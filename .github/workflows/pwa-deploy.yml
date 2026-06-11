@@ -1,0 +1,39 @@
+name: Deploy PWA to GitHub Pages
+
+# Triggers: run on every push to main (when PWA files change)
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'CertForge.PWA/**'
+
+# Allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Ensure only one deployment runs at a time
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  deploy-pwa:
+    # Only run on Ubuntu (no .NET build needed, just static files)
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Check out the repository code
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 2. Upload the static PWA files as a Pages artifact
+      - name: Upload PWA artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: CertForge.PWA/
+
+      # 3. Deploy the artifact to GitHub Pages
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4

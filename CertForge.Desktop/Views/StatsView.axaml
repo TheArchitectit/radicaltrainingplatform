@@ -1,0 +1,255 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="CertForge.Avalonia.Views.StatsView">
+
+  <ScrollViewer VerticalScrollBarVisibility="Auto">
+    <StackPanel Spacing="16" Margin="20">
+      <TextBlock Text="Study Statistics"
+                 FontSize="24"
+                 FontWeight="Bold"
+                 Foreground="{StaticResource TextPrimaryBrush}" />
+
+      <!-- Overall Score Card -->
+      <Border Background="{StaticResource CardBgBrush}"
+              CornerRadius="12"
+              Padding="20,16">
+        <StackPanel Spacing="8">
+          <TextBlock Text="Overall Score"
+                     FontSize="14"
+                     FontWeight="SemiBold"
+                     Foreground="{StaticResource TextDimBrush}"
+                     />
+          <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto,Auto">
+            <TextBlock Grid.Row="0" Grid.Column="0"
+                       Text="85%"
+                       FontSize="48"
+                       FontWeight="Bold"
+                       Foreground="{StaticResource StatusGreenBrush}"
+                       VerticalAlignment="Center" />
+            <StackPanel Grid.Row="0" Grid.Column="1"
+                        VerticalAlignment="Center"
+                        Margin="16,0,0,0"
+                        Spacing="4">
+              <TextBlock Text="102 correct out of 120"
+                         FontSize="14"
+                         Foreground="{StaticResource TextDimBrush}" />
+              <TextBlock Text="Best streak: 14"
+                         FontSize="12"
+                         Foreground="{StaticResource StatusAmberBrush}" />
+            </StackPanel>
+
+            <ProgressBar Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+                         Value="85"
+                         Maximum="100"
+                         Height="8"
+                         Margin="0,8,0,0"
+                         Background="{StaticResource DarkPanelBrush}"
+                         Foreground="{StaticResource StatusGreenBrush}"
+                         CornerRadius="4" />
+          </Grid>
+        </StackPanel>
+      </Border>
+
+      <!-- Domain Breakdown -->
+      <TextBlock Text="Domain Breakdown"
+                 FontSize="18"
+                 FontWeight="Bold"
+                 Foreground="{StaticResource TextPrimaryBrush}"
+                 Margin="0,4,0,-4" />
+
+      <Border Background="{StaticResource CardBgBrush}"
+              CornerRadius="12"
+              Padding="16">
+        <StackPanel Spacing="10">
+          <!-- Domain 1 -->
+          <Grid ColumnDefinitions="*,Auto,Auto">
+            <StackPanel Spacing="2">
+              <TextBlock Text="Domain 1 — Managing Nutanix AOS"
+                         FontSize="13"
+                         Foreground="{StaticResource TextPrimaryBrush}"
+                         FontWeight="SemiBold" />
+              <ProgressBar Value="92"
+                           Maximum="100"
+                           Height="6"
+                           Margin="0,4,8,0"
+                           Background="{StaticResource DarkPanelBrush}"
+                           Foreground="{StaticResource NeonCyanBrush}"
+                           CornerRadius="3" />
+            </StackPanel>
+            <TextBlock Grid.Column="1"
+                       Text="92%"
+                       FontSize="14"
+                       Foreground="{StaticResource NeonCyanBrush}"
+                       FontWeight="Bold"
+                       VerticalAlignment="Center"
+                       Margin="8,0,8,0" />
+            <TextBlock Grid.Column="2"
+                       Text="32/35"
+                       FontSize="12"
+                       Foreground="{StaticResource TextDimBrush}"
+                       VerticalAlignment="Center" />
+          </Grid>
+
+          <Border Background="{StaticResource BorderSubtleBrush}"
+                  Height="1" />
+
+          <!-- Domain 2 -->
+          <Grid ColumnDefinitions="*,Auto,Auto">
+            <StackPanel Spacing="2">
+              <TextBlock Text="Domain 2 — Managing Nutanix Files &amp; Objects"
+                         FontSize="13"
+                         Foreground="{StaticResource TextPrimaryBrush}"
+                         FontWeight="SemiBold" />
+              <ProgressBar Value="78"
+                           Maximum="100"
+                           Height="6"
+                           Margin="0,4,8,0"
+                           Background="{StaticResource DarkPanelBrush}"
+                           Foreground="{StaticResource NeonPurpleBrush}"
+                           CornerRadius="3" />
+            </StackPanel>
+            <TextBlock Grid.Column="1"
+                       Text="78%"
+                       FontSize="14"
+                       Foreground="{StaticResource NeonPurpleBrush}"
+                       FontWeight="Bold"
+                       VerticalAlignment="Center"
+                       Margin="8,0,8,0" />
+            <TextBlock Grid.Column="2"
+                       Text="25/32"
+                       FontSize="12"
+                       Foreground="{StaticResource TextDimBrush}"
+                       VerticalAlignment="Center" />
+          </Grid>
+
+          <Border Background="{StaticResource BorderSubtleBrush}"
+                  Height="1" />
+
+          <!-- Domain 3 -->
+          <Grid ColumnDefinitions="*,Auto,Auto">
+            <StackPanel Spacing="2">
+              <TextBlock Text="Domain 3 — Managing Nutanix Flow &amp; Security"
+                         FontSize="13"
+                         Foreground="{StaticResource TextPrimaryBrush}"
+                         FontWeight="SemiBold" />
+              <ProgressBar Value="88"
+                           Maximum="100"
+                           Height="6"
+                           Margin="0,4,8,0"
+                           Background="{StaticResource DarkPanelBrush}"
+                           Foreground="{StaticResource NeonMagentaBrush}"
+                           CornerRadius="3" />
+            </StackPanel>
+            <TextBlock Grid.Column="1"
+                       Text="88%"
+                       FontSize="14"
+                       Foreground="{StaticResource NeonMagentaBrush}"
+                       FontWeight="Bold"
+                       VerticalAlignment="Center"
+                       Margin="8,0,8,0" />
+            <TextBlock Grid.Column="2"
+                       Text="28/32"
+                       FontSize="12"
+                       Foreground="{StaticResource TextDimBrush}"
+                       VerticalAlignment="Center" />
+          </Grid>
+
+          <Border Background="{StaticResource BorderSubtleBrush}"
+                  Height="1" />
+
+          <!-- Domain 4 -->
+          <Grid ColumnDefinitions="*,Auto,Auto">
+            <StackPanel Spacing="2">
+              <TextBlock Text="Domain 4 — Lifecycle Operations"
+                         FontSize="13"
+                         Foreground="{StaticResource TextPrimaryBrush}"
+                         FontWeight="SemiBold" />
+              <ProgressBar Value="81"
+                           Maximum="100"
+                           Height="6"
+                           Margin="0,4,8,0"
+                           Background="{StaticResource DarkPanelBrush}"
+                           Foreground="{StaticResource StatusAmberBrush}"
+                           CornerRadius="3" />
+            </StackPanel>
+            <TextBlock Grid.Column="1"
+                       Text="81%"
+                       FontSize="14"
+                       Foreground="{StaticResource StatusAmberBrush}"
+                       FontWeight="Bold"
+                       VerticalAlignment="Center"
+                       Margin="8,0,8,0" />
+            <TextBlock Grid.Column="2"
+                       Text="17/21"
+                       FontSize="12"
+                       Foreground="{StaticResource TextDimBrush}"
+                       VerticalAlignment="Center" />
+          </Grid>
+        </StackPanel>
+      </Border>
+
+      <!-- Session Summary -->
+      <Border Background="{StaticResource CardBgBrush}"
+              CornerRadius="12"
+              Padding="20,16">
+        <StackPanel Spacing="8">
+          <TextBlock Text="Session Summary"
+                     FontSize="14"
+                     FontWeight="SemiBold"
+                     Foreground="{StaticResource TextDimBrush}"
+                     />
+          <Grid ColumnDefinitions="*,*,*,*" RowDefinitions="Auto,Auto">
+            <TextBlock Grid.Row="0" Grid.Column="0"
+                       Text="Started"
+                       FontSize="11"
+                       Foreground="{StaticResource TextDimBrush}"
+                       HorizontalAlignment="Center" />
+            <TextBlock Grid.Row="1" Grid.Column="0"
+                       Text="Jun 10"
+                       FontSize="13"
+                       Foreground="{StaticResource TextPrimaryBrush}"
+                       FontWeight="SemiBold"
+                       HorizontalAlignment="Center" />
+
+            <TextBlock Grid.Row="0" Grid.Column="1"
+                       Text="Questions"
+                       FontSize="11"
+                       Foreground="{StaticResource TextDimBrush}"
+                       HorizontalAlignment="Center" />
+            <TextBlock Grid.Row="1" Grid.Column="1"
+                       Text="120"
+                       FontSize="13"
+                       Foreground="{StaticResource TextPrimaryBrush}"
+                       FontWeight="SemiBold"
+                       HorizontalAlignment="Center" />
+
+            <TextBlock Grid.Row="0" Grid.Column="2"
+                       Text="Correct"
+                       FontSize="11"
+                       Foreground="{StaticResource TextDimBrush}"
+                       HorizontalAlignment="Center" />
+            <TextBlock Grid.Row="1" Grid.Column="2"
+                       Text="102"
+                       FontSize="13"
+                       Foreground="{StaticResource StatusGreenBrush}"
+                       FontWeight="SemiBold"
+                       HorizontalAlignment="Center" />
+
+            <TextBlock Grid.Row="0" Grid.Column="3"
+                       Text="Incorrect"
+                       FontSize="11"
+                       Foreground="{StaticResource TextDimBrush}"
+                       HorizontalAlignment="Center" />
+            <TextBlock Grid.Row="1" Grid.Column="3"
+                       Text="18"
+                       FontSize="13"
+                       Foreground="{StaticResource StatusRedBrush}"
+                       FontWeight="SemiBold"
+                       HorizontalAlignment="Center" />
+          </Grid>
+        </StackPanel>
+      </Border>
+
+    </StackPanel>
+  </ScrollViewer>
+</UserControl>

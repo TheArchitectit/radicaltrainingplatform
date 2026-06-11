@@ -1,0 +1,14 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=CertForge
+GenericName=Exam Prep Tool
+Comment=Nutanix Certification Exam Prep
+Exec=CertForge %f
+Icon=app.certstudy.CertForge
+Terminal=false
+Categories=Education;Science;
+MimeType=text/markdown;
+Keywords=nutanix;certification;exam;study;quiz;nca;ncp;ncm;
+StartupWMClass=CertForge
+StartupNotify=true

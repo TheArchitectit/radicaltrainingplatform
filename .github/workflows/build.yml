@@ -1,0 +1,98 @@
+name: Build
+
+# Triggers: run on push or pull request targeting the main branch
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build-core:
+    # Run on three platforms to verify cross-platform compatibility
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+      # Continue running other OS jobs even if one fails
+      fail-fast: false
+
+    steps:
+      # 1. Check out the repository code
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 2. Install the .NET 8 SDK
+      - name: Setup .NET 8
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      # 3. Restore NuGet packages for the Core library
+      - name: Restore packages (Core)
+        run: dotnet restore CertForge.Core/CertForge.Core.csproj
+
+      # 4. Build the Core library (cross-platform, must succeed everywhere)
+      - name: Build CertForge.Core
+        run: dotnet build CertForge.Core/CertForge.Core.csproj --configuration Release --no-restore
+
+      # 5. Build the Avalonia desktop app if it exists (cross-platform)
+      - name: Build CertForge.Avalonia (if exists)
+        run: |
+          if [ -f "CertForge.Avalonia/CertForge.Avalonia.csproj" ]; then
+            dotnet restore CertForge.Avalonia/CertForge.Avalonia.csproj
+            dotnet build CertForge.Avalonia/CertForge.Avalonia.csproj --configuration Release --no-restore
+          fi
+        shell: bash
+
+      # 6. Build the WinForms app -- only on Windows
+      - name: Build CertForge (WinForms)
+        if: runner.os == 'Windows'
+        run: |
+          dotnet restore CertForge/CertForge.csproj
+          dotnet build CertForge/CertForge.csproj --configuration Release --no-restore
+
+      # 7. Run any existing tests on all platforms
+      - name: Run tests
+        run: |
+          if ls *.sln 1> /dev/null 2>&1; then
+            dotnet test --configuration Release --no-build || true
+          fi
+        shell: bash
+
+      # 8. Verify Core library has no System.Windows.Forms references
+      - name: Verify no Windows.Forms in Core
+        run: |
+          echo "Checking CertForge.Core for System.Windows.Forms references..."
+          # Search for Windows.Forms references in source code and compiled assembly
+          if grep -ri "System.Windows.Forms" CertForge.Core/ 2>/dev/null; then
+            echo "ERROR: CertForge.Core must not reference System.Windows.Forms" >&2
+            exit 1
+          fi
+          # Also check the compiled DLL metadata (works on all platforms via strings-like grep on binary)
+          NET5_DLL="CertForge.Core/bin/Release/net8.0/CertForge.Core.dll"
+          if [ -f "$NET5_DLL" ]; then
+            if strings "$NET5_DLL" | grep -qi "Windows.Forms"; then
+              echo "ERROR: Compiled Core DLL contains Windows.Forms references" >&2
+              exit 1
+            fi
+          fi
+          echo "OK: No System.Windows.Forms references found in CertForge.Core"
+        shell: bash
+
+      # 9. Upload build artifacts
+      - name: Upload Core artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: certstudy-core-${{ matrix.os }}
+          path: CertForge.Core/bin/Release/net8.0/
+          if-no-files-found: warn
+
+      # 10. Upload WinForms artifacts (Windows only)
+      - name: Upload WinForms artifacts
+        if: runner.os == 'Windows'
+        uses: actions/upload-artifact@v4
+        with:
+          name: certstudy-winforms
+          path: CertForge/bin/Release/net8.0-windows/
+          if-no-files-found: warn

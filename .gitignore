@@ -1,0 +1,31 @@
+# .NET build output
+bin/
+obj/
+*.user
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# IDE
+.vs/
+.vscode/
+*.suo
+*.swp
+
+# Analysis artifacts (intermediate/generated)
+all_questions.json
+analysis_results.json
+complete_analysis.json
+coverage_analysis.json
+coverage_analysis_detailed.json
+final_analysis.json
+questions_analysis.json
+question_analysis.csv
+questions-export.csv
+orphan-questions.csv
+
+# Build output (published binaries tracked via LFS as zip)
+publish/
+.claw/

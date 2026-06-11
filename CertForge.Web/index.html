@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0B0B1A">
+    <title>Nutanix Lab Simulator</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="css/tokens.css">
+    <link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+    <div class="app-shell">
+        <!-- ═══ Top Header Bar ═══ -->
+        <header class="header-bar">
+            <button id="hamburger-btn" class="hamburger-btn" title="Menu">☰</button>
+            <span id="context-label" class="context-label">Prism Element</span>
+
+            <div class="context-switcher">
+                <select id="context-switcher" title="Switch context">
+                    <option value="pe">Prism Element</option>
+                    <option value="pc">Prism Central</option>
+                </select>
+            </div>
+
+            <div class="header-right">
+                <div class="search-box">
+                    <input type="text" placeholder="Search..." />
+                </div>
+                <button id="theme-toggle-btn" title="Toggle dark/light mode" style="background:none;border:1px solid var(--border-light);border-radius:6px;padding:4px 8px;cursor:pointer;font-size:16px;color:var(--text-primary);">🌙</button>
+                <span style="font-size: var(--font-size-sm);">admin</span>
+            </div>
+        </header>
+
+        <!-- ═══ Breadcrumb ═══ -->
+        <nav class="breadcrumb-bar">
+            <div id="breadcrumb">
+                <a href="#/pe/dashboard">Prism Element</a>
+                <span class="separator">›</span>
+                <span class="current">Dashboard</span>
+            </div>
+        </nav>
+
+        <!-- ═══ Main Content Area ═══ -->
+        <div class="main-content">
+            <!-- PC Sidebar (hidden when PE context) -->
+            <aside id="pc-sidebar" class="pc-sidebar">
+                <div class="nav-section">
+                    <div class="nav-section-title">Dashboard</div>
+                    <a class="nav-item" data-route="/pc/dashboard"><span class="icon">📊</span> Dashboard</a>
+                </div>
+                <div class="nav-section">
+                    <div class="nav-section-title">Compute & Storage</div>
+                    <a class="nav-item" data-route="/pc/vms"><span class="icon">🖥️</span> VMs</a>
+                    <a class="nav-item" data-route="/pc/categories"><span class="icon">🏷️</span> Categories</a>
+                    <a class="nav-item" data-route="/pc/clusters"><span class="icon">🏢</span> Clusters</a>
+                </div>
+                <div class="nav-section">
+                    <div class="nav-section-title">Networking</div>
+                    <a class="nav-item" data-route="/pc/network"><span class="icon">🌐</span> VPCs & Subnets</a>
+                    <a class="nav-item" data-route="/pc/flow"><span class="icon">🔒</span> Flow Security</a>
+                </div>
+                <div class="nav-section">
+                    <div class="nav-section-title">Policies</div>
+                    <a class="nav-item" data-route="/pc/leap"><span class="icon">🔄</span> Leap DR</a>
+                    <a class="nav-item" data-route="/pc/alerts"><span class="icon">🔔</span> Alerts</a>
+                </div>
+                <div class="nav-section">
+                    <div class="nav-section-title">Operations</div>
+                    <a class="nav-item" data-route="/pc/planning"><span class="icon">📈</span> Planning</a>
+                    <a class="nav-item" data-route="/pc/xplay"><span class="icon">🎭</span> X-Play</a>
+                    <a class="nav-item" data-route="/pc/reports"><span class="icon">📋</span> Reports</a>
+                    <a class="nav-item" data-route="/pc/insights"><span class="icon">💡</span> Insights</a>
+                </div>
+                <div class="nav-section">
+                    <div class="nav-section-title">Admin</div>
+                    <a class="nav-item" data-route="/pc/rbac"><span class="icon">👤</span> Users & Roles</a>
+                    <a class="nav-item" data-route="/pc/projects"><span class="icon">📂</span> Projects</a>
+                    <a class="nav-item" data-route="/pc/api"><span class="icon">🔌</span> API Explorer</a>
+                    <a class="nav-item" data-route="/pc/audit"><span class="icon">📜</span> Audit Log</a>
+                    <a class="nav-item" data-route="/pc/lcm"><span class="icon">⬆️</span> LCM Updates</a>
+                    <a class="nav-item" data-route="/pc/pc-settings"><span class="icon">⚙️</span> Settings</a>
+                </div>
+                <div class="nav-section">
+                    <div class="nav-section-title">Unified Storage</div>
+                    <a class="nav-item" data-route="/pc/files"><span class="icon">📁</span> Files</a>
+                    <a class="nav-item" data-route="/pc/analytics"><span class="icon">📊</span> File Analytics</a>
+                    <a class="nav-item" data-route="/pc/objects"><span class="icon">📦</span> Objects</a>
+                    <a class="nav-item" data-route="/pc/volumes"><span class="icon">📀</span> Volumes</a>
+                </div>
+                <div class="nav-section">
+                    <div class="nav-section-title">Cloud Clusters (NC2)</div>
+                    <a class="nav-item" data-route="/pc/nc2-console"><span class="icon">☁️</span> NC2 Console</a>
+                    <a class="nav-item" data-route="/pc/nc2-deploy"><span class="icon">🚀</span> Deploy Cluster</a>
+                    <a class="nav-item" data-route="/pc/nc2-networking"><span class="icon">🌐</span> Networking</a>
+                    <a class="nav-item" data-route="/pc/nc2-monitoring"><span class="icon">📡</span> Monitoring</a>
+                    <a class="nav-item" data-route="/pc/nc2-scaling"><span class="icon">📐</span> Scaling</a>
+                </div>
+                <div class="nav-section">
+                    <div class="nav-section-title">AI Infrastructure</div>
+                    <a class="nav-item" data-route="/pc/gpu"><span class="icon">🎮</span> GPU Config</a>
+                    <a class="nav-item" data-route="/pc/nai"><span class="icon">🤖</span> NAI Endpoints</a>
+                    <a class="nav-item" data-route="/pc/nai-tools"><span class="icon">🧪</span> NAI Tools</a>
+                    <a class="nav-item" data-route="/pc/ai-models"><span class="icon">🧠</span> AI Models</a>
+                    <a class="nav-item" data-route="/pc/ai-monitoring"><span class="icon">📊</span> AI Monitoring</a>
+                </div>
+                <div class="nav-section">
+                    <div class="nav-section-title">Lab</div>
+                    <a class="nav-item" data-route="/pc/scenarios"><span class="icon">📋</span> Guided Scenarios</a>
+                    <a class="nav-item" data-route="/pc/calm"><span class="icon">🧩</span> Calm / Marketplace</a>
+                </div>
+            </aside>
+
+            <!-- PE Hamburger Overlay -->
+            <div id="hamburger-backdrop" class="hamburger-backdrop"></div>
+            <nav id="hamburger-overlay" class="hamburger-overlay">
+                <div class="nav-group">
+                    <div class="nav-group-title">Home</div>
+                    <a class="nav-item" data-route="/pe/dashboard"><span class="icon">📊</span> Dashboard</a>
+                    <a class="nav-item" data-route="/pe/health"><span class="icon">💚</span> Health</a>
+                </div>
+                <div class="nav-group">
+                    <div class="nav-group-title">Compute</div>
+                    <a class="nav-item" data-route="/pe/vms"><span class="icon">🖥️</span> VMs</a>
+                    <a class="nav-item" data-route="/pe/images"><span class="icon">💿</span> Images</a>
+                </div>
+                <div class="nav-group">
+                    <div class="nav-group-title">Storage</div>
+                    <a class="nav-item" data-route="/pe/storage"><span class="icon">💾</span> Storage Containers</a>
+                </div>
+                <div class="nav-group">
+                    <div class="nav-group-title">Network</div>
+                    <a class="nav-item" data-route="/pe/network"><span class="icon">🌐</span> Network Config</a>
+                </div>
+                <div class="nav-group">
+                    <div class="nav-group-title">Data Protection</div>
+                    <a class="nav-item" data-route="/pe/protection"><span class="icon">🛡️</span> Protection Domains</a>
+                </div>
+                <div class="nav-group">
+                    <div class="nav-group-title">Admin</div>
+                    <a class="nav-item" data-route="/pe/hardware"><span class="icon">🔧</span> Hardware</a>
+                    <a class="nav-item" data-route="/pe/settings"><span class="icon">⚙️</span> Settings</a>
+                    <a class="nav-item" data-route="/pe/cli"><span class="icon">💻</span> CLI Terminal</a>
+                    <a class="nav-item" data-route="/pe/services"><span class="icon">📡</span> Service Diagnostics</a>
+                    <a class="nav-item" data-route="/pe/reports"><span class="icon">📋</span> Reports</a>
+                    <a class="nav-item" data-route="/pe/capacity"><span class="icon">📈</span> Capacity Planning</a>
+                </div>
+            </nav>
+
+            <!-- View Container -->
+            <main id="view-container" class="view-container"></main>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <!-- Boot Script -->
+    <script type="module" src="js/app.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js')
+                .then(reg => console.log('[PWA] Service Worker registered:', reg.scope))
+                .catch(err => console.error('[PWA] Service Worker registration failed:', err));
+        }
+    </script>
+</body>
+</html>

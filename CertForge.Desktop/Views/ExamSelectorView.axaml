@@ -1,0 +1,275 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="CertForge.Avalonia.Views.ExamSelectorView">
+
+  <ScrollViewer VerticalScrollBarVisibility="Auto">
+    <StackPanel Spacing="12" Margin="20">
+      <TextBlock Text="Available Exams"
+                 FontSize="24"
+                 FontWeight="Bold"
+                 Foreground="{StaticResource TextPrimaryBrush}" />
+
+      <TextBlock Text="Select a certification exam to begin your study session."
+                 FontSize="14"
+                 Foreground="{StaticResource TextDimBrush}"
+                 TextWrapping="Wrap"
+                 Margin="0,0,0,8" />
+
+      <!-- NCA 7.5 -->
+      <Border Background="{StaticResource CardBgBrush}"
+              CornerRadius="10"
+              BorderBrush="{StaticResource StatusGreenBrush}"
+              BorderThickness="1"
+              Padding="18,14">
+        <Grid ColumnDefinitions="*,Auto">
+          <StackPanel Spacing="4">
+            <TextBlock Text="NCA — 7.5"
+                       FontSize="18"
+                       FontWeight="Bold"
+                       Foreground="{StaticResource StatusGreenBrush}" />
+            <TextBlock Text="Nutanix Certified Associate v7.5 (Beta)"
+                       FontSize="13"
+                       Foreground="{StaticResource TextDimBrush}" />
+            <StackPanel Orientation="Horizontal" Spacing="8" Margin="0,6,0,0">
+              <Border Background="{StaticResource DarkPanelBrush}"
+                      CornerRadius="4"
+                      Padding="8,2">
+                <TextBlock Text="140 Questions"
+                           FontSize="11"
+                           Foreground="{StaticResource TextDimBrush}" />
+              </Border>
+              <Border Background="{StaticResource DarkPanelBrush}"
+                      CornerRadius="4"
+                      Padding="8,2">
+                <TextBlock Text="4 Domains"
+                           FontSize="11"
+                           Foreground="{StaticResource TextDimBrush}" />
+              </Border>
+              <Border Background="{StaticResource DarkPanelBrush}"
+                      CornerRadius="4"
+                      Padding="8,2">
+                <TextBlock Text="Entry Level"
+                           FontSize="11"
+                           Foreground="{StaticResource StatusGreenBrush}" />
+              </Border>
+            </StackPanel>
+          </StackPanel>
+          <Button Grid.Column="1"
+                  x:Name="BtnStartNCA75"
+                  Content="Start"
+                  Background="{StaticResource StatusGreenBrush}"
+                  Foreground="{StaticResource DeepSpaceBrush}"
+                  CornerRadius="8"
+                  Padding="20,8"
+                  FontWeight="Bold"
+                  VerticalAlignment="Center" />
+        </Grid>
+      </Border>
+
+      <!-- NCA 6.5 (Legacy) -->
+      <Border Background="{StaticResource CardBgBrush}"
+              CornerRadius="10"
+              BorderBrush="{StaticResource NeonCyanBrush}"
+              BorderThickness="1"
+              Padding="18,14">
+        <Grid ColumnDefinitions="*,Auto">
+          <StackPanel Spacing="4">
+            <TextBlock Text="NCA — 6.5"
+                       FontSize="18"
+                       FontWeight="Bold"
+                       Foreground="{StaticResource NeonCyanBrush}" />
+            <TextBlock Text="Nutanix Certified Associate (Legacy)"
+                       FontSize="13"
+                       Foreground="{StaticResource TextDimBrush}" />
+            <StackPanel Orientation="Horizontal" Spacing="8" Margin="0,6,0,0">
+              <Border Background="{StaticResource DarkPanelBrush}"
+                      CornerRadius="4"
+                      Padding="8,2">
+                <TextBlock Text="120 Questions"
+                           FontSize="11"
+                           Foreground="{StaticResource TextDimBrush}" />
+              </Border>
+              <Border Background="{StaticResource DarkPanelBrush}"
+                      CornerRadius="4"
+                      Padding="8,2">
+                <TextBlock Text="4 Domains"
+                           FontSize="11"
+                           Foreground="{StaticResource TextDimBrush}" />
+              </Border>
+              <Border Background="{StaticResource DarkPanelBrush}"
+                      CornerRadius="4"
+                      Padding="8,2">
+                <TextBlock Text="Legacy"
+                           FontSize="11"
+                           Foreground="{StaticResource TextDimBrush}" />
+              </Border>
+            </StackPanel>
+          </StackPanel>
+          <Button Grid.Column="1"
+                  x:Name="BtnStartNCA"
+                  Content="Start"
+                  Background="{StaticResource NeonCyanBrush}"
+                  Foreground="{StaticResource DeepSpaceBrush}"
+                  CornerRadius="8"
+                  Padding="20,8"
+                  FontWeight="Bold"
+                  VerticalAlignment="Center" />
+        </Grid>
+      </Border>
+
+      <!-- NCM - MCI -->
+      <Border Background="{StaticResource CardBgBrush}"
+              CornerRadius="10"
+              BorderBrush="{StaticResource NeonPurpleBrush}"
+              BorderThickness="1"
+              Padding="18,14">
+        <Grid ColumnDefinitions="*,Auto">
+          <StackPanel Spacing="4">
+            <TextBlock Text="NCM — MCI"
+                       FontSize="18"
+                       FontWeight="Bold"
+                       Foreground="{StaticResource NeonPurpleBrush}" />
+            <TextBlock Text="Nutanix Certified Master — Multicloud Infrastructure"
+                       FontSize="13"
+                       Foreground="{StaticResource TextDimBrush}" />
+            <StackPanel Orientation="Horizontal" Spacing="8" Margin="0,6,0,0">
+              <Border Background="{StaticResource DarkPanelBrush}"
+                      CornerRadius="4"
+                      Padding="8,2">
+                <TextBlock Text="180 Questions"
+                           FontSize="11"
+                           Foreground="{StaticResource TextDimBrush}" />
+              </Border>
+              <Border Background="{StaticResource DarkPanelBrush}"
+                      CornerRadius="4"
+                      Padding="8,2">
+                <TextBlock Text="5 Domains"
+                           FontSize="11"
+                           Foreground="{StaticResource TextDimBrush}" />
+              </Border>
+              <Border Background="{StaticResource DarkPanelBrush}"
+                      CornerRadius="4"
+                      Padding="8,2">
+                <TextBlock Text="Advanced"
+                           FontSize="11"
+                           Foreground="{StaticResource StatusRedBrush}" />
+              </Border>
+            </StackPanel>
+          </StackPanel>
+          <Button Grid.Column="1"
+                  x:Name="BtnStartNCM"
+                  Content="Start"
+                  Background="{StaticResource NeonPurpleBrush}"
+                  Foreground="{StaticResource TextPrimaryBrush}"
+                  CornerRadius="8"
+                  Padding="20,8"
+                  FontWeight="Bold"
+                  VerticalAlignment="Center" />
+        </Grid>
+      </Border>
+
+      <!-- NCP - CI -->
+      <Border Background="{StaticResource CardBgBrush}"
+              CornerRadius="10"
+              BorderBrush="{StaticResource NeonMagentaBrush}"
+              BorderThickness="1"
+              Padding="18,14">
+        <Grid ColumnDefinitions="*,Auto">
+          <StackPanel Spacing="4">
+            <TextBlock Text="NCP — CI"
+                       FontSize="18"
+                       FontWeight="Bold"
+                       Foreground="{StaticResource NeonMagentaBrush}" />
+            <TextBlock Text="Nutanix Certified Professional — Cloud Infrastructure"
+                       FontSize="13"
+                       Foreground="{StaticResource TextDimBrush}" />
+            <StackPanel Orientation="Horizontal" Spacing="8" Margin="0,6,0,0">
+              <Border Background="{StaticResource DarkPanelBrush}"
+                      CornerRadius="4"
+                      Padding="8,2">
+                <TextBlock Text="150 Questions"
+                           FontSize="11"
+                           Foreground="{StaticResource TextDimBrush}" />
+              </Border>
+              <Border Background="{StaticResource DarkPanelBrush}"
+                      CornerRadius="4"
+                      Padding="8,2">
+                <TextBlock Text="4 Domains"
+                           FontSize="11"
+                           Foreground="{StaticResource TextDimBrush}" />
+              </Border>
+              <Border Background="{StaticResource DarkPanelBrush}"
+                      CornerRadius="4"
+                      Padding="8,2">
+                <TextBlock Text="Professional"
+                           FontSize="11"
+                           Foreground="{StaticResource StatusAmberBrush}" />
+              </Border>
+            </StackPanel>
+          </StackPanel>
+          <Button Grid.Column="1"
+                  x:Name="BtnStartNCPCI"
+                  Content="Start"
+                  Background="{StaticResource NeonMagentaBrush}"
+                  Foreground="{StaticResource TextPrimaryBrush}"
+                  CornerRadius="8"
+                  Padding="20,8"
+                  FontWeight="Bold"
+                  VerticalAlignment="Center" />
+        </Grid>
+      </Border>
+
+      <!-- NCP - AI -->
+      <Border Background="{StaticResource CardBgBrush}"
+              CornerRadius="10"
+              BorderBrush="{StaticResource NeonCyanDimBrush}"
+              BorderThickness="1"
+              Padding="18,14">
+        <Grid ColumnDefinitions="*,Auto">
+          <StackPanel Spacing="4">
+            <TextBlock Text="NCP — AI"
+                       FontSize="18"
+                       FontWeight="Bold"
+                       Foreground="{StaticResource NeonCyanDimBrush}" />
+            <TextBlock Text="Nutanix Certified Professional — AI / ML Infrastructure"
+                       FontSize="13"
+                       Foreground="{StaticResource TextDimBrush}" />
+            <StackPanel Orientation="Horizontal" Spacing="8" Margin="0,6,0,0">
+              <Border Background="{StaticResource DarkPanelBrush}"
+                      CornerRadius="4"
+                      Padding="8,2">
+                <TextBlock Text="130 Questions"
+                           FontSize="11"
+                           Foreground="{StaticResource TextDimBrush}" />
+              </Border>
+              <Border Background="{StaticResource DarkPanelBrush}"
+                      CornerRadius="4"
+                      Padding="8,2">
+                <TextBlock Text="4 Domains"
+                           FontSize="11"
+                           Foreground="{StaticResource TextDimBrush}" />
+              </Border>
+              <Border Background="{StaticResource DarkPanelBrush}"
+                      CornerRadius="4"
+                      Padding="8,2">
+                <TextBlock Text="Professional"
+                           FontSize="11"
+                           Foreground="{StaticResource StatusAmberBrush}" />
+              </Border>
+            </StackPanel>
+          </StackPanel>
+          <Button Grid.Column="1"
+                  x:Name="BtnStartNCPAI"
+                  Content="Start"
+                  Background="{StaticResource NeonCyanDimBrush}"
+                  Foreground="{StaticResource TextPrimaryBrush}"
+                  CornerRadius="8"
+                  Padding="20,8"
+                  FontWeight="Bold"
+                  VerticalAlignment="Center" />
+        </Grid>
+      </Border>
+
+    </StackPanel>
+  </ScrollViewer>
+</UserControl>

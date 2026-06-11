@@ -1,0 +1,27 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="CertForge.Avalonia.App"
+             RequestedThemeVariant="Dark">
+
+  <Application.Styles>
+    <SimpleTheme />
+  </Application.Styles>
+
+  <Application.Resources>
+    <!-- Synthwave color palette -->
+    <SolidColorBrush x:Key="DeepSpaceBrush"    Color="#0B0B1A" />
+    <SolidColorBrush x:Key="DarkPanelBrush"    Color="#0F1020" />
+    <SolidColorBrush x:Key="CardBgBrush"       Color="#1A1B2E" />
+    <SolidColorBrush x:Key="NeonCyanBrush"     Color="#00F0FF" />
+    <SolidColorBrush x:Key="NeonCyanDimBrush"  Color="#008A94" />
+    <SolidColorBrush x:Key="NeonMagentaBrush"  Color="#FF2D95" />
+    <SolidColorBrush x:Key="NeonPurpleBrush"   Color="#BD00FF" />
+    <SolidColorBrush x:Key="TextPrimaryBrush"  Color="#E0E0FF" />
+    <SolidColorBrush x:Key="TextDimBrush"      Color="#8080AA" />
+    <SolidColorBrush x:Key="StatusRedBrush"    Color="#FF4444" />
+    <SolidColorBrush x:Key="StatusAmberBrush"  Color="#FFAA00" />
+    <SolidColorBrush x:Key="StatusGreenBrush"  Color="#44FF88" />
+    <SolidColorBrush x:Key="BorderSubtleBrush" Color="#2A2B4A" />
+  </Application.Resources>
+
+</Application>

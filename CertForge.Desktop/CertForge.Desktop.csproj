@@ -1,0 +1,39 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+    <AssemblyName>CertForge</AssemblyName>
+    <RootNamespace>CertForge.Avalonia</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <AvaloniaResource Include="Assets\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Avalonia" Version="11.2.3" />
+    <PackageReference Include="Avalonia.Desktop" Version="11.2.3" />
+    <PackageReference Include="Avalonia.Themes.Simple" Version="11.2.3" />
+    <PackageReference Include="Avalonia.Fonts.Inter" Version="11.2.3" />
+    <!-- Chromium Embedded for cross-platform WebView (Lab Simulator) -->
+    <PackageReference Include="CefGlue.Avalonia" Version="120.6099.204" />
+    <PackageReference Include="CefGlue.Common" Version="120.6099.204" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CertForge.Core\CertForge.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="..\CertForge\LabSimulator\Web\**\*" LinkBase="LabSimulator\Web">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+</Project>
