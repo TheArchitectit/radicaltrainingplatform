@@ -1,40 +1,55 @@
 using Avalonia.Controls;
 using Avalonia.Interactivity;
-using Avalonia.Markup.Xaml;
+using Avalonia.Media;
+using Avalonia.VisualTree;
+using CertForge.Core.Models;
 
 namespace CertForge.Avalonia.Views;
 
 /// <summary>
-/// Exam selection dashboard. Displays available certifications
-/// and raises <see cref="StartExamRequested"/> when the user
-/// chooses one.
+/// Dynamic exam selection dashboard. Builds cards from the
+/// ExamCatalogItem list passed via SetExams().
 /// </summary>
 public partial class ExamSelectorView : UserControl
 {
     public event Action<string>? StartExamRequested;
+    private List<ExamCatalogItem> _exams = new();
 
     public ExamSelectorView()
     {
         InitializeComponent();
     }
 
-    protected override void OnInitialized()
+    /// <summary>
+    /// Populate the exam selector with discovered exams.
+    /// </summary>
+    public void SetExams(List<ExamCatalogItem> exams)
     {
-        base.OnInitialized();
-
-        // Wire start buttons after InitializeComponent has created the visual tree
-        WireStartButton("BtnStartNCA75", "NCA");
-        WireStartButton("BtnStartNCA",   "NCA");
-        WireStartButton("BtnStartNCM",   "NCM-MCI");
-        WireStartButton("BtnStartNCPCI", "NCP-CI");
-        WireStartButton("BtnStartNCPAI", "NCP-AI");
+        _exams = exams;
+        ExamCards.ItemsSource = exams;
     }
 
-    private void WireStartButton(string name, string examCode)
+    private void OnStartClicked(object? sender, RoutedEventArgs e)
     {
-        if (this.FindControl<Button>(name) is Button btn)
+        if (sender is not Button btn) return;
+
+        // The button's DataContext is inherited from the ItemsControl item
+        if (btn.DataContext is ExamCatalogItem item)
         {
-            btn.Click += (s, e) => StartExamRequested?.Invoke(examCode);
+            StartExamRequested?.Invoke(item.ExamCode);
+            return;
+        }
+
+        // Walk up via visual tree as fallback
+        var current = btn.GetVisualParent();
+        while (current != null)
+        {
+            if (current is Border border && border.DataContext is ExamCatalogItem catalogItem)
+            {
+                StartExamRequested?.Invoke(catalogItem.ExamCode);
+                return;
+            }
+            current = current.GetVisualParent();
         }
     }
 }

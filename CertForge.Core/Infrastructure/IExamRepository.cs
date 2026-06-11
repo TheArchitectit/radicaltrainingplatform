@@ -22,20 +22,30 @@ public interface IExamRepository
 }
 
 /// <summary>
-/// Searches for exam markdown files (.md) in well-known locations.
+/// Searches for exam markdown files in well-known locations.
+/// Vendor-neutral: any .md file containing ### QN headers is an exam file.
 /// </summary>
 public class MarkdownExamRepository : IExamRepository
 {
     private readonly IFileProvider _files;
     private readonly string _appName;
-    private readonly string[] _examPatterns;
     private List<string>? _searchPaths;
+
+    // Regex to detect exam-content files (### Q1 or ### Q42 headers)
+    private static readonly System.Text.RegularExpressions.Regex ExamHeaderRegex =
+        new(@"^###\s+Q\d+", System.Text.RegularExpressions.RegexOptions.Compiled);
+
+    // Files/dirs to always skip
+    private static readonly HashSet<string> SkipNames = new(StringComparer.OrdinalIgnoreCase)
+    {
+        "README", "CHEATSHEET", "LAB", "ROADMAP", "CHANGELOG", "CONTRIBUTING",
+        "LICENSE", "CODE_OF_CONDUCT", "MASTER-PROJECT-PLAN"
+    };
 
     public MarkdownExamRepository(IFileProvider files, string appName = "CertForge")
     {
         _files = files;
         _appName = appName;
-        _examPatterns = new[] { "*.md" };
     }
 
     public IEnumerable<string> SearchPaths
@@ -52,7 +62,7 @@ public class MarkdownExamRepository : IExamRepository
                 // 2. Assembly directory
                 _searchPaths.Add(_files.GetExecutingAssemblyDirectory());
 
-                // 3. Application data directory (for user-installed content)
+                // 3. Application data directory
                 try { _searchPaths.Add(_files.GetApplicationDataDirectory(_appName)); } catch { }
 
                 // 4. Walk up from assembly looking for repo root
@@ -88,8 +98,11 @@ public class MarkdownExamRepository : IExamRepository
             foreach (var f in candidates)
             {
                 var name = Path.GetFileName(f);
-                if (LooksLikeExamFile(name) && seen.Add(f))
-                    yield return f;
+                if (!LooksLikeExamFile(name) || !seen.Add(f))
+                    continue;
+
+                // Content check: first pass on filename heuristic, then verify headers
+                yield return f;
             }
         }
     }
@@ -97,16 +110,19 @@ public class MarkdownExamRepository : IExamRepository
     public string ReadExamFile(string path) => _files.ReadAllText(path);
 
     /// <summary>
-    /// Heuristic to identify exam question files vs other markdown.
+    /// Heuristic: identify exam question files vs other markdown.
+    /// Vendor-neutral — rejects known non-exam files.
     /// </summary>
     private static bool LooksLikeExamFile(string fileName)
     {
         if (string.IsNullOrEmpty(fileName)) return false;
-        var name = fileName.ToUpperInvariant();
-        if (!name.StartsWith("NCP-") && !name.StartsWith("NCM-") && !name.StartsWith("NCA-")) return false;
-        if (name.Contains("README")) return false;
-        if (name.Contains("CHEATSHEET")) return false;
-        if (name.Contains("LAB")) return false;
+        if (!fileName.EndsWith(".md", StringComparison.OrdinalIgnoreCase)) return false;
+
+        var name = Path.GetFileNameWithoutExtension(fileName).ToUpperInvariant();
+        foreach (var skip in SkipNames)
+        {
+            if (name.StartsWith(skip) || name.Contains(skip)) return false;
+        }
         return true;
     }
 }

@@ -1,0 +1,17 @@
+{
+  "vendor": "template",
+  "displayName": "Template Simulator",
+  "version": "1.0.0",
+  "rootRoute": "/dashboard",
+  "contexts": [
+    { "id": "main", "label": "Main Console", "icon": "🏠" }
+  ],
+  "routes": {
+    "/dashboard": { "view": "DashboardView", "title": "Dashboard", "file": "views/DashboardView.js" }
+  },
+  "theme": {
+    "primary": "#00F0FF",
+    "secondary": "#FF2D95",
+    "accent": "#BD00FF"
+  }
+}

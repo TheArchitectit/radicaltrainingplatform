@@ -14,15 +14,6 @@ public partial class QuestionParser
     private readonly IExamRepository _examRepository;
     private readonly IFileProvider _fileProvider;
 
-    private static readonly string[] ExamPatterns = new[]
-    {
-        "NCP-US-*.md",
-        "NCP-CI-*.md",
-        "NCP-AI-*.md",
-        "NCM-MCI-*.md",
-        "NCA-*.md"
-    };
-
     public QuestionParser(IExamRepository examRepository, IFileProvider fileProvider)
     {
         _examRepository = examRepository;
@@ -41,19 +32,78 @@ public partial class QuestionParser
     [GeneratedRegex(@"^\*\*Answer:\s*([A-F][,\s]*(?:[A-F][,\s]*)*)\*\*", RegexOptions.Compiled)]
     private static partial Regex AnswerRegex();
 
+    /// <summary>
+    /// Derive an exam code from a filename by stripping -PartN, -DN suffixes.
+    /// Examples: "AWS-SAA-Part1.md" → "AWS-SAA", "CKA-Part2.md" → "CKA", "NCA-75-Part1.md" → "NCA"
+    /// </summary>
     public static string DeriveExamCode(string fileName)
     {
-        // NCP-US-Part1.md -> NCP-US, NCM-MCI-Part2.md -> NCM-MCI, NCA-75-Part1.md -> NCA
         var name = Path.GetFileNameWithoutExtension(fileName);
-        var parts = name.Split('-');
 
-        // If the second segment is a number (e.g. "75" in NCA-75), skip it — the exam code is the first segment alone
+        // Strip trailing -PartN or -DN suffixes
+        var partMatch = Regex.Match(name, @"^(.+?)-?(?:Part\d+|D\d+)$", RegexOptions.IgnoreCase);
+        if (partMatch.Success)
+            return partMatch.Groups[1].Value.TrimEnd('-');
+
+        // Fallback: first two segments if hyphenated
+        var parts = name.Split('-');
         if (parts.Length >= 2 && int.TryParse(parts[1], out _))
             return parts[0];
-
         if (parts.Length >= 2)
             return $"{parts[0]}-{parts[1]}";
         return name;
+    }
+
+    /// <summary>
+    /// Build a lightweight catalog of all discovered exams without
+    /// parsing every question. Counts questions via regex for speed.
+    /// </summary>
+    public List<ExamCatalogItem> BuildCatalog()
+    {
+        var catalog = new Dictionary<string, ExamCatalogItem>(StringComparer.OrdinalIgnoreCase);
+        var domainCounter = new Dictionary<string, HashSet<string>>(StringComparer.OrdinalIgnoreCase);
+
+        foreach (var file in _examRepository.FindExamFiles())
+        {
+            var content = _examRepository.ReadExamFile(file);
+            var fileName = Path.GetFileName(file);
+            var code = DeriveExamCode(fileName);
+
+            // Count questions and domains via regex (fast, no full parse)
+            var qCount = QuestionHeaderRx.Matches(content).Count;
+            var domainMatches = DomainHeaderRx.Matches(content);
+            var domains = new HashSet<string>();
+            foreach (Match dm in domainMatches)
+                domains.Add(dm.Groups[1].Value);
+
+            if (!catalog.TryGetValue(code, out var item))
+            {
+                item = new ExamCatalogItem
+                {
+                    ExamCode = code,
+                    DisplayName = DeriveDisplayName(code),
+                    Vendor = DeriveVendor(code),
+                    Level = DeriveLevel(code),
+                    Color = DeriveColor(code),
+                };
+                catalog[code] = item;
+                domainCounter[code] = new HashSet<string>();
+            }
+
+            item.QuestionCount += qCount;
+            domainCounter[code].UnionWith(domains);
+            item.SourceFiles.Add(fileName);
+        }
+
+        foreach (var (code, item) in catalog)
+        {
+            item.DomainCount = domainCounter.GetValueOrDefault(code)?.Count ?? 0;
+            item.Description = $"{item.Vendor} — {item.Level}";
+        }
+
+        return catalog.Values
+            .OrderByDescending(c => c.QuestionCount)
+            .ToList();
     }
 
     public List<Question> ParseFile(string filePath)
@@ -74,7 +124,6 @@ public partial class QuestionParser
             if (dm.Success)
             {
                 currentDomain = $"Domain {dm.Groups[1].Value}";
-                // grab description after the colon if present
                 int colon = line.IndexOf(':');
                 if (colon >= 0)
                 {
@@ -87,7 +136,6 @@ public partial class QuestionParser
                 }
                 else
                 {
-                    // try dash separator: ## Domain 1 — Deploy NAI Environment
                     int dash = line.IndexOf('—');
                     if (dash < 0) dash = line.IndexOf('-', line.IndexOf(dm.Groups[1].Value));
                     if (dash > 0)
@@ -116,7 +164,6 @@ public partial class QuestionParser
                     SourceFile = Path.GetFileName(filePath)
                 };
 
-                // Capture inline stem text (e.g. "### Q1. Which tool..." or "### Q1 Which tool...")
                 var inlineStem = qm.Groups[2].Value.Trim();
                 var stemLines = new List<string>();
                 if (!string.IsNullOrEmpty(inlineStem))
@@ -134,7 +181,6 @@ public partial class QuestionParser
                 }
                 q.Stem = string.Join("\n", stemLines).Trim();
 
-                // Collect options
                 while (i < lines.Length)
                 {
                     line = lines[i].TrimEnd();
@@ -143,7 +189,6 @@ public partial class QuestionParser
                     {
                         var optText = om.Groups[2].Value.Trim();
                         i++;
-                        // multi-line option: continuation lines that don't start a new option/answer/question
                         while (i < lines.Length)
                         {
                             var next = lines[i].TrimEnd();
@@ -165,11 +210,9 @@ public partial class QuestionParser
                     break;
                 }
 
-                // Skip blank lines before answer
                 while (i < lines.Length && string.IsNullOrWhiteSpace(lines[i]))
                     i++;
 
-                // Answer line
                 if (i < lines.Length)
                 {
                     line = lines[i].TrimEnd();
@@ -184,7 +227,6 @@ public partial class QuestionParser
                     }
                 }
 
-                // Collect explanation
                 var explLines = new List<string>();
                 while (i < lines.Length)
                 {
@@ -209,18 +251,20 @@ public partial class QuestionParser
         return questions;
     }
 
+    /// <summary>
+    /// Load all exams. No longer restricted by hardcoded prefixes —
+    /// any .md file with ### QN headers is an exam.
+    /// </summary>
     public Dictionary<string, List<Question>> LoadAllExams()
     {
         var exams = new Dictionary<string, List<Question>>(StringComparer.OrdinalIgnoreCase);
 
         foreach (var file in _examRepository.FindExamFiles())
         {
-            var fileName = Path.GetFileName(file);
-            if (!ExamPatterns.Any(p => MatchesPattern(fileName, p)))
-                continue;
-
             var questions = ParseFile(file);
-            var code = DeriveExamCode(fileName);
+            if (questions.Count == 0) continue;
+
+            var code = DeriveExamCode(Path.GetFileName(file));
             if (!exams.ContainsKey(code))
                 exams[code] = new List<Question>();
             exams[code].AddRange(questions);
@@ -229,15 +273,83 @@ public partial class QuestionParser
         return exams;
     }
 
-    private static bool MatchesPattern(string fileName, string pattern)
+    // ─── Vendor-neutral metadata derivations ────────────────────────
+
+    private static readonly Dictionary<string, string> VendorMap = new(StringComparer.OrdinalIgnoreCase)
     {
-        // Simple glob matching for patterns like NCP-US-*.md and NCA-*.md
-        if (pattern.EndsWith("*.md"))
+        ["NCA"] = "Nutanix", ["NCM"] = "Nutanix", ["NCP"] = "Nutanix",
+        ["AWS"] = "Amazon Web Services",
+        ["AZ"]  = "Microsoft Azure",
+        ["GCP"] = "Google Cloud",
+        ["CKA"] = "Cloud Native Computing Foundation",
+        ["CKS"] = "Cloud Native Computing Foundation",
+        ["CKAD"]= "Cloud Native Computing Foundation",
+        ["CCNA"]= "Cisco",
+        ["CCNP"]= "Cisco",
+        ["Sec"] = "CompTIA",
+        ["A"]   = "CompTIA",
+        ["N"]   = "CompTIA",
+    };
+
+    private static string DeriveVendor(string code)
+    {
+        var prefix = code.Split('-', '_')[0].ToUpperInvariant();
+        return VendorMap.GetValueOrDefault(prefix) ?? "Independent";
+    }
+
+    private static string DeriveLevel(string code) => code switch
+    {
+        var c when c.StartsWith("NCA", StringComparison.OrdinalIgnoreCase) => "Associate",
+        var c when c.StartsWith("NCM", StringComparison.OrdinalIgnoreCase) => "Expert",
+        var c when c.StartsWith("NCP", StringComparison.OrdinalIgnoreCase) => "Professional",
+        var c when c.StartsWith("CKA", StringComparison.OrdinalIgnoreCase) => "Associate",
+        var c when c.StartsWith("CKS", StringComparison.OrdinalIgnoreCase) => "Professional",
+        var c when c.StartsWith("CKAD", StringComparison.OrdinalIgnoreCase) => "Associate",
+        var c when c.Contains("-SAA", StringComparison.OrdinalIgnoreCase) => "Associate",
+        var c when c.Contains("-SAP", StringComparison.OrdinalIgnoreCase) => "Professional",
+        var c when c.Contains("-DA", StringComparison.OrdinalIgnoreCase) => "Associate",
+        var c when c.Contains("-DP", StringComparison.OrdinalIgnoreCase) => "Professional",
+        var c when c.Contains("-104", StringComparison.OrdinalIgnoreCase) => "Associate",
+        var c when c.Contains("-305", StringComparison.OrdinalIgnoreCase) => "Professional",
+        _ => "Professional"
+    };
+
+    private static string DeriveDisplayName(string code)
+    {
+        // Known exam codes get full names; unknown ones get a formatted version of the code
+        return code.ToUpperInvariant() switch
         {
-            var prefix = pattern[..^4]; // Remove "*.md"
-            return fileName.EndsWith(".md", StringComparison.OrdinalIgnoreCase)
-                   && fileName.StartsWith(prefix, StringComparison.OrdinalIgnoreCase);
-        }
-        return false;
+            "NCA"    => "NCA — Nutanix Certified Associate",
+            "NCM-MCI"=> "NCM — Multicloud Infrastructure",
+            "NCP-CI" => "NCP — Cloud Infrastructure",
+            "NCP-AI" => "NCP — AI/ML Infrastructure",
+            "NCP-US" => "NCP — Unified Storage",
+            "AWS-SAA"=> "AWS — Solutions Architect Associate",
+            "AWS-SAP"=> "AWS — Solutions Architect Professional",
+            "AWS-DA" => "AWS — Data Analytics",
+            "AZ-104" => "Azure — Administrator",
+            "AZ-305" => "Azure — Solutions Architect",
+            "CKA"    => "CKA — Kubernetes Administrator",
+            "CKS"    => "CKS — Kubernetes Security",
+            "CKAD"   => "CKAD — Kubernetes Developer",
+            "CCNA"   => "CCNA — Cisco Certified",
+            _        => code
+        };
+    }
+
+    /// <summary>
+    /// Assign a neon accent color per vendor/exam based on a rotating palette.
+    /// </summary>
+    private static readonly string[] NeonPalette =
+    {
+        "#00F0FF", "#FF2D95", "#BD00FF", "#39FF14", "#FFFF00",
+        "#FF6600", "#00FF88", "#FF3366", "#66FFFF", "#CC00FF"
+    };
+
+    private static string DeriveColor(string code)
+    {
+        var hash = code.GetHashCode();
+        var idx = Math.Abs(hash) % NeonPalette.Length;
+        return NeonPalette[idx];
     }
 }

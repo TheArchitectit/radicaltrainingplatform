@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab Simulator</title>
+    <link rel="stylesheet" href="css/tokens.css">
+    <link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+    <div class="app-shell">
+        <!-- ═══ Top Header Bar ═══ -->
+        <header class="header-bar">
+            <button id="hamburger-btn" class="hamburger-btn" title="Menu">☰</button>
+            <span id="context-label" class="context-label">Console</span>
+            <div class="context-switcher">
+                <select id="context-switcher" title="Switch context"></select>
+            </div>
+            <div class="header-right">
+                <div class="search-box">
+                    <input type="text" placeholder="Search..." />
+                </div>
+                <button id="theme-toggle-btn" title="Toggle dark/light mode">🌙</button>
+                <span class="user-label">admin</span>
+            </div>
+        </header>
+
+        <!-- ═══ Breadcrumb ═══ -->
+        <nav class="breadcrumb-bar">
+            <div id="breadcrumb"></div>
+        </nav>
+
+        <!-- ═══ Main Layout ═══ -->
+        <div class="main-layout">
+            <!-- Sidebar -->
+            <aside id="sidebar" class="sidebar">
+                <nav id="sidebar-nav"></nav>
+            </aside>
+            <!-- View Container -->
+            <main id="view-container" class="view-container"></main>
+        </div>
+    </div>
+
+    <!-- Core scripts (vendor-neutral) -->
+    <script type="module" src="js/app-loader.js"></script>
+</body>
+</html>

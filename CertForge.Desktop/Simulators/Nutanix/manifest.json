@@ -1,0 +1,30 @@
+{
+  "vendor": "nutanix",
+  "displayName": "Nutanix Prism Simulator",
+  "version": "1.0.0",
+  "rootRoute": "/pe/dashboard",
+  "contexts": [
+    { "id": "pe", "label": "Prism Element", "icon": "🏠" },
+    { "id": "pc", "label": "Prism Central", "icon": "🏢" },
+    { "id": "us", "label": "Objects", "icon": "💾" },
+    { "id": "ci", "label": "CI/CD", "icon": "🔄" },
+    { "id": "ai", "label": "AI/ML", "icon": "🧠" }
+  ],
+  "routes": {
+    "/pe/dashboard":  { "view": "PeDashboardView",  "title": "Dashboard",       "file": "views/pe-dashboard.js" },
+    "/pe/vms":        { "view": "PeVmsView",          "title": "VMs",             "file": "views/pe-vms.js" },
+    "/pe/storage":    { "view": "PeStorageView",      "title": "Storage",         "file": "views/pe-storage.js" },
+    "/pe/network":    { "view": "PeNetworkView",      "title": "Network",         "file": "views/pe-network.js" },
+    "/pc/dashboard":  { "view": "PcDashboardView",    "title": "Dashboard",       "file": "views/pc-dashboard.js" },
+    "/pc/vms":        { "view": "PcVmsView",          "title": "VMs",             "file": "views/pc-vms.js" },
+    "/us/files":      { "view": "UsFilesView",        "title": "Files",           "file": "views/us-files.js" },
+    "/ci/console":   { "view": "CiConsoleView",      "title": "Console",         "file": "views/ci-console.js" },
+    "/ai/nai":        { "view": "AiNaiView",          "title": "NAI",             "file": "views/ai-nai.js" },
+    "/scenarios":    { "view": "ScenariosView",       "title": "Lab Scenarios",  "file": "views/scenarios.js" }
+  },
+  "theme": {
+    "primary": "#00F0FF",
+    "secondary": "#FF2D95",
+    "accent": "#BD00FF"
+  }
+}
