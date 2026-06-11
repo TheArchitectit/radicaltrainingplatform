@@ -1,0 +1,14 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:ctrl="using:RadicalTrainingPlatform.Avalonia.Controls"
+             x:Class="RadicalTrainingPlatform.Avalonia.Views.BlueprintView"
+             Background="{StaticResource DeepSpaceBrush}">
+
+  <ScrollViewer VerticalScrollBarVisibility="Auto"
+                HorizontalScrollBarVisibility="Disabled">
+    <ctrl:BlueprintCanvas x:Name="Canvas"
+                          HorizontalAlignment="Stretch"
+                          VerticalAlignment="Top"
+                          Margin="20" />
+  </ScrollViewer>
+</UserControl>

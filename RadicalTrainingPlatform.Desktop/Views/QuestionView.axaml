@@ -1,0 +1,311 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:RadicalTrainingPlatform.Core.ViewModels"
+             xmlns:local="using:RadicalTrainingPlatform.Avalonia.Views"
+             xmlns:ctrl="using:RadicalTrainingPlatform.Avalonia.Controls"
+             x:Class="RadicalTrainingPlatform.Avalonia.Views.QuestionView"
+             x:DataType="vm:ExamSessionViewModel"
+             x:Name="Root"
+             Background="#0B0B1A"
+             Focusable="True"
+             KeyDown="OnKeyDown">
+
+  <Design.DataContext>
+    <vm:ExamSessionViewModel />
+  </Design.DataContext>
+
+  <UserControl.Resources>
+    <!-- Main neon gradient -->
+    <LinearGradientBrush x:Key="NeonGradient" StartPoint="0%,0%" EndPoint="100%,0%">
+      <GradientStop Color="#FF2D95" Offset="0"/>
+      <GradientStop Color="#00F0FF" Offset="1"/>
+    </LinearGradientBrush>
+
+    <!-- Domain badge gradient -->
+    <LinearGradientBrush x:Key="DomainGradient" StartPoint="0%,0%" EndPoint="100%,0%">
+      <GradientStop Color="#FF2D9560" Offset="0"/>
+      <GradientStop Color="#00F0FF60" Offset="1"/>
+    </LinearGradientBrush>
+  </UserControl.Resources>
+
+  <UserControl.Styles>
+    <!-- Header question counter -->
+    <Style Selector="TextBlock.headerCounter">
+      <Setter Property="Foreground" Value="#D0D0E6"/>
+      <Setter Property="FontSize" Value="16"/>
+      <Setter Property="FontWeight" Value="SemiBold"/>
+    </Style>
+
+    <!-- Domain tag badge -->
+    <Style Selector="Border.domainTag">
+      <Setter Property="Background" Value="{StaticResource DomainGradient}"/>
+      <Setter Property="BorderBrush" Value="#00F0FF40"/>
+      <Setter Property="BorderThickness" Value="1"/>
+      <Setter Property="CornerRadius" Value="12"/>
+      <Setter Property="Padding" Value="10,4"/>
+    </Style>
+
+    <Style Selector="TextBlock.domainText">
+      <Setter Property="Foreground" Value="#00F0FF"/>
+      <Setter Property="FontSize" Value="11"/>
+      <Setter Property="FontWeight" Value="SemiBold"/>
+    </Style>
+
+    <!-- Multi-select hint -->
+    <Style Selector="TextBlock.multiSelectHint">
+      <Setter Property="Foreground" Value="#FF2D95"/>
+      <Setter Property="FontSize" Value="11"/>
+      <Setter Property="FontWeight" Value="SemiBold"/>
+      <Setter Property="FontStyle" Value="Italic"/>
+    </Style>
+
+    <!-- Question stem text -->
+    <Style Selector="TextBlock.stemText">
+      <Setter Property="Foreground" Value="#FFFFFF"/>
+      <Setter Property="FontSize" Value="15"/>
+      <Setter Property="LineHeight" Value="24"/>
+      <Setter Property="TextWrapping" Value="Wrap"/>
+      <Setter Property="Margin" Value="0,8,0,0"/>
+    </Style>
+
+    <!-- Submit button -->
+    <Style Selector="Button.submitButton">
+      <Setter Property="Background" Value="{StaticResource NeonGradient}"/>
+      <Setter Property="Foreground" Value="#0B0B1A"/>
+      <Setter Property="FontSize" Value="14"/>
+      <Setter Property="FontWeight" Value="Bold"/>
+      <Setter Property="CornerRadius" Value="8"/>
+      <Setter Property="Padding" Value="32,12"/>
+      <Setter Property="HorizontalAlignment" Value="Center"/>
+      <Setter Property="Cursor" Value="Hand"/>
+      <Setter Property="Transitions">
+        <Transitions>
+          <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.1"/>
+          <BrushTransition Property="Background" Duration="0:0:0.15"/>
+        </Transitions>
+      </Setter>
+    </Style>
+
+    <Style Selector="Button.submitButton:pointerover">
+      <Setter Property="RenderTransform" Value="scale(1.05)"/>
+    </Style>
+
+    <Style Selector="Button.submitButton:disabled">
+      <Setter Property="Background" Value="#2A2B45"/>
+      <Setter Property="Foreground" Value="#666677"/>
+      <Setter Property="Opacity" Value="0.7"/>
+    </Style>
+
+    <!-- Navigation buttons -->
+    <Style Selector="Button.navButton">
+      <Setter Property="Background" Value="Transparent"/>
+      <Setter Property="Foreground" Value="#8888AA"/>
+      <Setter Property="FontSize" Value="13"/>
+      <Setter Property="BorderBrush" Value="#333355"/>
+      <Setter Property="BorderThickness" Value="1"/>
+      <Setter Property="CornerRadius" Value="6"/>
+      <Setter Property="Padding" Value="16,8"/>
+      <Setter Property="Cursor" Value="Hand"/>
+    </Style>
+
+    <Style Selector="Button.navButton:pointerover">
+      <Setter Property="Background" Value="#1E1F38"/>
+      <Setter Property="Foreground" Value="#D0D0E6"/>
+      <Setter Property="BorderBrush" Value="#00F0FF40"/>
+    </Style>
+
+    <Style Selector="Button.navButton:disabled">
+      <Setter Property="Opacity" Value="0.3"/>
+    </Style>
+
+    <!-- Explanation panel -->
+    <Style Selector="Border.explanationPanel">
+      <Setter Property="Background" Value="#121225"/>
+      <Setter Property="BorderBrush" Value="#00F0FF30"/>
+      <Setter Property="BorderThickness" Value="1"/>
+      <Setter Property="CornerRadius" Value="8"/>
+      <Setter Property="Padding" Value="16"/>
+      <Setter Property="Margin" Value="0,8,0,0"/>
+    </Style>
+
+    <Style Selector="TextBlock.explanationHeader">
+      <Setter Property="Foreground" Value="#FF2D95"/>
+      <Setter Property="FontSize" Value="12"/>
+      <Setter Property="FontWeight" Value="Bold"/>
+      <Setter Property="LetterSpacing" Value="2"/>
+      <Setter Property="Margin" Value="0,0,0,8"/>
+    </Style>
+
+    <Style Selector="TextBlock.explanationText">
+      <Setter Property="Foreground" Value="#B0B0CC"/>
+      <Setter Property="FontSize" Value="13"/>
+      <Setter Property="LineHeight" Value="22"/>
+      <Setter Property="TextWrapping" Value="Wrap"/>
+    </Style>
+
+    <Style Selector="Button.explainButton">
+      <Setter Property="Background" Value="Transparent"/>
+      <Setter Property="Foreground" Value="#00F0FF"/>
+      <Setter Property="FontSize" Value="12"/>
+      <Setter Property="BorderBrush" Value="#00F0FF40"/>
+      <Setter Property="BorderThickness" Value="1"/>
+      <Setter Property="CornerRadius" Value="6"/>
+      <Setter Property="Padding" Value="12,6"/>
+      <Setter Property="Cursor" Value="Hand"/>
+    </Style>
+
+    <!-- Correct/wrong result indicator -->
+    <Style Selector="TextBlock.resultIndicator">
+      <Setter Property="FontSize" Value="14"/>
+      <Setter Property="FontWeight" Value="Bold"/>
+      <Setter Property="HorizontalAlignment" Value="Center"/>
+      <Setter Property="Margin" Value="0,0,0,8"/>
+    </Style>
+
+    <Style Selector="TextBlock.resultIndicator.correct">
+      <Setter Property="Foreground" Value="#00E676"/>
+    </Style>
+
+    <Style Selector="TextBlock.resultIndicator.wrong">
+      <Setter Property="Foreground" Value="#FF5252"/>
+    </Style>
+  </UserControl.Styles>
+
+  <Grid RowDefinitions="Auto,Auto,*,Auto">
+    <!-- Header row -->
+    <Grid Grid.Row="0"
+          ColumnDefinitions="Auto,*,Auto"
+          Margin="16,12,16,0">
+      <TextBlock Grid.Column="0"
+                 x:Name="QuestionCounter"
+                 Classes="headerCounter"
+                 Text="Question 1 / 1"/>
+
+      <Border Grid.Column="1"/>
+
+      <Border Grid.Column="2"
+              Classes="domainTag">
+        <TextBlock x:Name="DomainText"
+                   Classes="domainText"
+                   Text="GENERAL"/>
+      </Border>
+    </Grid>
+
+    <!-- Progress bar -->
+    <ctrl:SynthwaveProgressBar Grid.Row="1"
+                               x:Name="ProgressBar"
+                               Progress="0"
+                               Margin="16,8,16,0"
+                               ShowPercentText="False"/>
+
+    <!-- Scrollable content -->
+    <ScrollViewer Grid.Row="2"
+                  x:Name="ContentScrollViewer"
+                  Margin="16,0"
+                  VerticalScrollBarVisibility="Auto"
+                  HorizontalScrollBarVisibility="Disabled">
+      <Grid RowDefinitions="Auto,Auto,Auto,*,Auto,Auto,Auto">
+        <TextBlock Grid.Row="0"
+                   x:Name="MultiSelectHint"
+                   Classes="multiSelectHint"
+                   Text="Select all that apply"
+                   IsVisible="False"/>
+
+        <TextBlock Grid.Row="1"
+                   x:Name="StemTextBlock"
+                   Classes="stemText"
+                   Text="{Binding CurrentQuestion.Stem}"/>
+
+        <Border Grid.Row="2" Height="12"/>
+
+        <ItemsControl Grid.Row="3"
+                      x:Name="OptionsList"
+                      ItemsSource="{Binding CurrentQuestion.Options}">
+          <ItemsControl.ItemTemplate>
+            <DataTemplate>
+              <local:OptionCard x:Name="OptionCardItem"
+                                Letter="{Binding Letter}"
+                                Text="{Binding Text}"
+                                Margin="0,6,0,0"/>
+            </DataTemplate>
+          </ItemsControl.ItemTemplate>
+        </ItemsControl>
+
+        <TextBlock Grid.Row="4"
+                   x:Name="ResultIndicator"
+                   Classes="resultIndicator"
+                   IsVisible="False"/>
+
+        <Button Grid.Row="5"
+                x:Name="SubmitButton"
+                Classes="submitButton"
+                Content="SUBMIT ANSWER"
+                Click="OnSubmitClicked"
+                IsVisible="True"
+                Margin="0,16,0,0"/>
+
+        <Grid Grid.Row="5"
+              x:Name="NavButtons"
+              ColumnDefinitions="Auto,*,Auto"
+              IsVisible="False"
+              Margin="0,16,0,0">
+          <Button Grid.Column="0"
+                  Classes="navButton"
+                  Content="&#x2190; PREVIOUS"
+                  Click="OnPreviousClicked"
+                  IsVisible="{Binding HasPrevious}"/>
+
+          <Button Grid.Column="2"
+                  Classes="navButton"
+                  Content="NEXT &#x2192;"
+                  Click="OnNextClicked"
+                  IsVisible="{Binding HasNext}"/>
+        </Grid>
+
+        <Border Grid.Row="6"
+                x:Name="ExplanationPanel"
+                Classes="explanationPanel"
+                IsVisible="False">
+          <Grid RowDefinitions="Auto,*">
+            <Grid Grid.Row="0"
+                  ColumnDefinitions="Auto,*">
+              <TextBlock Grid.Column="0"
+                         Classes="explanationHeader"
+                         Text="EXPLANATION"/>
+              <Button Grid.Column="1"
+                      Classes="explainButton"
+                      Content="Press E to toggle"
+                      HorizontalAlignment="Right"
+                      Click="OnToggleExplanation"/>
+            </Grid>
+
+            <ScrollViewer Grid.Row="1"
+                          x:Name="ExplanationScroll"
+                          VerticalScrollBarVisibility="Auto"
+                          MaxHeight="200">
+              <TextBlock x:Name="ExplanationTextBlock"
+                         Classes="explanationText"
+                         Text="{Binding CurrentQuestion.Explanation}"/>
+            </ScrollViewer>
+          </Grid>
+        </Border>
+      </Grid>
+    </ScrollViewer>
+
+    <!-- Footer keyboard hints -->
+    <Border Grid.Row="3"
+            Background="#08080F"
+            Padding="16,6">
+      <Grid ColumnDefinitions="Auto,*,Auto">
+        <TextBlock Grid.Column="0"
+                   Foreground="#555566"
+                   FontSize="10"
+                   Text="1-5: select  |  Enter: submit  |  E: explanation"/>
+        <TextBlock Grid.Column="2"
+                   Foreground="#555566"
+                   FontSize="10"
+                   Text="&#x2190; &#x2192;: navigate"/>
+      </Grid>
+    </Border>
+  </Grid>
+</UserControl>

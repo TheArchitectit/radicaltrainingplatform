@@ -30,27 +30,27 @@ jobs:
 
       # 3. Restore NuGet packages for the Core library
       - name: Restore packages (Core)
-        run: dotnet restore CertForge.Core/CertForge.Core.csproj
+        run: dotnet restore RadicalTrainingPlatform.Core/RadicalTrainingPlatform.Core.csproj
 
       # 4. Build the Core library (cross-platform, must succeed everywhere)
-      - name: Build CertForge.Core
-        run: dotnet build CertForge.Core/CertForge.Core.csproj --configuration Release --no-restore
+      - name: Build RadicalTrainingPlatform.Core
+        run: dotnet build RadicalTrainingPlatform.Core/RadicalTrainingPlatform.Core.csproj --configuration Release --no-restore
 
       # 5. Build the Avalonia desktop app if it exists (cross-platform)
-      - name: Build CertForge.Avalonia (if exists)
+      - name: Build RadicalTrainingPlatform.Desktop (Avalonia, if exists)
         run: |
-          if [ -f "CertForge.Avalonia/CertForge.Avalonia.csproj" ]; then
-            dotnet restore CertForge.Avalonia/CertForge.Avalonia.csproj
-            dotnet build CertForge.Avalonia/CertForge.Avalonia.csproj --configuration Release --no-restore
+          if [ -f "RadicalTrainingPlatform.Desktop/RadicalTrainingPlatform.Desktop.csproj" ]; then
+            dotnet restore RadicalTrainingPlatform.Desktop/RadicalTrainingPlatform.Desktop.csproj
+            dotnet build RadicalTrainingPlatform.Desktop/RadicalTrainingPlatform.Desktop.csproj --configuration Release --no-restore
           fi
         shell: bash
 
       # 6. Build the WinForms app -- only on Windows
-      - name: Build CertForge (WinForms)
+      - name: Build RadicalTrainingPlatform (WinForms)
         if: runner.os == 'Windows'
         run: |
-          dotnet restore CertForge/CertForge.csproj
-          dotnet build CertForge/CertForge.csproj --configuration Release --no-restore
+          dotnet restore RadicalTrainingPlatform.Legacy.WinForms/RadicalTrainingPlatform.Legacy.WinForms.csproj
+          dotnet build RadicalTrainingPlatform.Legacy.WinForms/RadicalTrainingPlatform.Legacy.WinForms.csproj --configuration Release --no-restore
 
       # 7. Run any existing tests on all platforms
       - name: Run tests
@@ -63,29 +63,29 @@ jobs:
       # 8. Verify Core library has no System.Windows.Forms references
       - name: Verify no Windows.Forms in Core
         run: |
-          echo "Checking CertForge.Core for System.Windows.Forms references..."
+          echo "Checking RadicalTrainingPlatform.Core for System.Windows.Forms references..."
           # Search for Windows.Forms references in source code and compiled assembly
-          if grep -ri "System.Windows.Forms" CertForge.Core/ 2>/dev/null; then
-            echo "ERROR: CertForge.Core must not reference System.Windows.Forms" >&2
+          if grep -ri "System.Windows.Forms" RadicalTrainingPlatform.Core/ 2>/dev/null; then
+            echo "ERROR: RadicalTrainingPlatform.Core must not reference System.Windows.Forms" >&2
             exit 1
           fi
           # Also check the compiled DLL metadata (works on all platforms via strings-like grep on binary)
-          NET5_DLL="CertForge.Core/bin/Release/net8.0/CertForge.Core.dll"
+          NET5_DLL="RadicalTrainingPlatform.Core/bin/Release/net8.0/RadicalTrainingPlatform.Core.dll"
           if [ -f "$NET5_DLL" ]; then
             if strings "$NET5_DLL" | grep -qi "Windows.Forms"; then
               echo "ERROR: Compiled Core DLL contains Windows.Forms references" >&2
               exit 1
             fi
           fi
-          echo "OK: No System.Windows.Forms references found in CertForge.Core"
+          echo "OK: No System.Windows.Forms references found in RadicalTrainingPlatform.Core"
         shell: bash
 
       # 9. Upload build artifacts
       - name: Upload Core artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: certstudy-core-${{ matrix.os }}
-          path: CertForge.Core/bin/Release/net8.0/
+          name: radicaltrainingplatform-core-${{ matrix.os }}
+          path: RadicalTrainingPlatform.Core/bin/Release/net8.0/
           if-no-files-found: warn
 
       # 10. Upload WinForms artifacts (Windows only)
@@ -93,6 +93,6 @@ jobs:
         if: runner.os == 'Windows'
         uses: actions/upload-artifact@v4
         with:
-          name: certstudy-winforms
-          path: CertForge/bin/Release/net8.0-windows/
+          name: radicaltrainingplatform-winforms
+          path: RadicalTrainingPlatform.Legacy.WinForms/bin/Release/net8.0-windows/
           if-no-files-found: warn

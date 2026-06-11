@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>app.radicaltrainingplatform.RadicalTrainingPlatform</id>
+  <name>RadicalTrainingPlatform</name>
+  <summary>Nutanix Certification Exam Prep</summary>
+  <developer id="app.radicaltrainingplatform">
+    <name>RadicalTrainingPlatform Project</name>
+  </developer>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>MIT</project_license>
+
+  <description>
+    <p>
+      RadicalTrainingPlatform is a cross-platform study application built with Avalonia UI
+      for preparing for Nutanix certification exams.  It reads Markdown-formatted
+      question banks from the Nutanix Certification Tool project and presents
+      them as interactive quizzes with progress tracking, gap-fill support,
+      and detailed explanations.
+    </p>
+    <p>Features:</p>
+    <ul>
+      <li>Multiple-choice and gap-fill question modes</li>
+      <li>Progress tracking and score history</li>
+      <li>Shuffle and category filtering</li>
+      <li>Markdown-driven content — no database required</li>
+      <li>Dark synthwave-inspired UI theme</li>
+      <li>Self-contained exams for offline study</li>
+    </ul>
+  </description>
+
+  <launchable type="desktop-id">app.radicaltrainingplatform.RadicalTrainingPlatform.desktop</launchable>
+
+  <categories>
+    <category>Education</category>
+    <category>Science</category>
+  </categories>
+
+  <keywords>
+    <keyword>nutanix</keyword>
+    <keyword>certification</keyword>
+    <keyword>exam</keyword>
+    <keyword>study</keyword>
+    <keyword>quiz</keyword>
+    <keyword>markdown</keyword>
+    <keyword>nca</keyword>
+    <keyword>ncp</keyword>
+    <keyword>ncm</keyword>
+  </keywords>
+
+  <content_rating type="oars-1.1" />
+
+  <screenshots>
+    <!-- Replace URLs with real screenshot locations before publishing to Flathub -->
+    <screenshot type="default">
+      <caption>Main quiz interface showing a multiple-choice question</caption>
+      <image>https://raw.githubusercontent.com/your-org/nutanixcertificationtool/main/screenshot.png</image>
+    </screenshot>
+    <screenshot>
+      <caption>Exam selector with category filtering</caption>
+      <image>https://raw.githubusercontent.com/your-org/nutanixcertificationtool/main/screenshot2.png</image>
+    </screenshot>
+    <screenshot>
+      <caption>Study statistics and progress overview</caption>
+      <image>https://raw.githubusercontent.com/your-org/nutanixcertificationtool/main/screenshot3.png</image>
+    </screenshot>
+  </screenshots>
+
+  <url type="homepage">https://github.com/your-org/nutanixcertificationtool</url>
+  <url type="bugtracker">https://github.com/your-org/nutanixcertificationtool/issues</url>
+  <url type="vcs-browser">https://github.com/your-org/nutanixcertificationtool</url>
+
+  <requires>
+    <display_length compare="ge">800</display_length>
+  </requires>
+  <supports>
+    <control>pointing</control>
+    <control>keyboard</control>
+  </supports>
+
+  <releases>
+    <release version="0.3.0" date="2026-06-10">
+      <description>
+        <p>Alpha release of the Avalonia cross-platform desktop build.</p>
+      </description>
+    </release>
+    <release version="0.2.0" date="2026-05-01">
+      <description>
+        <p>Added gap-fill question support and improved UI theming.</p>
+      </description>
+    </release>
+    <release version="0.1.0" date="2026-04-15">
+      <description>
+        <p>Initial alpha with multiple-choice quiz engine.</p>
+      </description>
+    </release>
+  </releases>
+</component>

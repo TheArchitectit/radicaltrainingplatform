@@ -1,0 +1,128 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        x:Class="RadicalTrainingPlatform.Avalonia.MainWindow"
+        Title="🎯 RadicalTrainingPlatform — Certification Study Engine"
+        MinWidth="1200"
+        MinHeight="700"
+        Width="1400"
+        Height="900"
+        WindowState="Maximized"
+        Background="{StaticResource DeepSpaceBrush}">
+
+  <Grid ColumnDefinitions="280,*">
+    <!-- Left Sidebar -->
+    <Border Grid.Column="0"
+            Background="{StaticResource DarkPanelBrush}"
+            BorderBrush="{StaticResource BorderSubtleBrush}"
+            BorderThickness="0,0,1,0">
+      <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Margin="16,20,16,20" Spacing="16">
+
+          <!-- Logo -->
+          <Border Background="{StaticResource CardBgBrush}"
+                  CornerRadius="8"
+                  Padding="16,12"
+                  HorizontalAlignment="Center">
+            <TextBlock Text="CERT FORGE"
+                       FontSize="22"
+                       FontWeight="Bold"
+                       Foreground="{StaticResource TextPrimaryBrush}" />
+          </Border>
+
+          <!-- Dynamic exam quick-launch (populated from code-behind) -->
+          <Border Background="{StaticResource CardBgBrush}"
+                  CornerRadius="8"
+                  Padding="12,10">
+            <StackPanel Spacing="6">
+              <TextBlock Text="Quick Launch"
+                         FontSize="11"
+                         FontWeight="SemiBold"
+                         Foreground="{StaticResource TextDimBrush}" />
+              <ItemsControl x:Name="SidebarExamButtons" />
+            </StackPanel>
+          </Border>
+
+          <!-- Mode Selector -->
+          <Border Background="{StaticResource CardBgBrush}"
+                  CornerRadius="8"
+                  Padding="12,10">
+            <StackPanel Spacing="6">
+              <TextBlock Text="Mode"
+                         FontSize="11"
+                         FontWeight="SemiBold"
+                         Foreground="{StaticResource TextDimBrush}" />
+              <StackPanel Orientation="Horizontal" Spacing="8">
+                <Button x:Name="BtnModeStudy"
+                        Content="Study"
+                        Background="{StaticResource NeonPurpleBrush}"
+                        Foreground="{StaticResource DeepSpaceBrush}"
+                        CornerRadius="6"
+                        FontWeight="SemiBold"
+                        Padding="16,6"
+                        Click="OnModeChanged" />
+                <Button x:Name="BtnModeTest"
+                        Content="Test"
+                        Background="Transparent"
+                        BorderBrush="{StaticResource BorderSubtleBrush}"
+                        BorderThickness="1"
+                        Foreground="{StaticResource TextDimBrush}"
+                        CornerRadius="6"
+                        Padding="16,6"
+                        Click="OnModeChanged" />
+              </StackPanel>
+            </StackPanel>
+          </Border>
+
+          <!-- Stats Display -->
+          <Border Background="{StaticResource CardBgBrush}"
+                  CornerRadius="8"
+                  Padding="12,10">
+            <StackPanel Spacing="8">
+              <TextBlock Text="Your Stats"
+                         FontSize="11"
+                         FontWeight="SemiBold"
+                         Foreground="{StaticResource TextDimBrush}" />
+              <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto,Auto">
+                <TextBlock Grid.Row="0" Grid.Column="0" Text="Score" Foreground="{StaticResource TextDimBrush}" FontSize="13" />
+                <TextBlock Grid.Row="0" Grid.Column="1" x:Name="TxtScore" Text="0/0" Foreground="{StaticResource TextPrimaryBrush}" FontSize="13" FontWeight="SemiBold" />
+                <TextBlock Grid.Row="1" Grid.Column="0" Text="Streak" Foreground="{StaticResource TextDimBrush}" FontSize="13" />
+                <TextBlock Grid.Row="1" Grid.Column="1" x:Name="TxtStreak" Text="0 🔥" Foreground="{StaticResource StatusAmberBrush}" FontSize="13" FontWeight="SemiBold" />
+                <TextBlock Grid.Row="2" Grid.Column="0" Text="Accuracy" Foreground="{StaticResource TextDimBrush}" FontSize="13" />
+                <TextBlock Grid.Row="2" Grid.Column="1" x:Name="TxtAccuracy" Text="--%" Foreground="{StaticResource NeonCyanBrush}" FontSize="13" FontWeight="SemiBold" />
+              </Grid>
+            </StackPanel>
+          </Border>
+
+          <!-- Action Buttons -->
+          <Border Background="{StaticResource CardBgBrush}"
+                  CornerRadius="8"
+                  Padding="12,10">
+            <StackPanel Spacing="6">
+              <TextBlock Text="Actions"
+                         FontSize="11"
+                         FontWeight="SemiBold"
+                         Foreground="{StaticResource TextDimBrush}" />
+              <Button Content="Reset" HorizontalAlignment="Stretch" Background="{StaticResource StatusRedBrush}" Foreground="{StaticResource TextPrimaryBrush}" CornerRadius="6" FontWeight="SemiBold" Click="OnResetClicked" />
+              <Button Content="Blueprint" HorizontalAlignment="Stretch" Background="Transparent" BorderBrush="{StaticResource BorderSubtleBrush}" BorderThickness="1" Foreground="{StaticResource TextPrimaryBrush}" CornerRadius="6" Click="OnBlueprintClicked" />
+              <Button Content="Review" HorizontalAlignment="Stretch" Background="Transparent" BorderBrush="{StaticResource BorderSubtleBrush}" BorderThickness="1" Foreground="{StaticResource TextPrimaryBrush}" CornerRadius="6" Click="OnReviewClicked" />
+              <Button Content="Export" HorizontalAlignment="Stretch" Background="Transparent" BorderBrush="{StaticResource BorderSubtleBrush}" BorderThickness="1" Foreground="{StaticResource TextPrimaryBrush}" CornerRadius="6" Click="OnExportClicked" />
+              <Button Content="Lab Simulator" HorizontalAlignment="Stretch" Background="{StaticResource NeonPurpleBrush}" Foreground="{StaticResource TextPrimaryBrush}" CornerRadius="6" FontWeight="SemiBold" Click="OnLabSimulatorClicked" />
+            </StackPanel>
+          </Border>
+
+        </StackPanel>
+      </ScrollViewer>
+    </Border>
+
+    <!-- Main Content Area -->
+    <Border Grid.Column="1"
+            Background="{StaticResource DeepSpaceBrush}">
+      <ContentControl x:Name="MainContent"
+                      HorizontalAlignment="Stretch"
+                      VerticalAlignment="Stretch" />
+    </Border>
+  </Grid>
+</Window>

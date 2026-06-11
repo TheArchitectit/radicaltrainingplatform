@@ -1,0 +1,14 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=RadicalTrainingPlatform
+GenericName=Exam Prep Tool
+Comment=Nutanix Certification Exam Prep
+Exec=RadicalTrainingPlatform %f
+Icon=app.radicaltrainingplatform.RadicalTrainingPlatform
+Terminal=false
+Categories=Education;Science;
+MimeType=text/markdown;
+Keywords=nutanix;certification;exam;study;quiz;nca;ncp;ncm;
+StartupWMClass=RadicalTrainingPlatform
+StartupNotify=true

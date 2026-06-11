@@ -35,9 +35,9 @@ A WinForms-based exam preparation tool for Nutanix certifications featuring **1,
 
 ### Option 1: Download Pre-Built Binary (No SDK Required)
 
-1. Download `CertForge-v0.2.0-alpha-win-x64.zip` from the [Releases](https://github.com/rogerlundnetcenter/nutanixcertificationtool/releases) page or from the repo root (tracked via Git LFS)
+1. Download `RadicalTrainingPlatform-v0.2.0-alpha-win-x64.zip` from the [Releases](https://github.com/rogerlundnetcenter/nutanixcertificationtool/releases) page or from the repo root (tracked via Git LFS)
 2. Extract the zip
-3. Run `CertForge.exe`
+3. Run `RadicalTrainingPlatform.exe`
 
 > **Note:** This is a self-contained Windows x64 build — no .NET runtime installation needed.
 
@@ -46,7 +46,7 @@ A WinForms-based exam preparation tool for Nutanix certifications featuring **1,
 **Prerequisites:** [.NET 8.0 SDK](https://dotnet.microsoft.com/download/dotnet/8.0) (Windows)
 
 ```bash
-cd CertForge
+cd RadicalTrainingPlatform
 dotnet build
 dotnet run
 ```
@@ -54,7 +54,7 @@ dotnet run
 To create a self-contained publish:
 
 ```bash
-cd CertForge
+cd RadicalTrainingPlatform
 dotnet publish -c Release -r win-x64 --self-contained
 ```
 
@@ -63,7 +63,7 @@ The app will launch with all 4 exam tabs. Select an exam, answer questions, and 
 ## 📁 Project Structure
 
 ```
-├── CertForge/                    # WinForms .NET 8.0 application
+├── RadicalTrainingPlatform/                    # WinForms .NET 8.0 application
 │   ├── Program.cs                # Entry point
 │   ├── MainForm.cs               # Main GUI (question display, explain panel, navigation)
 │   ├── SynthwaveColors.cs        # Neon color scheme
@@ -97,7 +97,7 @@ The app will launch with all 4 exam tabs. Select an exam, answer questions, and 
 │   ├── gapfill-validate-*.log    # Gap-fill validation logs
 │   └── CORRECTIONS_SUMMARY.txt   # All answer corrections applied
 │
-├── CertForge-v0.2.0-alpha-win-x64.zip  # Pre-built binary (Git LFS)
+├── RadicalTrainingPlatform-v0.2.0-alpha-win-x64.zip  # Pre-built binary (Git LFS)
 ├── .gitattributes                # Git LFS tracking rules
 ├── LICENSE                       # BSD 3-Clause
 └── README.md

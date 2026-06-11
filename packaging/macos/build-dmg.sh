@@ -2,15 +2,15 @@
 set -euo pipefail
 
 # build-dmg.sh
-# Builds a signed and notarized .dmg for the CertForge Avalonia macOS app.
+# Builds a signed and notarized .dmg for the RadicalTrainingPlatform Avalonia macOS app.
 
-APP_NAME="CertForge"
-APP_ID="app.certstudy.CertForge"
-BUNDLE_ID="app.certstudy.CertForge"
+APP_NAME="RadicalTrainingPlatform"
+APP_ID="app.radicaltrainingplatform.RadicalTrainingPlatform"
+BUNDLE_ID="app.radicaltrainingplatform.RadicalTrainingPlatform"
 # macOS universal binary target (Apple Silicon; switch to osx-x64 for Intel)
-: "${CERTSTUDY_RUNTIME:=osx-arm64}"
-: "${CERTSTUDY_BUILD_CONFIG:=Release}"
-: "${CERTSTUDY_SLN:=CertForge.Avalonia}"
+: "${RADICALTRAININGPLATFORM_RUNTIME:=osx-arm64}"
+: "${RADICALTRAININGPLATFORM_BUILD_CONFIG:=Release}"
+: "${RADICALTRAININGPLATFORM_SLN:=RadicalTrainingPlatform.Desktop}"
 
 APP_BUNDLE="${APP_NAME}.app"
 CONTENTS="${APP_BUNDLE}/Contents"
@@ -19,14 +19,14 @@ RESOURCES="${CONTENTS}/Resources"
 OUT_DIR="dist"
 
 # Developer identity strings (populated via env or defaults to empty)
-: "${CERTSTUDY_CODESIGN_ID:=}"
-: "${CERTSTUDY_NOTARY_KEYCHAIN:=}"
-: "${CERTSTUDY_NOTARY_PROFILE:=}"
+: "${RADICALTRAININGPLATFORM_CODESIGN_ID:=}"
+: "${RADICALTRAININGPLATFORM_NOTARY_KEYCHAIN:=}"
+: "${RADICALTRAININGPLATFORM_NOTARY_PROFILE:=}"
 
-echo "==> Step 1: .NET publish (${CERTSTUDY_BUILD_CONFIG}, ${CERTSTUDY_RUNTIME})"
-dotnet publish "${CERTSTUDY_SLN}/${CERTSTUDY_SLN}.csproj" \
-  -c "${CERTSTUDY_BUILD_CONFIG}" \
-  -r "${CERTSTUDY_RUNTIME}" \
+echo "==> Step 1: .NET publish (${RADICALTRAININGPLATFORM_BUILD_CONFIG}, ${RADICALTRAININGPLATFORM_RUNTIME})"
+dotnet publish "${RADICALTRAININGPLATFORM_SLN}/${RADICALTRAININGPLATFORM_SLN}.csproj" \
+  -c "${RADICALTRAININGPLATFORM_BUILD_CONFIG}" \
+  -r "${RADICALTRAININGPLATFORM_RUNTIME}" \
   --self-contained true \
   -p:PublishSingleFile=true \
   -p:PublishTrimmed=false \
@@ -47,13 +47,13 @@ cat > "${CONTENTS}/Info.plist" << 'PLIST'
   <key>CFBundleDevelopmentRegion</key>
   <string>en</string>
   <key>CFBundleExecutable</key>
-  <string>CertForge</string>
+  <string>RadicalTrainingPlatform</string>
   <key>CFBundleIdentifier</key>
-  <string>app.certstudy.CertForge</string>
+  <string>app.radicaltrainingplatform.RadicalTrainingPlatform</string>
   <key>CFBundleInfoDictionaryVersion</key>
   <string>6.0</string>
   <key>CFBundleName</key>
-  <string>CertForge</string>
+  <string>RadicalTrainingPlatform</string>
   <key>CFBundlePackageType</key>
   <string>APPL</string>
   <key>CFBundleShortVersionString</key>
@@ -73,8 +73,8 @@ PLIST
 # --- Icon --------------------------------------------------------------------
 ICON_SRC=""
 for candidate in \
-  "${CERTSTUDY_SLN}/Assets/certstudy.icns" \
-  "${CERTSTUDY_SLN}/Assets/icon.icns"; do
+  "${RADICALTRAININGPLATFORM_SLN}/Assets/radicaltrainingplatform.icns" \
+  "${RADICALTRAININGPLATFORM_SLN}/Assets/icon.icns"; do
   if [ -f "${candidate}"; then
     ICON_SRC="${candidate}"
     break
@@ -86,37 +86,37 @@ if [ -n "${ICON_SRC}" ]; then
 else
   # Create a trivial placeholder .icns from the PNG if available
   for png in \
-    "${CERTSTUDY_SLN}/Assets/certstudy.png" \
-    "${CERTSTUDY_SLN}/Assets/icon.png"; do
+    "${RADICALTRAININGPLATFORM_SLN}/Assets/radicaltrainingplatform.png" \
+    "${RADICALTRAININGPLATFORM_SLN}/Assets/icon.png"; do
     if [ -f "${png}" ]; then
-      mkdir -p /tmp/certstudy.iconset
-      sips -z 16 16   "${png}" --out /tmp/certstudy.iconset/icon_16x16.png || true
-      sips -z 32 32   "${png}" --out /tmp/certstudy.iconset/icon_16x16@2x.png || true
-      sips -z 32 32   "${png}" --out /tmp/certstudy.iconset/icon_32x32.png || true
-      sips -z 64 64   "${png}" --out /tmp/certstudy.iconset/icon_32x32@2x.png || true
-      sips -z 128 128 "${png}" --out /tmp/certstudy.iconset/icon_128x128.png || true
-      sips -z 256 256 "${png}" --out /tmp/certstudy.iconset/icon_128x128@2x.png || true
-      sips -z 256 256 "${png}" --out /tmp/certstudy.iconset/icon_256x256.png || true
-      sips -z 512 512 "${png}" --out /tmp/certstudy.iconset/icon_256x256@2x.png || true
-      iconutil -c icns /tmp/certstudy.iconset -o "${RESOURCES}/${APP_NAME}.icns" || true
-      rm -rf /tmp/certstudy.iconset
+      mkdir -p /tmp/radicaltrainingplatform.iconset
+      sips -z 16 16   "${png}" --out /tmp/radicaltrainingplatform.iconset/icon_16x16.png || true
+      sips -z 32 32   "${png}" --out /tmp/radicaltrainingplatform.iconset/icon_16x16@2x.png || true
+      sips -z 32 32   "${png}" --out /tmp/radicaltrainingplatform.iconset/icon_32x32.png || true
+      sips -z 64 64   "${png}" --out /tmp/radicaltrainingplatform.iconset/icon_32x32@2x.png || true
+      sips -z 128 128 "${png}" --out /tmp/radicaltrainingplatform.iconset/icon_128x128.png || true
+      sips -z 256 256 "${png}" --out /tmp/radicaltrainingplatform.iconset/icon_128x128@2x.png || true
+      sips -z 256 256 "${png}" --out /tmp/radicaltrainingplatform.iconset/icon_256x256.png || true
+      sips -z 512 512 "${png}" --out /tmp/radicaltrainingplatform.iconset/icon_256x256@2x.png || true
+      iconutil -c icns /tmp/radicaltrainingplatform.iconset -o "${RESOURCES}/${APP_NAME}.icns" || true
+      rm -rf /tmp/radicaltrainingplatform.iconset
       break
     fi
   done
 fi
 
 # Ensure the executable bit is set
-chmod +x "${MACOS}/CertForge"
+chmod +x "${MACOS}/RadicalTrainingPlatform"
 
 echo "==> Step 3: Code signing (optional)"
-if [ -n "${CERTSTUDY_CODESIGN_ID}" ]; then
-  echo "--- Signing .app bundle with identity: ${CERTSTUDY_CODESIGN_ID}"
+if [ -n "${RADICALTRAININGPLATFORM_CODESIGN_ID}" ]; then
+  echo "--- Signing .app bundle with identity: ${RADICALTRAININGPLATFORM_CODESIGN_ID}"
   codesign --force --deep --options runtime \
-    --sign "${CERTSTUDY_CODESIGN_ID}" \
+    --sign "${RADICALTRAININGPLATFORM_CODESIGN_ID}" \
     --entitlements packaging/macos/entitlements.plist \
     "${APP_BUNDLE}"
 else
-  echo "--- Skipping code signing (set CERTSTUDY_CODESIGN_ID to enable)"
+  echo "--- Skipping code signing (set RADICALTRAININGPLATFORM_CODESIGN_ID to enable)"
 fi
 
 echo "==> Step 4: Build .dmg with create-dmg"
@@ -146,16 +146,16 @@ else
 fi
 
 echo "==> Step 5: Notarization (optional)"
-if [ -n "${CERTSTUDY_NOTARY_PROFILE}" ]; then
-  echo "--- Submitting to Apple notarytool with profile: ${CERTSTUDY_NOTARY_PROFILE}"
+if [ -n "${RADICALTRAININGPLATFORM_NOTARY_PROFILE}" ]; then
+  echo "--- Submitting to Apple notarytool with profile: ${RADICALTRAININGPLATFORM_NOTARY_PROFILE}"
   xcrun notarytool submit "${DMG_NAME}" \
-    --keychain-profile "${CERTSTUDY_NOTARY_PROFILE}" \
+    --keychain-profile "${RADICALTRAININGPLATFORM_NOTARY_PROFILE}" \
     --wait
 
   echo "--- Stapling notarization ticket"
   xcrun stapler staple "${DMG_NAME}"
 else
-  echo "--- Skipping notarization (set CERTSTUDY_NOTARY_PROFILE to enable)"
+  echo "--- Skipping notarization (set RADICALTRAININGPLATFORM_NOTARY_PROFILE to enable)"
 fi
 
 echo ""

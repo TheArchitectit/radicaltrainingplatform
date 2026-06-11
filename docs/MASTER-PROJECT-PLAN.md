@@ -1,4 +1,4 @@
-# 🚀 CertForge — Master Project Plan (Multi-Year Roadmap)
+# 🚀 RadicalTrainingPlatform — Master Project Plan (Multi-Year Roadmap)
 
 > **Vision:** The definitive cross-platform certification study platform for Nutanix and beyond.
 
@@ -12,10 +12,10 @@ This roadmap is organized into **years**, **quarters**, and **sprints**. Each sp
 
 | Sprint | Goal | Deliverable | Status |
 |--------|------|-------------|--------|
-| S1 | Extract `CertForge.Core` shared library | `CertForge.Core` builds on `net8.0` | 🟡 |
-| S2 | Port all services (Reference, Blueprint, Parser) | All services in `CertForge.Core` | 🟡 |
+| S1 | Extract `RadicalTrainingPlatform.Core` shared library | `RadicalTrainingPlatform.Core` builds on `net8.0` | 🟡 |
+| S2 | Port all services (Reference, Blueprint, Parser) | All services in `RadicalTrainingPlatform.Core` | 🟡 |
 | S3 | PDF export with QuestPDF | Cross-platform PDF generation | ⚪ |
-| S4 | Lab Simulator standalone PWA | `CertForge.PWA` deployable to GitHub Pages | 🟡 |
+| S4 | Lab Simulator standalone PWA | `RadicalTrainingPlatform.PWA` deployable to GitHub Pages | 🟡 |
 | S5 | CI/CD matrix setup | GitHub Actions: Windows/Linux/macOS builds | ⚪ |
 | S6 | WinForms app refactored to use Core | Zero regression on Windows | ⚪ |
 
@@ -27,7 +27,7 @@ This roadmap is organized into **years**, **quarters**, and **sprints**. Each sp
 
 | Sprint | Goal | Deliverable |
 |--------|------|-------------|
-| S7 | Avalonia project skeleton | `CertForge.Avalonia` builds on all 3 platforms |
+| S7 | Avalonia project skeleton | `RadicalTrainingPlatform.Avalonia` builds on all 3 platforms |
 | S8 | Synthwave theme in Avalonia | `DrawingContext` paint engine matching WinForms |
 | S9 | Main layout (exam list, question display) | Feature parity with WinForms layout |
 | S10 | Options cards, answer selection, submit flow | Interactive question answering |
@@ -186,10 +186,10 @@ This roadmap is organized into **years**, **quarters**, and **sprints**. Each sp
 
 ## YEAR 4+ (200+ weeks): The Long Game
 
-- **CertForge OS:** A dedicated thin Linux distro that boots straight into the study app
+- **RadicalTrainingPlatform OS:** A dedicated thin Linux distro that boots straight into the study app
 - **Hardware partnerships:** Pre-loaded study tablets sold at Nutanix conferences
 - **Academic program:** Free access for universities, curriculum integration
-- **Annual conference:** CertForgeCon — physical study bootcamps
+- **Annual conference:** RadicalTrainingPlatformCon — physical study bootcamps
 - **AI certification:** Our own micro-certifications recognized by industry
 - **Acquisition target?** Become so integral Nutanix buys it (or we don't care, it's sustainable)
 

@@ -1,0 +1,151 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="RadicalTrainingPlatform.Avalonia.LabSimulator.LabSimulatorView"
+             x:Name="Root"
+             Background="#0B0B1A">
+
+  <UserControl.Resources>
+    <SolidColorBrush x:Key="DeepSpaceBrush"   Color="#0B0B1A" />
+    <SolidColorBrush x:Key="CardBgBrush"      Color="#1A1B2E" />
+    <SolidColorBrush x:Key="NeonCyanBrush"    Color="#00F0FF" />
+    <SolidColorBrush x:Key="NeonMagentaBrush" Color="#FF2D95" />
+    <SolidColorBrush x:Key="TextPrimaryBrush" Color="#E0E0FF" />
+    <SolidColorBrush x:Key="TextDimBrush"     Color="#8080AA" />
+    <SolidColorBrush x:Key="StatusRedBrush"   Color="#FF4444" />
+  </UserControl.Resources>
+
+  <Grid>
+
+    <!--
+      ═══ Loading Placeholder ═══
+      Shown until the embedded Chromium page fires its first
+      paint event (or Cef initialization completes).
+    -->
+    <Border x:Name="LoadingPanel"
+            IsVisible="True"
+            Background="{StaticResource DeepSpaceBrush}"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch">
+      <StackPanel HorizontalAlignment="Center"
+                  VerticalAlignment="Center"
+                  Spacing="20">
+        <!-- Spinner ring -->
+        <Border Width="72" Height="72"
+                CornerRadius="36"
+                BorderBrush="{StaticResource NeonCyanBrush}"
+                BorderThickness="4"
+                Opacity="0.85">
+          <Border.Styles>
+            <Style Selector="Border">
+              <Style.Animations>
+                <Animation Duration="0:0:1.2"
+                           IterationCount="Infinite"
+                           Easing="LinearEasing">
+                  <KeyFrame Cue="0%">
+                    <Setter Property="RotateTransform.Angle" Value="0" />
+                  </KeyFrame>
+                  <KeyFrame Cue="100%">
+                    <Setter Property="RotateTransform.Angle" Value="360" />
+                  </KeyFrame>
+                </Animation>
+              </Style.Animations>
+            </Style>
+          </Border.Styles>
+        </Border>
+        <TextBlock Text="Loading Lab Simulator..."
+                   FontSize="18"
+                   FontWeight="SemiBold"
+                   Foreground="{StaticResource NeonCyanBrush}"
+                   HorizontalAlignment="Center" />
+        <TextBlock Text="Initializing embedded Chromium runtime..."
+                   FontSize="12"
+                   Foreground="{StaticResource TextDimBrush}"
+                   HorizontalAlignment="Center" />
+      </StackPanel>
+    </Border>
+
+    <!--
+      ═══ CefGlue WebView Host ═══
+      A plain Avalonia ContentControl is the parent for the
+      ChromiumWebBrowser instance which is added to the visual
+      tree from code-behind (CefGlue.Avalonia requires
+      WinForms-style control hosting).
+    -->
+    <ContentControl x:Name="WebViewHost"
+                    IsVisible="False"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"
+                    HorizontalContentAlignment="Stretch"
+                    VerticalContentAlignment="Stretch" />
+
+    <!--
+      ═══ Error / Fallback Panel ═══
+      Shown if CefGlue cannot be loaded (missing native binaries
+      in a non-bundled run, e.g. on Linux/macOS dev machines).
+    -->
+    <Border x:Name="ErrorPanel"
+            IsVisible="False"
+            Background="{StaticResource DeepSpaceBrush}"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch">
+      <StackPanel HorizontalAlignment="Center"
+                  VerticalAlignment="Center"
+                  Spacing="18"
+                  MaxWidth="520">
+        <!-- Warning glyph -->
+        <Border Width="96" Height="96"
+                CornerRadius="48"
+                BorderBrush="{StaticResource StatusRedBrush}"
+                BorderThickness="3"
+                HorizontalAlignment="Center">
+          <TextBlock Text="!"
+                     FontSize="48"
+                     FontWeight="Bold"
+                     Foreground="{StaticResource StatusRedBrush}"
+                     HorizontalAlignment="Center"
+                     VerticalAlignment="Center" />
+        </Border>
+
+        <TextBlock Text="Lab Simulator Unavailable"
+                   FontSize="22"
+                   FontWeight="Bold"
+                   Foreground="{StaticResource TextPrimaryBrush}"
+                   HorizontalAlignment="Center" />
+
+        <Border Background="{StaticResource CardBgBrush}"
+                CornerRadius="8"
+                Padding="20"
+                BorderBrush="{StaticResource NeonMagentaBrush}"
+                BorderThickness="1">
+          <TextBlock x:Name="ErrorMessageText"
+                     Text="Lab Simulator requires the desktop app bundle. Download from GitHub releases."
+                     FontSize="14"
+                     Foreground="{StaticResource TextDimBrush}"
+                     TextAlignment="Center"
+                     TextWrapping="Wrap"
+                     LineHeight="22" />
+        </Border>
+
+        <Button x:Name="DownloadButton"
+                HorizontalAlignment="Center"
+                Padding="24,12"
+                Background="{StaticResource NeonMagentaBrush}"
+                Foreground="{StaticResource DeepSpaceBrush}"
+                FontWeight="Bold"
+                FontSize="14"
+                CornerRadius="6"
+                Click="OnDownloadClicked">
+          <TextBlock Text="Open GitHub Releases" />
+        </Button>
+
+        <TextBlock Text="The CefGlue Chromium runtime did not load. This usually means the bundled native binaries (libcef.dll / libcef.so / libcef.dylib) are missing for this platform."
+                   FontSize="11"
+                   Foreground="{StaticResource TextDimBrush}"
+                   TextAlignment="Center"
+                   TextWrapping="Wrap"
+                   Opacity="0.7" />
+      </StackPanel>
+    </Border>
+
+  </Grid>
+</UserControl>

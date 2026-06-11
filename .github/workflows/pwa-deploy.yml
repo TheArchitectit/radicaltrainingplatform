@@ -5,7 +5,7 @@ on:
   push:
     branches: [main]
     paths:
-      - 'CertForge.PWA/**'
+      - 'RadicalTrainingPlatform.Web/**'
 
 # Allow deployment to GitHub Pages
 permissions:
@@ -32,7 +32,7 @@ jobs:
       - name: Upload PWA artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: CertForge.PWA/
+          path: RadicalTrainingPlatform.Web/
 
       # 3. Deploy the artifact to GitHub Pages
       - name: Deploy to GitHub Pages

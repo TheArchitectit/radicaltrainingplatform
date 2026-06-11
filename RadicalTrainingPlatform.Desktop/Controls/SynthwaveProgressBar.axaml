@@ -1,0 +1,114 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="RadicalTrainingPlatform.Avalonia.Controls.SynthwaveProgressBar"
+             x:Name="Root"
+             Height="28">
+
+  <UserControl.Resources>
+    <!-- Neon gradient: magenta to cyan -->
+    <LinearGradientBrush x:Key="NeonGradient" StartPoint="0%,0%" EndPoint="100%,0%">
+      <GradientStop Color="#FF2D95" Offset="0"/>
+      <GradientStop Color="#00F0FF" Offset="1"/>
+    </LinearGradientBrush>
+
+    <!-- Glow brush -->
+    <LinearGradientBrush x:Key="GlowGradient" StartPoint="0%,0%" EndPoint="100%,0%">
+      <GradientStop Color="#FF2D95" Offset="0"/>
+      <GradientStop Color="#00F0FF" Offset="0.5"/>
+      <GradientStop Color="#FF2D95" Offset="1"/>
+    </LinearGradientBrush>
+  </UserControl.Resources>
+
+  <UserControl.Styles>
+    <!-- Track (unfilled background) -->
+    <Style Selector="Border.progressTrack">
+      <Setter Property="Background" Value="#1A1B2E"/>
+      <Setter Property="BorderBrush" Value="#2A2B45"/>
+      <Setter Property="BorderThickness" Value="1"/>
+      <Setter Property="CornerRadius" Value="4"/>
+      <Setter Property="Height" Value="8"/>
+      <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+
+    <!-- Filled progress indicator -->
+    <Style Selector="Border.progressFill">
+      <Setter Property="Background" Value="{StaticResource NeonGradient}"/>
+      <Setter Property="CornerRadius" Value="4"/>
+      <Setter Property="Height" Value="8"/>
+      <Setter Property="VerticalAlignment" Value="Center"/>
+      <Setter Property="Transitions">
+        <Transitions>
+          <DoubleTransition Property="Width" Duration="0:0:0.4">
+            <DoubleTransition.Easing>
+              <CubicEaseOut/>
+            </DoubleTransition.Easing>
+          </DoubleTransition>
+        </Transitions>
+      </Setter>
+    </Style>
+
+    <!-- Glow overlay -->
+    <Style Selector="Border.glowOverlay">
+      <Setter Property="Background" Value="{StaticResource GlowGradient}"/>
+      <Setter Property="CornerRadius" Value="4"/>
+      <Setter Property="Height" Value="4"/>
+      <Setter Property="VerticalAlignment" Value="Top"/>
+      <Setter Property="Margin" Value="0,1,0,0"/>
+      <Setter Property="Opacity" Value="0.6"/>
+    </Style>
+
+    <!-- Percentage text -->
+    <Style Selector="TextBlock.percentText">
+      <Setter Property="Foreground" Value="#00F0FF"/>
+      <Setter Property="FontSize" Value="11"/>
+      <Setter Property="FontWeight" Value="SemiBold"/>
+      <Setter Property="HorizontalAlignment" Value="Right"/>
+      <Setter Property="VerticalAlignment" Value="Center"/>
+      <Setter Property="Margin" Value="8,0,0,0"/>
+      <Setter Property="MinWidth" Value="32"/>
+    </Style>
+  </UserControl.Styles>
+
+  <Grid ColumnDefinitions="*,Auto">
+    <!-- Progress bar container -->
+    <Border Grid.Column="0"
+            Classes="progressTrack">
+      <Grid>
+        <!-- Fill bar -->
+        <Border x:Name="ProgressFill"
+                Classes="progressFill"
+                HorizontalAlignment="Left"
+                Width="0"/>
+
+        <!-- Glow effect on top of fill -->
+        <Border x:Name="GlowFill"
+                Classes="glowOverlay"
+                HorizontalAlignment="Left"
+                Width="0"/>
+
+        <!-- Animated shimmer (optional) -->
+        <Border x:Name="Shimmer"
+                Width="40"
+                Height="8"
+                HorizontalAlignment="Left"
+                Opacity="0.15"
+                CornerRadius="4"
+                IsHitTestVisible="False">
+          <Border.Background>
+            <LinearGradientBrush StartPoint="0%,0%" EndPoint="100%,0%">
+              <GradientStop Color="Transparent" Offset="0"/>
+              <GradientStop Color="White" Offset="0.5"/>
+              <GradientStop Color="Transparent" Offset="1"/>
+            </LinearGradientBrush>
+          </Border.Background>
+        </Border>
+      </Grid>
+    </Border>
+
+    <!-- Percentage label -->
+    <TextBlock Grid.Column="1"
+               x:Name="PercentText"
+               Classes="percentText"
+               Text="0%"/>
+  </Grid>
+</UserControl>

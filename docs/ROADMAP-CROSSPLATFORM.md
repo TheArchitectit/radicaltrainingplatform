@@ -1,4 +1,4 @@
-# CertForge — Cross-Platform Roadmap (Linux + macOS)
+# RadicalTrainingPlatform — Cross-Platform Roadmap (Linux + macOS)
 
 > **Current:** WinForms .NET 8 + WebView2 (Windows-only)
 > **Target:** Native apps on Windows, Linux, macOS with shared engine
@@ -24,8 +24,8 @@ The current app is a **WinForms .NET 8 desktop app** with:
 
 | App | Technology | Platforms | Notes |
 |-----|-----------|-----------|-------|
-| **CertForge-Desktop** | Eto.Forms (fully native) | Windows, Linux, macOS | Shared business logic, native UI per platform |
-| **CertForge-Web** | Lab Simulator → standalone PWA | All (via browser) | Simulator already works in any browser |
+| **RadicalTrainingPlatform-Desktop** | Eto.Forms (fully native) | Windows, Linux, macOS | Shared business logic, native UI per platform |
+| **RadicalTrainingPlatform-Web** | Lab Simulator → standalone PWA | All (via browser) | Simulator already works in any browser |
 
 **Why Eto.Forms?** Not Avalonia/MAUI/Uno. Here's why:
 
@@ -60,7 +60,7 @@ The current app is a **WinForms .NET 8 desktop app** with:
 ├─────────────────────────────────────────────────────────────┤
 │                     SHARED ENGINE (.NET 8)                 │
 │  ┌──────────────────────────────────────────────────────┐  │
-│  │  CertForge.Core (class library, net8.0)              │  │
+│  │  RadicalTrainingPlatform.Core (class library, net8.0)              │  │
 │  │  ├── Models/         Question, AnswerOption           │  │
 │  │  ├── Services/       QuestionParser, BlueprintSvc     │  │
 │  │  ├── PdfExport/      Remove PdfSharp dependency       │  │
@@ -83,7 +83,7 @@ The current app is a **WinForms .NET 8 desktop app** with:
 **Goal:** Establish shared library, audit all Windows-only code, define abstractions.
 
 **Tasks:**
-1. **Create `CertForge.Core` class library** (`net8.0` — no platform TFM)
+1. **Create `RadicalTrainingPlatform.Core` class library** (`net8.0` — no platform TFM)
    - Move `Models/`, `Services/`, `BlueprintService.cs`, `ReferenceService.cs`
    - Refactor `QuestionParser.LoadAllExams()` to accept an `IFileProvider` interface (not `Directory.GetFiles`)
    - Extract `IExamRepository` interface for loading/saving exam data
@@ -122,7 +122,7 @@ The current app is a **WinForms .NET 8 desktop app** with:
    }
    ```
 
-**Deliverable:** `CertForge.Core` builds on `net8.0` with zero Windows references.
+**Deliverable:** `RadicalTrainingPlatform.Core` builds on `net8.0` with zero Windows references.
 
 ---
 
@@ -131,7 +131,7 @@ The current app is a **WinForms .NET 8 desktop app** with:
 **Goal:** Working Linux app with all existing features.
 
 **Tasks:**
-1. **Create `CertForge.Linux` project**
+1. **Create `RadicalTrainingPlatform.Linux` project**
    - `Eto.Forms` + `Eto.Platform.Gtk` packages
    - Application entry point: `new Application(Eto.Platforms.Gtk).Run(new MainForm())`
 
@@ -178,7 +178,7 @@ The current app is a **WinForms .NET 8 desktop app** with:
    - Test: `dotnet build && dotnet run`
    - Package target: `.deb` (Ubuntu/Debian), `.rpm` (Fedora), tarball (generic)
 
-**Deliverable:** `CertForge.Linux` runs natively on Ubuntu with full feature parity.
+**Deliverable:** `RadicalTrainingPlatform.Linux` runs natively on Ubuntu with full feature parity.
 
 ---
 
@@ -187,7 +187,7 @@ The current app is a **WinForms .NET 8 desktop app** with:
 **Goal:** Working macOS app. Most work is shared from Sprint 1.
 
 **Tasks:**
-1. **Create `CertForge.Mac` project**
+1. **Create `RadicalTrainingPlatform.Mac` project**
    - `Eto.Platform.Mac64` package
    - Single project produces `.app` bundle
 
@@ -209,7 +209,7 @@ The current app is a **WinForms .NET 8 desktop app** with:
    - `dotnet build -r osx-x64` / `dotnet build -r osx-arm64`
    - Universal binary via `lipo` if needed
 
-**Deliverable:** `CertForge.Mac.app` runs on macOS with full feature parity.
+**Deliverable:** `RadicalTrainingPlatform.Mac.app` runs on macOS with full feature parity.
 
 ---
 
@@ -218,15 +218,15 @@ The current app is a **WinForms .NET 8 desktop app** with:
 **Goal:** Windows app rebuilt on Eto.Forms (optional) OR keep WinForms as-is with shared core.
 
 **Decision point:**
-- **Option A:** Keep WinForms app running on `CertForge.Core` (minimal effort)
+- **Option A:** Keep WinForms app running on `RadicalTrainingPlatform.Core` (minimal effort)
 - **Option B:** Replace with Eto.Wpf for consistency and modern WPF rendering
 
 **Recommendation: Option A for v1** — the existing WinForms app works fine. Just:
-1. Refactor to use `CertForge.Core`
+1. Refactor to use `RadicalTrainingPlatform.Core`
 2. Keep WebView2 for the simulator (best experience on Windows)
 3. Optionally add `Eto.Wpf` migration later if WinForms becomes a burden
 
-**Deliverable:** Windows app uses `CertForge.Core`, no regression.
+**Deliverable:** Windows app uses `RadicalTrainingPlatform.Core`, no regression.
 
 ---
 
@@ -237,7 +237,7 @@ The current app is a **WinForms .NET 8 desktop app** with:
 **Tasks:**
 1. **Convert Lab Simulator to standalone PWA**
    - Add `manifest.json`, service worker
-   - Host on GitHub Pages or `certstudy.app`
+   - Host on GitHub Pages or `radicaltrainingplatform.app`
    - Works in any browser: Chrome, Firefox, Safari, Edge
 
 2. **BridgeClient.js modification**
@@ -253,7 +253,7 @@ The current app is a **WinForms .NET 8 desktop app** with:
    - Service worker caches all simulator assets
    - Works offline after first load
 
-**Deliverable:** `https://certstudy.app/simulator` runs on any device with a browser.
+**Deliverable:** `https://radicaltrainingplatform.app/simulator` runs on any device with a browser.
 
 ---
 
@@ -290,8 +290,8 @@ The current app is a **WinForms .NET 8 desktop app** with:
 
 ## Success Criteria
 
-- [ ] `CertForge.Linux` runs on Ubuntu 24.04 with all 5 exams loadable
-- [ ] `CertForge.Mac` runs on macOS 14 (Apple Silicon) with all 5 exams loadable
+- [ ] `RadicalTrainingPlatform.Linux` runs on Ubuntu 24.04 with all 5 exams loadable
+- [ ] `RadicalTrainingPlatform.Mac` runs on macOS 14 (Apple Silicon) with all 5 exams loadable
 - [ ] Lab Simulator works on both platforms (embedded or browser)
 - [ ] PDF export works on both platforms
 - [ ] All 1,458 questions (now + NCA 7.5) parse correctly
@@ -333,4 +333,4 @@ The current app is a **WinForms .NET 8 desktop app** with:
 - `MainForm.cs` 59K lines → ~15K Eto.Forms lines (most of the bulk is inline layout construction which translates 1:1)
 - `AnimatedProgressBar.cs` → ~80 lines Eto `Drawable` (paint logic unchanged)
 - `BlueprintPanel.cs` → similar paint port
-- Business logic: **zero changes** (moves to `CertForge.Core`)
+- Business logic: **zero changes** (moves to `RadicalTrainingPlatform.Core`)
