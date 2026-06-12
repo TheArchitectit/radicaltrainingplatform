@@ -35,8 +35,8 @@ In AOS 7.5, what is the default SSH access state for CVMs on fresh installations
 - C) SSH disabled by default
 - D) SSH requires Prism Central approval
 
-**Answer: A (Platform key: C — INCORRECT)**
-Per GA documentation for AOS 7.5, SSH/Bash shell access remains **enabled by default** on fresh installations. The platform's key is incorrect — the engineering plan to disable SSH by default was deferred to a subsequent Nutanix Cloud Infrastructure (NCI) feature release after 7.5. Administrators can still restrict CVM SSH access as a hardening measure after deployment.
+**Answer: A**
+Per GA documentation for AOS 7.5, SSH/Bash shell access remains **enabled by default** on fresh installations. The engineering plan to disable SSH by default was deferred to a subsequent Nutanix Cloud Infrastructure (NCI) feature release after 7.5. Administrators can still restrict CVM SSH access as a hardening measure after deployment.
 
 ---
 

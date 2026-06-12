@@ -3,7 +3,7 @@ runtime: org.freedesktop.Platform
 runtime-version: "23.08"
 sdk: org.freedesktop.Sdk
 sdk-extensions:
-  - org.freedesktop.Sdk.Extension.dotnet8
+  - org.freedesktop.Sdk.Extension.dotnet10
 
 command: RadicalTrainingPlatform
 
@@ -15,8 +15,8 @@ finish-args:
   - --filesystem=home
 
 build-options:
-  append-path: /usr/lib/sdk/dotnet8/bin
-  append-ld-library-path: /usr/lib/sdk/dotnet8/lib
+  append-path: /usr/lib/sdk/dotnet10/bin
+  append-ld-library-path: /usr/lib/sdk/dotnet10/lib
   env:
     PKG_CONFIG_PATH: /app/lib/pkgconfig:/app/share/pkgconfig:/usr/lib/pkgconfig:/usr/share/pkgconfig
     DOTNET_CLI_TELEMETRY_OPTOUT: "true"
@@ -58,10 +58,10 @@ modules:
 
     sources:
       - type: git
-        url: https://github.com/TheArchitectit/certforge.git
+        url: https://github.com/TheArchitectit/radicaltrainingplatform.git
         # Replace with the exact commit SHA or tag you want to package.
         # branch: main
-        commit: REPLACE_WITH_COMMIT_SHA
+        commit: 72d5ec8
 
       # Pre-downloaded NuGet packages must be added here as type:file sources
       # when building offline (Flathub policy).  Generate the list with:

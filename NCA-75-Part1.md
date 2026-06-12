@@ -423,8 +423,8 @@ What is the maximum number of VMs that Prism Central can manage in AOS 7.5?
 - C) 15,000
 - D) 25,000
 
-**Answer: B**
-Prism Central in AOS 7.5 can scale to manage up to 10,000 VMs across all registered clusters.
+**Answer: D**
+Prism Central in AOS 7.5 can manage up to 25,000 VMs in a scale-out 3-VM deployment. A single large VM instance supports up to 10,000 VMs; the 3-VM scale-out architecture extends this to 25,000.
 
 ---
 

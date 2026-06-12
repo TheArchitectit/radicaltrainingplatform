@@ -45,7 +45,7 @@ public partial class MainWindow : Window
     {
         var provider = new DefaultFileProvider();
         var repo = new MarkdownExamRepository(provider);
-        var parser = new QuestionParser(repo, provider);
+        var parser = new QuestionParser(repo);
 
         // Build catalog (fast — no full parse) and load all exams
         _catalog = parser.BuildCatalog();

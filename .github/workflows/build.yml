@@ -22,11 +22,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # 2. Install the .NET 8 SDK
-      - name: Setup .NET 8
+      # 2. Install the .NET 10 SDK
+      - name: Setup .NET 10
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '8.0.x'
+          dotnet-version: '10.0.x'
 
       # 3. Restore NuGet packages for the Core library
       - name: Restore packages (Core)
@@ -56,7 +56,7 @@ jobs:
       - name: Run tests
         run: |
           if ls *.sln 1> /dev/null 2>&1; then
-            dotnet test --configuration Release --no-build || true
+            dotnet test --configuration Release --no-build
           fi
         shell: bash
 
@@ -70,9 +70,9 @@ jobs:
             exit 1
           fi
           # Also check the compiled DLL metadata (works on all platforms via strings-like grep on binary)
-          NET5_DLL="RadicalTrainingPlatform.Core/bin/Release/net8.0/RadicalTrainingPlatform.Core.dll"
-          if [ -f "$NET5_DLL" ]; then
-            if strings "$NET5_DLL" | grep -qi "Windows.Forms"; then
+          NET10_DLL="RadicalTrainingPlatform.Core/bin/Release/net10.0/RadicalTrainingPlatform.Core.dll"
+          if [ -f "$NET10_DLL" ]; then
+            if strings "$NET10_DLL" | grep -qi "Windows.Forms"; then
               echo "ERROR: Compiled Core DLL contains Windows.Forms references" >&2
               exit 1
             fi
@@ -85,7 +85,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: radicaltrainingplatform-core-${{ matrix.os }}
-          path: RadicalTrainingPlatform.Core/bin/Release/net8.0/
+          path: RadicalTrainingPlatform.Core/bin/Release/net10.0/
           if-no-files-found: warn
 
       # 10. Upload WinForms artifacts (Windows only)

@@ -11,6 +11,7 @@ public class ExamSessionViewModel : INotifyPropertyChanged
 {
     private readonly List<Question> _allQuestions;
     private readonly List<Question> _sessionQuestions;
+    private readonly Dictionary<Question, int> _displayIndex = new();
     private int _currentIndex;
     private readonly HashSet<string> _selectedAnswers = new();
     private bool _submitted;
@@ -35,13 +36,9 @@ public class ExamSessionViewModel : INotifyPropertyChanged
             _sessionQuestions = questions.ToList();
         }
 
-        // Reset IDs to sequential for the session
+        // Build display index mapping without mutating shared model objects
         for (int i = 0; i < _sessionQuestions.Count; i++)
-        {
-            var q = _sessionQuestions[i];
-            q.Id = i + 1;
-            _sessionQuestions[i] = q;
-        }
+            _displayIndex[_sessionQuestions[i]] = i + 1;
 
         _currentIndex = 0;
     }
@@ -49,7 +46,13 @@ public class ExamSessionViewModel : INotifyPropertyChanged
     public string ExamCode { get; }
     public int TotalQuestions => _sessionQuestions.Count;
     public int CurrentIndex => _currentIndex;
-    public int CurrentNumber => _currentIndex + 1;
+    public int CurrentNumber => GetDisplayNumber(CurrentQuestion);
+
+    /// <summary>
+    /// Returns the 1-based display ordinal for a question within this session,
+    /// without relying on or mutating the original Question.Id.
+    /// </summary>
+    public int GetDisplayNumber(Question q) => _displayIndex.TryGetValue(q, out var idx) ? idx : q.Id;
 
     public Question CurrentQuestion => _sessionQuestions[_currentIndex];
 

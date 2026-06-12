@@ -12,12 +12,10 @@ public partial class QuestionParser
     private static readonly Regex AnswerRx = AnswerRegex();
 
     private readonly IExamRepository _examRepository;
-    private readonly IFileProvider _fileProvider;
 
-    public QuestionParser(IExamRepository examRepository, IFileProvider fileProvider)
+    public QuestionParser(IExamRepository examRepository)
     {
         _examRepository = examRepository;
-        _fileProvider = fileProvider;
     }
 
     [GeneratedRegex(@"^###\s+Q(\d+)[.\s]*(.*)", RegexOptions.Compiled)]
@@ -29,29 +27,36 @@ public partial class QuestionParser
     [GeneratedRegex(@"^-\s+([A-F])\)\s+(.*)", RegexOptions.Compiled)]
     private static partial Regex OptionRegex();
 
-    [GeneratedRegex(@"^\*\*Answer:\s*([A-F][,\s]*(?:[A-F][,\s]*)*)\*\*", RegexOptions.Compiled)]
+    [GeneratedRegex(@"^\*\*(?:Correct )?Answer:\s*([A-F][,\s]*(?:[A-F][,\s]*)*)\*\*", RegexOptions.Compiled)]
     private static partial Regex AnswerRegex();
 
     /// <summary>
-    /// Derive an exam code from a filename by stripping -PartN, -DN suffixes.
-    /// Examples: "AWS-SAA-Part1.md" → "AWS-SAA", "CKA-Part2.md" → "CKA", "NCA-75-Part1.md" → "NCA"
+    /// Derive an exam code from a filename by iteratively stripping known suffixes.
+    /// Handles: -PartN, -DN, -GapFill, and combinations like -Part2-D3, -Part3-GapFill.
+    /// Examples: "NCP-US-Part2-D3.md" → "NCP-US", "NCA-75-Part3-GapFill.md" → "NCA-75",
+    ///           "AWS-SAA-Part1.md" → "AWS-SAA", "CKA.md" → "CKA"
     /// </summary>
     public static string DeriveExamCode(string fileName)
     {
         var name = Path.GetFileNameWithoutExtension(fileName);
 
-        // Strip trailing -PartN or -DN suffixes
-        var partMatch = Regex.Match(name, @"^(.+?)-?(?:Part\d+|D\d+)$", RegexOptions.IgnoreCase);
-        if (partMatch.Success)
-            return partMatch.Groups[1].Value.TrimEnd('-');
+        // Iteratively strip suffixes: -PartN, -DN, -GapFill (and anything after them)
+        var suffixPattern = @"^(.+?)-(?:Part\d+(?:-.*)?|D\d+(?:-.*)?|GapFill(?:-.*)?)$";
+        string current = name;
+        while (true)
+        {
+            var match = Regex.Match(current, suffixPattern, RegexOptions.IgnoreCase);
+            if (!match.Success) break;
+            current = match.Groups[1].Value;
+        }
 
-        // Fallback: first two segments if hyphenated
-        var parts = name.Split('-');
+        // Fallback: first two segments if hyphenated and second is numeric
+        var parts = current.Split('-');
         if (parts.Length >= 2 && int.TryParse(parts[1], out _))
             return parts[0];
         if (parts.Length >= 2)
             return $"{parts[0]}-{parts[1]}";
-        return name;
+        return current;
     }
 
     /// <summary>
