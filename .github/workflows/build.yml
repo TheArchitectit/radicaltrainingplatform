@@ -88,7 +88,7 @@ jobs:
 
       # 9. Upload build artifacts
       - name: Upload Core artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: radicaltrainingplatform-core-${{ matrix.os }}
           path: RadicalTrainingPlatform.Core/bin/Release/net10.0/
@@ -97,7 +97,7 @@ jobs:
       # 10. Upload WinForms artifacts (Windows only)
       - name: Upload WinForms artifacts
         if: runner.os == 'Windows'
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: radicaltrainingplatform-winforms
           path: RadicalTrainingPlatform.Legacy.WinForms/bin/Release/net8.0-windows/
