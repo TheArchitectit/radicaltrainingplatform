@@ -1,10 +1,11 @@
 using System.Text.RegularExpressions;
+using RadicalTrainingPlatform.Core.Abstractions;
 using RadicalTrainingPlatform.Core.Models;
 using System.Linq;
 
 namespace RadicalTrainingPlatform.Core;
 
-public partial class QuestionParser
+public partial class QuestionParser : IQuestionParser
 {
     private static readonly Regex QuestionHeaderRx = QuestionHeaderRegex();
     private static readonly Regex DomainHeaderRx = DomainHeaderRegex();

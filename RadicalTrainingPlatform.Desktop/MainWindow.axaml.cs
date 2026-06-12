@@ -4,7 +4,9 @@ using Avalonia.Interactivity;
 using Avalonia.Layout;
 using Avalonia.Media;
 using Avalonia.Threading;
+using Microsoft.Extensions.DependencyInjection;
 using RadicalTrainingPlatform.Core;
+using RadicalTrainingPlatform.Core.Abstractions;
 using RadicalTrainingPlatform.Core.Models;
 using RadicalTrainingPlatform.Core.ViewModels;
 using RadicalTrainingPlatform.Avalonia.Views;
@@ -19,6 +21,11 @@ namespace RadicalTrainingPlatform.Avalonia;
 /// </summary>
 public partial class MainWindow : Window
 {
+    private readonly IExamRepository _examRepository;
+    private readonly IQuestionParser _questionParser;
+    private readonly IBlueprintService _blueprintService;
+    private readonly IReferenceService _referenceService;
+
     private Dictionary<string, List<Question>> _exams = new(StringComparer.OrdinalIgnoreCase);
     private List<ExamCatalogItem> _catalog = new();
     private ExamSessionViewModel? _session;
@@ -27,10 +34,17 @@ public partial class MainWindow : Window
     private LabSimulator.LabSimulatorView? _labView;
     private string _currentMode = "Study";
 
-    public MainWindow()
+    public MainWindow() : this(((App)Application.Current!).Services!) { }
+
+    public MainWindow(IServiceProvider services)
     {
         InitializeComponent();
         Loaded += OnLoaded;
+
+        _examRepository = services.GetRequiredService<IExamRepository>();
+        _questionParser = services.GetRequiredService<IQuestionParser>();
+        _blueprintService = services.GetRequiredService<IBlueprintService>();
+        _referenceService = services.GetRequiredService<IReferenceService>();
     }
 
     private void OnLoaded(object? sender, RoutedEventArgs e)
@@ -43,13 +57,9 @@ public partial class MainWindow : Window
 
     private void LoadExams()
     {
-        var provider = new DefaultFileProvider();
-        var repo = new MarkdownExamRepository(provider);
-        var parser = new QuestionParser(repo);
-
         // Build catalog (fast — no full parse) and load all exams
-        _catalog = parser.BuildCatalog();
-        _exams = parser.LoadAllExams();
+        _catalog = _questionParser.BuildCatalog();
+        _exams = _questionParser.LoadAllExams();
 
         // Populate sidebar quick-launch buttons dynamically
         PopulateSidebarButtons();
@@ -234,7 +244,7 @@ public partial class MainWindow : Window
 
     private void OnExportClicked(object? sender, RoutedEventArgs e)
     {
-        // TODO: Export dialog
+        // TODO: Export dialog (Sprint 2 wiring pending)
     }
 
     private void OnLabSimulatorClicked(object? sender, RoutedEventArgs e)

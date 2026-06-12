@@ -10,14 +10,14 @@
 
 | ID | Story | Points | Assignee | Status |
 |---|---|---|---|---|
-| S3-01 | Create IBlueprintService interface | 2 | TBD | To Do |
-| S3-02 | Create IReferenceService interface | 2 | TBD | To Do |
-| S3-03 | Rename BlueprintService and implement interface | 3 | TBD | To Do |
-| S3-04 | Rename ReferenceService and implement interface | 3 | TBD | To Do |
-| S3-05 | Add Microsoft.Extensions.DependencyInjection to Core | 2 | TBD | To Do |
-| S3-06 | Wire DI container in Desktop Program.cs | 3 | TBD | To Do |
-| S3-07 | Update all call sites to use injected interfaces | 3 | TBD | To Do |
-| S3-08 | Mark old static methods [Obsolete] for WinForms compat | 1 | TBD | To Do |
+| S3-01 | Create IBlueprintService interface | 2 | Claude | ✅ Done |
+| S3-02 | Create IReferenceService interface | 2 | Claude | ✅ Done |
+| S3-03 | Rename BlueprintService and implement interface | 3 | Claude | ✅ Done |
+| S3-04 | Rename ReferenceService and implement interface | 3 | Claude | ✅ Done |
+| S3-05 | Add Microsoft.Extensions.DependencyInjection to Core | 2 | Claude | ✅ Done |
+| S3-06 | Wire DI container in Desktop Program.cs | 3 | Claude | ✅ Done |
+| S3-07 | Update all call sites to use injected interfaces | 3 | Claude | ✅ Done |
+| S3-08 | Mark old static methods [Obsolete] for WinForms compat | 1 | Claude | ✅ Done |
 
 **Total:** 19 points
 
