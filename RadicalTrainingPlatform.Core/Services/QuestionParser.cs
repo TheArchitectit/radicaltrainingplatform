@@ -50,10 +50,18 @@ public partial class QuestionParser
             current = match.Groups[1].Value;
         }
 
-        // Fallback: first two segments if hyphenated and second is numeric
+        // After suffix stripping, current IS the exam code.
+        // Special case: if nothing was stripped and the name has a numeric
+        // second segment with only 2 parts (e.g. "AZ-104" → "AZ-104"),
+        // keep both segments since numeric is part of the exam code.
+        // Only truncate to first segment for known prefix-only codes.
         var parts = current.Split('-');
-        if (parts.Length >= 2 && int.TryParse(parts[1], out _))
-            return parts[0];
+        if (parts.Length >= 3 && int.TryParse(parts[1], out _))
+        {
+            // e.g., "NCA-75-Something" → after stripping suffixes this shouldn't happen,
+            // but as safety: take first two segments when middle is numeric
+            return $"{parts[0]}-{parts[1]}";
+        }
         if (parts.Length >= 2)
             return $"{parts[0]}-{parts[1]}";
         return current;

@@ -29,3 +29,7 @@ orphan-questions.csv
 # Build output (published binaries tracked via LFS as zip)
 publish/
 .claw/
+
+# Test results
+**/TestResults/
+

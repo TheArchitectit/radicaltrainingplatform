@@ -10,13 +10,13 @@
 
 | ID | Story | Points | Assignee | Status |
 |---|---|---|---|---|
-| S2-01 | Create Core.Tests project with xUnit + Shouldly + NSubstitute | 2 | TBD | To Do |
-| S2-02 | QuestionParser unit tests (85%+ coverage) | 5 | TBD | To Do |
-| S2-03 | ExamSessionViewModel unit tests (80%+ coverage) | 5 | TBD | To Do |
-| S2-04 | DeriveExamCode parameterized tests (100% coverage) | 2 | TBD | To Do |
-| S2-05 | DefaultFileProvider + MarkdownExamRepository tests | 3 | TBD | To Do |
-| S2-06 | Create content format linter script | 2 | TBD | To Do |
-| S2-07 | Add linter step to CI pipeline | 1 | TBD | To Do |
+| S2-01 | Create Core.Tests project with xUnit + Shouldly + NSubstitute | 2 | Claude | ✅ Done |
+| S2-02 | QuestionParser unit tests (85%+ coverage) | 5 | Claude | ✅ Done |
+| S2-03 | ExamSessionViewModel unit tests (80%+ coverage) | 5 | Claude | ✅ Done |
+| S2-04 | DeriveExamCode parameterized tests (100% coverage) | 2 | Claude | ✅ Done |
+| S2-05 | DefaultFileProvider + MarkdownExamRepository tests | 3 | Claude | ✅ Done |
+| S2-06 | Create content format linter script | 2 | Claude | ✅ Done |
+| S2-07 | Add linter step to CI pipeline | 1 | Claude | ✅ Done |
 
 **Total:** 20 points
 

@@ -22,6 +22,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      # 1.5 Lint exam content (fail fast before build)
+      - name: Lint exam content
+        run: python3 scripts/lint-content.py
+
       # 2. Install the .NET 10 SDK
       - name: Setup .NET 10
         uses: actions/setup-dotnet@v4
