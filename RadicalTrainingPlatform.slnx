@@ -1,2 +1,6 @@
 <Solution>
+  <Project Path="RadicalTrainingPlatform.Core\RadicalTrainingPlatform.Core.csproj" />
+  <Project Path="RadicalTrainingPlatform.Desktop\RadicalTrainingPlatform.Desktop.csproj" />
+  <Project Path="RadicalTrainingPlatform.Core.Tests\RadicalTrainingPlatform.Core.Tests.csproj" />
+  <Project Path="RadicalTrainingPlatform.Legacy.WinForms\RadicalTrainingPlatform.Legacy.WinForms.csproj" Type="windows" />
 </Solution>

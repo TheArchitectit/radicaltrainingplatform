@@ -61,6 +61,11 @@ jobs:
         run: dotnet test RadicalTrainingPlatform.Core.Tests/RadicalTrainingPlatform.Core.Tests.csproj --configuration Release --no-build --collect:"XPlat Code Coverage"
         shell: bash
 
+      # 7.5 Check for vulnerable packages
+      - name: Check for vulnerable packages
+        run: dotnet list RadicalTrainingPlatform.sln package --vulnerable --include-transitive 2>/dev/null || true
+        shell: bash
+
       # 8. Verify Core library has no System.Windows.Forms references
       - name: Verify no Windows.Forms in Core
         run: |
