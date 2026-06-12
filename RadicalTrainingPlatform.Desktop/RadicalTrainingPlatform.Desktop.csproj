@@ -22,8 +22,8 @@
     <PackageReference Include="Avalonia.Themes.Simple" Version="11.2.3" />
     <PackageReference Include="Avalonia.Fonts.Inter" Version="11.2.3" />
     <!-- Chromium Embedded for cross-platform WebView (Lab Simulator) -->
-    <PackageReference Include="CefGlue.Avalonia" Version="120.6099.204" />
-    <PackageReference Include="CefGlue.Common" Version="120.6099.204" />
+    <PackageReference Include="CefGlue.Avalonia" Version="120.6099.211" />
+    <PackageReference Include="CefGlue.Common" Version="120.6099.211" />
     <!-- Dependency Injection -->
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.0" />
     <!-- Logging -->
