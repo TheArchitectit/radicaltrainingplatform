@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "errata": [
+    {
+      "id": "NCA-75-Part1-Q35",
+      "file": "NCA-75-Part1.md",
+      "questionId": 35,
+      "correctionType": "answerKey",
+      "originalAnswer": "B",
+      "correctAnswer": ["D"],
+      "rationale": "Prism Central scale-out 3-VM deployment supports 25,000 VMs, not 10,000 (single large VM instance). See DOC-REVIEW-REPORT.md.",
+      "dateAdded": "2026-06-12"
+    },
+    {
+      "id": "NCA-75-Part3-GapFill-Q3",
+      "file": "NCA-75-Part3-GapFill.md",
+      "questionId": 3,
+      "correctionType": "answerKey",
+      "originalAnswer": "C",
+      "correctAnswer": ["A"],
+      "rationale": "SSH enabled by default on fresh AOS 7.5 installs per GA documentation. The plan to disable was deferred. See DOC-REVIEW-REPORT.md.",
+      "dateAdded": "2026-06-12"
+    }
+  ]
+}

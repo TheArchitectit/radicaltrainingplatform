@@ -2,6 +2,7 @@ using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using RadicalTrainingPlatform.Core;
 using RadicalTrainingPlatform.Core.Abstractions;
 
@@ -36,16 +37,28 @@ public partial class App : Application
     {
         var services = new ServiceCollection();
 
+        // Logging
+        services.AddLogging(builder =>
+        {
+            builder.AddConsole();
+            builder.SetMinimumLevel(LogLevel.Information);
+            builder.AddFilter("RadicalTrainingPlatform", LogLevel.Debug);
+        });
+
         // Infrastructure
         services.AddSingleton<IFileProvider, DefaultFileProvider>();
 
         // Repositories
         services.AddSingleton<IExamRepository>(sp =>
-            new MarkdownExamRepository(sp.GetRequiredService<IFileProvider>()));
+            new MarkdownExamRepository(
+                sp.GetRequiredService<IFileProvider>(),
+                logger: sp.GetRequiredService<ILogger<MarkdownExamRepository>>()));
 
         // Parsers
         services.AddSingleton<IQuestionParser>(sp =>
-            new QuestionParser(sp.GetRequiredService<IExamRepository>()));
+            new QuestionParser(
+                sp.GetRequiredService<IExamRepository>(),
+                logger: sp.GetRequiredService<ILogger<QuestionParser>>()));
 
         // Services
         services.AddSingleton<IBlueprintService, HardcodedBlueprintService>();

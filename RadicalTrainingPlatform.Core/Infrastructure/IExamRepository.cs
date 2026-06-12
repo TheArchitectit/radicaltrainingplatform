@@ -1,3 +1,5 @@
+using Microsoft.Extensions.Logging;
+
 namespace RadicalTrainingPlatform.Core;
 
 /// <summary>
@@ -29,6 +31,7 @@ public class MarkdownExamRepository : IExamRepository
 {
     private readonly IFileProvider _files;
     private readonly string _appName;
+    private readonly ILogger<MarkdownExamRepository>? _logger;
     private List<string>? _searchPaths;
 
     // Regex to detect exam-content files (### Q1 or ### Q42 headers)
@@ -42,10 +45,11 @@ public class MarkdownExamRepository : IExamRepository
         "LICENSE", "CODE_OF_CONDUCT", "MASTER-PROJECT-PLAN"
     };
 
-    public MarkdownExamRepository(IFileProvider files, string appName = "RadicalTrainingPlatform")
+    public MarkdownExamRepository(IFileProvider files, string appName = "RadicalTrainingPlatform", ILogger<MarkdownExamRepository>? logger = null)
     {
         _files = files;
         _appName = appName;
+        _logger = logger;
     }
 
     public IEnumerable<string> SearchPaths
@@ -63,14 +67,15 @@ public class MarkdownExamRepository : IExamRepository
                 _searchPaths.Add(_files.GetExecutingAssemblyDirectory());
 
                 // 3. Application data directory
-                try { _searchPaths.Add(_files.GetApplicationDataDirectory(_appName)); } catch { }
+                try { _searchPaths.Add(_files.GetApplicationDataDirectory(_appName)); }
+                catch (Exception ex) { _logger?.LogWarning(ex, "Could not access application data directory for {AppName}", _appName); }
 
                 // 4. Walk up from assembly looking for repo root
                 var asmDir = _files.GetExecutingAssemblyDirectory();
                 var current = asmDir;
                 for (int i = 0; i < 6; i++)
                 {
-                    var parent = Directory.GetParent(current)?.FullName;
+                    var parent = _files.GetParentDirectory(current);
                     if (string.IsNullOrEmpty(parent)) break;
                     _searchPaths.Add(parent);
                     current = parent;
@@ -93,7 +98,7 @@ public class MarkdownExamRepository : IExamRepository
             {
                 candidates = _files.GetFiles(path, "*.md");
             }
-            catch { /* ignore inaccessible dirs */ continue; }
+            catch (Exception ex) { _logger?.LogWarning(ex, "Could not enumerate files in {SearchPath}", path); continue; }
 
             foreach (var f in candidates)
             {

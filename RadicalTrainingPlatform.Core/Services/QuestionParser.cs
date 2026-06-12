@@ -1,4 +1,5 @@
 using System.Text.RegularExpressions;
+using Microsoft.Extensions.Logging;
 using RadicalTrainingPlatform.Core.Abstractions;
 using RadicalTrainingPlatform.Core.Models;
 using System.Linq;
@@ -13,10 +14,12 @@ public partial class QuestionParser : IQuestionParser
     private static readonly Regex AnswerRx = AnswerRegex();
 
     private readonly IExamRepository _examRepository;
+    private readonly ILogger<QuestionParser>? _logger;
 
-    public QuestionParser(IExamRepository examRepository)
+    public QuestionParser(IExamRepository examRepository, ILogger<QuestionParser>? logger = null)
     {
         _examRepository = examRepository;
+        _logger = logger;
     }
 
     [GeneratedRegex(@"^###\s+Q(\d+)[.\s]*(.*)", RegexOptions.Compiled)]
@@ -255,12 +258,17 @@ public partial class QuestionParser : IQuestionParser
 
                 if (q.Options.Count > 0 && q.CorrectAnswers.Count > 0)
                     questions.Add(q);
+                else
+                    _logger?.LogWarning("Skipped Q{QuestionId} in {File}: Options={OptCount}, Answers={AnsCount}",
+                        q.Id, Path.GetFileName(filePath), q.Options.Count, q.CorrectAnswers.Count);
 
                 continue;
             }
 
             i++;
         }
+
+        _logger?.LogInformation("Parsed {File}: {Count} questions extracted", Path.GetFileName(filePath), questions.Count);
 
         return questions;
     }

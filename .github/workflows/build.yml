@@ -32,13 +32,13 @@ jobs:
         with:
           dotnet-version: '10.0.x'
 
-      # 3. Restore NuGet packages for the Core library
-      - name: Restore packages (Core)
-        run: dotnet restore RadicalTrainingPlatform.Core/RadicalTrainingPlatform.Core.csproj
+      # 3. Restore NuGet packages for the solution
+      - name: Restore packages
+        run: dotnet restore RadicalTrainingPlatform.sln
 
-      # 4. Build the Core library (cross-platform, must succeed everywhere)
-      - name: Build RadicalTrainingPlatform.Core
-        run: dotnet build RadicalTrainingPlatform.Core/RadicalTrainingPlatform.Core.csproj --configuration Release --no-restore
+      # 4. Build the solution (Core + Desktop + Tests)
+      - name: Build solution
+        run: dotnet build RadicalTrainingPlatform.sln --configuration Release --no-restore
 
       # 5. Build the Avalonia desktop app if it exists (cross-platform)
       - name: Build RadicalTrainingPlatform.Desktop (Avalonia, if exists)
@@ -56,12 +56,9 @@ jobs:
           dotnet restore RadicalTrainingPlatform.Legacy.WinForms/RadicalTrainingPlatform.Legacy.WinForms.csproj
           dotnet build RadicalTrainingPlatform.Legacy.WinForms/RadicalTrainingPlatform.Legacy.WinForms.csproj --configuration Release --no-restore
 
-      # 7. Run any existing tests on all platforms
+      # 7. Run unit tests on all platforms
       - name: Run tests
-        run: |
-          if ls *.sln 1> /dev/null 2>&1; then
-            dotnet test --configuration Release --no-build
-          fi
+        run: dotnet test RadicalTrainingPlatform.Core.Tests/RadicalTrainingPlatform.Core.Tests.csproj --configuration Release --no-build --collect:"XPlat Code Coverage"
         shell: bash
 
       # 8. Verify Core library has no System.Windows.Forms references

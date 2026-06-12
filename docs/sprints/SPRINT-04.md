@@ -10,14 +10,14 @@
 
 | ID | Story | Points | Assignee | Status |
 |---|---|---|---|---|
-| S4-01 | Add Microsoft.Extensions.Logging to Core.csproj | 1 | TBD | To Do |
-| S4-02 | Add ILogger to MarkdownExamRepository, replace bare catch blocks | 3 | TBD | To Do |
-| S4-03 | Add ILogger to QuestionParser, log skipped questions | 3 | TBD | To Do |
-| S4-04 | Add ILogger to ExamPdfExporter | 2 | TBD | To Do |
-| S4-05 | Fix IFileProvider breach — add GetParentDirectory method | 2 | TBD | To Do |
-| S4-06 | Implement GetParentDirectory in DefaultFileProvider | 1 | TBD | To Do |
-| S4-07 | Create errata.json mechanism + parser integration | 3 | TBD | To Do |
-| S4-08 | Wire Core.Tests into CI with coverage reporting | 2 | TBD | To Do |
+| S4-01 | Add Microsoft.Extensions.Logging to Core.csproj | 1 | Claude | ✅ Done |
+| S4-02 | Add ILogger to MarkdownExamRepository, replace bare catch blocks | 3 | Claude | ✅ Done |
+| S4-03 | Add ILogger to QuestionParser, log skipped questions | 3 | Claude | ✅ Done |
+| S4-04 | Add ILogger to ExamPdfExporter | 2 | Claude | ⏳ Deferred (minimal impact, no catches to replace) |
+| S4-05 | Fix IFileProvider breach — add GetParentDirectory method | 2 | Claude | ✅ Done |
+| S4-06 | Implement GetParentDirectory in DefaultFileProvider | 1 | Claude | ✅ Done |
+| S4-07 | Create errata.json mechanism + parser integration | 3 | Claude | ✅ Done |
+| S4-08 | Wire Core.Tests into CI with coverage reporting | 2 | Claude | ✅ Done |
 
 **Total:** 17 points
 

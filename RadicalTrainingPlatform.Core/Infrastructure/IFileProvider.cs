@@ -14,6 +14,7 @@ public interface IFileProvider
     string GetCurrentDirectory();
     string GetExecutingAssemblyDirectory();
     string GetApplicationDataDirectory(string appName);
+    string? GetParentDirectory(string path);
 }
 
 /// <summary>
@@ -36,4 +37,5 @@ public class DefaultFileProvider : IFileProvider
         Directory.CreateDirectory(appDir);
         return appDir;
     }
+    public string? GetParentDirectory(string path) => Directory.GetParent(path)?.FullName;
 }
