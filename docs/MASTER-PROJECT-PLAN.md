@@ -1,8 +1,11 @@
 # 🚀 RadicalTrainingPlatform — Master Project Plan (Multi-Year Roadmap)
 
-> **Vision:** The definitive cross-platform certification study platform for Nutanix and beyond.
+> **Vision:** The definitive cross-platform certification study platform for Nutanix and beyond.  
+> **Guardrails:** [agent-guardrails-template](https://github.com/TheArchitectit/agent-guardrails-template) v2.8.0 (Four Laws: read-before-edit, stay-in-scope, verify-before-commit, halt-when-uncertain)
 
 This roadmap is organized into **years**, **quarters**, and **sprints**. Each sprint is 2 weeks. Status: `🟢 Done` | `🟡 In Progress` | `⚪ Planned` | `🔴 Blocked`
+
+> **For current sprint tasks and priorities**, see [SPRINT-PLAN.md](SPRINT-PLAN.md).
 
 ---
 
@@ -12,12 +15,12 @@ This roadmap is organized into **years**, **quarters**, and **sprints**. Each sp
 
 | Sprint | Goal | Deliverable | Status |
 |--------|------|-------------|--------|
-| S1 | Extract `RadicalTrainingPlatform.Core` shared library | `RadicalTrainingPlatform.Core` builds on `net8.0` | 🟡 |
-| S2 | Port all services (Reference, Blueprint, Parser) | All services in `RadicalTrainingPlatform.Core` | 🟡 |
-| S3 | PDF export with QuestPDF | Cross-platform PDF generation | ⚪ |
-| S4 | Lab Simulator standalone PWA | `RadicalTrainingPlatform.PWA` deployable to GitHub Pages | 🟡 |
-| S5 | CI/CD matrix setup | GitHub Actions: Windows/Linux/macOS builds | ⚪ |
-| S6 | WinForms app refactored to use Core | Zero regression on Windows | ⚪ |
+| S1 | Rename cleanup + fix broken bits | Zero stale CertForge refs, patched CVEs, valid solution files | 🟡 |
+| S2 | Wire real data through Desktop app | Avalonia app runs with real exam data on Linux | ⚪ |
+| S3 | Vendor-neutral Core + test coverage | Data-driven BlueprintService/ReferenceService, xUnit tests | ⚪ |
+| S4 | Exam simulation mode | Timed tests, score reports, difficulty ratings | ⚪ |
+| S5 | Persistence & progress tracking | SQLite database, spaced repetition, export formats | ⚪ |
+| S6 | CI/CD & packaging | GitHub Actions matrix, Flatpak/AppImage/dmg/exe | ⚪ |
 
 **Milestone Q1:** Core library is platform-agnostic. Windows app works unchanged. PWA is live.
 
@@ -209,21 +212,27 @@ Current mode: **1 developer + AI pair** = high velocity, parallel workstreams.
 
 | Quarter | Sprints | Done | In Progress | Blocked |
 |---------|---------|------|-------------|---------|
-| Q1 | 1-6 | 2 | 3 | 0 |
+| Q1 | 1-6 | 0 | 1 | 0 |
 | Q2 | 7-12 | 0 | 0 | 0 |
 | Q3 | 13-18 | 0 | 0 | 0 |
 | Q4 | 19-24 | 0 | 0 | 0 |
+
+### Completed Earlier (pre-sprint tracking)
+- ✅ `RadicalTrainingPlatform.Core` extracted — builds on `net10.0` with Models, Services, ViewModels, Infrastructure, PdfExport
+- ✅ `RadicalTrainingPlatform.Desktop` (Avalonia 11.2) scaffolded — views, controls, lab simulator
+- ✅ `RadicalTrainingPlatform.Web` (PWA) — manifest, service worker, HTML/JS/CSS
+- ✅ Agent guardrails v2.8.0 installed — skills + hooks + CLAUDE.md
 
 ---
 
 ## Immediate Next 5 Sprints (Active Planning)
 
 ```
-S1 [NOW]  → Core extraction, PWA, models, parser
-S2 [NEXT] → Refactor WinForms → Core, port services, PDF export
-S3        → Avalonia skeleton, theme engine, main layout
-S4        → Question UI, options cards, answer flow
-S5        → Explain panel, blueprint, stats, test mode
+S1 [NOW]  → Rename cleanup, fix CertForge refs, patch CVEs, reconcile docs
+S2 [NEXT] → Wire real data through Avalonia Desktop app (Core → Views)
+S3        → Vendor-neutral Core (data-driven blueprints/refs), xUnit test coverage
+S4        → Exam simulation mode (timer, score reports, difficulty ratings)
+S5        → Persistence (SQLite), spaced repetition, Anki/CSV export
 ```
 
 Let's go. 🚀
