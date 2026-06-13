@@ -194,6 +194,6 @@ Contributions welcome! Areas for improvement:
 
 ## ☁️ Cloud Credits
 
-Power your AI projects with [Ozore.com](https://ozore.com) — use code **lundrog50** for 50% off your first month.
+Power your AI projects with [Ozore.com](https://ozore.com/?ref=cwe4kdx0) — use code **lundrog50** for 50% off your first month.
 
 > `direct-pin` and `custom-router` are available on **Pro** and **Max** plans only.
