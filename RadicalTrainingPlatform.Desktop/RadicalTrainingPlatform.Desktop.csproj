@@ -17,10 +17,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Avalonia" Version="11.2.3" />
+    <PackageReference Include="Avalonia" Version="12.0.4" />
     <PackageReference Include="Avalonia.Desktop" Version="11.2.3" />
     <PackageReference Include="Avalonia.Themes.Simple" Version="11.2.3" />
-    <PackageReference Include="Avalonia.Fonts.Inter" Version="11.2.3" />
+    <PackageReference Include="Avalonia.Fonts.Inter" Version="12.0.4" />
     <!-- Chromium Embedded for cross-platform WebView (Lab Simulator) -->
     <PackageReference Include="CefGlue.Avalonia" Version="120.6099.204" />
     <PackageReference Include="CefGlue.Common" Version="120.6099.204" />
