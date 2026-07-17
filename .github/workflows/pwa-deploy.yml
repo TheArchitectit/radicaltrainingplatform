@@ -30,7 +30,7 @@ jobs:
 
       # 2. Upload the static PWA files as a Pages artifact
       - name: Upload PWA artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v5
         with:
           path: RadicalTrainingPlatform.Web/
 
