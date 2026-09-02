@@ -6,7 +6,6 @@ A WinForms-based exam preparation tool for Nutanix certifications featuring **1,
 ![License](https://img.shields.io/badge/License-BSD%203--Clause-green)
 ![Questions](https://img.shields.io/badge/Questions-1%2C458-orange)
 ![Status](https://img.shields.io/badge/Status-Alpha-yellow)
-[![Sponsor](https://img.shields.io/badge/Sponsor-GitHub%20Sponsors-FF69B4?style=flat&logo=github-sponsors)](https://github.com/sponsors/TheArchitectit)
 
 ## 📋 Supported Certifications
 
