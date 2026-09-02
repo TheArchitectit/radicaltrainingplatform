@@ -194,8 +194,6 @@ Contributions welcome! Areas for improvement:
 
 ---
 
----
-
 ## ☕ Support This Project
 
 Help keep this project going — use a referral link below and both of us get credits!
