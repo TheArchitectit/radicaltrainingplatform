@@ -21,14 +21,12 @@ jobs:
       - name: Lint exam content
         run: python3 scripts/lint-content.py
 
-      - name: Setup .NET 10
-        uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: '10.0.x'
-
-      # The .sln cannot restore on Linux: Legacy.WinForms is net8.0-windows AND
-      # NU1201-incompatible with Core, so no EnableWindowsTargeting value helps.
-      # Build the three Linux-legitimate projects explicitly instead.
+      # No setup-dotnet here: the runner image (localhost/devgate-runner-rtp,
+      # infra Containerfile convention) bakes the .NET 10 SDK — setup-dotnet
+      # cannot write /usr/share/dotnet inside a rootless runner container.
+      # The .sln cannot build on Linux: Legacy.WinForms is a windows-targeted
+      # project (WFO analyzers, WebView2), so the Linux leg builds the three
+      # Linux-legitimate projects explicitly instead.
       - name: Build Core
         run: dotnet build RadicalTrainingPlatform.Core/RadicalTrainingPlatform.Core.csproj --configuration Release
 
@@ -64,8 +62,9 @@ jobs:
           path: RadicalTrainingPlatform.Core/bin/Release/net10.0/
           if-no-files-found: warn
 
-  # WinForms stays on a Windows machine — a Linux runner cannot compile
-  # net8.0-windows for this project at all (see NU1201 note above).
+  # WinForms stays on a Windows machine — this leg builds the retargeted
+  # net10.0-windows project (NU1201 with Core's net10.0 was the old
+  # net8.0-windows TFM; retargeted 2026-09-26 so the solution restores).
   # windows-latest is kept deliberately: radicaltrainingplatform is a PUBLIC
   # repo, so hosted minutes are free here, unlike the fleet's private repos.
   # pwa-deploy.yml likewise stays ubuntu-latest: actions/deploy-pages is a
@@ -84,12 +83,10 @@ jobs:
           PYTHONIOENCODING: utf-8
         shell: bash
 
-      - name: Setup .NET (SDKs 8 + 10)
+      - name: Setup .NET (SDK 10 — Legacy.WinForms retargeted to net10.0-windows)
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: |
-            8.0.x
-            10.0.x
+          dotnet-version: "10.0.x"
 
       - name: Restore solution
         run: dotnet restore RadicalTrainingPlatform.sln
@@ -104,5 +101,5 @@ jobs:
         uses: actions/upload-artifact@v7
         with:
           name: radicaltrainingplatform-winforms
-          path: RadicalTrainingPlatform.Legacy.WinForms/bin/Release/net8.0-windows/
+          path: RadicalTrainingPlatform.Legacy.WinForms/bin/Release/net10.0-windows/
           if-no-files-found: warn
