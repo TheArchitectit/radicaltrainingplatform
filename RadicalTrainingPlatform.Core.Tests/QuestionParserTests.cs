@@ -48,6 +48,26 @@ public class QuestionParserTests
     }
 
     [Fact]
+    public void ParseFile_CrlfContent_ParsesIdenticallyToLf()
+    {
+        // Windows editors (and git autocrlf) deliver exam files with CRLF
+        // endings. Splitting on both \r and \n used to inject phantom empty
+        // lines that aborted option parsing — questions vanished silently.
+        var content = MakeQuestion(1, "What is 2+2?", ["- A) 3", "- B) 4"], "B", "Two plus two is four.")
+                          .Replace("\n", "\r\n");
+        var repo = CreateRepo(content);
+        var parser = new QuestionParser(repo);
+
+        var questions = parser.ParseFile("test-exam.md");
+
+        questions.ShouldHaveSingleItem();
+        questions[0].Stem.ShouldContain("What is 2+2?");
+        questions[0].Options.Count.ShouldBe(2);
+        questions[0].CorrectAnswers.ShouldContain("B");
+        questions[0].Explanation.ShouldContain("Two plus two is four.");
+    }
+
+    [Fact]
     public void ParseFile_MultipleQuestions_ReturnsAll()
     {
         var content = MakeQuestion(1, "Q1", ["- A) A1", "- B) B1"], "A")
