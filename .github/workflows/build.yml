@@ -8,74 +8,46 @@ on:
     branches: [main]
 
 jobs:
-  build-core:
-    # Run on three platforms to verify cross-platform compatibility
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
-      # Continue running other OS jobs even if one fails
-      fail-fast: false
-
+  # Core + Desktop + Tests: Linux self-hosted (ucs03-rtp, label devgate-rtp).
+  # Moved off the ubuntu/windows/macos hosted matrix 2026-09-26 — owner call:
+  # fleet runner, not GitHub-hosted, and "nothing local" is preserved because
+  # the runner lives on ucs03, not on a personal box.
+  build-linux:
+    runs-on: [self-hosted, devgate-rtp]
     steps:
-      # 1. Check out the repository code
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # 1.5 Lint exam content (fail fast before build)
       - name: Lint exam content
         run: python3 scripts/lint-content.py
 
-      # 2. Install the .NET 10 SDK
       - name: Setup .NET 10
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '10.0.x'
 
-      # 3. Restore NuGet packages for the solution
-      - name: Restore packages
-        run: dotnet restore RadicalTrainingPlatform.sln
+      # The .sln cannot restore on Linux: Legacy.WinForms is net8.0-windows AND
+      # NU1201-incompatible with Core, so no EnableWindowsTargeting value helps.
+      # Build the three Linux-legitimate projects explicitly instead.
+      - name: Build Core
+        run: dotnet build RadicalTrainingPlatform.Core/RadicalTrainingPlatform.Core.csproj --configuration Release
 
-      # 4. Build the solution (Core + Desktop + Tests)
-      - name: Build solution
-        run: dotnet build RadicalTrainingPlatform.sln --configuration Release --no-restore
+      - name: Build RadicalTrainingPlatform.Desktop (Avalonia)
+        run: dotnet build RadicalTrainingPlatform.Desktop/RadicalTrainingPlatform.Desktop.csproj --configuration Release
 
-      # 5. Build the Avalonia desktop app if it exists (cross-platform)
-      - name: Build RadicalTrainingPlatform.Desktop (Avalonia, if exists)
-        run: |
-          if [ -f "RadicalTrainingPlatform.Desktop/RadicalTrainingPlatform.Desktop.csproj" ]; then
-            dotnet restore RadicalTrainingPlatform.Desktop/RadicalTrainingPlatform.Desktop.csproj
-            dotnet build RadicalTrainingPlatform.Desktop/RadicalTrainingPlatform.Desktop.csproj --configuration Release --no-restore
-          fi
-        shell: bash
-
-      # 6. Build the WinForms app -- only on Windows
-      - name: Build RadicalTrainingPlatform (WinForms)
-        if: runner.os == 'Windows'
-        run: |
-          dotnet restore RadicalTrainingPlatform.Legacy.WinForms/RadicalTrainingPlatform.Legacy.WinForms.csproj
-          dotnet build RadicalTrainingPlatform.Legacy.WinForms/RadicalTrainingPlatform.Legacy.WinForms.csproj --configuration Release --no-restore
-
-      # 7. Run unit tests on all platforms
       - name: Run tests
-        run: dotnet test RadicalTrainingPlatform.Core.Tests/RadicalTrainingPlatform.Core.Tests.csproj --configuration Release --no-build --collect:"XPlat Code Coverage"
-        shell: bash
+        run: dotnet test RadicalTrainingPlatform.Core.Tests/RadicalTrainingPlatform.Core.Tests.csproj --configuration Release --collect:"XPlat Code Coverage"
 
-      # 7.5 Check for vulnerable packages
       - name: Check for vulnerable packages
-        run: dotnet list RadicalTrainingPlatform.sln package --vulnerable --include-transitive 2>/dev/null || true
-        shell: bash
+        run: dotnet list RadicalTrainingPlatform.Core/RadicalTrainingPlatform.Core.csproj RadicalTrainingPlatform.Core.Tests/RadicalTrainingPlatform.Core.Tests.csproj package --vulnerable --include-transitive 2>/dev/null || true
 
-      # 8. Verify Core library has no System.Windows.Forms references
       - name: Verify no Windows.Forms in Core
         run: |
           echo "Checking RadicalTrainingPlatform.Core for System.Windows.Forms references..."
-          # Search for Windows.Forms references in source code and compiled assembly
           if grep -ri "System.Windows.Forms" RadicalTrainingPlatform.Core/ 2>/dev/null; then
             echo "ERROR: RadicalTrainingPlatform.Core must not reference System.Windows.Forms" >&2
             exit 1
           fi
-          # Also check the compiled DLL metadata (works on all platforms via strings-like grep on binary)
           NET10_DLL="RadicalTrainingPlatform.Core/bin/Release/net10.0/RadicalTrainingPlatform.Core.dll"
           if [ -f "$NET10_DLL" ]; then
             if strings "$NET10_DLL" | grep -qi "Windows.Forms"; then
@@ -84,19 +56,51 @@ jobs:
             fi
           fi
           echo "OK: No System.Windows.Forms references found in RadicalTrainingPlatform.Core"
-        shell: bash
 
-      # 9. Upload build artifacts
       - name: Upload Core artifacts
         uses: actions/upload-artifact@v7
         with:
-          name: radicaltrainingplatform-core-${{ matrix.os }}
+          name: radicaltrainingplatform-core-linux
           path: RadicalTrainingPlatform.Core/bin/Release/net10.0/
           if-no-files-found: warn
 
-      # 10. Upload WinForms artifacts (Windows only)
+  # WinForms stays on a Windows machine — a Linux runner cannot compile
+  # net8.0-windows for this project at all (see NU1201 note above).
+  # windows-latest is kept deliberately: radicaltrainingplatform is a PUBLIC
+  # repo, so hosted minutes are free here, unlike the fleet's private repos.
+  # pwa-deploy.yml likewise stays ubuntu-latest: actions/deploy-pages is a
+  # GitHub-hosted platform capability that cannot run self-hosted.
+  build-winforms:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # cp1252 consoles cannot print the lint output's emoji — force UTF-8
+      # (this UnicodeEncodeError killed the 2026-09-02 Windows legs).
+      - name: Lint exam content
+        run: python scripts/lint-content.py
+        env:
+          PYTHONIOENCODING: utf-8
+        shell: bash
+
+      - name: Setup .NET (SDKs 8 + 10)
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: |
+            8.0.x
+            10.0.x
+
+      - name: Restore solution
+        run: dotnet restore RadicalTrainingPlatform.sln
+
+      - name: Build solution
+        run: dotnet build RadicalTrainingPlatform.sln --configuration Release --no-restore
+
+      - name: Run tests
+        run: dotnet test RadicalTrainingPlatform.Core.Tests/RadicalTrainingPlatform.Core.Tests.csproj --configuration Release --no-build
+
       - name: Upload WinForms artifacts
-        if: runner.os == 'Windows'
         uses: actions/upload-artifact@v7
         with:
           name: radicaltrainingplatform-winforms
