@@ -53,8 +53,10 @@ public class QuestionParserTests
         // Windows editors (and git autocrlf) deliver exam files with CRLF
         // endings. Splitting on both \r and \n used to inject phantom empty
         // lines that aborted option parsing — questions vanished silently.
+        // AppendLine emits Environment.NewLine — normalise to LF first so
+        // the conversion is a no-op on Windows runners where it is already CRLF.
         var content = MakeQuestion(1, "What is 2+2?", ["- A) 3", "- B) 4"], "B", "Two plus two is four.")
-                          .Replace("\n", "\r\n");
+                          .Replace("\r\n", "\n").Replace("\n", "\r\n");
         var repo = CreateRepo(content);
         var parser = new QuestionParser(repo);
 
