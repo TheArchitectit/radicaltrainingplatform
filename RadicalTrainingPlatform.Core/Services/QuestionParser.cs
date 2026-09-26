@@ -126,7 +126,10 @@ public partial class QuestionParser : IQuestionParser
     public List<Question> ParseFile(string filePath)
     {
         var content = _examRepository.ReadExamFile(filePath);
-        var lines = content.Split(['\r', '\n'], StringSplitOptions.None);
+        // Normalise line endings before splitting: Split('\r','\n') turns every
+        // CRLF into a phantom empty line, which aborted option parsing (and thus
+        // dropped whole questions) on CRLF exam files.
+        var lines = content.Replace("\r\n", "\n").Replace('\r', '\n').Split('\n');
         var examCode = DeriveExamCode(Path.GetFileName(filePath));
         var questions = new List<Question>();
         var currentDomain = "";
