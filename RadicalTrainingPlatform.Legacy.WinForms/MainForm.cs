@@ -3,6 +3,7 @@ using RadicalTrainingPlatform.Controls;
 using RadicalTrainingPlatform.LabSimulator;
 using RadicalTrainingPlatform.Core.Models;
 using RadicalTrainingPlatform.Core;
+using RadicalTrainingPlatform.Services;
 
 namespace RadicalTrainingPlatform;
 
@@ -470,19 +471,19 @@ class MainForm : Form
 
     private void LoadExams()
     {
-        // The .md files live in C:\copilot\next2026 (parent of the RadicalTrainingPlatform project).
-        // Try several strategies to locate them.
-        string dir = FindMarkdownDirectory();
-
+        // MarkdownExamRepository resolves exam files itself: cwd, the assembly
+        // directory, appData, and walks up looking for the repo root. The old
+        // static QuestionParser.LoadAllExams(dir) call never existed.
         try
         {
-            var loaded = QuestionParser.LoadAllExams(dir);
+            var parser = new QuestionParser(new MarkdownExamRepository(new DefaultFileProvider()));
+            var loaded = parser.LoadAllExams();
             foreach (var kv in loaded.OrderBy(k => k.Key))
                 _exams[kv.Key] = kv.Value;
         }
         catch (Exception ex)
         {
-            MessageBox.Show($"Could not load exams from {dir}:\n{ex.Message}",
+            MessageBox.Show($"Could not load exams:\n{ex.Message}",
                 "Load Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
 
@@ -1418,35 +1419,6 @@ class MainForm : Form
     // ═══════════════════════════════════════════════════════════════
     //  HELPERS
     // ═══════════════════════════════════════════════════════════════
-
-    private static string FindMarkdownDirectory()
-    {
-        // 1) Known hard-coded path
-        const string known = @"C:\copilot\next2026";
-        if (Directory.Exists(known) && Directory.GetFiles(known, "NCP-US*.md").Length > 0)
-            return known;
-
-        // 2) Walk up from the executable directory looking for .md files
-        var search = AppContext.BaseDirectory;
-        for (int i = 0; i < 8 && search != null; i++)
-        {
-            search = Path.GetDirectoryName(search);
-            if (search != null && Directory.Exists(search)
-                && Directory.GetFiles(search, "NCP-US*.md").Length > 0)
-                return search;
-        }
-
-        // 3) Walk up from current working directory
-        search = Directory.GetCurrentDirectory();
-        for (int i = 0; i < 5 && search != null; i++)
-        {
-            if (Directory.GetFiles(search, "NCP-US*.md").Length > 0)
-                return search;
-            search = Path.GetDirectoryName(search);
-        }
-
-        return known; // fallback
-    }
 
     private Label MakeSectionLabel(string text)
     {
