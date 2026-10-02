@@ -29,6 +29,7 @@ public partial class MainWindow : Window
     private Dictionary<string, List<Question>> _exams = new(StringComparer.OrdinalIgnoreCase);
     private List<ExamCatalogItem> _catalog = new();
     private ExamSessionViewModel? _session;
+    private string? _lastExamCode;
     private QuestionView? _questionView;
     private BlueprintView? _blueprintView;
     private LabSimulator.LabSimulatorView? _labView;
@@ -141,6 +142,7 @@ public partial class MainWindow : Window
 
         int? limit = _currentMode == "Test" ? 75 : null;
         _session = new ExamSessionViewModel(questions, examCode, limit);
+        _lastExamCode = examCode;
         _session.PropertyChanged += OnSessionPropertyChanged;
 
         _questionView.DataContext = _session;
@@ -233,9 +235,29 @@ public partial class MainWindow : Window
 
     private void OnBlueprintClicked(object? sender, RoutedEventArgs e)
     {
+        // Exam scope: current session, else the last one studied.
+        var code = _session?.ExamCode ?? _lastExamCode;
+        if (string.IsNullOrEmpty(code))
+        {
+            // No exam studied yet — show selector rather than an empty canvas.
+            ShowExamSelector();
+            return;
+        }
+
         ReleaseCurrentView();
         _blueprintView ??= new BlueprintView();
         MainContent.Content = _blueprintView;
+
+        // Real data pipeline (was: injected _blueprintService never used,
+        // LoadBlueprint never called — the canvas rendered empty).
+        var blueprint = _blueprintService.GetBlueprint(code);
+        if (blueprint == null) return;
+        var questions = _exams.GetValueOrDefault(code) ?? new();
+        var qTexts = questions
+            .Select(q => q.Stem + " " + string.Join(" ", q.Options.Select(o => o.Text)))
+            .ToList();
+        var coverage = _blueprintService.CalculateCoverage(code, qTexts);
+        _blueprintView.LoadBlueprintData(blueprint, coverage);
     }
 
     private void OnReviewClicked(object? sender, RoutedEventArgs e)

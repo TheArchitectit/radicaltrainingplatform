@@ -33,6 +33,20 @@ public class HardcodedBlueprintServiceTests
         bp.ShouldNotBeNull();
     }
 
+    [Theory]
+    [InlineData("NCM-MCI", "NCM-MCI")]
+    [InlineData("NCP-CI", "NCP-CI")]
+    [InlineData("ncpmci", "NCM-MCI")]
+    public void GetBlueprint_SubstringRouting_DoesNotConfuseMciWithCi(string input, string expected)
+    {
+        // Regression: substring order once sent "NCM-MCI" (contains "CI") to
+        // the NCP-CI blueprint. The old test asserted only non-null and missed
+        // it — assert the ACTUAL blueprint, not just existence.
+        var bp = _service.GetBlueprint(input);
+        bp.ShouldNotBeNull();
+        bp!.ExamCode.ShouldBe(expected);
+    }
+
     [Fact]
     public void GetBibleSections_NCA75_ReturnsSections()
     {

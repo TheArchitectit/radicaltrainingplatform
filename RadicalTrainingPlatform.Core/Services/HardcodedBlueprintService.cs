@@ -10,12 +10,14 @@ namespace RadicalTrainingPlatform.Core;
 public class HardcodedBlueprintService : IBlueprintService
 {
     private static readonly Dictionary<string, ExamBlueprint> _blueprints = new(StringComparer.OrdinalIgnoreCase);
+    private static readonly object _initLock = new();
     private static bool _initialized;
 
     public HardcodedBlueprintService()
     {
-        if (!_initialized)
+        lock (_initLock)
         {
+            if (_initialized) return;
             InitNcpAi();
             InitNcpUs();
             InitNcpCi();
@@ -29,10 +31,13 @@ public class HardcodedBlueprintService : IBlueprintService
     {
         // Normalize exam code
         var key = examCode.Replace(" ", "").ToUpperInvariant();
+        // Order matters: "NCM-MCI" contains "CI" — the MCI/NCM check must come
+        // BEFORE the bare-CI check or NCM-MCI silently routed to the NCP-CI
+        // blueprint (shipped bug; invisible to the old non-null-only test).
+        if (key.Contains("MCI") || key.Contains("MCM") || key.Contains("NCM")) return _blueprints.GetValueOrDefault("NCM-MCI");
         if (key.Contains("AI")) return _blueprints.GetValueOrDefault("NCP-AI");
         if (key.Contains("US")) return _blueprints.GetValueOrDefault("NCP-US");
         if (key.Contains("CI")) return _blueprints.GetValueOrDefault("NCP-CI");
-        if (key.Contains("MCI") || key.Contains("MCM") || key.Contains("NCM")) return _blueprints.GetValueOrDefault("NCM-MCI");
         if ((key.Contains("NCA") || key.StartsWith("NCA")) && key.Contains("75")) return _blueprints.GetValueOrDefault("NCA-75");
         if (key == "NCA" || key.Contains("NCA75") || key.Contains("NCA-75")) return _blueprints.GetValueOrDefault("NCA-75");
         return _blueprints.GetValueOrDefault(examCode);
