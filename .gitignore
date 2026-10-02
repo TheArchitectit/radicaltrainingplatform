@@ -33,3 +33,6 @@ publish/
 # Test results
 **/TestResults/
 
+# Agent runtime state (session DBs, turn logs) — never commit
+.pi/
+

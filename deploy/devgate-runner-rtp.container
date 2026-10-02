@@ -1,0 +1,54 @@
+# devgate-runner-rtp — RadicalTrainingPlatform CI runner on the podman fleet (ucs03).
+#
+# This is a RECORD of the unit deployed on ucs03 (CPU tier) on 2026-09-26,
+# pulled back from the live host 2026-10-01. It is not applied from this repo —
+# the fleet host is the source of truth; keep this in sync when the unit changes.
+# Runner verified online 2026-10-01: name `ucs03-rtp`, labels `devgate-rtp`.
+#
+# Fleet context lives in the infra-info repo: hosts.md (ucs03 = CPU tier since
+# 2026-09-25), devgate-ci-fleet.md (hub on ucs03 since 2026-09-27), and
+# runner-install-runbook.md. Template lineage: .devgate/templates/runner/
+# self-hosted-runner.container (DevGate standard) + the dg-entrypoint child-image
+# pattern the fleet uses on ucs03.
+#
+# Ops (on ucs03, user unit):
+#   systemctl --user status devgate-runner-rtp
+#   podman logs -f devgate-runner-rtp
+#
+# Token mint (from any box with gh auth, NEVER on the runner):
+#   gh api -X POST repos/TheArchitectit/radicaltrainingplatform/actions/runners/registration-token \
+#     --jq .token
+# drop-in: ~/.config/containers/systemd/devgate-runner-rtp.container.d/10-token.conf
+# (mode 600, single line RUNNER_TOKEN=...; consumed at first register — the
+# durable registration below means restarts need no new token).
+
+[Container]
+# Child image of ghcr.io/actions/actions-runner built on the host (DevGate fleet
+# pattern — adds the fleet entrypoint); pinned locally as :local.
+Image=localhost/devgate-runner-rtp:local
+ContainerName=devgate-runner-rtp
+HostName=devgate-runner-ucs03-rtp
+Exec=/usr/local/bin/dg-entrypoint.sh
+Volume=devgate-runner-rtp-work:/_work
+Mount=type=bind,src=%h/.config/containers/dg-entrypoint.sh,target=/usr/local/bin/dg-entrypoint.sh,ro,Z
+Environment=RUNNER_NAME=ucs03-rtp
+# DISTINCT label per project — jobs never cross project boundaries.
+# Two-tier rule: bare label, no gpu — RTP is a CPU-only workload on ucs03.
+Environment=RUNNER_LABELS=devgate-rtp
+Environment=RUNNER_SCOPE=repo
+Environment=REPO_URL=https://github.com/TheArchitectit/radicaltrainingplatform
+# RUNNER_WORKDIR and the persisted-config dir live under /_work so a restart
+# reuses the registration (no fresh token needed).
+Environment=RUNNER_WORKDIR=/_work
+Environment=CONFIGURED_ACTIONS_RUNNER_FILES_DIR=/_work/runner-config
+Environment=DISABLE_AUTOMATIC_DEREGISTRATION=true
+EnvironmentFile=%h/.config/containers/systemd/devgate-runner-rtp.container.d/10-token.conf
+LogDriver=k8s-file
+
+[Service]
+Restart=always
+RestartSec=10
+TimeoutStopSec=30
+
+[Install]
+WantedBy=default.target
