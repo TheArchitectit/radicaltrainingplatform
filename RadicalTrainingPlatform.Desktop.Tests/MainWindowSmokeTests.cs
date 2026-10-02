@@ -87,6 +87,21 @@ public class MainWindowSmokeTests
     }
 
     [AvaloniaFact]
+    public void Blueprint_Click_LoadsRealDataIntoCanvas_NoThrow()
+    {
+        var (window, vm) = OpenMainWindowWithSession();
+
+        // Used to render an empty canvas (LoadBlueprint had no caller); the
+        // pipeline now feeds GetBlueprint + CalculateCoverage from DI.
+        var blueprint = FindButton(window, "Blueprint");
+        blueprint.ShouldNotBeNull();
+        Should.NotThrow(() => blueprint.RaiseEvent(new RoutedEventArgs(Button.ClickEvent!)));
+
+        window.GetVisualDescendants().OfType<BlueprintView>().Any().ShouldBeTrue();
+        window.Close();
+    }
+
+    [AvaloniaFact]
     public void Review_WithWrongAnswer_DoesNotCrash_AndOffersBackToStudy()
     {
         var (window, vm) = OpenMainWindowWithSession();
