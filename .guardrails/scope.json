@@ -1,0 +1,12 @@
+{
+  "api_version": "devgate.scope/v1",
+  "note": [
+    "Host-project overlay of the DevGate scope baseline (.devgate/.guardrails/scope.json).",
+    "Projects EXTEND via this overlay, never by editing the submodule baseline (overlay-not-fork).",
+    "RadicalTrainingPlatform build artifacts live in bin/ and obj/ — they are gitignored and must not be scanned as source."
+  ],
+  "skip_dirs": [
+    "bin",
+    "obj"
+  ]
+}
