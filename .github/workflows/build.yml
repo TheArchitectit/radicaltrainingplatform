@@ -36,6 +36,16 @@ jobs:
       - name: Run tests
         run: dotnet test RadicalTrainingPlatform.Core.Tests/RadicalTrainingPlatform.Core.Tests.csproj --configuration Release --collect:"XPlat Code Coverage"
 
+      # Headless Avalonia UI smoke suite (xunit.v3/MTP — runs as the built exe,
+      # not via VSTest). Boots the real App + MainWindow on the fleet runner
+      # with no display: catches XAML-load breaks (e.g. Avalonia package skew)
+      # and the Review-button crash path that unit tests on Core cannot see.
+      # cwd = workspace root so the app's SearchPaths find the exam .md files.
+      - name: Run desktop smoke tests (headless Avalonia)
+        run: |
+          dotnet build RadicalTrainingPlatform.Desktop.Tests/RadicalTrainingPlatform.Desktop.Tests.csproj --configuration Release
+          ./RadicalTrainingPlatform.Desktop.Tests/bin/Release/net10.0/RadicalTrainingPlatform.Desktop.Tests
+
       - name: Check for vulnerable packages
         run: dotnet list RadicalTrainingPlatform.Core/RadicalTrainingPlatform.Core.csproj RadicalTrainingPlatform.Core.Tests/RadicalTrainingPlatform.Core.Tests.csproj RadicalTrainingPlatform.Desktop/RadicalTrainingPlatform.Desktop.csproj package --vulnerable --include-transitive 2>/dev/null || true
 

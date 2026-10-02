@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RadicalTrainingPlatform.Leg
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RadicalTrainingPlatform.Core.Tests", "RadicalTrainingPlatform.Core.Tests\RadicalTrainingPlatform.Core.Tests.csproj", "{C708C36B-BFC1-416D-A124-4C6E5A1FE1AE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RadicalTrainingPlatform.Desktop.Tests", "RadicalTrainingPlatform.Desktop.Tests\RadicalTrainingPlatform.Desktop.Tests.csproj", "{FE05F3E1-FC55-4C72-A7E1-A8E89EF30195}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +71,18 @@ Global
 		{C708C36B-BFC1-416D-A124-4C6E5A1FE1AE}.Release|x64.Build.0 = Release|Any CPU
 		{C708C36B-BFC1-416D-A124-4C6E5A1FE1AE}.Release|x86.ActiveCfg = Release|Any CPU
 		{C708C36B-BFC1-416D-A124-4C6E5A1FE1AE}.Release|x86.Build.0 = Release|Any CPU
+		{FE05F3E1-FC55-4C72-A7E1-A8E89EF30195}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE05F3E1-FC55-4C72-A7E1-A8E89EF30195}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE05F3E1-FC55-4C72-A7E1-A8E89EF30195}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{FE05F3E1-FC55-4C72-A7E1-A8E89EF30195}.Debug|x64.Build.0 = Debug|Any CPU
+		{FE05F3E1-FC55-4C72-A7E1-A8E89EF30195}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{FE05F3E1-FC55-4C72-A7E1-A8E89EF30195}.Debug|x86.Build.0 = Debug|Any CPU
+		{FE05F3E1-FC55-4C72-A7E1-A8E89EF30195}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE05F3E1-FC55-4C72-A7E1-A8E89EF30195}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE05F3E1-FC55-4C72-A7E1-A8E89EF30195}.Release|x64.ActiveCfg = Release|Any CPU
+		{FE05F3E1-FC55-4C72-A7E1-A8E89EF30195}.Release|x64.Build.0 = Release|Any CPU
+		{FE05F3E1-FC55-4C72-A7E1-A8E89EF30195}.Release|x86.ActiveCfg = Release|Any CPU
+		{FE05F3E1-FC55-4C72-A7E1-A8E89EF30195}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
