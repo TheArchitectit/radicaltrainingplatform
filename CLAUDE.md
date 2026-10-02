@@ -18,7 +18,8 @@ RadicalTrainingPlatform.Core (net10.0 — no UI deps)
   ├── Infrastructure/  IExamRepository, IFileProvider
   └── PdfExport/       ExamPdfExporter (QuestPDF)
 
-RadicalTrainingPlatform.Core.Tests (xUnit — parser, blueprint, viewmodel, DI)
+RadicalTrainingPlatform.Core.Tests (xUnit — parser, blueprint, viewmodel, infra;
+  DI registration itself untested — composition root lives in Desktop)
 
 RadicalTrainingPlatform.Desktop (net10.0 — Avalonia 12.0)
   ├── Views/           ExamSelectorView, QuestionView, OptionCard, BlueprintView, StatsView
