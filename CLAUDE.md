@@ -4,19 +4,23 @@
 
 Cross-platform certification study platform for Nutanix (and future vendors). 1,458 validated practice questions across 4 exams, synthwave-themed UI, blueprint coverage tracking, and a lab simulator.
 
-**Stack:** .NET 10 / C# 13 / Avalonia 11.2 / QuestPDF / HTML+JS PWA
+**Stack:** .NET 10 / C# 13 / Avalonia 12.0 / QuestPDF / HTML+JS PWA
 
 ## Architecture
 
 ```
 RadicalTrainingPlatform.Core (net10.0 — no UI deps)
   ├── Models/          Question, AnswerOption, BlueprintObjective, ExamCatalogItem
-  ├── Services/        QuestionParser, BlueprintService, ReferenceService
+  ├── Abstractions/    IQuestionParser, IBlueprintService, IReferenceService
+  ├── Services/        DI impls (HardcodedBlueprintService, HardcodedReferenceService,
+  │                    QuestionParser) + obsolete static shims for legacy WinForms
   ├── ViewModels/      ExamSessionViewModel
   ├── Infrastructure/  IExamRepository, IFileProvider
   └── PdfExport/       ExamPdfExporter (QuestPDF)
 
-RadicalTrainingPlatform.Desktop (net10.0 — Avalonia 11.2)
+RadicalTrainingPlatform.Core.Tests (xUnit — parser, blueprint, viewmodel, DI)
+
+RadicalTrainingPlatform.Desktop (net10.0 — Avalonia 12.0)
   ├── Views/           ExamSelectorView, QuestionView, OptionCard, BlueprintView, StatsView
   ├── Controls/        SynthwaveProgressBar, BlueprintCanvas
   ├── LabSimulator/    CefBridge, LabSimulatorView
@@ -27,7 +31,7 @@ RadicalTrainingPlatform.Web (static PWA)
   ├── js/              app.js, core/, views/
   └── css/
 
-RadicalTrainingPlatform.Legacy.WinForms (net8.0-windows)
+RadicalTrainingPlatform.Legacy.WinForms (net10.0-windows)
   └── MainForm.cs (59K GDI+ synthwave UI — preserved for reference)
 ```
 
@@ -99,17 +103,21 @@ Types: `feat`, `fix`, `docs`, `style`, `refactor`, `test`, `chore`, `rename`
 - Prefer small, single-file edits
 - Commit after each logical change
 - Core changes must build on `net10.0` with zero warnings
-- Desktop changes must build on `net10.0` with Avalonia 11.2
+- Desktop changes must build on `net10.0` with Avalonia 12.0
 
 ## Key Files
 
 | File | Purpose |
 |------|---------|
-| `docs/SPRINT-PLAN.md` | Current sprint tasks and priorities |
+| `docs/sprints/SPRINT-PLAN.md` | Master sprint plan (44 sprints); per-sprint details in `docs/sprints/SPRINT-NN.md` |
+| `docs/DESIGN-PLAN.md` | Design plan (DI refactor: see Phase 1.5) |
 | `docs/MASTER-PROJECT-PLAN.md` | Multi-year roadmap |
 | `docs/ROADMAP-CROSSPLATFORM.md` | Cross-platform architecture decisions |
-| `RadicalTrainingPlatform.sln` | Solution file (Windows + cross-platform projects) |
-| `RadicalTrainingPlatform.slnx` | XML solution file (needs population — Sprint 1) |
+| `RadicalTrainingPlatform.sln` | Solution file (all 4 projects incl. Tests) |
+| `RadicalTrainingPlatform.slnx` | XML solution file (populated — mirrors .sln) |
+
+CI: `.github/workflows/build.yml` — `build-linux` on fleet runner `ucs03-rtp`
+(label `devgate-rtp`, quadlet recorded in `deploy/`), `build-winforms` on hosted.
 
 ## Documentation Standards
 
