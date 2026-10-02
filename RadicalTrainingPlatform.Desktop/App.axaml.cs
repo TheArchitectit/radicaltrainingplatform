@@ -24,6 +24,7 @@ public partial class App : Application
     public override void OnFrameworkInitializationCompleted()
     {
         Services = ConfigureServices();
+        InstallGlobalExceptionHandlers();
 
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
@@ -31,6 +32,30 @@ public partial class App : Application
         }
 
         base.OnFrameworkInitializationCompleted();
+    }
+
+    /// <summary>
+    /// Last-resort handlers: an unhandled UI-thread exception used to tear the
+    /// process down with no trace (e.g. the Review-button NRE). Log loudly and
+    /// keep the window alive where possible.
+    /// </summary>
+    private void InstallGlobalExceptionHandlers()
+    {
+        var log = Services.GetRequiredService<ILoggerFactory>()
+                               .CreateLogger("RadicalTrainingPlatform.Unhandled");
+
+        global::Avalonia.Threading.Dispatcher.UIThread.UnhandledException += (_, e) =>
+        {
+            log.LogError(e.Exception, "Unhandled exception on UI thread");
+            e.Handled = true; // keep the app alive; the operation itself is lost
+        };
+        AppDomain.CurrentDomain.UnhandledException += (_, e) =>
+            log.LogError(e.ExceptionObject as Exception, "Unhandled exception on background thread");
+        System.Threading.Tasks.TaskScheduler.UnobservedTaskException += (_, e) =>
+        {
+            log.LogError(e.Exception, "Unobserved task exception");
+            e.SetObserved();
+        };
     }
 
     private static IServiceProvider ConfigureServices()
@@ -45,24 +70,8 @@ public partial class App : Application
             builder.AddFilter("RadicalTrainingPlatform", LogLevel.Debug);
         });
 
-        // Infrastructure
-        services.AddSingleton<IFileProvider, DefaultFileProvider>();
-
-        // Repositories
-        services.AddSingleton<IExamRepository>(sp =>
-            new MarkdownExamRepository(
-                sp.GetRequiredService<IFileProvider>(),
-                logger: sp.GetRequiredService<ILogger<MarkdownExamRepository>>()));
-
-        // Parsers
-        services.AddSingleton<IQuestionParser>(sp =>
-            new QuestionParser(
-                sp.GetRequiredService<IExamRepository>(),
-                logger: sp.GetRequiredService<ILogger<QuestionParser>>()));
-
-        // Services
-        services.AddSingleton<IBlueprintService, HardcodedBlueprintService>();
-        services.AddSingleton<IReferenceService, HardcodedReferenceService>();
+        // Core composition root (shared with WinForms and Core.Tests)
+        services.AddRadicalTrainingPlatformCore();
 
         return services.BuildServiceProvider();
     }

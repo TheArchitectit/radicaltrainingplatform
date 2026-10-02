@@ -34,6 +34,13 @@ public partial class MainWindow : Window
     private LabSimulator.LabSimulatorView? _labView;
     private string _currentMode = "Study";
 
+    /// <summary>
+    /// Non-null while the wrong-answers review is on screen: the study session
+    /// to resume when the user leaves review. Doubles as the review-mode flag.
+    /// </summary>
+    private ExamSessionViewModel? _reviewReturnSession;
+    private bool InReviewMode => _reviewReturnSession != null;
+
     public MainWindow() : this(((App)Application.Current!).Services!) { }
 
     public MainWindow(IServiceProvider services)
@@ -115,6 +122,12 @@ public partial class MainWindow : Window
         if (MainContent.Content is LabSimulator.LabSimulatorView lab)
             lab.Dispose();
         _session = null;
+        // Leaving review (via any nav button) ends the review return path.
+        if (InReviewMode)
+        {
+            _reviewReturnSession = null;
+            SetReviewButtonLabel(false);
+        }
     }
 
     // ─── Session Management ────────────────────────────────────────
@@ -227,19 +240,51 @@ public partial class MainWindow : Window
 
     private void OnReviewClicked(object? sender, RoutedEventArgs e)
     {
+        // Already reviewing → return to the study session we paused on.
+        if (InReviewMode)
+        {
+            var resume = _reviewReturnSession;
+            _reviewReturnSession = null;
+            SetReviewButtonLabel(false);
+            ShowReviewSession(resume!);
+            return;
+        }
+
         if (_session == null) return;
         var wrong = _session.GetWrongQuestions();
         if (wrong.Count == 0) return;
 
-        ReleaseCurrentView();
+        // Capture BEFORE ReleaseCurrentView(): that call nulls _session (the
+        // old code dereferenced _session.ExamCode afterwards → guaranteed NRE).
+        var studySession = _session;
+        var reviewVm = new ExamSessionViewModel(wrong, studySession.ExamCode + " (Review)");
+        _reviewReturnSession = studySession;
+        SetReviewButtonLabel(true);
+        ShowReviewSession(reviewVm);
+    }
+
+    /// <summary>
+    /// Swap the question view onto <paramref name="vm"/>, rewiring the stats
+    /// subscription. ReleaseCurrentView is deliberately NOT used: it disposes
+    /// the review session we must keep for Back-to-Study.
+    /// </summary>
+    private void ShowReviewSession(ExamSessionViewModel vm)
+    {
+        if (_session != null)
+            _session.PropertyChanged -= OnSessionPropertyChanged;
+
         _questionView ??= new QuestionView();
-        var reviewVm = new ExamSessionViewModel(wrong, _session.ExamCode + " (Review)");
-        _session.PropertyChanged -= OnSessionPropertyChanged;
-        _session = reviewVm;
+        _session = vm;
         _session.PropertyChanged += OnSessionPropertyChanged;
         _questionView.DataContext = _session;
         MainContent.Content = _questionView;
         UpdateStats();
+    }
+
+    private void SetReviewButtonLabel(bool inReview)
+    {
+        if (BtnReview != null)
+            BtnReview.Content = inReview ? "← Back to Study" : "Review";
     }
 
     private void OnExportClicked(object? sender, RoutedEventArgs e)
