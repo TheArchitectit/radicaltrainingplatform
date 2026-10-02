@@ -35,6 +35,7 @@ public partial class MainWindow : Window
     private string? _lastExamCode;
     private QuestionView? _questionView;
     private BlueprintView? _blueprintView;
+    private StatsView? _statsView;
     private LabSimulator.LabSimulatorView? _labView;
     private string _currentMode = "Study";
 
@@ -261,6 +262,17 @@ public partial class MainWindow : Window
             .ToList();
         var coverage = _blueprintService.CalculateCoverage(code, qTexts);
         _blueprintView.LoadBlueprintData(blueprint, coverage);
+    }
+
+    private void OnStatsClicked(object? sender, RoutedEventArgs e)
+    {
+        // Snapshot the session: ReleaseCurrentView nulls _session, so the
+        // stats view gets whatever was active when Stats was clicked.
+        var snapshot = _session;
+        ReleaseCurrentView();
+        _statsView ??= new StatsView();
+        _statsView.LoadStats(snapshot);
+        MainContent.Content = _statsView;
     }
 
     private void OnReviewClicked(object? sender, RoutedEventArgs e)

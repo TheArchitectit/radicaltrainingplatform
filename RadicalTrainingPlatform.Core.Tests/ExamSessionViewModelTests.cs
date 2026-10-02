@@ -10,7 +10,7 @@ namespace RadicalTrainingPlatform.Core.Tests;
 
 public class ExamSessionViewModelTests
 {
-    private static Question MakeQuestion(int id, string[] correctAnswers, int optionCount = 4)
+    private static Question MakeQuestion(int id, string[] correctAnswers, int optionCount = 4, string domain = "")
     {
         var options = new List<AnswerOption>();
         var letters = new[] { "A", "B", "C", "D", "E", "F" };
@@ -24,8 +24,74 @@ public class ExamSessionViewModelTests
             CorrectAnswers = correctAnswers.ToList(),
             Options = options,
             ExamCode = "TEST",
+            Domain = domain,
             SourceFile = "test.md"
         };
+    }
+
+    // ─── Streak (audit: MainWindow rendered CorrectCount as "Streak") ──
+
+    [Fact]
+    public void Streak_IncrementsOnConsecutiveCorrect()
+    {
+        var questions = new List<Question> { MakeQuestion(1, ["A"]), MakeQuestion(2, ["A"]) };
+        var vm = new ExamSessionViewModel(questions, "TEST");
+
+        vm.SelectAnswer("A"); vm.Submit(); vm.Next();
+        vm.Streak.ShouldBe(1); vm.BestStreak.ShouldBe(1);
+
+        vm.SelectAnswer("A"); vm.Submit();
+        vm.Streak.ShouldBe(2); vm.BestStreak.ShouldBe(2);
+    }
+
+    [Fact]
+    public void Streak_ResetsOnWrong_SkipAlsoBreaks()
+    {
+        var questions = new List<Question> { MakeQuestion(1, ["A"]), MakeQuestion(2, ["A"]), MakeQuestion(3, ["A"]) };
+        var vm = new ExamSessionViewModel(questions, "TEST");
+
+        vm.SelectAnswer("A"); vm.Submit(); vm.Next(); // correct, streak 1
+        vm.SelectAnswer("B"); vm.Submit();            // wrong
+        vm.Streak.ShouldBe(0);
+        vm.BestStreak.ShouldBe(1);                    // peak retained
+
+        vm.Next();
+        vm.Skip();                                    // skip = miss, breaks streak
+        vm.Streak.ShouldBe(0);
+    }
+
+    // ─── Domain stats (feeds StatsView breakdown) ──────────────────
+
+    [Fact]
+    public void GetDomainStats_CountsPerDomain()
+    {
+        var questions = new List<Question>
+        {
+            MakeQuestion(1, ["A"], domain: "Alpha"),
+            MakeQuestion(2, ["A"], domain: "Alpha"),
+            MakeQuestion(3, ["A"], domain: "Beta"),
+        };
+        var vm = new ExamSessionViewModel(questions, "TEST");
+
+        vm.SelectAnswer("A"); vm.Submit(); vm.Next();  // Alpha correct
+        vm.SelectAnswer("B"); vm.Submit(); vm.Next();  // Alpha wrong
+        // Beta untouched
+
+        var stats = vm.GetDomainStats();
+        var alpha = stats.Single(s => s.Domain == "Alpha");
+        alpha.Correct.ShouldBe(1);
+        alpha.Answered.ShouldBe(2);
+        alpha.Total.ShouldBe(2);
+        var beta = stats.Single(s => s.Domain == "Beta");
+        beta.Answered.ShouldBe(0);
+        beta.Total.ShouldBe(1);
+    }
+
+    [Fact]
+    public void GetDomainStats_BlankDomain_GroupedAsGeneral()
+    {
+        var vm = new ExamSessionViewModel(new List<Question> { MakeQuestion(1, ["A"]) }, "TEST");
+        vm.GetDomainStats().Single().Domain.ShouldBe("General");
     }
 
     // ─── Constructor Tests ────────────────────────────────────────

@@ -87,6 +87,22 @@ public class MainWindowSmokeTests
     }
 
     [AvaloniaFact]
+    public void Stats_Click_RealDataAndEmptyState_NoFakeNumbers()
+    {
+        var (window, vm) = OpenMainWindowWithSession();
+
+        // StatsView was an unreachable mock-up (85%, "Started Jun 10").
+        // Fresh session, zero answers -> honest empty state, no fake numbers.
+        var stats = FindButton(window, "Stats");
+        stats.ShouldNotBeNull();
+        Should.NotThrow(() => stats.RaiseEvent(new RoutedEventArgs(Button.ClickEvent!)));
+
+        var view = window.GetVisualDescendants().OfType<StatsView>().FirstOrDefault();
+        view.ShouldNotBeNull();
+        window.Close();
+    }
+
+    [AvaloniaFact]
     public void GenerateStudyGuidePdf_ProducesRealPdfBytes()
     {
         var (window, vm) = OpenMainWindowWithSession();

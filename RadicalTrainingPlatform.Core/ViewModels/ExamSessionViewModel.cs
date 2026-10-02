@@ -17,6 +17,8 @@ public class ExamSessionViewModel : INotifyPropertyChanged
     private bool _submitted;
     private readonly HashSet<string> _wrongKeys = new();
     private readonly HashSet<string> _correctKeys = new();
+    private int _streak;
+    private int _bestStreak;
 
     public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -66,6 +68,10 @@ public class ExamSessionViewModel : INotifyPropertyChanged
 
     public int CorrectCount => _correctKeys.Count;
     public int WrongCount => _wrongKeys.Count;
+    /// <summary>Consecutive correct answers since the last miss.</summary>
+    public int Streak => _streak;
+    /// <summary>Longest consecutive-correct run this session.</summary>
+    public int BestStreak => _bestStreak;
     public double AccuracyPercent => TotalQuestions > 0 ? (CorrectCount * 100.0 / TotalQuestions) : 0;
     public bool IsComplete => _sessionQuestions.All(IsAnswered);
 
@@ -98,14 +104,23 @@ public class ExamSessionViewModel : INotifyPropertyChanged
         var correct = CurrentQuestion.CorrectAnswers.OrderBy(a => a).SequenceEqual(_selectedAnswers.OrderBy(a => a));
         var key = MakeKey(CurrentQuestion);
         if (correct)
+        {
             _correctKeys.Add(key);
+            _streak++;
+            if (_streak > _bestStreak) _bestStreak = _streak;
+        }
         else
+        {
             _wrongKeys.Add(key);
+            _streak = 0;
+        }
 
         Notify(nameof(IsSubmitted));
         Notify(nameof(IsCorrect));
         Notify(nameof(CorrectCount));
         Notify(nameof(WrongCount));
+        Notify(nameof(Streak));
+        Notify(nameof(BestStreak));
         Notify(nameof(AccuracyPercent));
         Notify(nameof(IsComplete));
         return correct;
@@ -134,8 +149,29 @@ public class ExamSessionViewModel : INotifyPropertyChanged
 
     public void Skip()
     {
+        // A skip counts as a miss: it breaks the streak, same as a wrong answer.
         _wrongKeys.Add(MakeKey(CurrentQuestion));
+        _streak = 0;
+        Notify(nameof(Streak));
         Next();
+    }
+
+    /// <summary>
+    /// Per-domain accuracy for the session: domain → (correct, answered, total).
+    /// Drives the StatsView domain breakdown; unit-testable without UI.
+    /// </summary>
+    public List<(string Domain, int Correct, int Answered, int Total)> GetDomainStats()
+    {
+        return _sessionQuestions
+            .GroupBy(q => string.IsNullOrWhiteSpace(q.Domain) ? "General" : q.Domain)
+            .Select(g =>
+            {
+                int answeredCorrect = g.Count(q => _correctKeys.Contains(MakeKey(q)));
+                int answered = g.Count(q => _correctKeys.Contains(MakeKey(q)) || _wrongKeys.Contains(MakeKey(q)));
+                return (g.Key, answeredCorrect, answered, g.Count());
+            })
+            .OrderBy(d => d.Key, StringComparer.OrdinalIgnoreCase)
+            .ToList();
     }
 
     public List<Question> GetWrongQuestions() =>
