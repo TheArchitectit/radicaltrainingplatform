@@ -37,7 +37,7 @@ jobs:
         run: dotnet test RadicalTrainingPlatform.Core.Tests/RadicalTrainingPlatform.Core.Tests.csproj --configuration Release --collect:"XPlat Code Coverage"
 
       - name: Check for vulnerable packages
-        run: dotnet list RadicalTrainingPlatform.Core/RadicalTrainingPlatform.Core.csproj RadicalTrainingPlatform.Core.Tests/RadicalTrainingPlatform.Core.Tests.csproj package --vulnerable --include-transitive 2>/dev/null || true
+        run: dotnet list RadicalTrainingPlatform.Core/RadicalTrainingPlatform.Core.csproj RadicalTrainingPlatform.Core.Tests/RadicalTrainingPlatform.Core.Tests.csproj RadicalTrainingPlatform.Desktop/RadicalTrainingPlatform.Desktop.csproj package --vulnerable --include-transitive 2>/dev/null || true
 
       - name: Verify no Windows.Forms in Core
         run: |
