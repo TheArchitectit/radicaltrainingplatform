@@ -87,6 +87,21 @@ public class MainWindowSmokeTests
     }
 
     [AvaloniaFact]
+    public void GenerateStudyGuidePdf_ProducesRealPdfBytes()
+    {
+        var (window, vm) = OpenMainWindowWithSession();
+
+        // ExamPdfExporter had zero call sites repo-wide; the Export button's
+        // handler was an empty TODO. QuestPDF renders fine headless.
+        var bytes = window.GenerateStudyGuidePdf();
+        bytes.ShouldNotBeNull();
+        bytes!.Length.ShouldNotBe(0);
+        // PDF magic bytes %PDF
+        System.Text.Encoding.ASCII.GetString(bytes, 0, 4).ShouldBe("%PDF");
+        window.Close();
+    }
+
+    [AvaloniaFact]
     public void Blueprint_Click_LoadsRealDataIntoCanvas_NoThrow()
     {
         var (window, vm) = OpenMainWindowWithSession();

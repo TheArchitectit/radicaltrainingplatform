@@ -1,12 +1,15 @@
+using System.IO;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
+using Avalonia.Platform.Storage;
 using Avalonia.Layout;
 using Avalonia.Media;
 using Avalonia.Threading;
 using Microsoft.Extensions.DependencyInjection;
 using RadicalTrainingPlatform.Core;
 using RadicalTrainingPlatform.Core.Abstractions;
+using RadicalTrainingPlatform.Core.PdfExport;
 using RadicalTrainingPlatform.Core.Models;
 using RadicalTrainingPlatform.Core.ViewModels;
 using RadicalTrainingPlatform.Avalonia.Views;
@@ -310,8 +313,37 @@ public partial class MainWindow : Window
     }
 
     private void OnExportClicked(object? sender, RoutedEventArgs e)
+        => ExportStudyGuide();
+
+    /// <summary>
+    /// Renders the current (or last-studied) exam's study guide to PDF bytes,
+    /// or null when no exam has been loaded. Split from the save dialog so the
+    /// QuestPDF generation is testable without OS file-picker interaction.
+    /// </summary>
+    public byte[]? GenerateStudyGuidePdf()
     {
-        // TODO: Export dialog (Sprint 2 wiring pending)
+        var code = _session?.ExamCode ?? _lastExamCode;
+        if (string.IsNullOrEmpty(code)) return null;
+        if (!_exams.TryGetValue(code, out var questions) || questions.Count == 0) return null;
+        var title = _catalog.FirstOrDefault(c => string.Equals(c.ExamCode, code, StringComparison.OrdinalIgnoreCase))?.DisplayName ?? code;
+        return ExamPdfExporter.GenerateExamPdf(questions, title, code);
+    }
+
+    private async void ExportStudyGuide()
+    {
+        var code = _session?.ExamCode ?? _lastExamCode;
+        if (string.IsNullOrEmpty(code)) { ShowExamSelector(); return; }
+
+        var file = await StorageProvider.SaveFilePickerAsync(new FilePickerSaveOptions
+        {
+            SuggestedFileName = $"{code}-study-guide.pdf",
+            DefaultExtension = ".pdf",
+        });
+        if (file == null) return; // user cancelled
+
+        var bytes = GenerateStudyGuidePdf();
+        if (bytes is { Length: > 0 })
+            await File.WriteAllBytesAsync(file.Path.LocalPath, bytes);
     }
 
     private void OnLabSimulatorClicked(object? sender, RoutedEventArgs e)
