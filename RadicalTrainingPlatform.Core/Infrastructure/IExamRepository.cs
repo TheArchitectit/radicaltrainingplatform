@@ -21,6 +21,12 @@ public interface IExamRepository
     /// Get paths where exam files are searched.
     /// </summary>
     IEnumerable<string> SearchPaths { get; }
+
+    /// <summary>
+    /// Add a directory to the search set (takes priority over auto-discovered
+    /// paths). Call before first FindExamFiles() for ordering to matter.
+    /// </summary>
+    void RegisterSearchPath(string directory);
 }
 
 /// <summary>
@@ -33,6 +39,7 @@ public class MarkdownExamRepository : IExamRepository
     private readonly string _appName;
     private readonly ILogger<MarkdownExamRepository>? _logger;
     private List<string>? _searchPaths;
+    private readonly List<string> _registeredPaths = new();
 
     // Regex to detect exam-content files (### Q1 or ### Q42 headers)
     private static readonly System.Text.RegularExpressions.Regex ExamHeaderRegex =
@@ -52,13 +59,21 @@ public class MarkdownExamRepository : IExamRepository
         _logger = logger;
     }
 
+    public void RegisterSearchPath(string directory)
+    {
+        if (string.IsNullOrWhiteSpace(directory))
+            throw new ArgumentException("Directory required", nameof(directory));
+        _registeredPaths.Add(directory);
+        _searchPaths = null; // rebuild on next access
+    }
+
     public IEnumerable<string> SearchPaths
     {
         get
         {
             if (_searchPaths == null)
             {
-                _searchPaths = new List<string>();
+                _searchPaths = new List<string>(_registeredPaths); // registered first: priority
 
                 // 1. Current working directory
                 _searchPaths.Add(_files.GetCurrentDirectory());

@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using NSubstitute;
 using RadicalTrainingPlatform.Core.Models;
@@ -112,6 +113,29 @@ public class MarkdownExamRepositoryTests
         var paths = repo.SearchPaths.ToList();
         paths.ShouldContain("/asm");
     }
+
+    [Fact]
+    public void RegisterSearchPath_TakesPriorityAndIsSearched()
+    {
+        var files = Substitute.For<IFileProvider>();
+        files.GetCurrentDirectory().Returns("/cwd");
+        files.GetExecutingAssemblyDirectory().Returns("/asm");
+        files.Exists(Arg.Any<string>()).Returns(true);
+        files.GetFiles("/registered", "*.md").Returns(new[] { "/registered/EXAM-X-Part1.md" });
+        files.ReadAllText("/registered/EXAM-X-Part1.md").Returns("### Q1\nQ?\n- A) a\n**Answer: A**\n");
+
+        var repo = new MarkdownExamRepository(files);
+        repo.RegisterSearchPath("/registered");
+
+        var paths = repo.SearchPaths.ToList();
+        paths.First().ShouldBe("/registered");
+        repo.FindExamFiles().ShouldContain("/registered/EXAM-X-Part1.md");
+    }
+
+    [Fact]
+    public void RegisterSearchPath_BlankRejected() =>
+        Should.Throw<ArgumentException>(() =>
+            new MarkdownExamRepository(Substitute.For<IFileProvider>()).RegisterSearchPath("  "));
 
     [Fact]
     public void SearchPaths_DeduplicatesPaths()
