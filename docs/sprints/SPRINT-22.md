@@ -46,5 +46,5 @@ The lab simulator (15,100+ lines of JS Prism simulation) exists but is disconnec
 
 - [ ] Lab simulator scenarios submit answers that count in quiz scoring
 - [ ] ILabSimulatorHost abstraction allows non-CefGlue implementations
-- [ ] CefBridge no longer returns stub data
+- [x] CefBridge no longer returns stub data (handlers read real catalog + ISessionStore; CefBridgeHandlerTests 2026-10-03)
 - [ ] Lab questions parse correctly from markdown
