@@ -21,7 +21,7 @@
 | CVM default RAM | ~32 GB (varies by feature load) |
 | Prism API v4 | PC current/recommended |
 | Prism API v2.0 | PE |
-| Max PC scale (AOS 7.5) | 10,000 VMs |
+| Max PC scale (AOS 7.5) | 25,000 VMs (scale-out 3-VM) |
 | Max NGT VMs per cluster | 2,048 |
 | vTPM support | AOS 7.5+ with KMS |
 | AES default | AOS 7.5+ (all-flash new; hybrid upgrade) |
@@ -32,7 +32,7 @@
 | Metro Availability RPO | 0 (synchronous) |
 | Async DR RPO | 1-24 hours |
 | NearSync RPO | ~15 sec - 15 min |
-| LCM upgrade order | Firmware → Hypervisor → AOS |
+| LCM upgrade order | AOS → Hypervisor → Firmware |
 | Prism ports | 80 (HTTP redirect), 9440 (HTTPS) |
 | NGT Master port | 2073 |
 | NGT Proxy port | 2074 |

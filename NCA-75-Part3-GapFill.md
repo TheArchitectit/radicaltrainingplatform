@@ -209,7 +209,7 @@ Place the LCM upgrade operations in the correct sequence:
 - D) Discover available updates (Inventory)
 
 **Answer: D, C, B, A**
-The standard LCM workflow sequence is: 1) Inventory — discover available updates; 2) Pre-checks — run NCC and validate readiness; 3) Notifications — alert users; 4) Apply — execute updates in recommended order (firmware → hypervisor → AOS).
+The standard LCM workflow sequence is: 1) Inventory — discover available updates; 2) Pre-checks — run NCC and validate readiness; 3) Notifications — alert users; 4) Apply — execute updates in recommended order (AOS → hypervisor → firmware).
 
 ---
 
@@ -639,7 +639,7 @@ What is the maximum number of VMs that can have NGT installed per cluster?
 - D) 10,000
 
 **Answer: B**
-The maximum number of VMs with NGT installed per cluster is 2,048. This is a specific limit that may appear on the NCA 7.5 exam. Prism Central can manage up to 10,000 VMs total, but NGT has a per-cluster limit of 2,048.
+The maximum number of VMs with NGT installed per cluster is 2,048. This is a specific limit that may appear on the NCA 7.5 exam. Prism Central scale-out (3-VM deployment) manages up to 25,000 VMs; a single large VM instance supports 10,000. NGT has a per-cluster limit of 2,048.
 
 ---
 
