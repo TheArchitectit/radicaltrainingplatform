@@ -136,6 +136,10 @@ public partial class QuestionParser : IQuestionParser
     public List<Question> ParseFile(string filePath)
     {
         var content = _examRepository.ReadExamFile(filePath);
+        // A UTF-8 BOM survives string-level transport (it is stripped by
+        // File.ReadAllText, but not by content arriving via other seams) and
+        // would defeat the ^### header anchor on line 1.
+        content = content.TrimStart('\uFEFF');
         // Normalise line endings before splitting: Split('\r','\n') turns every
         // CRLF into a phantom empty line, which aborted option parsing (and thus
         // dropped whole questions) on CRLF exam files.

@@ -1,3 +1,4 @@
+using System;
 using NSubstitute;
 using RadicalTrainingPlatform.Core.Models;
 using Shouldly;
@@ -67,6 +68,45 @@ public class QuestionParserTests
         questions[0].Options.Count.ShouldBe(2);
         questions[0].CorrectAnswers.ShouldContain("B");
         questions[0].Explanation.ShouldContain("Two plus two is four.");
+    }
+
+    [Theory]
+    [InlineData("lf")]
+    [InlineData("crlf")]
+    [InlineData("mixed")]
+    [InlineData("bom")]
+    [InlineData("bom-crlf")]
+    public void ParseFile_EncodingVariants_ProduceIdenticalQuestionSets(string variant)
+    {
+        // Digest 2026-09-27: real-world exam .md files arrive with LF, CRLF,
+        // mixed endings, and/or a UTF-8 BOM (Windows editors, git autocrlf,
+        // PowerShell redirection). All variants must parse to the same set.
+        var baseContent = MakeQuestion(1, "What is 2+2?", ["- A) 3", "- B) 4"], "B", "Two plus two is four.")
+                          + MakeQuestion(2, "What is 3+3?", ["- A) 6", "- B) 7"], "A", "Three plus three is six.")
+                          .Replace("\r\n", "\n"); // canonical LF baseline
+
+        var content = variant switch
+        {
+            "lf" => baseContent,
+            "crlf" => baseContent.Replace("\n", "\r\n"),
+            // First question CRLF, second stays LF.
+            "mixed" => baseContent[..baseContent.IndexOf("- A) 6")]
+                         .Replace("\n", "\r\n")
+                      + baseContent[baseContent.IndexOf("- A) 6")..],
+            "bom" => "\uFEFF" + baseContent,
+            "bom-crlf" => "\uFEFF" + baseContent.Replace("\n", "\r\n"),
+            _ => throw new ArgumentOutOfRangeException(nameof(variant)),
+        };
+
+        var repo = CreateRepo(content);
+        var questions = new QuestionParser(repo).ParseFile("test-exam.md");
+
+        questions.Count.ShouldBe(2);
+        questions[0].Stem.ShouldContain("2+2");
+        questions[0].Options.Count.ShouldBe(2);
+        questions[0].CorrectAnswers.ShouldContain("B");
+        questions[1].Stem.ShouldContain("3+3");
+        questions[1].CorrectAnswers.ShouldContain("A");
     }
 
     [Fact]
