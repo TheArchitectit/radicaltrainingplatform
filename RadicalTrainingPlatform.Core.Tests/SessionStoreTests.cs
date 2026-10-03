@@ -59,7 +59,9 @@ public class SessionStoreTests
     public void Save_CreatesSessionDirectoryOnce()
     {
         _store.Save("s", "{}");
-        _files.Dirs.ShouldContain("/appdata/TestApp/sessions");
+        // The store builds this via fake CombinePath (real Path.Combine), so
+        // expect the same separator-dependent spelling.
+        _files.Dirs.ShouldContain(Path.Combine("/appdata", "TestApp", "sessions"));
     }
 
     [Fact]
