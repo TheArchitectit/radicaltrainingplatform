@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.IO;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
+using Microsoft.Extensions.DependencyInjection;
 using Avalonia.Threading;
 using Xilium.CefGlue;
 using Xilium.CefGlue.Avalonia;
@@ -133,8 +134,13 @@ public partial class LabSimulatorView : UserControl, IDisposable
             }
 
             // 4) Create the bridge and the browser. The CefBridge
-            //    is registered into JS as window.dotnetBridge.
-            _bridge = new CefBridge(this);
+            //    is registered into JS as window.dotnetBridge. Handlers are
+            //    backed by the real Core services from the composition root.
+            var services = ((App)global::Avalonia.Application.Current!).Services;
+            _bridge = new CefBridge(
+                ExecuteScript,
+                services.GetRequiredService<RadicalTrainingPlatform.Core.Abstractions.IQuestionParser>(),
+                services.GetRequiredService<RadicalTrainingPlatform.Core.ISessionStore>());
 
             _browser = new AvaloniaCefBrowser();
             _browser.Address = new Uri(htmlPath).AbsoluteUri;

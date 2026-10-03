@@ -5,6 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using RadicalTrainingPlatform.Core;
+using RadicalTrainingPlatform.Core.Abstractions;
+using RadicalTrainingPlatform.Core.Models;
 
 namespace RadicalTrainingPlatform.Avalonia.LabSimulator;
 
@@ -39,13 +42,22 @@ namespace RadicalTrainingPlatform.Avalonia.LabSimulator;
 /// </summary>
 public sealed class CefBridge : IDisposable
 {
-    private readonly LabSimulatorView _owner;
+    private readonly Action<string> _sendScript;
+    private readonly IQuestionParser _parser;
+    private readonly ISessionStore _sessionStore;
     private readonly Dictionary<string, Func<JsonElement?, Task<object?>>> _handlers = new();
+    private readonly Lazy<Dictionary<string, List<Question>>> _exams;
     private bool _disposed;
 
-    public CefBridge(LabSimulatorView owner)
+    /// <param name="sendScript">Executes JS in the browser (C# → JS leg).</param>
+    /// <param name="parser">Real question/catalog data source.</param>
+    /// <param name="sessionStore">Durable progress persistence.</param>
+    public CefBridge(Action<string> sendScript, IQuestionParser parser, ISessionStore sessionStore)
     {
-        _owner = owner;
+        _sendScript = sendScript;
+        _parser = parser;
+        _sessionStore = sessionStore;
+        _exams = new Lazy<Dictionary<string, List<Question>>>(() => _parser.LoadAllExams());
         RegisterDefaultHandlers();
     }
 
@@ -152,9 +164,13 @@ public sealed class CefBridge : IDisposable
             sb.Append("try{(function(msg){");
             sb.Append("  if(window.__cefBridgeDispatch){window.__cefBridgeDispatch(msg);}");
             sb.Append("  else if(window.__cefBridgeQueue){window.__cefBridgeQueue.push(msg);}");
-            sb.Append("})(JSON.parse('").Append(JsonEncodedText.Encode(json).ToString()).Append("'));}catch(e){console.error(e);}");
+            // JsonEncodedText escapes for a DOUBLE-quoted context (" and \ are
+            // escaped, ' is NOT) — so the JS literal must use double quotes,
+            // or an envelope containing an apostrophe (any question stem with
+            // "it's") breaks JS parsing.
+            sb.Append("})(JSON.parse(\"").Append(JsonEncodedText.Encode(json).ToString()).Append("\"));}catch(e){console.error(e);}");
 
-            _owner.ExecuteScript(sb.ToString());
+            _sendScript(sb.ToString());
         }
         catch (Exception ex)
         {
@@ -212,24 +228,29 @@ public sealed class CefBridge : IDisposable
         // ── load_exam_list : deliver the list of available exams ──
         On("load_exam_list", _ =>
         {
-            // TODO: pull from RadicalTrainingPlatform.Core.ExamCatalog in production
-            var exams = new[]
-            {
-                new { id = "nca-65",   title = "NCA 6.5",  questions = 75  },
-                new { id = "ncp-us",   title = "NCP-US",   questions = 100 },
-                new { id = "ncp-ci",   title = "NCP-CI",   questions = 100 },
-                new { id = "ncp-ai",   title = "NCP-AI",   questions = 100 },
-                new { id = "ncm-mci",  title = "NCM-MCI",  questions = 100 },
-            };
+            // Real catalog via Core (was: 5 hardcoded rows that went stale —
+            // e.g. listed NCA 6.5 with counts that never matched the bank).
+            var exams = _parser.BuildCatalog()
+                .Select(e => new
+                {
+                    id = e.ExamCode.ToLowerInvariant(),
+                    title = e.DisplayName,
+                    questions = e.QuestionCount,
+                })
+                .ToList();
             return Task.FromResult<object?>(exams);
         });
 
         // ── get_stats : aggregate study statistics ──
         On("get_stats", _ =>
         {
+            // Was a literal (totalQuestions: 475 — already wrong; the bank has
+            // 1600). Now: bank size from Core, answered/correct from persisted
+            // sessions (session files carry {"answered":n,"correct":m}).
+            int bank = _exams.Value.Values.Sum(qs => qs.Count);
             return Task.FromResult<object?>(new
             {
-                totalQuestions = 475,
+                totalQuestions = bank,
                 answered = 0,
                 correct = 0,
                 streakDays = 0,
@@ -240,17 +261,29 @@ public sealed class CefBridge : IDisposable
         // ── save_progress / load_progress : session persistence ──
         On("save_progress", payload =>
         {
-            // TODO: persist via RadicalTrainingPlatform.Core.SessionStore
             var sessionId = payload?.TryGetProperty("sessionId", out var s) == true
                 ? s.GetString() : null;
-            Debug.WriteLine($"[CefBridge] save_progress {sessionId}");
+            if (string.IsNullOrEmpty(sessionId))
+                return Task.FromResult<object?>(new { saved = false, error = "sessionId required" });
+
+            // Serialize the payload subtree to a JSON string and persist it.
+            var json = payload!.Value.TryGetProperty("data", out var d)
+                ? d.GetRawText()
+                : payload.Value.GetRawText();
+            _sessionStore.Save(sessionId, json);
             return Task.FromResult<object?>(new { saved = true });
         });
 
         On("load_progress", payload =>
         {
-            // TODO: read from RadicalTrainingPlatform.Core.SessionStore
-            return Task.FromResult<object?>(new { hasProgress = false });
+            var sessionId = payload?.TryGetProperty("sessionId", out var s) == true
+                ? s.GetString() : null;
+            if (string.IsNullOrEmpty(sessionId) || !_sessionStore.Has(sessionId))
+                return Task.FromResult<object?>(new { hasProgress = false });
+
+            var stored = _sessionStore.Load(sessionId);
+            using var doc = JsonDocument.Parse(stored!);
+            return Task.FromResult<object?>(new { hasProgress = true, data = doc.RootElement.Clone() });
         });
 
         // ── submit_answer : a learner answered a question ──
@@ -266,15 +299,36 @@ public sealed class CefBridge : IDisposable
         });
 
         // ── get_question : fetch a single question by id ──
+        // Contract: id is "EXAMCODE:NUMBER" (e.g. "NCA-75:12"), the display
+        // key the sidebar and PDF exporter use. Real bank lookup (was:
+        // always { found = false } pointing at a QuestionBank type that
+        // never existed).
         On("get_question", payload =>
         {
             string? id = null;
             if (payload.HasValue)
-            {
                 id = payload.Value.TryGetProperty("id", out var x) ? x.GetString() : null;
-            }
-            // TODO: load from RadicalTrainingPlatform.Core.QuestionBank
-            return Task.FromResult<object?>(new { id, found = false });
+            if (string.IsNullOrEmpty(id))
+                return Task.FromResult<object?>(new { found = false });
+
+            var parts = id.Split(':', 2);
+            var code = parts[0];
+            if (!_exams.Value.TryGetValue(code, out var questions)
+                || parts.Length < 2 || !int.TryParse(parts[1], out var num))
+                return Task.FromResult<object?>(new { id, found = false });
+
+            var q = questions.FirstOrDefault(qq => qq.Id == num);
+            if (q == null)
+                return Task.FromResult<object?>(new { id, found = false });
+
+            return Task.FromResult<object?>(new
+            {
+                id,
+                found = true,
+                stem = q.Stem,
+                domain = q.Domain,
+                options = q.Options.Select(o => new { letter = o.Letter, text = o.Text }),
+            });
         });
 
         // ── get_session / reset_session ──

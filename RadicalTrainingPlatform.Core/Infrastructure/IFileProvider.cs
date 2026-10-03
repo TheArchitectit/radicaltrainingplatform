@@ -11,6 +11,9 @@ public interface IFileProvider
     string[] GetFiles(string directory, string searchPattern);
     string[] GetDirectories(string directory);
     string ReadAllText(string path);
+    void WriteAllText(string path, string content);
+    void DeleteFile(string path);
+    void CreateDirectory(string path);
     string GetCurrentDirectory();
     string GetExecutingAssemblyDirectory();
     string GetApplicationDataDirectory(string appName);
@@ -28,6 +31,9 @@ public class DefaultFileProvider : IFileProvider
     public string[] GetFiles(string directory, string searchPattern) => Directory.GetFiles(directory, searchPattern);
     public string[] GetDirectories(string directory) => Directory.GetDirectories(directory);
     public string ReadAllText(string path) => File.ReadAllText(path);
+    public void WriteAllText(string path, string content) => File.WriteAllText(path, content);
+    public void DeleteFile(string path) => File.Delete(path);
+    public void CreateDirectory(string path) => Directory.CreateDirectory(path);
     public string GetCurrentDirectory() => Directory.GetCurrentDirectory();
     public string GetExecutingAssemblyDirectory() => AppContext.BaseDirectory;
     public string GetApplicationDataDirectory(string appName)

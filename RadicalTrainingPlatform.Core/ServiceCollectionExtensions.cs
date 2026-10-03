@@ -17,6 +17,7 @@ public static class ServiceCollectionExtensions
         services.AddSingleton<IQuestionParser, QuestionParser>();
         services.AddSingleton<IBlueprintService, HardcodedBlueprintService>();
         services.AddSingleton<IReferenceService, HardcodedReferenceService>();
+        services.AddSingleton<ISessionStore, JsonSessionStore>();
         return services;
     }
 }
