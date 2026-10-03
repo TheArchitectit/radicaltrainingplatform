@@ -81,9 +81,11 @@ public class QuestionParserTests
         // Digest 2026-09-27: real-world exam .md files arrive with LF, CRLF,
         // mixed endings, and/or a UTF-8 BOM (Windows editors, git autocrlf,
         // PowerShell redirection). All variants must parse to the same set.
-        var baseContent = MakeQuestion(1, "What is 2+2?", ["- A) 3", "- B) 4"], "B", "Two plus two is four.")
+        // Parenthesized deliberately: AppendLine emits Environment.NewLine,
+        // so the baseline must be normalised AFTER concatenation (see daaa401).
+        var baseContent = (MakeQuestion(1, "What is 2+2?", ["- A) 3", "- B) 4"], "B", "Two plus two is four.")
                           + MakeQuestion(2, "What is 3+3?", ["- A) 6", "- B) 7"], "A", "Three plus three is six.")
-                          .Replace("\r\n", "\n"); // canonical LF baseline
+                         ).Replace("\r\n", "\n"); // canonical LF baseline
 
         var content = variant switch
         {
