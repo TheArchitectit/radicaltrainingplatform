@@ -36,7 +36,7 @@ public class MarkdownExamRepository : IExamRepository
 
     // Regex to detect exam-content files (### Q1 or ### Q42 headers)
     private static readonly System.Text.RegularExpressions.Regex ExamHeaderRegex =
-        new(@"^###\s+Q\d+", System.Text.RegularExpressions.RegexOptions.Compiled);
+        new(@"^###\s+Q\d+", System.Text.RegularExpressions.RegexOptions.Compiled | System.Text.RegularExpressions.RegexOptions.Multiline);
 
     // Files/dirs to always skip
     private static readonly HashSet<string> SkipNames = new(StringComparer.OrdinalIgnoreCase)
@@ -106,7 +106,20 @@ public class MarkdownExamRepository : IExamRepository
                 if (!LooksLikeExamFile(name) || !seen.Add(f))
                     continue;
 
-                // Content check: first pass on filename heuristic, then verify headers
+                // Filename heuristic first, then VERIFY headers — without this
+                // check CLAUDE.md / AUDIT-*.md got cataloged as zero-question
+                // "exams".
+                try
+                {
+                    var head = _files.ReadAllText(f);
+                    if (!ExamHeaderRegex.IsMatch(head)) continue;
+                }
+                catch (Exception ex)
+                {
+                    _logger?.LogWarning(ex, "Could not read candidate exam file {File}", f);
+                    continue;
+                }
+
                 yield return f;
             }
         }

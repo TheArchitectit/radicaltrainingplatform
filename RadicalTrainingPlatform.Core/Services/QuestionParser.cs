@@ -22,10 +22,12 @@ public partial class QuestionParser : IQuestionParser
         _logger = logger;
     }
 
-    [GeneratedRegex(@"^###\s+Q(\d+)[.\s]*(.*)", RegexOptions.Compiled)]
+    // Multiline: BuildCatalog counts matches over whole-file content; the
+    // per-line call sites are unaffected by ^ matching line starts.
+    [GeneratedRegex(@"^###\s+Q(\d+)[.\s]*(.*)", RegexOptions.Compiled | RegexOptions.Multiline)]
     private static partial Regex QuestionHeaderRegex();
 
-    [GeneratedRegex(@"^##\s+(?:DOMAIN|Domain)\s*(\d+)", RegexOptions.Compiled | RegexOptions.IgnoreCase)]
+    [GeneratedRegex(@"^##\s+(?:DOMAIN|Domain)\s*(\d+)", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Multiline)]
     private static partial Regex DomainHeaderRegex();
 
     [GeneratedRegex(@"^-\s+([A-F])\)\s+(.*)", RegexOptions.Compiled)]

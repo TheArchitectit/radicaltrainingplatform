@@ -170,6 +170,7 @@ public class MarkdownExamRepositoryTests
         // Both dirs have the same file
         files.GetFiles("/dir1", "*.md").Returns(new[] { "/dir1/exam.md" });
         files.GetFiles("/dir2", "*.md").Returns(new[] { "/dir1/exam.md" }); // Same path
+        files.ReadAllText("/dir1/exam.md").Returns("### Q1\nQ?\n- A) a\n**Answer: A**\n---\n");
 
         var repo = new MarkdownExamRepository(files);
 
