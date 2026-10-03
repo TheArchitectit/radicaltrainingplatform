@@ -15,10 +15,18 @@ public partial class QuestionParser : IQuestionParser
 
     private readonly IExamRepository _examRepository;
     private readonly ILogger<QuestionParser>? _logger;
+    private readonly IErrataProvider? _errata;
 
     public QuestionParser(IExamRepository examRepository, ILogger<QuestionParser>? logger = null)
     {
         _examRepository = examRepository;
+        _logger = logger;
+    }
+
+    public QuestionParser(IExamRepository examRepository, IErrataProvider errata, ILogger<QuestionParser>? logger = null)
+    {
+        _examRepository = examRepository;
+        _errata = errata;
         _logger = logger;
     }
 
@@ -262,7 +270,19 @@ public partial class QuestionParser : IQuestionParser
                 q.Explanation = string.Join("\n", explLines).Trim();
 
                 if (q.Options.Count > 0 && q.CorrectAnswers.Count > 0)
+                {
+                    // Errata overrides the parsed key without touching the .md.
+                    if (_errata != null
+                        && _errata.TryGetCorrection(q.SourceFile, q.Id, out var corrected))
+                    {
+                        _logger?.LogInformation(
+                            "Errata applied to {File} Q{Id}: {Old} -> {New}",
+                            q.SourceFile, q.Id,
+                            string.Join(",", q.CorrectAnswers), string.Join(",", corrected));
+                        q.CorrectAnswers = corrected.ToList();
+                    }
                     questions.Add(q);
+                }
                 else
                     _logger?.LogWarning("Skipped Q{QuestionId} in {File}: Options={OptCount}, Answers={AnsCount}",
                         q.Id, Path.GetFileName(filePath), q.Options.Count, q.CorrectAnswers.Count);

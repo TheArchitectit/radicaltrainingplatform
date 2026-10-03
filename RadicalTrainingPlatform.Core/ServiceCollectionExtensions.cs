@@ -14,6 +14,9 @@ public static class ServiceCollectionExtensions
     {
         services.AddSingleton<IFileProvider, DefaultFileProvider>();
         services.AddSingleton<IExamRepository, MarkdownExamRepository>();
+        services.AddSingleton<IErrataProvider, JsonErrataStore>();
+        // DI selects the greediest ctor, so the registered IErrataProvider above
+        // is injected into QuestionParser (errata corrections get applied).
         services.AddSingleton<IQuestionParser, QuestionParser>();
         services.AddSingleton<IBlueprintService, HardcodedBlueprintService>();
         services.AddSingleton<IReferenceService, HardcodedReferenceService>();

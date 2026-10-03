@@ -37,7 +37,7 @@ public class SessionStoreTests
         public void CreateDirectory(string path) => Dirs.Add(path);
         public string GetCurrentDirectory() => "/app";
         public string GetExecutingAssemblyDirectory() => "/app/bin";
-        public string GetApplicationDataDirectory(string appName) => "/appdata/" + appName;
+        public string GetApplicationDataDirectory(string appName) => Path.Combine("/appdata", appName);
         public string? GetParentDirectory(string path) => Path.GetDirectoryName(path);
     }
 

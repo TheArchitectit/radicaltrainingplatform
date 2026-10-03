@@ -27,6 +27,7 @@ public class CompositionRootTests
         provider.GetRequiredService<IBlueprintService>().ShouldBeAssignableTo<HardcodedBlueprintService>();
         provider.GetRequiredService<IReferenceService>().ShouldBeAssignableTo<HardcodedReferenceService>();
         provider.GetRequiredService<ISessionStore>().ShouldBeAssignableTo<JsonSessionStore>();
+        provider.GetRequiredService<IErrataProvider>().ShouldBeAssignableTo<JsonErrataStore>();
     }
 
     [Fact]
