@@ -46,8 +46,8 @@ jobs:
           dotnet build RadicalTrainingPlatform.Desktop.Tests/RadicalTrainingPlatform.Desktop.Tests.csproj --configuration Release
           ./RadicalTrainingPlatform.Desktop.Tests/bin/Release/net10.0/RadicalTrainingPlatform.Desktop.Tests
 
-      - name: Check for vulnerable packages
-        run: dotnet list RadicalTrainingPlatform.Core/RadicalTrainingPlatform.Core.csproj RadicalTrainingPlatform.Core.Tests/RadicalTrainingPlatform.Core.Tests.csproj RadicalTrainingPlatform.Desktop/RadicalTrainingPlatform.Desktop.csproj package --vulnerable --include-transitive 2>/dev/null || true
+      - name: Check for vulnerable packages (blocking)
+        run: python3 .github/scripts/vuln_gate.py RadicalTrainingPlatform.Core/RadicalTrainingPlatform.Core.csproj RadicalTrainingPlatform.Core.Tests/RadicalTrainingPlatform.Core.Tests.csproj RadicalTrainingPlatform.Desktop/RadicalTrainingPlatform.Desktop.csproj
 
       - name: Verify no Windows.Forms in Core
         run: |
