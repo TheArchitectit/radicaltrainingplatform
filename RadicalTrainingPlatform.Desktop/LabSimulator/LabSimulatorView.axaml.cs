@@ -218,25 +218,13 @@ public partial class LabSimulatorView : UserControl, IDisposable
                 var full = Path.GetFullPath(p);
                 if (File.Exists(full)) return full;
             }
-            catch
+            catch (Exception ex)
             {
-                // Path.GetFullPath can throw on weird inputs — ignore.
+                // Path.GetFullPath can throw on weird inputs — skip candidate.
+                Debug.WriteLine($"[LabSimulator] Candidate path check failed: {ex.Message}");
             }
         }
         return null;
-    }
-
-    /// <summary>
-    /// Create an Avalonia-side visual host for the Cef browser. The
-    /// CefGlue.Avalonia package exposes an <c>AvaloniaCefBrowser</c>
-    /// which is itself an Avalonia Control and can be added directly.
-    /// </summary>
-    private static Control CreateAvaloniaHostFor(AvaloniaCefBrowser browser)
-    {
-        // AvaloniaCefBrowser is itself a Control, so the caller can host
-        // it directly. This method is kept for backwards compatibility
-        // with earlier code that passed a raw browser reference.
-        return browser;
     }
 
     // ─────────────────────────────────────────────────────────────────────
@@ -301,7 +289,7 @@ public partial class LabSimulatorView : UserControl, IDisposable
         {
             // Use Avalonia's launcher if available (cross-platform), else
             // fall back to OS shell.
-            var url = "https://github.com";
+            var url = "https://github.com/TheArchitectit/radicaltrainingplatform/releases";
 #if WINDOWS
             Process.Start(new ProcessStartInfo(url) { UseShellExecute = true });
 #elif LINUX

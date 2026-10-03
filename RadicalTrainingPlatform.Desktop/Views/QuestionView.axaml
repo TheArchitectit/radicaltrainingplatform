@@ -10,10 +10,6 @@
              Focusable="True"
              KeyDown="OnKeyDown">
 
-  <Design.DataContext>
-    <vm:ExamSessionViewModel />
-  </Design.DataContext>
-
   <UserControl.Resources>
     <!-- Main neon gradient -->
     <LinearGradientBrush x:Key="NeonGradient" StartPoint="0%,0%" EndPoint="100%,0%">

@@ -110,6 +110,10 @@ public partial class QuestionView : UserControl
         // Update question counter text manually (binding handles most)
         QuestionCounter.Text = $"Question {_viewModel.CurrentNumber} / {_viewModel.TotalQuestions}";
 
+        // Domain badge (was hardcoded "GENERAL" — never reflected the question)
+        var domain = _viewModel.CurrentQuestion?.Domain;
+        DomainText.Text = string.IsNullOrWhiteSpace(domain) ? "GENERAL" : domain.ToUpperInvariant();
+
         // Update progress bar (custom SynthwaveProgressBar uses .Progress)
         double progressPercent = _viewModel.TotalQuestions > 0
             ? ((_viewModel.CurrentIndex + 1) * 100.0 / _viewModel.TotalQuestions)
@@ -167,15 +171,6 @@ public partial class QuestionView : UserControl
             return;
 
         _viewModel?.SelectAnswer(card.Letter);
-    }
-
-    private void OnOptionClicked(object? sender, RoutedEventArgs e)
-    {
-        // Routed event handler from XAML - find the OptionCard
-        if (e.Source is OptionCard card)
-        {
-            _viewModel?.SelectAnswer(card.Letter);
-        }
     }
 
     private void UpdateOptionCardStates()
