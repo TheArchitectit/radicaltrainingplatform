@@ -76,6 +76,7 @@ public class QuestionParserTests
     [InlineData("mixed")]
     [InlineData("bom")]
     [InlineData("bom-crlf")]
+    [InlineData("post-concat-bom")]
     public void ParseFile_EncodingVariants_ProduceIdenticalQuestionSets(string variant)
     {
         // Digest 2026-09-27: real-world exam .md files arrive with LF, CRLF,
@@ -97,6 +98,9 @@ public class QuestionParserTests
                       + baseContent[baseContent.IndexOf("- A) 6")..],
             "bom" => "\uFEFF" + baseContent,
             "bom-crlf" => "\uFEFF" + baseContent.Replace("\n", "\r\n"),
+            // Simulates a BOM introduced when separately-produced content is
+            // concatenated after the first question.
+            "post-concat-bom" => baseContent.Insert(baseContent.IndexOf("### Q2"), "\uFEFF"),
             _ => throw new ArgumentOutOfRangeException(nameof(variant)),
         };
 

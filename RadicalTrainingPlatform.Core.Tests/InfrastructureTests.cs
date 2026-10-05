@@ -1,5 +1,7 @@
 using System;
+using System.IO;
 using System.Linq;
+using System.Text;
 using NSubstitute;
 using RadicalTrainingPlatform.Core.Models;
 using Shouldly;
@@ -45,6 +47,21 @@ public class DefaultFileProviderTests
     {
         var provider = new DefaultFileProvider();
         provider.GetExecutingAssemblyDirectory().ShouldNotBeNull();
+    }
+
+    [Fact]
+    public void ReadAllText_DecodesUtf16Bom()
+    {
+        var path = Path.Combine(Path.GetTempPath(), $"rtp-encoding-{Guid.NewGuid():N}.md");
+        try
+        {
+            File.WriteAllText(path, "### Q1\n", Encoding.Unicode);
+            new DefaultFileProvider().ReadAllText(path).ShouldBe("### Q1\n");
+        }
+        finally
+        {
+            File.Delete(path);
+        }
     }
 }
 
