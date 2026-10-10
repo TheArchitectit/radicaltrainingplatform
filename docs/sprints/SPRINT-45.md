@@ -21,8 +21,8 @@
 | S45-06 (T-06) | Manifest system: models, loader, catalog, blueprint override, validator | REQ-MAN-01..07 | 3 | ⚪ |
 | S45-07 (T-07) | Four exam.json + three track.json with sources and review dates | REQ-MAN-06 | 2 | ⚪ |
 | S45-08 (T-08) | First reviewed lesson + question fixtures (A+ A2; Network+ N5) | REQ-AP-02, REQ-NP-02 | 2 | ⚪ |
-| S45-09 (T-09) | Begin NCA remap inventory (140 rows) | REQ-NCA-01 | 2 | ⚪ |
-| S45-10 (T-10) | Answer-position distribution report | R-09 | 1 | ⚪ |
+| S45-09 (T-09) | Begin NCA remap inventory (140 rows) | REQ-NCA-01 | 2 | ✅ |
+| S45-10 (T-10) | Answer-position distribution report | R-09 | 1 | ✅ |
 | S45-11 (T-43*) | Web runtime batch starts immediately after T-01 (same surface) | R-22 | 2 | ⚪ |
 | S45-12 (T-46) | RedEye lane: checks, logs, ship-gate, seeded-defect self-test | REQ-REV-01..06 | 3 | ⚪ |
 
@@ -126,9 +126,9 @@
 **As a** track maintainer, **I want** all 140 NCA-75 items inventoried against the current guide, **so that** the California cut is transformation, not guesswork.
 
 **Acceptance Criteria:**
-- [ ] `content/exams/NCA-75/remap.csv` started with SPEC-01 columns (itemId, sourceFile, oldDomain, oldObjectiveId, newSection, newObjectiveId, productVersion, keyReviewed, explanationReviewed, rightsStatus, reviewer, notes)
-- [ ] Every one of the 140 items gets a row before Sprint 48 (T-31 completes it)
-- [ ] Existing question IDs never change
+- [x] `content/exams/NCA-75/remap.csv` started with SPEC-01 columns (itemId, sourceFile, oldDomain, oldObjectiveId, newSection, newObjectiveId, productVersion, keyReviewed, explanationReviewed, rightsStatus, reviewer, notes)
+- [x] Every one of the 140 items gets a row before Sprint 48 (T-31 completes it)
+- [x] Existing question IDs never change
 
 **Files:** `content/exams/NCA-75/remap.csv`
 
@@ -136,8 +136,8 @@
 **As a** content reviewer, **I want** answer-position distribution visible, **so that** position bias is caught before RedEye review.
 
 **Acceptance Criteria:**
-- [ ] `scripts/report-key-distribution.py` reports per-bank answer-letter distribution
-- [ ] Report output archived with release evidence
+- [x] `scripts/report-key-distribution.py` reports per-bank answer-letter distribution
+- [x] Report output archived with release evidence
 
 ### S45-11 (T-43*, partial): Web Runtime Batch (started)
 **As a** platform engineer, **I want** the web runtime defects fixed on the same surface as T-01, **so that** we do not reopen the boot area twice.
