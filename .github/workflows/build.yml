@@ -47,6 +47,11 @@ jobs:
       - name: Run web runtime fixtures
         run: bash tests/gates/run_web_fixtures.sh
 
+      # T-46/SPEC-08A: RedEye lane — every seeded defect caught (REQ-REV-03),
+      # ship-gate fail-closed with named exclusions (REQ-REV-02/05).
+      - name: Run RedEye lane fixtures
+        run: bash tests/gates/run_redeye_fixtures.sh
+
       # No setup-dotnet here: the runner image (localhost/devgate-runner-rtp,
       # infra Containerfile convention) bakes the .NET 10 SDK — setup-dotnet
       # cannot write /usr/share/dotnet inside a rootless runner container.

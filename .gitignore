@@ -36,3 +36,9 @@ publish/
 # Agent runtime state (session DBs, turn logs) — never commit
 .pi/
 
+
+# RedEye lane review logs — regenerable via scripts/redeye-lane.py --exam;
+# any bound-input change (item text, manifest, config) invalidates hashes,
+# so committing them would churn. Release-time logs for a frozen head land
+# in the Sprint D freeze evidence set instead (SPEC-11 Sprint D).
+content/review-logs/
