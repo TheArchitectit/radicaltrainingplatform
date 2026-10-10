@@ -1,0 +1,13 @@
+{
+  "lane": "redeye-lane",
+  "version": "0.1.0-deterministic-skeleton",
+  "reviewer": "redeye-lane",
+  "concentrationThreshold": 0.40,
+  "duplicateThreshold": 0.6,
+  "ngramSize": 5,
+  "modelStage": "not-integrated",
+  "policy": {
+    "failClosed": true,
+    "note": "Key-vs-source verification runs on the radredeye pipeline (SPEC-08A); until that integration lands every verdict is 'return' and the ship-gate releases zero items."
+  }
+}
