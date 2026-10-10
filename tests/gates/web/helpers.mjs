@@ -19,7 +19,7 @@ export class StubElement {
             contains: (c) => this.classList._set.has(c),
         };
         this._innerHTML = '';
-        this.textContent = '';
+        this._ownText = '';
         this.value = '';
         this.disabled = false;
         this._listeners = new Map();
@@ -36,7 +36,16 @@ export class StubElement {
     set innerHTML(html) {
         this._innerHTML = String(html ?? '');
         this.children = [];
+        this._ownText = '';
         if (this._doc) parseInto(this, this._innerHTML, this._doc);
+    }
+
+    get textContent() {
+        return this._ownText + this.children.map(c => c.textContent).join('');
+    }
+    set textContent(v) {
+        this._ownText = String(v ?? '');
+        this.children = [];
     }
 
     get firstChild() { return this.children[0] || null; }
@@ -130,6 +139,13 @@ function parseInto(parent, html, doc) {
     let m;
     TAG_RE.lastIndex = 0;
     while ((m = TAG_RE.exec(html)) != null) {
+        const text = html.slice(last, m.index);
+        if (text.trim()) {
+            const textNode = new StubElement('#text');
+            textNode._doc = doc;
+            textNode._ownText = text;
+            stack[stack.length - 1].appendChild(textNode);
+        }
         const [full, tagName, attrText, selfClose] = m;
         const isClose = full.startsWith('</');
         const isSelf = selfClose === '/' || /^(br|hr|img|input|meta|link)$/i.test(tagName);
@@ -152,7 +168,13 @@ function parseInto(parent, html, doc) {
         }
         last = TAG_RE.lastIndex;
     }
-    void last;
+    const tail = html.slice(last);
+    if (tail.trim()) {
+        const textNode = new StubElement('#text');
+        textNode._doc = doc;
+        textNode._ownText = tail;
+        stack[stack.length - 1].appendChild(textNode);
+    }
 }
 
 export function createDocument() {

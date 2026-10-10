@@ -595,10 +595,11 @@ export class ScenariosView extends BaseView {
             passed: false,
         }));
 
-        // Try initial validation
-        try {
-            results.forEach(r => { r.passed = r.validate(); });
-        } catch { /* ignore validation errors on initial render */ }
+        // Try initial validation — isolate each validator so one poisoned
+        // objective doesn't leave the rest unrendered/unmarked.
+        results.forEach(r => {
+            try { r.passed = r.validate(); } catch { r.passed = false; }
+        });
 
         container.innerHTML = `
             <div class="card" style="margin-bottom:var(--space-lg);">
