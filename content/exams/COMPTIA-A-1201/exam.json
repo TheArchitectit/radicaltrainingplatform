@@ -27,10 +27,10 @@
       "objectives": [
         { "id": "2.1", "title": "Compare and contrast Transmission Control Protocol (TCP) and User Datagram Protocol (UDP) ports, protocols, and their purposes.", "lessonIds": [] },
         { "id": "2.2", "title": "Explain wireless networking technologies.", "lessonIds": [] },
-        { "id": "2.3", "title": "Summarize services provided by networked hosts.", "lessonIds": [] },
-        { "id": "2.4", "title": "Explain common network configuration concepts.", "lessonIds": [] },
+        { "id": "2.3", "title": "Summarize services provided by networked hosts.", "lessonIds": ["a2"] },
+        { "id": "2.4", "title": "Explain common network configuration concepts.", "lessonIds": ["a2"] },
         { "id": "2.5", "title": "Compare and contrast common networking hardware devices.", "lessonIds": [] },
-        { "id": "2.6", "title": "Given a scenario, configure basic wired/wireless small office/home office (SOHO) networks.", "lessonIds": [] },
+        { "id": "2.6", "title": "Given a scenario, configure basic wired/wireless small office/home office (SOHO) networks.", "lessonIds": ["a2"] },
         { "id": "2.7", "title": "Compare and contrast internet connection types, network types, and their characteristics.", "lessonIds": [] },
         { "id": "2.8", "title": "Explain networking tools and their purposes.", "lessonIds": [] }
       ]

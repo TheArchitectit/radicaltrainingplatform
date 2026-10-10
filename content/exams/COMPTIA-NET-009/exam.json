@@ -66,11 +66,11 @@
       "weightPercent": 24,
       "studyItemAllocation": 24,
       "objectives": [
-        { "id": "5.1", "title": "Explain the troubleshooting methodology.", "lessonIds": [] },
+        { "id": "5.1", "title": "Explain the troubleshooting methodology.", "lessonIds": ["n5"] },
         { "id": "5.2", "title": "Given a scenario, troubleshoot common cabling and physical interface issues.", "lessonIds": [] },
         { "id": "5.3", "title": "Given a scenario, troubleshoot common issues with network services.", "lessonIds": [] },
-        { "id": "5.4", "title": "Given a scenario, troubleshoot common performance issues.", "lessonIds": [] },
-        { "id": "5.5", "title": "Given a scenario, use the appropriate tool or protocol to solve networking issues.", "lessonIds": [] }
+        { "id": "5.4", "title": "Given a scenario, troubleshoot common performance issues.", "lessonIds": ["n5"] },
+        { "id": "5.5", "title": "Given a scenario, use the appropriate tool or protocol to solve networking issues.", "lessonIds": ["n5"] }
       ]
     }
   ],
