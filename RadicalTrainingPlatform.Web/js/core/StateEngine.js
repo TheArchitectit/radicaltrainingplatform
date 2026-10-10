@@ -41,8 +41,8 @@ class StateEngine {
 
         if (!this.#state[collection]) this.#state[collection] = [];
         this.#state[collection].push(entity);
-        await this.#persist();
         this.#logAudit(collection, 'create', entity);
+        await this.#persist();
         bus.emit(`${collection}:created`, entity);
         bus.emit('state:changed', { collection, action: 'create', entity });
         return entity;
@@ -54,8 +54,8 @@ class StateEngine {
         if (idx === -1) throw new Error(`${collection}/${id} not found`);
 
         Object.assign(list[idx], changes, { updated_at: new Date().toISOString() });
-        await this.#persist();
         this.#logAudit(collection, 'update', list[idx]);
+        await this.#persist();
         bus.emit(`${collection}:updated`, list[idx]);
         bus.emit('state:changed', { collection, action: 'update', entity: list[idx] });
         return list[idx];
@@ -67,8 +67,8 @@ class StateEngine {
         if (idx === -1) return;
 
         const removed = list.splice(idx, 1)[0];
-        await this.#persist();
         this.#logAudit(collection, 'delete', removed);
+        await this.#persist();
         bus.emit(`${collection}:deleted`, removed);
         bus.emit('state:changed', { collection, action: 'delete', entity: removed });
         return removed;
