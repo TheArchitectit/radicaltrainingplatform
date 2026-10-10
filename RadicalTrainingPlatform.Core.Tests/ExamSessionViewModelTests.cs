@@ -636,6 +636,132 @@ public class ExamSessionViewModelTests
         inclusive.TotalQuestions.ShouldBe(3); // review/triage can opt in
     }
 
+    // ─── Retry accounting (R-04/R-14/D9, TM-18) ───────────────────
+
+    // A retry must move the item's key between the correct and wrong sets —
+    // the pre-repair code added without removing, so one question could be
+    // Correct AND Wrong, inflating both counts past the number of answered items.
+
+    [Fact]
+    public void Retry_PassThenFail_FirstAttemptStaysCorrect_LatestBecomesWrong()
+    {
+        var questions = new List<Question>
+        {
+            MakeQuestion(1, ["A"]),
+            MakeQuestion(2, ["B"]),
+        };
+        var vm = new ExamSessionViewModel(questions, "TEST");
+
+        // First attempt: correct.
+        vm.SelectAnswer("A");
+        vm.Submit().ShouldBeTrue();
+        vm.CorrectCount.ShouldBe(1);
+        vm.FirstAttemptCorrectCount.ShouldBe(1);
+
+        // Retry the same item (JumpTo resets the submission state) and miss it.
+        vm.JumpTo(0);
+        vm.IsSubmitted.ShouldBeFalse();
+        vm.SelectAnswer("B");
+        vm.Submit().ShouldBeFalse();
+
+        // Latest outcome = wrong; first-attempt metric is immutable.
+        vm.CorrectCount.ShouldBe(0);
+        vm.WrongCount.ShouldBe(1);
+        vm.FirstAttemptCorrectCount.ShouldBe(1);
+    }
+
+    [Fact]
+    public void Retry_FailThenPass_FirstAttemptStaysWrong_LatestBecomesCorrect()
+    {
+        var questions = new List<Question>
+        {
+            MakeQuestion(1, ["A"]),
+            MakeQuestion(2, ["B"]),
+        };
+        var vm = new ExamSessionViewModel(questions, "TEST");
+
+        // First attempt: wrong.
+        vm.SelectAnswer("B");
+        vm.Submit().ShouldBeFalse();
+        vm.WrongCount.ShouldBe(1);
+        vm.FirstAttemptCorrectCount.ShouldBe(0);
+
+        // Retry and get it right.
+        vm.JumpTo(0);
+        vm.SelectAnswer("A");
+        vm.Submit().ShouldBeTrue();
+
+        // Latest outcome = correct; first attempt stays a miss.
+        vm.CorrectCount.ShouldBe(1);
+        vm.WrongCount.ShouldBe(0);
+        vm.FirstAttemptCorrectCount.ShouldBe(0);
+    }
+
+    [Fact]
+    public void Retry_ItemNeverCountedInBothSets()
+    {
+        var questions = new List<Question>
+        {
+            MakeQuestion(1, ["A"]),
+            MakeQuestion(2, ["B"]),
+            MakeQuestion(3, ["C"]),
+        };
+        var vm = new ExamSessionViewModel(questions, "TEST");
+
+        // Flip the same item's outcome three times across retries.
+        vm.SelectAnswer("A");
+        vm.Submit();
+        vm.JumpTo(0); vm.SelectAnswer("B"); vm.Submit();
+        vm.JumpTo(0); vm.SelectAnswer("C"); vm.Submit();
+        vm.JumpTo(0); vm.SelectAnswer("A"); vm.Submit();
+
+        // D9 invariant: unique answered items ≤ total questions, always.
+        (vm.CorrectCount + vm.WrongCount).ShouldBeLessThanOrEqualTo(vm.TotalQuestions);
+        // Latest outcome after the final flip = correct, exactly one answered item.
+        vm.CorrectCount.ShouldBe(1);
+        vm.WrongCount.ShouldBe(0);
+    }
+
+    [Fact]
+    public void Retry_AcrossMultipleItems_NoInflation()
+    {
+        var questions = new List<Question>
+        {
+            MakeQuestion(1, ["A"]),
+            MakeQuestion(2, ["B"]),
+        };
+        var vm = new ExamSessionViewModel(questions, "TEST");
+
+        // Q1 passes; Q2 fails then passes on retry.
+        vm.SelectAnswer("A"); vm.Submit();
+        vm.Next();
+        vm.SelectAnswer("C"); vm.Submit();
+        vm.JumpTo(1); vm.SelectAnswer("B"); vm.Submit();
+
+        vm.CorrectCount.ShouldBe(2);
+        vm.WrongCount.ShouldBe(0);
+        vm.FirstAttemptCorrectCount.ShouldBe(1); // only Q1 was a first-attempt win
+        vm.GetDomainStats().Sum(d => d.Answered).ShouldBe(2); // 2 items answered, not 3
+    }
+
+    [Fact]
+    public void Skip_AfterCorrect_FirstAttemptWinsAreRetained()
+    {
+        var questions = new List<Question>
+        {
+            MakeQuestion(1, ["A"]),
+            MakeQuestion(2, ["B"]),
+        };
+        var vm = new ExamSessionViewModel(questions, "TEST");
+
+        vm.SelectAnswer("A"); vm.Submit();
+        vm.Skip(); // skips Q1's latest outcome into wrong — first attempt stays a win
+
+        vm.FirstAttemptCorrectCount.ShouldBe(1);
+        vm.CorrectCount.ShouldBe(0);
+        vm.WrongCount.ShouldBe(1);
+    }
+
 }
 
 // ─── Parser type derivation (R-03) — lives with the parser test helpers ──

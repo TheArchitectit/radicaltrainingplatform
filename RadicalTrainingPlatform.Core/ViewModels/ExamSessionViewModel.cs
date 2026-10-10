@@ -20,6 +20,12 @@ public class ExamSessionViewModel : INotifyPropertyChanged
     private bool _submitted;
     private readonly HashSet<string> _wrongKeys = new();
     private readonly HashSet<string> _correctKeys = new();
+    // R-14/D9: first attempt is immutable — its winners never change on retry.
+    // _firstAttemptKeys records every item attempted at least once (so a later
+    // retry can never register a "first" outcome); _firstAttemptCorrectKeys
+    // freezes the items whose FIRST outcome was correct.
+    private readonly HashSet<string> _firstAttemptKeys = new();
+    private readonly HashSet<string> _firstAttemptCorrectKeys = new();
     private int _streak;
     private int _bestStreak;
 
@@ -77,6 +83,9 @@ public class ExamSessionViewModel : INotifyPropertyChanged
 
     public int CorrectCount => _correctKeys.Count;
     public int WrongCount => _wrongKeys.Count;
+    /// <summary>Items correct on their FIRST attempt (R-14/D9 — immutable
+    /// across retries; retries never inflate or deflate this).</summary>
+    public int FirstAttemptCorrectCount => _firstAttemptCorrectKeys.Count;
     /// <summary>Consecutive correct answers since the last miss.</summary>
     public int Streak => _streak;
     /// <summary>Longest consecutive-correct run this session.</summary>
@@ -133,15 +142,24 @@ public class ExamSessionViewModel : INotifyPropertyChanged
         var (isCorrect, _) = Grade(CurrentQuestion, CurrentSelection());
         var correct = isCorrect;
         var key = MakeKey(CurrentQuestion);
+
+        // R-14/D9: the first outcome is immutable; the displayed outcome is
+        // the latest attempt — a retry moves the key between the sets and
+        // never leaves the item in both (the old code added without removing,
+        // so one question could be Correct AND Wrong after a retry).
+        if (_firstAttemptKeys.Add(key) && correct)
+            _firstAttemptCorrectKeys.Add(key); // frozen at the FIRST outcome
         if (correct)
         {
             _correctKeys.Add(key);
+            _wrongKeys.Remove(key);
             _streak++;
             if (_streak > _bestStreak) _bestStreak = _streak;
         }
         else
         {
             _wrongKeys.Add(key);
+            _correctKeys.Remove(key);
             _streak = 0;
         }
 
@@ -149,6 +167,7 @@ public class ExamSessionViewModel : INotifyPropertyChanged
         Notify(nameof(IsCorrect));
         Notify(nameof(CorrectCount));
         Notify(nameof(WrongCount));
+        Notify(nameof(FirstAttemptCorrectCount));
         Notify(nameof(Streak));
         Notify(nameof(BestStreak));
         Notify(nameof(AccuracyPercent));
@@ -180,7 +199,10 @@ public class ExamSessionViewModel : INotifyPropertyChanged
     public void Skip()
     {
         // A skip counts as a miss: it breaks the streak, same as a wrong answer.
-        _wrongKeys.Add(MakeKey(CurrentQuestion));
+        var key = MakeKey(CurrentQuestion);
+        _firstAttemptKeys.Add(key); // a skip is the item's first attempt if it had none — never a win
+        _wrongKeys.Add(key);
+        _correctKeys.Remove(key);
         _streak = 0;
         Notify(nameof(Streak));
         Next();
