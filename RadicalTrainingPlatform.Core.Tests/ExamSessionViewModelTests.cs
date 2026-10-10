@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using NSubstitute;
 using RadicalTrainingPlatform.Core.Models;
 using RadicalTrainingPlatform.Core.ViewModels;
 using Shouldly;
@@ -25,7 +27,10 @@ public class ExamSessionViewModelTests
             Options = options,
             ExamCode = "TEST",
             Domain = domain,
-            SourceFile = "test.md"
+            SourceFile = "test.md",
+            // Mirror the parser's derivation: multiple keys are multi-select
+            // (R-03 made Type explicit rather than inferred at the call site).
+            Type = correctAnswers.Length > 1 ? QuestionType.MultiSelect : QuestionType.SingleChoice,
         };
     }
 
@@ -510,5 +515,226 @@ public class ExamSessionViewModelTests
 
         vm.WrongCount.ShouldBe(1);
         vm.CurrentIndex.ShouldBe(1); // Moved to next
+    }
+
+    // ─── Ordered-response (TM-17 / R-03) ──────────────────────────
+    // The sorted-set comparison previously graded EVERY permutation of an
+    // ordering key as correct (NCA-75-Part3 Q16-19). These fixtures pin
+    // sequence scoring: only the intended order passes.
+
+    private static Question MakeOrderedQuestion(int id, string[] sequence, int optionCount = 4)
+    {
+        var q = MakeQuestion(id, sequence, optionCount);
+        q.Type = QuestionType.Ordered;
+        q.Quarantined = true; // the parser always sets these together (R-03)
+        return q;
+    }
+
+    private static ExamSessionViewModel MakeOrderedVm(Question q)
+    {
+        var vm = new ExamSessionViewModel([q], "TEST", includeQuarantined: true);
+        return vm;
+    }
+
+    [Fact]
+    public void Ordered_CorrectSequence_Passes()
+    {
+        var q = MakeOrderedQuestion(1, ["B", "C", "D", "A"]);
+        var vm = MakeOrderedVm(q);
+        foreach (var letter in new[] { "B", "C", "D", "A" }) vm.SelectAnswer(letter);
+
+        vm.Submit().ShouldBeTrue();
+    }
+
+    [Fact]
+    public void Ordered_ReversedSequence_Fails()
+    {
+        var q = MakeOrderedQuestion(1, ["B", "C", "D", "A"]);
+        var vm = MakeOrderedVm(q);
+        foreach (var letter in new[] { "A", "D", "C", "B" }) vm.SelectAnswer(letter);
+
+        vm.Submit().ShouldBeFalse();
+    }
+
+    [Fact]
+    public void Ordered_SameLettersDifferentPermutation_Fails()
+    {
+        // The old defect in its purest form: identical letter set, wrong order.
+        var q = MakeOrderedQuestion(1, ["B", "C", "D", "A"]);
+        var vm = MakeOrderedVm(q);
+        foreach (var letter in new[] { "C", "B", "D", "A" }) vm.SelectAnswer(letter);
+
+        vm.Submit().ShouldBeFalse();
+    }
+
+    [Fact]
+    public void Ordered_MissingStep_Fails()
+    {
+        var q = MakeOrderedQuestion(1, ["B", "C", "D", "A"]);
+        var vm = MakeOrderedVm(q);
+        foreach (var letter in new[] { "B", "C", "D" }) vm.SelectAnswer(letter);
+
+        vm.Submit().ShouldBeFalse();
+    }
+
+    [Fact]
+    public void Ordered_DuplicateStep_Fails()
+    {
+        var q = MakeOrderedQuestion(1, ["B", "C", "D", "A"]);
+        var vm = MakeOrderedVm(q);
+        foreach (var letter in new[] { "B", "B", "D", "A" }) vm.SelectAnswer(letter);
+
+        vm.Submit().ShouldBeFalse();
+    }
+
+    [Fact]
+    public void Ordered_ExtraToken_Fails()
+    {
+        var q = MakeOrderedQuestion(1, ["B", "C", "D", "A"]);
+        var vm = MakeOrderedVm(q);
+        foreach (var letter in new[] { "B", "C", "D", "A", "B" }) vm.SelectAnswer(letter);
+
+        vm.Submit().ShouldBeFalse();
+    }
+
+    [Fact]
+    public void Ordered_EmptyResponse_SubmitReturnsFalse()
+    {
+        var q = MakeOrderedQuestion(1, ["B", "C", "D", "A"]);
+        var vm = MakeOrderedVm(q);
+
+        vm.Submit().ShouldBeFalse();
+        vm.IsSubmitted.ShouldBeFalse();
+    }
+
+    [Fact]
+    public void Ordered_ClickPickedStepAgain_RemovesIt()
+    {
+        var q = MakeOrderedQuestion(1, ["B", "C", "D", "A"]);
+        var vm = MakeOrderedVm(q);
+        vm.SelectAnswer("B");
+        vm.SelectAnswer("C");
+        vm.SelectAnswer("B"); // remove the first pick
+
+        vm.OrderedSelection.ShouldBe(["C"]);
+    }
+
+    [Fact]
+    public void Ordered_QuarantinedItem_ExcludedFromScoredSessionByDefault()
+    {
+        var questions = new List<Question>
+        {
+            MakeQuestion(1, ["A"]),
+            MakeOrderedQuestion(2, ["B", "C", "D", "A"]),
+            MakeQuestion(3, ["C"]),
+        };
+        var vm = new ExamSessionViewModel(questions, "TEST");
+
+        vm.TotalQuestions.ShouldBe(2); // Q2 quarantined out
+
+        var inclusive = new ExamSessionViewModel(questions, "TEST", includeQuarantined: true);
+        inclusive.TotalQuestions.ShouldBe(3); // review/triage can opt in
+    }
+
+}
+
+// ─── Parser type derivation (R-03) — lives with the parser test helpers ──
+
+public class QuestionTypeDerivationTests
+{
+    private static IExamRepository CreateRepo(string content)
+    {
+        var repo = Substitute.For<IExamRepository>();
+        repo.ReadExamFile(Arg.Any<string>()).Returns(content);
+        repo.FindExamFiles().Returns(new[] { "test-exam.md" });
+        return repo;
+    }
+
+    [Fact]
+    public void Parser_OrderingHeader_SetsOrderedTypeAndQuarantine()
+    {
+        var content = """
+            ### Q1 (Ordering)
+            Place the steps in order.
+            - A) first
+            - B) second
+            - C) third
+            **Answer: B, C, A**
+            Sequence explanation.
+            ---
+            """;
+        var questions = new QuestionParser(CreateRepo(content)).ParseFile("test-exam.md");
+
+        questions.ShouldHaveSingleItem();
+        questions[0].Type.ShouldBe(QuestionType.Ordered);
+        questions[0].Quarantined.ShouldBeTrue();
+        questions[0].CorrectAnswers.ShouldBe(new[] { "B", "C", "A" });
+    }
+
+    [Fact]
+    public void Parser_MultiKeyQuestion_IsMultiSelect_NotOrdered()
+    {
+        var content = """
+            ### Q1
+            Pick two.
+            - A) x
+            - B) y
+            - C) z
+            **Answer: A, C**
+            Both.
+            ---
+            """;
+        var questions = new QuestionParser(CreateRepo(content)).ParseFile("test-exam.md");
+
+        questions.ShouldHaveSingleItem();
+        questions[0].Type.ShouldBe(QuestionType.MultiSelect);
+        questions[0].Quarantined.ShouldBeFalse();
+    }
+
+    [Fact]
+    public void Parser_SingleKeyQuestion_IsSingleChoice()
+    {
+        var content = """
+            ### Q1
+            Pick one.
+            - A) x
+            - B) y
+            **Answer: B**
+            It is B.
+            ---
+            """;
+        var questions = new QuestionParser(CreateRepo(content)).ParseFile("test-exam.md");
+
+        questions.ShouldHaveSingleItem();
+        questions[0].Type.ShouldBe(QuestionType.SingleChoice);
+        questions[0].Quarantined.ShouldBeFalse();
+    }
+
+    [Fact]
+    public void LoadAllExams_NcaGapFill_QuarantinesTheFourOrderingItems()
+    {
+        // The real bank: NCA-75-Part3-GapFill Q16-19 are "(Ordering)" items.
+        // They must be flagged, not silently graded as set-equality.
+        var repo = new MarkdownExamRepository(new DefaultFileProvider());
+        var parser = new QuestionParser(repo);
+        var part3 = Path.Combine(FindRepoRoot(), "NCA-75-Part3-GapFill.md");
+
+        var questions = parser.ParseFile(part3);
+
+        var ordered = questions.Where(q => q.IsOrdered).ToList();
+        ordered.Select(q => q.Id).ShouldBe(new[] { 16, 17, 18, 19 });
+        ordered.ShouldAllBe(q => q.Quarantined);
+    }
+
+    private static string FindRepoRoot()
+    {
+        var dir = AppContext.BaseDirectory;
+        for (var i = 0; i < 8; i++)
+        {
+            if (File.Exists(Path.Combine(dir, "NCA-75-Part3-GapFill.md")))
+                return dir;
+            dir = Path.GetDirectoryName(dir)!;
+        }
+        throw new FileNotFoundException("NCA-75-Part3-GapFill.md not found above test assembly");
     }
 }

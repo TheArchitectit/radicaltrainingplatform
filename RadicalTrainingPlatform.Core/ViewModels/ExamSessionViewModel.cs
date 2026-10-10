@@ -14,6 +14,9 @@ public class ExamSessionViewModel : INotifyPropertyChanged
     private readonly Dictionary<Question, int> _displayIndex = new();
     private int _currentIndex;
     private readonly HashSet<string> _selectedAnswers = new();
+    // Ordered-response picks in click order (R-03: a HashSet loses sequence,
+    // which is exactly what ordering grading must check).
+    private readonly List<string> _orderedSelection = new();
     private bool _submitted;
     private readonly HashSet<string> _wrongKeys = new();
     private readonly HashSet<string> _correctKeys = new();
@@ -22,20 +25,25 @@ public class ExamSessionViewModel : INotifyPropertyChanged
 
     public event PropertyChangedEventHandler? PropertyChanged;
 
-    public ExamSessionViewModel(List<Question> questions, string examCode, int? limit = null)
+    public ExamSessionViewModel(List<Question> questions, string examCode, int? limit = null,
+        bool includeQuarantined = false)
     {
         _allQuestions = questions ?? throw new ArgumentNullException(nameof(questions));
         ExamCode = examCode;
 
+        // R-03: quarantined items (ordering prompts until sequence scoring is
+        // wired on every surface) never enter a scored session by default.
+        var eligible = includeQuarantined ? questions : questions.Where(q => !q.Quarantined).ToList();
+
         // If limit specified, take a random subset for test mode
-        if (limit.HasValue && limit.Value < questions.Count)
+        if (limit.HasValue && limit.Value < eligible.Count)
         {
             var rng = new Random();
-            _sessionQuestions = questions.OrderBy(_ => rng.Next()).Take(limit.Value).ToList();
+            _sessionQuestions = eligible.OrderBy(_ => rng.Next()).Take(limit.Value).ToList();
         }
         else
         {
-            _sessionQuestions = questions.ToList();
+            _sessionQuestions = eligible.ToList();
         }
 
         // Build display index mapping without mutating shared model objects
@@ -59,9 +67,10 @@ public class ExamSessionViewModel : INotifyPropertyChanged
     public Question CurrentQuestion => _sessionQuestions[_currentIndex];
 
     public IReadOnlySet<string> SelectedAnswers => _selectedAnswers;
+    /// <summary>Ordered-response picks in submission order (R-03).</summary>
+    public IReadOnlyList<string> OrderedSelection => _orderedSelection;
     public bool IsSubmitted => _submitted;
-    public bool IsCorrect => _submitted &&
-        CurrentQuestion.CorrectAnswers.OrderBy(a => a).SequenceEqual(_selectedAnswers.OrderBy(a => a));
+    public bool IsCorrect => _submitted && Grade(CurrentQuestion, CurrentSelection()) is { isCorrect: true };
 
     public bool HasPrevious => _currentIndex > 0;
     public bool HasNext => _currentIndex < _sessionQuestions.Count - 1;
@@ -81,27 +90,48 @@ public class ExamSessionViewModel : INotifyPropertyChanged
     {
         if (_submitted) return;
 
-        if (CurrentQuestion.IsMultiSelect)
+        if (CurrentQuestion.IsOrdered)
+        {
+            // Toggle in sequence: first click appends, clicking a picked step
+            // removes it (and everything after it shifts up), clicking an
+            // unpicked step when full replaces the last pick.
+            if (_orderedSelection.Remove(letter))
+            {
+                // removed
+            }
+            else if (_orderedSelection.Count < CurrentQuestion.Options.Count)
+            {
+                _orderedSelection.Add(letter);
+            }
+            else
+            {
+                _orderedSelection[^1] = letter;
+            }
+            Notify(nameof(OrderedSelection));
+        }
+        else if (CurrentQuestion.IsMultiSelect)
         {
             if (_selectedAnswers.Contains(letter))
                 _selectedAnswers.Remove(letter);
             else
                 _selectedAnswers.Add(letter);
+            Notify(nameof(SelectedAnswers));
         }
         else
         {
             _selectedAnswers.Clear();
             _selectedAnswers.Add(letter);
+            Notify(nameof(SelectedAnswers));
         }
-        Notify(nameof(SelectedAnswers));
     }
 
     public bool Submit()
     {
-        if (_submitted || _selectedAnswers.Count == 0) return false;
+        if (_submitted || CurrentSelection().Count == 0) return false;
 
         _submitted = true;
-        var correct = CurrentQuestion.CorrectAnswers.OrderBy(a => a).SequenceEqual(_selectedAnswers.OrderBy(a => a));
+        var (isCorrect, _) = Grade(CurrentQuestion, CurrentSelection());
+        var correct = isCorrect;
         var key = MakeKey(CurrentQuestion);
         if (correct)
         {
@@ -179,9 +209,33 @@ public class ExamSessionViewModel : INotifyPropertyChanged
 
     // ─── Helpers ──────────────────────────────────────────────────
 
+    private IReadOnlyCollection<string> CurrentSelection() =>
+        CurrentQuestion.IsOrdered ? _orderedSelection : _selectedAnswers;
+
+    /// <summary>
+    /// Grades a response against a question. Set equality for choice items;
+    /// exact sequence equality for ordered items (R-03 — the sorted-set
+    /// comparison previously accepted every permutation of the key).
+    /// </summary>
+    internal static (bool isCorrect, string reason) Grade(Question q, IReadOnlyCollection<string> response)
+    {
+        if (q.IsOrdered)
+        {
+            if (response.Count != q.CorrectAnswers.Count)
+                return (false, response.Count < q.CorrectAnswers.Count ? "missing-step" : "extra-token");
+            if (response.Distinct().Count() != response.Count)
+                return (false, "duplicate-step");
+            return (response.SequenceEqual(q.CorrectAnswers), "sequence-mismatch");
+        }
+        var correct = response.Count == q.CorrectAnswers.Count
+            && q.CorrectAnswers.OrderBy(a => a).SequenceEqual(response.OrderBy(a => a));
+        return (correct, correct ? "" : "set-mismatch");
+    }
+
     private void ResetState()
     {
         _selectedAnswers.Clear();
+        _orderedSelection.Clear();
         _submitted = false;
         Notify(nameof(CurrentQuestion));
         Notify(nameof(CurrentIndex));

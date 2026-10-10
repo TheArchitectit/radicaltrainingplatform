@@ -88,6 +88,7 @@ public partial class QuestionView : UserControl
                 break;
 
             case nameof(ExamSessionViewModel.SelectedAnswers):
+            case nameof(ExamSessionViewModel.OrderedSelection):
                 UpdateOptionCardStates();
                 break;
 
@@ -120,8 +121,10 @@ public partial class QuestionView : UserControl
             : 0;
         ProgressBar.Progress = progressPercent;
 
-        // Multi-select hint
-        MultiSelectHint.IsVisible = _viewModel.CurrentQuestion?.IsMultiSelect ?? false;
+        // Multi-select / ordering hint
+        var q = _viewModel.CurrentQuestion;
+        MultiSelectHint.IsVisible = q?.IsMultiSelect ?? false;
+        OrderingHint.IsVisible = q?.IsOrdered ?? false;
 
         // Reset explanation
         _explanationVisible = false;
@@ -137,7 +140,7 @@ public partial class QuestionView : UserControl
         else
         {
             SubmitButton.IsVisible = true;
-            SubmitButton.IsEnabled = _viewModel.SelectedAnswers.Count > 0;
+            SubmitButton.IsEnabled = AnySelection();
             NavButtons.IsVisible = false;
             ResultIndicator.IsVisible = false;
         }
@@ -180,7 +183,8 @@ public partial class QuestionView : UserControl
 
         foreach (var (letter, card) in _optionCards)
         {
-            bool isSelected = _viewModel.SelectedAnswers.Contains(letter);
+            bool isSelected = _viewModel.SelectedAnswers.Contains(letter)
+                || _viewModel.OrderedSelection.Contains(letter);
             bool isCorrectAnswer = _viewModel.CurrentQuestion?.CorrectAnswers.Contains(letter) ?? false;
             bool isSubmitted = _viewModel.IsSubmitted;
 
@@ -202,7 +206,7 @@ public partial class QuestionView : UserControl
         // Update submit button enabled state
         if (!_viewModel.IsSubmitted)
         {
-            SubmitButton.IsEnabled = _viewModel.SelectedAnswers.Count > 0;
+            SubmitButton.IsEnabled = AnySelection();
         }
     }
 
@@ -230,6 +234,9 @@ public partial class QuestionView : UserControl
             ExplanationPanel.IsVisible = false;
         }
     }
+
+    private bool AnySelection() =>
+        _viewModel.SelectedAnswers.Count > 0 || _viewModel.OrderedSelection.Count > 0;
 
     private void ShowResultIndicator()
     {

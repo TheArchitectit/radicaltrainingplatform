@@ -207,6 +207,12 @@
                    Text="Select all that apply"
                    IsVisible="False"/>
 
+        <TextBlock Grid.Row="0"
+                   x:Name="OrderingHint"
+                   Classes="multiSelectHint"
+                   Text="Order the steps: click steps in sequence; click a picked step to remove it"
+                   IsVisible="False"/>
+
         <TextBlock Grid.Row="1"
                    x:Name="StemTextBlock"
                    Classes="stemText"

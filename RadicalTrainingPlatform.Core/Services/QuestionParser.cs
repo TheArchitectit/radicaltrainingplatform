@@ -13,6 +13,7 @@ public partial class QuestionParser : IQuestionParser
     private static readonly Regex OptionRx = OptionRegex();
     private static readonly Regex AnswerRx = AnswerRegex();
     private static readonly Regex AnswerLettersRx = AnswerLettersRegex();
+    private static readonly Regex OrderingMarkerRx = OrderingMarkerRegex();
 
     private readonly IExamRepository _examRepository;
     private readonly ILogger<QuestionParser>? _logger;
@@ -35,6 +36,10 @@ public partial class QuestionParser : IQuestionParser
     // per-line call sites are unaffected by ^ matching line starts.
     [GeneratedRegex(@"^###\s+Q(\d+)[.\s]*(.*)", RegexOptions.Compiled | RegexOptions.Multiline)]
     private static partial Regex QuestionHeaderRegex();
+
+    // R-03: "(Ordering)" in the header marks a sequence-graded item.
+    [GeneratedRegex(@"\(\s*Ordering\s*\)", RegexOptions.Compiled | RegexOptions.IgnoreCase)]
+    private static partial Regex OrderingMarkerRegex();
 
     [GeneratedRegex(@"^##\s+(?:DOMAIN|Domain)\s*(\d+)", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Multiline)]
     private static partial Regex DomainHeaderRegex();
@@ -203,7 +208,14 @@ public partial class QuestionParser : IQuestionParser
                     Id = int.Parse(qm.Groups[1].Value),
                     ExamCode = examCode,
                     Domain = string.IsNullOrEmpty(currentDomain) ? examCode : currentDomain,
-                    SourceFile = Path.GetFileName(filePath)
+                    SourceFile = Path.GetFileName(filePath),
+                    // R-03: "(Ordering)" headers are sequence-graded and
+                    // quarantined from scored packs until sequence scoring
+                    // ships on every surface.
+                    Type = OrderingMarkerRx.IsMatch(line)
+                        ? QuestionType.Ordered
+                        : QuestionType.SingleChoice,
+                    Quarantined = OrderingMarkerRx.IsMatch(line),
                 };
 
                 var inlineStem = qm.Groups[2].Value.Trim();
@@ -296,6 +308,8 @@ public partial class QuestionParser : IQuestionParser
                             string.Join(",", q.CorrectAnswers), string.Join(",", corrected));
                         q.CorrectAnswers = corrected.ToList();
                     }
+                    if (q.Type == QuestionType.SingleChoice && q.CorrectAnswers.Count > 1)
+                        q.Type = QuestionType.MultiSelect;
                     questions.Add(q);
                 }
                 else
