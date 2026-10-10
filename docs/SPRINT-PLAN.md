@@ -1,7 +1,7 @@
 # 🏃 RadicalTrainingPlatform — Sprint Plan
 
 > **Last Updated:** 2026-10-10  
-> **Current Sprint:** Sprint 45 — OpenSpec Sprint A (contracts, blocking repairs, first content)  
+> **Current Sprint:** Sprint 45 — OpenSpec Sprint A — landed (11/11 gates green at head `0e9c184`); next: Sprint 46 — OpenSpec B (one learning loop end to end)  
 > **Guardrails:** agent-guardrails-template v2.8.0 (TheArchitectit)
 
 > **Note:** This file is the legacy working sprint list. The authoritative
