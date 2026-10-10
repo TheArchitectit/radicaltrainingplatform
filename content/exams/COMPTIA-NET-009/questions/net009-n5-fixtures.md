@@ -54,10 +54,10 @@ nslookup queries DNS directly and shows both whether resolution happens and whic
 
 ### Q5
 Users on a subnet report that a file transfer that used to take seconds now takes minutes, while web browsing is normal. The link lights are up and no configuration changed. How should this symptom be classified first?
-- A) A hard failure — the transfer is broken and should be fixed
-- B) A physical fault — replace the cables immediately
-- C) A performance symptom — measure latency, loss, and throughput before acting
+- A) A performance symptom — measure latency, loss, and throughput before acting
+- B) A hard failure — the transfer is broken and should be fixed
+- C) A physical fault — replace the cables immediately
 - D) A DNS problem — the server is resolving to the wrong address
 
-**Answer: C**
+**Answer: A**
 The transfer still completes — it is degraded, not absent, which makes this a performance symptom. The correct first response is measurement (latency, loss, throughput/bandwidth) rather than invasive action, since "slow" without numbers cannot be tested against a cause. A hard failure would mean no transfer at all, cable replacement is invasive before any evidence, and DNS would affect browsing by name too.
