@@ -19,7 +19,12 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Lint exam content
-        run: python3 scripts/lint-content.py
+        run: |
+          python3 scripts/lint-content.py
+          # R-07/TM-15: the lint itself must fail on a non-canonical separator
+          # file (the old first-letter-only regex passed "Answer: B and D"
+          # lines the parser then dropped) and pass on a canonical file.
+          python3 scripts/lint-content.py --self-test
 
       # R-01/CI-03 companion gate: every relative import in the PWA must
       # resolve case-sensitively (deploy-host semantics). Fixture pair:

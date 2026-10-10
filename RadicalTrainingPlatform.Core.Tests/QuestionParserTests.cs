@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using NSubstitute;
 using RadicalTrainingPlatform.Core.Models;
 using Shouldly;
@@ -172,6 +173,69 @@ public class QuestionParserTests
         questions[0].CorrectAnswers.ShouldContain("A");
         questions[0].CorrectAnswers.ShouldContain("C");
         questions[0].IsMultiSelect.ShouldBeTrue();
+    }
+
+    // TM-14 / R-07: comma, "and", "&" and whitespace separators must all
+    // normalize to the same letter list. NCP-AI-Part4.md Q61-70 shipped in the
+    // "B and D" form and the old grammar silently dropped all ten questions.
+    [Theory]
+    [InlineData("A, C", new[] { "A", "C" })]
+    [InlineData("A and C", new[] { "A", "C" })]
+    [InlineData("A & C", new[] { "A", "C" })]
+    [InlineData("A C", new[] { "A", "C" })]
+    [InlineData("B, D, E", new[] { "B", "D", "E" })]
+    [InlineData("B and D", new[] { "B", "D" })]
+    [InlineData("B&D", new[] { "B", "D" })]
+    [InlineData("A, B and C", new[] { "A", "B", "C" })]
+    public void ParseFile_AnswerSeparatorVariants_NormalizeToIdenticalKeySets(string answer, string[] expected)
+    {
+        var content = MakeQuestion(1, "Which apply?", ["- A) one", "- B) two", "- C) three", "- D) four", "- E) five"], answer);
+        var repo = CreateRepo(content);
+        var parser = new QuestionParser(repo);
+
+        var questions = parser.ParseFile("test-exam.md");
+
+        questions.ShouldHaveSingleItem();
+        questions[0].CorrectAnswers.ShouldBe(expected);
+        questions[0].IsMultiSelect.ShouldBeTrue();
+    }
+
+    [Fact]
+    public void ParseFile_AnswerSeparator_LettersInsideTheWordAnd_DoNotBecomeKeys()
+    {
+        // "and" contributes the letters a/n/d to the raw text — the
+        // normalization must keep only A-F option letters as keys, and "a"
+        // from the separator itself must not count as an answer.
+        var content = MakeQuestion(1, "Pick two.", ["- A) x", "- B) y", "- C) z", "- D) w"], "B and D");
+        var repo = CreateRepo(content);
+        var parser = new QuestionParser(repo);
+
+        var questions = parser.ParseFile("test-exam.md");
+
+        questions.ShouldHaveSingleItem();
+        questions[0].CorrectAnswers.ShouldBe(new[] { "B", "D" });
+    }
+
+    [Fact]
+    public void ParseFile_AnswerSeparator_CorrectAnswerVariant_AcceptsAndSeparator()
+    {
+        var content = """
+            ### Q1
+            Which apply?
+            - A) one
+            - B) two
+            - C) three
+            **Correct Answer: A and C**
+            Both apply.
+            ---
+            """;
+        var repo = CreateRepo(content);
+        var parser = new QuestionParser(repo);
+
+        var questions = parser.ParseFile("test-exam.md");
+
+        questions.ShouldHaveSingleItem();
+        questions[0].CorrectAnswers.ShouldBe(new[] { "A", "C" });
     }
 
     [Fact]
@@ -374,8 +438,28 @@ public class QuestionParserTests
         questions[0].ExamCode.ShouldBe("NCP-US");
     }
 
-    // ─── BuildCatalog Tests ──────────────────────────────────────
+    // ─── Parse-vs-catalog reconciliation (TM-15 / R-07) ──────────
 
+    [Fact]
+    public void ParseFile_EveryQuestionHeaderYieldsExactlyOneQuestion()
+    {
+        // A dropped question vanishes silently today (the old grammar skipped
+        // "B and D" keys). The invariant: header count == parsed count, always.
+        var content =
+            MakeQuestion(1, "One", ["- A) x", "- B) y"], "A") +
+            MakeQuestion(2, "Two", ["- A) x", "- B) y"], "B and D", "multiselect") +
+            MakeQuestion(3, "Three", ["- A) x", "- B) y", "- C) z"], "A & C") +
+            MakeQuestion(4, "Four", ["- A) x", "- B) y"], "B");
+        var repo = CreateRepo(content);
+        var parser = new QuestionParser(repo);
+
+        var questions = parser.ParseFile("test-exam.md");
+
+        questions.Count.ShouldBe(4);
+        questions.Select(q => q.Id).ShouldBe(new[] { 1, 2, 3, 4 });
+    }
+
+    // ─── BuildCatalog Tests ──────────────────────────────────────
     [Fact]
     public void BuildCatalog_ReturnsCatalogItems()
     {

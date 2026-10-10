@@ -802,7 +802,7 @@ You need to troubleshoot poor inference performance on NAI. Which TWO of the fol
 - D) Model serving pod logs and application metrics (vLLM/TensorRT-LLM output)
 - E) Prism Central license expiry
 
-**Answer: B and D**
+**Answer: B, D**
 Pod logs and application metrics reveal model-level issues (OOM, slow generation), while Prometheus metrics show GPU/memory pressure and latency patterns. API server and driver logs are secondary; license issues are rare.
 
 ---
@@ -816,7 +816,7 @@ A customer is planning a NAI deployment for a 13B parameter model with 100 concu
 - D) Kubernetes etcd database size
 - E) Nutanix CSI storage throughput and capacity
 
-**Answer: B and E**
+**Answer: B, E**
 GPU VRAM determines how many pods fit per node (concurrent batch × model size × overhead). Storage throughput affects model loading speed; capacity holds artifacts. Other factors are secondary for inference workloads.
 
 ---
@@ -830,7 +830,7 @@ To achieve zero-downtime model updates in NAI, which TWO Kubernetes features mus
 - D) NetworkPolicy to block old pods
 - E) Helm hooks for pre/post-upgrade validation
 
-**Answer: B and C**
+**Answer: B, C**
 RollingUpdateStrategy controls pod replacement rate (maxUnavailable=0 for zero downtime). Readiness probes ensure new pods are healthy before receiving traffic. Service mesh and NetworkPolicy are optional; Helm hooks are nice-to-have.
 
 ---
@@ -844,7 +844,7 @@ NAI model serving requires both inference optimization AND API compatibility. Wh
 - D) NVIDIA Triton with OpenAI-compatible frontends (plugins/extensions)
 - E) JAX compiled models
 
-**Answer: A and B**
+**Answer: A, B**
 vLLM natively provides OpenAI-compatible endpoints. TensorRT-LLM requires wrapping (e.g., Triton or custom server) to add API compatibility, but achieves maximum performance. PyTorch and JAX require custom development.
 
 ---
@@ -858,7 +858,7 @@ A NAI cluster requires HA (high availability) for production workloads. Which TW
 - D) Multiple master nodes in Kubernetes (3+ for etcd quorum)
 - E) Shared NFS mount on one filer
 
-**Answer: B and D**
+**Answer: B, D**
 HA requires: (1) redundant storage (Nutanix CSI with RAID protection), (2) redundant Kubernetes masters (3+ for HA etcd). Single NFS filer, single master, or single storage node creates SPOF (single point of failure).
 
 ---
@@ -872,7 +872,7 @@ For a LoRA fine-tuning task on NAI, which TWO components are essential to manage
 - D) NVIDIA driver version
 - E) Model input tokenizer (shared with base model)
 
-**Answer: A and B**
+**Answer: A, B**
 LoRA training freezes base model weights, only trains adapter weights (small matrices in attention/MLP). These are the two managed components. Optimizer state, drivers, tokenizer are dependencies but not the core LoRA components.
 
 ---
@@ -886,7 +886,7 @@ An organization requires per-tenant isolation on a shared NAI cluster. Which TWO
 - D) Single shared namespace with naming conventions
 - E) Kubernetes user accounts (no isolation benefit)
 
-**Answer: A and B**
+**Answer: A, B**
 Namespaces isolate resources and RBAC prevents cross-tenant access. NetworkPolicy adds network-level isolation. Labels alone don't enforce security; shared namespaces eliminate isolation; user accounts ≠ isolation.
 
 ---
@@ -900,7 +900,7 @@ You're optimizing vLLM for 1000 concurrent requests on a 13B model. Which TWO co
 - D) Using speculative decoding with a draft model
 - E) Increasing model parameter count
 
-**Answer: A and B**
+**Answer: A, B**
 PagedAttention enables higher batch sizes by managing KV cache efficiently. Larger batches improve throughput. INT4 quantization and speculative decoding help specific scenarios but aren't universally optimal. More parameters worsen latency.
 
 ---
@@ -914,7 +914,7 @@ NAI API security requires both authentication AND authorization. Which TWO mecha
 - D) Shared API key (security risk)
 - E) HTTP Basic Auth over unencrypted connections
 
-**Answer: A and B**
+**Answer: A, B**
 Bearer tokens authenticate identity. Prism Central RBAC authorizes what each authenticated user can access (model, rate limits). Firewalls provide network security but not API-level auth. Shared keys and unencrypted Basic Auth are insecure.
 
 ---
@@ -928,7 +928,7 @@ For disaster recovery of NAI deployments, which TWO are most critical?
 - D) Manual documentation of all pod IP addresses
 - E) Backup of Kubernetes etcd cluster state
 
-**Answer: B and E**
+**Answer: B, E**
 CSI volume backups preserve models, data, and state. etcd backup preserves Kubernetes cluster config, deployments, secrets. Together they enable full recovery. Testing (C) is best practice but not a backup mechanism itself. Pod IPs change; manual docs are unreliable. Helm backups (A) help but require CSI + etcd to be useful.
 
 ---

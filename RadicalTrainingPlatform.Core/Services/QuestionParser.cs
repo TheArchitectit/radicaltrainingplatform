@@ -12,6 +12,7 @@ public partial class QuestionParser : IQuestionParser
     private static readonly Regex DomainHeaderRx = DomainHeaderRegex();
     private static readonly Regex OptionRx = OptionRegex();
     private static readonly Regex AnswerRx = AnswerRegex();
+    private static readonly Regex AnswerLettersRx = AnswerLettersRegex();
 
     private readonly IExamRepository _examRepository;
     private readonly ILogger<QuestionParser>? _logger;
@@ -41,8 +42,15 @@ public partial class QuestionParser : IQuestionParser
     [GeneratedRegex(@"^-\s+([A-F])\)\s+(.*)", RegexOptions.Compiled)]
     private static partial Regex OptionRegex();
 
-    [GeneratedRegex(@"^\*\*(?:Correct )?Answer:\s*([A-F][,\s]*(?:[A-F][,\s]*)*)\*\*", RegexOptions.Compiled)]
+    // Separator grammar per R-07: comma, "and", "&", or bare whitespace between
+    // letters. Legacy banks (NCP-AI-Part4 Q61-70) use "B and D"; new content is
+    // lint-enforced to the comma form, but the parser must never silently drop
+    // a valid key again.
+    [GeneratedRegex(@"^\*\*(?:Correct )?Answer:\s*([A-F](?:\s*(?:,|and|&)?\s*[A-F])*)\s*\*\*", RegexOptions.Compiled)]
     private static partial Regex AnswerRegex();
+
+    [GeneratedRegex(@"[A-F]", RegexOptions.Compiled)]
+    private static partial Regex AnswerLettersRegex();
 
     /// <summary>
     /// Derive an exam code from a filename by iteratively stripping known suffixes.
@@ -253,10 +261,13 @@ public partial class QuestionParser : IQuestionParser
                     var am = AnswerRx.Match(line);
                     if (am.Success)
                     {
-                        var raw = am.Groups[1].Value
-                            .Replace(",", "")
-                            .Replace(" ", "");
-                        q.CorrectAnswers = raw.Select(c => c.ToString()).ToList();
+                        // Keep A-F letters only: separators are ",", "and", "&",
+                        // whitespace — the letters in "and" must not become keys.
+                        q.CorrectAnswers = AnswerLettersRx.Matches(am.Groups[1].Value)
+                            .Select(m => m.Value)
+                            .Distinct(StringComparer.OrdinalIgnoreCase)
+                            .Select(l => l.ToUpperInvariant())
+                            .ToList();
                         i++;
                     }
                 }
