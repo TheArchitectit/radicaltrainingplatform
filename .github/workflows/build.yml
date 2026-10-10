@@ -41,6 +41,12 @@ jobs:
           python3 scripts/check-imports.py
           bash tests/gates/run_import_check_fixtures.sh
 
+      # R-22/T-43: web runtime fixtures — each R-22 defect has a must-fail
+      # self-test plus one passing fixture per fixed bullet (Node built-in
+      # test runner, zero-dependency DOM stubs).
+      - name: Run web runtime fixtures
+        run: bash tests/gates/run_web_fixtures.sh
+
       # No setup-dotnet here: the runner image (localhost/devgate-runner-rtp,
       # infra Containerfile convention) bakes the .NET 10 SDK — setup-dotnet
       # cannot write /usr/share/dotnet inside a rootless runner container.
