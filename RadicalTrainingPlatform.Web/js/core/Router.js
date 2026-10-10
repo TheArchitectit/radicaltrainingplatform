@@ -7,6 +7,7 @@ class Router {
     #routes = new Map();
     #currentView = null;
     #viewContainer = null;
+    #renderToken = 0;
 
     constructor() {
         window.addEventListener('hashchange', () => this.#onHashChange());
@@ -84,6 +85,8 @@ class Router {
     }
 
     async #renderView(ViewClass, params, path) {
+        const token = ++this.#renderToken;
+
         // Tear down current view
         if (this.#currentView?.destroy) {
             this.#currentView.destroy();
@@ -94,8 +97,16 @@ class Router {
         this.#currentView = view;
 
         if (this.#viewContainer) {
-            this.#viewContainer.innerHTML = '';
             const el = await view.render(params);
+
+            // A newer navigation started while this render was in flight;
+            // discard the stale result.
+            if (token !== this.#renderToken) {
+                if (view.destroy) view.destroy();
+                return;
+            }
+
+            this.#viewContainer.innerHTML = '';
             if (el) {
                 this.#viewContainer.appendChild(el);
                 view.root = el;
