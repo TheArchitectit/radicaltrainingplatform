@@ -29,6 +29,8 @@
 | S46-14 (T-42) | CefGlue NoSandbox scoped hardening review + navigation allowlist decision | R-21 | 1 | ⚪ |
 | S46-15 (T-43*) | Web runtime batch remainder (if not closed in Sprint 45) | R-22 | 1 | ⚪ |
 
+**Register note (Sprint 45):** T-43's cosmetic bullet (placeholder/breadcrumb labels + snapshot fixtures) slipped to this sprint — the seven functional R-22 bullets landed in Sprint 45 with per-bullet fixtures (commits 5decbaf..0c84562); only the cosmetics remain.
+
 **Total:** 31 points
 
 ---
