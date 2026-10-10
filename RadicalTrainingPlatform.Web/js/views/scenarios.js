@@ -506,6 +506,7 @@ const SCENARIOS = [
 
 export class ScenariosView extends BaseView {
     #activeScenario = null;
+    #attemptRecorded = false;
 
     async render() {
         const el = document.createElement('div');
@@ -552,6 +553,11 @@ export class ScenariosView extends BaseView {
                 `).join('')}
             </div>
 
+            <div class="card" id="scenario-history" style="margin-top:var(--space-xl);">
+                <div class="card-header">History</div>
+                <div class="card-body" id="scenario-history-list"></div>
+            </div>
+
             <div id="active-scenario" style="display:none;"></div>
         `;
 
@@ -570,6 +576,8 @@ export class ScenariosView extends BaseView {
             item.addEventListener('mouseenter', () => item.style.background = 'var(--bg-secondary)');
             item.addEventListener('mouseleave', () => item.style.background = '');
         });
+
+        this.#renderHistory();
     }
 
     destroy() {}
@@ -579,6 +587,7 @@ export class ScenariosView extends BaseView {
         if (!scenario) return;
 
         this.#activeScenario = scenario;
+        this.#attemptRecorded = false;
         const listDiv = document.getElementById('scenario-list');
         const activeDiv = document.getElementById('active-scenario');
         if (!listDiv || !activeDiv) return;
@@ -686,6 +695,7 @@ export class ScenariosView extends BaseView {
                     document.getElementById('result-title').textContent = 'All Objectives Complete!';
                     document.getElementById('result-message').textContent = `Great job! You've completed "${scenario.title}".`;
                     toast.success(`Scenario "${scenario.title}" completed!`);
+                    this.#recordAttempt(scenario);
                 } else {
                     document.getElementById('result-icon').textContent = '🔄';
                     document.getElementById('result-title').textContent = 'Not Yet Complete';
@@ -693,5 +703,37 @@ export class ScenariosView extends BaseView {
                 }
             }
         });
+    }
+
+    async #recordAttempt(scenario) {
+        if (this.#attemptRecorded) return;
+        this.#attemptRecorded = true;
+        const existing = state.getAll('scenario_attempts')
+            .filter(a => a.scenario_id === scenario.id && a.completed);
+        await state.create('scenario_attempts', {
+            scenario_id: scenario.id,
+            scenario_title: scenario.title,
+            exam: scenario.exam,
+            attempt_number: existing.length + 1,
+            completed: true,
+            completed_at: new Date().toISOString(),
+        });
+        this.#renderHistory();
+    }
+
+    #renderHistory() {
+        const list = document.getElementById('scenario-history-list');
+        if (!list) return;
+        const attempts = state.getAll('scenario_attempts');
+        if (attempts.length === 0) {
+            list.innerHTML = '<span class="text-secondary text-sm">No completed scenarios yet.</span>';
+            return;
+        }
+        list.innerHTML = attempts.map(a => `
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border-light);">
+                <span>✅ <strong>${a.scenario_title}</strong> <span class="text-secondary text-sm">(${a.exam})</span></span>
+                <span class="text-secondary text-sm">attempt #${a.attempt_number}${a.completed_at ? ` · ${new Date(a.completed_at).toLocaleString()}` : ''}</span>
+            </div>
+        `).join('');
     }
 }
