@@ -23,7 +23,7 @@
 | S45-08 (T-08) | First reviewed lesson + question fixtures (A+ A2; Network+ N5) | REQ-AP-02, REQ-NP-02 | 2 | ⚪ |
 | S45-09 (T-09) | Begin NCA remap inventory (140 rows) | REQ-NCA-01 | 2 | ✅ |
 | S45-10 (T-10) | Answer-position distribution report | R-09 | 1 | ✅ |
-| S45-11 (T-43*) | Web runtime batch starts immediately after T-01 (same surface) | R-22 | 2 | ⚪ |
+| S45-11 (T-43*) | Web runtime batch starts immediately after T-01 (same surface) | R-22 | 2 | ✅ |
 | S45-12 (T-46) | RedEye lane: checks, logs, ship-gate, seeded-defect self-test | REQ-REV-01..06 | 3 | ⚪ |
 
 **Total:** 27 points (Sprint A runs on a compressed calendar; cut lines, not quality, absorb slippage per SPEC-11 11.9)
@@ -143,8 +143,8 @@
 **As a** platform engineer, **I want** the web runtime defects fixed on the same surface as T-01, **so that** we do not reopen the boot area twice.
 
 **Acceptance Criteria:**
-- [ ] `this.root` lifecycle, `ci-networking` accessor, CLI async, audit-log ordering, router serialization, per-item validator isolation, scenario attempt/history fixes begin immediately after S45-01 lands
-- [ ] Remaining cosmetics may slip to Sprint 46 with register note
+- [x] `this.root` lifecycle, `ci-networking` accessor, CLI async, audit-log ordering, router serialization, per-item validator isolation, scenario attempt/history fixes begin immediately after S45-01 lands
+- [x] Remaining cosmetics may slip to Sprint 46 with register note
 
 **Files:** `Web/js/` (per R-22 finding list)
 
