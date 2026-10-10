@@ -166,7 +166,7 @@ VNet (custom address space)
         const container = document.getElementById('networking-content');
         if (!container) return;
 
-        const c = state.get('nc2_clusters', uuid);
+        const c = state.getById('nc2_clusters', uuid);
         if (!c) { container.innerHTML = '<p class="text-secondary">Cluster not found</p>'; return; }
 
         this.#selectedCluster = c;
