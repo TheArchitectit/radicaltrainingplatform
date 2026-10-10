@@ -1,0 +1,65 @@
+{
+  "examId": "NCA-75",
+  "vendor": "Nutanix",
+  "displayName": "Nutanix Certified Associate 7.5",
+  "officialVersion": "2026-06-15",
+  "objectivesDocVersion": "2026-06-15",
+  "sourceUrl": "https://www.nutanix.com/content/dam/nutanix/en/resources/datasheets/ds-ebg-nca.pdf",
+  "sourceReviewDate": "2026-10-10",
+  "productVersions": {
+    "AOS": "7.5",
+    "AHV": "11.0",
+    "Prism Central": "pc.7.5"
+  },
+  "sections": [
+    {
+      "number": "1",
+      "title": "Recognize Nutanix Solutions and Tools",
+      "studyItemAllocation": 10,
+      "objectives": [
+        { "id": "1.1", "title": "Recognize Nutanix solutions, use cases, and features of Nutanix Cloud Infrastructure (NCI) technologies", "lessonIds": [] },
+        { "id": "1.2", "title": "Recognize Nutanix solutions, use cases, and features of non-Nutanix Cloud Infrastructure (NCI) technologies", "lessonIds": [] },
+        { "id": "1.3", "title": "Recognize the use cases and features of Nutanix tools", "lessonIds": [] }
+      ]
+    },
+    {
+      "number": "2",
+      "title": "Describe Nutanix Platform Administration",
+      "studyItemAllocation": 10,
+      "objectives": [
+        { "id": "2.1", "title": "Describe VM tasks", "lessonIds": [] },
+        { "id": "2.2", "title": "Identify virtual networking tasks", "lessonIds": [] },
+        { "id": "2.3", "title": "Discuss storage operations", "lessonIds": [] },
+        { "id": "2.4", "title": "Describe licensing tasks", "lessonIds": [] }
+      ]
+    },
+    {
+      "number": "3",
+      "title": "Describe Cluster Configuration and Maintenance",
+      "studyItemAllocation": 10,
+      "objectives": [
+        { "id": "3.1", "title": "Describe valid cluster options", "lessonIds": [] },
+        { "id": "3.2", "title": "Identify hardware maintenance tasks", "lessonIds": [] },
+        { "id": "3.3", "title": "Identify software maintenance tasks", "lessonIds": [] }
+      ]
+    },
+    {
+      "number": "4",
+      "title": "Demonstrate and Understand of Platform Health and Monitoring",
+      "studyItemAllocation": 10,
+      "objectives": [
+        { "id": "4.1", "title": "Perform and interpret a health check", "lessonIds": [] },
+        { "id": "4.2", "title": "Review and interpret alerts and events", "lessonIds": [] },
+        { "id": "4.3", "title": "Leverage support functions", "lessonIds": [] },
+        { "id": "4.4", "title": "Review and interpret workload performance", "lessonIds": [] }
+      ]
+    }
+  ],
+  "questionPolicy": { "authorship": "original", "review": "human-required" },
+  "gaps": [
+    "1.x solutions/tools (Nutanix and non-Nutanix NCI product awareness)",
+    "2.4 licensing tasks",
+    "4.3 support-case workflow",
+    "4.4 workload performance interpretation"
+  ]
+}

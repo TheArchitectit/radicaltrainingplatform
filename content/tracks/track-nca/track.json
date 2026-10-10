@@ -1,0 +1,9 @@
+{
+  "trackId": "track-nca",
+  "title": "Nutanix NCA 7.5 Beginner Track",
+  "examIds": ["NCA-75"],
+  "audience": "beginners preparing for Nutanix NCA",
+  "previewLabel": "beginner preview",
+  "disclaimer": "This is independent study material. It is not official training and is not endorsed or approved by CompTIA, Nutanix, or any other certification body.",
+  "order": 3
+}

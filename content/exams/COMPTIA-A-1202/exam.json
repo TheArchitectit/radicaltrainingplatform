@@ -1,0 +1,82 @@
+{
+  "examId": "COMPTIA-A-1202",
+  "vendor": "CompTIA",
+  "displayName": "CompTIA A+ Core 2 (220-1202)",
+  "officialVersion": "V15",
+  "objectivesDocVersion": "3.0",
+  "sourceUrl": "https://assets.ctfassets.net/82ripq7fjls2/6I8WL66IBa1AUovioDGrnM/f74a7eca336fd4e4c8e723a1f893086d/CompTIA-A-220-1202-Exam-Objectives-3.0.pdf",
+  "sourceReviewDate": "2026-10-10",
+  "productVersions": {},
+  "sections": [
+    {
+      "number": "1",
+      "title": "Operating Systems",
+      "weightPercent": 28,
+      "studyItemAllocation": 17,
+      "objectives": [
+        { "id": "1.1", "title": "Explain common operating system (OS) types and their purposes.", "lessonIds": [] },
+        { "id": "1.2", "title": "Given a scenario, perform OS installations and upgrades in a diverse environment.", "lessonIds": [] },
+        { "id": "1.3", "title": "Compare and contrast basic features of Microsoft Windows editions.", "lessonIds": [] },
+        { "id": "1.4", "title": "Given a scenario, use Microsoft Windows operating system features and tools.", "lessonIds": [] },
+        { "id": "1.5", "title": "Given a scenario, use the appropriate Microsoft command-line tools.", "lessonIds": [] },
+        { "id": "1.6", "title": "Given a scenario, configure Microsoft Windows settings.", "lessonIds": [] },
+        { "id": "1.7", "title": "Given a scenario, configure Microsoft Windows networking features on a client/desktop.", "lessonIds": [] },
+        { "id": "1.8", "title": "Explain common features and tools of the macOS/desktop operating system.", "lessonIds": [] },
+        { "id": "1.9", "title": "Identify common features and tools of the Linux client/desktop operating system.", "lessonIds": [] },
+        { "id": "1.10", "title": "Given a scenario, install applications according to requirements.", "lessonIds": [] },
+        { "id": "1.11", "title": "Given a scenario, install and configure cloud-based productivity tools.", "lessonIds": [] }
+      ]
+    },
+    {
+      "number": "2",
+      "title": "Security",
+      "weightPercent": 28,
+      "studyItemAllocation": 17,
+      "objectives": [
+        { "id": "2.1", "title": "Summarize various security measures and their purposes.", "lessonIds": [] },
+        { "id": "2.2", "title": "Given a scenario, configure and apply basic Microsoft Windows OS security settings.", "lessonIds": [] },
+        { "id": "2.3", "title": "Compare and contrast wireless security protocols and authentication methods.", "lessonIds": [] },
+        { "id": "2.4", "title": "Summarize types of malware and tools/methods for detection, removal, and prevention.", "lessonIds": [] },
+        { "id": "2.5", "title": "Compare and contrast common social engineering attacks, threats, and vulnerabilities.", "lessonIds": [] },
+        { "id": "2.6", "title": "Given a scenario, implement procedures for basic small office/home office (SOHO) malware removal.", "lessonIds": [] },
+        { "id": "2.7", "title": "Given a scenario, apply workstation security options and hardening techniques.", "lessonIds": [] },
+        { "id": "2.8", "title": "Given a scenario, apply common methods for securing mobile devices.", "lessonIds": [] },
+        { "id": "2.9", "title": "Compare and contrast common data destruction and disposal methods.", "lessonIds": [] },
+        { "id": "2.10", "title": "Given a scenario, apply security settings on SOHO wireless and wired networks.", "lessonIds": [] },
+        { "id": "2.11", "title": "Given a scenario, configure relevant security settings in a browser.", "lessonIds": [] }
+      ]
+    },
+    {
+      "number": "3",
+      "title": "Software Troubleshooting",
+      "weightPercent": 23,
+      "studyItemAllocation": 14,
+      "objectives": [
+        { "id": "3.1", "title": "Given a scenario, troubleshoot common Windows OS issues.", "lessonIds": [] },
+        { "id": "3.2", "title": "Given a scenario, troubleshoot common mobile OS and application issues.", "lessonIds": [] },
+        { "id": "3.3", "title": "Given a scenario, troubleshoot common mobile OS and application security issues.", "lessonIds": [] },
+        { "id": "3.4", "title": "Given a scenario, troubleshoot common personal computer (PC) security issues.", "lessonIds": [] }
+      ]
+    },
+    {
+      "number": "4",
+      "title": "Operational Procedures",
+      "weightPercent": 21,
+      "studyItemAllocation": 12,
+      "objectives": [
+        { "id": "4.1", "title": "Given a scenario, implement best practices associated with documentation and support systems information management.", "lessonIds": [] },
+        { "id": "4.2", "title": "Given a scenario, apply change management procedures.", "lessonIds": [] },
+        { "id": "4.3", "title": "Given a scenario, implement workstation backup and recovery methods.", "lessonIds": [] },
+        { "id": "4.4", "title": "Given a scenario, use common safety procedures.", "lessonIds": [] },
+        { "id": "4.5", "title": "Summarize environmental impacts and local environment controls.", "lessonIds": [] },
+        { "id": "4.6", "title": "Explain the importance of prohibited content/activity and privacy, licensing, and policy concepts.", "lessonIds": [] },
+        { "id": "4.7", "title": "Given a scenario, use proper communication techniques and professionalism.", "lessonIds": [] },
+        { "id": "4.8", "title": "Explain the basics of scripting.", "lessonIds": [] },
+        { "id": "4.9", "title": "Given a scenario, use remote access technologies.", "lessonIds": [] },
+        { "id": "4.10", "title": "Explain basic concepts related to artificial intelligence (AI).", "lessonIds": [] }
+      ]
+    }
+  ],
+  "questionPolicy": { "authorship": "original", "review": "human-required" },
+  "gaps": []
+}

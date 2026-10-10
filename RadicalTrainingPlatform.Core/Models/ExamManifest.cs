@@ -16,6 +16,11 @@ public class ManifestSection
     public string Title { get; set; } = "";
     /// <summary>Optional — present only when the official source publishes weights.</summary>
     public int? WeightPercent { get; set; }
+    /// <summary>
+    /// Study-allocation item count for this section. A product choice, never an
+    /// official test model (REQ-AP-01/REQ-NP-01); omitted for NCA equal allocation.
+    /// </summary>
+    public int? StudyItemAllocation { get; set; }
     public List<ManifestObjective> Objectives { get; set; } = new();
 }
 

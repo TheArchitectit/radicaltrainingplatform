@@ -1,0 +1,9 @@
+{
+  "trackId": "track-aplus",
+  "title": "CompTIA A+ Beginner Track",
+  "examIds": ["COMPTIA-A-1201", "COMPTIA-A-1202"],
+  "audience": "beginners preparing for CompTIA A+",
+  "previewLabel": "beginner preview",
+  "disclaimer": "This is independent study material. It is not official training and is not endorsed or approved by CompTIA, Nutanix, or any other certification body.",
+  "order": 1
+}

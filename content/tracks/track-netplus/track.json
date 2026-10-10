@@ -1,0 +1,9 @@
+{
+  "trackId": "track-netplus",
+  "title": "CompTIA Network+ Beginner Track",
+  "examIds": ["COMPTIA-NET-009"],
+  "audience": "beginners preparing for CompTIA Network+",
+  "previewLabel": "beginner preview",
+  "disclaimer": "This is independent study material. It is not official training and is not endorsed or approved by CompTIA, Nutanix, or any other certification body.",
+  "order": 2
+}

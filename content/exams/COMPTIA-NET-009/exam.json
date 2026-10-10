@@ -1,0 +1,84 @@
+{
+  "examId": "COMPTIA-NET-009",
+  "vendor": "CompTIA",
+  "displayName": "CompTIA Network+ (N10-009)",
+  "officialVersion": "N10-009",
+  "objectivesDocVersion": "4.0",
+  "sourceUrl": "https://comptiacdn.azureedge.net/webcontent/docs/default-source/exam-objectives/comptia-network-n10-009-exam-objectives-%284-0%29-%281%29.pdf",
+  "sourceReviewDate": "2026-10-10",
+  "productVersions": {},
+  "sections": [
+    {
+      "number": "1",
+      "title": "Networking Concepts",
+      "weightPercent": 23,
+      "studyItemAllocation": 23,
+      "objectives": [
+        { "id": "1.1", "title": "Explain concepts related to the Open Systems Interconnection (OSI) reference model.", "lessonIds": [] },
+        { "id": "1.2", "title": "Compare and contrast networking appliances, applications, and functions.", "lessonIds": [] },
+        { "id": "1.3", "title": "Summarize cloud concepts and connectivity options.", "lessonIds": [] },
+        { "id": "1.4", "title": "Explain common networking ports, protocols, services, and traffic types.", "lessonIds": [] },
+        { "id": "1.5", "title": "Compare and contrast transmission media and transceivers.", "lessonIds": [] },
+        { "id": "1.6", "title": "Compare and contrast network topologies, architectures, and types.", "lessonIds": [] },
+        { "id": "1.7", "title": "Given a scenario, use appropriate IPv4 network addressing.", "lessonIds": [] },
+        { "id": "1.8", "title": "Summarize evolving use cases for modern network environments.", "lessonIds": [] }
+      ]
+    },
+    {
+      "number": "2",
+      "title": "Network Implementation",
+      "weightPercent": 20,
+      "studyItemAllocation": 20,
+      "objectives": [
+        { "id": "2.1", "title": "Explain characteristics of routing technologies.", "lessonIds": [] },
+        { "id": "2.2", "title": "Given a scenario, configure switching technologies and features.", "lessonIds": [] },
+        { "id": "2.3", "title": "Given a scenario, select and configure wireless devices and technologies.", "lessonIds": [] },
+        { "id": "2.4", "title": "Explain important factors of physical installations.", "lessonIds": [] }
+      ]
+    },
+    {
+      "number": "3",
+      "title": "Network Operations",
+      "weightPercent": 19,
+      "studyItemAllocation": 19,
+      "objectives": [
+        { "id": "3.1", "title": "Explain the purpose of organizational processes and procedures.", "lessonIds": [] },
+        { "id": "3.2", "title": "Given a scenario, use network monitoring technologies.", "lessonIds": [] },
+        { "id": "3.3", "title": "Explain disaster recovery (DR) concepts.", "lessonIds": [] },
+        { "id": "3.4", "title": "Given a scenario, implement IPv4 and IPv6 network services.", "lessonIds": [] },
+        { "id": "3.5", "title": "Compare and contrast network access and management methods.", "lessonIds": [] }
+      ]
+    },
+    {
+      "number": "4",
+      "title": "Network Security",
+      "weightPercent": 14,
+      "studyItemAllocation": 14,
+      "objectives": [
+        { "id": "4.1", "title": "Explain the importance of basic network security concepts.", "lessonIds": [] },
+        { "id": "4.2", "title": "Summarize various types of attacks and their impact to the network.", "lessonIds": [] },
+        { "id": "4.3", "title": "Given a scenario, apply network security features, defense techniques, and solutions.", "lessonIds": [] }
+      ]
+    },
+    {
+      "number": "5",
+      "title": "Network Troubleshooting",
+      "weightPercent": 24,
+      "studyItemAllocation": 24,
+      "objectives": [
+        { "id": "5.1", "title": "Explain the troubleshooting methodology.", "lessonIds": [] },
+        { "id": "5.2", "title": "Given a scenario, troubleshoot common cabling and physical interface issues.", "lessonIds": [] },
+        { "id": "5.3", "title": "Given a scenario, troubleshoot common issues with network services.", "lessonIds": [] },
+        { "id": "5.4", "title": "Given a scenario, troubleshoot common performance issues.", "lessonIds": [] },
+        { "id": "5.5", "title": "Given a scenario, use the appropriate tool or protocol to solve networking issues.", "lessonIds": [] }
+      ]
+    }
+  ],
+  "questionPolicy": { "authorship": "original", "review": "human-required" },
+  "gaps": [
+    "routing protocols",
+    "subnetting drills",
+    "wireless design",
+    "packet analysis"
+  ]
+}

@@ -1,0 +1,81 @@
+{
+  "examId": "COMPTIA-A-1201",
+  "vendor": "CompTIA",
+  "displayName": "CompTIA A+ Core 1 (220-1201)",
+  "officialVersion": "V15",
+  "objectivesDocVersion": "3.0",
+  "sourceUrl": "https://assets.ctfassets.net/82ripq7fjls2/1oSdlyujpaX3GrM0rir6Ge/91afb2be72785281e8fb4c0d9a70c6f4/CompTIA-A-220-1201-Exam-Objectives-3.0.pdf",
+  "sourceReviewDate": "2026-10-10",
+  "productVersions": {},
+  "sections": [
+    {
+      "number": "1",
+      "title": "Mobile Devices",
+      "weightPercent": 13,
+      "studyItemAllocation": 8,
+      "objectives": [
+        { "id": "1.1", "title": "Given a scenario, monitor mobile device hardware and use appropriate replacement techniques.", "lessonIds": [] },
+        { "id": "1.2", "title": "Compare and contrast accessories and connectivity options for mobile devices.", "lessonIds": [] },
+        { "id": "1.3", "title": "Given a scenario, configure basic mobile device network connectivity and provide application support.", "lessonIds": [] }
+      ]
+    },
+    {
+      "number": "2",
+      "title": "Networking",
+      "weightPercent": 23,
+      "studyItemAllocation": 14,
+      "objectives": [
+        { "id": "2.1", "title": "Compare and contrast Transmission Control Protocol (TCP) and User Datagram Protocol (UDP) ports, protocols, and their purposes.", "lessonIds": [] },
+        { "id": "2.2", "title": "Explain wireless networking technologies.", "lessonIds": [] },
+        { "id": "2.3", "title": "Summarize services provided by networked hosts.", "lessonIds": [] },
+        { "id": "2.4", "title": "Explain common network configuration concepts.", "lessonIds": [] },
+        { "id": "2.5", "title": "Compare and contrast common networking hardware devices.", "lessonIds": [] },
+        { "id": "2.6", "title": "Given a scenario, configure basic wired/wireless small office/home office (SOHO) networks.", "lessonIds": [] },
+        { "id": "2.7", "title": "Compare and contrast internet connection types, network types, and their characteristics.", "lessonIds": [] },
+        { "id": "2.8", "title": "Explain networking tools and their purposes.", "lessonIds": [] }
+      ]
+    },
+    {
+      "number": "3",
+      "title": "Hardware",
+      "weightPercent": 25,
+      "studyItemAllocation": 15,
+      "objectives": [
+        { "id": "3.1", "title": "Compare and contrast display components and attributes.", "lessonIds": [] },
+        { "id": "3.2", "title": "Summarize basic cable types and their connectors, features, and purposes.", "lessonIds": [] },
+        { "id": "3.3", "title": "Compare and contrast RAM characteristics.", "lessonIds": [] },
+        { "id": "3.4", "title": "Compare and contrast storage devices.", "lessonIds": [] },
+        { "id": "3.5", "title": "Given a scenario, install and configure motherboards, central processing units (CPUs), and add-on cards.", "lessonIds": [] },
+        { "id": "3.6", "title": "Given a scenario, install the appropriate power supply.", "lessonIds": [] },
+        { "id": "3.7", "title": "Given a scenario, deploy and configure multifunction devices/printers and settings.", "lessonIds": [] },
+        { "id": "3.8", "title": "Given a scenario, perform appropriate printer maintenance.", "lessonIds": [] }
+      ]
+    },
+    {
+      "number": "4",
+      "title": "Virtualization and Cloud Computing",
+      "weightPercent": 11,
+      "studyItemAllocation": 7,
+      "objectives": [
+        { "id": "4.1", "title": "Explain virtualization concepts.", "lessonIds": [] },
+        { "id": "4.2", "title": "Summarize cloud computing concepts.", "lessonIds": [] }
+      ]
+    },
+    {
+      "number": "5",
+      "title": "Hardware and Network Troubleshooting",
+      "weightPercent": 28,
+      "studyItemAllocation": 16,
+      "objectives": [
+        { "id": "5.1", "title": "Given a scenario, troubleshoot motherboards, RAM, CPUs, and power.", "lessonIds": [] },
+        { "id": "5.2", "title": "Given a scenario, troubleshoot drive and RAID issues.", "lessonIds": [] },
+        { "id": "5.3", "title": "Given a scenario, troubleshoot video, projector, and display issues.", "lessonIds": [] },
+        { "id": "5.4", "title": "Given a scenario, troubleshoot common mobile device issues.", "lessonIds": [] },
+        { "id": "5.5", "title": "Given a scenario, troubleshoot network issues.", "lessonIds": [] },
+        { "id": "5.6", "title": "Given a scenario, troubleshoot printer issues.", "lessonIds": [] }
+      ]
+    }
+  ],
+  "questionPolicy": { "authorship": "original", "review": "human-required" },
+  "gaps": []
+}

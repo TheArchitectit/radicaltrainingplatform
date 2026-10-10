@@ -111,7 +111,12 @@ public class ManifestCatalogTests : IDisposable
         WriteFile("content/exams/TEST-EX/exam.json", "{ not json ");
         var loader = new ManifestLoader(MakeRepo(), new DefaultFileProvider());
 
-        loader.LoadExamManifests().Count.ShouldBe(0);
+        // The real repo content/ tree is visible to the loader (priority search
+        // paths); scope the assertion to the temp root — the malformed fixture
+        // must contribute zero manifests, not the whole world be empty.
+        loader.LoadExamManifests().Values
+            .Count(m => m.ManifestPath.StartsWith(_root))
+            .ShouldBe(0);
     }
 
     // ─── Catalog (TM-12) ─────────────────────────────────────────────
