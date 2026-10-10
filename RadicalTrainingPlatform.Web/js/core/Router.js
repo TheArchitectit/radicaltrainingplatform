@@ -96,7 +96,10 @@ class Router {
         if (this.#viewContainer) {
             this.#viewContainer.innerHTML = '';
             const el = await view.render(params);
-            if (el) this.#viewContainer.appendChild(el);
+            if (el) {
+                this.#viewContainer.appendChild(el);
+                view.root = el;
+            }
             if (view.afterRender) view.afterRender(params);
         }
 
