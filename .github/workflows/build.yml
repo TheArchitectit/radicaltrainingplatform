@@ -21,6 +21,14 @@ jobs:
       - name: Lint exam content
         run: python3 scripts/lint-content.py
 
+      # R-01/CI-03 companion gate: every relative import in the PWA must
+      # resolve case-sensitively (deploy-host semantics). Fixture pair:
+      # tests/gates/run_import_check_fixtures.sh
+      - name: Check PWA import graph
+        run: |
+          python3 scripts/check-imports.py
+          bash tests/gates/run_import_check_fixtures.sh
+
       # No setup-dotnet here: the runner image (localhost/devgate-runner-rtp,
       # infra Containerfile convention) bakes the .NET 10 SDK — setup-dotnet
       # cannot write /usr/share/dotnet inside a rootless runner container.

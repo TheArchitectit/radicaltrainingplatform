@@ -28,6 +28,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      # CI-03 predeploy smoke: case-sensitive import resolution on the exact
+      # artifact about to ship (this is how R-01 shipped and stayed broken
+      # since June). Full browser smoke lands with T-22 (Sprint 47).
+      - name: Check import graph (predeploy)
+        run: python3 scripts/check-imports.py --root RadicalTrainingPlatform.Web/js
+
       # 2. Upload the static PWA files as a Pages artifact
       - name: Upload PWA artifact
         uses: actions/upload-pages-artifact@v5

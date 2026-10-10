@@ -79,7 +79,7 @@ class App {
         bridge.post('ready');
 
         // Listen for route changes to update nav highlights
-        bus.on('route:changed', ({ path }) => this.#onRouteChanged(path));
+        bus.on('route:changed', (payload) => this.#onRouteChanged(payload));
     }
 
     #registerRoutes() {

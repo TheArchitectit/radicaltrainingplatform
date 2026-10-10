@@ -4,7 +4,7 @@ import { bus } from '../core/EventBus.js';
 import { EntityTable } from '../components/EntityTable.js';
 import { toast } from '../components/Toast.js';
 import { Wizard } from '../components/Wizard.js';
-import { confirm } from '../components/ConfirmDialog.js';
+import { confirm } from '../components/Confirm.js';
 
 export class PeReportsView extends BaseView {
     #libraryTable = null;
