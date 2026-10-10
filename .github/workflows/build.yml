@@ -55,7 +55,10 @@ jobs:
           ./RadicalTrainingPlatform.Desktop.Tests/bin/Release/net10.0/RadicalTrainingPlatform.Desktop.Tests
 
       - name: Check for vulnerable packages (blocking)
-        run: python3 .github/scripts/vuln_gate.py RadicalTrainingPlatform.Core/RadicalTrainingPlatform.Core.csproj RadicalTrainingPlatform.Core.Tests/RadicalTrainingPlatform.Core.Tests.csproj RadicalTrainingPlatform.Desktop/RadicalTrainingPlatform.Desktop.csproj
+        run: |
+          python3 .github/scripts/vuln_gate.py RadicalTrainingPlatform.Core/RadicalTrainingPlatform.Core.csproj RadicalTrainingPlatform.Core.Tests/RadicalTrainingPlatform.Core.Tests.csproj RadicalTrainingPlatform.Desktop/RadicalTrainingPlatform.Desktop.csproj
+          # CI-01/TM-71: the gate itself must be able to fail — run its fixture suite
+          python3 tests/gates/run_vuln_gate_fixtures.py
 
       - name: Verify no Windows.Forms in Core
         run: |

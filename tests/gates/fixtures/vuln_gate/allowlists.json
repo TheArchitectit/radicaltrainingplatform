@@ -1,0 +1,8 @@
+{
+  "empty": "package,resolved_version,expires,justification,approver\n",
+  "matching-unexpired": "package,resolved_version,expires,justification,approver\nNewtonsoft.Json,12.0.1,2099-01-01,fixture exception,fixture-approver\n",
+  "wrong-version-exception": "package,resolved_version,expires,justification,approver\nNewtonsoft.Json,13.0.0,2099-01-01,fixture exception,fixture-approver\n",
+  "expired-exception": "package,resolved_version,expires,justification,approver\nNewtonsoft.Json,12.0.1,2001-01-01,fixture exception,fixture-approver\n",
+  "wildcard-unexpired": "package,resolved_version,expires,justification,approver\nNewtonsoft.Json,*,2099-01-01,fixture exception,fixture-approver\n",
+  "malformed-entry": "package,resolved_version,expires,justification,approver\nNewtonsoft.Json,12.0.1,not-a-date,fixture exception,fixture-approver\n"
+}

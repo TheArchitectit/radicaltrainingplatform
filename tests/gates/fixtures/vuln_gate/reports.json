@@ -1,0 +1,171 @@
+{
+  "clean-real-shape": {
+    "version": 1,
+    "parameters": "--vulnerable --include-transitive",
+    "sources": ["https://api.nuget.org/v3/index.json"],
+    "projects": [
+      {
+        "path": "/fixtures/clean.csproj",
+        "frameworks": [
+          {
+            "framework": "net10.0",
+            "topLevelPackages": [],
+            "transitivePackages": []
+          }
+        ]
+      }
+    ]
+  },
+  "top-level-vulnerable": {
+    "version": 1,
+    "parameters": "--vulnerable --include-transitive",
+    "sources": ["https://api.nuget.org/v3/index.json"],
+    "projects": [
+      {
+        "path": "/fixtures/high.csproj",
+        "frameworks": [
+          {
+            "framework": "net10.0",
+            "topLevelPackages": [
+              {
+                "id": "Newtonsoft.Json",
+                "requestedVersion": "12.0.1",
+                "resolvedVersion": "12.0.1",
+                "vulnerabilities": [
+                  {
+                    "severity": "High",
+                    "advisoryurl": "https://github.com/advisories/GHSA-5crp-9r3c-p9vr"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "transitive-vulnerable": {
+    "version": 1,
+    "parameters": "--vulnerable --include-transitive",
+    "sources": ["https://api.nuget.org/v3/index.json"],
+    "projects": [
+      {
+        "path": "/fixtures/transitive.csproj",
+        "frameworks": [
+          {
+            "framework": "net10.0",
+            "topLevelPackages": [
+              {
+                "id": "Safe.Lib",
+                "requestedVersion": "1.0.0",
+                "resolvedVersion": "1.0.0",
+                "vulnerabilities": []
+              }
+            ],
+            "transitivePackages": [
+              {
+                "id": "Newtonsoft.Json",
+                "requestedVersion": "13.0.0",
+                "resolvedVersion": "13.0.0",
+                "vulnerabilities": [
+                  {
+                    "severity": "High",
+                    "advisoryurl": "https://github.com/advisories/GHSA-5crp-9r3c-p9vr"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "multi-project-multi-framework": {
+    "version": 1,
+    "parameters": "--vulnerable --include-transitive",
+    "sources": ["https://api.nuget.org/v3/index.json"],
+    "projects": [
+      {
+        "path": "/fixtures/a.csproj",
+        "frameworks": [
+          {
+            "framework": "net10.0",
+            "topLevelPackages": [
+              {
+                "id": "Newtonsoft.Json",
+                "requestedVersion": "12.0.1",
+                "resolvedVersion": "12.0.1",
+                "vulnerabilities": [
+                  {"severity": "High", "advisoryurl": "https://github.com/advisories/GHSA-5crp-9r3c-p9vr"}
+                ]
+              }
+            ]
+          },
+          {
+            "framework": "net8.0",
+            "topLevelPackages": []
+          }
+        ]
+      },
+      {
+        "path": "/fixtures/b.csproj",
+        "frameworks": [
+          {
+            "framework": "net10.0",
+            "transitivePackages": [
+              {
+                "id": "Newtonsoft.Json",
+                "requestedVersion": "12.0.1",
+                "resolvedVersion": "12.0.1",
+                "vulnerabilities": [
+                  {"severity": "High", "advisoryurl": "https://github.com/advisories/GHSA-5crp-9r3c-p9vr"}
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "wrong-case-id": {
+    "version": 1,
+    "parameters": "--vulnerable --include-transitive",
+    "sources": ["https://api.nuget.org/v3/index.json"],
+    "projects": [
+      {
+        "path": "/fixtures/case.csproj",
+        "frameworks": [
+          {
+            "framework": "net10.0",
+            "topLevelPackages": [
+              {
+                "id": "newtonsoft.json",
+                "requestedVersion": "12.0.1",
+                "resolvedVersion": "12.0.1",
+                "vulnerabilities": [
+                  {"severity": "High", "advisoryurl": "https://github.com/advisories/GHSA-5crp-9r3c-p9vr"}
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "empty-valid-project": {
+    "version": 1,
+    "parameters": "--vulnerable --include-transitive",
+    "sources": ["https://api.nuget.org/v3/index.json"],
+    "projects": []
+  },
+  "malformed-json": "NOT JSON AT ALL {",
+  "unknown-root-version": {
+    "version": 99,
+    "parameters": "--vulnerable --include-transitive",
+    "projects": []
+  },
+  "missing-root-projects": {
+    "version": 1,
+    "parameters": "--vulnerable --include-transitive"
+  }
+}
