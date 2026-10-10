@@ -1,6 +1,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using RadicalTrainingPlatform.Core;
 using RadicalTrainingPlatform.Core.Abstractions;
+using RadicalTrainingPlatform.Core.Services;
 using Shouldly;
 using Xunit;
 
@@ -24,7 +25,11 @@ public class CompositionRootTests
         provider.GetRequiredService<IFileProvider>().ShouldBeAssignableTo<DefaultFileProvider>();
         provider.GetRequiredService<IExamRepository>().ShouldBeAssignableTo<MarkdownExamRepository>();
         provider.GetRequiredService<IQuestionParser>().ShouldBeAssignableTo<QuestionParser>();
-        provider.GetRequiredService<IBlueprintService>().ShouldBeAssignableTo<HardcodedBlueprintService>();
+        provider.GetRequiredService<IManifestLoader>().ShouldBeAssignableTo<ManifestLoader>();
+        // REQ-MAN-04: the IBlueprintService surface is the manifest-first service;
+        // the hardcoded service remains resolvable as the legacy fallback.
+        provider.GetRequiredService<IBlueprintService>().ShouldBeAssignableTo<ManifestBlueprintService>();
+        provider.GetRequiredService<HardcodedBlueprintService>().ShouldBeAssignableTo<HardcodedBlueprintService>();
         provider.GetRequiredService<IReferenceService>().ShouldBeAssignableTo<HardcodedReferenceService>();
         provider.GetRequiredService<ISessionStore>().ShouldBeAssignableTo<JsonSessionStore>();
         provider.GetRequiredService<IErrataProvider>().ShouldBeAssignableTo<JsonErrataStore>();

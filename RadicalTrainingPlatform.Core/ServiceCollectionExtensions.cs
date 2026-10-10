@@ -1,5 +1,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using RadicalTrainingPlatform.Core.Abstractions;
+using RadicalTrainingPlatform.Core.Services;
 
 namespace RadicalTrainingPlatform.Core;
 
@@ -18,7 +19,14 @@ public static class ServiceCollectionExtensions
         // DI selects the greediest ctor, so the registered IErrataProvider above
         // is injected into QuestionParser (errata corrections get applied).
         services.AddSingleton<IQuestionParser, QuestionParser>();
-        services.AddSingleton<IBlueprintService, HardcodedBlueprintService>();
+        services.AddSingleton<IManifestLoader, ManifestLoader>();
+        // REQ-MAN-04: manifest blueprints take precedence; the hardcoded service
+        // is kept as the fallback for legacy exams without manifests.
+        services.AddSingleton<HardcodedBlueprintService>();
+        services.AddSingleton<IBlueprintService>(sp =>
+            new ManifestBlueprintService(
+                sp.GetRequiredService<IManifestLoader>(),
+                sp.GetRequiredService<HardcodedBlueprintService>()));
         services.AddSingleton<IReferenceService, HardcodedReferenceService>();
         services.AddSingleton<ISessionStore, JsonSessionStore>();
         return services;

@@ -367,13 +367,13 @@ public partial class QuestionParser : IQuestionParser
         ["N"]   = "CompTIA",
     };
 
-    private static string DeriveVendor(string code)
+    internal static string DeriveVendor(string code)
     {
         var prefix = code.Split('-', '_')[0].ToUpperInvariant();
         return VendorMap.GetValueOrDefault(prefix) ?? "Independent";
     }
 
-    private static string DeriveLevel(string code) => code switch
+    internal static string DeriveLevel(string code) => code switch
     {
         var c when c.StartsWith("NCA", StringComparison.OrdinalIgnoreCase) => "Associate",
         var c when c.StartsWith("NCM", StringComparison.OrdinalIgnoreCase) => "Expert",
@@ -390,7 +390,7 @@ public partial class QuestionParser : IQuestionParser
         _ => "Professional"
     };
 
-    private static string DeriveDisplayName(string code)
+    internal static string DeriveDisplayName(string code)
     {
         // Known exam codes get full names; unknown ones get a formatted version of the code
         return code.ToUpperInvariant() switch

@@ -74,4 +74,39 @@ public class DeriveExamCodeTests
     {
         QuestionParser.DeriveExamCode("GCP-PCA-Part1.md").ShouldBe("GCP-PCA");
     }
+
+    // ─── REQ-MAN-03: truncation-documentation cases ─────────────────
+    // These pin the exact failure that makes filename-derived identity
+    // unusable for new CompTIA packs: the derivation keeps only the first
+    // two segments, so COMPTIA-A-1201 silently becomes COMPTIA-A. New packs
+    // therefore resolve identity from exam.json (REQ-MAN-02/D1) — these
+    // cases exist to prove WHY, and to fail loudly if the legacy behavior
+    // ever changes shape.
+
+    [Fact]
+    public void DeriveExamCode_ComptiaA1201_TruncatesToComptiaA()
+    {
+        QuestionParser.DeriveExamCode("COMPTIA-A-1201-Part1.md").ShouldBe("COMPTIA-A");
+    }
+
+    [Fact]
+    public void DeriveExamCode_ComptiaA1202_TruncatesToComptiaA()
+    {
+        QuestionParser.DeriveExamCode("COMPTIA-A-1202-Part1.md").ShouldBe("COMPTIA-A");
+    }
+
+    [Fact]
+    public void DeriveExamCode_ComptiaNet009_TruncatesToComptiaNet()
+    {
+        QuestionParser.DeriveExamCode("COMPTIA-NET-009-Part1.md").ShouldBe("COMPTIA-NET");
+    }
+
+    [Fact]
+    public void DeriveExamCode_TruncationCollides_TwoCompTiaExamsDeriveIdentically()
+    {
+        // The reason manifests are mandatory: both Cores derive to the SAME
+        // code, so filename identity cannot distinguish them.
+        QuestionParser.DeriveExamCode("COMPTIA-A-1201-Part1.md")
+            .ShouldBe(QuestionParser.DeriveExamCode("COMPTIA-A-1202-Part1.md"));
+    }
 }

@@ -26,6 +26,13 @@ jobs:
           # lines the parser then dropped) and pass on a canonical file.
           python3 scripts/lint-content.py --self-test
 
+      # REQ-MAN-01/05/06: manifest shape, ID collisions, source freshness.
+      # Fixture pair: failing/passing trees asserted by --self-test.
+      - name: Validate content manifests
+        run: |
+          python3 scripts/validate-manifests.py
+          python3 scripts/validate-manifests.py --self-test
+
       # R-01/CI-03 companion gate: every relative import in the PWA must
       # resolve case-sensitively (deploy-host semantics). Fixture pair:
       # tests/gates/run_import_check_fixtures.sh
