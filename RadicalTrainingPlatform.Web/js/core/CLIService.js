@@ -6,7 +6,7 @@ import { state } from '../core/StateEngine.js';
  * zeus_config_printer, manage_ovs, ovs-vsctl, ovs-ofctl, allssh, curl
  */
 export class CLIService {
-    execute(input) {
+    async execute(input) {
         const trimmed = input.trim();
         if (!trimmed) return '';
 
@@ -47,7 +47,7 @@ export class CLIService {
 
         const handler = handlers[cmd];
         if (!handler) return `bash: ${cmd}: command not found\nType 'help' for available commands.`;
-        return handler();
+        return await handler();
     }
 
     #tokenize(input) {

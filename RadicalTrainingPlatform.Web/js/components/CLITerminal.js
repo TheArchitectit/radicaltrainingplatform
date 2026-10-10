@@ -94,12 +94,8 @@ export class CLITerminal {
                 this.#history.unshift(cmd);
                 this.#historyIndex = -1;
 
-                const result = this.#cli.execute(cmd);
-                if (result === '__CLEAR__') {
-                    this.#output.innerHTML = '';
-                } else if (result) {
-                    this.#appendOutput(result);
-                }
+                this.#runCommand(cmd);
+                return;
             }
 
             this.#appendOutput('');
@@ -122,6 +118,20 @@ export class CLITerminal {
         } else if (e.key === 'Tab') {
             e.preventDefault();
             this.#autocomplete();
+        }
+    }
+
+    async #runCommand(cmd) {
+        try {
+            const result = await this.#cli.execute(cmd);
+            if (result === '__CLEAR__') {
+                this.#output.innerHTML = '';
+            } else if (result) {
+                this.#appendOutput(result);
+            }
+        } finally {
+            this.#appendOutput('');
+            this.#scrollToBottom();
         }
     }
 
