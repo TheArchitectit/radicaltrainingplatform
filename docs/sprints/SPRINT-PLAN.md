@@ -48,6 +48,7 @@ All stories must satisfy the following before being marked complete:
 | **Phase 2: Growth** | S7-S14 | Weeks 13-28 | Complete UI, add persistence, release v0.5 | All views wired, SQLite persistence, timed exams, cross-platform release |
 | **Phase 3: Scale** | S15-S26 | Weeks 29-52 | Multi-question types, adaptive learning, mobile | 3+ question types, SM-2 scheduler, mobile PWA, analytics |
 | **Phase 4: Enterprise** | S27-S44 | Weeks 53-88 | Multi-vendor, cloud, social, enterprise readiness | 3+ vendors, OAuth2 backend, WCAG AA, SOC2 groundwork |
+| **Phase 5: Product-Track Enablement** | S45-S48 | Oct 10-22 + post-EPIC window 2026 | Three beginner tracks (A+, Network+, NCA 7.5), demo mode, gate truth | Demo-ready Oct 23; California-ready Oct 25-28; OpenSpec package `rtp-beginner-tracks-2026-10` fully covered |
 
 ---
 
@@ -111,6 +112,23 @@ S15-S26 (Phase 3) <-- S14 (needs stable v0.5 base)
   |
   v
 S27-S44 (Phase 4) <-- S15-S26 (needs content foundation, auth)
+```
+
+Phase 5 is calendar-driven and runs independently of the S1-S44 chain (the
+October 23 / Oct 25-28 deadlines do not wait for Phase 1-4 completion):
+
+```
+S45 (contracts & blocking repairs) <-- OpenSpec package @ main 904106a
+  |
+  v
+S46 (learning loop) <-- S45 (manifests, repaired scoring, RedEye lane)
+  |
+  v
+S47 (demo packs, freeze & rehearsal) <-- S46 (loop + validator sweep)
+  |                                        [Oct 23 demo]
+  v
+S48 (NCA current blueprint) <-- S45-T09 remap start; S47 freeze discipline
+                                   [Oct 25-28 California]
 ```
 
 ### Critical Path
@@ -199,6 +217,42 @@ S1 (CI green) -> S2 (tests) -> S3 (DI) -> S6 (v0.1) -> S7 (MVVM) -> S9 (persiste
 | Sprint 41-42 | Security & Compliance | Weeks 81-84 | [SPRINT-41-42.md](./SPRINT-41-42.md) |
 | Sprint 43-44 | Psychometric Analysis | Weeks 85-88 | [SPRINT-43-44.md](./SPRINT-43-44.md) |
 
+### Phase 5: Product-Track Enablement (Sprints 45-48)
+
+Sprints 45-48 implement the October 10 OpenSpec change package
+[`rtp-beginner-tracks-2026-10`](../drive-ingest-2026-10-10/RTP-Beginner-Tracks-Openspec-Change-Package-A-Network-NCA75-v2.md)
+(SPEC-11 task sets A/B/C+D/E, T-01..T-46), pinned to main at `904106a`. Dates are
+calendar-driven by two real deadlines: the October 23 student demonstration (A+ /
+Network+) and the October 25-28 Nutanix HQ trip (NCA 7.5). Slippage degrades by
+cutting released scope visibly — never by shipping unreviewed content.
+
+| Sprint | OpenSpec Sprint | Window | Focus | Points | Link |
+|---|---|---|---|---|---|
+| Sprint 45 | Sprint A | Oct 10-12 | Blocking repairs (boot, vuln gate, answer grammar, ordering/retry), manifest system, RedEye lane, first content fixtures | ~27 | [SPRINT-45.md](./SPRINT-45.md) |
+| Sprint 46 | Sprint B | Oct 13-16 | One learning loop end to end: study views, ProgressStore, ticket renderer, scenario validator sweep, CI gates | ~30 | [SPRINT-46.md](./SPRINT-46.md) |
+| Sprint 47 | Sprints C+D | Oct 17-22 | Demo packs complete, packaging truth, tutor slice or fallback, freeze + rehearsal for Oct 23 | ~26 | [SPRINT-47.md](./SPRINT-47.md) |
+| Sprint 48 | Sprint E | Post-EPIC, pre-travel | NCA 7.5 current-blueprint remap: 140 rows, 14 lessons, 40-item pilot, 4 scenarios, travel freeze | ~12 | [SPRINT-48.md](./SPRINT-48.md) |
+
+### OpenSpec Alignment with Existing Sprints (1-44)
+
+The October 10 package is largely complementary to the June plan, but overlaps
+must be reconciled during execution to avoid duplicate work:
+
+| OpenSpec concern | Nearest existing sprint | Reconciliation rule |
+|---|---|---|
+| Vulnerability gate repair (CI-01, S45-02) | Sprint 5 (DevOps & Security) | One repaired implementation satisfies both; mark S5 vuln-scan row done when S45-02 lands |
+| NCA content expansion | Sprint 24 | Sprint 48 supersedes only the beta-blueprint portions; bank expansion stays S24 scope |
+| Lab simulator integration | Sprint 22 | Sprint 46 scenario validator repair is a prerequisite; S22 builds on the repaired validator field |
+| Wire dead views / study UI | Sprint 8 | Compare S8 view work against S46-01 views; one learning surface, not two |
+| Persistence layer | Sprint 9 | OpenSpec ProgressStore (S46-02) targets the PWA; keep SQLite desktop work in S9, share concepts not code |
+| Multi-question types (ordering) | Sprints 15-16 | S45-04 lands the minimum ordered-response support needed by the demo cut; S15/S16 remain the full model/UI work |
+| Packaging & release automation | Sprint 13 | S47-07 (PKG-01..04) repairs existing script defects; S13 remains the full automation build-out |
+| Multi-vendor plugin architecture | Sprints 27-28 | The manifest system (S45-06) is a concrete first slice of vendor extension; S27-28 generalize it later |
+
+Per SPEC-11 11.10, each Phase 5 sprint closes with a mini-retrospective and the
+gate pass count at its head SHA; the full gate chain order is defined in
+SPEC-10 10.8 of the package.
+
 ---
 
 ## 7. References
@@ -206,3 +260,6 @@ S1 (CI green) -> S2 (tests) -> S3 (DI) -> S6 (v0.1) -> S7 (MVVM) -> S9 (persiste
 - [Design Matrix & Roadmap](../DESIGN-MATRIX-AND-ROADMAP.md)
 - [Engineering Design Plan](../DESIGN-PLAN.md)
 - [Project Guidelines (CLAUDE.md)](../../CLAUDE.md)
+- [OpenSpec Change Package rtp-beginner-tracks-2026-10 (Oct 10, 2026)](../drive-ingest-2026-10-10/RTP-Beginner-Tracks-Openspec-Change-Package-A-Network-NCA75-v2.md)
+- [Full Audit 2026-10-10](../drive-ingest-2026-10-10/RTP-Full-Audit-2026-10-10.md)
+- [Gap Analysis — Beginner Tracks](../drive-ingest-2026-10-10/Gap-Analysis-Comptia-A-Network-NCA-75-Beginner-Tracks.md)

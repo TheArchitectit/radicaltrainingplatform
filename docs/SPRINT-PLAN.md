@@ -1,8 +1,13 @@
 # 🏃 RadicalTrainingPlatform — Sprint Plan
 
-> **Last Updated:** 2026-06-11  
-> **Current Sprint:** Sprint 1 — Rename Cleanup + Fix Broken Bits  
+> **Last Updated:** 2026-10-10  
+> **Current Sprint:** Sprint 45 — OpenSpec Sprint A (contracts, blocking repairs, first content)  
 > **Guardrails:** agent-guardrails-template v2.8.0 (TheArchitectit)
+
+> **Note:** This file is the legacy working sprint list. The authoritative
+> phase-structured master plan — including Phase 5 (Sprints 45-48, the October 10
+> OpenSpec beginner-tracks package) and the OpenSpec alignment matrix — lives at
+> [`docs/sprints/SPRINT-PLAN.md`](./sprints/SPRINT-PLAN.md).
 
 ## Sprint Cadence
 
