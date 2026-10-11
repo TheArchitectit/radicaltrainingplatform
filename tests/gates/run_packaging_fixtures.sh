@@ -176,7 +176,7 @@ python3 - "$WS/repo/packaging/linux/app.radicaltrainingplatform.RadicalTrainingP
 import pathlib, sys
 p = pathlib.Path(sys.argv[1])
 p.write_text(p.read_text(encoding="utf-8").replace(
-    "commit: 59529bb13a87b909d5d21ac784a29ffb1bb57da0", "commit: 72d5ec8"),
+    "commit: f3d1d5d955d27ee912db45f48e914ec95c951e43", "commit: 72d5ec8"),
     encoding="utf-8")
 PY
 expect_fail "a short Flatpak commit pin (PKG-04)" \

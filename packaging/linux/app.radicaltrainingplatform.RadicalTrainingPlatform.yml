@@ -95,9 +95,17 @@ modules:
         url: https://github.com/TheArchitectit/radicaltrainingplatform.git
         # Full commit SHA, not the short one the previous manifest pinned: a
         # short SHA is ambiguous and flatpak-builder refuses to fetch it.
+        #
+        # This points at the commit that introduced the packaging files the
+        # build commands below need. It cannot point at the commit that contains
+        # this line — a commit cannot name itself — so it is bumped in the
+        # commit after the one it names, and the file is consistent in the sense
+        # that matters: flatpak-builder fetches a tree that has every script the
+        # commands invoke.
+        #
         # Move this to the release commit when a release is cut; there are no
         # tags in this repository yet.
-        commit: 59529bb13a87b909d5d21ac784a29ffb1bb57da0
+        commit: f3d1d5d955d27ee912db45f48e914ec95c951e43
 
       # ---------------------------------------------------------------------
       # OFFLINE DEPENDENCY SOURCES — NOT YET DECLARED (PKG-04)

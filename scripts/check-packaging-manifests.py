@@ -268,7 +268,7 @@ MUTATIONS = [
     (DMG, '"notarized": ${NOTARIZED},', '"notarized": true,',
      "the notarization result is asserted rather than recorded"),
     (DMG, "create-dmg not found", "create-dmg absent", "a missing create-dmg is unreported"),
-    (FLATPAK, "commit: 59529bb13a87b909d5d21ac784a29ffb1bb57da0", "commit: 72d5ec8",
+    (FLATPAK, "commit: f3d1d5d955d27ee912db45f48e914ec95c951e43", "commit: 72d5ec8",
      "a short SHA pin"),
     (FLATPAK, "        commit: ", "        # no commit pinned\n        url2: ",
      "no commit pinned at all"),
