@@ -19,7 +19,7 @@
 | S46-04 (T-14) | Scenario validator sweep repairs (all 44; us-bucket-01) | R-02, REQ-DEMO-06 | 3 | ✅ |
 | S46-05 (T-15) | Bridge handlers: real effects or removal; desktop SessionStore consumption | R-05, R-06 | 2 | ✅ |
 | S46-06 (T-16) | Catalog tests, multi-select scoring tests, save/reload/error tests | REQ-MAN-05, L-06 | 2 | ✅ |
-| S46-07 (T-17) | Lint extension + manifest validator in CI | SPEC-10 10.6 | 2 | ⚪ |
+| S46-07 (T-17) | Lint extension + manifest validator in CI | SPEC-10 10.6 | 2 | ✅ |
 | S46-08 (T-18) | Coverage threshold enforcement | CI-02 | 2 | ⚪ |
 | S46-09 (T-37) | Semantic item identity for legacy banks + collision detector; retry outcome-set policy | R-13, R-14 | 2 | ⚪ |
 | S46-10 (T-38) | Study-continuation restore; streak/Skip repairs | R-15, R-17 | 2 | ⚪ |
@@ -152,11 +152,18 @@
 **As a** release manager, **I want** the new content tree linted, **so that** nothing ships unlinted.
 
 **Acceptance Criteria:**
-- [ ] `lint-content.py` covers `content/exams/**/*.md` with manifest-aware rules (canonical answer separators, required front matter, provenance presence per C-02)
-- [ ] Skip logic moves from name substrings to manifest declarations
-- [ ] `validate-manifests.py` runs in the Linux leg
+- [x] `lint-content.py` covers `content/exams/**/*.md` with manifest-aware rules (canonical answer separators, required front matter, provenance presence per C-02)
+- [x] Skip logic moves from name substrings to manifest declarations
+- [x] `validate-manifests.py` runs in the Linux leg
 
 **Files:** `scripts/lint-content.py`, `.github/workflows/build.yml`
+
+**Notes (S46-07 close, 2026-10-10):**
+- **Manifest-aware lint (SPEC-10 10.6).** `content/exams/<examId>/questions/*.md` is now linted with three rule groups: (1) canonical answer separators + question/answer count parity (same R-07 rule as legacy); (2) required file structure — a `# title` and at least one `## DOMAIN N` header, which the parser needs to assign domains; (3) provenance presence per C-02 — every `### QN` must have `content/provenance/<examId>/QN.json` carrying the ten required C-02 keys, and the record's `objectiveId` must exist in that exam's `exam.json`.
+- **Skip logic is now structural inside the manifest tree.** Under `content/exams/`, role comes from the directory: `questions/` is scored bank content (linted even if the file is named `CHEATSHEET.md`), `lessons/` is prose (skipped). Name-substring skips (`CHEATSHEET`/`LAB`/`ROADMAP`/…) apply only to legacy root files, which have no manifest. Self-test pins both directions: a `lessons/CHEATSHEET.md` is not linted as a bank; a `questions/CHEATSHEET.md` with a non-canonical answer *does* fail.
+- **`validate-manifests.py` was already wired** into the Linux leg (Sprint 45, T-06); confirmed still green with its self-test. No workflow edit needed for this row.
+- **Self-test fixtures (SPEC-16: every gate ships failing+passing).** Eight pairs: legacy non-canonical (fail) / legacy canonical (pass); missing provenance (fail); incomplete C-02 fields (fail); orphan `objectiveId` (fail); missing domain header (fail); complete pack (pass); lesson-role skip (pass despite name); role-over-name bank (fail).
+- **Not verified:** provenance `reviewDate` is allowed empty for `status: "draft"` records (matches the existing draft inventory) — release-time field completeness is a RedEye lane concern (SPEC-08A), not this lint; no per-question YAML front matter is enforced (the current authoring format carries identity in the provenance record and the parser has no front-matter reader — adding YAML would be a parser change out of T-17 scope); objectiveId-orphan check only fires when `exam.json` parses and declares objectives.
 
 ### S46-08 (T-18): Coverage Threshold Enforcement
 **As a** release manager, **I want** coverage enforced, **so that** collection without enforcement stops.
