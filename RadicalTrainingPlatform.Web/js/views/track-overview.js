@@ -29,6 +29,17 @@ export class TrackOverviewView extends BaseView {
                      <span class="module-id">${m.lessonId}</span>
                      <span class="module-title">${m.title}</span>
                      <span class="module-tag planned-tag">planned</span></div>`).join('');
+            const worked = (exam.workedExamples || []).map(we => `
+                <article class="worked-example">
+                    <p class="worked-example-label">${we.label}</p>
+                    <h3 class="worked-example-title">${we.title}</h3>
+                    <p class="worked-example-gap">declared gap: ${we.gap}</p>
+                    <p class="worked-example-body">${we.body}</p>
+                </article>`).join('');
+            const gapList = (exam.gaps || []).length
+                ? `<div class="gap-list"><p class="study-sub">Declared gaps (labeled worked examples, not interactive labs):
+                    ${exam.gaps.map(g => `<span class="gap-tag">${g}</span>`).join('')}</p></div>`
+                : '';
             return `
                 <section class="exam-block">
                     <div class="exam-block-head">
@@ -36,13 +47,18 @@ export class TrackOverviewView extends BaseView {
                         <span class="coverage-text">coverage ${cov.covered}/${cov.total} objectives (${cov.percent}%)</span>
                     </div>
                     <div class="module-list">${moduleList}</div>
+                    ${gapList}
+                    ${worked}
                 </section>`;
         }).join('');
+        const coverageLabel = track.coverageLabel
+            ? ` · <span class="coverage-label">${track.coverageLabel}</span>`
+            : '';
         return this.html(`
             <div class="study-page">
                 <a class="study-back" href="#/tracks">‹ All tracks</a>
                 <h1 class="study-title">${track.title}</h1>
-                <p class="study-sub">${track.audience} · <span class="preview-label">${track.previewLabel}</span></p>
+                <p class="study-sub">${track.audience} · <span class="preview-label">${track.previewLabel}</span>${coverageLabel}</p>
                 ${examBlocks}
                 <p class="study-disclaimer">${DISCLAIMER}</p>
             </div>`);

@@ -87,19 +87,23 @@ export const TRACKS = {
     ],
     "audience": "beginners preparing for CompTIA Network+",
     "previewLabel": "beginner preview",
+    "coverageLabel": "exploratory coverage \u2014 not exam-weighted",
     "disclaimer": "This is independent study material. It is not official training and is not endorsed or approved by CompTIA, Nutanix, or any other certification body.",
     "order": 2,
     "coverage": {
       "total": 25,
-      "covered": 3,
-      "percent": 12,
+      "covered": 6,
+      "percent": 24,
       "coveredObjectiveIds": [],
       "examCoverage": {
         "COMPTIA-NET-009": {
           "total": 25,
-          "covered": 3,
-          "percent": 12,
+          "covered": 6,
+          "percent": 24,
           "coveredObjectiveIds": [
+            "1.1",
+            "1.4",
+            "1.7",
             "5.1",
             "5.4",
             "5.5"
@@ -579,7 +583,9 @@ export const EXAMS = {
           {
             "id": "1.1",
             "title": "Explain concepts related to the Open Systems Interconnection (OSI) reference model.",
-            "lessonIds": []
+            "lessonIds": [
+              "n1"
+            ]
           },
           {
             "id": "1.2",
@@ -589,32 +595,44 @@ export const EXAMS = {
           {
             "id": "1.3",
             "title": "Summarize cloud concepts and connectivity options.",
-            "lessonIds": []
+            "lessonIds": [
+              "n1"
+            ]
           },
           {
             "id": "1.4",
             "title": "Explain common networking ports, protocols, services, and traffic types.",
-            "lessonIds": []
+            "lessonIds": [
+              "n1"
+            ]
           },
           {
             "id": "1.5",
             "title": "Compare and contrast transmission media and transceivers.",
-            "lessonIds": []
+            "lessonIds": [
+              "n1"
+            ]
           },
           {
             "id": "1.6",
             "title": "Compare and contrast network topologies, architectures, and types.",
-            "lessonIds": []
+            "lessonIds": [
+              "n1"
+            ]
           },
           {
             "id": "1.7",
             "title": "Given a scenario, use appropriate IPv4 network addressing.",
-            "lessonIds": []
+            "lessonIds": [
+              "n1"
+            ]
           },
           {
             "id": "1.8",
             "title": "Summarize evolving use cases for modern network environments.",
-            "lessonIds": []
+            "lessonIds": [
+              "n1"
+            ]
           }
         ]
       },
@@ -627,22 +645,30 @@ export const EXAMS = {
           {
             "id": "2.1",
             "title": "Explain characteristics of routing technologies.",
-            "lessonIds": []
+            "lessonIds": [
+              "n2"
+            ]
           },
           {
             "id": "2.2",
             "title": "Given a scenario, configure switching technologies and features.",
-            "lessonIds": []
+            "lessonIds": [
+              "n2"
+            ]
           },
           {
             "id": "2.3",
             "title": "Given a scenario, select and configure wireless devices and technologies.",
-            "lessonIds": []
+            "lessonIds": [
+              "n2"
+            ]
           },
           {
             "id": "2.4",
             "title": "Explain important factors of physical installations.",
-            "lessonIds": []
+            "lessonIds": [
+              "n2"
+            ]
           }
         ]
       },
@@ -655,27 +681,37 @@ export const EXAMS = {
           {
             "id": "3.1",
             "title": "Explain the purpose of organizational processes and procedures.",
-            "lessonIds": []
+            "lessonIds": [
+              "n3"
+            ]
           },
           {
             "id": "3.2",
             "title": "Given a scenario, use network monitoring technologies.",
-            "lessonIds": []
+            "lessonIds": [
+              "n3"
+            ]
           },
           {
             "id": "3.3",
             "title": "Explain disaster recovery (DR) concepts.",
-            "lessonIds": []
+            "lessonIds": [
+              "n3"
+            ]
           },
           {
             "id": "3.4",
             "title": "Given a scenario, implement IPv4 and IPv6 network services.",
-            "lessonIds": []
+            "lessonIds": [
+              "n3"
+            ]
           },
           {
             "id": "3.5",
             "title": "Compare and contrast network access and management methods.",
-            "lessonIds": []
+            "lessonIds": [
+              "n3"
+            ]
           }
         ]
       },
@@ -688,17 +724,23 @@ export const EXAMS = {
           {
             "id": "4.1",
             "title": "Explain the importance of basic network security concepts.",
-            "lessonIds": []
+            "lessonIds": [
+              "n4"
+            ]
           },
           {
             "id": "4.2",
             "title": "Summarize various types of attacks and their impact to the network.",
-            "lessonIds": []
+            "lessonIds": [
+              "n4"
+            ]
           },
           {
             "id": "4.3",
             "title": "Given a scenario, apply network security features, defense techniques, and solutions.",
-            "lessonIds": []
+            "lessonIds": [
+              "n4"
+            ]
           }
         ]
       },
@@ -751,6 +793,36 @@ export const EXAMS = {
       "subnetting drills",
       "wireless design",
       "packet analysis"
+    ],
+    "workedExamples": [
+      {
+        "id": "we-subnetting-drills",
+        "gap": "subnetting drills",
+        "label": "worked example",
+        "title": "Worked example \u2014 subnetting drill (not a scored item)",
+        "body": "Host 192.168.10.42/26 needs to reach 192.168.10.100. A /26 mask is 255.255.255.192, so each subnet holds 64 addresses: .0\u2013.63, .64\u2013.127, .128\u2013.191, .192\u2013.255. The host's network is 192.168.10.0/26 (.0\u2013.63) and the destination .100 sits in 192.168.10.64/26. The two addresses are on different subnets, so the host sends the packet to its default gateway rather than ARPing for .100. If the mask had been /24, both addresses would share one subnet and the host would ARP directly. The drill is: write the block size, find each network, then apply the local-vs-remote rule from N1. Interactive subnetting exercises are a declared gap (REQ-NP-04) \u2014 this walkthrough is labeled, not scored, and not a fake interactive lab."
+      },
+      {
+        "id": "we-routing-protocols",
+        "gap": "routing protocols",
+        "label": "worked example",
+        "title": "Worked example \u2014 routing protocols at recognition level (not a scored item)",
+        "body": "A small office has one router and a default route to the ISP. Nothing fancy is required: a static default gateway is enough. When a second router and multiple paths appear, a routing protocol (for example OSPF inside an organization, or BGP between organizations) is how routers exchange what they know about reachable networks instead of a human typing every static route. Worked reading: a diagram shows Router A and Router B both advertising 10.20.0.0/16. If A's link fails and the protocol withdraws the route, traffic shifts to B. If the protocol does not converge, traffic black-holes. For the October 23 demo, know that routing protocols are how paths are learned and healed; detailed metric calculation and neighbor state machines are a declared gap filled by this labeled example (REQ-NP-04)."
+      },
+      {
+        "id": "we-wireless-design",
+        "gap": "wireless design",
+        "label": "worked example",
+        "title": "Worked example \u2014 wireless design walk-through (not a scored item)",
+        "body": "An office wants guest Wi-Fi and staff Wi-Fi on the same floor. Worked decisions, in order: (1) placement \u2014 APs spread for coverage with overlap, not stacked in a closet; (2) channels \u2014 non-overlapping channels on neighbors (2.4 GHz 1/6/11, or 5 GHz planning) so APs do not fight; (3) security \u2014 staff on WPA2/WPA3 Enterprise or a strong PSK, guests on an isolated VLAN with no route to internal servers; (4) power \u2014 just enough to cover the floor without spilling into the parking lot. The result is not \"more power and one SSID.\" Full site survey tooling and RF heat maps are a declared gap (REQ-NP-04); this walkthrough is labeled and not interactive."
+      },
+      {
+        "id": "we-packet-analysis",
+        "gap": "packet analysis",
+        "label": "worked example",
+        "title": "Worked example \u2014 packet analysis reading (not a scored item)",
+        "body": "A capture shows: TCP SYN from client 10.1.20.55:50000 to server 10.1.20.10:443, then no SYN-ACK, repeated SYNs, and the client eventually resets. Worked reading: the client is willing and the path at Layer 3 carried the SYN (we see it addressed), but the service on 443 did not answer \u2014 either the port is closed/filtered, the host is unreachable at Layer 4, or something in between is dropping the session. Compare with a capture of the same client to port 22 where SYN/SYN-ACK/ACK completes: the network path works, so the fault is specific to the HTTPS service. No packet-analysis homework ships in this preview; this labeled example stands in until a capture lab exists (REQ-NP-04)."
+      }
     ]
   },
   "NCA-75": {
@@ -977,9 +1049,17 @@ export const LESSONS = {
     "examId": "COMPTIA-NET-009",
     "title": "Networking concepts",
     "domainNumber": "1",
-    "status": "planned",
-    "markdown": "",
-    "objectiveIds": []
+    "status": "released",
+    "markdown": "# Networking Concepts (N1)\n\n*Module N1 \u2014 CompTIA Network+ study track. Independent study material \u2014 see the disclaimer at the end.*\n\nNetworks are conventions that many different devices agree to follow. This lesson is the vocabulary pass: how to think in layers, what ports and protocols actually are, why IPv4 addressing and subnetting exist, how DNS and DHCP work at Network+ depth, and where the physical media and cloud concepts fit. The A+ networking lesson (A2) already covered the four settings every host needs; here those same ideas are revisited as a *path* a packet takes, not just as fields on a configuration panel.\n\n## The layered model as a mailing analogy\n\nThe OSI model is seven layers tall, but a beginner only needs four ideas to read a diagram without getting lost:\n\n1. **Physical (Layer 1)** \u2014 the wire, the fiber, the radio wave. Envelope in the truck.\n2. **Data link (Layer 2)** \u2014 frames on one local link, addressed by MAC, moved by switches. The local mail carrier walking a street.\n3. **Network (Layer 3)** \u2014 packets between different subnets, addressed by IP, moved by routers. The address that decides which town the letter goes to.\n4. **Transport (Layer 4)** \u2014 TCP and UDP segments, ports, delivery guarantees (or the lack of them). Whether the letter is registered mail or a postcard.\n\nHigher layers (session, presentation, application) matter for application design; for network troubleshooting, most symptoms live in layers 1\u20134. When a user says \"the website is down,\" your job is to decide *which layer* is actually lying \u2014 cable, local frame, routed path, or service port.\n\nThe TCP/IP model collapses this into four (link, internet, transport, application). Same physics, different names. Learn one well and the other is a translation.\n\n## Protocols and ports as agreed conventions\n\nAn IP address gets a packet to the right *machine*. A **port** gets it to the right *service* on that machine. There is no cleverness here \u2014 clients and servers simply agree in advance that web traffic is 80/443, DNS is 53, SSH is 22, DHCP is 67/68, and so on. If one side changes the convention without the other, the packets arrive and nobody answers.\n\nUseful habit: when a symptom is \"the host pings but the application fails,\" you are almost certainly above Layer 3 and looking at a port, a service, or a TLS/name problem \u2014 not at cabling.\n\n## IPv4 addressing and why subnetting exists\n\nAn IPv4 address is a 32-bit number written in four octets. The **subnet mask** (often written `/24` instead of `255.255.255.0`) cuts that number into a network part and a host part. The cut is what lets a host decide:\n\n- destination is **on my street** (same network) \u2192 deliver directly on the local link;\n- destination is **in another town** (different network) \u2192 hand the packet to the default gateway.\n\nThat single decision is why a wrong mask and a wrong gateway produce such different (and such recognizable) symptoms.\n\n**Subnetting** is the deliberate use of that cut to break one large block into smaller blocks. The reason is mostly *broadcast and operational*: one flat subnet with hundreds of hosts means every ARP and broadcast hits every interface. Smaller subnets limit who hears what, make access control easier, and give you room to grow without a flag day. You do not need to do binary by hand in this beginner pack \u2014 you do need to know *why* the boundary exists.\n\n## DNS and DHCP at Network+ depth\n\nA+ teaches what these services hand out. Network+ asks you to follow the path.\n\n### DHCP lease lifecycle\n\nA DHCP lease is not \"an IP appears.\" It is a timed agreement, classically described as **DORA**:\n\n1. **Discover** \u2014 the client broadcasts, looking for a server.\n2. **Offer** \u2014 a server proposes an address and options (mask, gateway, DNS, lease time).\n3. **Request** \u2014 the client asks for that proposal (important when several servers answered).\n4. **Acknowledge** \u2014 the server confirms; the lease timer starts.\n\nLater, the client **renews** at T1 (half the lease, usually unicast to the original server) and **rebinds** at T2 (broadcast, any server) before the lease actually expires. A brief periodic dropout is often a renewal-path failure: renew fails, rebind fails, the address is released, and a fresh DORA has to run. That symptom is different from \"never got a lease at all\" (APIPA on many hosts) and different from \"got a lease but the gateway is wrong.\"\n\n### DNS resolution path\n\nWhen a client needs `www.example.com`:\n\n1. Check the **stub resolver cache** (and the hosts file, if present).\n2. Ask the **configured recursive DNS server**.\n3. That server walks the hierarchy (root \u2192 TLD \u2192 authoritative) or uses cached answers.\n4. The client receives an address record and opens a connection to that address.\n\nThe classic split of symptoms follows directly:\n\n- **IP works, name fails** \u2192 the network path is fine; the translation step is broken (resolver setting, resolver down, or the name itself).\n- **Nothing works, name and IP** \u2192 you are not in the name layer; look at addressing, gateway, or the remote path.\n- **Internal names work, external names fail** \u2192 the resolver can answer from its own zone/forwarders path or not; this is a resolver/upstream question, not \"DNS is just broken.\"\n\nThis is the same idea as A+ A2's \"works by IP but not by name,\" walked one level deeper into *why* the two cases separate so cleanly.\n\n## Media types, briefly\n\n- **Copper (twisted pair)** \u2014 cheap, common, distance-limited (~100 m), sensitive to EMI; category matters for throughput.\n- **Fiber** \u2014 long distance, immune to electrical noise, higher install skill and cost.\n- **Wireless** \u2014 flexible placement, shared medium, needs channel/power/security design.\n\nChoosing media is usually a constraint question (distance, interference, existing plant, bandwidth) rather than a taste question.\n\n## Cloud and modern environments at concept level\n\nFor this track, cloud is a *connectivity* idea: workloads may sit on someone else's data center, reachable over private links, VPNs, or the public internet. You still need addressing, name resolution, segmentation, and monitoring \u2014 the players are just less physical. SDN and similar phrases are \"control of forwarding is programmable rather than only console-typed.\" Know what they change in the mental model; deep product configuration is out of scope here.\n\n## Scenario walkthrough: the failed client\n\nA user says \"nothing loads.\" Walk the path instead of guessing:\n\n1. **Identify** \u2014 what exactly fails? A name, a URL, one site, everything?\n2. **Local link** \u2014 does the host have a sane IP, mask, gateway (compare to a working neighbor)?\n3. **Local vs remote** \u2014 can you ping a host on the same subnet? The gateway? An external IP?\n4. **Name layer** \u2014 does an IP work while a name fails? Then look at DNS before touching anything else.\n5. **Service layer** \u2014 if IP and name both work and the port answers, the problem may be the application or content, not the network.\n\nThat order is layers 1\u21923\u2192name\u2192service, and it is also the N5 troubleshooting method applied to a client. Use it every time until it is habit.\n\n---\n\n*This is independent study material. It is not official training and is not endorsed or approved by CompTIA, Nutanix, or any other certification body.*\n",
+    "objectiveIds": [
+      "1.1",
+      "1.3",
+      "1.4",
+      "1.5",
+      "1.6",
+      "1.7",
+      "1.8"
+    ]
   },
   "COMPTIA-NET-009/N2": {
     "lessonId": "N2",
@@ -1526,6 +1606,426 @@ export const ITEMS = [
     "provenanceStatus": "draft",
     "textHash": "b981921abfa0a7fd",
     "bank": "core2-b2b4-fixtures.md"
+  },
+  {
+    "id": "COMPTIA-NET-009/net009-n1-fixtures.md/Q6",
+    "examId": "COMPTIA-NET-009",
+    "number": "Q6",
+    "stem": "A workstation is addressed 10.1.20.55/24 with default gateway 10.1.20.1 and DNS server 10.1.20.10. It can ping 10.1.20.1 and 10.1.20.10, but every destination outside 10.1.20.0/24 times out. Which role in the host's IPv4 configuration is the first place to look, and why?",
+    "options": {
+      "A": "The DNS server role, because external names cannot resolve without a working resolver",
+      "B": "The default gateway role, because packets to non-local destinations have no working exit from the segment",
+      "C": "The subnet mask role, because the host would ARP for remote hosts instead of sending them to the gateway",
+      "D": "The DHCP lease, because the host would not have any address at all if the lease were the problem"
+    },
+    "keys": [
+      "B"
+    ],
+    "explanation": "Local reachability to the gateway's own interface proves addressing and the mask are consistent on the segment. Remote destinations never use the DNS server as a path \u2014 they need a router. When only non-local traffic fails, the default gateway is the first role to suspect: a wrong gateway address, a gateway that is up but not routing, or an upstream failure past it. DNS would affect name resolution (and this host fails by IP too), a wrong mask more often produces ARP attempts for remote destinations or local-traffic loss, and a missing DHCP lease produces an APIPA address or nothing at all. *(Cross-track concept: this is the A+ A2 four-settings idea at Network+ path depth \u2014 see the cross-exam reuse note in this item's provenance.)*",
+    "objectiveId": "1.7",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "2398688452faf662",
+    "bank": "net009-n1-fixtures.md"
+  },
+  {
+    "id": "COMPTIA-NET-009/net009-n1-fixtures.md/Q7",
+    "examId": "COMPTIA-NET-009",
+    "number": "Q7",
+    "stem": "A laptop on a corporate VLAN keeps dropping off the network for about thirty seconds every few hours, then recovers on its own. At Network+ lease-lifecycle depth, which stage is the most useful place to start, and what would you look for?",
+    "options": {
+      "A": "The DORA handshake at first join, because the laptop would never get an address if it failed",
+      "B": "The renewal path (T1 renew, T2 rebind, and expiry) \u2014 look for renewals that fail and fall through to expiry",
+      "C": "The DNS resolution path, because name lookups reset after each drop",
+      "D": "The subnet mask, because the laptop cannot tell local from remote during the gap"
+    },
+    "keys": [
+      "B"
+    ],
+    "explanation": "A brief recurring outage with automatic recovery is the signature of a lease that is not renewing cleanly: the client reaches T1, the renew does not complete, it reaches T2 and rebroadcasts, then the lease expires and the interface resets before a new DORA completes. First join (A) is a one-time event and would not explain periodic drops; DNS follows addressing rather than causing address loss; the mask does not change over time. *(Cross-track concept: A+ A2 teaches what a lease hands out; this item assesses the lifecycle that keeps it \u2014 deliberately different depth, separate evidence.)*",
+    "objectiveId": "1.7",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "16b19943c65ced4d",
+    "bank": "net009-n1-fixtures.md"
+  },
+  {
+    "id": "COMPTIA-NET-009/net009-n1-fixtures.md/Q8",
+    "examId": "COMPTIA-NET-009",
+    "number": "Q8",
+    "stem": "Which protocol and transport port pair is correct?",
+    "options": {
+      "A": "SSH on TCP 22",
+      "B": "DNS on TCP 80",
+      "C": "HTTPS on TCP 21",
+      "D": "DHCP on TCP 443"
+    },
+    "keys": [
+      "A"
+    ],
+    "explanation": "SSH \u2014 remote terminal and secure file copy \u2014 uses TCP port 22. DNS primarily uses UDP/TCP 53 (not 80), HTTPS uses TCP 443 (21 is FTP control), and DHCP uses UDP 67/68 (443 is HTTPS). Protocol-port pairs are agreed conventions: the number only works because clients and servers both use the same one.",
+    "objectiveId": "1.4",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "443b76701ca149dc",
+    "bank": "net009-n1-fixtures.md"
+  },
+  {
+    "id": "COMPTIA-NET-009/net009-n1-fixtures.md/Q9",
+    "examId": "COMPTIA-NET-009",
+    "number": "Q9",
+    "stem": "A technician is reading a layered network diagram and needs to know where IP addressing and routing decisions live. Which OSI layer is that?",
+    "options": {
+      "A": "Layer 1 \u2014 Physical",
+      "B": "Layer 2 \u2014 Data Link",
+      "C": "Layer 3 \u2014 Network",
+      "D": "Layer 4 \u2014 Transport"
+    },
+    "keys": [
+      "C"
+    ],
+    "explanation": "IP addressing, subnetting, and routing belong to Layer 3, the Network layer. Layer 1 is cabling and signals, Layer 2 moves frames on a local link (MAC addresses, switching), and Layer 4 handles end-to-end segments and ports (TCP/UDP). A mailing analogy fits here: Layer 3 is the address on the envelope that decides which town the letter goes to; Layer 2 is the local mail carrier who walks it to the right street.",
+    "objectiveId": "1.1",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "53dc9604e0117b2e",
+    "bank": "net009-n1-fixtures.md"
+  },
+  {
+    "id": "COMPTIA-NET-009/net009-n1-fixtures.md/Q10",
+    "examId": "COMPTIA-NET-009",
+    "number": "Q10",
+    "stem": "An organization has 250 workstations in one flat 10.0.0.0/24 and is seeing heavy broadcast noise and a growing number of address conflicts after a bring-your-own-device push. What problem is subnetting (or VLAN segmentation paired with it) actually solving here?",
+    "options": {
+      "A": "Subnetting makes each host's IP address longer and therefore harder to conflict",
+      "B": "Subnetting splits one large broadcast domain into smaller ones, limiting who hears every broadcast",
+      "C": "Subnetting replaces the need for a default gateway on each host",
+      "D": "Subnetting encrypts traffic between workstations so conflicts cannot occur"
+    },
+    "keys": [
+      "B"
+    ],
+    "explanation": "The purpose of subnetting is to break one large broadcast domain into smaller, more manageable segments \u2014 fewer hosts hear every ARP and broadcast, which cuts noise and limits the blast radius of a misbehaving device. It does not lengthen addresses (A), it does not remove the need for a gateway to leave the segment (C), and it is a topology and addressing tool, not encryption (D). Paired with VLANs, it is the standard first answer to \"the flat network got too loud.\"",
+    "objectiveId": "1.7",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "c9289dd2edc39a6c",
+    "bank": "net009-n1-fixtures.md"
+  },
+  {
+    "id": "COMPTIA-NET-009/net009-n2-fixtures.md/Q11",
+    "examId": "COMPTIA-NET-009",
+    "number": "Q11",
+    "stem": "A small office wants guest Wi-Fi users blocked from reaching the file server and printers, while keeping both on the same physical switch. What is the clearest implementation choice?",
+    "options": {
+      "A": "Put guests and staff in different VLANs and control routing between them",
+      "B": "Give every guest a static IP in a different subnet and leave routing open",
+      "C": "Turn off DHCP for guests so they cannot get an address",
+      "D": "Change the file server's workgroup name so guests cannot see it"
+    },
+    "keys": [
+      "A"
+    ],
+    "explanation": "VLANs separate traffic into distinct broadcast domains on shared hardware. With guests on their own VLAN and an explicit rule between VLANs, the file server is simply not reachable unless a rule allows it. Static IPs without segmentation (B) still share the same broadcast domain and path, disabling DHCP (C) keeps guests off the network entirely rather than limiting them, and a workgroup name (D) is a naming convenience, not a security boundary.",
+    "objectiveId": "2.2",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "6562195a537c93c9",
+    "bank": "net009-n2-fixtures.md"
+  },
+  {
+    "id": "COMPTIA-NET-009/net009-n2-fixtures.md/Q12",
+    "examId": "COMPTIA-NET-009",
+    "number": "Q12",
+    "stem": "Two VLANs share one access switch. Hosts in VLAN 10 can reach each other, and hosts in VLAN 20 can reach each other, but a VLAN 10 host cannot reach a VLAN 20 host. What does this result tell you about what a VLAN is doing?",
+    "options": {
+      "A": "The switch is broken and needs a reboot",
+      "B": "The VLAN boundary is acting as a separate Layer 2 segment; inter-VLAN traffic must be routed and explicitly allowed",
+      "C": "VLAN tags are encryption, so the two groups cannot communicate",
+      "D": "The hosts need a longer subnet mask to talk across VLANs"
+    },
+    "keys": [
+      "B"
+    ],
+    "explanation": "Reaching inside a VLAN and failing across VLANs is exactly how VLAN separation is supposed to behave. Each VLAN is its own broadcast domain; a packet from VLAN 10 to VLAN 20 must be routed (typically by a Layer 3 switch or router) and any firewall or ACL between them must permit it. The switch is not broken (A), VLANs segment rather than encrypt (C), and a mask change on the hosts (D) does not create a path across an unrouted boundary.",
+    "objectiveId": "2.2",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "55e55dd73d33c3ae",
+    "bank": "net009-n2-fixtures.md"
+  },
+  {
+    "id": "COMPTIA-NET-009/net009-n2-fixtures.md/Q13",
+    "examId": "COMPTIA-NET-009",
+    "number": "Q13",
+    "stem": "A packet's destination is on a different IP subnet from the sending host, and the host has a default gateway configured. Which device makes the forwarding decision to get that packet off the local segment?",
+    "options": {
+      "A": "The access switch, because it forwards all frames to every port",
+      "B": "The router (default gateway), because the destination is outside the host's local subnet",
+      "C": "The DHCP server, because it knows every address",
+      "D": "The DNS server, because the destination was named"
+    },
+    "keys": [
+      "B"
+    ],
+    "explanation": "Switching moves frames inside one broadcast domain based on MAC addresses. Routing moves packets between subnets based on IP addresses. When the mask says \"this destination is remote,\" the host sends the frame to the default gateway's MAC \u2014 the router \u2014 which makes the next forwarding decision. Flood-everything behavior (A) is a failure mode, not a design; DHCP and DNS do not forward data packets.",
+    "objectiveId": "2.1",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "7c1a0cca2aff2f00",
+    "bank": "net009-n2-fixtures.md"
+  },
+  {
+    "id": "COMPTIA-NET-009/net009-n2-fixtures.md/Q14",
+    "examId": "COMPTIA-NET-009",
+    "number": "Q14",
+    "stem": "Which wireless security mode is the minimum acceptable choice for a small-business WLAN that carries company data?",
+    "options": {
+      "A": "Open network with a captive portal",
+      "B": "WEP",
+      "C": "WPA2 (or WPA3) with a strong passphrase or Enterprise authentication",
+      "D": "WPS push-button only"
+    },
+    "keys": [
+      "C"
+    ],
+    "explanation": "WPA2 (or WPA3 where available) is the baseline. WEP is broken and must not be used, an open network offers no link encryption even with a portal, and WPS is a setup convenience with known weaknesses \u2014 not a security mode to leave enabled as the primary control.",
+    "objectiveId": "2.3",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "b0f9921315e686eb",
+    "bank": "net009-n2-fixtures.md"
+  },
+  {
+    "id": "COMPTIA-NET-009/net009-n2-fixtures.md/Q15",
+    "examId": "COMPTIA-NET-009",
+    "number": "Q15",
+    "stem": "During a wiring-closet install, a technician is terminating copper cables near fluorescent light fixtures and a power conduit. What is the most important physical-installation judgment here?",
+    "options": {
+      "A": "Keep data cabling separated from power and lighting runs to avoid EMI and near-end crosstalk",
+      "B": "Bundle data and power cables together for a tidier rack",
+      "C": "Use the cheapest cable available to finish the closet quickly",
+      "D": "Leave the patch panel unlabeled so later technicians can trace by tone"
+    },
+    "keys": [
+      "A"
+    ],
+    "explanation": "Copper data cable is susceptible to electromagnetic interference from power and lighting. Maintain separation (and crossing at right angles when they must cross), follow bend-radius and strain-relief rules, and label every run. Bundling with power (B) invites noise problems, bargain cable (C) risks failing category specs and certification, and unlabeled panels (D) turn every future outage into a tracing exercise.",
+    "objectiveId": "2.4",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "335efafc72284049",
+    "bank": "net009-n2-fixtures.md"
+  },
+  {
+    "id": "COMPTIA-NET-009/net009-n3-fixtures.md/Q16",
+    "examId": "COMPTIA-NET-009",
+    "number": "Q16",
+    "stem": "A monitoring dashboard shows round-trip latency to a core server at 40\u201360 ms for three months, then 300\u2013400 ms starting Tuesday at 14:00. How should this reading be classified first?",
+    "options": {
+      "A": "A baseline change that marks an incident \u2014 the long-running band is \"normal,\" the shift is the anomaly",
+      "B": "A cosmetic graph issue, because latency graphs drift",
+      "C": "A hard down condition, because the server is not answering",
+      "D": "A DNS problem, because the graph name may not resolve"
+    },
+    "keys": [
+      "A"
+    ],
+    "explanation": "A baseline is a measured range of normal, not a feeling. When the measurement leaves that band at a known time, you have an incident to investigate (what changed at 14:00?), not a mystery. The server still answers (so not down), graph cosmetics do not produce a clean step-change (B), and DNS failure would typically break the measurement source or the name, not raise latency cleanly (D).",
+    "objectiveId": "3.2",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "b723f66cbb00806b",
+    "bank": "net009-n3-fixtures.md"
+  },
+  {
+    "id": "COMPTIA-NET-009/net009-n3-fixtures.md/Q17",
+    "examId": "COMPTIA-NET-009",
+    "number": "Q17",
+    "stem": "An operator is handed a latency chart with no baseline and asked whether \"this is bad.\" What is the correct first response?",
+    "options": {
+      "A": "Declare an incident immediately, because latency above zero is always an outage",
+      "B": "Restore from backup to clear the symptom",
+      "C": "Establish what normal looked like for that service and interval before judging the current trace",
+      "D": "Restart the monitoring tool so the chart resets"
+    },
+    "keys": [
+      "C"
+    ],
+    "explanation": "Without a baseline there is no defensible \"normal,\" so the first step is to recover history (peer devices, prior captures, vendor SLAs, a quiet-time sample) and then compare. Declaring an incident on unexamined numbers (A) and rebooting the tool (D) both destroy or ignore the evidence; a restore (B) is an invasive action aimed at an unknown cause.",
+    "objectiveId": "3.2",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "9d4d29378bbbeae4",
+    "bank": "net009-n3-fixtures.md"
+  },
+  {
+    "id": "COMPTIA-NET-009/net009-n3-fixtures.md/Q18",
+    "examId": "COMPTIA-NET-009",
+    "number": "Q18",
+    "stem": "What is the operational purpose of keeping current network diagrams and an inventory of devices, circuits, and credentials?",
+    "options": {
+      "A": "They are required decorations for audit visitors only",
+      "B": "They are the map you need before and during an emergency, and the basis for change planning",
+      "C": "They replace the need for monitoring baselines",
+      "D": "They are only useful after the network is decommissioned"
+    },
+    "keys": [
+      "B"
+    ],
+    "explanation": "Diagrams and inventory are how anyone \u2014 not just the person who built the network \u2014 understands what exists and how it connects. They speed incident response, make change plans reviewable, and support capacity and lifecycle work. They are operational tools, not paperwork theater (A), and they complement rather than replace measurements (C).",
+    "objectiveId": "3.2",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "8eeb19c42694d7cb",
+    "bank": "net009-n3-fixtures.md"
+  },
+  {
+    "id": "COMPTIA-NET-009/net009-n3-fixtures.md/Q19",
+    "examId": "COMPTIA-NET-009",
+    "number": "Q19",
+    "stem": "A change request to replace a core switch has been signed off and scheduled. Which sequence is the correct next-step discipline?",
+    "options": {
+      "A": "Execute immediately during business hours to shorten the window",
+      "B": "Record the plan and rollback steps, take a backup, implement in the window, verify services, then document the outcome",
+      "C": "Skip verification if the console looks normal",
+      "D": "Delete the old configuration first to avoid confusion"
+    },
+    "keys": [
+      "B"
+    ],
+    "explanation": "Change management is a sequence: plan \u2192 backup \u2192 implement in the scheduled window \u2192 verify against known tests \u2192 document. Rollback must be defined before you touch anything. Daytime execution (A) ignores the scheduled window and blast radius, console-normal without service checks (C) is not verification, and deleting the old config first (D) throws away the rollback path.",
+    "objectiveId": "3.1",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "ce864bcf9e7858cb",
+    "bank": "net009-n3-fixtures.md"
+  },
+  {
+    "id": "COMPTIA-NET-009/net009-n3-fixtures.md/Q20",
+    "examId": "COMPTIA-NET-009",
+    "number": "Q20",
+    "stem": "In disaster recovery terms, what does RPO describe?",
+    "options": {
+      "A": "How long a restore is allowed to take",
+      "B": "How much data the organization accepts losing, expressed as time since the last good copy",
+      "C": "The order in which servers are rebuilt",
+      "D": "The number of backup copies to keep offsite"
+    },
+    "keys": [
+      "B"
+    ],
+    "explanation": "Recovery Point Objective is the maximum tolerable data loss measured in time \u2014 if backups run nightly and RPO is 24 hours, you accept up to a day of work lost. Recovery Time Objective (A) is how fast service must return, restoration order (C) is a runbook choice informed by RTO/RPO, and offsite copy count (D) is a retention design detail, not the objective itself.",
+    "objectiveId": "3.3",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "96205a1d82f79523",
+    "bank": "net009-n3-fixtures.md"
+  },
+  {
+    "id": "COMPTIA-NET-009/net009-n4-fixtures.md/Q21",
+    "examId": "COMPTIA-NET-009",
+    "number": "Q21",
+    "stem": "A hospital places medical devices, staff workstations, and guest Wi-Fi on separate network segments with controlled paths between them. What security purpose does this segmentation primarily serve?",
+    "options": {
+      "A": "It encrypts all traffic between the segments",
+      "B": "It limits lateral movement so a compromise in one segment cannot freely reach the others",
+      "C": "It increases raw bandwidth on every segment",
+      "D": "It replaces the need for user authentication"
+    },
+    "keys": [
+      "B"
+    ],
+    "explanation": "Segmentation is damage control: if a guest device or a flat IoT gadget is compromised, a segmented design means the attacker does not automatically land on clinical workstations. Inter-segment traffic can be inspected and limited. Encryption is a separate control (A), segmentation is not a bandwidth tool (C), and identity checks still matter inside every segment (D).",
+    "objectiveId": "4.1",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "40e27575b9a9e8b0",
+    "bank": "net009-n4-fixtures.md"
+  },
+  {
+    "id": "COMPTIA-NET-009/net009-n4-fixtures.md/Q22",
+    "examId": "COMPTIA-NET-009",
+    "number": "Q22",
+    "stem": "After a workstation on the user VLAN is infected with malware, the security team finds the malware only reached other user workstations and never touched the server VLAN. Which design choice produced that outcome?",
+    "options": {
+      "A": "A longer subnet mask on the server VLAN",
+      "B": "Segmentation with an explicit deny-by-default path from user VLANs to the server VLAN",
+      "C": "A larger DHCP scope on the user VLAN",
+      "D": "Disabling ICMP on the server VLAN"
+    },
+    "keys": [
+      "B"
+    ],
+    "explanation": "The observed containment is the expected result of segmentation plus a restrictive path between zones \u2014 the malware's lateral movement stopped at the boundary. Mask length (A) and DHCP scope size (C) do not enforce trust boundaries, and blocking ICMP (D) only silences one diagnostic protocol; it does not stop server-directed traffic the malware could still attempt.",
+    "objectiveId": "4.1",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "a43ab76dc1fbaa14",
+    "bank": "net009-n4-fixtures.md"
+  },
+  {
+    "id": "COMPTIA-NET-009/net009-n4-fixtures.md/Q23",
+    "examId": "COMPTIA-NET-009",
+    "number": "Q23",
+    "stem": "Which of the following is a multi-factor authentication pairing?",
+    "options": {
+      "A": "A password and a PIN, both of which the user knows",
+      "B": "A password and a fingerprint, which are two different factor categories",
+      "C": "Two different passwords from the same password manager",
+      "D": "A security question and a password, both from memory"
+    },
+    "keys": [
+      "B"
+    ],
+    "explanation": "Multi-factor authentication requires factors from different categories: something you know, something you have, something you are. A password plus a fingerprint uses knowledge plus biometrics. Password + PIN (A), two passwords (C), and a security question plus a password (D) are all single-factor (knowledge) combinations, however long they feel.",
+    "objectiveId": "4.3",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "567cbfdcd4f28282",
+    "bank": "net009-n4-fixtures.md"
+  },
+  {
+    "id": "COMPTIA-NET-009/net009-n4-fixtures.md/Q24",
+    "examId": "COMPTIA-NET-009",
+    "number": "Q24",
+    "stem": "Users report that a familiar-looking login page is asking for their corporate credentials after they clicked a link in an email. Which threat is this?",
+    "options": {
+      "A": "DDoS",
+      "B": "Phishing (credential harvesting via a deceptive page)",
+      "C": "VLAN hopping",
+      "D": "A routing loop"
+    },
+    "keys": [
+      "B"
+    ],
+    "explanation": "An email-borne lure to a fake login page is phishing \u2014 a social-engineering attack that steals credentials or drops malware. DDoS floods availability (A), VLAN hopping is a Layer 2 segmentation attack (C), and a routing loop causes repeated forwarding and congestion rather than a credential prompt (D).",
+    "objectiveId": "4.2",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "921dd0b734892843",
+    "bank": "net009-n4-fixtures.md"
+  },
+  {
+    "id": "COMPTIA-NET-009/net009-n4-fixtures.md/Q25",
+    "examId": "COMPTIA-NET-009",
+    "number": "Q25",
+    "stem": "A new firewall policy is being reviewed. Which change is the better hardening judgment?",
+    "options": {
+      "A": "Leave every unused port open so future applications do not need a change request",
+      "B": "Disable unused services and ports, and allow only what the business path requires",
+      "C": "Turn off logging to reduce noise and save disk",
+      "D": "Share one administrator account among the on-call team so nobody gets locked out"
+    },
+    "keys": [
+      "B"
+    ],
+    "explanation": "Hardening is removing what you do not need: unused services and open ports are standing attack surface. Allow-what-you-need with documented changes is the default-deny habit. Leaving everything open (A) maximizes exposure, turning off logging (C) removes detection and evidence, and a shared admin account (D) destroys attribution and breaks accountability during an incident.",
+    "objectiveId": "4.3",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "69065855e752fc82",
+    "bank": "net009-n4-fixtures.md"
   },
   {
     "id": "COMPTIA-NET-009/net009-n5-fixtures.md/Q1",

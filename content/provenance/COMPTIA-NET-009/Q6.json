@@ -1,0 +1,19 @@
+{
+  "itemId": "COMPTIA-NET-009/net009-n1-fixtures.md/Q6",
+  "examId": "COMPTIA-NET-009",
+  "objectiveId": "1.7",
+  "author": "executor",
+  "assistance": "ai-drafted",
+  "rightsBasis": "original work; no vendor text lifted",
+  "reviewer": "redeye-lane",
+  "reviewDate": "",
+  "originalityCheck": "no-exam-item-proximity",
+  "status": "draft",
+  "type": "diagnosis",
+  "lesson": "N1",
+  "crossExamIds": [
+    "COMPTIA-A-1201",
+    "COMPTIA-NET-009"
+  ],
+  "crossExamReuse": "A+ A2 DNS/DHCP concept reused at Network+ depth (resolution path and lease lifecycle). Distinct item ID and distinct assessment depth; this question is never counted as independent evidence in both tracks (REQ-NP-03)."
+}

@@ -14,14 +14,14 @@
       "weightPercent": 23,
       "studyItemAllocation": 23,
       "objectives": [
-        { "id": "1.1", "title": "Explain concepts related to the Open Systems Interconnection (OSI) reference model.", "lessonIds": [] },
+        { "id": "1.1", "title": "Explain concepts related to the Open Systems Interconnection (OSI) reference model.", "lessonIds": ["n1"] },
         { "id": "1.2", "title": "Compare and contrast networking appliances, applications, and functions.", "lessonIds": [] },
-        { "id": "1.3", "title": "Summarize cloud concepts and connectivity options.", "lessonIds": [] },
-        { "id": "1.4", "title": "Explain common networking ports, protocols, services, and traffic types.", "lessonIds": [] },
-        { "id": "1.5", "title": "Compare and contrast transmission media and transceivers.", "lessonIds": [] },
-        { "id": "1.6", "title": "Compare and contrast network topologies, architectures, and types.", "lessonIds": [] },
-        { "id": "1.7", "title": "Given a scenario, use appropriate IPv4 network addressing.", "lessonIds": [] },
-        { "id": "1.8", "title": "Summarize evolving use cases for modern network environments.", "lessonIds": [] }
+        { "id": "1.3", "title": "Summarize cloud concepts and connectivity options.", "lessonIds": ["n1"] },
+        { "id": "1.4", "title": "Explain common networking ports, protocols, services, and traffic types.", "lessonIds": ["n1"] },
+        { "id": "1.5", "title": "Compare and contrast transmission media and transceivers.", "lessonIds": ["n1"] },
+        { "id": "1.6", "title": "Compare and contrast network topologies, architectures, and types.", "lessonIds": ["n1"] },
+        { "id": "1.7", "title": "Given a scenario, use appropriate IPv4 network addressing.", "lessonIds": ["n1"] },
+        { "id": "1.8", "title": "Summarize evolving use cases for modern network environments.", "lessonIds": ["n1"] }
       ]
     },
     {
@@ -30,10 +30,10 @@
       "weightPercent": 20,
       "studyItemAllocation": 20,
       "objectives": [
-        { "id": "2.1", "title": "Explain characteristics of routing technologies.", "lessonIds": [] },
-        { "id": "2.2", "title": "Given a scenario, configure switching technologies and features.", "lessonIds": [] },
-        { "id": "2.3", "title": "Given a scenario, select and configure wireless devices and technologies.", "lessonIds": [] },
-        { "id": "2.4", "title": "Explain important factors of physical installations.", "lessonIds": [] }
+        { "id": "2.1", "title": "Explain characteristics of routing technologies.", "lessonIds": ["n2"] },
+        { "id": "2.2", "title": "Given a scenario, configure switching technologies and features.", "lessonIds": ["n2"] },
+        { "id": "2.3", "title": "Given a scenario, select and configure wireless devices and technologies.", "lessonIds": ["n2"] },
+        { "id": "2.4", "title": "Explain important factors of physical installations.", "lessonIds": ["n2"] }
       ]
     },
     {
@@ -42,11 +42,11 @@
       "weightPercent": 19,
       "studyItemAllocation": 19,
       "objectives": [
-        { "id": "3.1", "title": "Explain the purpose of organizational processes and procedures.", "lessonIds": [] },
-        { "id": "3.2", "title": "Given a scenario, use network monitoring technologies.", "lessonIds": [] },
-        { "id": "3.3", "title": "Explain disaster recovery (DR) concepts.", "lessonIds": [] },
-        { "id": "3.4", "title": "Given a scenario, implement IPv4 and IPv6 network services.", "lessonIds": [] },
-        { "id": "3.5", "title": "Compare and contrast network access and management methods.", "lessonIds": [] }
+        { "id": "3.1", "title": "Explain the purpose of organizational processes and procedures.", "lessonIds": ["n3"] },
+        { "id": "3.2", "title": "Given a scenario, use network monitoring technologies.", "lessonIds": ["n3"] },
+        { "id": "3.3", "title": "Explain disaster recovery (DR) concepts.", "lessonIds": ["n3"] },
+        { "id": "3.4", "title": "Given a scenario, implement IPv4 and IPv6 network services.", "lessonIds": ["n3"] },
+        { "id": "3.5", "title": "Compare and contrast network access and management methods.", "lessonIds": ["n3"] }
       ]
     },
     {
@@ -55,9 +55,9 @@
       "weightPercent": 14,
       "studyItemAllocation": 14,
       "objectives": [
-        { "id": "4.1", "title": "Explain the importance of basic network security concepts.", "lessonIds": [] },
-        { "id": "4.2", "title": "Summarize various types of attacks and their impact to the network.", "lessonIds": [] },
-        { "id": "4.3", "title": "Given a scenario, apply network security features, defense techniques, and solutions.", "lessonIds": [] }
+        { "id": "4.1", "title": "Explain the importance of basic network security concepts.", "lessonIds": ["n4"] },
+        { "id": "4.2", "title": "Summarize various types of attacks and their impact to the network.", "lessonIds": ["n4"] },
+        { "id": "4.3", "title": "Given a scenario, apply network security features, defense techniques, and solutions.", "lessonIds": ["n4"] }
       ]
     },
     {
@@ -80,5 +80,35 @@
     "subnetting drills",
     "wireless design",
     "packet analysis"
+  ],
+  "workedExamples": [
+    {
+      "id": "we-subnetting-drills",
+      "gap": "subnetting drills",
+      "label": "worked example",
+      "title": "Worked example — subnetting drill (not a scored item)",
+      "body": "Host 192.168.10.42/26 needs to reach 192.168.10.100. A /26 mask is 255.255.255.192, so each subnet holds 64 addresses: .0–.63, .64–.127, .128–.191, .192–.255. The host's network is 192.168.10.0/26 (.0–.63) and the destination .100 sits in 192.168.10.64/26. The two addresses are on different subnets, so the host sends the packet to its default gateway rather than ARPing for .100. If the mask had been /24, both addresses would share one subnet and the host would ARP directly. The drill is: write the block size, find each network, then apply the local-vs-remote rule from N1. Interactive subnetting exercises are a declared gap (REQ-NP-04) — this walkthrough is labeled, not scored, and not a fake interactive lab."
+    },
+    {
+      "id": "we-routing-protocols",
+      "gap": "routing protocols",
+      "label": "worked example",
+      "title": "Worked example — routing protocols at recognition level (not a scored item)",
+      "body": "A small office has one router and a default route to the ISP. Nothing fancy is required: a static default gateway is enough. When a second router and multiple paths appear, a routing protocol (for example OSPF inside an organization, or BGP between organizations) is how routers exchange what they know about reachable networks instead of a human typing every static route. Worked reading: a diagram shows Router A and Router B both advertising 10.20.0.0/16. If A's link fails and the protocol withdraws the route, traffic shifts to B. If the protocol does not converge, traffic black-holes. For the October 23 demo, know that routing protocols are how paths are learned and healed; detailed metric calculation and neighbor state machines are a declared gap filled by this labeled example (REQ-NP-04)."
+    },
+    {
+      "id": "we-wireless-design",
+      "gap": "wireless design",
+      "label": "worked example",
+      "title": "Worked example — wireless design walk-through (not a scored item)",
+      "body": "An office wants guest Wi-Fi and staff Wi-Fi on the same floor. Worked decisions, in order: (1) placement — APs spread for coverage with overlap, not stacked in a closet; (2) channels — non-overlapping channels on neighbors (2.4 GHz 1/6/11, or 5 GHz planning) so APs do not fight; (3) security — staff on WPA2/WPA3 Enterprise or a strong PSK, guests on an isolated VLAN with no route to internal servers; (4) power — just enough to cover the floor without spilling into the parking lot. The result is not \"more power and one SSID.\" Full site survey tooling and RF heat maps are a declared gap (REQ-NP-04); this walkthrough is labeled and not interactive."
+    },
+    {
+      "id": "we-packet-analysis",
+      "gap": "packet analysis",
+      "label": "worked example",
+      "title": "Worked example — packet analysis reading (not a scored item)",
+      "body": "A capture shows: TCP SYN from client 10.1.20.55:50000 to server 10.1.20.10:443, then no SYN-ACK, repeated SYNs, and the client eventually resets. Worked reading: the client is willing and the path at Layer 3 carried the SYN (we see it addressed), but the service on 443 did not answer — either the port is closed/filtered, the host is unreachable at Layer 4, or something in between is dropping the session. Compare with a capture of the same client to port 22 where SYN/SYN-ACK/ACK completes: the network path works, so the fault is specific to the HTTPS service. No packet-analysis homework ships in this preview; this labeled example stands in until a capture lab exists (REQ-NP-04)."
+    }
   ]
 }

@@ -97,7 +97,7 @@ export class PracticeView extends BaseView {
             <div class="study-page practice-page">
                 <a class="study-back" href="#/tracks/${track?.trackId ?? ''}">‹ ${track?.title ?? 'Tracks'}</a>
                 <h1 class="study-title">Practice — ${exam.displayName}</h1>
-                <p class="study-sub">Draft pack (${track?.previewLabel ?? 'beginner preview'}) · draws only from reviewed items in this build.</p>
+                <p class="study-sub">Draft pack (${track?.previewLabel ?? 'beginner preview'})${track?.coverageLabel ? ` · ${track.coverageLabel}` : ''} · draws only from reviewed items in this build.</p>
                 ${priorNote}
                 ${resumeNote}
                 <div class="practice-progress">${progressLine}</div>

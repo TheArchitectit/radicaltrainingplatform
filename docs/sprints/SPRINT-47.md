@@ -14,7 +14,7 @@
 | ID | Task | Requirements | Points | Status |
 |---|---|---|---|---|
 | S47-01 (T-19) | A+ cut complete: 24 reviewed items, 2 complete lessons | REQ-AP-02 | 3 | ✅ |
-| S47-02 (T-20) | Network+ cut complete: 25 reviewed items, 2 complete lessons (five per domain) | REQ-NP-02 | 3 | ⚪ |
+| S47-02 (T-20) | Network+ cut complete: 25 reviewed items, 2 complete lessons (five per domain) | REQ-NP-02 | 3 | ✅ |
 | S47-03 (T-21) | Demo mode: seed, one-click reset, mode label, ephemeral store | REQ-DEMO-01..06, REQ-UI-07/08 | 3 | ⚪ |
 | S47-04 (T-22) | Pages predeploy gate (imports, smoke, bundle check) | CI-03 | 2 | ⚪ |
 | S47-05 (T-23) | Tutor slice behind its gates, or recorded-example fallback | REQ-AI-01..07 | 3 | ⚪ |
@@ -81,13 +81,37 @@ Cut map (24 items, type in provenance as the per-item front matter; bank markdow
 
 ### S47-02 (T-20): Network+ Demo Cut
 **Acceptance Criteria:**
-- [ ] 25 reviewed items, five per domain (N1–N5 cut outline per SPEC-05 05.6), labeled “exploratory coverage” — explicitly not exam-weighted, on screen
-- [ ] Two complete lessons: N5 troubleshooting, N1 networking concepts (synopses per SPEC-05 05.5)
-- [ ] Cross-track reuse (A+ DNS/DHCP material) explicitly mapped per REQ-NP-03 — provenance names both exam IDs, no duplicate item IDs
-- [ ] Declared gaps (subnetting drills, routing protocols, wireless design, packet analysis) render as labeled worked examples
-- [ ] RedEye lane logs complete
+- [x] 25 reviewed items, five per domain (N1–N5 cut outline per SPEC-05 05.6), labeled “exploratory coverage” — explicitly not exam-weighted, on screen
+- [x] Two complete lessons: N5 troubleshooting, N1 networking concepts (synopses per SPEC-05 05.5)
+- [x] Cross-track reuse (A+ DNS/DHCP material) explicitly mapped per REQ-NP-03 — provenance names both exam IDs, no duplicate item IDs
+- [x] Declared gaps (subnetting drills, routing protocols, wireless design, packet analysis) render as labeled worked examples
+- [x] RedEye lane logs complete
 
 **Files:** `content/exams/COMPTIA-NET-009/`, `content/provenance/`
+
+**Shipped (S47-02 notes):**
+
+Cut map (25 items, type/lesson/cross-exam live in provenance; bank slices stay hash-stable). Numbers are unique per exam — provenance filenames are `Q{n}.json` with no bank qualifier, so the N5 bank keeps Q1–Q5 and the four new banks continue Q6–Q25 (never renumbered).
+
+| Domain | Bank | Items | Bucket (count) | Type |
+|---|---|---|---|---|
+| N1 | `net009-n1-fixtures.md` | Q6–Q10 | address/mask/gateway/DNS roles (Q6–Q7), protocol-port pairing (Q8), OSI layer (Q9), subnet purpose (Q10) | 3 diagnosis, 2 recall |
+| N2 | `net009-n2-fixtures.md` | Q11–Q15 | VLAN purpose (Q11–Q12), switching vs routing (Q13), wireless security mode (Q14), physical install (Q15) | 4 diagnosis, 1 recall |
+| N3 | `net009-n3-fixtures.md` | Q16–Q20 | baseline vs incident (Q16–Q17), diagram/inventory (Q18), change-management sequence (Q19), recovery/RPO (Q20) | 3 diagnosis, 2 recall |
+| N4 | `net009-n4-fixtures.md` | Q21–Q25 | segmentation purpose (Q21–Q22), auth factor (Q23), threat recognition (Q24), hardening judgment (Q25) | 4 diagnosis, 1 recall |
+| N5 | `net009-n5-fixtures.md` | Q1–Q5 (pre-existing) | method step (Q1–Q2), tool-to-symptom (Q3–Q4), performance vs fault (Q5) | 4 diagnosis, 1 recall |
+
+- **Diagnosis share (N+ pack):** 18/25 = 72%. Pooled with A+: 36/49 = 73% (`scripts/check-item-types.py`).
+- **Lessons released:** `n1.md` (Networking concepts — mailing-analogy layers, ports, IPv4/subnetting purpose, DNS resolution path + DHCP lease lifecycle at N+ depth, media, cloud at concept level, failed-client scenario walkthrough) and `n5.md` (already shipped). N2–N4 stay `planned` outlines. Scenario lessons N1s–N5s are out of this row’s acceptance (two complete lessons only).
+- **Cross-track reuse (REQ-NP-03):** Q6 and Q7 carry `crossExamIds: ["COMPTIA-A-1201", "COMPTIA-NET-009"]` plus a `crossExamReuse` note (A+ A2 DNS/DHCP concept at Network+ path/lifecycle depth). Distinct item IDs; never counted as independent evidence in both tracks. Q1–Q10 stems of the A+ bank were not copied.
+- **Exploratory coverage label:** `track-netplus/track.json` gains `coverageLabel: "exploratory coverage — not exam-weighted"`; `track-overview.js` and `practice.js` render it. Track `previewLabel` stays `beginner preview`.
+- **Declared gaps (REQ-NP-04):** the four `exam.json` gaps render as labeled worked examples (`workedExamples` on the manifest — subnetting drill /26, routing-protocol recognition, wireless design walk-through, packet-capture reading). `track-overview.js` shows the gap tag list plus each `worked example` card. No fake interactivity.
+- **Provenance:** `content/provenance/COMPTIA-NET-009/Q1..Q25.json` — each names `lesson`, `objectiveId`, `reviewer: redeye-lane`, `type`. `reviewDate` stays empty (no human source review; do not invent one).
+- **RedEye lane:** logs under `content/review-logs/COMPTIA-NET-009/` for all 25 items (A+ logs refreshed too). Verdicts `return` / `modelStage: blocked` — designed fail-closed state. Ship-gate (`redeye-gate.py --all`) excludes 100%; draft packs for the beginner preview, not released items.
+- **Manifest `lessonIds`:** N1 objectives 1.1/1.3–1.8 name `n1`; N2 2.1–2.4 name `n2`; N3 3.1–3.5 name `n3`; N4 4.1–4.3 name `n4`; N5 unchanged (5.1/5.4/5.5 → `n5`). Only N1/N5 objectives with released items count as covered (REQ-MAN-07).
+- **Gates run:** lint 29 files/1647 questions; item identity 0 semantic collisions; item types 36 diagnosis / 13 recall / 0 untyped (73%); brand pass; import graph pass; study-content drift clean; web runtime fixtures 15/15; brand fixtures pass; redeye-gate self-test pass. Brand gate caught a literal “approved” inside the Q19 change-control stem (endorsement-string adjacency) — reworded to “signed off” / “scheduled window” and re-passed.
+
+**Not verified this row:** live Chromium walkthrough of the Network+ practice loop (S47-10 owns demo-host evidence); human source review / `reviewDate`; radredeye model-stage verification (still blocked by design); N1s–N5s scenario lessons and `netplus-gw-01` gateway task (S47-03 / SPEC-07 surface).
 
 ### S47-03 (T-21): Demo Mode
 **As a** presenter rotating student groups, **I want** seeded deterministic scenarios with one-tap reset, **so that** every group starts clean.

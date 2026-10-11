@@ -47,6 +47,66 @@
     letter-spacing: 0.05em;
 }
 
+.coverage-label {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 999px;
+    border: 1px solid var(--text-secondary);
+    color: var(--text-secondary);
+    font-size: var(--font-size-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* Declared-gap worked examples (REQ-NP-04) — labeled, never interactive. */
+.gap-list {
+    margin: var(--space-sm) 0 var(--space-md);
+}
+
+.gap-tag {
+    display: inline-block;
+    margin: 2px 6px 2px 0;
+    padding: 2px 8px;
+    border-radius: 999px;
+    border: 1px dashed var(--border-light);
+    color: var(--text-secondary);
+    font-size: var(--font-size-xs);
+}
+
+.worked-example {
+    margin: var(--space-md) 0;
+    padding: var(--space-md);
+    border: 1px dashed var(--border-light);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.worked-example-label {
+    color: var(--text-link);
+    font-size: var(--font-size-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: var(--space-xs);
+}
+
+.worked-example-title {
+    color: var(--text-primary);
+    font-size: var(--font-size-md);
+    margin-bottom: var(--space-xs);
+}
+
+.worked-example-gap {
+    color: var(--text-secondary);
+    font-size: var(--font-size-xs);
+    margin-bottom: var(--space-sm);
+}
+
+.worked-example-body {
+    color: var(--text-secondary);
+    font-size: var(--font-size-sm);
+    line-height: 1.55;
+}
+
 /* ── Track picker ── */
 
 .track-grid {
