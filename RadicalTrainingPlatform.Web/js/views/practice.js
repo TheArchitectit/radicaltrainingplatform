@@ -1,6 +1,9 @@
 import { BaseView } from './BaseView.js';
 import { ITEMS, TRACKS, EXAMS, DISCLAIMER } from '../study-content.js';
 import { progress } from '../core/ProgressStore.js';
+import {
+    optionOrder, toStableIds, sourceLetterOf, correctDisplayLetters, newRunSeed,
+} from '../core/OptionShuffle.js';
 
 /**
  * Practice view (T-11, REQ-UI-03) — scored sets drawn from the compiled
@@ -8,12 +11,27 @@ import { progress } from '../core/ProgressStore.js';
  * exactly: set equality (order-insensitive, count-sensitive) for choice
  * items; exact sequence equality for ordered items (R-03).
  *
+ * Options are presented in a seeded per-run order (T-24, R-09) so a learner
+ * cannot farm accuracy by always clicking A. Display letters are therefore
+ * positions, not identities: everything the learner touches is translated to
+ * stable option IDs before grading, and everything shown back to them is
+ * translated the other way. See core/OptionShuffle.js.
+ *
  * Review mode shows the reviewed explanation after each submission.
  * Assessment-style runs hide hints until submission (Plan v2 L-01); the
  * released banks carry no hints, so nothing is ever pre-revealed.
  */
 
-/** Core-identical grading. `response` is an array of option letters. */
+/**
+ * What the learner clicked (display letters) → what `grade` scores (the
+ * bank's own source letters). The route runs through the stable option ID, so
+ * the result cannot depend on where the option was displayed.
+ */
+export function selectionToKeys(item, seed, displayLetters) {
+    return toStableIds(item, seed, displayLetters).map(id => sourceLetterOf(item, id));
+}
+
+/** Core-identical grading. `response` is an array of source letters. */
 export function grade(item, response) {
     if (item.isOrdered) {
         if (response.length !== item.keys.length) {
@@ -39,6 +57,10 @@ export class PracticeView extends BaseView {
     #results = [];
     #submitted = false;
     #restored = { attempted: 0, correct: 0, items: {} };
+    // Per-run seed for the option order (T-24). Restored from the continuation
+    // so a resumed run shows the same order it showed before — a saved
+    // selection of display letters only means anything under the same seed.
+    #runSeed = null;
 
     async render(params) {
         const examId = params.examId;
@@ -68,12 +90,23 @@ export class PracticeView extends BaseView {
         // restore the mid-run position (index + in-progress selection).
         await progress.init();
         this.#restored = await progress.restore(examId, this.#queue.map(i => i.id));
+        this.#runSeed = null;
         const cont = await progress.loadContinuation(examId);
         if (cont && cont.index >= 0 && cont.index < this.#queue.length) {
             this.#index = cont.index;
             this.#selection = new Set(cont.selection || []);
             this.#results = Array.isArray(cont.results) ? cont.results : [];
+            if (Number.isInteger(cont.seed)) this.#runSeed = cont.seed >>> 0;
         }
+        // A continuation from before T-24 carries no seed. Its saved selection
+        // is display letters under an order we cannot reconstruct, so the run
+        // restarts rather than grading a stale selection against a new order.
+        if (cont && !Number.isInteger(cont.seed) && this.#selection.size) {
+            this.#index = 0;
+            this.#selection = new Set();
+            this.#results = [];
+        }
+        if (this.#runSeed === null) this.#runSeed = newRunSeed();
         return this.#renderQuestion(exam, track);
     }
 
@@ -81,11 +114,17 @@ export class PracticeView extends BaseView {
         const item = this.#queue[this.#index];
         const multi = item.isMultiSelect;
         const multiNote = multi ? '<span class="multi-note">Select all that apply</span>' : '';
-        const options = Object.entries(item.options).map(([letter, text]) => `
+        // Display order is seeded per run (T-24, R-09). The letter shown is the
+        // position; the text comes from the stable ID that sits there.
+        const options = optionOrder(item, this.#runSeed).map((id, i) => {
+            const letter = String.fromCharCode(65 + i);
+            const text = item.options[sourceLetterOf(item, id)];
+            return `
             <button class="option-row ${this.#selection.has(letter) ? 'selected' : ''}" data-letter="${letter}">
                 <span class="option-letter">${letter}</span>
                 <span class="option-text">${text}</span>
-            </button>`).join('');
+            </button>`;
+        }).join('');
         const progressLine = `${this.#index + 1} / ${this.#queue.length}`;
         const priorNote = this.#restored.attempted
             ? `<p class="practice-prior-note">Saved progress: ${this.#restored.correct}/${this.#restored.attempted} previously answered in this exam pack.</p>`
@@ -117,7 +156,10 @@ export class PracticeView extends BaseView {
     }
 
     #renderFeedback(exam, track, item, outcome) {
-        const letters = item.keys.join(', ');
+        // The learner never saw the bank's letters, so the feedback names the
+        // letters they did see (T-24) — otherwise "correct answer: B" would
+        // point at the wrong row.
+        const letters = correctDisplayLetters(item, this.#runSeed).join(', ');
         const correctText = item.keys.map(k => item.options[k]).join('; ');
         const verdict = outcome.isCorrect
             ? '<div class="verdict correct">Correct</div>'
@@ -140,10 +182,11 @@ export class PracticeView extends BaseView {
         const total = this.#results.length;
         const rows = this.#queue.map((item, i) => {
             const r = this.#results[i];
+            const answer = correctDisplayLetters(item, this.#runSeed).join(', ');
             return `<div class="result-row">
                 <span class="result-mark ${r.isCorrect ? 'correct' : 'wrong'}">${r.isCorrect ? '✓' : '✗'}</span>
                 <span class="result-stem">${item.stem}</span>
-                ${r.isCorrect ? '' : `<span class="result-answer">correct: ${item.keys.join(', ')}</span>`}
+                ${r.isCorrect ? '' : `<span class="result-answer">correct: ${answer}</span>`}
             </div>`;
         }).join('');
         return this.html(`
@@ -176,6 +219,9 @@ export class PracticeView extends BaseView {
             this.#selection.clear();
             this.#submitted = false;
             this.#restored = { attempted: 0, correct: 0, items: {} };
+            // "Practice again" is a new run, so it draws a new order (T-24) —
+            // otherwise the second pass is a memory test of the first.
+            this.#runSeed = newRunSeed();
             progress.clearContinuation(exam.examId).catch(() => {});
             this.#rerender(exam, track);
         });
@@ -231,7 +277,9 @@ export class PracticeView extends BaseView {
         const submit = this.root.querySelector('#practice-submit');
         submit?.addEventListener('click', () => {
             if (!this.#selection.size || this.#submitted) return;
-            const outcome = grade(item, [...this.#selection]);
+            // Display letters in, source letters out — the learner's click is
+            // scored by what it chose, never by where it sat (T-24).
+            const outcome = grade(item, selectionToKeys(item, this.#runSeed, [...this.#selection]));
             this.#results[this.#index] = { isCorrect: outcome.isCorrect };
             this.#submitted = true;
             // REQ-UI-05: every scored event persists; failure is surfaced,
@@ -270,6 +318,9 @@ export class PracticeView extends BaseView {
             selection: [...this.#selection],
             results: this.#results.filter(Boolean),
             total: this.#queue.length,
+            // The selection is display letters, so the order they belong to
+            // has to travel with them (T-24).
+            seed: this.#runSeed,
         }).catch(() => {
             // Continuation is a convenience: a failed write is not a scored
             // save, so it must not raise the scored-save warning. The run

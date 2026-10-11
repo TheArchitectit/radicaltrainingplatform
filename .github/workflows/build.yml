@@ -76,6 +76,14 @@ jobs:
       - name: Run web runtime fixtures
         run: bash tests/gates/run_web_fixtures.sh
 
+      # T-24/R-09: the runtime shuffle must not change what a choice means.
+      # Fixture chain: a mutated copy that treats display position as identity
+      # (the pre-T-24 bug) must fail the checker; the shipped module must pass
+      # it; and the real practice view must render a shuffled order on the
+      # compiled bank and still score the correct choice Correct.
+      - name: Run option shuffle fixtures (R-09)
+        run: bash tests/gates/run_option_shuffle_fixtures.sh
+
       # REQ-SC-01/T-13: scenario validator scan — constant-true validators
       # fail the build. The registry's 27 pending validators warn loudly
       # until the T-14 sweep (S46-04) lands; fixture chain proves detection.

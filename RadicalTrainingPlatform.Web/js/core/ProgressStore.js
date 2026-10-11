@@ -208,6 +208,10 @@ class ProgressStore {
      * Persist mid-run position: which item, the in-progress selection, and
      * the results collected so far. Written on every index/selection change
      * so leaving for Stats/Blueprint or closing the tab restores exactly.
+     *
+     * `seed` travels with the selection (T-24): the saved selection is display
+     * letters, which name positions in a shuffled option order, so restoring it
+     * without the seed that produced that order would score the wrong options.
      */
     async saveContinuation(examId, state) {
         this.#assertReady();
@@ -216,6 +220,7 @@ class ProgressStore {
             examId,
             index: Number.isInteger(state.index) ? state.index : 0,
             selection: Array.isArray(state.selection) ? [...state.selection] : [],
+            seed: Number.isInteger(state.seed) ? state.seed >>> 0 : null,
             results: Array.isArray(state.results)
                 ? state.results.map(r => ({ isCorrect: !!r?.isCorrect }))
                 : [],

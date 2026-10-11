@@ -18,7 +18,7 @@
 | S47-03 (T-21) | Demo mode: seed, one-click reset, mode label, ephemeral store | REQ-DEMO-01..06, REQ-UI-07/08 | 3 | ✅ |
 | S47-04 (T-22) | Pages predeploy gate (imports, smoke, bundle check) | CI-03 | 2 | ✅ |
 | S47-05 (T-23) | Tutor slice behind its gates, or recorded-example fallback | REQ-AI-01..07 | 3 | ✅ |
-| S47-06 (T-24) | Option shuffling with stable IDs | R-09 | 1 | ⚪ |
+| S47-06 (T-24) | Option shuffling with stable IDs | R-09 | 1 | ✅ |
 | S47-07 (T-25) | Packaging repairs PKG-01..04 + clean-install tests | SPEC-10 10.5 | 3 | ⚪ |
 | S47-08 (T-41) | Installed-bundle content independence; Legacy bridge narrowing; release-link truth | R-19 | 2 | ⚪ |
 | S47-09 (T-45) | ShellCheck gate + packaging behavior fixtures | R-24 | 1 | ⚪ |
@@ -223,7 +223,55 @@ CI-03's defect is that `pwa-deploy.yml` published `RadicalTrainingPlatform.Web/`
 
 ### S47-06 (T-24): Option Shuffling
 **Acceptance Criteria:**
-- [ ] Seeded option shuffle with stable item IDs; no scoring regression on multi-select
+- [x] Seeded option shuffle with stable item IDs; no scoring regression on multi-select
+
+**Files:** `RadicalTrainingPlatform.Web/js/core/OptionShuffle.js` (new),
+`RadicalTrainingPlatform.Web/js/views/practice.js`,
+`RadicalTrainingPlatform.Web/js/core/ProgressStore.js`,
+`tests/gates/web/option-shuffle.mjs` (new),
+`tests/gates/fixtures/option-shuffle/check-shuffle.mjs` (new),
+`tests/gates/fixtures/option-shuffle/live-render.mjs` (new),
+`tests/gates/run_option_shuffle_fixtures.sh` (new), `.github/workflows/build.yml`
+
+**Shipped (S47-06 notes):**
+
+- **Identity is separated from position, and that separation is the whole fix.** A *stable option ID* is
+  `<item id>#<source letter>` — derived from the item's canonical ID, never from where the option sits
+  (SPEC-16: content IDs are never renumbered). A *display letter* is the position in this run. Grading
+  runs on stable IDs only: `selectionToKeys` translates the learner's click through the stable ID into
+  the bank's own letter, and `grade()` keeps its existing Core-parity contract unchanged. Every saved
+  selection is display letters, so the run seed is persisted with it — the order and the selection it
+  belongs to travel together, or the restored selection points at the wrong options.
+- **The order is seeded per run and per item** (FNV-1a → mulberry32 → Fisher–Yates over the stable IDs),
+  deterministic for a given `(item id, seed)` so a resumed run reproduces the exact order it showed, and
+  a fresh seed on "Practice again" so the second pass is not a memory test of the first.
+- **Refusals are named, not silent.** `shuffleRefusal` returns `ordered`, `letter-referential`,
+  `too-few-options` or `no-options`. Sequence items are never shuffled (position is the answer, R-03), and
+  neither is any item whose stem or options point at a position or a letter — "all of the above",
+  "none of the above", "both A and B", "options A and D", "Answer B only". A refusal is reportable, so the
+  decision is visible instead of guessed at.
+- **Feedback names the letters the learner actually saw.** The verdict and the results list map the correct
+  keys back to display letters; without that, "correct answer: B" would point at the wrong row on every
+  shuffled item.
+- **Pre-T-24 continuations restart rather than resume.** A saved selection written before this row carries
+  display letters under an order we cannot reconstruct; the view restarts the run instead of grading a
+  stale selection against a fresh order. The seed is stored as `null` when absent — never guessed.
+
+**Findings recorded this row:**
+
+- **The option-shuffle gate is wired into CI; the answer-position *distribution* gate is not.** `scripts/report-key-distribution.py --gate` is not referenced by any workflow. Run by hand today it fails on **27 banks**, including the new demo packs — `core1-a2-fixtures.md` (C 43.8%), `core2-b2b4-fixtures.md` (B 62.5%), `net009-n1`/`n3` (B 60%), `net009-n4` (B 100%) — alongside the pre-existing Nutanix banks (NCP-AI-Part1 100% A, NCM-MCI-Part1 98.8% A). R-09 has two acceptance clauses and this row satisfies the runtime one only; the authoring-side clause ("new A+/Network+/NCA-pilot items are authored position-balanced") is **not** satisfied for the demo packs. Fixing it means re-authoring option order in reviewed-content banks, which changes item text and its bound hash and belongs with the content cuts (T-19/T-20), not with a 1-point runtime row. **Handed forward, not silently closed.** The runtime shuffle shipped here is what keeps the demo honest in the meantime.
+- **The compiled banks contain no multi-select and no ordered items** (`isMultiSelect` is false for all 24, `isOrdered` appears nowhere), so "no scoring regression on multi-select" cannot be proven against shipped content. The fixture proves it against a synthetic multi-select vector instead, and separately proves that every one of the 24 shipped items scores identically shuffled and unshuffled across 8 seeds.
+- **The pre-fix behavior is reproduced as a fixture, not asserted from memory.** The runner mutates one line of a copy — display position treated as identity — and requires the checker to fail on it. Without that, a checker that had simply been written to agree with the module would pass.
+
+**Gates run:** `run_option_shuffle_fixtures.sh` 3/3 (mutated identity-as-position copy fails the checker; shipped module passes it; the live practice view renders a shuffled order and scores the correct choice Correct); `run_web_fixtures.sh` 25/25 including the new `option-shuffle.mjs` (16 checks) and the unchanged `practice-grading.mjs`; `run_tutor_eval.sh` 206/206; `run_import_check_fixtures.sh` 2/2; `run_content_bundle_fixtures.sh` 6/6; `run_brand_fixtures.sh` 3/3; `run_smoke_fixtures.sh` 3/3; `run_artifact_secrets_fixtures.sh` 7/7; `run_validator_scan_fixtures.sh` 3/3; `run_redeye_fixtures.sh` 3/3; `check-imports.py` PASS; `check-brand.py` PASS; `check-content-bundle.py` PASS; `generate-study-content.py --check` in sync; `dotnet test` 246/246. Both workflow YAMLs parse.
+
+**Not verified this row:**
+
+- **The shuffle was never seen in a browser.** Every assertion runs through the stub DOM. Ordering, the click path and the verdict are asserted structurally; no screenshot was taken and no real Chrome ran the practice view.
+- **No accessibility check on the shuffled option list** — the letters are rendered as text in a `<span>`, so a screen reader announces position labels that no longer match the bank. Whether that is the right presentation is unexamined here.
+- **The distribution report was not fixed and not gated** (see Findings). No content was re-authored.
+- **The seed's randomness is not audited.** `newRunSeed` prefers `crypto.getRandomValues` and falls back to a clock-derived value; the fallback path was not exercised in this row.
+- **No human review.** The banks remain `draft`; nothing here changes review state.
 
 ### S47-07 (T-25): Packaging Repairs
 **Acceptance Criteria:**
