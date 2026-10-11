@@ -39,7 +39,7 @@ document limit (CLAUDE.md).
 | ID | Task | Requirements | Points | Status |
 |---|---|---|---|---|
 | S47-10 (T-26) | Rehearsal on actual demo host: installed, offline, keyboard/projector, reset-between-groups | REQ-UI-06, REQ-DEMO-05, TM-40/45/50 | 2 | ⚪ |
-| S47-11 (T-27) | Tutor evaluation report and go/no-go; fallback labeling check | REQ-AI-06/07 | 1 | ⚪ |
+| S47-11 (T-27) | Tutor evaluation report and go/no-go; fallback labeling check | REQ-AI-06/07 | 1 | ✅ |
 | S47-12 (T-28) | Screenshots/video backup; non-AI backup path | REQ-AI-07 | 1 | ⚪ |
 | S47-13 (T-29) | Freeze: branch, base/head SHA, changed files, gate results, RedEye lane logs + seeded-defect self-test record, usable build | SPEC-11 11.7 | 1 | ⚪ |
 | S47-14 (T-30) | Demo script final: 90-second loop (learn, try, ask, verify) + exact disclaimer + no-patient/no-business-system line | REQ-BRAND-02 | 1 | ⚪ |
@@ -282,7 +282,30 @@ someone closes a gap. Reasoning recorded in the evidence file.
 [../qa/release-evidence/2026-10-23-rehearsal.md](../qa/release-evidence/2026-10-23-rehearsal.md).
 
 ### S47-11 (T-27): Tutor Go/No-Go
-- Evaluation report from the rehearsed set; explicit go/no-go; fallback labeling verified if no-go
+- [x] **Evaluation report from the rehearsed set** — `2026-10-23-tutor-eval.md`, regenerated and
+  restamped at head `5a2a22e`. REQ-AI-06's set is complete: 12 answerable (incl. both demo prompts),
+  6 unsupported/version-conflict, 6 injection/secret-extraction (+1 retrieval-text case), 3 runtime
+  (offline/timeout/rate-limit). 206/206 checks; report records model, prompt version, pack version,
+  per-case results and the decision.
+- [x] **Explicit go/no-go** — **NO-GO on live AI; GO on the recorded-example fallback.** Not because
+  the evaluation fails, but because REQ-AI-07's three preconditions are all unresolved: no provider or
+  model chosen, no transmission right for the vendor-objective packs (the corpus index excludes all
+  three for exactly that reason), and no cost posture (G-05 owner decision).
+- [x] **Fallback labeling verified** — the label reads exactly `recorded example` on the mode pill and
+  on every response, and answering makes **zero** network calls: asserted by
+  `tests/gates/web/tutor-panel.mjs` (counts every attempt to leave the page) and by
+  `tutor-eval.mjs`'s `tm67-recorded-mode`; `req-ai-05` covers the gateway-unreachable state.
+
+**Files:**
+- `docs/qa/release-evidence/2026-10-23-tutor-go-no-go.md` (new) — the decision record
+- `docs/qa/release-evidence/2026-10-23-tutor-eval.md` — regenerated at head `5a2a22e`
+
+**Not verified:** live model behaviour (nothing exercises a real provider — the gates are proven to
+*fail* against misbehaving responders, which is not the same as a model passing them); human source
+review (packs are `draft`, no `sourceReviewDate`); the panel on the actual demo host (same PKG:1469
+block as S47-10).
+
+**Evidence:** [../qa/release-evidence/2026-10-23-tutor-go-no-go.md](../qa/release-evidence/2026-10-23-tutor-go-no-go.md).
 
 ### S47-12 (T-28): Backup Evidence
 - Screenshots/video captured; non-AI backup path rehearsed
