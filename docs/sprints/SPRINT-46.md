@@ -21,7 +21,7 @@
 | S46-06 (T-16) | Catalog tests, multi-select scoring tests, save/reload/error tests | REQ-MAN-05, L-06 | 2 | ✅ |
 | S46-07 (T-17) | Lint extension + manifest validator in CI | SPEC-10 10.6 | 2 | ✅ |
 | S46-08 (T-18) | Coverage threshold enforcement | CI-02 | 2 | ✅ |
-| S46-09 (T-37) | Semantic item identity for legacy banks + collision detector; retry outcome-set policy | R-13, R-14 | 2 | ⚪ |
+| S46-09 (T-37) | Semantic item identity for legacy banks + collision detector; retry outcome-set policy | R-13, R-14 | 2 | ✅ |
 | S46-10 (T-38) | Study-continuation restore; streak/Skip repairs | R-15, R-17 | 2 | ⚪ |
 | S46-11 (T-39) | Disposal guards on cached simulator references | R-16 | 1 | ⚪ |
 | S46-12 (T-40) | PDF export: canonical ID vs display label; vendor-neutral footer; atomic session save + corrupt recovery | R-18, R-20 | 2 | ⚪ |
@@ -183,8 +183,16 @@
 **As a** content maintainer, **I want** stable semantic IDs for legacy bank items, **so that** progress history survives content edits.
 
 **Acceptance Criteria:**
-- [ ] Semantic identity scheme + collision detector for legacy banks
-- [ ] Retry outcome-set policy finalized with S45-05
+- [x] Semantic identity scheme + collision detector for legacy banks
+- [x] Retry outcome-set policy finalized with S45-05
+
+**Notes (S46-09 close, 2026-10-10):**
+- **Semantic identity (R-13 / TM-81).** `SemanticItemId` (Core/Models) defines the immutable source-aware form `<examId>/<sourceFile>/Q<localId>` — e.g. `NCA-75/NCA-75-Part1.md/Q1` vs `NCA-75/NCA-75-Part2.md/Q1`. Display numbering stays separate (`ExamSessionViewModel.GetDisplayNumber`); revision is carried by the manifest, never by mutating the ID. This matches the form `scripts/generate-study-content.py` already emits.
+- **Two-Q1 fixture (R-13 acceptance).** `SemanticItemIdTests.TwoQ1ItemsFromTwoFiles_GetDistinctSemanticIds` and `tests/gates/web/item-identity.mjs` both pin two Q1 items from two files in one exam as distinct records. Cross-exam same-local-id stays legal (REQ-MAN-05).
+- **Collision detector (TM-81).** `SemanticItemId.DetectCollisions` (unit) and `scripts/check-item-identity.py` (gate, wired in CI) scan every bank. Live result: **1613 items / 7 exams / 0 semantic collisions**. Seeded-duplicate fixture must fail; clean two-Q1 fixture must pass (`--self-test`). Legacy `EXAM:number` collisions (360 across multi-part banks) are reported as informational — that is the defect the source-aware ID exists to prevent in storage keys.
+- **Legacy ambiguity, never a silent pick.** `SemanticItemId.ResolveLegacy(exam, n)` returns Found / Ambiguous(listing every source file) / NotFound. A bare `NCA-75:1` with two Q1s is Ambiguous.
+- **Retry outcome-set policy (R-14 / D9, finalized with S45-05).** first-attempt and latest-attempt are separate explicit metrics; displayed outcome = latest; statistics report both. `ProgressStore.recordItem` now stores `firstCorrect` (immutable) and `latestCorrect` (alias of `isCorrect`); when they disagree, BOTH are on the record. Summary counts unique items (not scored events) and exposes both `correct` (latest) and `firstCorrect`. Both retry directions are pinned in `tests/gates/web/retry-outcome-sets.mjs` (TM-82) alongside the Core `ExamSessionViewModelTests` retry suite from S45-05.
+- **Not verified:** no storage-key migration ran against an existing learner profile (the new fields are additive; legacy records without `firstCorrect` treat a single recorded outcome as the first, and multi-attempt legacy records honestly store `firstCorrect: null` rather than guessing); display numbering is not re-checked on the desktop UI path; the 360 legacy `EXAM:number` collisions are reported but no caller still uses that form as a storage key — that claim is from the code search in this session, not a runtime assertion.
 
 ### S46-10 (T-38): Study Continuation and Streak/Skip
 **As a** learner, **I want** to resume where I stopped, **so that** sessions are not lost mid-study.

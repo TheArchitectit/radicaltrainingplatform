@@ -33,6 +33,15 @@ jobs:
           python3 scripts/validate-manifests.py
           python3 scripts/validate-manifests.py --self-test
 
+      # R-13/TM-81: semantic item identity — source-aware IDs must be
+      # unique across every bank (two Q1s in two files are distinct; a
+      # seeded duplicate fails). Legacy EXAM:number collisions are reported
+      # as informational so the migration stays visible.
+      - name: Check item identity (R-13/TM-81)
+        run: |
+          python3 scripts/check-item-identity.py
+          python3 scripts/check-item-identity.py --self-test
+
       # R-01/CI-03 companion gate: every relative import in the PWA must
       # resolve case-sensitively (deploy-host semantics). Fixture pair:
       # tests/gates/run_import_check_fixtures.sh
