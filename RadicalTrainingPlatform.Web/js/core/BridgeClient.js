@@ -12,6 +12,17 @@ class BridgeClient {
         if (window.chrome?.webview) {
             this.#mode = 'webview2';
             window.chrome.webview.addEventListener('message', (e) => this.#onMessage(e.data));
+        } else if (window.dotnetBridge && typeof window.dotnetBridge.call === 'function') {
+            // CefGlue host (Desktop LabSimulator): CefBridge.Dispatch pumps
+            // responses back via window.__cefBridgeDispatch, or queues them
+            // until this assignment lands.
+            this.#mode = 'cef';
+            window.__cefBridgeDispatch = (msg) => this.#onMessage(msg);
+            const queued = window.__cefBridgeQueue;
+            if (Array.isArray(queued)) {
+                window.__cefBridgeQueue = [];
+                queued.forEach((msg) => this.#onMessage(msg));
+            }
         } else if (window.opener || window.parent !== window) {
             this.#mode = 'postmessage';
             this.#postMessageTarget = window.opener || window.parent;
@@ -35,6 +46,8 @@ class BridgeClient {
 
             if (this.#mode === 'webview2') {
                 window.chrome.webview.postMessage(msg);
+            } else if (this.#mode === 'cef') {
+                window.dotnetBridge.call(JSON.stringify(msg));
             } else if (this.#mode === 'postmessage') {
                 this.#postMessageTarget.postMessage(msg, '*');
             } else {
@@ -56,6 +69,8 @@ class BridgeClient {
         const msg = { type, payload };
         if (this.#mode === 'webview2') {
             window.chrome.webview.postMessage(msg);
+        } else if (this.#mode === 'cef') {
+            window.dotnetBridge.call(JSON.stringify(msg));
         } else if (this.#mode === 'postmessage') {
             this.#postMessageTarget.postMessage(msg, '*');
         } else {

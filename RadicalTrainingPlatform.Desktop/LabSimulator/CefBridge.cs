@@ -33,12 +33,15 @@ namespace RadicalTrainingPlatform.Avalonia.LabSimulator;
 /// both the CefV8Handler-style API and the higher-level wrapper
 /// packages that ship a "send" helper.
 ///
-/// Incoming message types (mirror the original WebView2 bridge so
-/// BridgeClient.js is source-compatible):
+/// Incoming message types (R-05: every registered handler performs a real
+/// effect; a handler with no backing implementation is absent from this
+/// surface — listing one is a test failure):
 ///   ready, ping, log, load_exam_list, get_stats, save_progress,
-///   load_progress, submit_answer, get_question, get_session,
-///   reset_session, export_results, import_results, get_settings,
-///   set_setting
+///   load_progress, get_question, get_session, reset_session
+///
+/// Removed in T-15/S46-05 (acknowledged without effects): submit_answer,
+/// export_results, import_results, get_settings, set_setting. Exam progress
+/// lives in the JS ProgressStore; there is no Core settings store.
 /// </summary>
 public sealed class CefBridge : IDisposable
 {
@@ -48,6 +51,9 @@ public sealed class CefBridge : IDisposable
     private readonly Dictionary<string, Func<JsonElement?, Task<object?>>> _handlers = new();
     private readonly Lazy<Dictionary<string, List<Question>>> _exams;
     private bool _disposed;
+
+    /// <summary>Registered handler type names (R-05 surface contract).</summary>
+    public IReadOnlyCollection<string> HandlerTypes => _handlers.Keys.OrderBy(k => k, StringComparer.Ordinal).ToList();
 
     /// <param name="sendScript">Executes JS in the browser (C# → JS leg).</param>
     /// <param name="parser">Real question/catalog data source.</param>
@@ -241,20 +247,37 @@ public sealed class CefBridge : IDisposable
             return Task.FromResult<object?>(exams);
         });
 
-        // ── get_stats : aggregate study statistics ──
+        // ── get_stats : aggregate study statistics from the session store ──
         On("get_stats", _ =>
         {
-            // Was a literal (totalQuestions: 475 — already wrong; the bank has
-            // 1600). Now: bank size from Core, answered/correct from persisted
-            // sessions (session files carry {"answered":n,"correct":m}).
             int bank = _exams.Value.Values.Sum(qs => qs.Count);
+            int answered = 0, correct = 0;
+            string? lastSession = null;
+            foreach (var id in _sessionStore.List())
+            {
+                lastSession = id;
+                var raw = _sessionStore.Load(id);
+                if (string.IsNullOrEmpty(raw)) continue;
+                try
+                {
+                    using var doc = JsonDocument.Parse(raw);
+                    if (doc.RootElement.TryGetProperty("answered", out var a) && a.ValueKind == JsonValueKind.Number)
+                        answered += a.GetInt32();
+                    if (doc.RootElement.TryGetProperty("correct", out var c) && c.ValueKind == JsonValueKind.Number)
+                        correct += c.GetInt32();
+                }
+                catch (JsonException)
+                {
+                    // Corrupt session file — skip it rather than invent numbers.
+                }
+            }
             return Task.FromResult<object?>(new
             {
                 totalQuestions = bank,
-                answered = 0,
-                correct = 0,
+                answered,
+                correct,
                 streakDays = 0,
-                lastSession = (string?)null,
+                lastSession,
             });
         });
 
@@ -284,18 +307,6 @@ public sealed class CefBridge : IDisposable
             var stored = _sessionStore.Load(sessionId);
             using var doc = JsonDocument.Parse(stored!);
             return Task.FromResult<object?>(new { hasProgress = true, data = doc.RootElement.Clone() });
-        });
-
-        // ── submit_answer : a learner answered a question ──
-        On("submit_answer", payload =>
-        {
-            if (payload == null) return Task.FromResult<object?>(null);
-            var p = payload.Value;
-            var questionId = p.TryGetProperty("questionId", out var q) ? q.GetString() : null;
-            var answer     = p.TryGetProperty("answer",     out var a) ? a.ToString() : null;
-            var correct    = p.TryGetProperty("correct",    out var c) ? c.GetBoolean() : false;
-            Debug.WriteLine($"[CefBridge] submit_answer q={questionId} ans={answer} correct={correct}");
-            return Task.FromResult<object?>(new { recorded = true });
         });
 
         // ── get_question : fetch a single question by id ──
@@ -331,49 +342,54 @@ public sealed class CefBridge : IDisposable
             });
         });
 
-        // ── get_session / reset_session ──
-        On("get_session", _ =>
-            Task.FromResult<object?>(new { active = false, sessionId = (string?)null }));
-
-        On("reset_session", _ =>
+        // ── get_session : real session inventory from the store ──
+        On("get_session", payload =>
         {
-            Debug.WriteLine("[CefBridge] reset_session");
-            return Task.FromResult<object?>(new { reset = true });
-        });
-
-        // ── export_results / import_results : CSV exchange ──
-        On("export_results", _ =>
-        {
-            // TODO: build CSV from session history
-            return Task.FromResult<object?>(new { csv = "", rowCount = 0 });
-        });
-
-        On("import_results", payload =>
-        {
-            var csv = payload?.TryGetProperty("csv", out var c) == true ? c.GetString() : null;
-            var rows = csv?.Split('\n').Length ?? 0;
-            return Task.FromResult<object?>(new { imported = rows });
-        });
-
-        // ── get_settings / set_setting : key/value prefs store ──
-        On("get_settings", _ =>
-        {
-            return Task.FromResult<object?>(new Dictionary<string, object?>
+            var sessionId = payload?.TryGetProperty("sessionId", out var s) == true
+                ? s.GetString() : null;
+            if (!string.IsNullOrEmpty(sessionId))
             {
-                ["theme"]         = "synthwave",
-                ["showTimer"]     = true,
-                ["shuffleOptions"]= true,
+                var exists = _sessionStore.Has(sessionId);
+                return Task.FromResult<object?>(new
+                {
+                    sessionId,
+                    exists,
+                    hasProgress = exists,
+                    data = exists ? (object?)_sessionStore.Load(sessionId) : null,
+                });
+            }
+            var ids = _sessionStore.List();
+            return Task.FromResult<object?>(new
+            {
+                sessions = ids,
+                count = ids.Count,
             });
         });
 
-        On("set_setting", payload =>
+        // ── reset_session : remove defined session data, confirm the baseline ──
+        On("reset_session", payload =>
         {
-            if (payload == null) return Task.FromResult<object?>(null);
-            var p = payload.Value;
-            var key = p.TryGetProperty("key", out var k) ? k.GetString() : null;
-            var val = p.TryGetProperty("value", out var v) ? v.ToString() : null;
-            Debug.WriteLine($"[CefBridge] set_setting {key}={val}");
-            return Task.FromResult<object?>(new { ok = true });
+            var sessionId = payload?.TryGetProperty("sessionId", out var s) == true
+                ? s.GetString() : null;
+            int removed = 0;
+            if (!string.IsNullOrEmpty(sessionId))
+            {
+                if (_sessionStore.Has(sessionId))
+                {
+                    _sessionStore.Delete(sessionId);
+                    removed = 1;
+                }
+            }
+            else
+            {
+                foreach (var id in _sessionStore.List())
+                {
+                    _sessionStore.Delete(id);
+                    removed++;
+                }
+            }
+            var remaining = _sessionStore.List().Count;
+            return Task.FromResult<object?>(new { reset = true, removed, remainingSessions = remaining });
         });
     }
 

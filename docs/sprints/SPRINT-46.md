@@ -17,7 +17,7 @@
 | S46-02 (T-12) | ProgressStore + wiring + E2E save/reload/failure tests | REQ-UI-04/05, R-06 | 3 | ✅ |
 | S46-03 (T-13) | `ticket-lab.js` renderer; aplus-dns-01 + netplus-gw-01 with validators and negative fixtures | REQ-SC-01..06 | 3 | ✅ |
 | S46-04 (T-14) | Scenario validator sweep repairs (all 44; us-bucket-01) | R-02, REQ-DEMO-06 | 3 | ✅ |
-| S46-05 (T-15) | Bridge handlers: real effects or removal; desktop SessionStore consumption | R-05, R-06 | 2 | ⚪ |
+| S46-05 (T-15) | Bridge handlers: real effects or removal; desktop SessionStore consumption | R-05, R-06 | 2 | ✅ |
 | S46-06 (T-16) | Catalog tests, multi-select scoring tests, save/reload/error tests | REQ-MAN-05, L-06 | 2 | ⚪ |
 | S46-07 (T-17) | Lint extension + manifest validator in CI | SPEC-10 10.6 | 2 | ⚪ |
 | S46-08 (T-18) | Coverage threshold enforcement | CI-02 | 2 | ⚪ |
@@ -121,10 +121,18 @@
 **As a** learner, **I want** desktop bridge actions to have real effects, **so that** no UI control lies.
 
 **Acceptance Criteria:**
-- [ ] Every bridge handler either performs its real effect or is removed
-- [ ] Desktop consumes `JsonSessionStore` end-to-end for sessions
+- [x] Every bridge handler either performs its real effect or is removed
+- [x] Desktop consumes `JsonSessionStore` end-to-end for sessions
 
-**Files:** Desktop bridge handlers, `RadicalTrainingPlatform.Core/Services/SessionStore.cs` consumers
+**Files:** `Desktop/LabSimulator/CefBridge.cs`, `Web/js/core/BridgeClient.js`, `Desktop.Tests/CefBridgeHandlerTests.cs`
+
+**Notes (S46-05 close, 2026-10-10):**
+- **R-05 surface contract enforced.** Five handlers that acknowledged without effects are removed from the bridge surface: `submit_answer` (only wrote a debug line), `export_results` (empty CSV TODO), `import_results` (counted rows, imported nothing), `get_settings` (returned a hardcoded dict — no Core settings store exists), `set_setting` (only wrote a debug line). R-05 acceptance: "a handler with no backing implementation is absent from the bridge surface (listing it is a test failure)" — `HandlerSurface_ListsOnlyHandlersWithRealEffects` pins the present set and asserts the removed five are absent.
+- **Completed the half-real handlers.** `get_stats` now aggregates `answered`/`correct` from the JsonSessionStore session files (was hardcoded 0s after a bank-size fix) and reports `lastSession` from `List()`; `get_session` returns real inventory (`exists`/`hasProgress`/`data` for an id, or `sessions`/`count`) instead of a constant `{active:false}`; `reset_session` actually deletes the named session (or all) and confirms the new baseline (`removed` + `remainingSessions`) instead of acknowledging without touching data.
+- **Effect-then-acknowledge tests** (`CefBridgeHandlerTests`): `GetStats_AggregatesFromSessionStore_NotHardcodedZeros`, `GetSession_WithId_ReportsRealExistence`, `ResetSession_RemovesData_AndConfirmsBaseline`, `SaveProgress_FailsHonestly_WhenSessionIdMissing`. Plus the pre-existing `SaveThenLoadProgress_RoundTripsThroughStore` proving Desktop consumes `JsonSessionStore` end-to-end (R-06's store half).
+- **BridgeClient.js CEF wiring (the R-06 "nothing calls it end-to-end" gap).** `CefBridge` is registered as `window.dotnetBridge`, but BridgeClient only knew WebView2/postMessage — so in the Desktop CefGlue host the JS fell through to standalone mode and never reached `save_progress`/`load_progress`. BridgeClient now detects `window.dotnetBridge.call`, dispatches responses via `window.__cefBridgeDispatch`, and drains `window.__cefBridgeQueue`.
+- **Not verified:** the CEF `window.dotnetBridge` round-trip is pinned at the C# level (`CefBridge.Call` → captured dispatch script) and at the JS level (the mode branch is in BridgeClient); a live CefGlue browser round-trip was not exercised in this session (no CEF runtime in the test environment — same posture as the existing Desktop smoke suite). `streakDays` in `get_stats` remains a constant 0 — there is no streak store in Core yet (R-15/S46-10 covers streak repairs); the field is honest (0) rather than fabricated. Exam-session progress remains in the JS ProgressStore (S46-02); the bridge store is for simulator sessions.
+
 
 ### S46-06 (T-16): Catalog and Scoring Tests
 **As a** platform engineer, **I want** catalog merge and multi-select scoring pinned by tests, **so that** legacy + manifest worlds coexist safely.

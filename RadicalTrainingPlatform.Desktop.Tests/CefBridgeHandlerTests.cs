@@ -173,4 +173,93 @@ public class CefBridgeHandlerTests
         payload.GetProperty("error").GetString().ShouldNotBeNull()
                .ShouldContain("nosuchhandler");
     }
+
+    // ── R-05 surface contract: a handler with no backing implementation is
+    //    absent from the bridge surface. Listing one is a test failure. ──
+
+    [Fact]
+    public void HandlerSurface_ListsOnlyHandlersWithRealEffects()
+    {
+        using var h = new Harness();
+        var types = h.Bridge.HandlerTypes;
+
+        // Present: each has a backing implementation (catalog, store, or host log).
+        types.ShouldContain("ready");
+        types.ShouldContain("ping");
+        types.ShouldContain("log");
+        types.ShouldContain("load_exam_list");
+        types.ShouldContain("get_stats");
+        types.ShouldContain("get_question");
+        types.ShouldContain("save_progress");
+        types.ShouldContain("load_progress");
+        types.ShouldContain("get_session");
+        types.ShouldContain("reset_session");
+
+        // Absent (R-05: acknowledged without effects, removed in T-15/S46-05).
+        types.ShouldNotContain("submit_answer");
+        types.ShouldNotContain("export_results");
+        types.ShouldNotContain("import_results");
+        types.ShouldNotContain("get_settings");
+        types.ShouldNotContain("set_setting");
+    }
+
+    [Fact]
+    public void GetStats_AggregatesFromSessionStore_NotHardcodedZeros()
+    {
+        var sessionId = "cstats" + Guid.NewGuid().ToString("N");
+        using var h = new Harness();
+
+        InvokeAndWait(h, Req("save_progress",
+            $"{{\"sessionId\":\"{sessionId}\",\"data\":{{\"answered\":5,\"correct\":3}}}}"));
+
+        var data = InvokeAndWait(h, Req("get_stats", null, "t2"));
+        data!.Value.GetProperty("answered").GetInt32().ShouldBeGreaterThanOrEqualTo(5);
+        data.Value.GetProperty("correct").GetInt32().ShouldBeGreaterThanOrEqualTo(3);
+        data.Value.GetProperty("lastSession").GetString().ShouldNotBeNull();
+        data.Value.GetProperty("totalQuestions").GetInt32().ShouldBeGreaterThan(1000);
+    }
+
+    [Fact]
+    public void GetSession_WithId_ReportsRealExistence()
+    {
+        var sessionId = "csess" + Guid.NewGuid().ToString("N");
+        using var h = new Harness();
+
+        var before = InvokeAndWait(h, Req("get_session", $"{{\"sessionId\":\"{sessionId}\"}}"));
+        before!.Value.GetProperty("exists").GetBoolean().ShouldBeFalse();
+
+        InvokeAndWait(h, Req("save_progress",
+            $"{{\"sessionId\":\"{sessionId}\",\"data\":{{\"answered\":1}}}}", "t2"));
+
+        var after = InvokeAndWait(h, Req("get_session", $"{{\"sessionId\":\"{sessionId}\"}}", "t3"));
+        after!.Value.GetProperty("exists").GetBoolean().ShouldBeTrue();
+        after.Value.GetProperty("hasProgress").GetBoolean().ShouldBeTrue();
+    }
+
+    [Fact]
+    public void ResetSession_RemovesData_AndConfirmsBaseline()
+    {
+        var sessionId = "crst" + Guid.NewGuid().ToString("N");
+        using var h = new Harness();
+
+        InvokeAndWait(h, Req("save_progress",
+            $"{{\"sessionId\":\"{sessionId}\",\"data\":{{\"answered\":9}}}}"));
+
+        var reset = InvokeAndWait(h, Req("reset_session", $"{{\"sessionId\":\"{sessionId}\"}}", "t2"));
+        reset!.Value.GetProperty("reset").GetBoolean().ShouldBeTrue();
+        reset.Value.GetProperty("removed").GetInt32().ShouldBe(1);
+
+        var after = InvokeAndWait(h, Req("get_session", $"{{\"sessionId\":\"{sessionId}\"}}", "t3"));
+        after!.Value.GetProperty("exists").GetBoolean().ShouldBeFalse(
+            "reset must remove the session data before acknowledging");
+    }
+
+    [Fact]
+    public void SaveProgress_FailsHonestly_WhenSessionIdMissing()
+    {
+        using var h = new Harness();
+        var data = InvokeAndWait(h, Req("save_progress", "{\"data\":{\"answered\":1}}"));
+        data!.Value.GetProperty("saved").GetBoolean().ShouldBeFalse(
+            "save must not claim success without a session id");
+    }
 }
