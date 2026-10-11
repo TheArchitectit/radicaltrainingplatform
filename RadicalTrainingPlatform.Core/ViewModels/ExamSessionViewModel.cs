@@ -26,6 +26,12 @@ public class ExamSessionViewModel : INotifyPropertyChanged
     // freezes the items whose FIRST outcome was correct.
     private readonly HashSet<string> _firstAttemptKeys = new();
     private readonly HashSet<string> _firstAttemptCorrectKeys = new();
+    // R-17: streak derives from attempt history, never from a counter a
+    // retry can inflate. _attemptLog is chronological (key, correct) events;
+    // streak is the trailing run of correct events since the last miss,
+    // counting each distinct item at most once so a correct retry of an
+    // item already in the run cannot add a phantom step.
+    private readonly List<(string Key, bool Correct)> _attemptLog = new();
     private int _streak;
     private int _bestStreak;
 
@@ -153,15 +159,13 @@ public class ExamSessionViewModel : INotifyPropertyChanged
         {
             _correctKeys.Add(key);
             _wrongKeys.Remove(key);
-            _streak++;
-            if (_streak > _bestStreak) _bestStreak = _streak;
         }
         else
         {
             _wrongKeys.Add(key);
             _correctKeys.Remove(key);
-            _streak = 0;
         }
+        RecordAttempt(key, correct);
 
         Notify(nameof(IsSubmitted));
         Notify(nameof(IsCorrect));
@@ -203,9 +207,45 @@ public class ExamSessionViewModel : INotifyPropertyChanged
         _firstAttemptKeys.Add(key); // a skip is the item's first attempt if it had none — never a win
         _wrongKeys.Add(key);
         _correctKeys.Remove(key);
-        _streak = 0;
-        Notify(nameof(Streak));
+        RecordAttempt(key, correct: false);
         Next();
+    }
+
+    /// <summary>
+    /// Append one attempt to the chronological log and recompute the streak
+    /// from that history (R-17). A correct retry of an item already counted
+    /// in the current run does not extend the streak; any miss ends it.
+    /// </summary>
+    private void RecordAttempt(string key, bool correct)
+    {
+        _attemptLog.Add((key, correct));
+
+        var priorStreak = _streak;
+        var priorBest = _bestStreak;
+        _streak = ComputeStreakFromHistory();
+        if (_streak > _bestStreak) _bestStreak = _streak;
+        if (priorStreak != _streak) Notify(nameof(Streak));
+        if (priorBest != _bestStreak) Notify(nameof(BestStreak));
+    }
+
+    /// <summary>
+    /// Consecutive correct answers since the last miss. Walks the attempt
+    /// log backwards: a miss ends the run; a correct attempt counts one
+    /// streak step only the first time its item appears in this run, so a
+    /// retry cannot inflate the number.
+    /// </summary>
+    private int ComputeStreakFromHistory()
+    {
+        var counted = new HashSet<string>();
+        var streak = 0;
+        for (var i = _attemptLog.Count - 1; i >= 0; i--)
+        {
+            var (key, correct) = _attemptLog[i];
+            if (!correct) break;
+            if (!counted.Add(key)) continue;
+            streak++;
+        }
+        return streak;
     }
 
     /// <summary>

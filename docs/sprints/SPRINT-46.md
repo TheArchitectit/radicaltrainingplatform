@@ -22,7 +22,7 @@
 | S46-07 (T-17) | Lint extension + manifest validator in CI | SPEC-10 10.6 | 2 | ✅ |
 | S46-08 (T-18) | Coverage threshold enforcement | CI-02 | 2 | ✅ |
 | S46-09 (T-37) | Semantic item identity for legacy banks + collision detector; retry outcome-set policy | R-13, R-14 | 2 | ✅ |
-| S46-10 (T-38) | Study-continuation restore; streak/Skip repairs | R-15, R-17 | 2 | ⚪ |
+| S46-10 (T-38) | Study-continuation restore; streak/Skip repairs | R-15, R-17 | 2 | ✅ |
 | S46-11 (T-39) | Disposal guards on cached simulator references | R-16 | 1 | ⚪ |
 | S46-12 (T-40) | PDF export: canonical ID vs display label; vendor-neutral footer; atomic session save + corrupt recovery | R-18, R-20 | 2 | ⚪ |
 | S46-13 (T-44) | Storage recovery boundary tests (corrupt entry, quota, blocked) | R-23 | 1 | ⚪ |
@@ -198,8 +198,17 @@
 **As a** learner, **I want** to resume where I stopped, **so that** sessions are not lost mid-study.
 
 **Acceptance Criteria:**
-- [ ] Study-continuation restore works across sessions
-- [ ] Streak and Skip repairs per R-15/R-17
+- [x] Study-continuation restore works across sessions
+- [x] Streak and Skip repairs per R-15/R-17
+
+**Notes (S46-10 close, 2026-10-10):**
+- **Streak from attempt history (R-17, Core).** `ExamSessionViewModel` no longer does `_streak++` on every correct submit (the bug: answering one item right twice read as streak 2). New model: a chronological `(key, correct)` attempt log; streak = trailing run of correct events since the last miss, counting each distinct item at most once so a correct retry cannot add a phantom step. Any miss — wrong answer or Skip — ends the run. `BestStreak` retains the peak. Pinned by three new tests beside the existing streak suite (`Streak_RetryOfSameItemCorrect_DoesNotInflate`, `Streak_RetryFlip_CorrectThenWrong_TakesLatestOutcome`, `Streak_CountsDistinctItems_SinceLastMiss`). The first draft walked first-answer order instead of the attempt log; a flip-to-wrong on an earlier item left later correct items in the streak, which the flip test caught — corrected to the chronological model before commit.
+- **Desktop streak display (R-17).** `TxtStreak` showed `CorrectCount` (score-as-flame, also retry-inflated). Now binds `_session.Streak`, and `OnSessionPropertyChanged` refreshes on `Streak`/`BestStreak` as well as the score fields.
+- **Study continuation (R-15, Desktop).** Stats and Blueprint used to `ReleaseCurrentView()` which nulls `_session` — the only way back was `StartSession`, i.e. a brand-new session at question 1. Both handlers now pause the live view-model in `_pausedSession` (same pattern as `_reviewReturnSession`) before releasing; re-selecting that exam in the sidebar resumes it via `ShowStudySession` with position, current item, and in-progress answers intact. Reset and mode-change still start fresh (they call `StartSession`, which clears any pause).
+- **Study continuation (R-15, Web).** `ProgressStore` gains `saveContinuation` / `loadContinuation` / `clearContinuation` under `progress/<examId>/continuation` (`{ index, selection, results, total, savedAt }`). `practice.js` writes it on every selection and index change, restores index + in-progress selection + results-so-far on render (with a "Resumed at question N" note), and clears it on complete and on restart. `clearExam` also drops the continuation so a reset never leaves a ghost pointer.
+- **Skip (R-17, Web).** Practice view gains a Skip button. `ProgressStore.skipItem` records the item as a miss (`reason: 'skipped'`) and is the **only** emitter of `progress:skipped` — submit/retry never fire it. A skip that fails to persist emits nothing (never a false event).
+- **Fixtures (SPEC-16: failing + passing).** `tests/gates/web/study-continuation.mjs` (7 tests: persist/restore exact position+selection+results, overwrite, clear-on-complete, clearExam, malformed-index coercion) and `tests/gates/web/streak-skip.mjs` (8 tests: streak increments, retry does not inflate, miss resets run + peak retained, fail-then-pass counts one step, `recordItem` never notifies skip, `skipItem` notifies once and records a miss, skip breaks streak, failed skip save notifies nothing). Both fail against the pre-fix behavior (always-start-at-0 / streak++ / skip-on-every-miss). Auto-discovered by `tests/gates/run_web_fixtures.sh`.
+- **Not verified:** practice.js restore-on-render is wired but not driven through a headless view fixture (the stub DOM in `helpers.mjs` is enough for ProgressStore and `grade()`, not for a full PracticeView lifecycle — the round-trip is pinned at the storage API level). Desktop pause/resume is covered by the existing headless Avalonia smoke suite only insofar as those 20 tests still pass; no new smoke test drives Stats → sidebar-resume and asserts the current index. Streak semantics on a multi-day calendar (does the streak roll over at midnight?) are out of scope — `progress/meta.lastStudyDate` is recorded but nothing gates on it yet. Cross-exam streak (meta is global) is implemented as one run across exams; whether product wants per-exam streak is unconfirmed.
 
 ### S46-11 (T-39): Disposal Guards
 **As a** platform engineer, **I want** cached simulator references disposed safely, **so that** no resource leak degrades the demo host.

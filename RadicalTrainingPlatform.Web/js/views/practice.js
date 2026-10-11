@@ -63,10 +63,17 @@ export class PracticeView extends BaseView {
         this.#index = 0;
         this.#results = [];
         this.#submitted = false;
-        // REQ-UI-04: restore prior progress for this exam. Shown as a
-        // progress note — the run itself starts fresh.
+        this.#selection = new Set();
+        // REQ-UI-04: restore prior progress for this exam. R-15: also
+        // restore the mid-run position (index + in-progress selection).
         await progress.init();
         this.#restored = await progress.restore(examId, this.#queue.map(i => i.id));
+        const cont = await progress.loadContinuation(examId);
+        if (cont && cont.index >= 0 && cont.index < this.#queue.length) {
+            this.#index = cont.index;
+            this.#selection = new Set(cont.selection || []);
+            this.#results = Array.isArray(cont.results) ? cont.results : [];
+        }
         return this.#renderQuestion(exam, track);
     }
 
@@ -83,18 +90,23 @@ export class PracticeView extends BaseView {
         const priorNote = this.#restored.attempted
             ? `<p class="practice-prior-note">Saved progress: ${this.#restored.correct}/${this.#restored.attempted} previously answered in this exam pack.</p>`
             : '';
+        const resumeNote = this.#index > 0
+            ? '<p class="practice-prior-note">Resumed at question ' + (this.#index + 1) + '.</p>'
+            : '';
         return this.html(`
             <div class="study-page practice-page">
                 <a class="study-back" href="#/tracks/${track?.trackId ?? ''}">‹ ${track?.title ?? 'Tracks'}</a>
                 <h1 class="study-title">Practice — ${exam.displayName}</h1>
                 <p class="study-sub">Draft pack (${track?.previewLabel ?? 'beginner preview'}) · draws only from reviewed items in this build.</p>
                 ${priorNote}
+                ${resumeNote}
                 <div class="practice-progress">${progressLine}</div>
                 <div class="practice-item">
                     <div class="practice-stem">${item.stem}</div>
                     ${multiNote}
                     <div class="option-list">${options}</div>
                     <div class="practice-controls">
+                        <button class="study-button secondary" id="practice-skip">Skip</button>
                         <button class="study-button" id="practice-submit" ${this.#selection.size ? '' : 'disabled'}>Check answer</button>
                         <span class="practice-hint-note">${multi ? 'Choose ' + item.keys.length + ' options.' : 'Choose one option.'}</span>
                     </div>
@@ -160,6 +172,7 @@ export class PracticeView extends BaseView {
             this.#selection.clear();
             this.#submitted = false;
             this.#restored = { attempted: 0, correct: 0, items: {} };
+            progress.clearContinuation(exam.examId).catch(() => {});
             this.#rerender(exam, track);
         });
 
@@ -171,8 +184,10 @@ export class PracticeView extends BaseView {
                 if (this.#index + 1 < this.#queue.length) {
                     this.#index += 1;
                     this.#selection.clear();
+                    this.#saveContinuation(exam);
                     this.#rerender(exam, track);
                 } else {
+                    progress.clearContinuation(exam.examId).catch(() => {});
                     this.#rerenderResults(exam, track);
                 }
             });
@@ -193,7 +208,21 @@ export class PracticeView extends BaseView {
             }
             const submit = this.root.querySelector('#practice-submit');
             if (submit) submit.disabled = false;
+            this.#saveContinuation(exam);
         }));
+
+        // R-17: Skip is a real skip — ProgressStore.skipItem is the only
+        // emitter of progress:skipped. It records a miss and advances.
+        this.root.querySelector('#practice-skip')?.addEventListener('click', () => {
+            if (this.#submitted) return;
+            this.#results[this.#index] = { isCorrect: false };
+            progress.skipItem(exam.examId, item.id)
+                .then(r => {
+                    if (r && !r.saved) this.#showSaveWarning();
+                })
+                .catch(() => this.#showSaveWarning());
+            this.#advance(exam, track);
+        });
 
         const submit = this.root.querySelector('#practice-submit');
         submit?.addEventListener('click', () => {
@@ -202,7 +231,8 @@ export class PracticeView extends BaseView {
             this.#results[this.#index] = { isCorrect: outcome.isCorrect };
             this.#submitted = true;
             // REQ-UI-05: every scored event persists; failure is surfaced,
-            // never a silent false save (Plan v2 L-02).
+            // never a silent false save (Plan v2 L-02). recordItem never
+            // emits progress:skipped (R-17).
             progress.recordItem(exam.examId, item.id, outcome)
                 .then(r => {
                     if (r && !r.saved) this.#showSaveWarning();
@@ -212,15 +242,34 @@ export class PracticeView extends BaseView {
             if (feedbackEl) feedbackEl.innerHTML = this.#renderFeedback(exam, track, item, outcome);
             submit.disabled = true;
             this.root.querySelector('#practice-next')?.addEventListener('click', () => {
-                this.#submitted = false;
-                if (this.#index + 1 < this.#queue.length) {
-                    this.#index += 1;
-                    this.#selection.clear();
-                    this.#rerender(exam, track);
-                } else {
-                    this.#rerenderResults(exam, track);
-                }
+                this.#advance(exam, track);
             });
+        });
+    }
+
+    #advance(exam, track) {
+        this.#submitted = false;
+        if (this.#index + 1 < this.#queue.length) {
+            this.#index += 1;
+            this.#selection.clear();
+            this.#saveContinuation(exam);
+            this.#rerender(exam, track);
+        } else {
+            progress.clearContinuation(exam.examId).catch(() => {});
+            this.#rerenderResults(exam, track);
+        }
+    }
+
+    #saveContinuation(exam) {
+        progress.saveContinuation(exam.examId, {
+            index: this.#index,
+            selection: [...this.#selection],
+            results: this.#results.filter(Boolean),
+            total: this.#queue.length,
+        }).catch(() => {
+            // Continuation is a convenience: a failed write is not a scored
+            // save, so it must not raise the scored-save warning. The run
+            // itself continues.
         });
     }
 

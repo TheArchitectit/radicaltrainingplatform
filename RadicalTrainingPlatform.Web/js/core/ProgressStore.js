@@ -5,13 +5,16 @@ import { bus } from './EventBus.js';
  * ProgressStore (T-12, REQ-UI-04/05) — durable learner progress over
  * StateStore's IndexedDB (RadicalTrainingPlatformLab) / localStorage (lab_)
  * stack. Keys:
- *   progress/<examId>/<itemId>  — per scored item { isCorrect, reason,
- *                                 firstCorrect, latestCorrect, attempts,
- *                                 lastAnswered }
- *   progress/<examId>/summary   — per exam { attempted, correct,
- *                                 firstCorrect, updatedAt }
- *   scenario/<scenarioId>       — scenario completion { completedAt }
- *   progress/meta               — { streak, lastStudyDate, updatedAt }
+ *   progress/<examId>/<itemId>       — per scored item { isCorrect, reason,
+ *                                      firstCorrect, latestCorrect, attempts,
+ *                                      lastAnswered }
+ *   progress/<examId>/summary        — per exam { attempted, correct,
+ *                                      firstCorrect, updatedAt }
+ *   progress/<examId>/continuation   — mid-run position { index, selection,
+ *                                      results, total, savedAt } (R-15)
+ *   scenario/<scenarioId>            — scenario completion { completedAt }
+ *   progress/meta                    — { streak, bestStreak, streakItems,
+ *                                      lastStudyDate, updatedAt }
  *
  * Item identity (R-13): itemId is the source-aware semantic ID
  * (examId/sourceFile/Qn — see SemanticItemId.cs / generate-study-content.py).
@@ -22,6 +25,14 @@ import { bus } from './EventBus.js';
  * and never moves; latestCorrect (and the isCorrect alias) is the displayed
  * outcome. When the two disagree, BOTH are stored and BOTH are reported —
  * no state where they contradict without both being visible.
+ *
+ * Streak (R-17): derives from attempt history, never a counter retries
+ * inflate. streakItems holds the distinct items in the current run so a
+ * correct retry of an already-counted item cannot add a phantom step; any
+ * miss (wrong answer or skip) resets the run.
+ *
+ * Skip (R-17): skipItem is the ONLY emitter of progress:skipped. Submit and
+ * retry never fire that notification.
  *
  * Storage failure is never a false save: recordItem returns { saved: false,
  * reason } on failure and emits progress:saveFailed so the UI can surface an
@@ -41,6 +52,27 @@ class ProgressStore {
     }
 
     async recordItem(examId, itemId, outcome) {
+        return this.#recordOutcome(examId, itemId, outcome);
+    }
+
+    /**
+     * R-17: a real skip. Records the item as a miss (same shape as a wrong
+     * submit) and emits progress:skipped — the ONLY place that event fires.
+     * Submit/retry must never notify skip.
+     */
+    async skipItem(examId, itemId) {
+        this.#assertReady();
+        const result = await this.#recordOutcome(examId, itemId, {
+            isCorrect: false,
+            reason: 'skipped',
+        });
+        if (result.saved) {
+            bus.emit('progress:skipped', { examId, itemId });
+        }
+        return result;
+    }
+
+    async #recordOutcome(examId, itemId, outcome) {
         this.#assertReady();
         const key = `progress/${examId}/${itemId}`;
         const existing = await store.get(key);
@@ -79,6 +111,7 @@ class ProgressStore {
                 latest,
                 firstCorrect,
             });
+            await this.#recordAttemptInMeta(examId, itemId, latest);
         } catch (e) {
             this.#reportFailure(e, `progress record ${key}`);
             return { saved: false, reason: 'storage-write-failed' };
@@ -135,8 +168,93 @@ class ProgressStore {
     async clearExam(examId) {
         this.#assertReady();
         // StateStore has no key-iteration; summary deletion plus per-item
-        // deletes driven by the caller's known itemIds.
+        // deletes driven by the caller's known itemIds. Continuation dies
+        // with the exam's progress (R-15: a reset never leaves a stale
+        // mid-run pointer behind).
         await store.delete(`progress/${examId}/summary`);
+        await store.delete(`progress/${examId}/continuation`);
+    }
+
+    // ─── Study continuation (R-15) ─────────────────────────────────
+
+    /**
+     * Persist mid-run position: which item, the in-progress selection, and
+     * the results collected so far. Written on every index/selection change
+     * so leaving for Stats/Blueprint or closing the tab restores exactly.
+     */
+    async saveContinuation(examId, state) {
+        this.#assertReady();
+        const key = `progress/${examId}/continuation`;
+        const record = {
+            examId,
+            index: Number.isInteger(state.index) ? state.index : 0,
+            selection: Array.isArray(state.selection) ? [...state.selection] : [],
+            results: Array.isArray(state.results)
+                ? state.results.map(r => ({ isCorrect: !!r?.isCorrect }))
+                : [],
+            total: Number.isInteger(state.total) ? state.total : 0,
+            savedAt: new Date().toISOString(),
+        };
+        try {
+            await store.set(key, record);
+        } catch (e) {
+            this.#reportFailure(e, `continuation ${key}`);
+            return { saved: false, reason: 'storage-write-failed' };
+        }
+        return { saved: true, record };
+    }
+
+    async loadContinuation(examId) {
+        this.#assertReady();
+        return store.get(`progress/${examId}/continuation`);
+    }
+
+    async clearContinuation(examId) {
+        this.#assertReady();
+        await store.delete(`progress/${examId}/continuation`);
+    }
+
+    // ─── Streak from attempt history (R-17) ────────────────────────
+
+    /**
+     * Update progress/meta streak state from one scored attempt. A correct
+     * attempt of an item already in the current run is a retry and does not
+     * extend the streak; any miss resets the run.
+     */
+    async #recordAttemptInMeta(examId, itemId, correct) {
+        const key = 'progress/meta';
+        const prev = (await store.get(key)) || {};
+        const runKey = `${examId}/${itemId}`;
+        let streak = prev.streak || 0;
+        let streakItems = Array.isArray(prev.streakItems) ? [...prev.streakItems] : [];
+        let bestStreak = prev.bestStreak || 0;
+
+        if (!correct) {
+            streak = 0;
+            streakItems = [];
+        } else if (!streakItems.includes(runKey)) {
+            streak += 1;
+            streakItems.push(runKey);
+        }
+
+        if (streak > bestStreak) bestStreak = streak;
+
+        const next = {
+            streak,
+            bestStreak,
+            streakItems,
+            lastStudyDate: new Date().toISOString().slice(0, 10),
+            updatedAt: new Date().toISOString(),
+        };
+        await store.set(key, next);
+        return next;
+    }
+
+    async getMeta() {
+        this.#assertReady();
+        return (await store.get('progress/meta')) || {
+            streak: 0, bestStreak: 0, streakItems: [], lastStudyDate: null, updatedAt: null,
+        };
     }
 
     /**

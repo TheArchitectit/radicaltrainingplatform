@@ -32,6 +32,10 @@ public partial class MainWindow : Window
     private Dictionary<string, List<Question>> _exams = new(StringComparer.OrdinalIgnoreCase);
     private List<ExamCatalogItem> _catalog = new();
     private ExamSessionViewModel? _session;
+    // R-15: study continuation across Stats/Blueprint. Pausing keeps the
+    // live view-model (position, current item, in-progress answers) so
+    // returning to the exam restores exactly where the learner left off.
+    private ExamSessionViewModel? _pausedSession;
     private string? _lastExamCode;
     private QuestionView? _questionView;
     private BlueprintView? _blueprintView;
@@ -139,6 +143,7 @@ public partial class MainWindow : Window
 
     private void StartSession(string examCode, List<Question> questions)
     {
+        _pausedSession = null; // a fresh session supersedes any pause
         ReleaseCurrentView();
 
         if (_questionView == null)
@@ -160,6 +165,8 @@ public partial class MainWindow : Window
     {
         if (e.PropertyName is nameof(ExamSessionViewModel.CorrectCount)
                          or nameof(ExamSessionViewModel.WrongCount)
+                         or nameof(ExamSessionViewModel.Streak)
+                         or nameof(ExamSessionViewModel.BestStreak)
                          or nameof(ExamSessionViewModel.AccuracyPercent))
         {
             Dispatcher.UIThread.Post(UpdateStats);
@@ -176,7 +183,9 @@ public partial class MainWindow : Window
             return;
         }
         TxtScore.Text = $"{_session.CorrectCount}/{_session.TotalQuestions}";
-        TxtStreak.Text = $"{_session.CorrectCount} 🔥";
+        // R-17: streak is the consecutive-correct run, NOT CorrectCount
+        // (the old binding showed the score as a flame and inflated on retries).
+        TxtStreak.Text = $"{_session.Streak} 🔥";
         TxtAccuracy.Text = $"{_session.AccuracyPercent:F0}%";
     }
 
@@ -186,8 +195,19 @@ public partial class MainWindow : Window
     {
         if (sender is not Button btn) return;
         var code = btn.Tag?.ToString();
-        if (code != null && _exams.TryGetValue(code, out var questions))
-            StartSession(code, questions);
+        if (code == null || !_exams.TryGetValue(code, out var questions)) return;
+
+        // R-15: re-selecting the paused exam resumes the live session
+        // (same position, current item, in-progress answers) instead of
+        // discarding it and starting over.
+        if (_pausedSession != null && _pausedSession.ExamCode == code)
+        {
+            var paused = _pausedSession;
+            _pausedSession = null;
+            ShowStudySession(paused);
+            return;
+        }
+        StartSession(code, questions);
     }
 
     private void OnModeChanged(object? sender, RoutedEventArgs e)
@@ -248,6 +268,10 @@ public partial class MainWindow : Window
             return;
         }
 
+        // R-15: pause the study session so returning restores it intact.
+        if (_session != null && !InReviewMode)
+            _pausedSession = _session;
+
         ReleaseCurrentView();
         _blueprintView ??= new BlueprintView();
         MainContent.Content = _blueprintView;
@@ -266,8 +290,10 @@ public partial class MainWindow : Window
 
     private void OnStatsClicked(object? sender, RoutedEventArgs e)
     {
-        // Snapshot the session: ReleaseCurrentView nulls _session, so the
-        // stats view gets whatever was active when Stats was clicked.
+        // R-15: pause the study session so returning restores it intact.
+        // Snapshot for the stats view: ReleaseCurrentView nulls _session.
+        if (_session != null && !InReviewMode)
+            _pausedSession = _session;
         var snapshot = _session;
         ReleaseCurrentView();
         _statsView ??= new StatsView();
@@ -303,9 +329,15 @@ public partial class MainWindow : Window
     /// <summary>
     /// Swap the question view onto <paramref name="vm"/>, rewiring the stats
     /// subscription. ReleaseCurrentView is deliberately NOT used: it disposes
-    /// the review session we must keep for Back-to-Study.
+    /// the review/paused session we must keep for return.
     /// </summary>
     private void ShowReviewSession(ExamSessionViewModel vm)
+    {
+        ShowStudySession(vm);
+    }
+
+    /// <summary>Rebind the question view to a live session (review return or R-15 resume).</summary>
+    private void ShowStudySession(ExamSessionViewModel vm)
     {
         if (_session != null)
             _session.PropertyChanged -= OnSessionPropertyChanged;
