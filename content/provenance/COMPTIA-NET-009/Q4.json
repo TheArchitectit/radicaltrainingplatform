@@ -8,5 +8,7 @@
   "reviewer": "redeye-lane",
   "reviewDate": "",
   "originalityCheck": "no-exam-item-proximity",
-  "status": "draft"
+  "status": "draft",
+  "type": "diagnosis",
+  "lesson": "N5"
 }

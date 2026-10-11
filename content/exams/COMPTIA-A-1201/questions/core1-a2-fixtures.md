@@ -1,4 +1,4 @@
-# CompTIA A+ Core 1 — Module A2 fixtures (October 23 cut, A2 scope)
+# CompTIA A+ Core 1 — A2/A5 demo cut fixtures (October 23 cut)
 
 ## Domain 2: Networking (220-1201)
 
@@ -121,3 +121,75 @@ A workstation cannot reach anything by name or by IP address. The link light is 
 
 **Answer: D**
 Both name resolution *and* raw IP connectivity are broken, so the fault is below DNS — in the addressing itself. A wrong mask makes the host misjudge which destinations are local versus remote, breaking delivery for both named and direct-IP traffic. A bad DNS server would leave IP-address access working; a duplicate or bad gateway would not break local traffic the way a mask error does.
+
+---
+
+### Q11
+Internal server names stopped resolving on several workstations, but public websites still load normally. What does this split most suggest?
+- A) The default gateway is down for the whole building
+- B) Every workstation lost its IP address
+- C) The internal DNS zone or internal DNS service is the problem
+- D) The internet service provider is blocking web traffic
+
+**Answer: C**
+Public names working means the clients can still reach *some* DNS and the internet path is up — only the internal names fail. That isolates the fault to the internal zone or the internal DNS service those names live in, not to the gateway (A) or to addressing (B), which would break public traffic too. An ISP block on web traffic (D) would not leave public sites loading.
+
+---
+
+### Q12
+A firewall rule must be opened so clients can send DNS name lookups to the campus DNS server. Which port should the rule allow?
+- A) 80
+- B) 443
+- C) 53
+- D) 21
+
+**Answer: C**
+DNS name lookups use port 53 (UDP for ordinary queries, TCP for larger responses). Port 80 is unencrypted HTTP, 443 is HTTPS, and 21 is FTP control — none of those carry name resolution. Opening 80 or 443 because "that is web" is the classic confusion: web *uses* DNS, but DNS itself is not web traffic.
+
+---
+
+### Q13
+One user cannot reach the company intranet by name. Colleagues on the same switch can. What is the safest first test on that user's workstation?
+- A) Reinstall the operating system
+- B) Replace the network switch
+- C) Record the current IP configuration and try a name lookup (nslookup) to see what fails
+- D) Change the DNS server to a public resolver and leave it that way
+
+**Answer: C**
+When one host is affected and its neighbors are fine, start with a safe, reversible test: capture the configuration as it is, then measure name resolution directly. That tells you whether the client is asking, what it is asking, and what answer it gets — without changing anything you cannot undo. Reinstalling (A) and replacing the switch (B) are invasive and unsupported by the symptom; pointing DNS at a public resolver (D) may mask an internal-zone problem and leaks internal names.
+
+---
+
+### Q14
+After a desk move, a laptop gets no DHCP address and shows a 169.254.x.x APIPA address. Link light is on. What should the technician verify first, before replacing any hardware?
+- A) That the wall port / switch port actually reaches a DHCP-enabled network (correct VLAN or uplink)
+- B) That the laptop battery is fully charged
+- C) That the printer driver is up to date
+- D) That the monitor cable is seated
+
+**Answer: A**
+APIPA with a link light means the NIC is up but no lease arrived — the usual cause after a move is that the new port is on the wrong VLAN, unpatched, or otherwise not delivering DHCP. Verifying the port path is the safe, non-invasive first check. Battery, printer driver, and monitor cable are unrelated to address delivery and would not produce APIPA.
+
+---
+
+### Q15
+A user reports that file transfers to one server are slow, while other servers feel normal. What is the safest first measurement?
+- A) Increase the NIC speed/duplex settings immediately
+- B) Replace the workstation's network cable
+- C) Compare a ping or path test to the slow server against the same test to a known-good server
+- D) Defragment the workstation's hard drive
+
+**Answer: C**
+Before changing anything, measure. Comparing the slow path against a known-good one tells you whether the delay is on the network path to that server, on the server itself, or unique to the client — and it gives you a baseline to prove any later fix. Changing speed/duplex (A) and swapping cable (B) are guesses that can make things worse; defragmenting (D) does not test a network path at all.
+
+---
+
+### Q16
+A technician confirmed the workstation has a valid IP address and can ping its default gateway. Name resolution still fails. What is the next step in isolating the cause?
+- A) Replace the workstation's NIC
+- B) Reinstall the operating system
+- C) Test DNS specifically — try a lookup (nslookup) and verify the configured DNS server answers
+- D) Change the subnet mask and reboot
+
+**Answer: C**
+Local delivery is already proven (valid IP, gateway ping works). The remaining suspect is the name-resolution path, so the next step is to test that layer directly: does a lookup run, and does the configured DNS server reply? Replacing hardware (A) and reinstalling (B) are invasive actions with no evidence pointing at them; changing the mask (D) would disturb a working local path and does not test DNS.

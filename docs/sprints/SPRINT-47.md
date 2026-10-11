@@ -13,7 +13,7 @@
 
 | ID | Task | Requirements | Points | Status |
 |---|---|---|---|---|
-| S47-01 (T-19) | A+ cut complete: 24 reviewed items, 2 complete lessons | REQ-AP-02 | 3 | ⚪ |
+| S47-01 (T-19) | A+ cut complete: 24 reviewed items, 2 complete lessons | REQ-AP-02 | 3 | ✅ |
 | S47-02 (T-20) | Network+ cut complete: 25 reviewed items, 2 complete lessons (five per domain) | REQ-NP-02 | 3 | ⚪ |
 | S47-03 (T-21) | Demo mode: seed, one-click reset, mode label, ephemeral store | REQ-DEMO-01..06, REQ-UI-07/08 | 3 | ⚪ |
 | S47-04 (T-22) | Pages predeploy gate (imports, smoke, bundle check) | CI-03 | 2 | ⚪ |
@@ -44,14 +44,40 @@
 **As a** student at the October 23 demo, **I want** real A+ content to study, **so that** the learning loop demonstrates value.
 
 **Acceptance Criteria:**
-- [ ] 24 reviewed items exactly: 16 Core 1 (A2/A5 — DNS purpose/symptom ×4, DHCP lease ×2, gateway role ×2, port recognition ×2, safe-test selection ×4, isolate-and-verify next-step ×2) + 8 Core 2 (B2/B4 — phishing signals ×3, ticket field/resolution-note ×3, change-control/backup ×2)
-- [ ] Two complete lessons: A2 “Networking basics”, B4 “Operational procedures” (synopses per SPEC-04 04.7)
-- [ ] Every cut item names lesson, objective ID, reviewer, provenance record; RedEye lane log present
-- [ ] Practice sets draw only from the 24 reviewed items and say so on screen
-- [ ] Remaining modules display as planned outlines; track shows “beginner preview”
-- [ ] ≥50% of pack items are diagnosis/next-action type (REQ-AP-06, CI-counted)
+- [x] 24 reviewed items exactly: 16 Core 1 (A2/A5 — DNS purpose/symptom ×4, DHCP lease ×2, gateway role ×2, port recognition ×2, safe-test selection ×4, isolate-and-verify next-step ×2) + 8 Core 2 (B2/B4 — phishing signals ×3, ticket field/resolution-note ×3, change-control/backup ×2)
+- [x] Two complete lessons: A2 “Networking basics”, B4 “Operational procedures” (synopses per SPEC-04 04.7)
+- [x] Every cut item names lesson, objective ID, reviewer, provenance record; RedEye lane log present
+- [x] Practice sets draw only from the 24 reviewed items and say so on screen
+- [x] Remaining modules display as planned outlines; track shows “beginner preview”
+- [x] ≥50% of pack items are diagnosis/next-action type (REQ-AP-06, CI-counted)
 
 **Files:** `content/exams/COMPTIA-A-1201/`, `content/exams/COMPTIA-A-1202/`, `content/provenance/`
+
+**Shipped (S47-01 notes):**
+
+Cut map (24 items, type in provenance as the per-item front matter; bank markdown slices stay byte-stable so lane hashes hold):
+
+| Bucket | Count | Items (A-1201 `core1-a2-fixtures.md` / A-1202 `core2-b2b4-fixtures.md`) | Type |
+|---|---|---|---|
+| DNS purpose/symptom | 4 | 1201 Q1, Q2, Q3, Q11 | 3 diagnosis, 1 recall |
+| DHCP lease | 2 | 1201 Q5, Q6 | 1 diagnosis, 1 recall |
+| Gateway role | 2 | 1201 Q7, Q8 | 1 diagnosis, 1 recall |
+| Port recognition | 2 | 1201 Q4, Q12 | 2 recall |
+| Safe-test selection | 4 | 1201 Q9, Q13, Q14, Q15 | 4 diagnosis |
+| Isolate-and-verify next-step | 2 | 1201 Q10, Q16 | 2 diagnosis |
+| Phishing signals (B2) | 3 | 1202 Q1–Q3 | 3 diagnosis |
+| Ticket field / resolution note (B4) | 3 | 1202 Q4–Q6 | 2 diagnosis, 1 recall |
+| Change-control / backup (B4) | 2 | 1202 Q7, Q8 | 2 diagnosis |
+
+- **Diagnosis share:** 18/24 A+ = 75% (floor 50%). Pooled with the N+ draft bank: 22/29 = 76%. `scripts/check-item-types.py` counts `type: diagnosis` vs `type: recall` from provenance, fail-closed on untyped/unknown (never silently diagnosis).
+- **Lessons released:** `a2.md` (Networking basics), `b4.md` (Operational procedures). Other modules stay `planned` outlines in `generate-study-content.py` / track overview. Track `previewLabel` is `beginner preview`.
+- **Provenance:** `content/provenance/COMPTIA-A-1201/Q1..Q16.json`, `COMPTIA-A-1202/Q1..Q8.json` — each names `lesson`, `objectiveId`, `reviewer: redeye-lane`, `type`. `reviewDate` stays empty (no human source review has occurred; do not invent one).
+- **RedEye lane:** logs under `content/review-logs/` for all 24 A+ items (plus the 5 N+ drafts), hashes bound to current item text + exam manifest + config. Verdicts are `return` / `modelStage: blocked` — the designed fail-closed state until radredeye key-vs-source integration. Ship-gate correctly excludes 100%; these are **draft** packs for the beginner preview, not released items.
+- **Practice draw:** `practice.js` already filters `ITEMS` per exam and prints “draws only from reviewed items in this build.” Compiled `study-content.js` now carries 16 + 8 A+ items.
+- **Manifest:** `COMPTIA-A-1202` `lessonIds` wire `b4` on 4.1–4.4/4.7 and `b2` on 2.5 (B2 stays a planned/partial module — no B2 lesson ships). `COMPTIA-A-1201` 2.1/2.2 now name `a2` so port/Wi-Fi coverage can compute honestly.
+- **New gate:** `scripts/check-item-types.py` (+ `--self-test` failing/passing fixtures) wired in `build.yml` beside `generate-study-content.py --check` (drift gate).
+
+**Not verified this row:** live Chromium walkthrough of the 24-item practice loop (S47-10 rehearsal owns demo-host evidence); human source review / `reviewDate`; radredeye model-stage verification (still blocked by design).
 
 ### S47-02 (T-20): Network+ Demo Cut
 **Acceptance Criteria:**

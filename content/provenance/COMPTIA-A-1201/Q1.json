@@ -2,6 +2,8 @@
   "itemId": "COMPTIA-A-1201/core1-a2-fixtures.md/Q1",
   "examId": "COMPTIA-A-1201",
   "objectiveId": "2.3",
+  "lesson": "A2",
+  "type": "diagnosis",
   "author": "executor",
   "assistance": "ai-drafted",
   "rightsBasis": "original work; no vendor text lifted",

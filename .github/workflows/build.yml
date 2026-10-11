@@ -42,6 +42,18 @@ jobs:
           python3 scripts/check-item-identity.py
           python3 scripts/check-item-identity.py --self-test
 
+      # REQ-AP-06/T-19: diagnosis share must stay >= 50% (fail-closed on
+      # untyped items). Fixture pair: --self-test (30/30 pass, 29/31 fail
+      # naming the deficit, untyped/unknown-type fail-closed).
+      - name: Check item type mix (REQ-AP-06)
+        run: |
+          python3 scripts/check-item-types.py
+          python3 scripts/check-item-types.py --self-test
+
+      # T-11: study-content.js must match content/ (drift gate).
+      - name: Check compiled study content
+        run: python3 scripts/generate-study-content.py --check
+
       # R-01/CI-03 companion gate: every relative import in the PWA must
       # resolve case-sensitively (deploy-host semantics). Fixture pair:
       # tests/gates/run_import_check_fixtures.sh

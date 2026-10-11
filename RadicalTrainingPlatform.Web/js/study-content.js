@@ -15,24 +15,29 @@ export const TRACKS = {
     "order": 1,
     "coverage": {
       "total": 63,
-      "covered": 2,
-      "percent": 3,
+      "covered": 6,
+      "percent": 10,
       "coveredObjectiveIds": [],
       "examCoverage": {
         "COMPTIA-A-1201": {
           "total": 27,
-          "covered": 2,
-          "percent": 7,
+          "covered": 3,
+          "percent": 11,
           "coveredObjectiveIds": [
+            "2.1",
             "2.3",
             "2.4"
           ]
         },
         "COMPTIA-A-1202": {
           "total": 36,
-          "covered": 0,
-          "percent": 0,
-          "coveredObjectiveIds": []
+          "covered": 3,
+          "percent": 8,
+          "coveredObjectiveIds": [
+            "4.1",
+            "4.2",
+            "4.3"
+          ]
         }
       }
     },
@@ -154,12 +159,16 @@ export const EXAMS = {
           {
             "id": "2.1",
             "title": "Compare and contrast Transmission Control Protocol (TCP) and User Datagram Protocol (UDP) ports, protocols, and their purposes.",
-            "lessonIds": []
+            "lessonIds": [
+              "a2"
+            ]
           },
           {
             "id": "2.2",
             "title": "Explain wireless networking technologies.",
-            "lessonIds": []
+            "lessonIds": [
+              "a2"
+            ]
           },
           {
             "id": "2.3",
@@ -412,7 +421,9 @@ export const EXAMS = {
           {
             "id": "2.5",
             "title": "Compare and contrast common social engineering attacks, threats, and vulnerabilities.",
-            "lessonIds": []
+            "lessonIds": [
+              "b2"
+            ]
           },
           {
             "id": "2.6",
@@ -483,22 +494,30 @@ export const EXAMS = {
           {
             "id": "4.1",
             "title": "Given a scenario, implement best practices associated with documentation and support systems information management.",
-            "lessonIds": []
+            "lessonIds": [
+              "b4"
+            ]
           },
           {
             "id": "4.2",
             "title": "Given a scenario, apply change management procedures.",
-            "lessonIds": []
+            "lessonIds": [
+              "b4"
+            ]
           },
           {
             "id": "4.3",
             "title": "Given a scenario, implement workstation backup and recovery methods.",
-            "lessonIds": []
+            "lessonIds": [
+              "b4"
+            ]
           },
           {
             "id": "4.4",
             "title": "Given a scenario, use common safety procedures.",
-            "lessonIds": []
+            "lessonIds": [
+              "b4"
+            ]
           },
           {
             "id": "4.5",
@@ -513,7 +532,9 @@ export const EXAMS = {
           {
             "id": "4.7",
             "title": "Given a scenario, use proper communication techniques and professionalism.",
-            "lessonIds": []
+            "lessonIds": [
+              "b4"
+            ]
           },
           {
             "id": "4.8",
@@ -875,6 +896,8 @@ export const LESSONS = {
     "status": "released",
     "markdown": "# Networking Basics (A2)\n\n*Module A2 \u2014 CompTIA A+ Core 1 study track. Independent study material \u2014 see the disclaimer at the end.*\n\nEvery device that joins a network has to know a few things about itself and about the network around it. This lesson covers the four settings every host needs, what DHCP and DNS actually do for you, how ports work, and the SOHO Wi-Fi basics you will see in the field. When you finish, you should be able to read a workstation's network configuration panel and spot the field that is wrong.\n\n## The four things every host needs\n\nFor a host to take part in an IPv4 network, four settings must be correct:\n\n1. **IP address** \u2014 the host's own address on the network. Without it, the host has no identity and cannot send or receive anything.\n2. **Subnet mask** \u2014 tells the host which part of the address is the network and which part is the host. The mask is how the host decides whether a destination is *local* (\"same street\") or *remote* (\"another town, send it to the router\").\n3. **Default gateway** \u2014 the router's address on the local network. Any destination the host decides is remote goes to the gateway. If the gateway is wrong or missing, the classic symptom is: you can reach devices on your own network, but nothing outside it.\n4. **DNS server** \u2014 the address of the service that turns names like `www.example.com` into IP addresses. Without it, anything you reach *by name* fails, even though the network itself may be fine.\n\nAll four come as a set. If any one of them is wrong, you get a different and quite recognizable failure pattern \u2014 which is exactly what the troubleshooting modules build on.\n\n## What DHCP hands out \u2014 and what breaks without it\n\nTyping those four settings by hand on every device would be slow and error-prone. **DHCP (Dynamic Host Configuration Protocol)** does it automatically. When a device joins the network, it asks, and a DHCP server hands it a *lease*: an IP address to use, the subnet mask, the default gateway, and the DNS server address, plus a time limit after which the lease must be renewed.\n\nWhat DHCP hands out is therefore exactly the four settings above \u2014 that is not a coincidence, it is the design.\n\nWhen DHCP *fails*, the failure depends on what the device does next. Many operating systems fall back to an **APIPA** address \u2014 an address in the `169.254.x.x` range that lets the device talk to other devices on the same local segment and nothing more. So the symptom of a DHCP problem is very specific: the device can sometimes reach its immediate neighbors but has no gateway and no DNS, so nothing beyond the local network works. If a user says \"my machine has an address starting with 169.254,\" you are almost certainly looking at a DHCP delivery failure, not a broken application.\n\n## What DNS translates \u2014 and the classic symptom\n\n**DNS (Domain Name System)** is the internet's phone book. It translates names \u2014 `www.example.com` \u2014 into IP addresses, because people remember names and networks move packets by address.\n\nThe classic DNS failure has a famous signature: **\"it works by IP address but not by name.\"** If typing `http://93.184.216.34` reaches the site but typing `http://example.com` does not, the network path is fine \u2014 packets flow, the server answers. The only thing missing is the translation step. That points at DNS: a wrong DNS server setting, a DNS service that is down, or a name that does not resolve.\n\nLearn this symptom well. It is one of the most useful one-line diagnoses in beginning networking, because it cleanly separates \"the network is broken\" (both name and IP fail) from \"the name lookup is broken\" (IP works, name fails).\n\n## Ports: doors for services\n\nAn IP address gets your packets to the right *machine*. A **port** gets them to the right *service* on that machine \u2014 one machine can run a web server, a mail server, and a file transfer service at the same time, and ports are how the traffic is sorted.\n\nYou do not need to memorize the full port list at this stage. Three examples cover a huge share of real traffic:\n\n- **80** \u2014 HTTP, ordinary web traffic\n- **443** \u2014 HTTPS, encrypted web traffic (the padlock in your browser)\n- **53** \u2014 DNS, name lookups\n\nThink of ports as numbered doors on the same building: the address gets you to the building, the port says which office you want.\n\n## SOHO Wi-Fi basics\n\nA small office or home network usually runs on a single wireless router. Four concepts matter:\n\n- **SSID** \u2014 the network's name, the one you pick from the list of available networks. Broadcasting it makes joining easy; hiding it is a weak security measure at best, since the name still appears in traffic.\n- **Passphrase** \u2014 the Wi-Fi password. Modern networks use WPA2 or WPA3; the passphrase protects joining, not the traffic after joining.\n- **2.4 GHz vs 5 GHz** \u2014 the 2.4 GHz band travels farther and penetrates walls better but is slower and more crowded (microwave ovens, neighbors, Bluetooth all live here). The 5 GHz band is faster and cleaner but has shorter range. Dual-band routers offer both, often under two SSIDs.\n- **Guest networks** \u2014 a separate network for visitors so their devices do not touch yours.\n\n## Reading a configuration panel\n\nGiven everything above, a workstation's IPv4 configuration panel should now read like a sentence: *this is my address (IP), this is how I tell local from remote (mask), this is where I send everything else (gateway), and this is who translates names for me (DNS)*. The practice set for this module asks you to find the one field in that sentence that is wrong.\n\n## Where this leads\n\nThe troubleshooting modules (A5 for A+, N5 for Network+) reuse everything here. The Network+ troubleshooting lesson adds the formal method \u2014 identify, theorize, test, plan, verify, document \u2014 and the toolset (ping, traceroute, nslookup) that makes these symptoms measurable instead of guessable.\n\n---\n\n*This is independent study material. It is not official training and is not endorsed or approved by CompTIA, Nutanix, or any other certification body.*\n",
     "objectiveIds": [
+      "2.1",
+      "2.2",
       "2.3",
       "2.4",
       "2.6"
@@ -939,9 +962,15 @@ export const LESSONS = {
     "examId": "COMPTIA-A-1202",
     "title": "Operational procedures",
     "domainNumber": "4",
-    "status": "planned",
-    "markdown": "",
-    "objectiveIds": []
+    "status": "released",
+    "markdown": "# Operational Procedures (B4)\n\n*Module B4 \u2014 CompTIA A+ Core 2 study track. Independent study material \u2014 see the disclaimer at the end.*\n\nSupport work is not only about fixing machines. It is about leaving a trail someone else can follow, changing production systems on purpose instead of by accident, and keeping copies of data that matter. This lesson covers the four habits that make that possible: writing a useful ticket, backing up on purpose, changing things on purpose, and talking to a frustrated user without making the situation worse.\n\n## What a ticket is for\n\nA ticket is a **communication record** and a **history** at the same time. It is how the next technician \u2014 who may be you in six months \u2014 learns what happened without re-diagnosing from zero.\n\nA useful ticket answers four questions:\n\n1. **What did the user report?** Their words first, then your restatement of the symptom.\n2. **What did you already try?** Every test, including the ones that ruled things out. \"Nothing works\" is not a finding; \"ping to the gateway succeeds, nslookup fails\" is.\n3. **What was actually wrong?** The cause, not just the action. \"Fixed the network\" is empty; \"workstation DNS pointed at a decommissioned server\" is a cause.\n4. **What did you change, and how did you verify it?** The change, and the proof the user's own workflow works again.\n\n`Fixed it.` is not a resolution note. A resolution note is what you would want to read if you were picking this ticket up cold.\n\n## Backup basics (3-2-1)\n\nBackups only matter when they are the copy that survives the failure. The **3-2-1** idea is a concept-level rule of thumb:\n\n- **3** copies of the data (the live copy plus at least two backups)\n- **2** different media or storage types (so one class of failure does not take every copy)\n- **1** copy offsite or otherwise separated from the live environment (so theft, fire, or ransomware on the desk does not take every copy)\n\nAn external drive that stays plugged into the same desk is a second copy, not a backup plan. If the machine is encrypted by ransomware, or the desk is stolen, that drive goes with it. A backup you have never restored from is a guess, not a backup.\n\n## Change control: write it down first\n\nChange control sounds formal. At beginner scale it is one habit: **write down what you will do before you do it.**\n\nBefore changing something that other people depend on \u2014 a DHCP scope, a switch port, a DNS forwarder \u2014 capture:\n\n- what you are changing and why\n- what you expect to happen\n- how you will tell whether it worked\n- how you will put it back if it does not\n\nThat short note is what turns a risky tweak into a planned change. If something breaks at 9 a.m., the note is the difference between \"we changed the DNS server at 8:55 and here is the rollback\" and \"something is wrong and nobody knows what moved.\"\n\nApproval is the organizational half of the same idea: people who own the system know the change is coming.\n\n## Safety and privacy habits\n\nTwo habits cover a lot of ground:\n\n- **Do not collect or carry data you do not need.** Screenshots of a user's desktop, exported mailboxes, and \"temporary\" copies of files are how private data leaks. If you must capture evidence, capture the smallest thing that proves the point.\n- **Dispose of storage on purpose.** Deleting a file, or even formatting a drive, does not reliably erase it. Disposal that actually protects data means wiping or destroying the media according to the organization's procedure.\n\n## Talking to a frustrated user\n\nThe user is not the ticket. They are a person whose day is blocked.\n\n- **Listen first, diagnose second.** Let them finish the symptom description before you start testing.\n- **Restate what you heard** in plain language. It confirms you understand and it slows the conversation down to a workable pace.\n- **Say what you will do next, and when you will update them.** Uncertainty is often more stressful than the outage.\n- **Never guess out loud.** \"It might be the server, or maybe the switch\" creates fear and is not a theory. Form a theory, test it, then speak.\n\nYou can be warm and still be precise. Precision is a form of respect: it means you took their problem seriously enough to describe it correctly.\n\n## How this ties to the demo work\n\nThe help-desk ticket task in this build asks for two things this lesson covers directly: the right ticket fields (symptom, tests, cause, change, verification) and a resolution note a stranger could follow. When you practice the DNS scenario, the note you leave is the B4 skill in action \u2014 the fix is only half the job.\n\n## Where this leads\n\nOperational procedures show up everywhere: every later module's \"document the result\" step is this lesson. The shared diagnosis loop \u2014 identify, theorize, safe-test, isolate, verify, document \u2014 ends here on purpose. Documentation is how the next person starts from your work instead of from zero.\n\n---\n\n*This is independent study material. It is not official training and is not endorsed or approved by CompTIA, Nutanix, or any other certification body.*\n",
+    "objectiveIds": [
+      "4.1",
+      "4.2",
+      "4.3",
+      "4.4",
+      "4.7"
+    ]
   },
   "COMPTIA-NET-009/N1": {
     "lessonId": "N1",
@@ -1012,7 +1041,7 @@ export const ITEMS = [
     "objectiveId": "2.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "2f83b04dd21fd8c7",
+    "textHash": "949ab43e701d7ab9",
     "bank": "core1-a2-fixtures.md"
   },
   {
@@ -1033,7 +1062,7 @@ export const ITEMS = [
     "objectiveId": "2.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "bf609984284821b9",
+    "textHash": "a216ac5347068712",
     "bank": "core1-a2-fixtures.md"
   },
   {
@@ -1054,7 +1083,7 @@ export const ITEMS = [
     "objectiveId": "2.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "9300fa46d8543e22",
+    "textHash": "9ca62d39ba5da3ee",
     "bank": "core1-a2-fixtures.md"
   },
   {
@@ -1075,7 +1104,7 @@ export const ITEMS = [
     "objectiveId": "2.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "b8afd8e6a1efa743",
+    "textHash": "bbea6fe234d7e06d",
     "bank": "core1-a2-fixtures.md"
   },
   {
@@ -1096,7 +1125,7 @@ export const ITEMS = [
     "objectiveId": "2.4",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "e4f78295e7285d57",
+    "textHash": "acd6e16ac5b96ae2",
     "bank": "core1-a2-fixtures.md"
   },
   {
@@ -1117,7 +1146,7 @@ export const ITEMS = [
     "objectiveId": "2.4",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "fb6569d8c239260b",
+    "textHash": "90d959efcc613500",
     "bank": "core1-a2-fixtures.md"
   },
   {
@@ -1138,7 +1167,7 @@ export const ITEMS = [
     "objectiveId": "2.4",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "6b2169b8b0120948",
+    "textHash": "3b5b3e33c1883138",
     "bank": "core1-a2-fixtures.md"
   },
   {
@@ -1159,7 +1188,7 @@ export const ITEMS = [
     "objectiveId": "2.4",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "f21f761f42aca6b7",
+    "textHash": "a7f7a39d26c9da7d",
     "bank": "core1-a2-fixtures.md"
   },
   {
@@ -1180,7 +1209,7 @@ export const ITEMS = [
     "objectiveId": "5.5",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "1b99f75c03af5cd8",
+    "textHash": "fa70484521ee4cf0",
     "bank": "core1-a2-fixtures.md"
   },
   {
@@ -1201,8 +1230,302 @@ export const ITEMS = [
     "objectiveId": "5.5",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "d5dc5f33883ff59d",
+    "textHash": "54b4787533430abc",
     "bank": "core1-a2-fixtures.md"
+  },
+  {
+    "id": "COMPTIA-A-1201/core1-a2-fixtures.md/Q11",
+    "examId": "COMPTIA-A-1201",
+    "number": "Q11",
+    "stem": "Internal server names stopped resolving on several workstations, but public websites still load normally. What does this split most suggest?",
+    "options": {
+      "A": "The default gateway is down for the whole building",
+      "B": "Every workstation lost its IP address",
+      "C": "The internal DNS zone or internal DNS service is the problem",
+      "D": "The internet service provider is blocking web traffic"
+    },
+    "keys": [
+      "C"
+    ],
+    "explanation": "Public names working means the clients can still reach *some* DNS and the internet path is up \u2014 only the internal names fail. That isolates the fault to the internal zone or the internal DNS service those names live in, not to the gateway (A) or to addressing (B), which would break public traffic too. An ISP block on web traffic (D) would not leave public sites loading.",
+    "objectiveId": "2.3",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "d0eb22088cacb647",
+    "bank": "core1-a2-fixtures.md"
+  },
+  {
+    "id": "COMPTIA-A-1201/core1-a2-fixtures.md/Q12",
+    "examId": "COMPTIA-A-1201",
+    "number": "Q12",
+    "stem": "A firewall rule must be opened so clients can send DNS name lookups to the campus DNS server. Which port should the rule allow?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "53",
+      "D": "21"
+    },
+    "keys": [
+      "C"
+    ],
+    "explanation": "DNS name lookups use port 53 (UDP for ordinary queries, TCP for larger responses). Port 80 is unencrypted HTTP, 443 is HTTPS, and 21 is FTP control \u2014 none of those carry name resolution. Opening 80 or 443 because \"that is web\" is the classic confusion: web *uses* DNS, but DNS itself is not web traffic.",
+    "objectiveId": "2.1",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "1a540d4ae5597ac1",
+    "bank": "core1-a2-fixtures.md"
+  },
+  {
+    "id": "COMPTIA-A-1201/core1-a2-fixtures.md/Q13",
+    "examId": "COMPTIA-A-1201",
+    "number": "Q13",
+    "stem": "One user cannot reach the company intranet by name. Colleagues on the same switch can. What is the safest first test on that user's workstation?",
+    "options": {
+      "A": "Reinstall the operating system",
+      "B": "Replace the network switch",
+      "C": "Record the current IP configuration and try a name lookup (nslookup) to see what fails",
+      "D": "Change the DNS server to a public resolver and leave it that way"
+    },
+    "keys": [
+      "C"
+    ],
+    "explanation": "When one host is affected and its neighbors are fine, start with a safe, reversible test: capture the configuration as it is, then measure name resolution directly. That tells you whether the client is asking, what it is asking, and what answer it gets \u2014 without changing anything you cannot undo. Reinstalling (A) and replacing the switch (B) are invasive and unsupported by the symptom; pointing DNS at a public resolver (D) may mask an internal-zone problem and leaks internal names.",
+    "objectiveId": "5.5",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "ae2754d0702abfb6",
+    "bank": "core1-a2-fixtures.md"
+  },
+  {
+    "id": "COMPTIA-A-1201/core1-a2-fixtures.md/Q14",
+    "examId": "COMPTIA-A-1201",
+    "number": "Q14",
+    "stem": "After a desk move, a laptop gets no DHCP address and shows a 169.254.x.x APIPA address. Link light is on. What should the technician verify first, before replacing any hardware?",
+    "options": {
+      "A": "That the wall port / switch port actually reaches a DHCP-enabled network (correct VLAN or uplink)",
+      "B": "That the laptop battery is fully charged",
+      "C": "That the printer driver is up to date",
+      "D": "That the monitor cable is seated"
+    },
+    "keys": [
+      "A"
+    ],
+    "explanation": "APIPA with a link light means the NIC is up but no lease arrived \u2014 the usual cause after a move is that the new port is on the wrong VLAN, unpatched, or otherwise not delivering DHCP. Verifying the port path is the safe, non-invasive first check. Battery, printer driver, and monitor cable are unrelated to address delivery and would not produce APIPA.",
+    "objectiveId": "5.5",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "046e9163a3fce2a1",
+    "bank": "core1-a2-fixtures.md"
+  },
+  {
+    "id": "COMPTIA-A-1201/core1-a2-fixtures.md/Q15",
+    "examId": "COMPTIA-A-1201",
+    "number": "Q15",
+    "stem": "A user reports that file transfers to one server are slow, while other servers feel normal. What is the safest first measurement?",
+    "options": {
+      "A": "Increase the NIC speed/duplex settings immediately",
+      "B": "Replace the workstation's network cable",
+      "C": "Compare a ping or path test to the slow server against the same test to a known-good server",
+      "D": "Defragment the workstation's hard drive"
+    },
+    "keys": [
+      "C"
+    ],
+    "explanation": "Before changing anything, measure. Comparing the slow path against a known-good one tells you whether the delay is on the network path to that server, on the server itself, or unique to the client \u2014 and it gives you a baseline to prove any later fix. Changing speed/duplex (A) and swapping cable (B) are guesses that can make things worse; defragmenting (D) does not test a network path at all.",
+    "objectiveId": "5.5",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "4ad99a8d69b16996",
+    "bank": "core1-a2-fixtures.md"
+  },
+  {
+    "id": "COMPTIA-A-1201/core1-a2-fixtures.md/Q16",
+    "examId": "COMPTIA-A-1201",
+    "number": "Q16",
+    "stem": "A technician confirmed the workstation has a valid IP address and can ping its default gateway. Name resolution still fails. What is the next step in isolating the cause?",
+    "options": {
+      "A": "Replace the workstation's NIC",
+      "B": "Reinstall the operating system",
+      "C": "Test DNS specifically \u2014 try a lookup (nslookup) and verify the configured DNS server answers",
+      "D": "Change the subnet mask and reboot"
+    },
+    "keys": [
+      "C"
+    ],
+    "explanation": "Local delivery is already proven (valid IP, gateway ping works). The remaining suspect is the name-resolution path, so the next step is to test that layer directly: does a lookup run, and does the configured DNS server reply? Replacing hardware (A) and reinstalling (B) are invasive actions with no evidence pointing at them; changing the mask (D) would disturb a working local path and does not test DNS.",
+    "objectiveId": "5.5",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "fa244a7afea2a5ec",
+    "bank": "core1-a2-fixtures.md"
+  },
+  {
+    "id": "COMPTIA-A-1202/core2-b2b4-fixtures.md/Q1",
+    "examId": "COMPTIA-A-1202",
+    "number": "Q1",
+    "stem": "An email tells the recipient their account will be closed in 24 hours unless they click a link and sign in immediately. The sender address is `support@account-verify-helpdesk.example`. Which signal most strongly indicates phishing?",
+    "options": {
+      "A": "The message mentions a 24-hour deadline",
+      "B": "The sender domain does not match the organization's real domain",
+      "C": "The message asks the user to sign in",
+      "D": "The email arrived during business hours"
+    },
+    "keys": [
+      "B"
+    ],
+    "explanation": "Urgency and a sign-in request are common in phishing, but they also appear in legitimate mail. The strongest single signal is the sender domain: `account-verify-helpdesk.example` is not the organization's domain, so the message is not from who it claims to be. Deadline pressure (A) is a tactic that raises the stakes, not proof; many real services also ask users to sign in (C); timing (D) tells you nothing. When in doubt, inspect the sender and navigate to the site yourself rather than using the link.",
+    "objectiveId": "2.5",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "f36a25755425fc29",
+    "bank": "core2-b2b4-fixtures.md"
+  },
+  {
+    "id": "COMPTIA-A-1202/core2-b2b4-fixtures.md/Q2",
+    "examId": "COMPTIA-A-1202",
+    "number": "Q2",
+    "stem": "A caller says they are from IT and need the user's password to apply an urgent security patch. What should the user do?",
+    "options": {
+      "A": "Give the password now so the patch is not delayed",
+      "B": "Give only the username, not the password",
+      "C": "Decline and verify the request through a known IT channel",
+      "D": "Change the password after the call and then share it"
+    },
+    "keys": [
+      "C"
+    ],
+    "explanation": "IT staff do not need a user's password to apply a patch \u2014 that request is a social-engineering attempt (vishing), not a support procedure. The correct next action is to hang up and verify through a channel the user already trusts (the published help desk number, the IT portal, the known manager). Giving the password (A) hands over the account; sharing only a username (B) still confirms the user is a live target and helps the attacker; changing the password afterwards (D) does not undo a password that was already shared.",
+    "objectiveId": "2.5",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "f8f4d48a39e57df0",
+    "bank": "core2-b2b4-fixtures.md"
+  },
+  {
+    "id": "COMPTIA-A-1202/core2-b2b4-fixtures.md/Q3",
+    "examId": "COMPTIA-A-1202",
+    "number": "Q3",
+    "stem": "A user receives an unexpected invoice attachment from a vendor they do recognize, but the message urges them to open it today to avoid a late fee, and the reply-to address differs from the usual vendor contact. Which response is safest? ## Domain 4: Operational Procedures (220-1202) ---",
+    "options": {
+      "A": "Open the attachment quickly and verify the amount later",
+      "B": "Forward the email to the vendor's known contact and ask whether they sent it",
+      "C": "Reply to the message and ask whether it is legitimate",
+      "D": "Delete the message without telling anyone"
+    },
+    "keys": [
+      "B"
+    ],
+    "explanation": "The mix of urgency, an unexpected attachment, and a mismatched reply-to is a classic phishing shape. The safe test is out-of-band verification: contact the vendor using a known-good address or phone number you already had, not the one in the suspicious message. Opening the attachment (A) risks malware; replying to the message (C) talks to whoever wrote it, which proves nothing; deleting silently (D) removes evidence and leaves the next target uninformed.",
+    "objectiveId": "2.5",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "206a921d66dcd70a",
+    "bank": "core2-b2b4-fixtures.md"
+  },
+  {
+    "id": "COMPTIA-A-1202/core2-b2b4-fixtures.md/Q4",
+    "examId": "COMPTIA-A-1202",
+    "number": "Q4",
+    "stem": "A technician is about to take over a ticket someone else started. Which ticket field is most important for picking up the work without re-diagnosing from zero?",
+    "options": {
+      "A": "The technician's employee ID",
+      "B": "The time the ticket was created",
+      "C": "The symptom as reported, plus the tests already performed",
+      "D": "The priority level chosen by the help desk software"
+    },
+    "keys": [
+      "C"
+    ],
+    "explanation": "The handoff value of a ticket is the symptom and the trail of tests already run \u2014 what was ruled out is as important as what was found. That history is what lets the next technician start at the frontier instead of repeating work. Employee ID (A) is attribution, not diagnosis; creation time (B) helps with SLAs but not with the fix; the priority label (D) routes the work, it does not explain the fault.",
+    "objectiveId": "4.1",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "cbe18e5ec7ed2bdf",
+    "bank": "core2-b2b4-fixtures.md"
+  },
+  {
+    "id": "COMPTIA-A-1202/core2-b2b4-fixtures.md/Q5",
+    "examId": "COMPTIA-A-1202",
+    "number": "Q5",
+    "stem": "A resolution note says only: \"Fixed it.\" What is missing that the next technician most needs?",
+    "options": {
+      "A": "The user's phone number",
+      "B": "The cause, the change made, and how the fix was verified",
+      "C": "A screenshot of the desktop after the fix",
+      "D": "The model number of the workstation"
+    },
+    "keys": [
+      "B"
+    ],
+    "explanation": "A resolution note has to carry cause \u2192 change \u2192 verification. Without those, nobody can tell whether the right problem was solved, whether it will recur, or how to undo the change. Contact details (A) and hardware model (D) are useful metadata but they do not explain the fix; a desktop screenshot (C) rarely proves the user's own workflow works again, which is the verification that matters.",
+    "objectiveId": "4.1",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "dfbba0b2e81446c1",
+    "bank": "core2-b2b4-fixtures.md"
+  },
+  {
+    "id": "COMPTIA-A-1202/core2-b2b4-fixtures.md/Q6",
+    "examId": "COMPTIA-A-1202",
+    "number": "Q6",
+    "stem": "A workstation could not resolve names. The technician found the DNS server field pointed at a decommissioned address, changed it to the correct server, and confirmed the user can open the intranet site by name again. Which resolution note is most useful?",
+    "options": {
+      "A": "\"Network OK now.\"",
+      "B": "\"Changed DNS, user happy.\"",
+      "C": "\"Cause: DNS server field set to decommissioned 10.0.0.9. Change: set DNS to 10.0.0.10. Verified: user opened intranet by name; nslookup resolves.\"",
+      "D": "\"Ticket closed per user request.\""
+    },
+    "keys": [
+      "C"
+    ],
+    "explanation": "Option C names the symptom layer (DNS), the actual cause, the exact change, and a verification the user cares about plus a measurable test. That is the note a stranger can act on. \"Network OK now\" (A) hides every useful fact; \"Changed DNS, user happy\" (B) records an action without cause or proof; closing per user request (D) may end the SLA clock but leaves no technical record.",
+    "objectiveId": "4.1",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "8a70a0f209103e67",
+    "bank": "core2-b2b4-fixtures.md"
+  },
+  {
+    "id": "COMPTIA-A-1202/core2-b2b4-fixtures.md/Q7",
+    "examId": "COMPTIA-A-1202",
+    "number": "Q7",
+    "stem": "Before changing the DHCP scope on a production server that three floors of users depend on, what should the technician do first?",
+    "options": {
+      "A": "Make the change quickly during business hours so users can report problems immediately",
+      "B": "Document the planned change, the expected result, the verification step, and the rollback",
+      "C": "Reboot the DHCP server to clear any stale leases",
+      "D": "Change one setting at a time with no written record, to keep the work fast"
+    },
+    "keys": [
+      "B"
+    ],
+    "explanation": "Change control at this scale is: write down what you will do before you do it. The note should cover the change, what you expect, how you will tell it worked, and how you will put it back if it does not. Changing live without a plan (A/D) turns a controlled edit into an outage with no rollback; rebooting first (C) is an invasive action that is not required to plan a scope change and may itself disrupt service.",
+    "objectiveId": "4.2",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "27bceb3aa6a5c7a1",
+    "bank": "core2-b2b4-fixtures.md"
+  },
+  {
+    "id": "COMPTIA-A-1202/core2-b2b4-fixtures.md/Q8",
+    "examId": "COMPTIA-A-1202",
+    "number": "Q8",
+    "stem": "A user keeps their only backup on an external drive that stays plugged into the same desk as the workstation. What is the biggest risk of this setup?",
+    "options": {
+      "A": "The drive is too slow for large files",
+      "B": "A single local copy can be lost to theft, fire, or ransomware along with the workstation",
+      "C": "External drives cannot store more than one backup generation",
+      "D": "The user has to remember to plug the drive in"
+    },
+    "keys": [
+      "B"
+    ],
+    "explanation": "This is one extra copy, on one medium, at one location \u2014 the opposite of the 3-2-1 idea. Ransomware that encrypts the workstation often reaches attached drives; theft or fire takes both copies at once. Speed (A) is a performance concern, not a backup-design failure; drives can hold many generations (C); remembering to plug in (D) is a reliability annoyance, not the structural risk of having no separated copy.",
+    "objectiveId": "4.3",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "b981921abfa0a7fd",
+    "bank": "core2-b2b4-fixtures.md"
   },
   {
     "id": "COMPTIA-NET-009/net009-n5-fixtures.md/Q1",

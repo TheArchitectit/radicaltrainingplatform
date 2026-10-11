@@ -25,8 +25,8 @@
       "weightPercent": 23,
       "studyItemAllocation": 14,
       "objectives": [
-        { "id": "2.1", "title": "Compare and contrast Transmission Control Protocol (TCP) and User Datagram Protocol (UDP) ports, protocols, and their purposes.", "lessonIds": [] },
-        { "id": "2.2", "title": "Explain wireless networking technologies.", "lessonIds": [] },
+        { "id": "2.1", "title": "Compare and contrast Transmission Control Protocol (TCP) and User Datagram Protocol (UDP) ports, protocols, and their purposes.", "lessonIds": ["a2"] },
+        { "id": "2.2", "title": "Explain wireless networking technologies.", "lessonIds": ["a2"] },
         { "id": "2.3", "title": "Summarize services provided by networked hosts.", "lessonIds": ["a2"] },
         { "id": "2.4", "title": "Explain common network configuration concepts.", "lessonIds": ["a2"] },
         { "id": "2.5", "title": "Compare and contrast common networking hardware devices.", "lessonIds": [] },

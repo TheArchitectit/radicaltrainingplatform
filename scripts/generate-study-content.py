@@ -42,13 +42,13 @@ ANSWER_LINE = re.compile(
 # banks listed here; draft provenance status is the honest release state.
 RELEASED_LESSONS = {
     "COMPTIA-A-1201": ["a2"],
-    "COMPTIA-A-1202": [],
+    "COMPTIA-A-1202": ["b4"],
     "COMPTIA-NET-009": ["n5"],
     "NCA-75": [],
 }
 RELEASED_BANKS = {
     "COMPTIA-A-1201": ["core1-a2-fixtures.md"],
-    "COMPTIA-A-1202": [],
+    "COMPTIA-A-1202": ["core2-b2b4-fixtures.md"],
     "COMPTIA-NET-009": ["net009-n5-fixtures.md"],
     "NCA-75": [],
 }
