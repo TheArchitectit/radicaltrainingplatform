@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text.Json;
 using RadicalTrainingPlatform.Core;
 using Shouldly;
 using Xunit;
@@ -14,7 +15,7 @@ public class SessionStoreTests
     /// In-memory IFileProvider so the store is tested against real logic
     /// (round-trip, existence, traversal) without touching disk.
     /// </summary>
-    private sealed class FakeFiles : IFileProvider
+    private class FakeFiles : IFileProvider
     {
         public readonly Dictionary<string, string> Files = new();
         public readonly HashSet<string> Dirs = new();
@@ -32,7 +33,7 @@ public class SessionStoreTests
         }
         public string[] GetDirectories(string directory) => Array.Empty<string>();
         public string ReadAllText(string path) => Files[path];
-        public void WriteAllText(string path, string content) => Files[path] = content;
+        public virtual void WriteAllText(string path, string content) => Files[path] = content;
         public void DeleteFile(string path) => Files.Remove(path);
         public void CreateDirectory(string path) => Dirs.Add(path);
         public string GetCurrentDirectory() => "/app";
@@ -101,5 +102,54 @@ public class SessionStoreTests
         _store.Save("sess3", "{\"v\":1}");
         _store.Save("sess3", "{\"v\":2}");
         _store.Load("sess3").ShouldBe("{\"v\":2}");
+    }
+
+    // ─── Error paths (T-16 save/reload/error) ──────────────────────
+
+    /// <summary>File provider whose writes fail (disk full / denied).</summary>
+    private sealed class FailingWriteFiles : FakeFiles
+    {
+        public override void WriteAllText(string path, string content)
+            => throw new IOException("disk full");
+    }
+
+    [Fact]
+    public void Save_WriteFailure_Propagates_NeverClaimsSuccess()
+    {
+        var files = new FailingWriteFiles();
+        var store = new JsonSessionStore(files, "ErrApp");
+
+        Should.Throw<IOException>(() => store.Save("s1", "{}"));
+        store.Has("s1").ShouldBeFalse("a failed write must not leave a readable session");
+    }
+
+    [Fact]
+    public void Load_CorruptFile_Throws_NotSilentNull()
+    {
+        // Corrupt is not the same as "no progress" — Load must not paper over
+        // a damaged file by returning null (which callers treat as first-run).
+        _store.Save("corrupt", "{}");
+        var path = Path.Combine("/appdata", "TestApp", "sessions", "corrupt.json");
+        _files.Files[path] = "{ not json ";
+
+        Should.Throw<JsonException>(() => _store.Load("corrupt"));
+    }
+
+    [Fact]
+    public void Load_EmptyFile_Throws_NotSilentNull()
+    {
+        _store.Save("empty", "{}");
+        var path = Path.Combine("/appdata", "TestApp", "sessions", "empty.json");
+        _files.Files[path] = "";
+
+        Should.Throw<JsonException>(() => _store.Load("empty"));
+    }
+
+    [Fact]
+    public void SaveThenLoad_UnsignedJson_RoundTrips()
+    {
+        // Non-object payloads (arrays, strings) must survive the wrap/unwrap.
+        _store.Save("arr", "[1,2,3]");
+        _store.Load("arr").ShouldBe("[1,2,3]");
     }
 }

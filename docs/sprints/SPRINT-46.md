@@ -18,7 +18,7 @@
 | S46-03 (T-13) | `ticket-lab.js` renderer; aplus-dns-01 + netplus-gw-01 with validators and negative fixtures | REQ-SC-01..06 | 3 | ✅ |
 | S46-04 (T-14) | Scenario validator sweep repairs (all 44; us-bucket-01) | R-02, REQ-DEMO-06 | 3 | ✅ |
 | S46-05 (T-15) | Bridge handlers: real effects or removal; desktop SessionStore consumption | R-05, R-06 | 2 | ✅ |
-| S46-06 (T-16) | Catalog tests, multi-select scoring tests, save/reload/error tests | REQ-MAN-05, L-06 | 2 | ⚪ |
+| S46-06 (T-16) | Catalog tests, multi-select scoring tests, save/reload/error tests | REQ-MAN-05, L-06 | 2 | ✅ |
 | S46-07 (T-17) | Lint extension + manifest validator in CI | SPEC-10 10.6 | 2 | ⚪ |
 | S46-08 (T-18) | Coverage threshold enforcement | CI-02 | 2 | ⚪ |
 | S46-09 (T-37) | Semantic item identity for legacy banks + collision detector; retry outcome-set policy | R-13, R-14 | 2 | ⚪ |
@@ -138,9 +138,15 @@
 **As a** platform engineer, **I want** catalog merge and multi-select scoring pinned by tests, **so that** legacy + manifest worlds coexist safely.
 
 **Acceptance Criteria:**
-- [ ] Catalog tests cover manifest + legacy merge (TM-12)
-- [ ] Multi-select scoring tests match Core fixture vectors exactly
-- [ ] Save/reload/error-path tests pass
+- [x] Catalog tests cover manifest + legacy merge (TM-12)
+- [x] Multi-select scoring tests match Core fixture vectors exactly
+- [x] Save/reload/error-path tests pass
+
+**Notes (S46-06 close, 2026-10-10):**
+- **Grading parity pinned on both sides.** `tests/gates/web/practice-grading.mjs` (S46-01) pins the JS `grade()` port; `ScoringVectorParityTests.cs` now pins Core `ExamSessionViewModel.Grade` against the *exact same* vectors — choice `['B']`, multi `['A','C']`, ordered `['B','D','A']` — with the same reason strings (`set-mismatch`, `sequence-mismatch`, `missing-step`, `extra-token`, `duplicate-step`). `InternalsVisibleTo` added to Core so the test can call the `internal` Grade directly; no public API change.
+- **Catalog merge (TM-12)** was already covered by `ManifestCatalogTests` (10 tests: manifest identity wins over filename, legacy `DeriveExamCode` fallback, duplicate exam ID throws, duplicate question ID within exam throws, objective coverage from manifest, blueprint manifest-override + legacy fallback, composition-root registration). Added `Catalog_SameQuestionIdInDifferentExams_DoesNotThrow` to pin REQ-MAN-05's namespacing: the same numeric question ID in two packs is legal because progress keys carry `examId`.
+- **Save/reload/error-path.** `SessionStoreTests` gained write-failure honesty (`Save_WriteFailure_Propagates_NeverClaimsSuccess` — a failed write leaves no readable session), corrupt-entry and empty-file load paths (`Load_CorruptFile_Throws_NotSilentNull`, `Load_EmptyFile_Throws_NotSilentNull` — corrupt is *not* papered over as "no progress"), and non-object payload round-trip. `progress-store.mjs` gained the REQ-MAN-05 collision test: same `itemId` in two exams produces two independent records.
+- **Not verified:** no browser E2E of multi-select grading (node-level vectors only, same posture as the JS fixture); `FailingWriteFiles` is a stub `IFileProvider`, not a real disk-full condition; corrupt-load behavior is pinned as *throwing* — callers (CefBridge) catch and surface an error response, but no UI toast path for a corrupt session file was exercised.
 
 ### S46-07 (T-17): Lint Extension + Manifest Validator in CI
 **As a** release manager, **I want** the new content tree linted, **so that** nothing ships unlinted.

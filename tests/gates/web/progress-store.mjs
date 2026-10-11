@@ -82,4 +82,22 @@ await runner.test('recordScenario persists scenario completion', async () => {
     assert(rec.completedAt, 'completedAt set');
 });
 
+// REQ-MAN-05: progress keys are namespaced progress/<examId>/<itemId> so the
+// same itemId in two exams can never collide.
+await runner.test('same itemId in two exams does not collide (REQ-MAN-05)', async () => {
+    await progress.recordItem('COMPTIA-A-1201', 'shared.md/Q1', {
+        isCorrect: true, reason: '',
+    });
+    await progress.recordItem('COMPTIA-NET-009', 'shared.md/Q1', {
+        isCorrect: false, reason: 'set-mismatch',
+    });
+
+    const a = await progress.getItem('COMPTIA-A-1201', 'shared.md/Q1');
+    const n = await progress.getItem('COMPTIA-NET-009', 'shared.md/Q1');
+    assert(a, 'A+ record exists');
+    assert(n, 'Network+ record exists');
+    assertEqual(a.isCorrect, true, 'A+ outcome must not be overwritten by Network+');
+    assertEqual(n.isCorrect, false);
+});
+
 process.exit(runner.done('progress-store'));

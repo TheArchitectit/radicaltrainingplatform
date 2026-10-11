@@ -172,6 +172,26 @@ public class ManifestCatalogTests : IDisposable
     }
 
     [Fact]
+    public void Catalog_SameQuestionIdInDifferentExams_DoesNotThrow()
+    {
+        // REQ-MAN-05: question IDs are namespaced per exam, so the same
+        // numeric ID in two packs is legal — progress keys carry the examId.
+        WriteFile("content/exams/TEST-EX/exam.json", MinimalExamJson);
+        WriteFile("content/exams/TEST-EX/questions/part1.md",
+            "### Q1. One?\n\n- A) a\n- B) b\n\n**Answer: A**\n\nBecause.\n");
+        WriteFile("content/exams/OTHER-EX/exam.json",
+            MinimalExamJson.Replace("\"TEST-EX\"", "\"OTHER-EX\""));
+        WriteFile("content/exams/OTHER-EX/questions/part1.md",
+            "### Q1. Same number, different exam?\n\n- A) a\n- B) b\n\n**Answer: B**\n\nBecause.\n");
+
+        var catalog = MakeCatalog();
+        var items = catalog.Build();
+
+        items.ShouldContain(i => i.ExamCode == "TEST-EX" && i.QuestionCount == 1);
+        items.ShouldContain(i => i.ExamCode == "OTHER-EX" && i.QuestionCount == 1);
+    }
+
+    [Fact]
     public void Catalog_ObjectiveCoverage_ComputesFromManifest()
     {
         WriteFile("content/exams/TEST-EX/exam.json", MinimalExamJson);

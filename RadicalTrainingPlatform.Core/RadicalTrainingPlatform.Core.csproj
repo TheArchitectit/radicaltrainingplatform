@@ -14,4 +14,10 @@
     <PackageReference Include="QuestPDF" Version="2025.1.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <!-- ScoringVectorParityTests pins ExamSessionViewModel.Grade against the
+         same vectors tests/gates/web/practice-grading.mjs pins in JS. -->
+    <InternalsVisibleTo Include="RadicalTrainingPlatform.Core.Tests" />
+  </ItemGroup>
+
 </Project>
