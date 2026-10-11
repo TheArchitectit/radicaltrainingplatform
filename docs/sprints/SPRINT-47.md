@@ -22,12 +22,16 @@
 | S47-07 (T-25) | Packaging repairs PKG-01..04 + clean-install tests | SPEC-10 10.5 | 3 | 🟡 |
 | S47-08 (T-41) | Installed-bundle content independence; Legacy bridge narrowing; release-link truth | R-19 | 2 | 🟡 |
 | S47-09 (T-45) | ShellCheck gate + packaging behavior fixtures | R-24 | 1 | 🟡 |
+| S47-10 (T-26) | Demo host rehearsal (keyboard half shipped; host half blocked) | REQ-DEMO-05, TM-48/50/51 | 3 | 🟡 |
 
 **Status key:** ✅ shipped and verified on this host · 🟡 shipped and gated, with named verification gaps
 listed under the row's *Not verified* notes in [SPRINT-47-EVIDENCE.md](SPRINT-47-EVIDENCE.md) · ⚪ not started.
 
 **Evidence:** each completed row's shipped notes, findings, gates run and not-verified detail live in
-[SPRINT-47-EVIDENCE.md](SPRINT-47-EVIDENCE.md), split out of this file when it passed the 500-line
+[SPRINT-47-EVIDENCE.md](SPRINT-47-EVIDENCE.md) — except S47-10, whose rehearsal log is archived in
+[../qa/release-evidence/2026-10-23-rehearsal.md](../qa/release-evidence/2026-10-23-rehearsal.md) to
+keep this file's evidence companion under the 500-line limit. SPRINT-47-EVIDENCE.md, split out of this
+file when it passed the 500-line
 document limit (CLAUDE.md).
 
 ## Sprint Backlog — Part D (Oct 20–22)
@@ -240,9 +244,42 @@ the environment; full detail in the evidence file.
 ### S47-10 (T-26): Demo Host Rehearsal
 **Acceptance Criteria:**
 - [ ] On the actual demo host: install → boot → full loop (pick track, read lesson, practice, complete scenario, reset) with network unplugged except optional tutor call
-- [ ] Keyboard-only walkthrough passes; projector-distance readability verified
-- [ ] Reset-between-groups verified with reseed verification
-- [ ] Critical flow matrix (TM-50) entries for PWA-on-ChromeOS and PWA-on-presenter-host verified with recorded evidence
+- [x] **Keyboard-only walkthrough passes** — the automated half of TM-48 ("manual + automated a11y"), which S47-03 handed forward to this row. `tests/e2e/rehearsal-web.mjs` drives all seven named critical flows (PKG:141) through a real browser using only key events, never `.click()`. 28 PASS / 2 FAIL; the two failures are real demo-path defects, recorded below and in the evidence file. **Projector-distance readability is NOT verified** — no projector on this host; the harness measures reachability, not rendered legibility at distance.
+- [ ] **Partly verified:** reset-between-groups — the mechanism passes by keyboard (reseed count + outcome render, learner keys cleared); **"between groups" on the demo host, at the podium, is not verified**
+- [ ] Critical flow matrix (TM-50) entries for PWA-on-ChromeOS and PWA-on-presenter-host verified with recorded evidence — **no ChromeOS device or presenter host available; no evidence recorded**
+
+**Files:**
+- `tests/e2e/rehearsal-web.mjs` (new) — keyboard-only rehearsal of the seven critical flows; zero npm deps; deliberately not wired into CI (browser legs belong to the hosted runner, and it is knowingly red until the two gaps close)
+- `tests/gates/run_rehearsal_fixtures.sh` (new) — the fixture pair, with the live assertion inverted (see below)
+- `docs/qa/release-evidence/2026-10-23-rehearsal.md` (new) — the archived log, findings and not-verified list
+
+**Findings — two real demo-path defects, recorded not fixed** (S47-10 is a rehearsal row; each fix
+reaches well beyond the demo path and belongs to its own row):
+- **REQ-UI-04 gap** — a cold load does not surface stored progress. The scored answer is in storage
+  after a reload (2 item records) but `.practice-prior-note` never renders; the same view on a
+  client-side route change shows *"Saved progress: 0/1 previously answered in this exam pack."* So
+  `PracticeView` reads the store before it can see the records. Effect: a presenter who opens the app
+  cold sees a learner with no history.
+- **REQ-DEMO-05 gap** — the demo loop's scenario leg is mouse-only to enter. The `/pc/scenarios` nav
+  item has no `href` (`index.html:125`), so it is not in the tab order; 49 nav items share the shape.
+  The ticket lab **inside** the scenario is fully keyboard-operable — `aplus-dns-01` completes every
+  step by Tab/Space/Enter and the ticket resolves — so the defect is shell navigation, not the
+  scenario.
+- **Observation:** focus after reset lands on `<BUTTON#demo-reset>`; the view is re-rendered via
+  `replaceChild` and nothing restores focus. Focus is on a live node (not stranded), but not restored
+  to a meaningful place — TM-48's "focus predictable after reset" is only partly met.
+
+**Gate:** `run_rehearsal_fixtures.sh` PASS (exit 0). Because the live tree is expected to fail, its
+live assertion is **inverted** from the other fixture runners: the de-tabbed-option copy must FAIL and
+name the option row (proving the check detects a control removed from the tab order), the unmodified
+copy scoped to today's green legs (`REHEARSAL_FLOWS=1,2,3,4,7`) must PASS, and the live tree must FAIL
+with **exactly** the two recorded gaps so a new regression cannot hide behind them. The runner is
+deliberately **not wired into CI** — unlike `run_smoke_fixtures.sh` in `pwa-deploy.yml` — because its
+live assertion expects the artifact to be red, so a deploy job running it would go red precisely when
+someone closes a gap. Reasoning recorded in the evidence file.
+
+**Evidence:** full log, findings and not-verified detail are in
+[../qa/release-evidence/2026-10-23-rehearsal.md](../qa/release-evidence/2026-10-23-rehearsal.md).
 
 ### S47-11 (T-27): Tutor Go/No-Go
 - Evaluation report from the rehearsed set; explicit go/no-go; fallback labeling verified if no-go
