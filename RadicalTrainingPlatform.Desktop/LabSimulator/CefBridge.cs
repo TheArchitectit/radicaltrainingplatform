@@ -81,7 +81,9 @@ public sealed class CefBridge : IDisposable
     /// <returns>The JSON-serialized result for the JS promise.</returns>
     public object? Call(string json)
     {
-        if (_disposed) return null;
+        // R-16 / NET-07: a cached bridge must not silently act as a dead
+        // host. Reuse-after-dispose throws loudly.
+        ObjectDisposedException.ThrowIf(_disposed, this);
 
         try
         {
@@ -139,17 +141,27 @@ public sealed class CefBridge : IDisposable
     /// </summary>
     public void PostToJs(string type, object? payload = null)
     {
-        if (_disposed) return;
+        // R-16: same guard as Call — a disposed bridge must not send.
+        ObjectDisposedException.ThrowIf(_disposed, this);
         var msg = JsonSerializer.Serialize(new { type, payload });
         ExecuteScriptAsync(msg);
     }
 
     private void PostResponse(string id, bool success, object? data = null, string? error = null)
     {
-        if (success)
-            PostToJs("response", new { id, success, data });
-        else
-            PostToJs("response", new { id, success, error });
+        try
+        {
+            if (success)
+                PostToJs("response", new { id, success, data });
+            else
+                PostToJs("response", new { id, success, error });
+        }
+        catch (ObjectDisposedException)
+        {
+            // Shutdown race, not reuse: the bridge was disposed while a
+            // handler was in flight. The response has no host left to land
+            // on — drop it rather than faulting the fire-and-forget task.
+        }
     }
 
     /// <summary>

@@ -56,11 +56,21 @@ public partial class MainWindow : Window
     {
         InitializeComponent();
         Loaded += OnLoaded;
+        // R-16: the lab view is kept alive across navigation and disposed
+        // exactly once here (NET-07: the old code disposed on navigate and
+        // left a dead instance cached for reuse).
+        Closed += OnWindowClosed;
 
         _examRepository = services.GetRequiredService<IExamRepository>();
         _questionParser = services.GetRequiredService<IQuestionParser>();
         _blueprintService = services.GetRequiredService<IBlueprintService>();
         _referenceService = services.GetRequiredService<IReferenceService>();
+    }
+
+    private void OnWindowClosed(object? sender, EventArgs e)
+    {
+        _labView?.Dispose();
+        _labView = null;
     }
 
     private void OnLoaded(object? sender, RoutedEventArgs e)
@@ -128,8 +138,11 @@ public partial class MainWindow : Window
     {
         if (MainContent.Content is QuestionView qv)
             qv.DataContext = null;
-        if (MainContent.Content is LabSimulator.LabSimulatorView lab)
-            lab.Dispose();
+        // R-16 / NET-07 ownership policy: the lab view is KEPT ALIVE across
+        // navigation (LabSimulatorView's own lifetime note forbids disposing
+        // on detach). It is disposed exactly once, on window close, below.
+        // The old code disposed here and left _labView cached — the next
+        // Lab Simulator click reused a dead host.
         _session = null;
         // Leaving review (via any nav button) ends the review return path.
         if (InReviewMode)
@@ -393,6 +406,12 @@ public partial class MainWindow : Window
     private void OnLabSimulatorClicked(object? sender, RoutedEventArgs e)
     {
         ReleaseCurrentView();
+        // R-16: never hand a disposed instance back to the visual tree.
+        // Keep-alive policy means the cache is live until window close; if
+        // anything disposed it out from under us, drop it and build a new
+        // one rather than reusing a dead host.
+        if (_labView is { IsDisposed: true })
+            _labView = null;
         _labView ??= new LabSimulator.LabSimulatorView();
         MainContent.Content = _labView;
     }

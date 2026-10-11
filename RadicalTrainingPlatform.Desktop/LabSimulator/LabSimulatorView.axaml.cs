@@ -34,6 +34,9 @@ public partial class LabSimulatorView : UserControl, IDisposable
     private bool _cefInitialized;
     private bool _disposed;
 
+    /// <summary>R-16: callers (and tests) can observe the disposed state.</summary>
+    public bool IsDisposed => _disposed;
+
     public LabSimulatorView()
     {
         InitializeComponent();
@@ -51,7 +54,13 @@ public partial class LabSimulatorView : UserControl, IDisposable
 
     private void OnLoaded(object? sender, RoutedEventArgs e)
     {
-        if (_cefInitialized || _disposed) return;
+        // R-16 / NET-07: a disposed view must never be re-attached and
+        // silently dead. Throw loudly so the ownership bug that cached a
+        // disposed instance fails at the reuse site, not as a blank screen.
+        if (_disposed)
+            throw new ObjectDisposedException(nameof(LabSimulatorView),
+                "A disposed LabSimulatorView was re-attached to the visual tree. Create a new instance instead of reusing a disposed one (NET-07/R-16).");
+        if (_cefInitialized) return;
         TryStartCef();
     }
 
@@ -95,6 +104,21 @@ public partial class LabSimulatorView : UserControl, IDisposable
 
     private void TryStartCef()
     {
+        // CEF's Linux backend aborts the whole process (uncatchable — it
+        // calls exit(), not throw) when no X/Wayland display is available.
+        // Detect that before touching native code so the fallback panel is
+        // shown instead of the app dying — also what makes the ownership
+        // fixtures runnable on the headless fleet runner.
+        if (OperatingSystem.IsLinux()
+            && string.IsNullOrEmpty(Environment.GetEnvironmentVariable("DISPLAY"))
+            && string.IsNullOrEmpty(Environment.GetEnvironmentVariable("WAYLAND_DISPLAY")))
+        {
+            ShowError(
+                "Lab Simulator requires a graphical session (X11 or Wayland). " +
+                "Run the desktop app from a desktop environment.");
+            return;
+        }
+
         try
         {
             // 1) Probe whether the native lib is resolvable. This call throws
@@ -239,7 +263,11 @@ public partial class LabSimulatorView : UserControl, IDisposable
     /// </summary>
     public void ExecuteScript(string script)
     {
-        if (_disposed || _browser == null) return;
+        // R-16: reuse-after-dispose throws rather than acting on a dead host.
+        if (_disposed)
+            throw new ObjectDisposedException(nameof(LabSimulatorView),
+                "ExecuteScript on a disposed LabSimulatorView (NET-07/R-16).");
+        if (_browser == null) return;
         try
         {
             // AvaloniaCefBrowser exposes an ExecuteJavaScript method

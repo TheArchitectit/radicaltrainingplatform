@@ -23,7 +23,7 @@
 | S46-08 (T-18) | Coverage threshold enforcement | CI-02 | 2 | ✅ |
 | S46-09 (T-37) | Semantic item identity for legacy banks + collision detector; retry outcome-set policy | R-13, R-14 | 2 | ✅ |
 | S46-10 (T-38) | Study-continuation restore; streak/Skip repairs | R-15, R-17 | 2 | ✅ |
-| S46-11 (T-39) | Disposal guards on cached simulator references | R-16 | 1 | ⚪ |
+| S46-11 (T-39) | Disposal guards on cached simulator references | R-16 | 1 | ✅ |
 | S46-12 (T-40) | PDF export: canonical ID vs display label; vendor-neutral footer; atomic session save + corrupt recovery | R-18, R-20 | 2 | ⚪ |
 | S46-13 (T-44) | Storage recovery boundary tests (corrupt entry, quota, blocked) | R-23 | 1 | ⚪ |
 | S46-14 (T-42) | CefGlue NoSandbox scoped hardening review + navigation allowlist decision | R-21 | 1 | ⚪ |
@@ -213,7 +213,18 @@
 ### S46-11 (T-39): Disposal Guards
 **As a** platform engineer, **I want** cached simulator references disposed safely, **so that** no resource leak degrades the demo host.
 
-**Files:** Desktop/CefGlue simulator reference caches (per R-16)
+**Acceptance Criteria:**
+- [x] Unit fixtures prove the reuse-after-dispose guard (R-16 / TM-84)
+- [x] Manual native revisit listed as prescribed-but-not-yet-executed evidence
+- [x] Ownership policy recorded: keep-alive across navigation, dispose once on window close
+
+**Notes (S46-11 close, 2026-10-10):**
+- **Root cause (NET-07).** `MainWindow.ReleaseCurrentView` disposed `LabSimulatorView` on every navigate while leaving `_labView` cached; the next Lab Simulator click reused a dead host (`OnLoaded` silently returned). The two classes' lifetime decisions disagreed — `LabSimulatorView`'s own comment forbids dispose-on-detach (CefRuntime is process-wide), MainWindow did exactly that.
+- **Ownership policy.** Keep-alive across navigation; dispose exactly once on window close (`Closed += OnWindowClosed`). `ReleaseCurrentView` no longer touches the lab view. `OnLabSimulatorClicked` drops a disposed cache entry before `??=`, so an out-of-band dispose cannot be re-shown.
+- **Guards (defense-in-depth).** `CefBridge.Call`/`PostToJs` throw `ObjectDisposedException` (`ThrowIf`) instead of acting on a dead host. `CefBridge.PostResponse` catches that exception as a shutdown race (in-flight handler after dispose) and drops the response rather than faulting the fire-and-forget task. `LabSimulatorView` exposes `IsDisposed`; `ExecuteScript` and `OnLoaded` throw on a disposed instance (both previously silent-returned).
+- **Display guard.** CEF's Linux backend aborts the process (`exit()`, uncatchable) when no X/Wayland display exists. `TryStartCef` now detects that before touching native code and shows the fallback panel — required for the ownership fixtures to run on the headless fleet runner, and a real robustness fix for headless SSH sessions.
+- **Fixtures (`DisposalGuardTests.cs`, 11 tests).** CefBridge: Call/PostToJs after Dispose throw; Dispose is idempotent; Call before Dispose works. LabSimulatorView: ExecuteScript after Dispose throws; Dispose is idempotent; re-attach (synchronous `Loaded` raise) throws; fresh instance is not disposed. MainWindow: lab survives navigation (same live instance, `IsDisposed` false); a disposed cache entry is replaced, never re-shown; window close disposes the lab view. Full Desktop suite green: 31/31 (20 prior smoke + prior CefBridgeHandlerTests + these 11).
+- **Not verified:** the manual native second-visit check (real CefGlue browser, navigate away, come back, confirm the page reloads) is **prescribed-but-not-yet-executed** evidence — no display server in this environment. It belongs in the release record as unexecuted-until-run, not as claimed proof (R-16's explicit boundary). The re-attach fixture raises `Loaded` synchronously because Avalonia schedules the real `Loaded` on the dispatcher, where a handler throw becomes an unobserved task exception rather than a test-visible fault; the production throw still fires on the real attach path (observed in the run log). CEF `CefRuntime.Shutdown`-exactly-once on process exit is not asserted (no live CEF in tests).
 
 ### S46-12 (T-40): PDF Export Truth
 **As a** learner, **I want** exports that tell the truth, **so that** printed output matches the app.
