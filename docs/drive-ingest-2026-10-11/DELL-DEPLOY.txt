@@ -1,0 +1,6 @@
+Copy-paste deploy for the Dell box (lands the 13 new bank files in the repo and lints them):
+
+cd /tmp && curl -L -o banks.zip "https://drive.google.com/uc?export=download&id=1nFWAjLSuxp53YLdKkhi1y8KRR6COmj18" && rm -rf /tmp/rtp-banks && unzip -q banks.zip -d /tmp/rtp-banks && cp -r /tmp/rtp-banks/exams/* ~/radicaltrainingplatform/content/exams/ && cd ~/radicaltrainingplatform && python3 scripts/lint-content.py
+
+Expected lint output: the new file counts alongside existing banks (780 new questions across 13 files).
+Adjust ~/radicaltrainingplatform if the clone lives elsewhere.

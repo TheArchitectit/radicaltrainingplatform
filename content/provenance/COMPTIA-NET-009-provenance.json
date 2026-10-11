@@ -1,0 +1,2431 @@
+{
+ "exam": "COMPTIA-NET-009",
+ "item_count": 300,
+ "items": [
+  {
+   "id": "COMPTIA-NET-009-Q001",
+   "objective": "1.1",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 1.1 OSI reference model",
+   "demoCandidate": true,
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q002",
+   "objective": "1.1",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 1.1 OSI Layer 2",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q003",
+   "objective": "1.1",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 1.1 OSI Layer 3",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q004",
+   "objective": "1.1",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 1.1 OSI Layer 4",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q005",
+   "objective": "1.1",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 1.1 OSI Layer 6",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q006",
+   "objective": "1.2",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 1.2 networking appliances and functions",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q007",
+   "objective": "1.2",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 1.2 IDS vs IPS",
+   "demoCandidate": true,
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q008",
+   "objective": "1.2",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 1.2 applications CDN",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q009",
+   "objective": "1.2",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 1.2 functions QoS",
+   "demoCandidate": true,
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q010",
+   "objective": "1.2",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 1.2 functions TTL",
+   "demoCandidate": true,
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q011",
+   "objective": "1.3",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 1.3 cloud service models",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q012",
+   "objective": "1.3",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 1.3 VPC",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q013",
+   "objective": "1.3",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 1.3 cloud gateways NAT gateway",
+   "demoCandidate": true,
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q014",
+   "objective": "1.3",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 1.3 cloud connectivity options Direct Connect vs VPN",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q015",
+   "objective": "1.3",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 1.3 network security groups and lists",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q016",
+   "objective": "1.3",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 1.3 scalability and elasticity",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q017",
+   "objective": "1.4",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 1.4 ports, protocols, services",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q018",
+   "objective": "1.4",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 1.4 protocols and traffic types",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q019",
+   "objective": "1.4",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 1.4 FTP 20/21, SFTP 22",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q020",
+   "objective": "1.4",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 1.4 common ports SNMP 161, HTTPS 443",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q021",
+   "objective": "1.4",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 1.4 DHCP 67/68",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q022",
+   "objective": "1.4",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 1.4 LDAP 389 vs LDAPS 636",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q023",
+   "objective": "1.4",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 1.4 NTP 123",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q024",
+   "objective": "1.4",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 1.4 SNMP versions",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q025",
+   "objective": "1.5",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 1.5 transmission media, structured cabling",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q026",
+   "objective": "1.5",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 1.5 media types, distance limits",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q027",
+   "objective": "1.5",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 1.5 media comparison, EMI",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q028",
+   "objective": "1.5",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 1.5 transceivers, DAC",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q029",
+   "objective": "1.5",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 1.5 transceivers, SFP matching",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q030",
+   "objective": "1.6",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 1.6 network topologies",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q031",
+   "objective": "1.6",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 1.6 WAN topologies full mesh",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q032",
+   "objective": "1.6",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 1.6 hub and spoke",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q033",
+   "objective": "1.7",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 1.7 IPv4 summarization",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q034",
+   "objective": "1.7",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 1.7 IPv4 subnet sizing",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q035",
+   "objective": "1.7",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 1.7 IPv4 network calculation",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q036",
+   "objective": "1.7",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 1.7 network vs host addresses",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q037",
+   "objective": "1.7",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 1.7 IPv6 compression",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q038",
+   "objective": "1.7",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 1.7 IPv6 link-local",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q039",
+   "objective": "1.7",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 1.7 IPv6 unique local",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q040",
+   "objective": "1.7",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 1.7 SLAAC",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q041",
+   "objective": "2.2",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 2.2 inter-VLAN routing",
+   "demoCandidate": true,
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q042",
+   "objective": "2.3",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 2.3 wireless channels",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q043",
+   "objective": "2.3",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 2.3 roaming/cell design",
+   "demoCandidate": true,
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q044",
+   "objective": "2.3",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 2.3 guest network segmentation",
+   "demoCandidate": true,
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q045",
+   "objective": "2.3",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 2.3 captive portal",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q046",
+   "objective": "5.4",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 5.4 performance concepts jitter",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q047",
+   "objective": "5.4",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 5.4 performance factors",
+   "demoCandidate": true,
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q048",
+   "objective": "5.2",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 5.2 physical issues CRC errors",
+   "demoCandidate": true,
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q049",
+   "objective": "5.2",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 5.2 duplex mismatch",
+   "demoCandidate": true,
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q050",
+   "objective": "3.4",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 3.4 DHCP reservation vs static",
+   "demoCandidate": true,
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q051",
+   "objective": "3.4",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 3.4 DNS vs connectivity",
+   "demoCandidate": true,
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q052",
+   "objective": "3.4",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 3.4 DNS infrastructure",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q053",
+   "objective": "1.7",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 1.7 anycast addressing",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q054",
+   "objective": "3.2",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 3.2 port mirroring/SPAN",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q055",
+   "objective": "2.2",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 2.2 link aggregation LACP",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q056",
+   "objective": "2.1",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 2.1 FHRP HSRP/VRRP",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q057",
+   "objective": "2.4",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 2.4 PoE troubleshooting",
+   "demoCandidate": true,
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q058",
+   "objective": "2.4",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 2.4 PoE distance limits",
+   "demoCandidate": true,
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q059",
+   "objective": "2.1",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 2.1 WAN failover failback",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q060",
+   "objective": "3.5",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 3.5 out-of-band management",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q061",
+   "objective": "2.1",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 2.1 routing technologies, static",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q062",
+   "objective": "2.1",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 2.1 administrative distance",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q063",
+   "objective": "2.1",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 2.1 BGP",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q064",
+   "objective": "2.1",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 2.1 OSPF characteristics",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q065",
+   "objective": "2.1",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 2.1 NAT/PAT",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q066",
+   "objective": "2.1",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 2.1 static NAT",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q067",
+   "objective": "2.1",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 2.1 convergence",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q068",
+   "objective": "2.1",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 2.1 RIP characteristics",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q069",
+   "objective": "2.1",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 2.1 ECMP",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q070",
+   "objective": "2.1",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 2.1 distance-vector loop prevention",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q071",
+   "objective": "2.2",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 2.2 switching, 802.1Q",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q072",
+   "objective": "2.2",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 2.2 native VLAN",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q073",
+   "objective": "2.2",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 2.2 STP purpose",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q074",
+   "objective": "2.2",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 2.2 STP root election",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q075",
+   "objective": "2.2",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 2.2 STP port states, portfast",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q076",
+   "objective": "2.2",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 2.2 MAC learning",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q077",
+   "objective": "2.2",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 2.2 unknown unicast flooding",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q078",
+   "objective": "2.2",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 2.2 VLANs across switches",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q079",
+   "objective": "2.2",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 2.2 STP protections",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q080",
+   "objective": "2.2",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 2.2 LACP requirements",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q081",
+   "objective": "2.3",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 2.3 frequency options",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q082",
+   "objective": "2.3",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 2.3 802.11 standards, 6GHz",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q083",
+   "objective": "2.3",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 2.3 802.11 standards",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q084",
+   "objective": "2.3",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 2.3 MU-MIMO",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q085",
+   "objective": "2.3",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 2.3 antenna types",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q086",
+   "objective": "2.3",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 2.3 band steering",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q087",
+   "objective": "2.3",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 2.3 omnidirectional antennas",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q088",
+   "objective": "2.3",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 2.3 regulatory impacts 802.11h",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q089",
+   "objective": "2.3",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 2.3 channel width",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q090",
+   "objective": "2.3",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 2.3 roaming design",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q091",
+   "objective": "2.4",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 2.4 MDF/IDF",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q092",
+   "objective": "2.4",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 2.4 cabling distance standards",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q093",
+   "objective": "2.4",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 2.4 plenum vs non-plenum",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q094",
+   "objective": "2.4",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 2.4 environmental factors, airflow",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q095",
+   "objective": "2.4",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 2.4 power, UPS",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q096",
+   "objective": "2.4",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 2.4 cable management",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q097",
+   "objective": "2.4",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 2.4 outdoor installation factors",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q098",
+   "objective": "2.4",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 2.4 power planning",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q099",
+   "objective": "2.4",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 2.4 environmental, HVAC",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q100",
+   "objective": "2.4",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 2.4 termination standards T568",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q101",
+   "objective": "2.4",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 2.4 cable types, crossover/auto-MDIX",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q102",
+   "objective": "2.4",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 2.4 environmental, humidity",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q103",
+   "objective": "2.4",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 2.4 installation documentation",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q104",
+   "objective": "2.4",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 2.4 fiber selection",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q105",
+   "objective": "2.4",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 2.4 cable certification, NEXT",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q106",
+   "objective": "2.4",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 2.4 configuration management",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q107",
+   "objective": "2.2",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 2.2 switch stacking",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q108",
+   "objective": "2.4",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 2.4 redundancy, path diversity",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q109",
+   "objective": "2.2",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 2.2 voice VLAN",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q110",
+   "objective": "2.2",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 2.2 VLAN segmentation ACLs",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q111",
+   "objective": "2.4",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 2.4 fiber tools OTDR",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q112",
+   "objective": "2.4",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 2.4 copper categories 10GBASE-T",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q113",
+   "objective": "2.4",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 2.4 T568A/B consistency",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q114",
+   "objective": "2.4",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 2.4 secure management protocols",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q115",
+   "objective": "2.4",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 2.4 power continuity planning",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q116",
+   "objective": "2.4",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 2.4 pair faults, gigabit downgrade",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q117",
+   "objective": "2.4",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 2.4 demarcation point",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q118",
+   "objective": "2.4",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 2.4 smart jack",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q119",
+   "objective": "2.4",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 2.4 optics upgrade",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q120",
+   "objective": "2.4",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 2.4 EMI separation, pathways",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q121",
+   "objective": "3.1",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 3.1 processes, change management",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q122",
+   "objective": "3.1",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 3.1 documentation currency",
+   "demoCandidate": true,
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q123",
+   "objective": "3.1",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 3.1 SLA",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q124",
+   "objective": "3.1",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 3.1 MOU",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q125",
+   "objective": "3.1",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 3.1 lifecycle policies",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q126",
+   "objective": "3.1",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 3.1 change request contents",
+   "demoCandidate": true,
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q127",
+   "objective": "3.1",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 3.1 circuit inventory documentation",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q128",
+   "objective": "3.1",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 3.1 procedures",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q129",
+   "objective": "3.2",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 3.2 monitoring, SNMP",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q130",
+   "objective": "3.2",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 3.2 syslog centralization",
+   "demoCandidate": true,
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q131",
+   "objective": "3.2",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 3.2 NetFlow/IPFIX",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q132",
+   "objective": "3.2",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 3.2 baselines",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q133",
+   "objective": "3.2",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 3.2 packet capture",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q134",
+   "objective": "3.2",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 3.2 alert tuning",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q135",
+   "objective": "3.2",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 3.2 availability monitoring",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q136",
+   "objective": "3.2",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 3.2 SIEM correlation",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q137",
+   "objective": "3.2",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 3.2 device tracking",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q138",
+   "objective": "3.3",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 3.3 RPO/RTO",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q139",
+   "objective": "3.3",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 3.3 DR site types",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q140",
+   "objective": "3.3",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 3.3 DR plan governance",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q141",
+   "objective": "3.3",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 3.3 backup types",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q142",
+   "objective": "3.3",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 3.3 backup testing",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q143",
+   "objective": "3.3",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 3.3 HA/redundancy",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q144",
+   "objective": "3.3",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 3.3 single points of failure",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q145",
+   "objective": "3.3",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 3.3 availability design",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q146",
+   "objective": "3.4",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 3.4 DHCP scope exhaustion",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q147",
+   "objective": "3.4",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 3.4 DHCP relay",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q148",
+   "objective": "3.4",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 3.4 APIPA",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q149",
+   "objective": "3.4",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 3.4 DNS record types MX",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q150",
+   "objective": "3.4",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 3.4 DNS PTR",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q151",
+   "objective": "3.4",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 3.4 DNS CNAME",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q152",
+   "objective": "3.4",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 3.4 DNS TTL caching",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q153",
+   "objective": "3.4",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 3.4 NTP design",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q154",
+   "objective": "3.4",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 3.4 NTP and certificates",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q155",
+   "objective": "3.4",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 3.4 DHCP reservation",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q156",
+   "objective": "3.4",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 3.4 DHCPv6",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q157",
+   "objective": "3.5",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 3.5 console access",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q158",
+   "objective": "3.5",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 3.5 jump box",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q159",
+   "objective": "3.5",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 3.5 API management",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q160",
+   "objective": "3.5",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 3.5 in-band vs OOB management",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q161",
+   "objective": "3.5",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 3.5 Telnet vs SSH",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q162",
+   "objective": "3.5",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 3.5 API vs screen scraping",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q163",
+   "objective": "3.5",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 3.5 OOB network",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q164",
+   "objective": "3.5",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 3.5 AAA TACACS+/RADIUS",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q165",
+   "objective": "3.5",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 3.5 config backup and restore",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q166",
+   "objective": "3.5",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 3.5 secure file transfer",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q167",
+   "objective": "3.4",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 3.4 NTP internal source",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q168",
+   "objective": "3.4",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 3.4 DNS forwarding",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q169",
+   "objective": "3.2",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 3.2 log timestamp policy",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q170",
+   "objective": "3.2",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 3.2 LLDP/CDP discovery",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q171",
+   "objective": "3.2",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 3.2 environmental monitoring",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q172",
+   "objective": "3.3",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 3.3 redundancy for maintenance",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q173",
+   "objective": "3.1",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 3.1 audit evidence",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q174",
+   "objective": "3.2",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 3.2 QoS marking DSCP",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q175",
+   "objective": "3.2",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 3.2 capacity planning",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q176",
+   "objective": "3.3",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 3.3 recovery sequencing",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q177",
+   "objective": "3.1",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 3.1 config baselines",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q178",
+   "objective": "3.2",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 3.2 SNMP credential mismatch",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q179",
+   "objective": "3.2",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 3.2 SIEM dashboards",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q180",
+   "objective": "3.5",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 3.5 management access restriction",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q181",
+   "objective": "4.1",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 4.1 security concepts CIA",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q182",
+   "objective": "4.1",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 4.1 integrity",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q183",
+   "objective": "4.1",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 4.1 authentication factors",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q184",
+   "objective": "4.1",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 4.1 least privilege",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q185",
+   "objective": "4.1",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 4.1 zero trust",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q186",
+   "objective": "4.1",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 4.1 segmentation",
+   "demoCandidate": true,
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q187",
+   "objective": "4.1",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 4.1 honeypots",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q188",
+   "objective": "4.1",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 4.1 policies and procedures",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q189",
+   "objective": "4.1",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 4.1 posture assessment",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q190",
+   "objective": "4.2",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 4.2 DDoS",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q191",
+   "objective": "4.2",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 4.2 MAC flooding",
+   "demoCandidate": true,
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q192",
+   "objective": "4.2",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 4.2 ARP poisoning",
+   "demoCandidate": true,
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q193",
+   "objective": "4.2",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 4.2 DHCP starvation/rogue DHCP",
+   "demoCandidate": true,
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q194",
+   "objective": "4.2",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 4.2 rogue devices",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q195",
+   "objective": "4.2",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 4.2 evil twin",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q196",
+   "objective": "4.2",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 4.2 social engineering",
+   "demoCandidate": true,
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q197",
+   "objective": "4.2",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 4.2 VLAN hopping",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q198",
+   "objective": "4.2",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 4.2 DNS poisoning, DNSSEC",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q199",
+   "objective": "4.2",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 4.2 amplification attacks",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q200",
+   "objective": "4.2",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 4.2 DNS tunneling",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q201",
+   "objective": "4.3",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 4.3 port security",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q202",
+   "objective": "4.3",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 4.3 802.1X",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q203",
+   "objective": "4.3",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 4.3 802.1X roles",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q204",
+   "objective": "4.3",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 4.3 firewall rules, implicit deny",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q205",
+   "objective": "4.3",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 4.3 ACL least privilege",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q206",
+   "objective": "4.3",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 4.3 NAC quarantine",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q207",
+   "objective": "4.3",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 4.3 WPA3 SAE",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q208",
+   "objective": "4.3",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 4.3 WPA-Enterprise",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q209",
+   "objective": "4.3",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 4.3 stateful vs stateless",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q210",
+   "objective": "4.3",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 4.3 NGFW capabilities",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q211",
+   "objective": "4.3",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 4.3 dynamic ARP inspection",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q212",
+   "objective": "4.3",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 4.3 DHCP snooping",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q213",
+   "objective": "4.3",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 4.3 remote-access VPN",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q214",
+   "objective": "4.3",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 4.3 site-to-site VPN",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q215",
+   "objective": "4.3",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 4.3 geofencing",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q216",
+   "objective": "4.3",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 4.3 MAC filtering limits",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q217",
+   "objective": "4.3",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 4.3 IDS signature detection",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q218",
+   "objective": "4.3",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 4.3 IPS tuning tradeoffs",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q219",
+   "objective": "4.3",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 4.3 secure web gateway",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q220",
+   "objective": "4.3",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 4.3 TACACS+ vs RADIUS",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q221",
+   "objective": "4.3",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 4.3 PKI trust stores",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q222",
+   "objective": "4.3",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 4.3 secure disposal",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q223",
+   "objective": "4.2",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 4.2 physical social engineering",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q224",
+   "objective": "4.3",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 4.3 exposure reduction",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q225",
+   "objective": "4.3",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 4.3 ACL scoping health checks",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q226",
+   "objective": "4.2",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 4.2 password attacks, defenses",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q227",
+   "objective": "4.2",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 4.2 lateral movement indicators",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q228",
+   "objective": "4.3",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 4.3 unused port hardening",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q229",
+   "objective": "4.3",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 4.3 layered cloud controls",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q230",
+   "objective": "4.3",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 4.3 role-based segmentation",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q231",
+   "objective": "4.2",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 4.2 rogue AP response",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q232",
+   "objective": "4.3",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 4.3 SSH version hardening",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q233",
+   "objective": "4.1",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 4.1 risk assessment",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q234",
+   "objective": "4.1",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 4.1 incident response",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q235",
+   "objective": "4.1",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 4.1 forensics, chain of custody",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q236",
+   "objective": "4.3",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 4.3 DDoS mitigation placement",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q237",
+   "objective": "4.3",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 4.3 ACL established traffic",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q238",
+   "objective": "4.3",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 4.3 EAP certificate methods",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q239",
+   "objective": "4.1",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 4.1 firewall rule review",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q240",
+   "objective": "4.3",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 4.3 anomaly detection",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q241",
+   "objective": "5.1",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 5.1 troubleshooting methodology",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q242",
+   "objective": "5.1",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 5.1 identify the problem",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q243",
+   "objective": "5.1",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 5.1 test theory, re-establish",
+   "demoCandidate": true,
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q244",
+   "objective": "5.1",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 5.1 plan of action, approvals",
+   "demoCandidate": true,
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q245",
+   "objective": "5.1",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 5.1 verify functionality",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q246",
+   "objective": "5.1",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 5.1 scope analysis",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q247",
+   "objective": "5.1",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 5.1 problem narrowing",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q248",
+   "objective": "5.1",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 5.1 escalation",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q249",
+   "objective": "5.2",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 5.2 physical troubleshooting",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q250",
+   "objective": "5.2",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 5.2 wiremap faults",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q251",
+   "objective": "5.2",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 5.2 fiber cleaning",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q252",
+   "objective": "5.2",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 5.2 optical power levels",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q253",
+   "objective": "5.2",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 5.2 pair faults and speed",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q254",
+   "objective": "5.2",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 5.2 PoE troubleshooting",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q255",
+   "objective": "5.2",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 5.2 wireless survey tools",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q256",
+   "objective": "5.2",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 5.2 tone generator use",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q257",
+   "objective": "5.2",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 5.2 duplex mismatch diagnosis",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q258",
+   "objective": "5.3",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 5.3 DNS troubleshooting",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q259",
+   "objective": "5.3",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 5.3 DNS TTL planning",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q260",
+   "objective": "5.3",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 5.3 DHCP relay failure",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q261",
+   "objective": "5.3",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 5.3 IP conflicts",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q262",
+   "objective": "5.3",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 5.3 blocked ports",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q263",
+   "objective": "5.4",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 5.4 voice quality troubleshooting",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q264",
+   "objective": "5.4",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 5.4 path performance testing",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q265",
+   "objective": "5.4",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 5.4 MTU issues",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q266",
+   "objective": "5.4",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 5.4 performance baselining",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q267",
+   "objective": "5.4",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 5.4 iperf bisection",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q268",
+   "objective": "5.4",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 5.4 wireless vs wired isolation",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q269",
+   "objective": "5.5",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 5.5 nslookup/dig",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q270",
+   "objective": "5.5",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 5.5 traceroute analysis",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q271",
+   "objective": "5.5",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 5.5 ipconfig",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q272",
+   "objective": "5.5",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 5.5 netstat",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q273",
+   "objective": "5.5",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 5.5 arp command",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q274",
+   "objective": "5.5",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 5.5 packet capture analysis",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q275",
+   "objective": "5.5",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 5.5 nmap",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q276",
+   "objective": "5.5",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 5.5 route inspection",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q277",
+   "objective": "5.5",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 5.5 port testing tools",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q278",
+   "objective": "5.5",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 5.5 loopback testing",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q279",
+   "objective": "5.5",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 5.5 certifier metrics",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q280",
+   "objective": "5.5",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 5.5 spectrum analysis",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q281",
+   "objective": "5.5",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 5.5 device telemetry",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q282",
+   "objective": "5.5",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 5.5 change safety practices",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q283",
+   "objective": "5.1",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 5.1 root cause confirmation",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q284",
+   "objective": "5.1",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 5.1 knowledge base use",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q285",
+   "objective": "5.1",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 5.1 firmware upgrade process",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q286",
+   "objective": "5.1",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 5.1 documentation for remote hands",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q287",
+   "objective": "5.3",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 5.3 control-plane resource exhaustion",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q288",
+   "objective": "5.3",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 5.3 fault bisection at gateway",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q289",
+   "objective": "5.3",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 5.3 rogue DHCP remediation",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q290",
+   "objective": "5.4",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 5.4 retransmission analysis",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q291",
+   "objective": "5.4",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 5.4 systematic speed limits",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q292",
+   "objective": "5.4",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 5.4 congestion management",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q293",
+   "objective": "5.5",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 5.5 fiber loss testing",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q294",
+   "objective": "5.5",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 5.5 asymmetric routing",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q295",
+   "objective": "5.1",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 5.1 structured triage",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q296",
+   "objective": "5.1",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 5.1 environment comparison",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q297",
+   "objective": "5.4",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 5.4 uplink congestion",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q298",
+   "objective": "5.3",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 5.3 TLS inspection trust",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q299",
+   "objective": "5.2",
+   "type": "diagnosis",
+   "source": "OBJN9",
+   "locator": "Objective 5.2 MAC flapping/loops",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-NET-009-Q300",
+   "objective": "5.1",
+   "type": "recall",
+   "source": "OBJN9",
+   "locator": "Objective 5.1 verification",
+   "verified": "2026-10-10"
+  }
+ ]
+}

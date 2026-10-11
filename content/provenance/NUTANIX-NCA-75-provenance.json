@@ -1,0 +1,966 @@
+{
+ "exam": "NUTANIX-NCA-75",
+ "item_count": 120,
+ "items": [
+  {
+   "id": "NUTANIX-NCA-75-Q101",
+   "objective": "1.1",
+   "type": "recall",
+   "source": "NCAEBG",
+   "locator": "Objective 1.1 NCI core components",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q102",
+   "objective": "1.1",
+   "type": "recall",
+   "source": "NCAEBG",
+   "locator": "Objective 1.1 supported hypervisors",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q103",
+   "objective": "1.1",
+   "type": "diagnosis",
+   "source": "NCAEBG",
+   "locator": "Objective 1.1 replication factor, HA",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q104",
+   "objective": "1.1",
+   "type": "recall",
+   "source": "NCAEBG",
+   "locator": "Objective 1.1 two-node clusters, Witness",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q105",
+   "objective": "1.1",
+   "type": "recall",
+   "source": "NCAEBG",
+   "locator": "Objective 1.1 LCM",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q106",
+   "objective": "1.1",
+   "type": "diagnosis",
+   "source": "NCAEBG",
+   "locator": "Objective 1.1 LCM dark site",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q107",
+   "objective": "1.1",
+   "type": "recall",
+   "source": "NCAEBG",
+   "locator": "Objective 1.1 NC2",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q108",
+   "objective": "1.1",
+   "type": "recall",
+   "source": "NCAEBG",
+   "locator": "Objective 1.1 Nutanix Flow",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q109",
+   "objective": "1.1",
+   "type": "recall",
+   "source": "NCAEBG",
+   "locator": "Objective 1.1 Nutanix Central",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q110",
+   "objective": "1.1",
+   "type": "recall",
+   "source": "NCAEBG",
+   "locator": "Objective 1.1 Nutanix Disaster Recovery",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q111",
+   "objective": "1.1",
+   "type": "recall",
+   "source": "NCAEBG",
+   "locator": "Objective 1.1 replication factor",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q112",
+   "objective": "1.1",
+   "type": "diagnosis",
+   "source": "NCAEBG",
+   "locator": "Objective 1.1 three-node considerations, fault tolerance",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q113",
+   "objective": "1.1",
+   "type": "recall",
+   "source": "NCAEBG",
+   "locator": "Objective 1.1 MST disaster recovery",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q114",
+   "objective": "1.3",
+   "type": "recall",
+   "source": "NCAEBG",
+   "locator": "Objective 1.3 Foundation",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q115",
+   "objective": "1.3",
+   "type": "recall",
+   "source": "NCAEBG",
+   "locator": "Objective 1.3 X-Ray",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q116",
+   "objective": "1.3",
+   "type": "recall",
+   "source": "NCAEBG",
+   "locator": "Objective 1.3 NGT",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q117",
+   "objective": "1.3",
+   "type": "recall",
+   "source": "NCAEBG",
+   "locator": "Objective 1.3 Move",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q118",
+   "objective": "1.3",
+   "type": "recall",
+   "source": "NCAEBG",
+   "locator": "Objective 1.3 Self-Service Restore",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q119",
+   "objective": "1.3",
+   "type": "recall",
+   "source": "NCAEBG",
+   "locator": "Objective 1.3 Collector",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q120",
+   "objective": "1.3",
+   "type": "diagnosis",
+   "source": "NCAEBG",
+   "locator": "Objective 1.3 Witness function",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q121",
+   "objective": "1.2",
+   "type": "recall",
+   "source": "NCAEBG",
+   "locator": "Objective 1.2 Unified Storage/Files",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q122",
+   "objective": "1.2",
+   "type": "recall",
+   "source": "NCAEBG",
+   "locator": "Objective 1.2 Objects",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q123",
+   "objective": "1.2",
+   "type": "recall",
+   "source": "NCAEBG",
+   "locator": "Objective 1.2 Nutanix Database Service",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q124",
+   "objective": "1.2",
+   "type": "recall",
+   "source": "NCAEBG",
+   "locator": "Objective 1.2 NCM cost management",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q125",
+   "objective": "1.2",
+   "type": "recall",
+   "source": "NCAEBG",
+   "locator": "Objective 1.2 NCM Self-Service",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q126",
+   "objective": "1.2",
+   "type": "recall",
+   "source": "NCAEBG",
+   "locator": "Objective 1.2 Nutanix Kubernetes Platform",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q127",
+   "objective": "1.2",
+   "type": "recall",
+   "source": "NCAEBG",
+   "locator": "Objective 1.2 EUC/VDI",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q128",
+   "objective": "1.2",
+   "type": "recall",
+   "source": "NCAEBG",
+   "locator": "Objective 1.2 NCM Security Central",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q129",
+   "objective": "1.2",
+   "type": "recall",
+   "source": "NCAEBG",
+   "locator": "Objective 1.2 NCM Intelligent Operations",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q130",
+   "objective": "1.2",
+   "type": "recall",
+   "source": "NCAEBG",
+   "locator": "Objective 1.2 Enterprise AI",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q131",
+   "objective": "2.1",
+   "type": "recall",
+   "source": "NCAEBG",
+   "locator": "Objective 2.1 VM deployment, VirtIO",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q132",
+   "objective": "2.1",
+   "type": "recall",
+   "source": "NCAEBG",
+   "locator": "Objective 2.1 VM templates",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q133",
+   "objective": "2.1",
+   "type": "diagnosis",
+   "source": "NCAEBG",
+   "locator": "Objective 2.1 CPU/memory hot-plug",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q134",
+   "objective": "2.1",
+   "type": "recall",
+   "source": "NCAEBG",
+   "locator": "Objective 2.1 snapshots",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q135",
+   "objective": "2.1",
+   "type": "recall",
+   "source": "NCAEBG",
+   "locator": "Objective 2.1 vDisk placement",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q136",
+   "objective": "2.1",
+   "type": "recall",
+   "source": "NCAEBG",
+   "locator": "Objective 2.1 categories",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q137",
+   "objective": "2.1",
+   "type": "diagnosis",
+   "source": "NCAEBG",
+   "locator": "Objective 2.1 VM network attributes",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q138",
+   "objective": "2.1",
+   "type": "diagnosis",
+   "source": "NCAEBG",
+   "locator": "Objective 2.1 VM storage configuration",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q139",
+   "objective": "2.1",
+   "type": "diagnosis",
+   "source": "NCAEBG",
+   "locator": "Objective 2.1 cloning and customization",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q140",
+   "objective": "2.1",
+   "type": "diagnosis",
+   "source": "NCAEBG",
+   "locator": "Objective 2.1 snapshot/protection scoping",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q141",
+   "objective": "2.2",
+   "type": "recall",
+   "source": "NCAEBG",
+   "locator": "Objective 2.2 create subnet",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q142",
+   "objective": "2.2",
+   "type": "recall",
+   "source": "NCAEBG",
+   "locator": "Objective 2.2 IPAM",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q143",
+   "objective": "2.2",
+   "type": "recall",
+   "source": "NCAEBG",
+   "locator": "Objective 2.2 AHV bridges/vSwitches",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q144",
+   "objective": "2.2",
+   "type": "recall",
+   "source": "NCAEBG",
+   "locator": "Objective 2.2 bond types",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q145",
+   "objective": "2.2",
+   "type": "recall",
+   "source": "NCAEBG",
+   "locator": "Objective 2.2 network visualizer",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q146",
+   "objective": "2.2",
+   "type": "diagnosis",
+   "source": "NCAEBG",
+   "locator": "Objective 2.2 network segmentation",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q147",
+   "objective": "2.2",
+   "type": "recall",
+   "source": "NCAEBG",
+   "locator": "Objective 2.2 traffic mirroring",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q148",
+   "objective": "2.2",
+   "type": "diagnosis",
+   "source": "NCAEBG",
+   "locator": "Objective 2.2 physical switch monitoring",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q149",
+   "objective": "2.3",
+   "type": "recall",
+   "source": "NCAEBG",
+   "locator": "Objective 2.3 deduplication/compression",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q150",
+   "objective": "2.3",
+   "type": "recall",
+   "source": "NCAEBG",
+   "locator": "Objective 2.3 erasure coding",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q151",
+   "objective": "2.3",
+   "type": "recall",
+   "source": "NCAEBG",
+   "locator": "Objective 2.3 storage types, volume groups",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q152",
+   "objective": "2.3",
+   "type": "diagnosis",
+   "source": "NCAEBG",
+   "locator": "Objective 2.3 RF configuration",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q153",
+   "objective": "2.3",
+   "type": "diagnosis",
+   "source": "NCAEBG",
+   "locator": "Objective 2.3 rebuild capacity reservation",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q154",
+   "objective": "2.3",
+   "type": "recall",
+   "source": "NCAEBG",
+   "locator": "Objective 2.3 storage container policies",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q155",
+   "objective": "2.4",
+   "type": "recall",
+   "source": "NCAEBG",
+   "locator": "Objective 2.4 license state",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q156",
+   "objective": "2.4",
+   "type": "recall",
+   "source": "NCAEBG",
+   "locator": "Objective 2.4 reclaim/assign licenses",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q157",
+   "objective": "2.4",
+   "type": "diagnosis",
+   "source": "NCAEBG",
+   "locator": "Objective 2.4 manual vs seamless licensing",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q158",
+   "objective": "2.4",
+   "type": "recall",
+   "source": "NCAEBG",
+   "locator": "Objective 2.4 license by use case",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q159",
+   "objective": "2.4",
+   "type": "diagnosis",
+   "source": "NCAEBG",
+   "locator": "Objective 2.4 license expiration",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q160",
+   "objective": "2.4",
+   "type": "recall",
+   "source": "NCAEBG",
+   "locator": "Objective 2.4 license inventory",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q161",
+   "objective": "3.1",
+   "type": "diagnosis",
+   "source": "NCAEBG",
+   "locator": "Objective 3.1 SMTP configuration",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q162",
+   "objective": "3.1",
+   "type": "diagnosis",
+   "source": "NCAEBG",
+   "locator": "Objective 3.1 DNS configuration",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q163",
+   "objective": "3.1",
+   "type": "diagnosis",
+   "source": "NCAEBG",
+   "locator": "Objective 3.1 NTP configuration",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q164",
+   "objective": "3.1",
+   "type": "recall",
+   "source": "NCAEBG",
+   "locator": "Objective 3.1 SNMP configuration",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q165",
+   "objective": "3.1",
+   "type": "diagnosis",
+   "source": "NCAEBG",
+   "locator": "Objective 3.1 fault tolerance levels",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q166",
+   "objective": "3.1",
+   "type": "recall",
+   "source": "NCAEBG",
+   "locator": "Objective 3.1 fault tolerance, RF3",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q167",
+   "objective": "3.1",
+   "type": "recall",
+   "source": "NCAEBG",
+   "locator": "Objective 3.1 Prism Central settings",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q168",
+   "objective": "3.1",
+   "type": "recall",
+   "source": "NCAEBG",
+   "locator": "Objective 3.1 security options",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q169",
+   "objective": "3.1",
+   "type": "recall",
+   "source": "NCAEBG",
+   "locator": "Objective 3.1 validate Prism Central",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q170",
+   "objective": "3.1",
+   "type": "diagnosis",
+   "source": "NCAEBG",
+   "locator": "Objective 3.1 rebuild/fault tolerance",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q171",
+   "objective": "3.2",
+   "type": "recall",
+   "source": "NCAEBG",
+   "locator": "Objective 3.2 maintenance mode",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q172",
+   "objective": "3.2",
+   "type": "recall",
+   "source": "NCAEBG",
+   "locator": "Objective 3.2 maintenance mode guest status",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q173",
+   "objective": "3.2",
+   "type": "recall",
+   "source": "NCAEBG",
+   "locator": "Objective 3.2 node expansion types",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q174",
+   "objective": "3.2",
+   "type": "recall",
+   "source": "NCAEBG",
+   "locator": "Objective 3.2 compute-only nodes",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q175",
+   "objective": "3.2",
+   "type": "recall",
+   "source": "NCAEBG",
+   "locator": "Objective 3.2 hardware diagram view",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q176",
+   "objective": "3.2",
+   "type": "recall",
+   "source": "NCAEBG",
+   "locator": "Objective 3.2 OOB management",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q177",
+   "objective": "3.2",
+   "type": "diagnosis",
+   "source": "NCAEBG",
+   "locator": "Objective 3.2 disk replacement",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q178",
+   "objective": "3.2",
+   "type": "diagnosis",
+   "source": "NCAEBG",
+   "locator": "Objective 3.2 expansion prerequisites",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q179",
+   "objective": "3.2",
+   "type": "recall",
+   "source": "NCAEBG",
+   "locator": "Objective 3.2 bare-metal imaging",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q180",
+   "objective": "3.2",
+   "type": "recall",
+   "source": "NCAEBG",
+   "locator": "Objective 3.2 power monitoring",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q181",
+   "objective": "3.3",
+   "type": "recall",
+   "source": "NCAEBG",
+   "locator": "Objective 3.3 LCM inventory",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q182",
+   "objective": "3.3",
+   "type": "diagnosis",
+   "source": "NCAEBG",
+   "locator": "Objective 3.3 LCM pre-checks",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q183",
+   "objective": "3.3",
+   "type": "recall",
+   "source": "NCAEBG",
+   "locator": "Objective 3.3 dark site updates",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q184",
+   "objective": "3.3",
+   "type": "recall",
+   "source": "NCAEBG",
+   "locator": "Objective 3.3 compatibility matrix",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q185",
+   "objective": "3.3",
+   "type": "recall",
+   "source": "NCAEBG",
+   "locator": "Objective 3.3 rolling upgrades",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q186",
+   "objective": "3.3",
+   "type": "recall",
+   "source": "NCAEBG",
+   "locator": "Objective 3.3 NGT bulk upgrade",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q187",
+   "objective": "3.3",
+   "type": "diagnosis",
+   "source": "NCAEBG",
+   "locator": "Objective 3.3 version compatibility",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q188",
+   "objective": "3.3",
+   "type": "recall",
+   "source": "NCAEBG",
+   "locator": "Objective 3.3 upgrade order",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q189",
+   "objective": "3.3",
+   "type": "diagnosis",
+   "source": "NCAEBG",
+   "locator": "Objective 3.3 maintenance practices",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q190",
+   "objective": "3.3",
+   "type": "recall",
+   "source": "NCAEBG",
+   "locator": "Objective 3.3 AHV upgrade specs",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q191",
+   "objective": "4.1",
+   "type": "recall",
+   "source": "NCAEBG",
+   "locator": "Objective 4.1 log collection",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q192",
+   "objective": "4.1",
+   "type": "recall",
+   "source": "NCAEBG",
+   "locator": "Objective 4.1 NCC",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q193",
+   "objective": "4.1",
+   "type": "diagnosis",
+   "source": "NCAEBG",
+   "locator": "Objective 4.1 NCC remediation",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q194",
+   "objective": "4.1",
+   "type": "recall",
+   "source": "NCAEBG",
+   "locator": "Objective 4.1 cluster status",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q195",
+   "objective": "4.1",
+   "type": "recall",
+   "source": "NCAEBG",
+   "locator": "Objective 4.1 metric vs entity charts",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q196",
+   "objective": "4.1",
+   "type": "diagnosis",
+   "source": "NCAEBG",
+   "locator": "Objective 4.1 health check routine",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q197",
+   "objective": "4.1",
+   "type": "diagnosis",
+   "source": "NCAEBG",
+   "locator": "Objective 4.1 degraded states",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q198",
+   "objective": "4.2",
+   "type": "recall",
+   "source": "NCAEBG",
+   "locator": "Objective 4.2 remote syslog",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q199",
+   "objective": "4.2",
+   "type": "recall",
+   "source": "NCAEBG",
+   "locator": "Objective 4.2 Pulse",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q200",
+   "objective": "4.2",
+   "type": "recall",
+   "source": "NCAEBG",
+   "locator": "Objective 4.2 custom alert policies",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q201",
+   "objective": "4.2",
+   "type": "diagnosis",
+   "source": "NCAEBG",
+   "locator": "Objective 4.2 alert severity",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q202",
+   "objective": "4.2",
+   "type": "diagnosis",
+   "source": "NCAEBG",
+   "locator": "Objective 4.2 CPU ready",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q203",
+   "objective": "4.2",
+   "type": "recall",
+   "source": "NCAEBG",
+   "locator": "Objective 4.2 alert-triggered log collection",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q204",
+   "objective": "4.2",
+   "type": "diagnosis",
+   "source": "NCAEBG",
+   "locator": "Objective 4.2 alert noise management",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q205",
+   "objective": "4.2",
+   "type": "diagnosis",
+   "source": "NCAEBG",
+   "locator": "Objective 4.2 alert impact and resolution",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q206",
+   "objective": "4.2",
+   "type": "recall",
+   "source": "NCAEBG",
+   "locator": "Objective 4.2 custom reports",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q207",
+   "objective": "4.3",
+   "type": "recall",
+   "source": "NCAEBG",
+   "locator": "Objective 4.3 support case documentation",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q208",
+   "objective": "4.3",
+   "type": "recall",
+   "source": "NCAEBG",
+   "locator": "Objective 4.3 support priorities",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q209",
+   "objective": "4.3",
+   "type": "recall",
+   "source": "NCAEBG",
+   "locator": "Objective 4.3 Insights predictive health",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q210",
+   "objective": "4.3",
+   "type": "diagnosis",
+   "source": "NCAEBG",
+   "locator": "Objective 4.3 acting on Insights",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q211",
+   "objective": "4.3",
+   "type": "diagnosis",
+   "source": "NCAEBG",
+   "locator": "Objective 4.3 support readiness",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q212",
+   "objective": "4.4",
+   "type": "diagnosis",
+   "source": "NCAEBG",
+   "locator": "Objective 4.4 CPU ready vs I/O latency",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q213",
+   "objective": "4.4",
+   "type": "diagnosis",
+   "source": "NCAEBG",
+   "locator": "Objective 4.4 CPU contention",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q214",
+   "objective": "4.4",
+   "type": "diagnosis",
+   "source": "NCAEBG",
+   "locator": "Objective 4.4 memory constraints",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q215",
+   "objective": "4.4",
+   "type": "diagnosis",
+   "source": "NCAEBG",
+   "locator": "Objective 4.4 I/O latency contention",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q216",
+   "objective": "4.4",
+   "type": "diagnosis",
+   "source": "NCAEBG",
+   "locator": "Objective 4.4 workload interpretation",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q217",
+   "objective": "4.4",
+   "type": "diagnosis",
+   "source": "NCAEBG",
+   "locator": "Objective 4.4 performance trending",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q218",
+   "objective": "4.4",
+   "type": "diagnosis",
+   "source": "NCAEBG",
+   "locator": "Objective 4.4 data locality",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q219",
+   "objective": "4.4",
+   "type": "diagnosis",
+   "source": "NCAEBG",
+   "locator": "Objective 4.4 metric interpretation",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "NUTANIX-NCA-75-Q220",
+   "objective": "4.4",
+   "type": "diagnosis",
+   "source": "NCAEBG",
+   "locator": "Objective 4.4 performance baselines",
+   "verified": "2026-10-10"
+  }
+ ]
+}
