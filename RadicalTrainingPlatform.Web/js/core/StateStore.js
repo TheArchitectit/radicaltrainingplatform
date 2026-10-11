@@ -199,13 +199,60 @@ class StateStore {
         });
     }
 
+    /**
+     * Enumerate the store's own keys (the `lab_` namespace, prefix stripped).
+     *
+     * Uses the DOM-standard `length` + `key(i)` walk rather than
+     * `Object.keys(localStorage)`: the latter is not part of the Storage API
+     * and is empty under the fixture stub (and in some embedders), which
+     * silently made key enumeration return nothing.
+     */
+    #localKeys() {
+        const out = [];
+        const n = localStorage.length;
+        for (let i = 0; i < n; i += 1) {
+            const raw = localStorage.key(i);
+            if (raw != null && raw.startsWith('lab_')) out.push(raw.slice(4));
+        }
+        return out;
+    }
+
+    /**
+     * List stored keys, optionally filtered by prefix (T-21 station reset).
+     * `clear()` wipes the whole store — too broad for a demo-station reset,
+     * which must touch only the learner keyspaces (progress/, scenario/)
+     * and leave simulator fixtures alone. Blocked storage returns [] rather
+     * than throwing: the caller's reset is a best-effort on a store that
+     * honestly reported it cannot persist.
+     */
+    async keys(prefix = '') {
+        if (this.#mode === 'blocked') return [];
+        if (this.#mode === 'local') {
+            try {
+                return this.#localKeys().filter(k => k.startsWith(prefix));
+            } catch (e) {
+                this.#markBlocked(e);
+                return [];
+            }
+        }
+        return new Promise((resolve, reject) => {
+            const tx = this.#db.transaction('state', 'readonly');
+            const req = tx.objectStore('state').getAllKeys();
+            req.onsuccess = () => {
+                const all = (req.result || []).map(k => String(k));
+                resolve(prefix ? all.filter(k => k.startsWith(prefix)) : all);
+            };
+            req.onerror = () => reject(req.error);
+        });
+    }
+
     async clear() {
         if (this.#mode === 'blocked') return;
         if (this.#mode === 'local') {
             try {
-                Object.keys(localStorage)
-                    .filter(k => k.startsWith('lab_'))
-                    .forEach(k => localStorage.removeItem(k));
+                // Snapshot the keys first: removing while walking by index
+                // skips entries as `length` shrinks.
+                this.#localKeys().forEach(k => localStorage.removeItem(`lab_${k}`));
             } catch (e) {
                 this.#markBlocked(e);
             }

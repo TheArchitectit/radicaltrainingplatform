@@ -487,3 +487,255 @@ a.module-item:hover {
     color: var(--text-secondary);
     font-size: var(--font-size-xs);
 }
+
+/* ── Demo mode (T-21, REQ-DEMO-01..06) ── */
+
+/* The label is on every screen: it lives in the app shell, not a view.
+   High-contrast, text-first, and never a hover tooltip. */
+.demo-banner {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    flex-wrap: wrap;
+    padding: 10px var(--space-md);
+    background: #3b1d5e;
+    border-bottom: 2px solid #a855f7;
+    color: #f5f3ff;
+    font-size: var(--font-size-sm);
+}
+
+.demo-banner-label {
+    letter-spacing: 0.12em;
+    font-size: var(--font-size-sm);
+    padding: 3px 12px;
+    border-radius: 4px;
+    background: #a855f7;
+    color: #1a0b2e;
+}
+
+.demo-banner-text {
+    flex: 1;
+    min-width: 240px;
+}
+
+.demo-banner-link {
+    color: #f5f3ff;
+    text-decoration: underline;
+    font-weight: 600;
+}
+
+/* Projector readability: demo mode raises the base type scale so the
+   presenter's screen is legible at distance. Learner mode is untouched. */
+body.demo-mode {
+    font-size: 18px;
+}
+
+.demo-page .study-title {
+    font-size: var(--font-size-2xl, 28px);
+}
+
+.demo-status {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: var(--space-md);
+    border-radius: 10px;
+    border: 1px solid var(--border-light);
+    margin: var(--space-md) 0;
+}
+
+.demo-status.on {
+    border-color: #a855f7;
+    background: rgba(168, 85, 247, 0.12);
+}
+
+.demo-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    margin: var(--space-md) 0;
+}
+
+.demo-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--font-size-sm);
+}
+
+.demo-table th,
+.demo-table td {
+    text-align: left;
+    padding: 6px 10px;
+    border-bottom: 1px solid var(--border-light);
+}
+
+.demo-table tr.ok td:last-child {
+    color: var(--success, #22c55e);
+}
+
+.demo-table tr.bad td:last-child {
+    color: var(--danger, #ef4444);
+}
+
+.demo-notes {
+    margin-top: var(--space-xl);
+    padding: var(--space-md);
+    border: 1px dashed var(--border-light);
+    border-radius: 12px;
+}
+
+.demo-notes ul {
+    padding-left: 20px;
+    color: var(--text-secondary);
+    font-size: var(--font-size-sm);
+}
+
+/* Wide tables scroll inside their own box — the page body never does. */
+.table-scroll {
+    overflow-x: auto;
+    margin-top: var(--space-sm);
+}
+
+/* ── Completion panel (REQ-DEMO-06) — truth-telling, never a score ── */
+
+.completion-panel {
+    text-align: left;
+    padding: var(--space-md);
+}
+
+.completion-title {
+    margin: 0 0 var(--space-xs);
+    color: var(--text-primary);
+}
+
+.completion-summary {
+    margin: 0;
+    color: var(--text-secondary);
+    font-size: var(--font-size-sm);
+}
+
+.completion-framing {
+    margin: var(--space-sm) 0 var(--space-md);
+    padding: var(--space-xs) var(--space-sm);
+    border-left: 3px solid var(--text-link);
+    color: var(--text-secondary);
+    font-size: var(--font-size-sm);
+}
+
+.completion-section {
+    margin: var(--space-md) 0 var(--space-xs);
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.completion-conditions,
+.completion-trace {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.completion-condition {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 8px 10px;
+    border-bottom: 1px solid var(--border-light);
+    font-size: var(--font-size-sm);
+}
+
+.completion-condition.met .completion-mark {
+    color: var(--success, #22c55e);
+}
+
+.completion-condition.remaining .completion-mark {
+    color: var(--text-secondary);
+}
+
+.completion-requested {
+    color: var(--text-primary);
+}
+
+.completion-actual {
+    color: var(--text-secondary);
+    font-size: var(--font-size-xs);
+}
+
+.completion-trace-row {
+    display: flex;
+    gap: var(--space-sm);
+    padding: 4px 10px;
+    border-bottom: 1px solid var(--border-light);
+    font-size: var(--font-size-xs);
+}
+
+.completion-trace-action {
+    color: var(--text-link);
+    font-weight: 600;
+    min-width: 14ch;
+}
+
+.completion-trace-detail {
+    color: var(--text-secondary);
+}
+
+.completion-trace-empty {
+    color: var(--text-secondary);
+    font-size: var(--font-size-xs);
+    padding: 4px 10px;
+}
+
+.completion-record {
+    margin-top: var(--space-md);
+    color: var(--text-secondary);
+    font-size: var(--font-size-xs);
+}
+
+/* ── Observation objectives: recorded interpretation (REQ-DEMO-06) ── */
+
+.objective-row {
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border-light);
+}
+
+.objective-head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.interpretation-form {
+    margin: var(--space-sm) 0 var(--space-xs) 32px;
+    padding: var(--space-sm);
+    border: 1px dashed var(--border-light);
+    border-radius: 8px;
+}
+
+.interpretation-label {
+    display: block;
+    color: var(--text-secondary);
+    font-size: var(--font-size-xs);
+    margin-bottom: 4px;
+}
+
+.interpretation-input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid var(--border-light);
+    background: rgba(255, 255, 255, 0.03);
+    color: var(--text-primary);
+    font-family: inherit;
+    font-size: var(--font-size-sm);
+    resize: vertical;
+}
+
+.interpretation-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    margin-top: 6px;
+}

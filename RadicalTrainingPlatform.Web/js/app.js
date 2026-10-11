@@ -56,6 +56,9 @@ import { TrackPickerView } from './views/track-picker.js';
 import { TrackOverviewView } from './views/track-overview.js';
 import { LessonReaderView } from './views/lesson-reader.js';
 import { PracticeView } from './views/practice.js';
+import { DemoModeView } from './views/demo-mode.js';
+import { initDemoBanner } from './components/DemoBanner.js';
+import { demo } from './core/DemoMode.js';
 
 /**
  * App — Bootstrap the Nutanix Lab Simulator.
@@ -71,6 +74,12 @@ class App {
         // Progress store is app-wide (lessons, practice, scenarios all record
         // against it) — initialize once at boot, not per view.
         await progress.init();
+
+        // Demo mode (T-21): restore a previously entered mode before the
+        // first render so the demo label is never briefly missing on a
+        // reload mid-demo.
+        await demo.init();
+        initDemoBanner();
 
         // Initialize theme
         initTheme();
@@ -163,6 +172,9 @@ class App {
         router.register('/tracks/:trackId', TrackOverviewView);
         router.register('/tracks/:trackId/lessons/:examId/:lessonId', LessonReaderView);
         router.register('/practice/:examId', PracticeView);
+
+        // Demo mode (Sprint 47 / T-21, REQ-DEMO-01..06)
+        router.register('/demo', DemoModeView);
     }
 
     #wireNavigation() {

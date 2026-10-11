@@ -172,12 +172,34 @@ class ProgressStore {
 
     async clearExam(examId) {
         this.#assertReady();
-        // StateStore has no key-iteration; summary deletion plus per-item
-        // deletes driven by the caller's known itemIds. Continuation dies
-        // with the exam's progress (R-15: a reset never leaves a stale
-        // mid-run pointer behind).
-        await store.delete(`progress/${examId}/summary`);
-        await store.delete(`progress/${examId}/continuation`);
+        // Deletes every key under progress/<examId>/ by enumeration (T-21
+        // added store.keys) — per-item records are not enumerable from the
+        // caller, and a reset that leaves scored items behind is a false
+        // reset. Continuation dies with the exam's progress (R-15: a reset
+        // never leaves a stale mid-run pointer behind).
+        const prefix = `progress/${examId}/`;
+        const keys = await store.keys(prefix);
+        for (const key of keys) await store.delete(key);
+    }
+
+    /**
+     * T-21 station reset — the demo presenter's one-click "clean station".
+     * Clears the two learner keyspaces and nothing else:
+     *   progress/*  (scored items, summaries, continuations, meta/streak)
+     *   scenario/*  (scenario completion records)
+     * Simulator fixture state lives under other keys and is reseeded by the
+     * caller (DemoMode), not deleted here. Quarantined corrupt bytes are
+     * deliberately left in place: they are evidence, not learner state.
+     * Returns the deleted key count so the reset can be reported honestly.
+     */
+    async clearStation() {
+        this.#assertReady();
+        const keys = [
+            ...(await store.keys('progress/')),
+            ...(await store.keys('scenario/')),
+        ];
+        for (const key of keys) await store.delete(key);
+        return { cleared: keys.length, keys };
     }
 
     // ─── Study continuation (R-15) ─────────────────────────────────

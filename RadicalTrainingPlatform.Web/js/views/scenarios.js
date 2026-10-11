@@ -3,6 +3,7 @@ import { state } from '../core/StateEngine.js';
 import { bus } from '../core/EventBus.js';
 import { toast } from '../components/Toast.js';
 import { TicketLabView } from './ticket-lab.js';
+import { renderCompletionPanel } from '../core/CompletionPanel.js';
 
 /**
  * Guided Lab Scenarios — JSON-driven lab exercises across all exams.
@@ -40,6 +41,45 @@ function ranCli(trace, pattern) {
 }
 function ranAction(trace, action) {
     return (trace || []).some(t => t.action === action);
+}
+
+/**
+ * T-21 (REQ-DEMO-06): a recorded interpretation response for one objective.
+ * The response must be non-empty text the learner actually wrote — an empty
+ * or whitespace-only submission is not an interpretation, so the objective
+ * stays unmet. Keyed by scenario AND objective so an interpretation of one
+ * dashboard cannot satisfy a different observation task.
+ */
+export function interpreted(trace, scenarioId, objectiveId) {
+    return (trace || []).some(t =>
+        t.action === 'interpretation'
+        && t.scenarioId === scenarioId
+        && t.objectiveId === objectiveId
+        && typeof t.response === 'string'
+        && t.response.trim().length > 0);
+}
+
+/**
+ * Observation-objective completion. An observation task ("review the
+ * dashboard", "identify degraded endpoints") is complete only when the
+ * learner both reached the route AND recorded what they read there —
+ * visiting without responding fails, which is the whole point of the rule.
+ *
+ * @param {Array}  trace
+ * @param {string} route          the route the learner must observe
+ * @param {string} scenarioId
+ * @param {string} objectiveId
+ * @param {Object} [opts]
+ * @param {string} [opts.what]    subject of the "has not been opened" message
+ * @param {Function} [opts.also]  extra state predicate; returns a result
+ */
+export function observation(trace, route, scenarioId, objectiveId, opts = {}) {
+    const what = opts.what || `the ${route} view`;
+    if (!visited(trace, route)) return unmet(`${what} has not been opened`);
+    if (!interpreted(trace, scenarioId, objectiveId)) {
+        return unmet(`${what} was opened but no interpretation response was recorded — visiting alone is not completion`);
+    }
+    return opts.also ? opts.also() : met();
 }
 
 // ── Ticket scenario validators (pure: state + trace only) ──
@@ -116,6 +156,7 @@ export const SCENARIOS = [
     // NCM-MCI (4 scenarios)
     {
         id: 'mci-01', exam: 'NCM-MCI', title: 'Create and Power On a VM',
+        fixtureSeed: 4138669076,
         difficulty: 'Beginner', time: '10 min',
         description: 'Create a VM with specific resources, attach a disk from an image, configure networking, and power it on.',
         objectives: [
@@ -166,6 +207,7 @@ export const SCENARIOS = [
     },
     {
         id: 'mci-02', exam: 'NCM-MCI', title: 'Configure Data Protection',
+        fixtureSeed: 4189001933,
         difficulty: 'Intermediate', time: '15 min',
         description: 'Create a protection domain, add VMs, and configure a replication schedule.',
         objectives: [
@@ -199,6 +241,7 @@ export const SCENARIOS = [
     },
     {
         id: 'mci-03', exam: 'NCM-MCI', title: 'Create a Flow Security Policy',
+        fixtureSeed: 4172224314,
         difficulty: 'Intermediate', time: '15 min',
         description: 'Create an Application security policy using categories to control traffic between tiers.',
         objectives: [
@@ -222,12 +265,14 @@ export const SCENARIOS = [
     },
     {
         id: 'mci-04', exam: 'NCM-MCI', title: 'Use the CLI to Manage VMs',
+        fixtureSeed: 4088336219,
         difficulty: 'Advanced', time: '10 min',
         description: 'Use acli and ncli commands to list and manage cluster resources.',
         objectives: [
             {
                 id: 'obj-1', text: 'Open the CLI terminal',
-                validate: (s, t) => visited(t, '/pe/cli') ? met() : unmet('the CLI terminal has not been opened'),
+                observation: true,
+                validate: (s, t) => observation(t, '/pe/cli', 'mci-04', 'obj-1', { what: 'the CLI terminal' }),
             },
             {
                 id: 'obj-2', text: 'List all VMs using acli',
@@ -244,6 +289,7 @@ export const SCENARIOS = [
     // NCP-US (3 scenarios)
     {
         id: 'us-01', exam: 'NCP-US', title: 'Deploy Nutanix Files',
+        fixtureSeed: 2016230447,
         difficulty: 'Intermediate', time: '15 min',
         description: 'Deploy FSVMs and create an SMB file share with Self-Service Restore.',
         objectives: [
@@ -269,6 +315,7 @@ export const SCENARIOS = [
     },
     {
         id: 'us-02', exam: 'NCP-US', title: 'Create WORM-Enabled Bucket',
+        fixtureSeed: 2033008066,
         difficulty: 'Advanced', time: '10 min',
         description: 'Create an Object Store bucket with WORM compliance (irreversible!).',
         objectives: [
@@ -285,6 +332,7 @@ export const SCENARIOS = [
     },
     {
         id: 'us-03', exam: 'NCP-US', title: 'Configure Volume Group with iSCSI',
+        fixtureSeed: 2049785685,
         difficulty: 'Intermediate', time: '15 min',
         description: 'Create a Volume Group with iSCSI target and enable CHAP authentication.',
         objectives: [
@@ -309,6 +357,7 @@ export const SCENARIOS = [
     // NCP-CI (4 scenarios)
     {
         id: 'ci-01', exam: 'NCP-CI', title: 'Deploy NC2 Cluster on AWS',
+        fixtureSeed: 2545995575,
         difficulty: 'Intermediate', time: '15 min',
         description: 'Deploy an NC2 cluster using i3.metal instances in a single AZ.',
         objectives: [
@@ -325,6 +374,7 @@ export const SCENARIOS = [
     },
     {
         id: 'ci-02', exam: 'NCP-CI', title: 'Deploy NC2 on Azure with Flow Gateway',
+        fixtureSeed: 2562773194,
         difficulty: 'Advanced', time: '15 min',
         description: 'Deploy an Azure NC2 cluster with Flow Gateways in noNAT mode.',
         objectives: [
@@ -348,6 +398,7 @@ export const SCENARIOS = [
     },
     {
         id: 'ci-03', exam: 'NCP-CI', title: 'Hibernate and Resume NC2 Cluster',
+        fixtureSeed: 2579550813,
         difficulty: 'Beginner', time: '5 min',
         description: 'Hibernate a running NC2 cluster and then resume it.',
         objectives: [
@@ -370,12 +421,14 @@ export const SCENARIOS = [
     },
     {
         id: 'ci-04', exam: 'NCP-CI', title: 'Validate Instance Type Selection',
+        fixtureSeed: 2462107480,
         difficulty: 'Beginner', time: '5 min',
         description: 'Attempt to deploy with invalid instance types and observe the validation errors.',
         objectives: [
             {
                 id: 'obj-1', text: 'Open the AWS deploy wizard and observe instance type options',
-                validate: (s, t) => visited(t, '/pc/nc2-deploy') ? met() : unmet('the NC2 deploy wizard has not been opened'),
+                observation: true,
+                validate: (s, t) => observation(t, '/pc/nc2-deploy', 'ci-04', 'obj-1', { what: 'the NC2 deploy wizard' }),
             },
         ],
         hints: ['Try selecting r5.metal — it should show a warning', 't3.xlarge is virtualized — won\'t work', 'Only i3.metal and i3en.metal are valid'],
@@ -384,6 +437,7 @@ export const SCENARIOS = [
     // NCP-AI (4 scenarios)
     {
         id: 'ai-01', exam: 'NCP-AI', title: 'Configure GPU with MIG',
+        fixtureSeed: 645581177,
         difficulty: 'Intermediate', time: '10 min',
         description: 'Add an A100 GPU and enable MIG mode. Try enabling MIG on a T4 (should fail).',
         objectives: [
@@ -400,6 +454,7 @@ export const SCENARIOS = [
     },
     {
         id: 'ai-02', exam: 'NCP-AI', title: 'Deploy NAI Inference Endpoint',
+        fixtureSeed: 595248320,
         difficulty: 'Advanced', time: '15 min',
         description: 'Create an NAI endpoint with vLLM engine and test the API.',
         objectives: [
@@ -416,6 +471,7 @@ export const SCENARIOS = [
     },
     {
         id: 'ai-03', exam: 'NCP-AI', title: 'Calculate VRAM for 70B Model',
+        fixtureSeed: 612025939,
         difficulty: 'Intermediate', time: '5 min',
         description: 'Use the VRAM calculator to determine GPU requirements for a 70B parameter model.',
         objectives: [
@@ -432,6 +488,7 @@ export const SCENARIOS = [
     },
     {
         id: 'ai-04', exam: 'NCP-AI', title: 'Test NAI API Explorer',
+        fixtureSeed: 695914034,
         difficulty: 'Intermediate', time: '10 min',
         description: 'Send requests to the API explorer and observe error handling for common mistakes.',
         objectives: [
@@ -459,6 +516,7 @@ export const SCENARIOS = [
     // Multi-Cluster & Calm
     {
         id: 'mc-01', exam: 'NCM-MCI', title: 'Register a Remote Cluster',
+        fixtureSeed: 3007443415,
         difficulty: 'Beginner', time: '5 min',
         description: 'Register a new Prism Element cluster to Prism Central for multi-cluster management.',
         objectives: [
@@ -475,6 +533,7 @@ export const SCENARIOS = [
     },
     {
         id: 'mc-02', exam: 'NCM-MCI', title: 'Create a Calm Blueprint',
+        fixtureSeed: 3024221034,
         difficulty: 'Intermediate', time: '10 min',
         description: 'Create a multi-VM blueprint in Calm with web, app, and database tiers.',
         objectives: [
@@ -498,6 +557,7 @@ export const SCENARIOS = [
     },
     {
         id: 'mc-03', exam: 'NCM-MCI', title: 'Launch App from Blueprint',
+        fixtureSeed: 3040998653,
         difficulty: 'Intermediate', time: '10 min',
         description: 'Launch a running application from an existing Calm blueprint.',
         objectives: [
@@ -515,6 +575,7 @@ export const SCENARIOS = [
     },
     {
         id: 'mc-04', exam: 'NCM-MCI', title: 'Clone Marketplace Item',
+        fixtureSeed: 2923555320,
         difficulty: 'Beginner', time: '5 min',
         description: 'Clone a pre-built application from the Calm Marketplace to your blueprints.',
         objectives: [
@@ -533,6 +594,7 @@ export const SCENARIOS = [
     // Advanced CLI scenarios
     {
         id: 'cli-01', exam: 'NCM-MCI', title: 'CLI Mastery — Storage & Network',
+        fixtureSeed: 2659987263,
         difficulty: 'Advanced', time: '15 min',
         description: 'Use NCLI to create storage containers and ACLI to manage networks from the command line.',
         objectives: [
@@ -556,6 +618,7 @@ export const SCENARIOS = [
     },
     {
         id: 'cli-02', exam: 'NCM-MCI', title: 'CLI — Calm and Lifecycle',
+        fixtureSeed: 2676764882,
         difficulty: 'Advanced', time: '10 min',
         description: 'Use the calm CLI to list blueprints and nuclei to check upgrade inventory.',
         objectives: [
@@ -575,6 +638,7 @@ export const SCENARIOS = [
     // NCP-US expanded
     {
         id: 'us-04', exam: 'NCP-US', title: 'Create NFS Export for Linux',
+        fixtureSeed: 1932342352,
         difficulty: 'Intermediate', time: '10 min',
         description: 'Create an NFS file share and understand multi-protocol considerations.',
         objectives: [
@@ -591,6 +655,7 @@ export const SCENARIOS = [
     },
     {
         id: 'us-05', exam: 'NCP-US', title: 'Verify FSVM Deployment Requirements',
+        fixtureSeed: 1949119971,
         difficulty: 'Beginner', time: '5 min',
         description: 'Check that minimum FSVM requirements (3 FSVMs, 12GB RAM each) are met.',
         objectives: [
@@ -599,17 +664,19 @@ export const SCENARIOS = [
                 // auto-passes (seed ships 3 FSVMs) — REQ-SC-02 forbids that.
                 // The learner must open the Files view to "verify" (T-14).
                 id: 'obj-1', text: 'Verify at least 3 FSVMs are deployed',
-                validate: (s, t) => {
-                    if (!visited(t, '/pc/files')) return unmet('the Files view has not been opened to verify FSVMs');
-                    return s.getAll('fsvms').length >= 3 ? met() : unmet('fewer than 3 FSVMs are deployed');
-                },
+                observation: true,
+                validate: (s, t) => observation(t, '/pc/files', 'us-05', 'obj-1', {
+                    what: 'the Files view',
+                    also: () => s.getAll('fsvms').length >= 3 ? met() : unmet('fewer than 3 FSVMs are deployed'),
+                }),
             },
             {
                 id: 'obj-2', text: 'Verify each FSVM has at least 12 GB RAM',
-                validate: (s, t) => {
-                    if (!visited(t, '/pc/files')) return unmet('the Files view has not been opened to verify FSVM memory');
-                    return s.getAll('fsvms').every(f => f.memory_gb >= 12) ? met() : unmet('at least one FSVM has less than 12 GB RAM');
-                },
+                observation: true,
+                validate: (s, t) => observation(t, '/pc/files', 'us-05', 'obj-2', {
+                    what: 'the Files view',
+                    also: () => s.getAll('fsvms').every(f => f.memory_gb >= 12) ? met() : unmet('at least one FSVM has less than 12 GB RAM'),
+                }),
             },
         ],
         hints: ['Navigate to PC → Files', 'Check the FSVMs section', 'Minimum: 3 FSVMs, 4 vCPUs, 12 GB RAM each'],
@@ -619,6 +686,7 @@ export const SCENARIOS = [
     // Audit / Operations
     {
         id: 'ops-01', exam: 'NCM-MCI', title: 'Review Audit Trail',
+        fixtureSeed: 1117254661,
         difficulty: 'Beginner', time: '5 min',
         description: 'Perform some actions, then check the Audit Log to see recorded events.',
         objectives: [
@@ -631,7 +699,8 @@ export const SCENARIOS = [
             },
             {
                 id: 'obj-2', text: 'View the audit log page',
-                validate: (s, t) => visited(t, '/pc/audit') ? met() : unmet('the audit log page has not been opened'),
+                observation: true,
+                validate: (s, t) => observation(t, '/pc/audit', 'ops-01', 'obj-2', { what: 'the audit log page' }),
             },
         ],
         hints: ['First, create something (e.g., a VM)', 'Then navigate to PC → Audit Log', 'You should see the create event recorded'],
@@ -640,6 +709,7 @@ export const SCENARIOS = [
     // Sprint 12 — LCM, Networking, Alerts, Projects (8 scenarios)
     {
         id: 'lcm-01', exam: 'NCM-MCI', title: 'LCM Firmware Update',
+        fixtureSeed: 2725195401,
         difficulty: 'Intermediate', time: '10 min',
         description: 'Use the Life Cycle Manager to check for firmware/software updates and apply them.',
         objectives: [
@@ -664,6 +734,7 @@ export const SCENARIOS = [
     },
     {
         id: 'lcm-02', exam: 'NCM-MCI', title: 'PC Settings — NTP & DNS',
+        fixtureSeed: 2674862544,
         difficulty: 'Beginner', time: '5 min',
         description: 'Configure Prism Central NTP and DNS settings for proper time sync and name resolution.',
         objectives: [
@@ -687,6 +758,7 @@ export const SCENARIOS = [
     },
     {
         id: 'net-01', exam: 'NCM-MCI', title: 'Create a VPC with Subnet',
+        fixtureSeed: 950603700,
         difficulty: 'Intermediate', time: '10 min',
         description: 'Create a new VPC with overlay networking and configure a subnet with IP pool.',
         objectives: [
@@ -711,6 +783,7 @@ export const SCENARIOS = [
     },
     {
         id: 'net-02', exam: 'NCM-MCI', title: 'Allocate a Floating IP',
+        fixtureSeed: 1000936557,
         difficulty: 'Beginner', time: '5 min',
         description: 'Allocate a floating IP to a VPC for external access.',
         objectives: [
@@ -728,6 +801,7 @@ export const SCENARIOS = [
     },
     {
         id: 'alert-01', exam: 'NCM-MCI', title: 'Create Alert Policy & Resolve Alert',
+        fixtureSeed: 1683502799,
         difficulty: 'Intermediate', time: '8 min',
         description: 'Create an alert policy for critical alerts and resolve an existing alert.',
         objectives: [
@@ -752,6 +826,7 @@ export const SCENARIOS = [
     },
     {
         id: 'proj-01', exam: 'NCM-MCI', title: 'Create a Self-Service Project',
+        fixtureSeed: 3479966294,
         difficulty: 'Intermediate', time: '10 min',
         description: 'Create a project with resource quotas and user assignments for self-service.',
         objectives: [
@@ -775,6 +850,7 @@ export const SCENARIOS = [
     },
     {
         id: 'cli-03', exam: 'NCM-MCI', title: 'CLI — LCM & Alert Commands',
+        fixtureSeed: 2693542501,
         difficulty: 'Intermediate', time: '8 min',
         description: 'Use CLI commands to check LCM inventory, list alerts, and manage projects.',
         objectives: [
@@ -796,6 +872,7 @@ export const SCENARIOS = [
     },
     {
         id: 'scma-01', exam: 'NCM-MCI', title: 'Enable SCMA Security Hardening',
+        fixtureSeed: 3103121751,
         difficulty: 'Beginner', time: '5 min',
         description: 'Enable Security Configuration Management Automation (SCMA) for STIG compliance.',
         objectives: [
@@ -813,6 +890,7 @@ export const SCENARIOS = [
     // Sprint 13 — NCP-US scenarios (4)
     {
         id: 'us-repl-01', exam: 'NCP-US', title: 'Configure File Server Replication',
+        fixtureSeed: 545274295,
         difficulty: 'Intermediate', time: '10 min',
         description: 'Set up a Files share and configure replication to a remote site for disaster recovery.',
         objectives: [
@@ -827,11 +905,12 @@ export const SCENARIOS = [
                 // Old predicate was file_shares.length > 0 — seed ships 3 shares,
                 // so it auto-passed. Require the named share plus the visit (T-14).
                 id: 'obj-2', text: 'Navigate to Files view and verify the share appears',
-                validate: (s, t) => {
-                    if (!visited(t, '/pc/files')) return unmet('the Files view has not been opened');
-                    return s.getAll('file_shares').some(sh => sh.name === 'Lab-Shared')
-                        ? met() : unmet('Lab-Shared is not visible in the Files view');
-                },
+                observation: true,
+                validate: (s, t) => observation(t, '/pc/files', 'us-repl-01', 'obj-2', {
+                    what: 'the Files view',
+                    also: () => s.getAll('file_shares').some(sh => sh.name === 'Lab-Shared')
+                        ? met() : unmet('Lab-Shared is not visible in the Files view'),
+                }),
             },
         ],
         hints: ['Navigate to PC → Files', 'Click "+ Create Share"', 'Set name to "Lab-Shared" and select a protocol'],
@@ -839,6 +918,7 @@ export const SCENARIOS = [
     },
     {
         id: 'us-bucket-01', exam: 'NCP-US', title: 'Create an Object Store Bucket',
+        fixtureSeed: 915177250,
         difficulty: 'Beginner', time: '8 min',
         description: 'Create a new bucket in Objects with versioning and a lifecycle policy.',
         objectives: [
@@ -863,6 +943,7 @@ export const SCENARIOS = [
     },
     {
         id: 'us-vol-01', exam: 'NCP-US', title: 'Volumes — iSCSI Target Migration',
+        fixtureSeed: 338426179,
         difficulty: 'Advanced', time: '12 min',
         description: 'Create a Volume Group for iSCSI storage and attach it to a VM client.',
         objectives: [
@@ -879,12 +960,14 @@ export const SCENARIOS = [
     },
     {
         id: 'us-analytics-01', exam: 'NCP-US', title: 'File Analytics — Audit Trail',
+        fixtureSeed: 166848784,
         difficulty: 'Intermediate', time: '8 min',
         description: 'Use File Analytics to review access patterns and audit file operations.',
         objectives: [
             {
                 id: 'obj-1', text: 'Navigate to File Analytics and review dashboard',
-                validate: (s, t) => visited(t, '/pc/analytics') ? met() : unmet('the File Analytics dashboard has not been opened'),
+                observation: true,
+                validate: (s, t) => observation(t, '/pc/analytics', 'us-analytics-01', 'obj-1', { what: 'the File Analytics dashboard' }),
             },
         ],
         hints: ['Navigate to PC → File Analytics', 'Review the capacity trends and top users'],
@@ -893,16 +976,19 @@ export const SCENARIOS = [
     // Sprint 13 — NCP-CI scenarios (3)
     {
         id: 'ci-migrate-01', exam: 'NCP-CI', title: 'NC2 — Deploy Cloud Cluster',
+        fixtureSeed: 1657861807,
         difficulty: 'Advanced', time: '15 min',
         description: 'Deploy a Nutanix Cloud Cluster on AWS and verify connectivity.',
         objectives: [
             {
                 id: 'obj-1', text: 'Navigate to NC2 Deploy and review deployment options',
-                validate: (s, t) => visited(t, '/pc/nc2-deploy') ? met() : unmet('the NC2 Deploy page has not been opened'),
+                observation: true,
+                validate: (s, t) => observation(t, '/pc/nc2-deploy', 'ci-migrate-01', 'obj-1', { what: 'the NC2 Deploy page' }),
             },
             {
                 id: 'obj-2', text: 'Check NC2 Monitoring for cluster health',
-                validate: (s, t) => visited(t, '/pc/nc2-monitoring') ? met() : unmet('the NC2 Monitoring page has not been opened'),
+                observation: true,
+                validate: (s, t) => observation(t, '/pc/nc2-monitoring', 'ci-migrate-01', 'obj-2', { what: 'the NC2 Monitoring page' }),
             },
         ],
         hints: ['Navigate to NC2 → Deploy Cluster', 'Review cloud provider options', 'Check monitoring dashboards'],
@@ -910,16 +996,19 @@ export const SCENARIOS = [
     },
     {
         id: 'ci-monitor-01', exam: 'NCP-CI', title: 'NC2 Monitoring & Cost Comparison',
+        fixtureSeed: 543742474,
         difficulty: 'Intermediate', time: '10 min',
         description: 'Compare performance and cost metrics between on-prem and cloud clusters.',
         objectives: [
             {
                 id: 'obj-1', text: 'View NC2 monitoring metrics for both clusters',
-                validate: (s, t) => visited(t, '/pc/nc2-monitoring') ? met() : unmet('the NC2 Monitoring page has not been opened'),
+                observation: true,
+                validate: (s, t) => observation(t, '/pc/nc2-monitoring', 'ci-monitor-01', 'obj-1', { what: 'the NC2 Monitoring page' }),
             },
             {
                 id: 'obj-2', text: 'Review cost estimates on the NC2 monitoring page',
-                validate: (s, t) => visited(t, '/pc/nc2-monitoring') ? met() : unmet('the NC2 Monitoring cost estimates have not been reviewed'),
+                observation: true,
+                validate: (s, t) => observation(t, '/pc/nc2-monitoring', 'ci-monitor-01', 'obj-2', { what: 'the NC2 Monitoring cost estimates' }),
             },
         ],
         hints: ['Navigate to NC2 → Monitoring', 'Compare AWS vs Azure cluster metrics', 'Review hourly cost rates'],
@@ -927,16 +1016,19 @@ export const SCENARIOS = [
     },
     {
         id: 'ci-scale-01', exam: 'NCP-CI', title: 'NC2 — Scale a Cloud Cluster',
+        fixtureSeed: 3121596862,
         difficulty: 'Advanced', time: '10 min',
         description: 'Scale up an NC2 cluster by adding a node and configure an autoscale policy.',
         objectives: [
             {
                 id: 'obj-1', text: 'View the scaling history for NC2 clusters',
-                validate: (s, t) => visited(t, '/pc/nc2-scaling') ? met() : unmet('the NC2 Scaling page has not been opened'),
+                observation: true,
+                validate: (s, t) => observation(t, '/pc/nc2-scaling', 'ci-scale-01', 'obj-1', { what: 'the NC2 Scaling page' }),
             },
             {
                 id: 'obj-2', text: 'Review autoscale policies',
-                validate: (s, t) => visited(t, '/pc/nc2-scaling') ? met() : unmet('the autoscale policies have not been reviewed'),
+                observation: true,
+                validate: (s, t) => observation(t, '/pc/nc2-scaling', 'ci-scale-01', 'obj-2', { what: 'the autoscale policies' }),
             },
         ],
         hints: ['Navigate to NC2 → Scaling', 'Review scaling history events', 'Check autoscale policy configurations'],
@@ -945,16 +1037,19 @@ export const SCENARIOS = [
     // Sprint 13 — NCP-AI scenarios (3)
     {
         id: 'ai-model-01', exam: 'NCP-AI', title: 'NAI Model Registry',
+        fixtureSeed: 936441421,
         difficulty: 'Intermediate', time: '10 min',
         description: 'Browse the NAI model registry, review available models, and deploy an endpoint.',
         objectives: [
             {
                 id: 'obj-1', text: 'Navigate to AI Models and view available models',
-                validate: (s, t) => visited(t, '/pc/ai-models') ? met() : unmet('the AI Models page has not been opened'),
+                observation: true,
+                validate: (s, t) => observation(t, '/pc/ai-models', 'ai-model-01', 'obj-1', { what: 'the AI Models page' }),
             },
             {
                 id: 'obj-2', text: 'Check endpoint metrics for deployed models',
-                validate: (s, t) => visited(t, '/pc/ai-monitoring') ? met() : unmet('the AI Monitoring page has not been opened for endpoint metrics'),
+                observation: true,
+                validate: (s, t) => observation(t, '/pc/ai-monitoring', 'ai-model-01', 'obj-2', { what: 'the AI Monitoring page' }),
             },
         ],
         hints: ['Navigate to AI → Models', 'Review model frameworks and sizes', 'Check deployment status'],
@@ -962,22 +1057,25 @@ export const SCENARIOS = [
     },
     {
         id: 'ai-monitor-01', exam: 'NCP-AI', title: 'NAI Endpoint Monitoring',
+        fixtureSeed: 1681153620,
         difficulty: 'Intermediate', time: '8 min',
         description: 'Monitor NAI inference endpoints — check latency, throughput, GPU utilization, and error rates.',
         objectives: [
             {
                 id: 'obj-1', text: 'View endpoint health and metrics',
-                validate: (s, t) => visited(t, '/pc/ai-monitoring') ? met() : unmet('the AI Monitoring page has not been opened'),
+                observation: true,
+                validate: (s, t) => observation(t, '/pc/ai-monitoring', 'ai-monitor-01', 'obj-1', { what: 'the AI Monitoring page' }),
             },
             {
                 // Seed already has a degraded endpoint — state alone auto-passed.
                 // Require the visit (observation objective, T-14).
                 id: 'obj-2', text: 'Identify degraded endpoints',
-                validate: (s, t) => {
-                    if (!visited(t, '/pc/ai-monitoring')) return unmet('the AI Monitoring page has not been opened to identify degraded endpoints');
-                    return s.getAll('ai_endpoint_metrics').some(e => e.status === 'degraded')
-                        ? met() : unmet('no degraded endpoint is present to identify');
-                },
+                observation: true,
+                validate: (s, t) => observation(t, '/pc/ai-monitoring', 'ai-monitor-01', 'obj-2', {
+                    what: 'the AI Monitoring page',
+                    also: () => s.getAll('ai_endpoint_metrics').some(e => e.status === 'degraded')
+                        ? met() : unmet('no degraded endpoint is present to identify'),
+                }),
             },
         ],
         hints: ['Navigate to AI → Monitoring', 'Look for endpoints with high error rates', 'Check GPU utilization percentages'],
@@ -985,6 +1083,7 @@ export const SCENARIOS = [
     },
     {
         id: 'ai-gpu-01', exam: 'NCP-AI', title: 'GPU OOM — Right-Size a Model',
+        fixtureSeed: 2521834816,
         difficulty: 'Advanced', time: '10 min',
         description: 'Investigate a GPU out-of-memory condition and identify the model that needs quantization or scale-down.',
         objectives: [
@@ -992,11 +1091,12 @@ export const SCENARIOS = [
                 // Seed already has a >90% GPU endpoint — state alone auto-passed.
                 // Require the visit (observation objective, T-14).
                 id: 'obj-1', text: 'Find the endpoint with >90% GPU utilization',
-                validate: (s, t) => {
-                    if (!visited(t, '/pc/ai-monitoring')) return unmet('the AI Monitoring page has not been opened to find high GPU use');
-                    return s.getAll('ai_endpoint_metrics').some(e => e.gpu_util_pct > 90)
-                        ? met() : unmet('no endpoint above 90% GPU utilization is present');
-                },
+                observation: true,
+                validate: (s, t) => observation(t, '/pc/ai-monitoring', 'ai-gpu-01', 'obj-1', {
+                    what: 'the AI Monitoring page',
+                    also: () => s.getAll('ai_endpoint_metrics').some(e => e.gpu_util_pct > 90)
+                        ? met() : unmet('no endpoint above 90% GPU utilization is present'),
+                }),
             },
             {
                 id: 'obj-2', text: 'Run nuclei ai.status in CLI to verify',
@@ -1009,16 +1109,19 @@ export const SCENARIOS = [
     // Sprint 13 — NCM-MCI scenarios (2)
     {
         id: 'mci-capacity-01', exam: 'NCM-MCI', title: 'PE Capacity Planning & Runway',
+        fixtureSeed: 2530324997,
         difficulty: 'Intermediate', time: '10 min',
         description: 'Review PE capacity planning to understand resource runway and identify top consumers.',
         objectives: [
             {
                 id: 'obj-1', text: 'Navigate to PE Capacity Planning and review CPU runway',
-                validate: (s, t) => visited(t, '/pe/capacity') ? met() : unmet('the PE Capacity Planning page has not been opened'),
+                observation: true,
+                validate: (s, t) => observation(t, '/pe/capacity', 'mci-capacity-01', 'obj-1', { what: 'the PE Capacity Planning page' }),
             },
             {
                 id: 'obj-2', text: 'Identify the resource with shortest runway',
-                validate: (s, t) => visited(t, '/pe/capacity') ? met() : unmet('the capacity runway has not been reviewed'),
+                observation: true,
+                validate: (s, t) => observation(t, '/pe/capacity', 'mci-capacity-01', 'obj-2', { what: 'the capacity runway' }),
             },
         ],
         hints: ['Navigate to PE → Capacity Planning (hamburger menu)', 'Memory typically has the shortest runway', 'Review the top consumer tables'],
@@ -1026,6 +1129,7 @@ export const SCENARIOS = [
     },
     {
         id: 'mci-insights-01', exam: 'NCM-MCI', title: 'PC Insights — Optimization Review',
+        fixtureSeed: 3038479938,
         difficulty: 'Intermediate', time: '8 min',
         description: 'Review Prism Central insights for optimization recommendations and anomaly detection.',
         objectives: [
@@ -1033,19 +1137,21 @@ export const SCENARIOS = [
                 // Seed already has active insights — state alone auto-passed.
                 // Require the visit (observation objective, T-14).
                 id: 'obj-1', text: 'Navigate to PC Insights and review active recommendations',
-                validate: (s, t) => {
-                    if (!visited(t, '/pc/insights')) return unmet('the PC Insights page has not been opened');
-                    return s.getAll('insights').filter(i => i.status === 'active').length > 0
-                        ? met() : unmet('no active insight is present to review');
-                },
+                observation: true,
+                validate: (s, t) => observation(t, '/pc/insights', 'mci-insights-01', 'obj-1', {
+                    what: 'the PC Insights page',
+                    also: () => s.getAll('insights').filter(i => i.status === 'active').length > 0
+                        ? met() : unmet('no active insight is present to review'),
+                }),
             },
             {
                 id: 'obj-2', text: 'Identify critical insights requiring immediate action',
-                validate: (s, t) => {
-                    if (!visited(t, '/pc/insights')) return unmet('the PC Insights page has not been opened to identify critical items');
-                    return s.getAll('insights').some(i => i.category === 'critical')
-                        ? met() : unmet('no critical insight is present to identify');
-                },
+                observation: true,
+                validate: (s, t) => observation(t, '/pc/insights', 'mci-insights-01', 'obj-2', {
+                    what: 'the PC Insights page',
+                    also: () => s.getAll('insights').some(i => i.category === 'critical')
+                        ? met() : unmet('no critical insight is present to identify'),
+                }),
             },
         ],
         hints: ['Navigate to PC → Insights', 'Look for 🔴 critical items at the top', 'Review optimization suggestions for resource savings'],
@@ -1055,6 +1161,7 @@ export const SCENARIOS = [
     // SPEC-05 REQ-NP-02). Routed through TicketLabView; validators above.
     {
         id: 'aplus-dns-01', exam: 'COMPTIA-A-1201', title: 'Ticket HR-2214: Site loads by IP, not by name',
+        fixtureSeed: 1961388102,
         difficulty: 'Beginner', time: '10 min',
         description: 'A help-desk ticket: the user can reach a website by IP address but not by name. Diagnose, fix the workstation, and document.',
         renderer: 'ticket',
@@ -1073,6 +1180,7 @@ export const SCENARIOS = [
     },
     {
         id: 'netplus-gw-01', exam: 'COMPTIA-NET-009', title: 'Ticket SA-3391: Local share works, internet does not',
+        fixtureSeed: 2288554035,
         difficulty: 'Beginner', time: '10 min',
         description: 'A network troubleshooting ticket: the workstation reaches its own subnet but nothing beyond it. Identify, fix, and verify.',
         renderer: 'ticket',
@@ -1211,12 +1319,40 @@ export class ScenariosView extends BaseView {
     }
 
     #evalObjective(obj) {
+        return this.#evalObjectiveDetail(obj).passed;
+    }
+
+    /** Full validator result — the completion panel reports unmetConditions. */
+    #evalObjectiveDetail(obj) {
         try {
             const result = obj.validate(state, this.#trace());
-            return result?.passed === true;
-        } catch {
-            return false;
+            return {
+                passed: result?.passed === true,
+                unmetConditions: Array.isArray(result?.unmetConditions) ? result.unmetConditions : [],
+            };
+        } catch (e) {
+            return { passed: false, unmetConditions: [`validator failed: ${e?.message || e}`] };
         }
+    }
+
+    /**
+     * The interpretation form for one observation objective (T-21,
+     * REQ-DEMO-06). Rendered only for objectives flagged `observation` —
+     * a config-mutation objective has nothing to interpret.
+     */
+    #renderInterpretationInput(scenario, objective) {
+        const already = interpreted(this.#trace(), scenario.id, objective.id);
+        return `
+            <div class="interpretation-form" data-objective="${objective.id}" data-recorded="${already}">
+                <label class="interpretation-label" for="interp-${objective.id}">What did you observe? Record your interpretation to complete this observation task.</label>
+                <textarea class="interpretation-input" id="interp-${objective.id}" rows="2"
+                    ${already ? 'disabled' : ''}
+                    placeholder="Describe what the page showed and what it means."></textarea>
+                <div class="interpretation-actions">
+                    <button class="btn btn-sm btn-primary interpretation-submit" ${already ? 'disabled' : ''}>Record interpretation</button>
+                    <span class="interpretation-status text-secondary text-sm">${already ? 'Recorded.' : 'Visiting the view alone does not complete this task.'}</span>
+                </div>
+            </div>`;
     }
 
     #renderActiveScenario(container, scenario) {
@@ -1255,9 +1391,12 @@ export class ScenariosView extends BaseView {
                 <div class="card-header">Objectives</div>
                 <div class="card-body" id="objectives-list">
                     ${results.map(r => `
-                        <div style="display:flex;align-items:center;gap:12px;padding:8px 0;border-bottom:1px solid var(--border-light);" id="obj-${r.id}">
-                            <span style="font-size:20px;">${r.passed ? '✅' : '⬜'}</span>
-                            <span>${r.text}</span>
+                        <div class="objective-row" id="obj-${r.id}">
+                            <div class="objective-head">
+                                <span class="objective-mark" style="font-size:20px;">${r.passed ? '✅' : '⬜'}</span>
+                                <span>${r.text}</span>
+                            </div>
+                            ${r.observation ? this.#renderInterpretationInput(scenario, r) : ''}
                         </div>
                     `).join('')}
                 </div>
@@ -1273,13 +1412,49 @@ export class ScenariosView extends BaseView {
             </div>
 
             <div class="card" id="result-panel" style="display:none;">
-                <div class="card-body" style="text-align:center;padding:32px;">
-                    <div style="font-size:48px;" id="result-icon">🎉</div>
-                    <h2 id="result-title">Scenario Complete!</h2>
-                    <p id="result-message" class="text-secondary"></p>
-                </div>
+                <div class="card-body" id="result-body"></div>
             </div>
         `;
+
+        // Observation objectives need a recorded interpretation response
+        // (T-21): a plain textarea + button, both natively tabbable, so the
+        // demo path stays keyboard-operable with no hover-only affordance.
+        container.querySelectorAll('.interpretation-form').forEach(form => {
+            const objectiveId = form.dataset.objective;
+            const input = form.querySelector('.interpretation-input');
+            const submit = form.querySelector('.interpretation-submit');
+            const status = form.querySelector('.interpretation-status');
+            const save = async () => {
+                const response = (input?.value || '').trim();
+                if (!response) {
+                    if (status) status.textContent = 'Type what you observed before recording — an empty response is not an interpretation.';
+                    input?.focus();
+                    return;
+                }
+                try {
+                    await state.create('action_trace', {
+                        action: 'interpretation',
+                        scenarioId: scenario.id,
+                        objectiveId,
+                        response,
+                    });
+                } catch (e) {
+                    if (status) status.textContent = 'Could not record the response — the station did not store it.';
+                    return;
+                }
+                if (status) status.textContent = 'Recorded. Use "Check Progress" to re-evaluate.';
+                submit.disabled = true;
+                input.disabled = true;
+                form.dataset.recorded = 'true';
+            };
+            submit?.addEventListener('click', save);
+            input?.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) {
+                    e.preventDefault();
+                    save();
+                }
+            });
+        });
 
         document.getElementById('back-btn')?.addEventListener('click', () => {
             container.style.display = 'none';
@@ -1301,31 +1476,36 @@ export class ScenariosView extends BaseView {
         });
 
         document.getElementById('check-btn')?.addEventListener('click', () => {
-            let allPassed = true;
-            scenario.objectives.forEach(obj => {
-                const passed = this.#evalObjective(obj);
+            const evaluated = scenario.objectives.map(obj => {
+                const detail = this.#evalObjectiveDetail(obj);
                 const el = document.getElementById(`obj-${obj.id}`);
-                if (el) {
-                    const icon = el.querySelector('span');
-                    if (icon) icon.textContent = passed ? '✅' : '❌';
-                }
-                if (!passed) allPassed = false;
+                const icon = el?.querySelector('.objective-mark');
+                if (icon) icon.textContent = detail.passed ? '✅' : '❌';
+                return { id: obj.id, text: obj.text, passed: detail.passed, unmetConditions: detail.unmetConditions };
             });
+            const allPassed = evaluated.every(o => o.passed);
 
             const resultPanel = document.getElementById('result-panel');
-            if (resultPanel) {
-                resultPanel.style.display = '';
-                if (allPassed) {
-                    document.getElementById('result-icon').textContent = '🎉';
-                    document.getElementById('result-title').textContent = 'All Objectives Complete!';
-                    document.getElementById('result-message').textContent = `Great job! You've completed "${scenario.title}".`;
-                    toast.success(`Scenario "${scenario.title}" completed!`);
-                    this.#recordAttempt(scenario);
-                } else {
-                    document.getElementById('result-icon').textContent = '🔄';
-                    document.getElementById('result-title').textContent = 'Not Yet Complete';
-                    document.getElementById('result-message').textContent = 'Some objectives are not met. Use the hints and navigate to the relevant view to complete them.';
-                }
+            const resultBody = document.getElementById('result-body');
+            if (!resultPanel || !resultBody) return;
+            resultPanel.style.display = '';
+
+            // T-21/REQ-DEMO-06: the panel states conditions met and
+            // remaining, requested vs actual, and the action trace. It is
+            // never a score and never a mastery/qualification claim —
+            // CompletionPanel holds the forbidden-string list.
+            resultBody.innerHTML = renderCompletionPanel({
+                title: scenario.title,
+                scenarioId: scenario.id,
+                objectives: evaluated,
+                trace: this.#trace(),
+                recorded: allPassed,
+            });
+            if (allPassed) {
+                toast.success(`All task conditions met for "${scenario.title}".`);
+                this.#recordAttempt(scenario);
+            } else {
+                toast.info(`${evaluated.filter(o => !o.passed).length} condition(s) still open.`);
             }
         });
     }

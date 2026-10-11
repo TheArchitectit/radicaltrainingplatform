@@ -34,8 +34,17 @@ async function completeScenario(state, view, el) {
     assert(checkBtn, 'check button should be wired');
     checkBtn.dispatchEvent({ type: 'click', target: checkBtn });
 
-    const title = dom.document.getElementById('result-title');
-    assertEqual(title.textContent, 'All Objectives Complete!', 'scenario should be complete');
+    // T-21/REQ-DEMO-06 replaced the old "All Objectives Complete!" panel:
+    // a mastery-style claim is a forbidden string, so completion is now
+    // reported as task conditions met/remaining, with requested vs actual.
+    const body = dom.document.getElementById('result-body');
+    assert(body, 'the result panel body should exist');
+    assert(body.innerHTML.includes('completion-panel'),
+        `the completion panel should render, got: ${body.innerHTML.slice(0, 200)}`);
+    assert(/<h2 class="completion-title">Conditions met<\/h2>/.test(body.innerHTML),
+        'a fully-satisfied scenario must report "Conditions met"');
+    assert(!/All Objectives Complete/.test(body.innerHTML),
+        'the panel must not make an "all objectives complete" mastery-style claim');
 }
 
 await runner.test('completing a scenario records an attempt and renders history', async () => {

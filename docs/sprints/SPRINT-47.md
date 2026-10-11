@@ -15,7 +15,7 @@
 |---|---|---|---|---|
 | S47-01 (T-19) | A+ cut complete: 24 reviewed items, 2 complete lessons | REQ-AP-02 | 3 | ✅ |
 | S47-02 (T-20) | Network+ cut complete: 25 reviewed items, 2 complete lessons (five per domain) | REQ-NP-02 | 3 | ✅ |
-| S47-03 (T-21) | Demo mode: seed, one-click reset, mode label, ephemeral store | REQ-DEMO-01..06, REQ-UI-07/08 | 3 | ⚪ |
+| S47-03 (T-21) | Demo mode: seed, one-click reset, mode label, ephemeral store | REQ-DEMO-01..06, REQ-UI-07/08 | 3 | ✅ |
 | S47-04 (T-22) | Pages predeploy gate (imports, smoke, bundle check) | CI-03 | 2 | ⚪ |
 | S47-05 (T-23) | Tutor slice behind its gates, or recorded-example fallback | REQ-AI-01..07 | 3 | ⚪ |
 | S47-06 (T-24) | Option shuffling with stable IDs | R-09 | 1 | ⚪ |
@@ -117,15 +117,38 @@ Cut map (25 items, type/lesson/cross-exam live in provenance; bank slices stay h
 **As a** presenter rotating student groups, **I want** seeded deterministic scenarios with one-tap reset, **so that** every group starts clean.
 
 **Acceptance Criteria:**
-- [ ] Each scenario declares a fixture seed; entering demo mode loads that seed exactly
-- [ ] All 44 existing + 6 new scenarios boot, run, and correctly report incomplete-then-complete in demo mode (TM-45 sweep report names each scenario ID and result)
-- [ ] One-click station reset clears `progress/` and `scenario/` keyspaces, reseeds all fixtures, verified by each validator’s negative path; confirmed via reseed verification pass
-- [ ] “Demo mode” label on every screen; synthetic data only; zero outbound calls from simulator content; no identity collection anywhere
-- [ ] Projector-readable, keyboard-operable, no hover-only affordances on the demo path
-- [ ] Completion panel tells the truth: conditions met/unmet, requested vs actual, action trace; mastery/qualification/readiness claims are forbidden strings (snapshot-tested)
-- [ ] Observation tasks require a recorded interpretation response — visiting without responding fails
+- [x] Each scenario declares a fixture seed; entering demo mode loads that seed exactly
+- [x] All 44 existing + 6 new scenarios boot, run, and correctly report incomplete-then-complete in demo mode (TM-45 sweep report names each scenario ID and result)
+- [x] One-click station reset clears `progress/` and `scenario/` keyspaces, reseeds all fixtures, verified by each validator’s negative path; confirmed via reseed verification pass
+- [x] “Demo mode” label on every screen; synthetic data only; zero outbound calls from simulator content; no identity collection anywhere
+- [x] Projector-readable, keyboard-operable, no hover-only affordances on the demo path
+- [x] Completion panel tells the truth: conditions met/unmet, requested vs actual, action trace; mastery/qualification/readiness claims are forbidden strings (snapshot-tested)
+- [x] Observation tasks require a recorded interpretation response — visiting without responding fails
 
-**Files:** `Web/js/views/` (demo mode), `tests/e2e/demo-sweep.spec.js`
+**Files:** `Web/js/core/DemoMode.js`, `Web/js/core/CompletionPanel.js`, `Web/js/components/DemoBanner.js`, `Web/js/views/demo-mode.js`, `Web/js/views/scenarios.js`, `Web/js/core/StateStore.js`, `Web/js/core/ProgressStore.js`, `Web/index.html`, `Web/css/study.css`, `tests/gates/web/{demo-mode,demo-independence,demo-sweep-report,completion-panel-snapshot}.mjs`, `tests/gates/web/lib/scenario-walkthroughs.mjs`, `docs/qa/release-evidence/2026-10-11-demo-sweep.md`
+
+**Shipped (S47-03 notes):**
+
+Demo mode is its own module (`core/DemoMode.js`), not learner mode with the sign-in hidden. It takes the scenario registry as an argument rather than importing it, so "which scenarios exist" stays in one place and `core/` keeps no view-layer dependency.
+
+- **Seeds (REQ-DEMO-01).** Every scenario in the catalog declares `fixtureSeed` — an FNV-1a hash of its id, so it is deterministic, distinct, and reproducible without a table to maintain. `demo.enter()` calls `declaredSeeds()` (which *refuses* a scenario that declares none rather than defaulting), then loads each seed exactly, then persists the mode flag so a mid-demo reload stays in demo mode with the same station. `rngFor(id)` refuses an unknown scenario rather than inventing a seed; `makeRng` is mulberry32.
+- **One-click reset (REQ-DEMO-05).** `demo.resetStation()` → `progress.clearStation()` (clears the `progress/` and `scenario/` keyspaces only — simulator fixtures are untouched) → `state.reset()` (reseeds fixtures) → `verifyReseed()` → emits `demo:stationReset`. `verifyReseed` is a real check, not an assertion: for each scenario it compares the loaded seed to the declared one *and* drives the validator's negative path on the fresh station; a validator that throws is reported as **failed**, never as clean.
+- **Mode label (REQ-DEMO-02).** `#demo-banner` lives in the app shell in `index.html`, outside `#view-container`, so the router cannot swap it out — that structural fact is what makes "on every screen" true, and `demo-independence.mjs` asserts it. `body.demo-mode` raises the base font size to 18px for projector legibility; the demo controls are real `<button>` elements.
+- **Completion panel (REQ-DEMO-06).** `core/CompletionPanel.js` is a pure string builder (no DOM, no clock, no storage), so the forbidden-string snapshot is deterministic. It reports conditions met/remaining, `Requested:` vs `Actual:` per condition, the action trace, and whether the run was recorded. `FORBIDDEN_CLAIM_STRINGS` (mastery / job-qualified / certification-ready families) is exported so the fixture reads the same list the module enforces.
+- **Observation tasks.** 22 objectives across 14 scenarios became `observation: true` — completion needs the route *and* a recorded `{action:'interpretation', scenarioId, objectiveId, response}` trace entry. `lcm-01/obj-1` was deliberately **not** converted: it requires a real `ranAction(t,'lcm-scan')`, and calling that an observation would have been false. A blank or cross-scenario interpretation does not complete an objective (fixture-tested).
+- **TM-45 report.** `docs/qa/release-evidence/2026-10-11-demo-sweep.md` names all 46 scenarios with their fresh-station result (incomplete) and post-walkthrough result (complete). Generated by `demo-sweep-report.mjs`; `DEMO_SWEEP_OUT` writes it to disk.
+- **Independence.** `demo-independence.mjs` scans `Web/js/**` for outbound primitives (zero found), treats `sw.js` separately and narrowly (its cache-revalidation `fetch` must bail on cross-origin before touching the network), stubs fetch/XHR/WebSocket/EventSource/sendBeacon and drives a full walkthrough (zero calls recorded), and asserts no learner-identity surface. The header's simulated `admin` label was relabelled `admin (simulated)` — it is Prism chrome, not an account.
+
+**Findings recorded this row:**
+
+- **`us-04`/`us-05` mis-attribution.** The observation conversion script guessed the owning scenario from surrounding context and attributed the Files-view objectives to `us-04` instead of `us-05`. `scenario-sweep.mjs` caught it (`us-05/obj-1: unmet after walkthrough — the Files view was opened but no interpretation response was recorded`). A genuine bug the fixture found, not a fixture artefact.
+- **`Object.keys(localStorage)` is not a Storage API.** `StateStore.keys()` originally enumerated with it and returned nothing — under the fixture stub and in some embedders it yields method names, not stored keys. Replaced with the DOM-standard `length` + `key(i)` walk (`#localKeys()`). `clear()` had the same latent bug, and additionally skipped entries by removing during an index walk; it now snapshots keys first.
+- **`ProgressStore.clearExam` left item records behind.** It deleted only the summary and continuation, so a reset looked clean and was not. It now enumerates by prefix.
+- **Scenario count is 46, not 50.** The plan's "44 existing + 6 new" counts 4 NCA scenarios that land in Sprint 48 (T-35); they are not in this build. The sweep report and the fixtures say so plainly instead of padding the count.
+
+**Gates run:** web runtime fixtures 23/23 (+ self-test correctly failing); `check-imports` pass; `check-brand` pass (warn: demo script not yet authored — T-30); `check-item-types` 49 scored, 0 untyped (73% diagnosis); `check-item-identity` 0 semantic collisions; `validate-manifests` pass; `generate-study-content --check` no drift; `redeye-gate --self-test` pass; `redeye-gate --all` exit 0; `lint-content` 29 files/1647 questions; `scan-scenario-validators` pass; `check-coverage` 92.62% ≥ 70%; `dotnet build Core` 0 warnings/0 errors; `dotnet test Core.Tests` 246/246.
+
+**Not verified this row:** live Chromium walkthrough of demo mode on the demo host (S47-10 owns demo-host evidence); real-browser keyboard/projector behaviour — the legibility and button checks are static, not a rendered measurement; human source review / `reviewDate`; RedEye model-stage verification (still blocked by design); the 4 NCA scenarios (Sprint 48 / T-35).
 
 ### S47-04 (T-22): Pages Predeploy Gate
 **Acceptance Criteria:**

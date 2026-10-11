@@ -30,9 +30,22 @@
                     <input type="text" placeholder="Search..." />
                 </div>
                 <button id="theme-toggle-btn" title="Toggle dark/light mode" style="background:none;border:1px solid var(--border-light);border-radius:6px;padding:4px 8px;cursor:pointer;font-size:16px;color:var(--text-primary);">🌙</button>
-                <span style="font-size: var(--font-size-sm);">admin</span>
+                <!-- Simulated appliance chrome, not an account. The real
+                     Prism header shows the signed-in user; this platform
+                     collects no learner identity (REQ-DEMO-03), so the
+                     label says plainly that it is part of the simulation. -->
+                <span id="simulated-identity-label" style="font-size: var(--font-size-sm);" title="Simulated Prism chrome — this platform does not know or collect who you are">admin (simulated)</span>
             </div>
         </header>
+
+        <!-- ═══ Demo mode label (T-21, REQ-DEMO-02) ═══
+             Present on every screen while demo mode is active. Rendered by
+             components/DemoBanner.js; hidden otherwise. -->
+        <div id="demo-banner" class="demo-banner" role="status" hidden>
+            <strong class="demo-banner-label">DEMO MODE</strong>
+            <span class="demo-banner-text">Synthetic lab data — not real infrastructure. Nothing is retained after a station reset.</span>
+            <a class="demo-banner-link" href="#/demo">Demo controls</a>
+        </div>
 
         <!-- ═══ Breadcrumb ═══ -->
         <nav class="breadcrumb-bar">
