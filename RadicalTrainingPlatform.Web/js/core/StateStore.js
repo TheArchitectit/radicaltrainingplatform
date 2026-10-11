@@ -27,6 +27,11 @@ class StateStore {
     }
 
     async init() {
+        // Idempotent: a second init (PracticeView re-entering) must not
+        // re-open IndexedDB — a blocked/hung open would freeze the study loop.
+        if (this.#mode === 'local' || this.#mode === 'blocked') return;
+        if (this.#mode === 'idb' && this.#db) return;
+
         try {
             this.#db = await this.#openDB();
             this.#mode = 'idb';
@@ -50,17 +55,48 @@ class StateStore {
         bus.emit('store:storageBlocked', { message: String(err?.message || err) });
     }
 
-    #openDB() {
+    /**
+     * Open the IDB database, but never hang. A blocked upgrade or a
+     * stuck connection can leave `indexedDB.open` pending forever (observed
+     * after a deleteDatabase with a live connection) — that would freeze
+     * every awaiter (PracticeView.render). Timeout/blocked reject so init
+     * can fall back to localStorage. R-23 recovery must never deadlock.
+     */
+    #openDB(timeoutMs = 500) {
         return new Promise((resolve, reject) => {
-            const req = indexedDB.open(this.#dbName, this.#dbVersion);
+            let settled = false;
+            const settle = (fn, value) => {
+                if (settled) return;
+                settled = true;
+                clearTimeout(timer);
+                fn(value);
+            };
+            const timer = setTimeout(() => {
+                settle(reject, Object.assign(
+                    new Error(`IndexedDB open timed out after ${timeoutMs}ms`),
+                    { name: 'StorageOpenTimeoutError' }
+                ));
+            }, timeoutMs);
+
+            let req;
+            try {
+                req = indexedDB.open(this.#dbName, this.#dbVersion);
+            } catch (e) {
+                settle(reject, e);
+                return;
+            }
             req.onupgradeneeded = (e) => {
                 const db = e.target.result;
                 if (!db.objectStoreNames.contains('state')) {
                     db.createObjectStore('state', { keyPath: 'key' });
                 }
             };
-            req.onsuccess = () => resolve(req.result);
-            req.onerror = () => reject(req.error);
+            req.onblocked = () => settle(reject, Object.assign(
+                new Error('IndexedDB open blocked by another connection'),
+                { name: 'StorageOpenBlockedError' }
+            ));
+            req.onsuccess = () => settle(resolve, req.result);
+            req.onerror = () => settle(reject, req.error || new Error('IndexedDB open failed'));
         });
     }
 

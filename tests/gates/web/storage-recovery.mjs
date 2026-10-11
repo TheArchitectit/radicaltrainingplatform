@@ -8,11 +8,14 @@
  *   2. Quota exceeded  — saved:false reason 'storage-quota-exceeded'.
  *   3. Storage blocked — saved:false reason 'storage-blocked'; reads return
  *                        null with store:storageBlocked, app keeps running.
+ *   4. IDB open hang   — never deadlock the study loop; fall back to local.
  *
  * Failing side of each defect (would fail before the R-23 fix):
  *   1. bare JSON.parse(raw) on corrupt data threw SyntaxError out of get().
  *   2. a generic 'storage-write-failed' hid quota from the recovery path.
  *   3. localStorage access denial threw out of init()/get() with no mode.
+ *   4. indexedDB.open with no onblocked/timeout hung PracticeView.render
+ *      forever (observed after deleteDatabase with a live connection).
  *
  * Passing side: StateStore quarantine + mode, and ProgressStore's named
  * reason codes on { saved: false }.
@@ -212,6 +215,53 @@ await runner.test('init with both IndexedDB and localStorage blocked marks store
         globalThis.localStorage.setItem = originalSet;
         globalThis.localStorage.removeItem = originalRemove;
         off();
+    }
+});
+
+// ─── 4. IDB open hang (never deadlock the study loop) ────────────────
+
+await runner.test('idb open that never settles falls back to localStorage (no hang)', async () => {
+    const originalIDB = globalThis.indexedDB;
+    globalThis.indexedDB = {
+        open() {
+            // Observed failure: open stays pending after deleteDatabase with
+            // a live connection — no onsuccess/onerror/onblocked ever fires.
+            return { onupgradeneeded: null, onblocked: null, onsuccess: null, onerror: null };
+        },
+    };
+    try {
+        const fresh = await import('../../../RadicalTrainingPlatform.Web/js/core/StateStore.js?open-hang');
+        const t0 = Date.now();
+        await Promise.race([
+            fresh.store.init(),
+            new Promise((_, rej) => setTimeout(() => rej(new Error('init hung')), 1500)),
+        ]);
+        const ms = Date.now() - t0;
+        assert(ms < 1200, `init must fall back promptly (took ${ms}ms)`);
+        assertEqual(fresh.store.mode, 'local', 'hung IDB → localStorage fallback, not a dead await');
+    } finally {
+        globalThis.indexedDB = originalIDB;
+    }
+});
+
+await runner.test('init is idempotent — second init does not re-open a hung IDB', async () => {
+    const originalIDB = globalThis.indexedDB;
+    let openCalls = 0;
+    globalThis.indexedDB = {
+        open() {
+            openCalls += 1;
+            return {};
+        },
+    };
+    try {
+        const fresh = await import('../../../RadicalTrainingPlatform.Web/js/core/StateStore.js?idempotent-init');
+        await fresh.store.init(); // first call: IDB hung → local
+        const callsAfterFirst = openCalls;
+        await fresh.store.init(); // second call must be a no-op
+        assertEqual(openCalls, callsAfterFirst, 'second init must not call indexedDB.open again');
+        assertEqual(fresh.store.mode, 'local', 'mode stays local after idempotent init');
+    } finally {
+        globalThis.indexedDB = originalIDB;
     }
 });
 

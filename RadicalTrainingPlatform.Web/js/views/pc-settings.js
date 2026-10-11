@@ -53,8 +53,6 @@ export class PcSettingsView extends BaseView {
                 this.#renderTab(this.#activeTab);
             });
         });
-
-        this.#wireDataTab();
     }
 
     destroy() { this.#unsubs.forEach(fn => fn()); }
@@ -85,6 +83,10 @@ export class PcSettingsView extends BaseView {
         c.querySelectorAll('.btn-save-settings').forEach(btn => {
             btn.addEventListener('click', () => this.#save(cfg));
         });
+        // Data Management buttons live only in this tab's HTML — wire after
+        // each render (switching tabs replaces the nodes, so a one-time
+        // wire in afterRender left Reset/Export/Import dead).
+        if (tab === 'data') this.#wireDataTab();
     }
 
     #defaults() {
@@ -271,7 +273,7 @@ export class PcSettingsView extends BaseView {
         } else {
             await state.create('pc_settings', { ...this.#defaults(), ...updates });
         }
-        toast('Settings saved successfully.', 'success');
+        toast.success('Settings saved successfully.');
     }
 
     #dataTab() {
@@ -307,7 +309,7 @@ export class PcSettingsView extends BaseView {
             a.download = `nutanix-lab-state-${new Date().toISOString().slice(0, 10)}.json`;
             a.click();
             URL.revokeObjectURL(url);
-            toast('State exported successfully.', 'success');
+            toast.success('State exported successfully.');
         });
 
         importBtn?.addEventListener('click', () => importFile?.click());
@@ -318,10 +320,10 @@ export class PcSettingsView extends BaseView {
             try {
                 const text = await file.text();
                 await state.importState(text);
-                toast('State imported successfully. Refreshing...', 'success');
+                toast.success('State imported successfully. Refreshing...');
                 setTimeout(() => location.reload(), 1000);
             } catch (err) {
-                toast(`Import failed: ${err.message}`, 'warning');
+                toast.warning(`Import failed: ${err.message}`);
             }
         });
 
@@ -329,7 +331,7 @@ export class PcSettingsView extends BaseView {
             const ok = await confirm({ title: 'Reset State', message: 'Reset ALL simulator data to defaults? This cannot be undone.', danger: true });
             if (!ok) return;
             await state.reset();
-            toast('State reset to defaults. Refreshing...', 'success');
+            toast.success('State reset to defaults. Refreshing...');
             setTimeout(() => location.reload(), 1000);
         });
     }

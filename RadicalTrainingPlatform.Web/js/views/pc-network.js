@@ -212,7 +212,7 @@ export class PcNetworkView extends BaseView {
         if (this.#activeTab === 'vpcs') this.#createVpc();
         else if (this.#activeTab === 'subnets') this.#createSubnet();
         else if (this.#activeTab === 'floating_ips') this.#allocateFloatingIp();
-        else toast('Route tables are auto-generated per VPC.', 'info');
+        else toast.show('Route tables are auto-generated per VPC.', 'info');
     }
 
     #createVpc() {
@@ -264,7 +264,7 @@ export class PcNetworkView extends BaseView {
                         { destination: data.cidr.trim(), target: 'Local', type: 'local' },
                     ],
                 });
-                toast(`VPC "${data.name}" created.`, 'success');
+                toast.show(`VPC "${data.name}" created.`, 'success');
             },
         });
         wizard.open();
@@ -272,7 +272,7 @@ export class PcNetworkView extends BaseView {
 
     #createSubnet() {
         const vpcs = state.getAll('vpcs');
-        if (vpcs.length === 0) { toast('Create a VPC first.', 'warning'); return; }
+        if (vpcs.length === 0) { toast.show('Create a VPC first.', 'warning'); return; }
 
         const wizard = new Wizard({
             title: 'Create Subnet',
@@ -348,7 +348,7 @@ export class PcNetworkView extends BaseView {
                     pool_end: data.pool_end || '',
                     nat: data.nat === 'Yes',
                 });
-                toast(`Subnet "${data.name}" created.`, 'success');
+                toast.show(`Subnet "${data.name}" created.`, 'success');
             },
         });
         wizard.open();
@@ -356,7 +356,7 @@ export class PcNetworkView extends BaseView {
 
     #allocateFloatingIp() {
         const vpcs = state.getAll('vpcs');
-        if (vpcs.length === 0) { toast('Create a VPC first.', 'warning'); return; }
+        if (vpcs.length === 0) { toast.show('Create a VPC first.', 'warning'); return; }
 
         const wizard = new Wizard({
             title: 'Allocate Floating IP',
@@ -386,17 +386,17 @@ export class PcNetworkView extends BaseView {
                     assigned_to: null,
                     status: 'available',
                 });
-                toast(`Floating IP ${ip} allocated.`, 'success');
+                toast.show(`Floating IP ${ip} allocated.`, 'success');
             },
         });
         wizard.open();
     }
 
     async #deleteItems(collection, selected) {
-        if (!selected || selected.length === 0) { toast('Select items first.', 'warning'); return; }
+        if (!selected || selected.length === 0) { toast.show('Select items first.', 'warning'); return; }
         const ok = await confirm({ title: 'Delete Items', message: `Delete ${selected.length} ${collection} item(s)?`, confirmLabel: 'Delete', danger: true });
         if (!ok) return;
         for (const item of selected) { await state.remove(collection, item.uuid); }
-        toast(`Deleted ${selected.length} item(s).`, 'success');
+        toast.show(`Deleted ${selected.length} item(s).`, 'success');
     }
 }

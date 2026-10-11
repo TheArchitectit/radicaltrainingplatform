@@ -297,7 +297,65 @@
 
 ## Sprint Acceptance
 
-- Fresh profile → track → lesson → practice → scenario → reset completes on the demo host class of device (headless Chromium in CI; manual ChromeOS verification in Sprint 47/48 rehearsal)
-- Scenario false-positive count is zero: sweep proves 0 objectives complete from fresh seed across the catalog; us-bucket-01 walkthrough replay passes
-- `dotnet test RadicalTrainingPlatform.Core.Tests` green; E2E study-loop green in CI Linux leg
-- Mini-retrospective per SPEC-11 11.10 with gate pass count at sprint head SHA
+- [x] Fresh profile → track → lesson → practice → scenario → reset completes on the demo host class of device (headless Chromium via Playwright; manual ChromeOS verification still deferred to Sprint 47/48 rehearsal)
+- [x] Scenario false-positive count is zero: sweep proves 0 objectives complete from fresh seed across the catalog; us-bucket-01 walkthrough replay passes
+- [x] `dotnet test RadicalTrainingPlatform.Core.Tests` 246/246 green; Desktop.Tests 51/51 green. CI E2E study-loop spec (`tests/e2e/study-loop.spec.js`) still not authored — same posture as S46-02/03/04 (browser walkthrough + node fixtures)
+- [x] Mini-retrospective per SPEC-11 11.10 with gate pass count at sprint head SHA
+
+**Acceptance walkthrough (2026-10-10, headless Chromium):** cleared learner storage → `/tracks` (crumb `Study Tracks › All Tracks`) → `track-aplus` → lesson `A2` (crumb `… > Lessons > COMPTIA-A-1201 > A2`, exact disclaimer twice) → `/practice/COMPTIA-A-1201` (crumb `Study Tracks › COMPTIA-A-1201`, heading `Practice — CompTIA A+ Core 1 (220-1201)`, one item graded with review feedback) → `/pc/scenarios` (crumb `Prism Central › Guided Scenarios`) → `/pc/pc-settings` → Data Management → **Reset to Default** (confirm modal + `toast.success` + reload). Post-reset `/tracks` still loads with the disclaimer.
+
+**Findings found by the acceptance walkthrough (fixed in this close-out):**
+1. **IDB open hang (R-23 gap).** `StateStore.#openDB` had no `onblocked`/timeout. After a `deleteDatabase` with a live connection, `indexedDB.open` never settles → `progress.init()` awaits forever → `PracticeView.render` never returns → lesson DOM stays up under the practice URL. Now: 500ms open timeout + `onblocked` reject → localStorage fallback; `init()` is idempotent (second call does not re-open). Pinned by two new `storage-recovery.mjs` fixtures. Failing side: study loop dead at the practice hop.
+2. **Data Management tab buttons were dead.** `#wireDataTab()` ran once in `afterRender` before the tab's HTML existed; switching tabs replaced the nodes without re-wiring. Reset/Export/Import did nothing. Now `#renderTab('data')` re-wires after each render. Failing side: "Reset to Default" was a no-op button.
+3. **`toast(...)` used as a function (28 call sites, 5 views).** `toast` is a `ToastManager` instance — `toast('msg', 'success')` throws `toast is not a function`, so the toast never appears and the rest of the handler dies (reset cleared state but never scheduled the refresh). Fixed to `toast.show(...)` / `toast.success(...)`; `tests/gates/web/toast-api.mjs` pins the API shape and scans for bare `toast(`.
+
+---
+
+## Mini-retrospective (SPEC-11 11.10)
+
+**Sprint head SHA:** `d152e57` (branch `feature/rtp-beginner-tracks`; sprint opened at the S45 close `0e9c184`).
+
+**Gate pass count at sprint head SHA: 14/14 local checks green.**
+`lint-content` + self-test, `validate-manifests` + self-test, `check-imports`,
+import-check fixtures, vuln-gate fixtures, web runtime fixtures (18 suites + self-test),
+brand fixtures, validator-scan fixtures, RedEye fixtures (seeded-defect + fail-closed
+matrix), key-distribution + self-test, item-identity, coverage 92.62% ≥ 70%,
+Core 246/246, Desktop 51/51. `dotnet build` Core 0 warnings; Desktop 1 pre-existing
+CS8602 in `QuestionView.axaml.cs` (not this sprint). Legacy WinForms not built on Linux
+(per CLAUDE.md).
+
+**Planned vs landed:** all 15 backlog rows landed (S46-01..S46-15). Two rows (S46-13,
+S46-15) plus this acceptance batch closed on 2026-10-10; the rest landed across
+Oct 13–16 per the OpenSpec B window.
+
+**What went well:**
+- The one-learning-loop shape held: track picker → lesson reader → practice →
+  scenario surface → reset is a single path with shared `ProgressStore`/`StateStore`
+  and one disclaimer string everywhere it is required.
+- Fail-loud recovery (R-23) made the storage findings nameable: corrupt/quota/blocked
+  each have a reason code, so the new hang case fell into the same shape
+  (timeout → fallback, never a silent dead await).
+- Snapshot fixtures kept the cosmetic labels honest: the breadcrumb now mirrors the
+  sidebar instead of inventing titles from slugs.
+
+**What slipped / register notes:**
+- T-43 cosmetics slipped from Sprint 45 → S46-15 (register note kept at the table head).
+- CI still has no `tests/e2e/study-loop.spec.js`; acceptance is browser-walkthrough +
+  node fixtures, same posture as S46-02/03/04. Deferred, not claimed green in CI.
+- ChromeOS / physical demo host rehearsal is Sprint 47/48 scope (T-26), not this sprint.
+
+**Not verified / deferred by design:**
+- Real browser quota pressure and cookie-blocked privacy modes (stubbed by name).
+- Live CEF bounce-back of an `https://` navigation (no display server; policy-layer
+  fixtures only) — see `docs/security/CEF-01-hardening-review-2026-10-10.md`.
+- Windows/macOS Desktop.Tests and CEF startup.
+- A true SIGKILL mid-write on session save.
+- Demo-host keyboard/keyboard-only walkthrough and offline PWA install (T-26).
+
+**Lessons for Sprint C (Oct 17–19):**
+- Acceptance walkthroughs catch wiring bugs that unit fixtures miss (tab re-render,
+  toast API). Keep the demo-host walk in the sprint gate, not only in rehearsal.
+- Any `await` on storage init must have a timeout/fallback — a hung IDB open is a
+  dead study loop, not a slow one.
+- Pin the toast/UI-chrome API the same way brand strings are pinned: a source scan
+  fixture is cheap and catches the next `toast(...)` regression.

@@ -270,17 +270,17 @@ export class PcProjectsView extends BaseView {
                     users,
                     infrastructure: { clusters: ['All'], networks: ['All'], categories: [], vpcs: [] },
                 });
-                toast(`Project "${data.name}" created.`, 'success');
+                toast.show(`Project "${data.name}" created.`, 'success');
             },
         });
         wizard.open();
     }
 
     async #deleteProjects(selected) {
-        if (!selected || selected.length === 0) { toast('Select projects first.', 'warning'); return; }
+        if (!selected || selected.length === 0) { toast.show('Select projects first.', 'warning'); return; }
         const ok = await confirm({ title: 'Delete Projects', message: `Delete ${selected.length} project(s)? This cannot be undone.`, confirmLabel: 'Delete', danger: true });
         if (!ok) return;
         for (const p of selected) { await state.remove('projects', p.uuid); }
-        toast(`Deleted ${selected.length} project(s).`, 'success');
+        toast.show(`Deleted ${selected.length} project(s).`, 'success');
     }
 }

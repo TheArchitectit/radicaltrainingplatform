@@ -119,13 +119,13 @@ export class AiMonitoringView extends BaseView {
                 {
                     label: 'Scale',
                     onClick: (item) => {
-                        toast(`Scaling endpoint "${item.name}"…`, 'info');
+                        toast.show(`Scaling endpoint "${item.name}"…`, 'info');
                     }
                 },
                 {
                     label: 'Restart',
                     onClick: (item) => {
-                        toast(`Restarting endpoint "${item.name}"…`, 'info');
+                        toast.show(`Restarting endpoint "${item.name}"…`, 'info');
                     }
                 }
             ]

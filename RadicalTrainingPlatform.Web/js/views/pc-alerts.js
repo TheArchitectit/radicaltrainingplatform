@@ -260,37 +260,37 @@ export class PcAlertsView extends BaseView {
                     action: actMap[data.action] || 'email',
                     enabled: true,
                 });
-                toast(`Alert policy "${data.name}" created.`, 'success');
+                toast.show(`Alert policy "${data.name}" created.`, 'success');
             },
         });
         wizard.open();
     }
 
     async #resolveAlerts(selected) {
-        if (!selected || selected.length === 0) { toast('Select alerts to resolve.', 'warning'); return; }
+        if (!selected || selected.length === 0) { toast.show('Select alerts to resolve.', 'warning'); return; }
         const active = selected.filter(a => !a.resolved);
-        if (active.length === 0) { toast('Selected alerts are already resolved.', 'info'); return; }
+        if (active.length === 0) { toast.show('Selected alerts are already resolved.', 'info'); return; }
 
         for (const alert of active) {
             await state.update('alerts', alert.uuid, { resolved: true, resolved_at: new Date().toISOString() });
         }
-        toast(`Resolved ${active.length} alert(s).`, 'success');
+        toast.show(`Resolved ${active.length} alert(s).`, 'success');
     }
 
     async #acknowledgeAlerts(selected) {
-        if (!selected || selected.length === 0) { toast('Select alerts to acknowledge.', 'warning'); return; }
+        if (!selected || selected.length === 0) { toast.show('Select alerts to acknowledge.', 'warning'); return; }
         for (const alert of selected) {
             await state.update('alerts', alert.uuid, { acknowledged: true });
         }
-        toast(`Acknowledged ${selected.length} alert(s).`, 'success');
+        toast.show(`Acknowledged ${selected.length} alert(s).`, 'success');
     }
 
     async #deletePolicies(selected) {
-        if (!selected || selected.length === 0) { toast('Select policies first.', 'warning'); return; }
+        if (!selected || selected.length === 0) { toast.show('Select policies first.', 'warning'); return; }
         const ok = await confirm({ title: 'Delete Policies', message: `Delete ${selected.length} alert policy(ies)?`, confirmLabel: 'Delete', danger: true });
         if (!ok) return;
         for (const p of selected) { await state.remove('alert_policies', p.uuid); }
-        toast(`Deleted ${selected.length} policy(ies).`, 'success');
+        toast.show(`Deleted ${selected.length} policy(ies).`, 'success');
         this.#renderTab(this.#activeTab);
     }
 }

@@ -175,7 +175,7 @@ export class PcLcmView extends BaseView {
     }
 
     async #checkForUpdates() {
-        toast('Scanning for updates...', 'info');
+        toast.show('Scanning for updates...', 'info');
         await state.create('action_trace', { action: 'lcm-scan' });
         // Simulate scanning delay
         await new Promise(r => setTimeout(r, 1500));
@@ -195,19 +195,19 @@ export class PcLcmView extends BaseView {
                 foundUpdates++;
             }
         }
-        toast(`Scan complete. ${foundUpdates} new update(s) found.`, foundUpdates > 0 ? 'warning' : 'success');
+        toast.show(`Scan complete. ${foundUpdates} new update(s) found.`, foundUpdates > 0 ? 'warning' : 'success');
         this.#renderTab(this.#activeTab);
     }
 
     async #updateComponents(selected) {
-        if (!selected || selected.length === 0) { toast('Select components to update.', 'warning'); return; }
+        if (!selected || selected.length === 0) { toast.show('Select components to update.', 'warning'); return; }
         const updatable = selected.filter(i => i.update_available);
-        if (updatable.length === 0) { toast('Selected components are already up to date.', 'info'); return; }
+        if (updatable.length === 0) { toast.show('Selected components are already up to date.', 'info'); return; }
 
         const ok = await confirm({ title: 'Update Components', message: `Update ${updatable.length} component(s)? This will simulate a rolling update.`, confirmLabel: 'Update' });
         if (!ok) return;
 
-        toast(`Updating ${updatable.length} component(s)...`, 'info');
+        toast.show(`Updating ${updatable.length} component(s)...`, 'info');
         for (const item of updatable) {
             await state.update('lcm_inventory', item.uuid, { status: 'updating' });
         }
@@ -233,7 +233,7 @@ export class PcLcmView extends BaseView {
                 completed_at: new Date().toISOString(),
             });
         }
-        toast(`✅ ${updatable.length} component(s) updated successfully.`, 'success');
+        toast.show(`✅ ${updatable.length} component(s) updated successfully.`, 'success');
         this.#renderTab(this.#activeTab);
     }
 }
