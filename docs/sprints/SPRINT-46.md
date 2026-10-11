@@ -313,7 +313,7 @@
 
 ## Mini-retrospective (SPEC-11 11.10)
 
-**Sprint head SHA:** `d152e57` (branch `feature/rtp-beginner-tracks`; sprint opened at the S45 close `0e9c184`).
+**Sprint head SHA:** `755d6ed` (branch `feature/rtp-beginner-tracks`; sprint opened at the S45 close `0e9c184`).
 
 **Gate pass count at sprint head SHA: 14/14 local checks green.**
 `lint-content` + self-test, `validate-manifests` + self-test, `check-imports`,
