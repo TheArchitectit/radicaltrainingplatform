@@ -26,7 +26,7 @@
 | S46-11 (T-39) | Disposal guards on cached simulator references | R-16 | 1 | ✅ |
 | S46-12 (T-40) | PDF export: canonical ID vs display label; vendor-neutral footer; atomic session save + corrupt recovery | R-18, R-20 | 2 | ✅ |
 | S46-13 (T-44) | Storage recovery boundary tests (corrupt entry, quota, blocked) | R-23 | 1 | ✅ |
-| S46-14 (T-42) | CefGlue NoSandbox scoped hardening review + navigation allowlist decision | R-21 | 1 | ⚪ |
+| S46-14 (T-42) | CefGlue NoSandbox scoped hardening review + navigation allowlist decision | R-21 | 1 | ✅ |
 | S46-15 (T-43*) | Web runtime batch remainder (if not closed in Sprint 45) | R-22 | 1 | ⚪ |
 
 **Register note (Sprint 45):** T-43's cosmetic bullet (placeholder/breadcrumb labels + snapshot fixtures) slipped to this sprint — the seven functional R-22 bullets landed in Sprint 45 with per-bullet fixtures (commits 5decbaf..0c84562); only the cosmetics remain.
@@ -265,9 +265,18 @@
 **As an** owner, **I want** a scoped hardening review of the embedded browser, **so that** the desktop demo path carries a recorded security decision, not an unexamined default.
 
 **Acceptance Criteria:**
-- [ ] Review record covers: navigation allowlist for the embedded browser, bridge surface minimization (with S46-05/R-19), update-channel review — with a recorded outcome
-- [ ] If the embedded browser stays in the demo path: navigation outside the allowlist is blocked by fixture test
-- [ ] Review concludes before the desktop demo path is chosen (Sprint 47 rehearsal)
+- [x] Review record covers: navigation allowlist for the embedded browser, bridge surface minimization (with S46-05/R-19), update-channel review — with a recorded outcome
+- [x] If the embedded browser stays in the demo path: navigation outside the allowlist is blocked by fixture test
+- [x] Review concludes before the desktop demo path is chosen (Sprint 47 rehearsal)
+
+**Notes (S46-14 close, 2026-10-10):**
+- **Review record.** [`docs/security/CEF-01-hardening-review-2026-10-10.md`](../security/CEF-01-hardening-review-2026-10-10.md) — decision **KEEP** the embedded browser in the desktop demo/lab path under a recorded compensating control set (navigation allowlist, local-bundle-only content, minimal bridge, remote debugging off, no auto-update). No exploit asserted (SPEC-09 R-21 constraint). Re-open triggers named in the record.
+- **Navigation allowlist (CEF-01 / TM-89).** New pure policy `LabSimulator/NavigationPolicy.cs` (testable without a CEF runtime, same pattern as `ExportText`). Allowed: `about:blank`/`about:srcdoc` and `file://` inside the resolved lab-bundle root. Denied: `http(s)` (those destinations open in the OS shell), `javascript:`/`data:`/`blob:`/`chrome:`/`devtools:`/`view-source:`, `file://` outside the bundle (including sibling-prefix tricks), empty/relative targets — and **fail closed** when the bundle root is unknown. Enforcement: `LabSimulatorView.OnBrowserAddressChanged` evaluates every address and bounces disallowed targets back to the bundle bootstrap via `Address =`.
+- **Fixtures (`NavigationPolicyTests.cs`, 20 tests).** Allow table, deny table (http/https + dangerous schemes), outside-bundle file URIs, sibling-prefix confusion, fail-closed, bounce-back helper, and `OldFailure_OpenNavigation_IsPinnedOut` (regression pin: the pre-review state navigated anywhere). Failing side of CEF-01: with no policy, any URL the page pointed at was a live navigation in a NoSandbox browser.
+- **Bridge surface (R-05 / R-19).** Re-confirmed the ten-handler surface from S46-05; absent handlers stay absent (`HandlerSurface_ListsOnlyHandlersWithRealEffects`). No JS-chosen filesystem paths (R-20 `PathFor` rejects), no process spawn, no settings mutation.
+- **Update-channel review (finding, closed).** CEF binaries are pinned NuGet packages (`CefGlue.Avalonia`/`CefGlue.Common` 120.6099.215); no auto-update channel. The ready handshake previously reported a **hardcoded `cefVersion = "120.6099.204"` that had already drifted from the pin** — it now reads the live binding assembly version. Supply-chain attestation of the NuGet package itself is out of scope (recorded, not claimed).
+- **Related.** Display guard from S46-11 (CEF `exit()`s without X/Wayland) stands as a robustness control on the same path. `RemoteDebuggingPort = 0`.
+- **Not verified (prescribed-but-not-yet-executed):** live bounce-back of a real `https://` navigation in a running CEF host (no display server here — policy + address hook are fixture-tested at the decision layer; the native leg is release-record evidence, not claimed proof); popup/`window.open` against CefGlue's internal LifeSpanHandler (not replaced — judged riskier than the gap for a local-bundle page); renderer-crash recovery; Windows/macOS CEF startup. Full list in the review record.
 
 ### S46-15 (T-43* remainder): Web Runtime Batch Close-out
 - Remaining R-22 cosmetics from Sprint 45; register note if slipped

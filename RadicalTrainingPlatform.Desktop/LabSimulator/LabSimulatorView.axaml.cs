@@ -33,6 +33,8 @@ public partial class LabSimulatorView : UserControl, IDisposable
     private CefBridge? _bridge;
     private bool _cefInitialized;
     private bool _disposed;
+    private string? _bundleRoot;
+    private string? _bootstrapUrl;
 
     /// <summary>R-16: callers (and tests) can observe the disposed state.</summary>
     public bool IsDisposed => _disposed;
@@ -157,6 +159,11 @@ public partial class LabSimulatorView : UserControl, IDisposable
                 return;
             }
 
+            // R-21 / CEF-01: the embedded browser is locked to the local lab
+            // bundle. Anything that leaves it is bounced back here.
+            _bundleRoot = Path.GetDirectoryName(Path.GetFullPath(htmlPath));
+            _bootstrapUrl = new Uri(Path.GetFullPath(htmlPath)).AbsoluteUri;
+
             // 4) Create the bridge and the browser. The CefBridge
             //    is registered into JS as window.dotnetBridge. Handlers are
             //    backed by the real Core services from the composition root.
@@ -167,7 +174,7 @@ public partial class LabSimulatorView : UserControl, IDisposable
                 services.GetRequiredService<RadicalTrainingPlatform.Core.ISessionStore>());
 
             _browser = new AvaloniaCefBrowser();
-            _browser.Address = new Uri(htmlPath).AbsoluteUri;
+            _browser.Address = _bootstrapUrl;
             // Register the bridge so JS can call window.dotnetBridge.call(...).
             // MethodCallHandler is a wrapper around the actual JS→C# invocation.
             // It receives a Func<object> (the original call) and returns its result.
@@ -177,6 +184,7 @@ public partial class LabSimulatorView : UserControl, IDisposable
                 "dotnetBridge",
                 new MethodCallHandler(func => func()));
             _browser.TitleChanged += OnBrowserTitleChanged;
+            _browser.AddressChanged += OnBrowserAddressChanged;
 
             // 5) The AvaloniaCefBrowser is itself an Avalonia Control; add
             //    it directly to the host. If the user's package flavour
@@ -293,6 +301,32 @@ public partial class LabSimulatorView : UserControl, IDisposable
             if (_disposed) return;
             LoadingPanel.IsVisible = false;
         });
+    }
+
+    /// <summary>
+    /// R-21 / CEF-01: navigation allowlist enforcement. The policy is the
+    /// pure NavigationPolicy surface (fixture-tested without CEF); this
+    /// handler is the bounce-back when a target leaves the lab bundle.
+    /// </summary>
+    private void OnBrowserAddressChanged(object? sender, string address)
+    {
+        if (_disposed || _bundleRoot == null || _bootstrapUrl == null || _browser == null)
+            return;
+
+        var decision = NavigationPolicy.Evaluate(address, _bundleRoot);
+        if (decision.Allowed) return;
+
+        Debug.WriteLine(
+            $"[LabSimulator] Blocked navigation to '{address}' ({decision.Reason}); returning to the lab bundle.");
+        try
+        {
+            // AvaloniaCefBrowser navigates via the Address property.
+            _browser.Address = _bootstrapUrl;
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"[LabSimulator] Bounce-back after blocked navigation failed: {ex.Message}");
+        }
     }
 
     // ─────────────────────────────────────────────────────────────────────

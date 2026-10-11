@@ -218,7 +218,10 @@ public sealed class CefBridge : IDisposable
             PostToJs("init", new
             {
                 appVersion = typeof(CefBridge).Assembly.GetName().Version?.ToString() ?? "0.0.0",
-                cefVersion = "120.6099.204",
+                // R-21 update-channel truth: report the live binding version,
+                // never a hardcoded string that drifts from the NuGet pin.
+                cefVersion = typeof(Xilium.CefGlue.CefRuntime).Assembly.GetName().Version?.ToString()
+                             ?? "unknown",
             });
             return Task.FromResult<object?>(null);
         });
