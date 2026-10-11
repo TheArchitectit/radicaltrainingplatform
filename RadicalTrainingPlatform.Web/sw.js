@@ -13,6 +13,7 @@ const STATIC_ASSETS = [
   './js/core/Router.js',
   './js/core/StateEngine.js',
   './js/core/StateStore.js',
+  './js/core/ProgressStore.js',
   './js/components/CLITerminal.js',
   './js/components/Confirm.js',
   './js/components/EntityTable.js',

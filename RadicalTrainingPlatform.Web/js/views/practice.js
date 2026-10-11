@@ -1,5 +1,6 @@
 import { BaseView } from './BaseView.js';
 import { ITEMS, TRACKS, EXAMS, DISCLAIMER } from '../study-content.js';
+import { progress } from '../core/ProgressStore.js';
 
 /**
  * Practice view (T-11, REQ-UI-03) — scored sets drawn from the compiled
@@ -37,6 +38,7 @@ export class PracticeView extends BaseView {
     #selection = new Set();
     #results = [];
     #submitted = false;
+    #restored = { attempted: 0, correct: 0, items: {} };
 
     async render(params) {
         const examId = params.examId;
@@ -61,6 +63,10 @@ export class PracticeView extends BaseView {
         this.#index = 0;
         this.#results = [];
         this.#submitted = false;
+        // REQ-UI-04: restore prior progress for this exam. Shown as a
+        // progress note — the run itself starts fresh.
+        await progress.init();
+        this.#restored = await progress.restore(examId, this.#queue.map(i => i.id));
         return this.#renderQuestion(exam, track);
     }
 
@@ -73,13 +79,17 @@ export class PracticeView extends BaseView {
                 <span class="option-letter">${letter}</span>
                 <span class="option-text">${text}</span>
             </button>`).join('');
-        const progress = `${this.#index + 1} / ${this.#queue.length}`;
+        const progressLine = `${this.#index + 1} / ${this.#queue.length}`;
+        const priorNote = this.#restored.attempted
+            ? `<p class="practice-prior-note">Saved progress: ${this.#restored.correct}/${this.#restored.attempted} previously answered in this exam pack.</p>`
+            : '';
         return this.html(`
             <div class="study-page practice-page">
                 <a class="study-back" href="#/tracks/${track?.trackId ?? ''}">‹ ${track?.title ?? 'Tracks'}</a>
                 <h1 class="study-title">Practice — ${exam.displayName}</h1>
                 <p class="study-sub">Draft pack (${track?.previewLabel ?? 'beginner preview'}) · draws only from reviewed items in this build.</p>
-                <div class="practice-progress">${progress}</div>
+                ${priorNote}
+                <div class="practice-progress">${progressLine}</div>
                 <div class="practice-item">
                     <div class="practice-stem">${item.stem}</div>
                     ${multiNote}
@@ -149,6 +159,7 @@ export class PracticeView extends BaseView {
             this.#results = [];
             this.#selection.clear();
             this.#submitted = false;
+            this.#restored = { attempted: 0, correct: 0, items: {} };
             this.#rerender(exam, track);
         });
 
@@ -190,6 +201,13 @@ export class PracticeView extends BaseView {
             const outcome = grade(item, [...this.#selection]);
             this.#results[this.#index] = { isCorrect: outcome.isCorrect };
             this.#submitted = true;
+            // REQ-UI-05: every scored event persists; failure is surfaced,
+            // never a silent false save (Plan v2 L-02).
+            progress.recordItem(exam.examId, item.id, outcome)
+                .then(r => {
+                    if (r && !r.saved) this.#showSaveWarning();
+                })
+                .catch(() => this.#showSaveWarning());
             const feedbackEl = this.root.querySelector('#practice-feedback');
             if (feedbackEl) feedbackEl.innerHTML = this.#renderFeedback(exam, track, item, outcome);
             submit.disabled = true;
@@ -204,6 +222,14 @@ export class PracticeView extends BaseView {
                 }
             });
         });
+    }
+
+    #showSaveWarning() {
+        const note = this.root.querySelector('.practice-prior-note') || this.root.querySelector('.practice-progress');
+        const warn = document.createElement('div');
+        warn.className = 'practice-save-warning';
+        warn.textContent = 'Progress could not be saved — your answers count for this run only. Check browser storage settings and try again.';
+        note?.after(warn);
     }
 
     #rerender(exam, track) {
