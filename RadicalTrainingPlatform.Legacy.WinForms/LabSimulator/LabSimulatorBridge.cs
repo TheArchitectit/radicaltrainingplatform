@@ -6,6 +6,24 @@ namespace RadicalTrainingPlatform.LabSimulator;
 
 /// <summary>
 /// Bidirectional PostMessage JSON bridge between C# and the WebView2 JS app.
+///
+/// R-05 surface contract: every registered handler performs a real effect, and
+/// a handler with no backing implementation is absent from this surface —
+/// listing one is a test failure. The surface here is deliberately narrow:
+///
+///   ready, log
+///
+/// The simulator's JS (<c>Web/js/</c>) calls <c>bridge.post('ready')</c> and
+/// nothing else; it keeps its state in <c>StateEngine</c>, not in the host. So
+/// there is nothing to wire for stats, reset, settings, submit or import — the
+/// desktop Avalonia host implements those (see
+/// <c>RadicalTrainingPlatform.Desktop/LabSimulator/CefBridge.cs</c>) against a
+/// real session store, and this bridge does not pretend to.
+///
+/// What this bridge does owe a caller is an honest answer for a type it does
+/// not implement. It used to drop those on the floor: the JS <c>send()</c>
+/// promise then hung for its full 10-second timeout and failed with "Bridge
+/// timeout", which reads as a broken host rather than an unimplemented type.
 /// </summary>
 sealed class LabSimulatorBridge : IDisposable
 {
@@ -17,6 +35,10 @@ sealed class LabSimulatorBridge : IDisposable
         _webView = webView;
         RegisterDefaultHandlers();
     }
+
+    /// <summary>Registered handler type names (R-05 surface contract).</summary>
+    public IReadOnlyCollection<string> HandlerTypes =>
+        _handlers.Keys.OrderBy(k => k, StringComparer.Ordinal).ToList();
 
     public void Attach()
     {
@@ -73,6 +95,15 @@ sealed class LabSimulatorBridge : IDisposable
                         PostToJs("response", new { id, success = false, error = ex.Message });
                 }
             }
+            else
+            {
+                // R-05 / R-19: an unimplemented type is answered, not ignored.
+                // Silence costs the caller its full timeout and misreports the
+                // cause as a dead host.
+                System.Diagnostics.Debug.WriteLine($"[Bridge] No handler for type '{type}'");
+                if (id != null)
+                    PostToJs("response", new { id, success = false, error = $"unknown type '{type}'" });
+            }
         }
         catch (Exception ex)
         {
@@ -94,7 +125,14 @@ sealed class LabSimulatorBridge : IDisposable
 
         On("log", payload =>
         {
-            var msg = payload?.GetProperty("message").GetString() ?? "";
+            // Tolerate a payload with no "message" — GetProperty throws on a
+            // missing key, which would answer a bare log line with a failure
+            // response and a KeyNotFoundException for its error text. The
+            // desktop bridge's log handler has always read it this way.
+            var msg = payload is { ValueKind: JsonValueKind.Object } p &&
+                      p.TryGetProperty("message", out var m)
+                ? m.GetString()
+                : payload?.ToString();
             System.Diagnostics.Debug.WriteLine($"[Simulator] {msg}");
             return Task.FromResult<object?>(null);
         });

@@ -69,6 +69,23 @@ jobs:
           python3 scripts/check-packaging-manifests.py --self-test
           bash tests/gates/run_packaging_fixtures.sh
 
+      # S47-08/T-41: R-19. With no tags and no releases, every releases link
+      # and every named bundle artifact is a promise nothing can keep. Fixture
+      # chain: tests/gates/run_release_truth_fixtures.sh — the dead-download
+      # fixture must fail on each seeded defect, the honest fixture must pass
+      # (the gate must not punish the retraction), and the gate must lift once
+      # a tag exists.
+      - name: Release-link truth (R-19)
+        run: bash tests/gates/run_release_truth_fixtures.sh
+
+      # S47-08/T-41: R-05/R-19. The Legacy WinForms bridge cannot be built or
+      # tested on this fleet, so its surface is gated on the source: what it
+      # documents must be what it registers, what its JS calls must be
+      # registered, and an unimplemented type must be answered rather than
+      # dropped. Fixture chain: tests/gates/run_bridge_surface_fixtures.sh.
+      - name: Legacy bridge surface (R-05)
+        run: bash tests/gates/run_bridge_surface_fixtures.sh
+
       # R-01/CI-03 companion gate: every relative import in the PWA must
       # resolve case-sensitively (deploy-host semantics). Fixture pair:
       # tests/gates/run_import_check_fixtures.sh

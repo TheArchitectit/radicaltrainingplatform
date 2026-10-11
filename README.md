@@ -34,15 +34,10 @@ A WinForms-based exam preparation tool for Nutanix certifications featuring **1,
 
 ## 🚀 Quick Start
 
-### Option 1: Download Pre-Built Binary (No SDK Required)
+### Build From Source
 
-1. Download `RadicalTrainingPlatform-v0.2.0-alpha-win-x64.zip` from the [Releases](https://github.com/rogerlundnetcenter/nutanixcertificationtool/releases) page or from the repo root (tracked via Git LFS)
-2. Extract the zip
-3. Run `RadicalTrainingPlatform.exe`
-
-> **Note:** This is a self-contained Windows x64 build — no .NET runtime installation needed.
-
-### Option 2: Build From Source
+**No pre-built binary is published.** This repository has no releases and no tags, and no packaged
+build is committed here, so there is nothing to download yet. Build from source until a release is cut.
 
 **Prerequisites:** [.NET 8.0 SDK](https://dotnet.microsoft.com/download/dotnet/8.0) (Windows)
 
@@ -98,8 +93,6 @@ The app will launch with all 4 exam tabs. Select an exam, answer questions, and 
 │   ├── gapfill-validate-*.log    # Gap-fill validation logs
 │   └── CORRECTIONS_SUMMARY.txt   # All answer corrections applied
 │
-├── RadicalTrainingPlatform-v0.2.0-alpha-win-x64.zip  # Pre-built binary (Git LFS)
-├── .gitattributes                # Git LFS tracking rules
 ├── LICENSE                       # BSD 3-Clause
 └── README.md
 ```
@@ -173,15 +166,6 @@ This tool is for **study purposes only**. Questions are generated based on publi
 ## 📄 License
 
 BSD 3-Clause License — see [LICENSE](LICENSE) for details.
-
-## 📦 Git LFS
-
-This repository uses [Git LFS](https://git-lfs.github.com/) to track large binary files (`.zip`, `.exe`, `.dll`). Make sure Git LFS is installed before cloning:
-
-```bash
-git lfs install
-git clone https://github.com/rogerlundnetcenter/nutanixcertificationtool.git
-```
 
 ## 🤝 Contributing
 
