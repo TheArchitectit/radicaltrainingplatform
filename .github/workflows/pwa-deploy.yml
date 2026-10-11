@@ -64,6 +64,15 @@ jobs:
       - name: Content bundle check (predeploy)
         run: python3 scripts/check-content-bundle.py
 
+      # 4. Secret scan (T-23, TM-64 / REQ-AI-04). The tutor slice is the first
+      #    code here designed to talk to a model provider, so it is the first
+      #    place a provider key could reach the published tree — pasted into the
+      #    tutor client, written into a data asset, or committed in a dotfile
+      #    the upload step would carry. This is the last check before the
+      #    artifact is packed, because it is the artifact that ships.
+      - name: Artifact secret scan (predeploy)
+        run: python3 scripts/check-artifact-secrets.py
+
       # Keep the smoke log with the run — the same evidence the release set
       # archives, so a green deploy can be read back after the fact.
       - name: Archive smoke log

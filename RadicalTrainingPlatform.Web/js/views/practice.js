@@ -129,6 +129,9 @@ export class PracticeView extends BaseView {
                 <button class="study-button" id="practice-next">
                     ${this.#index + 1 < this.#queue.length ? 'Next question ›' : 'See results ›'}
                 </button>
+                <p class="practice-tutor-entry">Confused by this one?
+                    <a href="#/tutor/${exam.examId}">Ask the study coach</a> — the tutor is
+                    available once an item is submitted, never while a set is still open.</p>
             </div>`;
     }
 
@@ -152,6 +155,7 @@ export class PracticeView extends BaseView {
                 <div class="lesson-actions">
                     <button class="study-button" id="practice-restart">Practice again</button>
                     <a class="study-button secondary" href="#/tracks/${track?.trackId ?? ''}">Back to track</a>
+                    <a class="study-button secondary" href="#/tutor/${exam.examId}">Ask the study coach</a>
                 </div>
                 <p class="study-disclaimer">${DISCLAIMER}</p>
             </div>`);

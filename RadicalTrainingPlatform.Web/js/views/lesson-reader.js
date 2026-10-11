@@ -1,13 +1,20 @@
 import { BaseView } from './BaseView.js';
 import { TRACKS, LESSONS, EXAMS, DISCLAIMER } from '../study-content.js';
+import { mountTutorPanel } from './tutor-panel.js';
 
 /**
  * Lesson reader (T-11, REQ-UI-02) — renders a reviewed lesson's markdown
  * with the objective IDs the manifest maps it to. Markdown rendering is
  * deliberately minimal and escape-first: paragraphs, ##/### headings, bold,
  * inline code, lists. No raw HTML from lesson files reaches the DOM.
+ *
+ * T-23 mounts the study-coach panel at the foot of the lesson: the reader is
+ * study mode, so the tutor is available here (and is not, in an unsubmitted
+ * practice set — see practice.js).
  */
 export class LessonReaderView extends BaseView {
+    #tutor = null;
+
     async render(params) {
         const key = `${params.examId}/${params.lessonId}`;
         const lesson = LESSONS[key];
@@ -23,7 +30,7 @@ export class LessonReaderView extends BaseView {
                 return obj ? `<li><span class="objective-id">${obj.id}</span> ${obj.title}</li>` : '';
             })
             .filter(Boolean).join('');
-        return this.html(`
+        const el = this.html(`
             <div class="study-page lesson-page">
                 <a class="study-back" href="#/tracks/${track.trackId}">‹ ${track.title}</a>
                 <h1 class="study-title">${lesson.title}</h1>
@@ -33,8 +40,21 @@ export class LessonReaderView extends BaseView {
                 <div class="lesson-actions">
                     <a class="study-button" href="#/practice/${lesson.examId}">Practice this exam ›</a>
                 </div>
+                <div id="lesson-tutor-host"></div>
                 <p class="study-disclaimer">${DISCLAIMER}</p>
             </div>`);
+
+        this.#tutor = mountTutorPanel(el.querySelector('#lesson-tutor-host'), {
+            examId: lesson.examId,
+            lessonId: lesson.lessonId,
+            objectiveId: lesson.objectiveIds[0] ?? null,
+            trackId: track.trackId,
+        });
+        return el;
+    }
+
+    destroy() {
+        this.#tutor = null;
     }
 
     /** Escape-first markdown subset: headings, lists, bold, code, paragraphs. */

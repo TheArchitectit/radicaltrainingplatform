@@ -1,0 +1,16 @@
+{
+  "_comment": "Copy to config.json to configure the gateway. Secret REFERENCES only — an environment variable name, never a value. The server refuses to start if a key named like a secret value is present.",
+
+  "activation": false,
+  "provider": null,
+  "model": null,
+  "secretRef": null,
+
+  "timeoutMs": 20000,
+  "maxOutputTokens": 700,
+  "rateLimitPerMinute": 10,
+
+  "_activation_note": "activation, provider, model and any spend limit are owner decisions (G-05). The shipped default is false: the demo runs the recorded-example fallback, and the panel says so.",
+
+  "spendKillSwitch": null
+}

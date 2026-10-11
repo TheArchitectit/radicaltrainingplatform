@@ -59,6 +59,7 @@ import { PracticeView } from './views/practice.js';
 import { DemoModeView } from './views/demo-mode.js';
 import { initDemoBanner } from './components/DemoBanner.js';
 import { demo } from './core/DemoMode.js';
+import { TutorView } from './views/tutor-panel.js';
 
 /**
  * App — Bootstrap the Nutanix Lab Simulator.
@@ -175,6 +176,12 @@ class App {
 
         // Demo mode (Sprint 47 / T-21, REQ-DEMO-01..06)
         router.register('/demo', DemoModeView);
+
+        // Study coach (Sprint 47 / T-23, REQ-AI-01..07). The panel is also
+        // mounted inline in the lesson reader; this route is how the tutor is
+        // reached from outside a lesson.
+        router.register('/tutor', TutorView);
+        router.register('/tutor/:examId', TutorView);
     }
 
     #wireNavigation() {

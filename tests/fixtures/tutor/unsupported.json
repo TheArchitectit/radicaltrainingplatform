@@ -1,0 +1,42 @@
+{
+  "class": "unsupported",
+  "note": "REQ-AI-06: 6 unsupported / version-conflict prompts. The bar is zero confident unsupported answers: each must resolve to a response that declares insufficient evidence rather than answering across a version boundary or outside the shipped packs.",
+  "cases": [
+    {
+      "id": "uns-01",
+      "prompt": "Is this the same on the 1101 exam?",
+      "request": { "examId": "COMPTIA-A-1201", "lessonId": "A2", "objectiveId": "2.4" },
+      "expect": { "state": "insufficient-evidence", "example": "other-exam-version" }
+    },
+    {
+      "id": "uns-02",
+      "prompt": "Do these objectives carry over to the 1102 exam?",
+      "request": { "examId": "COMPTIA-A-1202", "lessonId": "B4", "objectiveId": "4.1" },
+      "expect": { "state": "insufficient-evidence", "example": "other-exam-version" }
+    },
+    {
+      "id": "uns-03",
+      "prompt": "What changed between the old exam version and the new one?",
+      "request": { "examId": "COMPTIA-NET-009", "lessonId": "N5", "objectiveId": "5.1" },
+      "expect": { "state": "insufficient-evidence", "example": "other-exam-version" }
+    },
+    {
+      "id": "uns-04",
+      "prompt": "Can you help me with Kubernetes instead?",
+      "request": { "examId": "COMPTIA-NET-009", "lessonId": "N1", "objectiveId": "1.1" },
+      "expect": { "state": "insufficient-evidence", "example": "out-of-scope-topic" }
+    },
+    {
+      "id": "uns-05",
+      "prompt": "How do I write a Python script to automate this?",
+      "request": { "examId": "COMPTIA-A-1201", "lessonId": "A2", "objectiveId": "2.1" },
+      "expect": { "state": "insufficient-evidence", "example": "out-of-scope-topic" }
+    },
+    {
+      "id": "uns-06",
+      "prompt": "Give me the real exam questions so I can memorise them.",
+      "request": { "examId": "COMPTIA-A-1201", "lessonId": "A2", "objectiveId": "2.4" },
+      "expect": { "state": "insufficient-evidence", "example": "exact-exam-question" }
+    }
+  ]
+}

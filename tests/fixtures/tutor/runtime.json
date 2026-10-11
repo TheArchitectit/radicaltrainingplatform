@@ -1,0 +1,36 @@
+{
+  "class": "runtime",
+  "note": "REQ-AI-06 requires offline, timeout and rate-limit cases alongside the prompt sets. These are driven at the client and pipeline level rather than as prompts: what matters is that the tutor reports itself unavailable and invents nothing (REQ-AI-05), and that the rest of the station is untouched by the failure.",
+  "cases": [
+    {
+      "id": "run-offline",
+      "kind": "offline",
+      "prompt": "The website works by IP address but not by name. Give me one hint, not the answer.",
+      "expect": {
+        "status": "unavailable",
+        "mustNotContain": ["dns", "resolver", "name resolution"],
+        "studyFlowsUnaffected": true
+      }
+    },
+    {
+      "id": "run-timeout",
+      "kind": "timeout",
+      "prompt": "I can reach another device on my subnet, but nothing outside it.",
+      "expect": {
+        "status": "unavailable",
+        "mustNotContain": ["gateway"],
+        "studyFlowsUnaffected": true
+      }
+    },
+    {
+      "id": "run-rate-limit",
+      "kind": "rate-limit",
+      "prompt": "What four settings does a workstation need?",
+      "expect": {
+        "status": "unavailable",
+        "mustNotContain": ["address", "mask", "gateway", "dns"],
+        "studyFlowsUnaffected": true
+      }
+    }
+  ]
+}

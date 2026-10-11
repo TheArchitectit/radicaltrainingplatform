@@ -61,6 +61,12 @@ export class StubElement {
         return child;
     }
 
+    replaceChildren(...nodes) {
+        this.children = [];
+        this._ownText = '';
+        for (const node of nodes) this.appendChild(node);
+    }
+
     remove() { this.parent?.removeChild(this); }
 
     setAttribute(name, value) {

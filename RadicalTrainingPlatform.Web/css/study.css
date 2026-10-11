@@ -739,3 +739,165 @@ body.demo-mode {
     gap: var(--space-sm);
     margin-top: 6px;
 }
+
+/* ── Study coach (T-23, REQ-AI-01..07) ──
+   The mode label is the load-bearing element here: whatever else changes,
+   "recorded example" must stay visible whenever the fallback is answering
+   (REQ-AI-07). It is styled as a pill so it reads as a status, not a caption. */
+
+.tutor-panel {
+    margin-top: var(--space-xl);
+    padding: var(--space-lg);
+    border: 1px solid var(--border-default);
+    border-radius: 10px;
+    background: var(--bg-card);
+}
+
+.tutor-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-md);
+}
+
+.tutor-title {
+    margin: 0;
+    font-size: var(--font-size-lg);
+    color: var(--text-primary);
+}
+
+.tutor-mode {
+    padding: 3px 10px;
+    border-radius: 999px;
+    font-size: var(--font-size-xs);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.tutor-mode.recorded {
+    background: rgba(255, 176, 32, 0.16);
+    border: 1px solid rgba(255, 176, 32, 0.55);
+    color: #ffb020;
+}
+
+.tutor-mode.live {
+    background: rgba(34, 165, 247, 0.16);
+    border: 1px solid rgba(34, 165, 247, 0.55);
+    color: var(--text-link);
+}
+
+.tutor-frame {
+    margin: var(--space-sm) 0 var(--space-md);
+    color: var(--text-secondary);
+    font-size: var(--font-size-sm);
+}
+
+.tutor-label {
+    display: block;
+    margin-bottom: 4px;
+    color: var(--text-secondary);
+    font-size: var(--font-size-xs);
+}
+
+.tutor-input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 8px;
+    border: 1px solid var(--border-light);
+    border-radius: 6px;
+    background: var(--bg-input);
+    color: var(--text-primary);
+    font-family: inherit;
+    font-size: var(--font-size-sm);
+    resize: vertical;
+}
+
+.tutor-form-row {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    margin-top: var(--space-sm);
+    flex-wrap: wrap;
+}
+
+.tutor-privacy {
+    color: var(--text-secondary);
+    font-size: var(--font-size-xs);
+}
+
+.tutor-response {
+    margin-top: var(--space-lg);
+    padding-top: var(--space-md);
+    border-top: 1px dashed var(--border-light);
+}
+
+.tutor-response-label {
+    display: inline-block;
+    margin-bottom: 6px;
+    padding: 2px 8px;
+    border-radius: 999px;
+    font-size: var(--font-size-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    background: rgba(107, 113, 133, 0.15);
+    border: 1px solid var(--border-default);
+    color: var(--text-secondary);
+}
+
+.tutor-response-label.insufficient-evidence,
+.tutor-response-label.unavailable {
+    background: rgba(255, 176, 32, 0.14);
+    border-color: rgba(255, 176, 32, 0.5);
+    color: #ffb020;
+}
+
+.tutor-response-text {
+    margin: 0 0 var(--space-sm);
+    color: var(--text-primary);
+    line-height: 1.6;
+}
+
+.tutor-citations {
+    margin: 0 0 var(--space-sm);
+    padding-left: var(--space-lg);
+    font-size: var(--font-size-sm);
+}
+
+.tutor-next {
+    margin: 0 0 var(--space-sm);
+    color: var(--text-secondary);
+    font-size: var(--font-size-sm);
+}
+
+.tutor-settings {
+    margin-top: var(--space-md);
+    padding-top: var(--space-sm);
+    border-top: 1px solid var(--border-light);
+    color: var(--text-secondary);
+    font-size: var(--font-size-xs);
+}
+
+.tutor-consent {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    color: var(--text-primary);
+    font-size: var(--font-size-sm);
+}
+
+.tutor-consent-note {
+    margin: 4px 0 0;
+}
+
+.tutor-limits {
+    max-width: 70ch;
+    color: var(--text-secondary);
+    font-size: var(--font-size-sm);
+}
+
+.practice-tutor-entry {
+    margin-top: var(--space-sm);
+    color: var(--text-secondary);
+    font-size: var(--font-size-sm);
+}

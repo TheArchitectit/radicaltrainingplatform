@@ -1,0 +1,133 @@
+{
+  "class": "answerable",
+  "note": "REQ-AI-06: at least 12 answerable prompts across the shipped lessons. The two demo prompts (SPEC-04 REQ-AP-07 and SPEC-05 REQ-NP-06) are in this set and are marked demo:true — they must resolve to the reviewed DNS and gateway lessons without operating the simulation.",
+  "cases": [
+    {
+      "id": "ans-01",
+      "demo": true,
+      "source": "SPEC-04 REQ-AP-07",
+      "prompt": "The website works by IP address but not by name. Give me one hint, not the answer.",
+      "request": { "examId": "COMPTIA-A-1201", "lessonId": "A2", "objectiveId": "2.4" },
+      "expect": {
+        "state": "answer",
+        "example": "dns-name-vs-address",
+        "citationsMustInclude": ["lesson:COMPTIA-A-1201/A2"],
+        "mustNotStateTheFix": ["set the dns", "change the dns", "configure the dns", "the dns server is wrong", "point the resolver"]
+      }
+    },
+    {
+      "id": "ans-02",
+      "prompt": "A site loads fine by its address but not by its hostname — where do I look?",
+      "request": { "examId": "COMPTIA-A-1201", "lessonId": "A2", "objectiveId": "2.4" },
+      "expect": {
+        "state": "answer",
+        "example": "dns-name-vs-address",
+        "citationsMustInclude": ["lesson:COMPTIA-A-1201/A2"],
+        "mustNotStateTheFix": ["set the dns", "change the dns"]
+      }
+    },
+    {
+      "id": "ans-03",
+      "demo": true,
+      "source": "SPEC-05 REQ-NP-06",
+      "prompt": "I can reach another device on my subnet, but nothing outside it. What should I check first, and why?",
+      "request": { "examId": "COMPTIA-NET-009", "lessonId": "N5", "objectiveId": "5.4" },
+      "expect": {
+        "state": "answer",
+        "example": "gateway-local-not-remote",
+        "citationsMustInclude": ["lesson:COMPTIA-NET-009/N5"],
+        "mustNotStateTheFix": ["the gateway is wrong", "replace the gateway", "set the gateway to"]
+      }
+    },
+    {
+      "id": "ans-04",
+      "prompt": "Devices on my own network answer, but anything remote fails. Where would you start?",
+      "request": { "examId": "COMPTIA-NET-009", "lessonId": "N5", "objectiveId": "5.4" },
+      "expect": {
+        "state": "answer",
+        "example": "gateway-local-not-remote",
+        "citationsMustInclude": ["lesson:COMPTIA-NET-009/N5"]
+      }
+    },
+    {
+      "id": "ans-05",
+      "prompt": "What four settings does a workstation need before it can use the network?",
+      "request": { "examId": "COMPTIA-A-1201", "lessonId": "A2", "objectiveId": "2.1" },
+      "expect": {
+        "state": "answer",
+        "example": "host-settings-set",
+        "citationsMustInclude": ["lesson:COMPTIA-A-1201/A2"]
+      }
+    },
+    {
+      "id": "ans-06",
+      "prompt": "How does DHCP relate to the settings a host needs?",
+      "request": { "examId": "COMPTIA-A-1201", "lessonId": "A2", "objectiveId": "2.1" },
+      "expect": {
+        "state": "answer",
+        "example": "host-settings-set",
+        "citationsMustInclude": ["lesson:COMPTIA-A-1201/A2"]
+      }
+    },
+    {
+      "id": "ans-07",
+      "prompt": "My machine has an address starting with 169.254 — what does that tell me?",
+      "request": { "examId": "COMPTIA-A-1201", "lessonId": "A2", "objectiveId": "2.2" },
+      "expect": {
+        "state": "answer",
+        "example": "apipa-dhcp-failure",
+        "citationsMustInclude": ["lesson:COMPTIA-A-1201/A2"]
+      }
+    },
+    {
+      "id": "ans-08",
+      "prompt": "The host seems to have assigned itself an address and got no lease. What is going on?",
+      "request": { "examId": "COMPTIA-A-1201", "lessonId": "A2", "objectiveId": "2.2" },
+      "expect": {
+        "state": "answer",
+        "example": "apipa-dhcp-failure",
+        "citationsMustInclude": ["lesson:COMPTIA-A-1201/A2"]
+      }
+    },
+    {
+      "id": "ans-09",
+      "prompt": "Where do I start when I troubleshoot a network fault?",
+      "request": { "examId": "COMPTIA-NET-009", "lessonId": "N5", "objectiveId": "5.1" },
+      "expect": {
+        "state": "answer",
+        "example": "troubleshooting-order",
+        "citationsMustInclude": ["lesson:COMPTIA-NET-009/N5"]
+      }
+    },
+    {
+      "id": "ans-10",
+      "prompt": "What is the order of the troubleshooting method?",
+      "request": { "examId": "COMPTIA-NET-009", "lessonId": "N5", "objectiveId": "5.1" },
+      "expect": {
+        "state": "answer",
+        "example": "troubleshooting-order",
+        "citationsMustInclude": ["lesson:COMPTIA-NET-009/N5"]
+      }
+    },
+    {
+      "id": "ans-11",
+      "prompt": "What belongs in a ticket note when I close a job?",
+      "request": { "examId": "COMPTIA-A-1202", "lessonId": "B4", "objectiveId": "4.1" },
+      "expect": {
+        "state": "answer",
+        "example": "operational-documentation",
+        "citationsMustInclude": ["lesson:COMPTIA-A-1202/B4"]
+      }
+    },
+    {
+      "id": "ans-12",
+      "prompt": "Why does documentation matter for change control?",
+      "request": { "examId": "COMPTIA-A-1202", "lessonId": "B4", "objectiveId": "4.1" },
+      "expect": {
+        "state": "answer",
+        "example": "operational-documentation",
+        "citationsMustInclude": ["lesson:COMPTIA-A-1202/B4"]
+      }
+    }
+  ]
+}
