@@ -25,9 +25,9 @@ fi
 
 python3 scripts/scan-scenario-validators.py >/dev/null 2>&1
 if [ $? -eq 0 ]; then
-    echo "PASS: repo scenario registries clean or pending the documented T-14 sweep"
+    echo "PASS: repo scenario registries clean (REQ-SC-01 armed, T-14/S46-04)"
 else
-    echo "FAIL: repo scenario registries failed the scan"
+    echo "FAIL: repo scenario registries failed the scan (REQ-SC-01)"
     fail=1
 fi
 

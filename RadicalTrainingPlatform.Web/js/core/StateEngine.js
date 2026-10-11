@@ -399,6 +399,12 @@ class StateEngine {
                 { uuid: 'nc2asp-001', name: 'CPU-Scale-AWS', cluster: 'NC2-AWS-Prod', metric: 'CPU', threshold_pct: 80, action: 'add_node', cooldown_min: 30, enabled: true },
                 { uuid: 'nc2asp-002', name: 'Memory-Scale-Azure', cluster: 'NC2-Azure-DR', metric: 'Memory', threshold_pct: 85, action: 'add_node', cooldown_min: 45, enabled: false },
             ],
+            // SPEC-07 action trace: semantic learner actions (route-entered,
+            // cli-command, tool-used, api-request, lcm-scan, nc2-hibernate,
+            // nc2-resume, …) with stable shape { action, ... }. Durable so it
+            // survives view navigation; reset() reseeds it empty (REQ-SC-06).
+            // Scenario validators read it as their `trace` input.
+            action_trace: [],
         };
     }
 }

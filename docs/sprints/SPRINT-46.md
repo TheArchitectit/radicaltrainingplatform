@@ -16,7 +16,7 @@
 | S46-01 (T-11) | Track picker, lesson reader, practice view | REQ-UI-01..03, REQ-BRAND-01/02 | 3 | ✅ |
 | S46-02 (T-12) | ProgressStore + wiring + E2E save/reload/failure tests | REQ-UI-04/05, R-06 | 3 | ✅ |
 | S46-03 (T-13) | `ticket-lab.js` renderer; aplus-dns-01 + netplus-gw-01 with validators and negative fixtures | REQ-SC-01..06 | 3 | ✅ |
-| S46-04 (T-14) | Scenario validator sweep repairs (all 44; us-bucket-01) | R-02, REQ-DEMO-06 | 3 | ⚪ |
+| S46-04 (T-14) | Scenario validator sweep repairs (all 44; us-bucket-01) | R-02, REQ-DEMO-06 | 3 | ✅ |
 | S46-05 (T-15) | Bridge handlers: real effects or removal; desktop SessionStore consumption | R-05, R-06 | 2 | ⚪ |
 | S46-06 (T-16) | Catalog tests, multi-select scoring tests, save/reload/error tests | REQ-MAN-05, L-06 | 2 | ⚪ |
 | S46-07 (T-17) | Lint extension + manifest validator in CI | SPEC-10 10.6 | 2 | ⚪ |
@@ -99,12 +99,23 @@
 **As a** presenter, **I want** every existing scenario to be honestly passable, **so that** demo mode has no credibility failures.
 
 **Acceptance Criteria:**
-- [ ] All 44 scenarios repaired: 27 literal-true predicates replaced with state-based checks; 16 seed-auto-pass scenarios fixed; us-bucket-01 made achievable through real UI mutation paths (or corrected to what the simulator can mutate — choice documented)
-- [ ] `scripts/scan-scenario-validators.py` CI gate: constant-true validators fail the build, naming scenario + objective IDs
-- [ ] Wrong-state negativity fixtures for repaired scenarios
-- [ ] Sweep (TM-45) asserts fresh-seed negativity + walkthrough solvability per scenario
+- [x] All 44 scenarios repaired: 27 literal-true predicates replaced with state-based checks; 16 seed-auto-pass scenarios fixed; us-bucket-01 made achievable through real UI mutation paths (or corrected to what the simulator can mutate — choice documented)
+- [x] `scripts/scan-scenario-validators.py` CI gate: constant-true validators fail the build, naming scenario + objective IDs
+- [x] Wrong-state negativity fixtures for repaired scenarios
+- [x] Sweep (TM-45) asserts fresh-seed negativity + walkthrough solvability per scenario
 
-**Files:** `Web/js/views/scenarios.js` (and scenario registry), `scripts/scan-scenario-validators.py`
+**Files:** `Web/js/views/scenarios.js`, `Web/js/core/StateEngine.js`, `Web/js/core/CLIService.js`, `Web/js/app.js`, `Web/js/views/ci-console.js`, `Web/js/views/ai-tools.js`, `Web/js/views/pc-lcm.js`, `scripts/scan-scenario-validators.py`, `tests/gates/web/scenario-sweep.mjs`, `tests/gates/run_validator_scan_fixtures.sh`
+
+**Notes (S46-04 close, 2026-10-10):**
+- **Universal validator shape (SPEC-07).** Every objective validator is now `(state, trace) -> {passed, unmetConditions[]}`. The ticket validators already complied; the store-based ones were zero-arg boolean closures over module-level `state` and are converted. The runner (`#evalObjective`) calls `obj.validate(state, state.getAll('action_trace'))` with per-objective try/catch, so `scenario-validator-isolation.mjs` stays green (validators take `s` as a parameter, so the `getAll('categories')` poison still fires).
+- **Durable action trace.** Observation objectives ("open the CLI", "view the audit log") cannot be proven from configuration state. Added a `action_trace` StateEngine seed collection (cleared by `reset()`, REQ-SC-06) recorded by: App route handler (`route-entered`), CLIService (`cli-command`), ci-console hibernate/resume (`nc2-hibernate`/`nc2-resume`), ai-tools (`api-request`, `vram-calculate`), pc-lcm (`lcm-scan`), and the scenario "Go to View" button. Validators read it as their `trace` argument.
+- **27 constant-true replaced** with trace/state checks: CLI observations → `ranCli(trace, pattern)`; page observations → `visited(trace, route)`; tool/API → `ranAction`. The scan now hard-fails naming scenario + objective IDs (REQ-SC-01 armed).
+- **Seed-auto-pass fixed (REQ-SC-02).** Empirically 16 scenarios completed on a fresh seed. Repairs: us-01 obj-1 now counts only non-seed FSVMs (excludes `fsvm-001..003`); us-05/mci-insights-01/ai-monitor-01 obj-2/ai-gpu-01 obj-1 require a visit in addition to the seed condition; us-repl-01 obj-2 requires the named share plus a visit; ci-03 obj-2 requires `nc2-hibernate` in the trace first (obj-1/obj-2 are mutually exclusive in state alone).
+- **us-bucket-01 — choice: "corrected to real UI mutation paths" (documented per R-02).** The old predicate read `state.getAll('buckets')` — a collection that does not exist (the store is `object_buckets`). The Objects wizard already writes `name`, `versioning`, and `lifecycle: {days, action}`, so the objective is achievable through the real UI path once the collection is fixed and the objective matches the description's full contract (versioning + lifecycle). Objective text updated accordingly.
+- **Field-shape mismatches (the us-bucket-01 class) found and fixed:** mci-01 obj-2 checked `image === 'CentOS-8'` but the UI writes `image: 'CentOS-8-GenericCloud'` — now resolves the disk image against the real image library so a fabricated name cannot pass; mci-01 obj-3 checked `n.subnet === 'VM-100'` but the UI writes `nics: [{network_uuid}]` and the network is named `VM-Network-100` — now resolves `network_uuid` → network name, and the objective text names the real network; mci-02 obj-3 checked `schedule === 'hourly'` (a string) but the wizard writes `schedule: {interval, retention_*}` — now checks `schedule?.interval === 'hourly'`. `scenario-attempt-history.mjs` was written against the old mci-02 shape and is updated to the real UI mutation shape.
+- **Sweep (TM-45)** lives at `tests/gates/web/scenario-sweep.mjs` (auto-picked up by `run_web_fixtures.sh`): fresh-seed negativity (every objective of every store-based scenario fails after `state.reset()` with empty trace), walkthrough solvability (42 node-level walkthroughs replayed through the same `(state, trace)` entry point the UI uses, asserting 100%), and wrong-state negatives for the repaired scenarios (us-bucket-01 without versioning/lifecycle; us-bucket-01 written to the wrong collection; mci-01 without power-on; ci-03 without resume; mci-01 with the old image/network shapes).
+- **Not verified:** the walkthroughs are node-level state+trace mutations, not full browser UI paths — the "real UI mutation path" evidence for us-bucket-01 is the field map above (the Objects wizard writes exactly the validated shape) plus the sweep's walkthrough. A browser spot-check of the Objects wizard was not re-run in this batch. Ticket scenarios (`aplus-dns-01`, `netplus-gw-01`) are excluded from the store-based sweep (covered by `ticket-scenarios.mjs`). No CI e2e spec exists yet (same posture as S46-02/03).
+
 
 ### S46-05 (T-15): Bridge Handlers + SessionStore
 **As a** learner, **I want** desktop bridge actions to have real effects, **so that** no UI control lies.

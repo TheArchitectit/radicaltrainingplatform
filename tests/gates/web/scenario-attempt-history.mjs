@@ -19,9 +19,11 @@ const runner = makeRunner();
 
 async function completeScenario(state, view, el) {
     // Satisfy every objective of mci-02 (PD-Lab-DR): create the PD with
-    // one VM and an hourly schedule.
+    // one VM and an hourly schedule through the real UI mutation shape
+    // (schedule is { interval, retention_* }, not a bare string).
     await state.create('protection_domains', {
-        name: 'PD-Lab-DR', vms: ['vm-1'], schedule: 'hourly',
+        name: 'PD-Lab-DR', vms: ['vm-1'],
+        schedule: { interval: 'hourly', retention_local: 24, retention_remote: 72 },
     });
 
     const startBtn = el.querySelectorAll('.start-scenario-btn').find(b => b.dataset.id === 'mci-02');

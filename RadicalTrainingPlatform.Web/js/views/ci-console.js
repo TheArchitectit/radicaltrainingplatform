@@ -144,6 +144,7 @@ export class CiConsoleView extends BaseView {
         });
         if (ok) {
             await state.update('nc2_clusters', c.uuid, { status: 'hibernated' });
+            await state.create('action_trace', { action: 'nc2-hibernate', cluster: c.name });
             toast.success(`Cluster "${c.name}" hibernated. Metadata backed up to ${c.provider === 'AWS' ? 'S3' : 'Blob Storage'}.`);
         }
     }
@@ -151,6 +152,7 @@ export class CiConsoleView extends BaseView {
     async #resume(c) {
         if (c.status !== 'hibernated') { toast.warning('Only hibernated clusters can be resumed'); return; }
         await state.update('nc2_clusters', c.uuid, { status: 'running' });
+        await state.create('action_trace', { action: 'nc2-resume', cluster: c.name });
         toast.success(`Cluster "${c.name}" resuming. NVMe data intact, DSF rebalancing...`);
     }
 

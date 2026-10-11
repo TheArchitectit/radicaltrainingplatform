@@ -176,6 +176,7 @@ export class PcLcmView extends BaseView {
 
     async #checkForUpdates() {
         toast('Scanning for updates...', 'info');
+        await state.create('action_trace', { action: 'lcm-scan' });
         // Simulate scanning delay
         await new Promise(r => setTimeout(r, 1500));
 

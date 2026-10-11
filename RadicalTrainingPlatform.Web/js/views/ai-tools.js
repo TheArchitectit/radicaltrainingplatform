@@ -357,6 +357,7 @@ Practical Total     ≈ Model Weights × Overhead Factor (1.3× to 2.0×)
 
         // Check for common mistakes
         if (path === '/chat/completions' && reqBody?.prompt && !reqBody?.messages) {
+            state.create('action_trace', { action: 'api-request', path, status: 422 }).catch(() => {});
             respDiv.innerHTML = `<div style="padding:12px;background:var(--status-critical-bg);border-radius:6px;">
                 <strong>422 Unprocessable Entity</strong><br><br>
                 <code>/v1/chat/completions</code> requires <code>"messages"</code> array, not <code>"prompt"</code> string.<br><br>
@@ -377,6 +378,7 @@ Practical Total     ≈ Model Weights × Overhead Factor (1.3× to 2.0×)
         }
 
         // Simulate successful response
+        state.create('action_trace', { action: 'api-request', path, status: 200 }).catch(() => {});
         const simResponse = this.#simulateResponse(path, reqBody);
         respDiv.innerHTML = `
             <div style="margin-bottom:8px;">
@@ -445,6 +447,7 @@ Practical Total     ≈ Model Weights × Overhead Factor (1.3× to 2.0×)
         const prec = PRECISION.find(p => p.id === precId);
         const weightsGb = params * prec.bytes;
         const totalGb = weightsGb * overhead;
+        state.create('action_trace', { action: 'vram-calculate', params, precision: precId }).catch(() => {});
 
         // Find suitable GPUs
         const recommendations = GPU_OPTIONS.map(gpu => {

@@ -228,6 +228,11 @@ class App {
     }
 
     #onRouteChanged({ path }) {
+        // SPEC-07 action trace: route-entered is a semantic learner action.
+        // Durable in state so scenario validators can observe navigation
+        // across view mounts. Fire-and-forget — never block routing.
+        state.create('action_trace', { action: 'route-entered', route: path }).catch(() => {});
+
         // Update breadcrumb
         const bc = document.getElementById('breadcrumb');
         if (bc) {

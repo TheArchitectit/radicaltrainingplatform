@@ -10,6 +10,11 @@ export class CLIService {
         const trimmed = input.trim();
         if (!trimmed) return '';
 
+        // SPEC-07 action trace: CLI work must be observable by scenario
+        // validators across view navigation. Fire-and-forget — a trace write
+        // failure must never block the command itself.
+        state.create('action_trace', { action: 'cli-command', command: trimmed }).catch(() => {});
+
         const parts = this.#tokenize(trimmed);
         const cmd = parts[0]?.toLowerCase();
         const args = parts.slice(1);

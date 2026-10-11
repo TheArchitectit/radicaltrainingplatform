@@ -1,16 +1,11 @@
 #!/usr/bin/env python3
-"""Scenario validator scan (REQ-SC-01, T-14/S46-04; exercised from T-13).
+"""Scenario validator scan (REQ-SC-01, T-14/S46-04).
 
 Scans the web scenario registries for constant-true validators — the
-`() => true` pattern that made 27 of 78 objectives auto-pass. Constant-true
-validators fail the build naming the file, line and matched text.
+`() => true` pattern that made 27 of 78 objectives auto-pass. A constant-true
+validator fails the build naming the scenario id, objective id, file and line.
 
-Allowed in the tree: genuine `() => true` occurrences that are NOT
-validators are not currently present; if a future non-validator use needs
-an inline true closure in a registry file, it must be refactored out —
-the scan is intentionally syntactic and strict.
-
-Exit 0: clean. Exit 1: constant-true validators found (file:line listed).
+Exit 0: clean. Exit 1: constant-true validators found (scenario + objective listed).
 """
 import re
 import sys
@@ -18,25 +13,39 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 
-# Scenario registry files (SPEC-07: "Web/js/views/scenarios.js (and any
-# scenario registry)").
 REGISTRIES = [
     REPO_ROOT / "RadicalTrainingPlatform.Web" / "js" / "views" / "scenarios.js",
 ]
 
-# Matches an arrow function whose body is a lone `true` literal. The
-# validate: property key anchors it to objectives; a bare `() => true`
-# anywhere in a registry is equally a constant-true validator, so both
-# spellings are flagged.
-CONSTANT_TRUE = re.compile(r"validate:\s*\(\)\s*=>\s*true\b|validate:\s*\(\)\s*=>\s*\{\s*return\s+true;?\s*\}")
+# An arrow function whose body is a lone `true` literal, anchored to the
+# validate: property key.
+CONSTANT_TRUE = re.compile(
+    r"validate:\s*\(\)\s*=>\s*true\b|validate:\s*\(\)\s*=>\s*\{\s*return\s+true;?\s*\}"
+)
+
+# Context anchors so a hit can name scenario + objective IDs (REQ-SC-01).
+SCENARIO_ID = re.compile(r"^\s*id:\s*'([^']+)'")
+OBJECTIVE_ID = re.compile(r"^\s*id:\s*'(obj-[^']+)'")
 
 
 def scan(path: Path) -> list[str]:
     hits: list[str] = []
     text = path.read_text(encoding="utf-8", errors="replace")
+    scenario_id = "?"
+    objective_id = "?"
     for line_no, line in enumerate(text.splitlines(), start=1):
+        m = SCENARIO_ID.search(line)
+        if m and not OBJECTIVE_ID.search(line):
+            scenario_id = m.group(1)
+            objective_id = "?"
+        m = OBJECTIVE_ID.search(line)
+        if m:
+            objective_id = m.group(1)
         if CONSTANT_TRUE.search(line):
-            hits.append(f"{path}:{line_no}: constant-true validator: {line.strip()[:100]}")
+            hits.append(
+                f"{path}:{line_no}: scenario={scenario_id} objective={objective_id} "
+                f"constant-true validator: {line.strip()[:80]}"
+            )
     return hits
 
 
@@ -53,25 +62,13 @@ def main() -> int:
             for path in sorted(root.rglob("*.js")):
                 hits.extend(scan(path))
     else:
-        # Repo mode: scan the scenario registries. The registry currently
-        # carries 27 constant-true validators — the audited defect T-14
-        # (S46-04) repairs in this same sprint. Until that sweep lands the
-        # gate warns loudly with the exact count every run (never silently
-        # green); the fixture chain still proves bad-fails/good-passes.
+        # Repo mode: scan the scenario registries. REQ-SC-01 hard-fails
+        # naming scenario + objective IDs (T-14/S46-04 armed).
         for reg in REGISTRIES:
             if not reg.is_file():
                 print(f"VALIDATOR SCAN: FAIL — registry not found: {reg}", file=sys.stderr)
                 return 1
             hits.extend(scan(reg))
-        if hits:
-            print(
-                f"VALIDATOR SCAN: WARN — {len(hits)} constant-true validators pending "
-                "repair (T-14, S46-04 validator sweep); REQ-SC-01 repo enforcement arms "
-                "when the sweep lands"
-            )
-            for hit in hits:
-                print(f"  {hit}")
-            return 0
     if hits:
         print("VALIDATOR SCAN: FAIL — constant-true validators present (REQ-SC-01)")
         for hit in hits:
