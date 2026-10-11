@@ -36,7 +36,10 @@ import { bus } from './EventBus.js';
  *
  * Storage failure is never a false save: recordItem returns { saved: false,
  * reason } on failure and emits progress:saveFailed so the UI can surface an
- * honest recoverable error (Plan v2 L-02).
+ * honest recoverable error (Plan v2 L-02). Reasons distinguish the recovery
+ * path (R-23): 'storage-write-failed', 'storage-quota-exceeded',
+ * 'storage-blocked'. Corrupt stored entries are quarantined by StateStore
+ * and read back as a clean start (store:corruptEntry), never as a throw.
  */
 
 class ProgressStore {
@@ -113,8 +116,9 @@ class ProgressStore {
             });
             await this.#recordAttemptInMeta(examId, itemId, latest);
         } catch (e) {
-            this.#reportFailure(e, `progress record ${key}`);
-            return { saved: false, reason: 'storage-write-failed' };
+            const reason = this.#classifyWriteFailure(e);
+            this.#reportFailure(e, `progress record ${key}`, reason);
+            return { saved: false, reason };
         }
         return { saved: true, record };
     }
@@ -154,8 +158,9 @@ class ProgressStore {
         try {
             await store.set(key, { scenarioId, completedAt: new Date().toISOString() });
         } catch (e) {
-            this.#reportFailure(e, `scenario record ${key}`);
-            return { saved: false, reason: 'storage-write-failed' };
+            const reason = this.#classifyWriteFailure(e);
+            this.#reportFailure(e, `scenario record ${key}`, reason);
+            return { saved: false, reason };
         }
         return { saved: true };
     }
@@ -198,8 +203,9 @@ class ProgressStore {
         try {
             await store.set(key, record);
         } catch (e) {
-            this.#reportFailure(e, `continuation ${key}`);
-            return { saved: false, reason: 'storage-write-failed' };
+            const reason = this.#classifyWriteFailure(e);
+            this.#reportFailure(e, `continuation ${key}`, reason);
+            return { saved: false, reason };
         }
         return { saved: true, record };
     }
@@ -280,9 +286,27 @@ class ProgressStore {
         await store.set(key, next);
     }
 
-    #reportFailure(err, what) {
-        console.error('[ProgressStore] save failed for', what, err);
-        bus.emit('progress:saveFailed', { what, message: String(err?.message || err) });
+    /**
+     * Map a storage error to the honest recovery reason (R-23). Name-based
+     * (DOMException.name is standardized) so a message that merely mentions
+     * quota is not misclassified.
+     */
+    #classifyWriteFailure(err) {
+        const name = String(err?.name || '');
+        if (name === 'StorageBlockedError') return 'storage-blocked';
+        if (name === 'QuotaExceededError' || name === 'NS_ERROR_DOM_QUOTA_REACHED') {
+            return 'storage-quota-exceeded';
+        }
+        return 'storage-write-failed';
+    }
+
+    #reportFailure(err, what, reason) {
+        console.error('[ProgressStore] save failed for', what, reason, err);
+        bus.emit('progress:saveFailed', {
+            what,
+            reason: reason || 'storage-write-failed',
+            message: String(err?.message || err),
+        });
     }
 }
 

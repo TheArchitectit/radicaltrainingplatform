@@ -25,7 +25,7 @@
 | S46-10 (T-38) | Study-continuation restore; streak/Skip repairs | R-15, R-17 | 2 | ✅ |
 | S46-11 (T-39) | Disposal guards on cached simulator references | R-16 | 1 | ✅ |
 | S46-12 (T-40) | PDF export: canonical ID vs display label; vendor-neutral footer; atomic session save + corrupt recovery | R-18, R-20 | 2 | ✅ |
-| S46-13 (T-44) | Storage recovery boundary tests (corrupt entry, quota, blocked) | R-23 | 1 | ⚪ |
+| S46-13 (T-44) | Storage recovery boundary tests (corrupt entry, quota, blocked) | R-23 | 1 | ✅ |
 | S46-14 (T-42) | CefGlue NoSandbox scoped hardening review + navigation allowlist decision | R-21 | 1 | ⚪ |
 | S46-15 (T-43*) | Web runtime batch remainder (if not closed in Sprint 45) | R-22 | 1 | ⚪ |
 
@@ -249,7 +249,17 @@
 **As a** platform engineer, **I want** corrupt/quota/blocked storage handled, **so that** broken state never silently pretends to be saved.
 
 **Acceptance Criteria:**
-- [ ] Corrupt entry, quota exceeded, storage blocked — each surfaces the honest recoverable error path
+- [x] Corrupt entry, quota exceeded, storage blocked — each surfaces the honest recoverable error path
+
+**Notes (S46-13 close, 2026-10-10):**
+- **Findings (R-23 acceptance: a finding only if a test fails).** Two of the three boundaries were defective before this row; one was already honest and is now pinned.
+  1. **Corrupt entry — FAILING before the fix (finding).** `StateStore.get` (localStorage fallback) did a bare `JSON.parse(raw)`. A damaged value threw `SyntaxError` out of every read (`getItem`, `restore`, continuation load) — the store bricked on one bad key. Now: damaged bytes are quarantined to `lab_<key>.corrupt` (evidence preserved), `store:corruptEntry` fires, and `get` returns null (clean start). Recoverable: the key is writable again immediately (attempts restart at 1).
+  2. **Quota exceeded — PARTIAL before the fix (finding, narrowed).** A write failure already returned `{ saved: false, reason: 'storage-write-failed' }` (S46-02 / L-02), so it was never a false save. But the single reason code hid *which* recovery path the learner was on. Now `ProgressStore.#classifyWriteFailure` maps `DOMException`/`err.name` `QuotaExceededError` (and `NS_ERROR_DOM_QUOTA_REACHED`) to `storage-quota-exceeded`, and `StorageBlockedError` to `storage-blocked`, leaving everything else as `storage-write-failed`. Classification is name-based so a message that merely mentions quota is not misread (pinned by fixture).
+  3. **Storage blocked — FAILING before the fix (finding).** If `localStorage` access itself throws (cookies/storage denied), `init()` fell into the fallback and then every `get`/`set` threw `SecurityError` at the caller. Now `init()` probes localStorage and marks the store `blocked` when both backends are down; `store:storageBlocked` fires at first access or at init; reads return null; writes throw `StorageBlockedError` so the caller reports `saved: false, reason: 'storage-blocked'`. The app keeps running — persistence is honestly reported unavailable, not pretended.
+- **Fixtures (`tests/gates/web/storage-recovery.mjs`, auto-discovered; TM-34 extended).** Nine tests covering: corrupt `get` (quarantine + event + evidence + live-key removal); `ProgressStore.getItem` clean-start on corrupt; `restore()` over mixed good+corrupt; re-write after quarantine. Quota on `recordItem` / `recordScenario` / `saveContinuation` (`storage-quota-exceeded` + `progress:saveFailed` with reason); generic write failure stays `storage-write-failed`. Mid-session block (`SecurityError` on access) and init-time block (both IDB and localStorage down). Failing side named in the fixture header: bare `JSON.parse` throw, single undifferentiated reason, and no blocked mode.
+- **Surface.** Web `StateStore` / `ProgressStore` (the demo-host learner store) — not Desktop `JsonSessionStore` (R-20 shipped in S46-12). New events: `store:corruptEntry`, `store:storageBlocked`; `progress:saveFailed` now carries `reason`.
+- **Results recorded either way (R-23).** Corrupt-entry and quota paths are now green; they were the failing findings. Blocked storage is green and was likewise a finding (uncaught `SecurityError`). No other failure surfaced in the three boundaries.
+- **Not verified:** real browser quota pressure (actual `QuotaExceededError` from a full localStorage/IndexedDB quota) is simulated by a throwing stub with the standard `DOMException.name`, not by filling a real origin quota. IndexedDB write-quota and transaction-abort paths are not separately stubbed (the fixtures force the localStorage fallback, which is the demo-host path when IDB is unavailable). Real cookie-blocked privacy modes are simulated via `SecurityError` from the localStorage accessor, not by launching a browser with storage denied. Corrupt-entry recovery is asserted for the fallback path; the IndexedDB value-shape corruption path is not exercised (IDB stores a structured `{key, value}` wrapper and is left to the browser). Cross-browser `NS_ERROR_DOM_QUOTA_REACHED` is classified but only the `QuotaExceededError` name is fixture-proven.
 
 ### S46-14 (T-42): CefGlue NoSandbox Hardening Review
 **As an** owner, **I want** a scoped hardening review of the embedded browser, **so that** the desktop demo path carries a recorded security decision, not an unexamined default.
