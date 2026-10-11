@@ -22,7 +22,6 @@
 | S47-07 (T-25) | Packaging repairs PKG-01..04 + clean-install tests | SPEC-10 10.5 | 3 | 🟡 |
 | S47-08 (T-41) | Installed-bundle content independence; Legacy bridge narrowing; release-link truth | R-19 | 2 | 🟡 |
 | S47-09 (T-45) | ShellCheck gate + packaging behavior fixtures | R-24 | 1 | 🟡 |
-| S47-10 (T-26) | Demo host rehearsal (keyboard half shipped; host half blocked) | REQ-DEMO-05, TM-48/50/51 | 3 | 🟡 |
 
 **Status key:** ✅ shipped and verified on this host · 🟡 shipped and gated, with named verification gaps
 listed under the row's *Not verified* notes in [SPRINT-47-EVIDENCE.md](SPRINT-47-EVIDENCE.md) · ⚪ not started.
@@ -38,7 +37,7 @@ document limit (CLAUDE.md).
 
 | ID | Task | Requirements | Points | Status |
 |---|---|---|---|---|
-| S47-10 (T-26) | Rehearsal on actual demo host: installed, offline, keyboard/projector, reset-between-groups | REQ-UI-06, REQ-DEMO-05, TM-40/45/50 | 2 | ⚪ |
+| S47-10 (T-26) | Rehearsal on actual demo host: installed, offline, keyboard/projector, reset-between-groups | REQ-UI-06, REQ-DEMO-05, TM-40/45/50 | 2 | 🟡 |
 | S47-11 (T-27) | Tutor evaluation report and go/no-go; fallback labeling check | REQ-AI-06/07 | 1 | ✅ |
 | S47-12 (T-28) | Screenshots/video backup; non-AI backup path | REQ-AI-07 | 1 | ⚪ |
 | S47-13 (T-29) | Freeze: branch, base/head SHA, changed files, gate results, RedEye lane logs + seeded-defect self-test record, usable build | SPEC-11 11.7 | 1 | ⚪ |
@@ -244,7 +243,7 @@ the environment; full detail in the evidence file.
 ### S47-10 (T-26): Demo Host Rehearsal
 **Acceptance Criteria:**
 - [ ] On the actual demo host: install → boot → full loop (pick track, read lesson, practice, complete scenario, reset) with network unplugged except optional tutor call
-- [x] **Keyboard-only walkthrough passes** — the automated half of TM-48 ("manual + automated a11y"), which S47-03 handed forward to this row. `tests/e2e/rehearsal-web.mjs` drives all seven named critical flows (PKG:141) through a real browser using only key events, never `.click()`. 28 PASS / 2 FAIL; the two failures are real demo-path defects, recorded below and in the evidence file. **Projector-distance readability is NOT verified** — no projector on this host; the harness measures reachability, not rendered legibility at distance.
+- [x] **Keyboard-only walkthrough passes** — the automated half of TM-48 ("manual + automated a11y"), which S47-03 handed forward to this row. `tests/e2e/rehearsal-web.mjs` drives all seven named critical flows (PKG:141) through a real browser using only key events, never `.click()`. 27 PASS / 3 FAIL; the three failures are real demo-path defects, recorded below and in the evidence file. **Projector-distance readability is NOT verified** — no projector on this host; the harness measures reachability, not rendered legibility at distance.
 - [ ] **Partly verified:** reset-between-groups — the mechanism passes by keyboard (reseed count + outcome render, learner keys cleared); **"between groups" on the demo host, at the podium, is not verified**
 - [ ] Critical flow matrix (TM-50) entries for PWA-on-ChromeOS and PWA-on-presenter-host verified with recorded evidence — **no ChromeOS device or presenter host available; no evidence recorded**
 
@@ -253,7 +252,7 @@ the environment; full detail in the evidence file.
 - `tests/gates/run_rehearsal_fixtures.sh` (new) — the fixture pair, with the live assertion inverted (see below)
 - `docs/qa/release-evidence/2026-10-23-rehearsal.md` (new) — the archived log, findings and not-verified list
 
-**Findings — two real demo-path defects, recorded not fixed** (S47-10 is a rehearsal row; each fix
+**Findings — three real demo-path defects, recorded not fixed** (S47-10 is a rehearsal row; each fix
 reaches well beyond the demo path and belongs to its own row):
 - **REQ-UI-04 gap** — a cold load does not surface stored progress. The scored answer is in storage
   after a reload (2 item records) but `.practice-prior-note` never renders; the same view on a
@@ -265,15 +264,27 @@ reaches well beyond the demo path and belongs to its own row):
   The ticket lab **inside** the scenario is fully keyboard-operable — `aplus-dns-01` completes every
   step by Tab/Space/Enter and the ticket resolves — so the defect is shell navigation, not the
   scenario.
+- **REQ-DEMO-02 gap** — the demo banner is visible in learner mode. `DemoBanner.js` sets
+  `el.hidden = !demo.active` correctly, but `.demo-banner { display: flex }` (`css/study.css:495`)
+  beats the UA stylesheet's `[hidden] { display: none }` and no author `[hidden]` rule exists, so the
+  label paints regardless. Measured on a fresh profile with `demo.active` false: `hidden=true`,
+  `display="flex"`, 46px tall. A learner in normal mode is told "DEMO MODE", so the label stops
+  distinguishing anything. One-line fix, but it changes shell appearance app-wide.
 - **Observation:** focus after reset lands on `<BUTTON#demo-reset>`; the view is re-rendered via
   `replaceChild` and nothing restores focus. Focus is on a live node (not stranded), but not restored
   to a meaningful place — TM-48's "focus predictable after reset" is only partly met.
 
+**A false pass in this harness, found and fixed:** Flow 7 originally asserted the banner by reading
+`!document.getElementById('demo-banner').hidden` — the *attribute* — so it reported a pass for a
+banner that was on screen the whole time. It now reads the layout box (`offsetHeight > 0`) and asserts
+the transition (absent before Enter, present after). The first result this row produced (28 PASS /
+2 FAIL) came from that version, and is superseded by 27 PASS / 3 FAIL.
+
 **Gate:** `run_rehearsal_fixtures.sh` PASS (exit 0). Because the live tree is expected to fail, its
 live assertion is **inverted** from the other fixture runners: the de-tabbed-option copy must FAIL and
 name the option row (proving the check detects a control removed from the tab order), the unmodified
-copy scoped to today's green legs (`REHEARSAL_FLOWS=1,2,3,4,7`) must PASS, and the live tree must FAIL
-with **exactly** the two recorded gaps so a new regression cannot hide behind them. The runner is
+copy scoped to today's green legs (`REHEARSAL_FLOWS=1,2,3,4`) must PASS, and the live tree must FAIL
+with **exactly** the three recorded gaps so a new regression cannot hide behind them. The runner is
 deliberately **not wired into CI** — unlike `run_smoke_fixtures.sh` in `pwa-deploy.yml` — because its
 live assertion expects the artifact to be red, so a deploy job running it would go red precisely when
 someone closes a gap. Reasoning recorded in the evidence file.

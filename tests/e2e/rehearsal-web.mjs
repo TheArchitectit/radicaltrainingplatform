@@ -681,15 +681,49 @@ async function main() {
             await key('Enter');
             await sleep(600);
 
+            // Rendered visibility, not the `hidden` attribute. The attribute is
+            // set correctly by DemoBanner.js, but `.demo-banner { display: flex }`
+            // in css/study.css beats the UA stylesheet's `[hidden] { display:none }`
+            // (author rules win), so the label paints regardless. A check on
+            // `.hidden` alone reported a pass for a banner that was never off —
+            // so this reads the layout box, and asserts the transition, not just
+            // the end state: "is it showing?" is only meaningful against "was it
+            // showing before?".
+            const bannerVisible = () => evaluate(`(() => {
+                const b = document.getElementById('demo-banner');
+                if (!b) return null;
+                return { hiddenAttr: b.hidden, display: getComputedStyle(b).display,
+                         height: b.offsetHeight, onScreen: b.offsetHeight > 0 };
+            })()`);
+            const beforeEnter = await bannerVisible();
+
             const enter = await tabTo((d) => d.id === 'demo-enter', '#demo-enter');
             if (!enter.ok) {
                 fail(`#demo-enter not reachable by Tab (stopped on ${JSON.stringify(enter.d)})`);
             } else {
                 await key('Enter');
                 await sleep(700);
-                const banner = await evaluate(`!document.getElementById('demo-banner').hidden`);
-                if (banner) pass('Enter on "Enter demo mode" shows the demo banner');
-                else fail('entering demo mode did not show the demo banner');
+                const afterEnter = await bannerVisible();
+                if (!afterEnter?.onScreen) {
+                    fail('entering demo mode did not show the demo banner');
+                } else if (beforeEnter?.onScreen) {
+                    fail('the demo banner was already on screen BEFORE demo mode was entered '
+                        + `(hidden attribute ${JSON.stringify(beforeEnter.hiddenAttr)}, `
+                        + `computed display ${JSON.stringify(beforeEnter.display)}, `
+                        + `${beforeEnter.height}px tall) — the label does not mark demo mode, it is `
+                        + 'always painted, so "is this the demo?" has no on-screen answer');
+                    note('REQ-DEMO-02 gap — the demo banner is visible in learner mode. '
+                        + 'DemoBanner.js sets `el.hidden = !demo.active` correctly, but '
+                        + '`.demo-banner { display: flex }` (css/study.css:495) beats the UA '
+                        + 'stylesheet\'s `[hidden] { display: none }`, and no author `[hidden]` rule '
+                        + 'exists, so the element paints regardless of the attribute. Measured on a '
+                        + 'fresh profile: hidden=true, display="flex", 46px tall, demo.active=false. '
+                        + 'Effect: a learner in normal mode is told "DEMO MODE", so the label stops '
+                        + 'distinguishing anything. One-line fix, but it changes shell appearance '
+                        + 'app-wide and belongs to its own row.');
+                } else {
+                    pass('Enter on "Enter demo mode" shows the demo banner (absent before, present after)');
+                }
 
                 const reset = await tabTo((d) => d.id === 'demo-reset', '#demo-reset');
                 if (!reset.ok) {

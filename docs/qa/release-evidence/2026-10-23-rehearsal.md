@@ -35,7 +35,7 @@ deploy path would be worse than no gate. `tests/gates/run_rehearsal_fixtures.sh`
 is the gate, and it asserts the discrimination rather than the greenness — see
 "Fixture runner" below.
 
-## Result: 28 PASS, 2 FAIL, 3 findings
+## Result: 27 PASS, 3 FAIL, 4 findings
 
 ```
 ## Flow 1 — boot
@@ -79,14 +79,38 @@ is the gate, and it asserts the discrimination rather than the greenness — see
 
 ## Flow 7 — reset between groups
   PASS demo controls reached by keyboard in 10 Tab press(es)
-  PASS Enter on "Enter demo mode" shows the demo banner
+  FAIL the demo banner was already on screen BEFORE demo mode was entered (hidden attribute true, computed display "flex", 46px tall) — the label does not mark demo mode, it is always painted, so "is this the demo?" has no on-screen answer
+  NOTE REQ-DEMO-02 gap — … (see below)
   PASS the station reset renders its reseed verification outcome
   NOTE focus after reset is <BUTTON#demo-reset>; … (see below)
   PASS the reset cleared the stored learner keys (progress/* and scenario/*)
   PASS zero console errors, uncaught exceptions, or failed requests
 
-KEYBOARD REHEARSAL: FAIL — 2 problem(s)
+KEYBOARD REHEARSAL: FAIL — 3 problem(s)
 ```
+
+## A false pass in this harness, found and fixed
+
+The first version of Flow 7 asserted *"Enter on 'Enter demo mode' shows the demo
+banner"* by reading `!document.getElementById('demo-banner').hidden` — the
+**attribute**. That check passed on the live tree, and it was wrong: the banner
+was on screen the whole time. `DemoBanner.js` sets `el.hidden` correctly, but
+`.demo-banner { display: flex }` (`css/study.css:495`) beats the UA stylesheet's
+`[hidden] { display: none }` — author rules win — and no author `[hidden]` rule
+exists anywhere in the CSS. Measured on a fresh profile with `demo.active` false:
+`hidden=true`, `display="flex"`, `offsetHeight=46`.
+
+So the harness was reporting a pass for a banner that was never off, which is
+the same class of defect the harness exists to catch. It now reads the **layout
+box** (`offsetHeight > 0`) and asserts the **transition** — absent before Enter,
+present after — because "is it showing?" is only meaningful against "was it
+showing before?". The finding is recorded above rather than fixed: it is a
+one-line CSS change, but it alters shell appearance app-wide and belongs to its
+own row.
+
+This is noted here rather than quietly corrected because the first version of
+this file's result (28 PASS / 2 FAIL) was produced by a harness with a false
+pass in it.
 
 ## Findings — recorded, not silently fixed
 
@@ -115,6 +139,14 @@ beyond the demo path.
    hash to prove that distinction; a fix means giving the nav items an `href`,
    which changes shell behaviour app-wide and belongs to its own row.
 
+3. **REQ-DEMO-02 gap — the demo banner is visible in learner mode.** The label
+   that is supposed to mark demo mode paints on every screen, always, so it
+   distinguishes nothing. Cause and measurement are in the false-pass section
+   above (`hidden=true`, `display="flex"`, 46px tall, `demo.active=false` on a
+   fresh profile). For the demo this matters in both directions: a presenter in
+   normal learner mode is told "DEMO MODE", and the label cannot be relied on to
+   tell an audience which mode they are watching.
+
 **Observation (not a failure):** focus after reset lands on
 `<BUTTON#demo-reset>`; the view is re-rendered via `replaceChild` and nothing
 restores focus, so a keyboard user resumes from the top of the tab order. TM-48
@@ -134,13 +166,14 @@ still discriminates:
   proves the Tab-reachability check detects a de-tabbed control rather than
   failing for an unrelated reason.
 - **Passing fixture:** the same artifact unmodified, scoped via
-  `REHEARSAL_FLOWS=1,2,3,4,7` to the legs that are green today, must PASS.
+  `REHEARSAL_FLOWS=1,2,3,4` to the legs that are green today, must PASS.
   Without this, a harness that could only ever observe failure would look like
-  proof.
+  proof. Flow 7 is out of scope: its reset assertions pass, but its banner check
+  fails (REQ-DEMO-02 above).
 - **Live assertion:** the repository Web tree must FAIL the full run with
-  **exactly** the two recorded gaps — both the `REQ-UI-04 gap` and
-  `REQ-DEMO-05 gap` markers present, so a third, new regression cannot hide
-  behind the two known ones.
+  **exactly** the three recorded gaps — the `REQ-UI-04 gap`, `REQ-DEMO-05 gap`
+  and `REQ-DEMO-02 gap` markers all present, so a fourth, new regression cannot
+  hide behind the known ones.
 
 All three legs PASS on this host (`bash tests/gates/run_rehearsal_fixtures.sh`
 → exit 0).
