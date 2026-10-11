@@ -3,6 +3,7 @@ import { bridge } from './core/BridgeClient.js';
 import { router } from './core/Router.js';
 import { state } from './core/StateEngine.js';
 import { progress } from './core/ProgressStore.js';
+import { breadcrumbFor } from './core/RouteLabels.js';
 import { PeDashboardView } from './views/pe-dashboard.js';
 import { PeVmsView } from './views/pe-vms.js';
 import { PeStorageView } from './views/pe-storage.js';
@@ -233,13 +234,11 @@ class App {
         // across view mounts. Fire-and-forget — never block routing.
         state.create('action_trace', { action: 'route-entered', route: path }).catch(() => {});
 
-        // Update breadcrumb
+        // Update breadcrumb — fixed labels from RouteLabels (T-43 / R-22).
         const bc = document.getElementById('breadcrumb');
         if (bc) {
-            const parts = path.split('/').filter(Boolean);
-            const ctx = parts[0] === 'pc' ? 'Prism Central' : 'Prism Element';
-            const page = parts.slice(1).map(p => p.charAt(0).toUpperCase() + p.slice(1)).join(' > ');
-            bc.innerHTML = `<a href="#/${parts[0]}/dashboard">${ctx}</a><span class="separator">›</span><span class="current">${page || 'Dashboard'}</span>`;
+            const { context, href, page } = breadcrumbFor(path);
+            bc.innerHTML = `<a href="${href}">${context}</a><span class="separator">›</span><span class="current">${page}</span>`;
         }
 
         // Highlight active nav items

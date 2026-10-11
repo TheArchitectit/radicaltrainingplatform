@@ -27,9 +27,9 @@
 | S46-12 (T-40) | PDF export: canonical ID vs display label; vendor-neutral footer; atomic session save + corrupt recovery | R-18, R-20 | 2 | ✅ |
 | S46-13 (T-44) | Storage recovery boundary tests (corrupt entry, quota, blocked) | R-23 | 1 | ✅ |
 | S46-14 (T-42) | CefGlue NoSandbox scoped hardening review + navigation allowlist decision | R-21 | 1 | ✅ |
-| S46-15 (T-43*) | Web runtime batch remainder (if not closed in Sprint 45) | R-22 | 1 | ⚪ |
+| S46-15 (T-43*) | Web runtime batch remainder (if not closed in Sprint 45) | R-22 | 1 | ✅ |
 
-**Register note (Sprint 45):** T-43's cosmetic bullet (placeholder/breadcrumb labels + snapshot fixtures) slipped to this sprint — the seven functional R-22 bullets landed in Sprint 45 with per-bullet fixtures (commits 5decbaf..0c84562); only the cosmetics remain.
+**Register note (Sprint 45):** T-43's cosmetic bullet (placeholder/breadcrumb labels + snapshot fixtures) slipped to this sprint — the seven functional R-22 bullets landed in Sprint 45 with per-bullet fixtures (commits 5decbaf..0c84562); the cosmetics closed in S46-15.
 
 **Total:** 31 points
 
@@ -279,7 +279,19 @@
 - **Not verified (prescribed-but-not-yet-executed):** live bounce-back of a real `https://` navigation in a running CEF host (no display server here — policy + address hook are fixture-tested at the decision layer; the native leg is release-record evidence, not claimed proof); popup/`window.open` against CefGlue's internal LifeSpanHandler (not replaced — judged riskier than the gap for a local-bundle page); renderer-crash recovery; Windows/macOS CEF startup. Full list in the review record.
 
 ### S46-15 (T-43* remainder): Web Runtime Batch Close-out
-- Remaining R-22 cosmetics from Sprint 45; register note if slipped
+**As a** learner, **I want** breadcrumb and placeholder labels that name the surface correctly, **so that** navigation chrome never contradicts the sidebar or invents a context.
+
+**Acceptance Criteria:**
+- [x] Breadcrumb labels are fixed (match sidebar wording), not slugified
+- [x] Study surfaces report the Study Tracks context (not Prism Element)
+- [x] Placeholder copy is honest (not "Coming Soon")
+- [x] Snapshot fixtures pin the labels
+
+**Notes (S46-15 close, 2026-10-10):**
+- **Failing side (the Sprint 45 remainder).** `app.js` `#onRouteChanged` built the breadcrumb by naive title-casing path segments — `pc-settings` → "Pc-settings", `nai-tools` → "Nai-tools", `ai-models` → "Ai-models", `nc2-networking` → "Nc2-networking" — and labeled every non-`pc` root "Prism Element", so `/tracks` and `/practice/...` claimed a Prism Element crumb. `PlaceholderView` defaulted to "Coming Soon" / "This view is under development."
+- **Fix.** New pure map `js/core/RouteLabels.js`: `ROUTE_LABELS` mirrors the `index.html` sidebar exactly (source of truth for display wording); `SEGMENT_LABELS` covers mid-path pieces (`lessons` → "Lessons"); `breadcrumbFor(path)` returns `{ context, href, page }` with `Study Tracks` for `/tracks` and `/practice`; dynamic IDs (exam/lesson ids, filenames) stay honest IDs and are never fake-title-cased (R-18 / never renumber). `app.js` breadcrumb now renders `breadcrumbFor`; `PlaceholderView` uses `PLACEHOLDER_COPY` ("Not in this build" / "This section is not part of the current study build.") plus the route's real context.
+- **Fixtures (`tests/gates/web/route-labels-snapshot.mjs`, auto-discovered; 11 tests).** Sidebar-parity (every `ROUTE_LABELS` entry matches `index.html` `data-route` labels, and nothing invented beyond `/practice`); breadcrumb wording for the archived failures; context table (PC / PE / Study Tracks); root href + default page; honest dynamic IDs; nested `/tracks/:id/lessons` labeling; placeholder copy + rendered surface; `OldFailure_SlugifiedBreadcrumbLabels_ArePinnedOut`.
+- **Not verified:** the breadcrumb *DOM* write in a live browser (`#onRouteChanged` innerHTML is exercised at the label layer via `breadcrumbFor`, not by mounting `app.js`); sidebar label extraction is regex over `index.html`, so a nav item whose label is not text-noded after `data-route` would be missed (fixture asserts ≥40 nav items so a silent parse failure surfaces); track/lesson *display titles* from `study-content` are deliberately not injected into the breadcrumb — the crumb shows canonical IDs.
 
 ---
 
