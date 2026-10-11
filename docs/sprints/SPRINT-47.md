@@ -16,7 +16,7 @@
 | S47-01 (T-19) | A+ cut complete: 24 reviewed items, 2 complete lessons | REQ-AP-02 | 3 | ✅ |
 | S47-02 (T-20) | Network+ cut complete: 25 reviewed items, 2 complete lessons (five per domain) | REQ-NP-02 | 3 | ✅ |
 | S47-03 (T-21) | Demo mode: seed, one-click reset, mode label, ephemeral store | REQ-DEMO-01..06, REQ-UI-07/08 | 3 | ✅ |
-| S47-04 (T-22) | Pages predeploy gate (imports, smoke, bundle check) | CI-03 | 2 | ⚪ |
+| S47-04 (T-22) | Pages predeploy gate (imports, smoke, bundle check) | CI-03 | 2 | ✅ |
 | S47-05 (T-23) | Tutor slice behind its gates, or recorded-example fallback | REQ-AI-01..07 | 3 | ⚪ |
 | S47-06 (T-24) | Option shuffling with stable IDs | R-09 | 1 | ⚪ |
 | S47-07 (T-25) | Packaging repairs PKG-01..04 + clean-install tests | SPEC-10 10.5 | 3 | ⚪ |
@@ -152,11 +152,32 @@ Demo mode is its own module (`core/DemoMode.js`), not learner mode with the sign
 
 ### S47-04 (T-22): Pages Predeploy Gate
 **Acceptance Criteria:**
-- [ ] `pwa-deploy.yml` gains predeploy steps in order: `check-imports.py`; headless-browser smoke (open built artifact, wait for known route, zero console errors, one meaningful interaction); content-bundle check (every manifest-referenced asset exists with matching hash; no unreviewed corpus ships)
-- [ ] Gate proven to fail on a reintroduced bad import and on a missing pack asset
-- [ ] October 23 build smoke log archived
+- [x] `pwa-deploy.yml` gains predeploy steps in order: `check-imports.py`; headless-browser smoke (open built artifact, wait for known route, zero console errors, one meaningful interaction); content-bundle check (every manifest-referenced asset exists with matching hash; no unreviewed corpus ships)
+- [x] Gate proven to fail on a reintroduced bad import and on a missing pack asset
+- [x] October 23 build smoke log archived
 
-**Files:** `.github/workflows/pwa-deploy.yml`, `scripts/check-imports.py`, content-bundle checker
+**Files:** `.github/workflows/pwa-deploy.yml`, `tests/e2e/smoke-web.mjs`, `scripts/check-content-bundle.py`, `RadicalTrainingPlatform.Web/content-bundle.json`, `tests/gates/run_smoke_fixtures.sh`, `tests/gates/run_content_bundle_fixtures.sh`, `docs/qa/release-evidence/2026-10-23-build-smoke.md`
+
+**Shipped (S47-04 notes):**
+
+CI-03's defect is that `pwa-deploy.yml` published `RadicalTrainingPlatform.Web/` on path changes with no import-resolution check, no browser smoke and no scenario validation — which is how R-01 shipped and stayed broken in tree since June. Three predeploy steps now run before `upload-pages-artifact`, cheapest and most fundamental first, so the first failure names the smallest true cause.
+
+- **Step 1 — import graph.** Unchanged from S45: `scripts/check-imports.py --root RadicalTrainingPlatform.Web/js`, case-sensitive resolution over the module graph. Catches R-01 *by pattern*; kept first because it is cheap and needs no browser.
+- **Step 2 — browser smoke (`tests/e2e/smoke-web.mjs`).** Serves the exact artifact directory the deploy job uploads (not a rebuild) over a loopback static server, launches headless Chrome, drives it over the DevTools Protocol, and asserts: the router renders a view at the known route `#/pe/dashboard`; that view has text; one meaningful interaction completes (enter demo mode → banner appears → reset the station → the reseed verification report renders with a count *and* an outcome → leave → banner clears); and zero console errors, uncaught exceptions or failed requests. This is the step that catches R-01 *by symptom*, and the only one that exercises a real DOM — a throwing view, a 404 script or a missing asset all land in the console-error assertion. **Zero npm dependencies** on purpose: the repo has no `package.json`, and a gate that needs an install step is a gate that gets skipped; Node's global `WebSocket` speaks CDP directly. Browser discovery tries `CHROME_BIN`, then the usual paths and `PATH`; **a missing browser fails the step closed** rather than skipping, so a browser-less runner is a red deploy, never a silently green one.
+- **Step 3 — content bundle (`scripts/check-content-bundle.py`).** The Pages artifact cannot read `content/` at runtime — `generate-study-content.py` compiles the manifest world into `js/study-content.js` — so this is the only place the compiled content world is checked against the manifests that describe it. Five checks against `RadicalTrainingPlatform.Web/content-bundle.json`: EXISTS (every manifest-referenced asset is on disk), HASH (sha256 matches, so content cannot change without regenerating), REFERENCED (every released lesson is named by an objective's `lessonIds`; every released bank is in the release record), SHIPPED (every scored item in the compiled module comes from a released bank — a bank added to the tree but not released cannot reach the artifact), HONEST (no record claims `reviewed` with an empty `reviewDate`; no shipped pack undeclared). The release record is **imported from `generate-study-content.py`** rather than restated, so "what ships" has exactly one definition. `--root` lets the fixtures run against throwaway workspaces without mutating the repo tree.
+- **Archived log.** `docs/qa/release-evidence/2026-10-23-build-smoke.md` carries the smoke run for the October 23 demo build with `generated:` / `head:` / `branch:` provenance, plus an explicit "Not covered by this log" section (the runner's browser, the workflow wiring itself, other routes, deployed-Pages behaviour). The deploy job also uploads its own run's log as the `web-smoke-log` artifact, so a green deploy can be read back after the fact.
+
+**Findings recorded this row:**
+
+- **`navigator` is getter-only on modern Node.** The demo-independence spy must `Object.defineProperty(globalThis, 'navigator', …)` rather than assign — a plain assignment throws `TypeError: Cannot set property navigator of #<Object> which has only a getter`.
+- **The identity scan's first version cried wolf.** It flagged `placeholder="e.g. Critical-Alerts-Email"` in `pc-alerts.js` — a Prism alert *policy name*, i.e. simulator domain data, not a prompt for the learner's address. Tightened to learner-directed phrasing with the carve-out named in a comment. A gate that cries wolf is worse than no gate.
+- **`readDevToolsPort` was a synchronous poll.** Chrome writes `DevToolsActivePort` asynchronously; the first version returned before the file existed. Rewritten as an async poll with a timeout that throws.
+- **The smoke's reset assertion matched nothing.** It looked for `/\bok\b|verified/gi` against text that actually reads "Reseed verification … all correct". Rewritten to assert the count line *and* an outcome word — a report that renders but states no outcome must not pass.
+- **`scenario-attempt-history.mjs` failed the suite** asserting `#result-title` === `'All Objectives Complete!'` — the exact pre-T-21 mastery panel T-21 forbids. The fixture was stale against the new contract; fixed in the fixture, not by reverting the panel.
+
+**Gates run:** three predeploy steps in workflow order — `check-imports` pass, smoke pass (6/6), `check-content-bundle` pass (68 assets hash-matched, 49 items from released packs); `run_smoke_fixtures.sh` 3/3 (broken-import artifact fails, unmodified passes, live tree passes); `run_content_bundle_fixtures.sh` 6/6 (missing pack asset, stale bundle, review-state dishonesty, unreviewed corpus all fail; untouched and live trees pass); `run_import_check_fixtures.sh` 2/2; web runtime fixtures 23/23; workflow YAML parses and the step order is checkout → imports → smoke → bundle → archive → upload → deploy.
+
+**Not verified this row:** the workflow file is **not executed locally** — only the three steps it invokes were run, against the repository tree; the job's wiring is read, not run. CI Chrome availability on the fleet runner is asserted by the fail-closed path, not observed on a runner. Deployed-Pages behaviour (service-worker scope, caching, base path) is not exercised — the smoke uses a loopback server. Human source review / `reviewDate`; RedEye model-stage verification (still blocked by design).
 
 ### S47-05 (T-23): Tutor Slice
 **As a** student, **I want** a hint from the tutor inside stated limits, **so that** I get unblocked without an exam oracle.

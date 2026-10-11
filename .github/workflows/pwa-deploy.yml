@@ -28,11 +28,51 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # CI-03 predeploy smoke: case-sensitive import resolution on the exact
-      # artifact about to ship (this is how R-01 shipped and stayed broken
-      # since June). Full browser smoke lands with T-22 (Sprint 47).
+      # ── CI-03 predeploy gate chain (T-22) ──
+      #
+      # Order matters: each step is a cheaper or more fundamental check than
+      # the next, so the first failure names the smallest true cause.
+      #
+      # Before T-22 this job published RadicalTrainingPlatform.Web/ on path
+      # changes with no import check, no browser smoke and no content check.
+      # That is how R-01 — a bad relative import in pe-reports.js — shipped and
+      # stayed broken in tree since June: the module graph failed, the PWA
+      # booted to a blank shell, and nothing in the pipeline could tell.
+
+      # 1. Case-sensitive module graph: catches a dead import before spending a
+      #    browser launch on it.
       - name: Check import graph (predeploy)
         run: python3 scripts/check-imports.py --root RadicalTrainingPlatform.Web/js
+
+      # 2. Open the exact artifact about to ship and drive it. This is the step
+      #    that would have caught R-01 by symptom rather than by pattern, and it
+      #    is the only check that exercises the real DOM: a throwing view, a
+      #    404 script or a missing asset all surface here as console errors.
+      #    Zero npm dependencies — it speaks CDP over Node's global WebSocket,
+      #    and ubuntu-latest ships Chrome. A missing browser fails the step
+      #    closed rather than skipping it.
+      - name: Browser smoke (predeploy)
+        env:
+          SMOKE_LOG_OUT: ${{ runner.temp }}/web-smoke.log.md
+        run: node tests/e2e/smoke-web.mjs
+
+      # 3. Content bundle: every manifest-referenced asset exists with a
+      #    matching hash, and no unreviewed corpus ships. The Pages artifact
+      #    cannot read content/ at runtime, so this is the only place the
+      #    compiled content world is checked against the manifests that
+      #    describe it.
+      - name: Content bundle check (predeploy)
+        run: python3 scripts/check-content-bundle.py
+
+      # Keep the smoke log with the run — the same evidence the release set
+      # archives, so a green deploy can be read back after the fact.
+      - name: Archive smoke log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: web-smoke-log
+          path: ${{ runner.temp }}/web-smoke.log.md
+          if-no-files-found: warn
 
       # 2. Upload the static PWA files as a Pages artifact
       - name: Upload PWA artifact
