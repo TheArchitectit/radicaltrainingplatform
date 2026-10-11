@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
+  "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  Entitlements for the notarized macOS build.
+
+  build-dmg.sh passed this file to codesign as its entitlements argument, but
+  this file did not exist — codesign fails outright when the entitlements path
+  is missing, so the signing step could never have succeeded.
+
+  The two JIT keys are what a self-contained .NET app needs under the hardened
+  runtime: the CoreCLR compiles IL to native code at run time, which the
+  hardened runtime blocks by default. Nothing here grants network, file or
+  device access beyond what a normal app already has.
+-->
+<plist version="1.0">
+<dict>
+  <key>com.apple.security.cs.allow-jit</key>
+  <true/>
+  <key>com.apple.security.cs.allow-unsigned-executable-memory</key>
+  <true/>
+</dict>
+</plist>

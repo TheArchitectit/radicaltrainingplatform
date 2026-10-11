@@ -30,20 +30,24 @@ public interface IErrataProvider
 }
 
 /// <summary>
-/// Loads errata.json from the repo root / installed directory. Missing or
-/// malformed errata is non-fatal — the app runs with no corrections.
-/// Searched like MarkdownExamRepository: assembly dir, then walking up to
-/// the repo root (dev layout runs from bin/Release/net10.0).
+/// Loads errata.json. With a content bundle the manifest names the file and
+/// that is the only place consulted. Without one (a host embedding Core, a
+/// test) it falls back to the old search: assembly dir, then walking up to the
+/// repo root (dev layout runs from bin/Release/net10.0). Missing or malformed
+/// errata is non-fatal — the app runs with no corrections.
 /// </summary>
 public sealed class JsonErrataStore : IErrataProvider
 {
     private readonly IFileProvider _files;
     private readonly ILogger<JsonErrataStore>? _logger;
+    private readonly IContentBundle? _bundle;
     private readonly Lazy<Dictionary<(string File, int Id), ErrataEntry>> _entries;
 
-    public JsonErrataStore(IFileProvider files, ILogger<JsonErrataStore>? logger = null)
+    public JsonErrataStore(IFileProvider files, IContentBundle? bundle = null,
+                           ILogger<JsonErrataStore>? logger = null)
     {
         _files = files;
+        _bundle = bundle;
         _logger = logger;
         _entries = new Lazy<Dictionary<(string, int), ErrataEntry>>(Load);
     }
@@ -135,6 +139,26 @@ public sealed class JsonErrataStore : IErrataProvider
 
     private string? FindErrataFile()
     {
+        // PKG-01: when a bundle is present its manifest names the errata file.
+        // If the manifest names one that is not there, that is a broken bundle
+        // and the walk below must not paper over it by finding some other
+        // errata.json further up the tree — so return null and say why.
+        if (_bundle is { IsAvailable: true })
+        {
+            var declared = _bundle.ErrataPath;
+            if (declared == null)
+            {
+                _logger?.LogInformation("Content bundle declares no errata; running without corrections");
+                return null;
+            }
+            if (!_files.Exists(declared))
+            {
+                _logger?.LogError("Content bundle declares errata at {Path}, which is missing", declared);
+                return null;
+            }
+            return declared;
+        }
+
         var dir = _files.GetExecutingAssemblyDirectory();
         for (var depth = 0; depth <= 6 && !string.IsNullOrEmpty(dir); depth++)
         {

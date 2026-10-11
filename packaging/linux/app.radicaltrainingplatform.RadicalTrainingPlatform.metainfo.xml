@@ -49,25 +49,20 @@
 
   <content_rating type="oars-1.1" />
 
-  <screenshots>
-    <!-- Replace URLs with real screenshot locations before publishing to Flathub -->
-    <screenshot type="default">
-      <caption>Main quiz interface showing a multiple-choice question</caption>
-      <image>https://raw.githubusercontent.com/your-org/nutanixcertificationtool/main/screenshot.png</image>
-    </screenshot>
-    <screenshot>
-      <caption>Exam selector with category filtering</caption>
-      <image>https://raw.githubusercontent.com/your-org/nutanixcertificationtool/main/screenshot2.png</image>
-    </screenshot>
-    <screenshot>
-      <caption>Study statistics and progress overview</caption>
-      <image>https://raw.githubusercontent.com/your-org/nutanixcertificationtool/main/screenshot3.png</image>
-    </screenshot>
-  </screenshots>
+  <!--
+    No screenshots are declared. This file previously listed three, pointing at
+    raw.githubusercontent.com/your-org/nutanixcertificationtool — an org that
+    does not exist, for PNG files that are in no repository. They would have
+    404'd for every reader. There is no screenshot asset in this repository yet
+    (git ls-files '*.png' is empty), so the honest entry is none. Add a real
+    <screenshots> block with images that exist before publishing.
+  -->
 
-  <url type="homepage">https://github.com/your-org/nutanixcertificationtool</url>
-  <url type="bugtracker">https://github.com/your-org/nutanixcertificationtool/issues</url>
-  <url type="vcs-browser">https://github.com/your-org/nutanixcertificationtool</url>
+  <!-- The real repository. These were your-org/nutanixcertificationtool, which
+       is not where this project lives. -->
+  <url type="homepage">https://github.com/TheArchitectit/radicaltrainingplatform</url>
+  <url type="bugtracker">https://github.com/TheArchitectit/radicaltrainingplatform/issues</url>
+  <url type="vcs-browser">https://github.com/TheArchitectit/radicaltrainingplatform</url>
 
   <requires>
     <display_length compare="ge">800</display_length>
@@ -77,21 +72,12 @@
     <control>keyboard</control>
   </supports>
 
-  <releases>
-    <release version="0.3.0" date="2026-06-10">
-      <description>
-        <p>Alpha release of the Avalonia cross-platform desktop build.</p>
-      </description>
-    </release>
-    <release version="0.2.0" date="2026-05-01">
-      <description>
-        <p>Added gap-fill question support and improved UI theming.</p>
-      </description>
-    </release>
-    <release version="0.1.0" date="2026-04-15">
-      <description>
-        <p>Initial alpha with multiple-choice quiz engine.</p>
-      </description>
-    </release>
-  </releases>
+  <!--
+    No <releases> block. This file previously declared 0.1.0, 0.2.0 and 0.3.0
+    with dated descriptions of features shipping, none of which were ever
+    released: `git tag` is empty and there is no GitHub release. A release list
+    is a claim that downloadable builds exist, and none do. Until one is cut,
+    the honest entry is none — install from source (SPEC-10 10.5). Add the block
+    back, with the version actually tagged, when a release is cut.
+  -->
 </component>

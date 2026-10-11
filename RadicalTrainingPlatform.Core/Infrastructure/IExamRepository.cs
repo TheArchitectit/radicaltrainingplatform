@@ -38,6 +38,7 @@ public class MarkdownExamRepository : IExamRepository
     private readonly IFileProvider _files;
     private readonly string _appName;
     private readonly ILogger<MarkdownExamRepository>? _logger;
+    private readonly IContentBundle? _bundle;
     private List<string>? _searchPaths;
     private readonly List<string> _registeredPaths = new();
 
@@ -52,9 +53,12 @@ public class MarkdownExamRepository : IExamRepository
         "LICENSE", "CODE_OF_CONDUCT", "MASTER-PROJECT-PLAN"
     };
 
-    public MarkdownExamRepository(IFileProvider files, string appName = "RadicalTrainingPlatform", ILogger<MarkdownExamRepository>? logger = null)
+    public MarkdownExamRepository(IFileProvider files, IContentBundle? bundle = null,
+                                  string appName = "RadicalTrainingPlatform",
+                                  ILogger<MarkdownExamRepository>? logger = null)
     {
         _files = files;
+        _bundle = bundle;
         _appName = appName;
         _logger = logger;
     }
@@ -73,31 +77,45 @@ public class MarkdownExamRepository : IExamRepository
         {
             if (_searchPaths == null)
             {
-                _searchPaths = new List<string>(_registeredPaths); // registered first: priority
-
-                // 1. Current working directory
-                _searchPaths.Add(_files.GetCurrentDirectory());
-
-                // 2. Assembly directory
-                _searchPaths.Add(_files.GetExecutingAssemblyDirectory());
-
-                // 3. Application data directory
-                try { _searchPaths.Add(_files.GetApplicationDataDirectory(_appName)); }
-                catch (Exception ex) { _logger?.LogWarning(ex, "Could not access application data directory for {AppName}", _appName); }
-
-                // 4. Walk up from assembly looking for repo root
-                var asmDir = _files.GetExecutingAssemblyDirectory();
-                var current = asmDir;
-                for (int i = 0; i < 6; i++)
+                // PKG-01: when a content bundle is present and nothing was
+                // registered explicitly, the manifest decides where content is.
+                // The old auto paths stay for the cases that need them — an
+                // explicitly registered directory, a host that has no bundle —
+                // but they are no longer how an installed bundle finds its own
+                // content, because they are also how a *missing* bundle used to
+                // look like an empty one.
+                if (_registeredPaths.Count == 0 && _bundle is { IsAvailable: true })
                 {
-                    var parent = _files.GetParentDirectory(current);
-                    if (string.IsNullOrEmpty(parent)) break;
-                    _searchPaths.Add(parent);
-                    current = parent;
+                    _searchPaths = new List<string> { _bundle.BundleRoot! };
                 }
+                else
+                {
+                    _searchPaths = new List<string>(_registeredPaths); // registered first: priority
 
-                // Deduplicate
-                _searchPaths = _searchPaths.Distinct().Where(p => _files.Exists(p)).ToList();
+                    // 1. Current working directory
+                    _searchPaths.Add(_files.GetCurrentDirectory());
+
+                    // 2. Assembly directory
+                    _searchPaths.Add(_files.GetExecutingAssemblyDirectory());
+
+                    // 3. Application data directory
+                    try { _searchPaths.Add(_files.GetApplicationDataDirectory(_appName)); }
+                    catch (Exception ex) { _logger?.LogWarning(ex, "Could not access application data directory for {AppName}", _appName); }
+
+                    // 4. Walk up from assembly looking for repo root
+                    var asmDir = _files.GetExecutingAssemblyDirectory();
+                    var current = asmDir;
+                    for (int i = 0; i < 6; i++)
+                    {
+                        var parent = _files.GetParentDirectory(current);
+                        if (string.IsNullOrEmpty(parent)) break;
+                        _searchPaths.Add(parent);
+                        current = parent;
+                    }
+
+                    // Deduplicate
+                    _searchPaths = _searchPaths.Distinct().Where(p => _files.Exists(p)).ToList();
+                }
             }
             return _searchPaths;
         }

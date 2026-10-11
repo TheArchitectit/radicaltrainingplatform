@@ -5,14 +5,30 @@ sdk: org.freedesktop.Sdk
 sdk-extensions:
   - org.freedesktop.Sdk.Extension.dotnet10
 
+# The launcher on PATH. It is installed by the wrapper below at /app/bin/<name>,
+# which is the only reason this matches the app id rather than the binary name.
 command: RadicalTrainingPlatform
 
+# Permission review (PKG-04). This app is local-first: the question banks and
+# lessons come from its own bundle, and progress, sessions and lab state are
+# written to its own XDG data directory — which Flatpak grants without any
+# filesystem permission. It makes no network calls: the tutor surface ships a
+# recorded-example fallback, not a live model.
+#
+# So two permissions the previous manifest asked for are gone:
+#
+#   --share=network    nothing in the app opens a socket. If a live tutor or an
+#                      online content update lands, add this deliberately and
+#                      say why — do not add it "just in case".
+#   --filesystem=home  home-wide access to every file the user owns, for an app
+#                      that reads nothing outside its bundle and writes nothing
+#                      outside its own data directory.
+#
 finish-args:
-  - --share=network
-  - --share=ipc
+  # Display, and shared memory for Avalonia's render thread.
   - --socket=fallback-x11
   - --socket=wayland
-  - --filesystem=home
+  - --share=ipc
 
 build-options:
   append-path: /usr/lib/sdk/dotnet10/bin
@@ -26,15 +42,32 @@ modules:
   - name: RadicalTrainingPlatform
     buildsystem: simple
     build-commands:
-      # Restore NuGet packages from the pre-downloaded sources directory
+      # Publish into a directory of its own, next to the content it ships. The
+      # old manifest published to /app/bin/RadicalTrainingPlatform.Core — a
+      # *directory* — and then exec'd that directory as if it were a binary.
+      # The Desktop project's AssemblyName is RadicalTrainingPlatform, so that
+      # is the apphost this produces.
       - dotnet publish RadicalTrainingPlatform.Desktop/RadicalTrainingPlatform.Desktop.csproj
           --runtime linux-x64
           --configuration Release
           --self-contained true
-          --output /app/bin/RadicalTrainingPlatform.Core
+          --output /app/lib/radicaltrainingplatform
           -p:PublishSingleFile=false
           -p:PublishTrimmed=false
           -p:EnableWindowsTargeting=false
+
+      # PKG-01: the bundle declares the content it carries, and the app reads
+      # that manifest at startup. It lives beside the executable, which is the
+      # first place ContentBundle looks.
+      - python3 scripts/generate-bundle-manifest.py
+          --content content
+          --out /app/lib/radicaltrainingplatform/content-manifest.json
+      # Everything the manifest declares, installed next to it so its
+      # bundle-relative paths resolve inside the sandbox.
+      - python3 packaging/install-bundle-content.py
+          --manifest /app/lib/radicaltrainingplatform/content-manifest.json
+          --dest /app/lib/radicaltrainingplatform
+
       # Desktop integration
       - install -Dm644 packaging/linux/app.radicaltrainingplatform.RadicalTrainingPlatform.desktop
           /app/share/applications/app.radicaltrainingplatform.RadicalTrainingPlatform.desktop
@@ -49,23 +82,41 @@ modules:
           install -Dm644 RadicalTrainingPlatform.Desktop/Assets/icon.png \
             /app/share/icons/hicolor/256x256/apps/app.radicaltrainingplatform.RadicalTrainingPlatform.png
         fi
-      # Wrapper script so Flatpak can locate the binary by the app-id name
+      # Launcher: /app/bin is on PATH, so `command:` above resolves to this. It
+      # execs the apphost the publish step actually produced.
       - |
         install -Dm755 /dev/stdin /app/bin/RadicalTrainingPlatform << 'EOF'
         #!/bin/sh
-        exec /app/bin/RadicalTrainingPlatform.Core "$@"
+        exec /app/lib/radicaltrainingplatform/RadicalTrainingPlatform "$@"
         EOF
 
     sources:
       - type: git
         url: https://github.com/TheArchitectit/radicaltrainingplatform.git
-        # Replace with the exact commit SHA or tag you want to package.
-        # branch: main
-        commit: 72d5ec8
+        # Full commit SHA, not the short one the previous manifest pinned: a
+        # short SHA is ambiguous and flatpak-builder refuses to fetch it.
+        # Move this to the release commit when a release is cut; there are no
+        # tags in this repository yet.
+        commit: 59529bb13a87b909d5d21ac784a29ffb1bb57da0
 
-      # Pre-downloaded NuGet packages must be added here as type:file sources
-      # when building offline (Flathub policy).  Generate the list with:
-      #   flatpak-dotnet-generator.py nuget-sources.json RadicalTrainingPlatform.Desktop/RadicalTrainingPlatform.Desktop.csproj
-      # then reference the resulting JSON:
+      # ---------------------------------------------------------------------
+      # OFFLINE DEPENDENCY SOURCES — NOT YET DECLARED (PKG-04)
+      #
+      # This manifest does not yet build offline. The .NET publish step restores
+      # NuGet packages over the network, which Flathub policy does not allow, so
+      # a Flathub submission from this manifest would be rejected. The previous
+      # manifest asked for a pre-downloaded source list in a comment and then
+      # shipped without one, which made the omission look like a choice.
+      #
+      # To complete it:
+      #
+      #   flatpak-dotnet-generator.py nuget-sources.json \
+      #     RadicalTrainingPlatform.Desktop/RadicalTrainingPlatform.Desktop.csproj
+      #
+      # then uncomment the source below and commit nuget-sources.json beside
+      # this manifest. Until then, treat local flatpak-builder runs as
+      # network-dependent and do not present the result as a Flathub-ready
+      # build.
       #
       # - nuget-sources.json
+      # ---------------------------------------------------------------------

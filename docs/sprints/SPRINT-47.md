@@ -19,9 +19,12 @@
 | S47-04 (T-22) | Pages predeploy gate (imports, smoke, bundle check) | CI-03 | 2 | ✅ |
 | S47-05 (T-23) | Tutor slice behind its gates, or recorded-example fallback | REQ-AI-01..07 | 3 | ✅ |
 | S47-06 (T-24) | Option shuffling with stable IDs | R-09 | 1 | ✅ |
-| S47-07 (T-25) | Packaging repairs PKG-01..04 + clean-install tests | SPEC-10 10.5 | 3 | ⚪ |
+| S47-07 (T-25) | Packaging repairs PKG-01..04 + clean-install tests | SPEC-10 10.5 | 3 | 🟡 |
 | S47-08 (T-41) | Installed-bundle content independence; Legacy bridge narrowing; release-link truth | R-19 | 2 | ⚪ |
 | S47-09 (T-45) | ShellCheck gate + packaging behavior fixtures | R-24 | 1 | ⚪ |
+
+**Status key:** ✅ shipped and verified on this host · 🟡 shipped and gated, with named verification gaps
+listed under the row's *Not verified* section · ⚪ not started.
 
 ## Sprint Backlog — Part D (Oct 20–22)
 
@@ -275,15 +278,143 @@ CI-03's defect is that `pwa-deploy.yml` published `RadicalTrainingPlatform.Web/`
 
 ### S47-07 (T-25): Packaging Repairs
 **Acceptance Criteria:**
-- [ ] PKG-01: content bundle manifest (packs + metadata + hashes); clean-directory test loads known exam, count, question, errata correction, lesson; missing content dir = honest startup error
-- [ ] PKG-02: AppImage build falls back to tarball when appimagetool absent; failure never prints “Build complete.”
-- [ ] PKG-03: macOS script records actual signing/notarization results; universal claim requires universal2 build; macOS smoke launches the bundle
-- [ ] PKG-04: Flatpak full SHA pin, complete sources, launcher path verified in a real flatpak-builder run, permission review
-- [ ] Clean-install test per bundle; release-link text corrected to build-from-source until a release exists
-- [ ] ShellCheck gate + packaging fixtures (S47-09)
+- [x] PKG-01: content bundle manifest (packs + metadata + hashes); clean-directory test loads known exam, count, question, errata correction, lesson; missing content dir = honest startup error
+- [x] PKG-02: AppImage build falls back to tarball when appimagetool absent; failure never prints “Build complete.”
+- [x] PKG-03 (recording): macOS script records actual signing/notarization results; universal claim requires a universal runtime
+- [ ] PKG-03 (launch): **macOS smoke launches the bundle** — not run; no macOS host here
+- [x] PKG-04 (manifest): Flatpak full 40-hex SHA pin, complete sources, launcher path matches the published apphost, permission review
+- [ ] PKG-04 (run): **launcher verified in a real `flatpak-builder` run** — not run; `flatpak-builder` and the .NET SDK extension are not available here
+- [x] Clean-install test for the Linux bundle (real build under a controlled PATH; tarball inspected)
+- [ ] Clean-install test for the macOS and Flatpak bundles — not run; neither host is available
+- [x] Release-link text corrected to build-from-source until a release exists
+- [ ] ShellCheck gate + packaging fixtures — the fixtures landed here; the ShellCheck gate is S47-09
 
-**Files:** `packaging/linux/`, `packaging/macos/`, packaging scripts, `tests/`
+**Files:** `scripts/generate-bundle-manifest.py` (new), `content-manifest.json` (new, 91 entries),
+`scripts/check-packaging-manifests.py` (new),
+`packaging/install-bundle-content.py` (new), `packaging/macos/entitlements.plist` (new),
+`packaging/linux/build-appimage.sh`, `packaging/macos/build-dmg.sh`,
+`packaging/linux/app.radicaltrainingplatform.RadicalTrainingPlatform.yml`,
+`packaging/linux/app.radicaltrainingplatform.RadicalTrainingPlatform.metainfo.xml`,
+`RadicalTrainingPlatform.Core/Infrastructure/ContentBundle.cs` (new),
+`RadicalTrainingPlatform.Core/Services/LessonCatalog.cs` (new),
+`RadicalTrainingPlatform.Core/Infrastructure/IExamRepository.cs`,
+`RadicalTrainingPlatform.Core/Services/Errata.cs`,
+`RadicalTrainingPlatform.Core/ServiceCollectionExtensions.cs`,
+`RadicalTrainingPlatform.Desktop/MainWindow.axaml.cs`,
+`RadicalTrainingPlatform.Core.Tests/ContentBundleTests.cs` (new, 11 tests),
+`RadicalTrainingPlatform.Core.Tests/CompositionRootTests.cs`,
+`tests/gates/run_packaging_fixtures.sh` (new), `.github/workflows/build.yml`
 
+**Shipped (S47-07 notes):**
+
+- **PKG-01 — the bundle declares its content, and the app fails loudly when it cannot find it.** A manifest
+  generated *before* packing names every file the bundle ships with its SHA-256 (`scripts/generate-bundle-manifest.py`,
+  91 files, 4 exams, 22 legacy banks, errata, tracks, provenance, the exact disclaimer, `releaseState: draft-preview`).
+  `ContentBundle` locates it by bundle layout — beside the executable (AppImage/Flatpak), `../Resources`
+  (macOS .app), an env override, then a bounded 6-level parent climb for the dev tree — and `Verify()` reports
+  `missing:` / `unreadable:` / `hash mismatch:` lines rather than a bare boolean. `MainWindow` catches
+  `ContentBundleUnavailableException` and renders a "Content unavailable" panel naming every location searched
+  and the env var, instead of starting with an empty exam list. The clean-directory test copies exactly the
+  manifest's declared files into a temp directory with no repository above it and proves a known exam loads with
+  its real count (NCA-75, 140 items), a specific question carries its errata correction (Q35 B→D), a lesson
+  loads, and the disclaimer is verbatim.
+- **The trap this row was built to catch: the question banks do not live under `content/`.** The legacy banks
+  sit at the repository root (`NCA-75-Part1.md`, `NCP-AI-Part1.md`, … — 22 of them, 1,458 items). A bundle that
+  shipped only `content/` would have shipped lessons, metadata and *no usable questions*. The manifest carries
+  a `legacyBanks` list and every bank is in `files`, so the install step copies them too. Without this the
+  AppImage would have built cleanly and started empty.
+- **PKG-02 — the advertised fallback was unreachable.** `build-appimage.sh` ran `exit 1` when `appimagetool`
+  was missing, *before* the tarball step it told you to fall back to, so the documented path was dead code.
+  Now `APPIMAGE_PRODUCED` tracks the artifact, absence degrades to the tarball, a *present but failing*
+  appimagetool is a hard error (a broken environment is not an absence), and the summary distinguishes
+  `Build complete: …` from `Build complete (tarball only): …`. The fixture proves the negative: no
+  `Build complete:` line appears when no AppImage exists.
+- **PKG-03 — the macOS script now records what happened instead of claiming the best case.** The header
+  promised a "signed and notarized" `.dmg` while both steps were optional and their results were recorded
+  nowhere; the default `osx-arm64` build was called a "universal binary target", which it is not. Signing and
+  notarization results, the runtime, the architecture list and `universal` now land in
+  `build-manifest.json` (in the bundle and beside the artifacts), `UNIVERSAL` is derived from the runtime id,
+  a missing `create-dmg` is stated and falls back to an explicit `.zip` with no early `exit 0`, and a failed
+  requested step exits non-zero. **The entitlements file the signing step passed did not exist** — `codesign`
+  fails outright on a missing entitlements path, so signing could never have succeeded. It now exists, and the
+  checker parses it: a command line pasted into an XML comment contains `--`, which XML comments forbid, and
+  the first draft of that file was invalid XML.
+- **PKG-04 — the Flatpak manifest could not have built the app it described.** It published to
+  `/app/bin/RadicalTrainingPlatform.Core` — a *directory* — and then `exec`'d that directory as if it were a
+  binary; it pinned a short SHA, which `flatpak-builder` will not resolve unambiguously; it asked for
+  `--share=network` and `--filesystem=home` for an app that opens no socket and reads nothing outside its own
+  bundle; and its comment asked for a pre-downloaded NuGet source list that was never shipped, which made the
+  omission look like a choice. The publish now targets `/app/lib/radicaltrainingplatform` and the wrapper
+  execs the apphost that step produces, the pin is a full 40-hex SHA, the two permissions are gone with the
+  reasoning recorded in the file, and an explicit "OFFLINE DEPENDENCY SOURCES — NOT YET DECLARED" block states
+  that a Flathub submission from this manifest would be rejected. `runtime-version: "23.08"` was left alone —
+  it is unverifiable here, and guessing it would be worse than leaving it.
+- **The release links were dead.** The AppStream metadata pointed its homepage, bugtracker, VCS and three
+  screenshot URLs at `your-org/nutanixcertificationtool` — an organisation that does not exist, for PNG files
+  in no repository — and declared versions 0.1.0, 0.2.0 and 0.3.0 with dated feature notes while `git tag` is
+  empty and no GitHub release exists. A release list is a claim that downloadable builds exist. The URLs now
+  name the real repository, the fabricated release list is gone, and the screenshots block is gone (the
+  repository contains no image asset at all). `appstreamcli validate --no-net` passes.
+- **One installer, so three bundles cannot drift.** `packaging/install-bundle-content.py` copies exactly the
+  files the manifest declares and fails on a missing one; the AppImage, the `.app` and the Flatpak all call it.
+
+**Findings recorded this row:**
+
+- **Every bundle would have failed to build, and the fixture is what found it.** All three packaging scripts
+  generate the manifest *into* the destination they then hand to the installer, which then tried to copy the
+  manifest onto itself — `shutil.SameFileError`. This was not a theoretical edge case; it was the only path
+  each script takes. Fixed in the installer (skip the copy when source and target are the same file, which is
+  the case by design) and pinned with a fixture, because "the manifest is already beside its content" is now
+  the normal case rather than an accident.
+- **A must-fail fixture can pass for the wrong reason.** The first version of the manifest fixture invoked
+  `generate-bundle-manifest.py --check` without `--out`; the resulting usage error (exit 2) was read as
+  "the gate rejected it", so two fixtures were green while testing nothing. The fix was to make the passing
+  fixture run first — if the clean tree does not pass, nothing after it means anything.
+- **`appstreamcli` reports two pedantic notes, both honest.** `cid-contains-uppercase-letter`: the app id
+  `app.radicaltrainingplatform.RadicalTrainingPlatform` carries an uppercase segment, which AppStream
+  discourages and Flathub would flag. Renaming it touches the manifest filename, the `app-id`, the `.desktop`
+  filename and its `Icon`/`StartupWMClass`, the metainfo `id`, `APP_ID` in three scripts and every AppDir
+  path — a cross-cutting rename that belongs in its own row, not folded into a packaging-repair row at the
+  last minute. `releases-info-missing` is the direct cost of removing a fabricated release list: the metadata
+  is now pedantically incomplete because it is honest. The fix is to cut a release, not to invent one.
+- **CI-05 key distribution remains ungated** — unchanged from S47-06, still handed forward.
+
+**Gates run:** `run_packaging_fixtures.sh` 15/15 (stale manifest, deleted declared file, install with a
+declared file missing, short Flatpak commit pin, placeholder metadata host, empty `<releases>`, unparseable
+entitlements plist, a release claimed with no tag — each must fail; the shipped tree, the full manifest
+install, all three helper self-tests, the tarball-only build and a working appimagetool must pass);
+`check-packaging-manifests.py` PASS and `--self-test` 15/15; `generate-bundle-manifest.py --self-test` PASS;
+`install-bundle-content.py --self-test` PASS; `generate-bundle-manifest.py --check` in sync (91 files);
+`appstreamcli validate --no-net` PASS (pedantic: 2, above); `bash -n` on both build scripts; Core build
+0 warnings; `dotnet test` Core 257/257; Desktop smoke 51/51; `lint-content.py`, `validate-manifests.py`,
+`check-item-types.py` (+ self-test), `generate-study-content.py --check`, `check-coverage.py` (+ self-test),
+`check-content-bundle.py`, `check-imports.py`, `check-brand.py` all PASS; `run_import_check_fixtures.sh`,
+`run_brand_fixtures.sh`, `run_content_bundle_fixtures.sh`, `run_validator_scan_fixtures.sh`,
+`run_artifact_secrets_fixtures.sh`, `run_smoke_fixtures.sh`, `run_redeye_fixtures.sh`, `run_web_fixtures.sh`,
+`run_option_shuffle_fixtures.sh`, `run_tutor_eval.sh` all PASS. Workflow YAML parses; the new
+"Packaging gates (PKG-01..04)" step is in `build-linux`.
+
+**Not verified this row:**
+
+- **No real `flatpak-builder` run.** `flatpak` is installed here; `flatpak-builder` and
+  `org.freedesktop.Sdk.Extension.dotnet10` are not, and the build would need network for the SDK and the
+  NuGet restore. The launcher path is therefore verified *statically* (the exec target is checked against the
+  publish `--output`, and against the Desktop `AssemblyName`) and the content install by the shared
+  installer's own tests — not by building the Flatpak. PKG-04's "verified in a real flatpak-builder run"
+  clause is **not** satisfied.
+- **No macOS anything.** `build-dmg.sh` was never executed: no build, no `.app`, no signing, no notarization,
+  no `.dmg`, no launch. Its syntax is checked and its claims are checked statically; the code path itself is
+  unrun. PKG-03's "macOS smoke launches the bundle" clause is **not** satisfied.
+- **No AppImage was ever produced.** `appimagetool` is absent, so the AppImage branch ran only against a stub
+  in the fixture. That proves the control flow and the summary line, not that a real AppImage boots.
+- **The Linux build ran against a stub `dotnet`.** The AppDir was populated by a stub that honours `-o` and
+  drops a fake apphost; a real `dotnet publish` into an AppDir was not run end to end. The Desktop app itself
+  was built and smoke-tested separately (51/51) — that is a different thing from publishing it into a bundle.
+- **No Flathub submission and no AppStream screenshot.** The metadata declares no screenshots because none
+  exist in the repository; a Flathub submission would still be rejected for the missing offline sources.
+- **The icons are still missing.** Both build scripts warn that no icon asset exists (`git ls-files '*.png'`
+  is empty); no icon was authored, so every bundle ships without one.
+- **No human review.** Nothing here changes any content's review state.
 ### S47-08 (T-41): Bundle Independence and Bridge Narrowing
 **Acceptance Criteria:**
 - [ ] Installed bundle works with no repository parent (content independence)

@@ -54,6 +54,21 @@ jobs:
       - name: Check compiled study content
         run: python3 scripts/generate-study-content.py --check
 
+      # S47-07/T-25: PKG-01..04. The bundle manifest must match the content
+      # tree, and the packaging scripts must not claim more than they do.
+      # Fixture chain: tests/gates/run_packaging_fixtures.sh — a stale
+      # manifest, a deleted declared file, an install with a declared file
+      # missing, a short Flatpak commit pin and a present-but-failing
+      # appimagetool must each fail; the shipped tree, the tarball-only build
+      # and a working appimagetool must pass.
+      - name: Packaging gates (PKG-01..04)
+        run: |
+          python3 scripts/generate-bundle-manifest.py \
+            --content content --out content-manifest.json --check
+          python3 scripts/check-packaging-manifests.py
+          python3 scripts/check-packaging-manifests.py --self-test
+          bash tests/gates/run_packaging_fixtures.sh
+
       # R-01/CI-03 companion gate: every relative import in the PWA must
       # resolve case-sensitively (deploy-host semantics). Fixture pair:
       # tests/gates/run_import_check_fixtures.sh

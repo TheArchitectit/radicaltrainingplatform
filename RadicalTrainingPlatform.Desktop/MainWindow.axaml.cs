@@ -28,6 +28,9 @@ public partial class MainWindow : Window
     private readonly IQuestionParser _questionParser;
     private readonly IBlueprintService _blueprintService;
     private readonly IReferenceService _referenceService;
+    // PKG-01: consulted at startup so missing content is an error the user can
+    // read, not an empty exam list that looks like an empty app.
+    private readonly IContentBundle _contentBundle;
 
     private Dictionary<string, List<Question>> _exams = new(StringComparer.OrdinalIgnoreCase);
     private List<ExamCatalogItem> _catalog = new();
@@ -65,6 +68,7 @@ public partial class MainWindow : Window
         _questionParser = services.GetRequiredService<IQuestionParser>();
         _blueprintService = services.GetRequiredService<IBlueprintService>();
         _referenceService = services.GetRequiredService<IReferenceService>();
+        _contentBundle = services.GetRequiredService<IContentBundle>();
     }
 
     private void OnWindowClosed(object? sender, EventArgs e)
@@ -75,20 +79,72 @@ public partial class MainWindow : Window
 
     private void OnLoaded(object? sender, RoutedEventArgs e)
     {
-        LoadExams();
+        if (!LoadExams(out var error))
+        {
+            ShowContentError(error!);
+            return;
+        }
         ShowExamSelector();
     }
 
     // ─── Exam Loading ──────────────────────────────────────────────
 
-    private void LoadExams()
+    /// <summary>
+    /// Returns false when the app has no content to show. PKG-01: this used to
+    /// return void and swallow the case entirely — no content directory meant an
+    /// empty catalog, an empty sidebar and an empty selector, with nothing on
+    /// screen to tell a learner whether the app was empty or broken.
+    /// </summary>
+    private bool LoadExams(out string? error)
     {
+        error = null;
+        try
+        {
+            _contentBundle.EnsureAvailable();
+        }
+        catch (ContentBundleUnavailableException ex)
+        {
+            error = ex.Message;
+            return false;
+        }
+
         // Build catalog (fast — no full parse) and load all exams
         _catalog = _questionParser.BuildCatalog();
         _exams = _questionParser.LoadAllExams();
 
         // Populate sidebar quick-launch buttons dynamically
         PopulateSidebarButtons();
+        return true;
+    }
+
+    private void ShowContentError(string message)
+    {
+        ReleaseCurrentView();
+
+        var panel = new StackPanel
+        {
+            Spacing = 12,
+            Margin = new Thickness(32),
+            VerticalAlignment = VerticalAlignment.Center,
+            HorizontalAlignment = HorizontalAlignment.Center,
+        };
+        panel.Children.Add(new TextBlock
+        {
+            Text = "Content unavailable",
+            FontSize = 24,
+            FontWeight = FontWeight.SemiBold,
+            Foreground = new SolidColorBrush(Color.Parse("#ff5c8a")),
+            HorizontalAlignment = HorizontalAlignment.Center,
+        });
+        panel.Children.Add(new TextBlock
+        {
+            Text = message,
+            MaxWidth = 720,
+            TextWrapping = TextWrapping.Wrap,
+            Foreground = new SolidColorBrush(Color.Parse("#c9c9d4")),
+            HorizontalAlignment = HorizontalAlignment.Center,
+        });
+        MainContent.Content = panel;
     }
 
     private void PopulateSidebarButtons()

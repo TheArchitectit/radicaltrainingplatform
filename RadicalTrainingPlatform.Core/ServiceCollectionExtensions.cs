@@ -14,8 +14,13 @@ public static class ServiceCollectionExtensions
     public static IServiceCollection AddRadicalTrainingPlatformCore(this IServiceCollection services)
     {
         services.AddSingleton<IFileProvider, DefaultFileProvider>();
+        // PKG-01: the bundle is what tells the app which content it shipped.
+        // Registered before the services that consume it so DI's greediest-ctor
+        // selection injects it into the repository and the errata store.
+        services.AddSingleton<IContentBundle, ContentBundle>();
         services.AddSingleton<IExamRepository, MarkdownExamRepository>();
         services.AddSingleton<IErrataProvider, JsonErrataStore>();
+        services.AddSingleton<ILessonCatalog, BundleLessonCatalog>();
         // DI selects the greediest ctor, so the registered IErrataProvider above
         // is injected into QuestionParser (errata corrections get applied).
         services.AddSingleton<IQuestionParser, QuestionParser>();

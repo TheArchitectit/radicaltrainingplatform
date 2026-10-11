@@ -23,6 +23,9 @@ public class CompositionRootTests
             .BuildServiceProvider();
 
         provider.GetRequiredService<IFileProvider>().ShouldBeAssignableTo<DefaultFileProvider>();
+        // PKG-01: the bundle is what the app boots against.
+        provider.GetRequiredService<IContentBundle>().ShouldBeAssignableTo<ContentBundle>();
+        provider.GetRequiredService<ILessonCatalog>().ShouldBeAssignableTo<BundleLessonCatalog>();
         provider.GetRequiredService<IExamRepository>().ShouldBeAssignableTo<MarkdownExamRepository>();
         provider.GetRequiredService<IQuestionParser>().ShouldBeAssignableTo<QuestionParser>();
         provider.GetRequiredService<IManifestLoader>().ShouldBeAssignableTo<ManifestLoader>();
