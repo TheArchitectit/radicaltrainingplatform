@@ -9,6 +9,7 @@
     <link rel="manifest" href="manifest.json">
     <link rel="stylesheet" href="css/tokens.css">
     <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/study.css">
 </head>
 <body>
     <div class="app-shell">
@@ -107,6 +108,7 @@
                 </div>
                 <div class="nav-section">
                     <div class="nav-section-title">Lab</div>
+                    <a class="nav-item" data-route="/tracks"><span class="icon">🎓</span> Study Tracks</a>
                     <a class="nav-item" data-route="/pc/scenarios"><span class="icon">📋</span> Guided Scenarios</a>
                     <a class="nav-item" data-route="/pc/calm"><span class="icon">🧩</span> Calm / Marketplace</a>
                 </div>
@@ -115,6 +117,10 @@
             <!-- PE Hamburger Overlay -->
             <div id="hamburger-backdrop" class="hamburger-backdrop"></div>
             <nav id="hamburger-overlay" class="hamburger-overlay">
+                <div class="nav-group">
+                    <div class="nav-group-title">Study</div>
+                    <a class="nav-item" data-route="/tracks"><span class="icon">🎓</span> Study Tracks</a>
+                </div>
                 <div class="nav-group">
                     <div class="nav-group-title">Home</div>
                     <a class="nav-item" data-route="/pe/dashboard"><span class="icon">📊</span> Dashboard</a>

@@ -41,6 +41,14 @@ jobs:
           python3 scripts/check-imports.py
           bash tests/gates/run_import_check_fixtures.sh
 
+      # T-11/REQ-BRAND-01: nominative-use only — endorsement phrasing fails
+      # the build. Fixture pair: tests/gates/run_brand_fixtures.sh. The
+      # demo-script surface (T-30) warns loudly until authored, then enforces.
+      - name: Brand check (REQ-BRAND-01)
+        run: |
+          python3 scripts/check-brand.py
+          bash tests/gates/run_brand_fixtures.sh
+
       # R-22/T-43: web runtime fixtures — each R-22 defect has a must-fail
       # self-test plus one passing fixture per fixed bullet (Node built-in
       # test runner, zero-dependency DOM stubs).

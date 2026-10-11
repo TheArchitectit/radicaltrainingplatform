@@ -13,7 +13,7 @@
 
 | ID | Task | Requirements | Points | Status |
 |---|---|---|---|---|
-| S46-01 (T-11) | Track picker, lesson reader, practice view | REQ-UI-01..03, REQ-BRAND-01/02 | 3 | ⚪ |
+| S46-01 (T-11) | Track picker, lesson reader, practice view | REQ-UI-01..03, REQ-BRAND-01/02 | 3 | ✅ |
 | S46-02 (T-12) | ProgressStore + wiring + E2E save/reload/failure tests | REQ-UI-04/05, R-06 | 3 | ⚪ |
 | S46-03 (T-13) | `ticket-lab.js` renderer; aplus-dns-01 + netplus-gw-01 with validators and negative fixtures | REQ-SC-01..06 | 3 | ⚪ |
 | S46-04 (T-14) | Scenario validator sweep repairs (all 44; us-bucket-01) | R-02, REQ-DEMO-06 | 3 | ⚪ |
@@ -41,15 +41,22 @@
 **As a** learner, **I want** to pick a track, read a lesson, and run scored practice, **so that** the learning loop exists in the PWA.
 
 **Acceptance Criteria:**
-- [ ] `track-picker.js` at route `/tracks` renders three tracks from manifests only — no hardcoded track strings; shows coverage %, “beginner preview” label, exact REQ-BRAND-02 disclaimer byte-for-byte
-- [ ] `lesson-reader.js` renders reviewed lesson markdown with objective IDs from the manifest; unreviewed modules render as “planned”, never dead links
-- [ ] `practice.js` runs scored sets: single/multi-select, immediate review with explanations, scoring identical to Core rules; assessment mode hides hints and tutor until submission
-- [ ] Ordering-type items render only after the Sprint 45 ordered-response work lands
-- [ ] Routes registered in `app.js` (47 → 50); `sw.js` precaches new assets
-- [ ] Brand check `scripts/check-brand.py` fails on forbidden strings (“approved”, “official”, “certified by”, vendor marks)
-- [ ] Disclaimer snapshot test pins the exact REQ-BRAND-02 string on track picker, exam overview, demo script
+- [x] `track-picker.js` at route `/tracks` renders three tracks from manifests only — no hardcoded track strings; shows coverage %, “beginner preview” label, exact REQ-BRAND-02 disclaimer byte-for-byte
+- [x] `lesson-reader.js` renders reviewed lesson markdown with objective IDs from the manifest; unreviewed modules render as “planned”, never dead links
+- [x] `practice.js` runs scored sets: single/multi-select, immediate review with explanations, scoring identical to Core rules; assessment mode hides hints and tutor until submission
+- [x] Ordering-type items render only after the Sprint 45 ordered-response work lands
+- [x] Routes registered in `app.js` (47 → 50); `sw.js` precaches new assets
+- [x] Brand check `scripts/check-brand.py` fails on forbidden strings (“approved”, “official”, “certified by”, vendor marks)
+- [x] Disclaimer snapshot test pins the exact REQ-BRAND-02 string on track picker, exam overview, demo script
 
 **Files:** `Web/js/views/track-picker.js`, `Web/js/views/lesson-reader.js`, `Web/js/views/practice.js`, `Web/js/app.js`, `Web/index.html`, `Web/sw.js`, `Web/css/study.css`, `scripts/check-brand.py`
+
+**Notes (S46-01 close, 2026-10-11):**
+- Route count: OpenSpec said "47 → 50" (3 routes) but the loop needs 4 — track-overview (`/tracks/:trackId`) is the exam-overview surface REQ-UI-02's disclaimer requirement lives on. Registering 4 (47 → 51) is the honest reading; the OpenSpec file's "register 4 new routes — 47 to 51" (section 03.3) confirms it.
+- Ordered items: none exist in the released banks (all choice), so the ordered-path is exercised by `tests/gates/web/practice-grading.mjs` against the Core-ported `grade()` rather than live bank items. Rendering gate holds anyway — generator would flag a mismatch.
+- Demo-script disclaimer: no demo script exists yet (Sprint 47 T-30). `check-brand.py` warns loudly each run naming the pending surface, and the snapshot fixture reports it "pending" instead of silently claiming coverage. Enforcement auto-arms when the script is authored.
+- Grading parity: `grade()` in practice.js is a direct port of Core `ExamSessionViewModel.Grade` (set equality for choice, exact sequence for ordered); the fixture pins the JS side — S46-06 pins the Core side with the same vectors.
+- Verified in a real browser (Playwright/Chromium): picker → track → released A2/N5 lessons → practice golden path (correct, wrong, multi) → results with per-item marks → restart → NCA empty state; zero console errors. Not verified in CI yet (next push).
 
 ### S46-02 (T-12): ProgressStore
 **As a** learner, **I want** progress to survive reloads and app restarts, **so that** multi-day study works.

@@ -50,6 +50,10 @@ import { AiMonitoringView } from './views/ai-monitoring.js';
 import { CiMonitoringView } from './views/ci-monitoring.js';
 import { CiScalingView } from './views/ci-scaling.js';
 import { initTheme } from './components/ThemeToggle.js';
+import { TrackPickerView } from './views/track-picker.js';
+import { TrackOverviewView } from './views/track-overview.js';
+import { LessonReaderView } from './views/lesson-reader.js';
+import { PracticeView } from './views/practice.js';
 
 /**
  * App — Bootstrap the Nutanix Lab Simulator.
@@ -147,6 +151,12 @@ class App {
         router.register('/pc/ai-monitoring', AiMonitoringView);
         router.register('/pc/nc2-monitoring', CiMonitoringView);
         router.register('/pc/nc2-scaling', CiScalingView);
+
+        // Study tracks (Sprint 46 / T-11)
+        router.register('/tracks', TrackPickerView);
+        router.register('/tracks/:trackId', TrackOverviewView);
+        router.register('/tracks/:trackId/lessons/:examId/:lessonId', LessonReaderView);
+        router.register('/practice/:examId', PracticeView);
     }
 
     #wireNavigation() {
