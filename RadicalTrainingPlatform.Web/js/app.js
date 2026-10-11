@@ -2,6 +2,7 @@ import { bus } from './core/EventBus.js';
 import { bridge } from './core/BridgeClient.js';
 import { router } from './core/Router.js';
 import { state } from './core/StateEngine.js';
+import { progress } from './core/ProgressStore.js';
 import { PeDashboardView } from './views/pe-dashboard.js';
 import { PeVmsView } from './views/pe-vms.js';
 import { PeStorageView } from './views/pe-storage.js';
@@ -65,6 +66,10 @@ class App {
     async init() {
         // Initialize state engine
         await state.init();
+
+        // Progress store is app-wide (lessons, practice, scenarios all record
+        // against it) — initialize once at boot, not per view.
+        await progress.init();
 
         // Initialize theme
         initTheme();

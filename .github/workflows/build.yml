@@ -55,6 +55,12 @@ jobs:
       - name: Run web runtime fixtures
         run: bash tests/gates/run_web_fixtures.sh
 
+      # REQ-SC-01/T-13: scenario validator scan — constant-true validators
+      # fail the build. The registry's 27 pending validators warn loudly
+      # until the T-14 sweep (S46-04) lands; fixture chain proves detection.
+      - name: Scenario validator scan (REQ-SC-01)
+        run: bash tests/gates/run_validator_scan_fixtures.sh
+
       # T-46/SPEC-08A: RedEye lane — every seeded defect caught (REQ-REV-03),
       # ship-gate fail-closed with named exclusions (REQ-REV-02/05).
       - name: Run RedEye lane fixtures

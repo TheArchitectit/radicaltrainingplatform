@@ -15,7 +15,7 @@
 |---|---|---|---|---|
 | S46-01 (T-11) | Track picker, lesson reader, practice view | REQ-UI-01..03, REQ-BRAND-01/02 | 3 | ✅ |
 | S46-02 (T-12) | ProgressStore + wiring + E2E save/reload/failure tests | REQ-UI-04/05, R-06 | 3 | ✅ |
-| S46-03 (T-13) | `ticket-lab.js` renderer; aplus-dns-01 + netplus-gw-01 with validators and negative fixtures | REQ-SC-01..06 | 3 | ⚪ |
+| S46-03 (T-13) | `ticket-lab.js` renderer; aplus-dns-01 + netplus-gw-01 with validators and negative fixtures | REQ-SC-01..06 | 3 | ✅ |
 | S46-04 (T-14) | Scenario validator sweep repairs (all 44; us-bucket-01) | R-02, REQ-DEMO-06 | 3 | ⚪ |
 | S46-05 (T-15) | Bridge handlers: real effects or removal; desktop SessionStore consumption | R-05, R-06 | 2 | ⚪ |
 | S46-06 (T-16) | Catalog tests, multi-select scoring tests, save/reload/error tests | REQ-MAN-05, L-06 | 2 | ⚪ |
@@ -80,13 +80,20 @@
 **As a** learner, **I want** realistic help-desk ticket tasks, **so that** diagnosis skills are practiced, not just recalled.
 
 **Acceptance Criteria:**
-- [ ] `ticket-lab.js`: ticket pane, configuration panel, fixed test set, resolution-note field; owns no scoring logic (validators decide); evidence panel shows requested vs actual state and action trace
-- [ ] `aplus-dns-01`: wrong-DNS ticket; completion = correct DNS fix + resolution note; negative fixture: wrong-but-plausible DNS server fails
-- [ ] `netplus-gw-01`: wrong default gateway ticket; same contract
-- [ ] Every new objective validates against simulated state only; fresh-seed negativity proven (all objectives false before any action); recorded walkthrough reaches 100%; zero real network calls (E2E spy asserts)
-- [ ] “Simulated environment” label visible
+- [x] `ticket-lab.js`: ticket pane, configuration panel, fixed test set, resolution-note field; owns no scoring logic (validators decide); evidence panel shows requested vs actual state and action trace
+- [x] `aplus-dns-01`: wrong-DNS ticket; completion = correct DNS fix + resolution note; negative fixture: wrong-but-plausible DNS server fails
+- [x] `netplus-gw-01`: wrong default gateway ticket; same contract
+- [x] Every new objective validates against simulated state only; fresh-seed negativity proven (all objectives false before any action); recorded walkthrough reaches 100%; zero real network calls (E2E spy asserts)
+- [x] “Simulated environment” label visible
 
-**Files:** `Web/js/views/ticket-lab.js`, `Web/js/views/` scenario registry
+**Files:** `Web/js/views/ticket-lab.js`, `Web/js/views/scenarios.js`, `Web/js/core/StateEngine.js`, `Web/js/app.js`, `Web/sw.js`, `tests/gates/web/ticket-scenarios.mjs`, `scripts/scan-scenario-validators.py`, `tests/gates/fixtures/validator-scan/`, `tests/gates/run_validator_scan_fixtures.sh`, `.github/workflows/build.yml`
+
+**Notes (S46-03 close, 2026-10-11):**
+- Registry choice: ticket entries appended to the existing `SCENARIOS` registry in `scenarios.js` (COMPTIA-A-1201 / COMPTIA-NET-009), with pure validators beside them (`validateAplusDns01`, `validateNetplusGw01`) exported via `TICKET_VALIDATORS` — UI, node fixtures, and the CI scan share one evaluation entry point (REQ-SC-01). `SCENARIOS` itself is now exported so fixtures can assert the wiring.
+- Browser verification (Playwright/Chromium) covered both golden paths end to end (seeded wrong → tests → fix → note → submit → success toast + evidence ✓ + action trace + `progress.recordScenario` persisted), fresh-seed negativity (nslookup FAIL on seeded 10.42.100.99), wrong-but-plausible negatives (8.8.4.4 DNS, 10.42.100.1 gateway — each names the unmet condition in toast + verdict), empty-note rejection, and `#ticket-reset` reseeding the wrong values. A page-level network spy over a full walkthrough recorded zero non-localhost requests (REQ-SC-05).
+- Three product bugs found only by browser verification and fixed in this batch: (1) `ScenariosView.render` hardcoded the exam list, making both COMPTIA scenarios invisible — exam groups are now derived from the registry itself; (2) `StateEngine.init()` loaded persisted profiles wholesale, so pre-existing profiles missing `ticket_workstations` crashed the lab — `init()` now backfills missing seed collections from the seed (user-modified collections untouched); (3) ticket entries never wired `.validate`, so submit threw `s.validate is not a function` — wired to `TICKET_VALIDATORS` and regression-locked by a fixture asserting the entry carries the shared validator. A fourth integration gap surfaced from the same run: `ProgressStore` was only initialized inside the practice view, so scenario recording threw `used before init()` — `progress.init()` now runs at app boot (`app.js`).
+- REQ-SC-01 gate chain landed alongside: `scripts/scan-scenario-validators.py` (constant-true detector, fixture-only mode is hard-fail, repo mode warns loudly naming the 27 pending T-14 repairs and flips to hard FAIL when the sweep lands) + failing/passing fixtures + `run_validator_scan_fixtures.sh` wired into `build.yml` after the web runtime fixtures.
+- Not verified / deferred: the E2E study-loop spec (`tests/e2e/study-loop.spec.js`) still does not exist in CI — scenario verification here is browser-verified plus node fixtures (`ticket-scenarios.mjs`, 6 tests), same posture as S46-02. The negative browser spot-check for netplus-gw-01 used the same wrong-but-plausible gateway the fixture pins (10.42.100.1); not re-spied at the network layer for that second ticket (the spy ran over aplus-dns-01). Demo-sweep walkthroughs per scenario (TM-45) are T-14's job, not T-13's.
 
 ### S46-04 (T-14): Scenario Validator Sweep
 **As a** presenter, **I want** every existing scenario to be honestly passable, **so that** demo mode has no credibility failures.

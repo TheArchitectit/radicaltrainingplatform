@@ -14,6 +14,13 @@ class StateEngine {
         const saved = await store.get('clusterState');
         if (saved) {
             this.#state = saved;
+            // Migrate profiles saved before newer seed collections existed:
+            // missing collections are backfilled from the seed (existing
+            // user-modified collections are never touched).
+            for (const [key, value] of Object.entries(this.#createSeedState())) {
+                if (this.#state[key] === undefined) this.#state[key] = value;
+            }
+            await this.#persist();
         } else {
             this.#state = this.#createSeedState();
             await this.#persist();
@@ -375,6 +382,13 @@ class StateEngine {
             nc2_metrics: [
                 { uuid: 'nc2m-001', cluster: 'NC2-AWS-Prod', provider: 'AWS', cpu_pct: 58, memory_pct: 65, storage_pct: 42, iops: 8500, latency_ms: 1.8, throughput_mbs: 420, uptime_pct: 99.95, hourly_rate: 12.50, instance_type: 'i3.metal' },
                 { uuid: 'nc2m-002', cluster: 'NC2-Azure-DR', provider: 'Azure', cpu_pct: 22, memory_pct: 30, storage_pct: 18, iops: 3200, latency_ms: 2.1, throughput_mbs: 280, uptime_pct: 99.90, hourly_rate: 11.80, instance_type: 'Standard_L8s_v3' },
+            ],
+            // Sprint 46 — Ticket-lab workstations (T-13). Seeded WRONG on
+            // purpose: fresh-seed negativity (REQ-SC-02) requires the seeded
+            // state to fail its scenario validators. reset() reseeds these.
+            ticket_workstations: [
+                { uuid: 'ws-dns-01', scenarioId: 'aplus-dns-01', name: 'HR-WS-114', config: { ip: '10.42.100.114', gateway: '10.42.100.1', dns: '10.42.100.99' }, resolution_note: '' },
+                { uuid: 'ws-gw-01', scenarioId: 'netplus-gw-01', name: 'SALES-WS-207', config: { ip: '10.42.200.207', gateway: '10.42.200.254', dns: '10.42.100.10' }, resolution_note: '' },
             ],
             nc2_scaling_history: [
                 { uuid: 'nc2sh-001', cluster: 'NC2-AWS-Prod', action: 'scale_up', from_nodes: 3, to_nodes: 4, initiated_by: 'admin', status: 'completed', timestamp: '2026-03-20T10:00:00Z' },

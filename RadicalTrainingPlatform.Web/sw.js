@@ -64,6 +64,7 @@ const STATIC_ASSETS = [
   './js/views/pe-storage.js',
   './js/views/pe-vms.js',
   './js/views/scenarios.js',
+  './js/views/ticket-lab.js',
   './js/views/service-pages.js',
   './js/views/track-picker.js',
   './js/views/track-overview.js',

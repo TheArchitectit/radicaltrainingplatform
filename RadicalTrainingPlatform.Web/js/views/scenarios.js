@@ -2,13 +2,93 @@ import { BaseView } from './BaseView.js';
 import { state } from '../core/StateEngine.js';
 import { bus } from '../core/EventBus.js';
 import { toast } from '../components/Toast.js';
+import { TicketLabView } from './ticket-lab.js';
 
 /**
  * Guided Lab Scenarios — JSON-driven lab exercises across all 4 exams.
  * Each scenario has objectives, hints, and state validation.
+ *
+ * Sprint 46 (T-13): the two CompTIA help-desk ticket scenarios ride the
+ * shared TicketLabView renderer (ticket-lab.js). Their validators are pure
+ * functions over the simulated store plus the recorded action trace
+ * ((state, trace) -> { passed, unmetConditions }) — exported below so the
+ * UI, the CI scan and the demo sweep all evaluate the exact same entry
+ * point (SPEC-07 normative guidance). The renderer owns no scoring logic.
  */
 
-const SCENARIOS = [
+const DISCLAIMER = 'This is independent study material. It is not official training and is not endorsed or approved by CompTIA, Nutanix, or any other certification body.';
+
+// ── Ticket scenario validators (pure: state + trace only) ──
+
+/** Correct values are part of the scenario contract, not the seed. */
+export const TICKET_EXPECTATIONS = {
+    'aplus-dns-01': {
+        workstation: 'ws-dns-01',
+        editableField: 'dns',
+        correctDns: '10.42.100.10',
+        requiredTests: ['nslookup'],
+    },
+    'netplus-gw-01': {
+        workstation: 'ws-gw-01',
+        editableField: 'gateway',
+        correctGateway: '10.42.200.1',
+        requiredTests: ['tracert'],
+    },
+};
+
+function workstationOf(stateApi, scenarioId) {
+    return stateApi.getAll('ticket_workstations').find(w => w.scenarioId === scenarioId);
+}
+
+/** Trace helpers: did the learner run a required test AFTER observing the fault? */
+function ranTest(trace, testId) {
+    return trace.some(t => t.action === 'test-run' && t.test === testId);
+}
+
+export function validateAplusDns01(stateApi, trace) {
+    const unmet = [];
+    const ws = workstationOf(stateApi, 'aplus-dns-01');
+    const exp = TICKET_EXPECTATIONS['aplus-dns-01'];
+    if (!ws) return { passed: false, unmetConditions: ['workstation record missing'] };
+    if (ws.config.dns !== exp.correctDns) {
+        unmet.push(`DNS server is still ${ws.config.dns} — the resolver must point at 10.42.100.10`);
+    }
+    if (!ranTest(trace, 'nslookup')) {
+        unmet.push('no nslookup diagnosis recorded — run the fixed-set test before submitting');
+    }
+    if (!ranTest(trace, 'ping-ip')) {
+        unmet.push('no ping-by-IP recorded — confirm name resolution is the only fault');
+    }
+    if (!(ws.resolution_note || '').trim()) {
+        unmet.push('resolution note is empty — document the fix');
+    }
+    return { passed: unmet.length === 0, unmetConditions: unmet };
+}
+
+export function validateNetplusGw01(stateApi, trace) {
+    const unmet = [];
+    const ws = workstationOf(stateApi, 'netplus-gw-01');
+    const exp = TICKET_EXPECTATIONS['netplus-gw-01'];
+    if (!ws) return { passed: false, unmetConditions: ['workstation record missing'] };
+    if (ws.config.gateway !== exp.correctGateway) {
+        unmet.push(`default gateway is still ${ws.config.gateway} — it must be 10.42.200.1 for the 10.42.200.0/24 subnet`);
+    }
+    if (!ranTest(trace, 'tracert')) {
+        unmet.push('no tracert verification recorded — verify off-subnet reachability after the fix');
+    }
+    if (!(ws.resolution_note || '').trim()) {
+        unmet.push('resolution note is empty — document the fix');
+    }
+    return { passed: unmet.length === 0, unmetConditions: unmet };
+}
+
+export const TICKET_VALIDATORS = {
+    'aplus-dns-01': validateAplusDns01,
+    'netplus-gw-01': validateNetplusGw01,
+};
+
+
+export const SCENARIOS = [
     // NCM-MCI (4 scenarios)
     {
         id: 'mci-01', exam: 'NCM-MCI', title: 'Create and Power On a VM',
@@ -502,6 +582,45 @@ const SCENARIOS = [
         hints: ['Navigate to PC → Insights', 'Look for 🔴 critical items at the top', 'Review optimization suggestions for resource savings'],
         context: 'pc', startRoute: '/pc/insights',
     },
+    // Sprint 46 (T-13) — CompTIA help-desk ticket scenarios (SPEC-04 REQ-AP-07,
+    // SPEC-05 REQ-NP-02). Routed through TicketLabView; validators above.
+    {
+        id: 'aplus-dns-01', exam: 'COMPTIA-A-1201', title: 'Ticket HR-2214: Site loads by IP, not by name',
+        difficulty: 'Beginner', time: '10 min',
+        description: 'A help-desk ticket: the user can reach a website by IP address but not by name. Diagnose, fix the workstation, and document.',
+        renderer: 'ticket',
+        scenarioId: 'aplus-dns-01',
+        validate: TICKET_VALIDATORS['aplus-dns-01'],
+        ticket: {
+            id: 'HR-2214', priority: 'P3', reportedBy: 'M. Alvarez (HR)',
+            text: 'Since this morning I can open the intranet report portal by typing its IP address, but when I type the website name the browser says it cannot find it. Yesterday everything worked. I did not change anything.',
+        },
+        configFields: ['ip', 'gateway', 'dns'],
+        editableField: 'dns',
+        correctDns: '10.42.100.10',
+        correctGateway: '10.42.100.1',
+        hints: ['The user reaches services by IP — that rules out routing and the NIC.', 'Name resolution failing points at exactly one configuration field.', 'Run nslookup before and after the change to record the diagnosis.'],
+        disclaimer: DISCLAIMER,
+    },
+    {
+        id: 'netplus-gw-01', exam: 'COMPTIA-NET-009', title: 'Ticket SA-3391: Local share works, internet does not',
+        difficulty: 'Beginner', time: '10 min',
+        description: 'A network troubleshooting ticket: the workstation reaches its own subnet but nothing beyond it. Identify, fix, and verify.',
+        renderer: 'ticket',
+        scenarioId: 'netplus-gw-01',
+        validate: TICKET_VALIDATORS['netplus-gw-01'],
+        ticket: {
+            id: 'SA-3391', priority: 'P3', reportedBy: 'D. Chen (Sales)',
+            text: 'I can open shared folders and print, but I cannot reach anything outside our building — no websites, no webmail. Coworkers on the same floor are fine. A colleague was configuring my machine last week and may have "cleaned something up".',
+        },
+        configFields: ['ip', 'gateway', 'dns'],
+        editableField: 'gateway',
+        correctDns: '10.42.100.10',
+        correctGateway: '10.42.200.1',
+        topology: { subnets: ['10.42.200.0/24 — Sales', '10.42.100.0/24 — Services'], router: '10.42.200.1' },
+        hints: ['Reaching hosts on the same subnet but nothing off-subnet is a classic default-gateway symptom.', 'The correct gateway for 10.42.200.0/24 is .1 — check the topology panel.', 'tracert after the fix verifies off-subnet reachability; document what you found.'],
+        disclaimer: DISCLAIMER,
+    },
 ];
 
 export class ScenariosView extends BaseView {
@@ -512,8 +631,9 @@ export class ScenariosView extends BaseView {
         const el = document.createElement('div');
         el.className = 'view';
 
-        // Group by exam
-        const exams = ['NCM-MCI', 'NCP-US', 'NCP-CI', 'NCP-AI'];
+        // Group by exam — derive the exam list from the registry itself so
+        // scenario entries are never invisible because of a hardcoded list.
+        const exams = [...new Set(SCENARIOS.map(s => s.exam))];
         const grouped = {};
         exams.forEach(e => grouped[e] = SCENARIOS.filter(s => s.exam === e));
 
@@ -585,6 +705,24 @@ export class ScenariosView extends BaseView {
     #startScenario(id) {
         const scenario = SCENARIOS.find(s => s.id === id);
         if (!scenario) return;
+
+        // Ticket scenarios run in the shared TicketLabView renderer (T-13);
+        // the objective-checklist flow below stays for store-based scenarios.
+        if (scenario.renderer === 'ticket') {
+            const listDiv = document.getElementById('scenario-list');
+            const activeDiv = document.getElementById('active-scenario');
+            if (!listDiv || !activeDiv) return;
+            listDiv.style.display = 'none';
+            activeDiv.style.display = '';
+            const lab = new TicketLabView();
+            lab.render({ scenario }).then(el => {
+                activeDiv.innerHTML = '';
+                activeDiv.appendChild(el);
+                lab.root = el;
+                lab.afterRender({ scenario });
+            });
+            return;
+        }
 
         this.#activeScenario = scenario;
         this.#attemptRecorded = false;
