@@ -21,7 +21,7 @@
 | S47-06 (T-24) | Option shuffling with stable IDs | R-09 | 1 | ✅ |
 | S47-07 (T-25) | Packaging repairs PKG-01..04 + clean-install tests | SPEC-10 10.5 | 3 | 🟡 |
 | S47-08 (T-41) | Installed-bundle content independence; Legacy bridge narrowing; release-link truth | R-19 | 2 | 🟡 |
-| S47-09 (T-45) | ShellCheck gate + packaging behavior fixtures | R-24 | 1 | ⚪ |
+| S47-09 (T-45) | ShellCheck gate + packaging behavior fixtures | R-24 | 1 | 🟡 |
 
 **Status key:** ✅ shipped and verified on this host · 🟡 shipped and gated, with named verification gaps
 listed under the row's *Not verified* notes in [SPRINT-47-EVIDENCE.md](SPRINT-47-EVIDENCE.md) · ⚪ not started.
@@ -146,7 +146,8 @@ document limit (CLAUDE.md).
 - [x] Clean-install test for the Linux bundle (real build under a controlled PATH; tarball inspected)
 - [ ] Clean-install test for the macOS and Flatpak bundles — not run; neither host is available
 - [x] Release-link text corrected to build-from-source until a release exists
-- [ ] ShellCheck gate + packaging fixtures — the fixtures landed here; the ShellCheck gate is S47-09
+- [x] ShellCheck gate + packaging fixtures — the ShellCheck gate and the icon-path/macOS behaviour
+      fixtures landed in S47-09 (T-45), which is also where this row's macOS Step 7 defect was found
 
 **Files:** `scripts/generate-bundle-manifest.py` (new), `content-manifest.json` (new, 91 entries),
 `scripts/check-packaging-manifests.py` (new),
@@ -195,11 +196,46 @@ asserting no link to a nonexistent release.
 **Evidence:** shipped notes, findings, gates run and not-verified detail are in
 [SPRINT-47-EVIDENCE.md](SPRINT-47-EVIDENCE.md) § S47-08.
 
-**Evidence:** shipped notes, findings, gates run and not-verified detail are in
-[SPRINT-47-EVIDENCE.md](SPRINT-47-EVIDENCE.md) § S47-08.
-
 ### S47-09 (T-45): ShellCheck + Packaging Fixtures
-- ShellCheck gate in CI; packaging behavior fixtures for PKG-02/03 fallbacks
+**Requirement:** R-24 (PKG, medium). "ShellCheck added to CI for packaging scripts; icon-path
+behavior fixtures that execute the script paths, not syntax checks." Acceptance: "ShellCheck gate
+with failing+passing fixture scripts; behavior fixtures run the AppImage/macOS scripts' diagnostic
+branches and assert exit codes."
+
+**Acceptance Criteria:**
+- [x] ShellCheck gate over the packaging scripts (R-24's scope, not the whole repository's shell),
+      wired into `build-linux`; it fails closed when shellcheck is absent rather than reporting a
+      pass it did not earn
+- [x] Failing + passing fixture scripts. The failing one is *accepted* by `bash -n`, *rejected* by
+      ShellCheck on SC2181, and when run it exits 0 having produced nothing — R-24's defect class
+      ("a conditional diagnostic can still exit 0 wrongly") is proven behaviourally, not just read
+      off the text. The passing one prints the same warning sentence and exits non-zero
+- [x] AppImage icon-path behaviour fixtures: the real script runs with and without an icon asset and
+      each case asserts what landed in the AppDir and what was printed (cases J/K)
+- [x] macOS behaviour fixtures: the real script runs under a controlled PATH with `ditto` stubbed
+      and `create-dmg` absent, asserting the `.zip` fallback, the summary line, the absence of a
+      `.dmg` claim and the recorded manifest (cases L/M) — the first executable coverage
+      `build-dmg.sh` has ever had
+- [ ] **Not verified:** the CI step's `pip install shellcheck-py` on the fleet runner (PyPI
+      reachability from `ucs03-rtp` is untested here), and the macOS signing/notarization branches,
+      which need credentials and a macOS host.
+
+**Files:**
+- `tests/gates/run_shellcheck_fixtures.sh` (new) — the gate and its fixture pair
+- `tests/gates/fixtures/shellcheck/{bad,good}/build.sh` (new)
+- `tests/gates/run_packaging_fixtures.sh` — cases J/K/L/M added
+- `packaging/macos/build-dmg.sh` — Step 7 repaired; see the finding below
+- `scripts/check-packaging-manifests.py` — two self-test anchors re-pointed at the repaired lines
+- `.github/workflows/build.yml` — "ShellCheck gate (R-24)"; `.gitignore` — the CI venv
+
+**Finding:** the macOS behaviour fixture executed Step 7 of `build-dmg.sh` for the first time, and it
+could never have run. The manifest generator interpolated the script's own bash booleans into Python
+source (`"signed": false`), so every build died on a `NameError` before writing the manifest — the
+recorded outcome PKG-03 exists to produce was never written at all. Fixed by passing values through
+the environment; full detail in the evidence file.
+
+**Evidence:** shipped notes, findings, gates run and not-verified detail are in
+[SPRINT-47-EVIDENCE.md](SPRINT-47-EVIDENCE.md) § S47-09.
 
 ### S47-10 (T-26): Demo Host Rehearsal
 **Acceptance Criteria:**

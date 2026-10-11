@@ -7,6 +7,8 @@ obj/
 __pycache__/
 *.pyc
 .venv/
+# ShellCheck, installed by CI for the R-24 packaging gate (S47-09/T-45).
+.shellcheck-venv/
 
 # IDE
 .vs/

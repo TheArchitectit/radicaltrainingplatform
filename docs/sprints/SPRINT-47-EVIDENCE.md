@@ -287,7 +287,9 @@ install, all three helper self-tests, the tarball-only build and a working appim
   clause is **not** satisfied.
 - **No macOS anything.** `build-dmg.sh` was never executed: no build, no `.app`, no signing, no notarization,
   no `.dmg`, no launch. Its syntax is checked and its claims are checked statically; the code path itself is
-  unrun. PKG-03's "macOS smoke launches the bundle" clause is **not** satisfied.
+  unrun. PKG-03's "macOS smoke launches the bundle" clause is **not** satisfied. (S47-09 executed it for the
+  first time and found its manifest step could never have run — see § S47-09. The clause above still stands:
+  no bundle was launched.)
 - **No AppImage was ever produced.** `appimagetool` is absent, so the AppImage branch ran only against a stub
   in the fixture. That proves the control flow and the summary line, not that a real AppImage boots.
 - **The Linux build ran against a stub `dotnet`.** The AppDir was populated by a stub that honours `-o` and
@@ -359,6 +361,115 @@ brand, packaging) unchanged and green.
 - **The bridge surface gate is static.** It proves the source answers an unknown type and lists what
   it registers; it cannot prove the WebView2 host actually delivers that response. No Windows host
   on this fleet, so that stays unverified rather than assumed.
+
+### S47-09: ShellCheck + Packaging Fixtures
+
+**Shipped (S47-09 notes):**
+
+**The gate.** `tests/gates/run_shellcheck_fixtures.sh` runs ShellCheck over the two packaging scripts
+— R-24's scope — and over a fixture pair. It is a *behaviour* gate, not a lint run: R-24 names the
+"missing-bracket runtime defect class", where a conditional diagnostic fires and the script exits 0
+anyway, and that defect **parses**. `bash -n` is happy with it. So the gate asserts three things about
+the failing fixture and one about the passing one:
+
+| assertion | why |
+|---|---|
+| `bash -n` **accepts** the failing fixture | proving a syntax check is not the gate R-24 asked for |
+| ShellCheck **rejects** it, naming **SC2181** | the indirect `$?` is the defect, and it is named rather than merely counted |
+| running it **exits 0** having produced nothing | the defect is real, not a style opinion — the tool it needs is absent, it says so, and the exit code still reports success |
+| the passing fixture prints the same warning and exits non-zero | the gate must not become a ban on warnings; it requires the exit code to match the outcome |
+
+The passing fixture is deliberately *not* a contradiction of `build-appimage.sh`, which exits 0 when
+`appimagetool` is absent — there the tarball really is produced, so 0 is the honest answer. Absence is
+only a failure when it leaves nothing behind, and the fixture's comment says so.
+
+The gate **fails closed** when shellcheck is missing, printing how to install it. A gate that reports
+"pass" because it could not run is the same class of lie R-24 exists to remove. shellcheck is not in
+the fleet runner image, so CI installs a pinned `shellcheck-py` into `.shellcheck-venv/` — the exact
+path the gate looks for. That mechanism was exercised on this host end to end (venv → pip → gate with
+`SHELLCHECK` unset and a PATH without shellcheck), and the version is printed on every run because
+findings are version-dependent.
+
+**The behaviour fixtures (J/K/L/M in `run_packaging_fixtures.sh`).** R-24 asks for fixtures that
+"execute the script paths, not syntax checks", so these run the real scripts under the controlled PATH
+the packaging chain already builds and assert on what landed on disk and what was printed:
+
+- **J — no icon asset.** The icon branch warns, names the fix ("add a 256x256 PNG icon"), installs no
+  PNG into the hicolor directory, and the build still produces its tarball. A missing icon does not
+  take the build down with it.
+- **K — an icon asset present.** It is installed at
+  `AppDir/usr/share/icons/hicolor/256x256/apps/app.radicaltrainingplatform.RadicalTrainingPlatform.png`,
+  byte-identical to the asset, and the branch stays quiet.
+- **L — macOS, no icon, no create-dmg.** The `.zip` fallback is produced, the summary says
+  "Build complete (zip only)", no `Build complete:` line appears, no `.dmg` exists, and
+  `dist/build-manifest.json` records `dmgProduced: false` with the `.zip` in `artifacts`.
+- **M — macOS, an icon asset present.** The `.icns` lands in
+  `RadicalTrainingPlatform.app/Contents/Resources/` and the branch stays quiet.
+
+L and M are the first time `build-dmg.sh` has been executed at all. They need a `ditto` stub (it is
+macOS-only, and the fallback path shells out to it) — without that stub the fallback cannot run here
+and the fixture would prove nothing about the branch it exists to cover. What they still cannot prove
+is that the bundle runs on macOS.
+
+**Findings recorded this row:**
+
+- **The macOS build script could never have completed, and the fixture is what found it.** Step 7
+  generates `build-manifest.json` with an unquoted Python heredoc, interpolating the script's own bash
+  booleans straight into the program text: `"signed": ${SIGNED}` became `"signed": false`, and Python
+  has no `false` — `NameError: name 'false' is not defined`. **Every** run of `build-dmg.sh` died
+  there, which means the recorded signing/notarization outcome that PKG-03 exists to produce was never
+  written by any build. This is exactly the class R-24 is about: the script's own diagnostic record was
+  the thing that failed, and nothing that reads the script as text can see it. Fixed by passing all
+  values through the environment (`RTP_*`) with an explicit `flag()` coercion, so bash booleans become
+  real Python bools. The same interpolation would have broken on any codesign identity containing a
+  quote, so the fix covers `signingNote`/`notarizationNote` too.
+- **Two self-test anchors in `check-packaging-manifests.py` were pinned to the repaired lines.** They
+  seeded "the signing result is asserted rather than recorded" by rewriting `"signed": ${SIGNED},` —
+  a line that no longer exists. The self-test failed loudly with "fixture anchor not found" rather
+  than silently passing, which is the behaviour the anchor check is for; re-pointed at the new
+  `RTP_SIGNED="${SIGNED}"` form. All 15 seeded defects are caught again.
+- **A comment beginning `# shellcheck ` is a directive, not a comment.** The first draft of the gate
+  runner explained "shellcheck is not baked into the runner image" in a comment line that started with
+  those exact words, and ShellCheck refused to parse the file at all (SC1072/SC1073). Reworded, and the
+  reason is now recorded in the file so the next person does not re-introduce it.
+- **The gate runner was shipping the defect it tests for.** Its first version read
+  `bad_out="$(...)"` and then `if [ $? -eq 0 ]` — the indirect `$?`, SC2181, the precise thing the
+  gate fails the fixture for. Fixed to use the command substitution directly as the condition. The
+  remaining SC2164/SC2001 findings in the runner are the repository-wide baseline shared by all 13
+  `run_*_fixtures.sh` scripts, and R-24's scope is the packaging scripts — gating the rest of the
+  shell is a separate cleanup and was deliberately not folded in.
+- **PKG-03's "records actual results" clause was ticked in S47-07 while the recording code could never
+  execute.** S47-07 was honest that `build-dmg.sh` was never run, so nothing false was claimed — but
+  the box said the recording had shipped. It now genuinely has.
+
+**Gates run (this host):** `run_shellcheck_fixtures.sh` PASS (shellcheck 0.11.0; `bash -n` accepts the
+failing fixture; ShellCheck rejects it on SC2181; it exits 0 having produced nothing; the honest
+fixture prints the same warning and exits 1; both packaging scripts clean) · fail-closed path verified
+with shellcheck removed from PATH and `SHELLCHECK` unset (exit 1 with install instructions) · the CI
+mechanism verified end to end: `python3 -m venv .shellcheck-venv` + pinned `shellcheck-py==0.11.0.1`,
+then the gate with no `SHELLCHECK` override discovering `.shellcheck-venv/bin/shellcheck` ·
+`run_packaging_fixtures.sh` 19/19 including the four new cases (J/K/L/M) · `check-packaging-manifests.py`
+PASS and `--self-test` 15/15 · `generate-bundle-manifest.py --check` in sync (91 files) · all 13
+`run_*_fixtures.sh` gates PASS · 18 python gates PASS (lint-content ± self-test, validate-manifests ±
+self-test, item identity, item types, study content, packaging manifests ± self-test, imports, brand,
+release links ± self-test, legacy bridge ± self-test, content bundle, coverage self-test) · Core build
+0 warnings · `dotnet test` Core 257/257 · Desktop smoke 51/51 · Legacy WinForms build 0 errors
+(9 pre-existing warnings) · workflow YAML parses, `build-linux` now 24 steps.
+
+**Not verified this row:**
+
+- **The CI step's `pip install` on the fleet runner.** The mechanism is proven here, but whether
+  `ucs03-rtp` can reach PyPI at job time is untested from this host. If it cannot, the step fails
+  loudly (the gate fails closed) rather than skipping — which is the intended failure mode, but it
+  has not been observed.
+- **The macOS signing and notarization branches.** They need `codesign`, `xcrun notarytool`, a real
+  identity and a notary profile. L and M exercise the "not requested" branches only, so the repaired
+  `signingNote`/`notarizationNote` paths are proven to *run* but not proven to carry a real result.
+- **No real macOS build, bundle launch, `.dmg`, AppImage, or `flatpak-builder` run.** Unchanged from
+  S47-07; the same hosts are still missing. `ditto` is stubbed, so the `.zip` in L is a stub artifact.
+- **The icons are still missing.** J and L prove the warning branch; K and M seed a placeholder file
+  that is not a real image. No icon was authored — still handed forward from S47-07.
+- **No human review.** Nothing here changes any content's review state.
 
 
 

@@ -235,24 +235,53 @@ fi
 # ---------------------------------------------------------------------------
 echo "==> Step 7: Build manifest"
 GIT_SHA="$(git rev-parse HEAD 2>/dev/null || echo unknown)"
-python3 - "${BUILD_MANIFEST}" "${OUT_DIR}/build-manifest.json" << PY
-import json, pathlib, sys
+
+# Every value reaches Python through the environment, not by interpolation into
+# the program text. Interpolating this script's own booleans wrote `false` where
+# Python needs `False`, so the manifest step raised NameError and the build
+# failed on EVERY run — the recorded manifest that Step 7 exists to produce was
+# never written. Interpolating the signing note would have broken the same way
+# on any identity string containing a quote. The fixture pair in
+# tests/gates/run_packaging_fixtures.sh is what executes this branch.
+RTP_APP_ID="${APP_ID}" \
+RTP_BUNDLE_ID="${BUNDLE_ID}" \
+RTP_RUNTIME="${RADICALTRAININGPLATFORM_RUNTIME}" \
+RTP_CONFIGURATION="${RADICALTRAININGPLATFORM_BUILD_CONFIG}" \
+RTP_SOURCE_COMMIT="${GIT_SHA}" \
+RTP_UNIVERSAL="${UNIVERSAL}" \
+RTP_SIGNING_REQUESTED="${SIGNING_REQUESTED}" \
+RTP_SIGNED="${SIGNED}" \
+RTP_SIGNING_NOTE="${SIGNING_NOTE}" \
+RTP_NOTARIZATION_REQUESTED="${NOTARIZATION_REQUESTED}" \
+RTP_NOTARIZED="${NOTARIZED}" \
+RTP_NOTARIZATION_NOTE="${NOTARIZATION_NOTE}" \
+RTP_DMG_PRODUCED="${DMG_PRODUCED}" \
+RTP_DMG_NAME="${DMG_NAME}" \
+RTP_ZIP_NAME="${ZIP_NAME}" \
+python3 - "${BUILD_MANIFEST}" "${OUT_DIR}/build-manifest.json" << 'PY'
+import json, os, pathlib, sys
+
+def flag(name):
+    """The shell's booleans arrive as the strings 'true' and 'false'."""
+    return os.environ.get(name, "false") == "true"
+
 payload = {
-    "appId": "${APP_ID}",
-    "bundleId": "${BUNDLE_ID}",
-    "runtime": "${RADICALTRAININGPLATFORM_RUNTIME}",
-    "universal": ${UNIVERSAL},
-    "architectures": ["${RADICALTRAININGPLATFORM_RUNTIME}"],
-    "configuration": "${RADICALTRAININGPLATFORM_BUILD_CONFIG}",
-    "sourceCommit": "${GIT_SHA}",
-    "signingRequested": ${SIGNING_REQUESTED},
-    "signed": ${SIGNED},
-    "signingNote": "${SIGNING_NOTE}",
-    "notarizationRequested": ${NOTARIZATION_REQUESTED},
-    "notarized": ${NOTARIZED},
-    "notarizationNote": "${NOTARIZATION_NOTE}",
-    "dmgProduced": ${DMG_PRODUCED},
-    "artifacts": ["${DMG_NAME}"] if ${DMG_PRODUCED} else ["${ZIP_NAME}"],
+    "appId": os.environ["RTP_APP_ID"],
+    "bundleId": os.environ["RTP_BUNDLE_ID"],
+    "runtime": os.environ["RTP_RUNTIME"],
+    "universal": flag("RTP_UNIVERSAL"),
+    "architectures": [os.environ["RTP_RUNTIME"]],
+    "configuration": os.environ["RTP_CONFIGURATION"],
+    "sourceCommit": os.environ["RTP_SOURCE_COMMIT"],
+    "signingRequested": flag("RTP_SIGNING_REQUESTED"),
+    "signed": flag("RTP_SIGNED"),
+    "signingNote": os.environ["RTP_SIGNING_NOTE"],
+    "notarizationRequested": flag("RTP_NOTARIZATION_REQUESTED"),
+    "notarized": flag("RTP_NOTARIZED"),
+    "notarizationNote": os.environ["RTP_NOTARIZATION_NOTE"],
+    "dmgProduced": flag("RTP_DMG_PRODUCED"),
+    "artifacts": ([os.environ["RTP_DMG_NAME"]] if flag("RTP_DMG_PRODUCED")
+                  else [os.environ["RTP_ZIP_NAME"]]),
 }
 text = json.dumps(payload, indent=2) + "\n"
 for target in sys.argv[1:]:

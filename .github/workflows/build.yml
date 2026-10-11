@@ -86,6 +86,20 @@ jobs:
       - name: Legacy bridge surface (R-05)
         run: bash tests/gates/run_bridge_surface_fixtures.sh
 
+      # S47-09/T-45: R-24. ShellCheck over the packaging scripts — the class a
+      # syntax check cannot see, where a diagnostic fires and the script exits 0
+      # anyway. shellcheck is not in the runner image, so it is installed into
+      # the workspace-local venv the gate looks for; the gate fails closed if it
+      # is missing rather than reporting a pass it did not earn. The packaging
+      # behaviour fixtures (icon paths, macOS fallback) ride along in
+      # run_packaging_fixtures.sh above.
+      - name: ShellCheck gate (R-24)
+        run: |
+          python3 -m venv .shellcheck-venv
+          .shellcheck-venv/bin/pip install --quiet --disable-pip-version-check \
+            "shellcheck-py==0.11.0.1"
+          bash tests/gates/run_shellcheck_fixtures.sh
+
       # R-01/CI-03 companion gate: every relative import in the PWA must
       # resolve case-sensitively (deploy-host semantics). Fixture pair:
       # tests/gates/run_import_check_fixtures.sh
