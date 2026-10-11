@@ -81,6 +81,14 @@ jobs:
       - name: Run tests
         run: dotnet test RadicalTrainingPlatform.Core.Tests/RadicalTrainingPlatform.Core.Tests.csproj --configuration Release --collect:"XPlat Code Coverage"
 
+      # CI-02/ASM-11: collected coverage is now an enforced threshold (70%
+      # line on Core, Plan v2 D-04). The gate ships a below-threshold fixture
+      # that must fail and an above-threshold fixture that must pass.
+      - name: Enforce coverage threshold (CI-02)
+        run: |
+          python3 scripts/check-coverage.py
+          python3 scripts/check-coverage.py --self-test
+
       # Headless Avalonia UI smoke suite (xunit.v3/MTP — runs as the built exe,
       # not via VSTest). Boots the real App + MainWindow on the fleet runner
       # with no display: catches XAML-load breaks (e.g. Avalonia package skew)

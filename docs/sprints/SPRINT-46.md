@@ -20,7 +20,7 @@
 | S46-05 (T-15) | Bridge handlers: real effects or removal; desktop SessionStore consumption | R-05, R-06 | 2 | ✅ |
 | S46-06 (T-16) | Catalog tests, multi-select scoring tests, save/reload/error tests | REQ-MAN-05, L-06 | 2 | ✅ |
 | S46-07 (T-17) | Lint extension + manifest validator in CI | SPEC-10 10.6 | 2 | ✅ |
-| S46-08 (T-18) | Coverage threshold enforcement | CI-02 | 2 | ⚪ |
+| S46-08 (T-18) | Coverage threshold enforcement | CI-02 | 2 | ✅ |
 | S46-09 (T-37) | Semantic item identity for legacy banks + collision detector; retry outcome-set policy | R-13, R-14 | 2 | ⚪ |
 | S46-10 (T-38) | Study-continuation restore; streak/Skip repairs | R-15, R-17 | 2 | ⚪ |
 | S46-11 (T-39) | Disposal guards on cached simulator references | R-16 | 1 | ⚪ |
@@ -169,8 +169,15 @@
 **As a** release manager, **I want** coverage enforced, **so that** collection without enforcement stops.
 
 **Acceptance Criteria:**
-- [ ] Threshold declared (default 70% line on Core, ASM-11); enforcement step added; below-threshold fixture build fails CI
-- [ ] Critical surfaces (scoring, identity migration, storage failure, content parsing, security-gate boundaries) have direct behavior tests regardless of percentage
+- [x] Threshold declared (default 70% line on Core, ASM-11); enforcement step added; below-threshold fixture build fails CI
+- [x] Critical surfaces (scoring, identity migration, storage failure, content parsing, security-gate boundaries) have direct behavior tests regardless of percentage
+
+**Notes (S46-08 close, 2026-10-10):**
+- **Threshold declared and enforced (CI-02 / ASM-11).** `scripts/check-coverage.py` reads the coverlet cobertura XML and fails below 70% line coverage on authored Core source. Denominator excludes coverlet's generated-regex compiler output (`obj/.../RegexGenerator.g.cs`) — boilerplate, not authored code. Wired into the Linux leg immediately after the test step.
+- **Gate fixtures (SPEC-16).** `--self-test` pins three cases: a 40% fixture fails the threshold, a 90% fixture passes, and generated-regex lines are excluded from the denominator (a mixed report with 9/10 real lines covered must read as 90%, not 60%).
+- **Coverage before this row was 68.58% — below the declared threshold.** Two critical surfaces had almost no direct tests: `HardcodedReferenceService` (708 lines of reference/KB tables, previously reached only through an empty stub) and `ExamPdfExporter` (436 lines, zero tests). Added `ReferenceServiceTests` (keyword match, unknown-exam empty, KB links, general resources, Legacy static shims) and `ExamPdfExporterTests` (generate-and-return PDF bytes for exam + cheatsheet, empty-list paths). Result: **92.62% authored-source line coverage** (1833/1979).
+- **Critical surfaces now have direct behavior tests:** scoring (`ScoringVectorParityTests`, `ExamSessionViewModelTests`), identity migration (`DeriveExamCodeTests`, `ManifestCatalogTests`), storage failure (`SessionStoreTests` write-failure/corrupt-load), content parsing (`QuestionParserTests`, `lint-content.py` fixtures), security-gate boundaries (`vuln_gate` fixture matrix, `check-brand` fixtures).
+- **Not verified:** branch coverage is collected but not thresholded (ASM-11 is line-only); the PDF tests assert `%PDF` magic bytes and non-trivial length, not rendered layout; `ReferenceService`/`BlueprintService` static shims are exercised under `#pragma warning disable CS0618` because they are intentionally obsolete for the DI path.
 
 ### S46-09 (T-37): Semantic Item Identity
 **As a** content maintainer, **I want** stable semantic IDs for legacy bank items, **so that** progress history survives content edits.
