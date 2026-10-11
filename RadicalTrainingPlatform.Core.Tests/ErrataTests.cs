@@ -95,6 +95,11 @@ public class ErrataTests
         public string[] GetDirectories(string d) => Array.Empty<string>();
         public string ReadAllText(string path) => Files[N(path)];
         public void WriteAllText(string path, string c) => Files[N(path)] = c;
+        public void MoveFile(string source, string dest)
+        {
+            Files[N(dest)] = Files[N(source)];
+            Files.Remove(N(source));
+        }
         public void DeleteFile(string path) => Files.Remove(N(path));
         public void CreateDirectory(string path) => Dirs.Add(N(path));
         public string GetCurrentDirectory() => "/app";

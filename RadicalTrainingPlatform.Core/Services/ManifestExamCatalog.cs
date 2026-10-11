@@ -63,6 +63,8 @@ public class ManifestExamCatalog
                 Level = DeriveLevel(examId, manifest),
                 Color = DeriveColor(examId),
                 Description = $"{manifest.Vendor} — {manifest.OfficialVersion}",
+                PackVersion = manifest.OfficialVersion,
+                SourceReviewDate = manifest.SourceReviewDate,
             };
 
             var examDir = Path.GetDirectoryName(manifest.ManifestPath);

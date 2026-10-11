@@ -40,18 +40,14 @@ public static class ExamPdfExporter
     /// <summary>
     /// Generates a complete PDF study guide with a cover page, domain-grouped
     /// sections, formatted questions, explanations, and page numbers.
+    /// Identity strings come from <see cref="ExportText"/> (R-18).
     /// </summary>
-    /// <param name="questions">Questions to include (may be from multiple domains).</param>
-    /// <param name="examTitle">Human-readable exam title, e.g. "NCP-AI 6.10 - AI Infrastructure".</param>
-    /// <param name="examCode">Short exam code, e.g. "NCP-AI".</param>
-    /// <returns>The rendered PDF as a byte array.</returns>
-    public static byte[] GenerateExamPdf(List<Question> questions, string examTitle, string examCode)
+    public static byte[] GenerateExamPdf(List<Question> questions, ExportMetadata meta)
     {
         EnsureLicense();
+        ArgumentNullException.ThrowIfNull(meta);
 
         if (questions == null) questions = new List<Question>();
-        examTitle ??= string.Empty;
-        examCode ??= string.Empty;
 
         var generatedAt = DateTime.Now;
         var domains = questions
@@ -68,9 +64,9 @@ public static class ExamPdfExporter
                 page.PageColor(Color.FromHex(BgDark));
                 page.DefaultTextStyle(t => t.FontColor(Color.FromHex(TextColor)).FontSize(11));
 
-                page.Header().Element(h => ComposeHeader(h, examCode, examTitle));
-                page.Content().Element(c => ComposeContent(c, examTitle, examCode, questions.Count, generatedAt, domains));
-                page.Footer().Element(ComposeFooter);
+                page.Header().Element(h => ComposeHeader(h, meta));
+                page.Content().Element(c => ComposeContent(c, meta, questions.Count, generatedAt, domains));
+                page.Footer().Element(f => ComposeFooter(f, meta));
             });
         }).GeneratePdf();
     }
@@ -79,17 +75,13 @@ public static class ExamPdfExporter
     /// Generates a "missed questions only" review PDF using the same theme
     /// and question layout as the full study guide.
     /// </summary>
-    /// <param name="examCode">Short exam code used in the header / cover.</param>
-    /// <param name="wrongQuestions">Subset of questions the learner got wrong.</param>
-    /// <returns>The rendered PDF as a byte array.</returns>
-    public static byte[] GenerateCheatSheetPdf(string examCode, List<Question> wrongQuestions)
+    public static byte[] GenerateCheatSheetPdf(ExportMetadata meta, List<Question> wrongQuestions)
     {
         EnsureLicense();
+        ArgumentNullException.ThrowIfNull(meta);
 
         if (wrongQuestions == null) wrongQuestions = new List<Question>();
-        examCode ??= string.Empty;
 
-        var examTitle = $"{examCode} - Cheat Sheet (Missed Questions)";
         var generatedAt = DateTime.Now;
         var domains = wrongQuestions
             .GroupBy(q => string.IsNullOrWhiteSpace(q.Domain) ? "General" : q.Domain)
@@ -105,28 +97,28 @@ public static class ExamPdfExporter
                 page.PageColor(Color.FromHex(BgDark));
                 page.DefaultTextStyle(t => t.FontColor(Color.FromHex(TextColor)).FontSize(11));
 
-                page.Header().Element(h => ComposeHeader(h, examCode, examTitle));
-                page.Content().Element(c => ComposeContent(c, examTitle, examCode, wrongQuestions.Count, generatedAt, domains));
-                page.Footer().Element(ComposeFooter);
+                page.Header().Element(h => ComposeHeader(h, meta));
+                page.Content().Element(c => ComposeContent(c, meta, wrongQuestions.Count, generatedAt, domains, isCheatSheet: true));
+                page.Footer().Element(f => ComposeFooter(f, meta));
             });
         }).GeneratePdf();
     }
 
     // ---------------------------------------------------------------------
-    // Page composition helpers
+    // Page composition helpers — identity strings always via ExportText
     // ---------------------------------------------------------------------
 
-    private static void ComposeHeader(IContainer container, string examCode, string examTitle)
+    private static void ComposeHeader(IContainer container, ExportMetadata meta)
     {
         container.PaddingBottom(8).Column(col =>
         {
             col.Item().Row(row =>
             {
-                row.RelativeItem().Text(examCode)
+                row.RelativeItem().Text(ExportText.HeaderCode(meta))
                     .FontSize(10).Bold()
                     .FontColor(Color.FromHex(HeadingCyan));
 
-                row.ConstantItem(140).AlignRight().Text(examTitle)
+                row.ConstantItem(180).AlignRight().Text(ExportText.CoverTitle(meta))
                     .FontSize(9)
                     .FontColor(Color.FromHex(MutedColor));
             });
@@ -135,15 +127,18 @@ public static class ExamPdfExporter
         });
     }
 
-    private static void ComposeFooter(IContainer container)
+    private static void ComposeFooter(IContainer container, ExportMetadata meta)
     {
-        container.PaddingTop(8).Row(row =>
+        container.PaddingTop(8).Column(col =>
         {
-            row.RelativeItem().Text("RadicalTrainingPlatform - Nutanix Certification Practice")
-                .FontSize(8)
-                .FontColor(Color.FromHex(MutedColor));
+            foreach (var line in ExportText.FooterLines(meta))
+            {
+                col.Item().Text(line)
+                    .FontSize(7)
+                    .FontColor(Color.FromHex(MutedColor));
+            }
 
-            row.ConstantItem(80).AlignRight().Text(t =>
+            col.Item().PaddingTop(2).AlignRight().Text(t =>
             {
                 t.DefaultTextStyle(s => s.FontSize(8).FontColor(Color.FromHex(MutedColor)));
                 t.Span("Page ");
@@ -156,19 +151,17 @@ public static class ExamPdfExporter
 
     private static void ComposeContent(
         IContainer container,
-        string examTitle,
-        string examCode,
+        ExportMetadata meta,
         int totalQuestions,
         DateTime generatedAt,
-        List<IGrouping<string, Question>> domains)
+        List<IGrouping<string, Question>> domains,
+        bool isCheatSheet = false)
     {
         container.Column(col =>
         {
-            // Cover block
             col.Item().PaddingVertical(20).Element(c => ComposeCover(
-                c, examTitle, examCode, totalQuestions, generatedAt));
+                c, meta, totalQuestions, generatedAt, isCheatSheet));
 
-            // Each domain
             foreach (var group in domains)
             {
                 col.Item().PageBreak();
@@ -179,10 +172,10 @@ public static class ExamPdfExporter
 
     private static void ComposeCover(
         IContainer container,
-        string examTitle,
-        string examCode,
+        ExportMetadata meta,
         int totalQuestions,
-        DateTime generatedAt)
+        DateTime generatedAt,
+        bool isCheatSheet)
     {
         container.AlignCenter().Column(col =>
         {
@@ -191,12 +184,13 @@ public static class ExamPdfExporter
                 .FontColor(Color.FromHex(AccentMagenta))
                 .LetterSpacing(0.3f);
 
-            col.Item().PaddingTop(40).Text(examTitle)
+            col.Item().PaddingTop(40).Text(ExportText.CoverTitle(meta)
+                    + (isCheatSheet ? " — Cheat Sheet (Missed Questions)" : ""))
                 .FontSize(28).Bold()
                 .FontColor(Color.FromHex(HeadingCyan))
                 .AlignCenter();
 
-            col.Item().PaddingTop(8).Text(examCode)
+            col.Item().PaddingTop(8).Text(ExportText.CoverCode(meta))
                 .FontSize(16)
                 .FontColor(Color.FromHex(TextColor))
                 .AlignCenter();
@@ -214,10 +208,16 @@ public static class ExamPdfExporter
                 .AlignCenter();
 
             col.Item().PaddingTop(60).Text(
-                    "This study guide contains fully validated multiple-choice and multi-select "
+                    "This study guide contains multiple-choice and multi-select "
                     + "questions with correct answers and explanations. Use it to review key "
                     + "concepts and identify weak areas before your exam.")
                 .FontSize(11)
+                .FontColor(Color.FromHex(MutedColor))
+                .AlignCenter()
+                .LineHeight(1.4f);
+
+            col.Item().PaddingTop(24).Text(ExportText.Disclaimer)
+                .FontSize(9)
                 .FontColor(Color.FromHex(MutedColor))
                 .AlignCenter()
                 .LineHeight(1.4f);

@@ -382,8 +382,16 @@ public partial class MainWindow : Window
         var code = _session?.ExamCode ?? _lastExamCode;
         if (string.IsNullOrEmpty(code)) return null;
         if (!_exams.TryGetValue(code, out var questions) || questions.Count == 0) return null;
-        var title = _catalog.FirstOrDefault(c => string.Equals(c.ExamCode, code, StringComparison.OrdinalIgnoreCase))?.DisplayName ?? code;
-        return ExamPdfExporter.GenerateExamPdf(questions, title, code);
+        var item = _catalog.FirstOrDefault(c => string.Equals(c.ExamCode, code, StringComparison.OrdinalIgnoreCase));
+        // R-18: canonical exam ID and display label are separate fields. The
+        // old path passed DisplayName into the code slot (NET-10 export defect).
+        var meta = new ExportMetadata(
+            CanonicalExamId: code,
+            DisplayName: item?.DisplayName ?? code,
+            TrackTitle: item?.DisplayName,
+            PackVersion: item?.PackVersion,
+            SourceReviewDate: item?.SourceReviewDate);
+        return ExamPdfExporter.GenerateExamPdf(questions, meta);
     }
 
     private async void ExportStudyGuide()

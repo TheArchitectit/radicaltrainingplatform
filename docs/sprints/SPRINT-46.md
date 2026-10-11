@@ -24,7 +24,7 @@
 | S46-09 (T-37) | Semantic item identity for legacy banks + collision detector; retry outcome-set policy | R-13, R-14 | 2 | ✅ |
 | S46-10 (T-38) | Study-continuation restore; streak/Skip repairs | R-15, R-17 | 2 | ✅ |
 | S46-11 (T-39) | Disposal guards on cached simulator references | R-16 | 1 | ✅ |
-| S46-12 (T-40) | PDF export: canonical ID vs display label; vendor-neutral footer; atomic session save + corrupt recovery | R-18, R-20 | 2 | ⚪ |
+| S46-12 (T-40) | PDF export: canonical ID vs display label; vendor-neutral footer; atomic session save + corrupt recovery | R-18, R-20 | 2 | ✅ |
 | S46-13 (T-44) | Storage recovery boundary tests (corrupt entry, quota, blocked) | R-23 | 1 | ⚪ |
 | S46-14 (T-42) | CefGlue NoSandbox scoped hardening review + navigation allowlist decision | R-21 | 1 | ⚪ |
 | S46-15 (T-43*) | Web runtime batch remainder (if not closed in Sprint 45) | R-22 | 1 | ⚪ |
@@ -230,9 +230,20 @@
 **As a** learner, **I want** exports that tell the truth, **so that** printed output matches the app.
 
 **Acceptance Criteria:**
-- [ ] Canonical item ID vs display label resolved correctly in exports
-- [ ] Vendor-neutral footer
-- [ ] Atomic session save + corrupt-recovery behavior tested
+- [x] Canonical item ID vs display label resolved correctly in exports
+- [x] Vendor-neutral footer
+- [x] Atomic session save + corrupt-recovery behavior tested
+
+**Notes (S46-12 close, 2026-10-10):**
+- **R-18 identity split.** New `ExportMetadata` record keeps `CanonicalExamId` and `DisplayName` as separate fields — the NET-10 defect was the display label used as the canonical exam code on the PDF path. `ExportText` is the single source of identity strings (`HeaderCode`, `CoverTitle`, `CoverCode`, `FooterLines`, `AllIdentityStrings`); the QuestPDF composer draws exactly those. `MainWindow.GenerateStudyGuidePdf` now builds metadata from the catalog (`ExamCatalogItem` gained `PackVersion` / `SourceReviewDate`, populated from the exam manifest). `GenerateExamPdf` / `GenerateCheatSheetPdf` take `ExportMetadata` — the old `(title, examCode)` pair is gone, so the conflation cannot be reintroduced by a careless caller.
+- **Vendor-neutral footer (R-12/R-18).** The old footer said "RadicalTrainingPlatform - Nutanix Certification Practice" (vendor branding on a CompTIA pack). New footer lines: track title, unaffiliated status, `Official exam code: <canonicalId>  ·  Pack: <version>  ·  Source reviewed: <date>`, then the exact SPEC-16 disclaimer. Missing optional fields are omitted, never invented. The cover no longer claims "fully validated" and carries the disclaimer as well.
+- **Old failure reproduced + archived (R-18 acceptance).** `OldFailure_DisplayLabelAsCanonicalCode_IsPinnedOut` is the regression pin: it fails if the code slot ever carries the display label again. The pre-fix shape (DisplayName passed where the code belonged, Nutanix-branded footer) is described here as the archived reproduction; the pin is the living evidence.
+- **Per-pack export fixtures (TM-86).** Theory over the four released packs (`COMPTIA-A-1201`, `COMPTIA-A-1202`, `COMPTIA-NET-009`, `NCA-75`) asserts the canonical code in the header/cover/footer and generates real PDF bytes. When `content/exams/*/exam.json` is on disk, `ReleasedPacks_FromManifests_ExportIdentityMatches` loads each manifest and asserts identity matches (examId, displayName, officialVersion as pack, sourceReviewDate).
+- **R-20 atomic save.** `JsonSessionStore.Save` writes `<id>.json.tmp` then `MoveFile` over the live path — the live file is never truncated by `WriteAllText`. A failed write deletes the staging file and rethrows; the prior file stays byte-identical. `IFileProvider` gained `MoveFile` (DefaultFileProvider uses `File.Move(..., overwrite: true)`).
+- **R-20 corrupt quarantine.** `Load` on a corrupt/unreadable file moves it to `<id>.json.corrupt` (evidence preserved), fires `ISessionStore.CorruptQuarantined` (`SessionQuarantineNotice`), and returns null — a clean start that is never silent. The previous contract (Load throws `JsonException`) is replaced: throwing bricked the store; quarantine + loud notice is the honest recoverable path (R-20 / Plan v2 L-02). Quarantined sessions drop out of `List()`/`Has()`.
+- **R-20 ID path safety.** Session IDs are rejected if they contain POSIX separators, Windows-invalid filename chars (`< > : " | ? *`), extension dots, control chars, leading/trailing whitespace, or Windows reserved device names (`CON`, `PRN`, `AUX`, `NUL`, `COM0-9`, `LPT0-9`). Fixtures cover each class.
+- **Fixtures.** Session store: temp-then-rename proof, kill-after-temp-write leaves prior file intact + no `.tmp` ghost, write-failure never claims success, corrupt/empty quarantine + notice + clean start, expanded ID rejection. PDF: identity pins, vendor-neutral footer, exact disclaimer, per-pack theory, manifest-driven pack scan. Core 246/246; Desktop 31/31.
+- **Not verified:** full PDF *text extraction* from the rendered bytes (no PDF parser in the test stack) — identity is pinned on `ExportText`, the exact strings the composer draws, plus a `%PDF` real-bytes smoke. QuestPDF stream compression makes raw-byte string search unreliable, so the "renders" claim is at the composed-strings layer. Atomic rename is asserted against `IFileProvider.MoveFile` (fake + real `File.Move`); a true SIGKILL mid-write on ext4/NTFS was not executed. Cross-platform ID fixtures run the *rules* on Linux; they are not executed on Windows/macOS hosts in this session. Web `ProgressStore` (the other persistence surface) is untouched — R-20 is the Desktop `JsonSessionStore` path.
 
 ### S46-13 (T-44): Storage Recovery Boundary Tests
 **As a** platform engineer, **I want** corrupt/quota/blocked storage handled, **so that** broken state never silently pretends to be saved.

@@ -12,6 +12,8 @@ public interface IFileProvider
     string[] GetDirectories(string directory);
     string ReadAllText(string path);
     void WriteAllText(string path, string content);
+    /// <summary>Atomically replace <paramref name="dest"/> with <paramref name="source"/> (same volume).</summary>
+    void MoveFile(string source, string dest);
     void DeleteFile(string path);
     void CreateDirectory(string path);
     string GetCurrentDirectory();
@@ -32,6 +34,7 @@ public class DefaultFileProvider : IFileProvider
     public string[] GetDirectories(string directory) => Directory.GetDirectories(directory);
     public string ReadAllText(string path) => File.ReadAllText(path);
     public void WriteAllText(string path, string content) => File.WriteAllText(path, content);
+    public void MoveFile(string source, string dest) => File.Move(source, dest, overwrite: true);
     public void DeleteFile(string path) => File.Delete(path);
     public void CreateDirectory(string path) => Directory.CreateDirectory(path);
     public string GetCurrentDirectory() => Directory.GetCurrentDirectory();

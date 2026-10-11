@@ -14,5 +14,9 @@ public class ExamCatalogItem
     public int DomainCount { get; set; }
     public string Level { get; set; } = "";           // Entry, Associate, Professional, Advanced, Expert
     public string Color { get; set; } = "#00F0FF";    // Neon accent for the card border
+    /// <summary>Pack/content version from the exam manifest (R-18 footer).</summary>
+    public string PackVersion { get; set; } = "";
+    /// <summary>Human source-review date from the manifest. Never invented (SPEC-16).</summary>
+    public string SourceReviewDate { get; set; } = "";
     public List<string> SourceFiles { get; set; } = new();
 }
