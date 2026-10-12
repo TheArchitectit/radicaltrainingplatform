@@ -290,7 +290,29 @@ async function main() {
         cdp?.close();
         proc.kill('SIGKILL');
         server.close();
-        rmSync(profile, { recursive: true, force: true });
+        // Chrome keeps writing to its profile for a moment after SIGKILL, so an
+        // immediate rmSync races it and throws ENOTEMPTY — measured on
+        // tests/e2e/nca-lab-web.mjs, which shares this shape, on a run whose
+        // every assertion had passed. A leftover temp directory is not a gate
+        // failure: wait for the process to actually go, then remove best-effort
+        // with retries.
+        if (proc.exitCode === null && proc.signalCode === null) {
+            await new Promise((done) => {
+                proc.once('exit', done);
+                setTimeout(done, 2000);   // never hang on a process that will not die
+            });
+        }
+        // SIGKILL reaps the parent, not Chrome's zygote/GPU children, and they
+        // hold the profile open a little longer. Retry until it goes rather
+        // than leaving a ~4 MB directory behind on every run.
+        for (let attempt = 0; attempt < 20; attempt++) {
+            try {
+                rmSync(profile, { recursive: true, force: true, maxRetries: 3, retryDelay: 100 });
+                break;
+            } catch {
+                await sleep(250);
+            }
+        }
         if (failures.length && stderr) say(`browser stderr (tail): ${stderr.slice(-600)}`);
     }
 }
