@@ -20,7 +20,7 @@
 | S48-03 (T-33) | 14 lessons + 40-item pilot (remapped + newly authored gap fills) | REQ-NCA-02/06 | 3 | 🟡 |
 | S48-04 (T-34) | Cheatsheet correction + beta logistics cleanup + scheduling-link currency | REQ-NCA-04, C-07 | 1 | 🟡 |
 | S48-05 (T-35) | Four NCA scenarios with validators and walkthroughs | REQ-NCA-07, REQ-SC-01..06 | 2 | 🟡 |
-| S48-06 (T-36) | Travel freeze per REQ-NCA-08 once itinerary confirms cutoff | REQ-NCA-08 | 1 | ⚪ |
+| S48-06 (T-36) | Travel freeze per REQ-NCA-08 once itinerary confirms cutoff | REQ-NCA-08 | 1 | 🟡 |
 
 **Status key:** ✅ shipped and verified on this host · 🟡 shipped and gated, with named verification gaps listed under the row's *Not verified* notes · ⚪ not started.
 
@@ -342,12 +342,74 @@ these scenarios (it is not in the freeze chain either — it needs a browser).
 fresh station → `complete (N of N met)` after its walkthrough.
 
 ### S48-06 (T-36): Travel Freeze
+**As a** track owner, **I want** the NCA cut frozen at a recorded head before departure, **so that** what I demonstrate in California is a known, reproducible build.
+
 **Acceptance Criteria:**
-- [ ] Departure cutoff confirmed from the trip itinerary before schedule commitment (ASM-09)
-- [ ] Freeze checklist per SPEC-11 11.7: branch, tag-free head record, gate results with counts, RedEye lane logs + self-test record, usable build, no content edits after freeze
+- [ ] Departure cutoff confirmed from the trip itinerary before schedule commitment (ASM-09) — **not met, and not met by choice.** No itinerary exists in this repository, and ASM-09 itself records the exact departure as unverified. I did not invent a cutoff. What exists instead is a *candidate* freeze at a recorded head; whether that head is the last one before departure is unknown
+- [x] Freeze checklist per SPEC-11 11.7: branch, tag-free head record, gate results with counts, RedEye lane logs + self-test record, usable build, no content edits after freeze — head `4a399fb`, **43/43 gates**, Core 263/263, Desktop 51/51, coverage 92.07%, PWA smoke clean, bundle hash-matched; lane logs and the seeded-defect self-test record reproduced at the head
+
+**Status 🟡 because:** the first criterion is unmet. Everything else in the row is
+produced and reproducible, but a freeze whose cutoff is unconfirmed is a freeze
+waiting on one input from the owner — and saying so is the whole point of
+REQ-NCA-08's "confirmed from the trip itinerary" clause.
+
+**What was deliberately not done.** No cutoff date was guessed from the Oct 25–28
+window. The window is not the departure time, and a freeze record that names a
+date it cannot source is worse than one that says it does not know: a reader
+would treat it as confirmed. The record instead states, in its own second
+section, exactly which criterion it fails and why.
+
+**A second exclusion reason appeared, and it is the gate working.** Running the
+NCA lane at this head shows two distinct reasons: `verdict is 'return'` (the
+model stage is not configured) and — new since S48-02 — **`stale log (manifest
+changed since review)`**. Replacing `exam.json` with the current blueprint
+invalidates every log bound to the old manifest hash. That is a manifest change
+correctly re-opening a review, not a regression, and it is recorded rather than
+worked around. All **180** NCA items are excluded (140 bank + 40 pilot); across
+all exams, **229**.
+
+**The two prior freeze artifacts were left alone.** SPEC-16 16.6: "Freeze means
+no content edits afterward without a new head record." The S47-13 record
+(`2026-10-23-freeze.md`) and its demo sweep (`2026-10-11-demo-sweep.md`) measure
+39/39 at `0d1f565` and 46 scenarios respectively. Both were true; neither is
+rewritten. This freeze produces its own sweep artifact at its own head.
+
+**Files:**
+- `docs/qa/release-evidence/2026-10-25-nca-freeze.md` (new) — the freeze record
+- `docs/qa/release-evidence/2026-10-25-demo-sweep.md` — regenerated at the freeze head `4a399fb` (was generated at `efe5e31`)
+
+**Not verified:** the departure cutoff (see above). Nothing in this row was
+independently verified by a second party — the gate chain, test counts, coverage
+figure, smoke run and lane self-test are all single-run measurements on this host
+at this head. The full list of what the freeze does *not* establish is in the
+record's own known-unverified section: no item is reviewed, the Nutanix guide was
+never opened, the lab UI was never driven in a browser, `Desktop.Tests` has no CI
+signal, and the two vendor PDFs are absent.
+
+**Measured:** freeze chain **43/43 at `4a399fb`**, exit 0, with `--expect-sha`
+matching. Core 263/263 · Desktop 51/51 · coverage 92.07% · web fixtures 26/26 +
+the must-fail self-test · NCA scenarios 13/13 · demo sweep 50 scenarios, all
+incomplete → complete.
 
 ---
 
 ## Sprint Acceptance (October 25–28 California-ready definition, SPEC-00 00.5)
 
 The NCA track presents the current official blueprint (sections, objective IDs, AOS 7.5 / AHV 11.0 / pc.7.5), 14 short lessons, 40 reviewed remapped-or-authored items, four tested deterministic scenarios, and a corrected objective map; beta labels survive only where a retained claim was checked. All SPEC-08/10 gates green at the frozen head, including the repaired vulnerability gate proven by its must-fail fixture.
+
+**Where the sprint actually stands against that target.** Every structural piece
+is in place and gated — the blueprint, the 14 lessons, the 40-item pilot, the four
+scenarios, the remap inventory, the corrected companion surfaces, and 43/43 gates
+green at `4a399fb`. Three words in the paragraph above are not yet true, and no
+row claims them:
+
+- **"reviewed"** — all 180 NCA items are excluded by the RedEye gate; no item has
+  a passing log. The pilot ships at `draft-preview`.
+- **"beta labels survive only where a retained claim was checked"** — no claim was
+  checked against the current guide, so the surviving beta labels are the
+  *unexamined* ones, which is the honest state and not the finished one.
+- **"frozen head"** — the head is recorded and reproducible, but the departure
+  cutoff is unconfirmed (ASM-09), so the freeze is a candidate, not a closure.
+
+All six sprint rows stand 🟡 on those named gaps rather than ✅ on a target that
+has not been met.
