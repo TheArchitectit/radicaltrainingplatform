@@ -42,7 +42,7 @@ document limit (CLAUDE.md).
 | S47-12 (T-28) | Screenshots/video backup; non-AI backup path | REQ-AI-07 | 1 | ✅ |
 | S47-13 (T-29) | Freeze: branch, base/head SHA, changed files, gate results, RedEye lane logs + seeded-defect self-test record, usable build | SPEC-11 11.7 | 1 | ✅ |
 | S47-14 (T-30) | Demo script final: 90-second loop (learn, try, ask, verify) + exact disclaimer + no-patient/no-business-system line | REQ-BRAND-02 | 1 | ✅ |
-| S47-15 (R-10) | LICENSE: prepare BSD-3-Clause decision record + README pointer; final file drop waits on owner confirmation (HG-01) | R-10, C-08/C-09 | 1 | ⚪ |
+| S47-15 (R-10) | LICENSE: prepare BSD-3-Clause decision record + README pointer; final file drop waits on owner confirmation (HG-01) | R-10, C-08/C-09 | 1 | 🟡 |
 
 **Total:** 27 points. Sprint D explicitly excludes architecture migration and post-freeze content authoring.
 
@@ -442,9 +442,47 @@ the host. Nothing here was rehearsed in a live room.
 **As an** owner, **I want** the missing LICENSE resolved honestly, **so that** README claims match reality.
 
 **Acceptance Criteria:**
-- [ ] Decision record + README pointer prepared in advance of the owner confirmation (HG-01 — the package's sole standing code-license gate)
-- [ ] Final LICENSE file drop happens only after one-line owner confirmation of the BSD-3-Clause text
-- [ ] Docs note distinguishes code license, original content, and third-party material (Plan v2 C-08); adding it does not license vendor manuals or question banks (C-09)
+- [x] **Decision record prepared in advance** — `docs/LICENSE-DECISION.md`: the
+  finding, the SPDX BSD-3-Clause text ready to drop, and the HG-01 confirmation
+  stated as one line
+- [x] **README pointer prepared, and the unbacked claim withdrawn** — the
+  `## 📄 License` section no longer asserts a license the repository cannot
+  produce; it says *proposed, not yet in effect*, links the record, and states
+  that the file lands on confirmation. The three surfaces that claim it (badge,
+  tree line, section) are named so the drop sweeps all of them
+- [x] **Code / original content / third-party distinguished (C-08)** — the record
+  separates what the license would cover (code; and original content, which the
+  owner is asked to confirm explicitly) from what it cannot
+- [x] **Does not license vendor manuals or question banks (C-09)** — stated
+  plainly, with the two `docs/` manual files named
+- [x] **File drop waits on HG-01** — **no `LICENSE` file is dropped**, and the
+  copyright holder line is left blank rather than invented
+
+**Two things found while writing it, both recorded rather than fixed:**
+
+1. **The two vendor manuals are not in the repository.** `docs/AHV-Admin-Guide-v11_0.pdf`
+   and `docs/Prism-Central-Guide-vpc_7_5.pdf` are 132 and 133 bytes — large-object
+   pointer text naming objects of 4,323,527 and 19,424,163 bytes — and there is **no
+   `.gitattributes`**, so no filter is configured and nothing is tracked that way
+   (`git check-attr filter` → `unspecified`). A clone gets pointer text where a manual
+   is claimed. Found by the **release-truth gate** (S47-08) rejecting the first draft
+   of this section — the gate caught a claim the repository cannot keep, in the row
+   about claims the repository cannot keep.
+2. **The README's own disclaimer is a paraphrase** — *"not affiliated with or endorsed
+   by Nutanix, Inc."* — not the exact REQ-BRAND-02 string, and it is ungated:
+   `check-brand.py` scans `Web/`, `content/` and the demo-script glob, not the repo
+   root. Worth closing when the README is rewritten.
+
+**Files:**
+- `docs/LICENSE-DECISION.md` (new) — the decision record
+- `README.md` — `## 📄 License` section rewritten
+
+**Not verified:** the owner's confirmation (HG-01) has not been given, so the license
+is **not in effect** and no file is dropped. The `<YEAR>`/`<COPYRIGHT HOLDER>` line is
+the owner's to supply — the project was renamed from a fork (`2e4f008`), so the earliest
+commit here does not settle first-publication authorship.
+
+**Evidence:** [../../LICENSE-DECISION.md](../../LICENSE-DECISION.md).
 
 ---
 

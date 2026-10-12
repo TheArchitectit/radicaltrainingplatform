@@ -165,7 +165,17 @@ This tool is for **study purposes only**. Questions are generated based on publi
 
 ## 📄 License
 
-BSD 3-Clause License — see [LICENSE](LICENSE) for details.
+**Proposed: BSD 3-Clause — not yet in effect.** There is no `LICENSE` file at
+the repository root yet, so nothing here is licensed by it today.
+
+The text is prepared and waiting on one owner confirmation, because a license
+names a legal instrument. See [docs/LICENSE-DECISION.md](docs/LICENSE-DECISION.md)
+for the proposed text, what it would and would not cover, and what is left to
+confirm. The file lands at the root when that confirmation is given.
+
+Note that a code license covers the **code**. It does not cover the vendor
+manuals under `docs/` or any third-party material — those are separate rights
+questions, and the decision record says so explicitly.
 
 ## 🤝 Contributing
 
