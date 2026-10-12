@@ -3,6 +3,7 @@
 Items caught by the ArchitectIT daily digest and routed here by the backlog bridge (NEXT ids = Mission Control hit-list). Triage in MC; do not edit ids.
 
 ## Open
+- [ ] **NEXT-376 —** Project N107's ship-gate that could not fail and the harness false-pass need a shared meta-test that mutates each artifact and asserts red; also date the tutor recorded-fallback so it does not become permanent by inertia.  *(source: digest 2026-10-12)*.  *(digest: 2026-10-12; source: MC hit-list)*
 - [ ] **NEXT-362 —** Add a fail-closed negative test proving Project N107's repaired vulnerability gate now blocks.  *(source: digest 2026-10-11)*.  *(digest: 2026-10-12; source: MC hit-list)*
 - [ ] **NEXT-368 —** Push Project N107's local feature burst (study tracks, ticket lab, RedEye gate, demo cuts) so the October 23 demo work is CI-covered.  *(source: digest 2026-10-11)*.  *(digest: 2026-10-12; source: MC hit-list)*
 - [ ] **NEXT-360 —** Push or merge Project N107's unpushed feature burst (study tracks, ticket lab, review lane) from the main workstation before anything else touches that machine.  *(source: digest 2026-10-11)*.  *(digest: 2026-10-12; source: MC hit-list)*
