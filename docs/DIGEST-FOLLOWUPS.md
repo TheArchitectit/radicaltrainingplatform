@@ -3,6 +3,7 @@
 Items caught by the ArchitectIT daily digest and routed here by the backlog bridge (NEXT ids = Mission Control hit-list). Triage in MC; do not edit ids.
 
 ## Open
+- [ ] **NEXT-368 —** Push Project N107's local feature burst (study tracks, ticket lab, RedEye gate, demo cuts) so the October 23 demo work is CI-covered.  *(source: digest 2026-10-11)*.  *(digest: 2026-10-12; source: MC hit-list)*
 - [ ] **NEXT-360 —** Push or merge Project N107's unpushed feature burst (study tracks, ticket lab, review lane) from the main workstation before anything else touches that machine.  *(source: digest 2026-10-11)*.  *(digest: 2026-10-12; source: MC hit-list)*
 *(digest 2026-10-02 "next" item — no NEXT id assigned; addressed 2026-10-03: rebuild
 runbook added at deploy/runner-rebuild-runbook.md)*
