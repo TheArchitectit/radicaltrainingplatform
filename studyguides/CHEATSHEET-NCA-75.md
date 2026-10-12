@@ -1,5 +1,12 @@
 # NCA 7.5 Beta Exam — Quick Reference Cheat Sheet
 
+> **Status note — dated 2026-10-11.** This sheet was written against the NCA 7.5
+> **beta** blueprint and has *not* been re-verified claim-by-claim against the
+> current (June 15, 2026) guide. Per REQ-NCA-04, "beta" wording is removed only
+> from claims individually re-verified; everything else keeps its original label
+> rather than being silently relabelled. One claim **has** been corrected and is
+> marked inline: the CVM SSH default (errata **NCA-75-Part3-GapFill-Q3**).
+
 ## Must-Know Numbers
 | Metric | Value |
 |--------|-------|
@@ -93,7 +100,7 @@
 ## AOS 7.5 Key Changes (Exam Focus)
 - **AES default** — Autonomous Extent Store default for new all-flash + qualifying hybrid upgrades
 - **vTPM + KMS** — Key Management Service integration
-- **CVM SSH disabled by default** on fresh installs (security hardening)
+- **CVM SSH enabled by default** on fresh installs — the plan to disable it was deferred (corrected per errata **NCA-75-Part3-GapFill-Q3**; the earlier "disabled by default" claim was wrong)
 - **185 TB/node** max all-flash storage
 - **VM Startup Policies** — Ordered boot sequences during HA
 - **LCM DUO** — Dark site upgrade orchestrator in Prism Central
@@ -132,10 +139,16 @@
 | RBAC + Projects | No | Yes |
 | Categories | No | Yes |
 
-## Beta Exam Tips
+## Beta Exam Tips — dated 2026-10-11 (beta window has closed)
+
+> Kept as a historical record only. The beta period below ended **June 14, 2026**;
+> as of the date on this note the waiver code is no longer valid and these tips
+> describe an exam sitting that is over. They are dated, not deleted, because no
+> current-guide equivalent was verified at the time of writing.
+
 - More questions than live exam (used for scoring calibration)
 - Answer everything — no penalty for wrong answers
 - Mark-and-skip uncertain ones, come back later
 - Results take 1-2 months
-- Waiver code: **NCA75BETANEW**
-- Beta period through **June 14, 2026**
+- Waiver code: **NCA75BETANEW** — expired, do not attempt to use
+- Beta period through **June 14, 2026** (closed)

@@ -86,6 +86,9 @@ gate "python3 scripts/generate-study-content.py --check" python3 scripts/generat
 # reproducible from git: `git show 0d1f565:tests/gates/run_freeze_chain.sh`.
 gate "python3 scripts/check-nca-remap.py"              python3 scripts/check-nca-remap.py
 gate "bash tests/gates/run_remap_fixtures.sh"          bash tests/gates/run_remap_fixtures.sh
+# Added in Sprint 48 (S48-04): the cheatsheet must not contradict applied errata.
+gate "python3 scripts/check-nca-cheatsheet.py"         python3 scripts/check-nca-cheatsheet.py
+gate "bash tests/gates/run_cheatsheet_fixtures.sh"     bash tests/gates/run_cheatsheet_fixtures.sh
 
 # ── Packaging and release truth ──
 gate "python3 scripts/generate-bundle-manifest.py --check" \

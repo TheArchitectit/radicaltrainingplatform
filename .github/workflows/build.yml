@@ -55,6 +55,17 @@ jobs:
           python3 scripts/check-nca-remap.py --self-test
           bash tests/gates/run_remap_fixtures.sh
 
+      # REQ-NCA-04/C-07 (S48-04): the cheatsheet is a companion surface, so a
+      # claim it makes that applied errata contradicts is a defect. Fixture
+      # set: run_cheatsheet_fixtures.sh seeds the stale claim and a half-fix
+      # (claim deleted, correction unstated) — both must fail — plus a
+      # corrected sheet that must pass. The gate also prints the sheet's link
+      # inventory every run, which is the recurring form of C-07's "checked".
+      - name: Check NCA-75 cheatsheet errata (REQ-NCA-04)
+        run: |
+          python3 scripts/check-nca-cheatsheet.py
+          bash tests/gates/run_cheatsheet_fixtures.sh
+
       # REQ-AP-06/T-19: diagnosis share must stay >= 50% (fail-closed on
       # untyped items). Fixture pair: --self-test (30/30 pass, 29/31 fail
       # naming the deficit, untyped/unknown-type fail-closed).
