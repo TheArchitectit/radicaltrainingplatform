@@ -45,6 +45,14 @@ public class ExamManifest
     public string SourceUrl { get; set; } = "";
     public string SourceReviewDate { get; set; } = "";
     public Dictionary<string, string> ProductVersions { get; set; } = new();
+    /// <summary>
+    /// How this pack's per-section study allocation was chosen, in the pack's
+    /// own words. Present only where the official source publishes no weights
+    /// (ASM-13), so the allocation reads as a study choice rather than an exam
+    /// fact. Empty means the pack has nothing to disclaim — either the source
+    /// publishes weights, or the pack declares none.
+    /// </summary>
+    public string StudyAllocationLabel { get; set; } = "";
     public List<ManifestSection> Sections { get; set; } = new();
     public ManifestQuestionPolicy? QuestionPolicy { get; set; }
     /// <summary>Declared study gaps — domains not yet covered by lessons/items.</summary>

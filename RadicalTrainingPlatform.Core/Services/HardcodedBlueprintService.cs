@@ -22,7 +22,8 @@ public class HardcodedBlueprintService : IBlueprintService
             InitNcpUs();
             InitNcpCi();
             InitNcmMci();
-            InitNca75();
+            // No InitNca75: the beta block is gone. See the retired-block note
+            // at the foot of this file (S48-02 / T-32, REQ-NCA-05).
             _initialized = true;
         }
     }
@@ -38,8 +39,9 @@ public class HardcodedBlueprintService : IBlueprintService
         if (key.Contains("AI")) return _blueprints.GetValueOrDefault("NCP-AI");
         if (key.Contains("US")) return _blueprints.GetValueOrDefault("NCP-US");
         if (key.Contains("CI")) return _blueprints.GetValueOrDefault("NCP-CI");
-        if ((key.Contains("NCA") || key.StartsWith("NCA")) && key.Contains("75")) return _blueprints.GetValueOrDefault("NCA-75");
-        if (key == "NCA" || key.Contains("NCA75") || key.Contains("NCA-75")) return _blueprints.GetValueOrDefault("NCA-75");
+        // NCA-75 has no hardcoded entry any more (S48-02 / T-32): it falls
+        // through to the dictionary lookup below, finds nothing, and returns
+        // null. ManifestBlueprintService serves it from the manifest instead.
         return _blueprints.GetValueOrDefault(examCode);
     }
 
@@ -537,108 +539,21 @@ public class HardcodedBlueprintService : IBlueprintService
         _blueprints["NCM-MCI"] = bp;
     }
 
-    // ========== NCA 7.5 ==========
-    private static void InitNca75()
-    {
-        var bp = new ExamBlueprint
-        {
-            ExamCode = "NCA-75",
-            ExamTitle = "Nutanix Certified Associate 7.5",
-            QuestionCount = 75,
-            TimeLimitMinutes = 120,
-            PassingScore = "3000/6000",
-            Sections = new()
-            {
-                new BlueprintSection
-                {
-                    ExamCode = "NCA-75", SectionNumber = 1,
-                    SectionTitle = "Describe Lifecycle Management",
-                    WeightPercent = 20,
-                    Objectives = new()
-                    {
-                        new() { Id = "1.1", Title = "Explain LCM components and upgrade workflow",
-                            Knowledge = new() { "LCM catalog", "Upgrade workflow", "Prerequisites", "Component dependencies" },
-                            Keywords = new() { "LCM", "Lifecycle Manager", "catalog", "upgrade", "workflow", "prerequisite", "dependency", "component", "bundle", "inventory" } },
-                        new() { Id = "1.2", Title = "Perform LCM upgrades",
-                            Knowledge = new() { "Software upgrade", "Firmware upgrade", "Pre-upgrade checks", "Rollback" },
-                            Keywords = new() { "upgrade", "LCM", "perform", "software", "firmware", "pre-upgrade", "check", "rollback", "one-click" } },
-                        new() { Id = "1.3", Title = "Configure LCM settings including dark site mode",
-                            Knowledge = new() { "LCM settings", "Dark site", "Proxy", "Air-gapped" },
-                            Keywords = new() { "LCM", "settings", "dark site", "air-gap", "proxy", "offline", "catalog URL", "LCM bundle" } },
-                    }
-                },
-                new BlueprintSection
-                {
-                    ExamCode = "NCA-75", SectionNumber = 2,
-                    SectionTitle = "Describe Nutanix Basic Administration",
-                    WeightPercent = 30,
-                    Objectives = new()
-                    {
-                        new() { Id = "2.1", Title = "Manage VMs (create/modify/delete/migrate)",
-                            Knowledge = new() { "VM creation", "VM settings", "Live migration", "Delete/clone" },
-                            Keywords = new() { "VM", "create", "modify", "delete", "migrate", "clone", "vCPU", "memory", "vDisk", "NIC", "live migration" } },
-                        new() { Id = "2.2", Title = "Configure storage containers and policies",
-                            Knowledge = new() { "Container creation", "Storage policies", "Replication factor", "Data efficiency" },
-                            Keywords = new() { "storage container", "policy", "RF2", "RF3", "replication factor", "compression", "dedup", "EC-X", "erasure coding", "ILM", "container" } },
-                        new() { Id = "2.3", Title = "Configure networking (VLANs, bonds, IPAM)",
-                            Knowledge = new() { "VLAN creation", "Bond modes", "IPAM pool", "Subnet" },
-                            Keywords = new() { "VLAN", "bond", "LACP", "active-backup", "balance-slb", "IPAM", "subnet", "network", "OVS", "bridge", "managed" } },
-                        new() { Id = "2.4", Title = "Manage Prism Element and Prism Central",
-                            Knowledge = new() { "Prism UI navigation", "Cluster operations", "Multi-cluster" },
-                            Keywords = new() { "Prism", "Prism Element", "Prism Central", "PE", "PC", "dashboard", "cluster", "manage", "register", "analysis" } },
-                        new() { Id = "2.5", Title = "Use CLI tools (nCLI, aCLI)",
-                            Knowledge = new() { "nCLI commands", "aCLI commands", "VM management", "Network management" },
-                            Keywords = new() { "ncli", "acli", "CLI", "command", "vm.", "net.", "host.", "cluster.", "container" } },
-                        new() { Id = "2.6", Title = "Manage users, roles, and authentication",
-                            Knowledge = new() { "RBAC", "Local/AD/LDAP", "Roles", "Permissions" },
-                            Keywords = new() { "RBAC", "role", "user", "authentication", "AD", "LDAP", "SAML", "SSO", "permission", "cluster admin", "super admin", "viewer" } },
-                    }
-                },
-                new BlueprintSection
-                {
-                    ExamCode = "NCA-75", SectionNumber = 3,
-                    SectionTitle = "Maintain Environmental Health",
-                    WeightPercent = 25,
-                    Objectives = new()
-                    {
-                        new() { Id = "3.1", Title = "Use NCC health checks",
-                            Knowledge = new() { "NCC categories", "Running checks", "Interpreting results" },
-                            Keywords = new() { "NCC", "health check", "Nutanix Cluster Check", "diagnostic", "category", "run", "result", "critical", "warning" } },
-                        new() { Id = "3.2", Title = "Monitor alerts and events",
-                            Knowledge = new() { "Alert policies", "Severity levels", "Event log" },
-                            Keywords = new() { "alert", "event", "monitor", "severity", "critical", "warning", "info", "acknowledge", "resolve", "notification", "email" } },
-                        new() { Id = "3.3", Title = "Use Pulse and log collection",
-                            Knowledge = new() { "Pulse", "Log collection", "Support portal" },
-                            Keywords = new() { "Pulse", "heartbeat", "log collection", "logbay", "support", "diagnostic", "telemetry", "upload" } },
-                        new() { Id = "3.4", Title = "Analyze cluster resiliency and rebuild status",
-                            Knowledge = new() { "Resiliency factor", "Data rebuild", "Disk failure" },
-                            Keywords = new() { "resiliency", "rebuild", "cluster resiliency", "data rebuild", "disk failure", "node failure", "absence", "metadata resiliency" } },
-                    }
-                },
-                new BlueprintSection
-                {
-                    ExamCode = "NCA-75", SectionNumber = 4,
-                    SectionTitle = "Describe Cluster Configuration Options",
-                    WeightPercent = 25,
-                    Objectives = new()
-                    {
-                        new() { Id = "4.1", Title = "Configure redundancy factor and replication policies",
-                            Knowledge = new() { "RF2", "RF3", "Container RF", "Replication" },
-                            Keywords = new() { "RF2", "RF3", "redundancy factor", "replication", "container", "fault tolerance", "metadata resiliency", "data resiliency" } },
-                        new() { Id = "4.2", Title = "Configure data efficiency features (compression, dedup, EC-X)",
-                            Knowledge = new() { "Inline compression", "Post-process compression", "Deduplication", "Erasure Coding" },
-                            Keywords = new() { "compression", "dedup", "deduplication", "EC-X", "erasure coding", "inline", "post-process", "data efficiency", "savings", "fingerprint" } },
-                        new() { Id = "4.3", Title = "Describe AOS 7.5 new features (AES, VM Startup Policies, vTPM, Elastic VM Storage)",
-                            Knowledge = new() { "AES", "VM Startup Policy", "vTPM", "Elastic Storage" },
-                            Keywords = new() { "AES", "VM Startup Policy", "vTPM", "Elastic VM Storage", "AOS 7.5", "new feature", "startup order", "boot policy", "TPM", "elastic storage", "ADSF" } },
-                        new() { Id = "4.4", Title = "Configure licensing tiers",
-                            Knowledge = new() { "Starter", "Pro", "Ultimate", "License management" },
-                            Keywords = new() { "license", "licensing", "Starter", "Pro", "Ultimate", "tier", "add license", "Prism", "subscription", "capacity" } },
-                    }
-                },
-            }
-        };
-        _blueprints["NCA-75"] = bp;
-    }
-
+    // ========== NCA 7.5 — RETIRED (S48-02 / T-32, REQ-NCA-05) ==========
+    //
+    // The beta NCA-75 blueprint that used to live here is deleted, not merely
+    // superseded. It described four sections — "Describe Lifecycle Management",
+    // "Describe Nutanix Basic Administration", "Maintain Environmental Health",
+    // "Describe Cluster Configuration Options" — weighted 20/30/25/25 across 17
+    // objectives. The June 15, 2026 guide publishes four different sections and
+    // 14 objectives, and a learner who saw a beta title was studying a
+    // superseded structure.
+    //
+    // NCA-75's blueprint is now content/exams/NCA-75/exam.json, served by
+    // ManifestBlueprintService (REQ-MAN-04). Deleting rather than annotating is
+    // deliberate: an annotated-but-live block still renders beta section titles
+    // in every code path where the manifest is not loaded, and REQ-NCA-05
+    // requires that the beta section titles never render. GetBlueprint("NCA-75")
+    // therefore returns null from this service by design — the regression that
+    // would re-introduce it is pinned by ManifestBlueprintTests.
 }

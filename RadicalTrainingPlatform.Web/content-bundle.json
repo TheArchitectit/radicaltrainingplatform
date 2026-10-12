@@ -6,7 +6,7 @@
   "disclaimer": "This is independent study material. It is not official training and is not endorsed or approved by CompTIA, Nutanix, or any other certification body.",
   "compiled": {
     "path": "RadicalTrainingPlatform.Web/js/study-content.js",
-    "sha256": "6488eb23e4c79437ccd57429828999300967486e8f8cb662e3dbb7c18503d6ae"
+    "sha256": "2121ff63e5f3e32dd2bf07a4c6c9a8d64406da01b890e99d4e54ae07e82a61dd"
   },
   "exams": {
     "COMPTIA-A-1201": {
@@ -97,7 +97,7 @@
     "NCA-75": {
       "manifest": {
         "path": "content/exams/NCA-75/exam.json",
-        "sha256": "452a82ac9c2e51a7f5e688e0f2d34775dc801ed6b37964798ae414af484e4f45"
+        "sha256": "f5b6499485a2df3eceb603531d85f79d980c155e0849a9414ad27968958d87d9"
       },
       "lessons": [],
       "banks": []

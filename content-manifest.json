@@ -98,7 +98,7 @@
     "NCA-75": {
       "manifest": {
         "path": "content/exams/NCA-75/exam.json",
-        "sha256": "452a82ac9c2e51a7f5e688e0f2d34775dc801ed6b37964798ae414af484e4f45"
+        "sha256": "f5b6499485a2df3eceb603531d85f79d980c155e0849a9414ad27968958d87d9"
       },
       "lessons": [],
       "banks": []
@@ -611,8 +611,8 @@
     },
     {
       "path": "content/exams/NCA-75/exam.json",
-      "sha256": "452a82ac9c2e51a7f5e688e0f2d34775dc801ed6b37964798ae414af484e4f45",
-      "bytes": 2720
+      "sha256": "f5b6499485a2df3eceb603531d85f79d980c155e0849a9414ad27968958d87d9",
+      "bytes": 2946
     },
     {
       "path": "content/exams/NCA-75/remap.csv",

@@ -838,6 +838,7 @@ export const EXAMS = {
       "AHV": "11.0",
       "Prism Central": "pc.7.5"
     },
+    "studyAllocationLabel": "Equal 10 items per section \u2014 a study choice for this pilot, not a published exam weight. The June 15, 2026 NCA guide publishes no section percentage table, so this pack carries no weightPercent.",
     "sections": [
       {
         "number": "1",

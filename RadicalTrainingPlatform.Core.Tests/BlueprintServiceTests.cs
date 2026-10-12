@@ -12,11 +12,15 @@ public class HardcodedBlueprintServiceTests
     private readonly IBlueprintService _service = new HardcodedBlueprintService();
 
     [Fact]
-    public void GetBlueprint_NCA75_ReturnsBlueprint()
+    public void GetBlueprint_Nca75_IsRetiredFromHardcodedData()
     {
-        var bp = _service.GetBlueprint("NCA-75");
-        bp.ShouldNotBeNull();
-        bp!.Sections.ShouldNotBeEmpty();
+        // S48-02 (T-32, REQ-NCA-05): the beta NCA-75 blueprint was deleted, not
+        // merely superseded — an annotated-but-live block still renders beta
+        // section titles wherever the manifest is not loaded. NCA-75 now comes
+        // from content/exams/NCA-75/exam.json via ManifestBlueprintService;
+        // ManifestBlueprintTests asserts the rendered sections, objective IDs
+        // and the absence of every beta section title.
+        _service.GetBlueprint("NCA-75").ShouldBeNull();
     }
 
     [Fact]
@@ -64,11 +68,15 @@ public class HardcodedBlueprintServiceTests
     [Fact]
     public void CalculateCoverage_WithMatchingText_ReturnsNonZero()
     {
-        var coverage = _service.CalculateCoverage("NCA-75", new List<string>
+        // NCA-75 moved to its manifest in S48-02 (T-32), so this exercises a
+        // blueprint that is still hardcoded. The old assertion only checked the
+        // dictionary was non-empty, which is true for any recognised exam even
+        // when nothing matched — assert a count, not a key set.
+        var coverage = _service.CalculateCoverage("NCP-US", new List<string>
         {
-            "LCM lifecycle management firmware upgrade Nutanix cluster"
+            "FSVM share access SMB NFS"
         });
-        coverage.Count.ShouldBeGreaterThan(0);
+        coverage.Values.ShouldContain(count => count > 0);
     }
 
     [Fact]
