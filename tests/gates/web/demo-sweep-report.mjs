@@ -32,13 +32,15 @@ const { demo } = await import('../../../RadicalTrainingPlatform.Web/js/core/Demo
 const { SCENARIOS } = await import('../../../RadicalTrainingPlatform.Web/js/views/scenarios.js');
 
 /**
- * The catalog holds 44 pre-existing scenarios plus the 2 CompTIA ticket
- * scenarios built in Sprint 46. The plan's "44 + 6" counts 4 NCA scenarios
- * that land in Sprint 48 (T-35); they are NOT in this build. This report
- * states that plainly rather than padding the count.
+ * The catalog holds 44 pre-existing scenarios, the 2 CompTIA ticket scenarios
+ * built in Sprint 46, and — as of S48-05 — the 4 NCA beginner scenarios the
+ * plan's "44 + 6" counted. The plan's six are now all present: this report
+ * pins the count at 50 and names every one of them. The pin is the point:
+ * if a scenario is added or silently dropped, this report goes red rather
+ * than quietly reporting a different catalog than the one it claims.
  */
-const EXPECTED_PRESENT = 46;
-const NCA_DEFERRED = ['nca-01', 'nca-02', 'nca-03', 'nca-04'];
+const EXPECTED_PRESENT = 50;
+const NCA_IDS = ['nca-tool-01', 'nca-vm-01', 'nca-maint-01', 'nca-alert-01'];
 
 const rows = [];
 
@@ -137,10 +139,10 @@ function buildReport() {
     lines.push('');
     lines.push(`Scenarios in the catalog: **${rows.length}**`);
     lines.push('');
-    lines.push('The OpenSpec package counts "44 existing + 6 new". The 6 new are the 2 CompTIA');
-    lines.push('ticket scenarios (Sprint 46) plus 4 NCA scenarios that land in Sprint 48 (T-35).');
-    lines.push(`Those 4 (${NCA_DEFERRED.join(', ')}) are **not in this build** and are not`);
-    lines.push('reported here as passing. Present count is therefore 46, not 50.');
+    lines.push('The OpenSpec package counts "44 existing + 6 new": the 2 CompTIA ticket');
+    lines.push('scenarios (Sprint 46) plus the 4 NCA beginner scenarios (S48-05, T-35).');
+    lines.push('All six are present in this build — the count is 50, and every one of the 50');
+    lines.push('is driven below. Nothing is deferred from this catalog.');
     lines.push('');
     lines.push('| # | Scenario ID | Exam | Objectives | Fresh station | After walkthrough |');
     lines.push('|---|-------------|------|-----------:|---------------|-------------------|');
@@ -150,9 +152,11 @@ function buildReport() {
     lines.push('');
     lines.push('## Not covered by this report');
     lines.push('');
-    lines.push(`- The ${NCA_DEFERRED.length} NCA scenarios deferred to Sprint 48 (T-35): ${NCA_DEFERRED.join(', ')}.`);
     lines.push('- Real-browser behaviour (keyboard, projector legibility, hover affordances):');
     lines.push('  asserted statically and by the shell fixtures, not by this headless sweep.');
+    lines.push('- Whether the lesson text that names each scenario actually links to it:');
+    lines.push('  asserted by the content gates, not here. This report covers the catalog');
+    lines.push('  and its demo-mode solvability only.');
     return lines.join('\n') + '\n';
 }
 
@@ -161,7 +165,13 @@ await runner.test('the report is well-formed and complete', async () => {
     for (const row of rows) {
         assert(text.includes(`\`${row.id}\``), `the report must name ${row.id}`);
     }
-    assert(text.includes('not in this build'), 'the report must state the NCA deferral honestly');
+    // The four NCA scenarios are in this build (S48-05) — the report must name
+    // them as present rather than as a deferral.
+    for (const id of NCA_IDS) {
+        assert(text.includes(`\`${id}\``), `the report must name the NCA scenario ${id}`);
+    }
+    assert(text.includes('Nothing is deferred from this catalog.'),
+        'the report must state the catalog is complete');
     // Anchor at line start so the objectives-count column cannot match too.
     assertEqual(text.match(/^\| [0-9]+ \|/gm)?.length, rows.length,
         'the report table must have one row per scenario');

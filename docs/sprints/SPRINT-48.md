@@ -18,9 +18,11 @@
 | S48-01 (T-31) | Complete remap.csv (started T-09) with RedEye lane logs and seeded-defect self-test record | REQ-NCA-01 | 3 | 🟡 |
 | S48-02 (T-32) | NCA-75 exam.json current blueprint; InitNca75 retired; blueprint fixtures | REQ-NCA-05 | 2 | 🟡 |
 | S48-03 (T-33) | 14 lessons + 40-item pilot (remapped + newly authored gap fills) | REQ-NCA-02/06 | 3 | 🟡 |
-| S48-04 (T-34) | Cheatsheet correction + beta logistics cleanup + scheduling-link currency | REQ-NCA-04, C-07 | 1 | ⚪ |
-| S48-05 (T-35) | Four NCA scenarios with validators and walkthroughs | REQ-NCA-07, REQ-SC-01..06 | 2 | ⚪ |
+| S48-04 (T-34) | Cheatsheet correction + beta logistics cleanup + scheduling-link currency | REQ-NCA-04, C-07 | 1 | 🟡 |
+| S48-05 (T-35) | Four NCA scenarios with validators and walkthroughs | REQ-NCA-07, REQ-SC-01..06 | 2 | 🟡 |
 | S48-06 (T-36) | Travel freeze per REQ-NCA-08 once itinerary confirms cutoff | REQ-NCA-08 | 1 | ⚪ |
+
+**Status key:** ✅ shipped and verified on this host · 🟡 shipped and gated, with named verification gaps listed under the row's *Not verified* notes · ⚪ not started.
 
 **Total:** 12 points
 
@@ -219,25 +221,125 @@ bundle: 89 scored items (63 diagnosis, 71% — threshold 50%), 28 lesson slots,
 **As a** content consumer, **I want** the cheatsheet and logistics pages to match the applied errata, **so that** no surface contradicts the bank.
 
 **Acceptance Criteria:**
-- [ ] `studyguides/CHEATSHEET-NCA-75.md` line 96 corrected: SSH is enabled by default on fresh AOS 7.5 installs (disable plan deferred), referencing errata ID NCA-75-Part3-GapFill-Q3; CI grep fixture asserts the stale string “CVM SSH disabled by default” is absent
-- [ ] “Beta” labels removed only from claims individually re-verified against the current guide
-- [ ] Waiver-code/beta-exam tips removed or clearly dated
-- [ ] Scheduling-link currency checked (C-07 review work, never silent relabeling)
+- [x] `studyguides/CHEATSHEET-NCA-75.md` corrected: SSH is enabled by default on fresh AOS 7.5 installs (disable plan deferred), referencing errata ID NCA-75-Part3-GapFill-Q3; CI grep fixture asserts the stale string “CVM SSH disabled by default” is absent — enforced by `scripts/check-nca-cheatsheet.py` with three fixtures (`bad`, `half-fix`, `good`) and `tests/gates/run_cheatsheet_fixtures.sh`
+- [x] “Beta” labels removed only from claims individually re-verified against the current guide — **none were re-verified**, so none were removed: the guide was not opened. The sheet instead carries a dated status note saying so, and the one claim that *was* corrected is marked inline
+- [x] Waiver-code/beta-exam tips clearly dated — the “Beta Exam Tips” section is dated 2026-10-11 and states the beta window closed June 14, 2026; the waiver code is marked expired rather than deleted (no current-guide replacement was verified, so deleting it would have been a silent relabel)
+- [x] Scheduling-link currency checked (C-07 review work, never silent relabeling) — the sheet contains **no links at all** (`insights.nutanix.com:443` is a host:port table entry, not a URL), so there was nothing to relabel; the gate prints the link inventory on every run so the check recurs rather than being a one-time claim
 
-**Files:** `studyguides/CHEATSHEET-NCA-75.md`
+**The gate pins three things, not one.** The row asks for a grep that the stale
+string is absent. Absence alone is satisfiable by deleting the line — which would
+leave a learner with no statement about the SSH default at all, and would pass a
+gate that only greps. So `check-nca-cheatsheet.py` fails on (1) the stale claim
+present, (2) the correction not citing errata `NCA-75-Part3-GapFill-Q3`, and
+(3) the corrected claim absent. The `half-fix` fixture is the second failure mode
+made executable: it deletes the stale line and states nothing, and must fail.
+
+**Where the file was edited (line numbers moved as the note was added).** The
+stale claim was at line 93 of the 141-line sheet; it now reads *“CVM SSH enabled
+by default on fresh installs — the plan to disable it was deferred (corrected per
+errata NCA-75-Part3-GapFill-Q3; the earlier "disabled by default" claim was
+wrong)”*. A dated status note was added under the title, and the beta-tips
+section was dated and its closed window stated.
+
+**Files:**
+- `studyguides/CHEATSHEET-NCA-75.md` — claim corrected; dated status note; beta tips dated and closed
+- `scripts/check-nca-cheatsheet.py` (new) — the gate
+- `tests/gates/fixtures/cheatsheet-check/{bad,half-fix,good}/studyguides/CHEATSHEET-NCA-75.md` (new, 3)
+- `tests/gates/run_cheatsheet_fixtures.sh` (new) — 2 must-fail fixtures + 1 must-pass + the real tree
+- `.github/workflows/build.yml`, `tests/gates/run_freeze_chain.sh` — gate wired in
+
+**Not verified:** the Nutanix guide was not opened, so **no other claim on this
+sheet was re-checked** — the numbers table, the acronyms, the write path, the
+licensing tiers and the product-name table are all carried forward from the beta
+sheet unexamined. Every remaining “beta” label is therefore retained, which is
+the honest state and not a finished one. The waiver code is dated expired, not
+confirmed expired against Nutanix's own notice; the June 14, 2026 date is taken
+from the sheet's own text.
+
+**Measured:** freeze chain **43/43 at `ce51fc5`** (was 41/41; +2 gates), exit 0.
 
 ### S48-05 (T-35): Four NCA Scenarios
 **As a** learner, **I want** beginner NCA scenarios with honest validators, **so that** practice means something.
 
 **Acceptance Criteria:**
-- [ ] `nca-tool-01` — identify the right tool (powers lesson 1.3)
-- [ ] `nca-vm-01` — create/connect a VM (powers 2.1)
-- [ ] `nca-maint-01` — choose a safe maintenance sequence (powers 3.2; ordered-sequence task)
-- [ ] `nca-alert-01` — interpret an alert, select a next step (powers 4.2)
-- [ ] Each: fresh-seed negativity, recorded walkthrough to 100%, wrong-state negative fixture, zero real infrastructure calls, “simulated environment” label
-- [ ] Unsupported licensing/tool features use labeled worked examples, never fake interactive completion
+- [x] `nca-tool-01` — identify the right tool (powers lesson 1.3): seven-tool list, three jobs, validator checks each selection against the manifest's task→tool mapping
+- [x] `nca-vm-01` — create/connect a VM (powers 2.1): runs on the real PE VM wizard, not a bespoke renderer — 4 vCPUs, 8 GB, NIC on `Production-200` resolved through the network list, powered on
+- [x] `nca-maint-01` — choose a safe maintenance sequence (powers 3.2; ordered-sequence task): four steps presented in a fixed shuffled order, validator checks completeness and exact order
+- [x] `nca-alert-01` — interpret an alert, select a next step (powers 4.2): seeded `alert-001`, validator requires the detail to have been opened **and** the matching next step
+- [x] Each: fresh-seed negativity, recorded walkthrough to 100%, wrong-state negative fixture, zero real infrastructure calls, “simulated environment” label — all five in `tests/gates/web/nca-scenarios.mjs` (13 cases) plus the walkthroughs in `lib/scenario-walkthroughs.mjs`; zero outbound calls asserted by `demo-independence.mjs`, which walks the whole catalogue including these four
+- [x] Unsupported licensing/tool features use labeled worked examples, never fake interactive completion — no licensing scenario exists in this set, because the simulator cannot record a licence mutation; `s2_4`'s lesson says so in its own words (“the lab simulator for this track does not simulate licence mutations”), and every one of the four scenarios here is a decision the simulator genuinely records
 
-**Files:** `Web/js/views/` scenario registry
+**Status 🟡 because:** the criteria are met and gated, but the lab UI's
+interactivity has never been exercised in a real browser. The fixture drives the
+validators through the stub DOM; `rehearsal-web.mjs` drives the *ticket* lab in
+Chrome but not these three. Recorded, not smoothed.
+
+**One renderer for three decision tasks, and why the fourth has none.** SPEC-07
+07.5 asks for a tool pick, an ordered sequence and an alert triage — three
+surfaces the PE/PC simulator does not have. SPEC-07 07.7 is explicit about the
+choice: “When a view lacks a mutation the scenario needs … the fix is in the view
+or the scenario — chosen explicitly and recorded, never in the validator.” The
+choice here is **the view**: one `NcaLabView` with three modes, registered as
+`renderer: 'nca-lab'` beside the existing `'ticket'` dispatch. `nca-vm-01` needs
+no renderer at all — the PE VM wizard already writes every field its objectives
+read — so it stays an ordinary store-based scenario and is the one of the four
+the demo sweep drives through the real UI path.
+
+**Registry appended, not forked.** SPEC-07 07.6 allows a new
+`scenarios-beginner.js`. The four entries went into the existing
+`scenarios.js` instead: `scripts/scan-scenario-validators.py` holds a
+`REGISTRIES` list of files it scans for constant-true validators, so a second
+registry would have been a new file the REQ-SC-01 scan does not read unless the
+list was extended — a silent hole in a gate for the sake of a tidier filename.
+
+**Last-record-wins, so changing your mind is judged on the final answer.** Every
+answer appends a new trace record and each validator reads the **last** matching
+record. A learner who clicks a wrong tool and then corrects it is not
+permanently failed, and one who lands on the right answer by accident after a
+wrong one is judged on the wrong one they ended on. Pinned by its own case.
+
+**The label that was missing for the other 46 scenarios.** REQ-SC-05 says the
+simulation is labelled in the UI. The ticket and NCA labs each render the line,
+but `nca-vm-01` has no lab page of its own, and neither did any of the 46
+store-based scenarios before it — so `ScenariosView` now states it once for
+every scenario it lists. That is a REQ-SC-05 gap closed for the whole catalogue,
+not just for this row.
+
+**No `StateEngine` change was needed.** All four validators read only
+`action_trace` (which `state.reset()` clears, satisfying REQ-SC-06) plus the
+existing seed collections `alerts`, `networks` and `vms`. So
+`demo-independence.mjs`'s store-key allowlist and the fresh-seed negativity test
+both hold without a new collection or a new seed field.
+
+**The demo-sweep count moved 46 → 50, and the frozen record was left alone.**
+SPEC-16 16.6: “Freeze means no content edits afterward without a new head
+record.” The S47-13 freeze record indexes `2026-10-11-demo-sweep.md` as
+measuring 46 scenarios at `0d1f565`; that measurement was true and is not
+rewritten. The post-freeze sweep is a new artifact,
+`2026-10-25-demo-sweep.md`, at head `efe5e31`, and
+`demo-sweep-report.mjs`'s count pin moved with it (the pin is the point: a
+silently different catalogue goes red).
+
+**Files:**
+- `RadicalTrainingPlatform.Web/js/views/nca-lab.js` (new) — `NcaLabView`, three modes, evidence panel, reset
+- `RadicalTrainingPlatform.Web/js/views/scenarios.js` — four entries; `NCA_TOOL_LAB` / `NCA_MAINT_SEQUENCE` / `NCA_ALERT_LAB` manifests; `lastRecord`/`lastToolFor`/`lastSequence`/`lastTriage`/`alertOpened` helpers; the `nca-lab` dispatch branch; the catalogue-wide simulated-environment label
+- `tests/gates/web/nca-scenarios.mjs` (new) — 13 cases: fresh-seed negativity, four wrong-state negatives, last-record-wins, walkthrough-to-100%, reset, label, registry wiring
+- `tests/gates/web/lib/scenario-walkthroughs.mjs` — four recorded walkthroughs
+- `tests/gates/web/demo-sweep-report.mjs` — count pin 46 → 50; deferral prose replaced with the present-catalogue statement
+- `docs/qa/release-evidence/2026-10-25-demo-sweep.md` (new) — the post-freeze sweep at `efe5e31`
+
+**Not verified:** the lab UI was not driven in a real browser — no click, no
+ordering interaction, no alert-detail toggle was exercised outside the stub DOM,
+so “the buttons work” is inferred from the fixture's DOM and not observed. The
+`nca-vm-01` path through the PE VM wizard is covered by the demo sweep's
+store-level walkthrough, not by a browser session. Nothing here was re-read
+against the Nutanix guide; the tool/objective mapping in `NCA_TOOL_LAB` is an
+authored teaching choice, not a citation. `rehearsal-web.mjs` does not yet cover
+these scenarios (it is not in the freeze chain either — it needs a browser).
+
+**Measured:** freeze chain **43/43 at `efe5e31`**, exit 0. `nca-scenarios.mjs`
+13/13. Demo sweep: **50 scenarios**, every one `incomplete (0 of N met)` on a
+fresh station → `complete (N of N met)` after its walkthrough.
 
 ### S48-06 (T-36): Travel Freeze
 **Acceptance Criteria:**

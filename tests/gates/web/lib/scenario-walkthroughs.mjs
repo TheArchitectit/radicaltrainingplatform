@@ -306,6 +306,35 @@ export const WALKTHROUGHS = {
     'mci-insights-01': async () => {
         await traceAdd({ action: 'route-entered', route: '/pc/insights' });
     },
+
+    // ── NCA beginner set (T-35, REQ-NCA-07) ──
+    // These write the same trace actions NcaLabView writes on each answer.
+    'nca-tool-01': async () => {
+        await traceAdd({ action: 'tool-selected', task: 'task-1', tool: 'move' });
+        await traceAdd({ action: 'tool-selected', task: 'task-2', tool: 'foundation' });
+        await traceAdd({ action: 'tool-selected', task: 'task-3', tool: 'ssr' });
+    },
+    'nca-vm-01': async () => {
+        // Same shape the PE VM wizard writes (see mci-01's walkthrough).
+        await state.create('vms', {
+            name: 'Lab-AppServer', vcpus: 4, memory_gb: 8, power_state: 'off',
+            host_uuid: 'host-001', is_cvm: false,
+            disks: [{ size_gb: 40, container: 'Gold-Container', image: 'CentOS-8-GenericCloud' }],
+            nics: [{ network_uuid: 'net-002' }],
+        });
+        const vm = state.getAll('vms').find(v => v.name === 'Lab-AppServer');
+        await state.update('vms', vm.uuid, { power_state: 'on' });
+    },
+    'nca-maint-01': async () => {
+        await traceAdd({
+            action: 'sequence-order',
+            steps: ['health-check', 'evacuate-host', 'maintenance-mode', 'lcm-upgrade'],
+        });
+    },
+    'nca-alert-01': async () => {
+        await traceAdd({ action: 'alert-opened', alert: 'alert-001' });
+        await traceAdd({ action: 'triage-selected', step: 'expand-container' });
+    },
 };
 
 /**
