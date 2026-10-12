@@ -41,7 +41,7 @@ document limit (CLAUDE.md).
 | S47-11 (T-27) | Tutor evaluation report and go/no-go; fallback labeling check | REQ-AI-06/07 | 1 | ✅ |
 | S47-12 (T-28) | Screenshots/video backup; non-AI backup path | REQ-AI-07 | 1 | ✅ |
 | S47-13 (T-29) | Freeze: branch, base/head SHA, changed files, gate results, RedEye lane logs + seeded-defect self-test record, usable build | SPEC-11 11.7 | 1 | ✅ |
-| S47-14 (T-30) | Demo script final: 90-second loop (learn, try, ask, verify) + exact disclaimer + no-patient/no-business-system line | REQ-BRAND-02 | 1 | ⚪ |
+| S47-14 (T-30) | Demo script final: 90-second loop (learn, try, ask, verify) + exact disclaimer + no-patient/no-business-system line | REQ-BRAND-02 | 1 | ✅ |
 | S47-15 (R-10) | LICENSE: prepare BSD-3-Clause decision record + README pointer; final file drop waits on owner confirmation (HG-01) | R-10, C-08/C-09 | 1 | ⚪ |
 
 **Total:** 27 points. Sprint D explicitly excludes architecture migration and post-freeze content authoring.
@@ -399,7 +399,44 @@ deployed-Pages behaviour; live AI behaviour. Full list in the record.
 **Evidence:** [../qa/release-evidence/2026-10-23-freeze.md](../qa/release-evidence/2026-10-23-freeze.md).
 
 ### S47-14 (T-30): Demo Script
-- 90-second loop script (learn, try, ask, verify) with the exact REQ-BRAND-02 disclaimer and the “no patient or business system is involved” line
+**Acceptance Criteria:**
+- [x] **90-second loop, four beats** — learn (0:00–0:15), try (0:15–0:35), ask
+  (0:35–0:55), verify (0:55–1:20), reset (1:20–1:30), each with the spoken line
+- [x] **Exact REQ-BRAND-02 disclaimer** — present verbatim and now **enforced**:
+  authoring the script is what arms the brand gate on this surface
+- [x] **“No patient or business system is involved”** — the first of the three
+  sentences to say plainly
+- [x] **Written against actual behaviour, not intent** — the script routes around
+  the recorded gaps rather than being discovered live: it tells the presenter to
+  reach the scenario **with the mouse** (REQ-DEMO-05) and warns that the purple
+  banner is always painted (REQ-DEMO-02). It also says plainly that the tutor is
+  the **recorded example** (the S47-11 no-go), so the whole loop runs with the
+  network unplugged
+
+**The brand gate earned its keep immediately.** It rejected the first draft on two
+hits — `"Is this the official CompTIA training?"` and `"vendor-approved"` — which is
+exactly the endorsement surface REQ-BRAND-01 exists to catch. Both reworded; the
+gate now reports the script's disclaimer as an exact occurrence and passes.
+
+**A vacuous check, found and made real.** `brand-disclaimer-snapshot.mjs` asserted
+the demo script carried the disclaimer by looking for `docs/demo/DEMO-SCRIPT.md` —
+a filename nothing ever matched — so it logged *"pending"* on every run and
+enforced nothing. It now uses the same glob as `check-brand.py` (`docs/demo/*.md`),
+so the two gates cannot disagree about where the script lives. Proven to
+discriminate: stripping the disclaimer from the script turns it **red** naming the
+file; restoring it turns it green. That check was previously green either way.
+
+**Files:**
+- `docs/demo/2026-10-23-demo-script.md` (new) — the script
+- `tests/gates/web/brand-disclaimer-snapshot.mjs` — candidate list replaced with the
+  brand gate's glob
+
+**Not verified:** the script has not been **read aloud on the demo host** at
+podium pace — the timings are budgeted, not measured, and PKG:1469 still blocks
+the host. Nothing here was rehearsed in a live room.
+
+**Evidence:** the script itself is the deliverable; see
+[../../demo/2026-10-23-demo-script.md](../../demo/2026-10-23-demo-script.md).
 
 ### S47-15 (R-10): LICENSE Decision Record
 **As an** owner, **I want** the missing LICENSE resolved honestly, **so that** README claims match reality.

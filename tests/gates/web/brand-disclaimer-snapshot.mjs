@@ -61,12 +61,15 @@ await runner.test('every exam screen (track overview exam blocks) is covered by 
 });
 
 await runner.test('demo script carries the exact disclaimer (or is reported pending)', async () => {
-    const { readFileSync, existsSync } = await import('node:fs');
-    const candidates = [
-        'docs/demo/DEMO-SCRIPT.md',
-        'docs/DEMO-SCRIPT.md',
-    ];
-    const found = candidates.filter(p => existsSync(p));
+    const { readFileSync, readdirSync, existsSync } = await import('node:fs');
+    // The same glob scripts/check-brand.py uses (DEMO_SCRIPT_GLOBS), so the two
+    // gates cannot disagree about where the demo script lives. This check used
+    // to hardcode `docs/demo/DEMO-SCRIPT.md`, which no file ever matched — so it
+    // reported "pending" forever and enforced nothing even after T-30 landed.
+    const dir = 'docs/demo';
+    const found = existsSync(dir)
+        ? readdirSync(dir).filter((f) => f.endsWith('.md')).map((f) => `${dir}/${f}`)
+        : [];
     if (!found.length) {
         console.log('  pending: demo script not yet authored (T-30, Sprint 47) — REQ-BRAND-02 surface tracked');
         return;
