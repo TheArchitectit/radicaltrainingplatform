@@ -56,6 +56,19 @@ jobs:
           SMOKE_LOG_OUT: ${{ runner.temp }}/web-smoke.log.md
         run: node tests/e2e/smoke-web.mjs
 
+      # 2b. The scenario labs, driven end to end on the same artifact (T-35 /
+      #     REQ-SC-02..06). The smoke proves the shell boots and one demo
+      #     interaction works; it does not touch a single scenario. This leg
+      #     renders each NCA decision lab, submits it from the seed (every
+      #     objective must be unmet and say why), performs the recorded
+      #     walkthrough (every objective must be met, toast included) and
+      #     resets (the seed must return). A lab whose handlers were never
+      #     wired passes every store-level fixture in the repo and fails here.
+      - name: NCA lab browser run (predeploy)
+        env:
+          NCA_LAB_LOG_OUT: ${{ runner.temp }}/nca-lab.log.md
+        run: node tests/e2e/nca-lab-web.mjs
+
       # 3. Content bundle: every manifest-referenced asset exists with a
       #    matching hash, and no unreviewed corpus ships. The Pages artifact
       #    cannot read content/ at runtime, so this is the only place the

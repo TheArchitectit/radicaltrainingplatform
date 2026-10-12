@@ -145,6 +145,8 @@ gate "python3 tests/gates/run_vuln_gate_fixtures.py"    python3 tests/gates/run_
 # ── Browser legs (pwa-deploy.yml — hosted runner) ──
 gate "node tests/e2e/smoke-web.mjs"                     node tests/e2e/smoke-web.mjs
 gate "bash tests/gates/run_smoke_fixtures.sh"           bash tests/gates/run_smoke_fixtures.sh
+gate "node tests/e2e/nca-lab-web.mjs"                   node tests/e2e/nca-lab-web.mjs
+gate "bash tests/gates/run_nca_lab_fixtures.sh"         bash tests/gates/run_nca_lab_fixtures.sh
 
 echo
 echo "FREEZE CHAIN: $pass/$total at $SHORT_SHA"
