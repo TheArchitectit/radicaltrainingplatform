@@ -1,15 +1,24 @@
 # Keyboard-only demo-loop rehearsal — T-26 / S47-10
 
-> **PARTLY SUPERSEDED at `a7d6cf6` (2026-10-12).** Two of the three gaps recorded
-> below are now closed: **REQ-DEMO-05** (all 49 nav items carry an `href`, and the
-> closed hamburger overlay is `inert`) and the **demo-banner defect** (the Reset
-> block in `css/components.css` now restates `[hidden] { display: none !important }`).
-> **REQ-UI-04 remains open.** The body below is left byte-for-byte as the record of
-> the run at head `3dda3b8` — it is a log of what was observed, not a claim about
-> the current tree. Current counts at `a7d6cf6`: **30 PASS / 1 FAIL / 2 NOTEs**.
-> Also note: the banner gap is labelled `REQ-DEMO-02` throughout, but the package
-> defines REQ-DEMO-02 as seeded scenario state — the behaviour was real, the
-> requirement ID was wrong. See [SPRINT-47.md](../../sprints/SPRINT-47.md) S47-10.
+> **SUPERSEDED at `6b327db` (2026-10-12).** All three gaps recorded below are now
+> closed or explained. **REQ-DEMO-05** (all 49 nav items carry an `href`; the closed
+> hamburger overlay is `inert`) and the **demo-banner defect** (the Reset block in
+> `css/components.css` restates `[hidden] { display: none !important }`) were closed at
+> `a7d6cf6`. **REQ-UI-04 was not a product defect at all.** Flow 5's "reload" was
+> `Page.navigate` to a URL whose hash had not changed — a same-document no-op in Chrome
+> that never reloaded the document — so the leg read the DOM Flow 4 left behind (the
+> graded verdict, which carries no prior-progress note by design) and reported the
+> absent note as a cold-load failure. With a genuine `Page.reload` the note renders,
+> `store.mode` is `idb`, and `restore()` returns `attempted: 1`. The body below is left
+> byte-for-byte as the record of the run at head `3dda3b8` — a log of what was observed,
+> not a claim about the current tree. The "Fixture runner" and "Why this runner is not
+> wired into CI" sections below therefore describe the inverted live assertion as it
+> stood then; the runner now asserts greenness — see its header for why.
+> **Current counts at `6b327db`: 33 PASS / 0 FAIL /
+> 1 NOTE** (the note is the focus-after-reset observation, not a defect). Also note: the
+> banner gap is labelled `REQ-DEMO-02` throughout, but the package defines REQ-DEMO-02
+> as seeded scenario state — the behaviour was real, the requirement ID was wrong. See
+> [SPRINT-47.md](../../sprints/SPRINT-47.md) S47-10.
 
 Archived evidence for S47-10, captured by `tests/e2e/rehearsal-web.mjs` — the
 automated half of T-26. The row's other half is a rehearsal **on the actual

@@ -243,24 +243,16 @@ the environment; full detail in the evidence file.
 ### S47-10 (T-26): Demo Host Rehearsal
 **Acceptance Criteria:**
 - [ ] On the actual demo host: install → boot → full loop (pick track, read lesson, practice, complete scenario, reset) with network unplugged except optional tutor call
-- [x] **Keyboard-only walkthrough passes** — the automated half of TM-48 ("manual + automated a11y"), which S47-03 handed forward to this row. `tests/e2e/rehearsal-web.mjs` drives all seven named critical flows (PKG:141) through a real browser using only key events, never `.click()`. 30 PASS / 1 FAIL; the one failure is a real demo-path defect, recorded below and in the evidence file. **Projector-distance readability is NOT verified** — no projector on this host; the harness measures reachability, not rendered legibility at distance.
+- [x] **Keyboard-only walkthrough passes** — the automated half of TM-48 ("manual + automated a11y"), which S47-03 handed forward to this row. `tests/e2e/rehearsal-web.mjs` drives all seven named critical flows (PKG:141) through a real browser using only key events, never `.click()`. **33 PASS / 0 FAIL / 1 NOTE** — every flow green; the note is the focus-after-reset observation below, not a defect. **Projector-distance readability is NOT verified** — no projector on this host; the harness measures reachability, not rendered legibility at distance.
 - [ ] **Partly verified:** reset-between-groups — the mechanism passes by keyboard (reseed count + outcome render, learner keys cleared); **"between groups" on the demo host, at the podium, is not verified**
 - [ ] Critical flow matrix (TM-50) entries for PWA-on-ChromeOS and PWA-on-presenter-host verified with recorded evidence — **no ChromeOS device or presenter host available; no evidence recorded**
 
 **Files:**
-- `tests/e2e/rehearsal-web.mjs` (new) — keyboard-only rehearsal of the seven critical flows; zero npm deps; deliberately not wired into CI (browser legs belong to the hosted runner, and it is knowingly red until the last gap closes)
-- `tests/gates/run_rehearsal_fixtures.sh` (new) — the fixture pair, with the live assertion inverted (see below); widened at `a7d6cf6` to assert flows 6 and 7, which went green when REQ-DEMO-05 and the banner defect closed
+- `tests/e2e/rehearsal-web.mjs` (new) — keyboard-only rehearsal of the seven critical flows; zero npm deps; not wired into CI (its browser legs belong to the hosted runner by design)
+- `tests/gates/run_rehearsal_fixtures.sh` (new) — the fixture pair; widened at `a7d6cf6` to assert flows 6 and 7, and inverted to assert greenness at `6b327db` once the last gap turned out to be a harness defect
 - `docs/qa/release-evidence/2026-10-23-rehearsal.md` (new) — the archived log, findings and not-verified list
 
-**Findings — three demo-path defects. Two closed at `a7d6cf6`; one still open.**
-- **REQ-UI-04 — STILL OPEN, deliberately.** A cold load does not surface stored progress. The scored
-  answer is in storage after a reload (2 item records) but `.practice-prior-note` never renders; the
-  same view on a client-side route change shows *"Saved progress: 1/1 previously answered in this exam
-  pack."* So `PracticeView` reads the store before it can see the records. **The mechanism is not
-  established** — five CDP probes disagree on whether a reload's per-item `get` ever hits (one
-  measured `restore()` returning `attempted: 1` after a reload; another traced every boot-time `get`
-  missing while `getAllKeys` found the records). No fix was shipped: with the measurements
-  contradicting each other, a speculative ordering change would be unverifiable.
+**Findings — two demo-path defects, both closed at `a7d6cf6`; one harness defect, closed at `6b327db`.**
 - **REQ-DEMO-05 — CLOSED** (`a7d6cf6`). The demo loop's scenario leg was mouse-only to enter: all 49
   nav items were `<a class="nav-item" data-route="…">` with no `href`, so none was focusable. All 49
   now carry `href="#<route>"`. That exposed a second defect the fix had to answer for: the closed
@@ -274,24 +266,32 @@ the environment; full detail in the evidence file.
   the banner painted. `css/components.css` now restates `[hidden] { display: none !important }`.
   **Citation note:** the package defines REQ-DEMO-02 as seeded scenario state, not the banner — the
   behaviour was real, the requirement ID was wrong.
+- **REQ-UI-04 — NOT A PRODUCT DEFECT** (`6b327db`). Flow 5's "reload" was `Page.navigate` to a URL
+  whose hash had not changed — a same-document no-op in Chrome that does not reload the document. The
+  leg read the DOM Flow 4 left behind, the graded verdict, which carries no prior-progress note by
+  design, and reported a missing cold-load affordance from a page that was never cold. With a genuine
+  `Page.reload`: `mode` idb, `get()` hits every key `keys()` returns, `restore()` returns `attempted: 1`,
+  and the note renders. Nothing in the store or the view needed changing.
 - **Observation:** focus after reset lands on `<BUTTON#demo-reset>`; the view is re-rendered via
   `replaceChild` and nothing restores focus — TM-48's "focus predictable after reset" is partly met.
 
-**Two false passes in this harness, found and fixed.** Flow 7 first read `!.hidden` — the *attribute*
-— so it passed for a banner that was on screen the whole time; it then reached `#/demo` by tabbing to
-the banner's link in learner mode, which only worked while the banner was wrongly painted. It now
-reads the layout box, asserts learner mode shows no banner and no reachable demo-controls link, and
-enters demo mode by URL the way the presenter does.
+**Three false results in this harness, found and fixed** — one failure mode, an assertion that could
+not distinguish the thing it claimed to measure. (1) Flow 7 read `!.hidden` — the *attribute* — so it
+passed for a banner on screen the whole time, and reached `#/demo` via that banner's link, which only
+existed because of the bug. (2) Flow 6's Start walk began wherever focus happened to be; focus survives
+a hash change while it sits on a *shell* element (nav items live outside `#view-container`), so the walk
+started mid-list and its "45 Tab presses" described a route that skipped the whole shell — it would
+have passed with nothing in the shell reachable. It now blurs first and walks from the top: **84
+presses**. (3) The REQ-UI-04 false failure above. Each leg now asserts what makes it meaningful: the
+banner the transition, the reload a marker that must not survive, the walk a defined start.
 
-**Result at `a7d6cf6`: 30 PASS / 1 FAIL / 2 NOTEs.** The failure is REQ-UI-04.
+**Result at `6b327db`: 33 PASS / 0 FAIL / 1 NOTE.** The note is the focus-after-reset observation.
 
-**Gate:** `run_rehearsal_fixtures.sh` PASS (exit 0). Because one gap is still open, its live assertion
-is **inverted**: the de-tabbed-option copy must FAIL and name the option row (proving the check
-detects a control removed from the tab order), the unmodified copy scoped to the green legs
-(`REHEARSAL_FLOWS=1,2,3,4,6,7`) must PASS, and the live tree must FAIL with **exactly** the one
-recorded gap — by note *and* by problem count — so a new regression cannot hide behind REQ-UI-04. The
-runner is deliberately **not wired into CI** because its live assertion expects the artifact to be
-red, so a deploy job running it would go red precisely when someone closes the last gap.
+**Gate:** `run_rehearsal_fixtures.sh` PASS (exit 0). The live assertion is no longer inverted — every
+flow is green, so the live tree must **PASS** the full run. The pair is unchanged: the de-tabbed-option
+copy must FAIL and name the option row (proving the check detects a control removed from the tab
+order), and the unmodified copy must PASS all seven flows. The runner is still not wired into CI — now
+for the ordinary reason, that its browser legs belong to the hosted runner by design.
 
 **Evidence:** full log, findings and not-verified detail are in [../qa/release-evidence/2026-10-23-rehearsal.md](../qa/release-evidence/2026-10-23-rehearsal.md).
 
