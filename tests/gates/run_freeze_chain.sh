@@ -81,6 +81,11 @@ gate "python3 scripts/check-item-identity.py --self-test" python3 scripts/check-
 gate "python3 scripts/check-item-types.py"              python3 scripts/check-item-types.py
 gate "python3 scripts/check-item-types.py --self-test"  python3 scripts/check-item-types.py --self-test
 gate "python3 scripts/generate-study-content.py --check" python3 scripts/generate-study-content.py --check
+# Added in Sprint 48 (S48-01). The Sprint 47 freeze record's "39/39 at 0d1f565"
+# was produced by the 39-gate revision of this script, which is still
+# reproducible from git: `git show 0d1f565:tests/gates/run_freeze_chain.sh`.
+gate "python3 scripts/check-nca-remap.py"              python3 scripts/check-nca-remap.py
+gate "bash tests/gates/run_remap_fixtures.sh"          bash tests/gates/run_remap_fixtures.sh
 
 # ── Packaging and release truth ──
 gate "python3 scripts/generate-bundle-manifest.py --check" \

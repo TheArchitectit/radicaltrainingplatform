@@ -27,6 +27,14 @@ Usage:
   python3 scripts/redeye-lane.py --exam COMPTIA-A-1201            # all banks of the exam
   python3 scripts/redeye-lane.py bank.md --allow-model-pending    # self-test aid only
 
+Explicit paths take precedence over --exam, and --exam supplies the examId for
+them. That is how the legacy root banks are reviewed: NCA-75's 140 items stay in
+NCA-75-Part{1,2,3-GapFill}.md at the repository root (SPEC-06: remapped bank
+items stay in their original files), so they are not under
+content/exams/<examId>/questions and cannot be inferred:
+
+  python3 scripts/redeye-lane.py --exam NCA-75 NCA-75-Part1.md NCA-75-Part2.md NCA-75-Part3-GapFill.md
+
 --allow-model-pending exists ONLY so the seeded-defect self-test can exercise
 the deterministic checks; it does not make an item releasable — the gate
 rejects any log whose modelStage is not "verified".
@@ -367,10 +375,12 @@ def main():
     if args.self_test:
         sys.exit(self_test())
 
-    if args.exam:
-        bank_paths = collect_exam_banks(args.exam)
-    elif args.paths:
+    # Explicit paths win; --exam then only supplies the examId for them (legacy
+    # root banks have no manifest above them to infer from).
+    if args.paths:
         bank_paths = [pathlib.Path(p) for p in args.paths]
+    elif args.exam:
+        bank_paths = collect_exam_banks(args.exam)
     else:
         parser.error("give bank paths or --exam")
         return

@@ -159,7 +159,7 @@ def main():
         mod.LOG_ROOT = log_dir
         mod._repo_root = REPO
         try:
-            report, excluded = mod.gate_exam(EXAM_ID)
+            report, excluded, gated = mod.gate_exam(EXAM_ID)
         finally:
             (mod.LOG_ROOT, mod._repo_root) = saved
         named = [line for line in report if "EXCLUDED" in line]
@@ -190,12 +190,40 @@ def main():
             saved = (mod.LOG_ROOT, mod._repo_root)
             mod.LOG_ROOT, mod._repo_root = b2 / "logs", b2
             try:
-                report, excluded = mod.gate_exam("EX")
+                report, excluded, gated = mod.gate_exam("EX")
             finally:
                 (mod.LOG_ROOT, mod._repo_root) = saved
             check("stale item hash excluded and named",
                   excluded == 1 and any("stale log" in line for line in report),
                   str(report))
+
+        # A gate that can see no banks must FAIL, not pass. This was a real
+        # defect: NCA-75's 140 items live in root banks (SPEC-06 keeps remapped
+        # items in their original files), the questions dir was empty, and the
+        # gate printed "GATE PASS" while gating nothing.
+        with tempfile.TemporaryDirectory() as td3:
+            b3 = pathlib.Path(td3)
+            (b3 / "content" / "exams" / "EMPTY" / "questions").mkdir(parents=True)
+            saved = (mod.LOG_ROOT, mod._repo_root)
+            mod.LOG_ROOT, mod._repo_root = b3 / "logs", b3
+            try:
+                report, excluded, gated = mod.gate_exam("EMPTY")
+            finally:
+                (mod.LOG_ROOT, mod._repo_root) = saved
+            check("bank-less exam fails instead of passing vacuously",
+                  gated == 0 and any("NO BANKS" in line for line in report),
+                  str(report))
+
+        # …and the legacy root banks are found, so NCA-75 is not bank-less.
+        saved = (mod.LOG_ROOT, mod._repo_root)
+        mod.LOG_ROOT, mod._repo_root = REPO / "content" / "review-logs", REPO
+        try:
+            nca_banks = [p.name for p in mod.collect_banks("NCA-75")]
+        finally:
+            (mod.LOG_ROOT, mod._repo_root) = saved
+        check("legacy root banks are discovered for their exam",
+              nca_banks == ["NCA-75-Part1.md", "NCA-75-Part2.md", "NCA-75-Part3-GapFill.md"],
+              str(nca_banks))
 
     print()
     if failures:

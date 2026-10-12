@@ -42,6 +42,19 @@ jobs:
           python3 scripts/check-item-identity.py
           python3 scripts/check-item-identity.py --self-test
 
+      # REQ-NCA-01/TM-82 (S48-01): the remap inventory is the control document
+      # for the NCA cut — exactly 140 rows, every ID resolving to a parsed
+      # question, no row lacking a review state, and ID stability (nothing
+      # dropped, invented or renumbered). Fixture pair: run_remap_fixtures.sh
+      # seeds seven defects (dropped row, blank review state, undeclared
+      # objective, duplicate ID, beta product version, broken column contract)
+      # plus a clean 140-row inventory that must pass.
+      - name: Check NCA-75 remap inventory (REQ-NCA-01/TM-82)
+        run: |
+          python3 scripts/check-nca-remap.py
+          python3 scripts/check-nca-remap.py --self-test
+          bash tests/gates/run_remap_fixtures.sh
+
       # REQ-AP-06/T-19: diagnosis share must stay >= 50% (fail-closed on
       # untyped items). Fixture pair: --self-test (30/30 pass, 29/31 fail
       # naming the deficit, untyped/unknown-type fail-closed).

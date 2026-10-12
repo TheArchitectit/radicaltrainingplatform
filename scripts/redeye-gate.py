@@ -52,11 +52,54 @@ def sanitize_item_id(item_id):
     return re.sub(r"[^A-Za-z0-9._-]+", "_", item_id)
 
 
-def parse_items(bank_path):
+SUFFIX_STRIP = re.compile(
+    r"^(.+?)-(?:Part\d+(?:-.*)?|D\d+(?:-.*)?|GapFill(?:-.*)?)$", re.IGNORECASE
+)
+
+
+def derive_exam_code(file_name):
+    """Port of QuestionParser.DeriveExamCode — mirrors check-item-identity.py.
+
+    Legacy root banks (NCA-75-Part1.md) carry their exam in the filename, not
+    in a directory. Without this the gate cannot see them at all.
+    """
+    current = pathlib.Path(file_name).stem
+    while True:
+        match = SUFFIX_STRIP.match(current)
+        if not match:
+            break
+        current = match.group(1)
+    parts = current.split("-")
+    return f"{parts[0]}-{parts[1]}" if len(parts) >= 2 else current
+
+
+def collect_banks(exam_id):
+    """Every bank belonging to an exam, wherever it lives.
+
+    Pack banks live under content/exams/<examId>/questions/. The NCA-75 items
+    do not: SPEC-06 keeps remapped bank items in their original files, so the
+    140 of them are NCA-75-Part{1,2,3-GapFill}.md at the repository root. A gate
+    that only looked in the questions dir reported GATE PASS for NCA-75 while
+    gating nothing — see the NO BANKS branch in gate_exam.
+    """
+    banks = []
+    questions_dir = _repo_root / "content" / "exams" / exam_id / "questions"
+    if questions_dir.is_dir():
+        banks.extend(sorted(questions_dir.glob("*.md")))
+    for md in sorted(_repo_root.glob("*.md")):
+        if md.name in ("CLAUDE.md", "README.md"):
+            continue
+        if derive_exam_code(md.name) == exam_id:
+            banks.append(md)
+    return banks
+
+
+def parse_items(bank_path, exam_id=None):
     """[(item_id, item_text)] — mirrors redeye-lane.parse_bank's slicing."""
     content = bank_path.read_text(encoding="utf-8")
     headers = list(QUESTION_HEADER.finditer(content))
-    exam_id = bank_path.parent.parent.name
+    # A root bank's parent.parent is the repository, not the exam.
+    exam_id = exam_id or bank_path.parent.parent.name
     items = []
     for i, match in enumerate(headers):
         start = match.start()
@@ -79,12 +122,22 @@ def load_log(item_id):
 
 
 def gate_exam(exam_id):
-    """Return (report_lines, excluded_count) for one exam's scored packs."""
-    questions_dir = _repo_root / "content" / "exams" / exam_id / "questions"
+    """Return (report_lines, excluded_count, gated_count) for one exam's packs.
+
+    gated_count is how many items the gate actually examined. It exists so a
+    gate that can see no banks reports a FAILURE rather than a vacuous pass:
+    "nothing gated" and "everything verified" must never print the same line.
+    """
     report = [f"== {exam_id} =="]
     excluded = 0
-    if not questions_dir.is_dir():
-        return report + ["  (no questions dir — nothing gated)"], 0
+    gated = 0
+
+    banks = collect_banks(exam_id)
+    if not banks:
+        return report + [
+            f"  NO BANKS: {exam_id} has no question banks — the gate has nothing "
+            f"to verify (this is a failure, not a pass)"
+        ], 0, 0
 
     manifest_path = _repo_root / "content" / "exams" / exam_id / "exam.json"
     manifest_hash = sha256(manifest_path.read_text(encoding="utf-8")) \
@@ -92,8 +145,9 @@ def gate_exam(exam_id):
     config_hash = sha256(CONFIG_PATH.read_text(encoding="utf-8")) \
         if CONFIG_PATH.is_file() else None
 
-    for bank in sorted(questions_dir.glob("*.md")):
-        for item_id, text in parse_items(bank):
+    for bank in banks:
+        for item_id, text in parse_items(bank, exam_id):
+            gated += 1
             log = load_log(item_id)
             item_hash = sha256(text)
             if log is None:
@@ -127,7 +181,7 @@ def gate_exam(exam_id):
                 excluded += 1
                 continue
             report.append(f"  ok       {item_id}")
-    return report, excluded
+    return report, excluded, gated
 
 
 def main():
@@ -159,11 +213,20 @@ def main():
         return
 
     total_excluded = 0
+    ungated = []
     for exam_id in exam_ids:
-        report, excluded = gate_exam(exam_id)
+        report, excluded, gated = gate_exam(exam_id)
         for line in report:
             print(line)
         total_excluded += excluded
+        if gated == 0:
+            ungated.append(exam_id)
+
+    if ungated:
+        print(f"\n❌ GATE FAILURE: no question banks found for {', '.join(ungated)} — "
+              f"the gate verified nothing, which is not a pass (REQ-REV-05)",
+              file=sys.stderr)
+        sys.exit(1)
 
     if total_excluded:
         print(f"\n❌ GATE FAILURE: {total_excluded} item(s) excluded — nothing releases "
@@ -236,9 +299,14 @@ def self_test():
             return rc, buf_out.getvalue() + buf_err.getvalue()
 
         def gate_and_exit(exam_id):
-            report, excluded = gate_exam(exam_id)
+            report, excluded, gated = gate_exam(exam_id)
             for line in report:
                 print(line)
+            if gated == 0:
+                print(f"\n❌ GATE FAILURE: no question banks found for {exam_id} — "
+                      f"the gate verified nothing, which is not a pass (REQ-REV-05)",
+                      file=sys.stderr)
+                return 1
             if excluded:
                 print(f"\n❌ GATE FAILURE: {excluded} item(s) excluded — nothing releases "
                       f"without a current passing verified log (REQ-REV-02/05)",

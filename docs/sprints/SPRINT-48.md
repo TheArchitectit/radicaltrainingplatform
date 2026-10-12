@@ -15,7 +15,7 @@
 
 | ID | Task | Requirements | Points | Status |
 |---|---|---|---|---|
-| S48-01 (T-31) | Complete remap.csv (started T-09) with RedEye lane logs and seeded-defect self-test record | REQ-NCA-01 | 3 | ⚪ |
+| S48-01 (T-31) | Complete remap.csv (started T-09) with RedEye lane logs and seeded-defect self-test record | REQ-NCA-01 | 3 | 🟡 |
 | S48-02 (T-32) | NCA-75 exam.json current blueprint; InitNca75 retired; blueprint fixtures | REQ-NCA-05 | 2 | ⚪ |
 | S48-03 (T-33) | 14 lessons + 40-item pilot (remapped + newly authored gap fills) | REQ-NCA-02/06 | 3 | ⚪ |
 | S48-04 (T-34) | Cheatsheet correction + beta logistics cleanup + scheduling-link currency | REQ-NCA-04, C-07 | 1 | ⚪ |
@@ -32,13 +32,50 @@
 **As a** track maintainer, **I want** every one of the 140 NCA-75 items mapped to the current blueprint, **so that** remapping attaches new mappings without renumbering.
 
 **Acceptance Criteria:**
-- [ ] `content/exams/NCA-75/remap.csv` complete: exactly 140 rows, every item ID resolves to a parsed question, every row carries review state (columns per SPEC-01 01.3)
-- [ ] Existing question IDs never change; remap attaches mapping only
-- [ ] Every remapped row passes the RedEye lane with remap-aware checks (key re-verification against current documentation, explanation re-read, mapping check, rights status)
-- [ ] Errata fixtures still pass: NCA-75-Part1 Q35 = D; NCA-75-Part3-GapFill Q3 = A (REQ-NCA-03)
-- [ ] Lane logs + seeded-defect self-test record archived in release evidence
+- [x] `content/exams/NCA-75/remap.csv` complete: exactly 140 rows, every item ID resolves to a parsed question, every row carries review state (columns per SPEC-01 01.3) — enforced by `scripts/check-nca-remap.py`, whose failure mode is a `--self-test` fixture set (7 seeded defects + 1 clean 140-row inventory) and `tests/gates/run_remap_fixtures.sh`
+- [x] Existing question IDs never change; remap attaches mapping only — the validator asserts the itemId set **equals** the bank's question set, so a dropped, invented or renumbered ID fails
+- [ ] Every remapped row passes the RedEye lane with remap-aware checks (key re-verification against current documentation, explanation re-read, mapping check, rights status) — **the lane runs and every one of the 140 is `return`/excluded**; the key-vs-source stage is blocked (no provider) and `mapping-check` fails on missing provenance records, which the lane reads instead of `remap.csv`
+- [x] Errata fixtures still pass: NCA-75-Part1 Q35 = D; NCA-75-Part3-GapFill Q3 = A (REQ-NCA-03)
+- [x] Lane logs + seeded-defect self-test record archived in release evidence
 
-**Files:** `content/exams/NCA-75/remap.csv`, `content/provenance/`
+**Status 🟡 because:** the inventory is complete and enforced, but the row's own
+"every remapped row passes the lane" line is not met and is not claimed to be.
+That needs either the radredeye model stage (REQ-REV-05) or provenance records
+under `content/provenance/NCA-75/` — neither exists yet. Recorded, not smoothed.
+
+**The finding of the row — a ship gate that could not fail.** Before this work,
+`python3 scripts/redeye-gate.py NCA-75` printed **"✅ GATE PASS"** and exited 0
+while gating **zero items**: `gate_exam` looked only in
+`content/exams/NCA-75/questions/` (empty), and the 140 real items live in root
+banks where SPEC-06 requires them to stay. Fixed: `collect_banks` now finds
+legacy root banks using the same `derive_exam_code` port `check-item-identity.py`
+uses, `parse_items` takes the exam id, and **`gated == 0` is a failure** — so
+"nothing gated" and "everything verified" can no longer print the same line. Two
+self-test cases pin it. This is the third gate in this package found green while
+enforcing nothing (after S47-13 and S47-14).
+
+**Two measured facts the validator reports rather than hides:** 60 gap-fill rows
+carry no `oldObjectiveId` (that bank is organised by section, not beta
+objective — the blank is the true provenance), and **objective 3.2 has zero
+mapped items**, which is narrower than SPEC-06's estimate of the gaps (1.x, 2.4,
+4.3, 4.4 all *do* have bank items).
+
+**Files:**
+- `scripts/check-nca-remap.py` (new) — the validator
+- `tests/gates/run_remap_fixtures.sh` (new) — 7 seeded defects + a clean inventory
+- `scripts/redeye-gate.py` — `collect_banks`, `parse_items(exam_id)`, `gated == 0` fails
+- `scripts/redeye-lane.py` — explicit paths take precedence; `--exam` supplies the id for root banks
+- `tests/gates/redeye/self_test.py` — two new cases (bank-less exam fails; root banks discovered)
+- `.github/workflows/build.yml`, `tests/gates/run_freeze_chain.sh` — gate wired in
+- `content/exams/NCA-75/remap.csv` — unchanged (already complete); validated, not rewritten
+
+**Not verified:** no key or explanation re-verified against current documentation
+(all 140 flags deliberately `false`); the lane's `mapping-check` cannot read
+`remap.csv`; `rightsStatus` is an assertion, not a review; the 40-item pilot does
+not exist yet, so nothing here names release candidates; objective 3.2's gap is
+measured, not filled. Full list in the evidence record.
+
+**Evidence:** [../qa/release-evidence/2026-10-25-nca-remap.md](../qa/release-evidence/2026-10-25-nca-remap.md).
 
 ### S48-02 (T-32): Current Blueprint Manifest
 **As a** learner, **I want** the NCA track to present the current official blueprint, **so that** I never study the beta structure by accident.
