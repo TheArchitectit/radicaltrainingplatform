@@ -19,7 +19,7 @@
 | S48-02 (T-32) | NCA-75 exam.json current blueprint; InitNca75 retired; blueprint fixtures | REQ-NCA-05 | 2 | 🟡 |
 | S48-03 (T-33) | 14 lessons + 40-item pilot (remapped + newly authored gap fills) | REQ-NCA-02/06 | 3 | 🟡 |
 | S48-04 (T-34) | Cheatsheet correction + beta logistics cleanup + scheduling-link currency | REQ-NCA-04, C-07 | 1 | 🟡 |
-| S48-05 (T-35) | Four NCA scenarios with validators and walkthroughs | REQ-NCA-07, REQ-SC-01..06 | 2 | 🟡 |
+| S48-05 (T-35) | Four NCA scenarios with validators and walkthroughs | REQ-NCA-07, REQ-SC-01..06 | 2 | ✅ |
 | S48-06 (T-36) | Travel freeze per REQ-NCA-08 once itinerary confirms cutoff | REQ-NCA-08 | 1 | 🟡 |
 
 **Status key:** ✅ shipped and verified on this host · 🟡 shipped and gated, with named verification gaps listed under the row's *Not verified* notes · ⚪ not started.
@@ -269,10 +269,11 @@ from the sheet's own text.
 - [x] Each: fresh-seed negativity, recorded walkthrough to 100%, wrong-state negative fixture, zero real infrastructure calls, “simulated environment” label — all five in `tests/gates/web/nca-scenarios.mjs` (13 cases) plus the walkthroughs in `lib/scenario-walkthroughs.mjs`; zero outbound calls asserted by `demo-independence.mjs`, which walks the whole catalogue including these four
 - [x] Unsupported licensing/tool features use labeled worked examples, never fake interactive completion — no licensing scenario exists in this set, because the simulator cannot record a licence mutation; `s2_4`'s lesson says so in its own words (“the lab simulator for this track does not simulate licence mutations”), and every one of the four scenarios here is a decision the simulator genuinely records
 
-**Status 🟡 because:** the criteria are met and gated, but the lab UI's
-interactivity has never been exercised in a real browser. The fixture drives the
-validators through the stub DOM; `rehearsal-web.mjs` drives the *ticket* lab in
-Chrome but not these three. Recorded, not smoothed.
+**Status ✅.** Every criterion is met and gated, and the gap this row
+originally carried — the lab UI's interactivity never having been exercised in a
+real browser — is now closed by `tests/e2e/nca-lab-web.mjs`, which drives all
+three decision labs in headless Chrome. What that gate does *not* cover is named
+under **Not verified** below rather than left implied.
 
 **One renderer for three decision tasks, and why the fourth has none.** SPEC-07
 07.5 asks for a tool pick, an ordered sequence and an alert triage — three
@@ -326,27 +327,42 @@ silently different catalogue goes red).
 - `tests/gates/web/nca-scenarios.mjs` (new) — 13 cases: fresh-seed negativity, four wrong-state negatives, last-record-wins, walkthrough-to-100%, reset, label, registry wiring
 - `tests/gates/web/lib/scenario-walkthroughs.mjs` — four recorded walkthroughs
 - `tests/gates/web/demo-sweep-report.mjs` — count pin 46 → 50; deferral prose replaced with the present-catalogue statement
+- `tests/e2e/nca-lab-web.mjs` (new) — the three decision labs driven in headless Chrome over CDP: render + REQ-SC-05 label, reset → submit (every objective unmet and naming why), walkthrough → submit (every objective met, completion toast), reset → seed restored, zero console errors
+- `tests/gates/run_nca_lab_fixtures.sh` (new) — the failing/passing pair: a constant-true objective must fail the gate, the injection is verified to have applied, the unmodified artifact must pass
 - `docs/qa/release-evidence/2026-10-25-demo-sweep.md` (new) — the post-freeze sweep at `efe5e31`
 
-**Not verified:** the lab UI was not driven in a real browser — no click, no
-ordering interaction, no alert-detail toggle was exercised outside the stub DOM,
-so “the buttons work” is inferred from the fixture's DOM and not observed. The
-`nca-vm-01` path through the PE VM wizard is covered by the demo sweep's
-store-level walkthrough, not by a browser session. Nothing here was re-read
-against the Nutanix guide; the tool/objective mapping in `NCA_TOOL_LAB` is an
-authored teaching choice, not a citation. `rehearsal-web.mjs` does not yet cover
-these scenarios (it is not in the freeze chain either — it needs a browser).
+**The browser leg, and what it took to make it a real gate.** The first full
+chain run with `nca-lab-web.mjs` reported **44/45** — and every assertion in the
+failing leg had passed. The non-zero exit came from the `finally` block:
+`rmSync` on Chrome's throwaway profile races the SIGKILL, and the throw
+propagated out of `main()` before the summary printed. A gate that goes red on
+its own cleanup reports a product failure where none exists, and it does so
+intermittently, which is how a real failure gets waved through as flake. Both
+browser legs now wait for the process to exit and remove best-effort in a
+bounded retry loop; `smoke-web.mjs` carried the same unguarded call and is fixed
+with it (`0e12fcd`).
 
-**Measured:** freeze chain **43/43 at `efe5e31`**, exit 0. `nca-scenarios.mjs`
-13/13. Demo sweep: **50 scenarios**, every one `incomplete (0 of N met)` on a
-fresh station → `complete (N of N met)` after its walkthrough.
+**Not verified:** `nca-vm-01` — it has no lab page, so no browser leg drives it;
+its four objectives are covered by the store-level walkthrough and the demo
+sweep, and by the PE VM wizard's own fixtures, not by a Chrome session. The NCA
+labs' **keyboard** operability is also unmeasured: the new gate activates
+controls directly, as `smoke-web.mjs` does, and `rehearsal-web.mjs` — which owns
+the tab-order claim — covers the ticket lab only and is knowingly red on two
+legs. Nothing here was re-read against the Nutanix guide; the tool/objective
+mapping in `NCA_TOOL_LAB` is an authored teaching choice, not a citation.
+
+**Measured:** `nca-scenarios.mjs` 13/13. `nca-lab-web.mjs` **17/17**, three
+labs, zero console errors. `run_nca_lab_fixtures.sh` green, and red on its
+constant-true fixture. Demo sweep: **50 scenarios**, every one `incomplete
+(0 of N met)` on a fresh station → `complete (N of N met)` after its
+walkthrough. Freeze chain at this row's head: **45/45 at `0e12fcd`**.
 
 ### S48-06 (T-36): Travel Freeze
 **As a** track owner, **I want** the NCA cut frozen at a recorded head before departure, **so that** what I demonstrate in California is a known, reproducible build.
 
 **Acceptance Criteria:**
 - [ ] Departure cutoff confirmed from the trip itinerary before schedule commitment (ASM-09) — **not met, and not met by choice.** No itinerary exists in this repository, and ASM-09 itself records the exact departure as unverified. I did not invent a cutoff. What exists instead is a *candidate* freeze at a recorded head; whether that head is the last one before departure is unknown
-- [x] Freeze checklist per SPEC-11 11.7: branch, tag-free head record, gate results with counts, RedEye lane logs + self-test record, usable build, no content edits after freeze — head `4a399fb`, **43/43 gates**, Core 263/263, Desktop 51/51, coverage 92.07%, PWA smoke clean, bundle hash-matched; lane logs and the seeded-defect self-test record reproduced at the head
+- [x] Freeze checklist per SPEC-11 11.7: branch, tag-free head record, gate results with counts, RedEye lane logs + self-test record, usable build, no content edits after freeze — head `0e12fcd`, **45/45 gates**, Core 263/263, Desktop 51/51, coverage 92.07%, PWA smoke clean, bundle hash-matched; lane logs and the seeded-defect self-test record reproduced at the head
 
 **Status 🟡 because:** the first criterion is unmet. Everything else in the row is
 produced and reproducible, but a freeze whose cutoff is unconfirmed is a freeze
@@ -374,22 +390,52 @@ no content edits afterward without a new head record." The S47-13 record
 39/39 at `0d1f565` and 46 scenarios respectively. Both were true; neither is
 rewritten. This freeze produces its own sweep artifact at its own head.
 
+**Two false claims in the first freeze record, and the superseding record that
+replaces it.** Re-checking the record written for this row — rather than
+re-reading it as settled — turned up two entries in its known-unverified list
+that are false against repo state:
+
+- "the two vendor PDFs are absent" — `git ls-tree` shows both tracked and
+  present, and the OpenSpec package's own line 26 lists them among the source
+  inputs. The claim was struck, not softened.
+- "`Desktop.Tests` has no CI signal" — `build.yml` runs that suite, and
+  `git merge-base --is-ancestor 9a59e86 4a399fb` confirms the step predates the
+  head the record names. Struck.
+
+A third entry (item 10) carried a citation pointing at `:3` when the text is on
+`:1`; corrected. Items 4, 5 and 8 were re-verified and stand as written.
+
+SPEC-16 16.6 forbids editing a frozen artifact, so the correction is a **new head
+record** — `2026-10-12-nca-freeze-2.md` — which supersedes the first, states
+which entries it strikes and on what evidence, and freezes at `0e12fcd`. The
+first record is left byte-for-byte as committed. This is the "report what you did
+NOT verify" discipline doing the job it exists for: a list of unknowns is only
+worth reading if each entry is checked, and two of them were wrong in the
+direction that understated what the repo contains.
+
 **Files:**
-- `docs/qa/release-evidence/2026-10-25-nca-freeze.md` (new) — the freeze record
+- `docs/qa/release-evidence/2026-10-12-nca-freeze-2.md` (new) — the superseding freeze record at `0e12fcd`; strikes items 9 and 11, corrects item 10's citation, closes item 6, adds item 12
+- `docs/qa/release-evidence/2026-10-25-nca-freeze.md` — the first record at `4a399fb`, left unedited per SPEC-16 16.6
 - `docs/qa/release-evidence/2026-10-25-demo-sweep.md` — regenerated at the freeze head `4a399fb` (was generated at `efe5e31`)
 
 **Not verified:** the departure cutoff (see above). Nothing in this row was
 independently verified by a second party — the gate chain, test counts, coverage
 figure, smoke run and lane self-test are all single-run measurements on this host
-at this head. The full list of what the freeze does *not* establish is in the
-record's own known-unverified section: no item is reviewed, the Nutanix guide was
-never opened, the lab UI was never driven in a browser, `Desktop.Tests` has no CI
-signal, and the two vendor PDFs are absent.
+at this head. The freeze does *not* establish: that any item is reviewed (the
+model stage is unconfigured, so all 180 NCA items are excluded); that the Nutanix
+guide was ever opened; that `mapping-check` can read `remap.csv`; that
+`rightsStatus` is more than an assertion; that `nca-vm-01`'s PE VM wizard flow
+works in a browser; that any runner run was observed from this host; that
+deployed Pages behaviour was exercised; that beta section titles no longer
+survive in bank domain headings; or that the NCA labs are keyboard-operable. The
+first record's reproduce command is also corrected there — it could not run at
+its own commit, because `run_freeze_chain.sh --expect-sha` compares the working
+tree's HEAD, so the SHA must be checked out first.
 
-**Measured:** freeze chain **43/43 at `4a399fb`**, exit 0, with `--expect-sha`
+**Measured:** freeze chain **45/45 at `0e12fcd`**, exit 0, with `--expect-sha`
 matching. Core 263/263 · Desktop 51/51 · coverage 92.07% · web fixtures 26/26 +
-the must-fail self-test · NCA scenarios 13/13 · demo sweep 50 scenarios, all
-incomplete → complete.
+the must-fail self-test · NCA scenarios 13/13 · NCA lab browser 17/17 · demo
+sweep 50 scenarios, all incomplete → complete.
 
 ---
 
@@ -399,8 +445,8 @@ The NCA track presents the current official blueprint (sections, objective IDs, 
 
 **Where the sprint actually stands against that target.** Every structural piece
 is in place and gated — the blueprint, the 14 lessons, the 40-item pilot, the four
-scenarios, the remap inventory, the corrected companion surfaces, and 43/43 gates
-green at `4a399fb`. Three words in the paragraph above are not yet true, and no
+scenarios, the remap inventory, the corrected companion surfaces, and 45/45 gates
+green at `0e12fcd`. Three words in the paragraph above are not yet true, and no
 row claims them:
 
 - **"reviewed"** — all 180 NCA items are excluded by the RedEye gate; no item has
@@ -411,5 +457,6 @@ row claims them:
 - **"frozen head"** — the head is recorded and reproducible, but the departure
   cutoff is unconfirmed (ASM-09), so the freeze is a candidate, not a closure.
 
-All six sprint rows stand 🟡 on those named gaps rather than ✅ on a target that
-has not been met.
+Five sprint rows stand 🟡 on those named gaps rather than ✅ on a target that has
+not been met. S48-05 is ✅: its criteria are met, its gap is closed by a real
+browser gate, and what that gate does not cover is named rather than implied.
