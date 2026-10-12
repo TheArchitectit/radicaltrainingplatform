@@ -192,6 +192,9 @@ class App {
 
         hamburgerBtn?.addEventListener('click', () => this.#toggleHamburger());
         hamburgerBackdrop?.addEventListener('click', () => this.#closeHamburger());
+        // The overlay starts closed in the markup, so apply the closed state
+        // (including `inert`) before any Tab can reach it.
+        this.#setHamburger(false);
 
         // Nav item clicks (PE hamburger)
         document.querySelectorAll('#hamburger-overlay .nav-item[data-route]').forEach(item => {
@@ -216,15 +219,34 @@ class App {
     }
 
     #toggleHamburger() {
-        this.#hamburgerOpen = !this.#hamburgerOpen;
-        document.getElementById('hamburger-overlay')?.classList.toggle('open', this.#hamburgerOpen);
-        document.getElementById('hamburger-backdrop')?.classList.toggle('open', this.#hamburgerOpen);
+        this.#setHamburger(!this.#hamburgerOpen);
     }
 
     #closeHamburger() {
-        this.#hamburgerOpen = false;
-        document.getElementById('hamburger-overlay')?.classList.remove('open');
-        document.getElementById('hamburger-backdrop')?.classList.remove('open');
+        this.#setHamburger(false);
+    }
+
+    /**
+     * Single writer for the hamburger overlay's open/closed state.
+     *
+     * The overlay is hidden with `transform: translateX(-100%)`, which takes it
+     * off-screen but leaves it in the tab order and the accessibility tree —
+     * so its ~50 nav items were reachable by Tab (and by a screen reader) while
+     * visually absent. While nav items were `<a>` without an href that was
+     * invisible-but-harmless; now that they are real links (REQ-DEMO-05) they
+     * are focusable, which turns the closed overlay into a run of off-screen
+     * links every keyboard user must Tab through before reaching visible
+     * content — a focus-order defect (WCAG 2.4.3; TM-48 asks for "focus
+     * predictable after reset"). `inert` removes the closed overlay from both
+     * the tab order and the a11y tree, and states the intent exactly: not open,
+     * not reachable.
+     */
+    #setHamburger(open) {
+        this.#hamburgerOpen = open;
+        const overlay = document.getElementById('hamburger-overlay');
+        overlay?.classList.toggle('open', open);
+        document.getElementById('hamburger-backdrop')?.classList.toggle('open', open);
+        if (overlay) overlay.inert = !open;
     }
 
     #setContext(ctx) {

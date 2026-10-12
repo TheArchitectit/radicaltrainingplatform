@@ -9,6 +9,19 @@
     padding: 0;
 }
 
+/* The UA stylesheet hides `[hidden]` with a plain `display: none`, which ANY
+   author `display` rule outranks — so an element that is hidden in markup but
+   styled `display: flex` paints anyway and the attribute reads as if it worked.
+   That is exactly how REQ-DEMO-02 shipped: `DemoBanner.js` set `el.hidden`
+   correctly, `.demo-banner { display: flex }` (study.css) beat the UA rule, and
+   a learner in normal mode was shown "DEMO MODE". Restated here with
+   `!important` so the attribute means what it says regardless of load order or
+   specificity — the property is not one an author should be able to win against
+   while the attribute is set. */
+[hidden] {
+    display: none !important;
+}
+
 body {
     font-family: var(--font-family);
     font-size: var(--font-size-base);
@@ -261,6 +274,10 @@ body {
     transition: background var(--transition-fast);
     font-size: var(--font-size-sm);
     color: var(--gray-300);
+    /* The sidebar rule carries this and this one did not, which only showed
+       once nav items became real links (REQ-DEMO-05): an <a> with an href gets
+       the UA underline. Same fix, same reason. */
+    text-decoration: none;
 }
 
 .hamburger-overlay .nav-item:hover {

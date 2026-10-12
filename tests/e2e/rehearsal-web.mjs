@@ -672,29 +672,56 @@ async function main() {
         if (FLOWS.has(7)) {
         say('');
         say('## Flow 7 — reset between groups');
-        await goto('#/tracks');
-        const demoLink = await tabTo((d) => d.href === '#/demo', 'the demo controls link');
-        if (!demoLink.ok) {
-            fail(`the demo controls link is not reachable by Tab (stopped on ${JSON.stringify(demoLink.d)})`);
-        } else {
-            pass(`demo controls reached by keyboard in ${demoLink.presses} Tab press(es)`);
-            await key('Enter');
-            await sleep(600);
+        // Rendered visibility, not the `hidden` attribute. `DemoBanner.js` sets
+        // `el.hidden` correctly, and `.demo-banner { display: flex }`
+        // (css/study.css) used to beat the UA stylesheet's `[hidden] { display:none }`
+        // (author rules win), so the label painted regardless of the attribute.
+        // A check on `.hidden` alone reported a pass for a banner that was never
+        // off, so this reads the layout box — and the attribute alongside it, so
+        // a disagreement between the two is visible in the failure text.
+        const bannerVisible = () => evaluate(`(() => {
+            const b = document.getElementById('demo-banner');
+            if (!b) return null;
+            return { hiddenAttr: b.hidden, display: getComputedStyle(b).display,
+                     height: b.offsetHeight, onScreen: b.offsetHeight > 0 };
+        })()`);
 
-            // Rendered visibility, not the `hidden` attribute. The attribute is
-            // set correctly by DemoBanner.js, but `.demo-banner { display: flex }`
-            // in css/study.css beats the UA stylesheet's `[hidden] { display:none }`
-            // (author rules win), so the label paints regardless. A check on
-            // `.hidden` alone reported a pass for a banner that was never off —
-            // so this reads the layout box, and asserts the transition, not just
-            // the end state: "is it showing?" is only meaningful against "was it
-            // showing before?".
-            const bannerVisible = () => evaluate(`(() => {
-                const b = document.getElementById('demo-banner');
-                if (!b) return null;
-                return { hiddenAttr: b.hidden, display: getComputedStyle(b).display,
-                         height: b.offsetHeight, onScreen: b.offsetHeight > 0 };
-            })()`);
+        await goto('#/tracks');
+
+        // Learner mode must not show the demo label. Demo mode is presenter-
+        // entered: the banner's own link is the ONLY inbound route to #/demo in
+        // the app, and it lives inside the element that is hidden whenever demo
+        // mode is off — so a learner tabbing the shell must not find it. That
+        // absence is what makes the label mean anything.
+        //
+        // This flow used to reach #/demo by tabbing to that link here. That only
+        // worked because the banner was wrongly painted in learner mode, i.e.
+        // the assertion was green on exactly the defect it exists to catch. It
+        // now asserts the absence, then enters demo mode the way the presenter
+        // does — by URL.
+        const learnerBanner = await bannerVisible();
+        if (learnerBanner?.onScreen) {
+            fail('the demo banner is on screen in learner mode '
+                + `(hidden attribute ${JSON.stringify(learnerBanner.hiddenAttr)}, `
+                + `computed display ${JSON.stringify(learnerBanner.display)}, `
+                + `${learnerBanner.height}px tall) — the label does not mark demo mode, `
+                + 'so "is this the demo?" has no on-screen answer');
+        } else {
+            pass('learner mode shows no demo banner (the attribute and the layout box agree)');
+        }
+
+        const learnerDemoLink = await tabTo((d) => d.href === '#/demo', 'a demo-controls link', 30);
+        if (learnerDemoLink.ok) {
+            fail('a demo-controls link is reachable by Tab in learner mode '
+                + `(stopped on ${JSON.stringify(learnerDemoLink.d)}) — demo controls are presenter-only`);
+        } else {
+            pass('no demo-controls link is reachable by Tab in learner mode');
+        }
+
+        // The presenter's entry path. The banner then makes the link reachable
+        // on every screen for the rest of the demo.
+        await goto('#/demo');
+        {
             const beforeEnter = await bannerVisible();
 
             const enter = await tabTo((d) => d.id === 'demo-enter', '#demo-enter');
@@ -711,16 +738,9 @@ async function main() {
                         + `(hidden attribute ${JSON.stringify(beforeEnter.hiddenAttr)}, `
                         + `computed display ${JSON.stringify(beforeEnter.display)}, `
                         + `${beforeEnter.height}px tall) — the label does not mark demo mode, it is `
-                        + 'always painted, so "is this the demo?" has no on-screen answer');
-                    note('REQ-DEMO-02 gap — the demo banner is visible in learner mode. '
-                        + 'DemoBanner.js sets `el.hidden = !demo.active` correctly, but '
-                        + '`.demo-banner { display: flex }` (css/study.css:495) beats the UA '
-                        + 'stylesheet\'s `[hidden] { display: none }`, and no author `[hidden]` rule '
-                        + 'exists, so the element paints regardless of the attribute. Measured on a '
-                        + 'fresh profile: hidden=true, display="flex", 46px tall, demo.active=false. '
-                        + 'Effect: a learner in normal mode is told "DEMO MODE", so the label stops '
-                        + 'distinguishing anything. One-line fix, but it changes shell appearance '
-                        + 'app-wide and belongs to its own row.');
+                        + 'always painted, so "is this the demo?" has no on-screen answer. '
+                        + 'Closed by the `[hidden] { display: none !important }` reset rule in '
+                        + 'css/components.css; this branch is the regression guard for it.');
                 } else {
                     pass('Enter on "Enter demo mode" shows the demo banner (absent before, present after)');
                 }
