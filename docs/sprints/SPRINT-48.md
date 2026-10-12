@@ -16,7 +16,7 @@
 | ID | Task | Requirements | Points | Status |
 |---|---|---|---|---|
 | S48-01 (T-31) | Complete remap.csv (started T-09) with RedEye lane logs and seeded-defect self-test record | REQ-NCA-01 | 3 | 🟡 |
-| S48-02 (T-32) | NCA-75 exam.json current blueprint; InitNca75 retired; blueprint fixtures | REQ-NCA-05 | 2 | ⚪ |
+| S48-02 (T-32) | NCA-75 exam.json current blueprint; InitNca75 retired; blueprint fixtures | REQ-NCA-05 | 2 | 🟡 |
 | S48-03 (T-33) | 14 lessons + 40-item pilot (remapped + newly authored gap fills) | REQ-NCA-02/06 | 3 | ⚪ |
 | S48-04 (T-34) | Cheatsheet correction + beta logistics cleanup + scheduling-link currency | REQ-NCA-04, C-07 | 1 | ⚪ |
 | S48-05 (T-35) | Four NCA scenarios with validators and walkthroughs | REQ-NCA-07, REQ-SC-01..06 | 2 | ⚪ |
@@ -81,13 +81,76 @@ measured, not filled. Full list in the evidence record.
 **As a** learner, **I want** the NCA track to present the current official blueprint, **so that** I never study the beta structure by accident.
 
 **Acceptance Criteria:**
-- [ ] `content/exams/NCA-75/exam.json` encodes the current four sections / 14 objectives: 1 Solutions and tools (1.1–1.3), 2 Platform administration (2.1–2.4), 3 Cluster configuration and maintenance (3.1–3.3), 4 Health and monitoring (4.1–4.4)
-- [ ] Manifest carries displayName “Nutanix Certified Associate 7.5”, officialVersion with June 15 2026 guide date, productVersions AOS 7.5 / AHV 11.0 / pc.7.5, sourceUrl + sourceReviewDate from an actual human source review
-- [ ] No weightPercent — equal study allocation, labeled as study choice (ASM-13)
-- [ ] `HardcodedBlueprintService.InitNca75` (beta 20/30/25/25 structure) removed or annotated obsolete with a pointer to the manifest
-- [ ] `ManifestBlueprintTests.cs` fixtures assert manifest sections/objectives/IDs match the current guide; beta section titles never render
+- [x] `content/exams/NCA-75/exam.json` encodes the current four sections / 14 objectives: 1 Solutions and tools (1.1–1.3), 2 Platform administration (2.1–2.4), 3 Cluster configuration and maintenance (3.1–3.3), 4 Health and monitoring (4.1–4.4) — asserted section-by-section, objective IDs and titles, against the repo's real manifest rather than a temp copy
+- [ ] Manifest carries displayName “Nutanix Certified Associate 7.5”, officialVersion with June 15 2026 guide date, productVersions AOS 7.5 / AHV 11.0 / pc.7.5, sourceUrl + sourceReviewDate from an actual human source review — **all of this is in place except the last clause**: `sourceReviewDate` is `2026-10-10`, the ingest date all four manifests share. I did not open the Nutanix guide, so per SPEC-02 the date is not copied from the spec as if reviewed
+- [x] No weightPercent — equal study allocation, labeled as study choice (ASM-13)
+- [x] `HardcodedBlueprintService.InitNca75` (beta 20/30/25/25 structure) removed or annotated obsolete with a pointer to the manifest
+- [x] `ManifestBlueprintTests.cs` fixtures assert manifest sections/objectives/IDs match the current guide; beta section titles never render
 
-**Files:** `content/exams/NCA-75/exam.json`, `RadicalTrainingPlatform.Core/Services/HardcodedBlueprintService.cs`, `RadicalTrainingPlatform.Core.Tests/ManifestBlueprintTests.cs`, `RadicalTrainingPlatform.Core.Tests/BlueprintServiceTests.cs`
+**Status 🟡 because:** the one unmet line is the identity criterion's closing clause —
+`sourceReviewDate` is not attested as an actual human source review. Everything
+else in the row is landed and enforced; this is recorded rather than smoothed.
+
+**Deleted, not annotated — and why that is the stronger reading.** REQ-NCA-05
+allows "removed or annotated obsolete". The beta block is **removed**:
+`GetBlueprint("NCA-75")` returns `null` from `HardcodedBlueprintService`, and a
+fixture pins it. The reason is that "the beta section titles never render" is not
+satisfiable by an annotated-but-live block — `BlueprintCanvas` renders
+`$"Section {n}: {title}"` straight off `IBlueprintService`, so any code path where
+the manifest is not loaded (no `content/` tree, loader failure) would still paint
+"Describe Lifecycle Management" onto a learner's blueprint view. Deleting closes
+those paths instead of documenting them. Two `BlueprintServiceTests` facts that
+depended on the fallback serving NCA-75 are rewritten against blueprints that
+remain hardcoded, and one of them was found **vacuous** in the process
+(`coverage.Count.ShouldBeGreaterThan(0)` is true for any recognised exam even when
+nothing matched; it now asserts a count).
+
+**Study allocation as a choice, not a weight.** The manifest gains a
+`studyAllocationLabel` field (`ExamManifest.StudyAllocationLabel`): the June 15,
+2026 guide publishes no section percentage table, so no section carries
+`weightPercent` and the equal 10-per-section allocation says so in its own words.
+A fixture asserts all four sections are `null`-weighted, all allocations equal 10,
+and the label contains "not a published exam weight".
+
+**Deliberate deviation — REQ-NCA-02's wording collides with REQ-BRAND-01.** The
+label first read "not an **official** exam weight". `check-brand.py` forbids the
+word `official` (whole-word, case-insensitive) and failed on both
+`exam.json:14` and the generated `study-content.js:841`. The wording is now "not a
+**published** exam weight", which carries the same meaning and passes the brand
+gate; REQ-NCA-02's own phrasing is the thing that cannot ship. No gate was
+weakened and no exemption was added for this string.
+
+**Open finding — beta section titles survive in the bank domain headings.**
+`NCA-75-Part1.md:3` (and Part2/Part3) carry headings like
+`## Domain 1: Describe Lifecycle Management (~20%)`; `QuestionParser.DomainHeaderRx`
+extracts them into `Question.Domain`, which the Desktop `StatsView` renders via
+`GetDomainStats`. So the beta names can still reach a learner through practice
+stats on an NCA bank item. That is a **content** surface (S48-03/S48-04 scope),
+not the blueprint view, and it is recorded here rather than claimed as "never
+renders anywhere". `remap.csv`'s required `oldDomain` column keeps the same
+strings by design.
+
+**Files:**
+- `content/exams/NCA-75/exam.json` — `studyAllocationLabel` added
+- `RadicalTrainingPlatform.Core/Models/ExamManifest.cs` — `StudyAllocationLabel`
+- `RadicalTrainingPlatform.Core/Services/HardcodedBlueprintService.cs` — `InitNca75` deleted (−129 lines), retired-block pointer left at the foot of the file
+- `RadicalTrainingPlatform.Core.Tests/ManifestBlueprintTests.cs` (new, 6 facts) — reads the repo's real manifest; asserts section order, objective IDs/titles, no beta title rendered, fallback null
+- `RadicalTrainingPlatform.Core.Tests/BlueprintServiceTests.cs` — two NCA-75-dependent facts rewritten
+- `content-manifest.json`, `RadicalTrainingPlatform.Web/content-bundle.json`, `RadicalTrainingPlatform.Web/js/study-content.js` — regenerated (both bundle artifacts pin hashes; one regeneration is not enough)
+
+**Not verified:** the Nutanix guide was not opened — no section title, objective
+ID or objective title here was re-read against the PDF at execution time; the
+manifest's June 15, 2026 guide date and its four sections/14 objectives are taken
+from the S48-01 ingest and the OpenSpec package. `sourceReviewDate` is the ingest
+date, not an attested review. `GetBibleSections`'s NCA branch (7 Nutanix Bible
+sections, including "AOS 7.5 New Features") is deliberately left intact — it is a
+reference concept, not a beta blueprint artifact — so a Bible-style section name
+is still reachable through that surface.
+
+**Measured:** Core tests 263/263 (was 257; +6 new facts). Coverage 92.07%
+(2091/2271 lines, threshold 70%) — down from S47's 92.33% because ~100 lines of
+covered beta code were deleted, not because coverage regressed. Freeze chain
+**41/41 at `a319cda`**, exit 0.
 
 ### S48-03 (T-33): 14 Lessons + 40-Item Pilot
 **As a** learner traveling to Nutanix HQ, **I want** one short lesson per current objective and a reviewed 40-item pilot, **so that** I can study and demonstrate current-objective content.
