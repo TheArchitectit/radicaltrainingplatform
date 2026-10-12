@@ -243,54 +243,57 @@ the environment; full detail in the evidence file.
 ### S47-10 (T-26): Demo Host Rehearsal
 **Acceptance Criteria:**
 - [ ] On the actual demo host: install → boot → full loop (pick track, read lesson, practice, complete scenario, reset) with network unplugged except optional tutor call
-- [x] **Keyboard-only walkthrough passes** — the automated half of TM-48 ("manual + automated a11y"), which S47-03 handed forward to this row. `tests/e2e/rehearsal-web.mjs` drives all seven named critical flows (PKG:141) through a real browser using only key events, never `.click()`. 27 PASS / 3 FAIL; the three failures are real demo-path defects, recorded below and in the evidence file. **Projector-distance readability is NOT verified** — no projector on this host; the harness measures reachability, not rendered legibility at distance.
+- [x] **Keyboard-only walkthrough passes** — the automated half of TM-48 ("manual + automated a11y"), which S47-03 handed forward to this row. `tests/e2e/rehearsal-web.mjs` drives all seven named critical flows (PKG:141) through a real browser using only key events, never `.click()`. 30 PASS / 1 FAIL; the one failure is a real demo-path defect, recorded below and in the evidence file. **Projector-distance readability is NOT verified** — no projector on this host; the harness measures reachability, not rendered legibility at distance.
 - [ ] **Partly verified:** reset-between-groups — the mechanism passes by keyboard (reseed count + outcome render, learner keys cleared); **"between groups" on the demo host, at the podium, is not verified**
 - [ ] Critical flow matrix (TM-50) entries for PWA-on-ChromeOS and PWA-on-presenter-host verified with recorded evidence — **no ChromeOS device or presenter host available; no evidence recorded**
 
 **Files:**
-- `tests/e2e/rehearsal-web.mjs` (new) — keyboard-only rehearsal of the seven critical flows; zero npm deps; deliberately not wired into CI (browser legs belong to the hosted runner, and it is knowingly red until the two gaps close)
-- `tests/gates/run_rehearsal_fixtures.sh` (new) — the fixture pair, with the live assertion inverted (see below)
+- `tests/e2e/rehearsal-web.mjs` (new) — keyboard-only rehearsal of the seven critical flows; zero npm deps; deliberately not wired into CI (browser legs belong to the hosted runner, and it is knowingly red until the last gap closes)
+- `tests/gates/run_rehearsal_fixtures.sh` (new) — the fixture pair, with the live assertion inverted (see below); widened at `a7d6cf6` to assert flows 6 and 7, which went green when REQ-DEMO-05 and the banner defect closed
 - `docs/qa/release-evidence/2026-10-23-rehearsal.md` (new) — the archived log, findings and not-verified list
 
-**Findings — three real demo-path defects, recorded not fixed** (S47-10 is a rehearsal row; each fix
-reaches well beyond the demo path and belongs to its own row):
-- **REQ-UI-04 gap** — a cold load does not surface stored progress. The scored answer is in storage
-  after a reload (2 item records) but `.practice-prior-note` never renders; the same view on a
-  client-side route change shows *"Saved progress: 0/1 previously answered in this exam pack."* So
-  `PracticeView` reads the store before it can see the records. Effect: a presenter who opens the app
-  cold sees a learner with no history.
-- **REQ-DEMO-05 gap** — the demo loop's scenario leg is mouse-only to enter. The `/pc/scenarios` nav
-  item has no `href` (`index.html:125`), so it is not in the tab order; 49 nav items share the shape.
-  The ticket lab **inside** the scenario is fully keyboard-operable — `aplus-dns-01` completes every
-  step by Tab/Space/Enter and the ticket resolves — so the defect is shell navigation, not the
-  scenario.
-- **REQ-DEMO-02 gap** — the demo banner is visible in learner mode. `DemoBanner.js` sets
-  `el.hidden = !demo.active` correctly, but `.demo-banner { display: flex }` (`css/study.css:495`)
-  beats the UA stylesheet's `[hidden] { display: none }` and no author `[hidden]` rule exists, so the
-  label paints regardless. Measured on a fresh profile with `demo.active` false: `hidden=true`,
-  `display="flex"`, 46px tall. A learner in normal mode is told "DEMO MODE", so the label stops
-  distinguishing anything. One-line fix, but it changes shell appearance app-wide.
+**Findings — three demo-path defects. Two closed at `a7d6cf6`; one still open.**
+- **REQ-UI-04 — STILL OPEN, deliberately.** A cold load does not surface stored progress. The scored
+  answer is in storage after a reload (2 item records) but `.practice-prior-note` never renders; the
+  same view on a client-side route change shows *"Saved progress: 1/1 previously answered in this exam
+  pack."* So `PracticeView` reads the store before it can see the records. **The mechanism is not
+  established** — five CDP probes disagree on whether a reload's per-item `get` ever hits (one
+  measured `restore()` returning `attempted: 1` after a reload; another traced every boot-time `get`
+  missing while `getAllKeys` found the records). No fix was shipped: with the measurements
+  contradicting each other, a speculative ordering change would be unverifiable.
+- **REQ-DEMO-05 — CLOSED** (`a7d6cf6`). The demo loop's scenario leg was mouse-only to enter: all 49
+  nav items were `<a class="nav-item" data-route="…">` with no `href`, so none was focusable. All 49
+  now carry `href="#<route>"`. That exposed a second defect the fix had to answer for: the closed
+  `.hamburger-overlay` is hidden by `transform`, which moves it off-screen but leaves it in the tab
+  order, so ~50 off-screen links preceded visible content (WCAG 2.4.3; TM-48). The closed overlay is
+  now `inert`. Measured: 0 nav items in 25 tab stops closed, 14 open. The ticket lab **inside** the
+  scenario was always fully keyboard-operable.
+- **REQ-DEMO-02's banner defect — CLOSED** (`a7d6cf6`). A learner in normal mode was shown "DEMO
+  MODE": `DemoBanner.js` set `el.hidden` correctly, but `.demo-banner { display: flex }`
+  (`css/study.css:495`) outranks the UA `[hidden]` rule, so the attribute read as if it worked while
+  the banner painted. `css/components.css` now restates `[hidden] { display: none !important }`.
+  **Citation note:** the package defines REQ-DEMO-02 as seeded scenario state, not the banner — the
+  behaviour was real, the requirement ID was wrong.
 - **Observation:** focus after reset lands on `<BUTTON#demo-reset>`; the view is re-rendered via
-  `replaceChild` and nothing restores focus. Focus is on a live node (not stranded), but not restored
-  to a meaningful place — TM-48's "focus predictable after reset" is only partly met.
+  `replaceChild` and nothing restores focus — TM-48's "focus predictable after reset" is partly met.
 
-**A false pass in this harness, found and fixed:** Flow 7 originally asserted the banner by reading
-`!document.getElementById('demo-banner').hidden` — the *attribute* — so it reported a pass for a
-banner that was on screen the whole time. It now reads the layout box (`offsetHeight > 0`) and asserts
-the transition (absent before Enter, present after). The first result this row produced (28 PASS /
-2 FAIL) came from that version, and is superseded by 27 PASS / 3 FAIL.
+**Two false passes in this harness, found and fixed.** Flow 7 first read `!.hidden` — the *attribute*
+— so it passed for a banner that was on screen the whole time; it then reached `#/demo` by tabbing to
+the banner's link in learner mode, which only worked while the banner was wrongly painted. It now
+reads the layout box, asserts learner mode shows no banner and no reachable demo-controls link, and
+enters demo mode by URL the way the presenter does.
 
-**Gate:** `run_rehearsal_fixtures.sh` PASS (exit 0). Because the live tree is expected to fail, its
-live assertion is **inverted** from the other fixture runners: the de-tabbed-option copy must FAIL and
-name the option row (proving the check detects a control removed from the tab order), the unmodified
-copy scoped to today's green legs (`REHEARSAL_FLOWS=1,2,3,4`) must PASS, and the live tree must FAIL
-with **exactly** the three recorded gaps so a new regression cannot hide behind them. The runner is
-deliberately **not wired into CI** — unlike `run_smoke_fixtures.sh` in `pwa-deploy.yml` — because its
-live assertion expects the artifact to be red, so a deploy job running it would go red precisely when
-someone closes a gap. Reasoning recorded in the evidence file.
+**Result at `a7d6cf6`: 30 PASS / 1 FAIL / 2 NOTEs.** The failure is REQ-UI-04.
 
-**Evidence:** full log, findings and not-verified detail are in
-[../qa/release-evidence/2026-10-23-rehearsal.md](../qa/release-evidence/2026-10-23-rehearsal.md).
+**Gate:** `run_rehearsal_fixtures.sh` PASS (exit 0). Because one gap is still open, its live assertion
+is **inverted**: the de-tabbed-option copy must FAIL and name the option row (proving the check
+detects a control removed from the tab order), the unmodified copy scoped to the green legs
+(`REHEARSAL_FLOWS=1,2,3,4,6,7`) must PASS, and the live tree must FAIL with **exactly** the one
+recorded gap — by note *and* by problem count — so a new regression cannot hide behind REQ-UI-04. The
+runner is deliberately **not wired into CI** because its live assertion expects the artifact to be
+red, so a deploy job running it would go red precisely when someone closes the last gap.
+
+**Evidence:** full log, findings and not-verified detail are in [../qa/release-evidence/2026-10-23-rehearsal.md](../qa/release-evidence/2026-10-23-rehearsal.md).
 
 ### S47-11 (T-27): Tutor Go/No-Go
 - [x] **Evaluation report from the rehearsed set** — `2026-10-23-tutor-eval.md`, regenerated and
@@ -334,15 +337,14 @@ block as S47-10).
   mode, so the frame cannot be produced from a live panel. The no-network-call
   half is asserted by `tests/gates/web/tutor-panel.mjs`, not re-asserted here.
 
-**Not a projector measurement.** Fixed 1440x900 headless viewport, no projector
-in the loop; nothing here speaks to legibility at distance (T-26's manual half,
-unverified).
+**Not a projector measurement.** Fixed 1440x900 headless viewport, no projector in the loop; nothing
+here speaks to legibility at distance (T-26's manual half, unverified).
 
 **Every frame paints the DEMO MODE banner** — including frames 01–09, captured
-*before* the script enters demo mode. This is the S47-10 REQ-DEMO-02 defect,
-confirmed visually: `.demo-banner { display: flex }` beats the UA `[hidden]`
-rule, so `el.hidden` is set and the banner paints anyway. Recorded, not fixed —
-it alters shell appearance app-wide and belongs to its own row.
+*before* the script enters demo mode. This was the S47-10 banner defect,
+confirmed visually here: `.demo-banner { display: flex }` beat the UA `[hidden]`
+rule, so `el.hidden` was set and the banner painted anyway. **The 12 PNGs are
+now stale** — they still show the defect. Closed at `a7d6cf6`; recapture owed.
 
 **Files:**
 - `tests/e2e/capture-demo-shots.mjs` (new) — zero-dep CDP capture; fails closed

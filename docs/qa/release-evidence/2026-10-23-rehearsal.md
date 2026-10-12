@@ -1,5 +1,16 @@
 # Keyboard-only demo-loop rehearsal — T-26 / S47-10
 
+> **PARTLY SUPERSEDED at `a7d6cf6` (2026-10-12).** Two of the three gaps recorded
+> below are now closed: **REQ-DEMO-05** (all 49 nav items carry an `href`, and the
+> closed hamburger overlay is `inert`) and the **demo-banner defect** (the Reset
+> block in `css/components.css` now restates `[hidden] { display: none !important }`).
+> **REQ-UI-04 remains open.** The body below is left byte-for-byte as the record of
+> the run at head `3dda3b8` — it is a log of what was observed, not a claim about
+> the current tree. Current counts at `a7d6cf6`: **30 PASS / 1 FAIL / 2 NOTEs**.
+> Also note: the banner gap is labelled `REQ-DEMO-02` throughout, but the package
+> defines REQ-DEMO-02 as seeded scenario state — the behaviour was real, the
+> requirement ID was wrong. See [SPRINT-47.md](../../sprints/SPRINT-47.md) S47-10.
+
 Archived evidence for S47-10, captured by `tests/e2e/rehearsal-web.mjs` — the
 automated half of T-26. The row's other half is a rehearsal **on the actual
 demo host**, which cannot be run from this machine (see "Not verified").

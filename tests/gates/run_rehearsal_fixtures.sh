@@ -3,22 +3,27 @@
 #
 # This gate is a REHEARSAL, not a merge gate, and its live assertion is
 # deliberately inverted from the other fixture runners: the repository's Web
-# tree is expected to FAIL, because S47-10 records two real keyboard gaps
-# rather than silently closing them —
+# tree is expected to FAIL, because one real gap is still open and recorded
+# rather than silently closed —
 #
 #   REQ-UI-04  a cold load does not surface stored progress (the prior-progress
 #              note renders on a client-side route change but not on reload)
-#   REQ-DEMO-05 the demo loop's scenario leg is mouse-only to enter (the
-#              /pc/scenarios nav item has no href, so it is not in the tab
-#              order)
-#   REQ-DEMO-02 the demo banner paints in learner mode (`.demo-banner { display:
-#              flex }` beats the UA `[hidden]` rule, so `el.hidden` is set but
-#              has no effect)
+#
+# Two gaps this runner was written around have since been closed, and their
+# legs moved from "live must fail" into GREEN_FLOWS below:
+#
+#   REQ-DEMO-05 closed at a7d6cf6 — all 49 nav items now carry an href, so the
+#              demo path is keyboard-operable; the closed hamburger overlay is
+#              `inert` so its links are not an off-screen tab-order run
+#   REQ-DEMO-02 closed at a7d6cf6 — `[hidden] { display: none !important }` in
+#              css/components.css, so the demo banner no longer paints in
+#              learner mode (the package defines REQ-DEMO-02 as seeded scenario
+#              state; the banner was mis-cited under it)
 #
 # So "live must pass" cannot be the assertion here. What this runner proves is
 # that the harness still discriminates: a control removed from the tab order
 # fails a leg that otherwise passes, and the live tree is red for exactly the
-# recorded reasons and no others.
+# recorded reason and no others.
 #
 # Failing fixture: a throwaway copy with the practice answer option rendered as
 #   a non-focusable <div> instead of a <button> must FAIL, and the failure must
@@ -28,7 +33,7 @@
 # Passing fixture: the same artifact unmodified, scoped to the legs that are
 #   green today, must PASS. Without this a harness that could only ever observe
 #   failure would look like proof.
-# Live: the repository Web tree must FAIL with exactly the two recorded gaps.
+# Live: the repository Web tree must FAIL with exactly the one recorded gap.
 #
 # The copies live in a throwaway directory, so the repository tree is never
 # mutated. If no browser is present the harness fails closed, which fails the
@@ -40,10 +45,11 @@ fail=0
 REHEARSAL="tests/e2e/rehearsal-web.mjs"
 
 # The legs that are green on the current artifact. Flow 1 is the boot
-# precondition. 5 carries REQ-UI-04, 6 carries REQ-DEMO-05, and 7 carries
-# REQ-DEMO-02 (the banner check fails even though flow 7's reset assertions
-# pass, so the whole leg is out of scope here).
-GREEN_FLOWS="1,2,3,4"
+# precondition. Flow 5 carries REQ-UI-04 and is the only leg still out of
+# scope; 6 (REQ-DEMO-05) and 7 (the demo banner) went green at a7d6cf6 and are
+# asserted here, so a regression in either now fails this runner's passing
+# fixture rather than being tolerated as a known gap.
+GREEN_FLOWS="1,2,3,4,6,7"
 
 WS="$(mktemp -d)"
 trap 'rm -rf "$WS"' EXIT
@@ -80,18 +86,20 @@ else
 fi
 
 if node "$REHEARSAL" >"$WS/live.log" 2>&1; then
-    echo "FAIL: the live tree passed the full rehearsal — the recorded gaps (REQ-UI-04, REQ-DEMO-05, REQ-DEMO-02) appear to be closed; update this runner and the S47-10 record"
+    echo "FAIL: the live tree passed the full rehearsal — the recorded gap (REQ-UI-04) appears to be closed; update this runner and the S47-10 record"
     fail=1
 else
     missing=""
     grep -q "REQ-UI-04 gap" "$WS/live.log" || missing="$missing REQ-UI-04"
-    grep -q "REQ-DEMO-05 gap" "$WS/live.log" || missing="$missing REQ-DEMO-05"
-    grep -q "REQ-DEMO-02 gap" "$WS/live.log" || missing="$missing REQ-DEMO-02"
     if [ -n "$missing" ]; then
-        echo "FAIL: the live tree no longer reports:$missing — the recorded gaps were not found"
+        echo "FAIL: the live tree no longer reports:$missing — the recorded gap was not found"
+        fail=1
+    elif ! grep -q "KEYBOARD REHEARSAL: FAIL — 1 problem" "$WS/live.log"; then
+        echo "FAIL: the live tree reports more than the one recorded gap — a new regression is hiding behind REQ-UI-04"
+        grep -E "^  FAIL" "$WS/live.log" | head -10
         fail=1
     else
-        echo "PASS: the live tree fails the full rehearsal with exactly the three recorded gaps (REQ-UI-04, REQ-DEMO-05, REQ-DEMO-02)"
+        echo "PASS: the live tree fails the full rehearsal with exactly the one recorded gap (REQ-UI-04)"
     fi
 fi
 
