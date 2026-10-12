@@ -17,7 +17,7 @@
 |---|---|---|---|---|
 | S48-01 (T-31) | Complete remap.csv (started T-09) with RedEye lane logs and seeded-defect self-test record | REQ-NCA-01 | 3 | 🟡 |
 | S48-02 (T-32) | NCA-75 exam.json current blueprint; InitNca75 retired; blueprint fixtures | REQ-NCA-05 | 2 | 🟡 |
-| S48-03 (T-33) | 14 lessons + 40-item pilot (remapped + newly authored gap fills) | REQ-NCA-02/06 | 3 | ⚪ |
+| S48-03 (T-33) | 14 lessons + 40-item pilot (remapped + newly authored gap fills) | REQ-NCA-02/06 | 3 | 🟡 |
 | S48-04 (T-34) | Cheatsheet correction + beta logistics cleanup + scheduling-link currency | REQ-NCA-04, C-07 | 1 | ⚪ |
 | S48-05 (T-35) | Four NCA scenarios with validators and walkthroughs | REQ-NCA-07, REQ-SC-01..06 | 2 | ⚪ |
 | S48-06 (T-36) | Travel freeze per REQ-NCA-08 once itinerary confirms cutoff | REQ-NCA-08 | 1 | ⚪ |
@@ -156,14 +156,64 @@ covered beta code were deleted, not because coverage regressed. Freeze chain
 **As a** learner traveling to Nutanix HQ, **I want** one short lesson per current objective and a reviewed 40-item pilot, **so that** I can study and demonstrate current-objective content.
 
 **Acceptance Criteria:**
-- [ ] 14 lessons (s1_1..s4_4), one per current objective, synopses per SPEC-06 06.4
-- [ ] 40-item reviewed pilot: 10 per current section (equal allocation = study choice, not official weight, stated in exam.json)
-- [ ] Authoring gaps filled with new original items where the bank cannot supply two reviewed items per objective — expected gaps: solutions/tools (1.x), licensing (2.4), support-case workflow (4.3), performance interpretation (4.4); final gap count from the objective-by-objective review, not the spec estimate
-- [ ] New authored items live in `content/exams/NCA-75/questions/nca75-pilot.md`; remapped bank items stay in their original files
-- [ ] Every released item: full provenance + RedEye lane log; remaining bank items stay in review status
-- [ ] Coverage labeling shows pilot scope
+- [x] 14 lessons (s1_1..s4_4), one per current objective, synopses per SPEC-06 06.4 — each wired into its objective's `lessonIds`, so the track reports 14/14 objectives at 100%
+- [ ] 40-item reviewed pilot: 10 per current section (equal allocation = study choice, not official weight, stated in exam.json) — the 40 items exist, 10 per section, every objective covered by ≥2 items; **"reviewed" is not satisfied** and is not claimed: no item reached `modelStage: verified`
+- [x] Authoring gaps filled with new original items where the bank cannot supply two reviewed items per objective — expected gaps: solutions/tools (1.x), licensing (2.4), support-case workflow (4.3), performance interpretation (4.4); final gap count from the objective-by-objective review, not the spec estimate — **the measured count is 40, not the spec's four gap areas**: S48-01 established that all 140 bank items are excluded, so the bank supplies zero *reviewed* coverage and REQ-NCA-06's "where the bank cannot supply reviewed coverage" applies to the whole cut. Objective 3.2, measured at zero mapped bank items, carries three authored items
+- [x] New authored items live in `content/exams/NCA-75/questions/nca75-pilot.md`; remapped bank items stay in their original files — nothing was moved, renumbered or relabelled
+- [x] Every released item: full provenance + RedEye lane log; remaining bank items stay in review status — 40 C-02-complete provenance records with resolvable `objectiveId`s; 40 lane logs, each recording the lane's true verdict (`return` / `blocked`); the 140 bank items are absent from `RELEASED_BANKS` and remain in review
+- [x] Coverage labeling shows pilot scope — bundle release state `draft-preview`, the bank's own header, and the track's `previewLabel`
 
-**Files:** `content/exams/NCA-75/lessons/`, `content/exams/NCA-75/questions/nca75-pilot.md`, `content/provenance/`
+**Status 🟡 because:** the row is titled a *reviewed* pilot and no item is
+reviewed. Every one of the 40 has a lane log, and every log says `return` with
+`modelStage: blocked` — the model stage is not integrated (REQ-REV-05), which is
+the same blocker S48-01 recorded. The cut ships at release state `draft-preview`,
+matching how the A+/Network+ demo cuts ship, and the honest label is *pilot
+scope*, not *verified*.
+
+**The lane earned its keep — it caught a defect in my own items.** The first run
+flagged `position-bias`: **key B was the answer for 28 of 40 single-key items
+(70%), against a 40% threshold**. That is a real quality defect in authored
+content — a learner could score 70% by always picking B. The options were
+permuted (correct answer relocated, distractors kept in relative order) so the
+distribution is now 10/10/10/10 and the check passes. One explanation referenced
+option letters rather than content; the references were remapped with the
+permutation so the prose still points at the right distractors.
+
+**Authored, not remapped — and why.** The row could have been read as "release 40
+of the remapped bank items". It cannot be: S48-01 recorded that the lane excludes
+all 140, so releasing 40 of them would have shipped unreviewed content *and*
+claimed a remap that had not been verified. Authoring 40 fresh items against the
+current objectives is the reading that keeps "reviewed" honest — and it is still
+only 🟡, because the model stage that would make them verified does not exist.
+
+**One gate fixture changed.** `tests/gates/redeye/self_test.py` asserted the
+*exact* list of banks discovered for NCA-75. The case exists to prove the legacy
+root banks are found, and NCA-75 now legitimately has a pack bank of its own, so
+the assertion is narrowed to containment of the three root banks — what the case
+means — instead of an exact list that fails on every future pack bank while
+testing nothing the case is about. The three other gate self-tests still pass
+unchanged, and the case still fails if a root bank stops being discovered.
+
+**Files:**
+- `content/exams/NCA-75/lessons/s1_1.md` … `s4_4.md` (new, 14)
+- `content/exams/NCA-75/questions/nca75-pilot.md` (new, 40 items, 4 current-section domain headers — no beta title appears)
+- `content/provenance/NCA-75/Q1.json` … `Q40.json` (new, 40)
+- `content/exams/NCA-75/exam.json` — `lessonIds` wired for all 14 objectives
+- `scripts/generate-study-content.py` — NCA-75 added to `modules`, `RELEASED_LESSONS`, `RELEASED_BANKS`
+- `tests/gates/redeye/self_test.py` — bank-discovery assertion narrowed to its meaning
+- `content-manifest.json`, `RadicalTrainingPlatform.Web/content-bundle.json`, `RadicalTrainingPlatform.Web/js/study-content.js` — regenerated
+
+**Not verified:** no item is verified — the model stage is blocked, so nothing
+here has been re-read against the Nutanix guide or against current documentation;
+the 14 lessons are authored prose that no human has reviewed; the guide was not
+opened at execution time, so the objective titles the lessons are written against
+come from the S48-01 ingest. `reviewDate` is empty on all 40 records and `status`
+is `draft`, which is the truth rather than a placeholder.
+
+**Measured:** NCA track coverage **14/14 objectives, 100%** (was 0). Compiled
+bundle: 89 scored items (63 diagnosis, 71% — threshold 50%), 28 lesson slots,
+3 tracks. Core tests 263/263; coverage 92.07%. Freeze chain **41/41 at
+`9add142`**, exit 0.
 
 ### S48-04 (T-34): Companion Surface Corrections
 **As a** content consumer, **I want** the cheatsheet and logistics pages to match the applied errata, **so that** no surface contradicts the bank.
