@@ -40,7 +40,7 @@ document limit (CLAUDE.md).
 | S47-10 (T-26) | Rehearsal on actual demo host: installed, offline, keyboard/projector, reset-between-groups | REQ-UI-06, REQ-DEMO-05, TM-40/45/50 | 2 | 🟡 |
 | S47-11 (T-27) | Tutor evaluation report and go/no-go; fallback labeling check | REQ-AI-06/07 | 1 | ✅ |
 | S47-12 (T-28) | Screenshots/video backup; non-AI backup path | REQ-AI-07 | 1 | ✅ |
-| S47-13 (T-29) | Freeze: branch, base/head SHA, changed files, gate results, RedEye lane logs + seeded-defect self-test record, usable build | SPEC-11 11.7 | 1 | ⚪ |
+| S47-13 (T-29) | Freeze: branch, base/head SHA, changed files, gate results, RedEye lane logs + seeded-defect self-test record, usable build | SPEC-11 11.7 | 1 | ✅ |
 | S47-14 (T-30) | Demo script final: 90-second loop (learn, try, ask, verify) + exact disclaimer + no-patient/no-business-system line | REQ-BRAND-02 | 1 | ⚪ |
 | S47-15 (R-10) | LICENSE: prepare BSD-3-Clause decision record + README pointer; final file drop waits on owner confirmation (HG-01) | R-10, C-08/C-09 | 1 | ⚪ |
 
@@ -358,8 +358,45 @@ offline behaviour; TM-50 ChromeOS / presenter-host entries.
 
 ### S47-13 (T-29): Freeze
 **Acceptance Criteria:**
-- [ ] Branch, base/head SHA, changed files, gate results with counts (“N/N at SHA”), RedEye lane logs + seeded-defect self-test record, usable build — all recorded
-- [ ] No content edits after freeze; no architecture migration in Sprint D
+- [x] **Branch, base/head SHA, changed files recorded** — `feature/rtp-beginner-tracks`,
+  base `0a11c47` (`main`), **head `0d1f565`**; 61 commits, 310 files (+32,609 / −788)
+- [x] **Gate results with counts (“N/N at SHA”)** — **39/39 at `0d1f565`**, reproducible
+  via `bash tests/gates/run_freeze_chain.sh --expect-sha 0d1f565…`, which runs the same
+  commands in the same order as CI and refuses to quote a total measured elsewhere
+- [x] **Test counts per suite** — `Core.Tests` 257/257; `Desktop.Tests` 51/51;
+  coverage 2191/2373 = 92.33% (threshold 70%); vuln gate PASS over 3 projects
+- [x] **RedEye lane logs + seeded-defect self-test record** — 13/13 seeds caught
+  (wrong key, mis-mapped objective, 8-item position bias, near-duplicate, injection,
+  incomplete provenance), lane and gate self-tests pass
+- [x] **Usable build** — Core/Desktop/Desktop.Tests build in Release; Core 0 warnings
+- [x] **No content edits after freeze; no architecture migration in Sprint D** —
+  S47-14 and S47-15 are documentation-only
+
+**The ship-gate is honestly red.** `redeye-gate.py --all` → **exit 1, 49/49 scored
+items excluded** (`verdict: return`, modelStage blocked — no provider configured). That
+is REQ-REV-05 failing closed by design, and it means the A+/Network+ packs are **draft
+packs for the beginner preview, not released items**. Recorded plainly because the
+sprint acceptance criterion says “a scored practice set of reviewed original items” and
+by the gate's definition none of the 49 is releasable.
+
+**Two corrections made here** rather than left standing: `SPRINT-47-EVIDENCE.md`
+§ S47-03 claimed `redeye-gate --all` exit 0, which the tool cannot produce while every
+verdict is `return` (the packs already held 49 items at that commit); and
+`Desktop.Tests` had no recorded run anywhere — CI builds it and executes nothing, and
+`dotnet test` refuses it on .NET 10, so it was run via the MTP-native runner for the
+first time here.
+
+**Files:**
+- `tests/gates/run_freeze_chain.sh` (new) — the reproducible chain
+- `docs/qa/release-evidence/2026-10-23-freeze.md` (new) — the record
+- `docs/sprints/SPRINT-47-EVIDENCE.md` — § S47-03's `redeye-gate` line corrected
+
+**Not verified:** the actual demo host (PKG:1469); projector readability; TM-50
+ChromeOS/presenter-host entries; human source review; RedEye model-stage verification;
+reset-between-groups in a live room; offline; the mid-demo fallback switch; video;
+deployed-Pages behaviour; live AI behaviour. Full list in the record.
+
+**Evidence:** [../qa/release-evidence/2026-10-23-freeze.md](../qa/release-evidence/2026-10-23-freeze.md).
 
 ### S47-14 (T-30): Demo Script
 - 90-second loop script (learn, try, ask, verify) with the exact REQ-BRAND-02 disclaimer and the “no patient or business system is involved” line
