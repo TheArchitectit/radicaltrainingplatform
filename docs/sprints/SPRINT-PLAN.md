@@ -226,12 +226,22 @@ calendar-driven by two real deadlines: the October 23 student demonstration (A+ 
 Network+) and the October 25-28 Nutanix HQ trip (NCA 7.5). Slippage degrades by
 cutting released scope visibly — never by shipping unreviewed content.
 
-| Sprint | OpenSpec Sprint | Window | Focus | Points | Link |
-|---|---|---|---|---|---|
-| Sprint 45 | Sprint A | Oct 10-12 | Blocking repairs (boot, vuln gate, answer grammar, ordering/retry), manifest system, RedEye lane, first content fixtures | ~27 | [SPRINT-45.md](./SPRINT-45.md) |
-| Sprint 46 | Sprint B | Oct 13-16 | One learning loop end to end: study views, ProgressStore, ticket renderer, scenario validator sweep, CI gates | ~30 | [SPRINT-46.md](./SPRINT-46.md) |
-| Sprint 47 | Sprints C+D | Oct 17-22 | Demo packs complete, packaging truth, tutor slice or fallback, freeze + rehearsal for Oct 23 | ~26 | [SPRINT-47.md](./SPRINT-47.md) |
-| Sprint 48 | Sprint E | Post-EPIC, pre-travel | NCA 7.5 current-blueprint remap: 140 rows, 14 lessons, 40-item pilot, 4 scenarios, travel freeze | ~12 | [SPRINT-48.md](./SPRINT-48.md) |
+| Sprint | OpenSpec Sprint | Window | Focus | Points | Status | Link |
+|---|---|---|---|---|---|---|
+| Sprint 45 | Sprint A | Oct 10-12 | Blocking repairs (boot, vuln gate, answer grammar, ordering/retry), manifest system, RedEye lane, first content fixtures | ~27 | 🟢 Done — 11/11 at `0e9c184` | [SPRINT-45.md](./SPRINT-45.md) |
+| Sprint 46 | Sprint B | Oct 13-16 | One learning loop end to end: study views, ProgressStore, ticket renderer, scenario validator sweep, CI gates | ~30 | 🟢 Done — 14/14 at `755d6ed` | [SPRINT-46.md](./SPRINT-46.md) |
+| Sprint 47 | Sprints C+D | Oct 17-22 | Demo packs complete, packaging truth, tutor slice or fallback, freeze + rehearsal for Oct 23 | ~26 | 🟢 Done — 39/39 at `7a21f6b` (freeze `0d1f565`) | [SPRINT-47.md](./SPRINT-47.md) · [retro](./SPRINT-47-RETROSPECTIVE.md) |
+| Sprint 48 | Sprint E | Post-EPIC, pre-travel | NCA 7.5 current-blueprint remap: 140 rows, 14 lessons, 40-item pilot, 4 scenarios, travel freeze | ~12 | ⚪ Planned | [SPRINT-48.md](./SPRINT-48.md) |
+
+**Status key:** 🟢 Done | 🟡 In Progress | ⚪ Planned | 🔴 Blocked. Each Phase 5 sprint
+carries the gate pass count **at its own head SHA**, not carried forward between
+sprints. Sprint 47's 39/39 is produced by a committed runner,
+`tests/gates/run_freeze_chain.sh --expect-sha` (see
+[SPRINT-47-RETROSPECTIVE.md](./SPRINT-47-RETROSPECTIVE.md)); Sprints 45 and 46
+counted their gates by running the commands listed in their own retrospectives, which
+is why their totals are smaller — the chain was written in Sprint 47 and covers more
+ground. Sprint 47's retrospective is a companion file because `SPRINT-47.md` reached
+the 500-line document limit.
 
 ### OpenSpec Alignment with Existing Sprints (1-44)
 

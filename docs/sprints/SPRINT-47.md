@@ -489,3 +489,10 @@ commit here does not settle first-publication authorship.
 ## Sprint Acceptance (October 23 demo-ready definition, SPEC-00 00.5)
 
 A presenter can open the PWA on the demo host, pick track-aplus or track-netplus, read one complete lesson per exam, run a scored practice set of reviewed original items, complete a deterministic simulated help-desk task, ask the tutor for a hint inside its stated limits (or play the labeled recorded example), reset the station for the next group — all with the network cable unplugged except the optional tutor call. Coverage labeled “beginner preview”; no pass-prediction claim anywhere; every SPEC-08/10 gate green at the tested head including the vulnerability gate proven by a must-fail fixture. Release evidence records gate counts at the frozen head.
+
+## Mini-retrospective (SPEC-11 11.10)
+
+**Sprint head `7a21f6b`; 39/39 gates at that SHA** (re-run), Core 257/257, Desktop
+51/51, coverage 92.33%. Full retrospective, including why five rows are 🟡 and what
+was not verified: [SPRINT-47-RETROSPECTIVE.md](./SPRINT-47-RETROSPECTIVE.md) — a
+companion file, split out because this one reached the 500-line limit.
