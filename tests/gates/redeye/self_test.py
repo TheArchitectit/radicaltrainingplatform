@@ -221,8 +221,14 @@ def main():
             nca_banks = [p.name for p in mod.collect_banks("NCA-75")]
         finally:
             (mod.LOG_ROOT, mod._repo_root) = saved
+        # Assert containment, not equality: the case is about the legacy ROOT
+        # banks being found, and NCA-75 also carries a pack bank of its own
+        # (content/exams/NCA-75/questions/nca75-pilot.md, S48-03). An exact-list
+        # assertion would fail on every future pack bank while still not
+        # testing anything the case is about.
+        legacy_root = ["NCA-75-Part1.md", "NCA-75-Part2.md", "NCA-75-Part3-GapFill.md"]
         check("legacy root banks are discovered for their exam",
-              nca_banks == ["NCA-75-Part1.md", "NCA-75-Part2.md", "NCA-75-Part3-GapFill.md"],
+              all(b in nca_banks for b in legacy_root),
               str(nca_banks))
 
     print()

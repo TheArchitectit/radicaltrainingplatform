@@ -65,19 +65,49 @@ export const TRACKS = {
     "order": 3,
     "coverage": {
       "total": 14,
-      "covered": 0,
-      "percent": 0,
+      "covered": 14,
+      "percent": 100,
       "coveredObjectiveIds": [],
       "examCoverage": {
         "NCA-75": {
           "total": 14,
-          "covered": 0,
-          "percent": 0,
-          "coveredObjectiveIds": []
+          "covered": 14,
+          "percent": 100,
+          "coveredObjectiveIds": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1",
+            "2.2",
+            "2.3",
+            "2.4",
+            "3.1",
+            "3.2",
+            "3.3",
+            "4.1",
+            "4.2",
+            "4.3",
+            "4.4"
+          ]
         }
       }
     },
-    "lessons": []
+    "lessons": [
+      "NCA-75/s1_1",
+      "NCA-75/s1_2",
+      "NCA-75/s1_3",
+      "NCA-75/s2_1",
+      "NCA-75/s2_2",
+      "NCA-75/s2_3",
+      "NCA-75/s2_4",
+      "NCA-75/s3_1",
+      "NCA-75/s3_2",
+      "NCA-75/s3_3",
+      "NCA-75/s4_1",
+      "NCA-75/s4_2",
+      "NCA-75/s4_3",
+      "NCA-75/s4_4"
+    ]
   },
   "track-netplus": {
     "trackId": "track-netplus",
@@ -848,17 +878,23 @@ export const EXAMS = {
           {
             "id": "1.1",
             "title": "Recognize Nutanix solutions, use cases, and features of Nutanix Cloud Infrastructure (NCI) technologies",
-            "lessonIds": []
+            "lessonIds": [
+              "s1_1"
+            ]
           },
           {
             "id": "1.2",
             "title": "Recognize Nutanix solutions, use cases, and features of non-Nutanix Cloud Infrastructure (NCI) technologies",
-            "lessonIds": []
+            "lessonIds": [
+              "s1_2"
+            ]
           },
           {
             "id": "1.3",
             "title": "Recognize the use cases and features of Nutanix tools",
-            "lessonIds": []
+            "lessonIds": [
+              "s1_3"
+            ]
           }
         ]
       },
@@ -870,22 +906,30 @@ export const EXAMS = {
           {
             "id": "2.1",
             "title": "Describe VM tasks",
-            "lessonIds": []
+            "lessonIds": [
+              "s2_1"
+            ]
           },
           {
             "id": "2.2",
             "title": "Identify virtual networking tasks",
-            "lessonIds": []
+            "lessonIds": [
+              "s2_2"
+            ]
           },
           {
             "id": "2.3",
             "title": "Discuss storage operations",
-            "lessonIds": []
+            "lessonIds": [
+              "s2_3"
+            ]
           },
           {
             "id": "2.4",
             "title": "Describe licensing tasks",
-            "lessonIds": []
+            "lessonIds": [
+              "s2_4"
+            ]
           }
         ]
       },
@@ -897,17 +941,23 @@ export const EXAMS = {
           {
             "id": "3.1",
             "title": "Describe valid cluster options",
-            "lessonIds": []
+            "lessonIds": [
+              "s3_1"
+            ]
           },
           {
             "id": "3.2",
             "title": "Identify hardware maintenance tasks",
-            "lessonIds": []
+            "lessonIds": [
+              "s3_2"
+            ]
           },
           {
             "id": "3.3",
             "title": "Identify software maintenance tasks",
-            "lessonIds": []
+            "lessonIds": [
+              "s3_3"
+            ]
           }
         ]
       },
@@ -919,22 +969,30 @@ export const EXAMS = {
           {
             "id": "4.1",
             "title": "Perform and interpret a health check",
-            "lessonIds": []
+            "lessonIds": [
+              "s4_1"
+            ]
           },
           {
             "id": "4.2",
             "title": "Review and interpret alerts and events",
-            "lessonIds": []
+            "lessonIds": [
+              "s4_2"
+            ]
           },
           {
             "id": "4.3",
             "title": "Leverage support functions",
-            "lessonIds": []
+            "lessonIds": [
+              "s4_3"
+            ]
           },
           {
             "id": "4.4",
             "title": "Review and interpret workload performance",
-            "lessonIds": []
+            "lessonIds": [
+              "s4_4"
+            ]
           }
         ]
       }
@@ -1100,6 +1158,160 @@ export const LESSONS = {
       "5.1",
       "5.4",
       "5.5"
+    ]
+  },
+  "NCA-75/s1_1": {
+    "lessonId": "s1_1",
+    "examId": "NCA-75",
+    "title": "NCI components and use cases",
+    "domainNumber": "1",
+    "status": "released",
+    "markdown": "# Nutanix Cloud Infrastructure: Components and Use Cases (S1.1)\n\n*Module S1.1 \u2014 Nutanix NCA 7.5 study track. Independent study material \u2014 see the disclaimer at the end.*\n\nThis lesson builds one mental picture: what a Nutanix Cloud Infrastructure (NCI) cluster is made of, what each of its three main names refers to, and where the whole thing sits compared with the storage-and-servers arrangement it replaces. Nothing here asks you to operate a cluster yet. The goal is recognition \u2014 you should finish able to hear a sentence about a Nutanix environment and know which part of the picture it is describing.\n\n## One machine, three jobs\n\nA traditional data centre keeps three things in three places: **servers** do the computing, a **network** connects everything, and a separate **storage array** holds the data. Adding capacity means buying the specific box that ran out.\n\nNutanix folds all three onto the same physical servers. Each server in a cluster contributes its CPU and memory to run workloads, its local disks to a shared pool of storage, and its network links to a fabric that ties the cluster together. The word for this is **hyperconverged**: the same nodes provide compute, storage, and the software that coordinates them.\n\nThat is the single most important idea in this lesson. Everything else \u2014 the product names, the size words \u2014 is detail layered on top of it.\n\n## AOS, AHV, and Prism\n\nThree names come up constantly. Keep them separate in your head:\n\n- **AOS (Acropolis Operating System)** \u2014 the distributed software layer that turns a group of servers into one storage system. It pools the disks across nodes, decides where data lives, makes copies for protection, and moves data away from a node that needs maintenance. When people say \"the cluster's storage\", they usually mean AOS.\n- **AHV (Acropolis Hypervisor)** \u2014 the hypervisor that runs virtual machines. A hypervisor is the layer that lets many virtual machines share one physical server safely. AHV is Nutanix's own; a cluster can also run other hypervisors, but AHV is the one the NCA material is built around.\n- **Prism** \u2014 the management interface. Prism is where you look at health, run tasks, and configure the cluster. It comes in two scopes: **Prism Element**, which manages one cluster, and **Prism Central**, which manages many clusters together and adds cross-cluster features.\n\nA useful shorthand: AOS is the storage brain, AHV runs the workloads, Prism is the window you look through.\n\n## Node, block, and cluster\n\nThree words describe how much hardware you have:\n\n- A **node** is one physical server in the group. In Nutanix terms it is also called a host, and each node runs a small controller virtual machine that participates in the shared storage layer.\n- A **block** is a chassis that holds several nodes and their disks. Blocks are how Nutanix sells and racks capacity in units, though the software treats the whole thing as one system.\n- A **cluster** is the set of nodes that work together as a single system, with one shared pool of storage and one place to manage it. A cluster is the unit you administer.\n\nThe minimum practical cluster is small \u2014 as few as three nodes for a standard configuration, with special arrangements for two-node and single-node cases. You do not need the sizing rules yet; you need the vocabulary.\n\n## Where NCI fits\n\nNCI is the infrastructure layer: the compute, storage, and virtualisation foundation that applications run on. Two things follow from that.\n\nFirst, NCI is **not** the applications. A database service, a container platform, or a file-sharing product may run *on* NCI, but they are separate products. Section 1.2 of this track is about recognising those neighbours.\n\nSecond, the pitch is operational rather than a single feature. The argument for hyperconverged infrastructure is that you buy one kind of building block, grow it in a straight line, and manage compute and storage from one place instead of three. That is why the conversation usually starts with a *situation* \u2014 a small team, a branch office, an ageing array \u2014 rather than with a specification.\n\n## Worked example: matching three businesses to the pitch\n\nRead each case and decide what the NCI conversation would be about. The point is the reasoning, not a product name.\n\n1. **A 40-person accounting firm.** Two ageing servers and a storage array that is nearly full. No dedicated IT staff. *The fit is simplicity:* one cluster, one management interface, growth by adding a node. The pitch is \"fewer things to run\", not raw performance.\n2. **A retail chain with a system in every store.** Each store runs a handful of virtual machines locally and needs to keep working when the link to head office drops. *The fit is small-footprint resilience:* a very small cluster per site, managed centrally alongside the others. The pitch is \"many small sites, one pane of glass\".\n3. **A software team that needs capacity on demand.** They spin environments up and down and are tired of waiting on storage provisioning. *The fit is elastic pooling:* storage is drawn from a shared pool rather than carved from an array in advance. The pitch is \"provisioning stops being a project\".\n\nIf you can say *why* each case lands on a different part of the story, you have the recognition skill this objective asks for.\n\n## Where this leads\n\nSection 1.2 widens the view to the products that sit around NCI. Section 1.3 names the tools you use to move data in, run guests, and test the cluster. Later sections move from recognising the platform to administering it \u2014 virtual machines, networks, storage, and licensing.\n\n---\n\n*This is independent study material. It is not official training and is not endorsed or approved by CompTIA, Nutanix, or any other certification body.*\n",
+    "objectiveIds": [
+      "1.1"
+    ]
+  },
+  "NCA-75/s1_2": {
+    "lessonId": "s1_2",
+    "examId": "NCA-75",
+    "title": "Adjacent solutions",
+    "domainNumber": "1",
+    "status": "released",
+    "markdown": "# The Products Around NCI (S1.2)\n\n*Module S1.2 \u2014 Nutanix NCA 7.5 study track. Independent study material \u2014 see the disclaimer at the end.*\n\nNCI is the foundation. This lesson is about the products that stand on it, and it is deliberately a recognition-level lesson: you are not expected to configure any of them. You are expected to read a short problem statement and know which *family* of product is the answer, the way you would know that a flat tyre is a tyre problem before you know which brand of tyre to buy.\n\n## Why this layer exists\n\nIf NCI gives you compute, storage, and virtual machines, you could build everything else yourself \u2014 install a file server, a database, a container platform, a desktop broker. Many organisations do exactly that. The products in this lesson exist because building those things by hand is repetitive, and because doing it consistently across many clusters is harder than doing it once.\n\nSo the pattern to look for is always the same: **a job that everyone does the same way, wrapped into a product.** When a question describes a recurring operational chore, an adjacent product is usually the answer.\n\n## Storage: the three shapes of data\n\nNCI's own storage pool presents storage to virtual machines as disks. Real applications often want something more specific, and three products cover the three classic shapes:\n\n- **File storage** \u2014 shared folders that many machines mount at once, reached over SMB or NFS. Think of a departmental share or a home directory.\n- **Block storage** \u2014 a raw volume presented to a machine as if it were a local disk, reached over iSCSI. Think of a database that wants its own dedicated disk.\n- **Object storage** \u2014 data addressed by key over an S3-compatible interface, for large numbers of unstructured items. Think of backups, media, or application data that does not fit a folder tree.\n\nIf a scenario says \"shared folder\", \"dedicated volume\", or \"S3\", that is the sorting key.\n\n## Databases: the lifecycle, not the engine\n\nA database product in this space is usually not a new database engine. It is software that handles the *lifecycle* around an existing engine: provisioning a new instance, cloning a copy for testing, taking backups, applying patches, and tearing instances down when they are finished. The problem it solves is the sheer number of manual, error-prone steps between \"we need a test copy of production\" and having one.\n\nListen for phrases about **provisioning, cloning, patching, or lifecycle** and you are in this family.\n\n## Cloud management: cost, operations, and self-service\n\nOnce you have several clusters, someone has to answer questions that no single cluster can answer on its own: what is everything costing, is it configured consistently, who is allowed to request what. A cloud-management product is the layer that aggregates those concerns \u2014 reporting on cost and capacity, checking configuration against a policy, and giving teams a self-service catalogue so they can request an environment without a ticket.\n\nListen for **cost, compliance, policy, or self-service portal**.\n\n## Containers: the orchestration platform\n\nContainers package an application and its dependencies so it runs the same way everywhere. Running a few by hand is easy; running hundreds across many machines needs an orchestrator to schedule them, restart the ones that fail, and expose them to the network. A Kubernetes platform product provides that orchestrator, managed, on top of your infrastructure.\n\nListen for **container, Kubernetes, cluster orchestration, or microservices**.\n\n## AI and end-user computing\n\nTwo more families round out the picture:\n\n- **AI workloads** need accelerators, large datasets, and a way to serve a model to users. An AI product family provides the infrastructure and tooling for training and inference rather than making you assemble it from virtual machines.\n- **End-user computing** delivers a desktop to a person rather than a server to an application \u2014 virtual desktops streamed to a thin client, a laptop, or a browser. The problem it solves is managing hundreds of desktops centrally instead of one machine at a time.\n\nListen for **model, GPU, inference** for the first, and **virtual desktop, VDI, or streamed desktop** for the second.\n\n## Worked example: which family solves this?\n\nSort each statement to a family. Say the reasoning out loud; that is the exercise.\n\n1. \"Our testers need a fresh copy of the production database every Friday.\" \u2014 *Database lifecycle.* The chore is cloning, repeatedly, on a schedule.\n2. \"We have no idea what our three clusters cost us per department.\" \u2014 *Cloud management.* The chore is cost visibility across clusters.\n3. \"The development team wants to request a three-node environment themselves.\" \u2014 *Cloud management.* Self-service catalogue.\n4. \"An application needs a 2 TB volume it can format itself.\" \u2014 *Block storage.* A dedicated volume, presented as a disk.\n5. \"We need to archive five years of scanned documents cheaply.\" \u2014 *Object storage.* Many unstructured items, addressed by key.\n6. \"Two hundred contractors need a standard desktop on day one.\" \u2014 *End-user computing.* Desktops delivered to people, centrally managed.\n7. \"A data-science team wants to serve a model to an internal web page.\" \u2014 *AI.* Serving a model is inference.\n8. \"The new service ships as container images and must survive a node reboot.\" \u2014 *Containers.* Orchestration and rescheduling.\n\n## Where this leads\n\nYou will not be asked to run these products at this level. The skill being tested is a fast, confident sort \u2014 problem statement in, family out. Section 1.3 covers the tools that operate the infrastructure itself.\n\n---\n\n*This is independent study material. It is not official training and is not endorsed or approved by CompTIA, Nutanix, or any other certification body.*\n",
+    "objectiveIds": [
+      "1.2"
+    ]
+  },
+  "NCA-75/s1_3": {
+    "lessonId": "s1_3",
+    "examId": "NCA-75",
+    "title": "Tooling",
+    "domainNumber": "1",
+    "status": "released",
+    "markdown": "# The Toolbox: Seven Names to Recognise (S1.3)\n\n*Module S1.3 \u2014 Nutanix NCA 7.5 study track. Independent study material \u2014 see the disclaimer at the end.*\n\nThis lesson is a recognition drill. Seven tools come up whenever someone talks about running a Nutanix environment, and each one answers a different question. The exam objective is to hear a problem and name the tool, so this lesson is organised as *question \u2192 tool*, not as a feature tour.\n\n## Move \u2014 \"we are migrating\"\n\n**Move** handles migration: bringing workloads onto a Nutanix cluster from elsewhere, or moving them between clusters. It plans and runs the transfer of virtual machines, including from another hypervisor or another vendor's platform, and it can keep the source running until you are ready to cut over.\n\nListen for **migrate, move workloads, cut over, leave the old platform**. The distinguishing word is *from somewhere else*. Moving a VM between nodes in the same cluster is ordinary cluster operation, not a Move job.\n\n## NGT \u2014 \"the guest needs to cooperate\"\n\n**Nutanix Guest Tools (NGT)** is a small package installed *inside* a virtual machine. Without it, the cluster can still protect the VM with snapshots, but the guest operating system has no way to prepare for them. With NGT installed, the guest can quiesce its filesystem and applications so a snapshot is consistent, and the guest gains self-service restore.\n\nThe tell is a phrase about **the guest operating system** or about **application-consistent snapshots**. NGT is the tool you install on the machine being protected, not on the cluster.\n\n## Foundation \u2014 \"the hardware is bare\"\n\n**Foundation** is the imaging tool. It takes a brand-new, factory-fresh node and installs the hypervisor and AOS onto it, so it can join a cluster. It is used at the very beginning of a node's life, or when a node has to be rebuilt.\n\nListen for **new node, bare metal, image the host, reimage**. If the question says the node has no operating system yet, the answer is Foundation.\n\n## Witness \u2014 \"there is no majority\"\n\nA cluster normally decides who is in charge by majority vote among its nodes. Two-node clusters have no majority to appeal to, and a stretched cluster spanning two sites has a similar problem: if the link between sites breaks, each side must not decide on its own that it is the survivor, because both sides might then write to the same data.\n\n**Witness** is a lightweight third party that provides that deciding vote. It runs somewhere outside the two nodes \u2014 typically a small virtual machine on a third site or in a public cloud \u2014 and it only participates when the cluster cannot reach a conclusion itself.\n\nListen for **two-node cluster, stretch cluster, split brain, arbitration, tie-breaker**.\n\n## SSR \u2014 \"the user deleted a file\"\n\n**Self-Service Restore (SSR)** lets a user restore individual files from a snapshot without opening a ticket and without an administrator mounting the snapshot for them. It works from inside the guest operating system, which is why it depends on NGT being installed.\n\nThe tell is **a single file or folder**, restored **by the user**, from **an existing snapshot**. Restoring a whole virtual machine is a different job.\n\n## X-Ray \u2014 \"will this design work?\"\n\n**X-Ray** tests a planned cluster configuration. Rather than discovering a problem during a real rollout, you describe the configuration you intend to build and X-Ray exercises it in a controlled way, reporting what passed and what did not.\n\nListen for **validate a design, test a configuration, will this work before we build it**. X-Ray is about a *plan*, not about a running production cluster's day-to-day health.\n\n## Collector \u2014 \"we need a picture of this environment\"\n\n**Collector** gathers inventory and configuration information from an environment and packages it into a report. It is commonly the first step when working with support, because it produces a consistent snapshot of what is actually deployed rather than a description assembled from memory.\n\nListen for **inventory, gather configuration, produce a report, before opening a case**.\n\n## Worked example: question \u2192 tool\n\nMatch each statement to one tool, and say why the others do not fit.\n\n1. \"We are leaving a different hypervisor and want our virtual machines on Nutanix.\" \u2014 **Move.** Workloads are coming from another platform.\n2. \"A user needs last Tuesday's version of one spreadsheet.\" \u2014 **SSR.** A single file, restored by the user, from a snapshot.\n3. \"Two nodes, one site, and we must survive losing either node.\" \u2014 **Witness.** Two nodes have no majority; something outside must break the tie.\n4. \"The new node arrived with nothing on it.\" \u2014 **Foundation.** Bare hardware needs imaging.\n5. \"Before we buy, will this cluster layout actually behave?\" \u2014 **X-Ray.** A design is being tested, not a live cluster.\n6. \"Support asked for a full picture of our configuration.\" \u2014 **Collector.** Inventory, packaged for a case.\n7. \"Snapshots of this database are not consistent.\" \u2014 **NGT.** The guest must be able to prepare itself.\n\nNotice that three of the seven answers hinge on a single word: *from elsewhere* (Move), *by the user* (SSR), *before we build it* (X-Ray). That is the level of precision the exam expects.\n\n## Where this leads\n\n`nca-tool-01`, the practice scenario for this objective, gives you a described situation and asks you to pick the tool. Section 2 turns from recognition to administration \u2014 starting with virtual machines.\n\n---\n\n*This is independent study material. It is not official training and is not endorsed or approved by CompTIA, Nutanix, or any other certification body.*\n",
+    "objectiveIds": [
+      "1.3"
+    ]
+  },
+  "NCA-75/s2_1": {
+    "lessonId": "s2_1",
+    "examId": "NCA-75",
+    "title": "VM tasks",
+    "domainNumber": "2",
+    "status": "released",
+    "markdown": "# Virtual Machine Tasks (S2.1)\n\n*Module S2.1 \u2014 Nutanix NCA 7.5 study track. Independent study material \u2014 see the disclaimer at the end.*\n\nA virtual machine is the unit most people actually care about. This lesson covers the handful of things you do to one: create it, change it, copy it, move it, delete it \u2014 plus the two ideas that trip beginners up, console access and the difference between a snapshot and a backup.\n\n## Creating a virtual machine\n\nCreating a virtual machine means making decisions in a few groups, and it helps to know the groups before the screens:\n\n- **Identity** \u2014 a name, and how many virtual processors and how much memory it gets.\n- **Storage** \u2014 which disk image it boots from, and how much disk space it has. The disk lives in a storage container on the cluster, which section 2.3 covers.\n- **Network** \u2014 which virtual network it attaches to. Section 2.2 covers this.\n- **Startup behaviour** \u2014 whether it starts automatically when the cluster starts, and how it should shut down.\n\nBeginners often treat the storage and network choices as plumbing to get past. They are not: a virtual machine with the wrong network attached is unreachable, and one with too little disk will fail later in a way that looks like an application problem.\n\n## Changing a virtual machine\n\nSome changes can be made while the machine is running and some cannot, and the distinction is worth internalising:\n\n- **Memory, most processor settings, and network attachments** can usually be changed live, though some guest operating systems need a reboot to notice.\n- **Disk size** can be increased while running in the usual case, but shrinking a disk is not something you do casually \u2014 you would create a new, smaller disk and copy the data instead.\n- **The boot device** and similar fundamental settings generally want the machine stopped.\n\nThe general principle: the further a change is from the operating system's view of the hardware, the more likely it needs a restart.\n\n## Cloning and templates\n\nA **clone** is a copy of a virtual machine. Cloning saves you from reinstalling an operating system every time. A **template** is the same idea taken further: a prepared, generic image kept specifically for making new machines, often with a step that customises hostname and network settings so the copies do not collide.\n\nCloning is the right answer to \"we need ten more of these\". It is the wrong answer to \"we need to preserve this machine exactly as it is today\" \u2014 that is a snapshot.\n\n## Migrating a virtual machine\n\n**Migrating** moves a running virtual machine from one node to another without shutting it down. The machine's memory is copied to the destination node while it keeps running, and it is switched over at the end. In a healthy cluster this is routine and is what lets a node be taken out for maintenance with no downtime for the workloads on it.\n\nTwo things follow. First, migration needs both nodes to be able to reach the machine's storage, which is why shared storage is the foundation of live migration. Second, if a node fails *without* a graceful migration, the cluster can restart its virtual machines elsewhere \u2014 a different operation, with a short interruption, rather than a seamless move.\n\n## Console access\n\nA virtual machine's **console** is its screen and keyboard, delivered over the network. You use it when the machine is not reachable over the network \u2014 during installation, after a network misconfiguration, or when the guest is too unwell to accept a remote session.\n\nThat is the whole point of the console: it works when nothing else does, because it does not depend on the guest's networking. If a question says \"the virtual machine does not respond on the network and we need to see what it is doing\", the answer is the console.\n\n## Snapshot versus backup\n\nThese two are confused constantly, and the distinction is a favourite exam topic.\n\n- A **snapshot** records the state of a virtual machine's disk at a moment in time, on the same cluster. It is fast, it is cheap, and it is meant for short-term use: take one before a risky change, and remove it once the change is proven good.\n- A **backup** is a copy of the data held somewhere separate from the cluster, so that losing the cluster does not lose the data. It is slower and it consumes its own storage, and it is meant for long-term retention.\n\nThe failure this distinction prevents: a snapshot is not a backup, because both the machine and its snapshots live on the same cluster. A cluster-wide failure takes the snapshots with it. Snapshots protect you from *a mistake*; backups protect you from *a loss*.\n\n## Deleting a virtual machine\n\nDeleting a machine removes it and its configuration. The question worth asking first is whether its snapshots and any dependent clones should go too \u2014 deleting a machine whose snapshot other machines were cloned from can leave those copies in an awkward state. The habit to build is: check what depends on the machine before you remove it.\n\n## Where this leads\n\n`nca-vm-01`, the scenario for this objective, walks through creating and connecting a virtual machine. Section 2.2 takes the networking choice you made here and explains what was actually behind it.\n\n---\n\n*This is independent study material. It is not official training and is not endorsed or approved by CompTIA, Nutanix, or any other certification body.*\n",
+    "objectiveIds": [
+      "2.1"
+    ]
+  },
+  "NCA-75/s2_2": {
+    "lessonId": "s2_2",
+    "examId": "NCA-75",
+    "title": "Virtual networking",
+    "domainNumber": "2",
+    "status": "released",
+    "markdown": "# Virtual Networking (S2.2)\n\n*Module S2.2 \u2014 Nutanix NCA 7.5 study track. Independent study material \u2014 see the disclaimer at the end.*\n\nWhen you created a virtual machine in the last lesson, you attached it to a virtual network and moved on. This lesson is about what you were choosing. Three ideas cover most of it: what a virtual network actually is, how VLANs keep traffic apart, and why some networks are managed while others are not.\n\n## A virtual network is a label, and a bridge\n\nOn a Nutanix cluster, a **virtual network** is a named object that virtual machines attach to. It has two sides:\n\n- On the **virtual side**, it is a name. A machine's network adapter points at it, and every machine attached to the same name can talk to every other one, as if they were plugged into the same switch.\n- On the **physical side**, it is a bridge to the real network. The cluster carries the traffic out over its physical links, tagged so that the physical switches know which network it belongs to.\n\nSo \"attach this machine to the production network\" is shorthand for: give this machine an adapter, bind it to the object called production, and let the cluster tag and forward its traffic out to the physical fabric.\n\n## VLANs: keeping traffic apart\n\nA **VLAN (virtual LAN)** is how one physical network carries several logically separate networks. Each VLAN has an identifier \u2014 a number \u2014 and switches use that number to keep the traffic of one VLAN from leaking into another.\n\nThe reason it matters here is the ordinary one: your production machines and your test machines may sit on the same physical switches, but they must not be able to talk to each other by accident. Assigning them to different VLANs enforces that separation.\n\nWhen you create a virtual network on the cluster, you normally give it the VLAN identifier that the physical switches already use for that segment. Get the number wrong and the machine is attached to the right cluster but the wrong network \u2014 it will be up, and it will be unreachable by the people who expect to reach it. This is one of the most common beginner mistakes, and it produces a symptom (machine running, network apparently fine, nobody can reach it) that is worth remembering.\n\n## Managed and unmanaged networks\n\nA cluster can create and track virtual networks itself, or you can point it at networks that were defined somewhere else. That is the **managed versus unmanaged** distinction.\n\n- A **managed** network is created and maintained on the cluster. The cluster is the source of truth: you define it once and machines attach to it by name.\n- An **unmanaged** network is one that already exists on the physical infrastructure, defined on the switches, and the cluster is told about it so that machines can be attached. The cluster is not the source of truth; the physical network is.\n\nThe practical consequence is where you go to change something. If a managed network's details are wrong, you fix them on the cluster. If an unmanaged network is wrong, fixing it on the cluster accomplishes nothing, because the cluster is only repeating what it was told.\n\n## What changes for a virtual machine\n\nWhen a network setting changes, ask what the machine *sees*, because that is what determines the symptom:\n\n- **Attaching a machine to a different virtual network** changes which segment it is on. If the new segment has a different address range, the machine's own address becomes invalid and it will lose connectivity until its addressing is updated \u2014 by hand, or by the addressing service on the new segment.\n- **Changing the VLAN identifier** behind a network moves every machine attached to it, at once. This is why a VLAN change is a change to be planned, not made casually during the day.\n- **Adding a second adapter** gives the machine a presence on two networks at once. Useful when a machine genuinely has to straddle two segments, and a common source of confusion when it happens by accident, because the machine now has two addresses and the traffic may leave by either.\n\nThe general rule: the machine does not know it was moved. It keeps the address it had, and everything depends on whether that address still means something on the segment it now sits on.\n\n## IP address management\n\nAddresses have to come from somewhere. On a well-run network, a **DHCP** service hands them out automatically and the cluster is told where to find it, so that newly created machines get a valid address without anyone typing one in. Where addresses are assigned by hand instead, an address plan is kept, and the discipline is to record what you assigned.\n\nThe failure to recognise: two machines with the same address on the same segment. The symptom is intermittent and maddening \u2014 connectivity that works, then does not, then works \u2014 because which machine answers depends on timing. When you meet a symptom that flickers, duplicate addressing is worth ruling out early.\n\n## Where this leads\n\nSection 2.3 covers the storage side of the choices you make when creating a machine. The network ideas here reappear in the scenarios, where a machine that will not respond is diagnosed by working out which of these layers is wrong.\n\n---\n\n*This is independent study material. It is not official training and is not endorsed or approved by CompTIA, Nutanix, or any other certification body.*\n",
+    "objectiveIds": [
+      "2.2"
+    ]
+  },
+  "NCA-75/s2_3": {
+    "lessonId": "s2_3",
+    "examId": "NCA-75",
+    "title": "Storage operations",
+    "domainNumber": "2",
+    "status": "released",
+    "markdown": "# Storage Operations (S2.3)\n\n*Module S2.3 \u2014 Nutanix NCA 7.5 study track. Independent study material \u2014 see the disclaimer at the end.*\n\nEvery virtual machine you create has a disk, and that disk lives somewhere in the cluster's storage. This lesson explains where, what protects it, and the four techniques the cluster uses to make the space go further. It stays at concept level throughout: you are learning what the knobs do and when you would reach for them, not how to turn them.\n\n## Containers: where disks live\n\nA **storage container** is a logical group of storage on the cluster, with its own set of policies. When you create a virtual machine, its disk is placed in a container. The container is where you set the rules that apply to everything inside it \u2014 how many copies are kept, whether compression or deduplication is on, and similar.\n\nThe useful mental model is a folder with a policy attached. You do not usually create many containers. You create a small number that reflect genuinely different needs \u2014 perhaps one for ordinary virtual machines and one for something that needs different protection \u2014 and then place disks into the right one.\n\nThe consequence to remember: changing a container's policy applies to the disks inside it. That is why a container is a considered object rather than something you create freely.\n\n## Capacity: what you bought and what you can use\n\nA cluster's storage is not simply the sum of the disks you installed. Several things come out of the headline number before a virtual machine can use it:\n\n- **The hypervisor and cluster software occupy space** on each node.\n- **Protection copies** consume space, as the next section explains.\n- **Reserved headroom** is kept so the cluster can absorb a failure and still function.\n\nSo the number that matters is **usable capacity**, not raw disk capacity, and the two can be surprisingly far apart. A cluster that appears half empty by disk count may be much closer to full in terms of what it will actually accept.\n\n## Replication factor: how many copies\n\n**Replication factor (RF)** is how many copies of your data the cluster keeps. The two you will meet are:\n\n- **RF2** \u2014 two copies of every piece of data, on two different nodes. This survives the loss of one node. It uses roughly twice the space of the data itself.\n- **RF3** \u2014 three copies, on three different nodes. This survives the loss of two nodes at once, and costs roughly three times the space.\n\nBecause the copies are placed on *different* nodes, the protection is real: losing a node does not lose the data, because a complete copy exists elsewhere. And because the copies occupy space, RF3 halves the usable capacity of a given set of disks compared with RF2.\n\nThe decision is a trade between how much failure you must survive and how much space you are willing to spend on it. RF3 is chosen where losing two nodes at once must be survivable; RF2 is the usual choice where one is enough. Section 3.1 returns to this as a cluster-design question.\n\n## Data efficiency: four techniques\n\nThese four reduce how much space your data actually occupies. Each has a \"when would you\" answer.\n\n**Compression.** Compression finds repeated patterns within data and stores them more compactly. It works best on data that is compressible \u2014 text, logs, many application files \u2014 and does little for data that is already compressed, such as images or archives. *When would you reach for it:* broadly, because it is cheap; but do not expect a dramatic saving on already-compressed content.\n\n**Deduplication.** Deduplication finds identical blocks and stores one copy, with the others pointing at it. It shines where the same data exists many times \u2014 cloned virtual machines, repeated operating system files, backup sets. *When would you reach for it:* in environments with many similar machines, which is most virtualised environments.\n\n**Erasure coding.** Erasure coding stores data plus calculated redundancy spread across nodes, so that a missing piece can be reconstructed. It provides protection similar to replication while consuming noticeably less space, at the cost of more computation and a different performance profile. *When would you reach for it:* for cold or archival data, where space matters more than the speed of an access.\n\n**Thin provisioning.** Space is allocated to a disk when the disk is *written*, not when it is created. A 500 GB disk that holds 50 GB consumes 50 GB. *When would you reach for it:* always, by default \u2014 but remember that it makes \"the disk is only using 10%\" a statement about allocation, not about what is genuinely free, because a hundred such disks can all grow at once.\n\n## Reading a capacity question\n\nWhen a question gives you numbers, it is usually testing one of two things: whether you accounted for **protection copies** (RF2 means roughly double), or whether you confused **allocated** space with **used** space. Before doing arithmetic, ask which of the two the question is really about.\n\n## Where this leads\n\nSection 3.1 turns replication factor into a cluster-design decision, and section 3.2 covers what happens to storage when a disk or a node fails. The practice items for this objective are recognition questions of the kind above.\n\n---\n\n*This is independent study material. It is not official training and is not endorsed or approved by CompTIA, Nutanix, or any other certification body.*\n",
+    "objectiveIds": [
+      "2.3"
+    ]
+  },
+  "NCA-75/s2_4": {
+    "lessonId": "s2_4",
+    "examId": "NCA-75",
+    "title": "Licensing",
+    "domainNumber": "2",
+    "status": "released",
+    "markdown": "# Licensing (S2.4)\n\n*Module S2.4 \u2014 Nutanix NCA 7.5 study track. Independent study material \u2014 see the disclaimer at the end.*\n\nLicensing is the least glamorous part of the platform and the part most likely to surprise you in production, because a licensing problem rarely looks like a licensing problem. This lesson stays at recognition level: what a licence is attached to, where you see it, and what happens when the environment outgrows what was bought.\n\n## What a licence is attached to\n\nThe important idea is that a licence is tied to the **capacity of the hardware**, not to the number of virtual machines you run on it. You do not pay per virtual machine; you licence the compute the cluster is made of.\n\nTwo consequences follow, and both are exam-relevant:\n\n- Adding a node to a cluster is not free from a licensing point of view. New capacity may need to be covered.\n- Running more virtual machines on hardware you already own does not, by itself, change the licensing position.\n\nSo when a question describes a cluster growing, the licensing question is about the *hardware that was added*, not about the workloads that were deployed.\n\n## Tiers, at recognition level\n\nLicences come in tiers, and the tiers differ by which capabilities they unlock rather than by how much hardware they cover. A lower tier gives you the platform's core functions; higher tiers add the management, automation, and advanced data-services features.\n\nYou are not expected to memorise a price list or a feature matrix. The recognition skill is:\n\n- If a scenario needs an advanced capability and the licence does not include it, the answer is about the *tier*, not about a broken configuration.\n- If a scenario is about capacity, the answer is about the *amount of hardware covered*, not about the tier.\n\nThat split \u2014 capability versus capacity \u2014 resolves most licensing questions at this level.\n\n## Where licensing lives\n\nLicensing is visible and managed from **Prism**, the same interface you use for everything else. From there you can see what is licensed, what the environment is using, and whether anything is out of step.\n\nThe reason this matters is diagnostic. Because licensing information lives in the management plane, an alert about licensing appears there rather than in the guest operating system. A user reporting that \"something is wrong with the cluster\" will not see a licensing message on their own machine; the administrator sees it in Prism.\n\n## When capacity is exceeded\n\nEnvironments drift. A node is added and nobody updates the records; a cluster is rebuilt and the licence is not reapplied; a test environment is promoted to production. The result is an environment whose licensed capacity and actual capacity no longer agree.\n\nWhat happens next depends on the direction and the size of the gap, but the shape is consistent:\n\n- The management plane **reports** the discrepancy. This is the normal first symptom \u2014 a compliance or capacity notice in Prism rather than an outage.\n- If the gap persists, **functionality can become restricted**. The platform protects itself in a defined way rather than simply failing without explanation.\n- The fix is to **bring the licence into line** with what is actually deployed, not to remove hardware to match the paperwork.\n\nThe habit worth building: when an environment behaves in a way that no configuration change explains, and a notice is sitting in Prism that nobody read, read the notice.\n\n## A worked example, and an honest limit\n\nConsider this statement: *\"A four-node cluster was expanded to six nodes last quarter. The administrator reports that several management features stopped working this week.\"*\n\nWork through it: the change was to **capacity** (two nodes added). The symptom is about **capability** (features stopped working). Those are different questions, and the sequence to check is: is the licence covering the two new nodes, and does the current tier include the features that stopped working? Both are answered in Prism, not on the nodes.\n\nThis is a reasoning example, and it is deliberately only that. The lab simulator for this track does not simulate licence mutations \u2014 you cannot buy a tier or exceed a capacity limit in it. Where a scenario or practice item touches licensing, it is presented as a **labelled worked example**: you reason through the situation and see the answer explained. Nothing in this track pretends to have let you perform a licensing change you did not perform.\n\n## Where this leads\n\nSection 3 covers cluster configuration and maintenance, where capacity decisions are made and where the licensing consequences of adding hardware are felt. Section 4 covers the health and monitoring surfaces where a licensing notice would appear.\n\n---\n\n*This is independent study material. It is not official training and is not endorsed or approved by CompTIA, Nutanix, or any other certification body.*\n",
+    "objectiveIds": [
+      "2.4"
+    ]
+  },
+  "NCA-75/s3_1": {
+    "lessonId": "s3_1",
+    "examId": "NCA-75",
+    "title": "Valid cluster options",
+    "domainNumber": "3",
+    "status": "released",
+    "markdown": "# Valid Cluster Options (S3.1)\n\n*Module S3.1 \u2014 Nutanix NCA 7.5 study track. Independent study material \u2014 see the disclaimer at the end.*\n\n\"Valid\" is the key word in this objective. When you design or expand a cluster, some combinations of choices work and some do not, and the reason is always the same: the cluster has to be able to survive the failure it promises to survive. This lesson explains the decisions, the constraints behind them, and how to tell a valid option from one that merely looks affordable.\n\n## Replication factor: the first decision\n\nSection 2.3 introduced replication factor as a storage setting. Here it becomes a design decision, because it determines what the cluster can survive.\n\n- **RF2** keeps two copies of the data, on two different nodes. It survives the loss of **one** node. It costs roughly twice the raw data in usable space.\n- **RF3** keeps three copies, on three different nodes. It survives the loss of **two** nodes at once. It costs roughly three times the raw data.\n\nThe framing question is not \"which is better\" but \"**how much failure must be survivable**\". A cluster that promises to keep running when two nodes are lost must be built with RF3, and the capacity arithmetic must account for it. Choosing RF3 on a cluster whose capacity was sized for RF2 is a valid *setting* and an invalid *design* \u2014 the cluster will run, and it will fill up.\n\n## The node-count constraint\n\nThe second constraint follows directly from the first, and this is where most invalid options are caught.\n\nIf data is kept on two different nodes, then losing one node leaves exactly one copy \u2014 and the cluster must be able to rebuild that copy onto a remaining node. That means there must be somewhere for it to go. With too few nodes, a failure leaves the cluster holding the only surviving copy of the data, with no room to rebuild and no margin for a second failure during the rebuild.\n\nThis is why the standard minimum is **three nodes** for RF2, and why RF3 arrangements want more nodes still. The rule is not arbitrary; it is \"enough nodes that a failure can be absorbed and repaired\".\n\nSo when you evaluate a proposed configuration, the check is mechanical:\n\n1. How many nodes?\n2. What replication factor?\n3. If the promised number of nodes fails at once, is a complete copy still present, and is there a node left to rebuild onto?\n\nAn option that fails step 3 is invalid regardless of price.\n\n## Node awareness and block awareness\n\nThe cluster also has to be careful *where* it puts the copies, because two nodes in the same chassis can fail together.\n\n- **Node awareness** places copies on different nodes. This is the baseline: it protects against a single node failing.\n- **Block awareness** places copies on nodes in different chassis. This protects against a whole block losing power or being removed for service.\n\nThe point is that node awareness alone is not enough if the nodes it chose share a chassis. A configuration that spreads copies across nodes but not across blocks is valid for a single-node failure and invalid for a block-level failure \u2014 so whether it is \"valid\" depends on what you promised the business it would survive.\n\n## Two-node and stretched arrangements\n\nThe standard rules bend in two directions, and both are deliberate rather than exceptions to be avoided:\n\n- A **two-node cluster** can be a valid design for a small site, but it has no majority of its own to decide who survives a failure. It is made valid by pairing it with a **Witness** \u2014 the tie-breaker from section 1.3. Without one, the design is incomplete.\n- A **stretched cluster** spans two physical sites so that either site can carry the workloads. Its validity depends on the link between the sites and on an arbitration mechanism that prevents both sides from deciding independently that they are the survivor.\n\nIn both cases the pattern is the same: the arrangement is valid **because** something outside the pair provides the deciding vote. Remove that and you have an invalid design that will appear to work until the day it does not.\n\n## Evaluating an expansion choice\n\nGrowing a cluster raises the same questions at a smaller scale:\n\n- **Does the addition keep the failure guarantee?** Adding nodes does not automatically improve protection if the copies are not placed to use them.\n- **Is the new capacity enough for the replication factor in use?** A cluster at RF3 needs a third more space per unit of data than the same cluster at RF2, and an expansion sized without that will be short.\n- **Is the resulting configuration homogeneous enough to operate?** Mixing node types is normal, but it affects where workloads can run and where data can be placed, so it is a design consideration rather than a purely commercial one.\n\nThe exam framing is usually a choice between options where one is subtly impossible: too few nodes for the replication factor, copies that would land in the same chassis, or a two-node arrangement with no arbiter. Your job is to spot the impossibility and say why.\n\n## Where this leads\n\nSection 3.2 covers what you actually do when a disk or a node fails \u2014 the operator-level workflow that the design decisions here are preparing you for. Section 3.3 covers planned maintenance of the software itself.\n\n---\n\n*This is independent study material. It is not official training and is not endorsed or approved by CompTIA, Nutanix, or any other certification body.*\n",
+    "objectiveIds": [
+      "3.1"
+    ]
+  },
+  "NCA-75/s3_2": {
+    "lessonId": "s3_2",
+    "examId": "NCA-75",
+    "title": "Hardware maintenance",
+    "domainNumber": "3",
+    "status": "released",
+    "markdown": "# Hardware Maintenance (S3.2)\n\n*Module S3.2 \u2014 Nutanix NCA 7.5 study track. Independent study material \u2014 see the disclaimer at the end.*\n\nHardware fails. A disk wears out, a power supply dies, a node needs a memory upgrade. This lesson is about the operator-level workflow for dealing with that, and it has one central idea: **get the work off the hardware before you touch the hardware**. Everything else is the sequence around that idea.\n\n## The one rule: evacuate first\n\nThe cluster is built so that no single node holds the only copy of anything. That property is what makes maintenance possible without downtime \u2014 but only if you use it.\n\n**Evacuating** a node means asking the cluster to move that node's data and workloads elsewhere, so that the node can be taken out of service safely. While the node is evacuating, the cluster is rebuilding or relocating copies onto the remaining nodes. When it finishes, the node is holding nothing that only it has, and it can be powered off, opened, or removed.\n\nSkipping this step is the classic beginner error. The node *looks* safe to pull because the cluster is healthy \u2014 and it is, right up until the moment you remove the copy of the data that was living on it.\n\n## Disk failure: the workflow\n\nA failed disk is the most common hardware event, and the workflow is short:\n\n1. **The cluster notices.** A failed disk raises an alert, and the data that was on it is rebuilt from its other copies onto the remaining disks. This happens without intervention; your job is to confirm it happened, not to trigger it.\n2. **Confirm the failure is real.** A disk can be reported as failed because of a transient fault. Before ordering a replacement, confirm the cluster agrees the disk is genuinely gone.\n3. **Replace the disk.** Physical replacement is safe *because* the data was already rebuilt elsewhere \u2014 the cluster is not depending on the failed disk.\n4. **Confirm the rebuild.** After the replacement, the cluster uses the new capacity and the state returns to healthy. Verify this rather than assuming it.\n\nNote what is *not* in that list: there is no step where you copy data off the failed disk, and no step where you shut the cluster down. The design has already handled it.\n\n## Node failure: the workflow\n\nA node failure is the same idea at a larger scale, with one addition \u2014 the workloads that were running on the node.\n\n- **If the node fails on its own**, the cluster restarts its virtual machines on the remaining nodes. There is a short interruption, because a running machine cannot be moved after the fact; it has to be started again elsewhere. Confirm the machines came back and that the data rebuilt.\n- **If you are taking the node down deliberately**, you do it in the other order. First **evacuate** the node so its workloads migrate away with no interruption and its data moves to other nodes. Then, once the node is genuinely empty, take it out of service.\n\nThe distinction between those two paragraphs is the heart of this objective: an unplanned failure *restarts* workloads, a planned maintenance *migrates* them. Planned maintenance is what you do when you can, precisely because it is the version with no interruption.\n\n## The ordered sequence for planned node maintenance\n\nWhen a question asks for the correct order, this is the sequence it is testing:\n\n1. **Confirm cluster health first.** Maintenance on an unhealthy cluster is how a small problem becomes a large one. If something else is already degraded, fix that before adding a failure.\n2. **Evacuate the node.** Move its data and workloads away. Wait for this to complete \u2014 not merely to start.\n3. **Confirm the node is empty.** The evacuation finishing is the signal that it is safe to proceed.\n4. **Take the node out of service.** Now the physical work can happen.\n5. **Return the node to service**, and confirm the cluster rebuilds onto it and returns to a healthy state.\n\nSteps 2 and 3 are the ones people skip, and they are the ones the sequence exists to enforce. \"I started the evacuation\" is not the same as \"the node is empty\".\n\n## Why the order matters\n\nEvery step in that sequence exists because of a specific way things go wrong:\n\n- Maintenance on an already-degraded cluster means the next failure has no margin.\n- Pulling a node before it is evacuated means removing a copy the cluster still needs.\n- Leaving a node out of service without confirming its return means running at reduced capacity without noticing, so the *next* failure is worse than it should be.\n\nThe exam does not usually ask you to recite the steps. It gives you a situation and asks which action is correct *now* \u2014 and the answer is almost always the one that keeps the cluster's ability to survive a failure intact.\n\n## Where this leads\n\n`nca-maint-01`, the scenario for this objective, is an ordered-sequence task: you are given a node that needs servicing and asked to choose the safe order of operations. Section 3.3 covers the software side of maintenance, where the same \"check first, act second\" discipline applies to upgrades.\n\n---\n\n*This is independent study material. It is not official training and is not endorsed or approved by CompTIA, Nutanix, or any other certification body.*\n",
+    "objectiveIds": [
+      "3.2"
+    ]
+  },
+  "NCA-75/s3_3": {
+    "lessonId": "s3_3",
+    "examId": "NCA-75",
+    "title": "Software maintenance",
+    "domainNumber": "3",
+    "status": "released",
+    "markdown": "# Software Maintenance (S3.3)\n\n*Module S3.3 \u2014 Nutanix NCA 7.5 study track. Independent study material \u2014 see the disclaimer at the end.*\n\nPlanned software maintenance means upgrading the layers the cluster runs on: the hypervisor, the cluster software, and the firmware underneath. This lesson covers the workflow at concept level. The recurring theme is that the tool does most of the work, and your job is the judgement around it \u2014 deciding what to update, in what order, and whether now is the right time.\n\n## The tool: Life Cycle Manager\n\n**Life Cycle Manager (LCM)** is the tool that discovers, stages, and applies updates across the cluster. It is the answer to \"how do I keep this environment current\" in a Nutanix context, and its value is that it treats the cluster as one system rather than as a pile of separate components to be updated by hand.\n\nWhat LCM does, in order of the workflow:\n\n- **Inventory** \u2014 find out what versions are installed and what updates are available.\n- **Compatibility check** \u2014 determine whether a given update is compatible with everything else in this specific environment.\n- **Pre-checks** \u2014 validate that the cluster is in a fit state to be updated right now.\n- **Apply** \u2014 perform the update, one component at a time, in an order it determines.\n\nThe one-click upgrade people talk about is the last step. The value is in the first three.\n\n## Inventory and compatibility\n\nThe **inventory** step answers \"what do I have, and what could I have\". LCM collects the versions of the software and firmware in the environment and compares them against available updates.\n\nThe **compatibility** step is the one that saves you. The layers of a cluster are interdependent: a hypervisor version, a cluster software version, and a firmware version form a combination, and not every combination is supported. Updating one component without regard for the others can produce a configuration that runs but is unsupported \u2014 which means that when something goes wrong later, you are on your own.\n\nSo the correct sequence is never \"update the thing that is out of date\". It is \"let the tool tell me which updates are compatible with *this* environment, then choose among those\".\n\n## Pre-checks: the same discipline as hardware maintenance\n\n**Pre-checks** are the software equivalent of confirming cluster health before evacuating a node. Before applying anything, LCM validates that the environment is in a state where the update can succeed: the cluster is healthy, no other operation is in flight, there is enough free capacity to absorb the rolling process, and the components are where they need to be.\n\nA failed pre-check is not an obstacle to be overridden. It is the tool telling you that something else needs attention first. The discipline from section 3.2 applies unchanged: fix the underlying condition, then come back.\n\n## What \"rolling\" means\n\nUpdates are applied one node at a time rather than all at once, because applying them everywhere simultaneously would take the cluster down. The pattern is: take one node out of service, update it, bring it back, confirm it is healthy, move to the next. During this, the workloads on each node move to the others \u2014 the same evacuation idea from section 3.2, performed by the tool.\n\nTwo consequences follow. First, an upgrade **takes time** proportional to the number of nodes, and the cluster runs on reduced capacity throughout. Second, an upgrade **needs headroom**: if the cluster is already tight on resources, there may not be room to run everything on the remaining nodes while one is being updated. That is why \"how much free capacity do we have\" is part of the pre-check.\n\n## Dark-site awareness\n\nNot every environment can reach the outside world. A **dark site** has no internet access \u2014 a common situation in secure or remote facilities. This matters for maintenance because update tooling often expects to download what it needs.\n\nThe practical point at this level is recognition: in a dark site, updates must be brought in through whatever controlled channel exists rather than fetched directly, and that has to be arranged *before* the maintenance window, not during it. If a question describes an isolated environment and an upgrade, the answer involves planning the transfer of the update media, not troubleshooting a download.\n\n## Judgement around the tool\n\nLCM handles the mechanics. The judgement is yours:\n\n- **What should be updated now, and what can wait?** Not every available update is urgent.\n- **Is this a good time?** A rolling upgrade runs on reduced capacity for a while, so it should not coincide with a period of peak demand or with other maintenance.\n- **Is the environment in a fit state?** That is what pre-checks answer, and the answer is not negotiable.\n\nThe exam usually tests the sequencing and the discipline rather than the interface: check compatibility, check the cluster, then apply.\n\n## Where this leads\n\nSection 4 turns to health and monitoring \u2014 the surfaces that tell you whether the cluster is in the fit state these pre-checks demand, and where you look first when something is wrong.\n\n---\n\n*This is independent study material. It is not official training and is not endorsed or approved by CompTIA, Nutanix, or any other certification body.*\n",
+    "objectiveIds": [
+      "3.3"
+    ]
+  },
+  "NCA-75/s4_1": {
+    "lessonId": "s4_1",
+    "examId": "NCA-75",
+    "title": "Health checks",
+    "domainNumber": "4",
+    "status": "released",
+    "markdown": "# Health Checks (S4.1)\n\n*Module S4.1 \u2014 Nutanix NCA 7.5 study track. Independent study material \u2014 see the disclaimer at the end.*\n\nA health check is how you find out whether a cluster is well before a user tells you it is not. This lesson covers what the check examines, how to run it, and \u2014 the part beginners get wrong \u2014 how to read the results without treating every line as an emergency.\n\n## The tool: Nutanix Cluster Check\n\n**Nutanix Cluster Check (NCC)** is the health-check tool. It runs a collection of individual checks against the cluster, each examining one aspect of its state, and produces a report of what it found.\n\nThe mental model that matters: NCC is not one test. It is many small tests, each answering a specific question \u2014 is this component healthy, is that configuration what it should be, is anything approaching a limit. Understanding that is what makes the output readable, because you get a list of findings rather than a single verdict.\n\n## What it checks\n\nThe checks cluster into a few groups, and knowing the groups tells you what a finding is likely to mean:\n\n- **Hardware and component state** \u2014 disks, nodes, power supplies, and similar physical elements. A finding here is often something the cluster already knew about and has already compensated for.\n- **Software and configuration** \u2014 whether versions and settings match what is expected for this environment.\n- **Capacity and utilisation** \u2014 how full the storage is, how busy the cluster is, and how close either is to a threshold.\n- **Health of the cluster's own services** \u2014 whether the internal components that make up the distributed system are all doing their jobs.\n\nMost findings are informational. The ones that matter are the ones that indicate something **degraded** \u2014 a component that has failed and been compensated for, or a resource approaching a limit.\n\n## How to run it\n\nA health check is run on demand, and it is also run automatically as part of routine operation. The practical difference is why you are running it:\n\n- **Routine** \u2014 a periodic check to confirm nothing has drifted. Read the report for anything degraded or approaching a threshold.\n- **Before a change** \u2014 the pre-check discipline from sections 3.2 and 3.3. You are confirming the cluster is fit to have maintenance performed on it.\n- **After a change** \u2014 confirming that whatever you did left the cluster in a healthy state.\n- **When investigating a problem** \u2014 a health check is often the first thing to run, because it can surface a degraded component that nobody had noticed and that explains the symptom.\n\nThat last use is the one worth internalising: a health check is a diagnostic tool, not only a periodic ritual.\n\n## Reading the results without panic\n\nThis is the skill the objective is really about. A health check on a working cluster will often produce findings, and the wrong response is to treat each one as a failure.\n\nRead in this order:\n\n1. **Is anything degraded?** A degraded component means something has failed and the cluster is compensating. This is the highest-value finding, even if the cluster is currently performing normally \u2014 it means you are running without margin.\n2. **Is anything approaching a limit?** Storage or compute nearing a threshold is a warning about the future rather than a fault now. It is the finding most often ignored and most often the cause of a later incident.\n3. **Is anything inconsistent?** A configuration that does not match what is expected, or a version that is out of step, usually points at something that was changed and not finished.\n4. **Everything else.** Informational lines are informational. Read them, do not act on them reflexively.\n\nThe discipline is to separate \"the cluster is broken\" from \"the cluster is fine and one of its components is being carried\". Those are very different states, and conflating them leads to unnecessary emergency work.\n\n## The habit worth building\n\nRun the check before you need it. The value of a health check is highest when you have a baseline to compare against \u2014 you know what normal looks like for this environment, so you can tell which findings are new. A health check run for the first time during an incident tells you the cluster is unhealthy; it cannot tell you what changed.\n\n## Where this leads\n\nSection 4.2 covers alerts and events \u2014 the push notifications the cluster sends when something needs attention, as opposed to the report you ask for here. Section 4.3 covers what to do when a finding needs the vendor's involvement.\n\n---\n\n*This is independent study material. It is not official training and is not endorsed or approved by CompTIA, Nutanix, or any other certification body.*\n",
+    "objectiveIds": [
+      "4.1"
+    ]
+  },
+  "NCA-75/s4_2": {
+    "lessonId": "s4_2",
+    "examId": "NCA-75",
+    "title": "Alerts and events",
+    "domainNumber": "4",
+    "status": "released",
+    "markdown": "# Alerts and Events (S4.2)\n\n*Module S4.2 \u2014 Nutanix NCA 7.5 study track. Independent study material \u2014 see the disclaimer at the end.*\n\nA health check is something you ask for. An alert is something the cluster tells you. This lesson covers the difference between an alert and an event, how severity works, what acknowledging an alert actually means, and \u2014 the skill this objective is really testing \u2014 where to look first when several things are shouting at once.\n\n## Alert versus event\n\nThese two are used interchangeably in ordinary conversation and mean different things here.\n\nAn **event** is a record that something happened. The cluster keeps a log of them: a node came back, a task completed, a configuration changed. Events are a history. Most of them are entirely routine, and their value is in reconstructing what happened, especially after the fact.\n\nAn **alert** is a condition that has been raised because it needs attention. An alert has a severity, it persists until the condition clears or someone resolves it, and it represents the cluster's judgement that a human should probably look.\n\nThe relationship between them is the useful part: **alerts are generated from events**. A single event may be unremarkable; a pattern of events, or an event that crosses a threshold, becomes an alert. So when you are diagnosing, the alerts tell you *what* is wrong and the events tell you *what happened* \u2014 and the events usually contain the sequence you need.\n\n## Severity\n\nAlerts carry a severity, and the severity is a statement about urgency rather than about difficulty.\n\n- **Critical** \u2014 something is broken or about to be. This is the level that wakes people up.\n- **Warning** \u2014 something is approaching a limit, or a condition exists that will become critical if it continues.\n- **Informational** \u2014 something happened that is worth recording. Informational alerts are the boundary between alert and event.\n\nThe trap is treating the list as a to-do queue to be worked top to bottom. A single critical alert usually matters more than a dozen warnings, and a warning that has been sitting unchanged for a month may matter more than a critical alert that resolved itself in thirty seconds.\n\n## Acknowledging: what it does and does not do\n\n**Acknowledging** an alert means \"a human has seen this and is aware of it\". It is a statement about *attention*, not about *state*.\n\nThat distinction is the whole point, and it is a favourite exam topic. Acknowledging an alert:\n\n- **Does** stop it from being treated as unexamined, and records that someone has taken responsibility for it.\n- **Does not** fix anything, and **does not** clear the underlying condition. If the condition is still true, the alert remains true; you have only recorded that you know.\n\nThe failure this prevents: acknowledging an alert to get it out of the way, then forgetting that the thing it described is still happening. Acknowledged-but-unresolved is a state worth being suspicious of when you review an environment.\n\n## Where to look first\n\nGiven a cluster with several alerts, this is the order that works:\n\n1. **Critical first \u2014 but read all of them before acting.** Critical alerts are where the damage is, but alerts are often *related*: one root cause produces a cluster of symptoms. Reading the whole set before acting is how you avoid fixing five symptoms of one problem.\n2. **Then the oldest unresolved.** An alert that has been open for days is either being ignored or is genuinely stuck, and both are worth knowing about.\n3. **Then warnings that are trending.** A capacity warning that is moving is a warning about next week, not today.\n4. **Then the acknowledged ones.** Confirm the acknowledgement was deserved, because an acknowledged alert that nobody is actually working on is invisible by design.\n\nThe single most useful habit: **look for the common cause before the individual fixes**. A cluster reporting that several virtual machines are unreachable, plus a storage alert, plus a network warning, is usually one problem with three faces \u2014 and the alert that appeared *first* is often the one that explains the rest.\n\n## Reading a single alert properly\n\nFor any one alert, four questions give you what you need:\n\n- **What is the severity?** Urgency, not difficulty.\n- **When did it start?** The start time is how you correlate it with events and with changes someone made.\n- **Is it still active, or has it resolved?** A resolved alert is history; an active one is a current condition.\n- **What else appeared at the same time?** Correlation is the fastest route to a cause.\n\n## Where this leads\n\n`nca-alert-01`, the scenario for this objective, presents an alert and asks you to choose the right next step \u2014 which is usually to establish what happened before deciding what to do. Section 4.3 covers what to do when the answer requires opening a support case.\n\n---\n\n*This is independent study material. It is not official training and is not endorsed or approved by CompTIA, Nutanix, or any other certification body.*\n",
+    "objectiveIds": [
+      "4.2"
+    ]
+  },
+  "NCA-75/s4_3": {
+    "lessonId": "s4_3",
+    "examId": "NCA-75",
+    "title": "Support functions",
+    "domainNumber": "4",
+    "status": "released",
+    "markdown": "# Support Functions (S4.3)\n\n*Module S4.3 \u2014 Nutanix NCA 7.5 study track. Independent study material \u2014 see the disclaimer at the end.*\n\nSome problems you fix yourself. Some need the vendor's help, and the difference between a support case that is resolved quickly and one that drags is usually how well it was prepared. This lesson covers the three parts of that: the telemetry that runs continuously, the collection of logs you gather on demand, and the discipline of opening a case with the right material attached.\n\n## Pulse: the continuous channel\n\n**Pulse** is the telemetry service. It periodically sends diagnostic and health information from the cluster back to the vendor, so that the vendor has visibility into environments without anyone having to ask for it.\n\nThree things follow from that, and they are the recognition points:\n\n- Pulse is **automatic and continuous**, not something you run. If a question says \"we need to send information to the vendor now\", Pulse is not the answer \u2014 collection is.\n- Pulse is **outbound telemetry**, so in a dark site (section 3.3) it may be disabled or proxied. An environment that has never sent telemetry is a normal configuration, not a fault.\n- Pulse supports **proactive** support: the vendor can sometimes see a developing problem before the customer reports it. That is its purpose, and it is why disabling it changes the support relationship rather than just saving bandwidth.\n\n## Collecting logs on demand\n\nWhen a specific problem needs investigation, you gather the relevant logs from the cluster and attach them to the case. The tool for this is **Collector** (section 1.3) \u2014 it produces a packaged report of the environment's configuration and state.\n\nThe skill here is scoping the collection. A collection can be narrow \u2014 the logs for one component, over a specific window \u2014 or broad. Two rules:\n\n- **Match the window to the problem.** If the problem started at 14:00 yesterday, a collection covering the last hour is useless. The start time of the alert (section 4.2) tells you what window to ask for.\n- **Narrow first.** A broad collection is slow to produce and slow for the vendor to work through. Start with the component that the evidence points at, and widen only if it is not enough.\n\nThis is where the earlier lessons pay off: to scope a collection you need to know which component is implicated, and that comes from reading the alerts and events properly rather than guessing.\n\n## Opening a support case\n\nA case is a conversation, and the quality of the first message sets its trajectory. The material that makes a case good:\n\n- **What is the symptom, in observable terms.** \"The cluster is slow\" is not a symptom. \"Virtual machines on node three respond in seconds rather than milliseconds, since 14:00 yesterday\" is.\n- **When it started, and what changed around then.** The single highest-value piece of information. Most problems have a change near their start \u2014 a maintenance window, a configuration edit, a new workload.\n- **What you have already checked.** Saying what you ruled out stops the vendor from asking you to repeat it, and it demonstrates you have done the diagnostic work.\n- **The evidence attached.** The collection, scoped to the window.\n- **The impact, stated plainly.** What is not working, and for whom. This is what determines how the case is prioritised.\n\nThe failure this prevents: a case that opens with \"it is broken\", gets a request for information, and spends its first day in a round trip that could have been avoided.\n\n## Working the case\n\nTwo habits worth building:\n\n- **Keep the case updated with what you observe**, not only with what you want. The sequence of what changed and when is often what leads to the answer, and it is much harder to reconstruct later.\n- **Apply and verify the resolution.** A case closed because a fix was suggested is not a case closed because the problem is gone. Verify, then close.\n\n## An honest limit\n\nThe lab simulator for this track does not simulate the vendor's support systems. You cannot open a real case in it. Where a practice item or scenario touches the support workflow, it is a **labelled worked example** \u2014 you reason through how a case should be prepared and see the reasoning explained. Nothing here claims to have let you perform a support action you did not perform.\n\n## Where this leads\n\nSection 4.4 covers the last piece of the monitoring picture: reading the performance dashboards that tell you whether the cluster is keeping up, and distinguishing a machine that is being starved from one that is simply asking for more than it should.\n\n---\n\n*This is independent study material. It is not official training and is not endorsed or approved by CompTIA, Nutanix, or any other certification body.*\n",
+    "objectiveIds": [
+      "4.3"
+    ]
+  },
+  "NCA-75/s4_4": {
+    "lessonId": "s4_4",
+    "examId": "NCA-75",
+    "title": "Workload performance",
+    "domainNumber": "4",
+    "status": "released",
+    "markdown": "# Workload Performance (S4.4)\n\n*Module S4.4 \u2014 Nutanix NCA 7.5 study track. Independent study material \u2014 see the disclaimer at the end.*\n\n\"Slow\" is the vaguest word in infrastructure support and the most common complaint. This lesson is about turning it into something you can act on: reading the performance charts, and distinguishing the two situations that produce the same complaint but need opposite responses \u2014 a machine that is being starved by a neighbour, and a cluster that is genuinely out of capacity.\n\n## Reading a performance chart\n\nA performance chart has three parts, and beginners tend to read only the middle one.\n\n- **The level** \u2014 how much of something is being used. This is what people look at, and on its own it is the least informative part.\n- **The trend** \u2014 whether the level is climbing, flat, or cycling. A level that is climbing is a warning about the future even when it is currently comfortable.\n- **The shape** \u2014 the pattern within the window. A steady line and a line that spikes every ten minutes can have the same average and mean entirely different things.\n\nSo the first habit is to read the trend and the shape, not just the number. \"Storage is 70% full\" is not useful on its own; \"storage is 70% full and climbing about 2% a week\" is a plan.\n\n## Two complaints, two causes\n\nThe same sentence \u2014 \"the application is slow\" \u2014 has two fundamentally different causes, and telling them apart is this objective's core skill.\n\n**Cause one: a capacity ceiling.** The resource genuinely is exhausted. Storage is full, the processors are saturated, memory is over-committed. Everyone on that resource is affected, and the fix is to add capacity or reduce demand.\n\n**Cause two: contention from a neighbour.** The resource has plenty of headroom *in total*, but one workload is consuming a disproportionate share, so others are starved. This is the **noisy neighbour** problem. The cluster looks healthy by the numbers, the affected user is suffering, and the fix is about the *offending workload*, not about capacity.\n\nThe distinguishing question is: **is the resource constrained in total, or is the constraint specific to the affected workload?** If the cluster has headroom while one machine is slow, you are looking at contention. If everything on the resource is slow, you are looking at a ceiling.\n\n## Recognising a noisy neighbour\n\nThe symptoms of contention are specific enough to recognise:\n\n- **One workload is slow while others are normal.** The clearest signal. If it were a ceiling, everything on that resource would feel it.\n- **The slowness is periodic, not constant.** Contention follows the neighbour's activity, so it appears when the neighbour is busy and eases when it is not. A constant symptom suggests a ceiling; an intermittent one suggests contention.\n- **The aggregate numbers look fine.** Total processor or storage use is unremarkable, because the resource is not full \u2014 it is just unevenly shared.\n- **The timing correlates with something else.** A backup window, a report that runs hourly, a batch job that starts at midnight. When you can correlate the symptom with another workload's schedule, you have found the neighbour.\n\nThe trap is treating this as a capacity problem and adding hardware, which does not help: the neighbour will consume the new headroom too.\n\n## Recognising a ceiling\n\nThe symptoms of a genuine ceiling are the mirror image:\n\n- **Everything on the resource is affected**, not one workload.\n- **The symptom is continuous** and tends to worsen over time as the level climbs.\n- **The aggregate numbers are high**, consistently, not just at peaks.\n- **The fix is capacity or demand**: add resource, or reduce what is asking for it.\n\n## From symptom to evidence\n\nThe workflow that turns a complaint into an action:\n\n1. **Establish what \"slow\" means.** Which application, which operation, since when, for whom.\n2. **Isolate whether it is one workload or all of them** on the shared resource. This single question splits the two causes.\n3. **Read the trend, not just the level.** Is this a new condition or a long-standing one that has crossed a line?\n4. **Correlate with other activity.** Another workload's schedule, a recent change, a maintenance window.\n5. **Only then decide** whether the answer is capacity, a change to the offending workload, or something else entirely.\n\nStep 2 is where most people go wrong, because they skip straight from the complaint to a solution.\n\n## An honest limit\n\nThe performance charts in this track's lab simulator are illustrative rather than real measurements, and the scenarios that touch performance present a described situation and ask you to reason about it. Nothing here claims to have let you diagnose a live performance problem on real hardware \u2014 the skill being built is the reasoning, and it is exercised as a **labelled worked example**.\n\n## Where this leads\n\nThis closes the monitoring section, and with it the four sections of the current blueprint. The scenarios bring these ideas together: `nca-tool-01`, `nca-vm-01`, `nca-maint-01`, and `nca-alert-01` each take one of the objectives and make you use it.\n\n---\n\n*This is independent study material. It is not official training and is not endorsed or approved by CompTIA, Nutanix, or any other certification body.*\n",
+    "objectiveIds": [
+      "4.4"
     ]
   }
 };
@@ -2132,6 +2344,846 @@ export const ITEMS = [
     "provenanceStatus": "draft",
     "textHash": "cf9f709b06d79f9d",
     "bank": "net009-n5-fixtures.md"
+  },
+  {
+    "id": "NCA-75/nca75-pilot.md/Q1",
+    "examId": "NCA-75",
+    "number": "Q1",
+    "stem": "Which statement best describes what \"hyperconverged\" means for a Nutanix cluster?",
+    "options": {
+      "A": "The same physical nodes provide compute, storage, and the software that coordinates them",
+      "B": "Storage is kept on a dedicated array and shared with the servers over the network",
+      "C": "All virtual machines run on a single large host that the others merely back up",
+      "D": "Compute and storage are separated so each can be scaled independently"
+    },
+    "keys": [
+      "A"
+    ],
+    "explanation": "Hyperconverged means the same nodes contribute CPU and memory for workloads, local disks to a shared storage pool, and the software that ties the cluster together. Option B describes the traditional three-tier arrangement with a separate array, and option D describes the separation hyperconvergence removes rather than what it does.",
+    "objectiveId": "1.1",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "bda2b9f53ffb6ed5",
+    "bank": "nca75-pilot.md"
+  },
+  {
+    "id": "NCA-75/nca75-pilot.md/Q2",
+    "examId": "NCA-75",
+    "number": "Q2",
+    "stem": "In a Nutanix cluster, what is the role of AOS?",
+    "options": {
+      "A": "It is the management interface used to view health and run tasks",
+      "B": "It is the hypervisor that runs the virtual machines",
+      "C": "It is the distributed software layer that pools storage across the nodes",
+      "D": "It is the tool that images a new node before it joins the cluster"
+    },
+    "keys": [
+      "C"
+    ],
+    "explanation": "AOS is the Acropolis Operating System: the distributed layer that turns a group of servers into one storage system, deciding where data lives and keeping copies for protection. The management interface is Prism, the hypervisor is AHV, and imaging a new node is Foundation's job.",
+    "objectiveId": "1.1",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "50b1336c75bb3aa4",
+    "bank": "nca75-pilot.md"
+  },
+  {
+    "id": "NCA-75/nca75-pilot.md/Q3",
+    "examId": "NCA-75",
+    "number": "Q3",
+    "stem": "A 40-person accounting firm has two ageing servers and a nearly full storage array, and no dedicated IT staff. Which part of the Nutanix story is the strongest fit for them?",
+    "options": {
+      "A": "Raw performance per node",
+      "B": "Elastic provisioning for a development team",
+      "C": "Fewer things to operate, grown by adding a node",
+      "D": "Per-site resilience across many branch offices"
+    },
+    "keys": [
+      "C"
+    ],
+    "explanation": "The firm's problem is operational: too many separate things to run and no one to run them. The fit is simplicity \u2014 one cluster, one management interface, growth by adding a node. Raw performance is not their constraint, elastic provisioning is a software-team need, and per-site resilience describes a multi-branch scenario.",
+    "objectiveId": "1.1",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "04e8489dc202b5e6",
+    "bank": "nca75-pilot.md"
+  },
+  {
+    "id": "NCA-75/nca75-pilot.md/Q4",
+    "examId": "NCA-75",
+    "number": "Q4",
+    "stem": "Which Nutanix component is the hypervisor?",
+    "options": {
+      "A": "AOS",
+      "B": "Prism Central",
+      "C": "AHV",
+      "D": "Life Cycle Manager"
+    },
+    "keys": [
+      "C"
+    ],
+    "explanation": "AHV (Acropolis Hypervisor) is the layer that runs virtual machines. AOS is the distributed storage software, Prism Central is a management interface spanning clusters, and Life Cycle Manager updates software and firmware.",
+    "objectiveId": "1.1",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "8265e0b7791834f3",
+    "bank": "nca75-pilot.md"
+  },
+  {
+    "id": "NCA-75/nca75-pilot.md/Q5",
+    "examId": "NCA-75",
+    "number": "Q5",
+    "stem": "A team needs a shared folder that several servers mount at once over SMB. Which storage shape is that?",
+    "options": {
+      "A": "Block storage",
+      "B": "Object storage",
+      "C": "File storage",
+      "D": "Erasure-coded storage"
+    },
+    "keys": [
+      "C"
+    ],
+    "explanation": "File storage presents shared folders that many machines mount simultaneously over SMB or NFS. Block storage presents a raw volume to one machine as a disk, object storage addresses items by key over an S3-compatible interface, and erasure coding is a data-protection technique rather than a storage shape.",
+    "objectiveId": "1.2",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "ee4cedf74c6763a8",
+    "bank": "nca75-pilot.md"
+  },
+  {
+    "id": "NCA-75/nca75-pilot.md/Q6",
+    "examId": "NCA-75",
+    "number": "Q6",
+    "stem": "Which interface is characteristic of object storage?",
+    "options": {
+      "A": "SMB",
+      "B": "iSCSI",
+      "C": "NFS",
+      "D": "S3-compatible"
+    },
+    "keys": [
+      "D"
+    ],
+    "explanation": "Object storage addresses data by key over an S3-compatible interface, which suits large numbers of unstructured items. SMB and NFS are file-sharing protocols, and iSCSI presents block storage as a disk.",
+    "objectiveId": "1.2",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "393a97fa3acf7777",
+    "bank": "nca75-pilot.md"
+  },
+  {
+    "id": "NCA-75/nca75-pilot.md/Q7",
+    "examId": "NCA-75",
+    "number": "Q7",
+    "stem": "Testers need a fresh copy of the production database every Friday. Which product family addresses that recurring chore?",
+    "options": {
+      "A": "Cloud management",
+      "B": "End-user computing",
+      "C": "Container orchestration",
+      "D": "Database lifecycle management"
+    },
+    "keys": [
+      "D"
+    ],
+    "explanation": "The chore is repeatedly cloning and refreshing a database, which is exactly what a database lifecycle product automates \u2014 provisioning, cloning, patching, and teardown. Cloud management covers cost and policy, end-user computing delivers desktops, and container orchestration schedules containers.",
+    "objectiveId": "1.2",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "72d6eae7c03d4afb",
+    "bank": "nca75-pilot.md"
+  },
+  {
+    "id": "NCA-75/nca75-pilot.md/Q8",
+    "examId": "NCA-75",
+    "number": "Q8",
+    "stem": "An administrator is leaving a different hypervisor and wants the existing virtual machines running on Nutanix. Which tool is intended for this?",
+    "options": {
+      "A": "Foundation",
+      "B": "Collector",
+      "C": "Move",
+      "D": "X-Ray"
+    },
+    "keys": [
+      "C"
+    ],
+    "explanation": "Move handles migration onto a Nutanix cluster from another platform, including from a different hypervisor, and can keep the source running until cutover. Foundation images bare nodes, Collector gathers inventory, and X-Ray tests a planned configuration.",
+    "objectiveId": "1.3",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "941063b7d7ef8997",
+    "bank": "nca75-pilot.md"
+  },
+  {
+    "id": "NCA-75/nca75-pilot.md/Q9",
+    "examId": "NCA-75",
+    "number": "Q9",
+    "stem": "A user needs to restore last Tuesday's version of a single spreadsheet without opening a ticket. Which capability is that?",
+    "options": {
+      "A": "Self-Service Restore",
+      "B": "Life Cycle Manager",
+      "C": "Witness",
+      "D": "Foundation"
+    },
+    "keys": [
+      "A"
+    ],
+    "explanation": "Self-Service Restore lets a user restore individual files from an existing snapshot from inside the guest, and it depends on Nutanix Guest Tools being installed. The other options cover updates, arbitration, and imaging respectively.",
+    "objectiveId": "1.3",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "06186d40385b01d6",
+    "bank": "nca75-pilot.md"
+  },
+  {
+    "id": "NCA-75/nca75-pilot.md/Q10",
+    "examId": "NCA-75",
+    "number": "Q10",
+    "stem": "A two-node cluster at a single site must survive the loss of either node. Which component supplies the deciding vote when the nodes cannot agree?",
+    "options": {
+      "A": "Witness",
+      "B": "Prism Central",
+      "C": "Collector",
+      "D": "AOS"
+    },
+    "keys": [
+      "A"
+    ],
+    "explanation": "Two nodes have no majority, so an outside party must break the tie; that is Witness, typically run at a third location. Prism Central is a management interface, Collector gathers inventory, and AOS is the storage software.\n\n## Domain 2: Describe Nutanix Platform Administration",
+    "objectiveId": "1.3",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "198c1e0cda76c4a7",
+    "bank": "nca75-pilot.md"
+  },
+  {
+    "id": "NCA-75/nca75-pilot.md/Q11",
+    "examId": "NCA-75",
+    "number": "Q11",
+    "stem": "Why would you use a virtual machine's console rather than a remote session?",
+    "options": {
+      "A": "Because the console is faster than a remote session",
+      "B": "Because the console is the only way to change memory settings",
+      "C": "Because the console encrypts the session",
+      "D": "Because the console works when the guest's networking does not"
+    },
+    "keys": [
+      "D"
+    ],
+    "explanation": "The console delivers the machine's screen and keyboard over the network independently of the guest's own networking, so it still works during installation, after a network misconfiguration, or when the guest is too unwell to accept a remote session. It is not faster, and it is not how memory is changed.",
+    "objectiveId": "2.1",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "c5f21218edf54f7d",
+    "bank": "nca75-pilot.md"
+  },
+  {
+    "id": "NCA-75/nca75-pilot.md/Q12",
+    "examId": "NCA-75",
+    "number": "Q12",
+    "stem": "An administrator takes a snapshot of a virtual machine before a risky change. What does that snapshot protect against?",
+    "options": {
+      "A": "The loss of the entire cluster",
+      "B": "A disk failure on another node",
+      "C": "The loss of the cluster's other data",
+      "D": "A mistake made during the change, for as long as the snapshot is kept"
+    },
+    "keys": [
+      "D"
+    ],
+    "explanation": "A snapshot records the machine's disk state on the same cluster, so it protects against a mistake and is intended for short-term use. It is not a backup: because the machine and its snapshots live on the same cluster, a cluster-wide loss takes the snapshots with it, and disk-level protection is provided by replication rather than snapshots.",
+    "objectiveId": "2.1",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "ef1d707468845d4c",
+    "bank": "nca75-pilot.md"
+  },
+  {
+    "id": "NCA-75/nca75-pilot.md/Q13",
+    "examId": "NCA-75",
+    "number": "Q13",
+    "stem": "What does live migration of a virtual machine require?",
+    "options": {
+      "A": "That the machine be powered off first",
+      "B": "That the cluster be at RF3",
+      "C": "That both the source and destination nodes can reach the machine's storage",
+      "D": "That the guest operating system have Nutanix Guest Tools installed"
+    },
+    "keys": [
+      "C"
+    ],
+    "explanation": "Live migration copies the running machine's memory to another node and switches over at the end, which requires both nodes to reach the same storage \u2014 which is why shared storage underpins it. The machine stays powered on, RF3 is unrelated, and guest tools are needed for consistent snapshots rather than migration.",
+    "objectiveId": "2.1",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "645bf5fe0e21073d",
+    "bank": "nca75-pilot.md"
+  },
+  {
+    "id": "NCA-75/nca75-pilot.md/Q14",
+    "examId": "NCA-75",
+    "number": "Q14",
+    "stem": "What is the purpose of a VLAN?",
+    "options": {
+      "A": "To encrypt traffic between virtual machines",
+      "B": "To assign IP addresses automatically",
+      "C": "To increase the bandwidth of a network link",
+      "D": "To carry several logically separate networks over one physical network"
+    },
+    "keys": [
+      "D"
+    ],
+    "explanation": "A VLAN uses an identifier so that switches keep the traffic of one logical network apart from another on the same physical infrastructure. Encryption is not its job, address assignment is DHCP's, and it does not change link bandwidth.",
+    "objectiveId": "2.2",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "e25e16f19829c0d3",
+    "bank": "nca75-pilot.md"
+  },
+  {
+    "id": "NCA-75/nca75-pilot.md/Q15",
+    "examId": "NCA-75",
+    "number": "Q15",
+    "stem": "A virtual machine is running, the cluster reports no faults, and nobody can reach the machine on the network. The administrator recently created its virtual network. What is the most likely cause?",
+    "options": {
+      "A": "The machine needs more memory",
+      "B": "The cluster is at RF2 rather than RF3",
+      "C": "Nutanix Guest Tools are not installed",
+      "D": "The virtual network was given the wrong VLAN identifier"
+    },
+    "keys": [
+      "D"
+    ],
+    "explanation": "A machine attached to the wrong VLAN is up and running but sits on the wrong segment, so it is unreachable by the people who expect to reach it \u2014 the classic symptom of a VLAN mismatch. Memory, replication factor, and guest tools would not produce a machine that is healthy on the cluster and unreachable on the network.",
+    "objectiveId": "2.2",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "e24d8c87c4efcfd2",
+    "bank": "nca75-pilot.md"
+  },
+  {
+    "id": "NCA-75/nca75-pilot.md/Q16",
+    "examId": "NCA-75",
+    "number": "Q16",
+    "stem": "What is the practical difference between a managed and an unmanaged virtual network?",
+    "options": {
+      "A": "Managed networks are faster than unmanaged ones",
+      "B": "Unmanaged networks cannot carry VLAN tags",
+      "C": "Managed networks cannot be used by virtual machines",
+      "D": "A managed network is defined on the cluster; an unmanaged one is defined on the physical network and repeated on the cluster"
+    },
+    "keys": [
+      "D"
+    ],
+    "explanation": "For a managed network the cluster is the source of truth, so you change it on the cluster. For an unmanaged network the physical infrastructure is the source of truth and the cluster only repeats what it was told, so fixing it on the cluster accomplishes nothing. The distinction is about where the definition lives, not about speed or capability.",
+    "objectiveId": "2.2",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "168d283252e3d16a",
+    "bank": "nca75-pilot.md"
+  },
+  {
+    "id": "NCA-75/nca75-pilot.md/Q17",
+    "examId": "NCA-75",
+    "number": "Q17",
+    "stem": "What does a replication factor of 2 mean?",
+    "options": {
+      "A": "Two copies of the data, kept on two different nodes",
+      "B": "Two nodes in the cluster",
+      "C": "Two virtual machines sharing a disk",
+      "D": "Data compressed to half its size"
+    },
+    "keys": [
+      "A"
+    ],
+    "explanation": "Replication factor is how many copies of the data the cluster keeps, placed on different nodes so that losing one node does not lose the data. It says nothing about node count, disk sharing, or compression.",
+    "objectiveId": "2.3",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "693b372ee9fc6fd8",
+    "bank": "nca75-pilot.md"
+  },
+  {
+    "id": "NCA-75/nca75-pilot.md/Q18",
+    "examId": "NCA-75",
+    "number": "Q18",
+    "stem": "A cluster has 12 TB of raw disk capacity and is running at RF2. Roughly how much of that can hold virtual machine data, before other overheads?",
+    "options": {
+      "A": "12 TB",
+      "B": "9 TB",
+      "C": "6 TB",
+      "D": "4 TB"
+    },
+    "keys": [
+      "C"
+    ],
+    "explanation": "RF2 keeps two copies of every piece of data, so roughly half the raw capacity is consumed by protection alone \u2014 about 6 TB before cluster software, reserved headroom, and other overheads are accounted for. Expecting 12 TB ignores replication, and 4 TB would correspond to RF3.",
+    "objectiveId": "2.3",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "5dd08fe81de7cff0",
+    "bank": "nca75-pilot.md"
+  },
+  {
+    "id": "NCA-75/nca75-pilot.md/Q19",
+    "examId": "NCA-75",
+    "number": "Q19",
+    "stem": "A cluster was expanded from four nodes to six last quarter. This week several management features stopped working. What is the most useful first thing to check?",
+    "options": {
+      "A": "Whether the two new nodes are covered by the licence, and whether the current tier includes those features",
+      "B": "Whether the new nodes have failed",
+      "C": "Whether the virtual machines need more memory",
+      "D": "Whether the cluster should be rebuilt at RF3"
+    },
+    "keys": [
+      "A"
+    ],
+    "explanation": "The change was to capacity and the symptom is about capability, so both halves need checking: the licence must cover the added hardware, and the tier must include the features that stopped working. Licensing is managed in Prism, which is where both answers live.",
+    "objectiveId": "2.4",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "5af1358ba62110b9",
+    "bank": "nca75-pilot.md"
+  },
+  {
+    "id": "NCA-75/nca75-pilot.md/Q20",
+    "examId": "NCA-75",
+    "number": "Q20",
+    "stem": "Where is licensing managed and monitored in a Nutanix environment?",
+    "options": {
+      "A": "From Prism, the management interface",
+      "B": "From the console of each virtual machine",
+      "C": "From Life Cycle Manager",
+      "D": "From the guest operating system of the cluster's controller machines"
+    },
+    "keys": [
+      "A"
+    ],
+    "explanation": "Licensing is visible and managed from Prism, which is also where a capacity or compliance notice appears. That is why a licensing problem is seen by the administrator in the management plane rather than by a user on their own machine.\n\n## Domain 3: Describe Cluster Configuration and Maintenance",
+    "objectiveId": "2.4",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "883c788924c2ce2e",
+    "bank": "nca75-pilot.md"
+  },
+  {
+    "id": "NCA-75/nca75-pilot.md/Q21",
+    "examId": "NCA-75",
+    "number": "Q21",
+    "stem": "A three-node cluster is proposed with RF3. Why is this not a valid design?",
+    "options": {
+      "A": "RF3 requires a Witness",
+      "B": "RF3 is only supported on stretched clusters",
+      "C": "Three nodes is below the minimum cluster size for any replication factor",
+      "D": "Three nodes cannot hold three copies on different nodes and still have somewhere to rebuild"
+    },
+    "keys": [
+      "D"
+    ],
+    "explanation": "RF3 keeps three copies on three different nodes. With only three nodes, losing two leaves a single surviving copy and no remaining node to rebuild onto, so the design cannot deliver the protection RF3 promises. Three nodes is a normal minimum for RF2, and RF3 is not restricted to stretched clusters.",
+    "objectiveId": "3.1",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "244e61847e2aaacf",
+    "bank": "nca75-pilot.md"
+  },
+  {
+    "id": "NCA-75/nca75-pilot.md/Q22",
+    "examId": "NCA-75",
+    "number": "Q22",
+    "stem": "Which failure does a cluster running at RF2 survive?",
+    "options": {
+      "A": "The loss of one node",
+      "B": "The loss of two nodes at once",
+      "C": "The loss of a whole block",
+      "D": "The loss of the cluster's management interface"
+    },
+    "keys": [
+      "A"
+    ],
+    "explanation": "RF2 keeps two copies on two different nodes, so losing one node leaves a complete copy. Surviving two simultaneous node losses is what RF3 provides, and block-level failure requires block awareness rather than replication factor alone.",
+    "objectiveId": "3.1",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "bc8fd45a02eeb7f1",
+    "bank": "nca75-pilot.md"
+  },
+  {
+    "id": "NCA-75/nca75-pilot.md/Q23",
+    "examId": "NCA-75",
+    "number": "Q23",
+    "stem": "What does block awareness add to node awareness?",
+    "options": {
+      "A": "It places copies on nodes in different chassis, so a whole block can be lost",
+      "B": "It places copies on different disks within one node",
+      "C": "It increases the replication factor automatically",
+      "D": "It removes the need for a Witness in a two-node cluster"
+    },
+    "keys": [
+      "A"
+    ],
+    "explanation": "Node awareness spreads copies across nodes; block awareness spreads them across chassis as well, so the failure of an entire block \u2014 power loss or removal for service \u2014 is survivable. It does not change replication factor or provide arbitration.",
+    "objectiveId": "3.1",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "0bb69176871562ac",
+    "bank": "nca75-pilot.md"
+  },
+  {
+    "id": "NCA-75/nca75-pilot.md/Q24",
+    "examId": "NCA-75",
+    "number": "Q24",
+    "stem": "What makes a two-node cluster a valid design?",
+    "options": {
+      "A": "Running it at RF3",
+      "B": "Adding a third node later",
+      "C": "Pairing it with a Witness to break ties",
+      "D": "Enabling deduplication"
+    },
+    "keys": [
+      "C"
+    ],
+    "explanation": "Two nodes cannot form a majority, so an outside party must decide which side survives a failure; Witness provides that vote and is what makes the arrangement valid. RF3 on two nodes is not a valid combination, and the other options do not address arbitration.",
+    "objectiveId": "3.1",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "067098cd17e07ef9",
+    "bank": "nca75-pilot.md"
+  },
+  {
+    "id": "NCA-75/nca75-pilot.md/Q25",
+    "examId": "NCA-75",
+    "number": "Q25",
+    "stem": "A node needs planned servicing. Which sequence is safe?",
+    "options": {
+      "A": "Power off the node, service it, then evacuate its data",
+      "B": "Take the node out of service, then evacuate it",
+      "C": "Service the node while it remains in the cluster",
+      "D": "Evacuate the node, confirm it is empty, then take it out of service"
+    },
+    "keys": [
+      "D"
+    ],
+    "explanation": "Planned maintenance evacuates first so the node's data and workloads move elsewhere, then confirms the evacuation completed \u2014 starting is not the same as finishing \u2014 and only then removes the node. Powering off or servicing first removes a copy the cluster still needs.",
+    "objectiveId": "3.2",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "c803e025397989a5",
+    "bank": "nca75-pilot.md"
+  },
+  {
+    "id": "NCA-75/nca75-pilot.md/Q26",
+    "examId": "NCA-75",
+    "number": "Q26",
+    "stem": "A disk in the cluster fails. What is the administrator's first action?",
+    "options": {
+      "A": "Immediately power off the node to protect the remaining disks",
+      "B": "Manually copy the data off the failed disk",
+      "C": "Rebuild the cluster from a backup",
+      "D": "Confirm the failure is genuine, since the data has already been rebuilt from its other copies"
+    },
+    "keys": [
+      "D"
+    ],
+    "explanation": "The cluster detects the failure and rebuilds the affected data onto the remaining disks without intervention, so the first job is confirming the disk is genuinely gone rather than responding to a transient report. Powering off the node, copying from the failed disk, and restoring a backup are all unnecessary and in the first case harmful.",
+    "objectiveId": "3.2",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "cd99e7b7d2f3dbf4",
+    "bank": "nca75-pilot.md"
+  },
+  {
+    "id": "NCA-75/nca75-pilot.md/Q27",
+    "examId": "NCA-75",
+    "number": "Q27",
+    "stem": "Why must a node be evacuated before it is taken out of service?",
+    "options": {
+      "A": "Because evacuation speeds up the physical work",
+      "B": "Because the cluster must not be left holding only one copy of any data",
+      "C": "Because evacuation is required to update firmware",
+      "D": "Because the node cannot be powered off while it holds data"
+    },
+    "keys": [
+      "B"
+    ],
+    "explanation": "Evacuation moves the node's data and workloads elsewhere so that no data exists only on the node being removed. Without it, removing the node would take away a copy the cluster is depending on. It is a safety step, not a speed or firmware requirement.",
+    "objectiveId": "3.2",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "7d884efe165ef1aa",
+    "bank": "nca75-pilot.md"
+  },
+  {
+    "id": "NCA-75/nca75-pilot.md/Q28",
+    "examId": "NCA-75",
+    "number": "Q28",
+    "stem": "Which LCM step should come before applying any update?",
+    "options": {
+      "A": "Applying the update to one node to see what happens",
+      "B": "Checking compatibility with this specific environment and running pre-checks",
+      "C": "Notifying users that the cluster will be unavailable",
+      "D": "Taking a snapshot of every virtual machine"
+    },
+    "keys": [
+      "B"
+    ],
+    "explanation": "LCM's value is in inventory, compatibility checking, and pre-checks before the one-click apply. Updating one node speculatively risks an unsupported combination, and a rolling update does not require cluster-wide unavailability.",
+    "objectiveId": "3.3",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "d03f39bca59f120f",
+    "bank": "nca75-pilot.md"
+  },
+  {
+    "id": "NCA-75/nca75-pilot.md/Q29",
+    "examId": "NCA-75",
+    "number": "Q29",
+    "stem": "An LCM pre-check fails before a planned upgrade. What is the correct response?",
+    "options": {
+      "A": "Override the pre-check and proceed",
+      "B": "Address the condition the pre-check identified, then return to the upgrade",
+      "C": "Skip that node and upgrade the rest",
+      "D": "Reboot the cluster and try again"
+    },
+    "keys": [
+      "B"
+    ],
+    "explanation": "A failed pre-check is the tool reporting that the environment is not in a fit state to be updated \u2014 the same discipline as confirming cluster health before hardware maintenance. Overriding it, skipping nodes, or rebooting does not fix the underlying condition.",
+    "objectiveId": "3.3",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "a2c15ae2c1d60717",
+    "bank": "nca75-pilot.md"
+  },
+  {
+    "id": "NCA-75/nca75-pilot.md/Q30",
+    "examId": "NCA-75",
+    "number": "Q30",
+    "stem": "A cluster at a secure site with no internet access needs a software update. What must be arranged?",
+    "options": {
+      "A": "The update media must be brought in through a controlled channel before the maintenance window",
+      "B": "Nothing \u2014 LCM downloads updates automatically in all environments",
+      "C": "The cluster must be moved to a site with internet access",
+      "D": "Pulse must be enabled first"
+    },
+    "keys": [
+      "A"
+    ],
+    "explanation": "A dark site cannot fetch updates directly, so the media has to be transferred in through whatever controlled channel exists \u2014 and that is planned ahead of the window rather than discovered during it. Enabling Pulse is telemetry, not update delivery.\n\n## Domain 4: Demonstrate and Understand of Platform Health and Monitoring",
+    "objectiveId": "3.3",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "b4641b6518517b01",
+    "bank": "nca75-pilot.md"
+  },
+  {
+    "id": "NCA-75/nca75-pilot.md/Q31",
+    "examId": "NCA-75",
+    "number": "Q31",
+    "stem": "What is Nutanix Cluster Check?",
+    "options": {
+      "A": "A single test that returns a pass or fail verdict for the cluster",
+      "B": "A collection of individual checks, each examining one aspect of cluster state",
+      "C": "A tool that applies software updates",
+      "D": "A service that sends telemetry to the vendor"
+    },
+    "keys": [
+      "B"
+    ],
+    "explanation": "NCC runs many small checks and produces a report of findings rather than one verdict, which is why its output is a list. Applying updates is Life Cycle Manager's job and sending telemetry is Pulse's.",
+    "objectiveId": "4.1",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "e1b5628b6bf227ee",
+    "bank": "nca75-pilot.md"
+  },
+  {
+    "id": "NCA-75/nca75-pilot.md/Q32",
+    "examId": "NCA-75",
+    "number": "Q32",
+    "stem": "A health check on a working cluster reports that a component is degraded. The cluster is performing normally. What does this mean?",
+    "options": {
+      "A": "The report is a false positive and can be ignored",
+      "B": "Something has failed and the cluster is compensating for it, so there is no margin",
+      "C": "The cluster must be shut down immediately",
+      "D": "The virtual machines on that component have stopped"
+    },
+    "keys": [
+      "B"
+    ],
+    "explanation": "A degraded finding means a component has failed and the cluster is carrying on without it \u2014 the highest-value finding precisely because performance looks normal while the margin for a further failure is gone. It is not a false positive, it does not require an immediate shutdown, and the workloads are still running.",
+    "objectiveId": "4.1",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "64f57d72dfcd5f58",
+    "bank": "nca75-pilot.md"
+  },
+  {
+    "id": "NCA-75/nca75-pilot.md/Q33",
+    "examId": "NCA-75",
+    "number": "Q33",
+    "stem": "Why run a health check before performing maintenance?",
+    "options": {
+      "A": "To confirm the cluster is in a fit state to be maintained",
+      "B": "Because the check performs the maintenance",
+      "C": "To satisfy a licensing requirement",
+      "D": "To reduce the time the maintenance takes"
+    },
+    "keys": [
+      "A"
+    ],
+    "explanation": "Running maintenance on an already-degraded cluster leaves no margin for anything to go wrong, so the pre-check confirms fitness first. This is the same discipline as the pre-checks in a software upgrade.",
+    "objectiveId": "4.1",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "f0797dd06536baac",
+    "bank": "nca75-pilot.md"
+  },
+  {
+    "id": "NCA-75/nca75-pilot.md/Q34",
+    "examId": "NCA-75",
+    "number": "Q34",
+    "stem": "What is the difference between an event and an alert?",
+    "options": {
+      "A": "An event is more serious than an alert",
+      "B": "Alerts are stored and events are not",
+      "C": "An event records that something happened; an alert is a raised condition needing attention",
+      "D": "Events only come from hardware and alerts only from software"
+    },
+    "keys": [
+      "C"
+    ],
+    "explanation": "Events are the cluster's history of what happened, most of them routine; alerts are generated from events and represent a condition that needs attention, with a severity. Alerts are not inherently more serious, and both are recorded.",
+    "objectiveId": "4.2",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "152ae71d27d2e859",
+    "bank": "nca75-pilot.md"
+  },
+  {
+    "id": "NCA-75/nca75-pilot.md/Q35",
+    "examId": "NCA-75",
+    "number": "Q35",
+    "stem": "An administrator acknowledges an alert. What has been accomplished?",
+    "options": {
+      "A": "The underlying condition has been resolved",
+      "B": "The alert has been recorded as seen by a person, and the condition may still be active",
+      "C": "The alert has been deleted",
+      "D": "The cluster has been told to ignore that condition in future"
+    },
+    "keys": [
+      "B"
+    ],
+    "explanation": "Acknowledging is a statement about attention, not about state: it records that someone is aware. If the condition is still true the alert remains true, which is why acknowledged-but-unresolved alerts are worth reviewing.",
+    "objectiveId": "4.2",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "3c095cc57305f625",
+    "bank": "nca75-pilot.md"
+  },
+  {
+    "id": "NCA-75/nca75-pilot.md/Q36",
+    "examId": "NCA-75",
+    "number": "Q36",
+    "stem": "A cluster reports that several virtual machines are unreachable, plus a storage alert and a network warning, all within a few minutes. What is the best first step?",
+    "options": {
+      "A": "Fix the virtual machine alerts first, then the storage alert",
+      "B": "Look for a common cause and check which alert appeared first",
+      "C": "Acknowledge all the alerts and wait for them to clear",
+      "D": "Reboot the node with the most alerts"
+    },
+    "keys": [
+      "B"
+    ],
+    "explanation": "A cluster of alerts appearing together is usually one root cause with several symptoms, so correlating them \u2014 and identifying which appeared first \u2014 is faster and safer than treating each in isolation. Acknowledging to wait, or rebooting, risks acting on symptoms.",
+    "objectiveId": "4.2",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "7582b38cab0a8719",
+    "bank": "nca75-pilot.md"
+  },
+  {
+    "id": "NCA-75/nca75-pilot.md/Q37",
+    "examId": "NCA-75",
+    "number": "Q37",
+    "stem": "A problem began at 14:00 yesterday. Which log collection is most useful for a support case?",
+    "options": {
+      "A": "The full cluster collection for the last hour",
+      "B": "A collection covering the component implicated, over a window that includes 14:00 yesterday",
+      "C": "A collection of every component over the last month",
+      "D": "No collection \u2014 the description alone is enough"
+    },
+    "keys": [
+      "B"
+    ],
+    "explanation": "The window must include when the problem started, and scoping to the implicated component produces something the vendor can work through. A one-hour window misses the start, a month-wide collection is slow and unfocused, and a description without evidence leaves the case guessing.",
+    "objectiveId": "4.3",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "45984b23129e0a46",
+    "bank": "nca75-pilot.md"
+  },
+  {
+    "id": "NCA-75/nca75-pilot.md/Q38",
+    "examId": "NCA-75",
+    "number": "Q38",
+    "stem": "What is Pulse?",
+    "options": {
+      "A": "A tool an administrator runs to collect logs for a support case",
+      "B": "A continuous telemetry service that periodically sends diagnostic and health information to the vendor",
+      "C": "The alerting engine inside Prism",
+      "D": "A health-check command"
+    },
+    "keys": [
+      "B"
+    ],
+    "explanation": "Pulse is automatic and continuous outbound telemetry, which is why it supports proactive support. Collecting logs for a case is Collector's job, alerting happens in Prism, and health checks are run by Nutanix Cluster Check.",
+    "objectiveId": "4.3",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "9c31e5bfffad52f4",
+    "bank": "nca75-pilot.md"
+  },
+  {
+    "id": "NCA-75/nca75-pilot.md/Q39",
+    "examId": "NCA-75",
+    "number": "Q39",
+    "stem": "One virtual machine is slow while everything else on the cluster is normal. The cluster's overall utilisation is unremarkable. What is the most likely cause?",
+    "options": {
+      "A": "A capacity ceiling on the cluster",
+      "B": "A failed disk",
+      "C": "Contention from another workload \u2014 a noisy neighbour",
+      "D": "The wrong VLAN on the affected machine"
+    },
+    "keys": [
+      "C"
+    ],
+    "explanation": "A single affected workload alongside normal aggregate utilisation points at contention rather than a ceiling: the resource is not full, it is unevenly shared. A capacity ceiling would affect everything on that resource, and a disk failure or VLAN problem would not present as variable slowness.",
+    "objectiveId": "4.4",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "62a84deb01110d4c",
+    "bank": "nca75-pilot.md"
+  },
+  {
+    "id": "NCA-75/nca75-pilot.md/Q40",
+    "examId": "NCA-75",
+    "number": "Q40",
+    "stem": "Storage is reported at 70% full. Why is the trend more useful than the number alone?",
+    "options": {
+      "A": "Because 70% is always a critical threshold",
+      "B": "Because a level that is climbing tells you when the limit will be reached, which the number alone does not",
+      "C": "Because the percentage is calculated incorrectly",
+      "D": "Because the trend determines the replication factor"
+    },
+    "keys": [
+      "B"
+    ],
+    "explanation": "The level says where you are; the trend says how long you have. Storage at 70% and stable is comfortable, while storage at 70% and climbing 2% a week is a plan with a deadline \u2014 the same number, two different situations. The percentage is not miscalculated, and it does not set the replication factor.",
+    "objectiveId": "4.4",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "0ec09f329748acaf",
+    "bank": "nca75-pilot.md"
   }
 ];
 export const DISCLAIMER = "This is independent study material. It is not official training and is not endorsed or approved by CompTIA, Nutanix, or any other certification body.";

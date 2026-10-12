@@ -44,7 +44,13 @@ RELEASED_LESSONS = {
     "COMPTIA-A-1201": ["a2"],
     "COMPTIA-A-1202": ["b4"],
     "COMPTIA-NET-009": ["n1", "n5"],
-    "NCA-75": [],
+    # REQ-NCA-02: the 14-lesson NCA pilot, one lesson per current objective.
+    "NCA-75": [
+        "s1_1", "s1_2", "s1_3",
+        "s2_1", "s2_2", "s2_3", "s2_4",
+        "s3_1", "s3_2", "s3_3",
+        "s4_1", "s4_2", "s4_3", "s4_4",
+    ],
 }
 RELEASED_BANKS = {
     "COMPTIA-A-1201": ["core1-a2-fixtures.md"],
@@ -56,7 +62,10 @@ RELEASED_BANKS = {
         "net009-n4-fixtures.md",
         "net009-n5-fixtures.md",
     ],
-    "NCA-75": [],
+    # REQ-NCA-02: the 40-item pilot, ten per current section. The 140 remapped
+    # bank items stay in their root files and stay out of this list — they are
+    # in review, and only the authored pilot is released.
+    "NCA-75": ["nca75-pilot.md"],
 }
 
 
@@ -204,6 +213,24 @@ def main():
             ("N3", "Network operations", "3"),
             ("N4", "Network security", "4"),
             ("N5", "Network troubleshooting", "5"),
+        ],
+        # REQ-NCA-02: one lesson per current objective, keyed by the lesson id
+        # in the manifest's lessonIds. Domain number is the current section.
+        "NCA-75": [
+            ("s1_1", "NCI components and use cases", "1"),
+            ("s1_2", "Adjacent solutions", "1"),
+            ("s1_3", "Tooling", "1"),
+            ("s2_1", "VM tasks", "2"),
+            ("s2_2", "Virtual networking", "2"),
+            ("s2_3", "Storage operations", "2"),
+            ("s2_4", "Licensing", "2"),
+            ("s3_1", "Valid cluster options", "3"),
+            ("s3_2", "Hardware maintenance", "3"),
+            ("s3_3", "Software maintenance", "3"),
+            ("s4_1", "Health checks", "4"),
+            ("s4_2", "Alerts and events", "4"),
+            ("s4_3", "Support functions", "4"),
+            ("s4_4", "Workload performance", "4"),
         ],
     }
     lessons = {}

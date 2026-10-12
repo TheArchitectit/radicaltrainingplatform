@@ -98,10 +98,87 @@
     "NCA-75": {
       "manifest": {
         "path": "content/exams/NCA-75/exam.json",
-        "sha256": "f5b6499485a2df3eceb603531d85f79d980c155e0849a9414ad27968958d87d9"
+        "sha256": "ba513ca2dd0ab7a707addcf5cd7857e852fb3d6fe9a0ef23d7b76f64711ae7bc"
       },
-      "lessons": [],
-      "banks": []
+      "lessons": [
+        {
+          "lessonId": "s1_1",
+          "path": "content/exams/NCA-75/lessons/s1_1.md",
+          "sha256": "dacbff31be958937fc307201002046ffbe14026423e729f78041acbb59f060f6"
+        },
+        {
+          "lessonId": "s1_2",
+          "path": "content/exams/NCA-75/lessons/s1_2.md",
+          "sha256": "266be3087498a66e830c149a5103486e07fbd56edfa4620e154f4f3f18220246"
+        },
+        {
+          "lessonId": "s1_3",
+          "path": "content/exams/NCA-75/lessons/s1_3.md",
+          "sha256": "ccd2692eb790230fde882708b238a0f39b13603b6cbe0eddd06413381a1edd99"
+        },
+        {
+          "lessonId": "s2_1",
+          "path": "content/exams/NCA-75/lessons/s2_1.md",
+          "sha256": "00b7876480e56fdc76c59522c4682b26bf1e4ce5b69c9d2110f445ecbf1f3186"
+        },
+        {
+          "lessonId": "s2_2",
+          "path": "content/exams/NCA-75/lessons/s2_2.md",
+          "sha256": "27097b9c88bf4dd7ab6e26fdef5139519f18d50c51da3ad5a26ec6b46234b80a"
+        },
+        {
+          "lessonId": "s2_3",
+          "path": "content/exams/NCA-75/lessons/s2_3.md",
+          "sha256": "b721f3a79e962ecf4d39819165cea371f9d9a5ba7a90b9e86731afc5941c4e69"
+        },
+        {
+          "lessonId": "s2_4",
+          "path": "content/exams/NCA-75/lessons/s2_4.md",
+          "sha256": "1dead0dedbbbfaa1d5dd4a49f2fce54d78aed8c5794d4af44aa2af21978bc7c2"
+        },
+        {
+          "lessonId": "s3_1",
+          "path": "content/exams/NCA-75/lessons/s3_1.md",
+          "sha256": "b6a134061e97aa0ccf2fa2b2173db0031c1b0679af8e0da3225468ca42898f68"
+        },
+        {
+          "lessonId": "s3_2",
+          "path": "content/exams/NCA-75/lessons/s3_2.md",
+          "sha256": "2928199bf5cc74fe5366f1e0e9cf7ba52bc7e66eb4287c7348eef8ec56f86e89"
+        },
+        {
+          "lessonId": "s3_3",
+          "path": "content/exams/NCA-75/lessons/s3_3.md",
+          "sha256": "9b0fd2b61a17bcf3b6d0fbba6a1ee92212f3714e02b7087dec7b335aca70f23b"
+        },
+        {
+          "lessonId": "s4_1",
+          "path": "content/exams/NCA-75/lessons/s4_1.md",
+          "sha256": "ab43d21f4f8f2d49d53b8a18bd1daa198e0c6afa9b03295d47452c6a62a29eae"
+        },
+        {
+          "lessonId": "s4_2",
+          "path": "content/exams/NCA-75/lessons/s4_2.md",
+          "sha256": "4328f6a75ba01eb20d8585602ff86c6c2843caafa41430c0c3456c5dd180edf4"
+        },
+        {
+          "lessonId": "s4_3",
+          "path": "content/exams/NCA-75/lessons/s4_3.md",
+          "sha256": "9d6a4490756edf2f45bc1ef195d6dcf42a7e80934bb5d42bc7b36123cbc854ff"
+        },
+        {
+          "lessonId": "s4_4",
+          "path": "content/exams/NCA-75/lessons/s4_4.md",
+          "sha256": "ecb7dc4d1ea29f750817159de11abbf6aad841c28b7ed77ab25ec77dce2a87d7"
+        }
+      ],
+      "banks": [
+        {
+          "bank": "nca75-pilot.md",
+          "path": "content/exams/NCA-75/questions/nca75-pilot.md",
+          "sha256": "9fcb3b76db03a31db05156175542b5c62d45e8eb8fd54e0aacfcd07e4a3f3254"
+        }
+      ]
     }
   },
   "legacyBanks": [
@@ -426,6 +503,166 @@
     {
       "path": "content/provenance/COMPTIA-NET-009/Q9.json",
       "sha256": "8ecf87aac9ee6e5563b174e851a9dcf1e1421eb4f5f2e6795ff7ed8814271b7e"
+    },
+    {
+      "path": "content/provenance/NCA-75/Q1.json",
+      "sha256": "6af1c2e84a06227b29f2a0d9adc8c0b62b17bf8e2e1df1a72ed8faa30f76846b"
+    },
+    {
+      "path": "content/provenance/NCA-75/Q10.json",
+      "sha256": "11e9607eac6be27a6f5b56cb57fa257f4b0fd079d0df46b4eaa65fff8a809588"
+    },
+    {
+      "path": "content/provenance/NCA-75/Q11.json",
+      "sha256": "7f0e2372d3011c4de752d46000a293cf28f4a14e04c8566850933506912c38fe"
+    },
+    {
+      "path": "content/provenance/NCA-75/Q12.json",
+      "sha256": "2ce7529258d540d20a8f10678d4baa523bedda13a0ce4a8d93dbb8e3692107c8"
+    },
+    {
+      "path": "content/provenance/NCA-75/Q13.json",
+      "sha256": "c42ebd392c664b6d7f2c974046d836a5693d5f82e35338f2188420395658bbda"
+    },
+    {
+      "path": "content/provenance/NCA-75/Q14.json",
+      "sha256": "ced9b4d90f43bab680c1d74021fa1c6605c72602d6a33cf903ed25fa05ae05ee"
+    },
+    {
+      "path": "content/provenance/NCA-75/Q15.json",
+      "sha256": "ae2068803469c86c1aa077afdccb75c1e5a559960695593ebbca44b1e9b8b918"
+    },
+    {
+      "path": "content/provenance/NCA-75/Q16.json",
+      "sha256": "ce6468fa793a492594072786670bae0608e6a6832a31d44d3b26c6d264abe4cb"
+    },
+    {
+      "path": "content/provenance/NCA-75/Q17.json",
+      "sha256": "4829289ff66398dd4c7689b14c529925c3158dec69807e7e0bb19293723650b9"
+    },
+    {
+      "path": "content/provenance/NCA-75/Q18.json",
+      "sha256": "baa9cc4f4bf76cf24012702392dd7e40cf0a9d25b4089514bf637b91a2f83e7c"
+    },
+    {
+      "path": "content/provenance/NCA-75/Q19.json",
+      "sha256": "312f6d88877de468becbeaef8866f62c8b790e0a73fb089d4a7651040c288582"
+    },
+    {
+      "path": "content/provenance/NCA-75/Q2.json",
+      "sha256": "34ca3f92d7355d1ca9aac52b527c083a3bfa5dab7709474d509199e04a37f355"
+    },
+    {
+      "path": "content/provenance/NCA-75/Q20.json",
+      "sha256": "86bea65906b0c92a9f1ab3aa94a6c22f313da04c468d818abcf92c318d07a9a8"
+    },
+    {
+      "path": "content/provenance/NCA-75/Q21.json",
+      "sha256": "1fce409c2776aa23fc25e1435f0e37172dab58bb88ee79853198609fb03af1d9"
+    },
+    {
+      "path": "content/provenance/NCA-75/Q22.json",
+      "sha256": "5829be2ba92e64c1698cea05214b85e6893acac434ce38703e6cac77797ccb7a"
+    },
+    {
+      "path": "content/provenance/NCA-75/Q23.json",
+      "sha256": "a92cfd78193f19f8013375d22d971b1d4ddc1b8a9908c86d580c772673bcf188"
+    },
+    {
+      "path": "content/provenance/NCA-75/Q24.json",
+      "sha256": "9ac2e656a368ce1b765b7edf6fbe8ddbbedb745768a128970336e42ebdb3aa5c"
+    },
+    {
+      "path": "content/provenance/NCA-75/Q25.json",
+      "sha256": "472c8ee3a079d43b4e5b1751c024bbef3471b949814c469fa03bd30cc6110e1e"
+    },
+    {
+      "path": "content/provenance/NCA-75/Q26.json",
+      "sha256": "913e98fdd0ef990138e6687ae67e4db28cd284c7844452efb4188cacd998aafc"
+    },
+    {
+      "path": "content/provenance/NCA-75/Q27.json",
+      "sha256": "48af9a5b06db4633b826beeffb967b4cf056cef0f8b3e4654ee38bb84ee196e1"
+    },
+    {
+      "path": "content/provenance/NCA-75/Q28.json",
+      "sha256": "293b02af028d978f05f282e35fd142d71e2062b2e6f160a966fcf694d94b3e9e"
+    },
+    {
+      "path": "content/provenance/NCA-75/Q29.json",
+      "sha256": "86d28df6b0f0c9c5a330e2f6660c5e10ea02f61ffb3bf55bd22adbf888a19403"
+    },
+    {
+      "path": "content/provenance/NCA-75/Q3.json",
+      "sha256": "9647bc309cfb2028d3513d95f586d6b780cc25d081c34fc940842833b20780a2"
+    },
+    {
+      "path": "content/provenance/NCA-75/Q30.json",
+      "sha256": "0e634e845a33a70f4f64653da3aaeb347d05e459d27c38faf0270627c3c06931"
+    },
+    {
+      "path": "content/provenance/NCA-75/Q31.json",
+      "sha256": "83d2f8011fa9442b1728557f5cd6bc44e38167c78deae30155c8177c4d305310"
+    },
+    {
+      "path": "content/provenance/NCA-75/Q32.json",
+      "sha256": "66e59e11b3146ed3ced55a384ad6503029aa5894d5537d3788a5abd647770019"
+    },
+    {
+      "path": "content/provenance/NCA-75/Q33.json",
+      "sha256": "b40d6d27f72d8cb7c67d2ce03f8fdd3310c7228664bace8cb26b8edadd982a72"
+    },
+    {
+      "path": "content/provenance/NCA-75/Q34.json",
+      "sha256": "c673c5254a929e8317ba909eaaf3de2e09d684ced7c210ae3923bb42935a59e4"
+    },
+    {
+      "path": "content/provenance/NCA-75/Q35.json",
+      "sha256": "05ee41a4ea2e6a35d4f163b7f1431cde782673a9f8e19ca17fb2f59de28b49c2"
+    },
+    {
+      "path": "content/provenance/NCA-75/Q36.json",
+      "sha256": "a8e8cd10c68893d10c440be4b16e63d11fcb0ca66227c77043b2e41c55ecf85e"
+    },
+    {
+      "path": "content/provenance/NCA-75/Q37.json",
+      "sha256": "4c9d5ac13d27df50916aecb6d6ee8845238a843fd0a6720a1d0df1656c00e755"
+    },
+    {
+      "path": "content/provenance/NCA-75/Q38.json",
+      "sha256": "d89595a20532d158dec34c371fd5bb5528d562eb90c067b7a2b16372cefd7118"
+    },
+    {
+      "path": "content/provenance/NCA-75/Q39.json",
+      "sha256": "e709c40c601c311d04a9f0dec083eda6ae12b65ef9985d3dfe9bf43cb7dc7cf7"
+    },
+    {
+      "path": "content/provenance/NCA-75/Q4.json",
+      "sha256": "b80a044b91d3902c21dd0dbcec7c567c456308059e7214e19fdfe842de28c532"
+    },
+    {
+      "path": "content/provenance/NCA-75/Q40.json",
+      "sha256": "80dd8af1d6e5b1f4a02e81671037dd7ba602e085486eb00a5ca348838355703d"
+    },
+    {
+      "path": "content/provenance/NCA-75/Q5.json",
+      "sha256": "b498b8a57e31d15e1999c81221456bc61423424c3045bd10206cd24ff6014574"
+    },
+    {
+      "path": "content/provenance/NCA-75/Q6.json",
+      "sha256": "4e5be49c5a72916aaf8d678b4b4597973a18face5fd94ebfa5e44a7a4c5698a2"
+    },
+    {
+      "path": "content/provenance/NCA-75/Q7.json",
+      "sha256": "cd35c3448a30252846e80b7e06968c7b563e2bf9698e368b0b628c2f8215db88"
+    },
+    {
+      "path": "content/provenance/NCA-75/Q8.json",
+      "sha256": "53d2020492955e9acf4ee2f5d811551517a2bec4ff398a07c4cf037a24481cc9"
+    },
+    {
+      "path": "content/provenance/NCA-75/Q9.json",
+      "sha256": "57ac0f899eba84e83bda7e59d14133236bb770d231391e24b87127b7b58d09d0"
     }
   ],
   "files": [
@@ -611,8 +848,83 @@
     },
     {
       "path": "content/exams/NCA-75/exam.json",
-      "sha256": "f5b6499485a2df3eceb603531d85f79d980c155e0849a9414ad27968958d87d9",
-      "bytes": 2946
+      "sha256": "ba513ca2dd0ab7a707addcf5cd7857e852fb3d6fe9a0ef23d7b76f64711ae7bc",
+      "bytes": 3030
+    },
+    {
+      "path": "content/exams/NCA-75/lessons/s1_1.md",
+      "sha256": "dacbff31be958937fc307201002046ffbe14026423e729f78041acbb59f060f6",
+      "bytes": 5790
+    },
+    {
+      "path": "content/exams/NCA-75/lessons/s1_2.md",
+      "sha256": "266be3087498a66e830c149a5103486e07fbd56edfa4620e154f4f3f18220246",
+      "bytes": 5853
+    },
+    {
+      "path": "content/exams/NCA-75/lessons/s1_3.md",
+      "sha256": "ccd2692eb790230fde882708b238a0f39b13603b6cbe0eddd06413381a1edd99",
+      "bytes": 5660
+    },
+    {
+      "path": "content/exams/NCA-75/lessons/s2_1.md",
+      "sha256": "00b7876480e56fdc76c59522c4682b26bf1e4ce5b69c9d2110f445ecbf1f3186",
+      "bytes": 5384
+    },
+    {
+      "path": "content/exams/NCA-75/lessons/s2_2.md",
+      "sha256": "27097b9c88bf4dd7ab6e26fdef5139519f18d50c51da3ad5a26ec6b46234b80a",
+      "bytes": 5343
+    },
+    {
+      "path": "content/exams/NCA-75/lessons/s2_3.md",
+      "sha256": "b721f3a79e962ecf4d39819165cea371f9d9a5ba7a90b9e86731afc5941c4e69",
+      "bytes": 5415
+    },
+    {
+      "path": "content/exams/NCA-75/lessons/s2_4.md",
+      "sha256": "1dead0dedbbbfaa1d5dd4a49f2fce54d78aed8c5794d4af44aa2af21978bc7c2",
+      "bytes": 4903
+    },
+    {
+      "path": "content/exams/NCA-75/lessons/s3_1.md",
+      "sha256": "b6a134061e97aa0ccf2fa2b2173db0031c1b0679af8e0da3225468ca42898f68",
+      "bytes": 5432
+    },
+    {
+      "path": "content/exams/NCA-75/lessons/s3_2.md",
+      "sha256": "2928199bf5cc74fe5366f1e0e9cf7ba52bc7e66eb4287c7348eef8ec56f86e89",
+      "bytes": 5221
+    },
+    {
+      "path": "content/exams/NCA-75/lessons/s3_3.md",
+      "sha256": "9b0fd2b61a17bcf3b6d0fbba6a1ee92212f3714e02b7087dec7b335aca70f23b",
+      "bytes": 5290
+    },
+    {
+      "path": "content/exams/NCA-75/lessons/s4_1.md",
+      "sha256": "ab43d21f4f8f2d49d53b8a18bd1daa198e0c6afa9b03295d47452c6a62a29eae",
+      "bytes": 4704
+    },
+    {
+      "path": "content/exams/NCA-75/lessons/s4_2.md",
+      "sha256": "4328f6a75ba01eb20d8585602ff86c6c2843caafa41430c0c3456c5dd180edf4",
+      "bytes": 5038
+    },
+    {
+      "path": "content/exams/NCA-75/lessons/s4_3.md",
+      "sha256": "9d6a4490756edf2f45bc1ef195d6dcf42a7e80934bb5d42bc7b36123cbc854ff",
+      "bytes": 4770
+    },
+    {
+      "path": "content/exams/NCA-75/lessons/s4_4.md",
+      "sha256": "ecb7dc4d1ea29f750817159de11abbf6aad841c28b7ed77ab25ec77dce2a87d7",
+      "bytes": 5309
+    },
+    {
+      "path": "content/exams/NCA-75/questions/nca75-pilot.md",
+      "sha256": "9fcb3b76db03a31db05156175542b5c62d45e8eb8fd54e0aacfcd07e4a3f3254",
+      "bytes": 23820
     },
     {
       "path": "content/exams/NCA-75/remap.csv",
@@ -863,6 +1175,206 @@
       "path": "content/provenance/COMPTIA-NET-009/Q9.json",
       "sha256": "8ecf87aac9ee6e5563b174e851a9dcf1e1421eb4f5f2e6795ff7ed8814271b7e",
       "bytes": 381
+    },
+    {
+      "path": "content/provenance/NCA-75/Q1.json",
+      "sha256": "6af1c2e84a06227b29f2a0d9adc8c0b62b17bf8e2e1df1a72ed8faa30f76846b",
+      "bytes": 361
+    },
+    {
+      "path": "content/provenance/NCA-75/Q10.json",
+      "sha256": "11e9607eac6be27a6f5b56cb57fa257f4b0fd079d0df46b4eaa65fff8a809588",
+      "bytes": 362
+    },
+    {
+      "path": "content/provenance/NCA-75/Q11.json",
+      "sha256": "7f0e2372d3011c4de752d46000a293cf28f4a14e04c8566850933506912c38fe",
+      "bytes": 359
+    },
+    {
+      "path": "content/provenance/NCA-75/Q12.json",
+      "sha256": "2ce7529258d540d20a8f10678d4baa523bedda13a0ce4a8d93dbb8e3692107c8",
+      "bytes": 362
+    },
+    {
+      "path": "content/provenance/NCA-75/Q13.json",
+      "sha256": "c42ebd392c664b6d7f2c974046d836a5693d5f82e35338f2188420395658bbda",
+      "bytes": 362
+    },
+    {
+      "path": "content/provenance/NCA-75/Q14.json",
+      "sha256": "ced9b4d90f43bab680c1d74021fa1c6605c72602d6a33cf903ed25fa05ae05ee",
+      "bytes": 359
+    },
+    {
+      "path": "content/provenance/NCA-75/Q15.json",
+      "sha256": "ae2068803469c86c1aa077afdccb75c1e5a559960695593ebbca44b1e9b8b918",
+      "bytes": 362
+    },
+    {
+      "path": "content/provenance/NCA-75/Q16.json",
+      "sha256": "ce6468fa793a492594072786670bae0608e6a6832a31d44d3b26c6d264abe4cb",
+      "bytes": 362
+    },
+    {
+      "path": "content/provenance/NCA-75/Q17.json",
+      "sha256": "4829289ff66398dd4c7689b14c529925c3158dec69807e7e0bb19293723650b9",
+      "bytes": 359
+    },
+    {
+      "path": "content/provenance/NCA-75/Q18.json",
+      "sha256": "baa9cc4f4bf76cf24012702392dd7e40cf0a9d25b4089514bf637b91a2f83e7c",
+      "bytes": 362
+    },
+    {
+      "path": "content/provenance/NCA-75/Q19.json",
+      "sha256": "312f6d88877de468becbeaef8866f62c8b790e0a73fb089d4a7651040c288582",
+      "bytes": 362
+    },
+    {
+      "path": "content/provenance/NCA-75/Q2.json",
+      "sha256": "34ca3f92d7355d1ca9aac52b527c083a3bfa5dab7709474d509199e04a37f355",
+      "bytes": 358
+    },
+    {
+      "path": "content/provenance/NCA-75/Q20.json",
+      "sha256": "86bea65906b0c92a9f1ab3aa94a6c22f313da04c468d818abcf92c318d07a9a8",
+      "bytes": 359
+    },
+    {
+      "path": "content/provenance/NCA-75/Q21.json",
+      "sha256": "1fce409c2776aa23fc25e1435f0e37172dab58bb88ee79853198609fb03af1d9",
+      "bytes": 362
+    },
+    {
+      "path": "content/provenance/NCA-75/Q22.json",
+      "sha256": "5829be2ba92e64c1698cea05214b85e6893acac434ce38703e6cac77797ccb7a",
+      "bytes": 359
+    },
+    {
+      "path": "content/provenance/NCA-75/Q23.json",
+      "sha256": "a92cfd78193f19f8013375d22d971b1d4ddc1b8a9908c86d580c772673bcf188",
+      "bytes": 362
+    },
+    {
+      "path": "content/provenance/NCA-75/Q24.json",
+      "sha256": "9ac2e656a368ce1b765b7edf6fbe8ddbbedb745768a128970336e42ebdb3aa5c",
+      "bytes": 362
+    },
+    {
+      "path": "content/provenance/NCA-75/Q25.json",
+      "sha256": "472c8ee3a079d43b4e5b1751c024bbef3471b949814c469fa03bd30cc6110e1e",
+      "bytes": 362
+    },
+    {
+      "path": "content/provenance/NCA-75/Q26.json",
+      "sha256": "913e98fdd0ef990138e6687ae67e4db28cd284c7844452efb4188cacd998aafc",
+      "bytes": 362
+    },
+    {
+      "path": "content/provenance/NCA-75/Q27.json",
+      "sha256": "48af9a5b06db4633b826beeffb967b4cf056cef0f8b3e4654ee38bb84ee196e1",
+      "bytes": 359
+    },
+    {
+      "path": "content/provenance/NCA-75/Q28.json",
+      "sha256": "293b02af028d978f05f282e35fd142d71e2062b2e6f160a966fcf694d94b3e9e",
+      "bytes": 362
+    },
+    {
+      "path": "content/provenance/NCA-75/Q29.json",
+      "sha256": "86d28df6b0f0c9c5a330e2f6660c5e10ea02f61ffb3bf55bd22adbf888a19403",
+      "bytes": 362
+    },
+    {
+      "path": "content/provenance/NCA-75/Q3.json",
+      "sha256": "9647bc309cfb2028d3513d95f586d6b780cc25d081c34fc940842833b20780a2",
+      "bytes": 361
+    },
+    {
+      "path": "content/provenance/NCA-75/Q30.json",
+      "sha256": "0e634e845a33a70f4f64653da3aaeb347d05e459d27c38faf0270627c3c06931",
+      "bytes": 359
+    },
+    {
+      "path": "content/provenance/NCA-75/Q31.json",
+      "sha256": "83d2f8011fa9442b1728557f5cd6bc44e38167c78deae30155c8177c4d305310",
+      "bytes": 359
+    },
+    {
+      "path": "content/provenance/NCA-75/Q32.json",
+      "sha256": "66e59e11b3146ed3ced55a384ad6503029aa5894d5537d3788a5abd647770019",
+      "bytes": 362
+    },
+    {
+      "path": "content/provenance/NCA-75/Q33.json",
+      "sha256": "b40d6d27f72d8cb7c67d2ce03f8fdd3310c7228664bace8cb26b8edadd982a72",
+      "bytes": 362
+    },
+    {
+      "path": "content/provenance/NCA-75/Q34.json",
+      "sha256": "c673c5254a929e8317ba909eaaf3de2e09d684ced7c210ae3923bb42935a59e4",
+      "bytes": 359
+    },
+    {
+      "path": "content/provenance/NCA-75/Q35.json",
+      "sha256": "05ee41a4ea2e6a35d4f163b7f1431cde782673a9f8e19ca17fb2f59de28b49c2",
+      "bytes": 362
+    },
+    {
+      "path": "content/provenance/NCA-75/Q36.json",
+      "sha256": "a8e8cd10c68893d10c440be4b16e63d11fcb0ca66227c77043b2e41c55ecf85e",
+      "bytes": 362
+    },
+    {
+      "path": "content/provenance/NCA-75/Q37.json",
+      "sha256": "4c9d5ac13d27df50916aecb6d6ee8845238a843fd0a6720a1d0df1656c00e755",
+      "bytes": 362
+    },
+    {
+      "path": "content/provenance/NCA-75/Q38.json",
+      "sha256": "d89595a20532d158dec34c371fd5bb5528d562eb90c067b7a2b16372cefd7118",
+      "bytes": 359
+    },
+    {
+      "path": "content/provenance/NCA-75/Q39.json",
+      "sha256": "e709c40c601c311d04a9f0dec083eda6ae12b65ef9985d3dfe9bf43cb7dc7cf7",
+      "bytes": 362
+    },
+    {
+      "path": "content/provenance/NCA-75/Q4.json",
+      "sha256": "b80a044b91d3902c21dd0dbcec7c567c456308059e7214e19fdfe842de28c532",
+      "bytes": 358
+    },
+    {
+      "path": "content/provenance/NCA-75/Q40.json",
+      "sha256": "80dd8af1d6e5b1f4a02e81671037dd7ba602e085486eb00a5ca348838355703d",
+      "bytes": 362
+    },
+    {
+      "path": "content/provenance/NCA-75/Q5.json",
+      "sha256": "b498b8a57e31d15e1999c81221456bc61423424c3045bd10206cd24ff6014574",
+      "bytes": 361
+    },
+    {
+      "path": "content/provenance/NCA-75/Q6.json",
+      "sha256": "4e5be49c5a72916aaf8d678b4b4597973a18face5fd94ebfa5e44a7a4c5698a2",
+      "bytes": 358
+    },
+    {
+      "path": "content/provenance/NCA-75/Q7.json",
+      "sha256": "cd35c3448a30252846e80b7e06968c7b563e2bf9698e368b0b628c2f8215db88",
+      "bytes": 361
+    },
+    {
+      "path": "content/provenance/NCA-75/Q8.json",
+      "sha256": "53d2020492955e9acf4ee2f5d811551517a2bec4ff398a07c4cf037a24481cc9",
+      "bytes": 361
+    },
+    {
+      "path": "content/provenance/NCA-75/Q9.json",
+      "sha256": "57ac0f899eba84e83bda7e59d14133236bb770d231391e24b87127b7b58d09d0",
+      "bytes": 361
     },
     {
       "path": "content/tracks/track-aplus/track.json",
