@@ -44,3 +44,7 @@ publish/
 # so committing them would churn. Release-time logs for a frozen head land
 # in the Sprint D freeze evidence set instead (SPEC-11 Sprint D).
 content/review-logs/
+
+# Playwright MCP scratch output (browser profiles, screenshots, traces).
+# Local tooling state, never a build input — must not be committed.
+.playwright-mcp/
