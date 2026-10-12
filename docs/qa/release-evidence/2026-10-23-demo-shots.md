@@ -9,7 +9,9 @@ head: 0eedfa1
 branch: feature/rtp-beginner-tracks
 browser: /usr/bin/google-chrome-stable (headless=new, CDP)
 viewport: 1440x900, deviceScaleFactor 1, fixed
-frames: 12 (1.3 MB total) in `2026-10-23-demo-shots/`
+frames: 12 in `2026-10-23-demo-shots/`
+**recaptured: 2026-10-12 at head `a7d6cf6`** — the frames below are the
+recapture, not the original 0eedfa1 set; see "The DEMO MODE banner" for why.
 
 ## What these frames are, and what they are not
 
@@ -76,22 +78,31 @@ This is the segment that plays if the tutor segment fails on the day. See
 `2026-10-23-tutor-go-no-go.md` for why live AI is a **no-go** and the fallback is
 a **go**.
 
-## The DEMO MODE banner appears in every frame — this is the recorded defect
+## The DEMO MODE banner — defect found here, closed, frames recaptured
 
-Every frame above paints a purple **DEMO MODE** strip at the top, including
-frames 01–09, which were captured **before** the script enters demo mode (it
-enters at frame 10's step). A reader should not mistake this for demo mode being
-on.
+At the original capture every frame painted a purple **DEMO MODE** strip at the
+top, including frames 01–09, which were taken **before** the script enters demo
+mode (it enters at frame 10's step). A reader should not have mistaken that for
+demo mode being on.
 
-This is the REQ-DEMO-02 defect S47-10 recorded, now confirmed visually rather
-than only by measurement: `.demo-banner { display: flex }` (`css/study.css:495`)
-beats the UA stylesheet's `[hidden] { display: none }`, so `DemoBanner.js` sets
-`el.hidden` correctly and the banner paints anyway. Measured on a fresh profile
+That was the banner defect S47-10 recorded, confirmed here visually rather than
+only by measurement: `.demo-banner { display: flex }` (`css/study.css:495`) beat
+the UA stylesheet's `[hidden] { display: none }`, so `DemoBanner.js` set
+`el.hidden` correctly and the banner painted anyway. Measured on a fresh profile
 with `demo.active` false: `hidden=true`, `display="flex"`, `offsetHeight=46`.
 
-It is recorded, not fixed. S47-12 is an evidence row; the one-line CSS change
-alters shell appearance app-wide and belongs to its own row (see the S47-10
-finding).
+**Closed at `a7d6cf6`** by `[hidden] { display: none !important }` in the Reset
+block of `css/components.css`, and **all 12 frames were recaptured** at that
+head — so the PNGs in this directory now show the corrected shell, not the
+defect. Frames 01–09 no longer carry the strip; frames 10–12 still do, because
+demo mode is genuinely on by then. The two directions were confirmed by eye, not
+only by measurement: the label is absent in learner mode and present in demo
+mode, which is the property that makes it mean anything.
+
+The requirement ID used throughout for this defect was **REQ-DEMO-02**, but the
+package defines REQ-DEMO-02 as "each scenario declares a fixture seed; entering
+demo mode loads that seed exactly" — seeded state, not the banner. The behaviour
+was real; the citation was wrong.
 
 ## Reproducing
 
