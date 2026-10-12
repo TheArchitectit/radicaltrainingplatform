@@ -13,8 +13,8 @@
 
 | ID | Task | Requirements | Points | Status |
 |---|---|---|---|---|
-| S47-01 (T-19) | A+ cut complete: 24 reviewed items, 2 complete lessons | REQ-AP-02 | 3 | ✅ |
-| S47-02 (T-20) | Network+ cut complete: 25 reviewed items, 2 complete lessons (five per domain) | REQ-NP-02 | 3 | ✅ |
+| S47-01 (T-19) | A+ cut complete: 24 items, 2 lessons — no passing lane log | REQ-AP-02 | 3 | 🟡 |
+| S47-02 (T-20) | Network+ cut complete: 25 items, 2 lessons — no passing lane log | REQ-NP-02 | 3 | 🟡 |
 | S47-03 (T-21) | Demo mode: seed, one-click reset, mode label, ephemeral store | REQ-DEMO-01..06, REQ-UI-07/08 | 3 | ✅ |
 | S47-04 (T-22) | Pages predeploy gate (imports, smoke, bundle check) | CI-03 | 2 | ✅ |
 | S47-05 (T-23) | Tutor slice behind its gates, or recorded-example fallback | REQ-AI-01..07 | 3 | ✅ |
@@ -28,10 +28,8 @@ listed under the row's *Not verified* notes in [SPRINT-47-EVIDENCE.md](SPRINT-47
 
 **Evidence:** each completed row's shipped notes, findings, gates run and not-verified detail live in
 [SPRINT-47-EVIDENCE.md](SPRINT-47-EVIDENCE.md) — except S47-10, whose rehearsal log is archived in
-[../qa/release-evidence/2026-10-23-rehearsal.md](../qa/release-evidence/2026-10-23-rehearsal.md) to
-keep this file's evidence companion under the 500-line limit. SPRINT-47-EVIDENCE.md, split out of this
-file when it passed the 500-line
-document limit (CLAUDE.md).
+[../qa/release-evidence/2026-10-23-rehearsal.md](../qa/release-evidence/2026-10-23-rehearsal.md). Both
+companions were split out of this file when it passed the 500-line document limit (CLAUDE.md).
 
 ## Sprint Backlog — Part D (Oct 20–22)
 
@@ -43,8 +41,9 @@ document limit (CLAUDE.md).
 | S47-13 (T-29) | Freeze: branch, base/head SHA, changed files, gate results, RedEye lane logs + seeded-defect self-test record, usable build | SPEC-11 11.7 | 1 | ✅ |
 | S47-14 (T-30) | Demo script final: 90-second loop (learn, try, ask, verify) + exact disclaimer + no-patient/no-business-system line | REQ-BRAND-02 | 1 | ✅ |
 | S47-15 (R-10) | LICENSE: prepare BSD-3-Clause decision record + README pointer; final file drop waits on owner confirmation (HG-01) | R-10, C-08/C-09 | 1 | 🟡 |
+| S47-16 (T-25b) | README/docs truth: README facts match CI-generated counts; docs index; historical labels — **no gate enforces the match** | R-12 | 2 | 🟡 |
 
-**Total:** 27 points. Sprint D explicitly excludes architecture migration and post-freeze content authoring.
+**Total:** 29 points. Sprint D explicitly excludes architecture migration and post-freeze content authoring. S47-16 was opened after the sprint, from a coverage audit: T-25b has no row in SPEC-11's tables, so R-12 had no owner. See [SPRINT-47-RETROSPECTIVE.md](SPRINT-47-RETROSPECTIVE.md).
 
 ---
 
@@ -54,10 +53,10 @@ document limit (CLAUDE.md).
 **As a** student at the October 23 demo, **I want** real A+ content to study, **so that** the learning loop demonstrates value.
 
 **Acceptance Criteria:**
-- [x] 24 reviewed items exactly: 16 Core 1 (A2/A5 — DNS purpose/symptom ×4, DHCP lease ×2, gateway role ×2, port recognition ×2, safe-test selection ×4, isolate-and-verify next-step ×2) + 8 Core 2 (B2/B4 — phishing signals ×3, ticket field/resolution-note ×3, change-control/backup ×2)
+- [x] 24 items exactly: 16 Core 1 (A2/A5 — DNS purpose/symptom ×4, DHCP lease ×2, gateway role ×2, port recognition ×2, safe-test selection ×4, isolate-and-verify next-step ×2) + 8 Core 2 (B2/B4 — phishing signals ×3, ticket field/resolution-note ×3, change-control/backup ×2) — **the word "reviewed" was struck here**: these carry provenance and lane logs, but no passing log (see S47-13)
 - [x] Two complete lessons: A2 “Networking basics”, B4 “Operational procedures” (synopses per SPEC-04 04.7)
 - [x] Every cut item names lesson, objective ID, reviewer, provenance record; RedEye lane log present
-- [x] Practice sets draw only from the 24 reviewed items and say so on screen
+- [x] Practice sets draw only from the 24 items above and say so on screen
 - [x] Remaining modules display as planned outlines; track shows “beginner preview”
 - [x] ≥50% of pack items are diagnosis/next-action type (REQ-AP-06, CI-counted)
 
@@ -68,7 +67,7 @@ document limit (CLAUDE.md).
 
 ### S47-02 (T-20): Network+ Demo Cut
 **Acceptance Criteria:**
-- [x] 25 reviewed items, five per domain (N1–N5 cut outline per SPEC-05 05.6), labeled “exploratory coverage” — explicitly not exam-weighted, on screen
+- [x] 25 items, five per domain (N1–N5 cut outline per SPEC-05 05.6), labeled “exploratory coverage” — explicitly not exam-weighted, on screen; **"reviewed" struck here too**, same reason as S47-01
 - [x] Two complete lessons: N5 troubleshooting, N1 networking concepts (synopses per SPEC-05 05.5)
 - [x] Cross-track reuse (A+ DNS/DHCP material) explicitly mapped per REQ-NP-03 — provenance names both exam IDs, no duplicate item IDs
 - [x] Declared gaps (subnetting drills, routing protocols, wireless design, packet analysis) render as labeled worked examples
@@ -490,7 +489,7 @@ commit here does not settle first-publication authorship.
 
 ## Sprint Acceptance (October 23 demo-ready definition, SPEC-00 00.5)
 
-A presenter can open the PWA on the demo host, pick track-aplus or track-netplus, read one complete lesson per exam, run a scored practice set of reviewed original items, complete a deterministic simulated help-desk task, ask the tutor for a hint inside its stated limits (or play the labeled recorded example), reset the station for the next group — all with the network cable unplugged except the optional tutor call. Coverage labeled “beginner preview”; no pass-prediction claim anywhere; every SPEC-08/10 gate green at the tested head including the vulnerability gate proven by a must-fail fixture. Release evidence records gate counts at the frozen head.
+A presenter can open the PWA on the demo host, pick track-aplus or track-netplus, read one complete lesson per exam, run a scored practice set of draft original items (draft-preview — no item carries a passing lane log), complete a deterministic simulated help-desk task, ask the tutor for a hint inside its stated limits (or play the labeled recorded example), reset the station for the next group — all with the network cable unplugged except the optional tutor call. Coverage labeled “beginner preview”; no pass-prediction claim anywhere; every SPEC-08/10 gate green at the tested head including the vulnerability gate proven by a must-fail fixture. Release evidence records gate counts at the frozen head.
 
 ## Mini-retrospective (SPEC-11 11.10)
 

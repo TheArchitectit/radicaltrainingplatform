@@ -20,7 +20,7 @@
 | S45-05 (T-05) | Retry accounting fix | R-04 | 2 | ✅ |
 | S45-06 (T-06) | Manifest system: models, loader, catalog, blueprint override, validator | REQ-MAN-01..07 | 3 | ✅ |
 | S45-07 (T-07) | Four exam.json + three track.json with sources and review dates | REQ-MAN-06 | 2 | ✅ |
-| S45-08 (T-08) | First reviewed lesson + question fixtures (A+ A2; Network+ N5) | REQ-AP-02, REQ-NP-02 | 2 | ✅ |
+| S45-08 (T-08) | First reviewed lesson + question fixtures (A+ A2; Network+ N5) | REQ-AP-02, REQ-NP-02 | 2 | 🟡 |
 | S45-09 (T-09) | Begin NCA remap inventory (140 rows) | REQ-NCA-01 | 2 | ✅ |
 | S45-10 (T-10) | Answer-position distribution report | R-09 | 1 | ✅ |
 | S45-11 (T-43*) | Web runtime batch starts immediately after T-01 (same surface) | R-22 | 2 | ✅ |
@@ -190,10 +190,13 @@ RedEye fixtures (seeded-defect self-test + fail-closed gate matrix), key-distrib
 self-test, Core test suite 172/172. `dotnet build` Core + Desktop zero warnings.
 CI runs the content gates + web + RedEye fixtures on the Linux leg.
 
-**Planned vs landed:** all 12 backlog rows landed (27/27 points). S45-01..08 and
-S45-10 landed Oct 10 with verified acceptance checks; S45-09 (remap inventory) and
-S45-11 (web runtime batch) completed via background-lane work the same day; S45-12
-(RedEye lane) closed the sprint.
+**Planned vs landed:** all 12 backlog rows were worked (27/27 points), but two of
+them did not close, and this line used to say "landed" flat — which is the same
+failure the lesson below warns about. S45-01..07, S45-09 and S45-10 landed Oct 10
+with verified acceptance checks; S45-11 (web runtime batch) completed via
+background-lane work the same day; S45-12 (RedEye lane) closed the sprint. What did
+*not* close is in the register below: T-43's cosmetic bullets moved to Sprint 46,
+and **S45-08's "passed the RedEye lane" line stays open**, so S45-08 is 🟡, not ✅.
 
 **What went well:**
 - Gate-first discipline held: every repair shipped with a failing fixture before the

@@ -1,14 +1,42 @@
 # 🎯 Nutanix Certification Study Tool
 
-A WinForms-based exam preparation tool for Nutanix certifications featuring **1,458 validated practice questions** across 4 exams, a synthwave-themed GUI, integrated exam blueprint coverage tracking, and a knowledge base with direct links to Nutanix documentation.
+A cross-platform certification study platform: a **.NET 10 / Avalonia desktop app**, a
+**static HTML+JS PWA**, and a shared `net10.0` Core library with no UI dependencies. It
+covers Nutanix certification exams plus a CompTIA A+/Network+ beginner track, with a
+synthwave-themed UI, exam blueprint coverage tracking, and a lab simulator.
 
-![.NET 8.0](https://img.shields.io/badge/.NET-8.0-blue)
+![.NET 10.0](https://img.shields.io/badge/.NET-10.0-blue)
 ![License](https://img.shields.io/badge/License-BSD%203--Clause-green)
-![Questions](https://img.shields.io/badge/Questions-1%2C458-orange)
-![Status](https://img.shields.io/badge/Status-Alpha-yellow)
+![Released items](https://img.shields.io/badge/Released%20items-89-orange)
+![Status](https://img.shields.io/badge/Status-Draft%20preview-yellow)
 [![Sponsor](https://img.shields.io/badge/Sponsor-TheArchitectit-FF69B4?style=flat&logo=github-sponsors)](https://github.com/sponsors/TheArchitectit)
 
+## 📦 What ships today
+
+The PWA compiles its content from `content/` into a bundle at
+`RadicalTrainingPlatform.Web/js/study-content.js`. Those are the CI-generated counts, and
+they are the numbers this README is accountable to:
+
+| | |
+|---|---|
+| Exam manifests | **4** — CompTIA A+ Core 1 (220-1201), A+ Core 2 (220-1202), Network+ (N10-009), Nutanix Certified Associate 7.5 |
+| Tracks | **3** — `track-aplus`, `track-netplus`, `track-nca` |
+| Released items | **89** — A+ Core 1: 16 · A+ Core 2: 8 · Network+: 25 · NCA 7.5: 40 |
+| Release state | `draft-preview` — draft packs for the beginner preview |
+
+**These are draft packs, not released study material.** No item carries a human source
+review date, and the scored-item gate fails closed: every released item's review log
+records `verdict: return` because the key-vs-source review stage has no provider
+configured. Read the counts as *what compiles*, not as *what is verified*.
+
+The **legacy question banks** at the repository root (`NCP-US-*.md`, `NCP-CI-*.md`,
+`NCP-AI-*.md`, `NCM-MCI-*.md`, `NCA-75-Part*.md`) are a separate, larger corpus that the
+Desktop and Legacy apps parse directly. They are **not** part of the PWA bundle.
+
 ## 📋 Supported Certifications
+
+The legacy banks cover the Nutanix exam set below. The PWA additionally ships the
+beginner A+/Network+ track above.
 
 | Exam | Questions | Format | Duration |
 |------|-----------|--------|----------|
@@ -39,41 +67,55 @@ A WinForms-based exam preparation tool for Nutanix certifications featuring **1,
 **No pre-built binary is published.** This repository has no releases and no tags, and no packaged
 build is committed here, so there is nothing to download yet. Build from source until a release is cut.
 
-**Prerequisites:** [.NET 8.0 SDK](https://dotnet.microsoft.com/download/dotnet/8.0) (Windows)
+**Prerequisites:** [.NET 10 SDK](https://dotnet.microsoft.com/download/dotnet/10.0)
+(Linux, macOS, or Windows). The Avalonia desktop app is cross-platform; the Legacy
+WinForms project is Windows-only and is excluded from the Linux build.
 
 ```bash
-cd RadicalTrainingPlatform
-dotnet build
-dotnet run
+dotnet build RadicalTrainingPlatform.sln          # Core + Desktop + Desktop.Tests
+dotnet run --project RadicalTrainingPlatform.Desktop
 ```
 
-To create a self-contained publish:
+The Web PWA is standalone — no .NET dependency, no npm dependency. Serve the directory
+with any static server and open `index.html`:
 
 ```bash
-cd RadicalTrainingPlatform
-dotnet publish -c Release -r win-x64 --self-contained
+python3 -m http.server -d RadicalTrainingPlatform.Web 8080
 ```
 
-The app will launch with all 4 exam tabs. Select an exam, answer questions, and use the explain panel to study.
+To create a self-contained desktop publish (substitute `linux-x64` or `osx-arm64`):
+
+```bash
+dotnet publish RadicalTrainingPlatform.Desktop -c Release -r linux-x64 --self-contained
+```
+
+Select a track, answer questions, and use the explain panel to study.
 
 ## 📁 Project Structure
 
 ```
-├── RadicalTrainingPlatform/                    # WinForms .NET 8.0 application
-│   ├── Program.cs                # Entry point
-│   ├── MainForm.cs               # Main GUI (question display, explain panel, navigation)
-│   ├── SynthwaveColors.cs        # Neon color scheme
-│   ├── Controls/
-│   │   ├── AnimatedProgressBar.cs
-│   │   └── BlueprintPanel.cs     # Blueprint coverage overlay panel
-│   ├── Models/
-│   │   ├── Question.cs           # Question data model
-│   │   └── BlueprintObjective.cs # Blueprint objective model
-│   └── Services/
-│       ├── QuestionParser.cs     # Markdown → Question parser
-│       ├── ReferenceService.cs   # KB references, doc links, explain content
-│       └── BlueprintService.cs   # Exam blueprint objectives & keyword matching
+├── RadicalTrainingPlatform.Core/               # net10.0 — no UI dependencies
+│   ├── Models/                   # Question, AnswerOption, BlueprintObjective, ExamManifest
+│   ├── Services/                 # QuestionParser, blueprint & reference services, ManifestLoader
+│   ├── Infrastructure/           # IExamRepository, IFileProvider
+│   ├── PdfExport/                # ExamPdfExporter (QuestPDF)
+│   └── Abstractions/             # IQuestionParser, IBlueprintService, IReferenceService
 │
+├── RadicalTrainingPlatform.Desktop/            # Avalonia 12.0 — Linux/macOS/Windows
+│   ├── Views/                    # ExamSelectorView, QuestionView, OptionCard, BlueprintView, StatsView
+│   ├── Controls/                 # SynthwaveProgressBar, BlueprintCanvas
+│   ├── LabSimulator/             # CefBridge, LabSimulatorView
+│   └── Simulators/               # Lab simulator templates
+│
+├── RadicalTrainingPlatform.Web/                # static PWA — no .NET, no npm
+│   ├── index.html, manifest.json, sw.js
+│   ├── js/                       # app.js, core/, views/
+│   └── css/
+│
+├── RadicalTrainingPlatform.Legacy.WinForms/    # net10.0-windows — preserved for reference
+│   └── MainForm.cs               # the original 59K GDI+ synthwave UI
+│
+├── content/                      # manifests, lessons, question banks, provenance
 ├── NCP-US-Part1.md               # Unified Storage questions (Domains 1-2, 160 Q)
 ├── NCP-US-Part2-D3.md            # Unified Storage questions (Domain 3, 80 Q)
 ├── NCP-US-Part2-D4.md            # Unified Storage questions (Domain 4, 80 Q)
@@ -83,17 +125,12 @@ The app will launch with all 4 exam tabs. Select an exam, answer questions, and 
 ├── NCP-AI-Part[1-4].md           # AI Infrastructure questions (80 Q each)
 ├── NCP-AI-Part5-GapFill.md       # AI Infrastructure gap-fill questions (15 Q)
 ├── NCM-MCI-Part[1-4].md          # Multicloud Infrastructure questions (80 Q each)
-├── NCM-MCI-Part5-GapFill.md      # MCM-MCI gap-fill questions (40 Q)
+├── NCM-MCI-Part5-GapFill.md      # Multicloud Infrastructure gap-fill questions (40 Q)
 │
-├── designguides/                 # Official exam blueprint PDFs & extracted text
-│
-├── validation/                   # Validation reports & logs
-│   ├── blueprint-*-coverage.md   # Blueprint coverage analysis reports
-│   ├── zerogap-*.md              # Zero-gap verification reports
-│   ├── gapfill-validate-*.log    # Gap-fill validation logs
-│   └── CORRECTIONS_SUMMARY.txt   # All answer corrections applied
-│
-├── LICENSE                       # BSD 3-Clause
+├── docs/                         # sprint plans, design records, release evidence
+├── scripts/                      # content generators and gate scripts
+├── tests/                        # e2e harnesses and gate fixtures
+├── packaging/                    # Flatpak manifest and packaging manifests
 └── README.md
 ```
 
@@ -180,11 +217,11 @@ questions, and the decision record says so explicitly.
 ## 🤝 Contributing
 
 Contributions welcome! Areas for improvement:
-- Answer randomization (reduce position bias)
 - Timed exam simulation mode
 - Question difficulty ratings
 - Additional certification exams
-- Cross-platform support (Avalonia/MAUI)
+- Getting the released packs past the scored-item review gate (see "What ships today")
+- Packaging: clean-install verification for the AppImage, macOS DMG, and Flatpak builds
 
 ---
 

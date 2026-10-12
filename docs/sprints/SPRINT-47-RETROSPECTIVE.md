@@ -41,12 +41,13 @@ not built on Linux (per CLAUDE.md).
 
 ## Planned vs landed
 
-All 15 backlog rows landed: S47-01..06 and S47-11..14 ✅; S47-07, S47-08, S47-09,
-S47-10 and S47-15 🟡 — **five yellow, and every one of them yellow for the same
-reason: the thing it needs is not available in this environment.**
+All 15 backlog rows landed, and S47-16 was opened after the fact for a gap the
+package left without an owner. S47-03..06 and S47-11..14 ✅; **seven rows 🟡** —
+S47-01, S47-02, S47-07, S47-08, S47-09, S47-10 and S47-15 — in two families.
 
 | Row | Yellow because |
 |---|---|
+| S47-01, S47-02 (T-19/T-20) | The cuts are complete and every item carries a lane log, but the RedEye model stage is unconfigured, so **no log passes** — the word *reviewed* was struck from both rows rather than left standing |
 | S47-07 (T-25) | Clean-install tests need a real install target (PKG:1469); the repairs themselves landed and are gated |
 | S47-08 (T-41) | Bundle independence verified from the artifact; the *installed* bundle is the same missing target |
 | S47-09 (T-45) | ShellCheck gate + fixtures landed; the packaging *behaviour* fixtures that need an install are the residue |
@@ -56,6 +57,14 @@ reason: the thing it needs is not available in this environment.**
 No row is yellow for a defect left standing. That distinction is the whole point of
 the status column: a 🟡 that means "awaiting a human or a host" is honest, and a 🟡
 that means "unfinished work I could have done" would not be.
+
+S47-01 and S47-02 were marked ✅ in the first draft of this retrospective, and that
+was the exact error the Sprint 45 retrospective predicted: *"every content-release
+acceptance box in Sprints 46–47 must be written to distinguish 'lane log exists'
+from 'item passed the lane' — otherwise green ticks will hide the unrun model
+stage."* The acceptance boxes were written that way; the **status column** was not.
+A reader scanning the backlog saw "24 reviewed items ✅" and would have concluded
+the items were reviewed. Fixed in `SPRINT-47.md`.
 
 ---
 
@@ -105,6 +114,36 @@ that means "unfinished work I could have done" would not be.
   still have no signal on the build host.
 - **Sprint 47 is the first Phase 5 sprint to exceed the 500-line document limit**,
   which is why this retrospective is a companion file.
+
+## S47-16 (T-25b) — README truth, opened late
+
+T-25b has no row in SPEC-11's tables: SPEC-14 assigns it to R-12, and R-12's
+"README facts match CI-generated counts" had no owner in any sprint file. It was
+found by a coverage audit, not by the plan.
+
+**What was wrong.** `README.md` was the pre-refactor WinForms document. It described
+a "WinForms-based" tool on ".NET 8.0" with a ".NET 8.0 SDK (Windows)" prerequisite,
+gave `RadicalTrainingPlatform/` as the project root (the repo has four projects), and
+printed a tree containing `designguides/` and `validation/` — neither of which exists
+— plus a `LICENSE` entry contradicting its own License section two screens later.
+
+**What landed.** Stack claims corrected (.NET 10 / Avalonia + PWA + Core; the WinForms
+project named as legacy and Windows-only); prerequisites corrected to the .NET 10 SDK,
+cross-platform; build and publish commands replaced with the ones CLAUDE.md documents;
+the project tree replaced with the real one; and a **"What ships today"** section
+carrying the CI-generated counts — 4 exam manifests, 3 tracks, 89 released items
+(16 + 8 + 25 + 40), `releaseState: draft-preview` — which also states plainly that no
+item carries a passing review log.
+
+**What did not land.** R-12's acceptance is that README facts *match* the CI-generated
+counts. Nothing enforces it: there is no gate comparing README prose to
+`content-bundle.json`, so the numbers are right by hand today, not by check. That is
+the residue, and it is why this row is 🟡 rather than ✅.
+
+**Also unowned, found by the same audit, not fixed here:** **T-31a** (PDF inventory
+with hash/license record, C-09) and **T-SC-03** (the written record of which
+`us-bucket-01` repair choice was made). Neither appears in SPEC-11's task tables, so
+the plan's "every task has exactly one sprint home" rule never reached them.
 
 ## Not verified / deferred by design
 
