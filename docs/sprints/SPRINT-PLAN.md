@@ -231,7 +231,7 @@ cutting released scope visibly — never by shipping unreviewed content.
 | Sprint 45 | Sprint A | Oct 10-12 | Blocking repairs (boot, vuln gate, answer grammar, ordering/retry), manifest system, RedEye lane, first content fixtures | ~27 | 🟢 Done — 11/11 at `0e9c184` | [SPRINT-45.md](./SPRINT-45.md) |
 | Sprint 46 | Sprint B | Oct 13-16 | One learning loop end to end: study views, ProgressStore, ticket renderer, scenario validator sweep, CI gates | ~30 | 🟢 Done — 14/14 at `755d6ed` | [SPRINT-46.md](./SPRINT-46.md) |
 | Sprint 47 | Sprints C+D | Oct 17-22 | Demo packs complete, packaging truth, tutor slice or fallback, freeze + rehearsal for Oct 23 | ~26 | 🟢 Done — 39/39 at `7a21f6b` (freeze `0d1f565`) | [SPRINT-47.md](./SPRINT-47.md) · [retro](./SPRINT-47-RETROSPECTIVE.md) |
-| Sprint 48 | Sprint E | Post-EPIC, pre-travel | NCA 7.5 current-blueprint remap: 140 rows, 14 lessons, 40-item pilot, 4 scenarios, travel freeze | ~12 | 🟡 In Progress — 45/45 at `0e12fcd`; five rows 🟡 on named gaps, S48-05 ✅, travel cutoff unconfirmed | [SPRINT-48.md](./SPRINT-48.md) |
+| Sprint 48 | Sprint E | Post-EPIC, pre-travel | NCA 7.5 current-blueprint remap: 140 rows, 14 lessons, 40-item pilot, 4 scenarios, travel freeze | ~12 | 🟡 Landed — 45/45 at `7956b6e`; S48-05 ✅, the other five 🟡 on inputs the repo does not contain (travel cutoff, RedEye model stage, a human read of the guide) | [SPRINT-48.md](./SPRINT-48.md) |
 
 **Status key:** 🟢 Done | 🟡 In Progress | ⚪ Planned | 🔴 Blocked. Each Phase 5 sprint
 carries the gate pass count **at its own head SHA**, not carried forward between

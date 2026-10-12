@@ -1,7 +1,7 @@
 # 🏃 RadicalTrainingPlatform — Sprint Plan
 
-> **Last Updated:** 2026-10-11  
-> **Current Sprint:** Sprint 47 — OpenSpec Sprints C+D — landed (39/39 gates green at head `7a21f6b`, demo frozen at `0d1f565`); next: Sprint 48 — OpenSpec Sprint E (NCA 7.5 current-blueprint track, pre-travel)  
+> **Last Updated:** 2026-10-12  
+> **Current Sprint:** Sprint 48 — OpenSpec Sprint E — landed (NCA 7.5 current-blueprint track; freeze chain **45/45 at `7956b6e`**). Five of its six rows stand 🟡 on inputs the repository does not contain — the departure cutoff, the RedEye model stage, and a human read of the Nutanix guide — and each says so in its own row rather than rounding up. Sprint 47 is closed at 39/39 (`7a21f6b`, demo frozen at `0d1f565`).  
 > **Guardrails:** agent-guardrails-template v2.8.0 (TheArchitectit)
 
 > **Note:** This file is the legacy working sprint list. The authoritative
