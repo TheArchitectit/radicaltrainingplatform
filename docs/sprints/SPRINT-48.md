@@ -347,9 +347,12 @@ its four objectives are covered by the store-level walkthrough and the demo
 sweep, and by the PE VM wizard's own fixtures, not by a Chrome session. The NCA
 labs' **keyboard** operability is also unmeasured: the new gate activates
 controls directly, as `smoke-web.mjs` does, and `rehearsal-web.mjs` — which owns
-the tab-order claim — covers the ticket lab only and is knowingly red on two
-legs. Nothing here was re-read against the Nutanix guide; the tool/objective
-mapping in `NCA_TOOL_LAB` is an authored teaching choice, not a citation.
+the tab-order claim — covers the ticket lab only. (That harness is green now:
+33 PASS / 0 FAIL / 1 NOTE at `6b327db`, after the two legs this row recorded as
+red turned out to be **harness** defects, not product ones. The NCA labs remain
+outside its flow set, which is the actual reason this stays unmeasured.)
+Nothing here was re-read against the Nutanix guide; the tool/objective mapping
+in `NCA_TOOL_LAB` is an authored teaching choice, not a citation.
 
 **Measured:** `nca-scenarios.mjs` 13/13. `nca-lab-web.mjs` **17/17**, three
 labs, zero console errors. `run_nca_lab_fixtures.sh` green, and red on its
