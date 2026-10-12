@@ -498,8 +498,39 @@ async function main() {
         // (2) the app SURFACES it on a cold load. A rehearsal that only asked
         // (1) would call this flow green while a presenter opening the app
         // cold sees a learner with no history.
-        await cdp.send('Page.navigate', { url: `${origin}/index.html#/practice/COMPTIA-A-1201` }, sessionId);
-        await waitForExpr(`!!document.querySelector('.practice-progress')`, 'practice to re-render');
+        // Flow 4 left this view showing the graded verdict. Read that state
+        // first, because it is what the previous version of this check was
+        // accidentally measuring — and asserting it explicitly is what stops a
+        // later no-op "reload" from being mistaken for a cold load again.
+        const beforeReload = await evaluate(
+            `document.querySelector('.practice-prior-note')?.textContent.trim() || null`);
+        if (beforeReload === null) {
+            pass('the post-submit verdict view carries no prior-progress note '
+                + '(the note is a cold-load affordance, not a permanent banner)');
+        } else {
+            fail(`the prior-progress note is on screen BEFORE any reload ("${beforeReload}") — `
+                + `this leg cannot tell a cold load from a warm one`);
+        }
+
+        // Force a REAL reload. `Page.navigate` to a URL whose hash is unchanged
+        // is a same-document no-op in Chrome: it does not reload the document,
+        // so it silently re-reads the DOM the previous flow left behind. This
+        // leg used to do exactly that and reported a cold-load failure for it —
+        // the app was surfacing stored progress correctly the whole time; the
+        // "reload" never happened. The marker below is the guard: a future
+        // regression back to a no-op navigate fails here rather than being
+        // read as a product defect.
+        await evaluate(`window.__rehearsalBoot = 1`);
+        await cdp.send('Page.reload', {}, sessionId);
+        await waitForExpr(`!!document.querySelector('.practice-progress')`,
+            'practice to re-render after a reload');
+        const reloaded = await evaluate(`window.__rehearsalBoot !== 1`);
+        if (reloaded) {
+            pass('the cold load was a genuine reload, not a same-document hash change');
+        } else {
+            fail('the document did not reload — this leg would be reading the previous '
+                + 'flow DOM and reporting it as a cold load');
+        }
 
         const stored = await evaluate(`(async () => {
             const mod = await import('/js/core/StateStore.js');
@@ -516,18 +547,14 @@ async function main() {
         } else {
             fail(`a cold load does not surface the stored progress (note was ${JSON.stringify(priorNote)}) `
                 + `even though the record is present — the learner opens the app to a blank history`);
-            // Prove it is a cold-load ordering problem and not a missing
-            // feature: the same view on a client-side route change shows it.
-            await goto('#/tracks');
-            await goto('#/practice/COMPTIA-A-1201');
-            const afterRoute = await evaluate(
-                `document.querySelector('.practice-prior-note')?.textContent.trim() || null`);
-            if (afterRoute && /previously answered/i.test(afterRoute)) {
-                note(`REQ-UI-04 gap — the prior-progress note renders on a client-side route `
-                    + `change ("${afterRoute}") but not on a cold load, so PracticeView reads the `
-                    + `store before it can see the records. Reproduced: reload the app on `
-                    + `#/practice/COMPTIA-A-1201 with a stored answer, then navigate away and back.`);
-            }
+            // Two causes, and the message must not guess between them: either
+            // the view read the store before it could see the records (the
+            // REQ-UI-04 shape this leg was written for), or the reload silently
+            // did not happen and this is the previous flow's DOM. The `reloaded`
+            // assertion above already separates them; this only reports which.
+            note(`cold-load note missing after ${reloaded ? 'a genuine reload' : 'a FAILED reload'}; `
+                + `the stored record is present (${stored} item record(s)) and the mode is `
+                + `${await evaluate(`(async () => (await import('/js/core/StateStore.js')).store.mode)()`)}`);
         }
         }
 
@@ -572,8 +599,23 @@ async function main() {
         // land on a store-based scenario and then blame the lab for the ids it
         // never had.
         await goto('#/pc/scenarios');
+        // Start the walk from a defined point, because `tabTo` tabs on from
+        // whatever currently holds focus. Focus survives a hash change
+        // whenever it sits on a shell element — nav items live outside
+        // #view-container, so re-rendering the view never detaches them — and
+        // an earlier version of this leg was resting on the nav item directly
+        // above the first scenario row. It reported "45 Tab presses" for a walk
+        // that had skipped the entire shell and started mid-list, so the number
+        // understated the real distance by 38 presses and the leg would have
+        // passed even if nothing in the shell were reachable. Blurring first
+        // makes "reachable by Tab" mean reachable from the top of the page.
+        await evaluate(`document.activeElement?.blur?.()`);
+        // aplus-dns-01 is the 44th scenario row, and the shell contributes ~39
+        // stops before the list — ~83 presses in all. The cap is sized to that
+        // measured distance plus headroom rather than to a round number that
+        // happened to fit while the walk was starting halfway down.
         const startBtn = await tabTo(
-            (d) => d.sid === 'aplus-dns-01', 'the aplus-dns-01 Start button');
+            (d) => d.sid === 'aplus-dns-01', 'the aplus-dns-01 Start button', 120);
         if (!startBtn.ok) {
             fail(`the aplus-dns-01 Start button is not reachable by Tab `
                 + `(stopped on ${JSON.stringify(startBtn.d)})`);
