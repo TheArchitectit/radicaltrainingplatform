@@ -39,7 +39,7 @@ document limit (CLAUDE.md).
 |---|---|---|---|---|
 | S47-10 (T-26) | Rehearsal on actual demo host: installed, offline, keyboard/projector, reset-between-groups | REQ-UI-06, REQ-DEMO-05, TM-40/45/50 | 2 | 🟡 |
 | S47-11 (T-27) | Tutor evaluation report and go/no-go; fallback labeling check | REQ-AI-06/07 | 1 | ✅ |
-| S47-12 (T-28) | Screenshots/video backup; non-AI backup path | REQ-AI-07 | 1 | ⚪ |
+| S47-12 (T-28) | Screenshots/video backup; non-AI backup path | REQ-AI-07 | 1 | ✅ |
 | S47-13 (T-29) | Freeze: branch, base/head SHA, changed files, gate results, RedEye lane logs + seeded-defect self-test record, usable build | SPEC-11 11.7 | 1 | ⚪ |
 | S47-14 (T-30) | Demo script final: 90-second loop (learn, try, ask, verify) + exact disclaimer + no-patient/no-business-system line | REQ-BRAND-02 | 1 | ⚪ |
 | S47-15 (R-10) | LICENSE: prepare BSD-3-Clause decision record + README pointer; final file drop waits on owner confirmation (HG-01) | R-10, C-08/C-09 | 1 | ⚪ |
@@ -319,7 +319,42 @@ block as S47-10).
 **Evidence:** [../qa/release-evidence/2026-10-23-tutor-go-no-go.md](../qa/release-evidence/2026-10-23-tutor-go-no-go.md).
 
 ### S47-12 (T-28): Backup Evidence
-- Screenshots/video captured; non-AI backup path rehearsed
+**Acceptance Criteria:**
+- [x] **Screenshots captured** — 12 frames (1.3 MB) in
+  `docs/qa/release-evidence/2026-10-23-demo-shots/`,
+  walking the seven named critical flows (PKG:141) in demo order, then the
+  recorded-example tutor. Taken from the artifact the demo serves, not a
+  rebuild. **Screenshots only, no video.**
+- [x] **Committed with the record** — a backup that lives only on one
+  workstation is not a backup.
+- [x] **Non-AI backup path rehearsed** (REQ-AI-07) — frame 12 is the recorded-
+  example tutor answering a real demo prompt, with the `recorded example` mode
+  pill, the *"Reviewed in advance — not a live model"* line, and *"No AI service
+  is connected."* The capture script **throws** if the panel is in any other
+  mode, so the frame cannot be produced from a live panel. The no-network-call
+  half is asserted by `tests/gates/web/tutor-panel.mjs`, not re-asserted here.
+
+**Not a projector measurement.** Fixed 1440x900 headless viewport, no projector
+in the loop; nothing here speaks to legibility at distance (T-26's manual half,
+unverified).
+
+**Every frame paints the DEMO MODE banner** — including frames 01–09, captured
+*before* the script enters demo mode. This is the S47-10 REQ-DEMO-02 defect,
+confirmed visually: `.demo-banner { display: flex }` beats the UA `[hidden]`
+rule, so `el.hidden` is set and the banner paints anyway. Recorded, not fixed —
+it alters shell appearance app-wide and belongs to its own row.
+
+**Files:**
+- `tests/e2e/capture-demo-shots.mjs` (new) — zero-dep CDP capture; fails closed
+  without a browser, throws rather than writing a partial set
+- `docs/qa/release-evidence/2026-10-23-demo-shots.md` (new) — the record
+- `docs/qa/release-evidence/2026-10-23-demo-shots/` (new) — the 12 PNGs
+
+**Not verified:** projector readability; the actual demo host (PKG:1469);
+video; the *switch* from a failed live segment to the fallback mid-demo;
+offline behaviour; TM-50 ChromeOS / presenter-host entries.
+
+**Evidence:** [../qa/release-evidence/2026-10-23-demo-shots.md](../qa/release-evidence/2026-10-23-demo-shots.md).
 
 ### S47-13 (T-29): Freeze
 **Acceptance Criteria:**
