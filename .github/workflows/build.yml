@@ -205,6 +205,16 @@ jobs:
           python3 scripts/check-traceability.py
           bash tests/gates/run_traceability_fixtures.sh
 
+      # Sprints 27-28/S27-08/S27-09: the vendor plugin contract — manifest
+      # schema versions, exam/track ID ownership across every content root, and
+      # plugin file integrity by SHA-256. The built-in content tree is validated
+      # through the same path a vendor pack is, so "existing users unaffected"
+      # is checked rather than asserted.
+      - name: Vendor plugin manifests (S27-08/S27-09)
+        run: |
+          python3 scripts/check-plugin-manifests.py
+          bash tests/gates/run_plugin_fixtures.sh
+
       # No setup-dotnet here: the runner image (localhost/devgate-runner-rtp,
       # infra Containerfile convention) bakes the .NET 10 SDK — setup-dotnet
       # cannot write /usr/share/dotnet inside a rootless runner container.

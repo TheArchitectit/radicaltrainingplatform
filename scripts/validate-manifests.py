@@ -30,6 +30,23 @@ EXAM_REQUIRED = [
 ]
 TRACK_REQUIRED = ["trackId", "title", "examIds", "previewLabel", "disclaimer"]
 
+# S27-09: manifest schema versions this build understands. Absent means 1, so
+# every manifest written before versioning existed validates unchanged. Mirrors
+# PluginValidator.SupportedSchemaVersions in Core — if one moves, both move.
+SUPPORTED_SCHEMA_VERSIONS = {1}
+
+
+def check_schema_version(manifest_path, data, errors):
+    """S27-09 — a manifest must declare a schema version this build understands."""
+    version = data.get("schemaVersion", 1)
+    if not isinstance(version, int) or isinstance(version, bool):
+        errors.append(f"{manifest_path}: schemaVersion must be an integer, got {version!r}")
+    elif version not in SUPPORTED_SCHEMA_VERSIONS:
+        supported = ", ".join(str(v) for v in sorted(SUPPORTED_SCHEMA_VERSIONS))
+        errors.append(
+            f"{manifest_path}: unsupported schemaVersion {version} "
+            f"(this build understands {supported})")
+
 
 def load_json(path):
     try:
@@ -73,6 +90,7 @@ def validate(content_root, warnings):
             for field in EXAM_REQUIRED:
                 if field not in data or data[field] in (None, "", {} if field == "sections" else None):
                     errors.append(f"{manifest_path}: missing required field '{field}'")
+            check_schema_version(manifest_path, data, errors)
             exam_id = data.get("examId", "")
             if exam_id:
                 if exam_id in exam_ids:
@@ -125,6 +143,7 @@ def validate(content_root, warnings):
             for field in TRACK_REQUIRED:
                 if field not in data or data[field] in (None, "", []):
                     errors.append(f"{manifest_path}: missing required field '{field}'")
+            check_schema_version(manifest_path, data, errors)
             track_id = data.get("trackId", "")
             if track_id:
                 if track_id in TRACK_IDS_SEEN:
@@ -172,7 +191,8 @@ def self_test():
         },
     }
 
-    def run_tree(files, expect_errors, expect_warning_substr=None):
+    def run_tree(files, expect_errors, expect_warning_substr=None,
+                 expect_error_substr=None):
         with tempfile.TemporaryDirectory() as tmp:
             base = pathlib.Path(tmp)
             for relpath, payload in files.items():
@@ -184,6 +204,9 @@ def self_test():
             failures.append(f"expected errors, got none ({describe(files)})")
         if not expect_errors and errors:
             failures.append(f"expected clean, got: {errors} ({describe(files)})")
+        if expect_error_substr and not any(expect_error_substr in e for e in errors):
+            failures.append(f"expected error containing '{expect_error_substr}', "
+                            f"got: {errors} ({describe(files)})")
         if expect_warning_substr and not any(expect_warning_substr in w for w in warnings):
             failures.append(f"expected warning containing '{expect_warning_substr}', "
                             f"got: {warnings}")
@@ -193,6 +216,12 @@ def self_test():
 
     # Passing fixture: well-formed exam + track referencing it.
     run_tree(good, expect_errors=False)
+
+    # Passing half of the S27-09 pair: an explicit schemaVersion this build
+    # understands is as valid as an absent one.
+    versioned = json.loads(json.dumps(good["content/exams/EX-1/exam.json"]))
+    versioned["schemaVersion"] = 1
+    run_tree({**good, "content/exams/EX-1/exam.json": versioned}, expect_errors=False)
 
     # Failing fixtures, one defect each.
     missing_field = json.loads(json.dumps(good["content/exams/EX-1/exam.json"]))
@@ -204,6 +233,24 @@ def self_test():
         "content/exams/EX-1/exam.json": dup,
         "content/exams/EX-2/exam.json": {**dup, "displayName": "Other"},
     }, expect_errors=True)
+
+    # S27-09: the schema-version rule. `good` above carries no schemaVersion at
+    # all, which is the passing half of the pair (absent means 1, so the four
+    # manifests written before versioning existed read unchanged).
+    bad_schema = json.loads(json.dumps(good["content/exams/EX-1/exam.json"]))
+    bad_schema["schemaVersion"] = 99
+    run_tree({"content/exams/EX-1/exam.json": bad_schema}, expect_errors=True,
+             expect_error_substr="unsupported schemaVersion 99")
+
+    bad_schema_type = json.loads(json.dumps(good["content/exams/EX-1/exam.json"]))
+    bad_schema_type["schemaVersion"] = "one"
+    run_tree({"content/exams/EX-1/exam.json": bad_schema_type}, expect_errors=True,
+             expect_error_substr="schemaVersion must be an integer")
+
+    bad_track_schema = json.loads(json.dumps(good["content/tracks/track-t/track.json"]))
+    bad_track_schema["schemaVersion"] = 2
+    run_tree({**good, "content/tracks/track-t/track.json": bad_track_schema},
+             expect_errors=True, expect_error_substr="unsupported schemaVersion 2")
 
     stale = json.loads(json.dumps(good["content/exams/EX-1/exam.json"]))
     stale["sourceReviewDate"] = "2025-01-01"

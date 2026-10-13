@@ -104,6 +104,12 @@ gate "bash tests/gates/run_source_inventory_fixtures.sh" bash tests/gates/run_so
 # chain-excluded with a reason.
 gate "python3 scripts/check-traceability.py"            python3 scripts/check-traceability.py
 gate "bash tests/gates/run_traceability_fixtures.sh"    bash tests/gates/run_traceability_fixtures.sh
+# Added in Sprints 27-28 (S27-08/S27-09): the vendor plugin contract. Manifest
+# schema versions, ID ownership across content roots, and plugin file integrity.
+# The built-in tree is validated through the same path a vendor pack is, so
+# "existing users unaffected" is checked rather than asserted.
+gate "python3 scripts/check-plugin-manifests.py"        python3 scripts/check-plugin-manifests.py
+gate "bash tests/gates/run_plugin_fixtures.sh"          bash tests/gates/run_plugin_fixtures.sh
 
 # ── Packaging and release truth ──
 gate "python3 scripts/generate-bundle-manifest.py --check" \
