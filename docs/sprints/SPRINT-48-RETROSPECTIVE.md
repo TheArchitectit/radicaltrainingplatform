@@ -1,22 +1,23 @@
 # Sprint 48 — Retrospective and Acceptance (SPEC-11 11.10)
 
-**Sprint head SHA:** `76fe1c9` (S48-07). **Frozen head:** `0e12fcd`, the head the
+**Sprint head SHA:** `2110dec` (S47-16/R-12). **Frozen head:** `0e12fcd`, the head the
 NCA freeze record names.
 
-**Gate pass count at the sprint head: 47/47 at `76fe1c9`** — measured, not carried
+**Gate pass count at the sprint head: 49/49 at `2110dec`** — measured, not carried
 over, by the committed runner:
 
 ```bash
 bash tests/gates/run_freeze_chain.sh --log /tmp/freeze.log \
-  --expect-sha 76fe1c9f6111b1aa66dc32c73cd4e0760c86fd62
-# FREEZE CHAIN: 47/47 at 76fe1c9   (exit 0)
+  --expect-sha 2110dec6d639f7b2e652b838e5b327e788f8e3a2
+# FREEZE CHAIN: 49/49 at 2110dec  (exit 0)
 ```
 
 The frozen head measured 45/45; the total is higher here because **the chain grew,
-not because anything changed** — S48-07 added `check-source-inventory.py` and its
-fixture runner to it. No gate regressed between the two heads, and no file under
-`content/` changed (`git diff --name-only 0e12fcd..76fe1c9 -- content/` is empty),
-so SPEC-16 16.6's "no content edits after freeze" is not engaged.
+not because anything changed** — S48-07 added the source-inventory gate and its
+runner (45 → 47), and S47-16/R-12 added the README count gate and its runner
+(47 → 49). No gate regressed, and no file under `content/` changed
+(`git diff --name-only 0e12fcd..2110dec -- content/` is empty), so SPEC-16 16.6's
+"no content edits after freeze" is not engaged.
 
 This is a companion file rather than a section of `SPRINT-48.md` because that file
 reached the 500-line document limit when S48-07 was opened, the same reason
