@@ -1,14 +1,15 @@
 # Sprint 48 — Retrospective and Acceptance (SPEC-11 11.10)
 
-**Sprint head SHA:** the S48-08 commit on `feature/rtp-beginner-tracks`.
-**Frozen head:** `0e12fcd`, the head the NCA freeze record names.
+**Sprint head SHA:** `e95ccc6` (S48-08/TM-75). **Frozen head:** `0e12fcd`, the head
+the NCA freeze record names.
 
-**Gate pass count at the sprint head: 53/53**, measured, not carried over, by the
-committed runner:
+**Gate pass count at the sprint head: 53/53 at `e95ccc6`** — measured, not carried
+over, by the committed runner:
 
 ```bash
-bash tests/gates/run_freeze_chain.sh --log /tmp/freeze.log --expect-sha <S48-08 head>
-# FREEZE CHAIN: 53/53 at <S48-08 head>  (exit 0)
+bash tests/gates/run_freeze_chain.sh --log /tmp/freeze.log \
+  --expect-sha e95ccc67f1a8deafead908c703216dc529546088
+# FREEZE CHAIN: 53/53 at e95ccc6  (exit 0)
 ```
 
 The frozen head measured 45/45; the total is higher here because **the chain grew,
@@ -16,7 +17,7 @@ not because anything changed** — S48-07 added the source-inventory gate and it
 runner (45 → 47), S47-16/R-12 added the README count gate and its runner (47 → 49),
 and S48-08 added four: the traceability gate and its runner, and the two orphaned
 runners it found (49 → 53). No gate regressed, and no file under `content/` changed
-(`git diff --name-only 0e12fcd..HEAD -- content/` is empty), so SPEC-16 16.6's
+(`git diff --name-only 0e12fcd..e95ccc6 -- content/` is empty), so SPEC-16 16.6's
 "no content edits after freeze" is not engaged.
 
 ---
@@ -92,6 +93,8 @@ row claims them:
 
 Six sprint rows stand 🟡 on named gaps rather than ✅ on a target that has not
 been met. S48-05 is ✅: its criteria are met, its gap is closed by a real browser
-gate, and what that gate does not cover is named rather than implied. S48-07
-joined them late — it is not an NCA row at all, but C-09's licensing record had
-no other home and the California trip is a place a licensing question gets asked.
+gate, and what that gate does not cover is named rather than implied. S48-07 and
+S48-08 joined late — neither is an NCA row. C-09's licensing record had no other
+home and the California trip is a place a licensing question gets asked; TM-75 was
+a gate the package named three times and never implemented, and a gate that does
+not run is the one defect a gate chain cannot report on itself.
