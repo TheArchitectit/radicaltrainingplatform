@@ -140,10 +140,21 @@ counts. Nothing enforces it: there is no gate comparing README prose to
 `content-bundle.json`, so the numbers are right by hand today, not by check. That is
 the residue, and it is why this row is 🟡 rather than ✅.
 
-**Also unowned, found by the same audit, not fixed here:** **T-31a** (PDF inventory
-with hash/license record, C-09) and **T-SC-03** (the written record of which
-`us-bucket-01` repair choice was made). Neither appears in SPEC-11's task tables, so
-the plan's "every task has exactly one sprint home" rule never reached them.
+**Also unowned, found by the same audit, and since resolved:** **T-31a** (PDF
+inventory with hash/license record, C-09) and **T-SC-03** (the written record of
+which `us-bucket-01` repair choice was made). Neither appears in SPEC-11's task
+tables, so the plan's "every task has exactly one sprint home" rule never reached
+them.
+
+- **T-SC-03 was already done** — `SPRINT-46.md` § S46-04 records the choice
+  ("corrected to real UI mutation paths") and the old predicate it replaced. The
+  audit's finding was wrong; nothing was written to "fix" it.
+- **T-31a was genuinely missing** and is now [S48-07](SPRINT-48.md):
+  [docs/SOURCE-INVENTORY.md](../SOURCE-INVENTORY.md) records all eight tracked PDFs
+  with sha256, size, class, presence and rights status, and
+  `scripts/check-source-inventory.py` fails when the record and the tree disagree —
+  including when a row claims `in-repo` for the two vendor manuals, which are
+  pointer text.
 
 ## Not verified / deferred by design
 

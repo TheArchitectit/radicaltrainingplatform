@@ -66,6 +66,18 @@ jobs:
           python3 scripts/check-nca-cheatsheet.py
           bash tests/gates/run_cheatsheet_fixtures.sh
 
+      # C-09/T-31a (S48-07): every tracked PDF carries a hash, a size and a
+      # rights status, and the record cannot claim a document the tree does
+      # not contain — the two vendor manuals are large-object pointer text,
+      # so "in-repo" for them is a failure. Fixture set:
+      # run_source_inventory_fixtures.sh seeds four lies (stale hash, unlisted
+      # PDF, TBD rights, a manual claimed present) that must each fail, plus
+      # a consistent row that must pass.
+      - name: Check source-document inventory (C-09/T-31a)
+        run: |
+          python3 scripts/check-source-inventory.py
+          bash tests/gates/run_source_inventory_fixtures.sh
+
       # REQ-AP-06/T-19: diagnosis share must stay >= 50% (fail-closed on
       # untyped items). Fixture pair: --self-test (30/30 pass, 29/31 fail
       # naming the deficit, untyped/unknown-type fail-closed).

@@ -120,7 +120,11 @@ it. This was found by the release-truth gate (`scripts/check-release-links.py`,
 S47-08) rejecting the first draft of this very section — the gate exists to
 catch claims the repository cannot keep, and it caught one here.
 
-**That is an open finding in its own right, recorded rather than fixed.** It is
+**That is an open finding in its own right, recorded rather than fixed.** The
+full record lives in [SOURCE-INVENTORY.md](SOURCE-INVENTORY.md) (C-09/T-31a,
+S48-07), which lists every tracked PDF with its hash and rights status and is
+gated by `scripts/check-source-inventory.py` so the absence cannot be papered
+over by a later description. It is
 not a licensing question: it is that two documented artifacts are absent. It
 bears on the rights review (C-03) because there is currently nothing in the
 repository to review.

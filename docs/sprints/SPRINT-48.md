@@ -21,10 +21,11 @@
 | S48-04 (T-34) | Cheatsheet correction + beta logistics cleanup + scheduling-link currency | REQ-NCA-04, C-07 | 1 | 🟡 |
 | S48-05 (T-35) | Four NCA scenarios with validators and walkthroughs | REQ-NCA-07, REQ-SC-01..06 | 2 | ✅ |
 | S48-06 (T-36) | Travel freeze per REQ-NCA-08 once itinerary confirms cutoff | REQ-NCA-08 | 1 | 🟡 |
+| S48-07 (T-31a) | Source-document inventory: every tracked PDF with hash and rights record, gated | C-09 | 2 | 🟡 |
 
 **Status key:** ✅ shipped and verified on this host · 🟡 shipped and gated, with named verification gaps listed under the row's *Not verified* notes · ⚪ not started.
 
-**Total:** 12 points
+**Total:** 14 points
 
 ---
 
@@ -440,26 +441,60 @@ matching. Core 263/263 · Desktop 51/51 · coverage 92.07% · web fixtures 26/26
 the must-fail self-test · NCA scenarios 13/13 · NCA lab browser 17/17 · demo
 sweep 50 scenarios, all incomplete → complete.
 
+### S48-07 (T-31a): Source-Document Inventory
+**As an** owner, **I want** every source document in the repository to carry a
+hash and a rights status, **so that** a licensing question is answered from a
+record rather than from memory.
+
+**This row was opened late, and the reason is worth recording.** T-31a has no
+row in SPEC-11's task tables — SPEC-14 assigns it to C-09, and C-09's passing
+condition names it, but the plan's "every task has exactly one sprint home" rule
+never reached it. It was found by a coverage audit and stood unowned in
+`SPRINT-47-RETROSPECTIVE.md` until this row. **T-SC-03**, the other task that
+audit named, was checked and found already documented (`SPRINT-46.md` § S46-04
+records the `us-bucket-01` repair choice); only T-31a was actually missing.
+
+**Acceptance Criteria:**
+- [x] Every tracked PDF appears in `docs/SOURCE-INVENTORY.md` with its sha256, byte size, class, presence and rights status
+- [x] `scripts/check-source-inventory.py` fails on an unlisted PDF, a phantom row, a stale hash, a wrong size, a placeholder rights cell, and a row claiming `in-repo` for a file that is pointer text
+- [x] Failing fixtures for four distinct lies plus a passing fixture (`tests/gates/run_source_inventory_fixtures.sh`), wired into CI and the freeze chain
+- [ ] The rights statements are *correct* — a human decision, not a gate's; the record says "review not performed" for the six ingested documents rather than assuming the license that is not in effect
+
+**Status 🟡 because:** the record is complete and enforced, but two things it
+names are open and are not the row's to close — `LICENSE` is proposed rather than
+in effect (owner confirmation, [LICENSE-DECISION.md](../../docs/LICENSE-DECISION.md)),
+and no rights review has been performed on the ingested documents. C-09's three
+clauses now stand at two satisfied, one pending a human.
+
+**The finding the row carries.** The two vendor manuals are **not in the
+repository**: `docs/AHV-Admin-Guide-v11_0.pdf` and
+`docs/Prism-Central-Guide-vpc_7_5.pdf` are 132 and 133 bytes of large-object
+pointer text, and there is no `.gitattributes`, so no filter is configured and a
+clone gets the pointer text where a manual is claimed. Two documents that cite
+them — `docs/DOC-REVIEW-REPORT.md` ("Based on review of: …") and the ingested
+change package ("in the public repository through Git LFS") — describe a state
+the tree does not have. Both are recorded against the inventory so the claim and
+the evidence are read together. The `Presence` column exists so the record cannot
+repeat that mistake: `pointer-only` is truthful, `in-repo` for pointer text fails.
+
+**Files:** `docs/SOURCE-INVENTORY.md` (new), `scripts/check-source-inventory.py`
+(new), `tests/gates/run_source_inventory_fixtures.sh` (new),
+`tests/gates/fixtures/source-inventory/` (5 fixture trees)
+
+**Commands:** `python3 scripts/check-source-inventory.py`;
+`bash tests/gates/run_source_inventory_fixtures.sh`
+
+**Not verified:** that any rights review has been performed for the ingested
+documents; that the pointer objects exist on any remote (the gate reads bytes in
+the tree and contacts nothing); the contents of the two manuals (not here, so
+not opened); and that the list is exhaustive of the project's *source material*
+— it enumerates tracked PDFs, and the other ingested formats are out of its
+scope by its own definition.
+
 ---
 
-## Sprint Acceptance (October 25–28 California-ready definition, SPEC-00 00.5)
+## Sprint Acceptance and Retrospective
 
-The NCA track presents the current official blueprint (sections, objective IDs, AOS 7.5 / AHV 11.0 / pc.7.5), 14 short lessons, 40 reviewed remapped-or-authored items, four tested deterministic scenarios, and a corrected objective map; beta labels survive only where a retained claim was checked. All SPEC-08/10 gates green at the frozen head, including the repaired vulnerability gate proven by its must-fail fixture.
-
-**Where the sprint actually stands against that target.** Every structural piece
-is in place and gated — the blueprint, the 14 lessons, the 40-item pilot, the four
-scenarios, the remap inventory, the corrected companion surfaces, and 45/45 gates
-green at `0e12fcd`. Three words in the paragraph above are not yet true, and no
-row claims them:
-
-- **"reviewed"** — all 180 NCA items are excluded by the RedEye gate; no item has
-  a passing log. The pilot ships at `draft-preview`.
-- **"beta labels survive only where a retained claim was checked"** — no claim was
-  checked against the current guide, so the surviving beta labels are the
-  *unexamined* ones, which is the honest state and not the finished one.
-- **"frozen head"** — the head is recorded and reproducible, but the departure
-  cutoff is unconfirmed (ASM-09), so the freeze is a candidate, not a closure.
-
-Five sprint rows stand 🟡 on those named gaps rather than ✅ on a target that has
-not been met. S48-05 is ✅: its criteria are met, its gap is closed by a real
-browser gate, and what that gate does not cover is named rather than implied.
+Moved to [SPRINT-48-RETROSPECTIVE.md](SPRINT-48-RETROSPECTIVE.md) — this file hit the
+500-line limit. The companion carries the acceptance target, where the sprint stands
+against it, and the gate count at the head.
