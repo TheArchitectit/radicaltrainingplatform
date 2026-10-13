@@ -60,6 +60,14 @@ RELEASED_LESSONS = {
         "az4_1", "az4_2", "az4_3",
         "az5_1", "az5_2",
     ],
+    # Sprints 27-28: the second vendor slice. One lesson per objective in the
+    # AWS-SAA manifest — all 14 released, so every objective has a lesson.
+    "AWS-SAA": [
+        "aws1_1", "aws1_2", "aws1_3",
+        "aws2_1", "aws2_2",
+        "aws3_1", "aws3_2", "aws3_3", "aws3_4", "aws3_5",
+        "aws4_1", "aws4_2", "aws4_3", "aws4_4",
+    ],
 }
 RELEASED_BANKS = {
     "COMPTIA-A-1201": ["core1-a2-fixtures.md"],
@@ -77,6 +85,8 @@ RELEASED_BANKS = {
     "NCA-75": ["nca75-pilot.md"],
     # Sprints 27-28: the AZ-104 beginner bank, one file, 50 items.
     "AZ-104": ["az104-beginner.md"],
+    # Sprints 27-28: the AWS-SAA beginner bank, one file, 50 items.
+    "AWS-SAA": ["aws-saa-beginner.md"],
 }
 
 
@@ -261,6 +271,24 @@ def main():
             ("az4_3", "Name resolution and load balancing", "4"),
             ("az5_1", "Azure Monitor", "5"),
             ("az5_2", "Backup and recovery", "5"),
+        ],
+        # Sprints 27-28: one module per AWS-SAA objective, keyed by the lesson id
+        # in the manifest's lessonIds. Domain number is the manifest section.
+        "AWS-SAA": [
+            ("aws1_1", "Secure access to AWS resources", "1"),
+            ("aws1_2", "Secure workloads and applications", "1"),
+            ("aws1_3", "Data security controls", "1"),
+            ("aws2_1", "Scalable and loosely coupled architectures", "2"),
+            ("aws2_2", "Highly available and fault-tolerant architectures", "2"),
+            ("aws3_1", "High-performing storage", "3"),
+            ("aws3_2", "High-performing and elastic compute", "3"),
+            ("aws3_3", "High-performing databases", "3"),
+            ("aws3_4", "High-performing networks", "3"),
+            ("aws3_5", "Data ingestion and transformation", "3"),
+            ("aws4_1", "Cost-optimized storage", "4"),
+            ("aws4_2", "Cost-optimized compute", "4"),
+            ("aws4_3", "Cost-optimized databases", "4"),
+            ("aws4_4", "Cost-optimized networks", "4"),
         ],
     }
     lessons = {}

@@ -6,7 +6,7 @@
   "disclaimer": "This is independent study material. It is not official training and is not endorsed or approved by CompTIA, Nutanix, or any other certification body.",
   "compiled": {
     "path": "RadicalTrainingPlatform.Web/js/study-content.js",
-    "sha256": "6aa4fb3a804d13816255d557de3da64f09df115a4fdb601a1dc0402f58b8accf"
+    "sha256": "803fcb4e8d8ec58277819d7065205dc7f12f0c3ed9cf762176491f74c4d778b2"
   },
   "exams": {
     "COMPTIA-A-1201": {
@@ -268,12 +268,101 @@
           "sha256": "6974dda2be342daf0eeae595f412d72a119fecea842298eb4a14d8c3275108c4"
         }
       ]
+    },
+    "AWS-SAA": {
+      "manifest": {
+        "path": "content/exams/AWS-SAA/exam.json",
+        "sha256": "5599a3dffbd398cc668ab596d7757ea325bd49dabddb64a3a440c16cf49dcdbe"
+      },
+      "lessons": [
+        {
+          "lessonId": "aws1_1",
+          "path": "content/exams/AWS-SAA/lessons/aws1_1.md",
+          "sha256": "a0033791885e3c7c79ba9a4058894d720f74a152930d56a06916a360f21bd6b2"
+        },
+        {
+          "lessonId": "aws1_2",
+          "path": "content/exams/AWS-SAA/lessons/aws1_2.md",
+          "sha256": "9915438f1cf76894ee4db523a5762696d90dc75f146f5d100e58f2bf15a573fc"
+        },
+        {
+          "lessonId": "aws1_3",
+          "path": "content/exams/AWS-SAA/lessons/aws1_3.md",
+          "sha256": "f2b5c52f7b5ba2762b1f61cf2cd63b349eb413b4e3fdbc514000d7f608c09e7b"
+        },
+        {
+          "lessonId": "aws2_1",
+          "path": "content/exams/AWS-SAA/lessons/aws2_1.md",
+          "sha256": "0ba5d3246e0eddd2672e44b712bab557112d9c3f721df8125cecd81742e71e48"
+        },
+        {
+          "lessonId": "aws2_2",
+          "path": "content/exams/AWS-SAA/lessons/aws2_2.md",
+          "sha256": "77b86b9dd47678eb87e2c1728673fcb07b22fb85dd391bf0161ac6df63725b4e"
+        },
+        {
+          "lessonId": "aws3_1",
+          "path": "content/exams/AWS-SAA/lessons/aws3_1.md",
+          "sha256": "aa9bfe7d20b077cffa21bbac360f6ddc1c0a8b6c8eb987e94c4c8c32ab162020"
+        },
+        {
+          "lessonId": "aws3_2",
+          "path": "content/exams/AWS-SAA/lessons/aws3_2.md",
+          "sha256": "ce3d138632efefc473b3a329f0120b8cd447edc51f35af05c019440821cdc4ca"
+        },
+        {
+          "lessonId": "aws3_3",
+          "path": "content/exams/AWS-SAA/lessons/aws3_3.md",
+          "sha256": "48d1ddcbbb60780a225a10c51ad1f3fa60d77df782fb15a6ae731361893fd94b"
+        },
+        {
+          "lessonId": "aws3_4",
+          "path": "content/exams/AWS-SAA/lessons/aws3_4.md",
+          "sha256": "9714ac2df642a9f4cf11e47d631ddc5f4eef4a542785299d13d747dc6f41167e"
+        },
+        {
+          "lessonId": "aws3_5",
+          "path": "content/exams/AWS-SAA/lessons/aws3_5.md",
+          "sha256": "0fb071f0987b52e1803e8c93099b71ecbb3ebc3abf4d8768c18b9f2d85e135de"
+        },
+        {
+          "lessonId": "aws4_1",
+          "path": "content/exams/AWS-SAA/lessons/aws4_1.md",
+          "sha256": "479cba8c20af376709ed6f0b273fbbb66c396000893ef01e4b0e711821d23053"
+        },
+        {
+          "lessonId": "aws4_2",
+          "path": "content/exams/AWS-SAA/lessons/aws4_2.md",
+          "sha256": "06459df4af927fa1a631c0cee266239bd5aaa1c69536d452b014fc056c39ab87"
+        },
+        {
+          "lessonId": "aws4_3",
+          "path": "content/exams/AWS-SAA/lessons/aws4_3.md",
+          "sha256": "b3ca721a732bb63b65ba6bf3ce26ba178e1a03be5a70c0debbdfc363a3b0ee3b"
+        },
+        {
+          "lessonId": "aws4_4",
+          "path": "content/exams/AWS-SAA/lessons/aws4_4.md",
+          "sha256": "5b8c6ca81d0e806c2170740c2b2e4d3f2eb8881b9d58315ae740f3925bd1ccd9"
+        }
+      ],
+      "banks": [
+        {
+          "bank": "aws-saa-beginner.md",
+          "path": "content/exams/AWS-SAA/questions/aws-saa-beginner.md",
+          "sha256": "61c7cb542f0c9b5e539555c55c45cc5289e1c5acdf404180b122ff49ae835348"
+        }
+      ]
     }
   },
   "tracks": [
     {
       "path": "content/tracks/track-aplus/track.json",
       "sha256": "64aa0c16d71d847fc0812f6372570bb46e57ca02e1211f1ec079f2ab2bbeb64d"
+    },
+    {
+      "path": "content/tracks/track-aws/track.json",
+      "sha256": "51c0bb76fb837a350817e3de9910315d9716f27f9e3e5668047b6cdb9267bbb5"
     },
     {
       "path": "content/tracks/track-azure/track.json",
@@ -1259,6 +1348,356 @@
       "itemId": "AZ-104/az104-beginner.md/Q50",
       "path": "content/provenance/AZ-104/Q50.json",
       "sha256": "3715ed7b0ec3766572875c2315d554af032a48bfb8edfd4b3337d5144c89411d",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "AWS-SAA/aws-saa-beginner.md/Q1",
+      "path": "content/provenance/AWS-SAA/Q1.json",
+      "sha256": "09c08e045b1714d14e9e64725a09cfc3c0f4158930be16eb5ee3e664d3b29135",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "AWS-SAA/aws-saa-beginner.md/Q2",
+      "path": "content/provenance/AWS-SAA/Q2.json",
+      "sha256": "f4bd5b8df770004a5b9d714dff90f777186831400aed5bf4a14721b4c081a2cd",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "AWS-SAA/aws-saa-beginner.md/Q3",
+      "path": "content/provenance/AWS-SAA/Q3.json",
+      "sha256": "ed715fc0677bbee6b886651a9640810e01fc1864d5d1b3251ae5f509f47103f4",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "AWS-SAA/aws-saa-beginner.md/Q4",
+      "path": "content/provenance/AWS-SAA/Q4.json",
+      "sha256": "282b7f7a51facec94c2e69fa66dbbf0ad54da85b3614c091791f36eb392d09ff",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "AWS-SAA/aws-saa-beginner.md/Q5",
+      "path": "content/provenance/AWS-SAA/Q5.json",
+      "sha256": "2b0e2455ab69d18628fa89355ba104a681e03d0ae8b165b72e417c4bbb1ed05f",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "AWS-SAA/aws-saa-beginner.md/Q6",
+      "path": "content/provenance/AWS-SAA/Q6.json",
+      "sha256": "8289d3ebc4f30a1bc1181cb9ad3c761fd225050e1255ce16f61a6c83d8034f56",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "AWS-SAA/aws-saa-beginner.md/Q7",
+      "path": "content/provenance/AWS-SAA/Q7.json",
+      "sha256": "8bb737dc579620ec8d39d50fdf29ee4cfcca6bcb99b7ce4f45e8c72768cd4645",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "AWS-SAA/aws-saa-beginner.md/Q8",
+      "path": "content/provenance/AWS-SAA/Q8.json",
+      "sha256": "79fc58ea10ff426e44f886412b92238c9f902ba263d406fd49209caaf475e89d",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "AWS-SAA/aws-saa-beginner.md/Q9",
+      "path": "content/provenance/AWS-SAA/Q9.json",
+      "sha256": "3fa9af2597692e3d6faa60a19e28dad9621e0081602ce2bfb12dc75c5267368d",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "AWS-SAA/aws-saa-beginner.md/Q10",
+      "path": "content/provenance/AWS-SAA/Q10.json",
+      "sha256": "ad5b44071bffb7771e77153831abdbed33c4971bfa193baf7575f93f2466b0f9",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "AWS-SAA/aws-saa-beginner.md/Q11",
+      "path": "content/provenance/AWS-SAA/Q11.json",
+      "sha256": "bb80c737dd01cc2a60763c0adf0c97033e67ba6e64643d9d811da1648b0a1068",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "AWS-SAA/aws-saa-beginner.md/Q12",
+      "path": "content/provenance/AWS-SAA/Q12.json",
+      "sha256": "b3fa4257566295d8f44dc05dc236ca362358ac767decfa6fc65e9e7400a76b58",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "AWS-SAA/aws-saa-beginner.md/Q13",
+      "path": "content/provenance/AWS-SAA/Q13.json",
+      "sha256": "f75b7af1ca486e4085fbfa33c4de055beb71ca8708a6a255cd1b46b7ec98a862",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "AWS-SAA/aws-saa-beginner.md/Q14",
+      "path": "content/provenance/AWS-SAA/Q14.json",
+      "sha256": "9b2829ade546a7776bde8dbc69659485eeb5b63a6b7c9309e1ab72c3a3a1b9b2",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "AWS-SAA/aws-saa-beginner.md/Q15",
+      "path": "content/provenance/AWS-SAA/Q15.json",
+      "sha256": "77be3ab7d818e6777b79b38f57cf13ccc4580c494b022b7e379d426a057a1fc3",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "AWS-SAA/aws-saa-beginner.md/Q16",
+      "path": "content/provenance/AWS-SAA/Q16.json",
+      "sha256": "d3fba1fe1cf4dd277c23d045ec6743a068798a8667b1eb249d528430b641beee",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "AWS-SAA/aws-saa-beginner.md/Q17",
+      "path": "content/provenance/AWS-SAA/Q17.json",
+      "sha256": "ac46f419988339146be61c688008bbd3623a21af73d53a442f210fe8c3767cad",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "AWS-SAA/aws-saa-beginner.md/Q18",
+      "path": "content/provenance/AWS-SAA/Q18.json",
+      "sha256": "7bb376ec12daec853b0c6605216152ee8b5c7b5add42d41fc8366b933e59e913",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "AWS-SAA/aws-saa-beginner.md/Q19",
+      "path": "content/provenance/AWS-SAA/Q19.json",
+      "sha256": "9c8e4e33c7ef5ba9606ee60a4bcde7fdee2a7f9f1760b5f78869a9ceb18952c6",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "AWS-SAA/aws-saa-beginner.md/Q20",
+      "path": "content/provenance/AWS-SAA/Q20.json",
+      "sha256": "34fb35fcd1d7e22db28301eeeae978a6c642dc625cb862bbbba2a4a4f1851391",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "AWS-SAA/aws-saa-beginner.md/Q21",
+      "path": "content/provenance/AWS-SAA/Q21.json",
+      "sha256": "bea493790511d52e13f3fe170b0de25db29d4d6bc8dfb10c55afc7f7f1c8703d",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "AWS-SAA/aws-saa-beginner.md/Q22",
+      "path": "content/provenance/AWS-SAA/Q22.json",
+      "sha256": "11d796ff55d30731d9dfede11577288c6b4d18c54435242db41012b17f2a5d63",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "AWS-SAA/aws-saa-beginner.md/Q23",
+      "path": "content/provenance/AWS-SAA/Q23.json",
+      "sha256": "849f778efb4d22111e000c8cb948daa45b6c9b02776dc68fd1b28f68d7e3cc40",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "AWS-SAA/aws-saa-beginner.md/Q24",
+      "path": "content/provenance/AWS-SAA/Q24.json",
+      "sha256": "dfd261301ae9398035fddd5eb2483a4f03e1b571477cc2af213b2b3f27c87836",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "AWS-SAA/aws-saa-beginner.md/Q25",
+      "path": "content/provenance/AWS-SAA/Q25.json",
+      "sha256": "73cc5f79d7ae6b2e1e5bebf644aa6d5b72f17cb65e680168a17117d27762798b",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "AWS-SAA/aws-saa-beginner.md/Q26",
+      "path": "content/provenance/AWS-SAA/Q26.json",
+      "sha256": "26ac36af36cfe9ad62aa503973b5818ad6791672760080f6fae1b5c97441f307",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "AWS-SAA/aws-saa-beginner.md/Q27",
+      "path": "content/provenance/AWS-SAA/Q27.json",
+      "sha256": "e88bc74563fbbcc503e83a38a7551a3f04e14f2b97519d1fe85806f5a9533b78",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "AWS-SAA/aws-saa-beginner.md/Q28",
+      "path": "content/provenance/AWS-SAA/Q28.json",
+      "sha256": "4500d3313883e135d1515d9090c4725df7ff5f020c34749e9955cbc205bc6d2d",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "AWS-SAA/aws-saa-beginner.md/Q29",
+      "path": "content/provenance/AWS-SAA/Q29.json",
+      "sha256": "d5bc664457e734d3da54ff23a56c9ea1b87ab78380d974b4f4ef4ae6ccab5dd6",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "AWS-SAA/aws-saa-beginner.md/Q30",
+      "path": "content/provenance/AWS-SAA/Q30.json",
+      "sha256": "121bd9d0c53a85a05bfb28e19ec282b9c1a5831eb731f844aef99d09e4d8045f",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "AWS-SAA/aws-saa-beginner.md/Q31",
+      "path": "content/provenance/AWS-SAA/Q31.json",
+      "sha256": "dcf5c02a3aa6e51cbec570e1a1d8212d4148d596504af5216c0493fc1616a3b5",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "AWS-SAA/aws-saa-beginner.md/Q32",
+      "path": "content/provenance/AWS-SAA/Q32.json",
+      "sha256": "35291823d04ee8e195dc2caf3d7c965e56627e3577abfc98c60fff459f10aca2",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "AWS-SAA/aws-saa-beginner.md/Q33",
+      "path": "content/provenance/AWS-SAA/Q33.json",
+      "sha256": "fe9f9f16035f51861d4dbfc9ad27532ab32a38c0655acc43f4995145260bdc04",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "AWS-SAA/aws-saa-beginner.md/Q34",
+      "path": "content/provenance/AWS-SAA/Q34.json",
+      "sha256": "89fe7a59e3489d659e11b9737761b22249eecdba8873483ec20db1291a09e930",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "AWS-SAA/aws-saa-beginner.md/Q35",
+      "path": "content/provenance/AWS-SAA/Q35.json",
+      "sha256": "79868f430b270a69afd69c3f72341960c445129061b98da7c7cffd9892366760",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "AWS-SAA/aws-saa-beginner.md/Q36",
+      "path": "content/provenance/AWS-SAA/Q36.json",
+      "sha256": "d782dbed182b9d6e88b09fe2355b5791074135873f09ac705eaceb2c89b48dfc",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "AWS-SAA/aws-saa-beginner.md/Q37",
+      "path": "content/provenance/AWS-SAA/Q37.json",
+      "sha256": "4ad8e66b71603136da8a5bf399c38b1be1fd3401791f6016fd9387f04a68e9c8",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "AWS-SAA/aws-saa-beginner.md/Q38",
+      "path": "content/provenance/AWS-SAA/Q38.json",
+      "sha256": "7419ce962721327fb7840f45b8f3e2fc2fee0163aeaf33f2b297956a03295f99",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "AWS-SAA/aws-saa-beginner.md/Q39",
+      "path": "content/provenance/AWS-SAA/Q39.json",
+      "sha256": "b6867a19f14e76deb16efceb314b95b1f7e6e784d2168cb6f43f70ecc178879a",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "AWS-SAA/aws-saa-beginner.md/Q40",
+      "path": "content/provenance/AWS-SAA/Q40.json",
+      "sha256": "a183a39c9dbe829aaa47d132e72065c10bbbe4199d68a44a0f024801becc6ada",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "AWS-SAA/aws-saa-beginner.md/Q41",
+      "path": "content/provenance/AWS-SAA/Q41.json",
+      "sha256": "fc465af8aecc04d467ef8890d6a08ac739978f89ec4c20b54111954d2714a278",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "AWS-SAA/aws-saa-beginner.md/Q42",
+      "path": "content/provenance/AWS-SAA/Q42.json",
+      "sha256": "146e397a7d772e764c7e51c6343f364a4e2a023331ecc35c530a0ee6faadc77c",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "AWS-SAA/aws-saa-beginner.md/Q43",
+      "path": "content/provenance/AWS-SAA/Q43.json",
+      "sha256": "465a7b2e513ee7ea929ad8e2b4b6e519721c39ed43f8b06f023e47983b11a29a",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "AWS-SAA/aws-saa-beginner.md/Q44",
+      "path": "content/provenance/AWS-SAA/Q44.json",
+      "sha256": "5abcd24f0f588029ab47b9f1d55999ad6e299aa94d689f4089d7e6f36786822e",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "AWS-SAA/aws-saa-beginner.md/Q45",
+      "path": "content/provenance/AWS-SAA/Q45.json",
+      "sha256": "a227f0086b793416787cd7c93ec706548ea22d15be3009048bad71b2ab609b9b",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "AWS-SAA/aws-saa-beginner.md/Q46",
+      "path": "content/provenance/AWS-SAA/Q46.json",
+      "sha256": "83ad1c3bf106b750a53f1dd6b00629584443ab1d18fe999416211fe33d9e5259",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "AWS-SAA/aws-saa-beginner.md/Q47",
+      "path": "content/provenance/AWS-SAA/Q47.json",
+      "sha256": "f263e725102ca567be52c34b808917b295e8d2e5c4936252f11275ab92e158e4",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "AWS-SAA/aws-saa-beginner.md/Q48",
+      "path": "content/provenance/AWS-SAA/Q48.json",
+      "sha256": "1ff7c3f6bdb308b88756af11b85b727f3af3c870e5c08f121e1bfcf7d7a009a2",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "AWS-SAA/aws-saa-beginner.md/Q49",
+      "path": "content/provenance/AWS-SAA/Q49.json",
+      "sha256": "b42f91577dce2ce96d43893dbfc558a59ce46a4508cc4826dd17799dd9c0923d",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "AWS-SAA/aws-saa-beginner.md/Q50",
+      "path": "content/provenance/AWS-SAA/Q50.json",
+      "sha256": "51784a6163e5e46afb11217628e7a571c0505d6bba54ad446b23bdce1d7e0f8d",
       "status": "draft",
       "reviewDate": ""
     }

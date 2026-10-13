@@ -205,9 +205,18 @@ S1 (CI green) -> S2 (tests) -> S3 (DI) -> S6 (v0.1) -> S7 (MVVM) -> S9 (persiste
 
 ### Phase 4: Enterprise (Sprints 27-44)
 
-| Sprint | Name | Duration | Link |
-|---|---|---|---|
-| Sprint 27-28 | Multi-Vendor Plugin Architecture | Weeks 53-56 | [SPRINT-27-28.md](./SPRINT-27-28.md) |
+Sprint 27-28 is the first Phase 4 pair to execute. It landed the vendor-neutral
+plugin layer and proved it with two vendor packs (AZ-104, then AWS-SAA), one
+pack per commit, each with its own rights record. **No source was reviewed for
+either pack** — `sourceReviewDate` holds the authoring date — and **no item
+passes RedEye**, so both ship at `draft-preview` under the `beginner preview`
+label. Read the pack rights records before trusting the manifests; the
+reconciliation with `RTP-Platform-Plan-v2` is in
+[SPRINT-27-28.md](./SPRINT-27-28.md#execution-record-added-2026-10-12).
+
+| Sprint | Name | Duration | Status | Link |
+|---|---|---|---|---|
+| Sprint 27-28 | Multi-Vendor Plugin Architecture | Weeks 53-56 | 🟢 Landed — 55/55 freeze chain; plugin layer + AZ-104 and AWS-SAA packs at `draft-preview` | [SPRINT-27-28.md](./SPRINT-27-28.md) |
 | Sprint 29-30 | Cloud API Backend | Weeks 57-60 | [SPRINT-29-30.md](./SPRINT-29-30.md) |
 | Sprint 31-32 | Authentication & Authorization | Weeks 61-64 | [SPRINT-31-32.md](./SPRINT-31-32.md) |
 | Sprint 33-34 | Social & Study Groups | Weeks 65-68 | [SPRINT-33-34.md](./SPRINT-33-34.md) |

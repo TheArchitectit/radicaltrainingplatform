@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "examId": "AWS-SAA",
+  "vendor": "Amazon Web Services",
+  "displayName": "AWS Certified Solutions Architect - Associate (SAA-C03)",
+  "officialVersion": "SAA-C03",
+  "objectivesDocVersion": "SAA-C03",
+  "sourceUrl": "https://docs.aws.amazon.com/aws-certification/latest/solutions-architect-associate-03/solutions-architect-associate-03.html",
+  "sourceReviewDate": "2026-10-12",
+  "productVersions": {
+    "AWS": "rolling service — no versioned release; blueprint identified as SAA-C03"
+  },
+  "studyAllocationLabel": "Per-section study allocation chosen to track the published weight bands (30 / 26 / 24 / 20 percent), not a published item count. The published bands are percentages, so the item counts below are a study choice: 15 / 13 / 12 / 10.",
+  "objectivesNote": "The section and objective structure below is derived from the public SAA-C03 exam guide (the four domain pages listing task statements and their skills) fetched by the authoring tool on 2026-10-12. It is not a human source review, and the guide's own task-statement and bullet text has been paraphrased into objective titles rather than copied. The guide carries no dated revision marker the tool could confirm, so objectivesDocVersion holds the exam code rather than a date.",
+  "sections": [
+    {
+      "number": "1",
+      "title": "Design secure architectures",
+      "studyItemAllocation": 15,
+      "objectives": [
+        { "id": "1.1", "title": "Design secure access to AWS resources", "lessonIds": ["aws1_1"] },
+        { "id": "1.2", "title": "Design secure workloads and applications", "lessonIds": ["aws1_2"] },
+        { "id": "1.3", "title": "Determine appropriate data security controls", "lessonIds": ["aws1_3"] }
+      ]
+    },
+    {
+      "number": "2",
+      "title": "Design resilient architectures",
+      "studyItemAllocation": 13,
+      "objectives": [
+        { "id": "2.1", "title": "Design scalable and loosely coupled architectures", "lessonIds": ["aws2_1"] },
+        { "id": "2.2", "title": "Design highly available and fault-tolerant architectures", "lessonIds": ["aws2_2"] }
+      ]
+    },
+    {
+      "number": "3",
+      "title": "Design high-performing architectures",
+      "studyItemAllocation": 12,
+      "objectives": [
+        { "id": "3.1", "title": "Determine high-performing and scalable storage solutions", "lessonIds": ["aws3_1"] },
+        { "id": "3.2", "title": "Design high-performing and elastic compute solutions", "lessonIds": ["aws3_2"] },
+        { "id": "3.3", "title": "Determine high-performing database solutions", "lessonIds": ["aws3_3"] },
+        { "id": "3.4", "title": "Determine high-performing and scalable network architectures", "lessonIds": ["aws3_4"] },
+        { "id": "3.5", "title": "Determine high-performing data ingestion and transformation solutions", "lessonIds": ["aws3_5"] }
+      ]
+    },
+    {
+      "number": "4",
+      "title": "Design cost-optimized architectures",
+      "studyItemAllocation": 10,
+      "objectives": [
+        { "id": "4.1", "title": "Design cost-optimized storage solutions", "lessonIds": ["aws4_1"] },
+        { "id": "4.2", "title": "Design cost-optimized compute solutions", "lessonIds": ["aws4_2"] },
+        { "id": "4.3", "title": "Design cost-optimized database solutions", "lessonIds": ["aws4_3"] },
+        { "id": "4.4", "title": "Design cost-optimized network architectures", "lessonIds": ["aws4_4"] }
+      ]
+    }
+  ],
+  "questionPolicy": { "authorship": "original", "review": "human-required" },
+  "gaps": [
+    "2.1 workflow orchestration with AWS Step Functions — named in the task statement, no lesson or item covers it",
+    "3.2 selecting the resource type and size for a serverless function (for example the amount of Lambda memory) — named in the task statement, no lesson or item covers it"
+  ]
+}

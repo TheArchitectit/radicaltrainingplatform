@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "trackId": "track-aws",
+  "title": "AWS Certified Solutions Architect Associate SAA-C03 Beginner Track",
+  "examIds": ["AWS-SAA"],
+  "audience": "beginners preparing for AWS Certified Solutions Architect - Associate (SAA-C03)",
+  "previewLabel": "beginner preview",
+  "disclaimer": "This is independent study material. It is not official training and is not endorsed or approved by CompTIA, Nutanix, or any other certification body.",
+  "order": 5
+}
