@@ -115,6 +115,34 @@ Every row names its requirement IDs, the test type (unit / integration / E2E / g
 | TM-74 | Scenario validator scan: constant-true fixture fails | gate | REQ-SC-01 |
 | TM-75 | Every gate in this package lists its failing+passing fixture in the release evidence | doc gate | SPEC-10 |
 
+## TM-94 series — index completion (TM-75 findings)
+
+`scripts/check-traceability.py` implements TM-75 and found sixteen identifiers
+declared in SPEC-02..SPEC-10 with no row above. These rows close that. Each
+names the evidence that actually exists, or says plainly that none does — a row
+naming no gate is a **named gap**, not a covered requirement.
+
+| ID | Test | Type | Requirements |
+|---|---|---|---|
+| TM-94 | A+ virtualization label on the PE simulator link (REQ-AP-04) | manual | REQ-AP-04 — **named gap**: lesson A4 is not in the October cut and the label string is absent from the shipped artifact |
+| TM-95 | A+ worked examples carry the label; no fake interactive completion (REQ-AP-05) | manual | REQ-AP-05 — **named gap**: no gate; module A3/B1 render as worked examples |
+| TM-96 | Diagnosis share ≥50% of scored A+ items, fail-closed on untyped | gate | REQ-AP-06 — `scripts/check-item-types.py` + `--self-test` |
+| TM-97 | Demo tutor prompt resolves to the reviewed DNS lesson | eval | REQ-AP-07 — `tests/gates/tutor-eval.mjs` via `run_tutor_eval.sh` |
+| TM-98 | Manifest source fields present; stale review date warns loudly | gate | REQ-MAN-06 — `scripts/validate-manifests.py` |
+| TM-99 | Remap inventory: every itemId resolves, no row lacks a review state, ID stability; unmapped objectives reported as the authoring gap | gate | REQ-NCA-06 — `scripts/check-nca-remap.py` + `run_remap_fixtures.sh` |
+| TM-100 | Four NCA scenarios boot, run and report both states | E2E + gate | REQ-NCA-07 — `run_nca_lab_fixtures.sh`, `tests/e2e/nca-lab-web.mjs` |
+| TM-101 | Freeze before travel: recorded head, gates green, no content edits after | doc | REQ-NCA-08 — freeze evidence + `run_freeze_chain.sh`; departure cutoff unconfirmed (ASM-09) — **named gap** |
+| TM-102 | Network+ declared gaps render as labeled worked examples | manual | REQ-NP-04 — **named gap**: no gate |
+| TM-103 | PE/PC VLAN lab stays out of October scope until mutations documented | doc | REQ-NP-05 — out of scope by the requirement's own text |
+| TM-104 | Demo tutor prompt resolves to the N5 gateway lesson | eval | REQ-NP-06 — `tests/gates/tutor-eval.mjs` via `run_tutor_eval.sh` |
+| TM-105 | Reset restores the exact seed, proven per scenario in the sweep | E2E | REQ-SC-06 — `tests/gates/web/demo-sweep-report.mjs` (fresh station must report incomplete; walkthrough must complete) |
+| TM-106 | Bridge surface registers exactly what it documents; no removed handler returns | gate | R-05 — `scripts/check-legacy-bridge.py` + `run_bridge_surface_fixtures.sh` |
+| TM-107 | Persistence wired end to end: save, restore after reload, honest failure | E2E + unit | R-06 — `tests/gates/web/progress-store.mjs`, `study-continuation.mjs`; Desktop.Tests (built by CI, executed by the chain's MTP runner) |
+| TM-108 | LICENSE present; owner confirmation logged | doc | R-10 — HG-01 owner gate, **open**: the file drop is deferred by design ([LICENSE-DECISION.md](../../LICENSE-DECISION.md)) |
+| TM-109 | README counts, badge and release state match the generated manifest | gate | R-12 — `scripts/check-readme-counts.py` + `run_readme_counts_fixtures.sh` |
+
 ## Requirement-to-test index
 
-Every REQ- and R- identifier in SPEC-02 through SPEC-10 maps to at least one TM row: MAN→TM-11..13; UI→TM-31..37,44,47; BRAND→TM-31/36/37; DEMO→TM-41..48; AP→TM-22/37; NP→TM-23/29a; NCA→TM-24..27,29b; SC→TM-41..46,74; AI→TM-61..67; XPAT→TM-51..53; R-01→TM-73; R-02→TM-45; R-03→TM-17; R-04→TM-18; R-07→TM-14/15; R-08→TM-28; R-09→TM-29/37; CI/PKG→TM-54..58,71..73. The release record cites this index; an unmapped requirement fails the doc gate (TM-75).
+Every REQ- and R- identifier in SPEC-02 through SPEC-10 maps to at least one TM row: MAN→TM-11..13,98; UI→TM-31..37,44,47; BRAND→TM-31/36/37; DEMO→TM-41..48; AP→TM-22/37,94..97; NP→TM-23/29a,102..104; NCA→TM-24..27,29b,99..101; SC→TM-41..46,74,105; AI→TM-61..67; XPAT→TM-51..53; R-01→TM-73; R-02→TM-45; R-03→TM-17; R-04→TM-18; R-05→TM-106; R-06→TM-107; R-07→TM-14/15; R-08→TM-28; R-09→TM-29/37; R-10→TM-108; R-12→TM-109; CI/PKG→TM-54..58,71..73.
+
+The release record cites this index. **TM-75 is implemented**, not asserted: `scripts/check-traceability.py` fails on any declared identifier with no row and on any fixture runner neither wired into the chain nor declared chain-excluded with a reason. Running it is what found the sixteen rows in the TM-94 series above — before S48-08 the index line claimed a coverage the table did not have, and nothing could tell.

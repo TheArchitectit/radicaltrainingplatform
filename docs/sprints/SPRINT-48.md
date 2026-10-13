@@ -22,10 +22,11 @@
 | S48-05 (T-35) | Four NCA scenarios with validators and walkthroughs | REQ-NCA-07, REQ-SC-01..06 | 2 | ✅ |
 | S48-06 (T-36) | Travel freeze per REQ-NCA-08 once itinerary confirms cutoff | REQ-NCA-08 | 1 | 🟡 |
 | S48-07 (T-31a) | Source-document inventory: every tracked PDF with hash and rights record, gated | C-09 | 2 | 🟡 |
+| S48-08 (TM-75) | Traceability doc gate implemented; index completed; orphaned fixture runners wired | SPEC-10, TM-75 | 2 | ✅ |
 
 **Status key:** ✅ shipped and verified on this host · 🟡 shipped and gated, with named verification gaps listed under the row's *Not verified* notes · ⚪ not started.
 
-**Total:** 14 points
+**Total:** 16 points
 
 ---
 
@@ -488,8 +489,7 @@ their `tests/gates/run_*_fixtures.sh` runners.
 **Not verified:** that any rights review has been performed for the ingested
 documents; that the pointer objects exist on any remote (the gate reads bytes in
 the tree and contacts nothing); the contents of the two manuals (not here, so not
-opened); and that the list is exhaustive of the project's source material — it
-enumerates tracked PDFs by its own definition.
+opened); and that the list is exhaustive — it enumerates tracked PDFs by its own definition.
 
 ---
 
@@ -497,4 +497,4 @@ enumerates tracked PDFs by its own definition.
 
 Moved to [SPRINT-48-RETROSPECTIVE.md](SPRINT-48-RETROSPECTIVE.md) — this file hit the
 500-line limit. The companion carries the acceptance target, where the sprint stands
-against it, and the gate count at the head.
+against it, the gate count at the head, and the **S48-08 (TM-75)** write-up.

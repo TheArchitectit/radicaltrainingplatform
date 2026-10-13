@@ -188,6 +188,23 @@ jobs:
       - name: Run RedEye lane fixtures
         run: bash tests/gates/run_redeye_fixtures.sh
 
+      # S48-08/TM-66: the tutor evaluation. The harness asserts both
+      # directions (recorded examples resolve and cite allowlisted corpus IDs;
+      # an injection-compliant response is caught, an unknown citation is
+      # stripped) and ran nowhere in CI or the freeze chain before S48-08.
+      - name: Run tutor evaluation (TM-66/REQ-AI-06)
+        run: bash tests/gates/run_tutor_eval.sh
+
+      # S48-08/TM-75: the traceability doc gate SPEC-12 named but nothing ran.
+      # Clause A — every REQ-/R- identifier declared in SPEC-02..SPEC-10 maps
+      # to a TM row. Clause B — every fixture runner under tests/gates/ is
+      # either wired into the freeze chain or declared chain-excluded with a
+      # reason, so no gate's failing+passing pair goes unrun.
+      - name: Traceability index and runner register (TM-75)
+        run: |
+          python3 scripts/check-traceability.py
+          bash tests/gates/run_traceability_fixtures.sh
+
       # No setup-dotnet here: the runner image (localhost/devgate-runner-rtp,
       # infra Containerfile convention) bakes the .NET 10 SDK — setup-dotnet
       # cannot write /usr/share/dotnet inside a rootless runner container.

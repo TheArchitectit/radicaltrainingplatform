@@ -98,6 +98,12 @@ gate "bash tests/gates/run_readme_counts_fixtures.sh"  bash tests/gates/run_read
 # not contain — the two vendor manuals are pointer text.
 gate "python3 scripts/check-source-inventory.py"       python3 scripts/check-source-inventory.py
 gate "bash tests/gates/run_source_inventory_fixtures.sh" bash tests/gates/run_source_inventory_fixtures.sh
+# Added in Sprint 48 (S48-08, TM-75): the traceability doc gate SPEC-12 named
+# but nothing ran. Clause A: every REQ-/R- identifier declared in SPEC-02..10
+# maps to a TM row. Clause B: every fixture runner is wired here or declared
+# chain-excluded with a reason.
+gate "python3 scripts/check-traceability.py"            python3 scripts/check-traceability.py
+gate "bash tests/gates/run_traceability_fixtures.sh"    bash tests/gates/run_traceability_fixtures.sh
 
 # ── Packaging and release truth ──
 gate "python3 scripts/generate-bundle-manifest.py --check" \
@@ -122,6 +128,13 @@ gate "bash tests/gates/run_option_shuffle_fixtures.sh"  bash tests/gates/run_opt
 gate "bash tests/gates/run_validator_scan_fixtures.sh"  bash tests/gates/run_validator_scan_fixtures.sh
 gate "bash tests/gates/run_redeye_fixtures.sh"          bash tests/gates/run_redeye_fixtures.sh
 gate "python3 scripts/check-content-bundle.py"          python3 scripts/check-content-bundle.py
+# Added in Sprint 48 (S48-08, TM-75): the content-bundle gate's fixture pair.
+# The checker was in the chain and in pwa-deploy.yml; the runner that proves it
+# can fail was in neither, so the gate could have gone vacuous unnoticed.
+gate "bash tests/gates/run_content_bundle_fixtures.sh"  bash tests/gates/run_content_bundle_fixtures.sh
+# Added in Sprint 48 (S48-08, TM-75): TM-66/REQ-AI-06's evaluation run. Its
+# harness asserts both directions and ran nowhere in CI or the chain.
+gate "bash tests/gates/run_tutor_eval.sh"               bash tests/gates/run_tutor_eval.sh
 gate "python3 scripts/check-artifact-secrets.py"        python3 scripts/check-artifact-secrets.py
 gate "bash tests/gates/run_artifact_secrets_fixtures.sh" bash tests/gates/run_artifact_secrets_fixtures.sh
 
@@ -156,6 +169,15 @@ gate "node tests/e2e/smoke-web.mjs"                     node tests/e2e/smoke-web
 gate "bash tests/gates/run_smoke_fixtures.sh"           bash tests/gates/run_smoke_fixtures.sh
 gate "node tests/e2e/nca-lab-web.mjs"                   node tests/e2e/nca-lab-web.mjs
 gate "bash tests/gates/run_nca_lab_fixtures.sh"         bash tests/gates/run_nca_lab_fixtures.sh
+
+# ── Chain exclusions (read by scripts/check-traceability.py, TM-75) ──
+#
+# A fixture runner that is neither wired above nor declared here ships a
+# failing+passing pair nothing runs — the SPEC-16 rule left unenforced. Each
+# exclusion must carry a reason, and naming a runner that no longer exists is
+# itself a violation, so this register cannot rot into a blanket exemption.
+#
+# chain-excluded: tests/gates/run_rehearsal_fixtures.sh — a rehearsal tool, not a merge gate (T-26/S47-10): it walks the full demo path in a real browser and its live leg is the demo-host rehearsal, which has no host yet (PKG:1469). Its failing and passing fixtures are documented in the file's own header.
 
 echo
 echo "FREEZE CHAIN: $pass/$total at $SHORT_SHA"

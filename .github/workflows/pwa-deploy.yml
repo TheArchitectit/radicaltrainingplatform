@@ -75,7 +75,14 @@ jobs:
       #    compiled content world is checked against the manifests that
       #    describe it.
       - name: Content bundle check (predeploy)
-        run: python3 scripts/check-content-bundle.py
+        run: |
+          python3 scripts/check-content-bundle.py
+          # S48-08/TM-75: the checker ran here and in the freeze chain, but the
+          # runner that proves it can fail — a missing pack asset, a stale
+          # bundle, a review-state lie, an unnamed bank whose items still ship —
+          # ran in neither. A gate with no exercised failing direction can go
+          # vacuous and nothing in the pipeline would notice.
+          bash tests/gates/run_content_bundle_fixtures.sh
 
       # 4. Secret scan (T-23, TM-64 / REQ-AI-04). The tutor slice is the first
       #    code here designed to talk to a model provider, so it is the first

@@ -83,4 +83,4 @@ Roger, October 10, 2026, verbatim: “And we have to address it all understand.�
 
 ## 14.4 Requirement-to-test index
 
-See [SPEC-12](SPEC-12-test-matrix.md) § Requirement-to-test index. The release record cites that index; an unmapped requirement fails the doc gate (TM-75).
+See [SPEC-12](SPEC-12-test-matrix.md) § Requirement-to-test index. The release record cites that index; an unmapped requirement fails the doc gate (TM-75) — now implemented as `scripts/check-traceability.py` (S48-08), which found sixteen declared identifiers with no TM row and closed them in SPEC-12's TM-94 series. Its second clause fails on any fixture runner under `tests/gates/` that the freeze chain neither runs nor declares chain-excluded with a reason.
