@@ -13,7 +13,7 @@
 
 ```bash
 python3 .github/scripts/vuln_gate.py <csproj...>
-python3 tests/gates/test_vuln_gate.py
+python3 tests/gates/run_vuln_gate_fixtures.py
 ```
 
 ## CI-02 — Enforced coverage threshold

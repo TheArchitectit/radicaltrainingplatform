@@ -66,6 +66,15 @@ is why the named gaps above are written as gaps. Clause B proves every runner is
 explicitly excluded; it does not prove a wired runner actually discriminates, which is
 what each runner's own fixture pair is for.
 
+**The same sweep found one more.** Running the command paths referenced anywhere under
+`docs/sprints/` against the tree turned up `tests/gates/test_vuln_gate.py`, named in
+SPEC-10 and in an S45-02 acceptance box ticked as green — while the file on disk, in CI
+and in the chain is `tests/gates/run_vuln_gate_fixtures.py`. A ticked box citing a
+command that does not exist is the same defect as an unrun gate. Both references are
+corrected. The two remaining unresolved paths are Sprint 06 *plan* entries
+(`scripts/validate-parse-rate.py`, `scripts/validate-exam-codes.py`) — deliverables that
+were planned, not files claimed to exist — so they are left as the historical record.
+
 This is a companion file rather than a section of `SPRINT-48.md` because that file
 reached the 500-line document limit when S48-07 was opened, the same reason
 [Sprint 47's retrospective](SPRINT-47-RETROSPECTIVE.md) is a companion file.

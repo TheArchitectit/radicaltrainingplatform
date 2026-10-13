@@ -52,9 +52,9 @@
 - [x] `vuln_gate.py` walks the real dotnet JSON shape (root object → projects → frameworks → topLevelPackages/transitivePackages, lowercase `advisoryurl`)
 - [x] Fixture suite covers: clean report passes; top-level vulnerable fails; transitive vulnerable fails; multi-project; empty project; malformed JSON fails; unknown root version fails loudly; scanner non-zero exit fails; expired/unexpired/wrong-version/malformed exception cases
 - [x] Canonical proof: a fixture with a High advisory exits 1
-- [x] `python3 tests/gates/test_vuln_gate.py` green
+- [x] `python3 tests/gates/run_vuln_gate_fixtures.py` green (named `test_vuln_gate.py` when this row was written; the file on disk and in the chain is `run_vuln_gate_fixtures.py`)
 
-**Files:** `.github/scripts/vuln_gate.py`, `tests/gates/test_vuln_gate.py`
+**Files:** `.github/scripts/vuln_gate.py`, `tests/gates/run_vuln_gate_fixtures.py`
 **Dependencies:** None
 
 ### S45-03 (T-03): Answer Grammar Repair
