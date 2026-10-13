@@ -66,6 +66,30 @@ Roger, October 10, 2026, verbatim: “And we have to address it all understand.�
 
 **Zero unowned rows stands:** every finding above has requirement, task, test and passing condition. Any later audit addendum enters through the same five columns.
 
+**Audited 2026-10-12 (follow-on to S48-08/TM-75).** "Unowned" was asserted here and
+had never been checked against the tree, so each row's passing condition was resolved
+to the file that implements it and to the runner that executes it. All twelve do:
+TM-81 → `scripts/check-item-identity.py` and its `--self-test`; TM-82/83/85/90/91 →
+`tests/gates/web/*.mjs` (`retry-outcome-sets`, `study-continuation`, `streak-skip`,
+the R-22 batch, `storage-recovery`), which `run_web_fixtures.sh` executes by glob, so
+a fixture cannot be orphaned by a rename the way a hand-listed one can; TM-84 →
+`Desktop.Tests/DisposalGuardTests.cs`; TM-86/88 → `Core.Tests/ExamPdfExporterTests.cs`
+and `SessionStoreTests.cs`; TM-87 → `run_release_truth_fixtures.sh`; TM-89 →
+`Desktop.Tests/NavigationPolicyTests.cs` plus the review record at
+[docs/security/CEF-01-hardening-review-2026-10-10.md](../../security/CEF-01-hardening-review-2026-10-10.md);
+TM-92 → `run_shellcheck_fixtures.sh`. Every one of those runners is a link in the
+freeze chain, and the chain is green at 53/53, so each gate is executed, not merely
+present. The two manual halves are the register's own named boundaries and stay
+recorded as such: NET-07's native second-visit check is
+prescribed-but-not-yet-executed (`SPRINT-46.md`), and CEF-01's review record is a
+document, not a passing test.
+
+The same sweep resolved every path-like token named anywhere in
+[SPEC-12](SPEC-12-test-matrix.md) — 21 distinct files — against the tree; all 21 exist.
+No gate path in the matrix is dangling, which is the defect that turned up in
+`SPEC-10` (`tests/gates/test_vuln_gate.py`, corrected to
+`run_vuln_gate_fixtures.py`).
+
 ## 14.3 Plan v2 requirement inheritance
 
 | Plan v2 ID | Inherited into |

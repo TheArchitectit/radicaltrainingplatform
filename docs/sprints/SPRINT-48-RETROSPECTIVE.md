@@ -75,6 +75,16 @@ corrected. The two remaining unresolved paths are Sprint 06 *plan* entries
 (`scripts/validate-parse-rate.py`, `scripts/validate-exam-codes.py`) — deliverables that
 were planned, not files claimed to exist — so they are left as the historical record.
 
+**The register behind it holds up.** SPEC-14's 14.2b asserted that its final-audit
+runtime findings were "zero unowned rows" and nothing had checked that against the
+tree, so the same method was turned on it: every row's passing condition was resolved
+to the file implementing it and the runner executing it. All twelve resolve, and each
+runner is a link in the green chain, so the gates are executed rather than merely
+present. Two rows keep their named boundary — NET-07's native second-visit check is
+prescribed-but-not-yet-executed, and CEF-01's evidence is a review record rather than
+a test. The sweep also resolved all 21 path-like tokens named in SPEC-12 to real
+files, so no gate path in the matrix dangles. Recorded in SPEC-14 14.2b.
+
 This is a companion file rather than a section of `SPRINT-48.md` because that file
 reached the 500-line document limit when S48-07 was opened, the same reason
 [Sprint 47's retrospective](SPRINT-47-RETROSPECTIVE.md) is a companion file.
