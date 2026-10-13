@@ -42,6 +42,7 @@ LABELS = {
     "A+ Core 2": "COMPTIA-A-1202",
     "Network+": "COMPTIA-NET-009",
     "NCA 7.5": "NCA-75",
+    "Azure AZ-104": "AZ-104",
 }
 
 EXAMS_RE = re.compile(r"\|\s*Exam manifests\s*\|\s*\*\*(\d+)\*\*")

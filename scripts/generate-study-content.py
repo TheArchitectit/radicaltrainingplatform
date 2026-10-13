@@ -51,6 +51,15 @@ RELEASED_LESSONS = {
         "s3_1", "s3_2", "s3_3",
         "s4_1", "s4_2", "s4_3", "s4_4",
     ],
+    # Sprints 27-28: the first vendor slice. One lesson per objective in the
+    # AZ-104 manifest — all 15 released, so every objective has a lesson.
+    "AZ-104": [
+        "az1_1", "az1_2", "az1_3",
+        "az2_1", "az2_2", "az2_3",
+        "az3_1", "az3_2", "az3_3", "az3_4",
+        "az4_1", "az4_2", "az4_3",
+        "az5_1", "az5_2",
+    ],
 }
 RELEASED_BANKS = {
     "COMPTIA-A-1201": ["core1-a2-fixtures.md"],
@@ -66,6 +75,8 @@ RELEASED_BANKS = {
     # bank items stay in their root files and stay out of this list — they are
     # in review, and only the authored pilot is released.
     "NCA-75": ["nca75-pilot.md"],
+    # Sprints 27-28: the AZ-104 beginner bank, one file, 50 items.
+    "AZ-104": ["az104-beginner.md"],
 }
 
 
@@ -231,6 +242,25 @@ def main():
             ("s4_2", "Alerts and events", "4"),
             ("s4_3", "Support functions", "4"),
             ("s4_4", "Workload performance", "4"),
+        ],
+        # Sprints 27-28: one module per AZ-104 objective, keyed by the lesson id
+        # in the manifest's lessonIds. Domain number is the manifest section.
+        "AZ-104": [
+            ("az1_1", "Entra users and groups", "1"),
+            ("az1_2", "Access to Azure resources", "1"),
+            ("az1_3", "Subscriptions and governance", "1"),
+            ("az2_1", "Access to storage", "2"),
+            ("az2_2", "Storage accounts", "2"),
+            ("az2_3", "Azure Files and Blob Storage", "2"),
+            ("az3_1", "ARM templates and Bicep", "3"),
+            ("az3_2", "Virtual machines", "3"),
+            ("az3_3", "Containers", "3"),
+            ("az3_4", "App Service", "3"),
+            ("az4_1", "Virtual networks", "4"),
+            ("az4_2", "Secure access to virtual networks", "4"),
+            ("az4_3", "Name resolution and load balancing", "4"),
+            ("az5_1", "Azure Monitor", "5"),
+            ("az5_2", "Backup and recovery", "5"),
         ],
     }
     lessons = {}

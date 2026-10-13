@@ -2,12 +2,13 @@
 
 A cross-platform certification study platform: a **.NET 10 / Avalonia desktop app**, a
 **static HTML+JS PWA**, and a shared `net10.0` Core library with no UI dependencies. It
-covers Nutanix certification exams plus a CompTIA A+/Network+ beginner track, with a
-synthwave-themed UI, exam blueprint coverage tracking, and a lab simulator.
+covers Nutanix certification exams plus a beginner track spanning CompTIA A+/Network+
+and Microsoft Azure Administrator (AZ-104), with a synthwave-themed UI, exam blueprint
+coverage tracking, and a lab simulator.
 
 ![.NET 10.0](https://img.shields.io/badge/.NET-10.0-blue)
 ![License](https://img.shields.io/badge/License-BSD%203--Clause-green)
-![Released items](https://img.shields.io/badge/Released%20items-89-orange)
+![Released items](https://img.shields.io/badge/Released%20items-139-orange)
 ![Status](https://img.shields.io/badge/Status-Draft%20preview-yellow)
 [![Sponsor](https://img.shields.io/badge/Sponsor-TheArchitectit-FF69B4?style=flat&logo=github-sponsors)](https://github.com/sponsors/TheArchitectit)
 
@@ -19,9 +20,9 @@ they are the numbers this README is accountable to:
 
 | | |
 |---|---|
-| Exam manifests | **4** — CompTIA A+ Core 1 (220-1201), A+ Core 2 (220-1202), Network+ (N10-009), Nutanix Certified Associate 7.5 |
-| Tracks | **3** — `track-aplus`, `track-netplus`, `track-nca` |
-| Released items | **89** — A+ Core 1: 16 · A+ Core 2: 8 · Network+: 25 · NCA 7.5: 40 |
+| Exam manifests | **5** — CompTIA A+ Core 1 (220-1201), A+ Core 2 (220-1202), Network+ (N10-009), Nutanix Certified Associate 7.5, Microsoft Azure Administrator (AZ-104) |
+| Tracks | **4** — `track-aplus`, `track-netplus`, `track-nca`, `track-azure` |
+| Released items | **139** — A+ Core 1: 16 · A+ Core 2: 8 · Network+: 25 · NCA 7.5: 40 · Azure AZ-104: 50 |
 | Release state | `draft-preview` — draft packs for the beginner preview |
 
 **These are draft packs, not released study material.** No item carries a human source
@@ -36,7 +37,11 @@ Desktop and Legacy apps parse directly. They are **not** part of the PWA bundle.
 ## 📋 Supported Certifications
 
 The legacy banks cover the Nutanix exam set below. The PWA additionally ships the
-beginner A+/Network+ track above.
+beginner CompTIA A+/Network+ track and the AZ-104 track above. The AZ-104 pack is
+independent study material and is not affiliated with Microsoft; its objective structure
+was derived from the public Microsoft study guide by a tool, and no human source review
+has been performed on it — see
+[VENDOR-PACK-RIGHTS-AZ-104.md](docs/VENDOR-PACK-RIGHTS-AZ-104.md).
 
 | Exam | Questions | Format | Duration |
 |------|-----------|--------|----------|

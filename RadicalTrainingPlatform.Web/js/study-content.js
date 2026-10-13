@@ -53,6 +53,65 @@ export const TRACKS = {
       "COMPTIA-A-1202/B4"
     ]
   },
+  "track-azure": {
+    "schemaVersion": 1,
+    "trackId": "track-azure",
+    "title": "Microsoft Azure Administrator AZ-104 Beginner Track",
+    "examIds": [
+      "AZ-104"
+    ],
+    "audience": "beginners preparing for Microsoft Azure Administrator (AZ-104)",
+    "previewLabel": "beginner preview",
+    "disclaimer": "This is independent study material. It is not official training and is not endorsed or approved by CompTIA, Nutanix, or any other certification body.",
+    "order": 4,
+    "coverage": {
+      "total": 15,
+      "covered": 15,
+      "percent": 100,
+      "coveredObjectiveIds": [],
+      "examCoverage": {
+        "AZ-104": {
+          "total": 15,
+          "covered": 15,
+          "percent": 100,
+          "coveredObjectiveIds": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1",
+            "2.2",
+            "2.3",
+            "3.1",
+            "3.2",
+            "3.3",
+            "3.4",
+            "4.1",
+            "4.2",
+            "4.3",
+            "5.1",
+            "5.2"
+          ]
+        }
+      }
+    },
+    "lessons": [
+      "AZ-104/az1_1",
+      "AZ-104/az1_2",
+      "AZ-104/az1_3",
+      "AZ-104/az2_1",
+      "AZ-104/az2_2",
+      "AZ-104/az2_3",
+      "AZ-104/az3_1",
+      "AZ-104/az3_2",
+      "AZ-104/az3_3",
+      "AZ-104/az3_4",
+      "AZ-104/az4_1",
+      "AZ-104/az4_2",
+      "AZ-104/az4_3",
+      "AZ-104/az5_1",
+      "AZ-104/az5_2"
+    ]
+  },
   "track-nca": {
     "trackId": "track-nca",
     "title": "Nutanix NCA 7.5 Beginner Track",
@@ -151,6 +210,174 @@ export const TRACKS = {
   }
 };
 export const EXAMS = {
+  "AZ-104": {
+    "schemaVersion": 1,
+    "examId": "AZ-104",
+    "vendor": "Microsoft",
+    "displayName": "Microsoft Azure Administrator (AZ-104)",
+    "officialVersion": "2026-04-17",
+    "objectivesDocVersion": "2026-04-17",
+    "sourceUrl": "https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104",
+    "sourceReviewDate": "2026-10-12",
+    "productVersions": {
+      "Azure": "rolling service \u2014 no versioned release; blueprint dated 2026-04-17"
+    },
+    "studyAllocationLabel": "Per-section study allocation chosen to track the published weight bands (20-25 / 15-20 / 20-25 / 15-20 / 10-15), not a published item count. The published bands are ranges, so the item counts below are a study choice: 12 / 10 / 12 / 10 / 6.",
+    "objectivesNote": "The section and objective structure below is derived from the public AZ-104 study guide (skills measured as of April 17, 2026) fetched by the authoring tool on 2026-10-12. It is not a human source review, and the guide's own bullet text has been paraphrased into objective titles rather than copied.",
+    "sections": [
+      {
+        "number": "1",
+        "title": "Manage Azure identities and governance",
+        "studyItemAllocation": 12,
+        "objectives": [
+          {
+            "id": "1.1",
+            "title": "Manage Microsoft Entra users and groups",
+            "lessonIds": [
+              "az1_1"
+            ]
+          },
+          {
+            "id": "1.2",
+            "title": "Manage access to Azure resources",
+            "lessonIds": [
+              "az1_2"
+            ]
+          },
+          {
+            "id": "1.3",
+            "title": "Manage Azure subscriptions and governance",
+            "lessonIds": [
+              "az1_3"
+            ]
+          }
+        ]
+      },
+      {
+        "number": "2",
+        "title": "Implement and manage storage",
+        "studyItemAllocation": 10,
+        "objectives": [
+          {
+            "id": "2.1",
+            "title": "Configure access to storage",
+            "lessonIds": [
+              "az2_1"
+            ]
+          },
+          {
+            "id": "2.2",
+            "title": "Configure and manage storage accounts",
+            "lessonIds": [
+              "az2_2"
+            ]
+          },
+          {
+            "id": "2.3",
+            "title": "Configure Azure Files and Azure Blob Storage",
+            "lessonIds": [
+              "az2_3"
+            ]
+          }
+        ]
+      },
+      {
+        "number": "3",
+        "title": "Deploy and manage Azure compute resources",
+        "studyItemAllocation": 12,
+        "objectives": [
+          {
+            "id": "3.1",
+            "title": "Automate deployment with ARM templates or Bicep files",
+            "lessonIds": [
+              "az3_1"
+            ]
+          },
+          {
+            "id": "3.2",
+            "title": "Create and configure virtual machines",
+            "lessonIds": [
+              "az3_2"
+            ]
+          },
+          {
+            "id": "3.3",
+            "title": "Provision and manage containers",
+            "lessonIds": [
+              "az3_3"
+            ]
+          },
+          {
+            "id": "3.4",
+            "title": "Create and configure Azure App Service",
+            "lessonIds": [
+              "az3_4"
+            ]
+          }
+        ]
+      },
+      {
+        "number": "4",
+        "title": "Implement and manage virtual networking",
+        "studyItemAllocation": 10,
+        "objectives": [
+          {
+            "id": "4.1",
+            "title": "Configure and manage virtual networks in Azure",
+            "lessonIds": [
+              "az4_1"
+            ]
+          },
+          {
+            "id": "4.2",
+            "title": "Configure secure access to virtual networks",
+            "lessonIds": [
+              "az4_2"
+            ]
+          },
+          {
+            "id": "4.3",
+            "title": "Configure name resolution and load balancing",
+            "lessonIds": [
+              "az4_3"
+            ]
+          }
+        ]
+      },
+      {
+        "number": "5",
+        "title": "Monitor and maintain Azure resources",
+        "studyItemAllocation": 6,
+        "objectives": [
+          {
+            "id": "5.1",
+            "title": "Monitor resources in Azure",
+            "lessonIds": [
+              "az5_1"
+            ]
+          },
+          {
+            "id": "5.2",
+            "title": "Implement backup and recovery",
+            "lessonIds": [
+              "az5_2"
+            ]
+          }
+        ]
+      }
+    ],
+    "questionPolicy": {
+      "authorship": "original",
+      "review": "human-required"
+    },
+    "gaps": [
+      "1.1 self-service password reset and external-user (B2B) guest management",
+      "2.1 stored access policies and identity-based access for Azure Files",
+      "3.1 exporting a deployment as a template and ARM-to-Bicep conversion",
+      "4.2 Azure Bastion and private endpoints for PaaS",
+      "5.2 Azure Site Recovery failover to a secondary region"
+    ]
+  },
   "COMPTIA-A-1201": {
     "examId": "COMPTIA-A-1201",
     "vendor": "CompTIA",
@@ -1312,6 +1539,171 @@ export const LESSONS = {
     "markdown": "# Workload Performance (S4.4)\n\n*Module S4.4 \u2014 Nutanix NCA 7.5 study track. Independent study material \u2014 see the disclaimer at the end.*\n\n\"Slow\" is the vaguest word in infrastructure support and the most common complaint. This lesson is about turning it into something you can act on: reading the performance charts, and distinguishing the two situations that produce the same complaint but need opposite responses \u2014 a machine that is being starved by a neighbour, and a cluster that is genuinely out of capacity.\n\n## Reading a performance chart\n\nA performance chart has three parts, and beginners tend to read only the middle one.\n\n- **The level** \u2014 how much of something is being used. This is what people look at, and on its own it is the least informative part.\n- **The trend** \u2014 whether the level is climbing, flat, or cycling. A level that is climbing is a warning about the future even when it is currently comfortable.\n- **The shape** \u2014 the pattern within the window. A steady line and a line that spikes every ten minutes can have the same average and mean entirely different things.\n\nSo the first habit is to read the trend and the shape, not just the number. \"Storage is 70% full\" is not useful on its own; \"storage is 70% full and climbing about 2% a week\" is a plan.\n\n## Two complaints, two causes\n\nThe same sentence \u2014 \"the application is slow\" \u2014 has two fundamentally different causes, and telling them apart is this objective's core skill.\n\n**Cause one: a capacity ceiling.** The resource genuinely is exhausted. Storage is full, the processors are saturated, memory is over-committed. Everyone on that resource is affected, and the fix is to add capacity or reduce demand.\n\n**Cause two: contention from a neighbour.** The resource has plenty of headroom *in total*, but one workload is consuming a disproportionate share, so others are starved. This is the **noisy neighbour** problem. The cluster looks healthy by the numbers, the affected user is suffering, and the fix is about the *offending workload*, not about capacity.\n\nThe distinguishing question is: **is the resource constrained in total, or is the constraint specific to the affected workload?** If the cluster has headroom while one machine is slow, you are looking at contention. If everything on the resource is slow, you are looking at a ceiling.\n\n## Recognising a noisy neighbour\n\nThe symptoms of contention are specific enough to recognise:\n\n- **One workload is slow while others are normal.** The clearest signal. If it were a ceiling, everything on that resource would feel it.\n- **The slowness is periodic, not constant.** Contention follows the neighbour's activity, so it appears when the neighbour is busy and eases when it is not. A constant symptom suggests a ceiling; an intermittent one suggests contention.\n- **The aggregate numbers look fine.** Total processor or storage use is unremarkable, because the resource is not full \u2014 it is just unevenly shared.\n- **The timing correlates with something else.** A backup window, a report that runs hourly, a batch job that starts at midnight. When you can correlate the symptom with another workload's schedule, you have found the neighbour.\n\nThe trap is treating this as a capacity problem and adding hardware, which does not help: the neighbour will consume the new headroom too.\n\n## Recognising a ceiling\n\nThe symptoms of a genuine ceiling are the mirror image:\n\n- **Everything on the resource is affected**, not one workload.\n- **The symptom is continuous** and tends to worsen over time as the level climbs.\n- **The aggregate numbers are high**, consistently, not just at peaks.\n- **The fix is capacity or demand**: add resource, or reduce what is asking for it.\n\n## From symptom to evidence\n\nThe workflow that turns a complaint into an action:\n\n1. **Establish what \"slow\" means.** Which application, which operation, since when, for whom.\n2. **Isolate whether it is one workload or all of them** on the shared resource. This single question splits the two causes.\n3. **Read the trend, not just the level.** Is this a new condition or a long-standing one that has crossed a line?\n4. **Correlate with other activity.** Another workload's schedule, a recent change, a maintenance window.\n5. **Only then decide** whether the answer is capacity, a change to the offending workload, or something else entirely.\n\nStep 2 is where most people go wrong, because they skip straight from the complaint to a solution.\n\n## An honest limit\n\nThe performance charts in this track's lab simulator are illustrative rather than real measurements, and the scenarios that touch performance present a described situation and ask you to reason about it. Nothing here claims to have let you diagnose a live performance problem on real hardware \u2014 the skill being built is the reasoning, and it is exercised as a **labelled worked example**.\n\n## Where this leads\n\nThis closes the monitoring section, and with it the four sections of the current blueprint. The scenarios bring these ideas together: `nca-tool-01`, `nca-vm-01`, `nca-maint-01`, and `nca-alert-01` each take one of the objectives and make you use it.\n\n---\n\n*This is independent study material. It is not official training and is not endorsed or approved by CompTIA, Nutanix, or any other certification body.*\n",
     "objectiveIds": [
       "4.4"
+    ]
+  },
+  "AZ-104/az1_1": {
+    "lessonId": "az1_1",
+    "examId": "AZ-104",
+    "title": "Entra users and groups",
+    "domainNumber": "1",
+    "status": "released",
+    "markdown": "# Manage Microsoft Entra users and groups (S1.1)\n\n*Module S1.1 \u2014 Azure Administrator AZ-104 study track. Independent study material \u2014 see the disclaimer at the end.*\n\nEverything an administrator does with people starts in one place: a **tenant**. A tenant is a dedicated instance of Microsoft Entra ID holding your users, groups, and app registrations, and it is the identity boundary for every subscription that trusts it. The tenant is the *who*; the subscription is the *what*.\n\n## Tenants and the users inside them\n\nA tenant is created when you sign up for Azure and arrives with a default domain name like `contoso.onmicrosoft.com`. You can add custom domains you own, so users sign in as `alex@contoso.com`.\n\nTwo **user types** exist:\n\n- **Member** \u2014 an account that belongs to your tenant. You create it, you control its password, and it is deleted with the tenant.\n- **Guest** \u2014 an external collaborator invited through B2B collaboration. They authenticate with credentials from their own home organisation, and your tenant holds a representation of them rather than their password. Guests appear in the directory and can join groups, but bring their own identity.\n\nThe practical difference is where the credential lives: if their password is managed by their own IT department, they are a guest in your tenant.\n\n## Groups: type and membership\n\nA group is the unit of scale. Granting access to a group rather than to twenty individuals means the next new hire is one membership away from productive, and one removal away from cut off.\n\nThere are two group **types**. **Security groups** are the general-purpose container for granting access to resources, apps, and policies. **Microsoft 365 groups** are collaboration containers that also provision a shared mailbox, calendar, and SharePoint site.\n\nThere are three **membership types**: **assigned** (you add members by hand), **dynamic user** (a rule on user attributes such as department or country keeps the list correct), and **dynamic device** (a rule on device attributes, available for security groups only).\n\nDynamic membership requires a paid Microsoft Entra ID P1 or P2 plan. It is also the answer to \"the list keeps going stale\" \u2014 a group maintained by hand will drift.\n\n## Administrative units and licence assignment\n\nAn administrator role such as User Administrator normally applies to the whole tenant. An **administrative unit** narrows that: place a subset of users (or groups and devices) in the unit, then assign a role scoped to it. The helpdesk can reset passwords for one department without touching the rest of the directory.\n\n**Licences** go to a user, or to a group so everyone in it receives one. Two things trip people up. Group-based licensing needs a paid Entra ID plan. And a user must have a **usage location** set before a geographically dependent licence can be assigned \u2014 a missing usage location is the classic reason an assignment fails.\n\n## Guests and self-service password reset\n\n**Self-service password reset (SSPR)** lets users change or reset their own password after registering authentication methods. You enable it for nobody, everybody, or a selected group \u2014 piloting with a group is the usual rollout. Writing a reset password back to an on-premises directory requires a paid plan and Microsoft Entra Connect. If the reset page does not recognise a user, check whether SSPR covers a group they are in and whether they registered a method.\n\n## Worked example: three small decisions\n\n1. **A new hire cannot be assigned a licence; the portal complains.** The account exists and is a member user. The likely cause is a missing **usage location** \u2014 set the country, then assign. A group or a guest conversion does not address the error.\n2. **A contractor needs access to a resource group for six months.** Invite them as a **guest**. Their password stays with their employer, and access ends when you remove the guest or the assignment.\n3. **The \"All Marketing\" group is wrong every month and someone fixes it by hand.** Recreate it as a security group with **dynamic user** membership on the department attribute \u2014 assuming the tenant has P1 or P2.\n\n## Where this leads\n\nYou now have people and groups. The next lesson answers the other half: what those identities are allowed to do, and how Azure RBAC decides it.\n\n---\n\n*This is independent study material. It is not official training and is not endorsed or approved by CompTIA, Nutanix, or any other certification body.*\n",
+    "objectiveIds": [
+      "1.1"
+    ]
+  },
+  "AZ-104/az1_2": {
+    "lessonId": "az1_2",
+    "examId": "AZ-104",
+    "title": "Access to Azure resources",
+    "domainNumber": "1",
+    "status": "released",
+    "markdown": "# Manage access to Azure resources (S1.2)\n\n*Module S1.2 \u2014 Azure Administrator AZ-104 study track. Independent study material \u2014 see the disclaimer at the end.*\n\nIdentity answers \"who are you\". This lesson answers \"what may you do\" \u2014 and the picture to hold is a sentence with three parts: **a principal**, **a role**, and **a scope**. Every access question in Azure resolves to that sentence, and every access problem is one of those three parts being wrong.\n\n## The three parts of a role assignment\n\nA **role assignment** binds a **security principal** (a user, a group, a service principal, or a managed identity), a **role definition** (the list of permitted actions), and a **scope** (where the assignment applies).\n\nA role definition is itself just a list. It names `Actions` that are permitted and `NotActions` that are carved out, and for storage-style services it also names `DataActions`, which govern the data inside a resource rather than the resource itself. Because a role is data, Azure can ship hundreds of built-in roles and you can write your own.\n\nFour built-in roles cover most beginner scenarios:\n\n- **Owner** \u2014 full management of everything at the scope, *including* granting access to others.\n- **Contributor** \u2014 full management of resources at the scope, but **cannot grant access** to anyone.\n- **Reader** \u2014 view only.\n- **User Access Administrator** \u2014 manage *who has access*, without managing the resources themselves.\n\nThe Owner/Contributor gap is the most useful distinction to internalise: Contributor is deliberately unable to escalate, because it cannot hand its power to someone else.\n\n## Scope and inheritance\n\nAzure organises resources into a hierarchy: **management group \u2192 subscription \u2192 resource group \u2192 resource**. An assignment made higher up is **inherited** by everything beneath it, including resources created tomorrow.\n\n**Effective access** is the union of everything inherited plus everything assigned directly. Access is additive: if a user is Reader at the subscription and Contributor at one resource group, then inside that resource group they are a Contributor. Being a Reader somewhere never subtracts from a Contributor grant elsewhere.\n\nThe one thing that does subtract is a **deny assignment**, which takes precedence over any allow no matter how senior the role. You do not create them by hand in the portal \u2014 Azure creates them on your behalf when a managed application or similar construct needs to protect resources it owns. So when a user with Owner still cannot touch a resource, \"look for a deny assignment\" is the right instinct.\n\n## Azure RBAC roles versus Entra directory roles\n\nThese are two different systems that share a portal, and mixing them up produces confident wrong answers.\n\n- **Azure RBAC roles** govern *Azure resources*: virtual machines, storage accounts, resource groups, subscriptions.\n- **Microsoft Entra directory roles** govern *directory objects*: creating users, resetting passwords, managing groups and app registrations. Global Administrator and User Administrator live here.\n\nA Global Administrator is not automatically an Owner of your subscriptions \u2014 the role can elevate itself to gain that access, but it is not the same grant. And being Owner of a subscription grants nothing over the directory.\n\n## Worked example: three small decisions\n\n1. **A developer who is Contributor on a resource group cannot give a colleague access.** That is by design. Either grant the developer **User Access Administrator** at that resource group, or have an Owner make the assignment. Widening Contributor changes nothing.\n2. **An auditor is Reader on the subscription but needs to manage resources in one resource group.** Assign **Contributor** at that resource group. The inherited Reader is not a barrier; the two grants combine, and the wider one wins inside the scope.\n3. **A group needs to read storage blobs, and only blobs.** A resource-level role such as Reader will not do it \u2014 reading blob *data* requires a role whose definition includes the relevant data actions, assigned at the storage account or below.\n\n## Where this leads\n\nYou can now place a principal, a role, and a scope. The next lesson moves to the containers those scopes live in \u2014 management groups, subscriptions, resource groups \u2014 and to the governance controls that act on all of them at once.\n\n---\n\n*This is independent study material. It is not official training and is not endorsed or approved by CompTIA, Nutanix, or any other certification body.*\n",
+    "objectiveIds": [
+      "1.2"
+    ]
+  },
+  "AZ-104/az1_3": {
+    "lessonId": "az1_3",
+    "examId": "AZ-104",
+    "title": "Subscriptions and governance",
+    "domainNumber": "1",
+    "status": "released",
+    "markdown": "# Manage Azure subscriptions and governance (S1.3)\n\n*Module S1.3 \u2014 Azure Administrator AZ-104 study track. Independent study material \u2014 see the disclaimer at the end.*\n\nIdentity and access control individual actions. Governance controls whole populations at once \u2014 picture nested boxes with rules stapled to the outside. Policies, locks, tags, and budgets work the same way: attach something at a container, and everything inside is affected. Where you attach the rule is most of the skill.\n\n## The container hierarchy\n\n**Management groups** sit above subscriptions, so an organisation with many subscriptions can apply access and policy once instead of fifty times. They nest, and a subscription belongs to exactly one of them. Because assignments inherit downward, a policy assigned at a management group reaches every subscription beneath it.\n\n**Subscriptions** are both a billing boundary and a security boundary; their value is separation \u2014 different payment arrangements, different environments, different blast radii. A subscription can be moved between management groups without being recreated.\n\n**Resource groups** hold resources that share a lifecycle. Two rules matter: a resource lives in exactly one resource group, and resource groups do not nest. Deleting one deletes everything inside it \u2014 which is why they are usually organised by \"things that get deleted together\", such as one application's full stack.\n\n## Resource locks\n\nA **lock** is a blunt instrument attached to a resource, resource group, or subscription, and inherited by children. **CanNotDelete** allows reads and modifications but refuses deletion; **ReadOnly** freezes the resource so even settings changes are refused.\n\nThe key detail: locks apply to the **control plane**, not the data plane. A ReadOnly lock on a storage account stops you changing its configuration in the portal, but an application can still write blobs into it. If the symptom is \"the portal refuses my change but the app works fine\", think lock. Managing locks requires Owner or User Access Administrator; Contributor is not enough.\n\n## Tags\n\n**Tags** are name/value pairs for organising resources for billing and reporting \u2014 `costCenter: 4471`, `environment: production`. Two limitations cause most problems. Tags are **not inherited**: a tag on a resource group does not appear on the resources inside it, so cost reports grouped by tag show untagged resources unless something enforces the tag. And tag rules are per-resource, with a limit on how many one resource can carry. A policy that appends the tag is the usual fix.\n\n## Azure Policy\n\n**Azure Policy** evaluates resource properties and can refuse or correct them. A **definition** is one rule, such as \"only these regions are allowed\". An **initiative** is a named collection of definitions. An **assignment** attaches one to a scope, with parameters. An **effect** decides what happens when a resource does not comply.\n\nCommon effects: **Deny** blocks the request outright, **Audit** records non-compliance without blocking, and **Append** adds a property during creation. Deny acts on *new* requests, so assigning it does not fix what already exists \u2014 that is what a **remediation task** is for. An **exemption** carves a resource out of an assignment, usually with an expiry date, for a documented exception.\n\n## Cost management and Azure Advisor\n\n**Cost Management** provides cost analysis and **budgets**. A budget is a spending target with alert thresholds; alerts fire on actual or forecasted spend and can trigger an action group. A budget does not stop spending \u2014 it tells you; quotas and policy are what constrain.\n\n**Azure Advisor** returns recommendations across cost, security, reliability, performance, and operational excellence, and is the fastest way to find idle or oversized resources.\n\n## Worked example: three small decisions\n\n1. **A developer cannot add a diagnostic setting to a storage account, but the application writes blobs normally.** The account carries a **ReadOnly** lock. Remove or downgrade it at the scope that holds it \u2014 it may be inherited from the resource group.\n2. **A team must be prevented from deploying outside two regions, and 30 resources already sit in a third region.** Assign a policy with the **Deny** effect for new deployments, and run a remediation for what already exists. Deny alone will not move them.\n3. **Finance wants a warning before the monthly bill crosses a threshold.** Create a **budget** on the subscription with an alert at the chosen percentage. Expect an alert, not an automatic shutdown.\n\n## Where this leads\n\nSection 1 is complete: you can create identities, grant them access, and govern the containers they work in. Section 2 moves to storage \u2014 the first workload where these access decisions become concrete.\n\n---\n\n*This is independent study material. It is not official training and is not endorsed or approved by CompTIA, Nutanix, or any other certification body.*\n",
+    "objectiveIds": [
+      "1.3"
+    ]
+  },
+  "AZ-104/az2_1": {
+    "lessonId": "az2_1",
+    "examId": "AZ-104",
+    "title": "Access to storage",
+    "domainNumber": "2",
+    "status": "released",
+    "markdown": "# Configure access to storage (S2.1)\n\n*Module S2.1 \u2014 Azure Administrator AZ-104 study track. Independent study material \u2014 see the disclaimer at the end.*\n\nAlmost every question about storage access is the same question: who may reach this data, and what proof do they present? The mental picture to build is a storage account you unlock with a shared secret, a signed token, or an identity \u2014 with the network around it narrowing who can even try.\n\n## Access keys\n\nEvery storage account is created with two **access keys**, key1 and key2. An access key is a shared secret: anything that presents it can do anything in the account. That bluntness is why two keys exist \u2014 regenerate key2, move every application to it, then regenerate key1 once nothing depends on the old value. With one key, every rotation would be a hard cutover.\n\n## Shared access signatures\n\nA **shared access signature (SAS)** is a signed token appended to a storage URL, carrying permissions, a start and expiry time, and the resources it applies to. Anyone holding the URL has exactly the access the token describes \u2014 no more. Three kinds matter:\n\n- A **service SAS** secures access to one service in the account, such as Blob or File.\n- An **account SAS** can cover several services at once, plus some account-level operations.\n- A **user delegation SAS** is signed with **Microsoft Entra ID** credentials instead of an access key: the client asks Entra ID for a user delegation key and builds the SAS from that. Because no account key is involved, prefer this form for blob access from your own code \u2014 and because the signature traces back to a user, removing that user's permissions stops the token working.\n\n## Stored access policies\n\nThe awkward part of a SAS is that once you hand it out you cannot edit it. To make one revocable and adjustable, define a **stored access policy** on the container and have the SAS reference that policy by name instead of spelling out its own start, expiry, and permissions. Changing the policy changes every SAS tied to it; deleting the policy revokes them all at once. Stored access policies pair with service SAS tokens, not with account or user delegation SAS.\n\n## Network controls\n\nKeys and tokens decide *who* gets in; the **storage firewall** decides *from where*. Accounts accept connections from all networks by default. Switch to selected networks and add **virtual network rules** (which rely on **service endpoints** to let specific subnets through) or **IP rules** for known public addresses.\n\nA **service endpoint** keeps traffic on the Azure backbone, but the account still has a public endpoint \u2014 you are only restricting who may use it. A **private endpoint** places a private IP address from your subnet in front of the account instead, so traffic never uses the public endpoint at all. Choose it when public access must be switched off entirely; it also serves on-premises clients over VPN or ExpressRoute.\n\n## Identity-based access for Azure Files\n\nAzure Files can also be reached with a user identity rather than a key or token. That requires the storage account to be joined to a directory \u2014 either your on-premises **Active Directory Domain Services** (which needs connectivity to the domain controllers) or **Microsoft Entra Domain Services**. Once joined, share-level permissions are granted to identities and users authenticate much as they would to a file server.\n\n## Worked example: a partner needs nightly upload access\n\n1. A partner application must write blobs to one container for 30 days and nothing else. Send an access key? No \u2014 it would let them read and delete everything in the account. Issue a SAS scoped to that container with write permission and a 30-day expiry.\n2. The partner warns the window may need extending. Rather than issuing a fresh SAS, attach a stored access policy to the container and issue the SAS against it, so you can adjust the expiry later \u2014 or delete the policy to revoke access immediately.\n3. Your own application then needs the same container. Prefer a user delegation SAS or a managed identity, so no account key is stored in the application.\n\n## Where this leads\n\nKeys, tokens, and network rules all assume the storage account already exists and is the right kind. The next lesson covers choosing an account's kind, performance tier, and redundancy.\n\n---\n\n*This is independent study material. It is not official training and is not endorsed or approved by CompTIA, Nutanix, or any other certification body.*\n",
+    "objectiveIds": [
+      "2.1"
+    ]
+  },
+  "AZ-104/az2_2": {
+    "lessonId": "az2_2",
+    "examId": "AZ-104",
+    "title": "Storage accounts",
+    "domainNumber": "2",
+    "status": "released",
+    "markdown": "# Configure and manage storage accounts (S2.2)\n\n*Module S2.2 \u2014 Azure Administrator AZ-104 study track. Independent study material \u2014 see the disclaimer at the end.*\n\nLesson 2.1 assumed a storage account existed. This one is about the account itself: decisions you make when you create it and cannot casually undo. Picture one account as a bundle of choices \u2014 what kind it is, how many copies of your data exist and where, and who holds the encryption key.\n\n## Kinds, services, and performance tiers\n\nA **general-purpose v2** account is the default and supports all four core services:\n\n- **Blob** storage \u2014 unstructured objects, the subject of lesson 2.3.\n- **Azure Files** \u2014 managed SMB and NFS file shares.\n- **Queue** storage \u2014 small messages between application components.\n- **Table** storage \u2014 a simple key-attribute store.\n\nThe **performance tier** is a separate decision. **Standard** accounts use disk-backed storage and suit most workloads. **Premium** accounts are SSD-backed and are created for a specific workload \u2014 premium block blobs, premium file shares, or premium page blobs for virtual machine disks \u2014 rather than for all services at once.\n\n## Redundancy\n\nRedundancy answers \"how many copies, and how far apart\". Read these as a ladder:\n\n- **LRS (locally redundant)** keeps three copies within one datacenter. It survives disk and rack failure, not the loss of the datacenter.\n- **ZRS (zone redundant)** keeps copies across three availability zones in one region. It survives the loss of an entire zone, and the endpoint does not change.\n- **GRS (geo redundant)** is LRS in the primary region plus an asynchronous copy to a paired secondary region. It survives a regional failure, but the secondary copy is not readable while the primary is healthy, and moving to it is a deliberate step.\n- **GZRS** is ZRS in the primary region plus the same asynchronous copy elsewhere: zone and regional resilience together.\n- **RA-GRS** and **RA-GZRS** add read access to the secondary region's endpoint, for applications that must keep reading during a regional problem.\n\n## Object replication\n\n**Object replication** asynchronously copies blobs from a source container to a destination container, which may sit in a different account or region, and unlike the geo-redundant secondary copy the destination is readable. Both accounts must have **blob versioning** enabled \u2014 the setting people most often forget when replication silently does nothing.\n\n## Encryption\n\nAll data written to Azure Storage is encrypted at rest with platform-managed keys, and this cannot be switched off. Two options go further:\n\n- **Infrastructure encryption** applies a second, independent layer of encryption at the infrastructure level. It is chosen when the account is created and cannot be turned on later.\n- **Customer-managed keys** move control of the key-encryption key into a key vault you own, so you can rotate or revoke it. The storage account needs a managed identity with access to that vault.\n\n## Working with data: Storage Explorer and AzCopy\n\n**Azure Storage Explorer** is a graphical desktop application for browsing accounts, containers, and shares, and it can connect using a key, a SAS, or an Entra ID sign-in. **AzCopy** is the command-line tool for bulk work \u2014 it is built for throughput and offers a `copy` operation for one-off transfers and a `sync` operation that makes a destination match a source.\n\n## Worked example: choosing for a new workload\n\n1. A reporting application in one region must keep serving reads if a single availability zone fails, with no change to its endpoint. LRS is out \u2014 it does not span zones. ZRS gives three zones behind one endpoint.\n2. The same team also wants copies in a second region for a disaster, and is willing to accept that the copies are not readable until they act. GZRS adds that regional copy on top of zone resilience.\n3. Compliance then asks that the encryption key be one the company controls and can revoke. Enable customer-managed keys in a key vault and grant the account's managed identity access \u2014 remembering that infrastructure encryption, if it is wanted too, had to be chosen at creation time.\n\n## Where this leads\n\nYou now have an account that is the right kind, in the right places, with the right key holder. The next lesson goes inside it: blob types, containers, access tiers, and file shares.\n\n---\n\n*This is independent study material. It is not official training and is not endorsed or approved by CompTIA, Nutanix, or any other certification body.*\n",
+    "objectiveIds": [
+      "2.2"
+    ]
+  },
+  "AZ-104/az2_3": {
+    "lessonId": "az2_3",
+    "examId": "AZ-104",
+    "title": "Azure Files and Blob Storage",
+    "domainNumber": "2",
+    "status": "released",
+    "markdown": "# Configure Azure Files and Azure Blob Storage (S2.3)\n\n*Module S2.3 \u2014 Azure Administrator AZ-104 study track. Independent study material \u2014 see the disclaimer at the end.*\n\nThis lesson goes inside the account. The mental picture is a container of objects, each object written in one of three shapes, sitting in one of four access tiers \u2014 plus a parallel world of file shares that look like a network drive and can be extended back to a server on your own network.\n\n## Blob types\n\nA blob's **type** is fixed when it is created and follows from how it is written and read:\n\n- **Block blobs** are built from blocks and are the general-purpose choice for text, images, documents, and streaming \u2014 most blobs are block blobs.\n- **Append blobs** can only be appended to, never overwritten in place, which makes them the natural fit for log and telemetry streams.\n- **Page blobs** are organised in 512-byte pages for random reads and writes. They exist mainly to back virtual machine disks, and premium page blobs are the SSD-backed variant.\n\n## Containers and access tiers\n\nA **container** is the grouping inside a blob account; a blob belongs to exactly one container, and container names must be lowercase and URL-safe. Inside a container, each blob sits in an **access tier** that trades storage cost against access cost and latency:\n\n- **Hot** \u2014 for data read often. Highest storage cost, lowest access cost.\n- **Cool** \u2014 for data read occasionally, with a 30-day minimum before early-deletion charges apply.\n- **Cold** \u2014 for data read rarely, with a longer minimum.\n- **Archive** \u2014 for data that may never be read again. Cheapest to store, most expensive and slowest to read.\n\nAn archived blob is **offline**: it cannot be read at all until it is **rehydrated** to hot or cool, and standard-priority rehydration takes hours. Moving a blob out of archive is that rehydration \u2014 there is no instant switch.\n\n## Lifecycle management, versioning, and soft delete\n\n**Lifecycle management** rules act on conditions you define, such as days since a blob was last modified or last accessed, and either move blobs to a cooler tier or delete them \u2014 including old versions and snapshots. They are how tiers are used in practice rather than by hand.\n\n**Blob versioning** keeps the previous contents of a blob each time it is overwritten or deleted, so you can read or promote an earlier version. **Soft delete** keeps deleted blobs, containers, or file shares recoverable for a retention period you set, which is the first place to look when someone deletes something by mistake. **Snapshots** are read-only point-in-time copies of a blob or a file share.\n\n## Azure Files\n\n**Azure Files** offers managed SMB and NFS shares. A share has a **tier** that sets its performance and cost profile, and a **quota** that caps how large the share may grow. **Azure File Sync** bridges a share to Windows Servers on your network: an agent on each server keeps a local folder in step with the Azure share, and **cloud tiering** can leave frequently used files on local disk while the rest stay in Azure as placeholders, which keeps the local volume small.\n\n## Worked example: reducing storage cost without losing data\n\n1. A team's diagnostic logs are written continuously and never modified. Append blobs are the right shape, since the writer only ever adds to the end.\n2. The logs are read heavily for a week and then almost never. A lifecycle rule moves them from hot to cool after 30 days and to archive after 180 \u2014 after which a rehydration is required before anyone can read them, and that takes hours, so the rule should not archive anything still under investigation.\n3. A developer deletes a container by mistake. Soft delete on the container is what allows recovery within the retention window; versioning alone would not bring the container back.\n\n## Where this leads\n\nStorage is now covered end to end: access, accounts, and the data itself. Section 3 moves to compute \u2014 templates, virtual machines, containers, and App Service.\n\n---\n\n*This is independent study material. It is not official training and is not endorsed or approved by CompTIA, Nutanix, or any other certification body.*\n",
+    "objectiveIds": [
+      "2.3"
+    ]
+  },
+  "AZ-104/az3_1": {
+    "lessonId": "az3_1",
+    "examId": "AZ-104",
+    "title": "ARM templates and Bicep",
+    "domainNumber": "3",
+    "status": "released",
+    "markdown": "# Automate deployment with ARM templates or Bicep files (S3.1)\n\n*Module S3.1 \u2014 Azure Administrator AZ-104 study track. Independent study material \u2014 see the disclaimer at the end.*\n\nSection 3 is about compute, and this first lesson is about the way compute gets created. Before you learn what a virtual machine needs, it helps to see the shape of the thing that asks for it. This lesson builds one mental picture: **a deployment is a document that describes the end state you want, and Azure works out the steps to reach it.**\n\n## Declarative versus imperative\n\nAn **imperative** instruction is a list of steps: create a network, then create a NIC, then create the VM. A **declarative** instruction describes the finished picture and lets the platform decide how to get there. ARM templates and Bicep files are declarative: you write down the resources you want and how they relate, and the deployment engine orders the work.\n\nThat difference matters most when you run the same deployment a second time. A script that says \"create a VM\" will fail or duplicate work if the VM already exists. A template that says \"this VM should exist with these settings\" is **idempotent** \u2014 running it again produces the same end state rather than a second VM.\n\n## The anatomy of an ARM template\n\nAn ARM template is JSON with a small, fixed set of top-level sections. You will not memorise syntax, but you should recognise each part and know why it exists:\n\n- **`$schema`** \u2014 tells the deployment tooling which template language version to read the file as. If the schema is wrong or missing, the tooling cannot parse the file, so it is the first thing to check when a template is rejected before anything is even attempted.\n- **`contentVersion`** \u2014 your own version label for the template, so you can tell one revision of your file from another. It is authoring metadata; Azure does not act on the number.\n- **`parameters`** \u2014 the inputs supplied at deployment time, such as a name, a region, or an administrator login. Parameters are what make one template reusable across environments.\n- **`variables`** \u2014 values computed inside the template, so a repeated string or a derived name is written once.\n- **`resources`** \u2014 the actual things to create, each with a **type**, a **name**, a **location**, and an **`apiVersion`**. The `apiVersion` selects which version of the resource provider's API handles that resource, and it is how a template written years ago keeps behaving the way it did.\n- **`outputs`** \u2014 values handed back after the deployment finishes, such as a generated hostname you want to feed into the next step.\n\n## Bicep: same destination, cleaner road\n\n**Bicep** is a language with terser syntax for exactly the same job. Where JSON needs nested brackets and repeated property names, Bicep uses short declarations and automatic dependency inference. The important fact is that Bicep is not a second deployment system: it **transpiles to ARM JSON**, so the engine underneath is identical. Choose Bicep for readability; nothing about the deployed result changes.\n\n## Modes, what-if, and the deployment as a record\n\nTwo settings govern how a deployment reconciles what you asked for against what exists:\n\n- **Incremental** (the default) adds and updates the resources in the template and leaves everything else in the resource group alone.\n- **Complete** additionally removes resources that are in the resource group but absent from the template. That is a real deletion, so it is not a mode to leave switched on by accident.\n\nBecause the engine can see both sides, it can tell you what it *would* change before it changes anything. **What-if** produces that preview: which resources will be created, modified, or deleted. Read it whenever a deployment touches something that already carries data.\n\nFinally, Azure keeps a **deployment history** on the scope you deployed to, recording the template and the parameters used. This is why administrators say the deployment is the record: the history explains how a resource group reached its current state, and it can be reviewed or exported as a template.\n\n## Worked example: the resource group with a surprise\n\n1. You inherit a resource group containing a VM, a storage account, and a network. You are asked to redeploy an updated template that describes only the VM. **Incremental mode.** The template adds nothing about the storage account, so the storage account stays. In complete mode, that same deployment would delete it.\n2. A template fails immediately with a parse error and no resources are attempted. **Check `$schema` first.** A malformed or mismatched schema stops the tooling before any resource provider is contacted.\n3. You must change a template that manages a production database. **Run what-if.** The preview shows whether the database will be modified or deleted, which is exactly the information you need before committing.\n\n## Where this leads\n\nLesson 3.2 takes the declarative idea and looks at the single resource most templates create: the virtual machine \u2014 what inputs it needs and which of them constrain each other.\n\n---\n\n*This is independent study material. It is not official training and is not endorsed or approved by CompTIA, Nutanix, or any other certification body.*\n",
+    "objectiveIds": [
+      "3.1"
+    ]
+  },
+  "AZ-104/az3_2": {
+    "lessonId": "az3_2",
+    "examId": "AZ-104",
+    "title": "Virtual machines",
+    "domainNumber": "3",
+    "status": "released",
+    "markdown": "# Create and configure virtual machines (S3.2)\n\n*Module S3.2 \u2014 Azure Administrator AZ-104 study track. Independent study material \u2014 see the disclaimer at the end.*\n\nA virtual machine is the resource where the most decisions meet: what software it starts from, how much machine it gets, where it lives, and how it survives a failure. The mental picture for this lesson is a **stack of coupled choices** \u2014 you rarely change one without touching another, and knowing which pairs are locked together is what turns a failed change into a planned one.\n\n## The inputs you choose at creation\n\nEvery VM creation asks the same core questions:\n\n- **Image** \u2014 the starting operating system and any preinstalled software. The image decides which sizes and which extensions are valid.\n- **Size** \u2014 the CPU, memory, and local temporary storage the VM receives.\n- **Region** \u2014 the datacentre location, which also determines which sizes and which zones are available, so region is chosen early.\n- **Networking** \u2014 the virtual network, subnet, and network interface. A VM without a NIC in a reachable subnet is running but unreachable.\n\nSizes come in **families**, grouped by workload shape: the **B series** for burstable general work, the **D series** for balanced general purpose, the **E series** for memory-heavy workloads, the **F series** for compute-heavy work, and the **N series** for GPU workloads. Choosing a family is a statement about the workload, not just about budget.\n\n## Resizing, and why deallocation appears\n\nA VM runs on a physical host that must have capacity for its size. If you ask for a size the current host cannot provide \u2014 a different family, or a larger shape \u2014 the VM must be **deallocated** first so it can be placed on suitable hardware. A resize within the same family and host often succeeds live. This is the first place the coupling shows: size changes are not always online operations.\n\n## Disks\n\nA VM has an **OS disk**, which holds the operating system, and zero or more **data disks** attached for additional storage. These are **managed disks** \u2014 Azure owns the storage account behind them, so you manage the disk, not the account. The tiers trade cost against performance:\n\n- **Standard HDD** \u2014 cheapest, lowest throughput, fine for backups and infrequent access.\n- **Standard SSD** \u2014 a middle tier for light production workloads.\n- **Premium SSD** \u2014 higher throughput and lower latency, the common production choice.\n- **Ultra Disk** \u2014 the highest performance tier, for the most demanding workloads.\n\nA disk's tier can be changed later, but not every change is available on every disk, so the tier is worth choosing deliberately at creation.\n\n## Availability: sets, zones, and scale sets\n\nIf a VM matters, the question is what happens when hardware or a platform update takes it away.\n\n- An **availability set** spreads VMs across **fault domains** (separate physical groupings that share power and networking) and **update domains** (groups rebooted together during maintenance). It protects against a single rack or a single maintenance wave, but all members stay in one datacentre.\n- **Availability zones** are physically separate datacentres inside a region, so placing VMs across zones survives the loss of an entire datacentre, which an availability set cannot.\n- A **virtual machine scale set (VMSS)** manages a group of identical VMs from one definition, so a change to the image or size applies to every instance. Scale sets support **autoscale** rules that add instances when a metric such as CPU rises and remove them when it falls.\n\n## Moving, stopping, and extending\n\nA VM can be moved between resource groups and between subscriptions, but the move takes its dependencies along \u2014 disks and network interfaces travel with it \u2014 and some attached resources block the move until they are handled. Moving to a *different region* is not a move at all; it is a rebuild.\n\n**Stopping** deserves care. Deallocating a VM releases the compute and stops the compute charge. Shutting the operating system down from inside leaves the VM stopped but still allocated: the compute is still reserved and still billed.\n\n**Extensions** are small agents installed into a VM to do a job: monitoring, configuration management, or running a script. The **custom script extension** downloads and runs a script on the VM, which is how a template finishes configuring a machine after the operating system is in place. **Encryption at host** is a VM-level setting that encrypts the temporary disk and the disk caches on the host itself, complementing the encryption already applied to the managed disks.\n\n## Worked example: three requests, three answers\n\n1. A VM resize from a general-purpose size to a much larger memory-optimised size is refused. **Deallocate first.** The current host cannot host the new size, so the VM must be released before it can be placed elsewhere.\n2. A workload must survive the loss of an entire datacentre. **Availability zones.** An availability set only spreads across racks and maintenance groups inside one datacentre.\n3. A web tier must grow automatically as load rises. **A scale set with autoscale rules.** A fixed set of standalone VMs has no definition to scale from.\n\n## Where this leads\n\nLesson 3.3 leaves the operating system behind and looks at containers \u2014 the same compute idea with far less to manage per instance.\n\n---\n\n*This is independent study material. It is not official training and is not endorsed or approved by CompTIA, Nutanix, or any other certification body.*\n",
+    "objectiveIds": [
+      "3.2"
+    ]
+  },
+  "AZ-104/az3_3": {
+    "lessonId": "az3_3",
+    "examId": "AZ-104",
+    "title": "Containers",
+    "domainNumber": "3",
+    "status": "released",
+    "markdown": "# Provision and manage containers (S3.3)\n\n*Module S3.3 \u2014 Azure Administrator AZ-104 study track. Independent study material \u2014 see the disclaimer at the end.*\n\nA container packages an application with everything it needs to run, and shares the host's operating system kernel instead of carrying its own. That single fact is the source of everything else in this lesson: containers start in seconds, they are small, and they need somewhere to run. The mental picture is a **ladder of how much platform you are willing to manage** \u2014 from a registry that stores images, to a service that runs one container, to a service that runs a whole application.\n\n## The registry: where images live\n\n**Azure Container Registry (ACR)** is a private place to store and distribute container images. It exists because a container service needs to pull an image from somewhere it trusts. ACR supports authentication integrated with your directory, so a container service can pull without credentials being pasted into a configuration file, and higher tiers add features such as geo-replication so pulls are served from a nearby region.\n\nThe registry does not run anything. It stores images and serves them.\n\n## Azure Container Instances: the fastest way to run one thing\n\n**Azure Container Instances (ACI)** runs a container with no cluster, no nodes, and no orchestrator to maintain. It is billed by the second for the resources the container uses. The unit of deployment is the **container group** \u2014 one or more containers that are scheduled together on the same host and share a lifecycle and a network space, much like a single pod.\n\nACI is the right tool when the job is simple and short-lived: a batch task, a build step, an isolated piece of work, or a first experiment with an image. What it does not give you is an application platform. There is no built-in revisioning, no traffic splitting, and no scale-to-zero behaviour driven by demand.\n\n## Azure Container Apps: a platform for applications\n\n**Azure Container Apps** sits a rung higher. It is serverless in the sense that you do not manage nodes, but it provides the features an application actually needs:\n\n- **Scale to zero** \u2014 when no requests arrive, the app scales down to nothing and you stop paying for compute.\n- **Revisions** \u2014 each deployment of a changed container produces an immutable revision, and you can send traffic to a specific revision or split traffic between them. This is how a canary release works without a second environment.\n- **Event-driven scaling** \u2014 scaling rules can follow HTTP concurrency, or external event sources such as a queue's depth, so the app grows in response to the work waiting for it rather than only to CPU.\n- **Ingress** \u2014 an HTTPS endpoint, with certificates handled for you.\n\nThe clean distinction: **ACI runs a container group; Container Apps runs an application.** If you need revisions, traffic splitting, or scale to zero, ACI is the wrong rung of the ladder.\n\n## Sizing and scaling rules\n\nBoth services ask for CPU and memory, but they ask differently. In ACI you allocate CPU and memory to the containers in the group, and that allocation is the capacity the group gets. In Container Apps you set CPU and memory per replica and then describe the **scaling rule**: the minimum and maximum number of replicas, and the condition that adds or removes them. Setting a minimum of zero is what enables scale to zero; setting a minimum of one keeps a warm instance and avoids the cold start.\n\n## Worked example: choosing the rung\n\n1. A nightly job converts files and takes about four minutes. It needs no endpoint and nothing after it finishes. **ACI.** A short-lived single task with no orchestration need is exactly what it is for.\n2. An API must cost nothing overnight, then absorb a morning spike driven by a queue. **Container Apps with a scale-to-zero minimum and an event-driven rule.** Scale to zero plus queue-based scaling is the combination ACI cannot express.\n3. A new release must reach ten percent of users before everyone else. **Container Apps revisions with traffic splitting.** Sending a share of traffic to a specific revision is a platform feature, not something a single container group can do.\n\n## Where this leads\n\nLesson 3.4 covers App Service \u2014 the platform for hosting an application when the unit of deployment is code or a container image rather than a container group.\n\n---\n\n*This is independent study material. It is not official training and is not endorsed or approved by CompTIA, Nutanix, or any other certification body.*\n",
+    "objectiveIds": [
+      "3.3"
+    ]
+  },
+  "AZ-104/az3_4": {
+    "lessonId": "az3_4",
+    "examId": "AZ-104",
+    "title": "App Service",
+    "domainNumber": "3",
+    "status": "released",
+    "markdown": "# Create and configure Azure App Service (S3.4)\n\n*Module S3.4 \u2014 Azure Administrator AZ-104 study track. Independent study material \u2014 see the disclaimer at the end.*\n\nApp Service hosts a web application without asking you to manage a server. The mental picture that makes the whole service legible is a **separation between the app and the compute it runs on**: the app is the thing you deploy, and the plan is the machine underneath it. Nearly every confusing question about tiers, scaling, and slots resolves once you can say which of the two you are changing.\n\n## The plan is the compute; the app is the workload\n\nAn **App Service plan** defines a region, a pricing tier, a VM size, and a number of instances, and every app placed in that plan shares those resources. This is why the first design question is never \"which tier is best\" but \"which apps can afford to share a machine\". Two apps in one plan compete for the same CPU and memory, and a burst of traffic in one is felt by the other. The app itself carries the deployment \u2014 code or a container image \u2014 plus its settings, custom domains, and slots.\n\n## Tiers, and what each one unlocks\n\n- **Free and Shared** \u2014 the lowest tiers, suited to experiments. Limited compute and no custom domain of your own.\n- **Basic** \u2014 dedicated compute, custom domains, and manual scaling to more instances.\n- **Standard** \u2014 adds what a real release process needs: **deployment slots**, **autoscale**, and **backup**.\n- **Premium** \u2014 more performance and instances, larger slot counts, and additional networking and resilience options.\n- **Isolated** \u2014 runs in a dedicated environment, for the strictest network isolation requirements.\n\nThe tiers are cumulative, so the practical reading is: if a requirement mentions slots, autoscale, or backup, the tier must be Standard or above.\n\n## Scaling up and scaling out\n\nTwo different actions share the word \"scale\":\n\n- **Scale up** means moving to a larger VM size in the plan \u2014 a bigger machine. It usually requires a change that restarts the app.\n- **Scale out** means adding instances of the same size, and it is the action **autoscale** performs against a metric such as CPU or a schedule.\n\nScale out is the usual answer to variable load because it can be added and removed without changing the shape of the machine.\n\n## Slots and swap\n\nA **deployment slot** is a second, fully addressable instance of the same app inside the same plan. The standard pattern is to deploy to a non-production slot, let it warm up, verify it, and then **swap** it into production. The swap exchanges the content of the two slots, so the release happens as an exchange rather than as a period of downtime. Some settings are marked as slot settings and stay with the slot rather than travelling with the swap \u2014 connection strings are the classic example, and getting this wrong is the usual cause of an app that works in staging and fails immediately after a swap.\n\n## Domains, certificates, backup, and networking\n\n- **Custom DNS names** \u2014 you map your own hostname to the app by creating the DNS records the service asks for.\n- **TLS certificates** \u2014 a managed certificate can be issued and renewed for you, or you can bring your own and bind it to the hostname.\n- **Backup** \u2014 at Standard and above, a scheduled backup of the app's content and configuration can be written to a storage account and restored.\n- **Access restrictions** \u2014 inbound rules that allow or deny traffic by address or range, evaluated before the request reaches the app.\n- **VNet integration** \u2014 gives the app outbound access into a virtual network, so it can reach a database that is not exposed publicly.\n- **Private endpoints** \u2014 the opposite direction: a private inbound address inside a virtual network rather than a public one.\n\n## App Service and containers\n\nApp Service can also run your application from a container image instead of a code deployment. You gain the ability to package the runtime exactly as you want, and you give up the fully managed runtime that patches itself. The plan, the tiers, the slots, and the networking rules work the same way either way.\n\n## Worked example: reading a requirement\n\n1. A release must be verified in a warm environment and then go live with no downtime. **Deploy to a slot, verify, then swap.**\n2. An app must reach a database that has no public endpoint. **VNet integration for outbound access**, with a private endpoint on the database side.\n3. Traffic varies sharply through the day and the app must follow it. **Scale out with autoscale rules**, which requires Standard or above.\n4. A connection string must not follow a swap into production. **Mark it as a slot setting**, so the value stays with the slot.\n\n## Where this leads\n\nSection 4 moves below the application: the virtual networks, name resolution, and load balancing that everything in section 3 has been quietly relying on.\n\n---\n\n*This is independent study material. It is not official training and is not endorsed or approved by CompTIA, Nutanix, or any other certification body.*\n",
+    "objectiveIds": [
+      "3.4"
+    ]
+  },
+  "AZ-104/az4_1": {
+    "lessonId": "az4_1",
+    "examId": "AZ-104",
+    "title": "Virtual networks",
+    "domainNumber": "4",
+    "status": "released",
+    "markdown": "# Configure and manage virtual networks in Azure (S4.1)\n\n*Module S4.1 \u2014 Azure Administrator AZ-104 study track. Independent study material \u2014 see the disclaimer at the end.*\n\nA virtual network in Azure is your own private address space inside a Microsoft region. The single mental picture to hold: a **virtual network (VNet)** is a container of address space, **subnets** are slices of that space, and everything that talks over IP lives in a subnet. When something cannot reach something else, you are almost always asking one of two questions \u2014 is the address space laid out correctly, or is there a route that sends the traffic somewhere unexpected?\n\n## Address space, subnets, and reserved addresses\n\nA VNet is defined by one or more **address space** ranges written in CIDR notation, such as `10.0.0.0/16`. Subnets must fall inside that space and must not overlap each other. You can add address space later, but you cannot shrink it, and a subnet cannot be resized while resources are attached to it.\n\nAzure **reserves five addresses** in every subnet, so a `/24` gives you 251 usable addresses rather than 256:\n\n- the first address (`x.x.x.0`) \u2014 the network address\n- the second (`x.x.x.1`) \u2014 the default gateway for the subnet\n- the third and fourth (`x.x.x.2`, `x.x.x.3`) \u2014 reserved for Azure DNS mapping\n- the last address \u2014 the broadcast address\n\nSubnets also have special-purpose names you will meet. A **GatewaySubnet** hosts a VPN or ExpressRoute gateway and must be named exactly that. A **AzureFirewallSubnet** hosts Azure Firewall. Getting these names wrong is a classic reason a gateway deployment fails.\n\n## Peering, public IPs, and routes\n\n**VNet peering** connects two VNets so traffic flows over the Microsoft backbone rather than the internet. Peering can be **regional** (same region) or **global** (different regions). Two facts drive most questions:\n\n- Peering is **non-transitive**. If A is peered to B and B is peered to C, A still cannot reach C. You need a direct peering or a gateway in the middle.\n- Peering must be created **from both sides**. A peering link created on VNet A shows as *Initiated* until the matching link is created on VNet B; only then does it become *Connected*.\n\n**Public IP addresses** come in two SKUs. **Basic** is the older SKU; it is open by default and pairs with a network security group you must remember to attach. **Standard** is the current SKU: it is **secure by default** (closed to inbound traffic until an NSG explicitly allows it), supports availability zones, and is required for a Standard load balancer. Each public IP is either **static** (the address never changes) or **dynamic**.\n\n**User-defined routes (UDRs)** let you override Azure's automatic routing. Each route has an address prefix and a **next hop type** \u2014 common ones are *Virtual network gateway*, *Virtual network*, *Internet*, *Virtual appliance* (a firewall or router NIC), and *None* (drop the traffic). Route precedence, from strongest to weakest, is **UDR, then system route, then BGP route** learned from a gateway.\n\n## Worked example: the VM that cannot be reached\n\n1. **A web server in subnet `10.0.1.0/24` has a Standard public IP but nobody can connect on port 443.** You check the NSG and there is no rule for 443. Because Standard SKU public IPs are secure by default, the missing allow rule is the whole story \u2014 add an inbound rule permitting TCP 443 from the internet. On a Basic public IP the same VM would have been reachable.\n2. **Two VNets, `Hub` and `Spoke`, are peered. A VM in `Spoke` still cannot reach a VM in a third VNet that is peered only to `Hub`.** Peering is non-transitive, so the Spoke-to-third-VNet path does not exist. Either peer them directly, or route through a firewall or gateway in the hub.\n3. **Traffic from a subnet is being inspected by a firewall appliance at `10.0.2.4`, but the firewall sees no traffic.** Add a UDR on the subnet with the destination prefix you care about and next hop **Virtual appliance** set to that IP. A UDR beats the system route, which is why it can redirect traffic that was previously flowing straight out.\n\n## Troubleshooting tools\n\nThree built-in tools answer \"why can't this flow?\" without guesswork. **IP flow verify** takes a source, destination, port and protocol and tells you whether a packet is allowed or denied, and which NSG rule decided it. **Next hop** shows the effective next hop type for traffic leaving a VM toward a given address. **Connection troubleshoot** runs an end-to-end check between a source and a destination and reports where the path fails.\n\n## Where this leads\n\nYou now know how packets are addressed and routed. The next lesson, S4.2, covers what decides whether those packets are allowed at all \u2014 network security groups, Azure Bastion, and the two ways to reach a platform service privately.\n\n---\n\n*This is independent study material. It is not official training and is not endorsed or approved by CompTIA, Nutanix, or any other certification body.*\n",
+    "objectiveIds": [
+      "4.1"
+    ]
+  },
+  "AZ-104/az4_2": {
+    "lessonId": "az4_2",
+    "examId": "AZ-104",
+    "title": "Secure access to virtual networks",
+    "domainNumber": "4",
+    "status": "released",
+    "markdown": "# Configure secure access to virtual networks (S4.2)\n\n*Module S4.2 \u2014 Azure Administrator AZ-104 study track. Independent study material \u2014 see the disclaimer at the end.*\n\nRouting gets a packet to the right place; security decides whether it is allowed to arrive. This lesson builds one picture: a **network security group** is an ordered allow/deny list attached to a boundary, and everything else here \u2014 application security groups, Bastion, service and private endpoints \u2014 is a refinement of that idea or a way to avoid exposing a boundary at all.\n\n## Network security groups and their rules\n\nAn **NSG** contains rules evaluated in **priority order**, lowest number first. The first rule that matches the traffic decides the outcome and evaluation stops. Each rule has:\n\n- a **priority** (100\u20134096, lower wins)\n- a **source** and **destination** (an IP range, a service tag such as `Internet` or `VirtualNetwork`, or an application security group)\n- a **port** (or range, or `*`)\n- a **protocol** (TCP, UDP, ICMP, or Any)\n- an **action** \u2014 Allow or Deny\n\nEvery NSG ships with **default rules** you cannot delete, numbered 65000, 65001 and 65500. They allow traffic within the virtual network and from Azure Load Balancer, allow outbound internet traffic, and finish with a **deny-all inbound** rule. That final rule is why a new NSG with no custom rules blocks inbound traffic from the internet.\n\nTwo properties cause most confusion. NSGs are **stateful** \u2014 if you allow inbound TCP 443, the reply traffic is permitted automatically without a matching outbound rule. And an NSG can be attached at the **subnet** or at the **NIC**; if both apply, traffic must be allowed by both. For inbound traffic the subnet NSG is evaluated first, then the NIC NSG.\n\n**Application security groups (ASGs)** let you group NICs by role \u2014 `web-servers`, `db-servers` \u2014 and then write a rule whose source is an ASG rather than an IP range. When you add a VM to the group, it inherits the rule; you never edit the rule again. **Effective security rules** is the view that shows, for one NIC, the combined result of every subnet and NIC NSG after defaults are merged \u2014 the right place to look when a rule you wrote does not seem to apply.\n\n## Bastion and private access to platform services\n\n**Azure Bastion** gives you browser-based RDP and SSH to a VM through the Azure portal. Its point is that the VM needs **no public IP address** at all; Bastion is deployed into a `AzureBastionSubnet` in your VNet and brokers the session. This removes the exposed management port that would otherwise be the most attacked surface on the VM.\n\nFor platform services such as storage accounts, SQL databases and key vaults, there are two ways to reach them privately, and the distinction is a favourite question.\n\n- A **service endpoint** extends your VNet identity to the service. Your subnet keeps using the service's public address, but Azure adds a route so the traffic stays on the Microsoft backbone, and the service can be locked to that subnet. The service still has a public IP.\n- A **private endpoint** places a **private IP address from your own VNet** in front of the service. The resource is then reachable at that private address, and you can disable public access entirely. Private endpoints also work across peered networks and from on-premises over VPN or ExpressRoute.\n\nRule of thumb: service endpoint when you want a cheaper, simpler lockdown and the service can keep a public address; private endpoint when the requirement is that no public path exists.\n\n## Worked example: three access problems\n\n1. **A VM in a peered VNet is denied access to a storage account that allows only a service endpoint from the original subnet.** Service endpoints are scoped to the subnet, not the VNet as a whole, and peering does not extend them. Either add the peered subnet's endpoint and to the storage firewall, or move to a private endpoint, which does work across peering.\n2. **You add an inbound NSG rule allowing TCP 3389 from your office, but RDP still fails.** Check whether a second NSG is attached at the other boundary. Both the subnet NSG and the NIC NSG must allow the traffic; a deny in either one wins. The effective security rules view shows exactly which rule denied it.\n3. **An administrator needs RDP to twenty VMs and the security team will not allow public IPs on them.** Deploy Azure Bastion into an `AzureBastionSubnet` and connect through the portal. The VMs keep only private addresses, and no inbound management port is exposed.\n\n## Where this leads\n\nYou can now control who reaches what. Lesson S4.3 turns to the two remaining pieces of a working network: turning names into addresses, and spreading traffic across several servers.\n\n---\n\n*This is independent study material. It is not official training and is not endorsed or approved by CompTIA, Nutanix, or any other certification body.*\n",
+    "objectiveIds": [
+      "4.2"
+    ]
+  },
+  "AZ-104/az4_3": {
+    "lessonId": "az4_3",
+    "examId": "AZ-104",
+    "title": "Name resolution and load balancing",
+    "domainNumber": "4",
+    "status": "released",
+    "markdown": "# Configure name resolution and load balancing (S4.3)\n\n*Module S4.3 \u2014 Azure Administrator AZ-104 study track. Independent study material \u2014 see the disclaimer at the end.*\n\nThis lesson covers the two services that sit in front of everything else you have built. Name resolution turns a name into an address, and load balancing turns one address into many servers. The mental picture: **Azure DNS** answers \"which address?\", and a **load balancer or application gateway** answers \"which server, and is it healthy?\"\n\n## Azure DNS zones\n\nAzure DNS hosts two kinds of zone.\n\nA **public zone** hosts records for a name you own and answers queries from the internet. You create the zone, then take the name server records Azure assigns you and set them at your domain registrar so the world can find your zone.\n\nA **private zone** answers queries only from the virtual networks you link to it. You create the zone (for example `internal.contoso.com`), then add **virtual network links**. Two details matter:\n\n- **Auto-registration** can be enabled on a link, and Azure then creates and updates an A record for each VM in the linked VNet automatically as VMs are created, started and deleted. Auto-registration is a per-link setting.\n- A VM must be linked to the zone to use it. A private zone linked only to VNet A does not answer for a VM in VNet B unless you link B as well.\n\nCommon record types are **A** (name to IPv4), **AAAA** (name to IPv6), **CNAME** (name to another name), **MX** and **TXT** for mail and verification, and **SRV** for service locations. By default, Azure provides name resolution to VMs in a VNet automatically, but if you set **custom DNS servers** on the VNet, you replace that service \u2014 the custom servers must then resolve everything the VMs need, including Azure service names.\n\n## Choosing a load balancing service\n\nThe first question is which layer you are balancing at.\n\n- **Azure Load Balancer** works at **Layer 4** \u2014 TCP and UDP. It cannot see a URL, a host header or a cookie. It is fast, cheap, and right for any non-HTTP protocol or when you only need to spread connections.\n- **Application Gateway** works at **Layer 7** \u2014 HTTP and HTTPS. Because it reads the request, it can route by path or host name, terminate TLS, and provide a web application firewall.\n\nEither can be **public** (a public frontend IP, for internet clients) or **internal** (a private frontend IP, for clients inside your network).\n\nAn Azure Load Balancer has three pieces worth separating:\n\n- the **frontend IP configuration** \u2014 the address clients connect to\n- the **backend pool** \u2014 the set of VMs or instances that receive traffic\n- the **health probe** \u2014 a periodic check (protocol, port, interval) that decides whether an instance is eligible to receive traffic\n\nThe probe and the pool are different things, and that distinction explains most load balancing failures: a server can be correctly listed in the backend pool and still receive no traffic because its health probe is failing.\n\n## Worked example: three load balancing faults\n\n1. **A Standard load balancer has three VMs in its backend pool, but all traffic lands on one VM.** Look at backend health. The other two are almost certainly failing the probe \u2014 commonly because the probe is set to a port or path the application does not answer on.\n2. **Backend health shows every instance as unhealthy even though the application responds from inside the VM.** The NSG is blocking the probe. Health probes originate from the address `168.63.129.16`, so the NSG must allow that source on the probe port. This is the single most common cause of an all-unhealthy pool.\n3. **A team needs `app.contoso.com/api` routed to one pool and everything else to another.** That is a path-based decision, so a Layer 4 load balancer cannot do it. Use Application Gateway with path-based routing rules.\n\n## Where this leads\n\nSection 4 is complete: you can lay out address space, control access, resolve names and distribute traffic. Section 5 builds on this foundation by covering how workloads are monitored and how data is protected across the platform.\n\n---\n\n*This is independent study material. It is not official training and is not endorsed or approved by CompTIA, Nutanix, or any other certification body.*\n",
+    "objectiveIds": [
+      "4.3"
+    ]
+  },
+  "AZ-104/az5_1": {
+    "lessonId": "az5_1",
+    "examId": "AZ-104",
+    "title": "Azure Monitor",
+    "domainNumber": "5",
+    "status": "released",
+    "markdown": "# Monitor resources in Azure (S5.1)\n\n*Module S5.1 \u2014 Azure Administrator AZ-104 study track. Independent study material \u2014 see the disclaimer at the end.*\n\nMonitoring gets easier once you separate two questions people blur together: *what is the resource doing right now?* and *who changed it?* Azure Monitor answers both, with different stores of data. **Metrics** describe behaviour and performance. The **activity log** records control-plane operations \u2014 the create, update, and delete actions taken against your resources. Most monitoring decisions start with picking the right one.\n\nThe second mental picture is a pipeline: signal \u2192 condition \u2192 action. An alert rule is that pipeline made explicit.\n\n## Metrics, and where they come from\n\n**Metrics** are numeric time-series values: lightweight, retained for a bounded period, queryable near-real-time. Azure separates **platform metrics**, which every resource emits automatically, from **guest metrics**, which come from inside a virtual machine's operating system \u2014 memory in use, or free space on a volume.\n\nThat explains a common complaint: \"the CPU chart works, but there is no memory chart.\" CPU percentage is a platform metric the hypervisor can see; memory pressure inside the guest is invisible unless an agent in the VM reports it \u2014 the job of the Azure Monitor Agent and VM insights. When an expected metric is missing, ask whether it is a guest metric and whether the agent is healthy.\n\n## Activity log, resource logs, and diagnostic settings\n\nThe **activity log** is a subscription-level record of control-plane operations: who created, modified, or deleted what, and when. If a resource changed unexpectedly, this is where you look for the change itself. It will not tell you the resource is slow.\n\n**Resource logs** are different: the resource emits them (detailed request records from a storage account or key vault, say) and nothing collects them by default. You route them with **diagnostic settings**, choosing a destination:\n\n- a **Log Analytics workspace**, for querying alongside other data,\n- a **storage account**, for cheap long-term archival,\n- **Event Hubs**, for streaming to an external system.\n\nA diagnostic setting is a routing decision, not a storage decision \u2014 the same log can go to several destinations at once.\n\n## Log Analytics and KQL\n\nA **Log Analytics workspace** is the query engine and store for log data, queried with **KQL**: a table name, then operators separated by pipes, typically filtering rows, projecting columns, and aggregating or sorting. You need not memorise operators \u2014 just recognise that \"query logs across many resources from one place\" points at a workspace, and that a workspace is what alert rules on log data are built against.\n\n## Alerts: signal, condition, action\n\nAn **alert rule** has three parts. The **signal** is the metric or log query being watched. The **condition** is the threshold and evaluation frequency \u2014 average CPU above a value for five minutes, say. The **action group** is what happens when the condition is met: email, SMS, voice call, push, webhook, runbook, or Logic App.\n\nAn **action group** is reusable, which is the point of separating it: define \"notify the platform team\" once and attach it to many rules. **Alert processing rules** sit on top, suppressing or rerouting notifications \u2014 muting alerts during a maintenance window without disabling the rules themselves.\n\n## Insights and Network Watcher\n\n**Azure Monitor Insights** are curated views built on the raw data: VM insights for a fleet of machines, plus insights for storage, networks, and containers, so you need not build the first dashboard yourself.\n\nFor networking, **Network Watcher** is a regional service of diagnostic tools \u2014 IP flow verify, next hop, packet capture, connection troubleshoot. **Connection Monitor** extends this into continuous monitoring of reachability and latency, which is what you want when a problem is intermittent rather than reproducible on demand.\n\n## Worked example: choosing the right tool\n\n1. **A storage account's settings changed overnight and nobody admits to it.** Look at the **activity log**: a configuration change is a control-plane operation, so the log holds the caller identity, operation name, and timestamp. Metrics show that requests behaved differently, not who changed the setting.\n2. **A VM has a CPU chart but no memory chart.** The missing value is a **guest metric**. Check that the Azure Monitor Agent is installed and reporting; platform metrics alone cannot see inside the operating system.\n3. **The team wants a page when an error appears in an application log, and a ticket outside business hours.** The signal is a **log query in a Log Analytics workspace**. One rule fires both; **alert processing rules** route by time window, so the after-hours path is a routing concern, not a second rule.\n\n## Where this leads\n\nMonitoring tells you what is happening and what changed. Lesson S5.2 covers what to do when the answer is \"something is lost or broken\" \u2014 backing data up so it can be restored, and replicating a workload so it can fail over to another region.\n\n---\n\n*This is independent study material. It is not official training and is not endorsed or approved by CompTIA, Nutanix, or any other certification body.*\n",
+    "objectiveIds": [
+      "5.1"
+    ]
+  },
+  "AZ-104/az5_2": {
+    "lessonId": "az5_2",
+    "examId": "AZ-104",
+    "title": "Backup and recovery",
+    "domainNumber": "5",
+    "status": "released",
+    "markdown": "# Implement backup and recovery (S5.2)\n\n*Module S5.2 \u2014 Azure Administrator AZ-104 study track. Independent study material \u2014 see the disclaimer at the end.*\n\nBackup and disaster recovery get discussed as one subject, but they answer two different questions, and separating them is the most useful thing this lesson can give you. **Backup** answers \"the data is gone or corrupted \u2014 put it back the way it was.\" It is a point-in-time copy, and restoring it takes time. **Site Recovery** answers \"the whole workload is unavailable because its region is unavailable \u2014 keep the business running.\" It is replication and failover, not a restore.\n\nHold those apart and most scenarios resolve themselves: if the ask is about lost or damaged *data*, you are in the backup half; if it is about an unavailable *workload*, you are in the Site Recovery half.\n\n## Vaults: where backups live\n\nA backup is stored in a vault, and two kinds matter.\n\nThe **Recovery Services vault** is the older, broader one: backups for virtual machines, file shares, on-premises servers, and SQL databases in Azure VMs.\n\nThe **Backup vault** is the newer type, used by newer-generation workloads \u2014 notably blob storage backups and Azure Database for PostgreSQL. When a question mentions backing up blobs, the answer is a Backup vault, and that is a reliable tell.\n\nThe vault is the container, not the schedule \u2014 which brings us to policy.\n\n## Policies, recovery points, and retention\n\nA **backup policy** is a separate object from the vault, defining two things: **frequency** (how often a backup is taken) and **retention** (how long each is kept \u2014 daily points for a short window, weekly, monthly, and yearly points for longer). One policy can attach to many resources, and one vault can hold many policies.\n\nEach backup produces a **recovery point**, and choosing a recovery point *is* choosing the restore's point in time. If a question asks how far back you can go, the answer comes from the retention in the policy, not from anything on the VM itself.\n\n## Soft delete and restore options\n\n**Soft delete** keeps backup data for a period after it would otherwise be deleted, so a recovery point removed accidentally \u2014 or maliciously \u2014 can still be recovered. It is a security control, not just a convenience: an attacker who reaches a vault and deletes backups is trying to destroy your ability to recover, and lengthening soft delete retention is a hardening step.\n\nRestoring a virtual machine offers several shapes, and picking between them is a frequent scenario:\n\n- **Replace the existing VM** \u2014 restore over the original disk. Simplest, and most destructive to current state.\n- **Restore the disks** \u2014 create new disks from the recovery point and attach them, useful when you want to inspect the data before committing.\n- **File-level recovery** \u2014 mount the recovery point and copy individual files out. The right answer when one folder was deleted and everything else is fine.\n\n**Cross-region restore** restores to a paired region from vault-replicated backup data, covering the case where the primary region is the problem \u2014 but it is still a restore, so it is measured in restore time.\n\n## Site Recovery: replication and failover\n\n**Azure Site Recovery** is a different service with a different job. It continuously replicates virtual machines to a secondary region, so that when the primary fails you can run a **failover** and bring the workload up elsewhere. You rehearse it with a **test failover**, which brings up the replica in an isolated network so you can verify it works without disturbing production \u2014 \"verify the plan without impacting production\" means a test failover, not a real one.\n\nThe distinction to carry away: Site Recovery has a low recovery time objective because a replica is already warm; backup has a higher one because data must be transferred and rebuilt. Many designs run both.\n\n## Reports and alerts\n\nBackup reports and built-in alerts cover the operational side: are jobs succeeding, are any resources unprotected, is a job overrunning. These matter because a backup job that silently fails is worse than none \u2014 cost and false confidence without the protection.\n\n## Worked example: picking the mechanism\n\n1. **A user deleted a folder from a file share; everything else is intact.** Use **file-level recovery**. Replacing the whole share would discard correct changes made since that recovery point for no reason.\n2. **A VM's OS disk was corrupted by a bad update an hour ago.** Restore from a **recovery point taken before the update**, replacing the VM or restoring the disks. The question is which point predates the damage; how far back you can reach is bounded by the policy's retention.\n3. **The finance application must keep running if the primary region fails.** This is workload continuity, so use **Site Recovery** with replication to a secondary region. Backup would restore the data eventually, but the requirement is availability.\n\n## Where this leads\n\nThis closes the monitoring and recovery portion of the track: watch the resource and know what changed (S5.1), and be able to put data back or keep the business running (S5.2).\n\n---\n\n*This is independent study material. It is not official training and is not endorsed or approved by CompTIA, Nutanix, or any other certification body.*\n",
+    "objectiveIds": [
+      "5.2"
     ]
   }
 };
@@ -3184,6 +3576,1057 @@ export const ITEMS = [
     "provenanceStatus": "draft",
     "textHash": "0ec09f329748acaf",
     "bank": "nca75-pilot.md"
+  },
+  {
+    "id": "AZ-104/az104-beginner.md/Q1",
+    "examId": "AZ-104",
+    "number": "Q1",
+    "stem": "A newly created member user cannot be assigned a Microsoft 365 licence, and the error indicates the account has no location; what should you do?",
+    "options": {
+      "A": "Convert the user to a guest user in the tenant",
+      "B": "Add the user to an administrative unit",
+      "C": "Set the user's usage location, then assign the licence",
+      "D": "Create a security group with dynamic user membership"
+    },
+    "keys": [
+      "C"
+    ],
+    "explanation": "Licences that depend on geography require the user's usage location to be set, so setting it and retrying the assignment resolves the error. Converting the user to a guest changes how they authenticate and does not supply a location. An administrative unit only narrows the scope of an administrator role, and a dynamic group does not set the missing property.",
+    "objectiveId": "1.1",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "6a83ede03fffc5c5",
+    "bank": "az104-beginner.md"
+  },
+  {
+    "id": "AZ-104/az104-beginner.md/Q2",
+    "examId": "AZ-104",
+    "number": "Q2",
+    "stem": "You need a group that automatically contains every Windows device enrolled in the tenant and requires no manual maintenance; what should you create?",
+    "options": {
+      "A": "A security group whose membership type is dynamic device",
+      "B": "A security group whose membership type is assigned",
+      "C": "A Microsoft 365 group with dynamic user membership",
+      "D": "An administrative unit scoped to the enrolled devices"
+    },
+    "keys": [
+      "A"
+    ],
+    "explanation": "Dynamic device membership matches devices by attribute rules, so the group maintains itself, and this membership type is available for security groups only. Assigned membership requires someone to add each device by hand. A Microsoft 365 group with dynamic user membership matches users rather than devices, and an administrative unit scopes administration instead of collecting devices for access.",
+    "objectiveId": "1.1",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "741966a342858553",
+    "bank": "az104-beginner.md"
+  },
+  {
+    "id": "AZ-104/az104-beginner.md/Q3",
+    "examId": "AZ-104",
+    "number": "Q3",
+    "stem": "Your helpdesk must be able to reset passwords for users in one department only and nothing else in the directory; what should you do?",
+    "options": {
+      "A": "Assign the helpdesk the User Administrator role at the tenant",
+      "B": "Place the department's users in an administrative unit and assign the role there",
+      "C": "Assign the helpdesk the Global Administrator directory role",
+      "D": "Create a dynamic security group for the department and assign the role to that group"
+    },
+    "keys": [
+      "B"
+    ],
+    "explanation": "An administrative unit narrows an administrator role to a defined set of objects, so the helpdesk can reset passwords for that department alone. The same role assigned at the tenant applies to every user in the directory. Global Administrator grants far more than password resets, and assigning a role to a group does not confine it to the department's users.",
+    "objectiveId": "1.1",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "2962d837ad29b25c",
+    "bank": "az104-beginner.md"
+  },
+  {
+    "id": "AZ-104/az104-beginner.md/Q4",
+    "examId": "AZ-104",
+    "number": "Q4",
+    "stem": "Which statement correctly describes a guest user in a Microsoft Entra tenant?",
+    "options": {
+      "A": "The tenant stores and manages the guest's password",
+      "B": "The guest authenticates with credentials from their home organisation",
+      "C": "The guest is removed from the directory when a subscription expires",
+      "D": "The guest cannot be added to a security group"
+    },
+    "keys": [
+      "B"
+    ],
+    "explanation": "A guest invited through B2B collaboration keeps their own home credentials, and the tenant holds a representation of the account rather than a password. The tenant does not store the guest's password. Guests are directory objects whose lifetime is independent of any subscription, and they can be added to security groups.",
+    "objectiveId": "1.1",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "f3d5900c24533937",
+    "bank": "az104-beginner.md"
+  },
+  {
+    "id": "AZ-104/az104-beginner.md/Q5",
+    "examId": "AZ-104",
+    "number": "Q5",
+    "stem": "A developer who holds the Contributor role on a resource group cannot grant a colleague access to that resource group; what should you do?",
+    "options": {
+      "A": "Assign the developer the Reader role at the resource group as well",
+      "B": "Ask the developer to create the assignment with a different client",
+      "C": "Assign the developer the Owner role at the subscription",
+      "D": "Assign the developer User Access Administrator at the resource group"
+    },
+    "keys": [
+      "D"
+    ],
+    "explanation": "Contributor can manage resources but cannot create role assignments, and User Access Administrator at that resource group supplies exactly the missing permission. Adding Reader grants no access-management permission. Changing client makes no difference because the rule is enforced by the platform, and Owner at the subscription would work but grants far more than required.",
+    "objectiveId": "1.2",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "581f7d7da289c648",
+    "bank": "az104-beginner.md"
+  },
+  {
+    "id": "AZ-104/az104-beginner.md/Q6",
+    "examId": "AZ-104",
+    "number": "Q6",
+    "stem": "A user is Reader at the subscription and Contributor at a single resource group; what can the user do with resources in that resource group?",
+    "options": {
+      "A": "Only view them, because the inherited Reader applies everywhere",
+      "B": "Manage them and grant access to other users",
+      "C": "Nothing, because conflicting assignments cancel each other out",
+      "D": "Manage them, but not grant access to other users"
+    },
+    "keys": [
+      "D"
+    ],
+    "explanation": "Effective access is the union of all assignments, so the Contributor grant at the resource group applies there. Contributor cannot create role assignments, so granting access to others remains impossible. Inherited access never cancels a more permissive grant made at a narrower scope, and assignments do not cancel one another.",
+    "objectiveId": "1.2",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "a179ec40152991d8",
+    "bank": "az104-beginner.md"
+  },
+  {
+    "id": "AZ-104/az104-beginner.md/Q7",
+    "examId": "AZ-104",
+    "number": "Q7",
+    "stem": "A user with the Owner role at a resource group still cannot modify a virtual machine in that group, and no resource lock exists; what is the most likely explanation?",
+    "options": {
+      "A": "A deny assignment on the virtual machine overrides the Owner role",
+      "B": "The user's Owner assignment has not finished propagating",
+      "C": "The virtual machine belongs to a different subscription",
+      "D": "The Owner role does not include permission to modify virtual machines"
+    },
+    "keys": [
+      "A"
+    ],
+    "explanation": "Deny assignments take precedence over allow assignments regardless of role, and Azure creates them for managed applications and similar constructs. Role propagation is quick and would not block a single resource in isolation. A virtual machine belongs to the resource group that contains it, and Owner includes full management of resources.",
+    "objectiveId": "1.2",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "84607ada1aefc490",
+    "bank": "az104-beginner.md"
+  },
+  {
+    "id": "AZ-104/az104-beginner.md/Q8",
+    "examId": "AZ-104",
+    "number": "Q8",
+    "stem": "An administrator needs to create user accounts and manage groups in the directory; which type of role must be assigned?",
+    "options": {
+      "A": "An Azure RBAC role at the subscription scope",
+      "B": "An Azure RBAC role at the management group scope",
+      "C": "A Microsoft Entra directory role",
+      "D": "The Owner role on the tenant root management group"
+    },
+    "keys": [
+      "C"
+    ],
+    "explanation": "Directory objects such as users and groups are governed by Microsoft Entra directory roles. Azure RBAC roles apply to Azure resources, so assigning one at any scope grants nothing over the directory. Owner on the root management group governs resources and access to them, not the creation of directory objects.",
+    "objectiveId": "1.2",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "83bc900ce5198ada",
+    "bank": "az104-beginner.md"
+  },
+  {
+    "id": "AZ-104/az104-beginner.md/Q9",
+    "examId": "AZ-104",
+    "number": "Q9",
+    "stem": "A developer reports that the portal refuses changes to a storage account's configuration, yet the application still writes blobs successfully; what is the cause?",
+    "options": {
+      "A": "A ReadOnly lock applies to the control plane only",
+      "B": "A CanNotDelete lock is blocking configuration changes",
+      "C": "The storage account firewall is rejecting portal requests",
+      "D": "The developer's Contributor role does not permit configuration changes"
+    },
+    "keys": [
+      "A"
+    ],
+    "explanation": "A ReadOnly lock freezes the resource's management settings while data-plane operations such as writing blobs continue, which matches the symptom exactly. CanNotDelete blocks deletion only, so it would not refuse a configuration change. A firewall affects network access rather than saving settings, and Contributor does permit configuration changes.",
+    "objectiveId": "1.3",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "c2fc2b8f11db31c5",
+    "bank": "az104-beginner.md"
+  },
+  {
+    "id": "AZ-104/az104-beginner.md/Q10",
+    "examId": "AZ-104",
+    "number": "Q10",
+    "stem": "A team must be prevented from deploying resources into any region except two permitted ones; what should you do?",
+    "options": {
+      "A": "Create a budget on the subscription with an alert threshold",
+      "B": "Assign an Azure Policy definition with the Deny effect",
+      "C": "Apply a CanNotDelete lock to the subscription",
+      "D": "Assign the team the Reader role at the subscription"
+    },
+    "keys": [
+      "B"
+    ],
+    "explanation": "A policy assignment with the Deny effect refuses any deployment request that does not meet the rule, which is exactly the requirement. A budget reports spending and blocks nothing. A CanNotDelete lock prevents deletion rather than creation, and Reader would stop the team from deploying anywhere at all.",
+    "objectiveId": "1.3",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "bc5c8d3b5088bc5c",
+    "bank": "az104-beginner.md"
+  },
+  {
+    "id": "AZ-104/az104-beginner.md/Q11",
+    "examId": "AZ-104",
+    "number": "Q11",
+    "stem": "Finance wants to be warned when a subscription's spending approaches a set amount each month; what should you create?",
+    "options": {
+      "A": "An Azure Policy assignment with the Audit effect",
+      "B": "A cost tag applied to every resource group in the subscription",
+      "C": "A budget with an alert threshold on the subscription",
+      "D": "An Azure Advisor cost recommendation"
+    },
+    "keys": [
+      "C"
+    ],
+    "explanation": "A budget tracks actual and forecasted spend against a target and raises alerts at the thresholds you choose. A policy with the Audit effect reports configuration compliance rather than spending. Tags organise cost data but notify nobody, and Advisor returns recommendations instead of notifications tied to a spending limit.",
+    "objectiveId": "1.3",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "584b6a93497253a1",
+    "bank": "az104-beginner.md"
+  },
+  {
+    "id": "AZ-104/az104-beginner.md/Q12",
+    "examId": "AZ-104",
+    "number": "Q12",
+    "stem": "Which statement about tags in Azure is correct? --- ## Domain 2: Implement and manage storage ---",
+    "options": {
+      "A": "Resources inherit tags from their resource group automatically",
+      "B": "Tags are copied from a resource group to resources at creation",
+      "C": "Tags are not inherited, and policy can enforce them on resources",
+      "D": "Tags on a subscription are inherited by every resource group"
+    },
+    "keys": [
+      "C"
+    ],
+    "explanation": "Tags are not inherited by default at any level of the hierarchy, which is why cost reports show untagged resources, and Azure Policy can require or append tags to close that gap. Resources do not receive their resource group's tags at creation or later, and subscription tags are not inherited by resource groups.",
+    "objectiveId": "1.3",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "6c49f9dfc0dec247",
+    "bank": "az104-beginner.md"
+  },
+  {
+    "id": "AZ-104/az104-beginner.md/Q13",
+    "examId": "AZ-104",
+    "number": "Q13",
+    "stem": "Which two directory services can provide identity-based authentication for an Azure Files share?",
+    "options": {
+      "A": "Microsoft Entra Domain Services",
+      "B": "On-premises Active Directory Domain Services",
+      "C": "A shared access signature issued for the share",
+      "D": "The storage account's access key"
+    },
+    "keys": [
+      "A",
+      "B"
+    ],
+    "explanation": "Identity-based access to Azure Files requires the storage account to be joined to a directory, and the two supported directories are Microsoft Entra Domain Services and on-premises Active Directory Domain Services. The other two options describe shared-secret mechanisms: a SAS and an access key both grant access to whoever holds the token or key and carry no notion of a user identity.",
+    "objectiveId": "2.1",
+    "isMultiSelect": true,
+    "provenanceStatus": "draft",
+    "textHash": "5cd9ae905db567b7",
+    "bank": "az104-beginner.md"
+  },
+  {
+    "id": "AZ-104/az104-beginner.md/Q14",
+    "examId": "AZ-104",
+    "number": "Q14",
+    "stem": "All of an application's components currently read the storage account access key named key1, and you must rotate credentials without an outage. What should you do first?",
+    "options": {
+      "A": "Regenerate key1 and immediately redeploy every component with the new value",
+      "B": "Regenerate key2, move all components to key2, and then regenerate key1",
+      "C": "Delete the storage account and recreate it with fresh keys",
+      "D": "Create a stored access policy on the container and issue SAS tokens to each component"
+    },
+    "keys": [
+      "B"
+    ],
+    "explanation": "Rotating the unused key first (key2) gives every consumer a working credential before the old one changes, so the cutover has no downtime; key1 is regenerated afterwards once nothing depends on it. Regenerating key1 first breaks every component at once, recreating the account destroys the data, and a stored access policy is a SAS-revocation mechanism rather than a way to rotate account keys.",
+    "objectiveId": "2.1",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "651b6a82d9b41002",
+    "bank": "az104-beginner.md"
+  },
+  {
+    "id": "AZ-104/az104-beginner.md/Q15",
+    "examId": "AZ-104",
+    "number": "Q15",
+    "stem": "An application running in Azure must read blobs on behalf of signed-in users, and the security team requires that no storage account key be stored in the application. Which SAS type should you use?",
+    "options": {
+      "A": "An account SAS generated from the storage account key",
+      "B": "A service SAS generated from the storage account key",
+      "C": "A user delegation SAS obtained with Microsoft Entra ID credentials",
+      "D": "A stored access policy attached to the container"
+    },
+    "keys": [
+      "C"
+    ],
+    "explanation": "A user delegation SAS is signed with Microsoft Entra ID credentials rather than the account key, so nothing secret has to live in the application and the token can be tied to the signed-in user. Account and service SAS tokens are both signed with an account key, which the requirement rules out, and a stored access policy is a container-level object that makes a service SAS revocable \u2014 it is not itself a SAS.",
+    "objectiveId": "2.1",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "143dee798695eb11",
+    "bank": "az104-beginner.md"
+  },
+  {
+    "id": "AZ-104/az104-beginner.md/Q16",
+    "examId": "AZ-104",
+    "number": "Q16",
+    "stem": "A storage account is restricted to selected networks. Security now requires that traffic never traverse the account's public endpoint, and that on-premises clients reach the account over ExpressRoute. What should you configure?",
+    "options": {
+      "A": "An IP network rule listing the on-premises public address range",
+      "B": "A service endpoint added to each virtual network subnet that needs access",
+      "C": "A firewall setting that allows access from all networks",
+      "D": "A private endpoint placed in the virtual network"
+    },
+    "keys": [
+      "D"
+    ],
+    "explanation": "A private endpoint gives the storage account a private IP address inside the virtual network, so clients use that address instead of the public endpoint, and on-premises clients reach it across ExpressRoute. An IP rule and a service endpoint both still use the public endpoint, and allowing all networks removes the restriction entirely rather than meeting the requirement.",
+    "objectiveId": "2.1",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "b395e2ee34d11f0c",
+    "bank": "az104-beginner.md"
+  },
+  {
+    "id": "AZ-104/az104-beginner.md/Q17",
+    "examId": "AZ-104",
+    "number": "Q17",
+    "stem": "An application in a single Azure region must keep working through the loss of one availability zone, with no change to the storage endpoint it uses. Which redundancy option meets the requirement?",
+    "options": {
+      "A": "Locally redundant storage (LRS)",
+      "B": "Geo-redundant storage (GRS)",
+      "C": "Zone-redundant storage (ZRS)",
+      "D": "Read-access geo-redundant storage (RA-GRS)"
+    },
+    "keys": [
+      "C"
+    ],
+    "explanation": "ZRS spreads copies across three availability zones in one region behind a single unchanged endpoint, which is exactly what surviving a zone failure requires. LRS keeps all copies in one datacenter, so a zone failure can take them all; GRS and RA-GRS replicate to a different region asynchronously and do not by themselves protect against a zone failure in the primary region.",
+    "objectiveId": "2.2",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "f0ed994203b82141",
+    "bank": "az104-beginner.md"
+  },
+  {
+    "id": "AZ-104/az104-beginner.md/Q18",
+    "examId": "AZ-104",
+    "number": "Q18",
+    "stem": "You configure object replication between a source container and a destination container in another account, but no blobs ever arrive at the destination. What is the most likely configuration gap?",
+    "options": {
+      "A": "Blob versioning is not enabled on the accounts",
+      "B": "The two accounts are in different regions",
+      "C": "The source container has no stored access policy",
+      "D": "The two accounts use different performance tiers"
+    },
+    "keys": [
+      "A"
+    ],
+    "explanation": "Object replication requires blob versioning to be enabled on both the source and the destination, and a missing versioning setting is the usual reason replication appears to do nothing. Replicating across regions is expected rather than a problem, a stored access policy has nothing to do with replication, and differing performance tiers are not the blocker as long as both accounts are of a kind that supports block blobs.",
+    "objectiveId": "2.2",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "da97a4a041ffcd5b",
+    "bank": "az104-beginner.md"
+  },
+  {
+    "id": "AZ-104/az104-beginner.md/Q19",
+    "examId": "AZ-104",
+    "number": "Q19",
+    "stem": "How is data protected at rest in an Azure storage account, and what does infrastructure encryption add?",
+    "options": {
+      "A": "Platform-managed keys encrypt the data at rest, and infrastructure encryption adds a second, independent encryption layer",
+      "B": "Nothing is encrypted until the account owner enables encryption on each container",
+      "C": "Only data in transit is encrypted, and infrastructure encryption adds encryption at rest",
+      "D": "A customer-managed key is mandatory, and infrastructure encryption rotates that key on a schedule"
+    },
+    "keys": [
+      "A"
+    ],
+    "explanation": "Storage data is always encrypted at rest with platform-managed keys and this cannot be switched off, while infrastructure encryption applies a second layer of encryption at the infrastructure level. Encryption is not opt-in per container, data at rest is never left unencrypted by default, and customer-managed keys are an option for controlling the key rather than a requirement.",
+    "objectiveId": "2.2",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "020c114dff3a02cb",
+    "bank": "az104-beginner.md"
+  },
+  {
+    "id": "AZ-104/az104-beginner.md/Q20",
+    "examId": "AZ-104",
+    "number": "Q20",
+    "stem": "A compliance review needs a blob that has sat in the archive tier for a year, and the reviewer wants to read it tomorrow morning. What should you do?",
+    "options": {
+      "A": "Set the blob's tier to hot, which makes it readable straight away",
+      "B": "Rehydrate the blob to hot or cool and expect standard-priority rehydration to take several hours",
+      "C": "Copy the blob to a new container, which restores immediate read access",
+      "D": "Read the blob directly from the archive tier, since archive reads are merely slow"
+    },
+    "keys": [
+      "B"
+    ],
+    "explanation": "Archive blobs are offline, so they must be rehydrated to hot or cool before they can be read, and standard-priority rehydration typically takes hours \u2014 which still fits a next-morning deadline. Changing the tier to hot is itself a rehydration and is not instant, copying a blob within archive leaves it unreadable, and archive blobs cannot be read at all while they remain in that tier.",
+    "objectiveId": "2.3",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "eadc71d5881f0972",
+    "bank": "az104-beginner.md"
+  },
+  {
+    "id": "AZ-104/az104-beginner.md/Q21",
+    "examId": "AZ-104",
+    "number": "Q21",
+    "stem": "An application writes telemetry records that are only ever appended to and read sequentially from the end of the stream. Which blob type should the container hold?",
+    "options": {
+      "A": "Append blobs",
+      "B": "Block blobs",
+      "C": "Page blobs",
+      "D": "An Azure file share instead of blobs"
+    },
+    "keys": [
+      "A"
+    ],
+    "explanation": "Append blobs exist for exactly this pattern: data can only be added at the end, which suits logs and telemetry streams. Block blobs are optimised for whole-object writes and rewrites rather than sequential appends, page blobs are built for random 512-byte page access and back virtual machine disks, and a file share is an SMB or NFS surface rather than an append-oriented object store.",
+    "objectiveId": "2.3",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "28621eba61d79608",
+    "bank": "az104-beginner.md"
+  },
+  {
+    "id": "AZ-104/az104-beginner.md/Q22",
+    "examId": "AZ-104",
+    "number": "Q22",
+    "stem": "What does an Azure Blob Storage lifecycle management rule let you do? --- ## Domain 3: Deploy and manage Azure compute resources ---",
+    "options": {
+      "A": "Transition or delete blobs when conditions you define are met",
+      "B": "Encrypt blobs at rest with a customer-managed key",
+      "C": "Move blobs between storage accounts in different regions",
+      "D": "Change a container's public access level on a schedule"
+    },
+    "keys": [
+      "A"
+    ],
+    "explanation": "A lifecycle rule evaluates conditions such as days since last modification or last access and then moves blobs to a cooler tier or deletes them, including old versions and snapshots. Key management is handled by encryption settings rather than lifecycle rules, cross-account movement is object replication, and container access levels are a separate access control setting that lifecycle rules do not touch.",
+    "objectiveId": "2.3",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "35178e0f65f6a312",
+    "bank": "az104-beginner.md"
+  },
+  {
+    "id": "AZ-104/az104-beginner.md/Q23",
+    "examId": "AZ-104",
+    "number": "Q23",
+    "stem": "You must redeploy a template that describes only a virtual machine into a resource group that also holds a storage account and a virtual network, and neither of those is mentioned in the template. Which deployment mode leaves them untouched?",
+    "options": {
+      "A": "Complete mode, because it only acts on resources named in the template",
+      "B": "Complete mode, because it removes the template from the group after the run",
+      "C": "Incremental mode, because it changes only the resources the template describes",
+      "D": "Incremental mode, because it refuses to run when the group holds extra resources"
+    },
+    "keys": [
+      "C"
+    ],
+    "explanation": "Incremental mode is the default and reconciles only what the template names, so the storage account and network are left as they are. Complete mode is the opposite: it deletes resources present in the group but absent from the template, which is why both complete options are wrong. The fourth option describes behaviour that does not exist, since an incremental deployment does not inspect the group for extra resources.",
+    "objectiveId": "3.1",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "d13f94ba11ca268f",
+    "bank": "az104-beginner.md"
+  },
+  {
+    "id": "AZ-104/az104-beginner.md/Q24",
+    "examId": "AZ-104",
+    "number": "Q24",
+    "stem": "In an ARM template, what does the $schema property tell the deployment tooling?",
+    "options": {
+      "A": "Which version of the template language the file should be read as",
+      "B": "Which resource provider should handle each resource in the file",
+      "C": "Which authoring revision of the file this is",
+      "D": "Which values must be supplied at deployment time"
+    },
+    "keys": [
+      "A"
+    ],
+    "explanation": "$schema selects the template language version used to parse the file, so a wrong or missing schema stops the tooling before any resource is attempted. The resource provider is selected by each resource's type and apiVersion, not by $schema. The authoring revision is contentVersion, and the values supplied at deployment time are parameters.",
+    "objectiveId": "3.1",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "27703d5204c7ddad",
+    "bank": "az104-beginner.md"
+  },
+  {
+    "id": "AZ-104/az104-beginner.md/Q25",
+    "examId": "AZ-104",
+    "number": "Q25",
+    "stem": "You are about to run a deployment against a resource group that contains a database, and you want to see which resources the run would modify or delete before anything happens. What should you do next?",
+    "options": {
+      "A": "Change the deployment mode to complete and run it",
+      "B": "Increase contentVersion and run the deployment again",
+      "C": "Export the resource group as a template and compare the two files by hand",
+      "D": "Run what-if for the deployment and read the predicted changes"
+    },
+    "keys": [
+      "D"
+    ],
+    "explanation": "What-if previews the create, modify, and delete actions a deployment would take, which is precisely the information needed before touching a database. Switching to complete mode would perform the deletions rather than preview them. Bumping contentVersion changes only an authoring label, and exporting the group compares documents without reporting what the engine would actually do.",
+    "objectiveId": "3.1",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "d162f258e90c1665",
+    "bank": "az104-beginner.md"
+  },
+  {
+    "id": "AZ-104/az104-beginner.md/Q26",
+    "examId": "AZ-104",
+    "number": "Q26",
+    "stem": "A virtual machine running a general-purpose size must be resized to a much larger memory-optimised size, and the resize request is rejected while the VM is running. What should you do?",
+    "options": {
+      "A": "Attach an additional data disk and retry the resize",
+      "B": "Deallocate the virtual machine, then apply the new size",
+      "C": "Move the virtual machine to another resource group and retry",
+      "D": "Change the OS disk tier to Premium SSD and retry"
+    },
+    "keys": [
+      "B"
+    ],
+    "explanation": "A size the current host cannot provide requires the VM to be released so it can be placed on suitable hardware, so deallocation comes first. Adding a data disk changes storage, not the compute shape. Moving the VM between resource groups does not change which host it lands on, and raising the disk tier changes disk performance rather than the size of the machine.",
+    "objectiveId": "3.2",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "97e027833572691f",
+    "bank": "az104-beginner.md"
+  },
+  {
+    "id": "AZ-104/az104-beginner.md/Q27",
+    "examId": "AZ-104",
+    "number": "Q27",
+    "stem": "A virtual machine's operating system was shut down from inside the guest, and the administrator expects the compute charge to stop. What is the actual state and cost?",
+    "options": {
+      "A": "The VM is stopped but still allocated, so the compute charge continues",
+      "B": "The VM is deallocated, so the compute charge has stopped",
+      "C": "The VM is deleted, so only the disk charge continues",
+      "D": "The VM is stopped and the compute charge continues at half rate"
+    },
+    "keys": [
+      "A"
+    ],
+    "explanation": "Shutting down from inside the guest leaves the VM stopped but still allocated, and the reserved compute is still billed. Only deallocating releases the compute and ends that charge, so the second option describes the wrong action. The VM is not deleted, and there is no half-rate billing state.",
+    "objectiveId": "3.2",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "0ed09303575e38d8",
+    "bank": "az104-beginner.md"
+  },
+  {
+    "id": "AZ-104/az104-beginner.md/Q28",
+    "examId": "AZ-104",
+    "number": "Q28",
+    "stem": "Which managed disk type offers the highest performance tier for a virtual machine's data disk?",
+    "options": {
+      "A": "Standard HDD",
+      "B": "Standard SSD",
+      "C": "Ultra Disk",
+      "D": "Premium SSD"
+    },
+    "keys": [
+      "C"
+    ],
+    "explanation": "Ultra Disk is the highest performance tier available for managed disks. Premium SSD is the common production choice but sits below Ultra. Standard SSD is a middle tier for lighter workloads, and Standard HDD is the cheapest and slowest of the four.",
+    "objectiveId": "3.2",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "23c258f2cd656a4a",
+    "bank": "az104-beginner.md"
+  },
+  {
+    "id": "AZ-104/az104-beginner.md/Q29",
+    "examId": "AZ-104",
+    "number": "Q29",
+    "stem": "A workload must keep running even if an entire datacentre inside the region is lost, and the design currently uses an availability set. What should you change?",
+    "options": {
+      "A": "Increase the number of fault domains in the availability set",
+      "B": "Add more update domains to the availability set",
+      "C": "Convert the virtual machines into a scale set in the same datacentre",
+      "D": "Place the virtual machines across availability zones instead"
+    },
+    "keys": [
+      "D"
+    ],
+    "explanation": "Availability zones are physically separate datacentres in a region, so spreading across them survives the loss of one datacentre. Fault domains and update domains only group machines within a single datacentre, so adjusting either does not add datacentre-level protection. A scale set placed in the same datacentre also shares that single point of failure.",
+    "objectiveId": "3.2",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "07af824ea3eef234",
+    "bank": "az104-beginner.md"
+  },
+  {
+    "id": "AZ-104/az104-beginner.md/Q30",
+    "examId": "AZ-104",
+    "number": "Q30",
+    "stem": "A nightly batch job runs for about four minutes in a container, needs no inbound endpoint, and requires no orchestration. Which service should host it?",
+    "options": {
+      "A": "Azure Container Instances, because it runs a container group without an orchestrator",
+      "B": "Azure Container Apps, because it provides revisions and traffic splitting",
+      "C": "Azure Container Registry, because it stores and serves the image",
+      "D": "Azure App Service, because it provides deployment slots"
+    },
+    "keys": [
+      "A"
+    ],
+    "explanation": "Azure Container Instances runs a container group with no cluster to manage and bills by the second, which suits a short task with no endpoint. Container Apps would work but brings revision and traffic-splitting features this job does not use. A registry stores images and runs nothing, and App Service targets a hosted application rather than a short batch task.",
+    "objectiveId": "3.3",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "ad5f9d84d33aae3d",
+    "bank": "az104-beginner.md"
+  },
+  {
+    "id": "AZ-104/az104-beginner.md/Q31",
+    "examId": "AZ-104",
+    "number": "Q31",
+    "stem": "An API hosted in Azure Container Apps must be released to ten percent of users before the rest. What should you use?",
+    "options": {
+      "A": "A second container group in Azure Container Instances",
+      "B": "A geo-replicated Azure Container Registry",
+      "C": "A new revision in Container Apps with traffic split between revisions",
+      "D": "A larger CPU and memory allocation per replica"
+    },
+    "keys": [
+      "C"
+    ],
+    "explanation": "Each deployment in Container Apps produces an immutable revision, and traffic can be split across revisions, which is how a partial release is done. A second container group in ACI has no traffic-splitting mechanism between groups. Geo-replication in a registry speeds up image pulls but does not route users, and raising per-replica resources changes capacity rather than the share of traffic.",
+    "objectiveId": "3.3",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "8a54367a91ecb7b9",
+    "bank": "az104-beginner.md"
+  },
+  {
+    "id": "AZ-104/az104-beginner.md/Q32",
+    "examId": "AZ-104",
+    "number": "Q32",
+    "stem": "What is the role of Azure Container Registry in a container deployment?",
+    "options": {
+      "A": "It runs container groups on shared hosts without an orchestrator",
+      "B": "It stores container images and serves them to the services that run them",
+      "C": "It provides scale-to-zero hosting for containerised applications",
+      "D": "It builds and schedules replicas across a managed cluster"
+    },
+    "keys": [
+      "B"
+    ],
+    "explanation": "A registry is the private store from which container services pull the images they run. Running container groups without an orchestrator describes Azure Container Instances. Scale-to-zero application hosting describes Azure Container Apps, and replica scheduling is done by the hosting platform, not the registry.",
+    "objectiveId": "3.3",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "d1928e422371d32c",
+    "bank": "az104-beginner.md"
+  },
+  {
+    "id": "AZ-104/az104-beginner.md/Q33",
+    "examId": "AZ-104",
+    "number": "Q33",
+    "stem": "An app has been verified in a staging slot and is about to be swapped into production, but a database connection string must remain different in production after the swap. What should you do?",
+    "options": {
+      "A": "Create the connection string again in production after the swap completes",
+      "B": "Move the app into a second App Service plan before the swap",
+      "C": "Change the app's pricing tier to Premium before the swap",
+      "D": "Mark the connection string as a slot setting before the swap"
+    },
+    "keys": [
+      "D"
+    ],
+    "explanation": "A slot setting stays with its slot instead of travelling with the swapped content, so the production value survives the exchange. Re-creating the value afterwards works only if someone remembers to do it and leaves a window of wrong configuration. A separate plan and a higher tier change where and how the app runs, not how settings behave during a swap.",
+    "objectiveId": "3.4",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "a8cce31d8d4f0907",
+    "bank": "az104-beginner.md"
+  },
+  {
+    "id": "AZ-104/az104-beginner.md/Q34",
+    "examId": "AZ-104",
+    "number": "Q34",
+    "stem": "An App Service app must read from a database that has no public endpoint and is reachable only inside a virtual network. Which setting addresses the app's outbound connection? --- ## Domain 4: Implement and manage virtual networking ---",
+    "options": {
+      "A": "Access restrictions on the app's inbound traffic",
+      "B": "VNet integration, which gives the app outbound access into the virtual network",
+      "C": "A private endpoint on the app, which gives it a private inbound address",
+      "D": "A managed TLS certificate bound to the app's custom hostname"
+    },
+    "keys": [
+      "B"
+    ],
+    "explanation": "VNet integration covers the outbound direction, letting the app reach private resources inside a virtual network. Access restrictions filter inbound requests and do nothing for outbound connections. A private endpoint on the app provides a private address for callers reaching the app, which is the opposite direction, and a certificate affects only TLS for inbound hostnames.",
+    "objectiveId": "3.4",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "6e2009aa271aeaa7",
+    "bank": "az104-beginner.md"
+  },
+  {
+    "id": "AZ-104/az104-beginner.md/Q35",
+    "examId": "AZ-104",
+    "number": "Q35",
+    "stem": "A subnet in a virtual network is configured with the address range 10.0.5.0/24. How many addresses in this subnet can actually be assigned to virtual machines?",
+    "options": {
+      "A": "251",
+      "B": "256",
+      "C": "250",
+      "D": "252"
+    },
+    "keys": [
+      "A"
+    ],
+    "explanation": "Azure reserves five addresses in every subnet: the network address, the default gateway, two for Azure DNS mapping, and the broadcast address, so a /24 yields 256 minus 5, which is 251 usable addresses. 256 counts the full block and ignores the reservations, 250 over-reserves by one, and 252 assumes only four addresses are held back.",
+    "objectiveId": "4.1",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "835d6e08d65db115",
+    "bank": "az104-beginner.md"
+  },
+  {
+    "id": "AZ-104/az104-beginner.md/Q36",
+    "examId": "AZ-104",
+    "number": "Q36",
+    "stem": "VNet A is peered to VNet B, and VNet B is peered to VNet C, but VNet A and VNet C have no peering between them. Which statement describes connectivity from VNet A to VNet C?",
+    "options": {
+      "A": "Traffic flows because peering carries traffic transitively across the backbone",
+      "B": "Traffic flows only when both virtual networks use the same address space range",
+      "C": "Traffic does not flow because peering is not transitive",
+      "D": "Traffic flows once each peering is re-created from both sides"
+    },
+    "keys": [
+      "C"
+    ],
+    "explanation": "VNet peering is non-transitive, so a path through an intermediate VNet does not carry traffic between the two outer networks. Re-creating the peerings does not change that, because the peerings are already connected and the limitation is architectural. Matching address space is not what enables peering, and it does not create a transitive path.",
+    "objectiveId": "4.1",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "b200efa858617230",
+    "bank": "az104-beginner.md"
+  },
+  {
+    "id": "AZ-104/az104-beginner.md/Q37",
+    "examId": "AZ-104",
+    "number": "Q37",
+    "stem": "An administrator attaches a Standard SKU public IP address to a virtual machine, but inbound HTTPS requests fail and no network security group rule permits port 443. What explains the failure?",
+    "options": {
+      "A": "Standard SKU public IP addresses do not support HTTPS traffic",
+      "B": "The public IP address must be dynamic rather than static",
+      "C": "A load balancer must be placed in front of the virtual machine",
+      "D": "Standard SKU public IP addresses are secure by default and need an explicit allow rule"
+    },
+    "keys": [
+      "D"
+    ],
+    "explanation": "A Standard SKU public IP address is secure by default, so inbound traffic is dropped until a network security group explicitly allows it, which makes the missing port 443 rule the cause. Static versus dynamic allocation only affects whether the address changes, not whether traffic is permitted. Standard SKU public IPs carry any protocol, and no load balancer is required for direct inbound access.",
+    "objectiveId": "4.1",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "e158e1f8f955fb58",
+    "bank": "az104-beginner.md"
+  },
+  {
+    "id": "AZ-104/az104-beginner.md/Q38",
+    "examId": "AZ-104",
+    "number": "Q38",
+    "stem": "A user-defined route, a system route and a BGP-learned route all match the same destination prefix for traffic leaving a subnet. Which route is used?",
+    "options": {
+      "A": "The BGP-learned route",
+      "B": "The user-defined route",
+      "C": "The system route",
+      "D": "The route whose next hop is closest to the destination"
+    },
+    "keys": [
+      "B"
+    ],
+    "explanation": "Azure evaluates routes by type, and a user-defined route takes precedence over a system route, which in turn takes precedence over a route learned through BGP. Proximity of the next hop is not part of the comparison, and the BGP route is the weakest of the three, so neither of those decides the outcome.",
+    "objectiveId": "4.1",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "e049ef457aa5e5af",
+    "bank": "az104-beginner.md"
+  },
+  {
+    "id": "AZ-104/az104-beginner.md/Q39",
+    "examId": "AZ-104",
+    "number": "Q39",
+    "stem": "An administrator adds an inbound network security group rule that allows TCP 3389 from the office range, but RDP to the virtual machine still fails. A network security group is attached both to the subnet and to the virtual machine's network interface. What should the administrator check next?",
+    "options": {
+      "A": "Whether the two network security groups are in the same resource group",
+      "B": "Whether the guest operating system firewall has been turned off",
+      "C": "Whether the other network security group also allows TCP 3389",
+      "D": "Whether the new rule has a priority number below 4096"
+    },
+    "keys": [
+      "C"
+    ],
+    "explanation": "When a network security group is attached at both the subnet and the NIC, traffic must be allowed by both, so a deny in the second group still blocks the session. Resource group membership has no effect on rule evaluation. The guest firewall is a separate layer that would be checked after Azure-side rules are confirmed, and any priority from 100 to 4096 is valid, so the number itself is not the issue.",
+    "objectiveId": "4.2",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "986e2c8d94ccd89e",
+    "bank": "az104-beginner.md"
+  },
+  {
+    "id": "AZ-104/az104-beginner.md/Q40",
+    "examId": "AZ-104",
+    "number": "Q40",
+    "stem": "A security policy forbids public IP addresses on virtual machines, but administrators must still reach those machines over RDP and SSH. What should be deployed?",
+    "options": {
+      "A": "Azure Bastion in a dedicated gateway subnet",
+      "B": "A site-to-site VPN gateway for every administrator",
+      "C": "A Standard load balancer with an inbound NAT rule",
+      "D": "A private endpoint in front of each virtual machine"
+    },
+    "keys": [
+      "A"
+    ],
+    "explanation": "Azure Bastion brokers browser-based RDP and SSH through the portal, so the virtual machines need no public IP address and no management port is exposed to the internet. A load balancer with an inbound NAT rule still requires a public frontend address, which the policy forbids. Private endpoints are for reaching platform services, not for management sessions to a VM, and a VPN gateway per administrator is far more than the requirement needs.",
+    "objectiveId": "4.2",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "3fe20de26bff712f",
+    "bank": "az104-beginner.md"
+  },
+  {
+    "id": "AZ-104/az104-beginner.md/Q41",
+    "examId": "AZ-104",
+    "number": "Q41",
+    "stem": "Which statement correctly distinguishes a service endpoint from a private endpoint for a platform service such as a storage account?",
+    "options": {
+      "A": "A service endpoint assigns the platform service a private IP address in the virtual network",
+      "B": "A private endpoint leaves the service on its public address and adds a backbone route",
+      "C": "Both approaches remove the platform service's public address entirely",
+      "D": "A private endpoint gives the platform service a private IP address from the virtual network"
+    },
+    "keys": [
+      "D"
+    ],
+    "explanation": "A private endpoint places a private IP address from your own virtual network in front of the service, which lets you disable public access completely. A service endpoint instead keeps the service on its public address and routes traffic over the Microsoft backbone, so the first two options describe the two features the wrong way round. Service endpoints do not remove the public address, so neither approach eliminates it in both cases.",
+    "objectiveId": "4.2",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "387e269dfc373a8c",
+    "bank": "az104-beginner.md"
+  },
+  {
+    "id": "AZ-104/az104-beginner.md/Q42",
+    "examId": "AZ-104",
+    "number": "Q42",
+    "stem": "A Standard load balancer reports every instance in its backend pool as unhealthy, even though each application answers requests made from inside its own virtual machine. What is the most likely cause?",
+    "options": {
+      "A": "The backend pool does not contain any virtual machines",
+      "B": "A network security group is blocking the health probe",
+      "C": "The load balancer is internal rather than public",
+      "D": "The frontend IP configuration is set to dynamic"
+    },
+    "keys": [
+      "B"
+    ],
+    "explanation": "Health probes originate from the address 168.63.129.16, so a network security group that does not allow that source on the probe port marks every instance unhealthy even when the application itself works. A pool that is genuinely empty shows no instances rather than unhealthy ones. An internal frontend and a dynamic frontend address both still allow probing to succeed, so neither would produce an all-unhealthy pool.",
+    "objectiveId": "4.3",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "f33b9a1383409285",
+    "bank": "az104-beginner.md"
+  },
+  {
+    "id": "AZ-104/az104-beginner.md/Q43",
+    "examId": "AZ-104",
+    "number": "Q43",
+    "stem": "Requests for app.contoso.com/api must be sent to one pool of servers, while all other requests for the same host name go to a different pool. Which service should be used?",
+    "options": {
+      "A": "Azure Load Balancer with two frontend IP configurations",
+      "B": "Azure DNS with two A records for the host name",
+      "C": "Application Gateway with path-based routing rules",
+      "D": "A public load balancer with two health probes"
+    },
+    "keys": [
+      "C"
+    ],
+    "explanation": "Routing on the request path is a Layer 7 decision, and Application Gateway reads the URL and can send /api to one pool and everything else to another. Azure Load Balancer operates at Layer 4 and cannot see the path, so extra frontends or probes on it would not separate the traffic. Two DNS A records for one host name would distribute requests randomly rather than by path.",
+    "objectiveId": "4.3",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "10c86d687b21c43d",
+    "bank": "az104-beginner.md"
+  },
+  {
+    "id": "AZ-104/az104-beginner.md/Q44",
+    "examId": "AZ-104",
+    "number": "Q44",
+    "stem": "A private DNS zone is linked to a virtual network with auto-registration enabled. What happens when a new virtual machine is created in that network? --- ## Domain 5: Monitor and maintain Azure resources ---",
+    "options": {
+      "A": "An A record for the virtual machine is created in the zone automatically",
+      "B": "A CNAME record for the virtual machine is created in the zone automatically",
+      "C": "The virtual machine is registered only after its name is added by hand",
+      "D": "The zone is recreated with the new virtual machine's address as its apex record"
+    },
+    "keys": [
+      "A"
+    ],
+    "explanation": "Auto-registration on a virtual network link makes Azure create and maintain an A record for each virtual machine in the linked network as machines are created and removed. CNAME records are not what auto-registration writes, and manual entry is exactly what the feature removes the need for. A zone is never recreated when a virtual machine is added.",
+    "objectiveId": "4.3",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "51cdfffdf1be1554",
+    "bank": "az104-beginner.md"
+  },
+  {
+    "id": "AZ-104/az104-beginner.md/Q45",
+    "examId": "AZ-104",
+    "number": "Q45",
+    "stem": "An administrator reports that a virtual machine shows a CPU percentage chart in Azure Monitor but has no memory chart at all. What should you check first?",
+    "options": {
+      "A": "Whether the virtual machine is in a region that supports memory metrics",
+      "B": "Whether the activity log has recorded a recent change to the virtual machine",
+      "C": "Whether a diagnostic setting is routing platform metrics to a workspace",
+      "D": "Whether the Azure Monitor Agent is installed and reporting from the guest"
+    },
+    "keys": [
+      "D"
+    ],
+    "explanation": "Memory in use is a guest metric, which the platform cannot see unless an agent inside the operating system reports it, so the agent is the first thing to verify. Region choice does not determine metric availability in this way, the activity log records control-plane operations rather than performance data, and diagnostic settings route data that is already being collected rather than creating guest metrics.",
+    "objectiveId": "5.1",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "293f51f222edbcbd",
+    "bank": "az104-beginner.md"
+  },
+  {
+    "id": "AZ-104/az104-beginner.md/Q46",
+    "examId": "AZ-104",
+    "number": "Q46",
+    "stem": "A storage account's configuration was changed overnight and no one on the team will admit to making the change. Where should you look to identify who performed the operation?",
+    "options": {
+      "A": "The resource logs for the storage account",
+      "B": "The metrics blade for the storage account",
+      "C": "The activity log for the subscription",
+      "D": "A Log Analytics workspace that holds the storage account's logs"
+    },
+    "keys": [
+      "C"
+    ],
+    "explanation": "The activity log records control-plane operations such as configuration changes, including the caller identity and the operation name. Resource logs describe data-plane requests against the account rather than who changed its settings, metrics are numeric performance values, and a workspace only holds what a diagnostic setting has been configured to send it.",
+    "objectiveId": "5.1",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "98cfec4e5de8e87d",
+    "bank": "az104-beginner.md"
+  },
+  {
+    "id": "AZ-104/az104-beginner.md/Q47",
+    "examId": "AZ-104",
+    "number": "Q47",
+    "stem": "Which three components make up an alert rule in Azure Monitor?",
+    "options": {
+      "A": "A signal, a condition, and an action group",
+      "B": "A workspace, a query, and a dashboard",
+      "C": "A vault, a policy, and a recovery point",
+      "D": "A metric, a diagnostic setting, and an insight"
+    },
+    "keys": [
+      "A"
+    ],
+    "explanation": "An alert rule watches a signal, evaluates a condition against it, and invokes an action group when the condition is met. The workspace and query pair describes log analytics rather than an alert rule's structure, vault and policy belong to backup, and metrics, diagnostic settings, and insights are separate monitoring features rather than the parts of an alert rule.",
+    "objectiveId": "5.1",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "8771187802782e73",
+    "bank": "az104-beginner.md"
+  },
+  {
+    "id": "AZ-104/az104-beginner.md/Q48",
+    "examId": "AZ-104",
+    "number": "Q48",
+    "stem": "A user has accidentally deleted a single folder from an Azure file share, and all other content on the share is current and correct. Which restore approach is most appropriate?",
+    "options": {
+      "A": "Perform a file-level recovery from a recovery point",
+      "B": "Replace the entire file share from the most recent recovery point",
+      "C": "Fail over the file share to the secondary region",
+      "D": "Restore the disks that back the file share to a new storage account"
+    },
+    "keys": [
+      "A"
+    ],
+    "explanation": "File-level recovery mounts a recovery point so individual files and folders can be copied out, which restores the deleted folder without disturbing anything else. Replacing the whole share would discard correct changes made since that recovery point, failover is a business-continuity action for an unavailable workload, and file shares do not present restorable disks in the way a virtual machine does.",
+    "objectiveId": "5.2",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "bcecf36346a0aae7",
+    "bank": "az104-beginner.md"
+  },
+  {
+    "id": "AZ-104/az104-beginner.md/Q49",
+    "examId": "AZ-104",
+    "number": "Q49",
+    "stem": "A business requirement states that a critical application must remain available if its primary Azure region becomes unavailable. Which service addresses this requirement?",
+    "options": {
+      "A": "Azure Backup with a daily backup policy",
+      "B": "A Recovery Services vault with extended retention",
+      "C": "Azure Site Recovery with replication to a secondary region",
+      "D": "Soft delete enabled on the backup vault"
+    },
+    "keys": [
+      "C"
+    ],
+    "explanation": "Site Recovery continuously replicates workloads so they can be failed over to another region, which is what keeping an application available through a regional outage requires. Backup restores data after the fact and takes far longer, extended retention only changes how long recovery points are kept, and soft delete protects backup data from deletion rather than keeping a workload running.",
+    "objectiveId": "5.2",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "6161cd38754ac757",
+    "bank": "az104-beginner.md"
+  },
+  {
+    "id": "AZ-104/az104-beginner.md/Q50",
+    "examId": "AZ-104",
+    "number": "Q50",
+    "stem": "Which statement correctly describes the relationship between a backup vault and a backup policy?",
+    "options": {
+      "A": "The vault defines the schedule and the policy stores the recovery points",
+      "B": "The vault stores the backups and the policy defines frequency and retention",
+      "C": "The policy stores the backups and the vault defines the retention period",
+      "D": "The vault and the policy are the same object viewed in two different places"
+    },
+    "keys": [
+      "B"
+    ],
+    "explanation": "The vault is the container that holds backup data, while the backup policy is a separate object defining how often backups are taken and how long each is kept. The remaining options reverse those roles or treat the two as a single object, which would make it impossible to apply one schedule to many resources while keeping their data together in one container.",
+    "objectiveId": "5.2",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "70d8209ee7ea0bf8",
+    "bank": "az104-beginner.md"
   }
 ];
 export const DISCLAIMER = "This is independent study material. It is not official training and is not endorsed or approved by CompTIA, Nutanix, or any other certification body.";

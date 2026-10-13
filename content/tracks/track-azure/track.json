@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "trackId": "track-azure",
+  "title": "Microsoft Azure Administrator AZ-104 Beginner Track",
+  "examIds": ["AZ-104"],
+  "audience": "beginners preparing for Microsoft Azure Administrator (AZ-104)",
+  "previewLabel": "beginner preview",
+  "disclaimer": "This is independent study material. It is not official training and is not endorsed or approved by CompTIA, Nutanix, or any other certification body.",
+  "order": 4
+}

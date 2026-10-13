@@ -1,0 +1,75 @@
+{
+  "schemaVersion": 1,
+  "examId": "AZ-104",
+  "vendor": "Microsoft",
+  "displayName": "Microsoft Azure Administrator (AZ-104)",
+  "officialVersion": "2026-04-17",
+  "objectivesDocVersion": "2026-04-17",
+  "sourceUrl": "https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104",
+  "sourceReviewDate": "2026-10-12",
+  "productVersions": {
+    "Azure": "rolling service — no versioned release; blueprint dated 2026-04-17"
+  },
+  "studyAllocationLabel": "Per-section study allocation chosen to track the published weight bands (20-25 / 15-20 / 20-25 / 15-20 / 10-15), not a published item count. The published bands are ranges, so the item counts below are a study choice: 12 / 10 / 12 / 10 / 6.",
+  "objectivesNote": "The section and objective structure below is derived from the public AZ-104 study guide (skills measured as of April 17, 2026) fetched by the authoring tool on 2026-10-12. It is not a human source review, and the guide's own bullet text has been paraphrased into objective titles rather than copied.",
+  "sections": [
+    {
+      "number": "1",
+      "title": "Manage Azure identities and governance",
+      "studyItemAllocation": 12,
+      "objectives": [
+        { "id": "1.1", "title": "Manage Microsoft Entra users and groups", "lessonIds": ["az1_1"] },
+        { "id": "1.2", "title": "Manage access to Azure resources", "lessonIds": ["az1_2"] },
+        { "id": "1.3", "title": "Manage Azure subscriptions and governance", "lessonIds": ["az1_3"] }
+      ]
+    },
+    {
+      "number": "2",
+      "title": "Implement and manage storage",
+      "studyItemAllocation": 10,
+      "objectives": [
+        { "id": "2.1", "title": "Configure access to storage", "lessonIds": ["az2_1"] },
+        { "id": "2.2", "title": "Configure and manage storage accounts", "lessonIds": ["az2_2"] },
+        { "id": "2.3", "title": "Configure Azure Files and Azure Blob Storage", "lessonIds": ["az2_3"] }
+      ]
+    },
+    {
+      "number": "3",
+      "title": "Deploy and manage Azure compute resources",
+      "studyItemAllocation": 12,
+      "objectives": [
+        { "id": "3.1", "title": "Automate deployment with ARM templates or Bicep files", "lessonIds": ["az3_1"] },
+        { "id": "3.2", "title": "Create and configure virtual machines", "lessonIds": ["az3_2"] },
+        { "id": "3.3", "title": "Provision and manage containers", "lessonIds": ["az3_3"] },
+        { "id": "3.4", "title": "Create and configure Azure App Service", "lessonIds": ["az3_4"] }
+      ]
+    },
+    {
+      "number": "4",
+      "title": "Implement and manage virtual networking",
+      "studyItemAllocation": 10,
+      "objectives": [
+        { "id": "4.1", "title": "Configure and manage virtual networks in Azure", "lessonIds": ["az4_1"] },
+        { "id": "4.2", "title": "Configure secure access to virtual networks", "lessonIds": ["az4_2"] },
+        { "id": "4.3", "title": "Configure name resolution and load balancing", "lessonIds": ["az4_3"] }
+      ]
+    },
+    {
+      "number": "5",
+      "title": "Monitor and maintain Azure resources",
+      "studyItemAllocation": 6,
+      "objectives": [
+        { "id": "5.1", "title": "Monitor resources in Azure", "lessonIds": ["az5_1"] },
+        { "id": "5.2", "title": "Implement backup and recovery", "lessonIds": ["az5_2"] }
+      ]
+    }
+  ],
+  "questionPolicy": { "authorship": "original", "review": "human-required" },
+  "gaps": [
+    "1.1 self-service password reset and external-user (B2B) guest management",
+    "2.1 stored access policies and identity-based access for Azure Files",
+    "3.1 exporting a deployment as a template and ARM-to-Bicep conversion",
+    "4.2 Azure Bastion and private endpoints for PaaS",
+    "5.2 Azure Site Recovery failover to a secondary region"
+  ]
+}

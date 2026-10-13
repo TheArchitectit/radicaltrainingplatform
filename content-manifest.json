@@ -10,6 +10,96 @@
     "sha256": "4b261f729f6f917d99602df67fdc539e0b309da6205aae349370c35a607b49ee"
   },
   "exams": {
+    "AZ-104": {
+      "manifest": {
+        "path": "content/exams/AZ-104/exam.json",
+        "sha256": "6d18a704aa6dd90c9f79cda08b696e6597ca00aadaf81a6e6b9a24c81bd0efbf"
+      },
+      "lessons": [
+        {
+          "lessonId": "az1_1",
+          "path": "content/exams/AZ-104/lessons/az1_1.md",
+          "sha256": "7fd3872f51bab60643b02372d54d7e674951a18226496e10868282ae1467c2e8"
+        },
+        {
+          "lessonId": "az1_2",
+          "path": "content/exams/AZ-104/lessons/az1_2.md",
+          "sha256": "ea20cceb0b0727d83b2538e0130aa2737cb581ea6a6940f6e157ad4cf56c9050"
+        },
+        {
+          "lessonId": "az1_3",
+          "path": "content/exams/AZ-104/lessons/az1_3.md",
+          "sha256": "c7a41f7dd39a6ee154d710992fc284d4be748651eb131f572c00b3c630987793"
+        },
+        {
+          "lessonId": "az2_1",
+          "path": "content/exams/AZ-104/lessons/az2_1.md",
+          "sha256": "37350c0c0bdb5cdd2f132fa32cf45975a5453dfdb17fbe2a5bf785819b2729d4"
+        },
+        {
+          "lessonId": "az2_2",
+          "path": "content/exams/AZ-104/lessons/az2_2.md",
+          "sha256": "8598e45b748f8b186daf38d2c6fc2420e88c6e49351e4d85f06ccb7af81573db"
+        },
+        {
+          "lessonId": "az2_3",
+          "path": "content/exams/AZ-104/lessons/az2_3.md",
+          "sha256": "d46ed4f0567889f7616fd88d9992e755ec82217033860b0f5b9193a0aa5a7ace"
+        },
+        {
+          "lessonId": "az3_1",
+          "path": "content/exams/AZ-104/lessons/az3_1.md",
+          "sha256": "66148d69642f83eb5b106c936354ce3fad27e9a3ea1b994b6c935a6d361ca236"
+        },
+        {
+          "lessonId": "az3_2",
+          "path": "content/exams/AZ-104/lessons/az3_2.md",
+          "sha256": "b90b351596cd120ed0372a3213325bad904f2de2080799a8bec2636f2f8ddf22"
+        },
+        {
+          "lessonId": "az3_3",
+          "path": "content/exams/AZ-104/lessons/az3_3.md",
+          "sha256": "b431d15e8ac392d87b3b1e167d83a58acc8c87349f7f19731b6047a0c8fb7e40"
+        },
+        {
+          "lessonId": "az3_4",
+          "path": "content/exams/AZ-104/lessons/az3_4.md",
+          "sha256": "58a6e90629bb6707f2e2730cca886f7ecdd669f102816ec41b00df042e4c25dc"
+        },
+        {
+          "lessonId": "az4_1",
+          "path": "content/exams/AZ-104/lessons/az4_1.md",
+          "sha256": "5b152a5c35b322176cb4949a5a2b27f77f83d9ff61d0fbde09a27d644dc9f184"
+        },
+        {
+          "lessonId": "az4_2",
+          "path": "content/exams/AZ-104/lessons/az4_2.md",
+          "sha256": "8cc26e183d4fde3c24c745a526c23a15ed1e330576b6b45c34d216f6d237b0b8"
+        },
+        {
+          "lessonId": "az4_3",
+          "path": "content/exams/AZ-104/lessons/az4_3.md",
+          "sha256": "b547e2de5a9ff4a55c7d997f84abeebcbcfa9ddc1c85e259efdf656edd14aca9"
+        },
+        {
+          "lessonId": "az5_1",
+          "path": "content/exams/AZ-104/lessons/az5_1.md",
+          "sha256": "2962386553068fec7fac0aa4cfe38fd8918d37c55b8956816b3e70b5357af6e2"
+        },
+        {
+          "lessonId": "az5_2",
+          "path": "content/exams/AZ-104/lessons/az5_2.md",
+          "sha256": "37153142ce2ec1d19407f6a16dabdb206de93cb3a65cebee902f1471788c9501"
+        }
+      ],
+      "banks": [
+        {
+          "bank": "az104-beginner.md",
+          "path": "content/exams/AZ-104/questions/az104-beginner.md",
+          "sha256": "6974dda2be342daf0eeae595f412d72a119fecea842298eb4a14d8c3275108c4"
+        }
+      ]
+    },
     "COMPTIA-A-1201": {
       "manifest": {
         "path": "content/exams/COMPTIA-A-1201/exam.json",
@@ -299,6 +389,10 @@
       "sha256": "64aa0c16d71d847fc0812f6372570bb46e57ca02e1211f1ec079f2ab2bbeb64d"
     },
     {
+      "path": "content/tracks/track-azure/track.json",
+      "sha256": "c0e676f81672c5ef93e3541e74651cd298efd5dc21d5aac5ddd8829ce73a06a6"
+    },
+    {
       "path": "content/tracks/track-nca/track.json",
       "sha256": "62b5a228e657f6464603adbd63951955ff690d6d583072a0fab22f72039f3502"
     },
@@ -308,6 +402,206 @@
     }
   ],
   "provenance": [
+    {
+      "path": "content/provenance/AZ-104/Q1.json",
+      "sha256": "d2869738bc530a00fe1f8a20a7131adb2c32506662c6f24791fd90b4b8cd2f13"
+    },
+    {
+      "path": "content/provenance/AZ-104/Q10.json",
+      "sha256": "5de8584cf0fb2aae4c2b2f892aac597305b4368bdb370fbc808a1141e648db2b"
+    },
+    {
+      "path": "content/provenance/AZ-104/Q11.json",
+      "sha256": "b78d097873050e20d027dbfc58219aa8d551f279479d749a095a12bac48d39f0"
+    },
+    {
+      "path": "content/provenance/AZ-104/Q12.json",
+      "sha256": "6a8b0af8ad37c7cbf40af965beb2cd0d8d3cc2ebd8aeec4d19490fc372b2e995"
+    },
+    {
+      "path": "content/provenance/AZ-104/Q13.json",
+      "sha256": "e572d50115636914b57a58b3afe6688366764fcb2bbc7c4ede9be502ffe7e718"
+    },
+    {
+      "path": "content/provenance/AZ-104/Q14.json",
+      "sha256": "e19ee4ba3021c7b00f788fc949f8939bc6432f017c974b474baf78a4be52dc8e"
+    },
+    {
+      "path": "content/provenance/AZ-104/Q15.json",
+      "sha256": "8e86fd8f09a47420e452630c719e8722a12858ca730d8750e5b16ae10477d36a"
+    },
+    {
+      "path": "content/provenance/AZ-104/Q16.json",
+      "sha256": "fdb31be1db2ec3ddb44745c8c34a0974552ad6bdc48d2c0c0041a774eeb9c4b6"
+    },
+    {
+      "path": "content/provenance/AZ-104/Q17.json",
+      "sha256": "422538bcb486ea38bf3e942dc5eb8c46ff31dfcf174b43db0c15e0a9cc1f67b9"
+    },
+    {
+      "path": "content/provenance/AZ-104/Q18.json",
+      "sha256": "3bde5a8b4b989c0718c3cdf9af0de44cff6f53e99903730ada84005247c57987"
+    },
+    {
+      "path": "content/provenance/AZ-104/Q19.json",
+      "sha256": "e5e6a6985cd16a2155685215e1245ad8c2839d125ce678e79fb92b64a787129e"
+    },
+    {
+      "path": "content/provenance/AZ-104/Q2.json",
+      "sha256": "f9c98de16f8d5d6e930e485c138427b35d851a4f964f41996a3f5546e30e9892"
+    },
+    {
+      "path": "content/provenance/AZ-104/Q20.json",
+      "sha256": "0f17d01cdcf1f487207664e20de6e62c148d2b890fa70c4e90c1547f007237e6"
+    },
+    {
+      "path": "content/provenance/AZ-104/Q21.json",
+      "sha256": "7c25bda0acc502f6eea7461e3cbabfc4be4d86dc4bd71bcb83d306d4072e897a"
+    },
+    {
+      "path": "content/provenance/AZ-104/Q22.json",
+      "sha256": "a0777b729d25bb888485232b448a1e617dfcbff20f0cc6942e4d39c3c185f27b"
+    },
+    {
+      "path": "content/provenance/AZ-104/Q23.json",
+      "sha256": "38e623ec4b9d6a64bb42e44487bf42103b7609ae314a45104b51a039535ec60e"
+    },
+    {
+      "path": "content/provenance/AZ-104/Q24.json",
+      "sha256": "ef52a3dff4fc9ff43b6766a7be194533e5a7a1ab32836ea76771e568bca28169"
+    },
+    {
+      "path": "content/provenance/AZ-104/Q25.json",
+      "sha256": "2ce11b630d89308a068ea91cf9f3a5f01e24b0910620781098e6a4bf2a8d2aac"
+    },
+    {
+      "path": "content/provenance/AZ-104/Q26.json",
+      "sha256": "e6bfa7e2a15857c3b48153496acba34c800a7dd83812131715ee42b51db3be94"
+    },
+    {
+      "path": "content/provenance/AZ-104/Q27.json",
+      "sha256": "54e34774df7e699e3d54ea9a47b862ceed55176aee8a9e025da6c2dc9470a743"
+    },
+    {
+      "path": "content/provenance/AZ-104/Q28.json",
+      "sha256": "76606f8e0c4f955bcf003f8d58624c34f40f4c5bc502675e08f228d492653332"
+    },
+    {
+      "path": "content/provenance/AZ-104/Q29.json",
+      "sha256": "f1d74925efe7c9f3f455ca175eacc14f8ddf9a33c3f148cf9bff1074868c5bf6"
+    },
+    {
+      "path": "content/provenance/AZ-104/Q3.json",
+      "sha256": "32de223b1cb50e8708ee1fdb35bef58689fc289f1c3256514815244692ead6c0"
+    },
+    {
+      "path": "content/provenance/AZ-104/Q30.json",
+      "sha256": "ecded658686dc2ec709045b376df6933bb96f1489dec4a076ce00e581bd358df"
+    },
+    {
+      "path": "content/provenance/AZ-104/Q31.json",
+      "sha256": "6d1b088d2c57a1d3945c2178cb7f740556d3f3f3ed96195ce3d8d1f7aa643c05"
+    },
+    {
+      "path": "content/provenance/AZ-104/Q32.json",
+      "sha256": "dbc4e64cb0a0e1b8f0321f0ca048d5fa2f56cd980f63fc0d31bcfa7b29dddfd6"
+    },
+    {
+      "path": "content/provenance/AZ-104/Q33.json",
+      "sha256": "80b152c18516b501707a3f4c845c3cda166e35f380b07f70a9fcf0bd1494bfe2"
+    },
+    {
+      "path": "content/provenance/AZ-104/Q34.json",
+      "sha256": "3a307bd19049b6b4c90dca147dd0e621f433286a43a39c545c714807448fff03"
+    },
+    {
+      "path": "content/provenance/AZ-104/Q35.json",
+      "sha256": "9b6f6851bc0edb4428b96f06fce06cee240dd940acd8d2bd16d62d6b0bccc115"
+    },
+    {
+      "path": "content/provenance/AZ-104/Q36.json",
+      "sha256": "a2363fd420122c5ec57d2685ba678321156309a057d48c1ba60ff7e537a9fcca"
+    },
+    {
+      "path": "content/provenance/AZ-104/Q37.json",
+      "sha256": "bdf751512c104a3654a5503e6838eeebbf887fb34982f21548ee40714991a1da"
+    },
+    {
+      "path": "content/provenance/AZ-104/Q38.json",
+      "sha256": "8c8d7236b9f095afaee3f81e60c8facb7c6189bed40973619e529efdef455ea3"
+    },
+    {
+      "path": "content/provenance/AZ-104/Q39.json",
+      "sha256": "c3434568b2bd535c43bc5035c68ebb5117bf47a1374dc30253910d19c7e1a3f6"
+    },
+    {
+      "path": "content/provenance/AZ-104/Q4.json",
+      "sha256": "1423b76666aad0f401f7e501922451fd5f40856b7c85376f1585c4a75b99dca7"
+    },
+    {
+      "path": "content/provenance/AZ-104/Q40.json",
+      "sha256": "76ab5ca1746b0404b6cc4bd48450168e600ba9640b97b77554633a9ba7ca12f4"
+    },
+    {
+      "path": "content/provenance/AZ-104/Q41.json",
+      "sha256": "45b83a7fc62110a723cc7133f0530d6a749ac1935e381cbf41406872fcbee811"
+    },
+    {
+      "path": "content/provenance/AZ-104/Q42.json",
+      "sha256": "223214be328a137446e922381183e066b6b9b2c3166121179bf8d14a78e9152e"
+    },
+    {
+      "path": "content/provenance/AZ-104/Q43.json",
+      "sha256": "1c81aea669b362059fcbe921dbddf584ff4236910101fad998064ea5481d22c3"
+    },
+    {
+      "path": "content/provenance/AZ-104/Q44.json",
+      "sha256": "6baac42812cb0c74006ad88326784d99309a092cdc8bb1364367c32214f8e38d"
+    },
+    {
+      "path": "content/provenance/AZ-104/Q45.json",
+      "sha256": "22e605916f0bf2a6e5211437b60f2c4d3e5c93bdc3463921928b321830c6ec93"
+    },
+    {
+      "path": "content/provenance/AZ-104/Q46.json",
+      "sha256": "b2fac0eac157b3cd60d128ca140860e954c6081e29b1d0212132b0e19f1b190c"
+    },
+    {
+      "path": "content/provenance/AZ-104/Q47.json",
+      "sha256": "51222108c640b1d5ec59cd99047a0e6ad82ceefd32741db8d8a6bfd84b138dc9"
+    },
+    {
+      "path": "content/provenance/AZ-104/Q48.json",
+      "sha256": "3d185dc56e0ddfecbb6cd79f86c18106e922da040f34f0f7b5ee1c98b3ffa3c3"
+    },
+    {
+      "path": "content/provenance/AZ-104/Q49.json",
+      "sha256": "f4fed834ff37dc47b437b551ba04c30883b3c74d231a88708b19e1114cfa0213"
+    },
+    {
+      "path": "content/provenance/AZ-104/Q5.json",
+      "sha256": "944df66272bc64d325ed534f29574fde55c7056f63fe3da0aee28a3ac10ba2e1"
+    },
+    {
+      "path": "content/provenance/AZ-104/Q50.json",
+      "sha256": "3715ed7b0ec3766572875c2315d554af032a48bfb8edfd4b3337d5144c89411d"
+    },
+    {
+      "path": "content/provenance/AZ-104/Q6.json",
+      "sha256": "5f3186c3194e32d0e07caca6672717f14f3737028b8f6748670f0e05bc376c54"
+    },
+    {
+      "path": "content/provenance/AZ-104/Q7.json",
+      "sha256": "5ecb5e7d212254b74070c32411951fbc310818e3595f5507b5bb7e03434adc61"
+    },
+    {
+      "path": "content/provenance/AZ-104/Q8.json",
+      "sha256": "877cc9263fdb5dd2007a202053d09be1c1529100b049b31560e7b612ec72bb13"
+    },
+    {
+      "path": "content/provenance/AZ-104/Q9.json",
+      "sha256": "0319881ba94a4f9693629c0c06fc0bcb2c71655ec7beac93fe715cc2c0d633cd"
+    },
     {
       "path": "content/provenance/COMPTIA-A-1201/Q1.json",
       "sha256": "0aee4bd9bb4253973ab2a02fdeaf83437fb5d45073ee9a50ecc329e539abd333"
@@ -777,6 +1071,91 @@
       "bytes": 63557
     },
     {
+      "path": "content/exams/AZ-104/exam.json",
+      "sha256": "6d18a704aa6dd90c9f79cda08b696e6597ca00aadaf81a6e6b9a24c81bd0efbf",
+      "bytes": 3773
+    },
+    {
+      "path": "content/exams/AZ-104/lessons/az1_1.md",
+      "sha256": "7fd3872f51bab60643b02372d54d7e674951a18226496e10868282ae1467c2e8",
+      "bytes": 4490
+    },
+    {
+      "path": "content/exams/AZ-104/lessons/az1_2.md",
+      "sha256": "ea20cceb0b0727d83b2538e0130aa2737cb581ea6a6940f6e157ad4cf56c9050",
+      "bytes": 4536
+    },
+    {
+      "path": "content/exams/AZ-104/lessons/az1_3.md",
+      "sha256": "c7a41f7dd39a6ee154d710992fc284d4be748651eb131f572c00b3c630987793",
+      "bytes": 4977
+    },
+    {
+      "path": "content/exams/AZ-104/lessons/az2_1.md",
+      "sha256": "37350c0c0bdb5cdd2f132fa32cf45975a5453dfdb17fbe2a5bf785819b2729d4",
+      "bytes": 4506
+    },
+    {
+      "path": "content/exams/AZ-104/lessons/az2_2.md",
+      "sha256": "8598e45b748f8b186daf38d2c6fc2420e88c6e49351e4d85f06ccb7af81573db",
+      "bytes": 4550
+    },
+    {
+      "path": "content/exams/AZ-104/lessons/az2_3.md",
+      "sha256": "d46ed4f0567889f7616fd88d9992e755ec82217033860b0f5b9193a0aa5a7ace",
+      "bytes": 4194
+    },
+    {
+      "path": "content/exams/AZ-104/lessons/az3_1.md",
+      "sha256": "66148d69642f83eb5b106c936354ce3fad27e9a3ea1b994b6c935a6d361ca236",
+      "bytes": 5267
+    },
+    {
+      "path": "content/exams/AZ-104/lessons/az3_2.md",
+      "sha256": "b90b351596cd120ed0372a3213325bad904f2de2080799a8bec2636f2f8ddf22",
+      "bytes": 5565
+    },
+    {
+      "path": "content/exams/AZ-104/lessons/az3_3.md",
+      "sha256": "b431d15e8ac392d87b3b1e167d83a58acc8c87349f7f19731b6047a0c8fb7e40",
+      "bytes": 4567
+    },
+    {
+      "path": "content/exams/AZ-104/lessons/az3_4.md",
+      "sha256": "58a6e90629bb6707f2e2730cca886f7ecdd669f102816ec41b00df042e4c25dc",
+      "bytes": 5079
+    },
+    {
+      "path": "content/exams/AZ-104/lessons/az4_1.md",
+      "sha256": "5b152a5c35b322176cb4949a5a2b27f77f83d9ff61d0fbde09a27d644dc9f184",
+      "bytes": 5013
+    },
+    {
+      "path": "content/exams/AZ-104/lessons/az4_2.md",
+      "sha256": "8cc26e183d4fde3c24c745a526c23a15ed1e330576b6b45c34d216f6d237b0b8",
+      "bytes": 4909
+    },
+    {
+      "path": "content/exams/AZ-104/lessons/az4_3.md",
+      "sha256": "b547e2de5a9ff4a55c7d997f84abeebcbcfa9ddc1c85e259efdf656edd14aca9",
+      "bytes": 4283
+    },
+    {
+      "path": "content/exams/AZ-104/lessons/az5_1.md",
+      "sha256": "2962386553068fec7fac0aa4cfe38fd8918d37c55b8956816b3e70b5357af6e2",
+      "bytes": 5312
+    },
+    {
+      "path": "content/exams/AZ-104/lessons/az5_2.md",
+      "sha256": "37153142ce2ec1d19407f6a16dabdb206de93cb3a65cebee902f1471788c9501",
+      "bytes": 5339
+    },
+    {
+      "path": "content/exams/AZ-104/questions/az104-beginner.md",
+      "sha256": "6974dda2be342daf0eeae595f412d72a119fecea842298eb4a14d8c3275108c4",
+      "bytes": 40264
+    },
+    {
       "path": "content/exams/COMPTIA-A-1201/exam.json",
       "sha256": "ed1c0f777b06a74f2557307fb01beb73d2daafa19aba5d191c12f1ebb77a734c",
       "bytes": 4534
@@ -930,6 +1309,256 @@
       "path": "content/exams/NCA-75/remap.csv",
       "sha256": "48bf65f537980387965b475dbd917edc29041e390191f5c505f7621aacc423d3",
       "bytes": 30056
+    },
+    {
+      "path": "content/provenance/AZ-104/Q1.json",
+      "sha256": "d2869738bc530a00fe1f8a20a7131adb2c32506662c6f24791fd90b4b8cd2f13",
+      "bytes": 365
+    },
+    {
+      "path": "content/provenance/AZ-104/Q10.json",
+      "sha256": "5de8584cf0fb2aae4c2b2f892aac597305b4368bdb370fbc808a1141e648db2b",
+      "bytes": 366
+    },
+    {
+      "path": "content/provenance/AZ-104/Q11.json",
+      "sha256": "b78d097873050e20d027dbfc58219aa8d551f279479d749a095a12bac48d39f0",
+      "bytes": 366
+    },
+    {
+      "path": "content/provenance/AZ-104/Q12.json",
+      "sha256": "6a8b0af8ad37c7cbf40af965beb2cd0d8d3cc2ebd8aeec4d19490fc372b2e995",
+      "bytes": 363
+    },
+    {
+      "path": "content/provenance/AZ-104/Q13.json",
+      "sha256": "e572d50115636914b57a58b3afe6688366764fcb2bbc7c4ede9be502ffe7e718",
+      "bytes": 363
+    },
+    {
+      "path": "content/provenance/AZ-104/Q14.json",
+      "sha256": "e19ee4ba3021c7b00f788fc949f8939bc6432f017c974b474baf78a4be52dc8e",
+      "bytes": 366
+    },
+    {
+      "path": "content/provenance/AZ-104/Q15.json",
+      "sha256": "8e86fd8f09a47420e452630c719e8722a12858ca730d8750e5b16ae10477d36a",
+      "bytes": 366
+    },
+    {
+      "path": "content/provenance/AZ-104/Q16.json",
+      "sha256": "fdb31be1db2ec3ddb44745c8c34a0974552ad6bdc48d2c0c0041a774eeb9c4b6",
+      "bytes": 366
+    },
+    {
+      "path": "content/provenance/AZ-104/Q17.json",
+      "sha256": "422538bcb486ea38bf3e942dc5eb8c46ff31dfcf174b43db0c15e0a9cc1f67b9",
+      "bytes": 366
+    },
+    {
+      "path": "content/provenance/AZ-104/Q18.json",
+      "sha256": "3bde5a8b4b989c0718c3cdf9af0de44cff6f53e99903730ada84005247c57987",
+      "bytes": 366
+    },
+    {
+      "path": "content/provenance/AZ-104/Q19.json",
+      "sha256": "e5e6a6985cd16a2155685215e1245ad8c2839d125ce678e79fb92b64a787129e",
+      "bytes": 363
+    },
+    {
+      "path": "content/provenance/AZ-104/Q2.json",
+      "sha256": "f9c98de16f8d5d6e930e485c138427b35d851a4f964f41996a3f5546e30e9892",
+      "bytes": 365
+    },
+    {
+      "path": "content/provenance/AZ-104/Q20.json",
+      "sha256": "0f17d01cdcf1f487207664e20de6e62c148d2b890fa70c4e90c1547f007237e6",
+      "bytes": 366
+    },
+    {
+      "path": "content/provenance/AZ-104/Q21.json",
+      "sha256": "7c25bda0acc502f6eea7461e3cbabfc4be4d86dc4bd71bcb83d306d4072e897a",
+      "bytes": 366
+    },
+    {
+      "path": "content/provenance/AZ-104/Q22.json",
+      "sha256": "a0777b729d25bb888485232b448a1e617dfcbff20f0cc6942e4d39c3c185f27b",
+      "bytes": 363
+    },
+    {
+      "path": "content/provenance/AZ-104/Q23.json",
+      "sha256": "38e623ec4b9d6a64bb42e44487bf42103b7609ae314a45104b51a039535ec60e",
+      "bytes": 366
+    },
+    {
+      "path": "content/provenance/AZ-104/Q24.json",
+      "sha256": "ef52a3dff4fc9ff43b6766a7be194533e5a7a1ab32836ea76771e568bca28169",
+      "bytes": 363
+    },
+    {
+      "path": "content/provenance/AZ-104/Q25.json",
+      "sha256": "2ce11b630d89308a068ea91cf9f3a5f01e24b0910620781098e6a4bf2a8d2aac",
+      "bytes": 366
+    },
+    {
+      "path": "content/provenance/AZ-104/Q26.json",
+      "sha256": "e6bfa7e2a15857c3b48153496acba34c800a7dd83812131715ee42b51db3be94",
+      "bytes": 366
+    },
+    {
+      "path": "content/provenance/AZ-104/Q27.json",
+      "sha256": "54e34774df7e699e3d54ea9a47b862ceed55176aee8a9e025da6c2dc9470a743",
+      "bytes": 366
+    },
+    {
+      "path": "content/provenance/AZ-104/Q28.json",
+      "sha256": "76606f8e0c4f955bcf003f8d58624c34f40f4c5bc502675e08f228d492653332",
+      "bytes": 363
+    },
+    {
+      "path": "content/provenance/AZ-104/Q29.json",
+      "sha256": "f1d74925efe7c9f3f455ca175eacc14f8ddf9a33c3f148cf9bff1074868c5bf6",
+      "bytes": 366
+    },
+    {
+      "path": "content/provenance/AZ-104/Q3.json",
+      "sha256": "32de223b1cb50e8708ee1fdb35bef58689fc289f1c3256514815244692ead6c0",
+      "bytes": 365
+    },
+    {
+      "path": "content/provenance/AZ-104/Q30.json",
+      "sha256": "ecded658686dc2ec709045b376df6933bb96f1489dec4a076ce00e581bd358df",
+      "bytes": 366
+    },
+    {
+      "path": "content/provenance/AZ-104/Q31.json",
+      "sha256": "6d1b088d2c57a1d3945c2178cb7f740556d3f3f3ed96195ce3d8d1f7aa643c05",
+      "bytes": 366
+    },
+    {
+      "path": "content/provenance/AZ-104/Q32.json",
+      "sha256": "dbc4e64cb0a0e1b8f0321f0ca048d5fa2f56cd980f63fc0d31bcfa7b29dddfd6",
+      "bytes": 363
+    },
+    {
+      "path": "content/provenance/AZ-104/Q33.json",
+      "sha256": "80b152c18516b501707a3f4c845c3cda166e35f380b07f70a9fcf0bd1494bfe2",
+      "bytes": 366
+    },
+    {
+      "path": "content/provenance/AZ-104/Q34.json",
+      "sha256": "3a307bd19049b6b4c90dca147dd0e621f433286a43a39c545c714807448fff03",
+      "bytes": 366
+    },
+    {
+      "path": "content/provenance/AZ-104/Q35.json",
+      "sha256": "9b6f6851bc0edb4428b96f06fce06cee240dd940acd8d2bd16d62d6b0bccc115",
+      "bytes": 366
+    },
+    {
+      "path": "content/provenance/AZ-104/Q36.json",
+      "sha256": "a2363fd420122c5ec57d2685ba678321156309a057d48c1ba60ff7e537a9fcca",
+      "bytes": 366
+    },
+    {
+      "path": "content/provenance/AZ-104/Q37.json",
+      "sha256": "bdf751512c104a3654a5503e6838eeebbf887fb34982f21548ee40714991a1da",
+      "bytes": 366
+    },
+    {
+      "path": "content/provenance/AZ-104/Q38.json",
+      "sha256": "8c8d7236b9f095afaee3f81e60c8facb7c6189bed40973619e529efdef455ea3",
+      "bytes": 363
+    },
+    {
+      "path": "content/provenance/AZ-104/Q39.json",
+      "sha256": "c3434568b2bd535c43bc5035c68ebb5117bf47a1374dc30253910d19c7e1a3f6",
+      "bytes": 366
+    },
+    {
+      "path": "content/provenance/AZ-104/Q4.json",
+      "sha256": "1423b76666aad0f401f7e501922451fd5f40856b7c85376f1585c4a75b99dca7",
+      "bytes": 362
+    },
+    {
+      "path": "content/provenance/AZ-104/Q40.json",
+      "sha256": "76ab5ca1746b0404b6cc4bd48450168e600ba9640b97b77554633a9ba7ca12f4",
+      "bytes": 366
+    },
+    {
+      "path": "content/provenance/AZ-104/Q41.json",
+      "sha256": "45b83a7fc62110a723cc7133f0530d6a749ac1935e381cbf41406872fcbee811",
+      "bytes": 363
+    },
+    {
+      "path": "content/provenance/AZ-104/Q42.json",
+      "sha256": "223214be328a137446e922381183e066b6b9b2c3166121179bf8d14a78e9152e",
+      "bytes": 366
+    },
+    {
+      "path": "content/provenance/AZ-104/Q43.json",
+      "sha256": "1c81aea669b362059fcbe921dbddf584ff4236910101fad998064ea5481d22c3",
+      "bytes": 366
+    },
+    {
+      "path": "content/provenance/AZ-104/Q44.json",
+      "sha256": "6baac42812cb0c74006ad88326784d99309a092cdc8bb1364367c32214f8e38d",
+      "bytes": 363
+    },
+    {
+      "path": "content/provenance/AZ-104/Q45.json",
+      "sha256": "22e605916f0bf2a6e5211437b60f2c4d3e5c93bdc3463921928b321830c6ec93",
+      "bytes": 366
+    },
+    {
+      "path": "content/provenance/AZ-104/Q46.json",
+      "sha256": "b2fac0eac157b3cd60d128ca140860e954c6081e29b1d0212132b0e19f1b190c",
+      "bytes": 366
+    },
+    {
+      "path": "content/provenance/AZ-104/Q47.json",
+      "sha256": "51222108c640b1d5ec59cd99047a0e6ad82ceefd32741db8d8a6bfd84b138dc9",
+      "bytes": 363
+    },
+    {
+      "path": "content/provenance/AZ-104/Q48.json",
+      "sha256": "3d185dc56e0ddfecbb6cd79f86c18106e922da040f34f0f7b5ee1c98b3ffa3c3",
+      "bytes": 366
+    },
+    {
+      "path": "content/provenance/AZ-104/Q49.json",
+      "sha256": "f4fed834ff37dc47b437b551ba04c30883b3c74d231a88708b19e1114cfa0213",
+      "bytes": 366
+    },
+    {
+      "path": "content/provenance/AZ-104/Q5.json",
+      "sha256": "944df66272bc64d325ed534f29574fde55c7056f63fe3da0aee28a3ac10ba2e1",
+      "bytes": 365
+    },
+    {
+      "path": "content/provenance/AZ-104/Q50.json",
+      "sha256": "3715ed7b0ec3766572875c2315d554af032a48bfb8edfd4b3337d5144c89411d",
+      "bytes": 363
+    },
+    {
+      "path": "content/provenance/AZ-104/Q6.json",
+      "sha256": "5f3186c3194e32d0e07caca6672717f14f3737028b8f6748670f0e05bc376c54",
+      "bytes": 365
+    },
+    {
+      "path": "content/provenance/AZ-104/Q7.json",
+      "sha256": "5ecb5e7d212254b74070c32411951fbc310818e3595f5507b5bb7e03434adc61",
+      "bytes": 365
+    },
+    {
+      "path": "content/provenance/AZ-104/Q8.json",
+      "sha256": "877cc9263fdb5dd2007a202053d09be1c1529100b049b31560e7b612ec72bb13",
+      "bytes": 362
+    },
+    {
+      "path": "content/provenance/AZ-104/Q9.json",
+      "sha256": "0319881ba94a4f9693629c0c06fc0bcb2c71655ec7beac93fe715cc2c0d633cd",
+      "bytes": 365
     },
     {
       "path": "content/provenance/COMPTIA-A-1201/Q1.json",
@@ -1380,6 +2009,11 @@
       "path": "content/tracks/track-aplus/track.json",
       "sha256": "64aa0c16d71d847fc0812f6372570bb46e57ca02e1211f1ec079f2ab2bbeb64d",
       "bytes": 395
+    },
+    {
+      "path": "content/tracks/track-azure/track.json",
+      "sha256": "c0e676f81672c5ef93e3541e74651cd298efd5dc21d5aac5ddd8829ce73a06a6",
+      "bytes": 445
     },
     {
       "path": "content/tracks/track-nca/track.json",
