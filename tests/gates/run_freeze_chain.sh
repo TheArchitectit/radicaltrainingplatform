@@ -89,6 +89,10 @@ gate "bash tests/gates/run_remap_fixtures.sh"          bash tests/gates/run_rema
 # Added in Sprint 48 (S48-04): the cheatsheet must not contradict applied errata.
 gate "python3 scripts/check-nca-cheatsheet.py"         python3 scripts/check-nca-cheatsheet.py
 gate "bash tests/gates/run_cheatsheet_fixtures.sh"     bash tests/gates/run_cheatsheet_fixtures.sh
+# Added in Sprint 48 (S47-16, R-12/T-25b): the README's "What ships today"
+# numbers must match the generated manifest, badge and release state included.
+gate "python3 scripts/check-readme-counts.py"          python3 scripts/check-readme-counts.py
+gate "bash tests/gates/run_readme_counts_fixtures.sh"  bash tests/gates/run_readme_counts_fixtures.sh
 # Added in Sprint 48 (S48-07, C-09/T-31a): every tracked PDF carries a hash,
 # a size and a rights status, and no row may claim a document the tree does
 # not contain — the two vendor manuals are pointer text.

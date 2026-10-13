@@ -36,7 +36,7 @@ Roger, October 10, 2026, verbatim: “And we have to address it all understand.�
 | R-06 | Persistence not wired | SPEC-09 R-06, REQ-UI-04/05 | T-12, T-15 | TM-34 green |
 | R-10 | LICENSE missing | SPEC-09 R-10 | T-25a | file present; owner confirmation logged (HG-01) |
 | R-11 | Simulator duplication | SPEC-09 R-11, D3 | T-15 | TM-53 + duplication gate |
-| R-12 | Stale README/docs as current | SPEC-09 R-12 | T-25b | generated counts match; docs index shipped |
+| R-12 | Stale README/docs as current | SPEC-09 R-12 | T-25b (**S47-16**) | generated counts match — `scripts/check-readme-counts.py` compares the README table, badge and release state to `content-manifest.json`, with 4 failing fixtures; docs index shipped ([OPENSPEC-INDEX.md](../../OPENSPEC-INDEX.md)). **Met** |
 | Historical | Oct 1 audit claims superseded (persistence, errata, 49 views) | SPEC-00 00.2 | T-25b | README/index label old docs historical |
 
 ## 14.2b Final-audit runtime evidence register (Web and .NET chapters) — closed, not pending

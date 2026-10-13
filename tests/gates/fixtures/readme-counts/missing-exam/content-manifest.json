@@ -1,0 +1,33 @@
+{
+ "releaseState": "draft-preview",
+ "exams": {
+  "COMPTIA-A-1201": {},
+  "COMPTIA-A-1202": {},
+  "NCA-75": {}
+ },
+ "tracks": [
+  {
+   "path": "content/tracks/track-aplus/track.json"
+  }
+ ],
+ "provenance": [
+  {
+   "path": "content/provenance/COMPTIA-A-1201/Q1.json"
+  },
+  {
+   "path": "content/provenance/COMPTIA-A-1201/Q2.json"
+  },
+  {
+   "path": "content/provenance/COMPTIA-A-1201/Q3.json"
+  },
+  {
+   "path": "content/provenance/COMPTIA-A-1202/Q1.json"
+  },
+  {
+   "path": "content/provenance/COMPTIA-A-1202/Q2.json"
+  },
+  {
+   "path": "content/provenance/NCA-75/Q1.json"
+  }
+ ]
+}

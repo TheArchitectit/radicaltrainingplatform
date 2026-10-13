@@ -446,50 +446,50 @@ sweep 50 scenarios, all incomplete → complete.
 hash and a rights status, **so that** a licensing question is answered from a
 record rather than from memory.
 
-**This row was opened late, and the reason is worth recording.** T-31a has no
-row in SPEC-11's task tables — SPEC-14 assigns it to C-09, and C-09's passing
-condition names it, but the plan's "every task has exactly one sprint home" rule
-never reached it. It was found by a coverage audit and stood unowned in
-`SPRINT-47-RETROSPECTIVE.md` until this row. **T-SC-03**, the other task that
-audit named, was checked and found already documented (`SPRINT-46.md` § S46-04
-records the `us-bucket-01` repair choice); only T-31a was actually missing.
+**This row was opened late.** T-31a has no row in SPEC-11's task tables —
+SPEC-14 assigns it to C-09 and C-09's passing condition names it, but the plan's
+"every task has exactly one sprint home" rule never reached it. It stood unowned
+in `SPRINT-47-RETROSPECTIVE.md` until this row. The other task that audit named,
+**T-SC-03**, was checked and is already documented (`SPRINT-46.md` § S46-04).
 
 **Acceptance Criteria:**
 - [x] Every tracked PDF appears in `docs/SOURCE-INVENTORY.md` with its sha256, byte size, class, presence and rights status
-- [x] `scripts/check-source-inventory.py` fails on an unlisted PDF, a phantom row, a stale hash, a wrong size, a placeholder rights cell, and a row claiming `in-repo` for a file that is pointer text
-- [x] Failing fixtures for four distinct lies plus a passing fixture (`tests/gates/run_source_inventory_fixtures.sh`), wired into CI and the freeze chain
-- [ ] The rights statements are *correct* — a human decision, not a gate's; the record says "review not performed" for the six ingested documents rather than assuming the license that is not in effect
+- [x] `scripts/check-source-inventory.py` fails on an unlisted PDF, a phantom row, a stale hash, a wrong size, a placeholder rights cell, and a row claiming `in-repo` for pointer text
+- [x] Failing fixtures for four distinct lies plus a passing one (`run_source_inventory_fixtures.sh`), wired into CI and the freeze chain
+- [ ] The rights statements are *correct* — a human decision, not a gate's; the record says "review not performed" for the six ingested documents
 
 **Status 🟡 because:** the record is complete and enforced, but two things it
-names are open and are not the row's to close — `LICENSE` is proposed rather than
-in effect (owner confirmation, [LICENSE-DECISION.md](../../docs/LICENSE-DECISION.md)),
-and no rights review has been performed on the ingested documents. C-09's three
-clauses now stand at two satisfied, one pending a human.
+names are not the row's to close — `LICENSE` is proposed rather than in effect
+(owner confirmation, [LICENSE-DECISION.md](../../docs/LICENSE-DECISION.md)), and no
+rights review has been performed on the ingested documents. C-09's three clauses
+stand at two satisfied, one pending a human.
 
 **The finding the row carries.** The two vendor manuals are **not in the
-repository**: `docs/AHV-Admin-Guide-v11_0.pdf` and
-`docs/Prism-Central-Guide-vpc_7_5.pdf` are 132 and 133 bytes of large-object
-pointer text, and there is no `.gitattributes`, so no filter is configured and a
-clone gets the pointer text where a manual is claimed. Two documents that cite
-them — `docs/DOC-REVIEW-REPORT.md` ("Based on review of: …") and the ingested
-change package ("in the public repository through Git LFS") — describe a state
-the tree does not have. Both are recorded against the inventory so the claim and
-the evidence are read together. The `Presence` column exists so the record cannot
-repeat that mistake: `pointer-only` is truthful, `in-repo` for pointer text fails.
+repository**: both are 132/133 bytes of large-object pointer text, and with no
+`.gitattributes` no filter is configured, so a clone gets pointer text where a
+manual is claimed. Two documents describe the opposite — `docs/DOC-REVIEW-REPORT.md`
+opens "Based on review of: …", and the ingested package says "in the public
+repository through Git LFS". Both are recorded against the inventory. The
+`Presence` column exists so the record cannot repeat it: `pointer-only` is
+truthful, `in-repo` for pointer text fails.
 
-**Files:** `docs/SOURCE-INVENTORY.md` (new), `scripts/check-source-inventory.py`
-(new), `tests/gates/run_source_inventory_fixtures.sh` (new),
-`tests/gates/fixtures/source-inventory/` (5 fixture trees)
-
-**Commands:** `python3 scripts/check-source-inventory.py`;
-`bash tests/gates/run_source_inventory_fixtures.sh`
+**Also closed here — R-12's residue, which had no gate.** S47-16 was 🟡 for one
+reason: "README facts match the CI-generated counts" was enforced by nothing.
+`scripts/check-readme-counts.py` now compares the README's "What ships today"
+table — manifests, tracks, items, the per-exam breakdown, the badge, the release
+state — against `content-manifest.json`, with four failing fixtures. **S47-16 ✅.**
+**Files (all new):** `docs/SOURCE-INVENTORY.md`, `scripts/check-source-inventory.py`,
+`tests/gates/run_source_inventory_fixtures.sh`, `tests/gates/fixtures/source-inventory/`,
+`scripts/check-readme-counts.py`, `tests/gates/run_readme_counts_fixtures.sh`,
+`tests/gates/fixtures/readme-counts/`. **Commands:** `python3
+scripts/check-source-inventory.py`, `python3 scripts/check-readme-counts.py` and
+their `tests/gates/run_*_fixtures.sh` runners.
 
 **Not verified:** that any rights review has been performed for the ingested
 documents; that the pointer objects exist on any remote (the gate reads bytes in
-the tree and contacts nothing); the contents of the two manuals (not here, so
-not opened); and that the list is exhaustive of the project's *source material*
-— it enumerates tracked PDFs, and the other ingested formats are out of its
-scope by its own definition.
+the tree and contacts nothing); the contents of the two manuals (not here, so not
+opened); and that the list is exhaustive of the project's source material — it
+enumerates tracked PDFs by its own definition.
 
 ---
 

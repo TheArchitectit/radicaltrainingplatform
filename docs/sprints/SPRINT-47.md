@@ -41,7 +41,7 @@ companions were split out of this file when it passed the 500-line document limi
 | S47-13 (T-29) | Freeze: branch, base/head SHA, changed files, gate results, RedEye lane logs + seeded-defect self-test record, usable build | SPEC-11 11.7 | 1 | ✅ |
 | S47-14 (T-30) | Demo script final: 90-second loop (learn, try, ask, verify) + exact disclaimer + no-patient/no-business-system line | REQ-BRAND-02 | 1 | ✅ |
 | S47-15 (R-10) | LICENSE: prepare BSD-3-Clause decision record + README pointer; final file drop waits on owner confirmation (HG-01) | R-10, C-08/C-09 | 1 | 🟡 |
-| S47-16 (T-25b) | README/docs truth: README facts match CI-generated counts; docs index; historical labels — **no gate enforces the match** | R-12 | 2 | 🟡 |
+| S47-16 (T-25b) | README/docs truth: README facts match CI-generated counts, **now gated** by `scripts/check-readme-counts.py`; docs index; historical labels | R-12 | 2 | ✅ |
 
 **Total:** 29 points. Sprint D explicitly excludes architecture migration and post-freeze content authoring. S47-16 was opened after the sprint, from a coverage audit: T-25b has no row in SPEC-11's tables, so R-12 had no owner. See [SPRINT-47-RETROSPECTIVE.md](SPRINT-47-RETROSPECTIVE.md).
 
@@ -494,6 +494,7 @@ A presenter can open the PWA on the demo host, pick track-aplus or track-netplus
 ## Mini-retrospective (SPEC-11 11.10)
 
 **Sprint head `7a21f6b`; 39/39 gates at that SHA** (re-run), Core 257/257, Desktop
-51/51, coverage 92.33%. Full retrospective, including why five rows are 🟡 and what
+51/51, coverage 92.33%. Full retrospective, including why seven rows are 🟡 and what
 was not verified: [SPRINT-47-RETROSPECTIVE.md](./SPRINT-47-RETROSPECTIVE.md) — a
-companion file, split out because this one reached the 500-line limit.
+companion file, split out because this one reached the 500-line limit. S47-16, opened
+after the sprint, closed later: R-12's counts check is now `scripts/check-readme-counts.py`.

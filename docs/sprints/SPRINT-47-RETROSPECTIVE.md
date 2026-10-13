@@ -135,10 +135,18 @@ carrying the CI-generated counts — 4 exam manifests, 3 tracks, 89 released ite
 (16 + 8 + 25 + 40), `releaseState: draft-preview` — which also states plainly that no
 item carries a passing review log.
 
-**What did not land.** R-12's acceptance is that README facts *match* the CI-generated
-counts. Nothing enforces it: there is no gate comparing README prose to
-`content-bundle.json`, so the numbers are right by hand today, not by check. That is
-the residue, and it is why this row is 🟡 rather than ✅.
+**What did not land here.** R-12's acceptance is that README facts *match* the
+CI-generated counts. Nothing enforced it: there was no gate comparing README prose
+to the generated manifest, so the numbers were right by hand, not by check. That
+was the residue, and it is why this row was 🟡 rather than ✅ when written.
+
+**Closed later, in S48-07.** `scripts/check-readme-counts.py` now compares the
+README's "What ships today" table — exam manifests, tracks, released items, the
+per-exam breakdown, the badge and the release state — against
+`content-manifest.json`, and `run_readme_counts_fixtures.sh` seeds four
+disagreements (drifted total, stale badge, unmentioned exam, false release state)
+that must each fail. R-12's second clause, "docs index shipped", is
+[docs/OPENSPEC-INDEX.md](../OPENSPEC-INDEX.md). **S47-16 is ✅.**
 
 **Also unowned, found by the same audit, and since resolved:** **T-31a** (PDF
 inventory with hash/license record, C-09) and **T-SC-03** (the written record of

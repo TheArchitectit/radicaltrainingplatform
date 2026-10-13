@@ -66,6 +66,17 @@ jobs:
           python3 scripts/check-nca-cheatsheet.py
           bash tests/gates/run_cheatsheet_fixtures.sh
 
+      # R-12/T-25b (S47-16): the README's "What ships today" numbers must match
+      # the generated manifest — exam manifests, tracks, released items (with
+      # the per-exam breakdown), the badge, and the release state. Fixture set:
+      # run_readme_counts_fixtures.sh seeds four disagreements (drifted total,
+      # stale badge, unmentioned exam, false release state) that must each fail,
+      # plus a matching README that must pass.
+      - name: Check README counts against the generated manifest (R-12)
+        run: |
+          python3 scripts/check-readme-counts.py
+          bash tests/gates/run_readme_counts_fixtures.sh
+
       # C-09/T-31a (S48-07): every tracked PDF carries a hash, a size and a
       # rights status, and the record cannot claim a document the tree does
       # not contain — the two vendor manuals are large-object pointer text,
