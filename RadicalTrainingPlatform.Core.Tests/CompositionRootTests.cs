@@ -33,9 +33,40 @@ public class CompositionRootTests
         // the hardcoded service remains resolvable as the legacy fallback.
         provider.GetRequiredService<IBlueprintService>().ShouldBeAssignableTo<ManifestBlueprintService>();
         provider.GetRequiredService<HardcodedBlueprintService>().ShouldBeAssignableTo<HardcodedBlueprintService>();
-        provider.GetRequiredService<IReferenceService>().ShouldBeAssignableTo<HardcodedReferenceService>();
+        // S27-03: the reference surface is now the provider catalog; the
+        // hardcoded corpus stays resolvable as the built-in provider's inner.
+        provider.GetRequiredService<IReferenceService>().ShouldBeAssignableTo<ReferenceProviderCatalog>();
+        provider.GetRequiredService<HardcodedReferenceService>().ShouldBeAssignableTo<HardcodedReferenceService>();
         provider.GetRequiredService<ISessionStore>().ShouldBeAssignableTo<JsonSessionStore>();
         provider.GetRequiredService<IErrataProvider>().ShouldBeAssignableTo<JsonErrataStore>();
+    }
+
+    [Fact]
+    public void PluginLayer_ResolvesAndHasDiscovered()
+    {
+        // S27-01..09: every new extension point resolves from a bare container.
+        // The assertions below hold in any working directory, so this test says
+        // "the layer is wired", not "this machine happens to have content" —
+        // discovery's own behaviour is pinned in PluginDiscoveryTests.
+        var provider = new ServiceCollection()
+            .AddRadicalTrainingPlatformCore()
+            .BuildServiceProvider();
+
+        provider.GetRequiredService<IBlueprintProvider>().ShouldBeAssignableTo<ManifestBlueprintProvider>();
+        provider.GetRequiredService<IExamMetadataProvider>().ShouldBeAssignableTo<ExamMetadataCatalog>();
+        provider.GetRequiredService<PluginValidator>().ShouldBeAssignableTo<PluginValidator>();
+
+        var plugins = provider.GetRequiredService<IPluginLoader>();
+        // Discovery has run: the loader's own construction depends on the
+        // plugin roots, so a lazily-populated list would read as "no plugins".
+        Should.NotThrow(() => plugins.Discover());
+        foreach (var plugin in plugins.Plugins)
+        {
+            plugin.PluginId.ShouldNotBeNullOrWhiteSpace();
+            plugin.ContentSearchRoot.ShouldNotBeNullOrWhiteSpace();
+        }
+        foreach (var rejected in plugins.Rejected)
+            rejected.Errors.ShouldNotBeEmpty();
     }
 
     [Fact]

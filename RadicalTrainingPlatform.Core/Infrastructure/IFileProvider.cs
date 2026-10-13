@@ -11,6 +11,11 @@ public interface IFileProvider
     string[] GetFiles(string directory, string searchPattern);
     string[] GetDirectories(string directory);
     string ReadAllText(string path);
+    /// <summary>
+    /// Raw bytes. Integrity checks hash these, not the decoded text — a BOM or
+    /// a CRLF ending must change the hash the way it changes the file.
+    /// </summary>
+    byte[] ReadAllBytes(string path);
     void WriteAllText(string path, string content);
     /// <summary>Atomically replace <paramref name="dest"/> with <paramref name="source"/> (same volume).</summary>
     void MoveFile(string source, string dest);
@@ -33,6 +38,7 @@ public class DefaultFileProvider : IFileProvider
     public string[] GetFiles(string directory, string searchPattern) => Directory.GetFiles(directory, searchPattern);
     public string[] GetDirectories(string directory) => Directory.GetDirectories(directory);
     public string ReadAllText(string path) => File.ReadAllText(path);
+    public byte[] ReadAllBytes(string path) => File.ReadAllBytes(path);
     public void WriteAllText(string path, string content) => File.WriteAllText(path, content);
     public void MoveFile(string source, string dest) => File.Move(source, dest, overwrite: true);
     public void DeleteFile(string path) => File.Delete(path);

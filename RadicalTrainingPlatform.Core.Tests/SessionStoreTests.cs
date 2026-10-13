@@ -33,6 +33,7 @@ public class SessionStoreTests
         }
         public string[] GetDirectories(string directory) => Array.Empty<string>();
         public string ReadAllText(string path) => Files[path];
+        public byte[] ReadAllBytes(string path) => System.Text.Encoding.UTF8.GetBytes(Files[path]);
         public virtual void WriteAllText(string path, string content) => Files[path] = content;
         public virtual void MoveFile(string source, string dest)
         {

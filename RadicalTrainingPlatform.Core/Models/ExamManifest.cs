@@ -37,6 +37,11 @@ public class ManifestQuestionPolicy
 /// </summary>
 public class ExamManifest
 {
+    /// <summary>
+    /// Manifest schema version. Absent means 1, so every manifest written
+    /// before schema versioning existed reads unchanged (S27-09).
+    /// </summary>
+    public int SchemaVersion { get; set; } = 1;
     public string ExamId { get; set; } = "";
     public string Vendor { get; set; } = "";
     public string DisplayName { get; set; } = "";
@@ -66,6 +71,8 @@ public class ExamManifest
 /// </summary>
 public class TrackManifest
 {
+    /// <summary>Manifest schema version; absent means 1 (S27-09).</summary>
+    public int SchemaVersion { get; set; } = 1;
     public string TrackId { get; set; } = "";
     public string Title { get; set; } = "";
     public List<string> ExamIds { get; set; } = new();

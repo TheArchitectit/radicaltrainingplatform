@@ -1,4 +1,5 @@
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using RadicalTrainingPlatform.Core.Abstractions;
 using RadicalTrainingPlatform.Core.Services;
 
@@ -24,15 +25,55 @@ public static class ServiceCollectionExtensions
         // DI selects the greediest ctor, so the registered IErrataProvider above
         // is injected into QuestionParser (errata corrections get applied).
         services.AddSingleton<IQuestionParser, QuestionParser>();
+
+        // S27-08: plugins are discovered once, at startup, before anything that
+        // reads manifests. Discovery validates each pack and the built-in tree
+        // together, so a pack that collides with shipped content is rejected by
+        // name instead of surfacing later as a duplicate-ID exception.
+        services.AddSingleton<PluginValidator>();
+        services.AddSingleton<IPluginLoader>(sp =>
+        {
+            var discovery = new PluginDiscovery(
+                sp.GetRequiredService<IFileProvider>(),
+                sp.GetRequiredService<PluginValidator>(),
+                sp.GetRequiredService<IExamRepository>(),
+                sp.GetService<ILogger<PluginDiscovery>>());
+            discovery.Discover();
+            return discovery;
+        });
+
         services.AddSingleton<IManifestLoader, ManifestLoader>();
+
         // REQ-MAN-04: manifest blueprints take precedence; the hardcoded service
-        // is kept as the fallback for legacy exams without manifests.
+        // is kept as the fallback for legacy exams without manifests. S27-02
+        // turns the manifest source into one provider among several, so a vendor
+        // pack plugs in here without the service learning about plugins.
         services.AddSingleton<HardcodedBlueprintService>();
+        services.AddSingleton<IBlueprintProvider, ManifestBlueprintProvider>();
         services.AddSingleton<IBlueprintService>(sp =>
             new ManifestBlueprintService(
-                sp.GetRequiredService<IManifestLoader>(),
+                sp.GetServices<IBlueprintProvider>(),
                 sp.GetRequiredService<HardcodedBlueprintService>()));
-        services.AddSingleton<IReferenceService, HardcodedReferenceService>();
+
+        // S27-03: the built-in corpus is one provider; the catalog routes a
+        // question to the providers that claim its exam, then falls back.
+        services.AddSingleton<HardcodedReferenceService>();
+        services.AddSingleton<IReferenceProvider>(sp =>
+            new BuiltInReferenceProvider(sp.GetRequiredService<HardcodedReferenceService>()));
+        services.AddSingleton<IReferenceService>(sp =>
+            new ReferenceProviderCatalog(
+                sp.GetServices<IReferenceProvider>(),
+                sp.GetRequiredService<HardcodedReferenceService>()));
+
+        // S27-01: the catalog is what consumers resolve; leaf providers are
+        // listed explicitly so the catalog never enumerates itself.
+        services.AddSingleton<ManifestExamMetadataProvider>();
+        services.AddSingleton<IExamMetadataProvider>(sp =>
+            new ExamMetadataCatalog(new IExamMetadataProvider[]
+            {
+                sp.GetRequiredService<ManifestExamMetadataProvider>(),
+            }));
+
         services.AddSingleton<ISessionStore, JsonSessionStore>();
         return services;
     }

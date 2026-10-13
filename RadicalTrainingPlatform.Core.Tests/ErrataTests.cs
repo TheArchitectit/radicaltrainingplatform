@@ -94,6 +94,7 @@ public class ErrataTests
         public string[] GetFiles(string d, string p) => Array.Empty<string>();
         public string[] GetDirectories(string d) => Array.Empty<string>();
         public string ReadAllText(string path) => Files[N(path)];
+        public byte[] ReadAllBytes(string path) => System.Text.Encoding.UTF8.GetBytes(Files[N(path)]);
         public void WriteAllText(string path, string c) => Files[N(path)] = c;
         public void MoveFile(string source, string dest)
         {

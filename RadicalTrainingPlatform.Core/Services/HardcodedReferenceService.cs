@@ -9,6 +9,13 @@ namespace RadicalTrainingPlatform.Core;
 /// </summary>
 public class HardcodedReferenceService : IReferenceService
 {
+    /// <summary>
+    /// Exam codes this corpus actually carries entries for. Read by the
+    /// reference provider so an aggregator asks only the sources that claim
+    /// the question's exam (S27-03).
+    /// </summary>
+    public static IReadOnlyCollection<string> ServedExamCodes => _data.Keys;
+
     private static readonly Dictionary<string, List<(string[] Keywords, string Reference)>> _data = BuildData();
 
     private static Dictionary<string, List<(string[], string)>> BuildData()

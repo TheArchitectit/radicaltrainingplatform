@@ -4,21 +4,37 @@ using RadicalTrainingPlatform.Core.Models;
 namespace RadicalTrainingPlatform.Core.Services;
 
 /// <summary>
-/// Blueprint source backed by exam.json manifests (REQ-MAN-04).
-/// For manifest-covered exams, this service is authoritative; for legacy
-/// exams without manifests it delegates to HardcodedBlueprintService.
+/// Blueprint aggregator (REQ-MAN-04, S27-02).
+///
+/// Providers are consulted in registration order and the first that covers an
+/// exam wins — manifest packs are authoritative for the exams they declare,
+/// and a vendor plugin's pack is just another provider. Legacy exams with no
+/// manifest fall through to <see cref="HardcodedBlueprintService"/>.
 /// </summary>
 public class ManifestBlueprintService : IBlueprintService
 {
-    private readonly Dictionary<string, ExamBlueprint> _fromManifests;
+    private readonly IReadOnlyList<IBlueprintProvider> _providers;
+    private readonly HashSet<string> _providedExamIds;
     private readonly IBlueprintService _fallback;
 
-    public ManifestBlueprintService(IManifestLoader loader, IBlueprintService fallback)
+    /// <summary>
+    /// Aggregating constructor. Use this one in DI so discovered plugins take
+    /// part; the manifest-only overload below is kept for callers that build
+    /// the service directly.
+    /// </summary>
+    public ManifestBlueprintService(IEnumerable<IBlueprintProvider> providers, IBlueprintService fallback)
     {
         _fallback = fallback;
-        _fromManifests = new Dictionary<string, ExamBlueprint>(StringComparer.OrdinalIgnoreCase);
-        foreach (var (examId, manifest) in loader.LoadExamManifests())
-            _fromManifests[examId] = ToBlueprint(manifest);
+        _providers = providers.ToList();
+        _providedExamIds = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+        foreach (var provider in _providers)
+            foreach (var examId in provider.ExamIds)
+                _providedExamIds.Add(examId);
+    }
+
+    public ManifestBlueprintService(IManifestLoader loader, IBlueprintService fallback)
+        : this(new IBlueprintProvider[] { new ManifestBlueprintProvider(loader) }, fallback)
+    {
     }
 
     public static ExamBlueprint ToBlueprint(ExamManifest manifest)
@@ -51,7 +67,11 @@ public class ManifestBlueprintService : IBlueprintService
 
     public ExamBlueprint? GetBlueprint(string examCode)
     {
-        if (_fromManifests.TryGetValue(examCode, out var bp)) return bp;
+        foreach (var provider in _providers)
+        {
+            var bp = provider.GetBlueprint(examCode);
+            if (bp != null) return bp;
+        }
         return _fallback.GetBlueprint(examCode);
     }
 
@@ -86,7 +106,7 @@ public class ManifestBlueprintService : IBlueprintService
     public List<(string Section, string Description)> GetBibleSections(string examCode)
     {
         // Bible sections are a legacy-Nutanix concept; manifest packs have none.
-        if (_fromManifests.ContainsKey(examCode)) return new();
+        if (_providedExamIds.Contains(examCode)) return new();
         return _fallback.GetBibleSections(examCode);
     }
 
