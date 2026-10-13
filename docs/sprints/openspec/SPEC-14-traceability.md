@@ -68,7 +68,8 @@ Roger, October 10, 2026, verbatim: “And we have to address it all understand.�
 
 **Audited 2026-10-12 (follow-on to S48-08/TM-75).** "Unowned" was asserted here and
 had never been checked against the tree, so each row's passing condition was resolved
-to the file that implements it and to the runner that executes it. All twelve do:
+to the file that implements it and to the runner that executes it. All twenty rows
+resolve to the twelve TM gates they name, and every one of those gates exists:
 TM-81 → `scripts/check-item-identity.py` and its `--self-test`; TM-82/83/85/90/91 →
 `tests/gates/web/*.mjs` (`retry-outcome-sets`, `study-continuation`, `streak-skip`,
 the R-22 batch, `storage-recovery`), which `run_web_fixtures.sh` executes by glob, so
