@@ -222,15 +222,23 @@ AUTHORIZED") and REQ-DEMO-04. The owner's answer was **self-host only, no accoun
 S29-01/03/04/05/06/07 were cut (owner-deferred, not rejected), S29-02 and S29-10 were
 replaced, and S29-09's throwaway "or document self-host" clause became the whole
 deliverable. The cut register, the review behind it, and the execution record are in
-[SPRINT-29-30.md](./SPRINT-29-30.md). **Sprints 31-34 below assume the accounts and
-social layers that were just deferred — read them as deferred too, not as next up.**
+[SPRINT-29-30.md](./SPRINT-29-30.md).
+
+**Sprints 31-32 and 33-34 were then cut outright by the owner on 2026-10-14**, for the
+same reason: both are built on the account layer that no longer exists. Each sprint doc
+records its own cut register with the original plan preserved verbatim underneath. The
+next pair to execute is **Sprint 35-36 (WCAG 2.1 AA accessibility)**, which needs no
+accounts, no API and no network.
+
+**Status key for Phase 4:** 🟢 Done | 🟡 In Progress | ⚪ Planned | ⚫ Cut (owner-deferred) |
+🔴 Blocked.
 
 | Sprint | Name | Duration | Status | Link |
 |---|---|---|---|---|
 | Sprint 27-28 | Multi-Vendor Plugin Architecture | Weeks 53-56 | 🟢 Landed — 55/55 freeze chain; plugin layer + AZ-104 and AWS-SAA packs at `draft-preview` | [SPRINT-27-28.md](./SPRINT-27-28.md) |
 | Sprint 29-30 | ~~Cloud API Backend~~ → Self-Host Enablement | Weeks 57-60 | 🟢 Landed — rescoped by the owner 2026-10-12: no accounts, no cloud; self-host guide, a completed offline cache, and 57/57 freeze chain | [SPRINT-29-30.md](./SPRINT-29-30.md) |
-| Sprint 31-32 | Authentication & Authorization | Weeks 61-64 | [SPRINT-31-32.md](./SPRINT-31-32.md) |
-| Sprint 33-34 | Social & Study Groups | Weeks 65-68 | [SPRINT-33-34.md](./SPRINT-33-34.md) |
+| Sprint 31-32 | Authentication & Authorization | Weeks 61-64 | ⚫ **Cut — owner-deferred** (2026-10-14): every deliverable needs the account layer Sprints 29-30 cut | [SPRINT-31-32.md](./SPRINT-31-32.md) |
+| Sprint 33-34 | Social & Study Groups | Weeks 65-68 | ⚫ **Cut — owner-deferred** (2026-10-14): sits on the API (29-30) and the auth layer (31-32), neither of which exists | [SPRINT-33-34.md](./SPRINT-33-34.md) |
 | Sprint 35-36 | WCAG 2.1 AA Accessibility | Weeks 69-72 | [SPRINT-35-36.md](./SPRINT-35-36.md) |
 | Sprint 37-38 | Multi-Format Content | Weeks 73-76 | [SPRINT-37-38.md](./SPRINT-37-38.md) |
 | Sprint 39-40 | Enterprise Admin Console | Weeks 77-80 | [SPRINT-39-40.md](./SPRINT-39-40.md) |
