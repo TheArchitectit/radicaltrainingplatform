@@ -183,6 +183,17 @@ gate "bash tests/gates/run_smoke_fixtures.sh"           bash tests/gates/run_smo
 gate "node tests/e2e/nca-lab-web.mjs"                   node tests/e2e/nca-lab-web.mjs
 gate "bash tests/gates/run_nca_lab_fixtures.sh"         bash tests/gates/run_nca_lab_fixtures.sh
 
+# ── Accessibility (Sprints 35-36, S35-01..S35-07) ──
+# The only gate that measures the rendered page rather than reading its source:
+# computed contrast ratios, the accessible-name computation, focus indicators
+# measured differentially (styles unfocused vs focused), heading order, landmark
+# naming, and the modal's focus trap — none of which a static check can see. It
+# audits every route in both themes. Its fixture runner proves each rule can
+# fail, including the modal and system-theme checks, which need a stub shell to
+# break because a plain page cannot exercise them.
+gate "node tests/e2e/a11y-web.mjs"                      node tests/e2e/a11y-web.mjs
+gate "bash tests/gates/run_a11y_fixtures.sh"            bash tests/gates/run_a11y_fixtures.sh
+
 # ── Chain exclusions (read by scripts/check-traceability.py, TM-75) ──
 #
 # A fixture runner that is neither wired above nor declared here ships a

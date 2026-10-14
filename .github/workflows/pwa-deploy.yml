@@ -69,6 +69,21 @@ jobs:
           NCA_LAB_LOG_OUT: ${{ runner.temp }}/nca-lab.log.md
         run: node tests/e2e/nca-lab-web.mjs
 
+      # 2c. Accessibility (Sprints 35-36). The smoke and lab legs prove the page
+      #     works; neither says whether a keyboard or screen-reader user can
+      #     reach it. This leg measures the rendered page — computed contrast in
+      #     both themes, accessible names, focus indicators, heading order,
+      #     landmark naming, the modal's focus trap and Escape — across every
+      #     route. It is also the only leg whose fixture runner needs a stub
+      #     shell, since the dialog and system-theme checks cannot be driven
+      #     against a plain document.
+      - name: Accessibility audit (predeploy)
+        env:
+          A11Y_LOG_OUT: ${{ runner.temp }}/a11y-web.log.md
+        run: |
+          node tests/e2e/a11y-web.mjs
+          bash tests/gates/run_a11y_fixtures.sh
+
       # 3. Content bundle: every manifest-referenced asset exists with a
       #    matching hash, and no unreviewed corpus ships. The Pages artifact
       #    cannot read content/ at runtime, so this is the only place the
@@ -93,14 +108,18 @@ jobs:
       - name: Artifact secret scan (predeploy)
         run: python3 scripts/check-artifact-secrets.py
 
-      # Keep the smoke log with the run — the same evidence the release set
-      # archives, so a green deploy can be read back after the fact.
+      # Keep the smoke and accessibility logs with the run — the same evidence
+      # the release set archives, so a green deploy can be read back after the
+      # fact. The accessibility log carries the per-route finding counts, which
+      # is what makes "we audited it" a record rather than a claim.
       - name: Archive smoke log
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: web-smoke-log
-          path: ${{ runner.temp }}/web-smoke.log.md
+          path: |
+            ${{ runner.temp }}/web-smoke.log.md
+            ${{ runner.temp }}/a11y-web.log.md
           if-no-files-found: warn
 
       # 2. Upload the static PWA files as a Pages artifact

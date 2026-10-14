@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<!--
+  Accessibility fixture — page-level rules.
+
+  A deliberately minimal, deliberately clean document that satisfies every
+  page-level check tests/e2e/a11y-web.mjs implements. tests/gates/run_a11y_fixtures.sh
+  copies it and seeds ONE defect per failing fixture, so each rule is proven to
+  be able to fail for its own reason and no other.
+
+  It has no `#view-container`, which is how the gate recognises a real app shell
+  and skips the interaction sections (dialog, hamburger, theme) it cannot drive
+  here. Those are covered by the stub shell in ./shell/.
+
+  The anchors the fixture script searches for are literal; changing this file
+  without updating the script makes the script fail loudly rather than pass
+  quietly, which is the intended behaviour.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Accessibility fixture</title>
+<style>
+    :root { --ink: #1b1b1b; --paper: #ffffff; --link: #0b3d91; }
+    body {
+        margin: 0;
+        padding: 1rem;
+        font: 16px/1.5 system-ui, sans-serif;
+        color: var(--ink);
+        background: var(--paper);
+    }
+    /* Off-screen but sized, so it is the first focusable element without being
+       visible until focused — the standard skip-link technique. */
+    .skip {
+        position: absolute;
+        left: -9999px;
+        top: 0;
+        padding: 0.5rem;
+        background: var(--paper);
+        color: var(--link);
+    }
+    .skip:focus { left: 0; }
+    :focus-visible { outline: 3px solid var(--link); outline-offset: 2px; }
+    .chip { background: #ffffff; color: #1b1b1b; }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+
+<nav aria-label="Primary">
+    <a href="#main">Home</a>
+</nav>
+
+<main id="main">
+    <h1>Accessibility fixture</h1>
+    <h2>A section</h2>
+    <p>The lesson explains how a storage pool is presented to a client, and
+        <a href="#main">the referenced topic</a> continues from there.</p>
+    <p><span class="chip">Status: ready</span></p>
+    <h3>A subsection</h3>
+    <p><label for="q">Search</label> <input id="q" type="text"></p>
+    <p><button type="button" aria-label="Close panel">×</button></p>
+    <p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="A one-pixel image"></p>
+</main>
+
+<div id="toast-container" role="status" aria-live="polite"></div>
+</body>
+</html>

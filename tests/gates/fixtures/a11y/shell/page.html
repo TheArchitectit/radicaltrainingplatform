@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<!--
+  Accessibility fixture — app-shell rules.
+
+  This one DOES have a `#view-container`, which is how tests/e2e/a11y-web.mjs
+  recognises a real app shell and therefore runs its interaction sections: the
+  modal dialog probe, the hamburger overlay, and the three theme checks. The
+  shell is stubbed down to exactly what those sections touch, backed by the two
+  stub modules in ./js/components/.
+
+  Without this fixture the dialog and theme checks would have no failing fixture
+  at all — they cannot be driven against the plain ./page.html — and a check with
+  no way to fail is not a check (SPEC-16 #4).
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Accessibility fixture — shell</title>
+<style>
+    :root { --ink: #1b1b1b; --paper: #ffffff; --link: #0b3d91; }
+    body {
+        margin: 0;
+        padding: 1rem;
+        font: 16px/1.5 system-ui, sans-serif;
+        color: var(--ink);
+        background: var(--paper);
+    }
+    .skip {
+        position: absolute;
+        left: -9999px;
+        top: 0;
+        padding: 0.5rem;
+        background: var(--paper);
+        color: var(--link);
+    }
+    .skip:focus { left: 0; }
+    :focus-visible { outline: 3px solid var(--link); outline-offset: 2px; }
+    .modal-overlay { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.5); }
+    .modal { background: #ffffff; color: #1b1b1b; padding: 1rem; }
+</style>
+</head>
+<body>
+<a class="skip" href="#view-container">Skip to main content</a>
+
+<nav aria-label="Breadcrumb">
+    <a href="#view-container">Home</a>
+</nav>
+
+<button id="hamburger-btn" aria-label="Menu">☰</button>
+<nav id="hamburger-overlay" aria-label="Simulator navigation" inert>
+    <a href="#view-container">Dashboard</a>
+</nav>
+
+<button id="theme-toggle-btn" aria-label="Toggle dark mode">🌙</button>
+
+<main id="view-container">
+    <h1>Shell fixture</h1>
+    <p>Fixture content.</p>
+</main>
+
+<div id="toast-container" role="status" aria-live="polite"></div>
+
+<script type="module">
+    import { initTheme } from './js/components/ThemeToggle.js';
+    initTheme();
+
+    const button = document.getElementById('hamburger-btn');
+    const overlay = document.getElementById('hamburger-overlay');
+    button.addEventListener('click', () => {
+        // Closed is `inert` (out of the tab order), not merely hidden — the same
+        // contract the real shell's #setHamburger applies.
+        if (overlay.hasAttribute('inert')) overlay.removeAttribute('inert');
+        else overlay.setAttribute('inert', '');
+    });
+</script>
+</body>
+</html>
