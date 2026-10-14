@@ -144,6 +144,13 @@ gate "bash tests/gates/run_tutor_eval.sh"               bash tests/gates/run_tut
 gate "python3 scripts/check-artifact-secrets.py"        python3 scripts/check-artifact-secrets.py
 gate "bash tests/gates/run_artifact_secrets_fixtures.sh" bash tests/gates/run_artifact_secrets_fixtures.sh
 
+# ── Self-host readiness (Sprints 29-30) ──
+# The platform is deployed by copying a directory and serving it, so the offline
+# cache being complete and the shell being servable from a subdirectory are
+# load-bearing. Neither was checked anywhere before this pair.
+gate "python3 scripts/check-selfhost.py"                python3 scripts/check-selfhost.py
+gate "bash tests/gates/run_selfhost_fixtures.sh"        bash tests/gates/run_selfhost_fixtures.sh
+
 # ── .NET ──
 gate "dotnet build Core (Release)" \
     dotnet build RadicalTrainingPlatform.Core/RadicalTrainingPlatform.Core.csproj --configuration Release

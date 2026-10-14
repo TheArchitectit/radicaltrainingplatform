@@ -215,6 +215,19 @@ jobs:
           python3 scripts/check-plugin-manifests.py
           bash tests/gates/run_plugin_fixtures.sh
 
+      # Sprints 29-30: self-host readiness. The platform is deployed by copying
+      # a directory and serving it, so two things are load-bearing and neither
+      # was checked anywhere before this pair: the service worker's precache
+      # list must cover every file the app loads (a missing module is a feature
+      # that dies on a first-load offline open), and every precached path must
+      # exist (cache.addAll() is all-or-nothing, so one 404 means no offline
+      # mode at all). It also holds docs/SELF-HOST.md to its own commands and
+      # keeps the shell servable from a subdirectory, which is how it is hosted.
+      - name: Self-host readiness (Sprints 29-30)
+        run: |
+          python3 scripts/check-selfhost.py
+          bash tests/gates/run_selfhost_fixtures.sh
+
       # No setup-dotnet here: the runner image (localhost/devgate-runner-rtp,
       # infra Containerfile convention) bakes the .NET 10 SDK — setup-dotnet
       # cannot write /usr/share/dotnet inside a rootless runner container.

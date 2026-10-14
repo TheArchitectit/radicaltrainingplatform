@@ -90,6 +90,12 @@ with any static server and open `index.html`:
 python3 -m http.server -d RadicalTrainingPlatform.Web 8080
 ```
 
+**Deploying it yourself?** The whole platform is a folder of files: no account, no
+backend, no database, no network at runtime. [docs/SELF-HOST.md](docs/SELF-HOST.md) is
+the deployment guide — classroom machines, a school file server, a USB stick with no
+internet, and the one limitation worth knowing (progress belongs to a browser profile,
+not a person).
+
 To create a self-contained desktop publish (substitute `linux-x64` or `osx-arm64`):
 
 ```bash
