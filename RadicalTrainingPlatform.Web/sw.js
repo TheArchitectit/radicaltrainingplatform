@@ -1,4 +1,7 @@
-const CACHE_NAME = 'labsim-v1';
+// Bumped to v2 when the precache list was completed (Sprints 29-30): changing
+// the bytes is what tells a browser to install the new worker, and the added
+// entries only reach an existing install through an install event.
+const CACHE_NAME = 'labsim-v2';
 const STATIC_ASSETS = [
   './',
   './index.html',
@@ -9,18 +12,28 @@ const STATIC_ASSETS = [
   './js/app.js',
   './js/core/BridgeClient.js',
   './js/core/CLIService.js',
+  './js/core/CompletionPanel.js',
+  './js/core/DemoMode.js',
   './js/core/EventBus.js',
+  './js/core/OptionShuffle.js',
+  './js/core/ProgressStore.js',
+  './js/core/RouteLabels.js',
   './js/core/Router.js',
   './js/core/StateEngine.js',
   './js/core/StateStore.js',
-  './js/core/ProgressStore.js',
+  './js/core/TutorClient.js',
+  './js/data/tutor-recorded.js',
   './js/components/CLITerminal.js',
   './js/components/Confirm.js',
+  './js/components/DemoBanner.js',
   './js/components/EntityTable.js',
   './js/components/ThemeToggle.js',
   './js/components/Toast.js',
   './js/components/Wizard.js',
   './js/views/BaseView.js',
+  './js/views/demo-mode.js',
+  './js/views/nca-lab.js',
+  './js/views/tutor-panel.js',
   './js/views/PlaceholderView.js',
   './js/views/ai-gpu.js',
   './js/views/ai-models.js',
