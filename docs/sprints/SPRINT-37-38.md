@@ -21,6 +21,12 @@ and review queue with **no scheduler**, per-format progress, cross-linking, and
 offline search. Every cut is recorded below rather than quietly dropped
 (SPEC-11 11.1: scope must be cut *visibly*).
 
+**Complete at `6cfefaf`.** S37-01, S37-03 (deck half), S37-05, S37-06 and S37-07
+are landed; S37-02 and the scheduler half of S37-03 are cut; S37-04 was already
+delivered in Sprint 46. Freeze chain **59/59 at `6cfefaf`**. The execution record
+and the two fixture counts are below; what this pair did **not** establish is in
+*Not verified*.
+
 ## Cut register
 
 | ID | As written | Disposition |
@@ -73,8 +79,8 @@ and D7.
 | S37-06 per-format progress | `bad9e74` | `tests/gates/web/content-progress.mjs` — 11 tests, including the isolation claim |
 | S37-03 deck + review | `6007653` | `tests/gates/web/flashcards.mjs` — 13 tests, driving the click path end to end |
 | S37-04 markdown notes | already present | `js/views/lesson-reader.js` since Sprint 46 |
-| S37-05 cross-linking | pending | — |
-| S37-07 offline search | pending | — |
+| S37-05 cross-linking | `6cfefaf` | `tests/gates/web/content-links.mjs` — 13 tests; resolves through the blueprint objective and pins the refusals |
+| S37-07 offline search | `6cfefaf` | `tests/gates/web/content-search.mjs` — 20 tests; the core is asserted to import nothing and call no I/O |
 
 ## Verification
 
@@ -87,16 +93,34 @@ and D7.
   and its claim left to `content-progress.mjs`, which asserts it against the
   store method that actually computes the number. Two ways to compute one count
   is how they drift apart.
-- **The accessibility sweep now audits the two new routes.** `tests/e2e/a11y-web.mjs`
+- **`tests/gates/web/content-links.mjs` — 13/13** and
+  **`tests/gates/web/content-search.mjs` — 20/20.** Both directions checked per
+  SPEC-16 #4. In the search core, turning the AND rule into an OR
+  (`scoreDocument`'s disqualifying `return null` into a `continue`) fails *two*
+  tests — the AND assertion and the no-match message — because a document that
+  matches on one token of two is exactly the failure the rule prevents. In the
+  link layer, pointing the deck href at an unregistered `#/decks/:examId` fails
+  the dead-link assertion and the per-exam link assertion. Both breaks were
+  applied, observed failing, and reverted; both fixtures are green at the commit.
+- **The accessibility sweep now audits three new routes.** `tests/e2e/a11y-web.mjs`
   reads `router.register(...)` out of `js/app.js`, so a new route is a new audit
   target with no list to update; its coverage check *fails* if a parameterized
   route has no concrete instance, which is what forced `#/flashcards/NCA-75` into
-  `PARAMETERIZED_TARGETS`. **56 routes × 2 themes, PASS** — up from the 54 of the
-  S35-36 freeze. The archived S35-36 log remains the record of *that* freeze and
-  was not regenerated.
+  `PARAMETERIZED_TARGETS`. **57 routes × 2 themes, PASS** — up from the 54 of the
+  S35-36 freeze, and from the 56 of the S37-03 commit. `/search` is
+  unparameterized, so it was picked up from the router table with no list change;
+  it audits clean (145 text runs, 9 focusable). The archived S35-36 log remains
+  the record of *that* freeze and was not regenerated.
 - **The web fixture gate** (`run_web_fixtures.sh`) auto-discovers
-  `tests/gates/web/*.mjs`, so this fixture joined the existing chain line. The
-  chain did not grow: **59/59 at `6007653`**, unchanged.
+  `tests/gates/web/*.mjs`, so both new fixtures joined the existing chain line —
+  32 fixtures, both `content-links.mjs` and `content-search.mjs` among them. The
+  chain did not grow: **59/59 at `6cfefaf`**, unchanged in count.
+- **Dead links are checked, because nothing else would catch them.** A hash router
+  never 404s — a link to an unregistered path silently bounces the learner to the
+  dashboard. So both fixtures read the registered route patterns out of `js/app.js`
+  (via the same regex the a11y gate uses) and assert that every href the search
+  index and the link layer emit matches one. This is what makes the two new
+  fixtures a check on the *wiring*, not only on the resolver.
 - `check-imports.py`, `check-brand.py`, `check-traceability.py`,
   `check-content-bundle.py` and `check-artifact-secrets.py` all pass.
 - **The helper stubs were extended, not worked around.** `StubElement` had no
@@ -122,6 +146,29 @@ and D7.
 - **No card was reviewed by a person.** The RedEye model stage is unconfigured and
   no item has been reviewed, so the cards inherit `draft` provenance exactly as
   the practice sets do.
+- **The lesson tie-break is a rule the corpus does not exercise.** An objective
+  covered by more than one released lesson resolves to the lowest lesson ID. **No
+  objective in this build is covered by two released lessons**, so the fixture
+  asserts the rule against the rule rather than against a real tie. It is a
+  determinism guarantee, not a covered case, and it is recorded here rather than
+  presented as tested. The same applies to the link layer's hrefs: the dead-link
+  assertion reads the route table, so it is as complete as `app.js` is.
+- **24 of the 189 items have no covering released lesson and render no lesson
+  link.** This is the intended refusal, not a gap to close here — a link to a
+  lesson that does not teach the item would be worse than none. But it does mean
+  the cross-linking covers 165 items, not all of them, and the number is stated
+  rather than rounded up.
+- **The scenario↔lesson association exists only as prose.** Four beginner
+  scenarios name a lesson in a sentence ("Powers lesson 1.3"), and a scenario's
+  `obj-N` objective space is separate from the blueprint's `2.3` IDs. There is no
+  structured field to link on, so the lesson reader links to the exam's scenario
+  set. The fixture pins the *absence* of a `lessonId` field, so a future per-lesson
+  mapping is a deliberate change rather than something quietly assumed.
+- **The search index is built at render, not measured for size.** `buildSearchIndex`
+  runs synchronously over the released lessons, items, cards and scenarios each
+  time the view mounts. It is small enough that this is invisible on the corpus in
+  this build, but nothing here measures it, and a much larger pack would want the
+  index built once rather than per mount.
 
 ## Findings recorded rather than fixed
 
@@ -135,10 +182,10 @@ and D7.
   surface and a change there needs its own measurement.
 - **The context chip disagrees with the breadcrumb on study routes.**
   `app.js #onRouteChanged` sets the switcher to `pe` for any path that is not
-  `/pc`, so `/tracks`, `/practice/:examId` and now `/flashcards` show a **"Prism
-  Element"** chip beside a **"Study Tracks"** breadcrumb. The PE *chrome* on those
-  routes is deliberate; only the label is misleading. Pre-existing for the two
-  older routes, inherited by the new ones, and recorded rather than changed —
+  `/pc`, so `/tracks`, `/practice/:examId`, `/flashcards` and now `/search` show a
+  **"Prism Element"** chip beside a **"Study Tracks"** breadcrumb. The PE *chrome*
+  on those routes is deliberate; only the label is misleading. Pre-existing for the
+  two older routes, inherited by the new ones, and recorded rather than changed —
   the right third label is not obvious and changing shipped behaviour is not this
   pair's job.
 
