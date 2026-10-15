@@ -59,6 +59,7 @@ export const ROUTE_LABELS = {
     '/pe/capacity': 'Capacity Planning',
     '/tracks': 'Study Tracks',
     '/flashcards': 'Flashcards',
+    '/search': 'Search',
     // /practice has no sidebar row — it is reached from a study track — so the
     // snapshot fixture carries it as an explicit allowed extra.
     '/practice': 'Practice',
@@ -90,12 +91,13 @@ export function labelForSegment(segment) {
  * The roots that are study surfaces rather than simulator chrome. Listed once
  * so `breadcrumbFor` cannot answer "Prism Element" for a study route: the old
  * breadcrumb labeled every non-PC root "Prism Element", so /tracks claimed a
- * Prism Element crumb. /flashcards (S37-03) joins them.
+ * Prism Element crumb. /flashcards (S37-03) and /search (S37-07) join them.
  */
 const STUDY_ROOTS = {
     tracks: 'All Tracks',
     practice: ROUTE_LABELS['/practice'],
     flashcards: ROUTE_LABELS['/flashcards'],
+    search: ROUTE_LABELS['/search'],
 };
 
 /**

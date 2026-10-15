@@ -1,6 +1,7 @@
 import { BaseView } from './BaseView.js';
 import { TRACKS, LESSONS, EXAMS, DISCLAIMER } from '../study-content.js';
 import { mountTutorPanel } from './tutor-panel.js';
+import { linksForLesson } from '../data/content-links.js';
 
 /**
  * Lesson reader (T-11, REQ-UI-02) — renders a reviewed lesson's markdown
@@ -24,6 +25,13 @@ export class LessonReaderView extends BaseView {
                 <p><a href="#/tracks">Back to tracks</a></p></div>`);
         }
         const exam = EXAMS[lesson.examId];
+        // S37-05. The scenarios link is to the exam's catalogue, not to one
+        // lesson's scenario: no scenario carries a lesson ID. Four of them name
+        // a lesson in their prose ("Powers lesson 1.3"), but a sentence is not a
+        // field, and the scenario objective IDs (`obj-1`) are a different space
+        // from blueprint IDs (`2.3`). Linking to the exam's set is what the data
+        // supports; see the header of js/data/content-links.js.
+        const links = linksForLesson(lesson, track);
         const objectives = lesson.objectiveIds
             .map(id => {
                 const obj = exam.sections.flatMap(s => s.objectives).find(o => o.id === id);
@@ -39,6 +47,8 @@ export class LessonReaderView extends BaseView {
                 <div class="lesson-body">${this.#renderMarkdown(lesson.markdown)}</div>
                 <div class="lesson-actions">
                     <a class="study-button" href="#/practice/${lesson.examId}">Practice this exam ›</a>
+                    <a class="study-button secondary" href="#/flashcards/${lesson.examId}">Review as flashcards</a>
+                    <a class="study-button secondary" href="${links.scenarios.href}">Guided scenarios</a>
                 </div>
                 <div id="lesson-tutor-host"></div>
                 <p class="study-disclaimer">${DISCLAIMER}</p>

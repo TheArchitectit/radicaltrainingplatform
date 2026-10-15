@@ -5,7 +5,10 @@
 // Bumped to v4 by S37-03, which added a view module. An installed worker keeps
 // serving its own precache list, so a module added to the list reaches an
 // existing install only through a new install event.
-const CACHE_NAME = 'labsim-v4';
+// Bumped to v5 by S37-05/07, which added a data module, a core module and a
+// view module. Same rule: the added entries reach an existing install only
+// through a new install event.
+const CACHE_NAME = 'labsim-v5';
 const STATIC_ASSETS = [
   './',
   './index.html',
@@ -18,6 +21,7 @@ const STATIC_ASSETS = [
   './js/core/CLIService.js',
   './js/core/CompletionPanel.js',
   './js/core/ContentFormats.js',
+  './js/core/ContentSearch.js',
   './js/core/DemoMode.js',
   './js/core/EventBus.js',
   './js/core/OptionShuffle.js',
@@ -27,6 +31,7 @@ const STATIC_ASSETS = [
   './js/core/StateEngine.js',
   './js/core/StateStore.js',
   './js/core/TutorClient.js',
+  './js/data/content-links.js',
   './js/data/tutor-recorded.js',
   './js/components/CLITerminal.js',
   './js/components/Confirm.js',
@@ -89,6 +94,7 @@ const STATIC_ASSETS = [
   './js/views/lesson-reader.js',
   './js/views/practice.js',
   './js/views/flashcards.js',
+  './js/views/search.js',
   './js/study-content.js',
   './js/views/us-analytics.js',
   './js/views/us-files.js',

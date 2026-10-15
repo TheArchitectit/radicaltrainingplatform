@@ -24,7 +24,7 @@
    -styled links — those are identified by their shape and position, not by
    being inline in a sentence. Nav items and breadcrumbs live outside
    .study-page and are untouched. */
-.study-page a:not(.study-button):not(.module-item):not(.track-card),
+.study-page a:not(.study-button):not(.module-item):not(.track-card):not(.search-result-link),
 .study-back {
     text-decoration: underline;
 }
@@ -971,4 +971,123 @@ body.demo-mode {
     margin-top: var(--space-sm);
     color: var(--text-secondary);
     font-size: var(--font-size-sm);
+}
+
+/* S37-05 — the item → lesson / deck cross-link on the feedback panel. */
+.practice-learn-note {
+    margin-top: var(--space-sm);
+    color: var(--text-secondary);
+    font-size: var(--font-size-sm);
+}
+
+/* The deck link on a track's exam block. */
+.module-actions {
+    margin-top: var(--space-sm);
+}
+
+/* ── Search (S37-07) ──
+   Same rule as the flashcard block above: every ink is a token that clears AA
+   on --bg-page in both themes, because the a11y sweep reads the router table
+   and audits this route the moment it is registered. The one pairing that is
+   *not* --bg-page-on---bg-page is the <mark> highlight, which paints
+   --status-warning-bg behind --status-warning-ink: measured 6.05:1 light
+   (#8a5300 on #fffae6) and 7.23:1 dark (#ffb020 on #3d2e00), both clear. */
+
+.search-form {
+    margin: var(--space-md) 0 var(--space-sm);
+}
+
+.search-label {
+    display: block;
+    color: var(--text-primary);
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    margin-bottom: var(--space-xs);
+}
+
+.search-row {
+    display: flex;
+    gap: var(--space-sm);
+    flex-wrap: wrap;
+}
+
+.search-input {
+    flex: 1 1 22ch;
+    min-width: 0;
+    padding: 8px 10px;
+    font-size: var(--font-size-md);
+    font-family: inherit;
+    color: var(--text-primary);
+    background: var(--bg-input);
+    border: 1px solid var(--border-default);
+    border-radius: var(--radius-md);
+}
+
+.search-input:focus {
+    outline: 2px solid var(--border-focus);
+    outline-offset: 1px;
+}
+
+.search-index-note,
+.search-hint,
+.search-empty,
+.search-count {
+    color: var(--text-secondary);
+    font-size: var(--font-size-sm);
+    margin: var(--space-sm) 0;
+}
+
+.search-results {
+    list-style: none;
+    padding: 0;
+    margin: var(--space-sm) 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.search-result-link {
+    display: block;
+    padding: 10px var(--space-md);
+    border: 1px solid var(--border-light);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.02);
+    text-decoration: none;
+}
+
+.search-result-link:hover {
+    border-color: var(--text-link);
+}
+
+/* The format label is what makes "across all formats" visible on screen: the
+   same content ID can appear twice, as an item and as a card, and the label is
+   the only thing that says which is which. */
+.search-format {
+    display: inline-block;
+    color: var(--text-secondary);
+    font-size: var(--font-size-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 2px;
+}
+
+.search-result-title {
+    display: block;
+    color: var(--text-primary);
+    font-size: var(--font-size-md);
+    font-weight: 600;
+}
+
+.search-result-snippet {
+    display: block;
+    color: var(--text-secondary);
+    font-size: var(--font-size-sm);
+    margin-top: 2px;
+}
+
+.search-result-snippet mark {
+    background: var(--status-warning-bg);
+    color: var(--status-warning-ink);
+    border-radius: 2px;
+    padding: 0 1px;
 }

@@ -2,6 +2,7 @@
  * Minimal DOM/window stubs for web runtime fixtures (R-22).
  * Zero-dependency: no jsdom. Enough surface for BaseView/Router/view afterRender.
  */
+import { readFileSync } from 'node:fs';
 
 export class StubElement {
     constructor(tagName = 'div') {
@@ -316,6 +317,31 @@ export function makeRunner() {
             return 0;
         },
     };
+}
+
+/**
+ * The route patterns `js/app.js` actually registers, read the same way the
+ * a11y gate reads them (regex over the source, not a hand-kept list).
+ *
+ * Fixtures use this to check that a link the app renders points at a route
+ * the app can serve. A dead link is invisible to every other gate here — the
+ * markup is valid, the href is a string, and nothing 404s in a hash router
+ * until a learner clicks it.
+ */
+export function registeredRoutePatterns(appJsUrl) {
+    const source = readFileSync(appJsUrl, 'utf8');
+    return [...source.matchAll(/router\.register\(\s*'([^']+)'/g)].map(m => m[1]);
+}
+
+/** True when `href` (a `#/...` link) matches a registered pattern. */
+export function hrefIsRouted(href, patterns) {
+    const path = String(href || '').replace(/^#/, '');
+    const parts = path.split('/').filter(Boolean);
+    return patterns.some(pattern => {
+        const pp = pattern.split('/').filter(Boolean);
+        if (pp.length !== parts.length) return false;
+        return pp.every((seg, i) => seg.startsWith(':') || seg === parts[i]);
+    });
 }
 
 export function assert(cond, msg) {

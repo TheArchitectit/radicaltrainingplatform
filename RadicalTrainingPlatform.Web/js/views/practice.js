@@ -4,6 +4,7 @@ import { progress } from '../core/ProgressStore.js';
 import {
     optionOrder, toStableIds, sourceLetterOf, correctDisplayLetters, newRunSeed,
 } from '../core/OptionShuffle.js';
+import { linksForItem } from '../data/content-links.js';
 
 /**
  * Practice view (T-11, REQ-UI-03) — scored sets drawn from the compiled
@@ -164,6 +165,17 @@ export class PracticeView extends BaseView {
         const verdict = outcome.isCorrect
             ? '<div class="verdict correct">Correct</div>'
             : `<div class="verdict wrong">Not quite — correct answer: ${letters} (${correctText})</div>`;
+        // S37-05: an item knows its blueprint objective, and the objective knows
+        // its lesson. The link is only shown when a released lesson actually
+        // covers it — a link to a lesson that does not teach this item is worse
+        // than no link, because a learner would trust it.
+        const links = linksForItem(item);
+        const objectiveBit = links.objective
+            ? `objective ${links.objective.id} (${links.objective.title})`
+            : 'this objective';
+        const lessonBit = links.lesson
+            ? ` — the lesson <a href="${links.lesson.href}">${links.lesson.title}</a> covers it`
+            : '';
         return `
             <div class="practice-feedback-inner">
                 ${verdict}
@@ -171,6 +183,8 @@ export class PracticeView extends BaseView {
                 <button class="study-button" id="practice-next">
                     ${this.#index + 1 < this.#queue.length ? 'Next question ›' : 'See results ›'}
                 </button>
+                <p class="practice-learn-note">This item covers ${objectiveBit}${lessonBit}.
+                    You can also <a href="${links.deck.href}">review this exam as flashcards</a>.</p>
                 <p class="practice-tutor-entry">Confused by this one?
                     <a href="#/tutor/${exam.examId}">Ask the study coach</a> — the tutor is
                     available once an item is submitted, never while a set is still open.</p>
@@ -198,6 +212,7 @@ export class PracticeView extends BaseView {
                 <div class="lesson-actions">
                     <button class="study-button" id="practice-restart">Practice again</button>
                     <a class="study-button secondary" href="#/tracks/${track?.trackId ?? ''}">Back to track</a>
+                    <a class="study-button secondary" href="#/flashcards/${exam.examId}">Review as flashcards</a>
                     <a class="study-button secondary" href="#/tutor/${exam.examId}">Ask the study coach</a>
                 </div>
                 <p class="study-disclaimer">${DISCLAIMER}</p>

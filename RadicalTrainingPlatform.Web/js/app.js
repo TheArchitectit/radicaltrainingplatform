@@ -57,6 +57,7 @@ import { TrackOverviewView } from './views/track-overview.js';
 import { LessonReaderView } from './views/lesson-reader.js';
 import { PracticeView } from './views/practice.js';
 import { FlashcardsView, FlashcardReviewView } from './views/flashcards.js';
+import { SearchView } from './views/search.js';
 import { DemoModeView } from './views/demo-mode.js';
 import { initDemoBanner } from './components/DemoBanner.js';
 import { demo } from './core/DemoMode.js';
@@ -179,6 +180,10 @@ class App {
         // to address. NOT spaced repetition; see the module header.
         router.register('/flashcards', FlashcardsView);
         router.register('/flashcards/:examId', FlashcardReviewView);
+        // Search (S37-07). Unparameterized: the query lives in the view's own
+        // state, not the hash — the router splits the whole path on '/' and
+        // would never match a '?q=' suffix.
+        router.register('/search', SearchView);
 
         // Demo mode (Sprint 47 / T-21, REQ-DEMO-01..06)
         router.register('/demo', DemoModeView);

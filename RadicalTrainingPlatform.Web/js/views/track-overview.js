@@ -36,6 +36,10 @@ export class TrackOverviewView extends BaseView {
                     <p class="worked-example-gap">declared gap: ${we.gap}</p>
                     <p class="worked-example-body">${we.body}</p>
                 </article>`).join('');
+            // S37-05: the deck is derived from this exam's released bank, so the
+            // track is where a learner should meet it — beside the practice set
+            // rather than only inside the flashcard route.
+            const deckLink = `<a class="study-button secondary module-actions-link" href="#/flashcards/${examId}">Review this exam as flashcards</a>`;
             const gapList = (exam.gaps || []).length
                 ? `<div class="gap-list"><p class="study-sub">Declared gaps (labeled worked examples, not interactive labs):
                     ${exam.gaps.map(g => `<span class="gap-tag">${g}</span>`).join('')}</p></div>`
@@ -47,6 +51,7 @@ export class TrackOverviewView extends BaseView {
                         <span class="coverage-text">coverage ${cov.covered}/${cov.total} objectives (${cov.percent}%)</span>
                     </div>
                     <div class="module-list">${moduleList}</div>
+                    <div class="module-actions">${deckLink}</div>
                     ${gapList}
                     ${worked}
                 </section>`;
