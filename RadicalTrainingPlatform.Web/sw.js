@@ -1,7 +1,8 @@
 // Bumped to v2 when the precache list was completed (Sprints 29-30): changing
 // the bytes is what tells a browser to install the new worker, and the added
 // entries only reach an existing install through an install event.
-const CACHE_NAME = 'labsim-v2';
+// Bumped to v3 by S37-01, which added a core module to the app's import graph.
+const CACHE_NAME = 'labsim-v3';
 const STATIC_ASSETS = [
   './',
   './index.html',
@@ -13,6 +14,7 @@ const STATIC_ASSETS = [
   './js/core/BridgeClient.js',
   './js/core/CLIService.js',
   './js/core/CompletionPanel.js',
+  './js/core/ContentFormats.js',
   './js/core/DemoMode.js',
   './js/core/EventBus.js',
   './js/core/OptionShuffle.js',
