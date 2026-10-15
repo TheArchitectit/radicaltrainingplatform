@@ -41,11 +41,14 @@ them true, and an explicit list of the gaps.
 loopback static server, drives headless Chrome over the DevTools Protocol, opens every
 registered route, and audits the live DOM.
 
-**Coverage:** 54 routes × 2 themes = **108 audits per run**. The route list is read out of
-`js/app.js`'s `router.register(...)` calls rather than hand-written, and the gate **fails**
-if it cannot parse a registration or has no concrete instance for a parameterized route.
-A separate tripwire fails the run if fewer routes rendered than it was given — this exists
-because a sweep that silently audited 20 of 54 routes once reported itself as complete.
+**Coverage:** every route the router registers — **57** at the time of writing, × 2 themes
+= **114 audits per run** — plus one **click-reachable** surface the sweep cannot reach on
+its own (see below). The route list is read out of `js/app.js`'s `router.register(...)`
+calls rather than hand-written, so it grows with the app instead of drifting behind it;
+the gate **fails** if it cannot parse a registration or has no concrete instance for a
+parameterized route. A separate tripwire fails the run if fewer routes rendered than it
+was given — this exists because a sweep that silently audited 20 of 54 routes once
+reported itself as complete.
 
 ### The checks, and the criterion each one stands for
 
@@ -162,13 +165,15 @@ choice. It also reports `aria-pressed`.
 ## The gate can fail, and that is tested
 
 Per SPEC-16 #4, a gate that cannot fail is itself a defect. `tests/gates/run_a11y_fixtures.sh`
-runs **27 fixture cases producing 28 verdicts**: every failing fixture seeds exactly one
-defect and must fail **and name it**, so no rule rests on another rule's failure. Three
-passing fixtures cover the clean page, the clean shell, and the real repository tree.
+runs **30 cases producing 32 verdicts**: every failing fixture seeds exactly one defect and
+must fail **and name it**, so no rule rests on another rule's failure. Two passing fixtures
+cover the clean page and the clean shell, and a third case runs the gate against the real
+repository tree.
 
 The fixtures are not decoration — the dialog, overlay, theme and toast checks cannot be
 driven against a plain HTML page, so without a stub shell to break they would have had no
-way to fail at all.
+way to fail at all. The same is true of the wizard checks: they are driven against the
+shell's own click-reachable wizard, which is why a fixture can break one.
 
 ---
 
@@ -195,11 +200,15 @@ way to fail at all.
   (`.page-title h1`) had never matched the bare `<h1 class="page-title">` form at all,
   leaving 7 of 33 page titles at the UA default — 26px where their siblings are 20px.
   All three were found by reading the CSS, not by the gate. All three are fixed.
-- **Anything behind a click.** The sweep audits each route as it loads. A component that
-  only exists after an interaction is never measured — and that is not a corner case: the
-  shared `Wizard` component is reachable from ~25 views and the audit has never opened it.
-  It was found to fail AA (white step-number digits at 2.66–2.70:1) only by reading the
-  CSS. Fixed, but **not verified by the gate**, because the gate cannot reach it.
+- **Almost everything behind a click.** The sweep audits each route as it loads, so a
+  component that only exists after an interaction is not measured by it. The gate now
+  closes **one** such gap: it opens the shared `Wizard` component from `/pe/vms` and runs
+  the dialog, focus and contrast checks on the result. That is one surface, opened one way,
+  on one route — the other ~24 views that open the same component are not individually
+  driven, and neither is any other interaction-gated UI (the confirm dialog's callers, the
+  EntityTable's selection state, the labs). The wizard's step-number contrast failure
+  (white digits at 2.66–2.70:1) was still found by **reading the CSS**, not by the gate;
+  what the gate now does is hold the fix, and prove it can fail if the fix regresses.
 - **Keyboard operability of the NCA labs is unmeasured.** The gate drives the dialog, the
   hamburger overlay and the theme toggle by keyboard. It does not drive the lab
   simulators, the PE VM wizard flow, or the drag-based interactions.
@@ -216,6 +225,25 @@ way to fail at all.
 - **The EntityTable `⋯` action button is fixed but unmeasured.** It was named `"⋯"`, which
   is a name to the accessibility-tree computation, so no automated check can catch it. It
   is now `aria-label="Actions for <row>"`. **This is fixed but NOT verified by the gate.**
+- **The wizard's close button is in the same class and is unmeasured.** `.modal-close`
+  renders a bare `×`. It carries `aria-label="Close wizard"`, but a text run *is* a name to
+  the accessibility-tree computation, so the gate cannot distinguish a good `×` label from
+  a missing one — the identical limitation as the `⋯` button above. Fixed, unmeasured.
+- **Every wizard step input was unnamed, in all ~25 views.** Views build step markup as
+  `<label class="form-label">…</label><input class="form-input">` with no `for`/`id` pair,
+  so the control had no accessible name at all (WCAG 4.1.2 / 3.3.2). **This was found by
+  the gate**, the moment it learned to open a wizard — the first defect this audit found
+  behind a click rather than by reading CSS. Fixed in the component (`Wizard.#labelStepControls`)
+  rather than in each view, so a view cannot forget and a new step gets it for free. Held
+  by fixture AB.
+- **The gate's own emoji filter was swallowing bare numerals.** Unicode classes the ASCII
+  digits `0-9`, `#` and `*` as `Emoji_Component`, so a character-class-only filter matched
+  `"1"` and skipped every numeral-only text run — wizard step numbers, badge counts, table
+  tallies — as though it were an emoji. Nothing numeral-only had ever been contrast-checked.
+  A gate defect, not a product one: it was found because fixture AA *passed* when it was
+  supposed to fail, which is the fixture doing exactly the job SPEC-16 #4 asks of it.
+  Requiring at least one genuinely pictographic character fixed it and put digits back in
+  the contrast maths; fixture AD holds the fix.
 - **`js/views/PlaceholderView.js` is dead code.** Not an accessibility defect; recorded
   because a dead module in a precached list is how such lists drift.
 

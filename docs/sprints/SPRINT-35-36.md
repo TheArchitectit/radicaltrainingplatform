@@ -7,7 +7,9 @@
 measurement found, and hold it with a gate that can fail.
 
 **Status:** 🟢 Landed — the first accessibility measurement of the Web PWA, 2,020 findings
-repaired to zero across 54 routes in both themes, and a gate with 27 fixtures holding it.
+repaired to zero across 54 routes in both themes, and a gate holding it. The gate was
+extended afterwards to audit one click-reachable surface, and immediately found a defect
+the per-route sweep could not see; see "After the freeze" below.
 
 > **S35-08 was rescoped before it was written.** The June plan asked for "Document
 > accessibility compliance (VPAT)". No VPAT was produced, because no audit was performed
@@ -141,14 +143,16 @@ Each is now a fixture, because a gate that cannot fail is not a gate (SPEC-16 #4
 
 ### 4. A gate that can fail, and is tested
 
-`tests/gates/run_a11y_fixtures.sh` — **27 cases, 28 verdicts**. Every failing fixture seeds
-exactly one defect and must fail **and name it**, so no rule rests on another rule's
-failure. Three passing fixtures cover the clean page, the clean shell, and the real
-repository tree.
+`tests/gates/run_a11y_fixtures.sh` — **30 cases, 32 verdicts**, grown from 27/28 by the
+click-reachable work below. Every failing fixture seeds exactly one defect and must fail
+**and name it**, so no rule rests on another rule's failure. Two passing fixtures cover the
+clean page and the clean shell, and a third case runs the gate against the real repository
+tree.
 
 The fixtures are load-bearing, not decoration: the dialog, overlay, theme and toast checks
 cannot be driven against a plain HTML page, so without a stub shell to break they would
-have had no way to fail at all.
+have had no way to fail at all. The same holds for the wizard checks, which is why the
+shell carries a click-reachable wizard of its own to break.
 
 ---
 
@@ -174,7 +178,7 @@ have had no way to fail at all.
 - `node tests/e2e/a11y-web.mjs` — **PASS**, 54 routes × 2 themes = 108 audits, zero
   findings, zero console errors. The per-route log is archived at
   [docs/qa/release-evidence/2026-10-14-a11y-audit.md](../qa/release-evidence/2026-10-14-a11y-audit.md).
-- `bash tests/gates/run_a11y_fixtures.sh` — **28/28 verdicts PASS**, including the real
+- `bash tests/gates/run_a11y_fixtures.sh` — **32/32 verdicts PASS**, including the real
   repository tree.
 - The pre-change baseline was measured by running the fixed gate against `HEAD`'s Web tree
   out of `git archive`: **2,020 findings**, now zero.
@@ -197,14 +201,17 @@ change is in `RadicalTrainingPlatform.Web/` and `tests/`.
 - **No screen reader, ever.** Every "name" here is computed from the accessibility tree.
   Whether a screen reader announces it usefully is unverified.
 - **Keyboard operability of the labs is unmeasured.** The gate drives the dialog, the
-  hamburger overlay and the theme toggle by keyboard. It does not drive the lab
-  simulators, the PE VM wizard flow, or any drag-based interaction.
+  hamburger overlay and the theme toggle by keyboard, and (since the click-reachable work)
+  the wizard's Tab trap and Escape. It does not drive the lab simulators or any drag-based
+  interaction. The PE VM wizard *flow* is driven only as far as opening its first step.
 - **No reflow, zoom, text-spacing, timing, motion, caption or target-size checks.**
   Criteria 1.2.x, 1.4.4, 1.4.10, 1.4.12, 2.2.x, 2.3.x, 2.5.5 and 2.5.8 have no check.
 - **A green run is not a user experience.** Nothing here establishes that a disabled user
   can complete a study session.
 
-### Defects found after the freeze, by reading rather than by measuring
+### Defects found after the freeze
+
+#### By reading rather than by measuring — four, repaired at `379de44`
 
 Four defects were repaired at `379de44`, after the chain had already gone green. None of
 them was found by the audit — the audit passed, and it was right to, because none of them
@@ -223,28 +230,60 @@ because a green chain that is silent about them reads as coverage it does not ha
   seven were promoted to `<h1>` during this sprint, which is how a semantic change moved
   their size. The selector now covers both forms.
 - **One real AA failure, behind a click.** The shared `Wizard` component — see the bullet
-  below, and the entry in [ACCESSIBILITY.md](../ACCESSIBILITY.md).
+  below, and the entry in [ACCESSIBILITY.md](../ACCESSIBILITY.md). It was found by reading
+  the CSS; the gate was later taught to open the component, which is how the *other* two
+  defects below were found.
 
 All four are recorded as **fixed**, and only the third was ever a contrast failure. The
 first two were presentation regressions this sprint introduced.
 
+#### By measuring, once the gate could reach behind a click — repaired at `099d8bf`
+
+The fourth defect above was a symptom of a structural gap: the gate audited routes as they
+loaded and had no way to open a component that only exists after an interaction. That gap
+was closed for one surface — the shared `Wizard`, opened from `/pe/vms` — and the closing
+is what these two defects came out of. Neither was found by reading anything; the gate
+found both on its first run against the wizard.
+
+- **Every wizard step input was unnamed, in all ~25 views.** Step markup is written per
+  view as `<label class="form-label">…</label><input class="form-input">` with no `for`/`id`
+  pair, so the control had no accessible name at all (WCAG 4.1.2 / 3.3.2). Fixed in the
+  component (`Wizard.#labelStepControls`), so a view cannot forget it and a new step gets
+  it for free. Held by fixture AB.
+- **The gate's own emoji filter was swallowing bare numerals.** Unicode classes the ASCII
+  digits `0-9`, `#` and `*` as `Emoji_Component`, so a character-class-only filter matched
+  `"1"` and skipped every numeral-only text run — step numbers, badge counts, table
+  tallies — as if it were an emoji. No numeral-only run had ever been contrast-checked.
+  Fixture AA *passing* when it was meant to fail is what exposed it, which is the fixture
+  doing exactly the job SPEC-16 #4 asks of it. Fixed, and held by fixture AD.
+
+The second one is the more uncomfortable of the two: a gate defect that had been silently
+narrowing the contrast check since it was written, found only because a new fixture was
+supposed to fail and did not.
+
 ### Findings recorded rather than fixed
 
-- **The audit cannot see anything behind a click, and that is a real blind spot.** The
-  sweep audits each route as it loads; a component that only exists after an interaction is
-  never measured. The shared `Wizard` component — reachable from ~25 views, the primary
-  create-flow on most of them — had never been audited. Reading its CSS found white
-  step-number digits on `--prism-blue` and `--status-good` at **2.70:1** and **2.66:1**,
-  both below AA. **Fixed** (now `--text-on-accent`, ~6.8:1), but **not verified by the
-  gate** — the gate still cannot reach it. Closing the gap means teaching the audit to
-  drive an interaction and audit the result, which is a gate capability, not a repair.
+- **The audit still cannot see most things behind a click.** The sweep audits each route as
+  it loads; a component that only exists after an interaction is not measured by it. The
+  shared `Wizard` component — reachable from ~25 views, the primary create-flow on most of
+  them — had never been audited at all; reading its CSS found white step-number digits on
+  `--prism-blue` and `--status-good` at **2.70:1** and **2.66:1**, both below AA.
+  **That gap is now closed for one surface**: the gate opens the create-VM wizard on
+  `/pe/vms` and runs the same dialog, focus, Tab-trap, Escape, focus-restore and contrast
+  checks on it, so the step-number fix is **held by the gate** rather than asserted. The
+  two defects that first measurement turned up are recorded above. The remaining gap is
+  narrower than it was but still real: one surface, one route, one way
+  in. The other ~24 views that open the same component are not individually driven, and
+  neither is any other interaction-gated UI — the EntityTable's selection state, the
+  confirm dialog's callers, the labs.
 - **`Confirm.js` uses a fixed `id` for its dialog title.** Two confirmations open at once
   would produce duplicate ids and an ambiguous `aria-labelledby`. The app only ever opens
   one; recorded rather than fixed.
 - **The EntityTable `⋯` action button is fixed but unmeasured.** It was named `"⋯"`, which
   *is* a name to the accessibility-tree computation, so no automated check can catch it.
   It is now `aria-label="Actions for <row>"`. **Fixed, but NOT verified by the gate** —
-  reported as unmeasured rather than claimed as done.
+  reported as unmeasured rather than claimed as done. The wizard's `.modal-close` `×`
+  button is in the same class, and stays unmeasured for the same reason.
 
 ---
 
