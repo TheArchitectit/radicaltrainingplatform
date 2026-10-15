@@ -194,6 +194,14 @@ change is in `RadicalTrainingPlatform.Web/` and `tests/`.
 
 ### Findings recorded rather than fixed
 
+- **The audit cannot see anything behind a click, and that is a real blind spot.** The
+  sweep audits each route as it loads; a component that only exists after an interaction is
+  never measured. The shared `Wizard` component — reachable from ~25 views, the primary
+  create-flow on most of them — had never been audited. Reading its CSS found white
+  step-number digits on `--prism-blue` and `--status-good` at **2.70:1** and **2.66:1**,
+  both below AA. **Fixed** (now `--text-on-accent`, ~6.8:1), but **not verified by the
+  gate** — the gate still cannot reach it. Closing the gap means teaching the audit to
+  drive an interaction and audit the result, which is a gate capability, not a repair.
 - **`Confirm.js` uses a fixed `id` for its dialog title.** Two confirmations open at once
   would produce duplicate ids and an ambiguous `aria-labelledby`. The app only ever opens
   one; recorded rather than fixed.

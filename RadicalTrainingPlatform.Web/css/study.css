@@ -273,7 +273,11 @@ a.module-item:hover {
     background: rgba(255, 255, 255, 0.02);
 }
 
-.lesson-objectives h3 {
+/* `:is()`, not `h3`. The heading level here is a semantic choice — it was raised
+   from h3 to h2 to fix an h1→h3 skip — and this rule is presentation. Pinning it
+   to one element meant the accessibility fix silently orphaned the styling and the
+   heading fell back to the browser default. Same specificity, same rendering. */
+.lesson-objectives :is(h2, h3) {
     margin: 0 0 var(--space-xs);
     font-size: var(--font-size-sm);
     color: var(--text-secondary);
@@ -457,7 +461,8 @@ a.module-item:hover {
     margin: var(--space-sm) 0;
 }
 
-.explanation h4 {
+/* Same reason as `.lesson-objectives`: the level moved h4 → h2 for heading order. */
+.explanation :is(h2, h3, h4) {
     margin: 0 0 4px;
     color: var(--text-secondary);
     font-size: var(--font-size-xs);

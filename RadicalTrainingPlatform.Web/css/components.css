@@ -360,7 +360,13 @@ body {
     margin-bottom: var(--space-xl);
 }
 
-.page-title h1 {
+/* Both forms are in the tree: `<div class="page-title"><h1>` (26 uses) and the bare
+   `<h1 class="page-title">` (7). Only the first matched, so the second fell through to
+   the UA default — 26px/700 against this rule's 20px/600, a visible 30% difference on
+   7 of 33 pages. Four of those seven were promoted to h1 for heading order during the
+   Sprints 35-36 accessibility work, which is how a semantic change moved their size. */
+.page-title h1,
+h1.page-title {
     font-size: var(--font-size-xl);
     font-weight: 600;
     color: var(--text-primary);
@@ -654,16 +660,21 @@ body {
     background: var(--bg-card);
 }
 
+/* White on these fills is 2.70:1 (active) and 2.66:1 (completed) — below AA for the
+   11px/600 digit inside. `--text-on-accent` is the token this codebase already uses for
+   text on a saturated accent fill (.pc-sidebar .nav-item.active), and clears both at
+   ~6.8:1. The wizard is reachable from ~25 views; the audit never opens it because it
+   sits behind a click, so the gate cannot see this either way. */
 .wizard-step.active .step-number {
     border-color: var(--prism-blue);
     background: var(--prism-blue);
-    color: white;
+    color: var(--text-on-accent);
 }
 
 .wizard-step.completed .step-number {
     border-color: var(--status-good);
     background: var(--status-good);
-    color: white;
+    color: var(--text-on-accent);
 }
 
 .wizard-connector {

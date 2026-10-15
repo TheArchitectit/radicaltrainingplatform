@@ -185,6 +185,21 @@ way to fail at all.
 - **Contrast over gradients, images and `backdrop-filter`** is approximated against the
   nearest solid ancestor colour. The app currently uses solid fills; a future gradient
   would need this check revisited.
+- **Rendered type size and layout.** The gate reads computed colour and the accessibility
+  tree. It does not read font metrics or geometry — so a change that breaks *presentation*
+  while improving *semantics* passes it cleanly. This is not hypothetical: the heading
+  promotions in this work raised several `<h3>`/`<h4>` to `<h2>` for heading order, and
+  two of the rules that styled them were element-scoped (`.lesson-objectives h3`,
+  `.explanation h4`). The promotion orphaned both rules and the headings silently fell
+  back to browser defaults, reported by the audit as a clean pass. A third
+  (`.page-title h1`) had never matched the bare `<h1 class="page-title">` form at all,
+  leaving 7 of 33 page titles at the UA default — 26px where their siblings are 20px.
+  All three were found by reading the CSS, not by the gate. All three are fixed.
+- **Anything behind a click.** The sweep audits each route as it loads. A component that
+  only exists after an interaction is never measured — and that is not a corner case: the
+  shared `Wizard` component is reachable from ~25 views and the audit has never opened it.
+  It was found to fail AA (white step-number digits at 2.66–2.70:1) only by reading the
+  CSS. Fixed, but **not verified by the gate**, because the gate cannot reach it.
 - **Keyboard operability of the NCA labs is unmeasured.** The gate drives the dialog, the
   hamburger overlay and the theme toggle by keyboard. It does not drive the lab
   simulators, the PE VM wizard flow, or the drag-based interactions.
