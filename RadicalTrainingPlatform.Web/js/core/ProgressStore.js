@@ -1,5 +1,6 @@
 import { store } from './StateStore.js';
 import { bus } from './EventBus.js';
+import { progressKeyFor } from './ContentFormats.js';
 
 /**
  * ProgressStore (T-12, REQ-UI-04/05) — durable learner progress over
@@ -12,9 +13,26 @@ import { bus } from './EventBus.js';
  *                                      firstCorrect, updatedAt }
  *   progress/<examId>/continuation   — mid-run position { index, selection,
  *                                      results, total, savedAt } (R-15)
+ *   progress/content/<formatId>/<contentId>
+ *                                    — per non-scored content record
+ *                                      (S37-06) { formatId, contentId,
+ *                                      outcome, count, firstRecordedAt,
+ *                                      lastRecordedAt }. Covers the formats
+ *                                      whose progress is not an attempt:
+ *                                      'lesson' (read) and 'flashcard'
+ *                                      (reviewed). Format ids come from
+ *                                      ContentFormats.js — never a literal.
  *   scenario/<scenarioId>            — scenario completion { completedAt }
  *   progress/meta                    — { streak, bestStreak, streakItems,
  *                                      lastStudyDate, updatedAt }
+ *
+ * Why scenarios did NOT move into progress/content/: `scenario/<scenarioId>`
+ * predates the registry and holds real learner state. Re-keying it would be a
+ * silent remap of stored progress, which SPEC-16 forbids — the same rule that
+ * stops content IDs being renumbered. One documented exception is cheaper than
+ * a migration that can lose a learner's completed scenarios, so scenarios keep
+ * their own key and their own methods, and `contentSummary` reads whichever
+ * key the format actually uses.
  *
  * Item identity (R-13): itemId is the source-aware semantic ID
  * (examId/sourceFile/Qn — see SemanticItemId.cs / generate-study-content.py).
@@ -168,6 +186,109 @@ class ProgressStore {
     async getScenario(scenarioId) {
         this.#assertReady();
         return store.get(`scenario/${scenarioId}`);
+    }
+
+    // ─── Per-format content progress (S37-06) ──────────────────────
+
+    /**
+     * Record that a learner read a lesson or reviewed a flashcard.
+     *
+     * Deliberately NOT the scored path. `recordItem` answers "was this
+     * right?"; this answers "has this been seen, how often, and how did the
+     * last review go?" — and the two must not be the same key, because a card
+     * flip that counted as a correct answer would inflate a score.
+     *
+     * The formats with their own paths are refused rather than silently
+     * written into a third key space: 'item' has `recordItem`, 'scenario' has
+     * `recordScenario`. A second record of the same fact, in a key nothing
+     * reads, is exactly the fragmentation the registry exists to prevent.
+     * The refusal is thrown, not returned, because passing 'item' here is a
+     * call-site bug rather than a storage condition.
+     *
+     * Returns { saved: true, record } or { saved: false, reason } — the same
+     * contract as every other write here, so a blocked or full store is
+     * reported rather than lost (L-02).
+     */
+    async recordContent(formatId, contentId, outcome = {}) {
+        this.#assertReady();
+        const key = this.#contentKey(formatId, contentId);
+        const existing = await store.get(key);
+        const now = outcome.recordedAt || new Date().toISOString();
+        const record = {
+            formatId,
+            contentId,
+            // The last outcome, not an accumulated one: "the last time I saw
+            // this card I missed it" is the actionable fact. `count` carries
+            // how many times it has been seen at all.
+            outcome: outcome.outcome || 'seen',
+            count: (existing?.count || 0) + 1,
+            firstRecordedAt: existing?.firstRecordedAt || now,
+            lastRecordedAt: now,
+        };
+        try {
+            await store.set(key, record);
+        } catch (e) {
+            const reason = this.#classifyWriteFailure(e);
+            this.#reportFailure(e, `content record ${key}`, reason);
+            return { saved: false, reason };
+        }
+        return { saved: true, record };
+    }
+
+    async getContent(formatId, contentId) {
+        this.#assertReady();
+        return store.get(this.#contentKey(formatId, contentId));
+    }
+
+    /**
+     * How far through one format's content a learner is.
+     *
+     * `contentIds` is the caller's enumeration — the store does not know the
+     * content, only how to key it. Counts are of *content*, not events: a
+     * lesson read twice is one lesson read, for the same reason a retry does
+     * not inflate a scored summary (R-04).
+     *
+     * Scenarios are read from their own key (see the header note) and are
+     * counted as touched when a completion record exists.
+     */
+    async contentSummary(formatId, contentIds) {
+        this.#assertReady();
+        const ids = Array.isArray(contentIds) ? contentIds : [];
+        let touched = 0;
+        const records = {};
+        for (const contentId of ids) {
+            const rec = formatId === 'scenario'
+                ? await this.getScenario(contentId)
+                : await store.get(this.#contentKey(formatId, contentId));
+            if (rec) {
+                records[contentId] = rec;
+                touched += 1;
+            }
+        }
+        return {
+            formatId,
+            total: ids.length,
+            touched,
+            remaining: ids.length - touched,
+            records,
+        };
+    }
+
+    /**
+     * The storage key for one piece of content, via the registry.
+     *
+     * Routed through `progressKeyFor` rather than built here so there is one
+     * definition of the key shape. The format guard lives there too, so this
+     * is also where an unknown format id is caught.
+     */
+    #contentKey(formatId, contentId) {
+        if (formatId === 'item' || formatId === 'scenario') {
+            throw new Error(
+                `ProgressStore: format '${formatId}' has its own progress path `
+                + `(${formatId === 'item' ? 'recordItem' : 'recordScenario'}) — `
+                + 'recordContent must not open a second key for it');
+        }
+        return progressKeyFor(formatId, contentId);
     }
 
     async clearExam(examId) {
