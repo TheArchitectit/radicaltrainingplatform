@@ -2,7 +2,10 @@
 // the bytes is what tells a browser to install the new worker, and the added
 // entries only reach an existing install through an install event.
 // Bumped to v3 by S37-01, which added a core module to the app's import graph.
-const CACHE_NAME = 'labsim-v3';
+// Bumped to v4 by S37-03, which added a view module. An installed worker keeps
+// serving its own precache list, so a module added to the list reaches an
+// existing install only through a new install event.
+const CACHE_NAME = 'labsim-v4';
 const STATIC_ASSETS = [
   './',
   './index.html',
@@ -85,6 +88,7 @@ const STATIC_ASSETS = [
   './js/views/track-overview.js',
   './js/views/lesson-reader.js',
   './js/views/practice.js',
+  './js/views/flashcards.js',
   './js/study-content.js',
   './js/views/us-analytics.js',
   './js/views/us-files.js',

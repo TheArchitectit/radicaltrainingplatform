@@ -56,6 +56,7 @@ import { TrackPickerView } from './views/track-picker.js';
 import { TrackOverviewView } from './views/track-overview.js';
 import { LessonReaderView } from './views/lesson-reader.js';
 import { PracticeView } from './views/practice.js';
+import { FlashcardsView, FlashcardReviewView } from './views/flashcards.js';
 import { DemoModeView } from './views/demo-mode.js';
 import { initDemoBanner } from './components/DemoBanner.js';
 import { demo } from './core/DemoMode.js';
@@ -173,6 +174,11 @@ class App {
         router.register('/tracks/:trackId', TrackOverviewView);
         router.register('/tracks/:trackId/lessons/:examId/:lessonId', LessonReaderView);
         router.register('/practice/:examId', PracticeView);
+        // Flashcards (S37-03). Derived from the practice bank, so these routes
+        // take an examId and nothing else — there is no separate card content
+        // to address. NOT spaced repetition; see the module header.
+        router.register('/flashcards', FlashcardsView);
+        router.register('/flashcards/:examId', FlashcardReviewView);
 
         // Demo mode (Sprint 47 / T-21, REQ-DEMO-01..06)
         router.register('/demo', DemoModeView);

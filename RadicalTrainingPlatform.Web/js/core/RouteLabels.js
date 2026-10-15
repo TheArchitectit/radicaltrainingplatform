@@ -58,6 +58,9 @@ export const ROUTE_LABELS = {
     '/pe/reports': 'Reports',
     '/pe/capacity': 'Capacity Planning',
     '/tracks': 'Study Tracks',
+    '/flashcards': 'Flashcards',
+    // /practice has no sidebar row — it is reached from a study track — so the
+    // snapshot fixture carries it as an explicit allowed extra.
     '/practice': 'Practice',
 };
 
@@ -84,9 +87,20 @@ export function labelForSegment(segment) {
 }
 
 /**
+ * The roots that are study surfaces rather than simulator chrome. Listed once
+ * so `breadcrumbFor` cannot answer "Prism Element" for a study route: the old
+ * breadcrumb labeled every non-PC root "Prism Element", so /tracks claimed a
+ * Prism Element crumb. /flashcards (S37-03) joins them.
+ */
+const STUDY_ROOTS = {
+    tracks: 'All Tracks',
+    practice: ROUTE_LABELS['/practice'],
+    flashcards: ROUTE_LABELS['/flashcards'],
+};
+
+/**
  * Breadcrumb facts for a hash path. Context is the study surface, Prism
- * Central, or Prism Element — never "Prism Element" for /tracks or
- * /practice (the old failure).
+ * Central, or Prism Element — never "Prism Element" for a study route.
  */
 export function breadcrumbFor(path) {
     const parts = String(path || '').split('/').filter(Boolean);
@@ -97,7 +111,7 @@ export function breadcrumbFor(path) {
     if (root === 'pc') {
         context = 'Prism Central';
         href = '#/pc/dashboard';
-    } else if (root === 'tracks' || root === 'practice') {
+    } else if (Object.prototype.hasOwnProperty.call(STUDY_ROOTS, root)) {
         context = 'Study Tracks';
         href = '#/tracks';
     } else {
@@ -108,9 +122,9 @@ export function breadcrumbFor(path) {
     const rest = parts.slice(1);
     let page;
     if (!rest.length) {
-        if (root === 'tracks') page = 'All Tracks';
-        else if (root === 'practice') page = ROUTE_LABELS['/practice'];
-        else page = ROUTE_LABELS['/' + root + '/dashboard'] || 'Dashboard';
+        // A study root's own landing page, from the one table above — so a
+        // fourth study route cannot silently fall through to 'Dashboard'.
+        page = STUDY_ROOTS[root] || ROUTE_LABELS['/' + root + '/dashboard'] || 'Dashboard';
     } else {
         page = rest.map(labelForSegment).join(' > ');
     }

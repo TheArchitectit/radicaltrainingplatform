@@ -97,6 +97,9 @@ const PARAMETERIZED_TARGETS = [
     'index.html#/tracks/track-nca/lessons/NCA-75/s1_1',
     'index.html#/practice/NCA-75',
     'index.html#/tutor/NCA-75',
+    // S37-03. The deck picker (/flashcards) is unparameterized and is picked up
+    // from the router table; this is the review run it links into.
+    'index.html#/flashcards/NCA-75',
 ];
 
 /**

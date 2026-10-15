@@ -50,6 +50,15 @@ export class StubElement {
 
     get firstChild() { return this.children[0] || null; }
 
+    /**
+     * The real DOM property. Five views re-render by asking their root for
+     * `parentElement` and replacing themselves in it; without this the getter
+     * was `undefined`, so those views quietly re-rendered nothing in every
+     * fixture and the path was never exercised. Null for a detached node,
+     * which is what the DOM reports too.
+     */
+    get parentElement() { return this.parent; }
+
     appendChild(child) {
         child.parent = this;
         this.children.push(child);
@@ -68,6 +77,22 @@ export class StubElement {
     }
 
     remove() { this.parent?.removeChild(this); }
+
+    /**
+     * The real DOM method, mirrored. Five views re-render by replacing their
+     * root (`practice.js`, `demo-mode.js`, `nca-lab.js`, `ticket-lab.js`,
+     * `flashcards.js`), and until this existed no fixture could drive that
+     * path — the stub simply had no such method, so the interaction was
+     * untestable rather than tested. Returns the replaced node, as the DOM does.
+     */
+    replaceChild(newChild, oldChild) {
+        const i = this.children.indexOf(oldChild);
+        if (i === -1) throw new Error('replaceChild: the node to replace is not a child of this node');
+        newChild.parent = this;
+        oldChild.parent = null;
+        this.children[i] = newChild;
+        return oldChild;
+    }
 
     setAttribute(name, value) {
         this.attributes[name] = String(value);
