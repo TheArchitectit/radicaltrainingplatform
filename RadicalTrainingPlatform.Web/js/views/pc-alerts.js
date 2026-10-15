@@ -87,19 +87,19 @@ export class PcAlertsView extends BaseView {
         summary.style.cssText = 'display:grid;grid-template-columns:repeat(4,1fr);gap:var(--space-lg);margin:var(--space-lg) 0;';
         summary.innerHTML = `
             <div class="card"><div class="card-body" style="text-align:center;">
-                <div style="font-size:28px;font-weight:700;color:var(--status-critical);">${critical}</div>
+                <div style="font-size:28px;font-weight:700;color:var(--status-critical-ink);">${critical}</div>
                 <div class="text-secondary text-sm">Critical</div>
             </div></div>
             <div class="card"><div class="card-body" style="text-align:center;">
-                <div style="font-size:28px;font-weight:700;color:var(--status-warning);">${warning}</div>
+                <div style="font-size:28px;font-weight:700;color:var(--status-warning-ink);">${warning}</div>
                 <div class="text-secondary text-sm">Warning</div>
             </div></div>
             <div class="card"><div class="card-body" style="text-align:center;">
-                <div style="font-size:28px;font-weight:700;color:var(--prism-blue);">${info}</div>
+                <div style="font-size:28px;font-weight:700;color:var(--text-link);">${info}</div>
                 <div class="text-secondary text-sm">Info</div>
             </div></div>
             <div class="card"><div class="card-body" style="text-align:center;">
-                <div style="font-size:28px;font-weight:700;color:var(--status-good);">${resolved}</div>
+                <div style="font-size:28px;font-weight:700;color:var(--status-good-ink);">${resolved}</div>
                 <div class="text-secondary text-sm">Resolved</div>
             </div></div>
         `;
@@ -108,13 +108,13 @@ export class PcAlertsView extends BaseView {
         this.#table = new EntityTable({
             columns: [
                 { key: 'severity', label: 'Severity', render: v => {
-                    const colors = { critical: 'var(--status-critical)', warning: 'var(--status-warning)', info: 'var(--prism-blue)' };
+                    const colors = { critical: 'var(--status-critical-ink)', warning: 'var(--status-warning-ink)', info: 'var(--text-link)' };
                     return `<span style="color:${colors[v] || 'inherit'};font-weight:600;text-transform:uppercase;">${v}</span>`;
                 }},
                 { key: 'title', label: 'Alert' },
                 { key: 'entity', label: 'Entity' },
                 { key: 'created_at', label: 'Time', render: v => new Date(v).toLocaleString() },
-                { key: 'resolved', label: 'Status', render: v => v ? '<span style="color:var(--status-good);">Resolved</span>' : '<span style="color:var(--status-warning);">Active</span>' },
+                { key: 'resolved', label: 'Status', render: v => v ? '<span style="color:var(--status-good-ink);">Resolved</span>' : '<span style="color:var(--status-warning-ink);">Active</span>' },
             ],
             data: alerts.sort((a, b) => new Date(b.created_at) - new Date(a.created_at)),
             searchKeys: ['title', 'entity', 'severity'],

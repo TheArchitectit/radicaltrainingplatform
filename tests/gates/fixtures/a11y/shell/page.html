@@ -47,12 +47,12 @@
     <a href="#view-container">Home</a>
 </nav>
 
-<button id="hamburger-btn" aria-label="Menu">☰</button>
+<button id="hamburger-btn" aria-label="Menu" aria-controls="hamburger-overlay" aria-expanded="false">☰</button>
 <nav id="hamburger-overlay" aria-label="Simulator navigation" inert>
     <a href="#view-container">Dashboard</a>
 </nav>
 
-<button id="theme-toggle-btn" aria-label="Toggle dark mode">🌙</button>
+<button id="theme-toggle-btn" aria-label="Toggle dark mode" aria-pressed="false">🌙</button>
 
 <main id="view-container">
     <h1>Shell fixture</h1>
@@ -72,6 +72,9 @@
         // contract the real shell's #setHamburger applies.
         if (overlay.hasAttribute('inert')) overlay.removeAttribute('inert');
         else overlay.setAttribute('inert', '');
+        // …and the control has to report the state it just caused, or a screen
+        // reader cannot tell whether the thing it controls is open (WCAG 4.1.2).
+        button.setAttribute('aria-expanded', String(!overlay.hasAttribute('inert')));
     });
 </script>
 </body>

@@ -35,20 +35,20 @@ export class UsFilesView extends BaseView {
             <!-- File Server Summary -->
             <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:var(--space-lg);margin-bottom:var(--space-xl);">
                 <div class="card"><div class="card-body" style="text-align:center;">
-                    <div style="font-size:28px;font-weight:700;color:${fsvms.length >= 3 ? 'var(--status-good)' : 'var(--status-warning)'};">${fsvms.length}</div>
+                    <div style="font-size:28px;font-weight:700;color:${fsvms.length >= 3 ? 'var(--status-good-ink)' : 'var(--status-warning-ink)'};">${fsvms.length}</div>
                     <div class="text-secondary text-sm">FSVMs</div>
-                    <div style="font-size:var(--font-size-xs);color:${fsvms.length >= 3 ? 'var(--status-good)' : 'var(--status-warning)'};">${fsvms.length >= 3 ? '✅ Min 3 met' : '⚠️ Need min 3'}</div>
+                    <div style="font-size:var(--font-size-xs);color:${fsvms.length >= 3 ? 'var(--status-good-ink)' : 'var(--status-warning-ink)'};">${fsvms.length >= 3 ? '✅ Min 3 met' : '⚠️ Need min 3'}</div>
                 </div></div>
                 <div class="card"><div class="card-body" style="text-align:center;">
-                    <div style="font-size:28px;font-weight:700;color:var(--prism-blue);">${shares.length}</div>
+                    <div style="font-size:28px;font-weight:700;color:var(--text-link);">${shares.length}</div>
                     <div class="text-secondary text-sm">Shares</div>
                 </div></div>
                 <div class="card"><div class="card-body" style="text-align:center;">
-                    <div style="font-size:28px;font-weight:700;color:var(--prism-blue);">${shares.filter(s => s.protocol === 'SMB').length}</div>
+                    <div style="font-size:28px;font-weight:700;color:var(--text-link);">${shares.filter(s => s.protocol === 'SMB').length}</div>
                     <div class="text-secondary text-sm">SMB Shares</div>
                 </div></div>
                 <div class="card"><div class="card-body" style="text-align:center;">
-                    <div style="font-size:28px;font-weight:700;color:var(--prism-blue);">${shares.filter(s => s.protocol === 'NFS').length}</div>
+                    <div style="font-size:28px;font-weight:700;color:var(--text-link);">${shares.filter(s => s.protocol === 'NFS').length}</div>
                     <div class="text-secondary text-sm">NFS Exports</div>
                 </div></div>
             </div>
@@ -71,13 +71,13 @@ export class UsFilesView extends BaseView {
                 { key: 'name', label: 'Share Name', sortable: true, render: (v) => `<strong>${v}</strong>` },
                 {
                     key: 'protocol', label: 'Protocol', sortable: true,
-                    render: (v) => `<span class="status-badge ${v === 'SMB' ? 'good' : 'info'}" ${v === 'NFS' ? 'style="background:var(--status-info-bg);color:var(--status-info);"' : ''}>${v}</span>`
+                    render: (v) => `<span class="status-badge ${v === 'SMB' ? 'good' : 'info'}" ${v === 'NFS' ? 'style="background:var(--status-info-bg);color:var(--text-link);"' : ''}>${v}</span>`
                 },
                 { key: 'path', label: 'Path', render: (v) => `<span class="font-mono text-sm">${v}</span>` },
                 { key: 'max_size_gb', label: 'Max Size', render: (v) => v ? `${v} GB` : 'Unlimited' },
                 {
                     key: 'ssr_enabled', label: 'SSR',
-                    render: (v) => v ? '<span style="color:var(--status-good);">✅ Enabled</span>' : '<span class="text-secondary">Disabled</span>'
+                    render: (v) => v ? '<span style="color:var(--status-good-ink);">✅ Enabled</span>' : '<span class="text-secondary">Disabled</span>'
                 },
                 {
                     key: 'multi_protocol', label: 'Multi-Protocol',

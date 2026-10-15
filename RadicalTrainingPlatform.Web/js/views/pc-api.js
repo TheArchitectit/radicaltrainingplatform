@@ -26,18 +26,21 @@ export class PcApiView extends BaseView {
                 <div class="card">
                     <div class="card-header">Request</div>
                     <div class="card-body">
+                        <!-- A request-builder toolbar: the method and URL are one
+                             control pair, so a visible label would break the row.
+                             aria-label names each without changing the layout. -->
                         <div style="display:flex;gap:8px;margin-bottom:12px;">
-                            <select class="form-input" id="api-method" style="width:120px;">
+                            <select class="form-input" id="api-method" aria-label="HTTP method" style="width:120px;">
                                 <option value="POST" selected>POST</option>
                                 <option value="GET">GET</option>
                                 <option value="PUT">PUT</option>
                                 <option value="DELETE">DELETE</option>
                             </select>
-                            <input class="form-input" id="api-url" value="/api/nutanix/v3/vms/list" placeholder="/api/nutanix/v3/..." style="flex:1;font-family:var(--font-mono);font-size:12px;" />
+                            <input class="form-input" id="api-url" aria-label="Request URL" value="/api/nutanix/v3/vms/list" placeholder="/api/nutanix/v3/..." style="flex:1;font-family:var(--font-mono);font-size:12px;" />
                         </div>
 
                         <div class="form-group">
-                            <label class="form-label" style="display:flex;justify-content:space-between;">
+                            <label class="form-label" for="api-body" style="display:flex;justify-content:space-between;">
                                 <span>Request Body</span>
                                 <span class="text-secondary text-sm">JSON</span>
                             </label>

@@ -22,19 +22,19 @@ export class PeHardwareView extends BaseView {
             <!-- Cluster-wide summary -->
             <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:var(--space-lg);margin-bottom:var(--space-xl);">
                 <div class="card"><div class="card-body" style="text-align:center;">
-                    <div style="font-size:28px;font-weight:700;color:var(--prism-blue);">${totalCores}</div>
+                    <div style="font-size:28px;font-weight:700;color:var(--text-link);">${totalCores}</div>
                     <div class="text-secondary text-sm">Total CPU Cores</div>
                 </div></div>
                 <div class="card"><div class="card-body" style="text-align:center;">
-                    <div style="font-size:28px;font-weight:700;color:var(--prism-blue);">${totalMem} GB</div>
+                    <div style="font-size:28px;font-weight:700;color:var(--text-link);">${totalMem} GB</div>
                     <div class="text-secondary text-sm">Total Memory</div>
                 </div></div>
                 <div class="card"><div class="card-body" style="text-align:center;">
-                    <div style="font-size:28px;font-weight:700;color:var(--prism-blue);">${totalSSD.toFixed(1)} TB</div>
+                    <div style="font-size:28px;font-weight:700;color:var(--text-link);">${totalSSD.toFixed(1)} TB</div>
                     <div class="text-secondary text-sm">SSD Capacity</div>
                 </div></div>
                 <div class="card"><div class="card-body" style="text-align:center;">
-                    <div style="font-size:28px;font-weight:700;color:var(--prism-blue);">${totalHDD.toFixed(1)} TB</div>
+                    <div style="font-size:28px;font-weight:700;color:var(--text-link);">${totalHDD.toFixed(1)} TB</div>
                     <div class="text-secondary text-sm">HDD Capacity</div>
                 </div></div>
             </div>

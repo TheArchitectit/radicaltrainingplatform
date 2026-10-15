@@ -77,7 +77,7 @@ export class Wizard {
                 </div>
                 <div class="wizard-steps">${stepsHtml}</div>
                 <div class="modal-body wizard-body" id="wizard-step-body"></div>
-                <div class="wizard-errors" id="wizard-errors" style="padding:0 24px;color:var(--status-critical);font-size:12px;"></div>
+                <div class="wizard-errors" id="wizard-errors" style="padding:0 24px;color:var(--status-critical-ink);font-size:12px;"></div>
                 <div class="modal-footer">
                     <button class="btn cancel-btn">Cancel</button>
                     ${!isFirst ? '<button class="btn back-btn">← Back</button>' : ''}

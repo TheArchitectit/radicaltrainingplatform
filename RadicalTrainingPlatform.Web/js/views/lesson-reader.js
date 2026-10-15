@@ -35,7 +35,7 @@ export class LessonReaderView extends BaseView {
                 <a class="study-back" href="#/tracks/${track.trackId}">‹ ${track.title}</a>
                 <h1 class="study-title">${lesson.title}</h1>
                 <p class="study-sub">${exam.displayName} · Domain ${lesson.domainNumber} · <span class="preview-label">${track.previewLabel}</span></p>
-                ${objectives ? `<div class="lesson-objectives"><h3>Exam objectives covered</h3><ul>${objectives}</ul></div>` : ''}
+                ${objectives ? `<div class="lesson-objectives"><h2>Exam objectives covered</h2><ul>${objectives}</ul></div>` : ''}
                 <div class="lesson-body">${this.#renderMarkdown(lesson.markdown)}</div>
                 <div class="lesson-actions">
                     <a class="study-button" href="#/practice/${lesson.examId}">Practice this exam ›</a>

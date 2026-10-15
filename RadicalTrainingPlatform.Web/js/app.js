@@ -247,6 +247,12 @@ class App {
         overlay?.classList.toggle('open', open);
         document.getElementById('hamburger-backdrop')?.classList.toggle('open', open);
         if (overlay) overlay.inert = !open;
+        // `inert` takes the overlay out of the tab order and the a11y tree, but
+        // it says nothing about the button that controls it. `aria-expanded`
+        // is what tells a screen reader the control has two states and which
+        // one it is in (WCAG 4.1.2) — without it the hamburger is announced as
+        // a button that does something, with no way to know what.
+        document.getElementById('hamburger-btn')?.setAttribute('aria-expanded', String(open));
     }
 
     #setContext(ctx) {

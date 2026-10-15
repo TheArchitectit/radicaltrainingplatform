@@ -119,11 +119,13 @@ export class PcPlanningView extends BaseView {
     }
 
     #runwayCard(label, months) {
-        let color = 'var(--status-good)';
+        // The runway figure and its label are both read as text, so the ink
+        // variants are what they need — not the bright fills.
+        let color = 'var(--status-good-ink)';
         let status = 'Healthy';
-        if (months <= 3) { color = 'var(--status-critical)'; status = 'Critical'; }
-        else if (months <= 6) { color = 'var(--status-warning)'; status = 'Warning'; }
-        else if (months <= 12) { color = 'var(--prism-blue)'; status = 'OK'; }
+        if (months <= 3) { color = 'var(--status-critical-ink)'; status = 'Critical'; }
+        else if (months <= 6) { color = 'var(--status-warning-ink)'; status = 'Warning'; }
+        else if (months <= 12) { color = 'var(--text-link)'; status = 'OK'; }
 
         return `<div class="card"><div class="card-body" style="text-align:center;">
             <div style="font-size:32px;font-weight:700;color:${color};">${months}</div>
@@ -199,7 +201,7 @@ export class PcPlanningView extends BaseView {
                     <input class="form-input scenario-field" data-idx="${i}" data-field="count" type="number" min="1" value="${s.count}" style="font-size:12px;padding:4px 8px;" />
                     <span class="text-secondary" style="font-size:11px;">VMs</span>
                 </div>
-                <button class="btn btn-secondary btn-sm remove-scenario-btn" data-idx="${i}" style="color:var(--status-critical);padding:2px 8px;">✕</button>
+                <button class="btn btn-secondary btn-sm remove-scenario-btn" data-idx="${i}" style="color:var(--status-critical-ink);padding:2px 8px;">✕</button>
             </div>
         `).join('');
 
@@ -281,7 +283,7 @@ export class PcPlanningView extends BaseView {
     }
 
     #impactItem(label, pct, runway) {
-        const color = pct > 90 ? 'var(--status-critical)' : pct > 70 ? 'var(--status-warning)' : 'var(--status-good)';
+        const color = pct > 90 ? 'var(--status-critical-ink)' : pct > 70 ? 'var(--status-warning-ink)' : 'var(--status-good-ink)';
         return `<div style="text-align:center;">
             <div style="font-size:20px;font-weight:700;color:${color};">${pct}%</div>
             <div class="text-secondary text-sm">${label} (${runway}mo runway)</div>

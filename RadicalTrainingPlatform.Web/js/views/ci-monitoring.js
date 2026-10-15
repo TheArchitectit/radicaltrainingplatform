@@ -11,7 +11,7 @@ export class CiMonitoringView extends BaseView {
         return this.html(`
             <div class="view">
                 <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:var(--space-lg);">
-                    <h2 class="page-title">NC2 Cloud Cluster Monitoring</h2>
+                    <h1 class="page-title">NC2 Cloud Cluster Monitoring</h1>
                     <button class="btn btn-primary" id="ci-mon-refresh-btn">↻ Refresh Metrics</button>
                 </div>
                 <div id="ci-mon-summary"></div>
@@ -72,19 +72,19 @@ export class CiMonitoringView extends BaseView {
         container.innerHTML = `
             <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:var(--space-lg);">
                 <div class="card"><div class="card-body" style="text-align:center;">
-                    <div style="font-size:28px;font-weight:700;color:var(--prism-blue);">${clusters.length}</div>
+                    <div style="font-size:28px;font-weight:700;color:var(--text-link);">${clusters.length}</div>
                     <div class="text-secondary text-sm">NC2 Clusters</div>
                 </div></div>
                 <div class="card"><div class="card-body" style="text-align:center;">
-                    <div style="font-size:28px;font-weight:700;color:var(--status-good);">${totalNodes}</div>
+                    <div style="font-size:28px;font-weight:700;color:var(--status-good-ink);">${totalNodes}</div>
                     <div class="text-secondary text-sm">Total Cloud Nodes</div>
                 </div></div>
                 <div class="card"><div class="card-body" style="text-align:center;">
-                    <div style="font-size:28px;font-weight:700;color:var(--status-warning);">$${Math.round(monthlyCost).toLocaleString()}</div>
+                    <div style="font-size:28px;font-weight:700;color:var(--status-warning-ink);">$${Math.round(monthlyCost).toLocaleString()}</div>
                     <div class="text-secondary text-sm">Monthly Cost Est.</div>
                 </div></div>
                 <div class="card"><div class="card-body" style="text-align:center;">
-                    <div style="font-size:28px;font-weight:700;color:var(--status-good);">${avgUptime}%</div>
+                    <div style="font-size:28px;font-weight:700;color:var(--status-good-ink);">${avgUptime}%</div>
                     <div class="text-secondary text-sm">Avg Uptime</div>
                 </div></div>
             </div>
@@ -108,7 +108,7 @@ export class CiMonitoringView extends BaseView {
             container.innerHTML = `
                 <div class="card"><div class="card-body" style="text-align:center;padding:var(--space-xl);">
                     <div style="font-size:48px;margin-bottom:16px;">☁️</div>
-                    <h3>No NC2 Clusters</h3>
+                    <h2>No NC2 Clusters</h2>
                     <p class="text-secondary">Deploy a Nutanix Cloud Cluster to see monitoring data here.</p>
                 </div></div>
             `;
@@ -125,13 +125,21 @@ export class CiMonitoringView extends BaseView {
             <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(380px,1fr));gap:16px;">
                 ${clusters.map(c => {
                     const h = healthMetrics[c.name] || { cpu: 50, memory: 50, storage: 50 };
+                    // Brand fills are fixed, but --text-inverse flips with the
+                    // theme, so the badge ink has to be picked per brand: white
+                    // clears AA on Azure (#0078D4, 4.53:1) but only reaches
+                    // 2.14:1 on AWS orange, and a dark ink is the reverse. These
+                    // are fixed inks that clear 4.5:1 on their own fill in both
+                    // themes — the fills themselves are left alone, because they
+                    // are the brand.
                     const providerColors = { AWS: '#FF9900', Azure: '#0078D4', GCP: '#4285F4' };
-                    const statusColor = c.status === 'running' ? 'var(--status-good)' : 'var(--status-warning)';
+                    const providerInks = { AWS: '#131520', Azure: '#ffffff', GCP: '#131520' };
+                    const statusColor = c.status === 'running' ? 'var(--status-good-ink)' : 'var(--status-warning-ink)';
                     return `
                         <div class="card">
                             <div class="card-header" style="display:flex;justify-content:space-between;align-items:center;">
                                 <span style="font-weight:600;">${c.name}</span>
-                                <span class="badge" style="background:${providerColors[c.provider] || 'var(--prism-blue)'};color:var(--text-inverse);">${c.provider}</span>
+                                <span class="badge" style="background:${providerColors[c.provider] || 'var(--text-link)'};color:${providerInks[c.provider] || 'var(--text-inverse)'};">${c.provider}</span>
                             </div>
                             <div class="card-body">
                                 <div style="display:flex;justify-content:space-between;margin-bottom:12px;">
@@ -151,7 +159,10 @@ export class CiMonitoringView extends BaseView {
     }
 
     #progressBar(label, pct) {
-        const color = pct > 80 ? 'var(--status-critical)' : pct > 60 ? 'var(--status-warning)' : 'var(--status-good)';
+        // One token for both the figure and the bar under it: the ink reading is
+        // deeper, which is also the better bar — 1.4.11 wants 3:1 against the
+        // track, and the bright fill measured under that on the light theme.
+        const color = pct > 80 ? 'var(--status-critical-ink)' : pct > 60 ? 'var(--status-warning-ink)' : 'var(--status-good-ink)';
         return `
             <div style="margin-bottom:8px;">
                 <div style="display:flex;justify-content:space-between;margin-bottom:2px;">
@@ -205,7 +216,7 @@ export class CiMonitoringView extends BaseView {
                                     <td style="padding:8px;text-align:right;">${r.nodes}</td>
                                     <td style="padding:8px;text-align:right;">$${(r.hourly_rate * r.nodes).toFixed(2)}</td>
                                     <td style="padding:8px;text-align:right;">$${Math.round(r.hourly_rate * r.nodes * 730).toLocaleString()}</td>
-                                    <td style="padding:8px;text-align:right;color:var(--status-good);">${r.savings}%</td>
+                                    <td style="padding:8px;text-align:right;color:var(--status-good-ink);">${r.savings}%</td>
                                 </tr>
                             `).join('')}
                         </tbody>
@@ -239,9 +250,9 @@ export class CiMonitoringView extends BaseView {
             const diff = isLatency
                 ? ((cloud - onPrem) / onPrem) * 100
                 : ((onPrem - cloud) / onPrem) * 100;
-            if (diff <= 10) return 'var(--status-good)';
-            if (diff <= 20) return 'var(--status-warning)';
-            return 'var(--status-critical)';
+            if (diff <= 10) return 'var(--status-good-ink)';
+            if (diff <= 20) return 'var(--status-warning-ink)';
+            return 'var(--status-critical-ink)';
         };
 
         const fmt = (v, metric) => {
@@ -275,9 +286,9 @@ export class CiMonitoringView extends BaseView {
                         </tbody>
                     </table>
                     <div class="text-secondary text-sm" style="margin-top:12px;">
-                        <span style="color:var(--status-good);">●</span> Within 10% &nbsp;
-                        <span style="color:var(--status-warning);">●</span> 10–20% slower &nbsp;
-                        <span style="color:var(--status-critical);">●</span> &gt;20% slower
+                        <span style="color:var(--status-good-ink);">●</span> Within 10% &nbsp;
+                        <span style="color:var(--status-warning-ink);">●</span> 10–20% slower &nbsp;
+                        <span style="color:var(--status-critical-ink);">●</span> &gt;20% slower
                     </div>
                 </div>
             </div>

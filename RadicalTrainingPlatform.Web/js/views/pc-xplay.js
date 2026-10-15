@@ -33,15 +33,15 @@ export class PcXplayView extends BaseView {
         summary.style.cssText = 'display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-lg);margin-bottom:var(--space-xl);';
         summary.innerHTML = `
             <div class="card"><div class="card-body" style="text-align:center;">
-                <div style="font-size:28px;font-weight:700;color:var(--prism-blue);">${playbooks.length}</div>
+                <div style="font-size:28px;font-weight:700;color:var(--text-link);">${playbooks.length}</div>
                 <div class="text-secondary text-sm">Total Playbooks</div>
             </div></div>
             <div class="card"><div class="card-body" style="text-align:center;">
-                <div style="font-size:28px;font-weight:700;color:var(--status-good);">${playbooks.filter(p => p.enabled).length}</div>
+                <div style="font-size:28px;font-weight:700;color:var(--status-good-ink);">${playbooks.filter(p => p.enabled).length}</div>
                 <div class="text-secondary text-sm">Enabled</div>
             </div></div>
             <div class="card"><div class="card-body" style="text-align:center;">
-                <div style="font-size:28px;font-weight:700;color:var(--prism-blue);">${playbooks.reduce((s, p) => s + (p.execution_count || 0), 0)}</div>
+                <div style="font-size:28px;font-weight:700;color:var(--text-link);">${playbooks.reduce((s, p) => s + (p.execution_count || 0), 0)}</div>
                 <div class="text-secondary text-sm">Total Executions</div>
             </div></div>
         `;

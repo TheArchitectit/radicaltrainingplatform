@@ -12,24 +12,37 @@
     <link rel="stylesheet" href="css/study.css">
 </head>
 <body>
+    <!-- First focusable element in the document: one Tab reaches the view
+         content instead of every control in the header (WCAG 2.4.1). Off-screen
+         until focused — see `.skip-link` in css/components.css. -->
+    <a class="skip-link" href="#view-container">Skip to main content</a>
+
     <div class="app-shell">
         <!-- ═══ Top Header Bar ═══ -->
         <header class="header-bar">
-            <button id="hamburger-btn" class="hamburger-btn" title="Menu">☰</button>
+            <!-- The icon-only controls carry `aria-label` rather than relying on
+                 `title` alone: a title is a tooltip, and is not reliably exposed
+                 as a name on touch or by every screen reader. `aria-expanded`
+                 is kept in sync by App#setHamburger. -->
+            <button id="hamburger-btn" class="hamburger-btn" title="Menu"
+                    aria-label="Menu" aria-controls="hamburger-overlay" aria-expanded="false">☰</button>
             <span id="context-label" class="context-label">Prism Element</span>
 
             <div class="context-switcher">
-                <select id="context-switcher" title="Switch context">
+                <select id="context-switcher" title="Switch context" aria-label="Context">
                     <option value="pe">Prism Element</option>
                     <option value="pc">Prism Central</option>
                 </select>
             </div>
 
             <div class="header-right">
+                <!-- Simulated Prism chrome, like #simulated-identity-label below:
+                     this box is decorative and filters nothing, so it is named
+                     as simulated rather than announced as a working search. -->
                 <div class="search-box">
-                    <input type="text" placeholder="Search..." />
+                    <input type="text" placeholder="Search..." aria-label="Search (simulated)" />
                 </div>
-                <button id="theme-toggle-btn" title="Toggle dark/light mode" style="background:none;border:1px solid var(--border-light);border-radius:6px;padding:4px 8px;cursor:pointer;font-size:16px;color:var(--text-primary);">🌙</button>
+                <button id="theme-toggle-btn" title="Toggle dark mode" aria-label="Dark mode" aria-pressed="false" style="background:none;border:1px solid var(--border-light);border-radius:6px;padding:4px 8px;cursor:pointer;font-size:16px;color:var(--text-primary);">🌙</button>
                 <!-- Simulated appliance chrome, not an account. The real
                      Prism header shows the signed-in user; this platform
                      collects no learner identity (REQ-DEMO-03), so the
@@ -48,7 +61,9 @@
         </div>
 
         <!-- ═══ Breadcrumb ═══ -->
-        <nav class="breadcrumb-bar">
+        <!-- Both navs need a name: two navigation landmarks on one page cannot be
+             told apart without one (WCAG 1.3.1). -->
+        <nav class="breadcrumb-bar" aria-label="Breadcrumb">
             <div id="breadcrumb">
                 <a href="#/pe/dashboard">Prism Element</a>
                 <span class="separator">›</span>
@@ -129,7 +144,7 @@
 
             <!-- PE Hamburger Overlay -->
             <div id="hamburger-backdrop" class="hamburger-backdrop"></div>
-            <nav id="hamburger-overlay" class="hamburger-overlay">
+            <nav id="hamburger-overlay" class="hamburger-overlay" aria-label="Prism Element navigation">
                 <div class="nav-group">
                     <div class="nav-group-title">Study</div>
                     <a class="nav-item" data-route="/tracks" href="#/tracks"><span class="icon">🎓</span> Study Tracks</a>
@@ -167,13 +182,20 @@
                 </div>
             </nav>
 
-            <!-- View Container -->
-            <main id="view-container" class="view-container"></main>
+            <!-- View Container. `tabindex="-1"` makes it a valid skip-link
+                 target — without it, following the skip link scrolls the page
+                 but leaves focus at the top of the document, which is the exact
+                 thing the skip link exists to avoid. It is not a tab stop:
+                 `-1` keeps it out of the tab order. -->
+            <main id="view-container" class="view-container" tabindex="-1"></main>
         </div>
     </div>
 
-    <!-- Toast Container -->
-    <div id="toast-container" class="toast-container"></div>
+    <!-- Toast Container. A live region, so a toast is announced rather than
+         only seen. `aria-atomic="false"` (overriding role=status's implicit
+         true) announces the toast that arrived, not the whole stack again. -->
+    <div id="toast-container" class="toast-container"
+         role="status" aria-live="polite" aria-atomic="false"></div>
 
     <!-- Boot Script -->
     <script type="module" src="js/app.js"></script>

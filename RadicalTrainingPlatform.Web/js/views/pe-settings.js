@@ -23,19 +23,19 @@ export class PeSettingsView extends BaseView {
                     </div>
                     <div class="card-body">
                         <div class="form-group">
-                            <label class="form-label">Cluster Name</label>
+                            <label class="form-label" for="set-cluster-name">Cluster Name</label>
                             <input class="form-input" id="set-cluster-name" value="${c.name}" />
                         </div>
                         <div class="form-group">
-                            <label class="form-label">Cluster Virtual IP</label>
+                            <label class="form-label" for="set-cluster-vip">Cluster Virtual IP</label>
                             <input class="form-input font-mono" id="set-cluster-vip" value="${c.clusterVIP}" />
                         </div>
                         <div class="form-group">
-                            <label class="form-label">Data Services IP</label>
+                            <label class="form-label" for="set-ds-ip">Data Services IP</label>
                             <input class="form-input font-mono" id="set-ds-ip" value="${c.dataServicesIP}" />
                         </div>
                         <div class="form-group">
-                            <label class="form-label">Timezone</label>
+                            <label class="form-label" for="set-timezone">Timezone</label>
                             <input class="form-input" id="set-timezone" value="${c.timezone}" />
                         </div>
                     </div>
@@ -49,15 +49,15 @@ export class PeSettingsView extends BaseView {
                     </div>
                     <div class="card-body">
                         <div class="form-group">
-                            <label class="form-label">DNS Servers</label>
+                            <label class="form-label" for="set-dns">DNS Servers</label>
                             <input class="form-input font-mono" id="set-dns" value="${(c.dns || []).join(', ')}" placeholder="Comma-separated" />
                         </div>
                         <div class="form-group">
-                            <label class="form-label">NTP Server</label>
+                            <label class="form-label" for="set-ntp">NTP Server</label>
                             <input class="form-input" id="set-ntp" value="${c.ntp}" />
                         </div>
                         <div class="form-group">
-                            <label class="form-label">Domain</label>
+                            <label class="form-label" for="set-domain">Domain</label>
                             <input class="form-input" id="set-domain" value="${c.domain}" />
                         </div>
                     </div>
@@ -78,7 +78,7 @@ export class PeSettingsView extends BaseView {
                                 <input type="checkbox" id="set-dare" />
                                 Data-at-Rest Encryption (DARE)
                             </label>
-                            <div class="form-error" style="color:var(--status-warning);font-size:11px;">⚠️ Enabling DARE is irreversible</div>
+                            <div class="form-error" style="color:var(--status-warning-ink);font-size:11px;">⚠️ Enabling DARE is irreversible</div>
                         </div>
                         <div class="form-group">
                             <label class="form-label">SSL Certificate</label>
@@ -95,15 +95,15 @@ export class PeSettingsView extends BaseView {
                     </div>
                     <div class="card-body">
                         <div class="form-group">
-                            <label class="form-label">Syslog Server</label>
+                            <label class="form-label" for="set-syslog-server">Syslog Server</label>
                             <input class="form-input font-mono" id="set-syslog-server" placeholder="e.g., 10.42.100.50" />
                         </div>
                         <div class="form-group">
-                            <label class="form-label">Syslog Port</label>
+                            <label class="form-label" for="set-syslog-port">Syslog Port</label>
                             <input class="form-input" id="set-syslog-port" type="number" value="514" />
                         </div>
                         <div class="form-group">
-                            <label class="form-label">Protocol</label>
+                            <label class="form-label" for="set-syslog-proto">Protocol</label>
                             <select class="form-input" id="set-syslog-proto">
                                 <option value="UDP">UDP</option>
                                 <option value="TCP">TCP</option>
@@ -111,7 +111,7 @@ export class PeSettingsView extends BaseView {
                             </select>
                         </div>
                         <div class="form-group">
-                            <label class="form-label">SNMP Community</label>
+                            <label class="form-label" for="set-snmp">SNMP Community</label>
                             <input class="form-input" id="set-snmp" placeholder="e.g., public" />
                         </div>
                     </div>

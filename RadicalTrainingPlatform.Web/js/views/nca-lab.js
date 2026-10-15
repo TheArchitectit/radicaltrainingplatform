@@ -56,7 +56,7 @@ export class NcaLabView extends BaseView {
         return this.html(`
             <div class="study-page nca-page">
                 <a class="study-back" href="#/pc/scenarios">‹ Back to scenarios</a>
-                <h1 class="study-title">${s.title}</h1>
+                <h2 class="study-title">${s.title}</h2>
                 <p class="study-sub">Simulated environment — every action here mutates a local simulation only. No real systems are contacted.</p>
                 <div class="card nca-pane">
                     <div class="card-header">${s.lab.prompt}</div>
@@ -256,9 +256,9 @@ export class NcaLabView extends BaseView {
             <div class="card nca-evidence">
                 <div class="card-header">Evidence</div>
                 <div class="card-body">
-                    <h4>Objectives</h4>
+                    <h3>Objectives</h3>
                     <ul class="nca-objectives">${rows}</ul>
-                    <h4>Recorded actions</h4>
+                    <h3>Recorded actions</h3>
                     <ul class="nca-trace">${actions || '<li>(no actions recorded yet)</li>'}</ul>
                 </div>
             </div>`;

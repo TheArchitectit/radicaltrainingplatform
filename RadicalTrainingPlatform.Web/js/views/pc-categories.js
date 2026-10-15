@@ -44,13 +44,13 @@ export class PcCategoriesView extends BaseView {
                             <span style="font-weight:700;font-size:var(--font-size-md);">${this.#esc(c.key)}</span>
                             <div style="display:flex;gap:4px;">
                                 <button class="btn btn-secondary btn-sm add-value-btn" data-cat-id="${c.uuid}" title="Add value">+ Value</button>
-                                <button class="btn btn-secondary btn-sm delete-cat-btn" data-cat-id="${c.uuid}" title="Delete" style="color:var(--status-critical);">✕</button>
+                                <button class="btn btn-secondary btn-sm delete-cat-btn" data-cat-id="${c.uuid}" title="Delete" style="color:var(--status-critical-ink);">✕</button>
                             </div>
                         </div>
                         <div style="display:flex;flex-wrap:wrap;gap:6px;">
                             ${c.values.map(v => `
-                                <span class="status-badge" style="background:var(--prism-blue-light);color:var(--prism-blue);cursor:default;"
-                                    >${this.#esc(v)}<button class="remove-val-btn" data-cat-id="${c.uuid}" data-val="${this.#esc(v)}" style="margin-left:4px;border:none;background:none;color:var(--prism-blue);cursor:pointer;font-weight:700;font-size:12px;" title="Remove value">×</button></span>
+                                <span class="status-badge" style="background:var(--prism-blue-light);color:var(--text-link);cursor:default;"
+                                    >${this.#esc(v)}<button class="remove-val-btn" data-cat-id="${c.uuid}" data-val="${this.#esc(v)}" style="margin-left:4px;border:none;background:none;color:var(--text-link);cursor:pointer;font-weight:700;font-size:12px;" title="Remove value">×</button></span>
                             `).join('')}
                             ${c.values.length === 0 ? '<span class="text-secondary text-sm">No values</span>' : ''}
                         </div>
@@ -69,7 +69,7 @@ export class PcCategoriesView extends BaseView {
                 <td style="padding:8px 12px;font-weight:500;">${this.#esc(vm.name)}</td>
                 <td style="padding:8px 12px;">
                     <div style="display:flex;flex-wrap:wrap;gap:4px;">
-                        ${cats.map(c => `<span class="status-badge" style="background:var(--prism-blue-light);color:var(--prism-blue);font-size:11px;">${this.#esc(c.key)}:${this.#esc(c.value)}</span>`).join('')}
+                        ${cats.map(c => `<span class="status-badge" style="background:var(--prism-blue-light);color:var(--text-link);font-size:11px;">${this.#esc(c.key)}:${this.#esc(c.value)}</span>`).join('')}
                         ${cats.length === 0 ? '<span class="text-secondary text-sm">None</span>' : ''}
                     </div>
                 </td>

@@ -30,7 +30,7 @@ export class PeImagesView extends BaseView {
                     key: 'type', label: 'Type', sortable: true,
                     render: (v) => v === 'DISK_IMAGE'
                         ? '<span class="status-badge good"><span class="dot"></span>Disk</span>'
-                        : '<span class="status-badge info" style="background:var(--status-info-bg);color:var(--status-info);"><span class="dot"></span>ISO</span>'
+                        : '<span class="status-badge info" style="background:var(--status-info-bg);color:var(--text-link);"><span class="dot"></span>ISO</span>'
                 },
                 { key: 'size_gb', label: 'Size', sortable: true, render: (v) => `${v} GB` },
                 {

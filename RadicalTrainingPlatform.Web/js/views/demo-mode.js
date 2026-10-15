@@ -52,7 +52,7 @@ export class DemoModeView extends BaseView {
                 </div>
 
                 <div class="demo-notes">
-                    <h3 class="completion-section">What this mode does not do</h3>
+                    <h2 class="completion-section">What this mode does not do</h2>
                     <ul>
                         <li>It does not collect a name, email, account, or device identifier.</li>
                         <li>It does not call any real infrastructure — the simulator is local fixtures only.</li>
@@ -70,7 +70,7 @@ export class DemoModeView extends BaseView {
                 <td>${seeds[s.id] ?? '—'}</td>
             </tr>`).join('');
         return `
-            <h3 class="completion-section">Loaded fixture seeds</h3>
+            <h2 class="completion-section">Loaded fixture seeds</h2>
             <p class="text-secondary text-sm">${Object.keys(seeds).length} of ${SCENARIOS.length} scenarios declare a fixture seed; entering demo mode loaded each one exactly.</p>
             <div class="table-scroll">
                 <table class="demo-table">
@@ -95,7 +95,7 @@ export class DemoModeView extends BaseView {
                         : `unexpectedly satisfied: ${r.passingOnFreshSeed.join(', ')}`)}</td>
             </tr>`).join('');
         return `
-            <h3 class="completion-section">Reseed verification</h3>
+            <h2 class="completion-section">Reseed verification</h2>
             <p class="text-secondary text-sm">
                 Cleared ${report.clearedKeys} stored learner key(s). Verification: ${v.passed}/${v.seeded}
                 scenarios reseeded and failing on a fresh station — ${v.ok ? 'all correct' : 'NOT all correct'}.

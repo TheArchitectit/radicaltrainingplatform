@@ -28,21 +28,21 @@ export class UsVolumesView extends BaseView {
 
             <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:var(--space-lg);margin-bottom:var(--space-xl);">
                 <div class="card"><div class="card-body" style="text-align:center;">
-                    <div style="font-size:28px;font-weight:700;color:var(--prism-blue);">${vgs.length}</div>
+                    <div style="font-size:28px;font-weight:700;color:var(--text-link);">${vgs.length}</div>
                     <div class="text-secondary text-sm">Volume Groups</div>
                 </div></div>
                 <div class="card"><div class="card-body" style="text-align:center;">
-                    <div style="font-size:28px;font-weight:700;color:var(--prism-blue);">${vgs.reduce((s, v) => s + (v.disks?.length || 0), 0)}</div>
+                    <div style="font-size:28px;font-weight:700;color:var(--text-link);">${vgs.reduce((s, v) => s + (v.disks?.length || 0), 0)}</div>
                     <div class="text-secondary text-sm">Total Disks</div>
                 </div></div>
                 <div class="card"><div class="card-body" style="text-align:center;">
-                    <div style="font-size:28px;font-weight:700;color:var(--status-good);">${vgs.filter(v => v.chap_enabled).length}</div>
+                    <div style="font-size:28px;font-weight:700;color:var(--status-good-ink);">${vgs.filter(v => v.chap_enabled).length}</div>
                     <div class="text-secondary text-sm">CHAP Enabled</div>
                 </div></div>
                 <div class="card"><div class="card-body" style="text-align:center;">
-                    <div style="font-size:28px;font-weight:700;color:var(--prism-blue);">3260</div>
+                    <div style="font-size:28px;font-weight:700;color:var(--text-link);">3260</div>
                     <div class="text-secondary text-sm">iSCSI Port</div>
-                    <div style="font-size:var(--font-size-xs);color:var(--status-warning);">⚠️ Exam: NOT 3261</div>
+                    <div style="font-size:var(--font-size-xs);color:var(--status-warning-ink);">⚠️ Exam: NOT 3261</div>
                 </div></div>
             </div>
         `;
@@ -67,7 +67,7 @@ export class UsVolumesView extends BaseView {
                 },
                 {
                     key: 'chap_enabled', label: 'CHAP',
-                    render: (v) => v ? '<span style="color:var(--status-good);">🔐 Enabled</span>' : '<span class="text-secondary">Disabled</span>'
+                    render: (v) => v ? '<span style="color:var(--status-good-ink);">🔐 Enabled</span>' : '<span class="text-secondary">Disabled</span>'
                 },
                 {
                     key: 'flash_mode', label: 'Flash Mode',

@@ -59,7 +59,7 @@ export class TicketLabView extends BaseView {
         return this.html(`
             <div class="study-page ticket-page">
                 <a class="study-back" href="#/pc/scenarios">‹ Back to scenarios</a>
-                <h1 class="study-title">Help Desk Ticket — ${this.#scenario.title}</h1>
+                <h2 class="study-title">Help Desk Ticket — ${this.#scenario.title}</h2>
                 <p class="study-sub">Simulated environment — every action here mutates a local simulation only. No real systems are contacted.</p>
                 <div class="ticket-pane card">
                     <div class="card-header">Ticket ${ticket.id} · Priority ${ticket.priority}</div>
@@ -236,9 +236,9 @@ export class TicketLabView extends BaseView {
             <div class="card ticket-evidence">
                 <div class="card-header">Evidence</div>
                 <div class="card-body">
-                    <h4>Requested vs actual configuration</h4>
+                    <h3>Requested vs actual configuration</h3>
                     <div class="ticket-evidence-table">${rows}</div>
-                    <h4>Action trace</h4>
+                    <h3>Action trace</h3>
                     <ul class="ticket-trace">${traceRows || '<li>(no actions recorded yet)</li>'}</ul>
                     ${verdictHtml}
                 </div>

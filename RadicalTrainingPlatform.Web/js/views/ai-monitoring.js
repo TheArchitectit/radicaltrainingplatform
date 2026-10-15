@@ -12,7 +12,7 @@ export class AiMonitoringView extends BaseView {
     async render() {
         return this.html(`
             <div class="view">
-                <h2 class="page-title">NAI Endpoint Monitoring</h2>
+                <h1 class="page-title">NAI Endpoint Monitoring</h1>
                 <div id="ai-mon-summary"></div>
                 <div class="tabs" id="ai-mon-tabs">
                     <button class="tab active" data-tab="endpoints">Endpoints</button>
@@ -62,19 +62,19 @@ export class AiMonitoringView extends BaseView {
         container.innerHTML = `
             <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:var(--space-lg);">
                 <div class="card"><div class="card-body" style="text-align:center;">
-                    <div style="font-size:28px;font-weight:700;color:var(--prism-blue);">${active}</div>
+                    <div style="font-size:28px;font-weight:700;color:var(--text-link);">${active}</div>
                     <div class="text-secondary text-sm">Active Endpoints</div>
                 </div></div>
                 <div class="card"><div class="card-body" style="text-align:center;">
-                    <div style="font-size:28px;font-weight:700;color:var(--status-warning);">${avgLatency} ms</div>
+                    <div style="font-size:28px;font-weight:700;color:var(--status-warning-ink);">${avgLatency} ms</div>
                     <div class="text-secondary text-sm">Avg Latency</div>
                 </div></div>
                 <div class="card"><div class="card-body" style="text-align:center;">
-                    <div style="font-size:28px;font-weight:700;color:var(--status-good);">${totalReqs.toLocaleString()}</div>
+                    <div style="font-size:28px;font-weight:700;color:var(--status-good-ink);">${totalReqs.toLocaleString()}</div>
                     <div class="text-secondary text-sm">Total Requests/hr</div>
                 </div></div>
                 <div class="card"><div class="card-body" style="text-align:center;">
-                    <div style="font-size:28px;font-weight:700;color:var(--status-critical);">${avgGpu}%</div>
+                    <div style="font-size:28px;font-weight:700;color:var(--status-critical-ink);">${avgGpu}%</div>
                     <div class="text-secondary text-sm">GPU Utilization</div>
                 </div></div>
             </div>
@@ -106,7 +106,7 @@ export class AiMonitoringView extends BaseView {
                 {
                     key: 'status', label: 'Status', sortable: true,
                     render: (v) => {
-                        const colors = { healthy: 'var(--status-good)', degraded: 'var(--status-warning)', down: 'var(--status-critical)' };
+                        const colors = { healthy: 'var(--status-good-ink)', degraded: 'var(--status-warning-ink)', down: 'var(--status-critical-ink)' };
                         return `<span class="badge" style="background:${colors[v] || 'var(--text-secondary)'};color:var(--text-inverse);">${v || 'unknown'}</span>`;
                     }
                 }
@@ -142,10 +142,10 @@ export class AiMonitoringView extends BaseView {
         this.#table = null;
 
         const metrics = [
-            { title: 'Latency',         value: '42 ms',   trend: '↓', trendColor: 'var(--status-good)',    bars: [55, 48, 50, 45, 42], color: 'var(--prism-blue)' },
-            { title: 'Throughput',       value: '1,240/s', trend: '↑', trendColor: 'var(--status-good)',    bars: [980, 1050, 1100, 1180, 1240], color: 'var(--status-good)' },
-            { title: 'GPU Utilization',  value: '78%',     trend: '→', trendColor: 'var(--status-warning)', bars: [72, 75, 80, 76, 78], color: 'var(--status-warning)' },
-            { title: 'Error Rate',       value: '0.3%',    trend: '↓', trendColor: 'var(--status-good)',    bars: [1.2, 0.8, 0.5, 0.4, 0.3], color: 'var(--status-critical)' }
+            { title: 'Latency',         value: '42 ms',   trend: '↓', trendColor: 'var(--status-good-ink)', bars: [55, 48, 50, 45, 42], color: 'var(--prism-blue)' },
+            { title: 'Throughput',       value: '1,240/s', trend: '↑', trendColor: 'var(--status-good-ink)', bars: [980, 1050, 1100, 1180, 1240], color: 'var(--status-good)' },
+            { title: 'GPU Utilization',  value: '78%',     trend: '→', trendColor: 'var(--status-warning-ink)', bars: [72, 75, 80, 76, 78], color: 'var(--status-warning)' },
+            { title: 'Error Rate',       value: '0.3%',    trend: '↓', trendColor: 'var(--status-good-ink)', bars: [1.2, 0.8, 0.5, 0.4, 0.3], color: 'var(--status-critical)' }
         ];
 
         container.innerHTML = `
@@ -195,7 +195,7 @@ export class AiMonitoringView extends BaseView {
                 <div class="card">
                     <div class="card-body" style="text-align:center;padding:var(--space-xl);">
                         <div style="font-size:48px;margin-bottom:16px;">✅</div>
-                        <h3 style="margin-bottom:8px;">No AI Alerts</h3>
+                        <h2 style="margin-bottom:8px;">No AI Alerts</h2>
                         <p class="text-secondary">All NAI endpoints and GPU resources are operating normally. Alerts will appear here when issues are detected with AI inference endpoints or GPU devices.</p>
                     </div>
                 </div>
@@ -206,7 +206,7 @@ export class AiMonitoringView extends BaseView {
         container.innerHTML = `
             <div style="display:flex;flex-direction:column;gap:12px;">
                 ${aiAlerts.map(a => {
-                    const sevColors = { critical: 'var(--status-critical)', warning: 'var(--status-warning)', info: 'var(--prism-blue)' };
+                    const sevColors = { critical: 'var(--status-critical-ink)', warning: 'var(--status-warning-ink)', info: 'var(--text-link)' };
                     const color = sevColors[a.severity] || 'var(--text-secondary)';
                     return `
                         <div class="card" style="border-left:4px solid ${color};">

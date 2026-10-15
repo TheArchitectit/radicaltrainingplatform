@@ -88,15 +88,15 @@ export class PcNetworkView extends BaseView {
         summary.style.cssText = 'display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-lg);margin:var(--space-lg) 0;';
         summary.innerHTML = `
             <div class="card"><div class="card-body" style="text-align:center;">
-                <div style="font-size:28px;font-weight:700;color:var(--prism-blue);">${vpcs.length}</div>
+                <div style="font-size:28px;font-weight:700;color:var(--text-link);">${vpcs.length}</div>
                 <div class="text-secondary text-sm">Total VPCs</div>
             </div></div>
             <div class="card"><div class="card-body" style="text-align:center;">
-                <div style="font-size:28px;font-weight:700;color:var(--status-good);">${state.getAll('subnets').length}</div>
+                <div style="font-size:28px;font-weight:700;color:var(--status-good-ink);">${state.getAll('subnets').length}</div>
                 <div class="text-secondary text-sm">Total Subnets</div>
             </div></div>
             <div class="card"><div class="card-body" style="text-align:center;">
-                <div style="font-size:28px;font-weight:700;color:var(--prism-blue);">${state.getAll('floating_ips').length}</div>
+                <div style="font-size:28px;font-weight:700;color:var(--text-link);">${state.getAll('floating_ips').length}</div>
                 <div class="text-secondary text-sm">Floating IPs</div>
             </div></div>
         `;
@@ -109,7 +109,7 @@ export class PcNetworkView extends BaseView {
                 { key: 'external_subnet', label: 'External Subnet' },
                 { key: 'dns_servers', label: 'DNS', render: v => (v || []).join(', ') || '—' },
                 { key: 'subnet_count', label: 'Subnets', render: (_, row) => state.getAll('subnets').filter(s => s.vpc_uuid === row.uuid).length },
-                { key: 'status', label: 'Status', render: v => `<span style="color:${v === 'active' ? 'var(--status-good)' : 'var(--status-warning)'};">${v}</span>` },
+                { key: 'status', label: 'Status', render: v => `<span style="color:${v === 'active' ? 'var(--status-good-ink)' : 'var(--status-warning-ink)'};">${v}</span>` },
             ],
             data: vpcs,
             searchKeys: ['name', 'cidr'],
@@ -153,7 +153,7 @@ export class PcNetworkView extends BaseView {
                 { key: 'ip', label: 'Floating IP' },
                 { key: 'vpc_name', label: 'VPC' },
                 { key: 'assigned_to', label: 'Assigned To', render: v => v || '<span class="text-secondary">Unassigned</span>' },
-                { key: 'status', label: 'Status', render: v => `<span style="color:${v === 'assigned' ? 'var(--status-good)' : 'var(--text-secondary)'};">${v}</span>` },
+                { key: 'status', label: 'Status', render: v => `<span style="color:${v === 'assigned' ? 'var(--status-good-ink)' : 'var(--text-secondary)'};">${v}</span>` },
             ],
             data: fips,
             searchKeys: ['ip', 'vpc_name', 'assigned_to'],

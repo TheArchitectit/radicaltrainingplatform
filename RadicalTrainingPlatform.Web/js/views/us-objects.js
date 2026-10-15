@@ -34,20 +34,20 @@ export class UsObjectsView extends BaseView {
 
             <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:var(--space-lg);margin-bottom:var(--space-xl);">
                 <div class="card"><div class="card-body" style="text-align:center;">
-                    <div style="font-size:28px;font-weight:700;color:var(--prism-blue);">${stores.length}</div>
+                    <div style="font-size:28px;font-weight:700;color:var(--text-link);">${stores.length}</div>
                     <div class="text-secondary text-sm">Object Stores</div>
                 </div></div>
                 <div class="card"><div class="card-body" style="text-align:center;">
-                    <div style="font-size:28px;font-weight:700;color:var(--prism-blue);">${buckets.length}</div>
+                    <div style="font-size:28px;font-weight:700;color:var(--text-link);">${buckets.length}</div>
                     <div class="text-secondary text-sm">Buckets</div>
                 </div></div>
                 <div class="card"><div class="card-body" style="text-align:center;">
-                    <div style="font-size:28px;font-weight:700;color:var(--status-warning);">${buckets.filter(b => b.worm_enabled).length}</div>
+                    <div style="font-size:28px;font-weight:700;color:var(--status-warning-ink);">${buckets.filter(b => b.worm_enabled).length}</div>
                     <div class="text-secondary text-sm">WORM Buckets</div>
-                    <div style="font-size:var(--font-size-xs);color:var(--status-warning);">⚠️ Irreversible</div>
+                    <div style="font-size:var(--font-size-xs);color:var(--status-warning-ink);">⚠️ Irreversible</div>
                 </div></div>
                 <div class="card"><div class="card-body" style="text-align:center;">
-                    <div style="font-size:28px;font-weight:700;color:var(--prism-blue);">${buckets.filter(b => b.versioning).length}</div>
+                    <div style="font-size:28px;font-weight:700;color:var(--text-link);">${buckets.filter(b => b.versioning).length}</div>
                     <div class="text-secondary text-sm">Versioned Buckets</div>
                 </div></div>
             </div>
@@ -87,7 +87,7 @@ export class UsObjectsView extends BaseView {
                 { key: 'store', label: 'Object Store' },
                 {
                     key: 'worm_enabled', label: 'WORM', sortable: true,
-                    render: (v) => v ? '<span style="color:var(--status-warning);font-weight:700;">🔒 LOCKED</span>' : '—'
+                    render: (v) => v ? '<span style="color:var(--status-warning-ink);font-weight:700;">🔒 LOCKED</span>' : '—'
                 },
                 { key: 'versioning', label: 'Versioning', render: (v) => v ? '✅' : '—' },
                 {
@@ -235,7 +235,7 @@ export class UsObjectsView extends BaseView {
                             <input type="checkbox" id="worm-check" ${data.worm_enabled ? 'checked' : ''} />
                             <label for="worm-check" style="cursor:pointer;">
                                 <strong>⚠️ Enable WORM (Write Once Read Many)</strong><br>
-                                <span style="color:var(--status-critical);font-size:12px;font-weight:700;">WARNING: This is IRREVERSIBLE. Once enabled, WORM cannot be disabled and objects cannot be deleted until retention expires.</span>
+                                <span style="color:var(--status-critical-ink);font-size:12px;font-weight:700;">WARNING: This is IRREVERSIBLE. Once enabled, WORM cannot be disabled and objects cannot be deleted until retention expires.</span>
                             </label>
                         </div>
                         <hr style="margin:16px 0;border:none;border-top:1px solid var(--border-light);">

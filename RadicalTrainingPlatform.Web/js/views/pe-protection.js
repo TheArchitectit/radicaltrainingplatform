@@ -34,7 +34,7 @@ export class PeProtectionView extends BaseView {
                         const colors = { async: 'good', nearsync: 'warning', metro: 'info' };
                         const labels = { async: 'Async DR', nearsync: 'NearSync', metro: 'Metro Availability' };
                         const cls = colors[v] || 'good';
-                        return `<span class="status-badge ${cls}" ${cls === 'info' ? 'style="background:var(--status-info-bg);color:var(--status-info);"' : ''}><span class="dot"></span>${labels[v] || v}</span>`;
+                        return `<span class="status-badge ${cls}" ${cls === 'info' ? 'style="background:var(--status-info-bg);color:var(--text-link);"' : ''}><span class="dot"></span>${labels[v] || v}</span>`;
                     }
                 },
                 {

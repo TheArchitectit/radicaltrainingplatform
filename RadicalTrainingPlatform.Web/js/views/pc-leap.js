@@ -47,7 +47,7 @@ export class PcLeapView extends BaseView {
                 {
                     key: 'categories', label: 'Categories',
                     render: (val) => (val || []).map(c =>
-                        `<span class="status-badge" style="background:var(--prism-blue-light);color:var(--prism-blue);font-size:11px;">${c.key}:${c.value}</span>`
+                        `<span class="status-badge" style="background:var(--prism-blue-light);color:var(--text-link);font-size:11px;">${c.key}:${c.value}</span>`
                     ).join(' ') || '<span class="text-secondary">None</span>'
                 },
                 {

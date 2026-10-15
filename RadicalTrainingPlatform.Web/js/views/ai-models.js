@@ -14,7 +14,7 @@ export class AiModelsView extends BaseView {
         return this.html(`
             <div class="view">
                 <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:var(--space-lg);">
-                    <h2 class="page-title">NAI Model Registry</h2>
+                    <h1 class="page-title">NAI Model Registry</h1>
                     <button class="btn btn-primary" id="register-model-btn">+ Register Model</button>
                 </div>
                 <div id="ai-models-summary"></div>
@@ -50,15 +50,15 @@ export class AiModelsView extends BaseView {
         container.innerHTML = `
             <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:var(--space-lg);">
                 <div class="card"><div class="card-body" style="text-align:center;">
-                    <div style="font-size:28px;font-weight:700;color:var(--prism-blue);">${models.length}</div>
+                    <div style="font-size:28px;font-weight:700;color:var(--text-link);">${models.length}</div>
                     <div class="text-secondary text-sm">Total Models</div>
                 </div></div>
                 <div class="card"><div class="card-body" style="text-align:center;">
-                    <div style="font-size:28px;font-weight:700;color:var(--status-good);">${deployed}</div>
+                    <div style="font-size:28px;font-weight:700;color:var(--status-good-ink);">${deployed}</div>
                     <div class="text-secondary text-sm">Deployed</div>
                 </div></div>
                 <div class="card"><div class="card-body" style="text-align:center;">
-                    <div style="font-size:28px;font-weight:700;color:var(--status-warning);">${available}</div>
+                    <div style="font-size:28px;font-weight:700;color:var(--status-warning-ink);">${available}</div>
                     <div class="text-secondary text-sm">Available</div>
                 </div></div>
                 <div class="card"><div class="card-body" style="text-align:center;">
@@ -83,7 +83,10 @@ export class AiModelsView extends BaseView {
                 {
                     key: 'status', label: 'Status', sortable: true,
                     render: (v) => {
-                        const colors = { deployed: 'var(--status-good)', available: 'var(--status-warning)', downloading: 'var(--prism-blue)' };
+                        // These are badge *fills* with inverse text on them, so they take the ink
+                        // readings: a fill that carries text has to be dark enough for it in both
+                        // themes, and these do not flip.
+                        const colors = { deployed: 'var(--status-good-ink)', available: 'var(--status-warning-ink)', downloading: 'var(--text-link)' };
                         return `<span class="badge" style="background:${colors[v] || 'var(--text-secondary)'};color:var(--text-inverse);">${v || 'unknown'}</span>`;
                     }
                 },

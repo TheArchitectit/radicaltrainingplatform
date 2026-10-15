@@ -84,19 +84,19 @@ export class PcLcmView extends BaseView {
         const software = items.filter(i => i.category === 'software').length;
         summary.innerHTML = `
             <div class="card"><div class="card-body" style="text-align:center;">
-                <div style="font-size:28px;font-weight:700;color:var(--prism-blue);">${items.length}</div>
+                <div style="font-size:28px;font-weight:700;color:var(--text-link);">${items.length}</div>
                 <div class="text-secondary text-sm">Total Components</div>
             </div></div>
             <div class="card"><div class="card-body" style="text-align:center;">
-                <div style="font-size:28px;font-weight:700;color:var(--status-good);">${upToDate}</div>
+                <div style="font-size:28px;font-weight:700;color:var(--status-good-ink);">${upToDate}</div>
                 <div class="text-secondary text-sm">Up to Date</div>
             </div></div>
             <div class="card"><div class="card-body" style="text-align:center;">
-                <div style="font-size:28px;font-weight:700;color:${needsUpdate > 0 ? 'var(--status-warning)' : 'var(--status-good)'};">${needsUpdate}</div>
+                <div style="font-size:28px;font-weight:700;color:${needsUpdate > 0 ? 'var(--status-warning-ink)' : 'var(--status-good-ink)'};">${needsUpdate}</div>
                 <div class="text-secondary text-sm">Updates Available</div>
             </div></div>
             <div class="card"><div class="card-body" style="text-align:center;">
-                <div style="font-size:28px;font-weight:700;color:var(--prism-blue);">${firmware} / ${software}</div>
+                <div style="font-size:28px;font-weight:700;color:var(--text-link);">${firmware} / ${software}</div>
                 <div class="text-secondary text-sm">Firmware / Software</div>
             </div></div>
         `;
@@ -108,9 +108,9 @@ export class PcLcmView extends BaseView {
                 { key: 'category', label: 'Category', render: v => `<span class="badge">${v}</span>` },
                 { key: 'entity', label: 'Entity' },
                 { key: 'current_version', label: 'Current Version' },
-                { key: 'available_version', label: 'Available Version', render: (v, row) => row.update_available ? `<span style="color:var(--status-warning);font-weight:600;">${v}</span>` : '<span class="text-secondary">—</span>' },
+                { key: 'available_version', label: 'Available Version', render: (v, row) => row.update_available ? `<span style="color:var(--status-warning-ink);font-weight:600;">${v}</span>` : '<span class="text-secondary">—</span>' },
                 { key: 'status', label: 'Status', render: v => {
-                    const colors = { 'up_to_date': 'var(--status-good)', 'update_available': 'var(--status-warning)', 'updating': 'var(--prism-blue)' };
+                    const colors = { 'up_to_date': 'var(--status-good-ink)', 'update_available': 'var(--status-warning-ink)', 'updating': 'var(--text-link)' };
                     const labels = { 'up_to_date': 'Up to Date', 'update_available': 'Update Available', 'updating': 'Updating...' };
                     return `<span style="color:${colors[v] || 'inherit'};">${labels[v] || v}</span>`;
                 }},
@@ -162,7 +162,7 @@ export class PcLcmView extends BaseView {
                 { key: 'from_version', label: 'From' },
                 { key: 'to_version', label: 'To' },
                 { key: 'status', label: 'Status', render: v => {
-                    const c = v === 'success' ? 'var(--status-good)' : v === 'failed' ? 'var(--status-critical)' : 'var(--status-warning)';
+                    const c = v === 'success' ? 'var(--status-good-ink)' : v === 'failed' ? 'var(--status-critical-ink)' : 'var(--status-warning-ink)';
                     return `<span style="color:${c};font-weight:600;">${v}</span>`;
                 }},
                 { key: 'completed_at', label: 'Completed', render: v => v ? new Date(v).toLocaleString() : '—' },

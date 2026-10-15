@@ -8,7 +8,14 @@
     --prism-blue: #22a5f7;
     --prism-blue-dark: #1a8cd8;
     --prism-blue-light: #e8f4fd;
-    --prism-blue-hover: #1b96e5;
+    --prism-blue-hover: #1478bd;
+    /* --prism-blue (#22a5f7) is a *light* blue: white on it measures 2.69:1 and
+       it measures 2.69:1 as text on a white card. Both are below AA, so it can
+       only carry white text or be read as text once it is deepened. This is the
+       prism blue deep enough to do either (5.38:1 with white, 4.99:1 on
+       --bg-page). Deliberately NOT overridden in the dark theme: the primary
+       button is the same fill in both themes, as it has always been. */
+    --prism-blue-strong: #0f6cbd;
 
     /* ── Neutral grays ── */
     --gray-50: #f5f6fa;
@@ -37,10 +44,36 @@
 
     /* ── Text ── */
     --text-primary: #22242f;
-    --text-secondary: #6b7185;
+    /* #6b7185 measured 4.495:1 on --bg-page — a hair under AA, and it is the
+       ink for secondary prose on exactly that surface. Deepened just enough to
+       clear it (4.91:1) without reading as a different grey. */
+    --text-secondary: #656b7e;
+    /* Text on a card/page surface — flips with the theme. Do NOT use this on
+       the app chrome; see --text-on-chrome. */
     --text-inverse: #ffffff;
-    --text-link: #22a5f7;
+    /* Links, and the light-theme reading of prism blue. #22a5f7 measured
+       2.69:1 on --bg-card and 2.61:1 on --bg-page — both below AA — so the
+       light theme reads a deepened blue (5.38:1 / 4.99:1). The dark theme
+       keeps the bright #4db8ff, which already passes on dark surfaces. */
+    --text-link: #0f6cbd;
     --text-disabled: #b8bdd1;
+    /* Ink for the amber "warning" pills (the tutor's recorded-example mode and
+       its insufficient-evidence/unavailable labels). The bright amber is
+       legible on the dark theme's near-black card but measured 1.65:1 on the
+       light theme's tinted pill, so the two themes read different inks. */
+    --text-warning-pill: #8a5300;
+
+    /* ── Foregrounds for the always-dark chrome ──
+       .header-bar, .pc-sidebar, .hamburger-overlay and the <option>s inside
+       them paint on backgrounds that stay dark in BOTH themes (#22242f-ish
+       light, #0d0f17-ish dark). --text-inverse flips to a dark ink in the dark
+       theme, which turned every one of those foregrounds dark-on-dark
+       (measured 1.05:1 on #context-label). These do not flip. */
+    --text-on-chrome: #ffffff;
+    --text-on-chrome-muted: #9096ad;
+    /* The active nav pill: its fill is the same brand blue in both themes, so
+       its foreground is fixed too. */
+    --text-on-accent: #131520;
 
     /* ── Borders ── */
     --border-light: #ebedf5;
@@ -56,6 +89,23 @@
     --status-critical-bg: #ffebe6;
     --status-info: #22a5f7;
     --status-info-bg: #e8f4fd;
+
+    /* Ink for text sitting on a tinted status chip. The --status-* colours above
+       are *fills* — capacity bars, the wizard's dot, toast rules — and as ink on
+       their own pastel chip they fail: #36b37e measured 2.46:1 on
+       --status-good-bg, #ffab00 1.81:1, #de350b 3.96:1. These are the same hues
+       deep enough to read on that tint. */
+    --status-good-ink: #0f7a4d;
+    --status-warning-ink: #8a5300;
+    --status-critical-ink: #b3261e;
+
+    /* study.css has always asked for --success/--danger and silently taken the
+       fallbacks, so these are the values it actually painted. The fallbacks
+       were never contrast-checked: #22c55e measured 2.11:1 on --bg-page and
+       #ef4444 3.49:1. The dark theme keeps them (7.07:1 on its card); the
+       light theme gets inks that clear AA. */
+    --success: #0f7a4d;
+    --danger: #c62828;
 
     /* ── Shadows ── */
     --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
@@ -133,6 +183,18 @@
     --text-inverse: #131520;
     --text-link: #4db8ff;
     --text-disabled: #4a4f63;
+    --text-warning-pill: #ffb020;
+
+    /* The dark theme keeps the greens/reds study.css was already painting via
+       its fallbacks — both clear AA on --bg-card (#1e2030). */
+    --success: #22c55e;
+    --danger: #ef4444;
+
+    /* Restated rather than inherited: the chrome stays dark here too, so these
+       must keep their light values in this theme. */
+    --text-on-chrome: #ffffff;
+    --text-on-chrome-muted: #9096ad;
+    --text-on-accent: #131520;
 
     --border-light: #2a2d42;
     --border-default: #353850;
@@ -142,6 +204,12 @@
     --status-warning-bg: #3d2e00;
     --status-critical-bg: #3d1008;
     --status-info-bg: #0d2a3d;
+
+    /* The dark chips are deep tints, so the ink moves the other way: the plain
+       --status-critical (#de350b) read 3.62:1 on --status-critical-bg. */
+    --status-good-ink: #36b37e;
+    --status-warning-ink: #ffb020;
+    --status-critical-ink: #ff6b6b;
 
     --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
     --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);

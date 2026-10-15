@@ -37,8 +37,17 @@ export class EntityTable {
             emptyIcon: '📋',
             searchKeys: [],
             selectable: false,
+            // Which column names a row. Used to give each row's checkbox and
+            // action button an accessible name that says *which* row it acts
+            // on — "Select" alone is not a name, it is the same name on every
+            // row (WCAG 1.3.1 / 4.1.2). Defaults to the first column, which is
+            // the name column by convention.
+            rowLabelKey: null,
             ...config,
         };
+        if (!this.#config.rowLabelKey) {
+            this.#config.rowLabelKey = this.#config.columns[0]?.key ?? 'uuid';
+        }
         this.#data = [...this.#config.data];
         this.#filtered = [...this.#data];
     }
@@ -72,8 +81,11 @@ export class EntityTable {
 
         // Search bar
         if (showSearch) {
+            // A placeholder is not a label: it is announced inconsistently and
+            // disappears the moment anything is typed. `aria-label` is the name
+            // (WCAG 4.1.2 / 3.3.2).
             html += `<div class="search-filter">
-                <input class="search-input" type="text" placeholder="Search..." value="${this.#escHtml(this.#searchTerm)}" />
+                <input class="search-input" type="text" placeholder="Search..." aria-label="Search this table" value="${this.#escHtml(this.#searchTerm)}" />
                 <span class="text-secondary text-sm">${this.#filtered.length} of ${this.#data.length} items</span>
             </div>`;
         }
@@ -87,7 +99,7 @@ export class EntityTable {
             html += '<div class="card"><table class="entity-table"><thead><tr>';
 
             if (selectable) {
-                html += `<th style="width:36px;"><input type="checkbox" class="select-all" ${this.#selected.size === this.#filtered.length ? 'checked' : ''} /></th>`;
+                html += `<th style="width:36px;"><input type="checkbox" class="select-all" aria-label="Select all rows" ${this.#selected.size === this.#filtered.length ? 'checked' : ''} /></th>`;
             }
 
             for (const col of columns) {
@@ -108,7 +120,8 @@ export class EntityTable {
                 html += `<tr data-id="${item.uuid}" class="${isSelected ? 'selected' : ''}">`;
 
                 if (selectable) {
-                    html += `<td><input type="checkbox" class="row-select" data-id="${item.uuid}" ${isSelected ? 'checked' : ''} /></td>`;
+                    html += `<td><input type="checkbox" class="row-select" data-id="${item.uuid}"`
+                        + ` aria-label="Select ${this.#rowLabel(item)}" ${isSelected ? 'checked' : ''} /></td>`;
                 }
 
                 for (const col of columns) {
@@ -118,7 +131,14 @@ export class EntityTable {
                 }
 
                 if (actions.length > 0) {
-                    html += `<td><button class="btn action-menu-btn" data-id="${item.uuid}" style="padding:2px 6px;font-size:16px;border:none;">⋯</button></td>`;
+                    // "⋯" is text, so this button *has* an accessible name as
+                    // far as a name computation is concerned — the gate's
+                    // control-name rule does not fire on it. But a name of "⋯"
+                    // tells a screen-reader user nothing, and it is the same
+                    // name on every row. Named after the row instead.
+                    html += `<td><button class="btn action-menu-btn" data-id="${item.uuid}"`
+                        + ` aria-label="Actions for ${this.#rowLabel(item)}"`
+                        + ` style="padding:2px 6px;font-size:16px;border:none;">⋯</button></td>`;
                 }
 
                 html += '</tr>';
@@ -224,7 +244,7 @@ export class EntityTable {
             actionBtn.style.cssText = `
                 display: block; width: 100%; text-align: left; padding: 8px 16px;
                 border: none; background: none; cursor: pointer; font-size: 13px;
-                color: ${action.danger ? 'var(--status-critical)' : 'var(--text-primary)'};
+                color: ${action.danger ? 'var(--status-critical-ink)' : 'var(--text-primary)'};
             `;
             actionBtn.addEventListener('mouseenter', () => actionBtn.style.background = 'var(--bg-table-row-hover)');
             actionBtn.addEventListener('mouseleave', () => actionBtn.style.background = 'none');
@@ -267,6 +287,12 @@ export class EntityTable {
         }
 
         this.#filtered = result;
+    }
+
+    /** A row's human-readable identity, for naming the controls on it. */
+    #rowLabel(item) {
+        const raw = item[this.#config.rowLabelKey] ?? item.uuid ?? 'this row';
+        return this.#escHtml(String(raw));
     }
 
     #escHtml(str) {

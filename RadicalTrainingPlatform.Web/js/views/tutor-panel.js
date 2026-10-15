@@ -69,7 +69,7 @@ export class TutorPanel {
         panel.id = 'tutor-panel';
         panel.innerHTML = `
             <div class="tutor-head">
-                <h3 class="tutor-title">Study coach</h3>
+                <h2 class="tutor-title">Study coach</h2>
                 <span class="tutor-mode" id="tutor-mode"></span>
             </div>
             <p class="tutor-frame" id="tutor-frame"></p>

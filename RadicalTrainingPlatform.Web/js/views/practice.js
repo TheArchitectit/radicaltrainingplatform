@@ -167,7 +167,7 @@ export class PracticeView extends BaseView {
         return `
             <div class="practice-feedback-inner">
                 ${verdict}
-                <div class="explanation"><h4>Why</h4><p>${item.explanation}</p></div>
+                <div class="explanation"><h2>Why</h2><p>${item.explanation}</p></div>
                 <button class="study-button" id="practice-next">
                     ${this.#index + 1 < this.#queue.length ? 'Next question ›' : 'See results ›'}
                 </button>

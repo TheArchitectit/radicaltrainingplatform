@@ -31,28 +31,28 @@ export class PeDashboardView extends BaseView {
             <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-lg); margin-bottom: var(--space-xl);">
                 <div class="card">
                     <div class="card-body" style="text-align:center;">
-                        <div style="font-size: 32px; font-weight: 700; color: var(--status-good);">${runningVMs}</div>
+                        <div style="font-size: 32px; font-weight: 700; color: var(--status-good-ink);">${runningVMs}</div>
                         <div class="text-secondary text-sm">VMs Running</div>
                         <div class="text-secondary" style="font-size:var(--font-size-xs);">${vms.length} total</div>
                     </div>
                 </div>
                 <div class="card">
                     <div class="card-body" style="text-align:center;">
-                        <div style="font-size: 32px; font-weight: 700; color: var(--prism-blue);">${hosts.length}</div>
+                        <div style="font-size: 32px; font-weight: 700; color: var(--text-link);">${hosts.length}</div>
                         <div class="text-secondary text-sm">Hosts</div>
                         <div class="text-secondary" style="font-size:var(--font-size-xs);">All healthy</div>
                     </div>
                 </div>
                 <div class="card">
                     <div class="card-body" style="text-align:center;">
-                        <div style="font-size: 32px; font-weight: 700; color: ${alerts.length > 0 ? 'var(--status-warning)' : 'var(--status-good)'};">${alerts.length}</div>
+                        <div style="font-size: 32px; font-weight: 700; color: ${alerts.length > 0 ? 'var(--status-warning-ink)' : 'var(--status-good-ink)'};">${alerts.length}</div>
                         <div class="text-secondary text-sm">Active Alerts</div>
                         <div class="text-secondary" style="font-size:var(--font-size-xs);">${alerts.filter(a => a.severity === 'critical').length} critical</div>
                     </div>
                 </div>
                 <div class="card">
                     <div class="card-body" style="text-align:center;">
-                        <div style="font-size: 32px; font-weight: 700; color: var(--prism-blue);">${containers.length}</div>
+                        <div style="font-size: 32px; font-weight: 700; color: var(--text-link);">${containers.length}</div>
                         <div class="text-secondary text-sm">Containers</div>
                         <div class="text-secondary" style="font-size:var(--font-size-xs);">${networks.length} networks</div>
                     </div>

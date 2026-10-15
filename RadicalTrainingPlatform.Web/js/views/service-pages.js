@@ -42,19 +42,19 @@ export class ServicePagesView extends BaseView {
                     </div>
                     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:var(--space-lg);">
                         <div style="padding:16px;background:var(--bg-secondary);border-radius:6px;text-align:center;">
-                            <div style="font-size:24px;font-weight:700;color:var(--status-good);">Healthy</div>
+                            <div style="font-size:24px;font-weight:700;color:var(--status-good-ink);">Healthy</div>
                             <div class="text-secondary text-sm">Service Status</div>
                         </div>
                         <div style="padding:16px;background:var(--bg-secondary);border-radius:6px;text-align:center;">
-                            <div style="font-size:24px;font-weight:700;color:var(--prism-blue);">4</div>
+                            <div style="font-size:24px;font-weight:700;color:var(--text-link);">4</div>
                             <div class="text-secondary text-sm">Active Instances</div>
                         </div>
                         <div style="padding:16px;background:var(--bg-secondary);border-radius:6px;text-align:center;">
-                            <div style="font-size:24px;font-weight:700;color:var(--prism-blue);">12.4 ms</div>
+                            <div style="font-size:24px;font-weight:700;color:var(--text-link);">12.4 ms</div>
                             <div class="text-secondary text-sm">Avg I/O Latency</div>
                         </div>
                     </div>
-                    <h4>I/O Statistics</h4>
+                    <h2>I/O Statistics</h2>
                     <table style="width:100%;border-collapse:collapse;font-size:var(--font-size-sm);margin-top:8px;">
                         <thead><tr style="background:var(--bg-secondary);border-bottom:2px solid var(--border-light);">
                             <th style="padding:8px 12px;text-align:left;">Metric</th>
@@ -88,19 +88,19 @@ export class ServicePagesView extends BaseView {
                     </div>
                     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:var(--space-lg);">
                         <div style="padding:16px;background:var(--bg-secondary);border-radius:6px;text-align:center;">
-                            <div style="font-size:24px;font-weight:700;color:var(--status-good);">Idle</div>
+                            <div style="font-size:24px;font-weight:700;color:var(--status-good-ink);">Idle</div>
                             <div class="text-secondary text-sm">Scan Status</div>
                         </div>
                         <div style="padding:16px;background:var(--bg-secondary);border-radius:6px;text-align:center;">
-                            <div style="font-size:24px;font-weight:700;color:var(--prism-blue);">CVM-01</div>
+                            <div style="font-size:24px;font-weight:700;color:var(--text-link);">CVM-01</div>
                             <div class="text-secondary text-sm">Curator Master</div>
                         </div>
                         <div style="padding:16px;background:var(--bg-secondary);border-radius:6px;text-align:center;">
-                            <div style="font-size:24px;font-weight:700;color:var(--prism-blue);">14m ago</div>
+                            <div style="font-size:24px;font-weight:700;color:var(--text-link);">14m ago</div>
                             <div class="text-secondary text-sm">Last Full Scan</div>
                         </div>
                     </div>
-                    <h4>Recent Scans</h4>
+                    <h2>Recent Scans</h2>
                     <table style="width:100%;border-collapse:collapse;font-size:var(--font-size-sm);margin-top:8px;">
                         <thead><tr style="background:var(--bg-secondary);border-bottom:2px solid var(--border-light);">
                             <th style="padding:8px 12px;text-align:left;">Scan Type</th>
@@ -114,7 +114,7 @@ export class ServicePagesView extends BaseView {
                             <tr><td style="padding:6px 12px;">Selective</td><td><span class="status-badge good"><span class="dot"></span>Completed</span></td><td style="text-align:right;">0m 12s</td><td style="text-align:right;">1,205</td></tr>
                         </tbody>
                     </table>
-                    <h4 style="margin-top:var(--space-lg);">Background Tasks</h4>
+                    <h2 style="margin-top:var(--space-lg);">Background Tasks</h2>
                     <table style="width:100%;border-collapse:collapse;font-size:var(--font-size-sm);margin-top:8px;">
                         <thead><tr style="background:var(--bg-secondary);border-bottom:2px solid var(--border-light);">
                             <th style="padding:8px 12px;text-align:left;">Task</th>
@@ -145,19 +145,19 @@ export class ServicePagesView extends BaseView {
                     </div>
                     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:var(--space-lg);">
                         <div style="padding:16px;background:var(--bg-secondary);border-radius:6px;text-align:center;">
-                            <div style="font-size:24px;font-weight:700;color:var(--status-good);">Active</div>
+                            <div style="font-size:24px;font-weight:700;color:var(--status-good-ink);">Active</div>
                             <div class="text-secondary text-sm">Replication Status</div>
                         </div>
                         <div style="padding:16px;background:var(--bg-secondary);border-radius:6px;text-align:center;">
-                            <div style="font-size:24px;font-weight:700;color:var(--prism-blue);">3</div>
+                            <div style="font-size:24px;font-weight:700;color:var(--text-link);">3</div>
                             <div class="text-secondary text-sm">Protection Domains</div>
                         </div>
                         <div style="padding:16px;background:var(--bg-secondary);border-radius:6px;text-align:center;">
-                            <div style="font-size:24px;font-weight:700;color:var(--prism-blue);">0</div>
+                            <div style="font-size:24px;font-weight:700;color:var(--text-link);">0</div>
                             <div class="text-secondary text-sm">Replication Failures</div>
                         </div>
                     </div>
-                    <h4>Replication Streams</h4>
+                    <h2>Replication Streams</h2>
                     <table style="width:100%;border-collapse:collapse;font-size:var(--font-size-sm);margin-top:8px;">
                         <thead><tr style="background:var(--bg-secondary);border-bottom:2px solid var(--border-light);">
                             <th style="padding:8px 12px;text-align:left;">PD</th>

@@ -31,6 +31,9 @@ export class PcDashboardView extends BaseView {
         const usedMem = vms.filter(v => v.power_state === 'on').reduce((s, v) => s + v.memory_gb, 0);
         const memPct = totalMem > 0 ? Math.round((usedMem / totalMem) * 100) : 0;
 
+        // The summary cards pass ink tokens: `#card` paints its figure *in* the
+        // colour it is handed, so these are text. The gauges below pass the same
+        // families to an SVG `stroke`, where the saturated fill is correct.
         return this.html(`
             <div class="page-title">
                 <h1>Prism Central Dashboard</h1>
@@ -39,11 +42,11 @@ export class PcDashboardView extends BaseView {
 
             <!-- Cluster Summary -->
             <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:var(--space-lg);margin-bottom:var(--space-xl);">
-                ${this.#card('Clusters', '1', 'var(--prism-blue)', cluster.name)}
-                ${this.#card('VMs', `${runningVMs}/${vms.length}`, 'var(--status-good)', `${runningVMs} running`)}
-                ${this.#card('Hosts', hosts.length, 'var(--prism-blue)', 'All healthy')}
-                ${this.#card('Alerts', alerts.length, alerts.length > 0 ? 'var(--status-warning)' : 'var(--status-good)', `${alerts.filter(a => a.severity === 'critical').length} critical`)}
-                ${this.#card('Policies', flowPolicies.length, 'var(--prism-blue)', `${flowPolicies.filter(p => p.mode === 'applied').length} enforced`)}
+                ${this.#card('Clusters', '1', 'var(--text-link)', cluster.name)}
+                ${this.#card('VMs', `${runningVMs}/${vms.length}`, 'var(--status-good-ink)', `${runningVMs} running`)}
+                ${this.#card('Hosts', hosts.length, 'var(--text-link)', 'All healthy')}
+                ${this.#card('Alerts', alerts.length, alerts.length > 0 ? 'var(--status-warning-ink)' : 'var(--status-good-ink)', `${alerts.filter(a => a.severity === 'critical').length} critical`)}
+                ${this.#card('Policies', flowPolicies.length, 'var(--text-link)', `${flowPolicies.filter(p => p.mode === 'applied').length} enforced`)}
             </div>
 
             <!-- Resource Utilization (SVG Gauges) -->

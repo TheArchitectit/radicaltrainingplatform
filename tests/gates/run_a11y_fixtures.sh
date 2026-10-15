@@ -20,12 +20,18 @@
 #     K. an <img> with no alt                   — 1.1.1
 #     L. no lang on <html>                      — 3.1.1
 #     M. a prose link distinguished by colour alone — 1.4.1
+#     U. a table row checkbox with no accessible name — 4.1.2
 #
 #   App-shell rules (against fixtures/a11y/shell/, which has a #view-container):
 #     N. a modal with no dialog semantics       — 4.1.2 / 2.4.3
 #     O. a modal with no Tab trap               — 2.4.3
 #     P. a theme toggle that ignores the OS     — S35-05
 #     Q. a closed overlay that is hidden but not inert — S35-07
+#     V. a hamburger whose aria-expanded never changes — 4.1.2
+#     W. a theme toggle whose aria-pressed never changes — 4.1.2
+#     X. an error toast that is not role="alert"       — 4.1.3
+#     Y. a route the sweep cannot render (the gate's own coverage tripwire)
+#     Z. routes the gate's own discovery would miss  (both guards)
 #
 # Passing fixtures:
 #     R. the unmodified page fixture
@@ -202,6 +208,21 @@ seed "$M/page.html" '</style>' '    a { text-decoration: none; }
 </style>'
 must_fail "a prose link distinguished by colour alone" "link-in-text-block" "$M" page.html
 
+# ── U. a table row checkbox with no accessible name ─────────────────────────
+# Found by widening the gate's route list to the two routes whose EntityTable is
+# selectable. The shell is where the unnamed controls were not, so this rule
+# needs a fixture of its own or the widened coverage would rest on the routes
+# alone. (The sibling defect — the `⋯` action button, named "⋯" rather than after
+# its row — is NOT detectable by this gate: a text run is a name as far as the
+# accname computation goes. It is fixed in EntityTable.js and reported as
+# unmeasured, not claimed as verified.)
+U="$(make_case no-row-name "$FIXTURES")"
+seed "$U/page.html" \
+    '<input type="checkbox" class="row-select" aria-label="Select vm-01">' \
+    '<input type="checkbox" class="row-select">'
+must_fail "a table row checkbox with no accessible name" \
+    'row-select has no accessible name' "$U" page.html
+
 # ── N. a modal with no dialog semantics ─────────────────────────────────────
 N="$(make_case bad-dialog "$FIXTURES/shell")"
 seed "$N/js/components/Confirm.js" \
@@ -251,6 +272,75 @@ seed "$Q/page.html" \
     "        if (overlay.hasAttribute('inert')) overlay.removeAttribute('inert');"
 must_fail "a closed overlay that is still in the tab order" \
     'the closed hamburger overlay is still reachable' "$Q" page.html
+
+# ── V. a hamburger whose aria-expanded never changes ────────────────────────
+# The overlay still opens and closes correctly and still goes inert, so the
+# overlay checks pass — the only thing broken is the control's report of its own
+# state, which is exactly what nothing else measures.
+V="$(make_case stale-expanded "$FIXTURES/shell")"
+seed "$V/page.html" \
+    "        button.setAttribute('aria-expanded', String(!overlay.hasAttribute('inert')));
+" ''
+must_fail "a hamburger button that never reports its own state" \
+    'the hamburger button does not track the overlay' "$V" page.html
+
+# ── W. a theme toggle whose aria-pressed never changes ──────────────────────
+W="$(make_case stale-pressed "$FIXTURES/shell")"
+seed "$W/js/components/ThemeToggle.js" \
+    "    if (btn) btn.setAttribute('aria-pressed', theme === 'dark' ? 'true' : 'false');
+" ''
+must_fail "a theme toggle that never reports its own state" \
+    'the theme toggle does not track the theme' "$W" page.html
+
+# ── X. an error toast announced like any other ──────────────────────────────
+# The toast still lands in the live region with a named dismiss control, so the
+# polite path works — but a failure is announced no differently from a success.
+X="$(make_case flat-toast "$FIXTURES/shell")"
+seed "$X/js/components/Toast.js" \
+    "        if (type === 'error') toast.setAttribute('role', 'alert');
+" ''
+must_fail "an error toast announced like any other" \
+    'an error toast is not role="alert"' "$X" page.html
+
+# ── Y. a route the sweep cannot render ──────────────────────────────────────
+# The shell exists (so the gate takes the app-shell path) but nothing ever
+# renders into it, which is what `/pc/api` did: `navigate` timed out, the throw
+# escaped the per-route loop into the outer catch, and 34 of 54 routes were
+# never audited while the summary still read as a completed sweep. This fixture
+# asserts both halves of the repair — the route is reported as not rendering,
+# AND the coverage tripwire notices that the sweep fell short of its own list.
+Y="$(make_case unrendered "$FIXTURES/shell")"
+seed "$Y/page.html" \
+    '<main id="view-container">
+    <h1>Shell fixture</h1>
+    <p>Fixture content.</p>
+</main>' \
+    '<main id="view-container"></main>'
+must_fail "a route that never renders" \
+    'did not render' "$Y" page.html
+must_fail "a sweep that covered fewer routes than it was given" \
+    'were never audited' "$Y" page.html
+
+# ── Z. routes the gate's own discovery would miss ───────────────────────────
+# The gate reads the route list out of `js/app.js` instead of carrying a
+# hand-written one, so discovery is now a thing that can be wrong. Both ways it
+# can drop a view are proved here: a registration it cannot parse, and a
+# parameterized route with no concrete instance to audit.
+Z="$(make_case lost-routes "$FIXTURES/shell")"
+mkdir -p "$Z/js"
+cat > "$Z/js/app.js" <<'JS'
+// Fixture router table. `/ghost/:id` has no concrete instance in the gate's
+// PARAMETERIZED_TARGETS, and GHOST_ROUTE is built from a variable so the gate's
+// path regex cannot see it — one fixture, both discovery guards.
+const GHOST_ROUTE = '/ghost-static';
+router.register('/tracks', TrackPickerView);
+router.register('/ghost/:id', GhostView);
+router.register(GHOST_ROUTE, GhostStaticView);
+JS
+must_fail "a registered route with no concrete instance to audit" \
+    'they would never be audited' "$Z" page.html
+must_fail "a registration the gate's route parser cannot read" \
+    'could not be parsed' "$Z" page.html
 
 # ── T. the repository tree, every route, both themes ────────────────────────
 if "${GATE[@]}" >/dev/null 2>&1; then

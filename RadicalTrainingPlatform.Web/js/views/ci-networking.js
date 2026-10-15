@@ -35,7 +35,7 @@ export class CiNetworkingView extends BaseView {
                 </div>
             ` : `
                 <div class="form-group" style="max-width:400px;margin-bottom:var(--space-xl);">
-                    <label class="form-label">Select Cluster</label>
+                    <label class="form-label" for="cluster-select">Select Cluster</label>
                     <select class="form-input" id="cluster-select">
                         ${clusters.map((c, i) => `<option value="${c.uuid}" ${i === 0 ? 'selected' : ''}>${c.name} (${c.provider} — ${c.region})</option>`).join('')}
                     </select>
@@ -182,7 +182,7 @@ VNet (custom address space)
         container.innerHTML = `
             <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:var(--space-lg);margin-bottom:var(--space-xl);">
                 <div class="card"><div class="card-body" style="text-align:center;">
-                    <div style="font-size:24px;font-weight:700;color:var(--prism-blue);">🟠 AWS</div>
+                    <div style="font-size:24px;font-weight:700;color:var(--text-link);">🟠 AWS</div>
                     <div class="text-secondary text-sm">${c.region}</div>
                 </div></div>
                 <div class="card"><div class="card-body" style="text-align:center;">
@@ -260,7 +260,7 @@ VNet (custom address space)
         container.innerHTML = `
             <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:var(--space-lg);margin-bottom:var(--space-xl);">
                 <div class="card"><div class="card-body" style="text-align:center;">
-                    <div style="font-size:24px;font-weight:700;color:var(--prism-blue);">🔵 Azure</div>
+                    <div style="font-size:24px;font-weight:700;color:var(--text-link);">🔵 Azure</div>
                     <div class="text-secondary text-sm">${c.region}</div>
                 </div></div>
                 <div class="card"><div class="card-body" style="text-align:center;">
@@ -272,11 +272,11 @@ VNet (custom address space)
                     <div class="text-secondary text-sm">Delegated Subnet (/24 min)</div>
                 </div></div>
                 <div class="card"><div class="card-body" style="text-align:center;">
-                    <div style="font-size:24px;font-weight:700;color:var(--prism-blue);">${c.flow_gateway_count}</div>
+                    <div style="font-size:24px;font-weight:700;color:var(--text-link);">${c.flow_gateway_count}</div>
                     <div class="text-secondary text-sm">Flow Gateways (ECMP)</div>
                 </div></div>
                 <div class="card"><div class="card-body" style="text-align:center;">
-                    <div style="font-size:20px;font-weight:700;color:${c.network_mode === 'noNAT' ? 'var(--status-good)' : 'var(--status-warning)'};">${c.network_mode}</div>
+                    <div style="font-size:20px;font-weight:700;color:${c.network_mode === 'noNAT' ? 'var(--status-good-ink)' : 'var(--status-warning-ink)'};">${c.network_mode}</div>
                     <div class="text-secondary text-sm">Mode (🔒 irreversible)</div>
                 </div></div>
             </div>

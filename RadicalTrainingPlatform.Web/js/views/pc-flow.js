@@ -36,19 +36,19 @@ export class PcFlowView extends BaseView {
         summary.style.cssText = 'display:grid;grid-template-columns:repeat(4,1fr);gap:var(--space-lg);margin-bottom:var(--space-xl);';
         summary.innerHTML = `
             <div class="card"><div class="card-body" style="text-align:center;">
-                <div style="font-size:28px;font-weight:700;color:var(--prism-blue);">${policies.length}</div>
+                <div style="font-size:28px;font-weight:700;color:var(--text-link);">${policies.length}</div>
                 <div class="text-secondary text-sm">Total Policies</div>
             </div></div>
             <div class="card"><div class="card-body" style="text-align:center;">
-                <div style="font-size:28px;font-weight:700;color:var(--status-good);">${applied}</div>
+                <div style="font-size:28px;font-weight:700;color:var(--status-good-ink);">${applied}</div>
                 <div class="text-secondary text-sm">Applied (Enforced)</div>
             </div></div>
             <div class="card"><div class="card-body" style="text-align:center;">
-                <div style="font-size:28px;font-weight:700;color:var(--status-warning);">${monitoring}</div>
+                <div style="font-size:28px;font-weight:700;color:var(--status-warning-ink);">${monitoring}</div>
                 <div class="text-secondary text-sm">Monitoring</div>
             </div></div>
             <div class="card"><div class="card-body" style="text-align:center;">
-                <div style="font-size:28px;font-weight:700;color:var(--prism-blue);">${this.#countAffectedVMs(policies)}</div>
+                <div style="font-size:28px;font-weight:700;color:var(--text-link);">${this.#countAffectedVMs(policies)}</div>
                 <div class="text-secondary text-sm">Affected VMs</div>
             </div></div>
         `;
@@ -76,7 +76,7 @@ export class PcFlowView extends BaseView {
                     key: 'target_categories', label: 'Target',
                     render: (val) => {
                         if (!val || val.length === 0) return '<span class="text-secondary">All VMs</span>';
-                        return val.map(c => `<span class="status-badge" style="background:var(--prism-blue-light);color:var(--prism-blue);font-size:11px;">${c.key}:${c.value}</span>`).join(' ');
+                        return val.map(c => `<span class="status-badge" style="background:var(--prism-blue-light);color:var(--text-link);font-size:11px;">${c.key}:${c.value}</span>`).join(' ');
                     }
                 },
                 {

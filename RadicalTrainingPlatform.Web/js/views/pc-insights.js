@@ -43,25 +43,25 @@ export class PcInsightsView extends BaseView {
                 <div class="card">
                     <div class="card-body" style="text-align:center;">
                         <div class="text-secondary text-sm">Total Insights</div>
-                        <div style="font-size:1.8rem;font-weight:700;color:var(--prism-blue);">${recs.length}</div>
+                        <div style="font-size:1.8rem;font-weight:700;color:var(--text-link);">${recs.length}</div>
                     </div>
                 </div>
                 <div class="card">
                     <div class="card-body" style="text-align:center;">
                         <div class="text-secondary text-sm">Critical Actions</div>
-                        <div style="font-size:1.8rem;font-weight:700;color:var(--status-critical);">${criticalCount}</div>
+                        <div style="font-size:1.8rem;font-weight:700;color:var(--status-critical-ink);">${criticalCount}</div>
                     </div>
                 </div>
                 <div class="card">
                     <div class="card-body" style="text-align:center;">
                         <div class="text-secondary text-sm">Optimizations</div>
-                        <div style="font-size:1.8rem;font-weight:700;color:var(--status-warning);">${optimizationCount}</div>
+                        <div style="font-size:1.8rem;font-weight:700;color:var(--status-warning-ink);">${optimizationCount}</div>
                     </div>
                 </div>
                 <div class="card">
                     <div class="card-body" style="text-align:center;">
                         <div class="text-secondary text-sm">Anomalies Detected</div>
-                        <div style="font-size:1.8rem;font-weight:700;color:var(--status-critical);">${anoms.length}</div>
+                        <div style="font-size:1.8rem;font-weight:700;color:var(--status-critical-ink);">${anoms.length}</div>
                     </div>
                 </div>
             </div>
@@ -167,18 +167,18 @@ export class PcInsightsView extends BaseView {
                 { key: 'entity', label: 'Entity' },
                 { key: 'metric', label: 'Metric' },
                 { key: 'expected', label: 'Expected' },
-                { key: 'actual', label: 'Actual', render: (val) => `<span style="color:var(--status-critical);font-weight:600;">${val}</span>` },
+                { key: 'actual', label: 'Actual', render: (val) => `<span style="color:var(--status-critical-ink);font-weight:600;">${val}</span>` },
                 {
                     key: 'deviation', label: 'Deviation %', render: (val) => {
                         const num = parseFloat(val);
-                        const color = num > 100 ? 'var(--status-critical)' : 'var(--status-warning)';
+                        const color = num > 100 ? 'var(--status-critical-ink)' : 'var(--status-warning-ink)';
                         return `<span style="color:${color};font-weight:600;">${val}</span>`;
                     }
                 },
                 { key: 'detectedAt', label: 'Detected At' },
                 {
                     key: 'status', label: 'Status', render: (val) => {
-                        const color = val === 'active' ? 'var(--status-critical)' : 'var(--status-warning)';
+                        const color = val === 'active' ? 'var(--status-critical-ink)' : 'var(--status-warning-ink)';
                         return `<span class="badge" style="background:${color};color:var(--text-inverse);">${val}</span>`;
                     }
                 }

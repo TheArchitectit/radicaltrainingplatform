@@ -113,8 +113,10 @@ export class PcSettingsView extends BaseView {
     }
 
     #field(label, value, id, type = 'text', disabled = false) {
+        // The label is wired to its input with `for` — without it the field has
+        // no accessible name, and a screen reader announces only "edit text".
         return `<div style="margin-bottom:var(--space-md);">
-            <label style="display:block;font-weight:600;margin-bottom:4px;">${label}</label>
+            <label for="${id}" style="display:block;font-weight:600;margin-bottom:4px;">${label}</label>
             <input type="${type}" id="${id}" value="${value || ''}" ${disabled ? 'disabled' : ''}
                    style="width:100%;padding:8px;border:1px solid var(--border-subtle);border-radius:4px;background:var(--surface-secondary);color:var(--text-primary);"/>
         </div>`;
@@ -122,7 +124,7 @@ export class PcSettingsView extends BaseView {
 
     #toggle(label, checked, id) {
         return `<div style="margin-bottom:var(--space-md);display:flex;align-items:center;gap:12px;">
-            <label style="font-weight:600;">${label}</label>
+            <label for="${id}" style="font-weight:600;">${label}</label>
             <label class="switch" style="position:relative;display:inline-block;width:44px;height:24px;">
                 <input type="checkbox" id="${id}" ${checked ? 'checked' : ''} style="opacity:0;width:0;height:0;">
                 <span style="position:absolute;cursor:pointer;top:0;left:0;right:0;bottom:0;background:${checked ? 'var(--prism-blue)' : 'var(--border-subtle)'};border-radius:12px;transition:.3s;">
@@ -149,7 +151,7 @@ export class PcSettingsView extends BaseView {
         return `<div class="card-header">NTP Servers</div><div class="card-body">
             <p class="text-secondary text-sm" style="margin-bottom:var(--space-md);">Configure Network Time Protocol servers for clock synchronization. One server per line.</p>
             <div style="margin-bottom:var(--space-md);">
-                <label style="display:block;font-weight:600;margin-bottom:4px;">NTP Servers</label>
+                <label for="set-ntp" style="display:block;font-weight:600;margin-bottom:4px;">NTP Servers</label>
                 <textarea id="set-ntp" rows="4" style="width:100%;padding:8px;border:1px solid var(--border-subtle);border-radius:4px;background:var(--surface-secondary);color:var(--text-primary);font-family:monospace;">${servers}</textarea>
             </div>
             ${this.#saveBtn()}
@@ -161,7 +163,7 @@ export class PcSettingsView extends BaseView {
         return `<div class="card-header">Name Servers (DNS)</div><div class="card-body">
             <p class="text-secondary text-sm" style="margin-bottom:var(--space-md);">Configure DNS servers for name resolution. One server per line.</p>
             <div style="margin-bottom:var(--space-md);">
-                <label style="display:block;font-weight:600;margin-bottom:4px;">DNS Servers</label>
+                <label for="set-dns" style="display:block;font-weight:600;margin-bottom:4px;">DNS Servers</label>
                 <textarea id="set-dns" rows="4" style="width:100%;padding:8px;border:1px solid var(--border-subtle);border-radius:4px;background:var(--surface-secondary);color:var(--text-primary);font-family:monospace;">${servers}</textarea>
             </div>
             ${this.#saveBtn()}
@@ -175,7 +177,7 @@ export class PcSettingsView extends BaseView {
             ${this.#field('Port', cfg.smtp_port, 'set-smtp-port', 'number')}
             ${this.#field('From Address', cfg.smtp_from, 'set-smtp-from', 'email')}
             <div style="margin-bottom:var(--space-md);">
-                <label style="display:block;font-weight:600;margin-bottom:4px;">Security Mode</label>
+                <label for="set-smtp-sec" style="display:block;font-weight:600;margin-bottom:4px;">Security Mode</label>
                 <select id="set-smtp-sec" style="width:100%;padding:8px;border:1px solid var(--border-subtle);border-radius:4px;background:var(--surface-secondary);color:var(--text-primary);">
                     <option value="none" ${cfg.smtp_security === 'none' ? 'selected' : ''}>None</option>
                     <option value="starttls" ${cfg.smtp_security === 'starttls' ? 'selected' : ''}>STARTTLS</option>
@@ -203,7 +205,7 @@ export class PcSettingsView extends BaseView {
                 </div>
                 <div>
                     <div class="text-secondary text-sm">Status</div>
-                    <div style="color:var(--status-good);font-weight:600;">✅ Valid</div>
+                    <div style="color:var(--status-good-ink);font-weight:600;">✅ Valid</div>
                 </div>
             </div>
             <p class="text-secondary text-sm">To replace the SSL certificate, upload a new PEM-encoded certificate and private key.</p>
@@ -220,7 +222,7 @@ export class PcSettingsView extends BaseView {
                 <div class="card-body">
                     <div style="font-weight:600;margin-bottom:8px;">📡 Pulse Status</div>
                     <div class="text-secondary text-sm">Last transmission: ${new Date().toLocaleString()}</div>
-                    <div class="text-secondary text-sm">Connection: <span style="color:var(--status-good);">Connected</span></div>
+                    <div class="text-secondary text-sm">Connection: <span style="color:var(--status-good-ink);">Connected</span></div>
                 </div>
             </div>
             ${this.#saveBtn()}
@@ -232,7 +234,7 @@ export class PcSettingsView extends BaseView {
             <p class="text-secondary text-sm" style="margin-bottom:var(--space-lg);">SCMA continuously monitors security configuration settings against STIG baselines and automatically remediates drift.</p>
             ${this.#toggle('Enable SCMA', cfg.scma_enabled, 'set-scma')}
             <div style="margin-bottom:var(--space-md);">
-                <label style="display:block;font-weight:600;margin-bottom:4px;">Check Schedule</label>
+                <label for="set-scma-sched" style="display:block;font-weight:600;margin-bottom:4px;">Check Schedule</label>
                 <select id="set-scma-sched" style="width:100%;padding:8px;border:1px solid var(--border-subtle);border-radius:4px;background:var(--surface-secondary);color:var(--text-primary);">
                     <option value="hourly" ${cfg.scma_schedule === 'hourly' ? 'selected' : ''}>Hourly</option>
                     <option value="daily" ${cfg.scma_schedule === 'daily' ? 'selected' : ''}>Daily</option>
@@ -244,7 +246,7 @@ export class PcSettingsView extends BaseView {
                     <div style="font-weight:600;margin-bottom:8px;">🔒 SCMA Status</div>
                     <div class="text-secondary text-sm">Baseline: DISA STIG v2r3</div>
                     <div class="text-secondary text-sm">Last check: ${cfg.scma_enabled ? new Date().toLocaleString() : 'N/A'}</div>
-                    <div class="text-secondary text-sm">Compliance: <span style="color:${cfg.scma_enabled ? 'var(--status-good)' : 'var(--text-secondary)'};">${cfg.scma_enabled ? '98.2%' : 'Disabled'}</span></div>
+                    <div class="text-secondary text-sm">Compliance: <span style="color:${cfg.scma_enabled ? 'var(--status-good-ink)' : 'var(--text-secondary)'};">${cfg.scma_enabled ? '98.2%' : 'Disabled'}</span></div>
                 </div>
             </div>
             ${this.#saveBtn()}

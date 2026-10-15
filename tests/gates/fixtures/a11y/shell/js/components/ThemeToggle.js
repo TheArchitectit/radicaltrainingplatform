@@ -22,6 +22,9 @@ export function getTheme() {
 export function setTheme(theme) {
     document.documentElement.setAttribute('data-theme', theme);
     localStorage.setItem(STORAGE_KEY, theme);
+    // A two-state control has to report which state it is in (WCAG 4.1.2).
+    const btn = document.getElementById('theme-toggle-btn');
+    if (btn) btn.setAttribute('aria-pressed', theme === 'dark' ? 'true' : 'false');
 }
 
 export function initTheme() {

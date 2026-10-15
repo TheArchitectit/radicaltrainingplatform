@@ -49,19 +49,19 @@ export class UsAnalyticsView extends BaseView {
             <!-- Summary Cards -->
             <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:var(--space-lg);margin-bottom:var(--space-xl);">
                 <div class="card"><div class="card-body" style="text-align:center;">
-                    <div style="font-size:28px;font-weight:700;color:var(--prism-blue);">${(analytics.totalFiles / 1000).toFixed(0)}K</div>
+                    <div style="font-size:28px;font-weight:700;color:var(--text-link);">${(analytics.totalFiles / 1000).toFixed(0)}K</div>
                     <div class="text-secondary text-sm">Total Files</div>
                 </div></div>
                 <div class="card"><div class="card-body" style="text-align:center;">
-                    <div style="font-size:28px;font-weight:700;color:var(--prism-blue);">${analytics.totalSize}</div>
+                    <div style="font-size:28px;font-weight:700;color:var(--text-link);">${analytics.totalSize}</div>
                     <div class="text-secondary text-sm">Total Size</div>
                 </div></div>
                 <div class="card"><div class="card-body" style="text-align:center;">
-                    <div style="font-size:28px;font-weight:700;color:var(--prism-blue);">${analytics.avgFileAge}</div>
+                    <div style="font-size:28px;font-weight:700;color:var(--text-link);">${analytics.avgFileAge}</div>
                     <div class="text-secondary text-sm">Avg File Age</div>
                 </div></div>
                 <div class="card"><div class="card-body" style="text-align:center;">
-                    <div style="font-size:28px;font-weight:700;color:${analytics.anomalies.length > 0 ? 'var(--status-warning)' : 'var(--status-good)'};">${analytics.anomalies.length}</div>
+                    <div style="font-size:28px;font-weight:700;color:${analytics.anomalies.length > 0 ? 'var(--status-warning-ink)' : 'var(--status-good-ink)'};">${analytics.anomalies.length}</div>
                     <div class="text-secondary text-sm">Anomalies</div>
                 </div></div>
             </div>

@@ -18,10 +18,20 @@
     margin-bottom: var(--space-lg);
 }
 
+/* Links sitting in prose carry a non-colour indicator (WCAG 1.4.1): colour
+   alone does not identify them for a reader who cannot perceive the
+   difference. Scoped to the study pages, and excluding the card/row/button
+   -styled links — those are identified by their shape and position, not by
+   being inline in a sentence. Nav items and breadcrumbs live outside
+   .study-page and are untouched. */
+.study-page a:not(.study-button):not(.module-item):not(.track-card),
+.study-back {
+    text-decoration: underline;
+}
+
 .study-back {
     display: inline-block;
     color: var(--text-link);
-    text-decoration: none;
     font-size: var(--font-size-sm);
     margin-bottom: var(--space-sm);
 }
@@ -331,7 +341,11 @@ a.module-item:hover {
 
 .study-button:hover {
     background: var(--text-link);
-    color: var(--bg-header);
+    /* --bg-header was only ever a stand-in for "ink that reads on the filled
+       button". It stops working now that the light-theme fill is the deepened
+       link blue (dark ink on a dark fill); --text-inverse is the token that
+       actually means this, and it flips the right way in both themes. */
+    color: var(--text-inverse);
 }
 
 .study-button.secondary {
@@ -778,7 +792,7 @@ body.demo-mode {
 .tutor-mode.recorded {
     background: rgba(255, 176, 32, 0.16);
     border: 1px solid rgba(255, 176, 32, 0.55);
-    color: #ffb020;
+    color: var(--text-warning-pill);
 }
 
 .tutor-mode.live {
@@ -849,7 +863,7 @@ body.demo-mode {
 .tutor-response-label.unavailable {
     background: rgba(255, 176, 32, 0.14);
     border-color: rgba(255, 176, 32, 0.5);
-    color: #ffb020;
+    color: var(--text-warning-pill);
 }
 
 .tutor-response-text {

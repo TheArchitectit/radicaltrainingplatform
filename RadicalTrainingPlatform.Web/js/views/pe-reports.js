@@ -35,19 +35,19 @@ export class PeReportsView extends BaseView {
                 <div class="card">
                     <div class="card-body" style="text-align:center;">
                         <div class="text-secondary text-sm">Total Reports</div>
-                        <div style="font-size:1.8rem;font-weight:700;color:var(--prism-blue);">${library.length}</div>
+                        <div style="font-size:1.8rem;font-weight:700;color:var(--text-link);">${library.length}</div>
                     </div>
                 </div>
                 <div class="card">
                     <div class="card-body" style="text-align:center;">
                         <div class="text-secondary text-sm">Scheduled</div>
-                        <div style="font-size:1.8rem;font-weight:700;color:var(--prism-blue);">${scheduled.length}</div>
+                        <div style="font-size:1.8rem;font-weight:700;color:var(--text-link);">${scheduled.length}</div>
                     </div>
                 </div>
                 <div class="card">
                     <div class="card-body" style="text-align:center;">
                         <div class="text-secondary text-sm">Generated Today</div>
-                        <div style="font-size:1.8rem;font-weight:700;color:var(--status-good);">${generatedToday.length}</div>
+                        <div style="font-size:1.8rem;font-weight:700;color:var(--status-good-ink);">${generatedToday.length}</div>
                     </div>
                 </div>
                 <div class="card">
@@ -113,7 +113,7 @@ export class PeReportsView extends BaseView {
                 { key: 'size', label: 'Size' },
                 {
                     key: 'status', label: 'Status', render: (val) => {
-                        const color = val === 'ready' ? 'var(--status-good)' : 'var(--status-warning)';
+                        const color = val === 'ready' ? 'var(--status-good-ink)' : 'var(--status-warning-ink)';
                         return `<span style="color:${color};font-weight:600;">${val}</span>`;
                     }
                 }
@@ -146,7 +146,7 @@ export class PeReportsView extends BaseView {
                 { key: 'recipients', label: 'Recipients' },
                 {
                     key: 'enabled', label: 'Enabled', render: (val) => {
-                        const color = val ? 'var(--status-good)' : 'var(--text-secondary)';
+                        const color = val ? 'var(--status-good-ink)' : 'var(--text-secondary)';
                         return `<span style="color:${color};font-weight:600;">${val ? 'Yes' : 'No'}</span>`;
                     }
                 }

@@ -61,6 +61,19 @@
     <p><label for="q">Search</label> <input id="q" type="text"></p>
     <p><button type="button" aria-label="Close panel">×</button></p>
     <p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="A one-pixel image"></p>
+
+    <!-- A selectable table row. The per-row checkbox is named after its row,
+         not "Select" — the same name on every row is not a name (WCAG 1.3.1 /
+         4.1.2). This is the EntityTable control class; case U strips the label
+         to prove the gate reports it. -->
+    <table>
+        <caption>Selected items</caption>
+        <tr><th scope="col">Name</th><th scope="col">Select</th></tr>
+        <tr>
+            <td>vm-01</td>
+            <td><input type="checkbox" class="row-select" aria-label="Select vm-01"></td>
+        </tr>
+    </table>
 </main>
 
 <div id="toast-container" role="status" aria-live="polite"></div>

@@ -29,8 +29,12 @@
  * WebSocket (Node >= 22) speaks CDP directly.
  *
  * What this gate does NOT check, so a green run is not read as more than it is:
- *   - **Only the routes listed in `DEFAULT_TARGETS`.** A view that is not
- *     reachable from one of them is not audited.
+ *   - **Only routes the router registers.** The route list is read out of
+ *     `js/app.js` rather than hand-written, and the gate fails if it cannot
+ *     parse a registration or has no concrete instance for a parameterized
+ *     route — but a view reachable only by clicking, with no route of its own,
+ *     is still never opened. Coverage of the *route table* is asserted; coverage
+ *     of the *application* is not.
  *   - **Contrast is computed from solid `background-color` only.** An element
  *     painted over a gradient, an image, or a `backdrop-filter` layer is
  *     measured against the nearest solid ancestor colour, so a genuinely low
@@ -64,6 +68,12 @@ const WEB_ROOT = resolve(process.env.A11Y_WEB_ROOT || 'RadicalTrainingPlatform.W
 // screens are the bulk of the app but share the shell's chrome, which the
 // routes below already exercise; the study routes are the ones the October
 // demo runs and the ones Sprint 46/47 added.
+//
+// `/pc/clusters` and `/pc/vms` are here for a different reason: they are the
+// two routes whose EntityTable is `selectable: true`, so they are the only
+// coverage of the per-row checkbox and the per-row action button — the class of
+// control that the audit found unnamed and that no amount of shell testing
+// reaches. A component class covered on one route is covered.
 const DEFAULT_TARGETS = [
     'index.html#/pe/dashboard',
     'index.html#/tracks',
@@ -73,10 +83,67 @@ const DEFAULT_TARGETS = [
     'index.html#/demo',
     'index.html#/tutor',
     'index.html#/pc/scenarios',
+    'index.html#/pc/clusters',
+    'index.html#/pc/vms',
 ];
 
+// Concrete instances of the app's parameterized routes. The router table names
+// them as patterns (`/tracks/:trackId`), and the gate cannot invent a track id —
+// so these are the one hand-maintained part of the route list. The content IDs
+// are stable by contract (SPEC-16: never renumber or silently remap an existing
+// content ID), so a failure here means content moved, which is worth knowing.
+const PARAMETERIZED_TARGETS = [
+    'index.html#/tracks/track-nca',
+    'index.html#/tracks/track-nca/lessons/NCA-75/s1_1',
+    'index.html#/practice/NCA-75',
+    'index.html#/tutor/NCA-75',
+];
+
+/**
+ * The routes to audit, read from the app's own router table.
+ *
+ * A hand-written list is a coverage claim that drifts: every view added since it
+ * was written is silently unaudited, and the gate keeps passing while its
+ * surface shrinks. Reading `router.register(...)` out of `js/app.js` makes the
+ * gate's surface the app's surface. Fixture roots have no `app.js`, so those
+ * fall back to `DEFAULT_TARGETS` (and in practice set `A11Y_TARGETS` anyway).
+ */
+function discoverTargets() {
+    const appJs = join(WEB_ROOT, 'js/app.js');
+    if (!existsSync(appJs)) {
+        return { routes: DEFAULT_TARGETS, registered: [], covered: true, uncovered: [], unparsed: 0 };
+    }
+    const source = readFileSync(appJs, 'utf8');
+    const registered = [...source.matchAll(/router\.register\(\s*'([^']+)'/g)].map((m) => m[1]);
+    const routes = [
+        ...registered.filter((p) => !p.includes(':')).map((p) => `index.html#${p}`),
+        ...PARAMETERIZED_TARGETS,
+    ];
+    // Two ways a view can end up unaudited, and both are checked, because a
+    // coverage claim that is only approximately true is not a coverage claim:
+    //
+    //   1. A registration this regex cannot see — a path held in a variable, a
+    //      call spread over lines with the path on the next one. Counting the
+    //      call sites catches it, because the parse found fewer paths than there
+    //      are calls.
+    //   2. A parameterized route with no concrete instance above, which would
+    //      otherwise be dropped silently (the gate cannot invent a track id).
+    const calls = (source.match(/router\.register\(/g) || []).length;
+    const unparsed = calls - registered.length;
+    const uncovered = registered.filter((p) => p.includes(':')
+        && !PARAMETERIZED_TARGETS.some((t) => t.includes(p.slice(0, p.indexOf(':')))));
+    return {
+        routes,
+        registered,
+        covered: uncovered.length === 0 && unparsed === 0,
+        uncovered,
+        unparsed,
+    };
+}
+
 const TARGETS = (process.env.A11Y_TARGETS || '').split(',').map((s) => s.trim()).filter(Boolean);
-const ROUTES = TARGETS.length ? TARGETS : DEFAULT_TARGETS;
+const DISCOVERY = discoverTargets();
+const ROUTES = TARGETS.length ? TARGETS : DISCOVERY.routes;
 
 const MIME = {
     '.html': 'text/html; charset=utf-8',
@@ -400,8 +467,12 @@ function pageAudit() {
     // match for a programmatically focused element.
     const fingerprint = (el) => {
         const cs = getComputedStyle(el);
+        // Position and opacity are in here because "reveal on focus" is a real
+        // indicator technique — the skip link is the one in this tree — and a
+        // fingerprint of colours and borders alone would report it as missing.
         return [cs.outlineStyle, cs.outlineWidth, cs.outlineColor, cs.boxShadow,
-            cs.borderColor, cs.backgroundColor, cs.textDecorationLine].join('|');
+            cs.borderColor, cs.backgroundColor, cs.textDecorationLine,
+            cs.position, cs.left, cs.top, cs.transform, cs.opacity, cs.visibility].join('|');
     };
     for (const el of focusableNow().slice(0, 25)) {
         const before = fingerprint(el);
@@ -619,6 +690,15 @@ async function readDevToolsPort(profileDir, timeoutMs = 15000) {
 
 const failures = [];
 
+// Findings are printed capped (PER_RULE_CAP per rule per route) so one broken
+// token cannot bury the run under 400 identical lines — but the headline must
+// not be the printed count. It was: `failures.length` reported 1,095 for a tree
+// that had 1,689 findings, because 594 sat behind "+N more not shown". A gate
+// that under-reports its own findings reads as a gate that found less than it
+// did, which is the same defect as a sweep covering fewer routes than it names.
+// The true total is counted separately and both are reported.
+let findingsFound = 0;
+
 function fail(what) { failures.push(what); say(`  FAIL ${what}`); }
 function pass(what) { say(`  PASS ${what}`); }
 
@@ -729,14 +809,39 @@ async function main() {
         };
 
         // ── Per-route audit ──
+        // A route that will not render must not end the sweep. It did: a single
+        // `navigate` timeout threw out of this loop into the outer catch, the
+        // remaining routes were never audited, and the run still printed a
+        // summary as if it had covered them — 34 of 54 routes went unmeasured
+        // while the gate looked like it had finished. A route that fails is now
+        // one failure and the sweep continues; `routesAudited` is reported at
+        // the end so a short sweep can never be mistaken for a clean one.
         const auditExpr = `(${String(pageAudit)})()`;
+        let routesAudited = 0;
         for (const route of ROUTES) {
-            await navigate(route);
+            try {
+                await navigate(route);
+            } catch (first) {
+                // One retry. A route that renders on the second attempt is a
+                // slow render, not an inaccessible page — `/pc/api` was observed
+                // timing out once in a 54-route sweep and passing every other
+                // time — and a gate that reds on a transient is a gate that gets
+                // ignored. A route that fails twice is reported.
+                try {
+                    await navigate(route);
+                } catch (second) {
+                    fail(`${route}: did not render — ${second.message} (after a retry; `
+                        + `first attempt: ${first.message})`);
+                    continue;
+                }
+            }
             const result = await evaluate(auditExpr);
+            routesAudited++;
             if (!result || !Array.isArray(result.violations)) {
                 fail(`${route}: the audit returned no result (the page may not have rendered)`);
                 continue;
             }
+            findingsFound += result.violations.length;
             const byRule = new Map();
             for (const v of result.violations) {
                 if (!byRule.has(v.rule)) byRule.set(v.rule, []);
@@ -754,6 +859,32 @@ async function main() {
                 for (const d of shown) fail(`${rule} @ ${route}: ${d}`);
                 if (extra) say(`  ... ${rule} @ ${route}:${extra}`);
             }
+        }
+
+        // Every route that was asked for must have been audited. This is the
+        // tripwire for the abort above ever coming back in another form: a sweep
+        // that quietly covers fewer routes than it was given is a gate reporting
+        // on a smaller surface than the one it names. It sits immediately after
+        // the sweep, before anything else can throw, so it is always reached.
+        // …and every route the app registers must have been *in* the list to
+        // begin with. Without this the discovery step could quietly miss a view
+        // — a `router.register` written across two lines, a path built from a
+        // variable — and the sweep would report full coverage of a list that
+        // was never the app's.
+        if (DISCOVERY.unparsed > 0) {
+            fail(`${DISCOVERY.unparsed} router.register call(s) could not be parsed, so those `
+                + 'views are not in the audit list — give each one a literal path string');
+        }
+        if (DISCOVERY.uncovered.length) {
+            fail(`the gate's route list is missing ${DISCOVERY.uncovered.length} registered route(s) `
+                + `— they would never be audited: ${DISCOVERY.uncovered.join(', ')}`);
+        }
+
+        if (routesAudited !== ROUTES.length) {
+            fail(`${ROUTES.length - routesAudited} of ${ROUTES.length} routes were never audited `
+                + '(the sweep did not cover what it was given)');
+        } else {
+            pass(`all ${ROUTES.length} routes rendered and were audited`);
         }
 
         // ── The app shell only ──
@@ -854,6 +985,123 @@ async function main() {
             if (closedReachable) fail('the closed hamburger overlay is still reachable (not inert and still rendered)');
             else pass('the closed hamburger overlay is inert and out of the tab order');
 
+            // ── Runtime component semantics (S35-02 / S35-06 / S35-07) ──
+            // Three claims the conformance report makes that no static check can
+            // hold, because each is a value a component writes at runtime: the
+            // hamburger's `aria-expanded` tracks the overlay, the theme toggle's
+            // `aria-pressed` tracks the theme, and a toast lands in the live
+            // region with a named dismiss control. Driving them here means a
+            // regression fails the gate instead of quietly invalidating a claim
+            // in the report. They are asserted as *state tracking* — the value
+            // must change with the thing it describes — not as a fixed literal,
+            // so this cannot pass by the attribute being hard-coded.
+            say('');
+            say('runtime component semantics:');
+            await navigate(ROUTES[0]);
+
+            const hamState = await evaluate(
+                `(() => { const b = document.getElementById('hamburger-btn');`
+                + ` const o = document.getElementById('hamburger-overlay');`
+                + ` return { expanded: b.getAttribute('aria-expanded'),`
+                + `          controls: b.getAttribute('aria-controls'),`
+                + `          resolves: !!(b.getAttribute('aria-controls')`
+                + `              && document.getElementById(b.getAttribute('aria-controls')) === o),`
+                + `          name: (b.getAttribute('aria-label') || b.textContent || '').trim() }; })()`);
+            if (!hamState.name) fail('the hamburger button has no accessible name');
+            if (!hamState.resolves) {
+                fail(`the hamburger's aria-controls=${JSON.stringify(hamState.controls)} `
+                    + 'does not resolve to the overlay it controls');
+            }
+            if (hamState.expanded !== 'false') {
+                fail(`the closed hamburger button reports aria-expanded=${JSON.stringify(hamState.expanded)}`);
+            } else {
+                await evaluate(`document.getElementById('hamburger-btn').click()`);
+                await waitForExpr(
+                    `!document.getElementById('hamburger-overlay').hasAttribute('inert')`,
+                    'the hamburger overlay to open');
+                const opened = await evaluate(
+                    `document.getElementById('hamburger-btn').getAttribute('aria-expanded')`);
+                await evaluate(`document.getElementById('hamburger-btn').click()`);
+                await sleep(200);
+                const reclosed = await evaluate(
+                    `document.getElementById('hamburger-btn').getAttribute('aria-expanded')`);
+                if (opened !== 'true' || reclosed !== 'false') {
+                    fail('the hamburger button does not track the overlay it controls '
+                        + `(closed=${JSON.stringify(hamState.expanded)}, open=${JSON.stringify(opened)}, `
+                        + `re-closed=${JSON.stringify(reclosed)})`);
+                } else if (hamState.name && hamState.resolves) {
+                    pass('the hamburger button is named and its aria-expanded tracks the overlay');
+                }
+            }
+
+            // The theme toggle is a two-state control: `aria-pressed` has to
+            // agree with the theme actually applied, both before and after a
+            // click. Clicking twice restores the starting theme.
+            const toggleBefore = await evaluate(
+                `(() => { const b = document.getElementById('theme-toggle-btn');`
+                + ` return { pressed: b.getAttribute('aria-pressed'),`
+                + `          theme: document.documentElement.getAttribute('data-theme'),`
+                + `          name: (b.getAttribute('aria-label') || b.textContent || '').trim() }; })()`);
+            const agrees = (s) => (s.theme === 'dark') === (s.pressed === 'true');
+            await evaluate(`document.getElementById('theme-toggle-btn').click()`);
+            await sleep(120);
+            const toggleAfter = await evaluate(
+                `(() => { const b = document.getElementById('theme-toggle-btn');`
+                + ` return { pressed: b.getAttribute('aria-pressed'),`
+                + `          theme: document.documentElement.getAttribute('data-theme') }; })()`);
+            await evaluate(`document.getElementById('theme-toggle-btn').click()`);
+            await sleep(120);
+            if (!toggleBefore.name) {
+                fail('the theme toggle has no accessible name');
+            } else if (!agrees(toggleBefore) || !agrees(toggleAfter)
+                || toggleBefore.theme === toggleAfter.theme) {
+                fail('the theme toggle does not track the theme it applies '
+                    + `(before: theme=${JSON.stringify(toggleBefore.theme)} `
+                    + `aria-pressed=${JSON.stringify(toggleBefore.pressed)}; after: `
+                    + `theme=${JSON.stringify(toggleAfter.theme)} `
+                    + `aria-pressed=${JSON.stringify(toggleAfter.pressed)})`);
+            } else {
+                pass('the theme toggle is named and its aria-pressed tracks the applied theme');
+            }
+
+            // A toast must land in the live region, be dismissable by a named
+            // control, and an *error* toast must be the interrupting kind —
+            // otherwise every toast reads the same and a failure queues behind
+            // whatever the reader is saying.
+            const toastState = await evaluate(
+                `(async () => { const m = await import('/js/components/Toast.js');`
+                + ` const c = document.getElementById('toast-container');`
+                + ` const live = c.getAttribute('aria-live');`
+                + ` const region = c.getAttribute('role');`
+                + ` m.toast.error('a11y gate: synthetic error toast');`
+                + ` m.toast.success('a11y gate: synthetic success toast');`
+                + ` const toasts = [...c.querySelectorAll('.toast')];`
+                + ` const read = (t) => ({ cls: t.className,`
+                + `     role: t.getAttribute('role'),`
+                + `     dismiss: (() => { const b = t.querySelector('.toast-close');`
+                + `         return b ? (b.getAttribute('aria-label') || b.textContent || '').trim() : null; })() });`
+                + ` const out = { live, region, toasts: toasts.map(read) };`
+                + ` toasts.forEach((t) => t.remove());`
+                + ` return out; })()`);
+            const errToast = (toastState?.toasts || []).find((t) => /\berror\b/.test(t.cls));
+            const okToast = (toastState?.toasts || []).find((t) => /\bsuccess\b/.test(t.cls));
+            if (toastState?.live !== 'polite' || !toastState?.region) {
+                fail(`the toast container is not a live region (role=${JSON.stringify(toastState?.region)}, `
+                    + `aria-live=${JSON.stringify(toastState?.live)})`);
+            } else if (!errToast || !okToast) {
+                fail('a toast did not render into #toast-container');
+            } else if (errToast.role !== 'alert') {
+                fail(`an error toast is not role="alert" (role=${JSON.stringify(errToast.role)})`);
+            } else if (okToast.role === 'alert') {
+                fail('a non-error toast is also role="alert" — the two kinds are indistinguishable');
+            } else if (!errToast.dismiss || !okToast.dismiss) {
+                fail(`a toast dismiss control has no accessible name `
+                    + `(error=${JSON.stringify(errToast.dismiss)}, success=${JSON.stringify(okToast.dismiss)})`);
+            } else {
+                pass('a toast is a live-region message with a named dismiss control, '
+                    + 'and only the error kind is role="alert"');
+            }
+
             // ── Light theme must also meet AA (S35-04) ──
             // Chosen through the app's own ThemeToggle rather than by setting the
             // attribute, so this also proves the toggle persists a choice.
@@ -870,6 +1118,7 @@ async function main() {
                 }
                 const result = await evaluate(auditExpr);
                 const contrast = (result?.violations || []).filter((v) => v.rule === 'contrast');
+                findingsFound += contrast.length;
                 if (!contrast.length) {
                     pass(`${route} (light) — no contrast findings`);
                 } else {
@@ -960,7 +1209,9 @@ await main();
 say('');
 say(failures.length === 0
     ? 'A11Y WEB: PASS — every audited route meets the WCAG 2.1 AA checks this gate implements'
-    : `A11Y WEB: FAIL — ${failures.length} finding(s)`);
+    : `A11Y WEB: FAIL — ${findingsFound} finding(s)`
+        + (findingsFound > failures.length
+            ? ` (${failures.length} printed, the rest behind the per-rule cap)` : ''));
 
 const out = process.env.A11Y_LOG_OUT;
 if (out) {

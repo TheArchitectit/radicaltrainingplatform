@@ -76,7 +76,7 @@ export class PeCapacityView extends BaseView {
                 <div class="card">
                     <div class="card-body" style="text-align:center;">
                         <div class="text-secondary text-sm">Overall Health</div>
-                        <div style="font-size:1.8rem;font-weight:700;color:var(--status-good);">${this.#healthScore(cap)}</div>
+                        <div style="font-size:1.8rem;font-weight:700;color:var(--status-good-ink);">${this.#healthScore(cap)}</div>
                     </div>
                 </div>
             </div>
@@ -128,10 +128,12 @@ export class PeCapacityView extends BaseView {
         return this.#defaults;
     }
 
+    // Feeds the runway figures in the tables, which are read as text — so the
+    // ink readings, not the bright fills the sparklines take.
     #runwayColor(days) {
-        if (days > 120) return 'var(--status-good)';
-        if (days > 60) return 'var(--status-warning)';
-        return 'var(--status-critical)';
+        if (days > 120) return 'var(--status-good-ink)';
+        if (days > 60) return 'var(--status-warning-ink)';
+        return 'var(--status-critical-ink)';
     }
 
     #healthScore(cap) {
@@ -237,7 +239,7 @@ export class PeCapacityView extends BaseView {
                 { key: 'usage', label: 'Usage' },
                 {
                     key: 'trend', label: 'Trend', render: (val) => {
-                        const color = val === '↑' ? 'var(--status-critical)' : val === '↓' ? 'var(--status-good)' : 'var(--text-secondary)';
+                        const color = val === '↑' ? 'var(--status-critical-ink)' : val === '↓' ? 'var(--status-good-ink)' : 'var(--text-secondary)';
                         return `<span style="color:${color};font-size:1.2rem;">${val}</span>`;
                     }
                 }

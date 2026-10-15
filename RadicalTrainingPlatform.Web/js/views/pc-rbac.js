@@ -50,7 +50,7 @@ export class PcRbacView extends BaseView {
                     render: (v) => {
                         const colors = { 'Cluster Admin': 'good', 'User Admin': 'warning', 'Viewer': 'info', 'Custom': 'info' };
                         const cls = colors[v] || 'info';
-                        return `<span class="status-badge ${cls}" ${cls === 'info' ? 'style="background:var(--status-info-bg);color:var(--status-info);"' : ''}>${v}</span>`;
+                        return `<span class="status-badge ${cls}" ${cls === 'info' ? 'style="background:var(--status-info-bg);color:var(--text-link);"' : ''}>${v}</span>`;
                     }
                 },
                 { key: 'source', label: 'Source', render: (v) => v === 'ad' ? '🏢 Active Directory' : '👤 Local' },

@@ -52,19 +52,19 @@ export class AiNaiView extends BaseView {
 
             <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:var(--space-lg);margin-bottom:var(--space-xl);">
                 <div class="card"><div class="card-body" style="text-align:center;">
-                    <div style="font-size:28px;font-weight:700;color:var(--prism-blue);">${endpoints.length}</div>
+                    <div style="font-size:28px;font-weight:700;color:var(--text-link);">${endpoints.length}</div>
                     <div class="text-secondary text-sm">Endpoints</div>
                 </div></div>
                 <div class="card"><div class="card-body" style="text-align:center;">
-                    <div style="font-size:28px;font-weight:700;color:var(--status-good);">${endpoints.filter(e => e.status === 'running').length}</div>
+                    <div style="font-size:28px;font-weight:700;color:var(--status-good-ink);">${endpoints.filter(e => e.status === 'running').length}</div>
                     <div class="text-secondary text-sm">Running</div>
                 </div></div>
                 <div class="card"><div class="card-body" style="text-align:center;">
-                    <div style="font-size:28px;font-weight:700;color:var(--prism-blue);">${endpoints.reduce((s, e) => s + (e.replicas || 1), 0)}</div>
+                    <div style="font-size:28px;font-weight:700;color:var(--text-link);">${endpoints.reduce((s, e) => s + (e.replicas || 1), 0)}</div>
                     <div class="text-secondary text-sm">Total Replicas</div>
                 </div></div>
                 <div class="card"><div class="card-body" style="text-align:center;">
-                    <div style="font-size:28px;font-weight:700;color:var(--prism-blue);">${gpus.length}</div>
+                    <div style="font-size:28px;font-weight:700;color:var(--text-link);">${gpus.length}</div>
                     <div class="text-secondary text-sm">Available GPUs</div>
                 </div></div>
             </div>
@@ -285,9 +285,9 @@ export class AiNaiView extends BaseView {
                             </div></div>
                         <div class="form-group"><label class="form-label">Model Format / Quantization</label>
                             <select class="form-input" data-field="format" id="format-select">
-                                ${FORMATS.map(f => `<option value="${f.id}" ${f.id === data.format ? 'selected' : ''} ${!f.vllm && !f.trt ? 'style="color:var(--status-critical);"' : ''}>${f.name}</option>`).join('')}
+                                ${FORMATS.map(f => `<option value="${f.id}" ${f.id === data.format ? 'selected' : ''} ${!f.vllm && !f.trt ? 'style="color:var(--status-critical-ink);"' : ''}>${f.name}</option>`).join('')}
                             </select>
-                            <div id="format-warning" style="display:none;margin-top:8px;padding:12px;background:var(--status-critical-bg);border-radius:6px;font-size:var(--font-size-sm);color:var(--status-critical);"></div>
+                            <div id="format-warning" style="display:none;margin-top:8px;padding:12px;background:var(--status-critical-bg);border-radius:6px;font-size:var(--font-size-sm);color:var(--status-critical-ink);"></div>
                         </div>
                     `,
                     bind: (body, data) => {

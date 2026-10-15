@@ -40,19 +40,19 @@ export class AiGpuView extends BaseView {
 
             <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:var(--space-lg);margin-bottom:var(--space-xl);">
                 <div class="card"><div class="card-body" style="text-align:center;">
-                    <div style="font-size:28px;font-weight:700;color:var(--prism-blue);">${gpus.length}</div>
+                    <div style="font-size:28px;font-weight:700;color:var(--text-link);">${gpus.length}</div>
                     <div class="text-secondary text-sm">Total GPUs</div>
                 </div></div>
                 <div class="card"><div class="card-body" style="text-align:center;">
-                    <div style="font-size:28px;font-weight:700;color:var(--prism-blue);">${totalVram} GB</div>
+                    <div style="font-size:28px;font-weight:700;color:var(--text-link);">${totalVram} GB</div>
                     <div class="text-secondary text-sm">Total VRAM</div>
                 </div></div>
                 <div class="card"><div class="card-body" style="text-align:center;">
-                    <div style="font-size:28px;font-weight:700;color:var(--status-good);">${migCapable.length}</div>
+                    <div style="font-size:28px;font-weight:700;color:var(--status-good-ink);">${migCapable.length}</div>
                     <div class="text-secondary text-sm">MIG-Capable</div>
                 </div></div>
                 <div class="card"><div class="card-body" style="text-align:center;">
-                    <div style="font-size:28px;font-weight:700;color:var(--prism-blue);">${gpus.filter(g => g.mode === 'passthrough').length} / ${gpus.filter(g => g.mode === 'mig').length}</div>
+                    <div style="font-size:28px;font-weight:700;color:var(--text-link);">${gpus.filter(g => g.mode === 'passthrough').length} / ${gpus.filter(g => g.mode === 'mig').length}</div>
                     <div class="text-secondary text-sm">Passthrough / MIG</div>
                 </div></div>
             </div>

@@ -64,19 +64,19 @@ export class PcProjectsView extends BaseView {
         const totalStorage = projects.reduce((s, p) => s + (p.storage_used_gb || 0), 0);
         summary.innerHTML = `
             <div class="card"><div class="card-body" style="text-align:center;">
-                <div style="font-size:28px;font-weight:700;color:var(--prism-blue);">${projects.length}</div>
+                <div style="font-size:28px;font-weight:700;color:var(--text-link);">${projects.length}</div>
                 <div class="text-secondary text-sm">Projects</div>
             </div></div>
             <div class="card"><div class="card-body" style="text-align:center;">
-                <div style="font-size:28px;font-weight:700;color:var(--status-good);">${totalVms}</div>
+                <div style="font-size:28px;font-weight:700;color:var(--status-good-ink);">${totalVms}</div>
                 <div class="text-secondary text-sm">Total VMs</div>
             </div></div>
             <div class="card"><div class="card-body" style="text-align:center;">
-                <div style="font-size:28px;font-weight:700;color:var(--prism-blue);">${totalVcpus} / ${totalMem} GB</div>
+                <div style="font-size:28px;font-weight:700;color:var(--text-link);">${totalVcpus} / ${totalMem} GB</div>
                 <div class="text-secondary text-sm">vCPU / Memory Used</div>
             </div></div>
             <div class="card"><div class="card-body" style="text-align:center;">
-                <div style="font-size:28px;font-weight:700;color:var(--prism-blue);">${totalStorage} GB</div>
+                <div style="font-size:28px;font-weight:700;color:var(--text-link);">${totalStorage} GB</div>
                 <div class="text-secondary text-sm">Storage Used</div>
             </div></div>
         `;

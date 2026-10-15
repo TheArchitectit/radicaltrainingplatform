@@ -52,14 +52,14 @@ export class CiDeployView extends BaseView {
                 <div class="card" id="aws-card" style="cursor:pointer;border:2px solid transparent;transition:border-color 0.2s;">
                     <div class="card-body" style="text-align:center;padding:32px;">
                         <div style="font-size:48px;">🟠</div>
-                        <h3 style="margin:12px 0 4px;">Amazon Web Services</h3>
+                        <h2 style="margin:12px 0 4px;">Amazon Web Services</h2>
                         <p class="text-secondary text-sm">i3.metal / i3en.metal bare-metal instances<br>Local NVMe storage</p>
                     </div>
                 </div>
                 <div class="card" id="azure-card" style="cursor:pointer;border:2px solid transparent;transition:border-color 0.2s;">
                     <div class="card-body" style="text-align:center;padding:32px;">
                         <div style="font-size:48px;">🔵</div>
-                        <h3 style="margin:12px 0 4px;">Microsoft Azure</h3>
+                        <h2 style="margin:12px 0 4px;">Microsoft Azure</h2>
                         <p class="text-secondary text-sm">BareMetal Infrastructure<br>Requires Microsoft.BareMetalInfrastructure provider</p>
                     </div>
                 </div>
@@ -70,7 +70,7 @@ export class CiDeployView extends BaseView {
                 <div class="card-body" style="font-size:var(--font-size-sm);">
                     <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;">
                         <div>
-                            <h4>AWS Requirements</h4>
+                            <h3>AWS Requirements</h3>
                             <ul style="padding-left:20px;">
                                 <li>IAM role with: EC2, VPC, EBS, S3 permissions</li>
                                 <li>VPC with /16+ CIDR (recommended)</li>
@@ -81,7 +81,7 @@ export class CiDeployView extends BaseView {
                             </ul>
                         </div>
                         <div>
-                            <h4>Azure Requirements</h4>
+                            <h3>Azure Requirements</h3>
                             <ul style="padding-left:20px;">
                                 <li><strong>Microsoft.BareMetalInfrastructure</strong> provider registered</li>
                                 <li>VNet with delegated subnet ≥ /24</li>
@@ -198,9 +198,9 @@ export class CiDeployView extends BaseView {
                     render: (data) => `
                         <div class="form-group"><label class="form-label">Instance Type</label>
                             <select class="form-input" data-field="instance_type" id="instance-select">
-                                ${instanceTypes.map(t => `<option value="${t.id}" ${t.id === data.instance_type ? 'selected' : ''} ${!t.valid ? 'style="color:var(--status-critical);"' : ''}>${t.label}</option>`).join('')}
+                                ${instanceTypes.map(t => `<option value="${t.id}" ${t.id === data.instance_type ? 'selected' : ''} ${!t.valid ? 'style="color:var(--status-critical-ink);"' : ''}>${t.label}</option>`).join('')}
                             </select>
-                            <div id="instance-warning" style="margin-top:8px;display:none;padding:12px;background:var(--status-critical-bg, #ffeaea);border-radius:6px;font-size:var(--font-size-sm);color:var(--status-critical);"></div>
+                            <div id="instance-warning" style="margin-top:8px;display:none;padding:12px;background:var(--status-critical-bg, #ffeaea);border-radius:6px;font-size:var(--font-size-sm);color:var(--status-critical-ink);"></div>
                         </div>
                         <div class="form-group"><label class="form-label">Node Count (min 3)</label>
                             <input class="form-input" data-field="node_count" type="number" min="3" max="28" value="${data.node_count}" />

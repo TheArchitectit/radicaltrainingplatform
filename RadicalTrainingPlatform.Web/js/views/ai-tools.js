@@ -67,7 +67,7 @@ export class AiToolsView extends BaseView {
                     </div>
                     <div class="card-body">
                         <div class="form-group">
-                            <label class="form-label">Endpoint</label>
+                            <label class="form-label" for="api-endpoint">Endpoint</label>
                             <select class="form-input" id="api-endpoint">
                                 ${endpoints.length > 0
                                     ? endpoints.map(e => `<option value="${e.url}">${e.name} (${e.model})</option>`).join('')
@@ -76,7 +76,7 @@ export class AiToolsView extends BaseView {
                             </select>
                         </div>
                         <div class="form-group">
-                            <label class="form-label">API Path</label>
+                            <label class="form-label" for="api-path">API Path</label>
                             <select class="form-input" id="api-path">
                                 <option value="/chat/completions">POST /v1/chat/completions</option>
                                 <option value="/completions">POST /v1/completions</option>
@@ -85,12 +85,12 @@ export class AiToolsView extends BaseView {
                             </select>
                         </div>
                         <div class="form-group">
-                            <label class="form-label">Authorization Header</label>
+                            <label class="form-label" for="api-auth">Authorization Header</label>
                             <input class="form-input font-mono" id="api-auth" value="Bearer nai-api-key-here" style="font-size:12px;" />
                             <div class="text-secondary text-sm" style="margin-top:4px;">Format: <code>Bearer &lt;token&gt;</code> (NOT <code>Token &lt;token&gt;</code>)</div>
                         </div>
                         <div class="form-group">
-                            <label class="form-label">Request Body (JSON)</label>
+                            <label class="form-label" for="api-body">Request Body (JSON)</label>
                             <textarea class="form-input font-mono" id="api-body" rows="12" style="font-size:12px;font-family:monospace;">${JSON.stringify({
                                 model: endpoints[0]?.model || 'llama-2-7b-chat',
                                 messages: [
@@ -124,7 +124,7 @@ export class AiToolsView extends BaseView {
                 <div class="card-body">
                     <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
                         <div>
-                            <h4>Python (OpenAI SDK)</h4>
+                            <h2>Python (OpenAI SDK)</h2>
                             <pre style="background:var(--bg-secondary);padding:12px;border-radius:6px;font-size:12px;overflow-x:auto;"><code>from openai import OpenAI
 
 client = OpenAI(
@@ -145,7 +145,7 @@ for chunk in response:
     print(chunk.choices[0].delta.content, end="")</code></pre>
                         </div>
                         <div>
-                            <h4>cURL</h4>
+                            <h2>cURL</h2>
                             <pre style="background:var(--bg-secondary);padding:12px;border-radius:6px;font-size:12px;overflow-x:auto;"><code>curl -X POST \\
   https://endpoint.nai.ntnxlab.local/v1/chat/completions \\
   -H "Content-Type: application/json" \\
@@ -198,17 +198,17 @@ for chunk in response:
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="form-label">Model Parameters (Billions)</label>
+                                <label class="form-label" for="calc-params">Model Parameters (Billions)</label>
                                 <input class="form-input" id="calc-params" type="number" min="1" max="1000" value="7" />
                             </div>
                             <div class="form-group">
-                                <label class="form-label">Precision</label>
+                                <label class="form-label" for="calc-precision">Precision</label>
                                 <select class="form-input" id="calc-precision">
                                     ${PRECISION.map(p => `<option value="${p.id}" ${p.id === 'FP16' ? 'selected' : ''}>${p.label}</option>`).join('')}
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label class="form-label">Overhead Factor (KV cache + activations)</label>
+                                <label class="form-label" for="calc-overhead">Overhead Factor (KV cache + activations)</label>
                                 <select class="form-input" id="calc-overhead">
                                     <option value="1.3">1.3× (minimal concurrency)</option>
                                     <option value="1.5" selected>1.5× (typical production)</option>
@@ -463,13 +463,13 @@ Practical Total     ≈ Model Weights × Overhead Factor (1.3× to 2.0×)
         resultDiv.innerHTML = `
             <div style="text-align:center;padding:16px;background:var(--bg-secondary);border-radius:8px;margin-bottom:16px;">
                 <div style="font-size:14px;font-weight:600;color:var(--text-secondary);">Model: ${params}B ${precId}</div>
-                <div style="font-size:36px;font-weight:700;color:var(--prism-blue);margin:8px 0;">${weightsGb.toFixed(1)} GB</div>
+                <div style="font-size:36px;font-weight:700;color:var(--text-link);margin:8px 0;">${weightsGb.toFixed(1)} GB</div>
                 <div class="text-secondary text-sm">Weights Only</div>
-                <div style="font-size:24px;font-weight:700;color:var(--status-warning);margin-top:8px;">${totalGb.toFixed(1)} GB</div>
+                <div style="font-size:24px;font-weight:700;color:var(--status-warning-ink);margin-top:8px;">${totalGb.toFixed(1)} GB</div>
                 <div class="text-secondary text-sm">With ${overhead}× overhead (KV cache + activations)</div>
             </div>
 
-            <h4 style="margin-bottom:8px;">GPU Recommendations</h4>
+            <h2 style="margin-bottom:8px;">GPU Recommendations</h2>
             ${recommendations.map(r => `
                 <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 12px;border:1px solid ${r.feasible ? 'var(--border-light)' : 'var(--status-critical)'};border-radius:6px;margin-bottom:8px;background:${r.fits ? 'var(--status-good-bg)' : r.tpViable ? 'var(--status-warning-bg)' : 'var(--status-critical-bg)'};">
                     <div>
@@ -477,10 +477,10 @@ Practical Total     ≈ Model Weights × Overhead Factor (1.3× to 2.0×)
                     </div>
                     <div style="font-size:var(--font-size-sm);">
                         ${r.fits
-                            ? `<span style="color:var(--status-good);">✅ 1× GPU (${(r.vram - totalGb).toFixed(0)}GB headroom)</span>`
+                            ? `<span style="color:var(--status-good-ink);">✅ 1× GPU (${(r.vram - totalGb).toFixed(0)}GB headroom)</span>`
                             : r.tpViable
-                                ? `<span style="color:var(--status-warning);">⚠️ ${r.gpusNeeded}× GPU (tensor parallel via NVLink)</span>`
-                                : `<span style="color:var(--status-critical);">❌ ${r.gpusNeeded}× needed, no NVLink — not viable</span>`
+                                ? `<span style="color:var(--status-warning-ink);">⚠️ ${r.gpusNeeded}× GPU (tensor parallel via NVLink)</span>`
+                                : `<span style="color:var(--status-critical-ink);">❌ ${r.gpusNeeded}× needed, no NVLink — not viable</span>`
                         }
                     </div>
                 </div>

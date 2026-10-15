@@ -22,6 +22,46 @@
     display: none !important;
 }
 
+/* ── Visible focus (WCAG 2.4.7 Focus Visible) ──
+   Before Sprints 35-36 the tree had no `:focus-visible` rule at all: three
+   component rules set `outline: none` and only two of them replaced it with
+   something else, so a keyboard user tabbing through the header had no way to
+   see where they were. Declared here, early, so a component that paints its own
+   indicator (`.form-input:focus`'s ring) can still override it; anything that
+   does not gets the outline. `--border-focus` is #22a5f7 in both themes and
+   measures 5.7:1 against the dark chrome, above the 3:1 that WCAG 1.4.11 asks
+   of a non-text indicator. */
+:focus-visible {
+    outline: 3px solid var(--border-focus);
+    outline-offset: 2px;
+}
+
+/* ── Skip link (WCAG 2.4.1 Bypass Blocks) ──
+   The first focusable element in the document, off-screen until focused and
+   then pinned over the header. Without it, reaching the view content from the
+   keyboard means tabbing past the hamburger, the context switcher, the search
+   box, the theme toggle and the breadcrumb on every single route.
+   `--bg-card` on `--text-link` clears AA in both themes (5.38:1 light); the
+   outline comes from the rule above and must not be suppressed here. */
+.skip-link {
+    position: absolute;
+    left: -9999px;
+    top: 0;
+    z-index: var(--z-tooltip);
+    padding: var(--space-sm) var(--space-lg);
+    background: var(--bg-card);
+    color: var(--text-link);
+    border: 2px solid var(--text-link);
+    border-radius: var(--radius-sm);
+    font-size: var(--font-size-md);
+    text-decoration: none;
+}
+
+.skip-link:focus {
+    left: var(--space-sm);
+    top: var(--space-sm);
+}
+
 body {
     font-family: var(--font-family);
     font-size: var(--font-size-base);
@@ -45,7 +85,7 @@ body {
     align-items: center;
     height: var(--header-height);
     background: var(--bg-header);
-    color: var(--text-inverse);
+    color: var(--text-on-chrome);
     padding: 0 var(--space-lg);
     z-index: var(--z-nav);
     flex-shrink: 0;
@@ -59,7 +99,7 @@ body {
     height: 40px;
     background: none;
     border: none;
-    color: var(--text-inverse);
+    color: var(--text-on-chrome);
     cursor: pointer;
     border-radius: var(--radius-md);
     font-size: 20px;
@@ -85,7 +125,7 @@ body {
 
 .header-bar .context-switcher select {
     background: rgba(255, 255, 255, 0.1);
-    color: var(--text-inverse);
+    color: var(--text-on-chrome);
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: var(--radius-md);
     padding: var(--space-xs) var(--space-sm);
@@ -95,7 +135,7 @@ body {
 
 .header-bar .context-switcher select option {
     background: var(--bg-header);
-    color: var(--text-inverse);
+    color: var(--text-on-chrome);
 }
 
 .header-bar .header-right {
@@ -116,10 +156,13 @@ body {
 .header-bar .search-box input {
     background: none;
     border: none;
-    color: var(--text-inverse);
+    color: var(--text-on-chrome);
     font-size: var(--font-size-sm);
     width: 200px;
-    outline: none;
+    /* No `outline: none` here. It used to suppress the focus ring and put
+       nothing in its place, which is how the header search box became the one
+       control on every route with no visible focus at all. The global
+       `:focus-visible` rule above supplies the ring. */
 }
 
 .header-bar .search-box input::placeholder {
@@ -150,7 +193,9 @@ body {
 
 .breadcrumb-bar .separator {
     margin: 0 var(--space-sm);
-    color: var(--gray-300);
+    /* --gray-300 (#b8bdd1) measured 1.87:1 on the breadcrumb's --bg-card — the
+       "›" is text and has to read. --text-secondary is 5.31:1 there. */
+    color: var(--text-secondary);
 }
 
 .breadcrumb-bar .current {
@@ -169,7 +214,7 @@ body {
 .pc-sidebar {
     width: var(--sidebar-width);
     background: var(--bg-sidebar);
-    color: var(--text-inverse);
+    color: var(--text-on-chrome);
     overflow-y: auto;
     flex-shrink: 0;
     display: none;
@@ -188,7 +233,7 @@ body {
     font-size: var(--font-size-xs);
     text-transform: uppercase;
     letter-spacing: 1px;
-    color: var(--gray-400);
+    color: var(--text-on-chrome-muted);
     padding: var(--space-sm) var(--space-lg);
 }
 
@@ -205,12 +250,12 @@ body {
 
 .pc-sidebar .nav-item:hover {
     background: var(--bg-sidebar-hover);
-    color: var(--text-inverse);
+    color: var(--text-on-chrome);
 }
 
 .pc-sidebar .nav-item.active {
     background: var(--bg-sidebar-active);
-    color: var(--text-inverse);
+    color: var(--text-on-accent);
 }
 
 .pc-sidebar .nav-item .icon {
@@ -227,7 +272,7 @@ body {
     bottom: 0;
     width: var(--hamburger-width);
     background: var(--bg-hamburger);
-    color: var(--text-inverse);
+    color: var(--text-on-chrome);
     z-index: var(--z-hamburger);
     transform: translateX(-100%);
     transition: transform var(--transition-normal);
@@ -262,7 +307,10 @@ body {
     font-size: var(--font-size-xs);
     text-transform: uppercase;
     letter-spacing: 1px;
-    color: var(--gray-500);
+    /* --gray-500 measured 3.18:1 on the light-theme chrome and 3.94:1 on the
+       dark-theme chrome — under AA in both. The chrome muted ink is 5.25:1
+       and 6.51:1 on the same two backgrounds. */
+    color: var(--text-on-chrome-muted);
     padding: var(--space-md) var(--space-lg) var(--space-xs);
 }
 
@@ -282,12 +330,12 @@ body {
 
 .hamburger-overlay .nav-item:hover {
     background: var(--bg-sidebar-hover);
-    color: var(--text-inverse);
+    color: var(--text-on-chrome);
 }
 
 .hamburger-overlay .nav-item.active {
     background: var(--bg-sidebar-active);
-    color: var(--text-inverse);
+    color: var(--text-on-accent);
 }
 
 .hamburger-overlay .nav-item .icon {
@@ -359,10 +407,13 @@ body {
     box-shadow: var(--shadow-sm);
 }
 
+/* White on --prism-blue (#22a5f7) measures 2.69:1 — #demo-enter was the
+   element the audit caught, but every .btn-primary shared the fill. The
+   strong blue is 5.38:1 with white. */
 .btn-primary {
-    background: var(--prism-blue);
+    background: var(--prism-blue-strong);
     color: white;
-    border-color: var(--prism-blue);
+    border-color: var(--prism-blue-strong);
 }
 
 .btn-primary:hover {
@@ -370,9 +421,11 @@ body {
     border-color: var(--prism-blue-hover);
 }
 
+/* Same family: --status-critical is a fill, and as ink it measured 3.54:1 on
+   the dark theme's card. The ink token carries it in both themes. */
 .btn-danger {
-    color: var(--status-critical);
-    border-color: var(--status-critical);
+    color: var(--status-critical-ink);
+    border-color: var(--status-critical-ink);
 }
 
 .btn-danger:hover {
@@ -433,19 +486,21 @@ body {
     font-weight: 500;
 }
 
+/* The chip fill stays the pastel --status-*-bg; only the ink changes, so the
+   badge still reads as green/amber/red at a glance. */
 .status-badge.good {
     background: var(--status-good-bg);
-    color: var(--status-good);
+    color: var(--status-good-ink);
 }
 
 .status-badge.warning {
     background: var(--status-warning-bg);
-    color: var(--status-warning);
+    color: var(--status-warning-ink);
 }
 
 .status-badge.critical {
     background: var(--status-critical-bg);
-    color: var(--status-critical);
+    color: var(--status-critical-ink);
 }
 
 .status-badge .dot {
@@ -556,7 +611,7 @@ body {
 
 .form-error {
     font-size: var(--font-size-xs);
-    color: var(--status-critical);
+    color: var(--status-critical-ink);
     margin-top: var(--space-xs);
 }
 
@@ -578,12 +633,12 @@ body {
 }
 
 .wizard-step.active {
-    color: var(--prism-blue);
+    color: var(--text-link);
     font-weight: 600;
 }
 
 .wizard-step.completed {
-    color: var(--status-good);
+    color: var(--status-good-ink);
 }
 
 .wizard-step .step-number {

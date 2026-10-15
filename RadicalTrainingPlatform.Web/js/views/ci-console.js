@@ -36,19 +36,19 @@ export class CiConsoleView extends BaseView {
 
             <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:var(--space-lg);margin-bottom:var(--space-xl);">
                 <div class="card"><div class="card-body" style="text-align:center;">
-                    <div style="font-size:28px;font-weight:700;color:var(--prism-blue);">${clusters.length}</div>
+                    <div style="font-size:28px;font-weight:700;color:var(--text-link);">${clusters.length}</div>
                     <div class="text-secondary text-sm">Total Clusters</div>
                 </div></div>
                 <div class="card"><div class="card-body" style="text-align:center;">
-                    <div style="font-size:28px;font-weight:700;color:var(--status-good);">${running.length}</div>
+                    <div style="font-size:28px;font-weight:700;color:var(--status-good-ink);">${running.length}</div>
                     <div class="text-secondary text-sm">Running</div>
                 </div></div>
                 <div class="card"><div class="card-body" style="text-align:center;">
-                    <div style="font-size:28px;font-weight:700;color:var(--status-warning);">${hibernated.length}</div>
+                    <div style="font-size:28px;font-weight:700;color:var(--status-warning-ink);">${hibernated.length}</div>
                     <div class="text-secondary text-sm">Hibernated</div>
                 </div></div>
                 <div class="card"><div class="card-body" style="text-align:center;">
-                    <div style="font-size:28px;font-weight:700;color:var(--prism-blue);">${totalNodes}</div>
+                    <div style="font-size:28px;font-weight:700;color:var(--text-link);">${totalNodes}</div>
                     <div class="text-secondary text-sm">Total Nodes</div>
                 </div></div>
                 <div class="card"><div class="card-body" style="text-align:center;">

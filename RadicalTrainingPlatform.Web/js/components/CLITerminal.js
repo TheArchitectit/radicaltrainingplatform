@@ -41,7 +41,7 @@ export class CLITerminal {
             white-space: pre-wrap; word-break: break-word; line-height: 1.6;
         `;
         this.#output.innerHTML = `<span style="color:#7aa2f7;">Welcome to Nutanix CVM Terminal (Simulated)</span>
-<span style="color:#565f89;">Type 'help' for available commands.</span>\n\n`;
+<span style="color:#8b96bd;">Type 'help' for available commands.</span>\n\n`;
 
         // Input line
         const inputLine = document.createElement('div');
@@ -56,8 +56,14 @@ export class CLITerminal {
 
         this.#input = document.createElement('input');
         this.#input.type = 'text';
+        // The prompt glyph is decoration, not a name — a screen reader reads
+        // "nutanix@cvm$" as text, so the field carries its own `aria-label`.
+        this.#input.setAttribute('aria-label', 'Terminal command');
+        // No `outline: none`. It used to suppress the global `:focus-visible`
+        // ring, leaving the one control on this page with no visible focus —
+        // the same defect the header search box had.
         this.#input.style.cssText = `
-            flex: 1; background: none; border: none; outline: none;
+            flex: 1; background: none; border: none;
             color: #c0caf5; font-family: var(--font-mono); font-size: 13px;
             caret-color: #7aa2f7;
         `;

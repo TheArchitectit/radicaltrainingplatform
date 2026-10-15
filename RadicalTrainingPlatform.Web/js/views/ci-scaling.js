@@ -13,7 +13,7 @@ export class CiScalingView extends BaseView {
     async render() {
         return this.html(`
             <div class="view">
-                <h2 class="page-title">NC2 Cluster Scaling</h2>
+                <h1 class="page-title">NC2 Cluster Scaling</h1>
                 <div id="ci-scale-summary"></div>
                 <div class="tabs" id="ci-scale-tabs">
                     <button class="tab active" data-tab="clusters">Clusters</button>
@@ -70,15 +70,15 @@ export class CiScalingView extends BaseView {
         container.innerHTML = `
             <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:var(--space-lg);">
                 <div class="card"><div class="card-body" style="text-align:center;">
-                    <div style="font-size:28px;font-weight:700;color:var(--prism-blue);">${totalNodes}</div>
+                    <div style="font-size:28px;font-weight:700;color:var(--text-link);">${totalNodes}</div>
                     <div class="text-secondary text-sm">Total Cloud Nodes</div>
                 </div></div>
                 <div class="card"><div class="card-body" style="text-align:center;">
-                    <div style="font-size:28px;font-weight:700;color:var(--status-good);">${history.length}</div>
+                    <div style="font-size:28px;font-weight:700;color:var(--status-good-ink);">${history.length}</div>
                     <div class="text-secondary text-sm">Scaling Events (30d)</div>
                 </div></div>
                 <div class="card"><div class="card-body" style="text-align:center;">
-                    <div style="font-size:28px;font-weight:700;color:var(--status-warning);">${pending}</div>
+                    <div style="font-size:28px;font-weight:700;color:var(--status-warning-ink);">${pending}</div>
                     <div class="text-secondary text-sm">Pending Operations</div>
                 </div></div>
                 <div class="card"><div class="card-body" style="text-align:center;">
@@ -120,7 +120,7 @@ export class CiScalingView extends BaseView {
                 {
                     key: 'status', label: 'Status', sortable: true,
                     render: (v) => {
-                        const c = v === 'running' ? 'var(--status-good)' : 'var(--status-warning)';
+                        const c = v === 'running' ? 'var(--status-good-ink)' : 'var(--status-warning-ink)';
                         return `<span class="badge" style="background:${c};color:var(--text-inverse);">${v}</span>`;
                     }
                 }
@@ -150,7 +150,7 @@ export class CiScalingView extends BaseView {
                     render: (data) => `
                         <div class="form-group">
                             <label class="form-label">Current Nodes</label>
-                            <div style="font-size:24px;font-weight:700;color:var(--prism-blue);margin-bottom:12px;">${cluster.node_count}</div>
+                            <div style="font-size:24px;font-weight:700;color:var(--text-link);margin-bottom:12px;">${cluster.node_count}</div>
                         </div>
                         <div class="form-group">
                             <label class="form-label">Target Node Count</label>
@@ -210,7 +210,7 @@ export class CiScalingView extends BaseView {
                 {
                     key: 'action', label: 'Action', sortable: true,
                     render: (v) => {
-                        const color = v === 'scale_up' ? 'var(--status-good)' : 'var(--status-warning)';
+                        const color = v === 'scale_up' ? 'var(--status-good-ink)' : 'var(--status-warning-ink)';
                         return `<span class="badge" style="background:${color};color:var(--text-inverse);">${v === 'scale_up' ? '↑ Scale Up' : '↓ Scale Down'}</span>`;
                     }
                 },
@@ -220,7 +220,7 @@ export class CiScalingView extends BaseView {
                 {
                     key: 'status', label: 'Status', sortable: true,
                     render: (v) => {
-                        const colors = { completed: 'var(--status-good)', in_progress: 'var(--prism-blue)', failed: 'var(--status-critical)' };
+                        const colors = { completed: 'var(--status-good-ink)', in_progress: 'var(--text-link)', failed: 'var(--status-critical-ink)' };
                         return `<span class="badge" style="background:${colors[v] || 'var(--text-secondary)'};color:var(--text-inverse);">${v}</span>`;
                     }
                 },
@@ -258,7 +258,7 @@ export class CiScalingView extends BaseView {
             grid.innerHTML = `
                 <div class="card"><div class="card-body" style="text-align:center;padding:var(--space-xl);">
                     <div style="font-size:48px;margin-bottom:16px;">⚖️</div>
-                    <h3>No Auto-Scale Policies</h3>
+                    <h2>No Auto-Scale Policies</h2>
                     <p class="text-secondary">Create a policy to automatically scale NC2 clusters based on resource utilization thresholds.</p>
                 </div></div>
             `;
@@ -266,7 +266,7 @@ export class CiScalingView extends BaseView {
             grid.innerHTML = `
                 <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px;">
                     ${policies.map(p => {
-                        const enabledColor = p.enabled ? 'var(--status-good)' : 'var(--text-secondary)';
+                        const enabledColor = p.enabled ? 'var(--status-good-ink)' : 'var(--text-secondary)';
                         return `
                             <div class="card">
                                 <div class="card-header" style="display:flex;justify-content:space-between;align-items:center;">

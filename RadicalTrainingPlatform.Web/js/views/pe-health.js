@@ -41,15 +41,15 @@ export class PeHealthView extends BaseView {
             <!-- NCC Summary -->
             <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-lg);margin-bottom:var(--space-xl);">
                 <div class="card"><div class="card-body" style="text-align:center;">
-                    <div style="font-size:32px;font-weight:700;color:var(--status-good);">${passed}</div>
+                    <div style="font-size:32px;font-weight:700;color:var(--status-good-ink);">${passed}</div>
                     <div class="text-secondary text-sm">Passed</div>
                 </div></div>
                 <div class="card"><div class="card-body" style="text-align:center;">
-                    <div style="font-size:32px;font-weight:700;color:var(--status-warning);">${warnings}</div>
+                    <div style="font-size:32px;font-weight:700;color:var(--status-warning-ink);">${warnings}</div>
                     <div class="text-secondary text-sm">Warnings</div>
                 </div></div>
                 <div class="card"><div class="card-body" style="text-align:center;">
-                    <div style="font-size:32px;font-weight:700;color:var(--status-critical);">${failures}</div>
+                    <div style="font-size:32px;font-weight:700;color:var(--status-critical-ink);">${failures}</div>
                     <div class="text-secondary text-sm">Failures</div>
                 </div></div>
             </div>
