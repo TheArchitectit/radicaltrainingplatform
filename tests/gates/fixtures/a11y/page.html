@@ -42,6 +42,7 @@
     .skip:focus { left: 0; }
     :focus-visible { outline: 3px solid var(--link); outline-offset: 2px; }
     .chip { background: #ffffff; color: #1b1b1b; }
+    .badge { background: #ffffff; color: #1b1b1b; }
 </style>
 </head>
 <body>
@@ -57,6 +58,13 @@
     <p>The lesson explains how a storage pool is presented to a client, and
         <a href="#main">the referenced topic</a> continues from there.</p>
     <p><span class="chip">Status: ready</span></p>
+
+    <!-- A digit-only text run. Unicode classes `0-9` as `Emoji_Component`, so the
+         gate's emoji filter used to swallow bare numerals and no numeral-only run
+         was ever contrast-checked — wizard step numbers, badge counts, tallies.
+         Case AD seeds this one to fail, which is what proves the filter no longer
+         eats it. -->
+    <p><span class="badge">4</span></p>
     <h3>A subsection</h3>
     <p><label for="q">Search</label> <input id="q" type="text"></p>
     <p><button type="button" aria-label="Close panel">×</button></p>

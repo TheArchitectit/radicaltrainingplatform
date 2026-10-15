@@ -21,6 +21,8 @@
 #     L. no lang on <html>                      — 3.1.1
 #     M. a prose link distinguished by colour alone — 1.4.1
 #     U. a table row checkbox with no accessible name — 4.1.2
+#     AD. a digit-only text run at low contrast — 1.4.3, and the fix for the
+#         emoji filter that used to swallow bare numerals
 #
 #   App-shell rules (against fixtures/a11y/shell/, which has a #view-container):
 #     N. a modal with no dialog semantics       — 4.1.2 / 2.4.3
@@ -32,6 +34,12 @@
 #     X. an error toast that is not role="alert"       — 4.1.3
 #     Y. a route the sweep cannot render (the gate's own coverage tripwire)
 #     Z. routes the gate's own discovery would miss  (both guards)
+#
+#   Click-reachable rules (against the wizard the shell opens on a click, which
+#   the per-route sweep never sees):
+#     AA. a wizard step whose marker digits fail contrast — 1.4.3
+#     AB. a wizard whose step inputs have no accessible name — 4.1.2 / 3.3.2
+#     AC. a wizard with no dialog semantics (role) — 4.1.2 / 2.4.3
 #
 # Passing fixtures:
 #     R. the unmodified page fixture
@@ -223,6 +231,17 @@ seed "$U/page.html" \
 must_fail "a table row checkbox with no accessible name" \
     'row-select has no accessible name' "$U" page.html
 
+# ── AD. a digit-only text run at low contrast ───────────────────────────────
+# Not a duplicate of A: A's run is words, which were always measured. This one is
+# a bare numeral, and bare numerals were NOT measured until the emoji filter was
+# fixed — Unicode classes `0-9` as `Emoji_Component`, so the old character class
+# matched "4" and skipped it as if it were an emoji. The needle names the run so
+# this cannot pass by some other element's contrast failing.
+AD="$(make_case digit-contrast "$FIXTURES")"
+seed "$AD/page.html" '    .badge { background: #ffffff; color: #1b1b1b; }' \
+                     '    .badge { background: #ffffff; color: #c9c9c9; }'
+must_fail "a digit-only text run at low contrast" '(text "4")' "$AD" page.html
+
 # ── N. a modal with no dialog semantics ─────────────────────────────────────
 N="$(make_case bad-dialog "$FIXTURES/shell")"
 seed "$N/js/components/Confirm.js" \
@@ -314,6 +333,7 @@ seed "$Y/page.html" \
     '<main id="view-container">
     <h1>Shell fixture</h1>
     <p>Fixture content.</p>
+    <button id="create-vm-btn" type="button">Create VM</button>
 </main>' \
     '<main id="view-container"></main>'
 must_fail "a route that never renders" \
@@ -341,6 +361,43 @@ must_fail "a registered route with no concrete instance to audit" \
     'they would never be audited' "$Z" page.html
 must_fail "a registration the gate's route parser cannot read" \
     'could not be parsed' "$Z" page.html
+
+# ── AA. a wizard whose step-marker digits fail contrast ─────────────────────
+# The defect this whole section exists for: the real `Wizard` shipped white step
+# digits on `--prism-blue` (2.69:1) and it was found by reading the CSS, not by
+# any audit, because the wizard only exists after a click. The stub carries the
+# fixed form (`--text-on-accent` on the same fill, ~6.8:1); this seeds it back.
+AA="$(make_case wizard-contrast "$FIXTURES/shell")"
+seed "$AA/page.html" \
+    '.wizard-step.active .step-number { border-color: #22a5f7; background: #22a5f7; color: #131520; }' \
+    '.wizard-step.active .step-number { border-color: #22a5f7; background: #22a5f7; color: #ffffff; }'
+must_fail "a wizard step marker whose digits fail contrast" \
+    'contrast @ open wizard' "$AA" page.html
+
+# ── AB. a wizard whose step inputs have no accessible name ──────────────────
+# Found the moment the gate learned to open a wizard: every view builds its step
+# markup as `<label>…</label><input>` with no `for`/`id`, so the control had no
+# name at all — in all ~25 views. The component now associates them; this removes
+# the association from the stub to prove the check can fail.
+AB="$(make_case wizard-unnamed-field "$FIXTURES/shell")"
+seed "$AB/js/components/Wizard.js" \
+    '                    <label for="fixture-wizard-field">Name</label>
+                    <input id="fixture-wizard-field" type="text">' \
+    '                    <label>Name</label>
+                    <input type="text">'
+must_fail "a wizard step input with no accessible name" \
+    'control-name @ open wizard' "$AB" page.html
+
+# ── AC. a wizard with no dialog semantics ───────────────────────────────────
+# A second component carries the same contract as the confirm dialog, so a
+# regression in either is caught: the wizard opens, traps and closes correctly,
+# but announces itself as a plain div.
+AC="$(make_case wizard-no-role "$FIXTURES/shell")"
+seed "$AC/js/components/Wizard.js" \
+    '<div class="modal" role="dialog" aria-modal="true" aria-labelledby="fixture-wizard-title">' \
+    '<div class="modal" aria-modal="true" aria-labelledby="fixture-wizard-title">'
+must_fail "a wizard that does not announce itself as a dialog" \
+    'the wizard has no role="dialog"' "$AC" page.html
 
 # ── T. the repository tree, every route, both themes ────────────────────────
 if "${GATE[@]}" >/dev/null 2>&1; then

@@ -21,7 +21,10 @@
  *      live regions, image alternatives, focus indicators,
  *   4. drives the modal dialog through the keyboard to check role, name,
  *      initial focus, focus trap, Escape, and focus restore,
- *   5. repeats the contrast audit in the light theme and verifies that an
+ *   5. opens the click-reachable create-VM wizard and runs the same dialog and
+ *      contrast checks on it — the shared `Wizard` component has no route of its
+ *      own, so it is invisible to step 3,
+ *   6. repeats the contrast audit in the light theme and verifies that an
  *      explicit theme choice wins while an absent one follows the OS.
  *
  * Zero npm dependencies on purpose: the repo has no package.json, and a gate
@@ -29,12 +32,16 @@
  * WebSocket (Node >= 22) speaks CDP directly.
  *
  * What this gate does NOT check, so a green run is not read as more than it is:
- *   - **Only routes the router registers.** The route list is read out of
- *     `js/app.js` rather than hand-written, and the gate fails if it cannot
- *     parse a registration or has no concrete instance for a parameterized
- *     route — but a view reachable only by clicking, with no route of its own,
- *     is still never opened. Coverage of the *route table* is asserted; coverage
- *     of the *application* is not.
+ *   - **Only routes the router registers, plus one click-reachable surface.** The
+ *     route list is read out of `js/app.js` rather than hand-written, and the
+ *     gate fails if it cannot parse a registration or has no concrete instance
+ *     for a parameterized route. It also opens the create-VM wizard, which has
+ *     no route of its own — so the shared `Wizard` component is now measured
+ *     rather than assumed. But that is *one* click-reachable surface: the
+ *     confirm dialog, the hamburger overlay, the theme toggle and the wizard are
+ *     driven; every other view-only interaction, and every drag-based one, is
+ *     still never opened. Coverage of the *route table* is asserted; coverage of
+ *     the *application* is not.
  *   - **Contrast is computed from solid `background-color` only.** An element
  *     painted over a gradient, an image, or a `backdrop-filter` layer is
  *     measured against the nearest solid ancestor colour, so a genuinely low
@@ -101,6 +108,16 @@ const PARAMETERIZED_TARGETS = [
     // from the router table; this is the review run it links into.
     'index.html#/flashcards/NCA-75',
 ];
+
+/**
+ * The click-reachable surface this gate drives: the create-VM wizard on the PE
+ * VM list. The shared `Wizard` component sits behind a button on ~25 views, so
+ * the per-route audit above never opens it — this is the route and the control
+ * that do. The stub shell carries the same control id so the section can be
+ * driven there too, and therefore broken there (SPEC-16 #4).
+ */
+const WIZARD_ROUTE = '/pe/vms';
+const WIZARD_TRIGGER = 'create-vm-btn';
 
 /**
  * The routes to audit, read from the app's own router table.
@@ -321,7 +338,18 @@ function pageAudit() {
     // pictographs is therefore not a text-contrast question — but a run that
     // mixes glyphs with words is, and is measured. Non-text contrast (1.4.11)
     // is not measured either way; see the header.
-    const PICTOGRAPHIC = /^[\p{Extended_Pictographic}\p{Emoji_Component}️‍\s]+$/u;
+    //
+    // The lookahead is load-bearing, and its absence was a real hole: Unicode
+    // classifies the ASCII digits `0-9`, `#`, `*` and the combining keycap as
+    // `Emoji_Component`, so the character-class alone matched a bare "1". Every
+    // numeral-only text run — wizard step numbers, badge counts, table tallies —
+    // was therefore skipped as if it were an emoji, and a white-on-blue step
+    // number at 2.69:1 went unmeasured even after the gate learned to open the
+    // wizard that renders it. Requiring at least one genuinely pictographic
+    // character (or an emoji presentation selector / keycap / ZWJ) keeps real
+    // emoji out of the contrast maths and puts digits back in it.
+    const PICTOGRAPHIC =
+        /^(?=.*[\p{Extended_Pictographic}️⃣‍])[\p{Extended_Pictographic}\p{Emoji_Component}️‍⃣\s]+$/u;
     for (const [el, directText] of hosts) {
         if (!shown(el)) continue;
         if (PICTOGRAPHIC.test(directText)) continue;
@@ -572,6 +600,26 @@ function dialogState() {
             : null,
         openerFocused: document.activeElement === window.__a11yOpener,
     };
+}
+
+// The click-reachable wizard probe.
+//
+// The shared `Wizard` component is the app's main multi-step surface and is
+// reachable from ~25 views, but it exists only after a click, so the per-route
+// audit above never opens it. That blind spot is exactly why the step-number
+// contrast failure was found by reading the CSS rather than by this gate. This
+// opens the real create-VM wizard by clicking the real control, so the fix is
+// measured rather than believed.
+function wizardOpen(triggerId) {
+    return (async () => {
+        const btn = document.getElementById(triggerId);
+        if (!btn) return { present: false, open: false };
+        btn.focus();
+        window.__a11yOpener = btn;
+        btn.click();
+        await new Promise((r) => setTimeout(r, 80));
+        return { present: true, open: !!document.querySelector('.modal-overlay') };
+    })();
 }
 
 // ── Static server over the exact artifact that would be published ──
@@ -987,6 +1035,80 @@ async function main() {
                 + ` return cs.display !== 'none' && cs.visibility !== 'hidden'; })()`);
             if (closedReachable) fail('the closed hamburger overlay is still reachable (not inert and still rendered)');
             else pass('the closed hamburger overlay is inert and out of the tab order');
+
+            // ── Click-reachable UI: the create-VM wizard ──
+            // Everything above audits the page as it loads. The shared `Wizard`
+            // component is the app's main multi-step surface and is reachable
+            // from ~25 views, but it is created by a click and torn down on
+            // close, so it is never on screen during the per-route sweep — the
+            // step-number contrast failure (white on `--prism-blue`, 2.70:1)
+            // was found by reading the CSS, not by this gate. Opening it here is
+            // what turns that fix from "believed correct" into "measured", and
+            // it puts the dialog contract on a second component so a regression
+            // in either is caught.
+            say('');
+            say('click-reachable wizard (the shared Wizard component):');
+            // The real tree carries the wizard on `/pe/vms`; the stub shell has no
+            // routes and falls back to its single target, which carries the same
+            // control id.
+            await navigate(ROUTES.find((r) => r.endsWith(`#${WIZARD_ROUTE}`)) || ROUTES[0]);
+            const wizard = await evaluate(`(${String(wizardOpen)})(${JSON.stringify(WIZARD_TRIGGER)})`);
+            if (!wizard.present) {
+                fail(`no wizard trigger (#${WIZARD_TRIGGER}) on this route — the click-reachable `
+                    + 'surface could not be audited');
+            } else if (!wizard.open) {
+                fail('clicking the wizard trigger did not open the wizard — it could not be audited');
+            } else {
+                const wInfo = await evaluate(`(${String(dialogInspect)})()`);
+                if (wInfo.role !== 'dialog' && wInfo.role !== 'alertdialog') {
+                    fail(`the wizard has no role="dialog" (role is ${JSON.stringify(wInfo.role)})`);
+                }
+                if (wInfo.ariaModal !== 'true') {
+                    fail(`the wizard does not set aria-modal="true" (it is ${JSON.stringify(wInfo.ariaModal)})`);
+                }
+                if (!(wInfo.labelledby && wInfo.labelledbyResolves) && !wInfo.ariaLabel) {
+                    fail('the wizard has no accessible name (no resolving aria-labelledby, no aria-label)');
+                }
+                if (!wInfo.activeInside) {
+                    fail(`opening the wizard left focus outside it (active element is ${wInfo.activeTag})`);
+                }
+
+                // Contrast and control names, on the wizard as it actually renders
+                // — the step numbers and the per-step form controls exist only here.
+                const wResult = await evaluate(auditExpr);
+                const wFindings = (wResult?.violations || [])
+                    .filter((v) => v.rule === 'contrast' || v.rule === 'control-name');
+                if (!wFindings.length) {
+                    pass(`the open wizard renders with no contrast or control-name findings `
+                        + `(${wInfo.focusables} focusable controls)`);
+                } else {
+                    for (const v of wFindings.slice(0, PER_RULE_CAP * 2)) {
+                        fail(`${v.rule} @ open wizard: ${v.detail}`);
+                    }
+                }
+
+                // The dialog contract, on the wizard: trap, Escape, focus restore.
+                if (await evaluate(`(${String(dialogFocusLast)})()`)) {
+                    await pressKey('Tab', 'Tab', 9);
+                    let wState = await evaluate(`(${String(dialogState)})()`);
+                    if (!wState.inside) {
+                        fail(`Tab from the last control in the wizard moved focus outside it (to ${wState.active})`);
+                    } else {
+                        pass('Tab from the last control stays inside the wizard');
+                    }
+                    await pressKey('Escape', 'Escape', 27);
+                    wState = await evaluate(`(${String(dialogState)})()`);
+                    if (wState.open) fail('Escape did not close the wizard');
+                    else pass('Escape closes the wizard');
+                    if (wState.openerFocused) pass('closing the wizard restores focus to the opener');
+                    else fail(`closing the wizard did not restore focus to the opener (focus is on ${wState.active})`);
+                }
+                // If Escape did not close it, make sure nothing is left open for
+                // the console check below.
+                await evaluate(`(async () => { const m = document.querySelector('.modal-overlay');`
+                    + ` if (m) { const b = m.querySelector('.cancel-btn'); if (b) b.click(); else m.remove(); }`
+                    + ` return true; })()`);
+            }
 
             // ── Runtime component semantics (S35-02 / S35-06 / S35-07) ──
             // Three claims the conformance report makes that no static check can

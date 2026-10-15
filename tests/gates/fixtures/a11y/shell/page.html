@@ -38,6 +38,19 @@
     :focus-visible { outline: 3px solid var(--link); outline-offset: 2px; }
     .modal-overlay { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.5); }
     .modal { background: #ffffff; color: #1b1b1b; padding: 1rem; }
+    /* Step markers. `#22a5f7` is the real `--prism-blue`, a *light* blue: white
+       on it measures 2.69:1. The active digit here is `--text-on-accent` on that
+       fill (~6.8:1, passing) — which is the fix the real component carries. The
+       failing fixture seeds the white form the component shipped with, the
+       defect the gate could not see until it learned to open a wizard. */
+    .wizard-step { display: flex; align-items: center; gap: 0.5rem; color: #1b1b1b; }
+    .wizard-step .step-number {
+        width: 24px; height: 24px; border-radius: 50%;
+        display: flex; align-items: center; justify-content: center;
+        font-size: 11px; font-weight: 600;
+        border: 2px solid #9aa0a6; background: #ffffff;
+    }
+    .wizard-step.active .step-number { border-color: #22a5f7; background: #22a5f7; color: #131520; }
 </style>
 </head>
 <body>
@@ -57,13 +70,26 @@
 <main id="view-container">
     <h1>Shell fixture</h1>
     <p>Fixture content.</p>
+    <button id="create-vm-btn" type="button">Create VM</button>
 </main>
 
 <div id="toast-container" role="status" aria-live="polite"></div>
 
 <script type="module">
     import { initTheme } from './js/components/ThemeToggle.js';
+    import { Wizard } from './js/components/Wizard.js';
     initTheme();
+
+    // The click-reachable surface the gate opens. The real app opens the same
+    // component from a button on /pe/vms; here it is opened from the fixture's
+    // own control so the wizard section has something to drive — and, when a
+    // fixture seeds a break, something to fail on.
+    document.getElementById('create-vm-btn').addEventListener('click', () => {
+        new Wizard({
+            title: 'Create VM',
+            steps: [{ label: 'General' }, { label: 'Review' }],
+        }).open();
+    });
 
     const button = document.getElementById('hamburger-btn');
     const overlay = document.getElementById('hamburger-overlay');
