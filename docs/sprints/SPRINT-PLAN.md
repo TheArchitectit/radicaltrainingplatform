@@ -247,7 +247,7 @@ still have no automated accessibility coverage at all. The next pair is
 | Sprint 29-30 | ~~Cloud API Backend~~ → Self-Host Enablement | Weeks 57-60 | 🟢 Landed — rescoped by the owner 2026-10-12: no accounts, no cloud; self-host guide, a completed offline cache, and 57/57 freeze chain | [SPRINT-29-30.md](./SPRINT-29-30.md) |
 | Sprint 31-32 | Authentication & Authorization | Weeks 61-64 | ⚫ **Cut — owner-deferred** (2026-10-14): every deliverable needs the account layer Sprints 29-30 cut | [SPRINT-31-32.md](./SPRINT-31-32.md) |
 | Sprint 33-34 | Social & Study Groups | Weeks 65-68 | ⚫ **Cut — owner-deferred** (2026-10-14): sits on the API (29-30) and the auth layer (31-32), neither of which exists | [SPRINT-33-34.md](./SPRINT-33-34.md) |
-| Sprint 35-36 | WCAG 2.1 AA Accessibility | Weeks 69-72 | 🟢 Landed — Web PWA audited (54 routes × 2 themes), 2,020 findings repaired to zero; S35-08 rescoped from a VPAT to a measured-facts report, since no audit here can support a conformance claim | [SPRINT-35-36.md](./SPRINT-35-36.md) · [ACCESSIBILITY.md](../ACCESSIBILITY.md) |
+| Sprint 35-36 | WCAG 2.1 AA Accessibility | Weeks 69-72 | 🟢 Landed — 59/59 at `ab200dc`; Web PWA audited (54 routes × 2 themes), 2,020 findings repaired to zero. S35-08 rescoped from a VPAT to a measured-facts report, since no audit here can support a conformance claim; "across all platforms" not delivered | [SPRINT-35-36.md](./SPRINT-35-36.md) · [ACCESSIBILITY.md](../ACCESSIBILITY.md) |
 | Sprint 37-38 | Multi-Format Content | Weeks 73-76 | [SPRINT-37-38.md](./SPRINT-37-38.md) |
 | Sprint 39-40 | Enterprise Admin Console | Weeks 77-80 | [SPRINT-39-40.md](./SPRINT-39-40.md) |
 | Sprint 41-42 | Security & Compliance | Weeks 81-84 | [SPRINT-41-42.md](./SPRINT-41-42.md) |

@@ -156,14 +156,18 @@ have had no way to fail at all.
 
 ### Verification
 
+- **Freeze chain 59/59 at `ab200dc`**, `--expect-sha` matching. The chain grew 57 → 59:
+  the accessibility gate and its fixture runner. Chain growth is stated as growth, not
+  regression.
 - `node tests/e2e/a11y-web.mjs` — **PASS**, 54 routes × 2 themes = 108 audits, zero
-  findings, zero console errors.
+  findings, zero console errors. The per-route log is archived at
+  [docs/qa/release-evidence/2026-10-14-a11y-audit.md](../qa/release-evidence/2026-10-14-a11y-audit.md).
 - `bash tests/gates/run_a11y_fixtures.sh` — **28/28 verdicts PASS**, including the real
   repository tree.
 - The pre-change baseline was measured by running the fixed gate against `HEAD`'s Web tree
   out of `git archive`: **2,020 findings**, now zero.
-- The gate is wired into `tests/gates/run_freeze_chain.sh`, so the freeze chain includes
-  it.
+- The gate is wired into `tests/gates/run_freeze_chain.sh` and, for the browser legs,
+  `pwa-deploy.yml` — the `build-linux` job runs on a fleet runner with no browser.
 
 ### What was not touched
 
