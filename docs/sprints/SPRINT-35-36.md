@@ -156,9 +156,21 @@ have had no way to fail at all.
 
 ### Verification
 
-- **Freeze chain 59/59 at `ab200dc`**, `--expect-sha` matching. The chain grew 57 → 59:
+- **Freeze chain 59/59 at `379de44`**, `--expect-sha` matching. The chain grew 57 → 59:
   the accessibility gate and its fixture runner. Chain growth is stated as growth, not
-  regression.
+  regression. The chain first went green at `ab200dc`; `379de44` is the head after the
+  four post-freeze repairs below, and the chain was re-run there rather than assumed.
+- **The evidence log was regenerated at the new head**, by the gate's own
+  `A11Y_LOG_OUT` path rather than edited by hand — the artifact is produced by the thing
+  it documents. The result is **byte-identical apart from the ephemeral serving port**,
+  still 142 lines: the reported numbers did not change, and this record says so rather
+  than implying a re-measurement found something new.
+  What *did* change is the strength of the claim it records. The `.lesson-objectives h3`
+  rule orphaned by the heading promotions was restored as `:is(h2, h3)`, which drops
+  those headings from the browser's ~24px default to `--font-size-sm` (12px). At 24px the
+  audit treats them as *large* text and needs 3:1; at 12px they are small text and need
+  **4.5:1**. The archived log therefore recorded a **lenient** pass, and the regenerated
+  one records a **strict** pass over the same text. Same numbers, stronger threshold.
 - `node tests/e2e/a11y-web.mjs` — **PASS**, 54 routes × 2 themes = 108 audits, zero
   findings, zero console errors. The per-route log is archived at
   [docs/qa/release-evidence/2026-10-14-a11y-audit.md](../qa/release-evidence/2026-10-14-a11y-audit.md).
@@ -191,6 +203,30 @@ change is in `RadicalTrainingPlatform.Web/` and `tests/`.
   Criteria 1.2.x, 1.4.4, 1.4.10, 1.4.12, 2.2.x, 2.3.x, 2.5.5 and 2.5.8 have no check.
 - **A green run is not a user experience.** Nothing here establishes that a disabled user
   can complete a study session.
+
+### Defects found after the freeze, by reading rather than by measuring
+
+Four defects were repaired at `379de44`, after the chain had already gone green. None of
+them was found by the audit — the audit passed, and it was right to, because none of them
+is something it measures. All four were found by reading the CSS. They are recorded here
+because a green chain that is silent about them reads as coverage it does not have.
+
+- **Two orphaned rules.** The heading promotions in this sprint (`h3`/`h4` → `h2`, for
+  heading order) silently orphaned the element-scoped rules that styled them:
+  `.lesson-objectives h3` and `.explanation h4`. Both headings fell back to browser
+  defaults. The element-scoped selector was the bug — it pinned presentation to a semantic
+  level that accessibility work will keep changing. Restored as `:is(h2, h3)` and
+  `:is(h2, h3, h4)`; same specificity, same rendering as before the promotion.
+- **One dead rule.** `.page-title h1` requires `<div class="page-title"><h1>`, but 7 of the
+  33 page titles are the bare `<h1 class="page-title">` form, so it never matched them and
+  they rendered at the UA default — 26px/700 against this rule's 20px/600. Four of those
+  seven were promoted to `<h1>` during this sprint, which is how a semantic change moved
+  their size. The selector now covers both forms.
+- **One real AA failure, behind a click.** The shared `Wizard` component — see the bullet
+  below, and the entry in [ACCESSIBILITY.md](../ACCESSIBILITY.md).
+
+All four are recorded as **fixed**, and only the third was ever a contrast failure. The
+first two were presentation regressions this sprint introduced.
 
 ### Findings recorded rather than fixed
 
