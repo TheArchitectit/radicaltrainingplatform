@@ -1091,3 +1091,55 @@ body.demo-mode {
     border-radius: 2px;
     padding: 0 1px;
 }
+
+/* ── S39: coverage detail + progress portability ── */
+
+.coverage-detail {
+    margin: var(--space-sm) 0 var(--space-md);
+    color: var(--text-secondary);
+    font-size: var(--font-size-sm);
+}
+
+.coverage-detail summary {
+    cursor: pointer;
+    color: var(--text-link);
+}
+
+.coverage-detail-list {
+    margin: var(--space-sm) 0 0;
+    padding-left: var(--space-lg);
+}
+
+.coverage-detail-list li {
+    margin-bottom: 2px;
+}
+
+.objective-id {
+    color: var(--text-secondary);
+    font-weight: 600;
+}
+
+.coverage-detail-empty {
+    color: var(--text-secondary);
+    font-size: var(--font-size-sm);
+    margin: var(--space-sm) 0 var(--space-md);
+}
+
+.study-kit {
+    margin-top: var(--space-xl);
+    padding-top: var(--space-lg);
+    border-top: 1px solid var(--border-light);
+}
+
+.study-section-title {
+    color: var(--text-primary);
+    font-size: var(--font-size-lg);
+    margin: 0 0 var(--space-sm);
+}
+
+.study-kit-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+    margin: var(--space-md) 0;
+}

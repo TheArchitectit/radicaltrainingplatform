@@ -17,7 +17,26 @@ export class TrackOverviewView extends BaseView {
         const examBlocks = track.examIds.map(examId => {
             const exam = EXAMS[examId];
             const cov = track.coverage.examCoverage[examId] ||
-                { total: 0, covered: 0, percent: 0 };
+                { total: 0, covered: 0, percent: 0, coveredObjectiveIds: [] };
+            // S39: the percentage is not actionable on its own. A teacher or a
+            // learner needs to know WHICH published objectives have no released
+            // lesson-and-item pair yet, so the detail names them. The list is
+            // derived from the exam's own objective structure rather than a
+            // second hand-maintained list, and is empty when the compiler's
+            // covered set already spans every objective.
+            const objectiveIds = new Set(cov.coveredObjectiveIds || []);
+            const allObjectives = (exam.sections || []).flatMap(section =>
+                (section.objectives || []).map(objective => ({ ...objective, section: section.number })));
+            const uncovered = allObjectives.filter(objective => !objectiveIds.has(objective.id));
+            const coverageDetail = allObjectives.length === 0
+                ? ''
+                : uncovered.length === 0
+                    ? `<p class="coverage-detail-empty">Every published objective in this exam has a released lesson and practice items.</p>`
+                    : `<details class="coverage-detail">
+                        <summary>${uncovered.length} of ${allObjectives.length} published objectives have no released lesson and item yet</summary>
+                        <ul class="coverage-detail-list">${uncovered.map(objective =>
+                            `<li><span class="objective-id">${objective.id}</span> ${objective.title}</li>`).join('')}</ul>
+                    </details>`;
             const modules = Object.values(LESSONS).filter(l => l.examId === examId)
                 .sort((a, b) => a.domainNumber.localeCompare(b.domainNumber, undefined, { numeric: true }));
             const moduleList = modules.map(m => m.status === 'released'
@@ -50,6 +69,7 @@ export class TrackOverviewView extends BaseView {
                         <h2 class="exam-name">${exam.displayName}</h2>
                         <span class="coverage-text">coverage ${cov.covered}/${cov.total} objectives (${cov.percent}%)</span>
                     </div>
+                    ${coverageDetail}
                     <div class="module-list">${moduleList}</div>
                     <div class="module-actions">${deckLink}</div>
                     ${gapList}
