@@ -183,7 +183,8 @@ shell carries a click-reachable wizard of its own to break.
 - The pre-change baseline was measured by running the fixed gate against `HEAD`'s Web tree
   out of `git archive`: **2,020 findings**, now zero.
 - The gate is wired into `tests/gates/run_freeze_chain.sh` and, for the browser legs,
-  `pwa-deploy.yml` — the `build-linux` job runs on a fleet runner with no browser.
+  `web-browser.yml` (named `pwa-deploy.yml` until Sprints 41-42 removed its Pages deploy
+  step) — the `build-linux` job runs on a fleet runner with no browser.
 
 ### What was not touched
 

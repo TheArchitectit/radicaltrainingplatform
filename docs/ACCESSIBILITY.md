@@ -263,8 +263,9 @@ bash tests/gates/run_a11y_fixtures.sh
 ```
 
 Both legs run in CI: `tests/e2e/a11y-web.mjs` and `tests/gates/run_a11y_fixtures.sh` are
-in `tests/gates/run_freeze_chain.sh`, and the browser legs run in `pwa-deploy.yml` (the
-`build-linux` job runs on a fleet runner with no browser).
+in `tests/gates/run_freeze_chain.sh`, and the browser legs run in `web-browser.yml` (the
+`build-linux` job runs on a fleet runner with no browser). That workflow was named
+`pwa-deploy.yml` before Sprints 41-42 removed its Pages deploy step.
 
 ---
 
