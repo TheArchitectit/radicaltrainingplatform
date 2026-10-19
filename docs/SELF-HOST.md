@@ -129,9 +129,14 @@ If you are deploying to shared machines, pick one of these:
    separate store.
 2. **Give each student their own copy** — a folder per student, or a stick per student.
 3. **Use a machine each**, if that is an option.
+4. **Move the progress as a file.** The Study Tracks page (`#/tracks`) can export a
+   learner's progress to a JSON file and import it into another browser profile or
+   machine. It writes a local file and touches no network — no account, no server. Use it
+   when a student needs to carry their history between machines but not keep a consistent
+   profile.
 
-There is no fourth option in this version. Cross-device sync does not exist, and this
-guide will not pretend otherwise.
+There is no sync. Option 4 moves a snapshot; it does not merge two histories or keep them
+in step. Cross-device sync does not exist, and this guide will not pretend otherwise.
 
 ## 8. Updating a copy
 
