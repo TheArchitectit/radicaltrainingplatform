@@ -42,7 +42,10 @@ const POSITIONAL_PATTERNS = [
     /\bnone of the above\b/i,
     /\bboth\s+[A-F]\b/i,
     /\b(?:options?|answers?|choices?)\s+[A-F]\b/i,
-    /\b[A-F]\s*(?:,|and|or|&)\s*[A-F]\b/i,
+    // Both letters must be single letters: without the `\b` after the first
+    // `[A-F]`, `re.I`/`/i` let it match the "f" of "for" or the "c" of "core",
+    // and "for a development team" was silently refused a shuffle.
+    /\b[A-F]\b\s*(?:,\s*(?:and\s+)?|&|\band\b|\bor\b)\s*[A-F]\b/i,
 ];
 
 /** Stable ID for one option of one item. */

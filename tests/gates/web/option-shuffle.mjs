@@ -80,6 +80,12 @@ await runner.test('letter-referential wording is never shuffled', async () => {
         item('X/3', { A: 'DNS', B: 'DHCP', C: 'Gateway', D: 'Mask' }, ['C'],
             { stem: 'Which of options A and D is wrong?' }),
         item('X/4', { A: 'DNS', B: 'DHCP', C: 'Gateway', D: 'Answer B only' }, ['A']),
+        item('X/4a', { A: 'DNS', B: 'DHCP', C: 'Gateway', D: 'Mask' }, ['C'],
+            { stem: 'Which values differ between A and D?' }),
+        item('X/4b', { A: 'DNS', B: 'DHCP', C: 'Gateway', D: 'Mask' }, ['C'],
+            { stem: 'Either B or C will work; which is preferred?' }),
+        item('X/4c', { A: 'DNS', B: 'DHCP', C: 'Gateway', D: 'Mask' }, ['C'],
+            { stem: 'Compare C, and D before answering.' }),
     ];
     for (const c of cases) {
         assertEqual(shuffleRefusal(c), 'letter-referential', `${c.id} must be refused`);
@@ -97,6 +103,24 @@ await runner.test('an ordinary choice item is shufflable', async () => {
     assertEqual(shuffleRefusal(SINGLE), null);
     assert(isShufflable(SINGLE));
     assert(isShufflable(MULTI), 'multi-select shuffles too — its identity is the set, not a position');
+});
+
+await runner.test('ordinary prose containing the letter "a" or "f" is not a letter reference', async () => {
+    // The "letter and letter" pattern once had no word boundary after its
+    // first letter, so under /i the "f" of "for" and the "c" of "core" matched
+    // `[A-F]`, and "for a development team" silently refused a shuffle. The
+    // pattern must see two *single* letters; these stems are ordinary prose.
+    const prose = [
+        item('X/8', { A: 'It removes the need for a second NIC', B: 'It doubles the core count',
+            C: 'It renames the DORA metrics', D: 'It adds a VLAN' }, ['A'],
+            { stem: 'What is the primary effect of this change for a development team?' }),
+        item('X/9', { A: 'Core count', B: 'Cache size', C: 'Frame size', D: 'Fan speed' }, ['B'],
+            { stem: 'Which value does the hypervisor report under load, for a given host?' }),
+    ];
+    for (const c of prose) {
+        assertEqual(shuffleRefusal(c), null, `${c.id} names no option letter and must shuffle`);
+        assert(isShufflable(c));
+    }
 });
 
 // ─── Determinism and variation ───────────────────────────────────────────

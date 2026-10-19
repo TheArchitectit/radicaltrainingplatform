@@ -238,6 +238,11 @@ jobs:
         run: |
           python3 scripts/check-security-baseline.py
           bash tests/gates/run_security_baseline_fixtures.sh
+      - name: Item hygiene (Sprints 43-44)
+        run: |
+          python3 scripts/check-item-hygiene.py
+          python3 scripts/check-item-hygiene.py --self-test
+          bash tests/gates/run_item_hygiene_fixtures.sh
 
       # No setup-dotnet here: the runner image (localhost/devgate-runner-rtp,
       # infra Containerfile convention) bakes the .NET 10 SDK — setup-dotnet

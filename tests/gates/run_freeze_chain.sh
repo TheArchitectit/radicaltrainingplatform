@@ -161,6 +161,16 @@ gate "bash tests/gates/run_selfhost_fixtures.sh"        bash tests/gates/run_sel
 gate "python3 scripts/check-security-baseline.py"       python3 scripts/check-security-baseline.py
 gate "bash tests/gates/run_security_baseline_fixtures.sh" bash tests/gates/run_security_baseline_fixtures.sh
 
+# ── Item hygiene (Sprints 43-44) ──
+# Every released bank must ship items that can actually be shuffled: distinct
+# option text, no position-dependent wording ("all of the above", "both A and
+# C"), a gradeable key, and no answer position so dominant it can be farmed.
+# The gate reads the released banks the compiler ships, not the legacy review
+# set — those are advisory. A clean sandbox passes; the seeded defects do not.
+gate "python3 scripts/check-item-hygiene.py"             python3 scripts/check-item-hygiene.py
+gate "python3 scripts/check-item-hygiene.py --self-test" python3 scripts/check-item-hygiene.py --self-test
+gate "bash tests/gates/run_item_hygiene_fixtures.sh"    bash tests/gates/run_item_hygiene_fixtures.sh
+
 # ── .NET ──
 gate "dotnet build Core (Release)" \
     dotnet build RadicalTrainingPlatform.Core/RadicalTrainingPlatform.Core.csproj --configuration Release
