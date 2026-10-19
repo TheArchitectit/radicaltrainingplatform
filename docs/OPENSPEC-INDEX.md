@@ -1,6 +1,8 @@
 # OpenSpec Index — RadicalTrainingPlatform
 
-Last reconciled: 2026-10-10 against main @ 88877b2.
+Last reconciled: 2026-10-10 against main @ 88877b2; execution state
+2026-10-18 on `feature/rtp-beginner-tracks` @ `da77118` — see
+[`CARRY-FORWARD.md`](CARRY-FORWARD.md) for what is blocked and deferred.
 
 **Note:** `.devgate/openspec/` in the working tree belongs to a different project (the DevGate fleet/gate platform), not RTP. It is untracked and out of scope here — do not modify it during RTP work.
 
