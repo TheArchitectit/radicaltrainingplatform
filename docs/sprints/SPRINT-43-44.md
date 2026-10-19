@@ -5,7 +5,7 @@
 **Goal (as written in June 2026):** Validate question quality with psychometric analysis, difficulty calibration, and readiness-score certification.  
 **Goal (as executed):** Check, offline and deterministically, that every item reaching the PWA can be graded and shuffled — nothing that depends on user performance data or any server.
 
-**Status:** 🟢 Landed at `d747676` — `scripts/check-item-hygiene.py`, `tests/gates/run_item_hygiene_fixtures.sh`, the `OptionShuffle.js` boundary fix, and the freeze-chain/CI wiring. Freeze chain **64/64** at `d747676`, `--expect-sha` matching.
+**Status:** 🟢 Landed at `f13b852` — `scripts/check-item-hygiene.py`, `tests/gates/run_item_hygiene_fixtures.sh`, the `OptionShuffle.js` boundary fix, and the freeze-chain/CI wiring. Freeze chain **64/64** at `f13b852`, `--expect-sha` matching.
 
 > **This sprint was rescoped by the owner on 2026-10-18.** The instruction was *"Rescope all three"*. The constraints stated the same day were: *"this is supposed to run as a local client on your device not need a hosting solution"* and *"the idea of this is they can just check the project out from github."* The delivery model is a clone and a local run — not a hosted multi-tenant service.
 >
@@ -76,7 +76,7 @@ Added vectors: prose stems containing "for a …", "core …", "DORA" must shuff
 - `python3 scripts/check-item-hygiene.py --self-test` — PASS, 7 seeded defects caught.
 - `bash tests/gates/run_item_hygiene_fixtures.sh` — PASS, all 11 cases.
 - `node tests/gates/web/option-shuffle.mjs` — PASS, including the new prose/refusal vectors.
-- Freeze chain **64/64** at `d747676`, `--expect-sha` matching.
+- Freeze chain **64/64** at `f13b852`, `--expect-sha` matching.
 
 ### What was not touched
 
