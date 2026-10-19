@@ -1,6 +1,8 @@
 # Carry-forward — state at 2026-10-18
 
-**Head:** `da77118` on `feature/rtp-beginner-tracks`.
+**Measured head:** `da77118` on `feature/rtp-beginner-tracks` (the docs-only
+commit that adds this page follows it; `git log -- docs/CARRY-FORWARD.md`
+names it).
 **Freeze chain:** **64/64 at `da77118`**, measured with `--expect-sha` on the full
 40-character SHA.
 **OpenSpec package:** `rtp-beginner-tracks-2026-10` — every task T-01..T-46 is
