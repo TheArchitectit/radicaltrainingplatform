@@ -1,0 +1,51 @@
+name: CodeQL
+
+# Static analysis for a local-client product (Sprint 41-42).
+#
+# The repository is public, so CodeQL is free to run here. It is also the only
+# hosted security control the delivery model can lean on: there is no server to
+# harden and no deploy to gate, but there is source, and this analyses it.
+#
+# `build-mode: none` is deliberate. The solution contains
+# RadicalTrainingPlatform.Legacy.WinForms, a net10.0-windows project that cannot
+# build on ubuntu-latest, so CodeQL's C# autobuild would fail on every run for a
+# reason unrelated to the change under test. Build-less extraction analyses the
+# source without compiling it.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  schedule:
+    # Weekly, so a new query pack or a dormant pattern is still found on a
+    # repository that has not changed.
+    - cron: '27 6 * * 1'
+
+permissions:
+  contents: read
+  security-events: write
+  actions: read
+
+jobs:
+  analyse:
+    name: Analyse (${{ matrix.language }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        language: [csharp, javascript-typescript]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Initialise CodeQL
+        uses: github/codeql-action/init@v3
+        with:
+          languages: ${{ matrix.language }}
+          build-mode: none
+
+      - name: Analyse
+        uses: github/codeql-action/analyze@v3
+        with:
+          category: /language:${{ matrix.language }}

@@ -1,0 +1,93 @@
+name: Web browser gates
+
+# Browser-level checks for the PWA (Sprints 35-36, 41-42).
+#
+# This workflow replaces pwa-deploy.yml. Nothing is published: the product is
+# checked out from source and run locally, so a Pages deployment was a public
+# distribution path the delivery model does not have. The gates it carried are
+# worth keeping — they drive the real artifact in a real browser — so they stay
+# here, with no pages/id-token permission and no upload step.
+#
+# Every step runs against RadicalTrainingPlatform.Web/ as it exists in the
+# checkout: the same bytes a student gets from `git clone`.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'RadicalTrainingPlatform.Web/**'
+      - 'tests/e2e/**'
+      - 'tests/gates/**'
+      - 'scripts/check-*.py'
+  pull_request:
+    paths:
+      - 'RadicalTrainingPlatform.Web/**'
+      - 'tests/e2e/**'
+      - 'tests/gates/**'
+      - 'scripts/check-*.py'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: "web-browser"
+  cancel-in-progress: false
+
+jobs:
+  browser-gates:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 1. Case-sensitive module graph: catches a dead import before spending a
+      #    browser launch on it.
+      - name: Check import graph
+        run: python3 scripts/check-imports.py --root RadicalTrainingPlatform.Web/js
+
+      # 2. Open the exact artifact and drive it. Zero npm dependencies — it
+      #    speaks CDP over Node's global WebSocket, and ubuntu-latest ships
+      #    Chrome. A missing browser fails closed rather than skipping.
+      - name: Browser smoke
+        env:
+          SMOKE_LOG_OUT: ${{ runner.temp }}/web-smoke.log.md
+        run: node tests/e2e/smoke-web.mjs
+
+      # 2b. The scenario labs driven end to end on the same artifact
+      #     (T-35 / REQ-SC-02..06). A lab whose handlers were never wired passes
+      #     every store-level fixture in the repo and fails here.
+      - name: NCA lab browser run
+        env:
+          NCA_LAB_LOG_OUT: ${{ runner.temp }}/nca-lab.log.md
+        run: node tests/e2e/nca-lab-web.mjs
+
+      # 2c. Accessibility (Sprints 35-36).
+      - name: Accessibility audit
+        env:
+          A11Y_LOG_OUT: ${{ runner.temp }}/a11y-web.log.md
+        run: |
+          node tests/e2e/a11y-web.mjs
+          bash tests/gates/run_a11y_fixtures.sh
+
+      # 3. Content bundle: every manifest-referenced asset exists with a
+      #    matching hash, and no unreviewed corpus ships.
+      - name: Content bundle check
+        run: |
+          python3 scripts/check-content-bundle.py
+          bash tests/gates/run_content_bundle_fixtures.sh
+
+      # 4. Secret scan (T-23, TM-64 / REQ-AI-04). The tutor slice is the first
+      #    code here designed to talk to a model provider, so it is the first
+      #    place a provider key could reach the tree a student runs.
+      - name: Artifact secret scan
+        run: python3 scripts/check-artifact-secrets.py
+
+      - name: Archive smoke log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: web-smoke-log
+          path: |
+            ${{ runner.temp }}/web-smoke.log.md
+            ${{ runner.temp }}/a11y-web.log.md
+          if-no-files-found: warn

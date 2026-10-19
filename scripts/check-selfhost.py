@@ -181,6 +181,24 @@ def check_precache_intact(root, fail):
                  f"app has no offline mode at all")
 
 
+def _registers_worker(root, html):
+    """True if the shell, or a local script it loads, registers the worker."""
+    if "serviceWorker.register" in html:
+        return True
+    web = pathlib.Path(root) / WEB_DIR
+    for ref in HTML_LINK.findall(html):
+        if ref.startswith("data:") or ref.startswith("#") or ABSOLUTE_REF.match(ref):
+            continue
+        path = web / normalise(ref)
+        if path.is_file() and path.suffix == ".js":
+            try:
+                if "serviceWorker.register" in path.read_text(encoding="utf-8"):
+                    return True
+            except OSError:
+                continue
+    return False
+
+
 def check_entry_points(root, fail):
     """Everything the shell names must exist, and the worker must be registered."""
     html = _read(root, INDEX)
@@ -191,9 +209,13 @@ def check_entry_points(root, fail):
         if not (web / normalise(ref)).is_file():
             fail(f"{INDEX}: references '{ref}', which does not exist — the page "
                  f"loads without it")
-    if "serviceWorker.register" not in html:
-        fail(f"{INDEX}: does not register a service worker, so the documented "
-             f"offline behaviour is not reachable from the shell")
+    # Registration may be inline or in a module the shell loads (S41 moved it
+    # into js/boot-sw.js so the CSP can forbid inline script). Follow the
+    # references rather than requiring one spelling of the same contract.
+    if not _registers_worker(root, html):
+        fail(f"{INDEX}: does not register a service worker, directly or via a "
+             f"script it loads, so the documented offline behaviour is not "
+             f"reachable from the shell")
 
     _, broken = reachable_assets(root)
     for item in broken:
@@ -262,13 +284,14 @@ GOOD = {
 <link rel="stylesheet" href="css/a.css">
 </head><body>
 <script type="module" src="js/app.js"></script>
-<script>navigator.serviceWorker.register('sw.js');</script>
+<script type="module" src="js/boot.js"></script>
 </body></html>
 """,
     f"{WEB_DIR}/manifest.json": '{"name":"t","start_url":".","scope":"."}\n',
     f"{WEB_DIR}/css/a.css": "body { color: black; }\n",
     f"{WEB_DIR}/js/app.js": "import './b.js';\n",
     f"{WEB_DIR}/js/b.js": "export const b = 1;\n",
+    f"{WEB_DIR}/js/boot.js": "navigator.serviceWorker.register('sw.js');\n",
     f"{WEB_DIR}/sw.js": """const CACHE_NAME = 't-v1';
 const STATIC_ASSETS = [
   './',
@@ -276,7 +299,8 @@ const STATIC_ASSETS = [
   './manifest.json',
   './css/a.css',
   './js/app.js',
-  './js/b.js'
+  './js/b.js',
+  './js/boot.js'
 ];
 """,
     GUIDE: """# Self-host
@@ -300,8 +324,10 @@ MUTATIONS = [
      "the shell references its script by absolute path"),
     (f"{WEB_DIR}/index.html", 'href="css/a.css"', 'href="https://cdn.example.com/a.css"',
      "the shell loads a stylesheet from a remote host"),
-    (f"{WEB_DIR}/index.html", "navigator.serviceWorker.register('sw.js');", "",
-     "the shell never registers the service worker"),
+    (f"{WEB_DIR}/js/boot.js", "navigator.serviceWorker.register('sw.js');", "",
+     "no script the shell loads registers the service worker"),
+    (f"{WEB_DIR}/index.html", 'src="js/boot.js"', 'src="js/app.js"',
+     "the module that registers the worker is no longer reachable from the shell"),
     (f"{WEB_DIR}/js/app.js", "import './b.js';", "import './gone.js';",
      "a module import does not resolve"),
     (GUIDE, "-d RadicalTrainingPlatform.Web", "-d RadicalTrainingPlatform.Weeb",

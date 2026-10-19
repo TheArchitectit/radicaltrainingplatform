@@ -228,6 +228,17 @@ jobs:
           python3 scripts/check-selfhost.py
           bash tests/gates/run_selfhost_fixtures.sh
 
+      # Sprints 41-42: the security baseline for a local client. No server sets
+      # headers, so the meta CSP is the policy the browser enforces — and an
+      # inline <script> or onclick= is silently dead under it. The gate also
+      # holds the committed SBOM against the csproj graph, forbids any Pages
+      # upload (delivery is a git checkout, not a hosted site) and requires the
+      # CodeQL workflow that analyses this public repository.
+      - name: Security baseline (Sprints 41-42)
+        run: |
+          python3 scripts/check-security-baseline.py
+          bash tests/gates/run_security_baseline_fixtures.sh
+
       # No setup-dotnet here: the runner image (localhost/devgate-runner-rtp,
       # infra Containerfile convention) bakes the .NET 10 SDK — setup-dotnet
       # cannot write /usr/share/dotnet inside a rootless runner container.
@@ -295,8 +306,8 @@ jobs:
   # net8.0-windows TFM; retargeted 2026-09-26 so the solution restores).
   # windows-latest is kept deliberately: radicaltrainingplatform is a PUBLIC
   # repo, so hosted minutes are free here, unlike the fleet's private repos.
-  # pwa-deploy.yml likewise stays ubuntu-latest: actions/deploy-pages is a
-  # GitHub-hosted platform capability that cannot run self-hosted.
+  # No job here deploys anywhere: the PWA is delivered as a git checkout and
+  # run locally (S41-42 removed the Pages workflow).
   build-winforms:
     runs-on: windows-latest
     steps:

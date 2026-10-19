@@ -4,6 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#0B0B1A">
+    <!-- S41 security baseline. The app is a local client checked out from
+         source, so this policy is enforced by the browser, not by a host:
+         a web server's headers are not available and Pages is not the
+         delivery model. `connect-src` admits loopback only, for the optional
+         local tutor gateway. `style-src` needs 'unsafe-inline' because views
+         ship style attributes; script-src does not, and there is no inline
+         script left to admit. `frame-ancestors` is omitted because browsers
+         ignore it in a meta policy. -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' http://127.0.0.1:* http://localhost:*; worker-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
     <title>Nutanix Lab Simulator</title>
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect fill='%230B0B1A' width='100' height='100' rx='20'/%3E%3Ctext x='50' y='65' font-size='50' text-anchor='middle'%3E%F0%9F%96%A5%EF%B8%8F%3C/text%3E%3C/svg%3E">
     <link rel="manifest" href="manifest.json">
@@ -201,14 +210,9 @@
     <div id="toast-container" class="toast-container"
          role="status" aria-live="polite" aria-atomic="false"></div>
 
-    <!-- Boot Script -->
+    <!-- Boot Script. The service-worker registration is a module rather than an
+         inline script so the CSP above can forbid inline script entirely. -->
     <script type="module" src="js/app.js"></script>
-    <script>
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('sw.js')
-                .then(reg => console.log('[PWA] Service Worker registered:', reg.scope))
-                .catch(err => console.error('[PWA] Service Worker registration failed:', err));
-        }
-    </script>
+    <script type="module" src="js/boot-sw.js"></script>
 </body>
 </html>

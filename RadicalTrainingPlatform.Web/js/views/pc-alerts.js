@@ -175,7 +175,7 @@ export class PcAlertsView extends BaseView {
                     <label style="font-weight:600;display:block;margin-bottom:4px;">Trap Receivers (one per line)</label>
                     <textarea rows="3" style="width:100%;padding:8px;border:1px solid var(--border-subtle);border-radius:4px;background:var(--surface-secondary);color:var(--text-primary);font-family:monospace;">10.42.100.100:162</textarea>
                 </div>
-                <button class="btn btn-primary" onclick="alert('SNMP config saved (simulated).')">Save SNMP</button>
+                <button class="btn btn-primary" type="button" data-simulated-alert="SNMP config saved (simulated).">Save SNMP</button>
             </div>
         `;
         container.appendChild(card);
@@ -204,10 +204,17 @@ export class PcAlertsView extends BaseView {
                         </select>
                     </div>
                 </div>
-                <button class="btn btn-primary" onclick="alert('Syslog config saved (simulated).')">Save Syslog</button>
+                <button class="btn btn-primary" type="button" data-simulated-alert="Syslog config saved (simulated).">Save Syslog</button>
             </div>
         `;
         container.appendChild(syslog);
+
+        // S41: inline onclick attributes are refused by the CSP, so the
+        // simulated-save buttons are wired here instead. The actions are
+        // deliberately still `alert` — they are lab simulation, not a save.
+        container.querySelectorAll('[data-simulated-alert]').forEach(btn => {
+            btn.addEventListener('click', () => alert(btn.dataset.simulatedAlert));
+        });
     }
 
     #createPolicy() {

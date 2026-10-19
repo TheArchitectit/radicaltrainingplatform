@@ -151,6 +151,16 @@ gate "bash tests/gates/run_artifact_secrets_fixtures.sh" bash tests/gates/run_ar
 gate "python3 scripts/check-selfhost.py"                python3 scripts/check-selfhost.py
 gate "bash tests/gates/run_selfhost_fixtures.sh"        bash tests/gates/run_selfhost_fixtures.sh
 
+# ── Security baseline (Sprints 41-42) ──
+# A local client has no server to set headers, so the CSP in index.html is the
+# only policy enforced. Before this pair the shell ran an inline service-worker
+# registration and four inline event handlers — all of which a strict
+# script-src blocks — and no workflow analysed the source. The gate holds the
+# policy, the absence of inline script, the loopback-only tutor path, the
+# committed SBOM against the csproj graph, and the no-publication rule.
+gate "python3 scripts/check-security-baseline.py"       python3 scripts/check-security-baseline.py
+gate "bash tests/gates/run_security_baseline_fixtures.sh" bash tests/gates/run_security_baseline_fixtures.sh
+
 # ── .NET ──
 gate "dotnet build Core (Release)" \
     dotnet build RadicalTrainingPlatform.Core/RadicalTrainingPlatform.Core.csproj --configuration Release
@@ -177,7 +187,7 @@ gate "python3 .github/scripts/vuln_gate.py" \
         RadicalTrainingPlatform.Desktop/RadicalTrainingPlatform.Desktop.csproj
 gate "python3 tests/gates/run_vuln_gate_fixtures.py"    python3 tests/gates/run_vuln_gate_fixtures.py
 
-# ── Browser legs (pwa-deploy.yml — hosted runner) ──
+# ── Browser legs (web-browser.yml — hosted runner) ──
 gate "node tests/e2e/smoke-web.mjs"                     node tests/e2e/smoke-web.mjs
 gate "bash tests/gates/run_smoke_fixtures.sh"           bash tests/gates/run_smoke_fixtures.sh
 gate "node tests/e2e/nca-lab-web.mjs"                   node tests/e2e/nca-lab-web.mjs

@@ -8,7 +8,7 @@
 // Bumped to v5 by S37-05/07, which added a data module, a core module and a
 // view module. Same rule: the added entries reach an existing install only
 // through a new install event.
-const CACHE_NAME = 'labsim-v5';
+const CACHE_NAME = 'labsim-v6';
 const STATIC_ASSETS = [
   './',
   './index.html',
@@ -17,6 +17,7 @@ const STATIC_ASSETS = [
   './css/components.css',
   './css/study.css',
   './js/app.js',
+  './js/boot-sw.js',
   './js/core/BridgeClient.js',
   './js/core/CLIService.js',
   './js/core/CompletionPanel.js',

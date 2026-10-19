@@ -1,0 +1,277 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.5",
+  "version": 1,
+  "metadata": {
+    "tools": {
+      "components": [
+        {
+          "type": "application",
+          "name": "rtp-generate-sbom",
+          "version": "1"
+        }
+      ]
+    },
+    "properties": [
+      {
+        "name": "rtp:delivery-model",
+        "value": "git clone and run locally; no hosted service"
+      },
+      {
+        "name": "rtp:web-runtime-dependencies",
+        "value": "none \u2014 RadicalTrainingPlatform.Web/ has no package.json and imports only its own tree"
+      }
+    ]
+  },
+  "components": [
+    {
+      "type": "library",
+      "bom-ref": "pkg:nuget/Avalonia.Desktop@12.1.3",
+      "name": "Avalonia.Desktop",
+      "version": "12.1.3",
+      "purl": "pkg:nuget/Avalonia.Desktop@12.1.3",
+      "scope": "required"
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:nuget/Avalonia.Fonts.Inter@12.1.3",
+      "name": "Avalonia.Fonts.Inter",
+      "version": "12.1.3",
+      "purl": "pkg:nuget/Avalonia.Fonts.Inter@12.1.3",
+      "scope": "required"
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:nuget/Avalonia.Headless.XUnit@12.1.3",
+      "name": "Avalonia.Headless.XUnit",
+      "version": "12.1.3",
+      "purl": "pkg:nuget/Avalonia.Headless.XUnit@12.1.3",
+      "scope": "excluded"
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:nuget/Avalonia.Themes.Simple@12.1.3",
+      "name": "Avalonia.Themes.Simple",
+      "version": "12.1.3",
+      "purl": "pkg:nuget/Avalonia.Themes.Simple@12.1.3",
+      "scope": "required"
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:nuget/Avalonia@12.1.3",
+      "name": "Avalonia",
+      "version": "12.1.3",
+      "purl": "pkg:nuget/Avalonia@12.1.3",
+      "scope": "required"
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:nuget/CefGlue.Avalonia@120.6099.215",
+      "name": "CefGlue.Avalonia",
+      "version": "120.6099.215",
+      "purl": "pkg:nuget/CefGlue.Avalonia@120.6099.215",
+      "scope": "required"
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:nuget/CefGlue.Common@120.6099.215",
+      "name": "CefGlue.Common",
+      "version": "120.6099.215",
+      "purl": "pkg:nuget/CefGlue.Common@120.6099.215",
+      "scope": "required"
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:nuget/Microsoft.Extensions.DependencyInjection.Abstractions@9.0.0",
+      "name": "Microsoft.Extensions.DependencyInjection.Abstractions",
+      "version": "9.0.0",
+      "purl": "pkg:nuget/Microsoft.Extensions.DependencyInjection.Abstractions@9.0.0",
+      "scope": "required"
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:nuget/Microsoft.Extensions.DependencyInjection@9.0.0",
+      "name": "Microsoft.Extensions.DependencyInjection",
+      "version": "9.0.0",
+      "purl": "pkg:nuget/Microsoft.Extensions.DependencyInjection@9.0.0",
+      "scope": "required"
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:nuget/Microsoft.Extensions.Logging.Abstractions@9.0.0",
+      "name": "Microsoft.Extensions.Logging.Abstractions",
+      "version": "9.0.0",
+      "purl": "pkg:nuget/Microsoft.Extensions.Logging.Abstractions@9.0.0",
+      "scope": "required"
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:nuget/Microsoft.Extensions.Logging.Console@9.0.0",
+      "name": "Microsoft.Extensions.Logging.Console",
+      "version": "9.0.0",
+      "purl": "pkg:nuget/Microsoft.Extensions.Logging.Console@9.0.0",
+      "scope": "required"
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:nuget/Microsoft.Extensions.Logging@9.0.0",
+      "name": "Microsoft.Extensions.Logging",
+      "version": "9.0.0",
+      "purl": "pkg:nuget/Microsoft.Extensions.Logging@9.0.0",
+      "scope": "required"
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:nuget/Microsoft.NET.Test.Sdk@17.14.1",
+      "name": "Microsoft.NET.Test.Sdk",
+      "version": "17.14.1",
+      "purl": "pkg:nuget/Microsoft.NET.Test.Sdk@17.14.1",
+      "scope": "excluded"
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:nuget/Microsoft.Testing.Platform.MSBuild@2.4.1",
+      "name": "Microsoft.Testing.Platform.MSBuild",
+      "version": "2.4.1",
+      "purl": "pkg:nuget/Microsoft.Testing.Platform.MSBuild@2.4.1",
+      "scope": "excluded"
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:nuget/Microsoft.Web.WebView2@1.0.2903.40",
+      "name": "Microsoft.Web.WebView2",
+      "version": "1.0.2903.40",
+      "purl": "pkg:nuget/Microsoft.Web.WebView2@1.0.2903.40",
+      "scope": "required"
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:nuget/NSubstitute@5.3.0",
+      "name": "NSubstitute",
+      "version": "5.3.0",
+      "purl": "pkg:nuget/NSubstitute@5.3.0",
+      "scope": "excluded"
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:nuget/PdfSharp@6.1.1",
+      "name": "PdfSharp",
+      "version": "6.1.1",
+      "purl": "pkg:nuget/PdfSharp@6.1.1",
+      "scope": "required"
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:nuget/QuestPDF@2025.1.0",
+      "name": "QuestPDF",
+      "version": "2025.1.0",
+      "purl": "pkg:nuget/QuestPDF@2025.1.0",
+      "scope": "required"
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:nuget/Shouldly@4.3.0",
+      "name": "Shouldly",
+      "version": "4.3.0",
+      "purl": "pkg:nuget/Shouldly@4.3.0",
+      "scope": "excluded"
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:nuget/coverlet.collector@6.0.4",
+      "name": "coverlet.collector",
+      "version": "6.0.4",
+      "purl": "pkg:nuget/coverlet.collector@6.0.4",
+      "scope": "excluded"
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:nuget/xunit.runner.visualstudio@2.8.2",
+      "name": "xunit.runner.visualstudio",
+      "version": "2.8.2",
+      "purl": "pkg:nuget/xunit.runner.visualstudio@2.8.2",
+      "scope": "excluded"
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:nuget/xunit.v3@3.2.2",
+      "name": "xunit.v3",
+      "version": "3.2.2",
+      "purl": "pkg:nuget/xunit.v3@3.2.2",
+      "scope": "excluded"
+    },
+    {
+      "type": "library",
+      "bom-ref": "pkg:nuget/xunit@2.9.3",
+      "name": "xunit",
+      "version": "2.9.3",
+      "purl": "pkg:nuget/xunit@2.9.3",
+      "scope": "excluded"
+    },
+    {
+      "type": "application",
+      "bom-ref": "project:RadicalTrainingPlatform.Core.Tests/RadicalTrainingPlatform.Core.Tests.csproj",
+      "name": "RadicalTrainingPlatform.Core.Tests",
+      "version": "0.0.0",
+      "scope": "excluded",
+      "properties": [
+        {
+          "name": "rtp:project-path",
+          "value": "RadicalTrainingPlatform.Core.Tests/RadicalTrainingPlatform.Core.Tests.csproj"
+        }
+      ]
+    },
+    {
+      "type": "application",
+      "bom-ref": "project:RadicalTrainingPlatform.Core/RadicalTrainingPlatform.Core.csproj",
+      "name": "RadicalTrainingPlatform.Core",
+      "version": "0.0.0",
+      "scope": "required",
+      "properties": [
+        {
+          "name": "rtp:project-path",
+          "value": "RadicalTrainingPlatform.Core/RadicalTrainingPlatform.Core.csproj"
+        }
+      ]
+    },
+    {
+      "type": "application",
+      "bom-ref": "project:RadicalTrainingPlatform.Desktop.Tests/RadicalTrainingPlatform.Desktop.Tests.csproj",
+      "name": "RadicalTrainingPlatform.Desktop.Tests",
+      "version": "0.0.0",
+      "scope": "excluded",
+      "properties": [
+        {
+          "name": "rtp:project-path",
+          "value": "RadicalTrainingPlatform.Desktop.Tests/RadicalTrainingPlatform.Desktop.Tests.csproj"
+        }
+      ]
+    },
+    {
+      "type": "application",
+      "bom-ref": "project:RadicalTrainingPlatform.Desktop/RadicalTrainingPlatform.Desktop.csproj",
+      "name": "RadicalTrainingPlatform.Desktop",
+      "version": "0.0.0",
+      "scope": "required",
+      "properties": [
+        {
+          "name": "rtp:project-path",
+          "value": "RadicalTrainingPlatform.Desktop/RadicalTrainingPlatform.Desktop.csproj"
+        }
+      ]
+    },
+    {
+      "type": "application",
+      "bom-ref": "project:RadicalTrainingPlatform.Legacy.WinForms/RadicalTrainingPlatform.Legacy.WinForms.csproj",
+      "name": "RadicalTrainingPlatform.Legacy.WinForms",
+      "version": "0.0.0",
+      "scope": "required",
+      "properties": [
+        {
+          "name": "rtp:project-path",
+          "value": "RadicalTrainingPlatform.Legacy.WinForms/RadicalTrainingPlatform.Legacy.WinForms.csproj"
+        }
+      ]
+    }
+  ]
+}

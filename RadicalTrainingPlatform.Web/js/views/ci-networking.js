@@ -30,7 +30,7 @@ export class CiNetworkingView extends BaseView {
                         <div style="font-size:48px;margin-bottom:16px;">🌐</div>
                         <h3>No NC2 Clusters Deployed</h3>
                         <p class="text-secondary">Deploy an NC2 cluster first to configure networking.</p>
-                        <button class="btn btn-primary" style="margin-top:16px;" onclick="location.hash='#/pc/nc2-deploy'">Deploy NC2 Cluster</button>
+                        <a class="btn btn-primary" style="margin-top:16px;" href="#/pc/nc2-deploy">Deploy NC2 Cluster</a>
                     </div>
                 </div>
             ` : `

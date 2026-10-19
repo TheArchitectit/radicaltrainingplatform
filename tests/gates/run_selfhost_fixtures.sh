@@ -149,7 +149,7 @@ must_fail "the precache list is gone" \
 
 # ── the checker's own seeded defects ────────────────────────────────────────
 if "${GATE[@]}" --self-test >/dev/null 2>&1; then
-    echo "PASS: check-selfhost self-test (11 seeded defects caught)"
+    echo "PASS: check-selfhost self-test (12 seeded defects caught)"
 else
     echo "FAIL: check-selfhost self-test"
     "${GATE[@]}" --self-test 2>&1 | sed 's/^/      /'

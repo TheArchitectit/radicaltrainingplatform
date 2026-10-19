@@ -87,6 +87,12 @@ export class PcSettingsView extends BaseView {
         // each render (switching tabs replaces the nodes, so a one-time
         // wire in afterRender left Reset/Export/Import dead).
         if (tab === 'data') this.#wireDataTab();
+
+        // S41: no inline event handlers — the CSP forbids them. Simulated
+        // actions declare their message in data-simulated-alert.
+        c.querySelectorAll('[data-simulated-alert]').forEach(btn => {
+            btn.addEventListener('click', () => alert(btn.dataset.simulatedAlert));
+        });
     }
 
     #defaults() {
@@ -209,7 +215,7 @@ export class PcSettingsView extends BaseView {
                 </div>
             </div>
             <p class="text-secondary text-sm">To replace the SSL certificate, upload a new PEM-encoded certificate and private key.</p>
-            <button class="btn btn-primary" style="margin-top:var(--space-md);" onclick="alert('Certificate upload simulated — this is a lab environment.')">📤 Replace Certificate</button>
+            <button class="btn btn-primary" type="button" style="margin-top:var(--space-md);" data-simulated-alert="Certificate upload simulated — this is a lab environment.">📤 Replace Certificate</button>
         </div>`;
     }
 
