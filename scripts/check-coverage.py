@@ -19,10 +19,34 @@ Exit codes:
 """
 import argparse
 import glob
+import os
 import sys
 import xml.etree.ElementTree as ET
 
 DEFAULT_THRESHOLD = 0.70
+
+# The gate measures Core, so the report it reads must be the one Core.Tests
+# produced. The old `sorted(...)[-1]` picked the lexicographically last path,
+# which is Desktop.Tests whenever both projects collected coverage — a gate
+# silently measuring the wrong assembly. Prefer the Core.Tests tree; if that
+# does not disambiguate, refuse rather than guess.
+CORE_TESTS_SEGMENT = "RadicalTrainingPlatform.Core.Tests/"
+
+
+def select_report(candidates: list[str]) -> str | None:
+    """Pick the Core.Tests report, or None when the choice is ambiguous."""
+    normalized = [p.replace(os.sep, "/") for p in candidates]
+    preferred = [p for p, norm in zip(candidates, normalized)
+                 if CORE_TESTS_SEGMENT in norm]
+    if len(preferred) == 1:
+        return preferred[0]
+    if len(preferred) > 1:
+        # Repeated runs leave several; the newest is the one just produced.
+        return max(preferred, key=lambda p: (os.path.getmtime(p), p))
+    if len(candidates) == 1:
+        # A caller may have moved the report; an unambiguous single file is fine.
+        return candidates[0]
+    return None
 
 
 def find_report(explicit: str | None) -> str:
@@ -32,7 +56,16 @@ def find_report(explicit: str | None) -> str:
     if not candidates:
         print("COVERAGE: no coverage.cobertura.xml found (did --collect run?)", file=sys.stderr)
         sys.exit(1)
-    return candidates[-1]
+    report = select_report(candidates)
+    if report is None:
+        print(
+            "COVERAGE: several coverage reports exist and none is under "
+            f"{CORE_TESTS_SEGMENT}; pass the report path explicitly. Found: "
+            + ", ".join(candidates),
+            file=sys.stderr,
+        )
+        sys.exit(1)
+    return report
 
 
 def line_rate(path: str) -> tuple[float, int, int]:
@@ -139,11 +172,35 @@ def run_self_test() -> int:
                 f"generated-regex lines must be excluded (got {covered}/{valid} = {rate:.2%})"
             )
 
+        # Report selection: two reports exist, and the lexicographically last
+        # one (Desktop.Tests) used to win. The Core.Tests report must win now.
+        core_dir = base / "RadicalTrainingPlatform.Core.Tests" / "TestResults"
+        desk_dir = base / "RadicalTrainingPlatform.Desktop.Tests" / "TestResults"
+        core_dir.mkdir(parents=True)
+        desk_dir.mkdir(parents=True)
+        core_report = core_dir / "coverage.cobertura.xml"
+        desk_report = desk_dir / "coverage.cobertura.xml"
+        write_cobertura(core_report, 0.90)
+        write_cobertura(desk_report, 0.10)
+        chosen = select_report([str(desk_report), str(core_report)])
+        if chosen != str(core_report):
+            failures.append(
+                f"the Core.Tests report must win over Desktop.Tests (chose {chosen})"
+            )
+        if select_report([str(desk_report)]) != str(desk_report):
+            failures.append("a single report must be accepted wherever it sits")
+        other = base / "SomeOtherProject" / "coverage.cobertura.xml"
+        other.parent.mkdir(parents=True)
+        write_cobertura(other, 0.50)
+        if select_report([str(desk_report), str(other)]) is not None:
+            failures.append("ambiguous reports must be refused, not guessed")
+
     if failures:
         for f in failures:
             print(f"FAIL fixture: {f}", file=sys.stderr)
         return 2
-    print("SELF-TEST: PASS (below fails, above passes, generated lines excluded)")
+    print("SELF-TEST: PASS (below fails, above passes, generated lines excluded, "
+          "Core.Tests report selected)")
     return 0
 
 
