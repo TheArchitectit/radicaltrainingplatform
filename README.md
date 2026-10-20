@@ -54,7 +54,9 @@ see [VENDOR-PACK-RIGHTS-AZ-104.md](docs/VENDOR-PACK-RIGHTS-AZ-104.md) and
 
 ## ✨ Features
 
-- **1,458 practice questions** — comprehensive coverage across all blueprint domains
+- **1,458 practice questions** across the four Nutanix exams below, plus the beginner
+  packs above (189 items, `draft-preview`) — parsed by the desktop and legacy apps, not
+  part of the PWA bundle
 - **Blueprint coverage panel** — toggle with `B` to see which exam objectives each question covers
 - **Mixed question formats** — Standard MCQ, multi-select ("Select TWO"), and ordering/sequence questions
 - **Synthwave-themed GUI** — Dark neon aesthetic with animated progress bars
@@ -76,19 +78,37 @@ build is committed here, so there is nothing to download yet. Build from source 
 
 **Prerequisites:** [.NET 10 SDK](https://dotnet.microsoft.com/download/dotnet/10.0)
 (Linux, macOS, or Windows). The Avalonia desktop app is cross-platform; the Legacy
-WinForms project is Windows-only and is excluded from the Linux build.
+WinForms project is Windows-only, so on Linux and macOS the solution needs one extra
+flag (below) — the desktop app itself never does.
 
 ```bash
-dotnet build RadicalTrainingPlatform.sln          # Core + Desktop + Desktop.Tests
+# The desktop app, on every platform:
+dotnet build RadicalTrainingPlatform.Desktop
 dotnet run --project RadicalTrainingPlatform.Desktop
+
+# The whole solution (Core + Desktop + both test projects + Legacy) — Linux/macOS:
+dotnet build RadicalTrainingPlatform.sln -p:EnableWindowsTargeting=true
+# …and on Windows, without the flag:
+dotnet build RadicalTrainingPlatform.sln
 ```
+
+The Linux flag is needed only because `Legacy.WinForms` targets `net10.0-windows`; without
+it the restore stops with `error NETSDK1100`. CI does the same thing differently — the
+Linux job builds the four non-Windows projects one at a time, because it has no
+Windows-targeting support at all.
 
 The Web PWA is standalone — no .NET dependency, no npm dependency. Serve the directory
-with any static server and open `index.html`:
+with any static server and open it in a browser:
 
 ```bash
-python3 -m http.server -d RadicalTrainingPlatform.Web 8080
+python3 -m http.server -d RadicalTrainingPlatform.Web 8080     # Linux/macOS
+python  -m http.server -d RadicalTrainingPlatform.Web 8080     # Windows, if installed
 ```
+
+Then open <http://localhost:8080>. Two things to know, because both cost time when
+discovered by accident: Python is a prerequisite for *this* path (any static server
+works, and so does the desktop app instead), and opening `index.html` straight from the
+file system does not work — ES modules and the service worker need an `http://` origin.
 
 **Deploying it yourself?** The whole platform is a folder of files: no account, no
 backend, no database, no network at runtime. [docs/SELF-HOST.md](docs/SELF-HOST.md) is
@@ -181,12 +201,23 @@ D. On-premises Prism Central
 
 ## 🔍 Validation
 
-All 1,458 questions have been through **multiple validation passes**:
+The claims below describe the **legacy Nutanix banks** (1,458 items: NCP-US, NCP-CI,
+NCP-AI and NCM-MCI — the four exams in the table above). They say nothing about the
+189 PWA items, which carry draft provenance and no human review date.
 
 1. **LLM Answer Validation** — 8 independent agents answered every question; disagreements researched and resolved
-2. **Blueprint Gap Analysis** — Official exam blueprints analyzed; 178 gap-fill questions generated to achieve zero coverage gaps
-3. **Direct First-Pass Validation** — Every question read and verified; 7 corrections applied (GGUF→GPTQ/AWQ, port fixes, answer key fixes)
-4. **Solo Second-Pass Validation** — All 1,458 questions re-validated through web research and knowledge verification; zero additional issues found
+2. **Blueprint Gap Analysis** — vendor exam blueprints analyzed; 178 gap-fill questions generated to close the coverage gaps that produced them
+3. **Direct First-Pass Validation** — every question read and verified; 7 corrections applied (GGUF→GPTQ/AWQ, port fixes, answer key fixes)
+4. **Solo Second-Pass Validation** — all 1,458 questions re-validated through web research and knowledge verification
+
+These passes are **asserted history, not a gate**: no machine-checkable log backs them,
+and the `validation/` directory this section used to point at has never been committed.
+The evidence that does exist in-tree is narrower — [docs/DOC-REVIEW-REPORT.md](docs/DOC-REVIEW-REPORT.md)
+reviews the disputed questions against the Nutanix guides, and [`errata.json`](errata.json)
+records the 2 answer-key corrections that survived that review. Treat "validated" as
+"reviewed once by the author", not "verified against a current vendor key" — and note
+that no gate measures per-objective coverage either, so "zero coverage gaps" was true of
+the blueprints as they were read in 2026-06 and is not maintained.
 
 ### Corrections Applied
 | File | Question | Fix |
@@ -199,7 +230,9 @@ All 1,458 questions have been through **multiple validation passes**:
 | NCM-MCI-Part2 | Q11 | A → D (SNMP trap = "Add Trap Receiver") |
 | NCM-MCI-Part2 | Q40 | B → D (cluster stop is cluster-wide command) |
 
-Validation logs are in the `validation/` directory.
+The 7 rows above are the in-file corrections. The 2 in [`errata.json`](errata.json) are
+answer-key corrections applied at read time rather than in the bank text, so both places
+have to be read to know the current key.
 
 ## 🎨 Screenshots
 
