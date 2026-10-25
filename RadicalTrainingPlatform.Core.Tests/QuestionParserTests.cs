@@ -422,4 +422,60 @@ public class QuestionParserTests
         exams.ShouldContainKey("test-exam");
         exams["test-exam"].Count.ShouldBe(1);
     }
+
+    // ─── Audit 2026-10-25 regressions ────────────────────────────────
+
+    [Fact]
+    public void ParseFile_AnswerWithAnd_ParsesBothLetters()
+    {
+        // NCP-AI-Part4 Q61-70 use "**Answer: B and D**" and were dropped.
+        var content = MakeQuestion(61, "Pick TWO", ["- A) a", "- B) b", "- C) c", "- D) d"], "B and D");
+        var parser = new QuestionParser(CreateRepo(content));
+
+        var q = parser.ParseFile("test-exam.md").ShouldHaveSingleItem();
+
+        q.CorrectAnswers.ShouldBe(new[] { "B", "D" });
+    }
+
+    [Fact]
+    public void ParseFile_ProvenanceComment_NotInExplanation()
+    {
+        var content = MakeQuestion(1, "Q?", ["- A) a", "- B) b"], "A",
+            "Because a.\n<!-- {\"id\":\"X-Q001\",\"objective\":\"1.1\"} -->");
+        var parser = new QuestionParser(CreateRepo(content));
+
+        var q = parser.ParseFile("test-exam.md").ShouldHaveSingleItem();
+
+        q.Explanation.ShouldBe("Because a.");
+    }
+
+    [Theory]
+    [InlineData("/repo/content/exams/COMPTIA-A-1201/questions/core1-part1.md", "COMPTIA-A-1201")]
+    [InlineData("/repo/content/exams/NCA-75/questions/nca75-new-part2.md", "NCA-75")]
+    [InlineData("/repo/NCP-US-Part2-D3.md", "NCP-US")]
+    [InlineData("/repo/questions/NCP-CI-Part1.md", "NCP-CI")]
+    public void DeriveExamCodeFromPath_UsesContentFolderElseFileName(string path, string expected)
+    {
+        var normalised = path.Replace('/', System.IO.Path.DirectorySeparatorChar);
+        QuestionParser.DeriveExamCodeFromPath(normalised).ShouldBe(expected);
+    }
+
+    [Fact]
+    public void LoadAllExams_NewTrackFiles_MergeIntoFolderExamCode()
+    {
+        var sep = System.IO.Path.DirectorySeparatorChar;
+        var legacy = "NCA-75-Part1.md";
+        var track = string.Join(sep, "", "repo", "content", "exams", "NCA-75", "questions", "nca75-new-part1.md");
+        var repo = Substitute.For<IExamRepository>();
+        repo.FindExamFiles().Returns(new[] { legacy, track });
+        repo.ReadExamFile(legacy).Returns(MakeQuestion(1, "Old", ["- A) a", "- B) b"], "A"));
+        repo.ReadExamFile(track).Returns(MakeQuestion(1, "New", ["- A) a", "- B) b"], "B"));
+        var parser = new QuestionParser(repo);
+
+        var exams = parser.LoadAllExams();
+
+        exams.Keys.ShouldBe(new[] { "NCA-75" });
+        exams["NCA-75"].Count.ShouldBe(2);
+        parser.BuildCatalog().ShouldHaveSingleItem().QuestionCount.ShouldBe(2);
+    }
 }

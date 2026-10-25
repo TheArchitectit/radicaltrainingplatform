@@ -12,6 +12,7 @@ public partial class QuestionParser : IQuestionParser
     private static readonly Regex DomainHeaderRx = DomainHeaderRegex();
     private static readonly Regex OptionRx = OptionRegex();
     private static readonly Regex AnswerRx = AnswerRegex();
+    private static readonly Regex HtmlCommentLineRx = HtmlCommentLineRegex();
 
     private readonly IExamRepository _examRepository;
     private readonly ILogger<QuestionParser>? _logger;
@@ -41,8 +42,13 @@ public partial class QuestionParser : IQuestionParser
     [GeneratedRegex(@"^-\s+([A-F])\)\s+(.*)", RegexOptions.Compiled)]
     private static partial Regex OptionRegex();
 
-    [GeneratedRegex(@"^\*\*(?:Correct )?Answer:\s*([A-F][,\s]*(?:[A-F][,\s]*)*)\*\*", RegexOptions.Compiled)]
+    // Accepts "A", "A, C", "AC" and "B and D" (NCP-AI-Part4 Q61-70 used the
+    // last form and were silently dropped).
+    [GeneratedRegex(@"^\*\*(?:Correct )?Answer:\s*([A-F](?:[,\s]*(?:and\s+)?[A-F])*)[,\s]*\*\*", RegexOptions.Compiled)]
     private static partial Regex AnswerRegex();
+
+    [GeneratedRegex(@"^\s*<!--.*-->\s*$")]
+    private static partial Regex HtmlCommentLineRegex();
 
     /// <summary>
     /// Derive an exam code from a filename by iteratively stripping known suffixes.
@@ -82,6 +88,24 @@ public partial class QuestionParser : IQuestionParser
     }
 
     /// <summary>
+    /// Exam code for a file path. New-track banks live at
+    /// content/exams/&lt;CODE&gt;/questions/*.md, where the folder IS the code
+    /// (file names like "core1-part1.md" carry no exam code). Everything else
+    /// falls back to <see cref="DeriveExamCode"/> on the file name.
+    /// </summary>
+    public static string DeriveExamCodeFromPath(string filePath)
+    {
+        var questionsDir = Path.GetDirectoryName(filePath);
+        var examDir = Path.GetDirectoryName(questionsDir);
+        var examsDir = Path.GetDirectoryName(examDir);
+        if (string.Equals(Path.GetFileName(questionsDir), "questions", StringComparison.OrdinalIgnoreCase)
+            && string.Equals(Path.GetFileName(examsDir), "exams", StringComparison.OrdinalIgnoreCase)
+            && !string.IsNullOrEmpty(Path.GetFileName(examDir)))
+            return Path.GetFileName(examDir)!;
+        return DeriveExamCode(Path.GetFileName(filePath));
+    }
+
+    /// <summary>
     /// Build a lightweight catalog of all discovered exams without
     /// parsing every question. Counts questions via regex for speed.
     /// </summary>
@@ -94,7 +118,7 @@ public partial class QuestionParser : IQuestionParser
         {
             var content = _examRepository.ReadExamFile(file);
             var fileName = Path.GetFileName(file);
-            var code = DeriveExamCode(fileName);
+            var code = DeriveExamCodeFromPath(file);
 
             // Count questions and domains via regex (fast, no full parse)
             var qCount = QuestionHeaderRx.Matches(content).Count;
@@ -144,7 +168,7 @@ public partial class QuestionParser : IQuestionParser
         // CRLF into a phantom empty line, which aborted option parsing (and thus
         // dropped whole questions) on CRLF exam files.
         var lines = content.Replace("\r\n", "\n").Replace('\r', '\n').Split('\n');
-        var examCode = DeriveExamCode(Path.GetFileName(filePath));
+        var examCode = DeriveExamCodeFromPath(filePath);
         var questions = new List<Question>();
         var currentDomain = "";
 
@@ -253,10 +277,11 @@ public partial class QuestionParser : IQuestionParser
                     var am = AnswerRx.Match(line);
                     if (am.Success)
                     {
-                        var raw = am.Groups[1].Value
-                            .Replace(",", "")
-                            .Replace(" ", "");
-                        q.CorrectAnswers = raw.Select(c => c.ToString()).ToList();
+                        q.CorrectAnswers = am.Groups[1].Value
+                            .Where(c => c is >= 'A' and <= 'F')
+                            .Select(c => c.ToString())
+                            .Distinct()
+                            .ToList();
                         i++;
                     }
                 }
@@ -268,7 +293,10 @@ public partial class QuestionParser : IQuestionParser
                     if (line.StartsWith("---")) { i++; break; }
                     if (QuestionHeaderRx.IsMatch(line)) break;
                     if (DomainHeaderRx.IsMatch(line)) break;
-                    explLines.Add(line);
+                    // Provenance metadata (<!-- {...} -->) is for tooling,
+                    // not learners; it rendered verbatim in the explanation.
+                    if (!HtmlCommentLineRx.IsMatch(line))
+                        explLines.Add(line);
                     i++;
                 }
                 q.Explanation = string.Join("\n", explLines).Trim();
@@ -315,7 +343,7 @@ public partial class QuestionParser : IQuestionParser
             var questions = ParseFile(file);
             if (questions.Count == 0) continue;
 
-            var code = DeriveExamCode(Path.GetFileName(file));
+            var code = DeriveExamCodeFromPath(file);
             if (!exams.ContainsKey(code))
                 exams[code] = new List<Question>();
             exams[code].AddRange(questions);
@@ -340,6 +368,7 @@ public partial class QuestionParser : IQuestionParser
         ["Sec"] = "CompTIA",
         ["A"]   = "CompTIA",
         ["N"]   = "CompTIA",
+        ["COMPTIA"] = "CompTIA",
     };
 
     private static string DeriveVendor(string code)
@@ -350,6 +379,7 @@ public partial class QuestionParser : IQuestionParser
 
     private static string DeriveLevel(string code) => code switch
     {
+        var c when c.StartsWith("COMPTIA", StringComparison.OrdinalIgnoreCase) => "Entry",
         var c when c.StartsWith("NCA", StringComparison.OrdinalIgnoreCase) => "Associate",
         var c when c.StartsWith("NCM", StringComparison.OrdinalIgnoreCase) => "Expert",
         var c when c.StartsWith("NCP", StringComparison.OrdinalIgnoreCase) => "Professional",
@@ -371,6 +401,10 @@ public partial class QuestionParser : IQuestionParser
         return code.ToUpperInvariant() switch
         {
             "NCA"    => "NCA — Nutanix Certified Associate",
+            "NCA-75" => "NCA 7.5 — Nutanix Certified Associate",
+            "COMPTIA-A-1201"  => "CompTIA A+ Core 1 (220-1201)",
+            "COMPTIA-A-1202"  => "CompTIA A+ Core 2 (220-1202)",
+            "COMPTIA-NET-009" => "CompTIA Network+ (N10-009)",
             "NCM-MCI"=> "NCM — Multicloud Infrastructure",
             "NCP-CI" => "NCP — Cloud Infrastructure",
             "NCP-AI" => "NCP — AI/ML Infrastructure",

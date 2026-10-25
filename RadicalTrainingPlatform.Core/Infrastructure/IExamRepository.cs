@@ -98,6 +98,13 @@ public class MarkdownExamRepository : IExamRepository
 
                 // Deduplicate
                 _searchPaths = _searchPaths.Distinct().Where(p => _files.Exists(p)).ToList();
+
+                // 5. New-track banks: <base>/content/exams/<CODE>/questions/*.md.
+                // The flat *.md scan never descended into these, so the whole
+                // content/exams tree was invisible to the app.
+                foreach (var basePath in _searchPaths.ToList())
+                    _searchPaths.AddRange(FindContentExamDirs(basePath));
+                _searchPaths = _searchPaths.Distinct().ToList();
             }
             return _searchPaths;
         }
@@ -141,6 +148,25 @@ public class MarkdownExamRepository : IExamRepository
     }
 
     public string ReadExamFile(string path) => _files.ReadAllText(path);
+
+    private IEnumerable<string> FindContentExamDirs(string basePath)
+    {
+        var examsRoot = _files.CombinePath(basePath, "content", "exams");
+        if (!_files.Exists(examsRoot)) return Array.Empty<string>();
+        try
+        {
+            return (_files.GetDirectories(examsRoot) ?? Array.Empty<string>())
+                .Select(d => _files.CombinePath(d, "questions"))
+                .Where(_files.Exists)
+                .OrderBy(d => d, StringComparer.OrdinalIgnoreCase)
+                .ToList();
+        }
+        catch (Exception ex)
+        {
+            _logger?.LogWarning(ex, "Could not enumerate exam folders in {Root}", examsRoot);
+            return Array.Empty<string>();
+        }
+    }
 
     /// <summary>
     /// Heuristic: identify exam question files vs other markdown.

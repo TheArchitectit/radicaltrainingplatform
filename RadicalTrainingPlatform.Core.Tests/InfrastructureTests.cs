@@ -150,6 +150,24 @@ public class MarkdownExamRepositoryTests
     }
 
     [Fact]
+    public void SearchPaths_IncludesContentExamQuestionFolders()
+    {
+        var files = Substitute.For<IFileProvider>();
+        files.GetCurrentDirectory().Returns("/repo");
+        files.GetExecutingAssemblyDirectory().Returns("/repo");
+        files.GetApplicationDataDirectory("RadicalTrainingPlatform").Returns("/repo");
+        files.CombinePath(Arg.Any<string[]>()).Returns(ci => string.Join("/", ci.Arg<string[]>()));
+        files.Exists(Arg.Any<string>()).Returns(ci =>
+            ci.Arg<string>() is "/repo" or "/repo/content/exams" or "/repo/content/exams/NET-009/questions");
+        files.GetDirectories("/repo/content/exams").Returns(new[] { "/repo/content/exams/NET-009", "/repo/content/exams/EMPTY" });
+
+        var paths = new MarkdownExamRepository(files).SearchPaths.ToList();
+
+        paths.ShouldContain("/repo/content/exams/NET-009/questions");
+        paths.ShouldNotContain("/repo/content/exams/EMPTY/questions"); // no questions/ dir
+    }
+
+    [Fact]
     public void RegisterSearchPath_BlankRejected() =>
         Should.Throw<ArgumentException>(() =>
             new MarkdownExamRepository(Substitute.For<IFileProvider>()).RegisterSearchPath("  "));
