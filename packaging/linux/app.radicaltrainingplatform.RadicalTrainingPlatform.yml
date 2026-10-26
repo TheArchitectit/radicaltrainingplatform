@@ -31,7 +31,7 @@ modules:
           --runtime linux-x64
           --configuration Release
           --self-contained true
-          --output /app/bin/RadicalTrainingPlatform.Core
+          --output /app/lib/radicaltrainingplatform
           -p:PublishSingleFile=false
           -p:PublishTrimmed=false
           -p:EnableWindowsTargeting=false
@@ -49,11 +49,12 @@ modules:
           install -Dm644 RadicalTrainingPlatform.Desktop/Assets/icon.png \
             /app/share/icons/hicolor/256x256/apps/app.radicaltrainingplatform.RadicalTrainingPlatform.png
         fi
-      # Wrapper script so Flatpak can locate the binary by the app-id name
+      # Wrapper on PATH for `command:`. It used to exec
+      # /app/bin/RadicalTrainingPlatform.Core — the publish DIRECTORY.
       - |
         install -Dm755 /dev/stdin /app/bin/RadicalTrainingPlatform << 'EOF'
         #!/bin/sh
-        exec /app/bin/RadicalTrainingPlatform.Core "$@"
+        exec /app/lib/radicaltrainingplatform/RadicalTrainingPlatform "$@"
         EOF
 
     sources:

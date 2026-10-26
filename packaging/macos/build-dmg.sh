@@ -28,7 +28,7 @@ dotnet publish "${RADICALTRAININGPLATFORM_SLN}/${RADICALTRAININGPLATFORM_SLN}.cs
   -c "${RADICALTRAININGPLATFORM_BUILD_CONFIG}" \
   -r "${RADICALTRAININGPLATFORM_RUNTIME}" \
   --self-contained true \
-  -p:PublishSingleFile=true \
+  -p:PublishSingleFile=false \
   -p:PublishTrimmed=false \
   -o "${MACOS}"
 
@@ -75,7 +75,7 @@ ICON_SRC=""
 for candidate in \
   "${RADICALTRAININGPLATFORM_SLN}/Assets/radicaltrainingplatform.icns" \
   "${RADICALTRAININGPLATFORM_SLN}/Assets/icon.icns"; do
-  if [ -f "${candidate}"; then
+  if [ -f "${candidate}" ]; then
     ICON_SRC="${candidate}"
     break
   fi
