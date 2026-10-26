@@ -99,6 +99,12 @@ export const TICKET_EXPECTATIONS = {
         correctGateway: '10.42.200.1',
         requiredTests: ['tracert'],
     },
+    'aplus-ipconf-01': {
+        workstation: 'ws-ipconf-01',
+        editableField: 'ip',
+        correctIp: '10.42.100.121',
+        requiredTests: ['ipconfig', 'ping-ip'],
+    },
 };
 
 function workstationOf(stateApi, scenarioId) {
@@ -147,9 +153,30 @@ export function validateNetplusGw01(stateApi, trace) {
     return { passed: unmetList.length === 0, unmetConditions: unmetList };
 }
 
+export function validateAplusIpconf01(stateApi, trace) {
+    const unmetList = [];
+    const ws = workstationOf(stateApi, 'aplus-ipconf-01');
+    const exp = TICKET_EXPECTATIONS['aplus-ipconf-01'];
+    if (!ws) return { passed: false, unmetConditions: ['workstation record missing'] };
+    if (ws.config.ip !== exp.correctIp) {
+        unmetList.push(`IP address is still ${ws.config.ip} — it conflicts with another host; set the assigned address ${exp.correctIp}`);
+    }
+    if (!ranTest(trace, 'ipconfig')) {
+        unmetList.push('no ipconfig output recorded — capture the duplicate-address evidence before submitting');
+    }
+    if (!ranTest(trace, 'ping-ip')) {
+        unmetList.push('no ping-by-IP recorded — confirm the intermittent loss clears after the change');
+    }
+    if (!(ws.resolution_note || '').trim()) {
+        unmetList.push('resolution note is empty — document the fix');
+    }
+    return { passed: unmetList.length === 0, unmetConditions: unmetList };
+}
+
 export const TICKET_VALIDATORS = {
     'aplus-dns-01': validateAplusDns01,
     'netplus-gw-01': validateNetplusGw01,
+    'aplus-ipconf-01': validateAplusIpconf01,
 };
 
 // ── NCA beginner-set validators (T-35, REQ-NCA-07) ──
@@ -1296,6 +1323,27 @@ export const SCENARIOS = [
         correctGateway: '10.42.200.1',
         topology: { subnets: ['10.42.200.0/24 — Sales', '10.42.100.0/24 — Services'], router: '10.42.200.1' },
         hints: ['Reaching hosts on the same subnet but nothing off-subnet is a classic default-gateway symptom.', 'The correct gateway for 10.42.200.0/24 is .1 — check the topology panel.', 'tracert after the fix verifies off-subnet reachability; document what you found.'],
+        disclaimer: DISCLAIMER,
+    },
+    {
+        id: 'aplus-ipconf-01', exam: 'COMPTIA-A-1201', title: 'Ticket OPS-4472: The network drops when a second laptop is docked',
+        fixtureSeed: 1732050807,
+        difficulty: 'Beginner', time: '10 min',
+        description: 'An address-conflict ticket: the workstation works for a while, drops, and recovers. Diagnose, fix the addressing, and verify.',
+        renderer: 'ticket',
+        scenarioId: 'aplus-ipconf-01',
+        validate: TICKET_VALIDATORS['aplus-ipconf-01'],
+        ticket: {
+            id: 'OPS-4472', priority: 'P2', reportedBy: 'R. Okafor (Operations)',
+            text: 'My machine connects, then drops for a minute or two, then comes back. Downloads fail halfway and the shared drive disconnects. It started when a spare laptop was set up next to me. IT says my address should be 10.42.100.121.',
+        },
+        configFields: ['ip', 'gateway', 'dns'],
+        editableField: 'ip',
+        correctDns: '10.42.100.10',
+        correctGateway: '10.42.100.1',
+        correctIp: '10.42.100.121',
+        topology: { subnets: ['10.42.100.0/24 — Operations'], router: '10.42.100.1' },
+        hints: ['Working, then dropping, then recovering is not a dead link — the link is being fought over.', 'Run ipconfig and read the whole output rather than only the address.', 'ping a known IP shows partial replies; the fix is the assigned address, not the cable.'],
         disclaimer: DISCLAIMER,
     },
 

@@ -389,6 +389,7 @@ class StateEngine {
             ticket_workstations: [
                 { uuid: 'ws-dns-01', scenarioId: 'aplus-dns-01', name: 'HR-WS-114', config: { ip: '10.42.100.114', gateway: '10.42.100.1', dns: '10.42.100.99' }, resolution_note: '' },
                 { uuid: 'ws-gw-01', scenarioId: 'netplus-gw-01', name: 'SALES-WS-207', config: { ip: '10.42.200.207', gateway: '10.42.200.254', dns: '10.42.100.10' }, resolution_note: '' },
+                { uuid: 'ws-ipconf-01', scenarioId: 'aplus-ipconf-01', name: 'OPS-WS-318', config: { ip: '10.42.100.118', gateway: '10.42.100.1', dns: '10.42.100.10' }, resolution_note: '' },
             ],
             nc2_scaling_history: [
                 { uuid: 'nc2sh-001', cluster: 'NC2-AWS-Prod', action: 'scale_up', from_nodes: 3, to_nodes: 4, initiated_by: 'admin', status: 'completed', timestamp: '2026-03-20T10:00:00Z' },

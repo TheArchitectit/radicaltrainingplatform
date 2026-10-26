@@ -33,13 +33,14 @@ const { SCENARIOS } = await import('../../../RadicalTrainingPlatform.Web/js/view
 
 /**
  * The catalog holds 44 pre-existing scenarios, the 2 CompTIA ticket scenarios
- * built in Sprint 46, and — as of S48-05 — the 4 NCA beginner scenarios the
- * plan's "44 + 6" counted. The plan's six are now all present: this report
- * pins the count at 50 and names every one of them. The pin is the point:
- * if a scenario is added or silently dropped, this report goes red rather
- * than quietly reporting a different catalog than the one it claims.
+ * built in Sprint 46, the 4 NCA beginner scenarios the plan's "44 + 6"
+ * counted, and — as of the 2026-10-26 content pass — the address-conflict
+ * ticket (aplus-ipconf-01). This report pins the count at 51 and names every
+ * one of them. The pin is the point: if a scenario is added or silently
+ * dropped, this report goes red rather than quietly reporting a different
+ * catalog than the one it claims.
  */
-const EXPECTED_PRESENT = 50;
+const EXPECTED_PRESENT = 51;
 const NCA_IDS = ['nca-tool-01', 'nca-vm-01', 'nca-maint-01', 'nca-alert-01'];
 
 const rows = [];
@@ -139,10 +140,11 @@ function buildReport() {
     lines.push('');
     lines.push(`Scenarios in the catalog: **${rows.length}**`);
     lines.push('');
-    lines.push('The OpenSpec package counts "44 existing + 6 new": the 2 CompTIA ticket');
-    lines.push('scenarios (Sprint 46) plus the 4 NCA beginner scenarios (S48-05, T-35).');
-    lines.push('All six are present in this build — the count is 50, and every one of the 50');
-    lines.push('is driven below. Nothing is deferred from this catalog.');
+    lines.push('The OpenSpec package counts "44 existing + 6 new": the 2 Sprint 46 CompTIA');
+    lines.push('ticket scenarios plus the 4 NCA beginner scenarios (S48-05, T-35). The');
+    lines.push('2026-10-26 content pass added a third CompTIA ticket (aplus-ipconf-01, an');
+    lines.push(`address conflict). The count is ${rows.length}, and every one of them is`);
+    lines.push('driven below. Nothing is deferred from this catalog.');
     lines.push('');
     lines.push('| # | Scenario ID | Exam | Objectives | Fresh station | After walkthrough |');
     lines.push('|---|-------------|------|-----------:|---------------|-------------------|');

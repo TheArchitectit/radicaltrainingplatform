@@ -134,9 +134,15 @@ export class TicketLabView extends BaseView {
         const cfg = ws.config;
         // Deterministic simulation: the result is a pure function of the
         // current simulated configuration. No network is touched.
+        const conflict = !!this.#scenario.correctIp && cfg.ip !== this.#scenario.correctIp;
         let outcome;
         if (id === 'ping-ip') {
-            outcome = { ok: true, output: 'Reply from 8.8.8.8: bytes=32 time=14ms TTL=118' };
+            // An address conflict makes every other reply fail: two hosts are
+            // answering for one address, so the local gateway stops replying
+            // to traffic it cannot attribute.
+            outcome = conflict
+                ? { ok: false, output: 'Reply from 8.8.8.8: bytes=32 time=16ms TTL=118\nRequest timed out.\nRequest timed out.\nReply from 8.8.8.8: bytes=32 time=41ms TTL=118\nPackets: Sent = 4, Received = 2, Lost = 2 (50% loss)' }
+                : { ok: true, output: 'Reply from 8.8.8.8: bytes=32 time=14ms TTL=118' };
         } else if (id === 'ping-name') {
             outcome = cfg.dns === this.#scenario.correctDns
                 ? { ok: true, output: 'Reply from 93.184.216.34: bytes=32 time=21ms TTL=56' }
@@ -146,7 +152,9 @@ export class TicketLabView extends BaseView {
                 ? { ok: true, output: 'example.com  93.184.216.34' }
                 : { ok: false, output: 'example.com: Name resolution timed out.' };
         } else if (id === 'ipconfig') {
-            outcome = { ok: true, output: `IPv4: ${cfg.ip}  Gateway: ${cfg.gateway}  DNS: ${cfg.dns}` };
+            outcome = conflict
+                ? { ok: false, output: `IPv4: ${cfg.ip}  Gateway: ${cfg.gateway}  DNS: ${cfg.dns}\nDuplicate address detected on ${cfg.ip} — another host on this subnet answers for it.` }
+                : { ok: true, output: `IPv4: ${cfg.ip}  Gateway: ${cfg.gateway}  DNS: ${cfg.dns}` };
         } else if (id === 'tracert') {
             outcome = cfg.gateway === this.#scenario.correctGateway
                 ? { ok: true, output: '1 <1ms 10.42.x.1  2 21ms 93.184.216.34' }
@@ -207,7 +215,7 @@ export class TicketLabView extends BaseView {
         const ws = await this.#workstation();
         const cfg = ws.config;
         const rows = (s.configFields || ['ip', 'gateway', 'dns']).map(f => {
-            const wanted = f === 'dns' ? s.correctDns : f === 'gateway' ? s.correctGateway : null;
+            const wanted = f === 'dns' ? s.correctDns : f === 'gateway' ? s.correctGateway : f === 'ip' ? s.correctIp : null;
             const actual = cfg[f];
             const state_ = wanted == null ? '' : (actual === wanted ? '✓' : '✗');
             return `<div class="ticket-evidence-row"><span>${this.#fieldLabel(f)}</span><span>${actual}</span><span>${state_}</span></div>`;

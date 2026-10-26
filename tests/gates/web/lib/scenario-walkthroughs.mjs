@@ -359,6 +359,14 @@ export const TICKET_WALKTHROUGHS = {
         });
         await traceAdd({ action: 'test-run', test: 'tracert' });
     },
+    'aplus-ipconf-01': async () => {
+        await state.update('ticket_workstations', 'ws-ipconf-01', {
+            config: { ip: '10.42.100.121', gateway: '10.42.100.1', dns: '10.42.100.10' },
+            resolution_note: 'Address 10.42.100.118 duplicated a spare laptop left docked on the same switch port; moved to the assigned 10.42.100.121 and ping is steady.',
+        });
+        await traceAdd({ action: 'test-run', test: 'ipconfig' });
+        await traceAdd({ action: 'test-run', test: 'ping-ip' });
+    },
 };
 
 /** Run the recorded action-script for any scenario id. */

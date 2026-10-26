@@ -308,6 +308,17 @@ objectives with empty `lessonIds` need a manifest mapping, and the 13 dangling
 5. **Scenarios**: 4 for Core 2, 4 for Core 1, 4 for Network+, 1 each for AZ-104 and
    AWS-SAA, using the existing ticket-lab renderer for the CompTIA ones and the
    store-based checklist for the vendor ones.
+   *Measured 2026-10-26 above plan, and the plan does not fit the renderers.* The
+   ticket renderer's only knobs are `ip` / `gateway` / `dns` against a fixed five-test
+   set, so it can express network-addressing faults and nothing else — not the OS,
+   security and procedures objectives that make up most of Core 2, and not four
+   distinct Core 1 or Network+ tickets without producing near-clones of the two that
+   already exist. No Azure or AWS route exists in the router and no store collection
+   backs either exam, so the two vendor scenarios have no surface to run on. **Landed:
+   one new ticket** (`aplus-ipconf-01`, address conflict) that is a genuinely different
+   failure mode — link up, gateway and resolver correct, host still drops — plus the
+   conflict-aware simulation behind it. The remaining 13 are blocked on renderer and
+   route work, not on content, and are recorded as such rather than cloned.
 6. **Human review sweep** (R4) over whatever is shipped at that point.
 
 Every authoring step ships with provenance records (the generator refuses an untracked
@@ -338,6 +349,7 @@ that adds it, as `check-traceability.py` requires.
 | 2026-10-26 | 5.3 step 3a — A+ Core 1 items | Five new banks (`core1-domain1-bank.md` … `core1-domain5-bank.md`, Q17–Q86) carrying 70 items and their provenance records; all 27 objectives now have at least three released items | A+ Core 1 items **16 → 86**; released items **289 → 359**; REQ-MAN-07 coverage **99 (76%) → 122 (93%)**; diagnosis share 72% of 359; longest-option cue **42/289 → 43/359** (15% → 12%). Freeze chain 64/64. |
 | 2026-10-26 | 5.3 step 3b — Network+ items | Five new banks (`net009-domain1-bank.md` … `net009-domain5-bank.md`, Q26–Q75) carrying 50 items and their provenance records; all 25 objectives now have at least three released items | Network+ items **25 → 75**; released items **359 → 409**; REQ-MAN-07 coverage **122 (93%) → 131 (100%)** — every objective in all six exams now has a released lesson and at least three released items; diagnosis share 72% of 409; longest-option cue **43/359 → 43/409** (12% → 11%). Freeze chain 64/64. |
 | 2026-10-26 | 5.3 step 4 — top-ups (NCA-75, AZ-104, AWS-SAA) | Ten items appended to the three single-file banks (`nca75-pilot.md` Q41–Q44, `az104-beginner.md` Q51, `aws-saa-beginner.md` Q51–Q55) for the ten objectives that were below the floor; keys stay balanced per bank (NCA 11/11/11/11, AZ ≤30%, AWS 13/13/14/14) | NCA 7.5 items **40 → 44**, AZ-104 **50 → 51**, AWS SAA-C03 **50 → 55**; released items **409 → 419**; **every one of the 131 objectives now has at least three released items**; diagnosis share 73% of 419; longest-option cue 43/419 (10%). Freeze chain 64/64. |
+| 2026-10-26 | 5.3 step 5 — scenarios | One new ticket, `aplus-ipconf-01` (address conflict): new seeded workstation `ws-ipconf-01`, a conflict-aware `#runTest` in `ticket-lab.js` (partial-loss `ping-ip`, "Duplicate address detected" in `ipconfig`, `ip` row in the evidence panel), `validateAplusIpconf01` registered in `TICKET_VALIDATORS`, and gate coverage — fresh-seed negativity, wrong-but-in-subnet negativity, trace-honoring positivity, reset reseed, and a registry check that now iterates `TICKET_VALIDATORS` **and** back-checks every `renderer: 'ticket'` scenario for a validator. `demo-sweep-report.mjs` pins **51**, and `docs/qa/release-evidence/2026-10-26-demo-sweep.md` records the 51/51 run. | Scenarios **50 → 51**; all 51 boot incomplete and complete via their walkthrough. **The other 13 planned scenarios are not built and are not clones**: the ticket renderer expresses only `ip`/`gateway`/`dns` over a fixed 5-test set (so no Core 2 OS/security/procedure tickets), and AZ-104/AWS-SAA have no route and no store collection to run on. Freeze chain 64/64. |
 
 Notes for the authoring steps that follow. First, the lesson renderer is still an
 escape-first subset (headings, lists, bold, inline code) — no tables and no
