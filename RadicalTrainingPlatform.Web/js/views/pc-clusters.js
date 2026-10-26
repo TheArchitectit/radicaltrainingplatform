@@ -5,6 +5,7 @@ import { EntityTable } from '../components/EntityTable.js';
 import { Wizard } from '../components/Wizard.js';
 import { toast } from '../components/Toast.js';
 import { confirm } from '../components/Confirm.js';
+import { html } from '../core/html.js';
 
 /**
  * PC Clusters — Multi-cluster federation management.
@@ -126,7 +127,7 @@ export class PcClustersView extends BaseView {
                     label: 'Unregister', danger: true, onClick: async (cluster) => {
                         const ok = await confirm({
                             title: 'Unregister Cluster',
-                            message: `Unregister <strong>${cluster.name}</strong> from Prism Central?`,
+                            message: html`Unregister <strong>${cluster.name}</strong> from Prism Central?`,
                             confirmLabel: 'Unregister', danger: true,
                         });
                         if (ok) {

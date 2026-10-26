@@ -5,6 +5,7 @@ import { EntityTable } from '../components/EntityTable.js';
 import { Wizard } from '../components/Wizard.js';
 import { toast } from '../components/Toast.js';
 import { confirm } from '../components/Confirm.js';
+import { html, raw } from '../core/html.js';
 
 /**
  * PC Flow Security — Network microsegmentation with 5 policy types.
@@ -141,7 +142,7 @@ export class PcFlowView extends BaseView {
         const action = newMode === 'applied' ? 'enforce' : 'switch to monitoring for';
         const ok = await confirm({
             title: `${newMode === 'applied' ? 'Apply' : 'Monitor'} Policy`,
-            message: `Are you sure you want to ${action} <strong>${policy.name}</strong>?${newMode === 'applied' ? '<br><br><strong>Warning:</strong> Enforced policies will actively block traffic that doesn\'t match rules.' : ''}`,
+            message: html`Are you sure you want to ${action} <strong>${policy.name}</strong>?${raw(newMode === 'applied' ? '<br><br><strong>Warning:</strong> Enforced policies will actively block traffic that doesn\'t match rules.' : '')}`,
             confirmLabel: newMode === 'applied' ? 'Apply' : 'Set to Monitor',
             danger: newMode === 'applied',
         });
@@ -154,7 +155,7 @@ export class PcFlowView extends BaseView {
     async #deletePolicy(policy) {
         const ok = await confirm({
             title: 'Delete Security Policy',
-            message: `Delete <strong>${policy.name}</strong>? All associated rules will be removed.`,
+            message: html`Delete <strong>${policy.name}</strong>? All associated rules will be removed.`,
             confirmLabel: 'Delete',
             danger: true,
         });

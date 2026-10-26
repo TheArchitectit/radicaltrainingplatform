@@ -3,6 +3,7 @@ import { state } from '../core/StateEngine.js';
 import { bus } from '../core/EventBus.js';
 import { toast } from '../components/Toast.js';
 import { confirm } from '../components/Confirm.js';
+import { html } from '../core/html.js';
 
 /**
  * NC2 Networking — AWS VPC + Azure VNet/Flow Gateway configuration.
@@ -373,7 +374,7 @@ VNet (custom address space)
         }
         const ok = await confirm({
             title: 'Add Flow Gateway',
-            message: `Add Flow Gateway to <strong>${c.name}</strong>?<br>Current: ${c.flow_gateway_count} → ${c.flow_gateway_count + 1} (max 4)`,
+            message: html`Add Flow Gateway to <strong>${c.name}</strong>?<br>Current: ${c.flow_gateway_count} → ${c.flow_gateway_count + 1} (max 4)`,
             confirmLabel: 'Add Gateway',
         });
         if (ok) {
@@ -389,7 +390,7 @@ VNet (custom address space)
         }
         const ok = await confirm({
             title: 'Remove Flow Gateway',
-            message: `Remove a Flow Gateway from <strong>${c.name}</strong>?<br>Current: ${c.flow_gateway_count} → ${c.flow_gateway_count - 1} (min 2 for HA)`,
+            message: html`Remove a Flow Gateway from <strong>${c.name}</strong>?<br>Current: ${c.flow_gateway_count} → ${c.flow_gateway_count - 1} (min 2 for HA)`,
             confirmLabel: 'Remove',
             danger: true,
         });

@@ -5,6 +5,7 @@ import { EntityTable } from '../components/EntityTable.js';
 import { Wizard } from '../components/Wizard.js';
 import { toast } from '../components/Toast.js';
 import { confirm } from '../components/Confirm.js';
+import { html } from '../core/html.js';
 
 /**
  * Nutanix Files — FSVM management, SMB/NFS shares, Smart DR.
@@ -187,7 +188,7 @@ export class UsFilesView extends BaseView {
     }
 
     async #deleteShare(share) {
-        const ok = await confirm({ title: 'Delete Share', message: `Delete share <strong>${share.name}</strong>? All data in this share will be lost.`, confirmLabel: 'Delete', danger: true });
+        const ok = await confirm({ title: 'Delete Share', message: html`Delete share <strong>${share.name}</strong>? All data in this share will be lost.`, confirmLabel: 'Delete', danger: true });
         if (ok) { await state.remove('file_shares', share.uuid); toast.success(`Share "${share.name}" deleted`); }
     }
 

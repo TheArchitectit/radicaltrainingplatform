@@ -113,7 +113,11 @@ export class EntityTable {
 
                 for (const col of columns) {
                     const val = item[col.key];
-                    const rendered = col.render ? col.render(val, item) : this.#escHtml(String(val ?? ''));
+                    // Custom renderers interpolate their value into markup, so
+                    // hand them strings already escaped (names are user-typed).
+                    const rendered = col.render
+                        ? col.render(typeof val === 'string' ? this.#escHtml(val) : val, item)
+                        : this.#escHtml(String(val ?? ''));
                     html += `<td>${rendered}</td>`;
                 }
 

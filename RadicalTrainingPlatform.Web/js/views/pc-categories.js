@@ -4,6 +4,7 @@ import { bus } from '../core/EventBus.js';
 import { toast } from '../components/Toast.js';
 import { confirm } from '../components/Confirm.js';
 import { Wizard } from '../components/Wizard.js';
+import { html } from '../core/html.js';
 
 /**
  * PC Categories — Manage category key/value pairs and assign to VMs.
@@ -220,7 +221,7 @@ export class PcCategoriesView extends BaseView {
         if (!cat) return;
         const ok = await confirm({
             title: 'Delete Category',
-            message: `Delete category <strong>${cat.key}</strong>? This will remove all assignments using this category.`,
+            message: html`Delete category <strong>${cat.key}</strong>? This will remove all assignments using this category.`,
             confirmLabel: 'Delete',
             danger: true,
         });

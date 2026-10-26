@@ -5,6 +5,7 @@ import { EntityTable } from '../components/EntityTable.js';
 import { Wizard } from '../components/Wizard.js';
 import { toast } from '../components/Toast.js';
 import { confirm } from '../components/Confirm.js';
+import { html } from '../core/html.js';
 
 /**
  * PE Protection Domains — Data protection management.
@@ -77,7 +78,7 @@ export class PeProtectionView extends BaseView {
     destroy() { this.#table?.destroy(); this.#unsubs.forEach(u => u()); }
 
     async #deletePD(pd) {
-        const ok = await confirm({ title: 'Delete Protection Domain', message: `Delete <strong>${pd.name}</strong>? Protected VMs will no longer be replicated.`, confirmLabel: 'Delete', danger: true });
+        const ok = await confirm({ title: 'Delete Protection Domain', message: html`Delete <strong>${pd.name}</strong>? Protected VMs will no longer be replicated.`, confirmLabel: 'Delete', danger: true });
         if (ok) { await state.remove('protection_domains', pd.uuid); toast.success(`Protection domain "${pd.name}" deleted`); }
     }
 

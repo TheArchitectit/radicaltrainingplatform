@@ -1,4 +1,6 @@
-const CACHE_NAME = 'labsim-v1';
+// Bump on every shipped change: the cache-first strategy otherwise keeps
+// serving old files (v2: ConfirmDialog import fix, html.js escaping).
+const CACHE_NAME = 'labsim-v2';
 const STATIC_ASSETS = [
   './',
   './index.html',
@@ -12,6 +14,7 @@ const STATIC_ASSETS = [
   './js/core/Router.js',
   './js/core/StateEngine.js',
   './js/core/StateStore.js',
+  './js/core/html.js',
   './js/components/CLITerminal.js',
   './js/components/Confirm.js',
   './js/components/EntityTable.js',

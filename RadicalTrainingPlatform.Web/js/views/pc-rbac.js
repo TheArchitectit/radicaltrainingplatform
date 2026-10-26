@@ -5,6 +5,7 @@ import { EntityTable } from '../components/EntityTable.js';
 import { Wizard } from '../components/Wizard.js';
 import { toast } from '../components/Toast.js';
 import { confirm } from '../components/Confirm.js';
+import { html } from '../core/html.js';
 
 /**
  * PC RBAC — User/Role management and Active Directory configuration.
@@ -164,13 +165,13 @@ export class PcRbacView extends BaseView {
 
     async #deleteUser(user) {
         if (user.username === 'admin') { toast.warning('Cannot delete the default admin user'); return; }
-        const ok = await confirm({ title: 'Delete User', message: `Delete user <strong>${user.username}</strong>?`, confirmLabel: 'Delete', danger: true });
+        const ok = await confirm({ title: 'Delete User', message: html`Delete user <strong>${user.username}</strong>?`, confirmLabel: 'Delete', danger: true });
         if (ok) { await state.remove('users', user.uuid); toast.success(`User "${user.username}" deleted`); }
     }
 
     async #deleteRole(role) {
         if (role.type === 'built_in') { toast.warning('Cannot delete built-in roles'); return; }
-        const ok = await confirm({ title: 'Delete Role', message: `Delete role <strong>${role.name}</strong>?`, confirmLabel: 'Delete', danger: true });
+        const ok = await confirm({ title: 'Delete Role', message: html`Delete role <strong>${role.name}</strong>?`, confirmLabel: 'Delete', danger: true });
         if (ok) { await state.remove('roles', role.uuid); toast.success(`Role "${role.name}" deleted`); }
     }
 

@@ -1,12 +1,14 @@
 const STORAGE_KEY = 'nutanix-lab-theme';
 
+// Storage can throw (private mode, blocked site data); the theme is only a
+// convenience, so fall back to dark rather than failing the boot.
 function getTheme() {
-    return localStorage.getItem(STORAGE_KEY) || 'dark';
+    try { return localStorage.getItem(STORAGE_KEY) || 'dark'; } catch { return 'dark'; }
 }
 
 function setTheme(theme) {
     document.documentElement.setAttribute('data-theme', theme);
-    localStorage.setItem(STORAGE_KEY, theme);
+    try { localStorage.setItem(STORAGE_KEY, theme); } catch { /* not persisted */ }
     const btn = document.getElementById('theme-toggle-btn');
     if (btn) btn.textContent = theme === 'dark' ? '☀️' : '🌙';
 }

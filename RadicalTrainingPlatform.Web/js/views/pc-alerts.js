@@ -5,6 +5,7 @@ import { EntityTable } from '../components/EntityTable.js';
 import { Wizard } from '../components/Wizard.js';
 import { toast } from '../components/Toast.js';
 import { confirm } from '../components/Confirm.js';
+import { html } from '../core/html.js';
 
 /**
  * PC Alerts — Alert management, alert policies, SNMP/Syslog configuration.
@@ -287,7 +288,7 @@ export class PcAlertsView extends BaseView {
 
     async #deletePolicies(selected) {
         if (!selected || selected.length === 0) { toast('Select policies first.', 'warning'); return; }
-        const ok = await confirm({ title: 'Delete Policies', message: `Delete ${selected.length} alert policy(ies)?`, confirmLabel: 'Delete', danger: true });
+        const ok = await confirm({ title: 'Delete Policies', message: html`Delete ${selected.length} alert policy(ies)?`, confirmLabel: 'Delete', danger: true });
         if (!ok) return;
         for (const p of selected) { await state.remove('alert_policies', p.uuid); }
         toast(`Deleted ${selected.length} policy(ies).`, 'success');

@@ -5,6 +5,7 @@ import { EntityTable } from '../components/EntityTable.js';
 import { Wizard } from '../components/Wizard.js';
 import { toast } from '../components/Toast.js';
 import { confirm } from '../components/Confirm.js';
+import { html } from '../core/html.js';
 
 /**
  * GPU Configuration — Passthrough, vGPU profiles, MIG.
@@ -245,7 +246,7 @@ export class AiGpuView extends BaseView {
     }
 
     async #removeGpu(g) {
-        const ok = await confirm({ title: 'Remove GPU', message: `Remove <strong>${g.name}</strong> (${g.model})?`, confirmLabel: 'Remove', danger: true });
+        const ok = await confirm({ title: 'Remove GPU', message: html`Remove <strong>${g.name}</strong> (${g.model})?`, confirmLabel: 'Remove', danger: true });
         if (ok) { await state.remove('gpu_devices', g.uuid); toast.success(`GPU "${g.name}" removed`); }
     }
 

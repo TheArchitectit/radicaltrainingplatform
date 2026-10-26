@@ -5,6 +5,7 @@ import { EntityTable } from '../components/EntityTable.js';
 import { Wizard } from '../components/Wizard.js';
 import { toast } from '../components/Toast.js';
 import { confirm } from '../components/Confirm.js';
+import { html } from '../core/html.js';
 
 /**
  * Nutanix Objects — S3-compatible object storage.
@@ -163,13 +164,13 @@ export class UsObjectsView extends BaseView {
     }
 
     async #deleteStore(s) {
-        const ok = await confirm({ title: 'Delete Object Store', message: `Delete <strong>${s.name}</strong>? All buckets and data will be lost.`, confirmLabel: 'Delete', danger: true });
+        const ok = await confirm({ title: 'Delete Object Store', message: html`Delete <strong>${s.name}</strong>? All buckets and data will be lost.`, confirmLabel: 'Delete', danger: true });
         if (ok) { await state.remove('object_stores', s.uuid); toast.success(`Object store "${s.name}" deleted`); }
     }
 
     async #deleteBucket(b) {
         if (b.worm_enabled) { toast.error('Cannot delete a WORM-enabled bucket. WORM is irreversible!'); return; }
-        const ok = await confirm({ title: 'Delete Bucket', message: `Delete bucket <strong>${b.name}</strong>?`, confirmLabel: 'Delete', danger: true });
+        const ok = await confirm({ title: 'Delete Bucket', message: html`Delete bucket <strong>${b.name}</strong>?`, confirmLabel: 'Delete', danger: true });
         if (ok) { await state.remove('object_buckets', b.uuid); toast.success(`Bucket "${b.name}" deleted`); }
     }
 

@@ -1,6 +1,7 @@
 import { BaseView } from './BaseView.js';
 import { state } from '../core/StateEngine.js';
 import { toast } from '../components/Toast.js';
+import { html } from '../core/html.js';
 
 /**
  * REST API v3 Simulator — Postman-like pane for practicing Nutanix API calls.
@@ -179,7 +180,7 @@ export class PcApiView extends BaseView {
             return { status: 405, statusText: 'Method Not Allowed', body: {
                 api_version: '3.1',
                 code: 405,
-                message_list: [{ message: `Use POST /${entity}/list to retrieve ${entity}. GET is not supported for listing in API v3.`, reason: 'METHOD_NOT_ALLOWED' }],
+                message_list: [{ message: html`Use POST /${entity}/list to retrieve ${entity}. GET is not supported for listing in API v3.`, reason: 'METHOD_NOT_ALLOWED' }],
                 state: 'ERROR',
             }};
         }
@@ -212,7 +213,7 @@ export class PcApiView extends BaseView {
         const collection = mapping[entity];
 
         if (collection === undefined) {
-            return { status: 404, statusText: 'Not Found', body: { code: 404, message_list: [{ message: `Unknown entity: ${entity}` }] }};
+            return { status: 404, statusText: 'Not Found', body: { code: 404, message_list: [{ message: html`Unknown entity: ${entity}` }] }};
         }
 
         let entities;
@@ -236,10 +237,10 @@ export class PcApiView extends BaseView {
     #handleGet(entity, uuid) {
         const mapping = { vms: 'vms', subnets: 'networks', images: 'images' };
         const collection = mapping[entity];
-        if (!collection) return { status: 404, statusText: 'Not Found', body: { code: 404, message_list: [{ message: `Unknown entity: ${entity}` }] }};
+        if (!collection) return { status: 404, statusText: 'Not Found', body: { code: 404, message_list: [{ message: html`Unknown entity: ${entity}` }] }};
 
         const item = state.getById(collection, uuid);
-        if (!item) return { status: 404, statusText: 'Not Found', body: { code: 404, message_list: [{ message: `${entity}/${uuid} not found` }] }};
+        if (!item) return { status: 404, statusText: 'Not Found', body: { code: 404, message_list: [{ message: html`${entity}/${uuid} not found` }] }};
 
         return { status: 200, statusText: 'OK', body: this.#wrapEntity(entity, item) };
     }
@@ -274,10 +275,10 @@ export class PcApiView extends BaseView {
 
         const mapping = { vms: 'vms', subnets: 'networks', images: 'images' };
         const collection = mapping[entity];
-        if (!collection) return { status: 404, statusText: 'Not Found', body: { code: 404, message_list: [{ message: `Unknown entity: ${entity}` }] }};
+        if (!collection) return { status: 404, statusText: 'Not Found', body: { code: 404, message_list: [{ message: html`Unknown entity: ${entity}` }] }};
 
         const item = state.getById(collection, uuid);
-        if (!item) return { status: 404, statusText: 'Not Found', body: { code: 404, message_list: [{ message: `${entity}/${uuid} not found` }] }};
+        if (!item) return { status: 404, statusText: 'Not Found', body: { code: 404, message_list: [{ message: html`${entity}/${uuid} not found` }] }};
 
         const taskUuid = crypto.randomUUID();
         return { status: 202, statusText: 'Accepted', body: {

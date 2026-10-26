@@ -4,7 +4,8 @@ import { bus } from '../core/EventBus.js';
 import { EntityTable } from '../components/EntityTable.js';
 import { toast } from '../components/Toast.js';
 import { Wizard } from '../components/Wizard.js';
-import { confirm } from '../components/ConfirmDialog.js';
+import { confirm } from '../components/Confirm.js';
+import { html } from '../core/html.js';
 
 export class PeReportsView extends BaseView {
     #libraryTable = null;
@@ -170,7 +171,7 @@ export class PeReportsView extends BaseView {
     async #deleteReport(item) {
         const ok = await confirm({
             title: 'Delete Report',
-            message: `Are you sure you want to delete report "${item.name}"? This action cannot be undone.`,
+            message: html`Are you sure you want to delete report "${item.name}"? This action cannot be undone.`,
             confirmLabel: 'Delete',
             danger: true
         });

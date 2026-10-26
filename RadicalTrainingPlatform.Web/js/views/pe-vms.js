@@ -5,6 +5,7 @@ import { EntityTable } from '../components/EntityTable.js';
 import { Wizard } from '../components/Wizard.js';
 import { toast } from '../components/Toast.js';
 import { confirm } from '../components/Confirm.js';
+import { html } from '../core/html.js';
 
 /**
  * PE VM List — Virtual machine management with create wizard.
@@ -123,7 +124,7 @@ export class PeVmsView extends BaseView {
         }
         const ok = await confirm({
             title: 'Delete VM',
-            message: `Are you sure you want to delete <strong>${vm.name}</strong>? This action cannot be undone.`,
+            message: html`Are you sure you want to delete <strong>${vm.name}</strong>? This action cannot be undone.`,
             confirmLabel: 'Delete',
             danger: true,
         });

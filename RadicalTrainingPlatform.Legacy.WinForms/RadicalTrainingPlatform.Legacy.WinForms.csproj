@@ -22,7 +22,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="LabSimulator\Web\**\*" CopyToOutputDirectory="PreserveNewest" />
+    <!-- Shared simulator web app (single copy, see Desktop csproj). -->
+    <Content Include="..\RadicalTrainingPlatform.Web\**\*" LinkBase="LabSimulator\Web" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="..\*-Part*.md" LinkBase="." CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="..\content\exams\**\questions\*.md" LinkBase="content\exams" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="..\errata.json" LinkBase="." CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 
 </Project>

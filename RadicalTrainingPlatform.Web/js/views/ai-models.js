@@ -5,6 +5,7 @@ import { EntityTable } from '../components/EntityTable.js';
 import { Wizard } from '../components/Wizard.js';
 import { toast } from '../components/Toast.js';
 import { confirm } from '../components/Confirm.js';
+import { html } from '../core/html.js';
 
 export class AiModelsView extends BaseView {
     #table = null;
@@ -110,7 +111,7 @@ export class AiModelsView extends BaseView {
                     onClick: async (item) => {
                         const ok = await confirm({
                             title: 'Delete Model',
-                            message: `Delete model <strong>${item.name}</strong>? This action cannot be undone.`,
+                            message: html`Delete model <strong>${item.name}</strong>? This action cannot be undone.`,
                             confirmLabel: 'Delete',
                             danger: true
                         });

@@ -5,6 +5,7 @@ import { EntityTable } from '../components/EntityTable.js';
 import { Wizard } from '../components/Wizard.js';
 import { toast } from '../components/Toast.js';
 import { confirm } from '../components/Confirm.js';
+import { html } from '../core/html.js';
 
 /**
  * PC Networking — VPCs, Subnets, Floating IPs, Route Tables.
@@ -394,7 +395,7 @@ export class PcNetworkView extends BaseView {
 
     async #deleteItems(collection, selected) {
         if (!selected || selected.length === 0) { toast('Select items first.', 'warning'); return; }
-        const ok = await confirm({ title: 'Delete Items', message: `Delete ${selected.length} ${collection} item(s)?`, confirmLabel: 'Delete', danger: true });
+        const ok = await confirm({ title: 'Delete Items', message: html`Delete ${selected.length} ${collection} item(s)?`, confirmLabel: 'Delete', danger: true });
         if (!ok) return;
         for (const item of selected) { await state.remove(collection, item.uuid); }
         toast(`Deleted ${selected.length} item(s).`, 'success');

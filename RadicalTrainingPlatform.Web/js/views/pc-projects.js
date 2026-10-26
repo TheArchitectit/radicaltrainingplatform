@@ -5,6 +5,7 @@ import { EntityTable } from '../components/EntityTable.js';
 import { Wizard } from '../components/Wizard.js';
 import { toast } from '../components/Toast.js';
 import { confirm } from '../components/Confirm.js';
+import { html } from '../core/html.js';
 
 /**
  * PC Projects — Self-Service portal: project quotas, assigned users,
@@ -278,7 +279,7 @@ export class PcProjectsView extends BaseView {
 
     async #deleteProjects(selected) {
         if (!selected || selected.length === 0) { toast('Select projects first.', 'warning'); return; }
-        const ok = await confirm({ title: 'Delete Projects', message: `Delete ${selected.length} project(s)? This cannot be undone.`, confirmLabel: 'Delete', danger: true });
+        const ok = await confirm({ title: 'Delete Projects', message: html`Delete ${selected.length} project(s)? This cannot be undone.`, confirmLabel: 'Delete', danger: true });
         if (!ok) return;
         for (const p of selected) { await state.remove('projects', p.uuid); }
         toast(`Deleted ${selected.length} project(s).`, 'success');

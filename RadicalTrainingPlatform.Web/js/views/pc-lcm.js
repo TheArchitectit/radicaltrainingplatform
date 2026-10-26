@@ -4,6 +4,7 @@ import { bus } from '../core/EventBus.js';
 import { EntityTable } from '../components/EntityTable.js';
 import { toast } from '../components/Toast.js';
 import { confirm } from '../components/Confirm.js';
+import { html } from '../core/html.js';
 
 /**
  * PC LCM — Life Cycle Manager: firmware/software inventory, update workflows.
@@ -203,7 +204,7 @@ export class PcLcmView extends BaseView {
         const updatable = selected.filter(i => i.update_available);
         if (updatable.length === 0) { toast('Selected components are already up to date.', 'info'); return; }
 
-        const ok = await confirm({ title: 'Update Components', message: `Update ${updatable.length} component(s)? This will simulate a rolling update.`, confirmLabel: 'Update' });
+        const ok = await confirm({ title: 'Update Components', message: html`Update ${updatable.length} component(s)? This will simulate a rolling update.`, confirmLabel: 'Update' });
         if (!ok) return;
 
         toast(`Updating ${updatable.length} component(s)...`, 'info');

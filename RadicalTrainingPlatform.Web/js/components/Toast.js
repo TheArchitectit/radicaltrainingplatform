@@ -19,10 +19,16 @@ class ToastManager {
 
         const toast = document.createElement('div');
         toast.className = `toast ${type}`;
-        toast.innerHTML = `
-            <span class="toast-message">${message}</span>
-            <button class="toast-close">×</button>
-        `;
+        // textContent, not innerHTML: messages interpolate user-typed entity
+        // names, and literal text like "Bearer <API_KEY>" vanished as a tag.
+        const text = document.createElement('span');
+        text.className = 'toast-message';
+        text.style.whiteSpace = 'pre-line';
+        text.textContent = message;
+        const close = document.createElement('button');
+        close.className = 'toast-close';
+        close.textContent = '×';
+        toast.append(text, close);
 
         toast.querySelector('.toast-close').addEventListener('click', () => this.#dismiss(toast));
         container.appendChild(toast);

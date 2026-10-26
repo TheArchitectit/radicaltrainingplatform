@@ -4,6 +4,7 @@ import { bus } from '../core/EventBus.js';
 import { EntityTable } from '../components/EntityTable.js';
 import { toast } from '../components/Toast.js';
 import { confirm } from '../components/Confirm.js';
+import { html } from '../core/html.js';
 
 /**
  * NC2 Console Dashboard — Nutanix Cloud Clusters management.
@@ -132,7 +133,7 @@ export class CiConsoleView extends BaseView {
 
         const ok = await confirm({
             title: 'Hibernate Cluster',
-            message: `Hibernate <strong>${c.name}</strong>?<br><br>
+            message: html`Hibernate <strong>${c.name}</strong>?<br><br>
                 This will:<br>
                 • Power down all VMs<br>
                 • Shut down CVMs gracefully<br>
@@ -158,7 +159,7 @@ export class CiConsoleView extends BaseView {
         if (c.status !== 'running') { toast.error('Cluster must be running to add nodes'); return; }
         const ok = await confirm({
             title: 'Add Node',
-            message: `Add a <code>${c.instance_type}</code> node to <strong>${c.name}</strong> in <strong>${c.az}</strong>?<br><br>
+            message: html`Add a <code>${c.instance_type}</code> node to <strong>${c.name}</strong> in <strong>${c.az}</strong>?<br><br>
                 <span class="text-secondary text-sm">New node will be in the same AZ. Data will automatically rebalance.</span>`,
             confirmLabel: 'Add Node',
         });
@@ -177,7 +178,7 @@ export class CiConsoleView extends BaseView {
         }
         const ok = await confirm({
             title: 'Remove Node',
-            message: `Remove a node from <strong>${c.name}</strong>?<br>
+            message: html`Remove a node from <strong>${c.name}</strong>?<br>
                 Current nodes: ${c.node_count} → ${c.node_count - 1}<br><br>
                 ⚠️ <strong>Minimum 3 nodes</strong> required for quorum.`,
             confirmLabel: 'Remove Node',
@@ -193,7 +194,7 @@ export class CiConsoleView extends BaseView {
     async #deleteCluster(c) {
         const ok = await confirm({
             title: 'Delete NC2 Cluster',
-            message: `Delete <strong>${c.name}</strong>? This will terminate all ${c.provider} instances and destroy all data.`,
+            message: html`Delete <strong>${c.name}</strong>? This will terminate all ${c.provider} instances and destroy all data.`,
             confirmLabel: 'Delete Cluster',
             danger: true,
         });

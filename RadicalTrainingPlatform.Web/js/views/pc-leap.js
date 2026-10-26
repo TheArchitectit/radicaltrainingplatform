@@ -5,6 +5,7 @@ import { EntityTable } from '../components/EntityTable.js';
 import { Wizard } from '../components/Wizard.js';
 import { toast } from '../components/Toast.js';
 import { confirm } from '../components/Confirm.js';
+import { html } from '../core/html.js';
 
 /**
  * PC Leap DR — Protection Policies and Recovery Plans.
@@ -148,7 +149,7 @@ export class PcLeapView extends BaseView {
     // ── Protection Policy ──
 
     async #deletePP(pp) {
-        const ok = await confirm({ title: 'Delete Protection Policy', message: `Delete <strong>${pp.name}</strong>?`, confirmLabel: 'Delete', danger: true });
+        const ok = await confirm({ title: 'Delete Protection Policy', message: html`Delete <strong>${pp.name}</strong>?`, confirmLabel: 'Delete', danger: true });
         if (ok) { await state.remove('protection_policies', pp.uuid); toast.success(`Protection policy "${pp.name}" deleted`); }
     }
 
@@ -247,14 +248,14 @@ export class PcLeapView extends BaseView {
     // ── Recovery Plan ──
 
     async #deleteRP(rp) {
-        const ok = await confirm({ title: 'Delete Recovery Plan', message: `Delete <strong>${rp.name}</strong>?`, confirmLabel: 'Delete', danger: true });
+        const ok = await confirm({ title: 'Delete Recovery Plan', message: html`Delete <strong>${rp.name}</strong>?`, confirmLabel: 'Delete', danger: true });
         if (ok) { await state.remove('recovery_plans', rp.uuid); toast.success(`Recovery plan "${rp.name}" deleted`); }
     }
 
     async #testFailover(rp) {
         const ok = await confirm({
             title: 'Test Failover',
-            message: `Run a test failover for <strong>${rp.name}</strong>?<br><br>This will validate the plan without affecting production workloads. VMs will be created in an isolated network at the recovery site.`,
+            message: html`Run a test failover for <strong>${rp.name}</strong>?<br><br>This will validate the plan without affecting production workloads. VMs will be created in an isolated network at the recovery site.`,
             confirmLabel: 'Start Test',
         });
         if (ok) {
@@ -269,7 +270,7 @@ export class PcLeapView extends BaseView {
     async #failover(rp) {
         const ok = await confirm({
             title: '⚠️ Live Failover',
-            message: `<strong>WARNING:</strong> This will initiate a live failover for <strong>${rp.name}</strong>.<br><br>Production VMs will be powered off at the source and started at the recovery site.<br><br>This action should only be performed during an actual disaster or planned migration.`,
+            message: html`<strong>WARNING:</strong> This will initiate a live failover for <strong>${rp.name}</strong>.<br><br>Production VMs will be powered off at the source and started at the recovery site.<br><br>This action should only be performed during an actual disaster or planned migration.`,
             confirmLabel: 'Initiate Failover',
             danger: true,
         });

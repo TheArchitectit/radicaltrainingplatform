@@ -38,10 +38,20 @@
     <ProjectReference Include="..\RadicalTrainingPlatform.Core\RadicalTrainingPlatform.Core.csproj" />
   </ItemGroup>
 
+  <!-- Single source of the simulator web app (the PWA folder). The old
+       second copy under Legacy.WinForms drifted from it. -->
   <ItemGroup>
-    <Content Include="..\RadicalTrainingPlatform.Legacy.WinForms\LabSimulator\Web\**\*" LinkBase="LabSimulator\Web">
+    <Content Include="..\RadicalTrainingPlatform.Web\**\*" LinkBase="LabSimulator\Web">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+
+  <!-- Question banks + errata ship next to the binary: an installed app has
+       no repo checkout to find them in (it shipped with zero exams). -->
+  <ItemGroup>
+    <Content Include="..\*-Part*.md" LinkBase="." CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="..\content\exams\**\questions\*.md" LinkBase="content\exams" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="..\errata.json" LinkBase="." CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 
 </Project>

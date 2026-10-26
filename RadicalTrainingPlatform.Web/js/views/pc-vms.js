@@ -5,6 +5,7 @@ import { EntityTable } from '../components/EntityTable.js';
 import { Wizard } from '../components/Wizard.js';
 import { toast } from '../components/Toast.js';
 import { confirm } from '../components/Confirm.js';
+import { html } from '../core/html.js';
 
 /**
  * PC VM List — Prism Central VM management with categories, projects, and cross-cluster view.
@@ -146,7 +147,7 @@ export class PcVmsView extends BaseView {
         if (vm.is_cvm) { toast.warning('Cannot delete a Controller VM'); return; }
         const ok = await confirm({
             title: 'Delete VM',
-            message: `Are you sure you want to delete <strong>${vm.name}</strong>? This action cannot be undone.`,
+            message: html`Are you sure you want to delete <strong>${vm.name}</strong>? This action cannot be undone.`,
             confirmLabel: 'Delete', danger: true,
         });
         if (ok) {

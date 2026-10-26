@@ -5,6 +5,7 @@ import { EntityTable } from '../components/EntityTable.js';
 import { Wizard } from '../components/Wizard.js';
 import { toast } from '../components/Toast.js';
 import { confirm } from '../components/Confirm.js';
+import { html } from '../core/html.js';
 
 /**
  * PE Network Configuration — Manage virtual networks.
@@ -71,7 +72,7 @@ export class PeNetworkView extends BaseView {
             toast.warning(`Cannot delete: ${usedBy.length} VM(s) use this network`);
             return;
         }
-        const ok = await confirm({ title: 'Delete Network', message: `Delete <strong>${network.name}</strong>?`, confirmLabel: 'Delete', danger: true });
+        const ok = await confirm({ title: 'Delete Network', message: html`Delete <strong>${network.name}</strong>?`, confirmLabel: 'Delete', danger: true });
         if (ok) {
             await state.remove('networks', network.uuid);
             toast.success(`Network "${network.name}" deleted`);

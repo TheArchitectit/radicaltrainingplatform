@@ -5,6 +5,7 @@ import { EntityTable } from '../components/EntityTable.js';
 import { Wizard } from '../components/Wizard.js';
 import { toast } from '../components/Toast.js';
 import { confirm } from '../components/Confirm.js';
+import { html } from '../core/html.js';
 
 /**
  * Nutanix Volumes — iSCSI block storage with CHAP authentication.
@@ -119,7 +120,7 @@ export class UsVolumesView extends BaseView {
 
     async #deleteVG(vg) {
         if ((vg.clients || []).length > 0) { toast.warning('Detach all clients before deleting the volume group'); return; }
-        const ok = await confirm({ title: 'Delete Volume Group', message: `Delete <strong>${vg.name}</strong>? All data will be lost.`, confirmLabel: 'Delete', danger: true });
+        const ok = await confirm({ title: 'Delete Volume Group', message: html`Delete <strong>${vg.name}</strong>? All data will be lost.`, confirmLabel: 'Delete', danger: true });
         if (ok) { await state.remove('volume_groups', vg.uuid); toast.success(`Volume group "${vg.name}" deleted`); }
     }
 

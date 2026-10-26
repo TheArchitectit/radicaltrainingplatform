@@ -5,6 +5,7 @@ import { EntityTable } from '../components/EntityTable.js';
 import { Wizard } from '../components/Wizard.js';
 import { toast } from '../components/Toast.js';
 import { confirm } from '../components/Confirm.js';
+import { html } from '../core/html.js';
 
 /**
  * PE Storage Containers — Create and manage storage containers.
@@ -85,7 +86,7 @@ export class PeStorageView extends BaseView {
             toast.warning(`Cannot delete: ${usedBy.length} VM(s) use this container`);
             return;
         }
-        const ok = await confirm({ title: 'Delete Container', message: `Delete <strong>${container.name}</strong>?`, confirmLabel: 'Delete', danger: true });
+        const ok = await confirm({ title: 'Delete Container', message: html`Delete <strong>${container.name}</strong>?`, confirmLabel: 'Delete', danger: true });
         if (ok) {
             await state.remove('containers', container.uuid);
             toast.success(`Container "${container.name}" deleted`);

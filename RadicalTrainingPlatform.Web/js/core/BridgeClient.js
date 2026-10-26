@@ -1,17 +1,37 @@
 /**
  * BridgeClient — JS side of the PostMessage bridge to C#.
- * PWA-aware: detects WebView2, falls back to window.postMessage, then mock mode.
+ *
+ * Single copy shared by the PWA and both desktop hosts (the Desktop and
+ * WinForms projects link this folder; a second copy used to drift).
+ * Transports, auto-detected at construction:
+ *   1. WebView2 (legacy WinForms): window.chrome.webview.
+ *   2. CefGlue (Avalonia desktop): window.dotnetBridge.call(json), with the
+ *      C# side pushing messages back through window.__cefBridgeDispatch.
+ *   3. postMessage to an embedding opener/parent (same origin only).
+ *   4. Standalone PWA: mock responses.
  */
 class BridgeClient {
     #pending = new Map();
     #idCounter = 0;
     #mode = 'unknown';
     #postMessageTarget = null;
+    // Same-origin only, matching the receive filter below ('*' leaked every
+    // message to whatever page framed the PWA). file:// origins are "null".
+    #targetOrigin = window.location.origin === 'null' ? '*' : window.location.origin;
 
     constructor() {
-        if (window.chrome?.webview) {
+        if (window.chrome?.webview?.postMessage) {
             this.#mode = 'webview2';
             window.chrome.webview.addEventListener('message', (e) => this.#onMessage(e.data));
+        } else if (window.dotnetBridge?.call) {
+            this.#mode = 'cef';
+            window.__cefBridgeDispatch = (msg) => this.#onMessage(msg);
+            // Drain anything C# queued before we finished constructing.
+            const queued = window.__cefBridgeQueue;
+            if (Array.isArray(queued)) {
+                window.__cefBridgeQueue = [];
+                queued.forEach((msg) => this.#onMessage(msg));
+            }
         } else if (window.opener || window.parent !== window) {
             this.#mode = 'postmessage';
             this.#postMessageTarget = window.opener || window.parent;
@@ -33,12 +53,10 @@ class BridgeClient {
         return new Promise((resolve, reject) => {
             this.#pending.set(id, { resolve, reject });
 
-            if (this.#mode === 'webview2') {
-                window.chrome.webview.postMessage(msg);
-            } else if (this.#mode === 'postmessage') {
-                this.#postMessageTarget.postMessage(msg, '*');
-            } else {
+            if (this.#mode === 'standalone') {
                 this.#mockResponse(type, payload, id, resolve, reject);
+            } else {
+                this.#postRaw(msg);
             }
 
             // Timeout after 10s
@@ -53,13 +71,21 @@ class BridgeClient {
 
     /** Fire-and-forget message to C#. */
     post(type, payload) {
-        const msg = { type, payload };
+        if (this.#mode === 'standalone') {
+            console.log('[Bridge] Standalone post (no-op):', type, payload);
+            return;
+        }
+        this.#postRaw({ type, payload });
+    }
+
+    #postRaw(msg) {
         if (this.#mode === 'webview2') {
             window.chrome.webview.postMessage(msg);
+        } else if (this.#mode === 'cef') {
+            // CefGlue exposes a synchronous string-arg entry point.
+            window.dotnetBridge.call(JSON.stringify(msg));
         } else if (this.#mode === 'postmessage') {
-            this.#postMessageTarget.postMessage(msg, '*');
-        } else {
-            console.log('[Bridge] Standalone post (no-op):', type, payload);
+            this.#postMessageTarget.postMessage(msg, this.#targetOrigin);
         }
     }
 

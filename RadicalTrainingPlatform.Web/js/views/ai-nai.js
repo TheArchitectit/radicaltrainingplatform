@@ -5,6 +5,7 @@ import { EntityTable } from '../components/EntityTable.js';
 import { Wizard } from '../components/Wizard.js';
 import { toast } from '../components/Toast.js';
 import { confirm } from '../components/Confirm.js';
+import { html } from '../core/html.js';
 
 /**
  * NAI Deployment + Endpoint Management.
@@ -240,7 +241,7 @@ export class AiNaiView extends BaseView {
     }
 
     async #deleteEndpoint(e) {
-        const ok = await confirm({ title: 'Delete Endpoint', message: `Delete <strong>${e.name}</strong>? All serving pods will be terminated.`, confirmLabel: 'Delete', danger: true });
+        const ok = await confirm({ title: 'Delete Endpoint', message: html`Delete <strong>${e.name}</strong>? All serving pods will be terminated.`, confirmLabel: 'Delete', danger: true });
         if (ok) { await state.remove('nai_endpoints', e.uuid); toast.success(`Endpoint "${e.name}" deleted`); }
     }
 

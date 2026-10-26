@@ -5,6 +5,7 @@ import { EntityTable } from '../components/EntityTable.js';
 import { Wizard } from '../components/Wizard.js';
 import { toast } from '../components/Toast.js';
 import { confirm } from '../components/Confirm.js';
+import { html } from '../core/html.js';
 
 /**
  * PC Calm — Blueprint & Marketplace management for Nutanix Calm automation.
@@ -128,7 +129,7 @@ export class PcCalmView extends BaseView {
                     }
                 },
                 { label: 'Delete', danger: true, onClick: async (bp) => {
-                    const ok = await confirm({ title: 'Delete Blueprint', message: `Delete <strong>${bp.name}</strong>?`, confirmLabel: 'Delete', danger: true });
+                    const ok = await confirm({ title: 'Delete Blueprint', message: html`Delete <strong>${bp.name}</strong>?`, confirmLabel: 'Delete', danger: true });
                     if (ok) { await state.remove('blueprints', bp.uuid); toast.success(`"${bp.name}" deleted`); this.#renderBlueprints(container); }
                 }},
             ],
