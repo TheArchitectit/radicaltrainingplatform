@@ -29,18 +29,40 @@ public class HardcodedBlueprintService : IBlueprintService
 
     public ExamBlueprint? GetBlueprint(string examCode)
     {
-        // Normalize exam code
-        var key = examCode.Replace(" ", "").ToUpperInvariant();
-        // Order matters: "NCM-MCI" contains "CI" — the MCI/NCM check must come
-        // BEFORE the bare-CI check or NCM-MCI silently routed to the NCP-CI
-        // blueprint (shipped bug; invisible to the old non-null-only test).
-        if (key.Contains("MCI") || key.Contains("MCM") || key.Contains("NCM")) return _blueprints.GetValueOrDefault("NCM-MCI");
-        if (key.Contains("AI")) return _blueprints.GetValueOrDefault("NCP-AI");
-        if (key.Contains("US")) return _blueprints.GetValueOrDefault("NCP-US");
-        if (key.Contains("CI")) return _blueprints.GetValueOrDefault("NCP-CI");
-        if ((key.Contains("NCA") || key.StartsWith("NCA")) && key.Contains("75")) return _blueprints.GetValueOrDefault("NCA-75");
-        if (key == "NCA" || key.Contains("NCA75") || key.Contains("NCA-75")) return _blueprints.GetValueOrDefault("NCA-75");
-        return _blueprints.GetValueOrDefault(examCode);
+        var family = ResolveFamily(examCode);
+        return family == null ? null : _blueprints.GetValueOrDefault(family);
+    }
+
+    /// <summary>
+    /// Map an exam code (any case or separators, optional " (Review)" suffix)
+    /// to its blueprint family, or null. Prefix-based: the old substring
+    /// checks routed NCM-MCI to NCP-CI (it contains "CI") and would capture
+    /// any future code containing "AI", "US" or "CI".
+    /// </summary>
+    internal static string? ResolveFamily(string examCode)
+    {
+        var n = new string(examCode.Where(char.IsLetterOrDigit).ToArray()).ToUpperInvariant();
+        if (n.StartsWith("NCM") || n.StartsWith("NCPMCI")) return "NCM-MCI";
+        if (n.StartsWith("NCPAI")) return "NCP-AI";
+        if (n.StartsWith("NCPUS")) return "NCP-US";
+        if (n.StartsWith("NCPCI")) return "NCP-CI";
+        if (n == "NCA" || n.StartsWith("NCA75")) return "NCA-75";
+        return null;
+    }
+
+    // Short keywords are acronyms ("DR", "API", "v3"): as substrings they hit
+    // "address", "capital", "dev3"… and inflated coverage. Match them as
+    // whole words; longer keywords keep substring matching (plurals etc.).
+    private static readonly System.Collections.Concurrent.ConcurrentDictionary<string, System.Text.RegularExpressions.Regex> _wordRx = new();
+
+    internal static bool MatchesKeyword(string text, string keyword)
+    {
+        if (keyword.Length > 3)
+            return text.Contains(keyword, StringComparison.OrdinalIgnoreCase);
+        var rx = _wordRx.GetOrAdd(keyword, k => new System.Text.RegularExpressions.Regex(
+            $@"(?<![A-Za-z0-9]){System.Text.RegularExpressions.Regex.Escape(k)}(?![A-Za-z0-9])",
+            System.Text.RegularExpressions.RegexOptions.IgnoreCase | System.Text.RegularExpressions.RegexOptions.Compiled));
+        return rx.IsMatch(text);
     }
 
     /// <summary>
@@ -59,7 +81,7 @@ public class HardcodedBlueprintService : IBlueprintService
                 int count = 0;
                 foreach (var q in questionTexts)
                 {
-                    if (obj.Keywords.Any(kw => q.Contains(kw, StringComparison.OrdinalIgnoreCase)))
+                    if (obj.Keywords.Any(kw => MatchesKeyword(q, kw)))
                         count++;
                 }
                 coverage[obj.Id] = count;
@@ -79,7 +101,7 @@ public class HardcodedBlueprintService : IBlueprintService
         foreach (var section in bp.Sections)
             foreach (var obj in section.Objectives)
             {
-                if (obj.Keywords.Any(kw => questionText.Contains(kw, StringComparison.OrdinalIgnoreCase)))
+                if (obj.Keywords.Any(kw => MatchesKeyword(questionText, kw)))
                     matches.Add((obj.Id, obj.Title));
             }
         return matches;
@@ -90,9 +112,11 @@ public class HardcodedBlueprintService : IBlueprintService
     /// </summary>
     public List<(string Section, string Description)> GetBibleSections(string examCode)
     {
-        var key = examCode.Replace(" ", "").ToUpperInvariant();
+        // Same family resolver as GetBlueprint: the old "CI" check ran before
+        // "MCI", so NCM-MCI got NCP-CI's sections.
+        var family = ResolveFamily(examCode);
 
-        if (key.Contains("AI")) return new()
+        if (family == "NCP-AI") return new()
         {
             ("Kubernetes & NKP", "NKP architecture, Kubernetes on Nutanix, GPU passthrough"),
             ("Prism Central", "Central management, RBAC, projects"),
@@ -100,7 +124,7 @@ public class HardcodedBlueprintService : IBlueprintService
             ("Nutanix Volumes (CSI)", "Persistent storage via CSI driver"),
         };
 
-        if (key.Contains("US")) return new()
+        if (family == "NCP-US") return new()
         {
             ("Nutanix Files", "Distributed file services, FSVMs, SMB/NFS"),
             ("Nutanix Objects", "S3-compatible object storage, buckets, WORM"),
@@ -109,7 +133,7 @@ public class HardcodedBlueprintService : IBlueprintService
             ("Data Lens", "SaaS analytics for Files and Objects"),
         };
 
-        if (key.Contains("CI")) return new()
+        if (family == "NCP-CI") return new()
         {
             ("NC2 on AWS", "i3.metal, Direct Connect, VPC networking"),
             ("NC2 on Azure", "BareMetal, ExpressRoute, Flow Gateway"),
@@ -118,7 +142,7 @@ public class HardcodedBlueprintService : IBlueprintService
             ("Data Protection", "Leap, async/sync replication, recovery plans"),
         };
 
-        if (key.Contains("MCI") || key.Contains("NCM")) return new()
+        if (family == "NCM-MCI") return new()
         {
             ("DSF Internals", "Stargate, Curator, OpLog, Extent Store, MapReduce"),
             ("Prism Central", "Analysis, reports, alerts, X-Play, Runway"),
@@ -130,7 +154,7 @@ public class HardcodedBlueprintService : IBlueprintService
             ("CLI Commands", "ncli, acli, nuclei, logbay, NCC"),
         };
 
-        if ((key.Contains("NCA") || key == "NCA") && (key.Contains("75") || key.Length <= 3)) return new()
+        if (family == "NCA-75") return new()
         {
             ("Lifecycle Management (LCM)", "LCM components, upgrade workflow, dark site mode"),
             ("Prism Element & Prism Central", "Cluster management, user roles, authentication"),

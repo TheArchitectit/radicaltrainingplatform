@@ -383,9 +383,10 @@ public partial class QuestionParser : IQuestionParser
         var c when c.StartsWith("NCA", StringComparison.OrdinalIgnoreCase) => "Associate",
         var c when c.StartsWith("NCM", StringComparison.OrdinalIgnoreCase) => "Expert",
         var c when c.StartsWith("NCP", StringComparison.OrdinalIgnoreCase) => "Professional",
+        // CKAD before CKA: "CKA" is a prefix of "CKAD".
+        var c when c.StartsWith("CKAD", StringComparison.OrdinalIgnoreCase) => "Associate",
         var c when c.StartsWith("CKA", StringComparison.OrdinalIgnoreCase) => "Associate",
         var c when c.StartsWith("CKS", StringComparison.OrdinalIgnoreCase) => "Professional",
-        var c when c.StartsWith("CKAD", StringComparison.OrdinalIgnoreCase) => "Associate",
         var c when c.Contains("-SAA", StringComparison.OrdinalIgnoreCase) => "Associate",
         var c when c.Contains("-SAP", StringComparison.OrdinalIgnoreCase) => "Professional",
         var c when c.Contains("-DA", StringComparison.OrdinalIgnoreCase) => "Associate",
@@ -431,10 +432,14 @@ public partial class QuestionParser : IQuestionParser
         "#FF6600", "#00FF88", "#FF3366", "#66FFFF", "#CC00FF"
     };
 
+    // FNV-1a over the upper-cased code: string.GetHashCode() is randomized
+    // per process, so every exam changed color on each launch (and
+    // Math.Abs(int.MinValue) could throw).
     private static string DeriveColor(string code)
     {
-        var hash = code.GetHashCode();
-        var idx = Math.Abs(hash) % NeonPalette.Length;
-        return NeonPalette[idx];
+        uint hash = 2166136261;
+        foreach (var c in code.ToUpperInvariant())
+            hash = (hash ^ c) * 16777619;
+        return NeonPalette[hash % (uint)NeonPalette.Length];
     }
 }

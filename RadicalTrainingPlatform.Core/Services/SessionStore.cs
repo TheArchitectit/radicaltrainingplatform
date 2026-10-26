@@ -36,11 +36,21 @@ public class JsonSessionStore : ISessionStore
         _dir = files.CombinePath(files.GetApplicationDataDirectory(appName), "sessions");
     }
 
-    // Session ids come from the JS side; keep them path-safe (no traversal).
+    // Session ids come from the JS side; keep them path-safe. Whitelist, not
+    // blacklist: the old '/', '\\', ':', '.' check still let through Windows-
+    // invalid characters (<>|"?*) and device names (CON, NUL, COM1…).
+    private static readonly System.Text.RegularExpressions.Regex SafeId =
+        new(@"^[A-Za-z0-9_-]{1,100}$", System.Text.RegularExpressions.RegexOptions.Compiled);
+    private static readonly HashSet<string> ReservedNames = new(StringComparer.OrdinalIgnoreCase)
+    {
+        "CON", "PRN", "AUX", "NUL",
+        "COM1", "COM2", "COM3", "COM4", "COM5", "COM6", "COM7", "COM8", "COM9",
+        "LPT1", "LPT2", "LPT3", "LPT4", "LPT5", "LPT6", "LPT7", "LPT8", "LPT9",
+    };
+
     private string PathFor(string sessionId)
     {
-        if (string.IsNullOrWhiteSpace(sessionId)
-            || sessionId.IndexOfAny(new[] { '/', '\\', ':', '.' }) >= 0)
+        if (sessionId == null || !SafeId.IsMatch(sessionId) || ReservedNames.Contains(sessionId))
             throw new ArgumentException("Invalid session id", nameof(sessionId));
         return _files.CombinePath(_dir, sessionId + ".json");
     }

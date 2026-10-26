@@ -74,7 +74,8 @@ public sealed class JsonErrataStore : IErrataProvider
         try
         {
             using var doc = JsonDocument.Parse(_files.ReadAllText(path));
-            if (!doc.RootElement.TryGetProperty("errata", out var arr)
+            if (doc.RootElement.ValueKind != JsonValueKind.Object
+                || !doc.RootElement.TryGetProperty("errata", out var arr)
                 || arr.ValueKind != JsonValueKind.Array)
             {
                 _logger?.LogWarning("errata.json at {Path} has no 'errata' array", path);
@@ -83,55 +84,77 @@ public sealed class JsonErrataStore : IErrataProvider
 
             foreach (var item in arr.EnumerateArray())
             {
-                var id = item.TryGetProperty("id", out var i) ? i.GetString() ?? "" : "";
-                var file = item.TryGetProperty("file", out var f) ? f.GetString() : null;
-                if (string.IsNullOrEmpty(file)
-                    || !item.TryGetProperty("questionId", out var qid)
-                    || qid.ValueKind != JsonValueKind.Number)
-                {
-                    _logger?.LogWarning("Skipping errata entry {Id}: missing file/questionId", id);
-                    continue;
-                }
-
-                // Only answerKey corrections are applied today; other types
-                // (stem, option text) would need parser support first.
-                var type = item.TryGetProperty("correctionType", out var t)
-                    ? t.GetString() : "answerKey";
-                if (!string.Equals(type, "answerKey", StringComparison.OrdinalIgnoreCase))
-                {
-                    _logger?.LogWarning("Skipping errata entry {Id}: unsupported correctionType '{Type}'", id, type);
-                    continue;
-                }
-
-                if (!item.TryGetProperty("correctAnswer", out var ca)) continue;
-                var answers = ca.ValueKind == JsonValueKind.Array
-                    ? ca.EnumerateArray().Select(a => a.GetString() ?? "").Where(a => a != "").ToList()
-                    : new List<string> { ca.GetString() ?? "" };
-                if (answers.Count == 0 || answers.Any(string.IsNullOrEmpty))
-                {
-                    _logger?.LogWarning("Skipping errata entry {Id}: empty correctAnswer", id);
-                    continue;
-                }
-
-                var rationale = item.TryGetProperty("rationale", out var r) ? r.GetString() ?? "" : "";
-                var entryId = qid.GetInt32();
-                var key = (file!.ToUpperInvariant(), entryId);
+                // Per-entry guard: a wrong-typed field ("questionId": 3.5,
+                // "file": 7) threw InvalidOperationException/FormatException
+                // past the JsonException catch and broke every lookup.
+                var entry = TryReadEntry(item);
+                if (entry == null) continue;
+                var key = (entry.File.ToUpperInvariant(), entry.QuestionId);
                 if (result.ContainsKey(key))
                 {
-                    _logger?.LogWarning("Duplicate errata for {File} Q{Id}; keeping first ({ErrataId})", file, entryId, id);
+                    _logger?.LogWarning("Duplicate errata for {File} Q{Id}; keeping first ({ErrataId})", entry.File, entry.QuestionId, entry.Id);
                     continue;
                 }
-                result[key] = new ErrataEntry(id, file, entryId, answers, rationale);
+                result[key] = entry;
             }
             _logger?.LogInformation("Loaded {Count} errata corrections from {Path}", result.Count, path);
         }
-        catch (JsonException ex)
+        catch (Exception ex) when (ex is JsonException or IOException or UnauthorizedAccessException)
         {
-            _logger?.LogWarning(ex, "errata.json at {Path} is malformed; running without corrections", path);
+            _logger?.LogWarning(ex, "errata.json at {Path} is unreadable or malformed; running without corrections", path);
             result.Clear();
         }
         return result;
     }
+
+    private ErrataEntry? TryReadEntry(JsonElement item)
+    {
+        if (item.ValueKind != JsonValueKind.Object)
+        {
+            _logger?.LogWarning("Skipping errata entry: not an object");
+            return null;
+        }
+
+        var id = String(item, "id") ?? "";
+        var file = String(item, "file");
+        if (string.IsNullOrEmpty(file)
+            || !item.TryGetProperty("questionId", out var qid)
+            || qid.ValueKind != JsonValueKind.Number
+            || !qid.TryGetInt32(out var questionId))
+        {
+            _logger?.LogWarning("Skipping errata entry {Id}: missing or invalid file/questionId", id);
+            return null;
+        }
+
+        // Only answerKey corrections are applied today; other types
+        // (stem, option text) would need parser support first.
+        var type = item.TryGetProperty("correctionType", out _) ? String(item, "correctionType") : "answerKey";
+        if (!string.Equals(type, "answerKey", StringComparison.OrdinalIgnoreCase))
+        {
+            _logger?.LogWarning("Skipping errata entry {Id}: unsupported correctionType '{Type}'", id, type);
+            return null;
+        }
+
+        if (!item.TryGetProperty("correctAnswer", out var ca)) return null;
+        var answers = ca.ValueKind switch
+        {
+            JsonValueKind.Array => ca.EnumerateArray()
+                .Select(a => a.ValueKind == JsonValueKind.String ? a.GetString() ?? "" : "")
+                .ToList(),
+            JsonValueKind.String => new List<string> { ca.GetString() ?? "" },
+            _ => new List<string>(),
+        };
+        if (answers.Count == 0 || answers.Any(a => a.Length != 1 || a[0] is < 'A' or > 'F'))
+        {
+            _logger?.LogWarning("Skipping errata entry {Id}: correctAnswer must be letters A-F", id);
+            return null;
+        }
+
+        return new ErrataEntry(id, file, questionId, answers, String(item, "rationale") ?? "");
+    }
+
+    private static string? String(JsonElement obj, string name) =>
+        obj.TryGetProperty(name, out var v) && v.ValueKind == JsonValueKind.String ? v.GetString() : null;
 
     private string? FindErrataFile()
     {

@@ -31,7 +31,16 @@ public class DefaultFileProvider : IFileProvider
     public string[] GetFiles(string directory, string searchPattern) => Directory.GetFiles(directory, searchPattern);
     public string[] GetDirectories(string directory) => Directory.GetDirectories(directory);
     public string ReadAllText(string path) => File.ReadAllText(path);
-    public void WriteAllText(string path, string content) => File.WriteAllText(path, content);
+    /// <summary>
+    /// Write-then-rename so a crash mid-write cannot leave a truncated file
+    /// (session progress was written in place).
+    /// </summary>
+    public void WriteAllText(string path, string content)
+    {
+        var temp = path + ".tmp";
+        File.WriteAllText(temp, content);
+        File.Move(temp, path, overwrite: true);
+    }
     public void DeleteFile(string path) => File.Delete(path);
     public void CreateDirectory(string path) => Directory.CreateDirectory(path);
     public string GetCurrentDirectory() => Directory.GetCurrentDirectory();

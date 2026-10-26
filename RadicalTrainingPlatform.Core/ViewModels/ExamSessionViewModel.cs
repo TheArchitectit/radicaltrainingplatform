@@ -11,6 +11,7 @@ namespace RadicalTrainingPlatform.Core.ViewModels;
 public class ExamSessionViewModel : INotifyPropertyChanged
 {
     private readonly List<Question> _sessionQuestions;
+    private readonly bool _revealAfterSubmit;
     private readonly Dictionary<Question, int> _displayIndex = new();
     private int _currentIndex;
     private readonly HashSet<string> _selectedAnswers = new();
@@ -29,9 +30,12 @@ public class ExamSessionViewModel : INotifyPropertyChanged
     /// text refers to options by letter are left in their authored order.
     /// </param>
     /// <param name="random">Seedable source for tests; defaults to a new Random.</param>
+    /// <param name="revealAnswersAfterSubmit">False for Test mode: see <see cref="RevealAnswers"/>.</param>
     public ExamSessionViewModel(List<Question> questions, string examCode, int? limit = null,
-                                bool shuffleOptions = false, Random? random = null)
+                                bool shuffleOptions = false, Random? random = null,
+                                bool revealAnswersAfterSubmit = true)
     {
+        _revealAfterSubmit = revealAnswersAfterSubmit;
         ArgumentNullException.ThrowIfNull(questions);
         if (questions.Count == 0)
             throw new ArgumentException("A session needs at least one question.", nameof(questions));
@@ -89,7 +93,19 @@ public class ExamSessionViewModel : INotifyPropertyChanged
     public int Streak => _streak;
     /// <summary>Longest consecutive-correct run this session.</summary>
     public int BestStreak => _bestStreak;
-    public double AccuracyPercent => TotalQuestions > 0 ? (CorrectCount * 100.0 / TotalQuestions) : 0;
+    /// <summary>Correct as a share of questions ANSWERED (was: of the whole
+    /// session, so one right answer out of 75 read as "1% accuracy").</summary>
+    public double AccuracyPercent => AnsweredCount > 0 ? (CorrectCount * 100.0 / AnsweredCount) : 0;
+    /// <summary>Correct as a share of the whole session — the exam score.</summary>
+    public double ScorePercent => TotalQuestions > 0 ? (CorrectCount * 100.0 / TotalQuestions) : 0;
+    public int AnsweredCount => CorrectCount + WrongCount;
+
+    /// <summary>
+    /// Whether correctness and explanations may be shown after Submit. Study
+    /// mode always reveals; Test mode (<c>revealAnswersAfterSubmit: false</c>)
+    /// holds them back until every question is answered or skipped.
+    /// </summary>
+    public bool RevealAnswers => _revealAfterSubmit || IsComplete;
     public bool IsComplete => _sessionQuestions.All(IsAnswered);
 
     // ─── Actions ──────────────────────────────────────────────────
@@ -144,6 +160,9 @@ public class ExamSessionViewModel : INotifyPropertyChanged
         Notify(nameof(BestStreak));
         Notify(nameof(AccuracyPercent));
         Notify(nameof(IsComplete));
+        Notify(nameof(AnsweredCount));
+        Notify(nameof(ScorePercent));
+        Notify(nameof(RevealAnswers));
         return correct;
     }
 
@@ -178,6 +197,9 @@ public class ExamSessionViewModel : INotifyPropertyChanged
             Notify(nameof(WrongCount));
             Notify(nameof(AccuracyPercent));
             Notify(nameof(IsComplete));
+            Notify(nameof(AnsweredCount));
+            Notify(nameof(ScorePercent));
+            Notify(nameof(RevealAnswers));
         }
         _streak = 0;
         Notify(nameof(Streak));

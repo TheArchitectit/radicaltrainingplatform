@@ -140,6 +140,39 @@ public class ErrataTests
     }
 
     [Fact]
+    public void Store_WrongTypedEntries_SkippedNotFatal()
+    {
+        // Wrong-typed fields threw InvalidOperationException/FormatException
+        // past the JsonException catch, breaking every lookup.
+        var files = new FakeFiles();
+        files.Files["/app/errata.json"] = """
+            { "errata": [
+              { "id": "frac", "file": "A.md", "questionId": 3.5, "correctAnswer": ["B"] },
+              { "id": "numfile", "file": 7, "questionId": 1, "correctAnswer": ["B"] },
+              { "id": "badletter", "file": "A.md", "questionId": 2, "correctAnswer": ["Z"] },
+              { "id": "numanswer", "file": "A.md", "questionId": 4, "correctAnswer": [1] },
+              "not-an-object",
+              { "id": "good", "file": "A.md", "questionId": 9, "correctAnswer": "C" }
+            ] }
+            """;
+        var store = new JsonErrataStore(files);
+
+        Should.NotThrow(() => store.TryGetCorrection("A.md", 1, out _));
+        store.TryGetCorrection("A.md", 2, out _).ShouldBeFalse();
+        store.TryGetCorrection("A.md", 4, out _).ShouldBeFalse();
+        store.TryGetCorrection("A.md", 9, out var good).ShouldBeTrue();
+        good.ShouldBe(["C"]);
+    }
+
+    [Fact]
+    public void Store_RootNotObject_FailsSoft()
+    {
+        var files = new FakeFiles();
+        files.Files["/app/errata.json"] = "[1, 2]";
+        Should.NotThrow(() => new JsonErrataStore(files).TryGetCorrection("A.md", 1, out _).ShouldBeFalse());
+    }
+
+    [Fact]
     public void Store_UnsupportedCorrectionType_Skipped()
     {
         var files = new FakeFiles();

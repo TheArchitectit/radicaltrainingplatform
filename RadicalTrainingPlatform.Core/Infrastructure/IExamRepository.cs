@@ -40,6 +40,9 @@ public class MarkdownExamRepository : IExamRepository
     private readonly ILogger<MarkdownExamRepository>? _logger;
     private List<string>? _searchPaths;
     private readonly List<string> _registeredPaths = new();
+    // Content read while verifying headers is reused by ReadExamFile: catalog
+    // + load used to read every bank four times on the UI thread.
+    private readonly System.Collections.Concurrent.ConcurrentDictionary<string, string> _content = new(StringComparer.OrdinalIgnoreCase);
 
     // Regex to detect exam-content files (### Q1 or ### Q42 headers)
     private static readonly System.Text.RegularExpressions.Regex ExamHeaderRegex =
@@ -85,21 +88,15 @@ public class MarkdownExamRepository : IExamRepository
                 try { _searchPaths.Add(_files.GetApplicationDataDirectory(_appName)); }
                 catch (Exception ex) { _logger?.LogWarning(ex, "Could not access application data directory for {AppName}", _appName); }
 
-                // 4. Walk up from assembly looking for repo root
-                var asmDir = _files.GetExecutingAssemblyDirectory();
-                var current = asmDir;
-                for (int i = 0; i < 6; i++)
-                {
-                    var parent = _files.GetParentDirectory(current);
-                    if (string.IsNullOrEmpty(parent)) break;
-                    _searchPaths.Add(parent);
-                    current = parent;
-                }
+                // No walk up the parent directories: it scanned up to six
+                // ancestors (e.g. a user's home) for stray *.md. The banks are
+                // copied next to the binary (Desktop/WinForms csproj), and dev
+                // runs from the repo root, which the working directory covers.
 
                 // Deduplicate
                 _searchPaths = _searchPaths.Distinct().Where(p => _files.Exists(p)).ToList();
 
-                // 5. New-track banks: <base>/content/exams/<CODE>/questions/*.md.
+                // 4. New-track banks: <base>/content/exams/<CODE>/questions/*.md.
                 // The flat *.md scan never descended into these, so the whole
                 // content/exams tree was invisible to the app.
                 foreach (var basePath in _searchPaths.ToList())
@@ -112,6 +109,9 @@ public class MarkdownExamRepository : IExamRepository
 
     public IEnumerable<string> FindExamFiles()
     {
+        // Keyed by exam folder + file name, not full path: the same bank can be
+        // reachable from the working directory AND the copy next to the
+        // binary. The first search path wins (registered, then cwd).
         var seen = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
         foreach (var path in SearchPaths)
         {
@@ -125,7 +125,8 @@ public class MarkdownExamRepository : IExamRepository
             foreach (var f in candidates)
             {
                 var name = Path.GetFileName(f);
-                if (!LooksLikeExamFile(name) || !seen.Add(f))
+                if (!LooksLikeExamFile(name)
+                    || !seen.Add(QuestionParser.DeriveExamCodeFromPath(f) + "/" + name))
                     continue;
 
                 // Filename heuristic first, then VERIFY headers — without this
@@ -133,7 +134,7 @@ public class MarkdownExamRepository : IExamRepository
                 // "exams".
                 try
                 {
-                    var head = _files.ReadAllText(f);
+                    var head = _content.GetOrAdd(f, _files.ReadAllText);
                     if (!ExamHeaderRegex.IsMatch(head)) continue;
                 }
                 catch (Exception ex)
@@ -147,7 +148,8 @@ public class MarkdownExamRepository : IExamRepository
         }
     }
 
-    public string ReadExamFile(string path) => _files.ReadAllText(path);
+    public string ReadExamFile(string path) =>
+        _content.TryGetValue(path, out var cached) ? cached : _files.ReadAllText(path);
 
     private IEnumerable<string> FindContentExamDirs(string basePath)
     {
