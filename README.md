@@ -9,7 +9,7 @@ coverage tracking, and a lab simulator.
 
 ![.NET 10.0](https://img.shields.io/badge/.NET-10.0-blue)
 ![License](https://img.shields.io/badge/License-BSD%203--Clause-green)
-![Released items](https://img.shields.io/badge/Released%20items-189-orange)
+![Released items](https://img.shields.io/badge/Released%20items-289-orange)
 ![Status](https://img.shields.io/badge/Status-Draft%20preview-yellow)
 [![Sponsor](https://img.shields.io/badge/Sponsor-TheArchitectit-FF69B4?style=flat&logo=github-sponsors)](https://github.com/sponsors/TheArchitectit)
 
@@ -23,7 +23,7 @@ they are the numbers this README is accountable to:
 |---|---|
 | Exam manifests | **6** — CompTIA A+ Core 1 (220-1201), A+ Core 2 (220-1202), Network+ (N10-009), Nutanix Certified Associate 7.5, Microsoft Azure Administrator (AZ-104), AWS Certified Solutions Architect - Associate (SAA-C03) |
 | Tracks | **5** — `track-aplus`, `track-netplus`, `track-nca`, `track-azure`, `track-aws` |
-| Released items | **189** — A+ Core 1: 16 · A+ Core 2: 8 · Network+: 25 · NCA 7.5: 40 · Azure AZ-104: 50 · AWS SAA-C03: 50 |
+| Released items | **289** — A+ Core 1: 16 · A+ Core 2: 108 · Network+: 25 · NCA 7.5: 40 · Azure AZ-104: 50 · AWS SAA-C03: 50 |
 | Release state | `draft-preview` — draft packs for the beginner preview |
 
 **These are draft packs, not released study material.** No item carries a human source
@@ -55,7 +55,7 @@ see [VENDOR-PACK-RIGHTS-AZ-104.md](docs/VENDOR-PACK-RIGHTS-AZ-104.md) and
 ## ✨ Features
 
 - **1,458 practice questions** across the four Nutanix exams below, plus the beginner
-  packs above (189 items, `draft-preview`) — parsed by the desktop and legacy apps, not
+  packs above (289 items, `draft-preview`) — parsed by the desktop and legacy apps, not
   part of the PWA bundle
 - **Blueprint coverage panel** — toggle with `B` to see which exam objectives each question covers
 - **Mixed question formats** — Standard MCQ, multi-select ("Select TWO"), and ordering/sequence questions
@@ -203,7 +203,7 @@ D. On-premises Prism Central
 
 The claims below describe the **legacy Nutanix banks** (1,458 items: NCP-US, NCP-CI,
 NCP-AI and NCM-MCI — the four exams in the table above). They say nothing about the
-189 PWA items, which carry draft provenance and no human review date.
+289 PWA items, which carry draft provenance and no human review date.
 
 1. **LLM Answer Validation** — 8 independent agents answered every question; disagreements researched and resolved
 2. **Blueprint Gap Analysis** — vendor exam blueprints analyzed; 178 gap-fill questions generated to close the coverage gaps that produced them

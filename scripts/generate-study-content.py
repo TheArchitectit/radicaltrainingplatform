@@ -74,7 +74,15 @@ RELEASED_LESSONS = {
 }
 RELEASED_BANKS = {
     "COMPTIA-A-1201": ["core1-a2-fixtures.md"],
-    "COMPTIA-A-1202": ["core2-b2b4-fixtures.md"],
+    # Beginner banks (2026-10-26): three items per objective across domains
+    # 1-3, and the two objectives in domain 4 that the demo cut did not reach.
+    "COMPTIA-A-1202": [
+        "core2-b2b4-fixtures.md",
+        "core2-b1-domain1-bank.md",
+        "core2-b2-domain2-bank.md",
+        "core2-b3-domain3-bank.md",
+        "core2-b4-domain4-bank.md",
+    ],
     "COMPTIA-NET-009": [
         "net009-n1-fixtures.md",
         "net009-n2-fixtures.md",

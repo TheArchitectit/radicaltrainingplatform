@@ -15,8 +15,8 @@ export const TRACKS = {
     "order": 1,
     "coverage": {
       "total": 63,
-      "covered": 8,
-      "percent": 13,
+      "covered": 40,
+      "percent": 63,
       "coveredObjectiveIds": [],
       "examCoverage": {
         "COMPTIA-A-1201": {
@@ -32,13 +32,45 @@ export const TRACKS = {
         },
         "COMPTIA-A-1202": {
           "total": 36,
-          "covered": 4,
-          "percent": 11,
+          "covered": 36,
+          "percent": 100,
           "coveredObjectiveIds": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "1.4",
+            "1.5",
+            "1.6",
+            "1.7",
+            "1.8",
+            "1.9",
+            "1.10",
+            "1.11",
+            "2.1",
+            "2.2",
+            "2.3",
+            "2.4",
             "2.5",
+            "2.6",
+            "2.7",
+            "2.8",
+            "2.9",
+            "2.10",
+            "2.11",
+            "3.1",
+            "3.2",
+            "3.3",
+            "3.4",
             "4.1",
             "4.2",
-            "4.3"
+            "4.3",
+            "4.4",
+            "4.5",
+            "4.6",
+            "4.7",
+            "4.8",
+            "4.9",
+            "4.10"
           ]
         }
       }
@@ -2773,6 +2805,2106 @@ export const ITEMS = [
     "provenanceStatus": "draft",
     "textHash": "b981921abfa0a7fd",
     "bank": "core2-b2b4-fixtures.md"
+  },
+  {
+    "id": "COMPTIA-A-1202/core2-b1-domain1-bank.md/Q9",
+    "examId": "COMPTIA-A-1202",
+    "number": "Q9",
+    "stem": "A point-of-sale terminal runs a single fixed application on dedicated hardware and offers no general desktop. Which operating system category does this describe?",
+    "options": {
+      "A": "A workstation operating system",
+      "B": "A server operating system",
+      "C": "An embedded operating system",
+      "D": "A virtual desktop operating system"
+    },
+    "keys": [
+      "C"
+    ],
+    "explanation": "An embedded operating system ships inside a device whose job is not general computing: kiosks, point-of-sale terminals, network appliances. A workstation OS (A) is built for an interactive user running whatever applications they choose; a server OS (B) is tuned for many concurrent service connections; a virtual desktop (D) is a workstation desktop hosted on shared infrastructure, which this device clearly is not.",
+    "objectiveId": "1.1",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "3c328c5949600ebb",
+    "bank": "core2-b1-domain1-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1202/core2-b1-domain1-bank.md/Q10",
+    "examId": "COMPTIA-A-1202",
+    "number": "Q10",
+    "stem": "A user reports that a new laptop shows only 3.5 GB of usable memory even though 8 GB is installed. Which condition explains the shortfall?",
+    "options": {
+      "A": "A 32-bit operating system is installed",
+      "B": "The memory modules are running in single-channel mode",
+      "C": "The BIOS has disabled half of the memory",
+      "D": "One of the two memory modules has failed"
+    },
+    "keys": [
+      "A"
+    ],
+    "explanation": "A 32-bit operating system can address about 4 GB in total, and some of that space is reserved for hardware, so it reports roughly 3.5 GB regardless of how much is installed. Memory channel mode (B) affects bandwidth, not the reported total; a firmware setting that hides half the memory (C) is unusual and would be visible in the firmware screen; a failed module (D) would typically leave the machine unbootable or reporting the other half only, and would be the thing to check after the architecture is ruled out.",
+    "objectiveId": "1.1",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "bea16696da6fce8e",
+    "bank": "core2-b1-domain1-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1202/core2-b1-domain1-bank.md/Q11",
+    "examId": "COMPTIA-A-1202",
+    "number": "Q11",
+    "stem": "A technician must add a second physical disk of 4 TB to an existing Windows machine that boots through UEFI. Which partition style is required?",
+    "options": {
+      "A": "MBR",
+      "B": "GPT",
+      "C": "NTFS",
+      "D": "exFAT"
+    },
+    "keys": [
+      "B"
+    ],
+    "explanation": "GPT is the partition scheme that supports disks larger than 2 TB and is the one UEFI systems use. MBR (A) caps a disk at 2 TB, which is exactly the limit this disk exceeds. NTFS (C) and exFAT (D) are file systems that live inside a partition; they do not decide how the partition table is laid out.",
+    "objectiveId": "1.2",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "2742593832222f7e",
+    "bank": "core2-b1-domain1-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1202/core2-b1-domain1-bank.md/Q12",
+    "examId": "COMPTIA-A-1202",
+    "number": "Q12",
+    "stem": "A department must move 20 Windows machines to a newer release of the same operating system while keeping installed applications and user files. Which approach preserves both with the least reconfiguration?",
+    "options": {
+      "A": "A clean install with data migration from a backup",
+      "B": "A repair install of the existing release",
+      "C": "An in-place upgrade",
+      "D": "Reimaging from a standard corporate image"
+    },
+    "keys": [
+      "C"
+    ],
+    "explanation": "An in-place upgrade replaces the operating system while preserving applications, settings and user data, which is the stated requirement. A clean install (A) erases applications and requires every one to be reinstalled; a repair install (B) repairs the current release rather than moving to a new one; reimaging (D) is a clean install with a standard build and discards what the users had installed.",
+    "objectiveId": "1.2",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "2ca807d73a936753",
+    "bank": "core2-b1-domain1-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1202/core2-b1-domain1-bank.md/Q13",
+    "examId": "COMPTIA-A-1202",
+    "number": "Q13",
+    "stem": "After a clean installation, a new desktop has no network connectivity at all: the adapter does not appear under Network adapters in Device Manager, and the machine cannot ping its own gateway. Which installation step was most likely missed?",
+    "options": {
+      "A": "Activating Windows",
+      "B": "Formatting the system partition with NTFS",
+      "C": "Installing the network adapter driver from the vendor",
+      "D": "Creating a recovery partition"
+    },
+    "keys": [
+      "C"
+    ],
+    "explanation": "A missing network driver is why a fresh install has no connectivity at all: the hardware is present, but nothing binds to it, and the fix is to install the vendor driver rather than relying on what Setup provided. Activation (A) is a licensing step and installs no drivers; the file system (B) is already in use because the system boots and runs; a recovery partition (D) is a repair convenience with no bearing on connectivity.",
+    "objectiveId": "1.2",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "1be818f65124bfcf",
+    "bank": "core2-b1-domain1-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1202/core2-b1-domain1-bank.md/Q14",
+    "examId": "COMPTIA-A-1202",
+    "number": "Q14",
+    "stem": "An office needs full-disk encryption, the ability to join the company domain, and the Remote Desktop host feature on its workstations. Which Windows edition satisfies all three with no add-on software?",
+    "options": {
+      "A": "Home",
+      "B": "Education",
+      "C": "Standard",
+      "D": "Pro"
+    },
+    "keys": [
+      "D"
+    ],
+    "explanation": "Windows Pro includes BitLocker, domain join, Remote Desktop host and Hyper-V; Home lacks all of them. Home (A) is the edition the requirement rules out first. Education (B) tracks Enterprise for schools and does include these features, but it is licensed for educational institutions rather than a general office. Standard (C) is not a current Windows client edition name.",
+    "objectiveId": "1.3",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "67d503d1b085bd3b",
+    "bank": "core2-b1-domain1-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1202/core2-b1-domain1-bank.md/Q15",
+    "examId": "COMPTIA-A-1202",
+    "number": "Q15",
+    "stem": "A workstation is taking several minutes to reach a usable desktop, and the user has not changed anything. Which tool best shows which programs are delaying sign-in?",
+    "options": {
+      "A": "Device Manager",
+      "B": "Disk Management",
+      "C": "The Startup tab in Task Manager",
+      "D": "The Services console"
+    },
+    "keys": [
+      "C"
+    ],
+    "explanation": "The Startup tab lists every program set to run at sign-in and reports each one's impact, which is exactly the ranking needed to find the delay. Device Manager (A) shows hardware and driver state, not sign-in load; Disk Management (B) shows partitions and volumes; the Services console (D) lists background services but does not rank their effect on the user's logon time.",
+    "objectiveId": "1.4",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "306a79d1551472d6",
+    "bank": "core2-b1-domain1-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1202/core2-b1-domain1-bank.md/Q16",
+    "examId": "COMPTIA-A-1202",
+    "number": "Q16",
+    "stem": "A user says an application closes itself a few seconds after launch. Which tool should the technician check first for the recorded error?",
+    "options": {
+      "A": "Event Viewer",
+      "B": "Resource Monitor",
+      "C": "System Configuration",
+      "D": "Windows Update history"
+    },
+    "keys": [
+      "A"
+    ],
+    "explanation": "Event Viewer records application errors with a faulting module and an error code, which turns \"it just closes\" into a specific cause. Resource Monitor (B) shows current CPU, memory and disk activity but keeps no history of the crash. System Configuration (C) controls startup and boot options; it does not record application faults. Update history (D) matters only if the fault began with an update, and it does not explain the crash on its own.",
+    "objectiveId": "1.4",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "ab748acdc85f7621",
+    "bank": "core2-b1-domain1-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1202/core2-b1-domain1-bank.md/Q17",
+    "examId": "COMPTIA-A-1202",
+    "number": "Q17",
+    "stem": "A second internal drive has been installed and is visible in the firmware, but it does not appear in File Explorer. Which tool is used to initialize it, partition it and assign a drive letter?",
+    "options": {
+      "A": "Device Manager",
+      "B": "Storage Spaces",
+      "C": "The Disk Cleanup utility",
+      "D": "Disk Management"
+    },
+    "keys": [
+      "D"
+    ],
+    "explanation": "Disk Management initializes a new disk, creates a volume on it, formats that volume and assigns the drive letter that makes it visible. Device Manager (A) would show the disk as present and working, which is exactly the state described. Storage Spaces (B) pools disks into a new virtual volume, which is a different design. Disk Cleanup (C) removes files from existing volumes.",
+    "objectiveId": "1.4",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "4b7465435a22170e",
+    "bank": "core2-b1-domain1-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1202/core2-b1-domain1-bank.md/Q18",
+    "examId": "COMPTIA-A-1202",
+    "number": "Q18",
+    "stem": "A laptop has an address in the correct subnet but cannot reach anything outside it, and the technician suspects the lease is stale. Which command requests a new address from the DHCP server?",
+    "options": {
+      "A": "ipconfig /flushdns",
+      "B": "ipconfig /release followed by ipconfig /renew",
+      "C": "netstat -an",
+      "D": "nslookup"
+    },
+    "keys": [
+      "B"
+    ],
+    "explanation": "`ipconfig /release` gives up the current lease and `ipconfig /renew` requests a new one, which is the pair for a stale or wrong DHCP lease. `/flushdns` (A) clears the local name cache and does not touch addressing. `netstat -an` (C) lists current connections and listening ports. `nslookup` (D) queries DNS records and cannot change an address.",
+    "objectiveId": "1.5",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "71ebd6ea5e0d25b3",
+    "bank": "core2-b1-domain1-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1202/core2-b1-domain1-bank.md/Q19",
+    "examId": "COMPTIA-A-1202",
+    "number": "Q19",
+    "stem": "A machine runs but reports that critical system files are damaged. Which command scans and repairs protected Windows system files?",
+    "options": {
+      "A": "chkdsk /f",
+      "B": "diskpart",
+      "C": "sfc /scannow",
+      "D": "format"
+    },
+    "keys": [
+      "C"
+    ],
+    "explanation": "`sfc /scannow` verifies protected system files and replaces damaged copies from the component store. `chkdsk /f` (A) repairs file system structures and bad sectors, which is a different layer. `diskpart` (B) manages partitions and volumes. `format` (D) erases a volume and would destroy the data the user needs.",
+    "objectiveId": "1.5",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "c8e6a5f72eb99cc8",
+    "bank": "core2-b1-domain1-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1202/core2-b1-domain1-bank.md/Q20",
+    "examId": "COMPTIA-A-1202",
+    "number": "Q20",
+    "stem": "A technician must copy a large directory tree to a network share, preserve permissions and timestamps, and be able to resume after an interruption. Which command is appropriate?",
+    "options": {
+      "A": "copy",
+      "B": "xcopy",
+      "C": "robocopy",
+      "D": "move"
+    },
+    "keys": [
+      "C"
+    ],
+    "explanation": "`robocopy` is built for exactly this job: it copies trees, can preserve security and timestamps, retries failed files, and can resume without recopying what is already there. `copy` (A) handles single files with no tree support. `xcopy` (B) copies trees but is the older tool with weaker retry and resume behavior. `move` (D) relocates the source rather than copying it.",
+    "objectiveId": "1.5",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "88014516dd8a044f",
+    "bank": "core2-b1-domain1-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1202/core2-b1-domain1-bank.md/Q21",
+    "examId": "COMPTIA-A-1202",
+    "number": "Q21",
+    "stem": "A desktop is set to enter sleep after 15 minutes and the user wants it to stay awake while a long download runs. Which settings area controls sleep and power plan behavior?",
+    "options": {
+      "A": "Privacy",
+      "B": "System, then Power and sleep",
+      "C": "Personalization",
+      "D": "Apps and features"
+    },
+    "keys": [
+      "B"
+    ],
+    "explanation": "Power and sleep settings hold the sleep timeout, screen-off timeout and the power plan, which is where the change belongs. Privacy (A) governs permissions and telemetry. Personalization (C) covers appearance. Apps and features (D) installs and removes software.",
+    "objectiveId": "1.6",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "d23bd251a2059b9e",
+    "bank": "core2-b1-domain1-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1202/core2-b1-domain1-bank.md/Q22",
+    "examId": "COMPTIA-A-1202",
+    "number": "Q22",
+    "stem": "Text on a new 4K monitor is unreadably small even though the resolution is correct. Which setting should the technician adjust?",
+    "options": {
+      "A": "The refresh rate",
+      "B": "The color profile",
+      "C": "Display scaling",
+      "D": "The screen orientation"
+    },
+    "keys": [
+      "C"
+    ],
+    "explanation": "Display scaling enlarges text and interface elements without lowering the resolution, which is the purpose of the setting. Refresh rate (A) changes how often the screen redraws and does not change element size. The color profile (B) changes color reproduction. Orientation (D) rotates the image.",
+    "objectiveId": "1.6",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "b241e3f36a9c2038",
+    "bank": "core2-b1-domain1-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1202/core2-b1-domain1-bank.md/Q23",
+    "examId": "COMPTIA-A-1202",
+    "number": "Q23",
+    "stem": "A workstation's clock is 40 minutes slow, and the user has not changed the time zone. Which action addresses the cause rather than the symptom?",
+    "options": {
+      "A": "Manually set the clock forward each morning",
+      "B": "Enable automatic time synchronization against a time server",
+      "C": "Change the time zone to a neighboring one",
+      "D": "Disable daylight saving time"
+    },
+    "keys": [
+      "B"
+    ],
+    "explanation": "A clock that drifts is a synchronization problem; pointing the machine at a reliable time source keeps it correct and also fixes the certificate and logon failures that a wrong clock causes. Setting the clock by hand (A) leaves the drift in place. Changing the time zone (C) makes the displayed time wrong in a different way. Disabling daylight saving (D) does not stop drift.",
+    "objectiveId": "1.6",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "8b06b6c865db9f81",
+    "bank": "core2-b1-domain1-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1202/core2-b1-domain1-bank.md/Q24",
+    "examId": "COMPTIA-A-1202",
+    "number": "Q24",
+    "stem": "A user on a public network cannot see the shared folder on a colleague's workstation, though both are on the same switch and can ping each other. The colleague's machine shows its network as Public. What is the most likely cause?",
+    "options": {
+      "A": "The folder's share permissions are set to Read",
+      "B": "The two machines use different workgroup names",
+      "C": "The switch port is configured for the wrong VLAN",
+      "D": "The network profile is Public, so file sharing is blocked"
+    },
+    "keys": [
+      "D"
+    ],
+    "explanation": "On a Public network profile Windows disables network discovery and file sharing, so the share is invisible even though the hosts can reach each other. Read share permissions (A) would still let the folder be discovered. A different workgroup name (B) affects browsing but does not block a share reached by name. A wrong VLAN (C) would break the ping that is reported to be working.",
+    "objectiveId": "1.7",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "47970b0590386894",
+    "bank": "core2-b1-domain1-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1202/core2-b1-domain1-bank.md/Q25",
+    "examId": "COMPTIA-A-1202",
+    "number": "Q25",
+    "stem": "A small office of six computers has no central directory service, and each machine keeps its own local accounts. Which arrangement is this?",
+    "options": {
+      "A": "A domain",
+      "B": "A workgroup",
+      "C": "A forest",
+      "D": "A trust relationship"
+    },
+    "keys": [
+      "B"
+    ],
+    "explanation": "A workgroup is peer to peer: each computer maintains its own accounts and there is no central authority. A domain (A) requires a directory service that holds the accounts. A forest (C) is a collection of domains in a directory service. A trust relationship (D) describes how domains allow access across their boundaries.",
+    "objectiveId": "1.7",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "a4bd02bf789bae60",
+    "bank": "core2-b1-domain1-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1202/core2-b1-domain1-bank.md/Q26",
+    "examId": "COMPTIA-A-1202",
+    "number": "Q26",
+    "stem": "A user's mapped network drive shows a red cross and asks for credentials every morning, though it works after the user signs in again. Which cause should be checked first?",
+    "options": {
+      "A": "The share was deleted",
+      "B": "The drive letter conflicts with a local volume",
+      "C": "The network cable is faulty",
+      "D": "The user's password expired and the stored credential is stale"
+    },
+    "keys": [
+      "D"
+    ],
+    "explanation": "A mapped drive that reconnects only after the user signs in again is the classic symptom of a stored credential that no longer matches the account, most often after a password change. A deleted share (A) would not reconnect at all. A drive letter conflict (B) fails immediately and consistently. A faulty cable (C) would affect all network access, not one mapped drive.",
+    "objectiveId": "1.7",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "ea309a0d56c579ae",
+    "bank": "core2-b1-domain1-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1202/core2-b1-domain1-bank.md/Q27",
+    "examId": "COMPTIA-A-1202",
+    "number": "Q27",
+    "stem": "A macOS user wants a backup that runs automatically and can restore an individual file from last week. Which built-in feature provides this?",
+    "options": {
+      "A": "iCloud Drive",
+      "B": "Disk Utility",
+      "C": "Time Machine",
+      "D": "Keychain Access"
+    },
+    "keys": [
+      "C"
+    ],
+    "explanation": "Time Machine takes automatic versioned backups and lets the user browse and restore a single file from an earlier date. iCloud Drive (A) syncs current documents and keeps no historical versions for restore. Disk Utility (B) repairs and manages disks. Keychain Access (D) stores credentials.",
+    "objectiveId": "1.8",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "f38ff68132fc4e86",
+    "bank": "core2-b1-domain1-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1202/core2-b1-domain1-bank.md/Q28",
+    "examId": "COMPTIA-A-1202",
+    "number": "Q28",
+    "stem": "A macOS user downloads an application from a developer website and macOS refuses to open it, saying the developer cannot be verified. Which feature is enforcing this?",
+    "options": {
+      "A": "FileVault",
+      "B": "Gatekeeper",
+      "C": "The Keychain",
+      "D": "System Integrity Protection"
+    },
+    "keys": [
+      "B"
+    ],
+    "explanation": "Gatekeeper checks the signature and notarization of downloaded applications and blocks those it cannot verify. FileVault (A) encrypts the startup disk. The Keychain (C) stores passwords and certificates for the user. System Integrity Protection (D) protects system files from modification at run time, not application launch.",
+    "objectiveId": "1.8",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "89ecb120be3ed332",
+    "bank": "core2-b1-domain1-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1202/core2-b1-domain1-bank.md/Q29",
+    "examId": "COMPTIA-A-1202",
+    "number": "Q29",
+    "stem": "A Mac's startup disk shows a file system that supports snapshots, strong encryption and space sharing. Which file system is it?",
+    "options": {
+      "A": "HFS+",
+      "B": "NTFS",
+      "C": "ext4",
+      "D": "APFS"
+    },
+    "keys": [
+      "D"
+    ],
+    "explanation": "APFS is the modern Apple file system, with snapshots, native encryption and space sharing across volumes in a container. HFS+ (A) is the predecessor without those features. NTFS (B) is Microsoft's file system. ext4 (C) is the common Linux file system.",
+    "objectiveId": "1.8",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "493a070bb031b2f6",
+    "bank": "core2-b1-domain1-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1202/core2-b1-domain1-bank.md/Q30",
+    "examId": "COMPTIA-A-1202",
+    "number": "Q30",
+    "stem": "A Linux workstation must install a package, and the distribution uses the apt tool. Which command installs it with the required privileges?",
+    "options": {
+      "A": "apt install <package> as the logged-in user",
+      "B": "sudo apt install <package>",
+      "C": "systemctl install <package>",
+      "D": "chmod +x <package>"
+    },
+    "keys": [
+      "B"
+    ],
+    "explanation": "Installing software changes system directories, so it needs elevation, which `sudo` provides on the standard Linux model. Running apt as an ordinary user (A) fails on permissions. `systemctl` (C) manages services, not packages. `chmod +x` (D) changes a file's execute bit and installs nothing.",
+    "objectiveId": "1.9",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "9e6a2216149e09db",
+    "bank": "core2-b1-domain1-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1202/core2-b1-domain1-bank.md/Q31",
+    "examId": "COMPTIA-A-1202",
+    "number": "Q31",
+    "stem": "A Linux service that worked when started by hand does not start after a reboot. Which command makes it start automatically at boot?",
+    "options": {
+      "A": "systemctl start <service>",
+      "B": "systemctl status <service>",
+      "C": "systemctl enable <service>",
+      "D": "systemctl restart <service>"
+    },
+    "keys": [
+      "C"
+    ],
+    "explanation": "`enable` creates the links that start the unit at boot; `start` alone only runs it in the current session, which is exactly the behavior described. `start` (A) is what the technician already did. `status` (B) reports state without changing it. `restart` (D) stops and starts the service now, with the same limitation as `start`.",
+    "objectiveId": "1.9",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "155362727fc62862",
+    "bank": "core2-b1-domain1-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1202/core2-b1-domain1-bank.md/Q32",
+    "examId": "COMPTIA-A-1202",
+    "number": "Q32",
+    "stem": "A user needs a 32-bit application to run on a 64-bit Windows machine. What is the expected result?",
+    "options": {
+      "A": "It runs, because 64-bit Windows supports 32-bit applications",
+      "B": "It fails, because 64-bit Windows cannot run 32-bit software",
+      "C": "It runs only in safe mode",
+      "D": "It runs only if the machine is joined to a domain"
+    },
+    "keys": [
+      "A"
+    ],
+    "explanation": "64-bit Windows includes a compatibility layer that runs 32-bit applications normally; the reverse, a 64-bit application on a 32-bit OS, is the combination that fails. Option B states the inverse of the truth. Safe mode (C) is a diagnostic environment, not a compatibility requirement. Domain membership (D) has no bearing on application architecture.",
+    "objectiveId": "1.10",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "0d29c18842b05bfe",
+    "bank": "core2-b1-domain1-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1202/core2-b1-domain1-bank.md/Q33",
+    "examId": "COMPTIA-A-1202",
+    "number": "Q33",
+    "stem": "An application installs correctly but exits immediately with an error naming a runtime component that is not present. What is the correct next step?",
+    "options": {
+      "A": "Reinstall Windows",
+      "B": "Install the required runtime or dependency",
+      "C": "Run the application as an administrator",
+      "D": "Move the application to a different drive"
+    },
+    "keys": [
+      "B"
+    ],
+    "explanation": "The error names a missing dependency, so the fix is to install that runtime or library at the version the application requires. Reinstalling the OS (A) is far beyond the fault. Running as administrator (C) changes privileges, not the presence of a library. Moving the application (D) changes no dependency.",
+    "objectiveId": "1.10",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "161a81212428885c",
+    "bank": "core2-b1-domain1-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1202/core2-b1-domain1-bank.md/Q34",
+    "examId": "COMPTIA-A-1202",
+    "number": "Q34",
+    "stem": "An administrator must deploy the same application to 40 workstations without visiting each one. Which method fits?",
+    "options": {
+      "A": "Copy the installer to a USB drive and walk the office",
+      "B": "Publish the installer on a network share and use a scripted silent install",
+      "C": "Ask each user to download and run the installer",
+      "D": "Install it once and copy the program folder to each machine"
+    },
+    "keys": [
+      "B"
+    ],
+    "explanation": "A network share plus a scripted silent install reaches every machine without a visit and runs without user interaction. Carrying a USB drive around (A) is the manual process being replaced. Asking users to install it themselves (C) produces 40 differently configured machines. Copying a program folder (D) skips registration and dependencies and is not an installation.",
+    "objectiveId": "1.10",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "ffc3405abdc8a95b",
+    "bank": "core2-b1-domain1-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1202/core2-b1-domain1-bank.md/Q35",
+    "examId": "COMPTIA-A-1202",
+    "number": "Q35",
+    "stem": "A user opens a cloud document on a plane with no connection, edits it, and finds the edits present once the network returns. Which capability made this possible?",
+    "options": {
+      "A": "The document was downloaded and edits were synchronized later",
+      "B": "The cloud provider edited the document from its own copy",
+      "C": "The application stored the edits only on the local disk forever",
+      "D": "The edits were e-mailed to the provider automatically"
+    },
+    "keys": [
+      "A"
+    ],
+    "explanation": "Cloud productivity suites keep a local copy with a sync client, so editing offline works and the changes upload when connectivity returns. The provider cannot edit on the user's behalf (B). Local-only storage (C) would mean the edits never reached the cloud. Automatic e-mail (D) is not how synchronization works.",
+    "objectiveId": "1.11",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "0a53de2334164f29",
+    "bank": "core2-b1-domain1-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1202/core2-b1-domain1-bank.md/Q36",
+    "examId": "COMPTIA-A-1202",
+    "number": "Q36",
+    "stem": "A company uses a browser-based spreadsheet service and no longer installs an office suite locally. Which service model is this?",
+    "options": {
+      "A": "IaaS",
+      "B": "PaaS",
+      "C": "SaaS",
+      "D": "On-premises"
+    },
+    "keys": [
+      "C"
+    ],
+    "explanation": "Software as a service delivers a finished application over the network; the customer manages users and data, not the platform. IaaS (A) supplies virtual machines and storage. PaaS (B) supplies a runtime for the customer's own application. On-premises (D) is the model being replaced.",
+    "objectiveId": "1.11",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "57b31bdd822ead79",
+    "bank": "core2-b1-domain1-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1202/core2-b1-domain1-bank.md/Q37",
+    "examId": "COMPTIA-A-1202",
+    "number": "Q37",
+    "stem": "A phone keeps every application inside its own sandbox, so one application cannot read another's files, and management is delivered through a remote enrollment service rather than a local administrator account. Which operating system category behaves this way?",
+    "options": {
+      "A": "A mobile operating system",
+      "B": "A workstation operating system",
+      "C": "A server operating system",
+      "D": "An embedded operating system"
+    },
+    "keys": [
+      "A"
+    ],
+    "explanation": "Mobile operating systems sandbox each application, restrict background activity for power reasons, and are managed through a device management service instead of local administrator rights. A workstation OS (B) allows applications to share user profile areas and is administered locally. A server OS (C) serves many clients and is managed remotely, but its applications are not sandboxed per app. An embedded OS (D) runs a fixed function and is not managed per user.",
+    "objectiveId": "1.1",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "920386d7d67ed193",
+    "bank": "core2-b1-domain1-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1202/core2-b1-domain1-bank.md/Q38",
+    "examId": "COMPTIA-A-1202",
+    "number": "Q38",
+    "stem": "A small business finds that a needed security feature is missing from its Windows Home workstations. Which feature is available in Windows Pro but not in Home?",
+    "options": {
+      "A": "Joining an Active Directory domain",
+      "B": "Connecting to a wireless network",
+      "C": "Using a local user account",
+      "D": "Running 32-bit applications"
+    },
+    "keys": [
+      "A"
+    ],
+    "explanation": "Domain join is a Pro feature, along with BitLocker, Remote Desktop host, Hyper-V and Group Policy. Wireless networking (B), local accounts (C) and 32-bit application support (D) are present in every current client edition, so none of them distinguishes Home from Pro.",
+    "objectiveId": "1.3",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "1e91cde04b8cff17",
+    "bank": "core2-b1-domain1-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1202/core2-b1-domain1-bank.md/Q39",
+    "examId": "COMPTIA-A-1202",
+    "number": "Q39",
+    "stem": "A company with several thousand PCs needs a Windows edition licensed for organizational deployment with the full management and security feature set for large enterprises. Which edition fits?",
+    "options": {
+      "A": "Home",
+      "B": "Pro",
+      "C": "Enterprise",
+      "D": "Education"
+    },
+    "keys": [
+      "C"
+    ],
+    "explanation": "Enterprise is the edition intended for large organizations, with volume-license deployment and the fullest management feature set. Home (A) lacks domain join and BitLocker entirely. Pro (B) carries the core business features but not the broader enterprise tooling. Education (D) tracks Enterprise for schools and is licensed for educational institutions, not a general company.",
+    "objectiveId": "1.3",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "5a81f2f60e46c37b",
+    "bank": "core2-b1-domain1-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1202/core2-b1-domain1-bank.md/Q40",
+    "examId": "COMPTIA-A-1202",
+    "number": "Q40",
+    "stem": "A Linux user creates a file named Report.txt, and a colleague creates report.txt in the same directory. Both files exist side by side. Which characteristic of the file system explains this?",
+    "options": {
+      "A": "The file system is journaling",
+      "B": "Filenames are case-sensitive",
+      "C": "The files have different owners",
+      "D": "The directory uses symbolic links"
+    },
+    "keys": [
+      "B"
+    ],
+    "explanation": "Linux file systems treat upper and lower case as different characters, so the two names are distinct files. Journaling (A) describes crash recovery for metadata, not name comparison. Ownership (C) does not allow two identical names to coexist. Symbolic links (D) are separate directory entries pointing at other paths and are not what is described.",
+    "objectiveId": "1.9",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "c3ee93033e67c32e",
+    "bank": "core2-b1-domain1-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1202/core2-b1-domain1-bank.md/Q41",
+    "examId": "COMPTIA-A-1202",
+    "number": "Q41",
+    "stem": "Two people open the same cloud document at once, and each sees the other's edits appear within moments without anyone saving a file or mailing a copy. Which capability explains this?",
+    "options": {
+      "A": "Each person keeps a private local copy that is merged the next day",
+      "B": "The document is locked so only one person can edit at a time",
+      "C": "The service holds one shared copy and synchronizes edits as they happen",
+      "D": "The edits are sent to the other person as e-mail attachments"
+    },
+    "keys": [
+      "C"
+    ],
+    "explanation": "Cloud productivity tools keep a single authoritative copy in the service and push changes to every open client as they occur, which is why both users see the same content live. A nightly merge (A) would not show edits within moments. A single-editor lock (B) would prevent the second person from editing at all. E-mail attachments (D) are a manual exchange, not synchronization.",
+    "objectiveId": "1.11",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "180c96b00d31377e",
+    "bank": "core2-b1-domain1-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1202/core2-b2-domain2-bank.md/Q42",
+    "examId": "COMPTIA-A-1202",
+    "number": "Q42",
+    "stem": "A technician's daily account is a standard user account, and administrator rights are used only when a task requires them. Which security principle does this follow?",
+    "options": {
+      "A": "Defense in depth",
+      "B": "Implicit deny",
+      "C": "Separation of duties",
+      "D": "Least privilege"
+    },
+    "keys": [
+      "D"
+    ],
+    "explanation": "Least privilege means an account holds only the rights its work needs at the moment, so routine browsing and mail run without administrator power. Defense in depth (A) is about layering controls. Implicit deny (B) is a default-deny rule for access decisions. Separation of duties (C) splits a sensitive process between different people so no single person can complete it alone.",
+    "objectiveId": "2.1",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "d39d1f3266c6e953",
+    "bank": "core2-b2-domain2-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1202/core2-b2-domain2-bank.md/Q43",
+    "examId": "COMPTIA-A-1202",
+    "number": "Q43",
+    "stem": "A server room is protected by a card reader, the racks are locked, and entry is recorded. Which category of control is this?",
+    "options": {
+      "A": "Administrative",
+      "B": "Logical",
+      "C": "Physical",
+      "D": "Corrective"
+    },
+    "keys": [
+      "C"
+    ],
+    "explanation": "Card readers, locked racks and entry logs control access to the space and the equipment, which makes them physical controls. Administrative controls (A) are policy, training and process. Logical controls (B) are implemented in software, such as permissions and firewalls. Corrective controls (D) describe what restores service after an event, not what prevents entry.",
+    "objectiveId": "2.1",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "6ade5845aae133d4",
+    "bank": "core2-b2-domain2-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1202/core2-b2-domain2-bank.md/Q44",
+    "examId": "COMPTIA-A-1202",
+    "number": "Q44",
+    "stem": "A service requires a password and then a six-digit code from an authenticator application on the user's phone. Which control is in use?",
+    "options": {
+      "A": "Single sign-on",
+      "B": "Password complexity",
+      "C": "Multifactor authentication",
+      "D": "Account lockout"
+    },
+    "keys": [
+      "C"
+    ],
+    "explanation": "The password is something the user knows and the phone code is something the user has, so two different factor types are required. Single sign-on (A) is one login for several services. Password complexity (B) strengthens one factor. Account lockout (D) limits repeated failures.",
+    "objectiveId": "2.1",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "615f24337c79b7b2",
+    "bank": "core2-b2-domain2-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1202/core2-b2-domain2-bank.md/Q45",
+    "examId": "COMPTIA-A-1202",
+    "number": "Q45",
+    "stem": "A shared folder grants the Everyone group Read at the share and Modify at the file system. A user opens a file and can read it but cannot save changes. What is the effective permission?",
+    "options": {
+      "A": "Modify, because the file system permission is more permissive",
+      "B": "Read, because the more restrictive permission applies",
+      "C": "Full control, because Everyone is a member of both",
+      "D": "No access, because the two permission sets conflict"
+    },
+    "keys": [
+      "B"
+    ],
+    "explanation": "When share and file system permissions both apply, the effective access is the more restrictive of the two, so Read wins over Modify. Asking for the more permissive result (A) inverts the rule. Full control (C) is not granted by either layer. A conflict does not produce a denial (D); it produces the narrower right.",
+    "objectiveId": "2.2",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "bdcbaba5494e5f48",
+    "bank": "core2-b2-domain2-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1202/core2-b2-domain2-bank.md/Q46",
+    "examId": "COMPTIA-A-1202",
+    "number": "Q46",
+    "stem": "A user tries to install a driver and a prompt appears asking for administrator approval, even though the user is signed in with an administrator account. What does this prompt enforce?",
+    "options": {
+      "A": "The firewall profile",
+      "B": "The network access protection level",
+      "C": "User Account Control elevation",
+      "D": "BitLocker pre-boot authentication"
+    },
+    "keys": [
+      "C"
+    ],
+    "explanation": "User Account Control holds administrator rights back until a task needs them and asks for confirmation at that moment, which is why even an administrator sees the prompt. The firewall profile (A) governs network traffic. Network access protection (B) decides what a connecting device may reach. BitLocker (D) unlocks an encrypted volume at boot.",
+    "objectiveId": "2.2",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "e48e4e93962b3aa0",
+    "bank": "core2-b2-domain2-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1202/core2-b2-domain2-bank.md/Q47",
+    "examId": "COMPTIA-A-1202",
+    "number": "Q47",
+    "stem": "A security policy locks an account for 15 minutes after five failed sign-in attempts. Which attack does this setting most directly limit?",
+    "options": {
+      "A": "A phishing message that asks for a password",
+      "B": "A malicious USB device plugged into a workstation",
+      "C": "An unencrypted laptop being stolen",
+      "D": "Repeated password guessing against one account"
+    },
+    "keys": [
+      "D"
+    ],
+    "explanation": "A lockout threshold slows repeated guesses against a single account by making the attacker wait after each small burst. Phishing (A) captures a password without guessing it. A malicious USB device (B) is a physical attack. A stolen laptop (C) is addressed by encryption, not by lockout.",
+    "objectiveId": "2.2",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "fd0753f5ab6a844f",
+    "bank": "core2-b2-domain2-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1202/core2-b2-domain2-bank.md/Q48",
+    "examId": "COMPTIA-A-1202",
+    "number": "Q48",
+    "stem": "A small business still runs a wireless network with WEP because an old scanner only supports that standard. What should the technician recommend?",
+    "options": {
+      "A": "Keep WEP, because the scanner requires it",
+      "B": "Add a longer WEP key and continue",
+      "C": "Isolate the legacy device and move the main network to WPA2 or WPA3",
+      "D": "Hide the network name so the weakness cannot be found"
+    },
+    "keys": [
+      "C"
+    ],
+    "explanation": "WEP encryption is broken and a longer key does not repair it; isolating the device that cannot be upgraded limits the exposure while the main network moves to current encryption. Keeping WEP (A) and lengthening the key (B) leave the same exploitable protocol in place. Hiding the network name (D) is not a security control, because the name is still discoverable.",
+    "objectiveId": "2.3",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "10994292f8668782",
+    "bank": "core2-b2-domain2-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1202/core2-b2-domain2-bank.md/Q49",
+    "examId": "COMPTIA-A-1202",
+    "number": "Q49",
+    "stem": "An organization wants each wireless user authenticated individually against a central server rather than by a shared passphrase. Which combination provides this?",
+    "options": {
+      "A": "A pre-shared key with a long passphrase",
+      "B": "MAC address filtering",
+      "C": "802.1X with a RADIUS server",
+      "D": "A hidden SSID with WPS enabled"
+    },
+    "keys": [
+      "C"
+    ],
+    "explanation": "802.1X authenticates each supplicant against a RADIUS server, so every user has their own credential and revoking one does not change the network key. A pre-shared key (A) is one secret shared by everyone. MAC filtering (B) is a list of hardware addresses that can be spoofed and does not authenticate a person. A hidden SSID with WPS (D) hides nothing useful and adds a weak pairing method.",
+    "objectiveId": "2.3",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "0dd5dedfc7b895fe",
+    "bank": "core2-b2-domain2-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1202/core2-b2-domain2-bank.md/Q50",
+    "examId": "COMPTIA-A-1202",
+    "number": "Q50",
+    "stem": "Why should WPS be disabled on a small-office wireless router?",
+    "options": {
+      "A": "It prevents the router from broadcasting its name",
+      "B": "Its PIN or push-button pairing is a weak path into the network",
+      "C": "It disables WPA2 encryption",
+      "D": "It prevents guests from connecting"
+    },
+    "keys": [
+      "B"
+    ],
+    "explanation": "WPS exists to make pairing easy, and the PIN method in particular has been shown to be guessable, so it offers an easier route in than the passphrase it bypasses. It does not control the broadcast name (A), it does not turn off WPA2 when unused (C), and guest access (D) is a separate feature.",
+    "objectiveId": "2.3",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "c8ec8e468685dc55",
+    "bank": "core2-b2-domain2-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1202/core2-b2-domain2-bank.md/Q51",
+    "examId": "COMPTIA-A-1202",
+    "number": "Q51",
+    "stem": "A workstation's files have been replaced by extension-renamed copies with a payment note, and the machine is still on the network. Which action should come first?",
+    "options": {
+      "A": "Pay the demand and restore the files afterwards",
+      "B": "Disconnect the machine from the network, then restore from an offline backup",
+      "C": "Run a disk cleanup and reinstall the affected applications",
+      "D": "Rename the files back and keep working"
+    },
+    "keys": [
+      "B"
+    ],
+    "explanation": "Ransomware is still spreading while the host is connected, so isolation comes before recovery, and an offline copy is the one an attacker cannot encrypt. Paying (A) funds the attack and does not guarantee recovery. Disk cleanup and reinstalling applications (C) do not touch encrypted data. Renaming files (D) does not reverse block encryption and leaves the host infected.",
+    "objectiveId": "2.4",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "6a5795db9ccdc8b5",
+    "bank": "core2-b2-domain2-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1202/core2-b2-domain2-bank.md/Q52",
+    "examId": "COMPTIA-A-1202",
+    "number": "Q52",
+    "stem": "During malware removal, a technician disables System Restore before cleaning the machine. Why?",
+    "options": {
+      "A": "To free disk space for the cleaning tools",
+      "B": "To stop Windows updates during the repair",
+      "C": "To remove the user's personal files",
+      "D": "So the infection cannot return from a restore point"
+    },
+    "keys": [
+      "D"
+    ],
+    "explanation": "An infected restore point can bring the malware back after a successful clean, so restore points are disabled for the duration and re-enabled afterwards with a fresh clean point. Freeing space (A) is not the reason. Updates (B) are unaffected. Personal files (C) are not removed by this step.",
+    "objectiveId": "2.4",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "11490e61ba7b1b50",
+    "bank": "core2-b2-domain2-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1202/core2-b2-domain2-bank.md/Q53",
+    "examId": "COMPTIA-A-1202",
+    "number": "Q53",
+    "stem": "A scan reports a rootkit, and the operating system no longer behaves as it should. Which remediation is most reliable?",
+    "options": {
+      "A": "Run the same scan again until it reports clean",
+      "B": "Delete the files the scan named",
+      "C": "Reimage the machine from a known-good build",
+      "D": "Change the user's password and continue"
+    },
+    "keys": [
+      "C"
+    ],
+    "explanation": "A rootkit hides inside the operating system itself, so tools running under that operating system cannot be trusted to report accurately; rebuilding from a known-good image is the reliable path. Repeating the scan (A) assumes the scanner sees the truth. Deleting named files (B) may miss the hidden components. Changing a password (D) addresses an account, not the infected system.",
+    "objectiveId": "2.4",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "0077f42589e9eee0",
+    "bank": "core2-b2-domain2-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1202/core2-b2-domain2-bank.md/Q54",
+    "examId": "COMPTIA-A-1202",
+    "number": "Q54",
+    "stem": "A small office wants visitors to use wireless internet without reaching the file server or the printers. Which configuration achieves this?",
+    "options": {
+      "A": "Put visitors on a separate guest network isolated from the internal network",
+      "B": "Give visitors the internal wireless password and ask them not to browse shares",
+      "C": "Hide the internal network name from visitors",
+      "D": "Reduce the wireless transmit power so the signal does not leave the room"
+    },
+    "keys": [
+      "A"
+    ],
+    "explanation": "A guest network is a separate segment with its own access rules, so visitors get internet access and nothing else. Sharing the internal password (B) relies on good behavior and gives full access. Hiding the name (C) is not access control. Reducing transmit power (D) limits range but not what a connected visitor can reach.",
+    "objectiveId": "2.6",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "ab88ce5075605c69",
+    "bank": "core2-b2-domain2-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1202/core2-b2-domain2-bank.md/Q55",
+    "examId": "COMPTIA-A-1202",
+    "number": "Q55",
+    "stem": "A small business wants to block categories of websites for staff during work hours and allow them outside those hours. Which control does this?",
+    "options": {
+      "A": "A content filter on the firewall or gateway",
+      "B": "A stronger wireless passphrase",
+      "C": "An antivirus scan schedule",
+      "D": "A screen-lock timeout"
+    },
+    "keys": [
+      "A"
+    ],
+    "explanation": "A content filter classifies traffic by site category and applies rules, including schedules, at the firewall or gateway. A passphrase (B) controls who joins the network, not what they visit. Antivirus schedules (C) scan files locally. Screen locking (D) protects an unattended session.",
+    "objectiveId": "2.6",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "9a8d573139957478",
+    "bank": "core2-b2-domain2-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1202/core2-b2-domain2-bank.md/Q56",
+    "examId": "COMPTIA-A-1202",
+    "number": "Q56",
+    "stem": "A remote worker must reach internal file shares over a public network as though on site. Which technology fits?",
+    "options": {
+      "A": "A remote desktop session to a personal home computer",
+      "B": "A guest wireless network at the office",
+      "C": "A VPN connection to the office gateway",
+      "D": "A mapped drive over the open internet"
+    },
+    "keys": [
+      "C"
+    ],
+    "explanation": "A VPN builds an encrypted tunnel from the remote device to the office gateway, so internal resources are reachable with the same access controls as on site. A remote desktop to a home machine (A) creates a different path with its own exposure and does not place the device on the internal network. A guest network (B) is for visitors on site. A mapped drive across the open internet (D) sends file traffic unencrypted and cannot cross the firewall as described.",
+    "objectiveId": "2.6",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "c638ea4855a65490",
+    "bank": "core2-b2-domain2-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1202/core2-b2-domain2-bank.md/Q57",
+    "examId": "COMPTIA-A-1202",
+    "number": "Q57",
+    "stem": "A workstation is left unattended in a shared office. Which setting most directly prevents a passer-by from using the signed-in session?",
+    "options": {
+      "A": "A screen saver with no password",
+      "B": "A longer user password",
+      "C": "A BIOS boot password",
+      "D": "A screen lock with a short idle timeout"
+    },
+    "keys": [
+      "D"
+    ],
+    "explanation": "Locking the session after a short idle period means the signed-in desktop requires the password again before use. A screen saver without a password (A) hides the screen but leaves the session open. A longer password (B) helps against guessing but does not close an open session. A boot password (C) is asked before the operating system loads and does nothing for a session already running.",
+    "objectiveId": "2.7",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "e35ae1399a4f72ff",
+    "bank": "core2-b2-domain2-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1202/core2-b2-domain2-bank.md/Q58",
+    "examId": "COMPTIA-A-1202",
+    "number": "Q58",
+    "stem": "A user regularly plugs in USB drives found in the office parking lot. Which control most directly addresses this risk?",
+    "options": {
+      "A": "Disabling autorun and blocking unauthorized media",
+      "B": "Increasing the antivirus scan frequency",
+      "C": "Enabling BitLocker on the system drive",
+      "D": "Adding a stronger password policy"
+    },
+    "keys": [
+      "A"
+    ],
+    "explanation": "Unknown media carrying malware is the risk, so preventing automatic execution and blocking unauthorized devices stops the attack at the point of insertion. More frequent scans (B) may not run before the payload acts. Full-disk encryption (C) protects data at rest if the machine is lost. Password policy (D) does not affect removable media.",
+    "objectiveId": "2.7",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "c91d2ba2ed3845c0",
+    "bank": "core2-b2-domain2-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1202/core2-b2-domain2-bank.md/Q59",
+    "examId": "COMPTIA-A-1202",
+    "number": "Q59",
+    "stem": "Which combination is the baseline hardening for a workstation that handles company data?",
+    "options": {
+      "A": "Endpoint protection, automatic updates, host firewall and full-disk encryption",
+      "B": "A local administrator account for every user and no updates during the week",
+      "C": "A shared password that everyone knows and a printed copy on the desk",
+      "D": "Disabling the firewall to avoid application prompts"
+    },
+    "keys": [
+      "A"
+    ],
+    "explanation": "Endpoint protection, current patches, a host firewall and encryption are the core set that covers malware, vulnerabilities, network exposure and a lost device. Administrator rights for every user (B) removes least privilege, and skipping updates leaves known holes. A shared password (C) destroys individual accountability. Disabling the firewall (D) removes a layer rather than managing it.",
+    "objectiveId": "2.7",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "11325b255b19083d",
+    "bank": "core2-b2-domain2-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1202/core2-b2-domain2-bank.md/Q60",
+    "examId": "COMPTIA-A-1202",
+    "number": "Q60",
+    "stem": "A personal phone holds both company mail and personal photos, and the company must be able to remove the work data if the phone is lost. Which arrangement meets this?",
+    "options": {
+      "A": "A full device wipe of everything on the phone",
+      "B": "A managed container that can be selectively wiped",
+      "C": "Backing up the phone weekly",
+      "D": "Asking the user to delete the mail application"
+    },
+    "keys": [
+      "B"
+    ],
+    "explanation": "Containerization separates company data into a managed, encrypted area that can be removed while personal data remains, which is the standard design for a personal device. A full wipe (A) would destroy personal photos. Backups (C) preserve data but do not remove access. Manual deletion (D) cannot be enforced and may not happen.",
+    "objectiveId": "2.8",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "f87a9fff40d03833",
+    "bank": "core2-b2-domain2-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1202/core2-b2-domain2-bank.md/Q61",
+    "examId": "COMPTIA-A-1202",
+    "number": "Q61",
+    "stem": "A user's phone has been rooted so they can install applications from outside the store. Which statement is correct from a security standpoint?",
+    "options": {
+      "A": "Rooting is harmless because it only affects the user's own device",
+      "B": "Rooting improves security by giving the user more control",
+      "C": "Rooting only affects battery life",
+      "D": "Rooting removes platform protections, so treat the device as non-compliant"
+    },
+    "keys": [
+      "D"
+    ],
+    "explanation": "Rooting or jailbreaking removes the operating system's own restrictions, which are the protections that sandbox applications and enforce policy, so a managed device with company data should be treated as non-compliant. Device-only impact (A) ignores shared data on that device. Increased control (B) is privilege, not protection. Battery life (C) is beside the point.",
+    "objectiveId": "2.8",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "255f60ba62b2c80d",
+    "bank": "core2-b2-domain2-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1202/core2-b2-domain2-bank.md/Q62",
+    "examId": "COMPTIA-A-1202",
+    "number": "Q62",
+    "stem": "A simple flashlight application requests access to contacts, location and the microphone. What is the appropriate response?",
+    "options": {
+      "A": "Grant everything, because the application will not run otherwise",
+      "B": "Deny the permissions the application does not need for its function",
+      "C": "Grant access only while charging",
+      "D": "Uninstall the operating system"
+    },
+    "keys": [
+      "B"
+    ],
+    "explanation": "Application permissions should match what the app actually does, and a flashlight has no reason to need contacts or a microphone, so those requests are refused (and the app is reconsidered). Granting everything (A) hands over data the function never required. A charging-only restriction (C) is not a permission model. Reinstalling the OS (D) is wildly disproportionate.",
+    "objectiveId": "2.8",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "7c7677ecf81d1b79",
+    "bank": "core2-b2-domain2-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1202/core2-b2-domain2-bank.md/Q63",
+    "examId": "COMPTIA-A-1202",
+    "number": "Q63",
+    "stem": "A technician must dispose of failed solid-state drives. Why is degaussing the wrong method?",
+    "options": {
+      "A": "It damages the drive's connectors",
+      "B": "It requires the drive to be powered on",
+      "C": "Flash memory stores no magnetic field for a degausser to erase",
+      "D": "It makes the drive unreadable but leaves the data recoverable"
+    },
+    "keys": [
+      "C"
+    ],
+    "explanation": "Degaussing erases magnetic media such as hard disk platters; flash memory stores charge, not magnetism, so a degausser leaves the data in place. Connector damage (A) is not the issue. A degausser does not need the drive powered (B). Leaving data recoverable (D) describes the result of not erasing, which is the outcome rather than the reason the method is unsuitable.",
+    "objectiveId": "2.9",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "bd89349d57c4cf1c",
+    "bank": "core2-b2-domain2-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1202/core2-b2-domain2-bank.md/Q64",
+    "examId": "COMPTIA-A-1202",
+    "number": "Q64",
+    "stem": "A user is returning a leased laptop and has deleted all files and emptied the recycle bin. Why is this insufficient?",
+    "options": {
+      "A": "Deleted files stay recoverable until the space is overwritten",
+      "B": "The recycle bin must be emptied twice",
+      "C": "The laptop must be defragmented first",
+      "D": "Deleting files changes their extension only"
+    },
+    "keys": [
+      "A"
+    ],
+    "explanation": "Deleting removes the directory entry, not the data, so recovery tools can still read the content; a secure erase or overwrite pass is required. Emptying the bin twice (B) does not change the underlying behavior. Defragmenting (C) rearranges files and does not erase them. An extension change (D) describes renaming, not deleting.",
+    "objectiveId": "2.9",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "0cf3f1500d57f328",
+    "bank": "core2-b2-domain2-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1202/core2-b2-domain2-bank.md/Q65",
+    "examId": "COMPTIA-A-1202",
+    "number": "Q65",
+    "stem": "An organization must prove to an auditor that retired drives were destroyed. Which documentation most directly provides that proof?",
+    "options": {
+      "A": "A ticket saying the drives were removed from service",
+      "B": "An inventory list of the drive serial numbers",
+      "C": "A photograph of the storage room",
+      "D": "A certificate of destruction from the disposal vendor"
+    },
+    "keys": [
+      "D"
+    ],
+    "explanation": "A certificate of destruction records the method, date and media identifiers and is the evidence an auditor can act on. A service ticket (A) shows intent but not destruction. A serial-number list (B) shows what existed. A photograph (C) proves nothing about the drives' fate.",
+    "objectiveId": "2.9",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "42160c01a4f10308",
+    "bank": "core2-b2-domain2-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1202/core2-b2-domain2-bank.md/Q66",
+    "examId": "COMPTIA-A-1202",
+    "number": "Q66",
+    "stem": "A new small-office router is still using the administrator password printed on its label. What is the first change to make?",
+    "options": {
+      "A": "Set a unique administrator password",
+      "B": "Change the wireless channel",
+      "C": "Rename the printer",
+      "D": "Increase the DHCP lease time"
+    },
+    "keys": [
+      "A"
+    ],
+    "explanation": "The factory administrator password is widely known and often published, so it must be replaced before anything else on the device is configured. The channel (B) and lease time (D) are performance settings. Renaming a printer (C) is unrelated to the router.",
+    "objectiveId": "2.10",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "fc9f5747d6f2fb64",
+    "bank": "core2-b2-domain2-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1202/core2-b2-domain2-bank.md/Q67",
+    "examId": "COMPTIA-A-1202",
+    "number": "Q67",
+    "stem": "A small office router has remote administration and universal plug-and-play enabled so devices can open ports as needed. Why is this a concern?",
+    "options": {
+      "A": "It slows down wireless throughput and increases latency",
+      "B": "It exposes administration and opens ports without review",
+      "C": "It prevents guests from connecting",
+      "D": "It encrypts local traffic twice"
+    },
+    "keys": [
+      "B"
+    ],
+    "explanation": "Remote administration widens the attack surface to the internet, and automatic port mapping lets software create inbound rules nobody reviewed. Throughput (A) is not the security issue. Guest access (C) is unrelated. Double encryption (D) does not describe either feature.",
+    "objectiveId": "2.10",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "a252c4094570c219",
+    "bank": "core2-b2-domain2-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1202/core2-b2-domain2-bank.md/Q68",
+    "examId": "COMPTIA-A-1202",
+    "number": "Q68",
+    "stem": "Which set of changes best secures a small-office wireless network?",
+    "options": {
+      "A": "WPA3 or WPA2 encryption, WPS disabled, firmware current and a strong unique passphrase",
+      "B": "The network name hidden, MAC filtering enabled and WEP as a fallback",
+      "C": "A long passphrase with WPS enabled for convenience",
+      "D": "Open authentication with a captive portal only"
+    },
+    "keys": [
+      "A"
+    ],
+    "explanation": "Current encryption with a strong unique passphrase, WPS off and updated firmware closes the known weak points. Hiding the name with MAC filtering and a WEP fallback (B) pairs two weak measures with one broken protocol. WPS (C) reintroduces the weak pairing path. Open authentication (D) offers no encryption at all.",
+    "objectiveId": "2.10",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "1dc2c76fadfa4d7f",
+    "bank": "core2-b2-domain2-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1202/core2-b2-domain2-bank.md/Q69",
+    "examId": "COMPTIA-A-1202",
+    "number": "Q69",
+    "stem": "A browser shows a certificate warning for a site a user visits every day. What should the user do?",
+    "options": {
+      "A": "Continue to the site, because it worked yesterday",
+      "B": "Stop, and report it so the certificate or connection can be checked",
+      "C": "Disable certificate checking in the browser settings",
+      "D": "Switch to a different browser and continue"
+    },
+    "keys": [
+      "B"
+    ],
+    "explanation": "A warning on a site that normally works can indicate an expired, misissued or intercepted certificate, so the safe response is to stop and have it checked. Continuing (A) assumes the change is benign. Disabling the check (C) removes the protection permanently. Another browser (D) applies the same check or may be less strict, and does not address the cause.",
+    "objectiveId": "2.11",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "ea5b7ab5ea673e38",
+    "bank": "core2-b2-domain2-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1202/core2-b2-domain2-bank.md/Q70",
+    "examId": "COMPTIA-A-1202",
+    "number": "Q70",
+    "stem": "A user in private browsing mode believes the session is invisible. What should the technician explain?",
+    "options": {
+      "A": "Private browsing hides activity from the network administrator and the service provider",
+      "B": "Private browsing encrypts all traffic end to end",
+      "C": "Private browsing prevents malware infection",
+      "D": "Private browsing limits local history; the network and sites still see traffic"
+    },
+    "keys": [
+      "D"
+    ],
+    "explanation": "Private browsing avoids saving local history, cookies and form data on that device; it does not hide traffic from the network it crosses or from the sites visited. Claiming it hides activity from administrators (A) overstates it. End-to-end encryption (B) is a property of the connection, not of the mode. Malware protection (C) is unrelated.",
+    "objectiveId": "2.11",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "092de7ad718662e2",
+    "bank": "core2-b2-domain2-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1202/core2-b2-domain2-bank.md/Q71",
+    "examId": "COMPTIA-A-1202",
+    "number": "Q71",
+    "stem": "A user on a shared computer wants to keep a signed-in account from carrying over to the next person. Which action addresses this?",
+    "options": {
+      "A": "Sign out of the account and clear cache and cookies",
+      "B": "Increase the browser zoom level",
+      "C": "Enable the pop-up blocker",
+      "D": "Change the home page to a search engine"
+    },
+    "keys": [
+      "A"
+    ],
+    "explanation": "Signing out ends the session and clearing cache and cookies removes the stored session data that would otherwise restore access. Zoom (B), the pop-up blocker (C) and the home page (D) are preference changes that leave the account and its stored data in place.",
+    "objectiveId": "2.11",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "2f21d30c83ed56ca",
+    "bank": "core2-b2-domain2-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1202/core2-b3-domain3-bank.md/Q72",
+    "examId": "COMPTIA-A-1202",
+    "number": "Q72",
+    "stem": "A workstation starts blue-screening immediately after a new graphics driver was installed. Which action is most likely to restore the machine?",
+    "options": {
+      "A": "Reinstall every application on the machine",
+      "B": "Replace the power supply",
+      "C": "Reformat the system drive",
+      "D": "Boot into safe mode and roll back the driver"
+    },
+    "keys": [
+      "D"
+    ],
+    "explanation": "The fault began with the driver, so booting with a minimal driver set and reverting that change addresses the cause with the least disruption. Reinstalling applications (A) touches nothing related to the driver. A power supply (B) is a hardware theory that arrived with no evidence. Reformatting (C) discards the user's data to fix a single component.",
+    "objectiveId": "3.1",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "4a064b5f513c5519",
+    "bank": "core2-b3-domain3-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1202/core2-b3-domain3-bank.md/Q73",
+    "examId": "COMPTIA-A-1202",
+    "number": "Q73",
+    "stem": "A Windows machine fails to start, and the technician has booted into the recovery environment. Which tool should be tried first for a startup failure with no other symptoms?",
+    "options": {
+      "A": "Disk Cleanup",
+      "B": "Startup Repair",
+      "C": "System Restore",
+      "D": "A factory reset"
+    },
+    "keys": [
+      "B"
+    ],
+    "explanation": "Startup Repair is designed for exactly this condition and attempts to fix boot configuration and startup files automatically before any destructive step. Disk Cleanup (A) removes files and does not repair booting. System Restore (C) is a reasonable second step when a change is suspected, but it is broader than the first check. A factory reset (D) is the last resort, after repair options fail.",
+    "objectiveId": "3.1",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "9d29cfe0451e79f8",
+    "bank": "core2-b3-domain3-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1202/core2-b3-domain3-bank.md/Q74",
+    "examId": "COMPTIA-A-1202",
+    "number": "Q74",
+    "stem": "A user signs in and finds an empty desktop with none of their documents, and Windows reports a temporary profile. Where is the user's data most likely to be?",
+    "options": {
+      "A": "Deleted permanently by the logon",
+      "B": "Moved to the recycle bin",
+      "C": "Still in the original profile folder on the disk",
+      "D": "On the domain controller only"
+    },
+    "keys": [
+      "C"
+    ],
+    "explanation": "A temporary profile is created when the real profile cannot be loaded, and the original profile folder and its files are normally still on the disk. The logon does not delete data (A). Nothing is sent to the recycle bin by this event (B). A domain controller holds directory objects, not the user's local documents (D).",
+    "objectiveId": "3.1",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "7bbaae09e92e4546",
+    "bank": "core2-b3-domain3-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1202/core2-b3-domain3-bank.md/Q75",
+    "examId": "COMPTIA-A-1202",
+    "number": "Q75",
+    "stem": "A mobile application closes immediately after launch following an operating system update. Which action should be tried first?",
+    "options": {
+      "A": "Update or reinstall the application from its store",
+      "B": "Replace the phone's battery",
+      "C": "Reset the device to factory settings",
+      "D": "Change the phone's wallpaper"
+    },
+    "keys": [
+      "A"
+    ],
+    "explanation": "An application that worked before an OS update and fails now is most likely incompatible with the new version, so the first step is the vendor's updated build or a clean reinstall of the app. A battery (B) does not explain a launch crash. A factory reset (C) discards data and is far beyond the first step. Wallpaper (D) has no effect.",
+    "objectiveId": "3.2",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "af0ad11078a34df3",
+    "bank": "core2-b3-domain3-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1202/core2-b3-domain3-bank.md/Q76",
+    "examId": "COMPTIA-A-1202",
+    "number": "Q76",
+    "stem": "A user cannot install an application from the store, and the device reports that there is not enough space. Which action is appropriate?",
+    "options": {
+      "A": "Restart the device and try again",
+      "B": "Disable the device's security software",
+      "C": "Free storage by removing unnecessary files and applications",
+      "D": "Install the application while the device is charging"
+    },
+    "keys": [
+      "C"
+    ],
+    "explanation": "The store's own message names the condition: installations need free space for the package and its data. A restart (A) does not create space. Disabling security software (B) is a dangerous non-answer. Charging (D) has no bearing on storage.",
+    "objectiveId": "3.2",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "304cd2a4ecfcef54",
+    "bank": "core2-b3-domain3-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1202/core2-b3-domain3-bank.md/Q77",
+    "examId": "COMPTIA-A-1202",
+    "number": "Q77",
+    "stem": "A phone application stops responding and the screen will not update, though the phone itself is working. Which action should come first?",
+    "options": {
+      "A": "Factory reset the phone",
+      "B": "Remove the phone's case",
+      "C": "Reinstall the operating system",
+      "D": "Force stop the application and reopen it"
+    },
+    "keys": [
+      "D"
+    ],
+    "explanation": "Force stopping ends the hung process and reopening starts it clean, which resolves the common case without touching data. A factory reset (A) is disproportionate as a first step. A case (B) relates to heat, not an unresponsive application. Reinstalling the OS (C) is the last resort.",
+    "objectiveId": "3.2",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "e91ea7e18600a43c",
+    "bank": "core2-b3-domain3-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1202/core2-b3-domain3-bank.md/Q78",
+    "examId": "COMPTIA-A-1202",
+    "number": "Q78",
+    "stem": "A phone's battery drains from full to empty in a few hours, and the device is warm even when sitting idle. What is the most likely cause?",
+    "options": {
+      "A": "The screen brightness is set too low",
+      "B": "A runaway application is using the processor in the background",
+      "C": "The device is connected to a wireless network",
+      "D": "The phone's storage is nearly empty"
+    },
+    "keys": [
+      "B"
+    ],
+    "explanation": "Heat plus drain while idle points to something consuming the processor continuously, which is the signature of a runaway or misbehaving application. Low brightness (A) reduces consumption. Being on Wi-Fi (C) is normal and does not produce idle heat. Empty storage (D) does not cause drain.",
+    "objectiveId": "3.3",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "5d4c896c32885cba",
+    "bank": "core2-b3-domain3-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1202/core2-b3-domain3-bank.md/Q79",
+    "examId": "COMPTIA-A-1202",
+    "number": "Q79",
+    "stem": "A phone repeatedly fails to install an operating system update. Which combination should be checked first?",
+    "options": {
+      "A": "Free storage and a stable network connection",
+      "B": "The device's wallpaper and ringtone settings",
+      "C": "The number of contacts stored on the device",
+      "D": "The phone's screen brightness setting"
+    },
+    "keys": [
+      "A"
+    ],
+    "explanation": "Updates need space to stage the package and a connection to download it, and both are the usual causes of a repeating failure. Wallpaper and ringtone (B), contact count (C) and brightness (D) are unrelated to update installation.",
+    "objectiveId": "3.3",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "5b182ba8900ca312",
+    "bank": "core2-b3-domain3-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1202/core2-b3-domain3-bank.md/Q80",
+    "examId": "COMPTIA-A-1202",
+    "number": "Q80",
+    "stem": "A managed phone is locked out after repeated failed passcode attempts, and company data is on it. What should the technician do?",
+    "options": {
+      "A": "Keep guessing likely passcodes",
+      "B": "Remove the phone's SIM card and try again",
+      "C": "Use the management system or vendor recovery path to regain access",
+      "D": "Wait for the device to unlock itself after a week"
+    },
+    "keys": [
+      "C"
+    ],
+    "explanation": "A managed device can be recovered through its management service, and the vendor provides a documented recovery path; that is the supported route and it preserves the ability to wipe if the device is lost. Guessing (A) risks erasing the device under a wipe-after-failures policy. Removing the SIM (B) does not clear a device lock. Waiting indefinitely (D) is not a plan and may not unlock at all.",
+    "objectiveId": "3.3",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "bd642dfe566035f0",
+    "bank": "core2-b3-domain3-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1202/core2-b3-domain3-bank.md/Q81",
+    "examId": "COMPTIA-A-1202",
+    "number": "Q81",
+    "stem": "A user's browser opens with an unfamiliar toolbar, and searches are redirected to an advertising site. What is the most likely explanation?",
+    "options": {
+      "A": "The keyboard layout was changed",
+      "B": "The monitor's color profile is wrong",
+      "C": "The DNS server is offline",
+      "D": "The browser was hijacked by an extension or add-on"
+    },
+    "keys": [
+      "D"
+    ],
+    "explanation": "A new toolbar plus redirects is the classic browser hijack: an extension or bundled program changed the home page, search provider and settings. Keyboard layout (A) affects typing. A color profile (B) affects appearance. An offline DNS server (C) would break resolution for everything rather than redirect searches to one site.",
+    "objectiveId": "3.4",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "27d4f78dcd5c9c43",
+    "bank": "core2-b3-domain3-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1202/core2-b3-domain3-bank.md/Q82",
+    "examId": "COMPTIA-A-1202",
+    "number": "Q82",
+    "stem": "A pop-up window claims the computer is infected and tells the user to call a support number. Which response is correct?",
+    "options": {
+      "A": "Close it, do not call, and scan with the installed security software",
+      "B": "Call the number and follow the instructions",
+      "C": "Enter payment details to unlock the cleaning tool",
+      "D": "Disable the browser's pop-up blocker permanently"
+    },
+    "keys": [
+      "A"
+    ],
+    "explanation": "The message is itself the attack: it uses fear and a phone number to get the user to hand over access or payment. Calling (B) contacts the attacker, and paying (C) completes the fraud. Disabling the pop-up blocker (D) removes a protection and adds exposure.",
+    "objectiveId": "3.4",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "40a3d00334458858",
+    "bank": "core2-b3-domain3-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1202/core2-b3-domain3-bank.md/Q83",
+    "examId": "COMPTIA-A-1202",
+    "number": "Q83",
+    "stem": "A user's account is locked, but the user insists they never mistyped their password. What is the most appropriate interpretation?",
+    "options": {
+      "A": "The account lockout policy is broken and should be disabled",
+      "B": "Credentials are being tried against the account, so treat it as an attack",
+      "C": "The keyboard must be faulty",
+      "D": "The user is mistaken and the lockout can be ignored"
+    },
+    "keys": [
+      "B"
+    ],
+    "explanation": "A lockout with no failed attempts by the user means another source is trying credentials, which is the signature of password guessing; the account should be unlocked through the proper process and the attempts investigated. Disabling lockout (A) removes the control that limited the attack. A keyboard (C) does not explain repeated attempts. Dismissing it (D) leaves the attempts running.",
+    "objectiveId": "3.4",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "fc383b090cbbddfc",
+    "bank": "core2-b3-domain3-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1202/core2-b4-domain4-bank.md/Q84",
+    "examId": "COMPTIA-A-1202",
+    "number": "Q84",
+    "stem": "A production switch is replaced at 02:00 without prior review because the office is offline. Which follow-up is required by change management?",
+    "options": {
+      "A": "Nothing, because the change was necessary",
+      "B": "A new change request for the next switch replacement",
+      "C": "A post-change review to document what was done and why",
+      "D": "A rollback of the replacement to restore the original switch"
+    },
+    "keys": [
+      "C"
+    ],
+    "explanation": "An emergency change skips the advance review but not the record; the post-change review is what keeps the exception from becoming the normal process. Doing nothing (A) is exactly how emergency changes turn into unmanaged ones. A future request (B) does not document this event. Rolling back a working replacement (D) would recreate the outage.",
+    "objectiveId": "4.2",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "0a44aa1e0915305e",
+    "bank": "core2-b4-domain4-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1202/core2-b4-domain4-bank.md/Q85",
+    "examId": "COMPTIA-A-1202",
+    "number": "Q85",
+    "stem": "A technician plans to apply a configuration change to a file server on Friday evening. What should the plan include before the change is made?",
+    "options": {
+      "A": "A rollback step and a verification step",
+      "B": "A list of every user who might notice",
+      "C": "A new server purchased as a spare",
+      "D": "A promise to complete the work before Monday"
+    },
+    "keys": [
+      "A"
+    ],
+    "explanation": "A change plan names how to undo the change if it fails and how to prove it worked, which is what makes the change recoverable and verifiable. A list of affected users (B) is useful context but not a recovery plan. A spare server (C) is not required for a configuration change. A deadline (D) is an intention, not a procedure.",
+    "objectiveId": "4.2",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "34474ff38ba8cb31",
+    "bank": "core2-b4-domain4-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1202/core2-b4-domain4-bank.md/Q86",
+    "examId": "COMPTIA-A-1202",
+    "number": "Q86",
+    "stem": "A small business keeps its only backup on an external drive that sits next to the server. Which change best follows the 3-2-1 principle?",
+    "options": {
+      "A": "Buy a larger external drive",
+      "B": "Copy the backup to a second folder on the same drive",
+      "C": "Compress the backup to save space",
+      "D": "Keep a second copy off site, on different media"
+    },
+    "keys": [
+      "D"
+    ],
+    "explanation": "The 3-2-1 principle asks for several copies, on different media, with at least one somewhere else, so a fire, theft or ransomware event cannot take them all. A larger drive (A) and a second folder on the same drive (B) share the same failure. Compression (C) reduces size without changing location.",
+    "objectiveId": "4.3",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "b295208b417f6bfb",
+    "bank": "core2-b4-domain4-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1202/core2-b4-domain4-bank.md/Q87",
+    "examId": "COMPTIA-A-1202",
+    "number": "Q87",
+    "stem": "A backup schedule runs a full backup on Sunday and differential backups each other day. A drive fails on Friday. How many backup sets are needed to restore?",
+    "options": {
+      "A": "Friday's differential only",
+      "B": "Sunday's full plus Friday's differential",
+      "C": "Sunday's full plus every daily backup through Friday",
+      "D": "Every differential from Monday through Friday"
+    },
+    "keys": [
+      "B"
+    ],
+    "explanation": "A differential contains everything changed since the last full backup, so the full plus the most recent differential restores the system. Friday's differential alone (A) lacks the base. A full plus every daily file (C) describes an incremental chain, not a differential set. All differentials (D) would still lack the base full backup.",
+    "objectiveId": "4.3",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "2c1b2b60349b6267",
+    "bank": "core2-b4-domain4-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1202/core2-b4-domain4-bank.md/Q88",
+    "examId": "COMPTIA-A-1202",
+    "number": "Q88",
+    "stem": "A technician is about to install memory in a desktop on a carpeted floor. Which precaution most directly protects the components?",
+    "options": {
+      "A": "Wear an anti-static wrist strap connected to the chassis",
+      "B": "Work with the power supply switched on",
+      "C": "Hold the modules by their gold contacts",
+      "D": "Place the modules on the carpet while working"
+    },
+    "keys": [
+      "A"
+    ],
+    "explanation": "An anti-static strap equalizes charge between the technician and the chassis, which is the control for electrostatic discharge. Leaving power on (B) adds an electrical hazard. Touching the contacts (C) deposits oils and can damage the connection. Placing modules on carpet (D) is the exact exposure the strap prevents.",
+    "objectiveId": "4.4",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "d0d112bbd9cb41be",
+    "bank": "core2-b4-domain4-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1202/core2-b4-domain4-bank.md/Q89",
+    "examId": "COMPTIA-A-1202",
+    "number": "Q89",
+    "stem": "A phone's back cover is lifting and the device is warm even when idle. What should the technician do?",
+    "options": {
+      "A": "Press the cover back down and continue using it",
+      "B": "Charge it fully to check whether the battery recovers",
+      "C": "Stop using it and replace the battery through a proper repair",
+      "D": "Place it in a freezer to cool it down"
+    },
+    "keys": [
+      "C"
+    ],
+    "explanation": "A swollen battery is a physical safety hazard: the cell has expanded and can rupture or ignite, so the device is taken out of service and the battery replaced by a qualified repair. Pressing the cover down (A) hides the problem. Charging (B) adds risk. Freezing (D) does not reverse the swelling and adds condensation damage.",
+    "objectiveId": "4.4",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "e5b94e9cfb84fb10",
+    "bank": "core2-b4-domain4-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1202/core2-b4-domain4-bank.md/Q90",
+    "examId": "COMPTIA-A-1202",
+    "number": "Q90",
+    "stem": "A laser printer jams repeatedly and the paper is warm and curled when removed. Which component should be checked?",
+    "options": {
+      "A": "The network adapter",
+      "B": "The fuser assembly",
+      "C": "The paper tray size setting",
+      "D": "The print spooler service"
+    },
+    "keys": [
+      "B"
+    ],
+    "explanation": "The fuser melts toner with heat and pressure, so warm, curled paper at the jam point points at the fuser or its temperature control. The network adapter (A) affects connectivity, not paper. A tray size setting (C) can cause jams but does not explain the heat. The spooler (D) manages print jobs in software.",
+    "objectiveId": "4.4",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "048013bde7476e4c",
+    "bank": "core2-b4-domain4-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1202/core2-b4-domain4-bank.md/Q91",
+    "examId": "COMPTIA-A-1202",
+    "number": "Q91",
+    "stem": "A technician must dispose of an old laptop battery. Which action is correct?",
+    "options": {
+      "A": "Place it in the office trash",
+      "B": "Store it in a desk drawer indefinitely",
+      "C": "Discharge it completely and throw it away",
+      "D": "Take it to a designated battery recycling point"
+    },
+    "keys": [
+      "D"
+    ],
+    "explanation": "Lithium-ion cells are hazardous waste and are collected through designated recycling or hazardous-waste channels. General trash (A) is prohibited and a fire risk in collection vehicles. Indefinite storage (B) leaves a hazard in place. Full discharge (C) does not make the cell safe for disposal.",
+    "objectiveId": "4.5",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "0ab2e37eb023856e",
+    "bank": "core2-b4-domain4-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1202/core2-b4-domain4-bank.md/Q92",
+    "examId": "COMPTIA-A-1202",
+    "number": "Q92",
+    "stem": "A workstation loses power for a second during a storm and reboots, losing unsaved work. Which device most directly prevents this?",
+    "options": {
+      "A": "A UPS with battery backup",
+      "B": "A surge protector",
+      "C": "A larger power supply",
+      "D": "A second monitor"
+    },
+    "keys": [
+      "A"
+    ],
+    "explanation": "A UPS carries the machine through a brief outage on battery, so work continues and the machine shuts down cleanly if the outage lasts. A surge protector (B) clamps voltage spikes and provides no ride-through. A larger power supply (C) changes capacity, not continuity. A monitor (D) is unrelated.",
+    "objectiveId": "4.5",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "554050b5f1d1e8c2",
+    "bank": "core2-b4-domain4-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1202/core2-b4-domain4-bank.md/Q93",
+    "examId": "COMPTIA-A-1202",
+    "number": "Q93",
+    "stem": "A server closet is warm, and the equipment's intake vents are blocked by stacked boxes. Which category of condition should be corrected?",
+    "options": {
+      "A": "The server's clock drift and the cable labels",
+      "B": "The keyboard layout and the screen resolution",
+      "C": "Airflow and ambient temperature",
+      "D": "The printer driver and the scan settings"
+    },
+    "keys": [
+      "C"
+    ],
+    "explanation": "Blocked intake vents and a warm room are airflow and ambient-temperature problems, and both are corrected by clearing the vents and cooling the space. Clock drift and labels (A) are documentation and time issues. Keyboard and display settings (B) are user preferences. Printer and scanner settings (D) belong to the printer.",
+    "objectiveId": "4.5",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "17b2a8d41865068f",
+    "bank": "core2-b4-domain4-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1202/core2-b4-domain4-bank.md/Q94",
+    "examId": "COMPTIA-A-1202",
+    "number": "Q94",
+    "stem": "A user pastes a customer's full name, address and account number into a ticket description. What is the main concern?",
+    "options": {
+      "A": "The ticket will be too long to read",
+      "B": "Personal data is stored where it may not be protected",
+      "C": "The customer's name will slow the search function",
+      "D": "The ticket system cannot store names"
+    },
+    "keys": [
+      "B"
+    ],
+    "explanation": "Tickets are records that many people may read, and personal data placed there must be minimized and protected under privacy rules, so the description should identify the customer without exposing unnecessary personal detail. Length (A) is a readability issue. Search performance (C) is irrelevant. Tickets can store names (D), which is precisely why the exposure matters.",
+    "objectiveId": "4.6",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "094d972abfb6db86",
+    "bank": "core2-b4-domain4-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1202/core2-b4-domain4-bank.md/Q95",
+    "examId": "COMPTIA-A-1202",
+    "number": "Q95",
+    "stem": "A user asks the technician to install a consumer application that the company has not licensed. What is the correct response?",
+    "options": {
+      "A": "Install it and add a note to the ticket",
+      "B": "Install a trial version and let it expire",
+      "C": "Install it only on one machine",
+      "D": "Decline and explain the licensing requirement"
+    },
+    "keys": [
+      "D"
+    ],
+    "explanation": "Unlicensed software is a legal and security exposure for the organization, so the request is declined and the licensing route explained. Installing it with a note (A) records the violation rather than preventing it. A trial copy used for production work (B) violates the trial terms. Limiting it to one machine (C) does not create a license.",
+    "objectiveId": "4.6",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "37f3dedf798e92a1",
+    "bank": "core2-b4-domain4-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1202/core2-b4-domain4-bank.md/Q96",
+    "examId": "COMPTIA-A-1202",
+    "number": "Q96",
+    "stem": "A technician sees a colleague sharing a customer's spreadsheet in a public chat channel. What should the technician do?",
+    "options": {
+      "A": "Report it through the organization's incident or policy channel",
+      "B": "Post a warning in the same public channel",
+      "C": "Ignore it because the colleague is senior",
+      "D": "Copy the file to a personal drive for safekeeping"
+    },
+    "keys": [
+      "A"
+    ],
+    "explanation": "Exposing customer data is a policy incident, and the correct path is the organization's reporting process, which can remove the file and assess the exposure. Replying in the same channel (B) propagates the problem. Ignoring it (C) leaves the data exposed. Copying it elsewhere (D) creates another unauthorized copy.",
+    "objectiveId": "4.6",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "1ebe55beb272ea6d",
+    "bank": "core2-b4-domain4-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1202/core2-b4-domain4-bank.md/Q97",
+    "examId": "COMPTIA-A-1202",
+    "number": "Q97",
+    "stem": "A user is angry and speaking loudly about a recurring fault. Which response best follows professional communication practice?",
+    "options": {
+      "A": "Match the user's tone so they know the technician is serious",
+      "B": "Explain that the fault is the user's own fault",
+      "C": "Let the user finish, acknowledge the impact, and state the next step",
+      "D": "Transfer the call without explanation"
+    },
+    "keys": [
+      "C"
+    ],
+    "explanation": "Letting the user finish, acknowledging the effect and stating what happens next de-escalates the conversation and keeps it focused on the fix. Matching the tone (A) escalates. Blaming the user (B) ends cooperation. An unexplained transfer (D) restarts the frustration somewhere else.",
+    "objectiveId": "4.7",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "79593100fa771f4a",
+    "bank": "core2-b4-domain4-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1202/core2-b4-domain4-bank.md/Q98",
+    "examId": "COMPTIA-A-1202",
+    "number": "Q98",
+    "stem": "A technician explains a fix to a non-technical user using terms such as subnet mask, DHCP lease and ARP cache. What should change?",
+    "options": {
+      "A": "Use plain language and confirm the user understands the outcome",
+      "B": "Speak more slowly while keeping the same terms",
+      "C": "Send the explanation as a technical document",
+      "D": "Ask the user to look the terms up later"
+    },
+    "keys": [
+      "A"
+    ],
+    "explanation": "The purpose is for the user to understand what was wrong and what to do next, which requires plain language and a check that the message landed. Slower delivery (B) does not make jargon clearer. A technical document (C) repeats the problem in another form. Sending the user to research (D) shifts the work to them.",
+    "objectiveId": "4.7",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "ba507fe977cd9776",
+    "bank": "core2-b4-domain4-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1202/core2-b4-domain4-bank.md/Q99",
+    "examId": "COMPTIA-A-1202",
+    "number": "Q99",
+    "stem": "A technician is on a support call with a customer and takes a personal call on another phone at the same time. Which professional practice is being violated?",
+    "options": {
+      "A": "Avoiding jargon",
+      "B": "Setting expectations",
+      "C": "Documenting the ticket",
+      "D": "Giving the customer full attention"
+    },
+    "keys": [
+      "D"
+    ],
+    "explanation": "Support calls require the technician's attention, and splitting it between two conversations signals that the customer is not a priority. Jargon (A) concerns word choice, expectation setting (B) concerns timelines, and documentation (C) concerns the record; none describes divided attention.",
+    "objectiveId": "4.7",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "00bb586bad045ceb",
+    "bank": "core2-b4-domain4-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1202/core2-b4-domain4-bank.md/Q100",
+    "examId": "COMPTIA-A-1202",
+    "number": "Q100",
+    "stem": "A technician wants to automate a repeated sequence of Windows commands that will run by double-clicking a file. Which file type fits?",
+    "options": {
+      "A": "A .ps1 file double-clicked with the default association",
+      "B": "A .bat or .cmd batch file",
+      "C": "A .py file double-clicked with no interpreter installed",
+      "D": "A .vbs file renamed to .txt"
+    },
+    "keys": [
+      "B"
+    ],
+    "explanation": "A batch file runs its commands in the Windows command interpreter by default when opened, which is the simplest way to make a double-clickable sequence. A PowerShell script (A) commonly does not run on double-click without an interpreter and policy allowance. A Python file (C) needs an installed interpreter. Renaming a script to .txt (D) turns it into text.",
+    "objectiveId": "4.8",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "08e6a41036716e68",
+    "bank": "core2-b4-domain4-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1202/core2-b4-domain4-bank.md/Q101",
+    "examId": "COMPTIA-A-1202",
+    "number": "Q101",
+    "stem": "A script must process every file in a folder and rename each one. Which programming construct repeats the same set of steps for each file?",
+    "options": {
+      "A": "A comment",
+      "B": "A variable",
+      "C": "An exit code",
+      "D": "A loop"
+    },
+    "keys": [
+      "D"
+    ],
+    "explanation": "A loop runs a block of steps repeatedly, once per item in the folder, which is exactly the requirement. A comment (A) documents code without executing it. A variable (B) stores a value. An exit code (C) reports a result to the caller.",
+    "objectiveId": "4.8",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "a1d2cefe935a3ae9",
+    "bank": "core2-b4-domain4-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1202/core2-b4-domain4-bank.md/Q102",
+    "examId": "COMPTIA-A-1202",
+    "number": "Q102",
+    "stem": "Before running a script downloaded from an unknown source, what should a technician do?",
+    "options": {
+      "A": "Read it and confirm what it does, or do not run it",
+      "B": "Run it as administrator to avoid permission errors",
+      "C": "Disable the antivirus so it completes faster",
+      "D": "Rename it to .txt and run it"
+    },
+    "keys": [
+      "A"
+    ],
+    "explanation": "An unknown script is executable code from an untrusted source, so it is read and understood first, and if that is not possible it is not run. Elevating it (B) increases the damage if it is malicious. Disabling protection (C) removes the control that might catch it. Renaming a file (D) changes nothing about what executes.",
+    "objectiveId": "4.8",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "d98f67e2c9fac8ad",
+    "bank": "core2-b4-domain4-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1202/core2-b4-domain4-bank.md/Q103",
+    "examId": "COMPTIA-A-1202",
+    "number": "Q103",
+    "stem": "A technician must reach a Windows desktop in another office over the network. Which protocol and default port are involved?",
+    "options": {
+      "A": "SSH on port 22",
+      "B": "VNC on port 5900",
+      "C": "RDP on port 3389",
+      "D": "HTTP on port 80"
+    },
+    "keys": [
+      "C"
+    ],
+    "explanation": "Remote Desktop Protocol is the Windows remote desktop service and listens on 3389 by default. SSH (A) is a secure command-line protocol, not the Windows desktop service. VNC (B) is a different remote framebuffer product. HTTP (D) serves web content.",
+    "objectiveId": "4.9",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "54638359972ef748",
+    "bank": "core2-b4-domain4-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1202/core2-b4-domain4-bank.md/Q104",
+    "examId": "COMPTIA-A-1202",
+    "number": "Q104",
+    "stem": "An administrator needs to reach an internal server from home. Which sequence uses the existing security controls correctly?",
+    "options": {
+      "A": "Publish the server's remote desktop port directly to the internet",
+      "B": "Connect to the company VPN, then use the internal remote access tool",
+      "C": "Use a public file-sharing site to exchange the session",
+      "D": "Disable the firewall on the server for the duration"
+    },
+    "keys": [
+      "B"
+    ],
+    "explanation": "The VPN puts the remote device on the internal network with the organization's authentication and access rules, and the remote tool is then used as it is on site. Exposing the port (A) creates an internet-facing service. A file-sharing site (C) cannot carry a remote session and exposes data. Disabling the firewall (D) removes protection from the server.",
+    "objectiveId": "4.9",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "60133902f4d50647",
+    "bank": "core2-b4-domain4-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1202/core2-b4-domain4-bank.md/Q105",
+    "examId": "COMPTIA-A-1202",
+    "number": "Q105",
+    "stem": "A third-party support vendor asks to connect to a user's machine using a remote-control tool. Which practice is correct?",
+    "options": {
+      "A": "Give the vendor the local administrator password for the machine",
+      "B": "Let the vendor connect at any time without notice",
+      "C": "Verify the request through a known contact and supervise the session",
+      "D": "Disable logging so the session is faster"
+    },
+    "keys": [
+      "C"
+    ],
+    "explanation": "Verification through a channel already trusted plus an attended, supervised session limits what the vendor can do and keeps a record. Handing over an administrator password (A) grants standing access. Unattended access (B) leaves the machine open. Disabling logging (D) removes the evidence.",
+    "objectiveId": "4.9",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "2bab8907f8a8fbf1",
+    "bank": "core2-b4-domain4-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1202/core2-b4-domain4-bank.md/Q106",
+    "examId": "COMPTIA-A-1202",
+    "number": "Q106",
+    "stem": "A technician asks an AI assistant to explain a configuration error. The answer sounds confident but cites a setting that does not exist in the product. What should the technician do?",
+    "options": {
+      "A": "Apply the setting anyway and observe the result on a production system",
+      "B": "Assume the product documentation is out of date",
+      "C": "Ask the same assistant again and accept a repeat answer",
+      "D": "Verify the answer against the vendor documentation before acting"
+    },
+    "keys": [
+      "D"
+    ],
+    "explanation": "Generated explanations can be plausible and wrong, so a claim about a specific setting is checked against the source that governs it before anything is changed. Trying it on production (A) risks an outage. Blaming the documentation (B) inverts the burden of proof. Repeating the question (C) does not make the answer correct.",
+    "objectiveId": "4.10",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "136e228135d2d5f9",
+    "bank": "core2-b4-domain4-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1202/core2-b4-domain4-bank.md/Q107",
+    "examId": "COMPTIA-A-1202",
+    "number": "Q107",
+    "stem": "A technician wants help drafting a troubleshooting note and pastes a customer's account details into an AI tool. What is the problem?",
+    "options": {
+      "A": "The AI tool will respond more slowly",
+      "B": "Confidential data has left the organization's control",
+      "C": "The note will be too detailed",
+      "D": "The AI tool cannot read account numbers"
+    },
+    "keys": [
+      "B"
+    ],
+    "explanation": "Sending data to an external service discloses it outside the organization's systems, which is a privacy and policy issue regardless of the tool's convenience. Response speed (A) is irrelevant. Detail (C) is a writing choice. The tool can read such data (D), which is exactly the exposure.",
+    "objectiveId": "4.10",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "8e036fb8e48a41d6",
+    "bank": "core2-b4-domain4-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1202/core2-b4-domain4-bank.md/Q108",
+    "examId": "COMPTIA-A-1202",
+    "number": "Q108",
+    "stem": "Which use of an AI assistant is appropriate during a hardware repair?",
+    "options": {
+      "A": "Letting it decide which component to replace without testing",
+      "B": "Sending it the customer's data so it can recommend a vendor",
+      "C": "Using it to draft a checklist that the technician then verifies",
+      "D": "Accepting its output as the final resolution note without review"
+    },
+    "keys": [
+      "C"
+    ],
+    "explanation": "Drafting a checklist is a good use: the assistant produces a starting point and the technician, who can see the machine, verifies it. Letting it choose parts untested (A) replaces diagnosis with a guess. Sending customer data (B) discloses confidential information to an external service. Unreviewed output as the permanent record (D) puts an unverified claim into the ticket.",
+    "objectiveId": "4.10",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "b470162311bf2948",
+    "bank": "core2-b4-domain4-bank.md"
   },
   {
     "id": "COMPTIA-NET-009/net009-n1-fixtures.md/Q6",

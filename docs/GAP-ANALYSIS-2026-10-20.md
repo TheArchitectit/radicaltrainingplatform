@@ -334,15 +334,19 @@ that adds it, as `check-traceability.py` requires.
 | Date | Roadmap step | What landed | Measured effect |
 |---|---|---|---|
 | 2026-10-26 | 5.3 step 1 — repair the lesson graph | Ten module lessons written (`a1,a3,a4,a5`, `b1,b2,b3`, `n2,n3,n4`); all ten added to `RELEASED_LESSONS`; the 55 empty `lessonIds` in the A-1201, A-1202 and NET-009 manifests mapped to their domain's lesson; `content-links.mjs` now pins the "no covering lesson" refusal with a synthetic item, because the shipped corpus no longer contains one | Lesson coverage **63/131 → 131/131 objectives**; REQ-MAN-07 coverage **55 (42%) → 67 (51%)**; dangling lesson references **13 → 0**. Every remaining uncovered objective is now missing *items*, not lessons. Freeze chain 64/64. |
+| 2026-10-26 | 5.3 step 2 — A+ Core 2 items | Four new banks (`core2-b1-domain1-bank.md`, `core2-b2-domain2-bank.md`, `core2-b3-domain3-bank.md`, `core2-b4-domain4-bank.md`) carrying 100 items and their provenance records; each of the 36 objectives now has at least three released items | A+ Core 2 items **8 → 108**; REQ-MAN-07 coverage **67 (51%) → 99 (76%)**; diagnosis share 72% of 289 released items; longest-option cue **41/189 → 42/289** (22% → 15%). Freeze chain 64/64. |
 
-Two notes for whoever picks up step 2. First, the lesson renderer is still an
+Notes for the authoring steps that follow. First, the lesson renderer is still an
 escape-first subset (headings, lists, bold, inline code) — no tables and no
 single-asterisk italics — so lesson authoring must stay inside it, or the renderer must
 grow first. Second, `content-links.mjs` had asserted that some shipped item lacked a
 covering lesson; when coverage became complete those two preconditions failed. They now
 assert full coverage explicitly and test the refusal with a synthetic item, so the gate
 still fails if the resolver ever links an item to a lesson that does not list its
-objective.
+objective. Third, a question bank must not end with a disclaimer paragraph: the bank
+parser folds everything after the final `---` into the last item's stem, so the text
+ships inside the question. The REQ-BRAND-02 disclaimer belongs in lessons and the PWA
+shell, not in `questions/*.md`.
 
 ---
 
