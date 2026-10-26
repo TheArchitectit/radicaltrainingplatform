@@ -2,19 +2,21 @@
 
   <PropertyGroup>
     <!-- xunit.v3: Avalonia 12's headless adapter (Avalonia.Headless.XUnit)
-         builds against xunit v3 extensibility, not v2. MTP via MSBuild keeps
-         `dotnet test` working for this project. -->
+         builds against xunit v3 extensibility, not v2. Runs two ways: as the
+         built exe (CI), or via `dotnet test` through the VSTest adapter. The
+         old MTP-via-MSBuild opt-in made `dotnet test` fail outright on the
+         .NET 10 SDK ("Testing with VSTest target is no longer supported"). -->
     <TargetFramework>net10.0</TargetFramework>
     <OutputType>Exe</OutputType>
     <Nullable>enable</Nullable>
     <IsPackable>false</IsPackable>
-    <TestingPlatformDotnetTestSupport>true</TestingPlatformDotnetTestSupport>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="xunit.v3" Version="3.2.2" />
-    <PackageReference Include="Microsoft.Testing.Platform.MSBuild" Version="2.4.1" />
-    <PackageReference Include="Avalonia.Headless.XUnit" Version="12.1.3" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="3.1.5" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.1" />
+    <PackageReference Include="Avalonia.Headless.XUnit" Version="12.1.4" />
     <PackageReference Include="Shouldly" Version="4.3.0" />
   </ItemGroup>
 
