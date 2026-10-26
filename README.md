@@ -1,10 +1,10 @@
 # 🎯 Nutanix Certification Study Tool
 
-A WinForms-based exam preparation tool for Nutanix certifications featuring **1,458 validated practice questions** across 4 exams, a synthwave-themed GUI, integrated exam blueprint coverage tracking, and a knowledge base with direct links to Nutanix documentation.
+A cross-platform (Avalonia desktop + PWA) exam preparation tool featuring **2,378 practice questions** across 8 exams (Nutanix and CompTIA), a synthwave-themed GUI, integrated exam blueprint coverage tracking, and a knowledge base with direct links to Nutanix documentation.
 
-![.NET 8.0](https://img.shields.io/badge/.NET-8.0-blue)
+![.NET 10](https://img.shields.io/badge/.NET-10-blue)
 ![License](https://img.shields.io/badge/License-BSD%203--Clause-green)
-![Questions](https://img.shields.io/badge/Questions-1%2C458-orange)
+![Questions](https://img.shields.io/badge/Questions-2%2C378-orange)
 ![Status](https://img.shields.io/badge/Status-Alpha-yellow)
 [![Sponsor](https://img.shields.io/badge/Sponsor-TheArchitectit-FF69B4?style=flat&logo=github-sponsors)](https://github.com/sponsors/TheArchitectit)
 
@@ -16,10 +16,14 @@ A WinForms-based exam preparation tool for Nutanix certifications featuring **1,
 | **NCP-CI 6.10** — Cloud Integration | 363 | 75 MCQ | 120 min |
 | **NCP-AI 6.10** — AI Infrastructure | 335 | 75 MCQ | 120 min |
 | **NCM-MCI 6.10** — Multicloud Infrastructure (Master) | 360 | 16-20 live lab scenarios | 180 min |
+| **NCA 7.5** — Nutanix Certified Associate | 260 | MCQ | — |
+| **CompTIA Network+** (N10-009) | 300 | MCQ | — |
+| **CompTIA A+ Core 1** (220-1201) | 180 | MCQ | — |
+| **CompTIA A+ Core 2** (220-1202) | 180 | MCQ | — |
 
 ## ✨ Features
 
-- **1,458 practice questions** — comprehensive coverage across all blueprint domains
+- **2,378 practice questions** — answer options are shuffled per session, so answer position gives nothing away
 - **Blueprint coverage panel** — toggle with `B` to see which exam objectives each question covers
 - **Mixed question formats** — Standard MCQ, multi-select ("Select TWO"), and ordering/sequence questions
 - **Synthwave-themed GUI** — Dark neon aesthetic with animated progress bars
@@ -30,13 +34,13 @@ A WinForms-based exam preparation tool for Nutanix certifications featuring **1,
   - Scrollable reference content
 - **Keyboard shortcuts** — `1-5` select answers, `Enter` submit, `N`/`P` navigate, `E` toggle explain, `B` toggle blueprint
 - **Score tracking** — Real-time accuracy stats per exam
-- **100% validated** — Every answer verified through 2 independent validation passes (LLM reasoning + solo web/knowledge review)
+- **Validated Nutanix banks** — the original Nutanix answers were verified through 2 independent validation passes (LLM reasoning + solo web/knowledge review); corrections ship in `errata.json`
 
 ## 🚀 Quick Start
 
 ### Option 1: Download Pre-Built Binary (No SDK Required)
 
-1. Download `RadicalTrainingPlatform-v0.2.0-alpha-win-x64.zip` from the [Releases](https://github.com/rogerlundnetcenter/nutanixcertificationtool/releases) page or from the repo root (tracked via Git LFS)
+1. Download `RadicalTrainingPlatform-v0.2.0-alpha-win-x64.zip` from the [Releases](https://github.com/TheArchitectit/radicaltrainingplatform/releases) page or from the repo root (tracked via Git LFS)
 2. Extract the zip
 3. Run `RadicalTrainingPlatform.exe`
 
@@ -44,20 +48,19 @@ A WinForms-based exam preparation tool for Nutanix certifications featuring **1,
 
 ### Option 2: Build From Source
 
-**Prerequisites:** [.NET 8.0 SDK](https://dotnet.microsoft.com/download/dotnet/8.0) (Windows)
+**Prerequisites:** [.NET 10 SDK](https://dotnet.microsoft.com/download/dotnet/10.0) (Windows, Linux or macOS)
 
 ```bash
-cd RadicalTrainingPlatform
-dotnet build
-dotnet run
+dotnet run --project RadicalTrainingPlatform.Desktop
 ```
 
 To create a self-contained publish:
 
 ```bash
-cd RadicalTrainingPlatform
-dotnet publish -c Release -r win-x64 --self-contained
+dotnet publish RadicalTrainingPlatform.Desktop -c Release -r win-x64 --self-contained
 ```
+
+Linux AppImage / macOS .dmg: `packaging/linux/build-appimage.sh`, `packaging/macos/build-dmg.sh`.
 
 The app will launch with all 4 exam tabs. Select an exam, answer questions, and use the explain panel to study.
 

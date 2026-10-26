@@ -2,9 +2,9 @@
 
 ## Project Overview
 
-Cross-platform certification study platform for Nutanix (and future vendors). 1,458 validated practice questions across 4 exams, synthwave-themed UI, blueprint coverage tracking, and a lab simulator.
+Cross-platform certification study platform for Nutanix (and future vendors). 2,378 practice questions across 8 exams (5 Nutanix, 3 CompTIA), synthwave-themed UI, blueprint coverage tracking, and a lab simulator.
 
-**Stack:** .NET 10 / C# 13 / Avalonia 12.0 / QuestPDF / HTML+JS PWA
+**Stack:** .NET 10 / C# 13 / Avalonia 12.1 / QuestPDF / HTML+JS PWA
 
 ## Architecture
 
@@ -21,14 +21,19 @@ RadicalTrainingPlatform.Core (net10.0 — no UI deps)
 RadicalTrainingPlatform.Core.Tests (xUnit — parser, blueprint, viewmodel, infra,
   session store, errata; composition root covered by CompositionRootTests)
 
-RadicalTrainingPlatform.Desktop (net10.0 — Avalonia 12.0)
+RadicalTrainingPlatform.Desktop (net10.0 — Avalonia 12.1)
   ├── Views/           ExamSelectorView, QuestionView, OptionCard, BlueprintView, StatsView
   ├── Controls/        SynthwaveProgressBar, BlueprintCanvas
   ├── LabSimulator/    CefBridge, LabSimulatorView
   └── Simulators/      Lab simulator templates
+  (ships the question banks, errata.json and the Web/ folder next to the binary)
 
-RadicalTrainingPlatform.Web (static PWA)
-  ├── index.html, manifest.json, sw.js
+RadicalTrainingPlatform.Desktop.Tests (xunit.v3 + Avalonia.Headless — smoke tests
+  of the real MainWindow, CefBridge handlers; `dotnet test` or run the built exe)
+
+RadicalTrainingPlatform.Web (static PWA — the ONLY copy of the simulator web app;
+  Desktop and WinForms link it as LabSimulator/Web)
+  ├── index.html, manifest.json, sw.js (bump CACHE_NAME when shipping changes)
   ├── js/              app.js, core/, views/
   └── css/
 
@@ -78,12 +83,20 @@ If an operation fails 3 times: HALT and escalate to the user.
 ### Build & Test
 
 ```bash
-# Build everything (Core + Desktop — Legacy WinForms won't build on Linux)
+# Whole solution: Windows only (Legacy WinForms fails on Linux, NETSDK1100)
 dotnet build RadicalTrainingPlatform.sln
 
-# Build individual projects
+# Linux / macOS: build the cross-platform projects individually
 dotnet build RadicalTrainingPlatform.Core
 dotnet build RadicalTrainingPlatform.Desktop
+
+# Tests (both suites; Desktop.Tests is headless — no display needed)
+dotnet test RadicalTrainingPlatform.Core.Tests
+dotnet test RadicalTrainingPlatform.Desktop.Tests
+
+# CI content/web guards
+python3 scripts/lint-content.py
+python3 scripts/check-web-imports.py
 
 # Run desktop app
 dotnet run --project RadicalTrainingPlatform.Desktop
