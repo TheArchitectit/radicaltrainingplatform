@@ -216,6 +216,23 @@ public class MainWindowSmokeTests
     }
 
     [AvaloniaFact]
+    public void TestMode_SubmitShowsRecorded_NotCorrectness()
+    {
+        var (window, _) = OpenMainWindowWithSession();
+        FindButton(window, "Test").RaiseEvent(new RoutedEventArgs(Button.ClickEvent!));
+        var vm = CurrentVm(window)!;
+        vm.RevealAnswers.ShouldBeFalse();
+
+        SubmitWrongAnswer(vm);
+        global::Avalonia.Threading.Dispatcher.UIThread.RunJobs();
+        var view = window.GetVisualDescendants().OfType<QuestionView>().First();
+        // Test mode used to show ✓/✗ and the explanation immediately.
+        view.FindControl<TextBlock>("ResultIndicator")!.Text.ShouldBe("● ANSWER RECORDED");
+        view.FindControl<Control>("ExplanationPanel")!.IsVisible.ShouldBeFalse();
+        window.Close();
+    }
+
+    [AvaloniaFact]
     public void BackToStudy_FromReview_ResumesOriginalSession()
     {
         var (window, vm) = OpenMainWindowWithSession();

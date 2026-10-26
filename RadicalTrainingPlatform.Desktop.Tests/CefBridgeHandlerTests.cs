@@ -33,12 +33,13 @@ public class CefBridgeHandlerTests
         public List<string> Sent { get; } = new();
         public ManualResetEventSlim Got { get; } = new(false);
 
-        public Harness()
+        public Harness(ISessionStore? store = null)
         {
             var services = new ServiceCollection()
                 .AddLogging()
                 .AddRadicalTrainingPlatformCore()
                 .BuildServiceProvider();
+            store ??= services.GetRequiredService<ISessionStore>();
 
             Action<string> send = script =>
             {
@@ -53,7 +54,7 @@ public class CefBridgeHandlerTests
             Bridge = new CefBridge(
                 send,
                 services.GetRequiredService<IQuestionParser>(),
-                services.GetRequiredService<ISessionStore>());
+                store);
         }
 
         public void Dispose() => Bridge.Dispose();
@@ -114,14 +115,93 @@ public class CefBridgeHandlerTests
         data!.Value.GetProperty("totalQuestions").GetInt32().ShouldBeGreaterThan(1000);
     }
 
+    /// <summary>In-memory store: persistence tests must not touch app data.</summary>
+    private sealed class MemoryStore : ISessionStore
+    {
+        private readonly Dictionary<string, string> _d = new();
+        public void Save(string id, string json) { lock (_d) _d[id] = json; }
+        public string? Load(string id) { lock (_d) return _d.GetValueOrDefault(id); }
+        public bool Has(string id) { lock (_d) return _d.ContainsKey(id); }
+        public void Delete(string id) { lock (_d) _d.Remove(id); }
+        public IReadOnlyList<string> List() { lock (_d) return _d.Keys.ToList(); }
+    }
+
     [Fact]
-    public void GetQuestion_Found_ReturnsStemAndOptions()
+    public void GetQuestion_ExactId_ReturnsStemAndOptions()
     {
         using var h = new Harness();
-        var data = InvokeAndWait(h, Req("get_question", "{\"id\":\"NCA-75:1\"}"));
+        var data = InvokeAndWait(h, Req("get_question", "{\"id\":\"NCA-75:NCA-75-Part1.md:1\"}"));
         data!.Value.GetProperty("found").GetBoolean().ShouldBeTrue();
+        data.Value.GetProperty("id").GetString().ShouldBe("NCA-75:NCA-75-Part1.md:1");
         data.Value.GetProperty("stem").GetString().ShouldNotBeNullOrWhiteSpace();
         data.Value.GetProperty("options").GetArrayLength().ShouldBeGreaterThan(1);
+    }
+
+    [Fact]
+    public void GetQuestion_ShortIdInSeveralFiles_IsAmbiguous_NotFirstMatch()
+    {
+        // Q numbers restart per bank file; "NCA-75:1" used to silently return
+        // whichever file loaded first.
+        using var h = new Harness();
+        var data = InvokeAndWait(h, Req("get_question", "{\"id\":\"NCA-75:1\"}"));
+        data!.Value.GetProperty("found").GetBoolean().ShouldBeFalse();
+        data.Value.GetProperty("ambiguous").GetBoolean().ShouldBeTrue();
+        data.Value.GetProperty("candidates").GetArrayLength().ShouldBeGreaterThan(1);
+    }
+
+    [Fact]
+    public void SubmitAnswers_DriveStatsExportResetAndImport()
+    {
+        using var h = new Harness(new MemoryStore());
+        InvokeAndWait(h, Req("submit_answer", "{\"questionId\":\"NCA-75:NCA-75-Part1.md:1\",\"answer\":\"A\",\"correct\":true}"))!
+            .Value.GetProperty("recorded").GetBoolean().ShouldBeTrue();
+        InvokeAndWait(h, Req("submit_answer", "{\"questionId\":\"NCA-75:NCA-75-Part1.md:2\",\"answer\":\"B, C\",\"correct\":false}", "t2"));
+
+        var stats = InvokeAndWait(h, Req("get_stats", null, "t3"))!.Value;
+        stats.GetProperty("answered").GetInt32().ShouldBe(2);   // were hardcoded 0
+        stats.GetProperty("correct").GetInt32().ShouldBe(1);
+        stats.GetProperty("streakDays").GetInt32().ShouldBe(1);
+
+        var export = InvokeAndWait(h, Req("export_results", null, "t4"))!.Value;
+        export.GetProperty("rowCount").GetInt32().ShouldBe(2);  // was an empty TODO
+        var csv = export.GetProperty("csv").GetString()!;
+        csv.ShouldContain("\"B, C\"");                          // CSV-quoted
+
+        InvokeAndWait(h, Req("reset_session", null, "t5"));
+        InvokeAndWait(h, Req("get_session", null, "t6"))!.Value
+            .GetProperty("active").GetBoolean().ShouldBeFalse();
+
+        var import = InvokeAndWait(h, Req("import_results",
+            JsonSerializer.Serialize(new { csv = csv + "garbage,row\n" }), "t7"))!.Value;
+        import.GetProperty("imported").GetInt32().ShouldBe(2);  // was the raw line count
+        import.GetProperty("skipped").GetInt32().ShouldBe(1);
+        InvokeAndWait(h, Req("get_stats", null, "t8"))!.Value
+            .GetProperty("answered").GetInt32().ShouldBe(2);
+    }
+
+    [Fact]
+    public void SetSetting_PersistsAndOverridesDefault()
+    {
+        var store = new MemoryStore();
+        using (var h = new Harness(store))
+            InvokeAndWait(h, Req("set_setting", "{\"key\":\"theme\",\"value\":\"light\"}"))!
+                .Value.GetProperty("ok").GetBoolean().ShouldBeTrue();
+
+        using var fresh = new Harness(store);                   // survives a new bridge
+        var settings = InvokeAndWait(fresh, Req("get_settings"))!.Value;
+        settings.GetProperty("theme").GetString().ShouldBe("light");
+        settings.GetProperty("shuffleOptions").GetBoolean().ShouldBeTrue();
+    }
+
+    [Theory]
+    [InlineData(0, 0)]   // answered today only
+    [InlineData(1, 1)]   // yesterday + today
+    public void StreakDays_CountsConsecutiveDays(int daysBack, int extra)
+    {
+        var now = new DateTimeOffset(2026, 10, 26, 12, 0, 0, TimeSpan.Zero);
+        var times = Enumerable.Range(0, daysBack + 1).Select(d => now.AddDays(-d)).ToList();
+        CefBridge.StreakDays(times, now).ShouldBe(1 + extra);
+        CefBridge.StreakDays(new[] { now.AddDays(-3) }, now).ShouldBe(0); // broken streak
     }
 
     [Fact]

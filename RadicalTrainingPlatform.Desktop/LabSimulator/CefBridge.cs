@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
@@ -200,7 +201,7 @@ public sealed class CefBridge : IDisposable
             PostToJs("init", new
             {
                 appVersion = typeof(CefBridge).Assembly.GetName().Version?.ToString() ?? "0.0.0",
-                cefVersion = "120.6099.204",
+                cefVersion = "120.6099.215", // CefGlue package version in the csproj
             });
             return Task.FromResult<object?>(null);
         });
@@ -244,17 +245,17 @@ public sealed class CefBridge : IDisposable
         // ── get_stats : aggregate study statistics ──
         On("get_stats", _ =>
         {
-            // Was a literal (totalQuestions: 475 — already wrong; the bank has
-            // 1600). Now: bank size from Core, answered/correct from persisted
-            // sessions (session files carry {"answered":n,"correct":m}).
+            // Bank size from Core; answered/correct/streak from the answers
+            // recorded by submit_answer (were hardcoded zeros).
             int bank = _exams.Value.Values.Sum(qs => qs.Count);
+            var answers = LoadAnswers();
             return Task.FromResult<object?>(new
             {
                 totalQuestions = bank,
-                answered = 0,
-                correct = 0,
-                streakDays = 0,
-                lastSession = (string?)null,
+                answered = answers.Count,
+                correct = answers.Count(a => a.Correct),
+                streakDays = StreakDays(answers.Select(a => a.At), DateTimeOffset.Now),
+                lastSession = answers.Count == 0 ? null : answers.Max(a => a.At).ToString("o"),
             });
         });
 
@@ -289,41 +290,64 @@ public sealed class CefBridge : IDisposable
         // ── submit_answer : a learner answered a question ──
         On("submit_answer", payload =>
         {
-            if (payload == null) return Task.FromResult<object?>(null);
+            if (payload?.ValueKind != JsonValueKind.Object)
+                return Task.FromResult<object?>(new { recorded = false, error = "object payload required" });
             var p = payload.Value;
-            var questionId = p.TryGetProperty("questionId", out var q) ? q.GetString() : null;
-            var answer     = p.TryGetProperty("answer",     out var a) ? a.ToString() : null;
-            var correct    = p.TryGetProperty("correct",    out var c) ? c.GetBoolean() : false;
-            Debug.WriteLine($"[CefBridge] submit_answer q={questionId} ans={answer} correct={correct}");
+            var questionId = p.TryGetProperty("questionId", out var q) ? q.ToString() : "";
+            var answer     = p.TryGetProperty("answer",     out var a) ? a.ToString() : "";
+            var correct    = p.TryGetProperty("correct",    out var c) && c.ValueKind == JsonValueKind.True;
+            if (string.IsNullOrEmpty(questionId))
+                return Task.FromResult<object?>(new { recorded = false, error = "questionId required" });
+
+            // Was logged and acknowledged but never stored.
+            lock (_storeLock)
+            {
+                var answers = LoadAnswers();
+                answers.Add(new AnswerRecord(questionId, answer, correct, DateTimeOffset.Now));
+                SaveAnswers(answers);
+            }
             return Task.FromResult<object?>(new { recorded = true });
         });
 
         // ── get_question : fetch a single question by id ──
-        // Contract: id is "EXAMCODE:NUMBER" (e.g. "NCA-75:12"), the display
-        // key the sidebar and PDF exporter use. Real bank lookup (was:
-        // always { found = false } pointing at a QuestionBank type that
-        // never existed).
+        // Contract: "EXAMCODE:FILE:NUMBER" (e.g. "NCA-75:NCA-75-Part1.md:12")
+        // is exact. Question numbers restart in every bank file, so the short
+        // "EXAMCODE:NUMBER" is accepted only when exactly one file has that
+        // number; otherwise the reply lists the candidates (it used to return
+        // whichever file happened to load first).
         On("get_question", payload =>
         {
             string? id = null;
-            if (payload.HasValue)
-                id = payload.Value.TryGetProperty("id", out var x) ? x.GetString() : null;
+            if (payload?.ValueKind == JsonValueKind.Object
+                && payload.Value.TryGetProperty("id", out var x) && x.ValueKind == JsonValueKind.String)
+                id = x.GetString();
             if (string.IsNullOrEmpty(id))
                 return Task.FromResult<object?>(new { found = false });
 
-            var parts = id.Split(':', 2);
-            var code = parts[0];
-            if (!_exams.Value.TryGetValue(code, out var questions)
-                || parts.Length < 2 || !int.TryParse(parts[1], out var num))
+            var parts = id.Split(':');
+            if (parts.Length is < 2 or > 3
+                || !_exams.Value.TryGetValue(parts[0], out var questions)
+                || !int.TryParse(parts[^1], out var num))
                 return Task.FromResult<object?>(new { id, found = false });
 
-            var q = questions.FirstOrDefault(qq => qq.Id == num);
-            if (q == null)
-                return Task.FromResult<object?>(new { id, found = false });
+            var matches = questions
+                .Where(qq => qq.Id == num
+                             && (parts.Length == 2
+                                 || string.Equals(qq.SourceFile, parts[1], StringComparison.OrdinalIgnoreCase)))
+                .ToList();
+            if (matches.Count != 1)
+                return Task.FromResult<object?>(new
+                {
+                    id,
+                    found = false,
+                    ambiguous = matches.Count > 1,
+                    candidates = matches.Select(m => $"{parts[0]}:{m.SourceFile}:{m.Id}").ToList(),
+                });
 
+            var q = matches[0];
             return Task.FromResult<object?>(new
             {
-                id,
+                id = $"{parts[0]}:{q.SourceFile}:{q.Id}",
                 found = true,
                 stem = q.Stem,
                 domain = q.Domain,
@@ -331,50 +355,184 @@ public sealed class CefBridge : IDisposable
             });
         });
 
-        // ── get_session / reset_session ──
+        // ── get_session / reset_session : the recorded answer history ──
         On("get_session", _ =>
-            Task.FromResult<object?>(new { active = false, sessionId = (string?)null }));
+        {
+            var count = LoadAnswers().Count;
+            return Task.FromResult<object?>(new
+            {
+                active = count > 0,
+                sessionId = count > 0 ? AnswersRecordId : null,
+                answered = count,
+            });
+        });
 
         On("reset_session", _ =>
         {
-            Debug.WriteLine("[CefBridge] reset_session");
+            // Was acknowledged ({ reset = true }) without clearing anything.
+            lock (_storeLock) _sessionStore.Delete(AnswersRecordId);
             return Task.FromResult<object?>(new { reset = true });
         });
 
         // ── export_results / import_results : CSV exchange ──
         On("export_results", _ =>
         {
-            // TODO: build CSV from session history
-            return Task.FromResult<object?>(new { csv = "", rowCount = 0 });
+            // Was a TODO returning an empty CSV.
+            var answers = LoadAnswers();
+            var sb = new StringBuilder(CsvHeader).Append('\n');
+            foreach (var a in answers)
+                sb.Append(Csv(a.QuestionId)).Append(',')
+                  .Append(Csv(a.Answer)).Append(',')
+                  .Append(a.Correct ? "true" : "false").Append(',')
+                  .Append(a.At.ToString("o")).Append('\n');
+            return Task.FromResult<object?>(new { csv = sb.ToString(), rowCount = answers.Count });
         });
 
         On("import_results", payload =>
         {
-            var csv = payload?.TryGetProperty("csv", out var c) == true ? c.GetString() : null;
-            var rows = csv?.Split('\n').Length ?? 0;
-            return Task.FromResult<object?>(new { imported = rows });
+            // Was: reported the CSV's line count as "imported" and stored nothing.
+            var csv = payload?.ValueKind == JsonValueKind.Object
+                      && payload.Value.TryGetProperty("csv", out var c) && c.ValueKind == JsonValueKind.String
+                ? c.GetString() : null;
+            if (string.IsNullOrWhiteSpace(csv))
+                return Task.FromResult<object?>(new { imported = 0, skipped = 0, error = "csv required" });
+
+            var rows = new List<AnswerRecord>();
+            int skipped = 0;
+            foreach (var line in csv.Split('\n').Select(l => l.TrimEnd('\r')))
+            {
+                if (string.IsNullOrWhiteSpace(line) || line == CsvHeader) continue;
+                var f = ParseCsvLine(line);
+                if (f.Count == 4 && f[0].Length > 0 && bool.TryParse(f[2], out var ok)
+                    && DateTimeOffset.TryParse(f[3], CultureInfo.InvariantCulture, DateTimeStyles.None, out var at))
+                    rows.Add(new AnswerRecord(f[0], f[1], ok, at));
+                else
+                    skipped++;
+            }
+            lock (_storeLock)
+            {
+                var answers = LoadAnswers();
+                answers.AddRange(rows);
+                SaveAnswers(answers);
+            }
+            return Task.FromResult<object?>(new { imported = rows.Count, skipped });
         });
 
         // ── get_settings / set_setting : key/value prefs store ──
         On("get_settings", _ =>
-        {
-            return Task.FromResult<object?>(new Dictionary<string, object?>
-            {
-                ["theme"]         = "synthwave",
-                ["showTimer"]     = true,
-                ["shuffleOptions"]= true,
-            });
-        });
+            Task.FromResult<object?>(LoadSettings()));
 
         On("set_setting", payload =>
         {
-            if (payload == null) return Task.FromResult<object?>(null);
-            var p = payload.Value;
-            var key = p.TryGetProperty("key", out var k) ? k.GetString() : null;
-            var val = p.TryGetProperty("value", out var v) ? v.ToString() : null;
-            Debug.WriteLine($"[CefBridge] set_setting {key}={val}");
+            if (payload?.ValueKind != JsonValueKind.Object
+                || !payload.Value.TryGetProperty("key", out var k) || k.ValueKind != JsonValueKind.String
+                || string.IsNullOrWhiteSpace(k.GetString())
+                || !payload.Value.TryGetProperty("value", out var v))
+                return Task.FromResult<object?>(new { ok = false, error = "key and value required" });
+
+            // Was logged and acknowledged but never stored.
+            lock (_storeLock)
+            {
+                var settings = LoadSettings();
+                settings[k.GetString()!] = v.Clone();
+                _sessionStore.Save(SettingsRecordId, JsonSerializer.Serialize(settings));
+            }
             return Task.FromResult<object?>(new { ok = true });
         });
+    }
+
+    // ─────────────────────────────────────────────────────────────────────
+    //  Persistence helpers (records live in the ISessionStore)
+    // ─────────────────────────────────────────────────────────────────────
+
+    private const string AnswersRecordId = "bridge-answers";
+    private const string SettingsRecordId = "bridge-settings";
+    private const string CsvHeader = "questionId,answer,correct,timestamp";
+    private readonly object _storeLock = new();
+
+    private sealed record AnswerRecord(string QuestionId, string Answer, bool Correct, DateTimeOffset At);
+
+    private List<AnswerRecord> LoadAnswers()
+    {
+        lock (_storeLock)
+        {
+            var json = _sessionStore.Load(AnswersRecordId);
+            if (string.IsNullOrEmpty(json)) return new();
+            try { return JsonSerializer.Deserialize<List<AnswerRecord>>(json) ?? new(); }
+            catch (JsonException ex)
+            {
+                Debug.WriteLine($"[CefBridge] answer history unreadable, starting fresh: {ex.Message}");
+                return new();
+            }
+        }
+    }
+
+    private void SaveAnswers(List<AnswerRecord> answers) =>
+        _sessionStore.Save(AnswersRecordId, JsonSerializer.Serialize(answers));
+
+    private Dictionary<string, object?> LoadSettings()
+    {
+        var settings = new Dictionary<string, object?>
+        {
+            ["theme"]          = "synthwave",
+            ["showTimer"]      = true,
+            ["shuffleOptions"] = true,
+        };
+        lock (_storeLock)
+        {
+            var json = _sessionStore.Load(SettingsRecordId);
+            if (string.IsNullOrEmpty(json)) return settings;
+            try
+            {
+                using var doc = JsonDocument.Parse(json);
+                if (doc.RootElement.ValueKind == JsonValueKind.Object)
+                    foreach (var prop in doc.RootElement.EnumerateObject())
+                        settings[prop.Name] = prop.Value.Clone();
+            }
+            catch (JsonException ex)
+            {
+                Debug.WriteLine($"[CefBridge] settings unreadable, using defaults: {ex.Message}");
+            }
+        }
+        return settings;
+    }
+
+    /// <summary>Consecutive days, ending today or yesterday, with at least one answer.</summary>
+    public static int StreakDays(IEnumerable<DateTimeOffset> answeredAt, DateTimeOffset now)
+    {
+        var days = answeredAt.Select(t => t.LocalDateTime.Date).ToHashSet();
+        var day = now.LocalDateTime.Date;
+        if (!days.Contains(day)) day = day.AddDays(-1);
+        int streak = 0;
+        while (days.Contains(day)) { streak++; day = day.AddDays(-1); }
+        return streak;
+    }
+
+    private static string Csv(string value) =>
+        value.IndexOfAny(new[] { ',', '"', '\n', '\r' }) >= 0
+            ? "\"" + value.Replace("\"", "\"\"") + "\""
+            : value;
+
+    private static List<string> ParseCsvLine(string line)
+    {
+        var fields = new List<string>();
+        var sb = new StringBuilder();
+        bool quoted = false;
+        for (int i = 0; i < line.Length; i++)
+        {
+            var ch = line[i];
+            if (quoted)
+            {
+                if (ch == '"' && i + 1 < line.Length && line[i + 1] == '"') { sb.Append('"'); i++; }
+                else if (ch == '"') quoted = false;
+                else sb.Append(ch);
+            }
+            else if (ch == '"') quoted = true;
+            else if (ch == ',') { fields.Add(sb.ToString()); sb.Clear(); }
+            else sb.Append(ch);
+        }
+        fields.Add(sb.ToString());
+        return fields;
     }
 
     // ─────────────────────────────────────────────────────────────────────

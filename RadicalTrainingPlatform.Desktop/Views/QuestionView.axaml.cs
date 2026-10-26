@@ -92,6 +92,7 @@ public partial class QuestionView : UserControl
                 break;
 
             case nameof(ExamSessionViewModel.IsSubmitted):
+            case nameof(ExamSessionViewModel.RevealAnswers):
                 UpdatePostSubmitState();
                 break;
 
@@ -183,13 +184,15 @@ public partial class QuestionView : UserControl
             bool isSelected = _viewModel.SelectedAnswers.Contains(letter);
             bool isCorrectAnswer = _viewModel.CurrentQuestion?.CorrectAnswers.Contains(letter) ?? false;
             bool isSubmitted = _viewModel.IsSubmitted;
+            // Test mode: no correct/wrong marking until the exam is complete.
+            bool reveal = isSubmitted && _viewModel.RevealAnswers;
 
             card.IsSelected = isSelected;
-            card.IsCorrect = isSubmitted && isCorrectAnswer;
-            card.IsWrong = isSubmitted && isSelected && !isCorrectAnswer;
+            card.IsCorrect = reveal && isCorrectAnswer;
+            card.IsWrong = reveal && isSelected && !isCorrectAnswer;
 
             // Dim unselected cards after submit
-            if (isSubmitted)
+            if (reveal)
             {
                 card.Opacity = isCorrectAnswer || isSelected ? 1.0 : 0.5;
             }
@@ -218,9 +221,9 @@ public partial class QuestionView : UserControl
             ShowResultIndicator();
             UpdateOptionCardStates();
 
-            // Auto-show explanation after submit
-            _explanationVisible = true;
-            ExplanationPanel.IsVisible = true;
+            // Auto-show explanation after submit (Test mode: only once revealed)
+            _explanationVisible = _viewModel.RevealAnswers;
+            ExplanationPanel.IsVisible = _explanationVisible;
         }
         else
         {
@@ -238,7 +241,13 @@ public partial class QuestionView : UserControl
 
         ResultIndicator.IsVisible = true;
 
-        if (_viewModel.IsCorrect)
+        if (!_viewModel.RevealAnswers)
+        {
+            ResultIndicator.Text = "● ANSWER RECORDED";
+            ResultIndicator.Classes.Remove("correct");
+            ResultIndicator.Classes.Remove("wrong");
+        }
+        else if (_viewModel.IsCorrect)
         {
             ResultIndicator.Text = "✓ CORRECT";
             ResultIndicator.Classes.Remove("wrong");
@@ -281,6 +290,7 @@ public partial class QuestionView : UserControl
 
     private void ToggleExplanation()
     {
+        if (!(_viewModel?.RevealAnswers ?? true)) return; // Test mode: held back
         _explanationVisible = !_explanationVisible;
         ExplanationPanel.IsVisible = _explanationVisible;
     }

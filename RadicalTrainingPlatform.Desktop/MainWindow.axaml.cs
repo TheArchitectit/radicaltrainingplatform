@@ -1,12 +1,14 @@
 using System.IO;
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Controls.Notifications;
 using Avalonia.Interactivity;
 using Avalonia.Platform.Storage;
 using Avalonia.Layout;
 using Avalonia.Media;
 using Avalonia.Threading;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using RadicalTrainingPlatform.Core;
 using RadicalTrainingPlatform.Core.Abstractions;
 using RadicalTrainingPlatform.Core.PdfExport;
@@ -28,6 +30,8 @@ public partial class MainWindow : Window
     private readonly IQuestionParser _questionParser;
     private readonly IBlueprintService _blueprintService;
     private readonly IReferenceService _referenceService;
+    private readonly ILogger<MainWindow>? _logger;
+    private WindowNotificationManager? _notifications;
 
     private Dictionary<string, List<Question>> _exams = new(StringComparer.OrdinalIgnoreCase);
     private List<ExamCatalogItem> _catalog = new();
@@ -67,6 +71,7 @@ public partial class MainWindow : Window
         _questionParser = services.GetRequiredService<IQuestionParser>();
         _blueprintService = services.GetRequiredService<IBlueprintService>();
         _referenceService = services.GetRequiredService<IReferenceService>();
+        _logger = services.GetService<ILogger<MainWindow>>();
     }
 
     private void OnLoaded(object? sender, RoutedEventArgs e)
@@ -183,7 +188,9 @@ public partial class MainWindow : Window
 
         int? limit = _currentMode == "Test" ? 75 : null;
         // Shuffle: legacy banks key up to 100% of answers to one letter.
-        _session = new ExamSessionViewModel(questions, examCode, limit, shuffleOptions: true);
+        _session = new ExamSessionViewModel(questions, examCode, limit, shuffleOptions: true,
+            // Test mode holds back correctness/explanations until the end.
+            revealAnswersAfterSubmit: _currentMode != "Test");
         _lastExamCode = examCode;
         _session.PropertyChanged += OnSessionPropertyChanged;
 
@@ -280,10 +287,17 @@ public partial class MainWindow : Window
             ShowExamSelector();
     }
 
+    /// <summary>
+    /// The exam in scope: active study session (the study exam while
+    /// reviewing — the review VM's code "X (Review)" matches no bank, which
+    /// made Export silently do nothing), else paused, else last studied.
+    /// </summary>
+    private string? CurrentExamCode =>
+        ((InReviewMode ? _reviewReturnSession : _session) ?? _pausedSession)?.ExamCode ?? _lastExamCode;
+
     private void OnBlueprintClicked(object? sender, RoutedEventArgs e)
     {
-        // Exam scope: current session, else the last one studied.
-        var code = _session?.ExamCode ?? _lastExamCode;
+        var code = CurrentExamCode;
         if (string.IsNullOrEmpty(code))
         {
             // No exam studied yet — show selector rather than an empty canvas.
@@ -381,7 +395,7 @@ public partial class MainWindow : Window
     /// </summary>
     public byte[]? GenerateStudyGuidePdf()
     {
-        var code = _session?.ExamCode ?? _lastExamCode;
+        var code = CurrentExamCode;
         if (string.IsNullOrEmpty(code)) return null;
         if (!_exams.TryGetValue(code, out var questions) || questions.Count == 0) return null;
         var title = _catalog.FirstOrDefault(c => string.Equals(c.ExamCode, code, StringComparison.OrdinalIgnoreCase))?.DisplayName ?? code;
@@ -390,19 +404,44 @@ public partial class MainWindow : Window
 
     private async void ExportStudyGuide()
     {
-        var code = _session?.ExamCode ?? _lastExamCode;
+        var code = CurrentExamCode;
         if (string.IsNullOrEmpty(code)) { ShowExamSelector(); return; }
 
-        var file = await StorageProvider.SaveFilePickerAsync(new FilePickerSaveOptions
+        // async void: anything thrown here used to vanish into the global
+        // handler with no feedback, so report success and failure visibly.
+        try
         {
-            SuggestedFileName = $"{code}-study-guide.pdf",
-            DefaultExtension = ".pdf",
-        });
-        if (file == null) return; // user cancelled
+            var file = await StorageProvider.SaveFilePickerAsync(new FilePickerSaveOptions
+            {
+                SuggestedFileName = $"{code}-study-guide.pdf",
+                DefaultExtension = ".pdf",
+            });
+            if (file == null) return; // user cancelled
 
-        var bytes = GenerateStudyGuidePdf();
-        if (bytes is { Length: > 0 })
-            await File.WriteAllBytesAsync(file.Path.LocalPath, bytes);
+            var bytes = GenerateStudyGuidePdf();
+            if (bytes is not { Length: > 0 })
+            {
+                Notify("Export failed", $"No questions loaded for {code}.", NotificationType.Error);
+                return;
+            }
+
+            // Write through the storage item, not file.Path.LocalPath: sandboxed
+            // pickers (Flatpak portals, macOS) hand out non-local URIs.
+            await using (var stream = await file.OpenWriteAsync())
+                await stream.WriteAsync(bytes);
+            Notify("Study guide exported", file.Name, NotificationType.Success);
+        }
+        catch (Exception ex)
+        {
+            _logger?.LogError(ex, "Study guide export failed for {ExamCode}", code);
+            Notify("Export failed", ex.Message, NotificationType.Error);
+        }
+    }
+
+    private void Notify(string title, string message, NotificationType type)
+    {
+        _notifications ??= new WindowNotificationManager(this) { Position = NotificationPosition.BottomRight };
+        _notifications.Show(new Notification(title, message, type));
     }
 
     private void OnLabSimulatorClicked(object? sender, RoutedEventArgs e)

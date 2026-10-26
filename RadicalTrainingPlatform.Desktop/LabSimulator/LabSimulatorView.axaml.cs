@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Avalonia.Threading;
 using Xilium.CefGlue;
 using Xilium.CefGlue.Avalonia;
+using Xilium.CefGlue.Common;
 using Xilium.CefGlue.Common.Events;
 using RadicalTrainingPlatform.Avalonia.LabSimulator;
 
@@ -97,29 +98,12 @@ public partial class LabSimulatorView : UserControl, IDisposable
     {
         try
         {
-            // 1) Probe whether the native lib is resolvable. This call throws
-            //    CefRuntimeNotFoundException (or a DllNotFoundException) on
-            //    dev machines where the runtime bundle is not present.
-            CefRuntime.Load();
-
-            // 2) Build the Cef settings. Caches are placed under
-            //    %LocalAppData%/RadicalTrainingPlatform/CefCache (or platform equivalent).
-            var cacheDir = Path.Combine(
-                Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-                "RadicalTrainingPlatform", "CefCache");
-
-            Directory.CreateDirectory(cacheDir);
-
-            var settings = new CefSettings
-            {
-                CachePath = cacheDir,
-                LogFile = Path.Combine(cacheDir, "cef.log"),
-                LogSeverity = CefLogSeverity.Warning,
-                NoSandbox = true,            // Sandboxes don't play well with bundled apps
-                MultiThreadedMessageLoop = true,
-                WindowlessRenderingEnabled = false,
-                RemoteDebuggingPort = 0,     // 0 = disabled
-            };
+            // 1+2) Hand CefGlue our settings. They were built here but never
+            //      applied (cache, log file, sandbox all ignored), and the old
+            //      bare CefRuntime.Load() probe bypassed CefGlue's own native
+            //      library resolution. CefRuntimeLoader applies the settings
+            //      when the first browser loads the runtime, once per process.
+            EnsureCefRuntimeConfigured();
 
             // 3) Resolve the local index.html (sibling of the app binary,
             //    under  LabSimulator/Web/index.html  in the source tree,
@@ -198,15 +182,46 @@ public partial class LabSimulatorView : UserControl, IDisposable
     /// installed location first (<c>AppContext.BaseDirectory</c>), and
     /// fall back to the source-tree location during development.
     /// </summary>
+    private static readonly object CefInitLock = new();
+    private static bool _cefConfigured;
+
+    private static void EnsureCefRuntimeConfigured()
+    {
+        lock (CefInitLock)
+        {
+            if (_cefConfigured || CefRuntimeLoader.IsLoaded) return;
+
+            // Caches under %LocalAppData%/RadicalTrainingPlatform/CefCache
+            // (or the platform equivalent).
+            var cacheDir = Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+                "RadicalTrainingPlatform", "CefCache");
+            Directory.CreateDirectory(cacheDir);
+
+            CefRuntimeLoader.Initialize(new CefSettings
+            {
+                RootCachePath = cacheDir,
+                CachePath = cacheDir,
+                LogFile = Path.Combine(cacheDir, "cef.log"),
+                LogSeverity = CefLogSeverity.Warning,
+                NoSandbox = true,            // Sandboxes don't play well with bundled apps
+                WindowlessRenderingEnabled = false,
+                RemoteDebuggingPort = 0,     // 0 = disabled
+            });
+            _cefConfigured = true;
+        }
+    }
+
     private static string? ResolveLocalIndexPath()
     {
         var candidates = new[]
         {
             // 1) Deployed location (bin output)
             Path.Combine(AppContext.BaseDirectory, "LabSimulator", "Web", "index.html"),
-            // 2) Source-tree fallback when running from the repo root
+            // 2) Source-tree fallback (bin/<Config>/net10.0 → repo root). The
+            //    old candidate pointed at a folder that never existed.
             Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..",
-                "RadicalTrainingPlatform", "LabSimulator", "Web", "index.html"),
+                "RadicalTrainingPlatform.Web", "index.html"),
             // 3) One level up from the app binary (publish layouts)
             Path.Combine(AppContext.BaseDirectory, "..", "LabSimulator", "Web", "index.html"),
         };
