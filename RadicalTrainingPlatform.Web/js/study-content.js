@@ -15,19 +15,42 @@ export const TRACKS = {
     "order": 1,
     "coverage": {
       "total": 63,
-      "covered": 40,
-      "percent": 63,
+      "covered": 63,
+      "percent": 100,
       "coveredObjectiveIds": [],
       "examCoverage": {
         "COMPTIA-A-1201": {
           "total": 27,
-          "covered": 4,
-          "percent": 15,
+          "covered": 27,
+          "percent": 100,
           "coveredObjectiveIds": [
+            "1.1",
+            "1.2",
+            "1.3",
             "2.1",
+            "2.2",
             "2.3",
             "2.4",
-            "5.5"
+            "2.5",
+            "2.6",
+            "2.7",
+            "2.8",
+            "3.1",
+            "3.2",
+            "3.3",
+            "3.4",
+            "3.5",
+            "3.6",
+            "3.7",
+            "3.8",
+            "4.1",
+            "4.2",
+            "5.1",
+            "5.2",
+            "5.3",
+            "5.4",
+            "5.5",
+            "5.6"
           ]
         },
         "COMPTIA-A-1202": {
@@ -2637,6 +2660,1476 @@ export const ITEMS = [
     "provenanceStatus": "draft",
     "textHash": "fa244a7afea2a5ec",
     "bank": "core1-a2-fixtures.md"
+  },
+  {
+    "id": "COMPTIA-A-1201/core1-domain1-bank.md/Q17",
+    "examId": "COMPTIA-A-1201",
+    "number": "Q17",
+    "stem": "A user's phone has a battery that no longer holds a charge, and the back cover is visibly lifting. What should the technician do?",
+    "options": {
+      "A": "Charge the phone fully and monitor it for a day",
+      "B": "Press the cover back into place and continue use",
+      "C": "Take the device out of service and replace the battery",
+      "D": "Place the phone in a cool room until the cover settles"
+    },
+    "keys": [
+      "C"
+    ],
+    "explanation": "A lifting cover together with lost capacity is the signature of a swollen cell, which is a safety hazard that calls for replacement rather than continued use. Fully charging it (A) adds energy to a failing cell. Pressing the cover down (B) conceals the condition. Cooling it (D) does not reverse the swelling.",
+    "objectiveId": "1.1",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "beba3e232028e337",
+    "bank": "core1-domain1-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1201/core1-domain1-bank.md/Q18",
+    "examId": "COMPTIA-A-1201",
+    "number": "Q18",
+    "stem": "A phone's glass is cracked but every part of the screen still responds to touch. Which component is still working?",
+    "options": {
+      "A": "The digitizer",
+      "B": "The battery",
+      "C": "The charging port",
+      "D": "The antenna"
+    },
+    "keys": [
+      "A"
+    ],
+    "explanation": "The digitizer is the touch layer that converts contact into input, and it is working if every area responds. The battery (B), charging port (C) and antenna (D) are unrelated to touch response, so none of them explains the observation.",
+    "objectiveId": "1.1",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "928791f79e25c4e1",
+    "bank": "core1-domain1-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1201/core1-domain1-bank.md/Q19",
+    "examId": "COMPTIA-A-1201",
+    "number": "Q19",
+    "stem": "A phone will not charge with any cable, but the battery and the charger both work in another device. What should the technician check first?",
+    "options": {
+      "A": "Replace the main board",
+      "B": "Reinstall the operating system",
+      "C": "Replace the battery",
+      "D": "Inspect and clean the charging port"
+    },
+    "keys": [
+      "D"
+    ],
+    "explanation": "A port packed with pocket lint prevents the cable from seating, which produces exactly this symptom and is fixed without parts. Replacing the main board (A) is far beyond the first check. Reinstalling the OS (B) does not address a physical connection. The battery (C) has already been tested in another device.",
+    "objectiveId": "1.1",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "a1384139e76ce047",
+    "bank": "core1-domain1-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1201/core1-domain1-bank.md/Q20",
+    "examId": "COMPTIA-A-1201",
+    "number": "Q20",
+    "stem": "A user wants one connector that can carry power, data and video and plugs in either way. Which connector should the technician recommend?",
+    "options": {
+      "A": "Micro-USB",
+      "B": "USB-C",
+      "C": "Lightning",
+      "D": "USB Type-B"
+    },
+    "keys": [
+      "B"
+    ],
+    "explanation": "USB-C is reversible and can carry power, data and video when the port and cable support those features. Micro-USB (A) is not reversible and carries no video. Lightning (C) is Apple's older proprietary connector. Type-B (D) is the squarer connector used on printers and hubs.",
+    "objectiveId": "1.2",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "35c0d3e97b811549",
+    "bank": "core1-domain1-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1201/core1-domain1-bank.md/Q21",
+    "examId": "COMPTIA-A-1201",
+    "number": "Q21",
+    "stem": "A user taps a phone against a payment terminal to complete a purchase. Which wireless technology is being used?",
+    "options": {
+      "A": "Bluetooth",
+      "B": "Cellular",
+      "C": "NFC",
+      "D": "Wi-Fi"
+    },
+    "keys": [
+      "C"
+    ],
+    "explanation": "Near-field communication works at a few centimeters, which is what makes tap-to-pay both possible and hard to intercept at a distance. Bluetooth (A) has a much longer range. Cellular (B) connects to the carrier network. Wi-Fi (D) is a building-scale data link.",
+    "objectiveId": "1.2",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "cdd2e2462198a454",
+    "bank": "core1-domain1-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1201/core1-domain1-bank.md/Q22",
+    "examId": "COMPTIA-A-1201",
+    "number": "Q22",
+    "stem": "A user turns on the phone's personal hotspot so a laptop can use the phone's cellular data, then connects the laptop with a USB cable instead of Wi-Fi. What is this arrangement called?",
+    "options": {
+      "A": "USB tethering",
+      "B": "Bluetooth pairing",
+      "C": "Wireless charging",
+      "D": "Synchronization"
+    },
+    "keys": [
+      "A"
+    ],
+    "explanation": "Tethering shares the phone's data connection with another device over a cable, Bluetooth or Wi-Fi, and the cabled form is USB tethering. Bluetooth pairing (B) is the setup step for a Bluetooth link, not a cabled one. Wireless charging (C) transfers power inductively. Synchronization (D) copies contacts and files.",
+    "objectiveId": "1.2",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "d3333279ec51d058",
+    "bank": "core1-domain1-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1201/core1-domain1-bank.md/Q23",
+    "examId": "COMPTIA-A-1201",
+    "number": "Q23",
+    "stem": "A company must enroll 40 phones so that each receives the same Wi-Fi, mail and policy configuration and can be wiped if lost. Which system provides this?",
+    "options": {
+      "A": "A local administrator account on each phone",
+      "B": "A printed setup guide for each user",
+      "C": "A shared cloud drive with the settings listed",
+      "D": "A mobile device management service"
+    },
+    "keys": [
+      "D"
+    ],
+    "explanation": "Mobile device management enrolls a device, pushes configuration profiles and enforces policy including remote wipe, which is exactly the requirement at this scale. Local administrator accounts (A) do not exist on managed mobile platforms in that form. A printed guide (B) leaves 40 devices configured differently. A cloud drive of settings (C) still requires manual configuration on each phone.",
+    "objectiveId": "1.3",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "3feeb89c879aac5b",
+    "bank": "core1-domain1-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1201/core1-domain1-bank.md/Q24",
+    "examId": "COMPTIA-A-1201",
+    "number": "Q24",
+    "stem": "A user's mail application on a phone fails to connect, and the account was set up manually. Which settings should the technician verify first?",
+    "options": {
+      "A": "The phone's wallpaper and font size",
+      "B": "The server name, port and encryption setting",
+      "C": "The number of photos stored on the device",
+      "D": "The screen brightness setting"
+    },
+    "keys": [
+      "B"
+    ],
+    "explanation": "A manual mail configuration depends on the server address, port and TLS setting matching what the mail service requires, and any one of them being wrong produces exactly this failure. Appearance settings (A) and brightness (D) have no bearing on mail. Photo storage (C) is a capacity issue, not a connection issue.",
+    "objectiveId": "1.3",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "a8cf4c72c3f1d518",
+    "bank": "core1-domain1-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1201/core1-domain1-bank.md/Q25",
+    "examId": "COMPTIA-A-1201",
+    "number": "Q25",
+    "stem": "A company policy requires that a phone's camera be disabled on site and that the device report when it leaves a defined area. Which pair of capabilities delivers this?",
+    "options": {
+      "A": "Anti-virus scanning and a firewall",
+      "B": "Encryption and a passcode",
+      "C": "A configuration profile and geofencing",
+      "D": "A VPN client and a proxy server"
+    },
+    "keys": [
+      "C"
+    ],
+    "explanation": "Configuration profiles enforce device restrictions such as disabling the camera, and geofencing triggers an action when the device crosses a defined boundary. Antivirus and a firewall (A) address malware and traffic. Encryption and a passcode (B) protect stored data and access. A VPN and proxy (D) protect and route network traffic.",
+    "objectiveId": "1.3",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "56fdd68ee58a09fd",
+    "bank": "core1-domain1-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1201/core1-domain2-bank.md/Q26",
+    "examId": "COMPTIA-A-1201",
+    "number": "Q26",
+    "stem": "A video call breaks up slightly but stays usable, while a file transfer over the same link either completes or fails cleanly. Which protocol behavior explains the difference?",
+    "options": {
+      "A": "The call uses UDP, which favors timely delivery over retransmission",
+      "B": "The call uses TCP, which guarantees every packet arrives",
+      "C": "The file transfer uses UDP and retries at the application layer",
+      "D": "The file transfer uses a protocol with no error detection"
+    },
+    "keys": [
+      "A"
+    ],
+    "explanation": "UDP sends datagrams without retransmission, so a lossy link produces small glitches rather than stalls, which suits real-time media. Claiming the call uses TCP (B) inverts the behavior. A file transfer over UDP (C) is not the usual file-transfer design. A protocol without error detection (D) still would not explain the clean completion pattern.",
+    "objectiveId": "2.1",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "47e06f2c600bfea1",
+    "bank": "core1-domain2-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1201/core1-domain2-bank.md/Q27",
+    "examId": "COMPTIA-A-1201",
+    "number": "Q27",
+    "stem": "A user needs coverage across a large warehouse with many steel racks, and the access points are far apart. Which band choice is the better starting point?",
+    "options": {
+      "A": "6 GHz, because it has the widest channels",
+      "B": "5 GHz, because it has the longest range",
+      "C": "2.4 GHz, because it penetrates obstacles better",
+      "D": "60 GHz, because it avoids all interference"
+    },
+    "keys": [
+      "C"
+    ],
+    "explanation": "Lower frequencies attenuate less through walls and metal, so 2.4 GHz reaches farther and bends around obstacles better than the higher bands. 6 GHz (A) offers clean wide channels at the shortest range. 5 GHz (B) is faster than 2.4 GHz but does not have the longest range. 60 GHz (D) has very short range and is blocked easily.",
+    "objectiveId": "2.2",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "f4b2d9e41936195b",
+    "bank": "core1-domain2-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1201/core1-domain2-bank.md/Q28",
+    "examId": "COMPTIA-A-1201",
+    "number": "Q28",
+    "stem": "A classroom has 40 devices connecting to one access point at the same time, and the current standard struggles under the load. Which standard is designed for dense client environments and works on both 2.4 and 5 GHz?",
+    "options": {
+      "A": "802.11a",
+      "B": "802.11ax",
+      "C": "802.11ac",
+      "D": "802.11g"
+    },
+    "keys": [
+      "B"
+    ],
+    "explanation": "802.11ax, marketed as Wi-Fi 6, is built for many simultaneous clients and operates on both bands. 802.11a (A) is 5 GHz only and long superseded. 802.11ac (C) is 5 GHz only. 802.11g (D) is 2.4 GHz only and far too old for this density.",
+    "objectiveId": "2.2",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "828df0a4d5d934e0",
+    "bank": "core1-domain2-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1201/core1-domain2-bank.md/Q29",
+    "examId": "COMPTIA-A-1201",
+    "number": "Q29",
+    "stem": "Three access points in one office are all set to channel 6 in the 2.4 GHz band, and clients report intermittent slowness. Which change reduces the interference?",
+    "options": {
+      "A": "Set all three to channel 1",
+      "B": "Set all three to channel 11",
+      "C": "Leave them at channel 6 and increase transmit power",
+      "D": "Set them to channels 1, 6 and 11 respectively"
+    },
+    "keys": [
+      "D"
+    ],
+    "explanation": "In 2.4 GHz, only channels 1, 6 and 11 do not overlap, so one access point on each gives three non-interfering cells. Moving all three to one channel (A, B) keeps them contending with each other. Raising power on a shared channel (C) makes the contention worse, not better.",
+    "objectiveId": "2.2",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "7d64a812506f725f",
+    "bank": "core1-domain2-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1201/core1-domain2-bank.md/Q30",
+    "examId": "COMPTIA-A-1201",
+    "number": "Q30",
+    "stem": "A device forwards traffic between two different networks and chooses a path for each packet. What is it?",
+    "options": {
+      "A": "A router",
+      "B": "A switch",
+      "C": "A hub",
+      "D": "A patch panel"
+    },
+    "keys": [
+      "A"
+    ],
+    "explanation": "Routers connect networks and make forwarding decisions based on destination addressing. A switch (B) forwards within a network by hardware address. A hub (C) repeats every frame to every port. A patch panel (D) is passive cabling termination.",
+    "objectiveId": "2.5",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "d8ba3c4a20cb5e3c",
+    "bank": "core1-domain2-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1201/core1-domain2-bank.md/Q31",
+    "examId": "COMPTIA-A-1201",
+    "number": "Q31",
+    "stem": "Every device on a small network sees every frame, and performance collapses as traffic rises. Which device is in use?",
+    "options": {
+      "A": "A layer-3 switch",
+      "B": "A wireless access point",
+      "C": "A hub",
+      "D": "A firewall"
+    },
+    "keys": [
+      "C"
+    ],
+    "explanation": "A hub repeats incoming frames out of every other port, so all devices share one collision domain and see each other's traffic. A layer-3 switch (A) forwards selectively and routes between networks. An access point (B) bridges wireless clients onto a segment. A firewall (D) filters traffic between zones.",
+    "objectiveId": "2.5",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "2f4f8a7b5ddd7a63",
+    "bank": "core1-domain2-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1201/core1-domain2-bank.md/Q32",
+    "examId": "COMPTIA-A-1201",
+    "number": "Q32",
+    "stem": "A technician must terminate the horizontal cabling from wall jacks in a wiring closet. Which component provides a central termination point for those cables?",
+    "options": {
+      "A": "A modem",
+      "B": "A patch panel",
+      "C": "A wireless controller",
+      "D": "A media converter"
+    },
+    "keys": [
+      "B"
+    ],
+    "explanation": "A patch panel holds the permanent cabling terminations and provides ports for short patch cords to the switch. A modem (A) converts the provider's signal. A wireless controller (C) manages access points. A media converter (D) changes between media types such as fiber and copper.",
+    "objectiveId": "2.5",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "bcd669ce23a401a9",
+    "bank": "core1-domain2-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1201/core1-domain2-bank.md/Q33",
+    "examId": "COMPTIA-A-1201",
+    "number": "Q33",
+    "stem": "A small office has one public address from its provider, but every workstation has a private address and can reach the internet. Which function makes this work?",
+    "options": {
+      "A": "DHCP reservation",
+      "B": "DNS forwarding",
+      "C": "MAC filtering",
+      "D": "Network address translation"
+    },
+    "keys": [
+      "D"
+    ],
+    "explanation": "Network address translation rewrites private source addresses to the single public address and tracks the return traffic, which is how many hosts share one address. A DHCP reservation (A) pins a lease to a device. DNS forwarding (B) resolves names. MAC filtering (C) restricts which hardware may join.",
+    "objectiveId": "2.6",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "1b2194b652cde835",
+    "bank": "core1-domain2-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1201/core1-domain2-bank.md/Q34",
+    "examId": "COMPTIA-A-1201",
+    "number": "Q34",
+    "stem": "A small business runs an internal camera server and wants it reachable from outside on one port without exposing the rest of the network. Which SOHO router feature does this?",
+    "options": {
+      "A": "Port forwarding",
+      "B": "A guest network",
+      "C": "A DHCP exclusion",
+      "D": "A content filter"
+    },
+    "keys": [
+      "A"
+    ],
+    "explanation": "Port forwarding maps one external port to one internal address and port, so only that service is reachable. A guest network (B) provides isolated internet access for visitors. A DHCP exclusion (C) keeps addresses out of the lease pool. A content filter (D) blocks categories of destinations.",
+    "objectiveId": "2.6",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "a9b42e653faceccc",
+    "bank": "core1-domain2-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1201/core1-domain2-bank.md/Q35",
+    "examId": "COMPTIA-A-1201",
+    "number": "Q35",
+    "stem": "Which configuration secures a new SOHO wireless network while still letting the owner's devices connect with a password?",
+    "options": {
+      "A": "Open authentication with a hidden network name",
+      "B": "WEP with a long key",
+      "C": "WPA2 or WPA3 with a strong pre-shared key",
+      "D": "MAC filtering with no encryption"
+    },
+    "keys": [
+      "C"
+    ],
+    "explanation": "Current encryption with a strong passphrase protects the traffic and requires a credential to join. Open authentication (A) encrypts nothing, and hiding the name is not a control. WEP (B) is broken. MAC filtering alone (D) can be spoofed and leaves traffic readable.",
+    "objectiveId": "2.6",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "e96da3d80d8717b5",
+    "bank": "core1-domain2-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1201/core1-domain2-bank.md/Q36",
+    "examId": "COMPTIA-A-1201",
+    "number": "Q36",
+    "stem": "Two buildings 2 kilometers apart must be connected, and the link runs beside heavy electrical equipment. Which medium fits best?",
+    "options": {
+      "A": "Cat 6 twisted pair",
+      "B": "Fiber",
+      "C": "Coaxial cable",
+      "D": "Cat 5e with a repeater"
+    },
+    "keys": [
+      "B"
+    ],
+    "explanation": "Fiber carries data for kilometers and is immune to electrical interference, which is exactly the combination described. Twisted pair (A, D) is limited to about 100 meters and picks up interference. Coax (C) is also distance-limited for this purpose and is not immune.",
+    "objectiveId": "2.7",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "277765fc04108a04",
+    "bank": "core1-domain2-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1201/core1-domain2-bank.md/Q37",
+    "examId": "COMPTIA-A-1201",
+    "number": "Q37",
+    "stem": "A rural site uses a satellite link. Users report that pages eventually load but every interaction feels delayed. Which characteristic explains this?",
+    "options": {
+      "A": "Low bandwidth",
+      "B": "Packet loss",
+      "C": "Duplicate addressing",
+      "D": "High latency"
+    },
+    "keys": [
+      "D"
+    ],
+    "explanation": "The signal travels to orbit and back, so each round trip adds a large fixed delay even when bandwidth is adequate. Low bandwidth (A) would make large transfers slow rather than every interaction feel delayed. Packet loss (B) would show as retries and failures. Duplicate addressing (C) causes conflicts, not uniform delay.",
+    "objectiveId": "2.7",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "55209487620a42f6",
+    "bank": "core1-domain2-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1201/core1-domain2-bank.md/Q38",
+    "examId": "COMPTIA-A-1201",
+    "number": "Q38",
+    "stem": "A user's wireless headset connects to a phone, the office network connects its computers, and the company's branch offices are joined across the country. Which set of network types is described, in that order?",
+    "options": {
+      "A": "PAN, LAN, WAN",
+      "B": "LAN, PAN, MAN",
+      "C": "WAN, LAN, PAN",
+      "D": "PAN, WAN, LAN"
+    },
+    "keys": [
+      "A"
+    ],
+    "explanation": "A headset pairing is a personal area network, an office network is a local area network, and links between distant sites form a wide area network. The other orderings (B, C, D) assign the office or the branch link to the wrong scope.",
+    "objectiveId": "2.7",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "684444be0d3629d7",
+    "bank": "core1-domain2-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1201/core1-domain2-bank.md/Q39",
+    "examId": "COMPTIA-A-1201",
+    "number": "Q39",
+    "stem": "A technician must attach RJ45 plugs to the ends of bulk twisted-pair cable. Which tool is used?",
+    "options": {
+      "A": "A punchdown tool",
+      "B": "A cable tester",
+      "C": "A crimper",
+      "D": "A toner probe"
+    },
+    "keys": [
+      "C"
+    ],
+    "explanation": "A crimper presses the plug's contacts onto the conductors and secures the connector body. A punchdown tool (A) terminates cable on a patch panel or keystone jack. A cable tester (B) verifies a finished cable. A toner probe (D) locates a cable among many.",
+    "objectiveId": "2.8",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "f584924dd2c3256e",
+    "bank": "core1-domain2-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1201/core1-domain2-bank.md/Q40",
+    "examId": "COMPTIA-A-1201",
+    "number": "Q40",
+    "stem": "A technician must find which of 30 unlabeled cables in a closet runs to a specific wall jack. Which tool is designed for this?",
+    "options": {
+      "A": "A multimeter",
+      "B": "A toner probe",
+      "C": "A loopback plug",
+      "D": "A crimper"
+    },
+    "keys": [
+      "B"
+    ],
+    "explanation": "A toner injects a signal on one end and the probe finds the matching cable at the other, which is exactly the tracing task. A multimeter (A) measures electrical values at a point. A loopback plug (C) tests a port by echoing its own signal. A crimper (D) attaches connectors.",
+    "objectiveId": "2.8",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "b002802e68c889a4",
+    "bank": "core1-domain2-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1201/core1-domain2-bank.md/Q41",
+    "examId": "COMPTIA-A-1201",
+    "number": "Q41",
+    "stem": "Users in one area complain that wireless is slow at certain times of day, though the signal is strong. Which tool best identifies the cause?",
+    "options": {
+      "A": "A cable tester",
+      "B": "A multimeter",
+      "C": "A punchdown tool",
+      "D": "A wireless analyzer"
+    },
+    "keys": [
+      "D"
+    ],
+    "explanation": "A wireless analyzer shows channel utilization, interference and nearby networks, which is what a strong-signal-but-slow complaint points at. A cable tester (A) checks copper runs. A multimeter (B) measures electrical values. A punchdown tool (C) terminates cabling.",
+    "objectiveId": "2.8",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "9b77df14a45420fd",
+    "bank": "core1-domain2-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1201/core1-domain3-bank.md/Q42",
+    "examId": "COMPTIA-A-1201",
+    "number": "Q42",
+    "stem": "A designer needs a display whose pixels switch off completely so black areas are truly black, with no backlight glow behind them. Which display type provides this?",
+    "options": {
+      "A": "A display that emits light per pixel, such as OLED",
+      "B": "A twisted-nematic liquid crystal panel",
+      "C": "A panel lit by an edge-mounted white backlight",
+      "D": "A projector using a color wheel"
+    },
+    "keys": [
+      "A"
+    ],
+    "explanation": "An emissive panel turns each pixel off rather than blocking a backlight, so dark areas carry no glow. A twisted-nematic panel (B) and an edge-lit panel (C) both use a backlight that stays on behind dark pixels. A color-wheel projector (D) is a projection technology and suffers the same washing-out in dark scenes.",
+    "objectiveId": "3.1",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "618a2624bfa42cc3",
+    "bank": "core1-domain3-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1201/core1-domain3-bank.md/Q43",
+    "examId": "COMPTIA-A-1201",
+    "number": "Q43",
+    "stem": "A user sets a laptop's resolution above the panel's native value to fit more on screen. What happens to the image?",
+    "options": {
+      "A": "More detail is rendered at the higher setting",
+      "B": "The image is scaled, so text and edges look softer",
+      "C": "The refresh rate rises to match",
+      "D": "The panel brightness increases"
+    },
+    "keys": [
+      "B"
+    ],
+    "explanation": "A panel has a fixed number of physical pixels, so anything above it is scaled up and interpolated, which softens fine detail. Rendering more detail (A) is what a higher-resolution panel does, not a higher setting. Refresh rate (C) and brightness (D) are separate attributes that the resolution setting does not change.",
+    "objectiveId": "3.1",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "45db2fc8e0d10ff5",
+    "bank": "core1-domain3-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1201/core1-domain3-bank.md/Q44",
+    "examId": "COMPTIA-A-1201",
+    "number": "Q44",
+    "stem": "A laptop's screen specification lists a brightness of 400. Which unit is being quoted?",
+    "options": {
+      "A": "Hertz",
+      "B": "Pixels per inch",
+      "C": "Nits",
+      "D": "Lumens"
+    },
+    "keys": [
+      "C"
+    ],
+    "explanation": "Display brightness is quoted in nits, which describe luminous intensity per unit area at the screen surface. Hertz (A) measures refresh rate. Pixels per inch (B) measures pixel density. Lumens (D) measure total light output, which suits a projector's rating rather than a panel's.",
+    "objectiveId": "3.1",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "6a61fb06e1396407",
+    "bank": "core1-domain3-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1201/core1-domain3-bank.md/Q45",
+    "examId": "COMPTIA-A-1201",
+    "number": "Q45",
+    "stem": "A technician must terminate a run of coaxial cable used for a small office's cable service. Which connector fits?",
+    "options": {
+      "A": "RJ45",
+      "B": "LC",
+      "C": "USB-C",
+      "D": "F-type"
+    },
+    "keys": [
+      "D"
+    ],
+    "explanation": "The F-type connector is the threaded connector used on coaxial cable for cable television and cable modem service. RJ45 (A) is for twisted-pair data cabling. An LC connector (B) is a fiber-optic connector. USB-C (C) is a general-purpose peripheral connector.",
+    "objectiveId": "3.2",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "5492f0affe51317e",
+    "bank": "core1-domain3-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1201/core1-domain3-bank.md/Q46",
+    "examId": "COMPTIA-A-1201",
+    "number": "Q46",
+    "stem": "A technician installs a 2.5-inch SATA solid-state drive. Which cable carries data between the drive and the motherboard?",
+    "options": {
+      "A": "A seven-pin SATA data cable",
+      "B": "A fifteen-pin SATA power connector",
+      "C": "A twenty-four-pin ATX connector",
+      "D": "A four-pin Molex connector"
+    },
+    "keys": [
+      "A"
+    ],
+    "explanation": "The narrow seven-pin SATA cable carries data to the host controller, while power arrives on its own connector. The fifteen-pin connector (B) and the Molex connector (D) supply power, not data. The 24-pin ATX connector (C) powers the main board.",
+    "objectiveId": "3.2",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "5a1a26a1fe63f56c",
+    "bank": "core1-domain3-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1201/core1-domain3-bank.md/Q47",
+    "examId": "COMPTIA-A-1201",
+    "number": "Q47",
+    "stem": "Cable must run through the return-air space above a suspended ceiling. Which cable rating is designed for that space?",
+    "options": {
+      "A": "Riser",
+      "B": "Plenum",
+      "C": "Standard PVC jacket",
+      "D": "Shielded twisted pair"
+    },
+    "keys": [
+      "B"
+    ],
+    "explanation": "Plenum-rated cable uses a jacket that produces limited smoke and does not spread fire in an air-handling space, which is exactly where it is required. Riser rating (A) suits vertical shafts, not air returns. A standard jacket (C) is not permitted there. Shielding (D) addresses interference, not fire safety.",
+    "objectiveId": "3.2",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "d5217dd207342e2f",
+    "bank": "core1-domain3-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1201/core1-domain3-bank.md/Q48",
+    "examId": "COMPTIA-A-1201",
+    "number": "Q48",
+    "stem": "A notebook needs a memory upgrade. Which module form factor fits?",
+    "options": {
+      "A": "A full-height DIMM",
+      "B": "A registered DIMM",
+      "C": "A small-outline DIMM",
+      "D": "A graphics card"
+    },
+    "keys": [
+      "C"
+    ],
+    "explanation": "Notebooks use the small-outline DIMM, which is shorter than a desktop module and slides into a socket lying flat. A full-height DIMM (A) is desktop-sized. A registered DIMM (B) is for servers with a memory controller that expects registers. A graphics card (D) is an add-on card, not memory.",
+    "objectiveId": "3.3",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "8e97a5b454604db0",
+    "bank": "core1-domain3-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1201/core1-domain3-bank.md/Q49",
+    "examId": "COMPTIA-A-1201",
+    "number": "Q49",
+    "stem": "A server's log reports corrected single-bit memory errors. Which memory feature produces that report?",
+    "options": {
+      "A": "Buffered output",
+      "B": "Low voltage operation",
+      "C": "Higher clock speed",
+      "D": "Error-correcting code"
+    },
+    "keys": [
+      "D"
+    ],
+    "explanation": "Error-correcting code adds check bits so the controller can detect and repair single-bit errors and log the correction, which is why it is standard on servers. Buffering (A) improves signal integrity at capacity. Low voltage (B) reduces power. Clock speed (C) affects throughput, not error handling.",
+    "objectiveId": "3.3",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "562462f4e05592f9",
+    "bank": "core1-domain3-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1201/core1-domain3-bank.md/Q50",
+    "examId": "COMPTIA-A-1201",
+    "number": "Q50",
+    "stem": "A technician tries to seat a DDR4 module in a DDR5 slot. What is the result?",
+    "options": {
+      "A": "It does not seat: the notch and pin layout differ",
+      "B": "The module seats and runs at the lower speed",
+      "C": "The module seats and runs at full speed",
+      "D": "The module seats only with an adapter"
+    },
+    "keys": [
+      "A"
+    ],
+    "explanation": "Each memory generation has its own keying and pin count, so a module from the wrong generation physically will not fit, which protects the board from an incompatible voltage and signalling scheme. Seating at a reduced speed (B, C) and seating with an adapter (D) all assume a fit that the keying prevents.",
+    "objectiveId": "3.3",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "57defa2f7ccb7659",
+    "bank": "core1-domain3-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1201/core1-domain3-bank.md/Q51",
+    "examId": "COMPTIA-A-1201",
+    "number": "Q51",
+    "stem": "Which drive type attaches directly to the PCIe bus and avoids the older storage controller?",
+    "options": {
+      "A": "A 2.5-inch SATA solid-state drive",
+      "B": "An NVMe drive in an M.2 slot",
+      "C": "A 7200 rpm hard disk",
+      "D": "A USB flash drive"
+    },
+    "keys": [
+      "B"
+    ],
+    "explanation": "An NVMe drive carries its commands over PCIe lanes, which removes the controller bottleneck and allows far higher queue depth. A SATA solid-state drive (A) still runs through the SATA controller. A hard disk (C) adds mechanical latency. A USB flash drive (D) runs through the USB bus and is the slowest of the four.",
+    "objectiveId": "3.4",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "a06dbfcecd01db71",
+    "bank": "core1-domain3-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1201/core1-domain3-bank.md/Q52",
+    "examId": "COMPTIA-A-1201",
+    "number": "Q52",
+    "stem": "Two 2 TB drives are configured as RAID 1. What capacity and protection does the array provide?",
+    "options": {
+      "A": "4 TB usable with no redundancy",
+      "B": "4 TB usable with one drive of redundancy",
+      "C": "2 TB usable and survives one drive failure",
+      "D": "2 TB usable and survives two drive failures"
+    },
+    "keys": [
+      "C"
+    ],
+    "explanation": "A mirror writes identical data to both drives, so usable capacity equals one drive and one failure can be sustained. Adding the capacities (A, B) describes striping without or with parity. Surviving two failures (D) would need a mirror of three or more copies.",
+    "objectiveId": "3.4",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "742a1b9ce99b352e",
+    "bank": "core1-domain3-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1201/core1-domain3-bank.md/Q53",
+    "examId": "COMPTIA-A-1201",
+    "number": "Q53",
+    "stem": "Which characteristic is a reason to choose a hard disk over a solid-state drive for a large archive?",
+    "options": {
+      "A": "No moving parts",
+      "B": "Silent operation",
+      "C": "Faster random access",
+      "D": "Lower cost per terabyte"
+    },
+    "keys": [
+      "D"
+    ],
+    "explanation": "Magnetic disks remain cheaper per terabyte in high capacities, which matters when the archive needs bulk space and speed is secondary. No moving parts (A), silence (B) and fast random access (C) are all solid-state advantages, so they argue against the hard disk rather than for it.",
+    "objectiveId": "3.4",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "a3f43d5b763f7d67",
+    "bank": "core1-domain3-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1201/core1-domain3-bank.md/Q54",
+    "examId": "COMPTIA-A-1201",
+    "number": "Q54",
+    "stem": "Which step belongs in a correct processor and cooler installation?",
+    "options": {
+      "A": "Apply a thin, even layer of thermal paste",
+      "B": "Fill the socket with paste before seating the processor",
+      "C": "Seat the cooler dry, then leave it without paste",
+      "D": "Apply paste to the socket pins"
+    },
+    "keys": [
+      "A"
+    ],
+    "explanation": "A thin layer of paste fills microscopic gaps between the two metal surfaces so heat crosses efficiently. Paste in the socket (B) and on the pins (D) contaminates the contacts and can prevent the system from starting. Leaving the joint dry (C) traps air, which is a poor conductor and leads to overheating.",
+    "objectiveId": "3.5",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "cb409b11e534d632",
+    "bank": "core1-domain3-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1201/core1-domain3-bank.md/Q55",
+    "examId": "COMPTIA-A-1201",
+    "number": "Q55",
+    "stem": "A workstation must run a discrete graphics card. Which slot is designed for it?",
+    "options": {
+      "A": "An M.2 socket",
+      "B": "A PCIe x16 slot",
+      "C": "A SATA port",
+      "D": "A memory slot"
+    },
+    "keys": [
+      "B"
+    ],
+    "explanation": "The PCIe x16 slot provides the width and power delivery a graphics card needs. An M.2 socket (A) is for storage, a SATA port (C) is for drives, and a memory slot (D) holds RAM, so none of them accepts an add-in card.",
+    "objectiveId": "3.5",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "8e48371ffc613325",
+    "bank": "core1-domain3-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1201/core1-domain3-bank.md/Q56",
+    "examId": "COMPTIA-A-1201",
+    "number": "Q56",
+    "stem": "A PCIe storage controller is installed and the drives attached to it are invisible to the operating system. What should be done?",
+    "options": {
+      "A": "Reinstall the operating system",
+      "B": "Replace the motherboard",
+      "C": "Install the controller's driver",
+      "D": "Clear the CMOS"
+    },
+    "keys": [
+      "C"
+    ],
+    "explanation": "The operating system needs the controller's driver to see the hardware, and a card that is seated but unsupported appears exactly as described. Reinstalling the system (A) destroys data without addressing the missing driver. Replacing the board (B) is unnecessary. Clearing the CMOS (D) resets firmware settings but does not add driver support.",
+    "objectiveId": "3.5",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "32ecbf39e5d3b63b",
+    "bank": "core1-domain3-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1201/core1-domain3-bank.md/Q57",
+    "examId": "COMPTIA-A-1201",
+    "number": "Q57",
+    "stem": "A system needs about 250 W, and a 1000 W supply is installed. What is the outcome?",
+    "options": {
+      "A": "Components receive 1000 W and fail",
+      "B": "The system refuses to start",
+      "C": "The supply runs continuously at full load",
+      "D": "The system draws only what it needs"
+    },
+    "keys": [
+      "D"
+    ],
+    "explanation": "A supply's rating is the maximum it can deliver, and the components draw their own demand, so a larger unit simply has headroom. Delivering the full rating (A) and running at full load (C) both treat the rating as a fixed output. A refusal to start (B) is not how a supply behaves.",
+    "objectiveId": "3.6",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "8a328b0a7aaef77e",
+    "bank": "core1-domain3-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1201/core1-domain3-bank.md/Q58",
+    "examId": "COMPTIA-A-1201",
+    "number": "Q58",
+    "stem": "Which connector supplies a desktop main board's primary power?",
+    "options": {
+      "A": "The 24-pin ATX connector",
+      "B": "A 15-pin SATA power connector",
+      "C": "A 6-pin PCIe connector",
+      "D": "A 4-pin Molex connector"
+    },
+    "keys": [
+      "A"
+    ],
+    "explanation": "The 24-pin ATX connector carries the main rails to the board. The SATA power connector (B) feeds drives, the 6-pin PCIe connector (C) feeds a graphics card, and the Molex connector (D) feeds older peripherals.",
+    "objectiveId": "3.6",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "10a1107e75feba7b",
+    "bank": "core1-domain3-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1201/core1-domain3-bank.md/Q59",
+    "examId": "COMPTIA-A-1201",
+    "number": "Q59",
+    "stem": "Why choose a modular power supply for a custom build?",
+    "options": {
+      "A": "It delivers more wattage from the wall",
+      "B": "Unused cables can be left off, which improves airflow",
+      "C": "It removes the need for a 24-pin connector",
+      "D": "It allows the supply to run without a fan"
+    },
+    "keys": [
+      "B"
+    ],
+    "explanation": "Cables attach only as needed, so the case is not filled with unused bundles that block airflow and trap heat. Wattage (A) is set by the model's rating, not by modularity. The 24-pin connector (C) is still required. Fanless operation (D) is a separate design choice.",
+    "objectiveId": "3.6",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "8c0c3ee91e3e4205",
+    "bank": "core1-domain3-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1201/core1-domain3-bank.md/Q60",
+    "examId": "COMPTIA-A-1201",
+    "number": "Q60",
+    "stem": "A network printer must be reachable by name from client computers day after day. Which configuration supports that?",
+    "options": {
+      "A": "The printer's display brightness",
+      "B": "The printer's default duplex setting",
+      "C": "A fixed address or a DHCP reservation",
+      "D": "A larger paper tray"
+    },
+    "keys": [
+      "C"
+    ],
+    "explanation": "A stable address keeps the name-to-address mapping valid, so clients keep finding the device after restarts and lease renewals. Display brightness (A), duplex defaults (B) and tray size (D) are settings for output, not for reachability.",
+    "objectiveId": "3.7",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "39d2a6159b38d12c",
+    "bank": "core1-domain3-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1201/core1-domain3-bank.md/Q61",
+    "examId": "COMPTIA-A-1201",
+    "number": "Q61",
+    "stem": "Scanning to a folder works, but scan-to-email fails on the same multifunction device. Which setting should be checked?",
+    "options": {
+      "A": "The scanner glass",
+      "B": "The paper type",
+      "C": "The duplex unit",
+      "D": "SMTP server settings"
+    },
+    "keys": [
+      "D"
+    ],
+    "explanation": "Scan-to-email hands the message to a mail server, so the SMTP host, port and credentials must be valid, and a failure confined to that function points there. The glass (A) would affect every scan. Paper type (B) and the duplex unit (C) affect printing, not the mail handoff.",
+    "objectiveId": "3.7",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "3c9cc39a19e0cd99",
+    "bank": "core1-domain3-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1201/core1-domain3-bank.md/Q62",
+    "examId": "COMPTIA-A-1201",
+    "number": "Q62",
+    "stem": "Confidential pages must not sit in the output tray for anyone to pick up. Which feature delivers this?",
+    "options": {
+      "A": "Secure print with a release code",
+      "B": "Duplex printing",
+      "C": "Collation of multiple copies",
+      "D": "A larger input tray"
+    },
+    "keys": [
+      "A"
+    ],
+    "explanation": "Secure printing holds the job until the sender enters a code at the device, so the pages are only printed when someone is standing there. Duplex (B), collation (C) and tray capacity (D) change how pages are produced, not who may collect them.",
+    "objectiveId": "3.7",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "8233621275d57fcb",
+    "bank": "core1-domain3-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1201/core1-domain3-bank.md/Q63",
+    "examId": "COMPTIA-A-1201",
+    "number": "Q63",
+    "stem": "A laser printer has reached its maintenance interval. What does the maintenance kit typically contain?",
+    "options": {
+      "A": "A toner cartridge and nothing else",
+      "B": "The fuser and paper-feed rollers",
+      "C": "The print head",
+      "D": "The duplex unit"
+    },
+    "keys": [
+      "B"
+    ],
+    "explanation": "Maintenance kits carry the wear items that the page count consumes, chiefly the fuser and the pickup and separation rollers. Toner (A) is a consumable replaced on its own schedule. Lasers have no print head (C) in the sense an inkjet does. The duplex unit (D) is a module, not a scheduled wear part.",
+    "objectiveId": "3.8",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "dc76b876bf576cad",
+    "bank": "core1-domain3-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1201/core1-domain3-bank.md/Q64",
+    "examId": "COMPTIA-A-1201",
+    "number": "Q64",
+    "stem": "A dot-matrix printer produces faint, uneven characters across the page. What should be replaced?",
+    "options": {
+      "A": "The fuser",
+      "B": "The printhead cleaner",
+      "C": "The ribbon cartridge",
+      "D": "The transfer belt"
+    },
+    "keys": [
+      "C"
+    ],
+    "explanation": "An impact printer forms characters by striking a ribbon against the paper, so a dried or worn ribbon gives faint and patchy output. A fuser (A) and a transfer belt (D) belong to laser printers. A cleaner (B) addresses a printhead condition on inkjets.",
+    "objectiveId": "3.8",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "4013ddd9ab4d8b68",
+    "bank": "core1-domain3-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1201/core1-domain3-bank.md/Q65",
+    "examId": "COMPTIA-A-1201",
+    "number": "Q65",
+    "stem": "An inkjet printer that sat unused for weeks prints with gaps and banding. Which action comes first?",
+    "options": {
+      "A": "Replace the fuser",
+      "B": "Reseat the memory",
+      "C": "Replace the pickup rollers",
+      "D": "Run the built-in printhead cleaning routine"
+    },
+    "keys": [
+      "D"
+    ],
+    "explanation": "Dried ink in the nozzles is the usual cause of gaps after idle time, and the cleaning routine clears the nozzles before any other step. A fuser (A) is laser-printer hardware. Memory (B) and pickup rollers (C) affect data handling and paper feed, not missing ink.",
+    "objectiveId": "3.8",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "d7bb7085e6da26be",
+    "bank": "core1-domain3-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1201/core1-domain4-bank.md/Q66",
+    "examId": "COMPTIA-A-1201",
+    "number": "Q66",
+    "stem": "A hypervisor runs directly on the server hardware, with no general-purpose operating system beneath it, and hosts several guest systems. Which type is it?",
+    "options": {
+      "A": "Type 2, hosted on a desktop operating system",
+      "B": "A container runtime sharing one kernel",
+      "C": "Type 1, bare metal",
+      "D": "An emulator translating a different instruction set"
+    },
+    "keys": [
+      "C"
+    ],
+    "explanation": "A bare-metal hypervisor is itself the platform and gives guests direct access to hardware with low overhead. A Type 2 hypervisor (A) needs a host operating system. A container runtime (B) shares the host kernel and does not provide a full guest system. An emulator (D) is a different mechanism entirely.",
+    "objectiveId": "4.1",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "233b2c46d143a27f",
+    "bank": "core1-domain4-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1201/core1-domain4-bank.md/Q67",
+    "examId": "COMPTIA-A-1201",
+    "number": "Q67",
+    "stem": "A technician must apply a major update to a production virtual machine and needs a fast rollback if the change misbehaves. Which action provides that?",
+    "options": {
+      "A": "Take a snapshot before the update",
+      "B": "Add virtual processors to the machine",
+      "C": "Move the machine permanently to another host",
+      "D": "Convert the machine to physical hardware"
+    },
+    "keys": [
+      "A"
+    ],
+    "explanation": "A snapshot captures the machine's disk and memory state at that moment, so reverting restores the prior state in minutes. Adding processors (B) changes resources but not the software state. A permanent move (C) relocates the machine without preserving a prior state. Converting to physical hardware (D) is a migration, not a rollback.",
+    "objectiveId": "4.1",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "7e6124e71155a53c",
+    "bank": "core1-domain4-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1201/core1-domain4-bank.md/Q68",
+    "examId": "COMPTIA-A-1201",
+    "number": "Q68",
+    "stem": "Two virtual machines share one host, and the second was given more memory than the host had free. Both now perform badly. What is the cause?",
+    "options": {
+      "A": "The virtual network adapters are misconfigured",
+      "B": "The host is overcommitted on memory",
+      "C": "The guest systems have no swap space",
+      "D": "The hypervisor is running in a container"
+    },
+    "keys": [
+      "B"
+    ],
+    "explanation": "When the assigned memory across guests exceeds what the host can supply, the host reclaims pages and guests stall, which shows up as general slowness on both machines. Network adapters (A) would break connectivity rather than slow execution. Swap space (C) is a guest-side setting and cannot recover memory the host does not have. Containers (D) describe a different runtime model.",
+    "objectiveId": "4.1",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "758b200657513944",
+    "bank": "core1-domain4-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1201/core1-domain4-bank.md/Q69",
+    "examId": "COMPTIA-A-1201",
+    "number": "Q69",
+    "stem": "A company shuts down its own mail server and moves staff to a hosted mail service that they reach with a browser or a mail client. Which service model is this?",
+    "options": {
+      "A": "Infrastructure as a service",
+      "B": "Platform as a service",
+      "C": "Desktop as a service",
+      "D": "Software as a service"
+    },
+    "keys": [
+      "D"
+    ],
+    "explanation": "The provider runs the application itself, and the customer only uses it, which is the software-as-a-service model. Infrastructure (A) supplies servers and storage the customer administers. A platform (B) supplies a runtime for the customer's own code. Desktop as a service (C) delivers a hosted desktop, not a mail application.",
+    "objectiveId": "4.2",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "a8945a9fb78c6353",
+    "bank": "core1-domain4-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1201/core1-domain4-bank.md/Q70",
+    "examId": "COMPTIA-A-1201",
+    "number": "Q70",
+    "stem": "An online retailer gains capacity automatically during a seasonal peak and gives it back when the peak ends, without buying hardware. Which cloud characteristic is this?",
+    "options": {
+      "A": "High availability",
+      "B": "Multitenancy",
+      "C": "Elasticity",
+      "D": "Geo-replication"
+    },
+    "keys": [
+      "C"
+    ],
+    "explanation": "Elasticity is the ability to grow resources on demand and release them afterwards, which is what the retailer is using. High availability (A) keeps a service running through failures. Multitenancy (B) describes several customers sharing infrastructure. Geo-replication (D) copies data across regions.",
+    "objectiveId": "4.2",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "fc5cda19e98dcc94",
+    "bank": "core1-domain4-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1201/core1-domain4-bank.md/Q71",
+    "examId": "COMPTIA-A-1201",
+    "number": "Q71",
+    "stem": "Which statement about public and private cloud deployment is correct?",
+    "options": {
+      "A": "A private cloud is provisioned for one organization's exclusive use",
+      "B": "Public cloud means any customer may read other customers' stored data",
+      "C": "A private cloud removes the need for security controls",
+      "D": "Public cloud is always less expensive than private cloud"
+    },
+    "keys": [
+      "A"
+    ],
+    "explanation": "A private cloud is dedicated to a single organization, whether it runs on premises or on dedicated provider infrastructure. Public cloud tenants are isolated from one another, so shared access to data (B) is wrong. Every cloud still needs controls (C). Cost (D) depends on the workload, which is why the claim is too strong.",
+    "objectiveId": "4.2",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "7889c958e4fc88fb",
+    "bank": "core1-domain4-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1201/core1-domain5-bank.md/Q72",
+    "examId": "COMPTIA-A-1201",
+    "number": "Q72",
+    "stem": "A desktop powers on, the fans spin, but there is no display and the board emits a repeating pattern of beeps. What should the technician check first?",
+    "options": {
+      "A": "The network cable",
+      "B": "That the memory modules are fully seated",
+      "C": "The printer driver",
+      "D": "The operating system license"
+    },
+    "keys": [
+      "B"
+    ],
+    "explanation": "A repeating beep code at power-on is the board reporting a self-test failure, and an unseated memory module is the most common cause, so reseating comes first. A network cable (A) does not affect the self test. Printer drivers (C) and licensing (D) are operating-system concerns that cannot run before the self test passes.",
+    "objectiveId": "5.1",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "49ce5641302d39cf",
+    "bank": "core1-domain5-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1201/core1-domain5-bank.md/Q73",
+    "examId": "COMPTIA-A-1201",
+    "number": "Q73",
+    "stem": "A workstation shuts down abruptly after several minutes of heavy work, and it restarts normally afterwards. Which cause is most likely?",
+    "options": {
+      "A": "A corrupted user profile",
+      "B": "An outdated browser",
+      "C": "A failed external drive",
+      "D": "An inadequate or overheating power supply"
+    },
+    "keys": [
+      "D"
+    ],
+    "explanation": "A shutdown that follows load and then recovers points to power delivery: the supply cannot sustain the draw or its fan has failed, so protection trips. A profile (A) and a browser (B) produce errors, not power loss. A failed external drive (C) would not stop the machine.",
+    "objectiveId": "5.1",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "48f3dd1bfe8c98db",
+    "bank": "core1-domain5-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1201/core1-domain5-bank.md/Q74",
+    "examId": "COMPTIA-A-1201",
+    "number": "Q74",
+    "stem": "A desktop loses its date and time whenever it is unplugged, and custom firmware settings revert. Which component should be replaced?",
+    "options": {
+      "A": "The power supply",
+      "B": "The processor",
+      "C": "The CMOS battery",
+      "D": "The memory modules"
+    },
+    "keys": [
+      "C"
+    ],
+    "explanation": "The small battery on the board keeps the real-time clock and the firmware settings alive while the machine has no power, so losing both is its signature. A power supply (A) fails when the machine is running. A processor (B) and memory (D) do not retain those settings.",
+    "objectiveId": "5.1",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "d77ac22898da6a02",
+    "bank": "core1-domain5-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1201/core1-domain5-bank.md/Q75",
+    "examId": "COMPTIA-A-1201",
+    "number": "Q75",
+    "stem": "A hard disk begins making a rhythmic clicking sound and files open slowly. What should the technician do first?",
+    "options": {
+      "A": "Copy the data off the drive",
+      "B": "Run a defragmentation",
+      "C": "Reinstall the operating system",
+      "D": "Increase the memory"
+    },
+    "keys": [
+      "A"
+    ],
+    "explanation": "Mechanical clicking signals a failing head or motor, and the drive may stop working entirely soon, so securing the data is the urgent step. Defragmenting (B) works the failing mechanism harder. Reinstalling the system (C) destroys data and does not repair hardware. More memory (D) is unrelated.",
+    "objectiveId": "5.2",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "5149f3eaa393e9cc",
+    "bank": "core1-domain5-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1201/core1-domain5-bank.md/Q76",
+    "examId": "COMPTIA-A-1201",
+    "number": "Q76",
+    "stem": "A server's RAID 1 array reports degraded status, and one drive has failed. What is the correct action?",
+    "options": {
+      "A": "Rebuild the array by wiping both drives",
+      "B": "Convert the array to a stripe",
+      "C": "Replace the failed drive and let the array rebuild",
+      "D": "Ignore it, because RAID 1 already has redundancy"
+    },
+    "keys": [
+      "C"
+    ],
+    "explanation": "A mirror keeps running on the surviving drive, and replacing the failed member lets the controller copy the data back and return the array to a healthy state. Wiping both drives (A) destroys the data that the mirror is protecting. Converting to a stripe (B) removes redundancy. Ignoring the fault (D) leaves the data with no protection at all.",
+    "objectiveId": "5.2",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "a1488e826d5354f0",
+    "bank": "core1-domain5-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1201/core1-domain5-bank.md/Q77",
+    "examId": "COMPTIA-A-1201",
+    "number": "Q77",
+    "stem": "A drive's self-monitoring reports reallocated sectors rising week over week. What does this indicate?",
+    "options": {
+      "A": "The drive needs a larger partition",
+      "B": "The drive is failing and should be replaced",
+      "C": "The drive is running at the wrong speed",
+      "D": "The file system needs defragmenting"
+    },
+    "keys": [
+      "B"
+    ],
+    "explanation": "Growing reallocated-sector counts mean the media is developing defects faster than the spare area can absorb them, so planned replacement protects the data. Partition size (A) is unrelated. Interface speed (C) is negotiated separately. Defragmenting (D) rearranges files and does not repair failing media.",
+    "objectiveId": "5.2",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "8343540936dc1a74",
+    "bank": "core1-domain5-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1201/core1-domain5-bank.md/Q78",
+    "examId": "COMPTIA-A-1201",
+    "number": "Q78",
+    "stem": "A projector's image is much dimmer than it was, and the unit has logged many hours of use. What should be done?",
+    "options": {
+      "A": "Reseat the video cable",
+      "B": "Change the input source",
+      "C": "Adjust the keystone setting",
+      "D": "Replace the lamp or light source"
+    },
+    "keys": [
+      "D"
+    ],
+    "explanation": "Projector light sources dim as they age and reach a rated end of life, which matches a gradual loss of brightness on a high-hour unit. A loose cable (A) causes a lost or flickering signal. Input selection (B) and keystone (C) change which image is shown and its shape, not its brightness.",
+    "objectiveId": "5.3",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "6b611add8768df0f",
+    "bank": "core1-domain5-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1201/core1-domain5-bank.md/Q79",
+    "examId": "COMPTIA-A-1201",
+    "number": "Q79",
+    "stem": "An external monitor flickers and occasionally drops the signal, and the case has been moved recently. What should be checked first?",
+    "options": {
+      "A": "The video cable connections at both ends",
+      "B": "The monitor's color profile",
+      "C": "The refresh rate setting",
+      "D": "The graphics driver version"
+    },
+    "keys": [
+      "A"
+    ],
+    "explanation": "A physically disturbed connection is the likeliest cause of intermittent signal loss, so seating or swapping the cable comes before software settings. A color profile (B) affects color rendition, not signal stability. Refresh rate (C) and driver version (D) can cause artifacts but rarely a signal that drops with movement.",
+    "objectiveId": "5.3",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "569601bb2a0c5ce8",
+    "bank": "core1-domain5-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1201/core1-domain5-bank.md/Q80",
+    "examId": "COMPTIA-A-1201",
+    "number": "Q80",
+    "stem": "A projector is placed to one side of the screen, and the image comes out wider at the top than the bottom. Which setting corrects it?",
+    "options": {
+      "A": "Brightness",
+      "B": "Color temperature",
+      "C": "Keystone correction",
+      "D": "Refresh rate"
+    },
+    "keys": [
+      "C"
+    ],
+    "explanation": "Keystone correction compensates for the angle between projector and screen, which is what produces the trapezoid. Brightness (A) and color temperature (B) control image intensity and tint. Refresh rate (D) governs how often the image is redrawn.",
+    "objectiveId": "5.3",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "ef098a522e82896f",
+    "bank": "core1-domain5-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1201/core1-domain5-bank.md/Q81",
+    "examId": "COMPTIA-A-1201",
+    "number": "Q81",
+    "stem": "A phone becomes noticeably warm and loses battery charge quickly, even with the screen off. What should the technician check first?",
+    "options": {
+      "A": "Which applications are consuming the battery",
+      "B": "The phone's ringtone volume",
+      "C": "The wallpaper setting",
+      "D": "The number of stored text messages"
+    },
+    "keys": [
+      "A"
+    ],
+    "explanation": "The battery-usage view names the applications responsible, and a process that keeps running in the background explains both the heat and the drain. Ringtone volume (B) and wallpaper (C) have no meaningful effect. Stored messages (D) do not consume power in a way that causes this.",
+    "objectiveId": "5.4",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "caa4826f33c4318c",
+    "bank": "core1-domain5-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1201/core1-domain5-bank.md/Q82",
+    "examId": "COMPTIA-A-1201",
+    "number": "Q82",
+    "stem": "A phone browses the web over Wi-Fi but cannot use cellular data, and the carrier reports no outage. What should be checked first?",
+    "options": {
+      "A": "The Wi-Fi password",
+      "B": "The screen timeout",
+      "C": "The Bluetooth pairing list",
+      "D": "The mobile data and access point settings"
+    },
+    "keys": [
+      "D"
+    ],
+    "explanation": "Data over the cellular network depends on mobile data being enabled and on the access point name settings being correct, and a failure limited to cellular points there. A Wi-Fi password (A) would break the link that is working. Screen timeout (B) and Bluetooth pairings (C) do not affect cellular data.",
+    "objectiveId": "5.4",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "06b09d4f31ee624e",
+    "bank": "core1-domain5-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1201/core1-domain5-bank.md/Q83",
+    "examId": "COMPTIA-A-1201",
+    "number": "Q83",
+    "stem": "A phone's screen shows a faint, permanent copy of the status bar even after the display changes. What is this condition?",
+    "options": {
+      "A": "A cracked digitizer",
+      "B": "Image persistence on the panel",
+      "C": "A blocked proximity sensor",
+      "D": "A failing charging port"
+    },
+    "keys": [
+      "B"
+    ],
+    "explanation": "Persistent images occur when panel pixels retain a charge pattern from a static element that is displayed constantly, and it is a panel-level fault. A cracked digitizer (A) affects touch input. A proximity sensor (C) blanks the screen during calls. The charging port (D) is a power path.",
+    "objectiveId": "5.4",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "7dbd0e11278fe7fa",
+    "bank": "core1-domain5-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1201/core1-domain5-bank.md/Q84",
+    "examId": "COMPTIA-A-1201",
+    "number": "Q84",
+    "stem": "A laser printer prints the same faint mark at the same distance on every page. What is the likely cause?",
+    "options": {
+      "A": "A low toner level overall",
+      "B": "An incorrect paper size setting",
+      "C": "A damaged drum or roller in the image path",
+      "D": "A network connection problem"
+    },
+    "keys": [
+      "C"
+    ],
+    "explanation": "A defect that repeats at a fixed interval comes from a rotating component, because each revolution places the mark at the same position. Low toner (A) produces general fading. Paper size (B) causes jams and wrong output. Network trouble (D) stops the job from arriving at all.",
+    "objectiveId": "5.6",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "2b6a3c7c665f3b96",
+    "bank": "core1-domain5-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1201/core1-domain5-bank.md/Q85",
+    "examId": "COMPTIA-A-1201",
+    "number": "Q85",
+    "stem": "A laser printer jams repeatedly with the first sheet, always at the paper tray. Which part should be examined?",
+    "options": {
+      "A": "The pickup rollers",
+      "B": "The fuser",
+      "C": "The duplex unit",
+      "D": "The toner cartridge"
+    },
+    "keys": [
+      "A"
+    ],
+    "explanation": "The pickup rollers lift the sheet from the tray, and when they glaze or wear smooth they fail to feed it. The fuser (B) is later in the path and would jam near the exit. The duplex unit (C) handles the return path. The toner cartridge (D) affects image quality, not feeding.",
+    "objectiveId": "5.6",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "b0ccd01721a0798a",
+    "bank": "core1-domain5-bank.md"
+  },
+  {
+    "id": "COMPTIA-A-1201/core1-domain5-bank.md/Q86",
+    "examId": "COMPTIA-A-1201",
+    "number": "Q86",
+    "stem": "Print jobs stay in the queue, and the local printer shows as offline although it is powered on and connected. Which action should be tried first?",
+    "options": {
+      "A": "Replace the printer's toner",
+      "B": "Reinstall the operating system",
+      "C": "Change the printer's paper size",
+      "D": "Restart the print spooler service"
+    },
+    "keys": [
+      "D"
+    ],
+    "explanation": "A stopped or wedged spooler leaves jobs queued and the device reported offline, and restarting the service is the standard first step. Toner (A) affects output quality. A system reinstall (B) is far beyond the symptom. Paper size (C) is an output setting that does not block the queue.",
+    "objectiveId": "5.6",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "c433f28c96a2e34f",
+    "bank": "core1-domain5-bank.md"
   },
   {
     "id": "COMPTIA-A-1202/core2-b2b4-fixtures.md/Q1",

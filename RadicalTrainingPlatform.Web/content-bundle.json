@@ -6,7 +6,7 @@
   "disclaimer": "This is independent study material. It is not official training and is not endorsed or approved by CompTIA, Nutanix, or any other certification body.",
   "compiled": {
     "path": "RadicalTrainingPlatform.Web/js/study-content.js",
-    "sha256": "c222012e41fbe1ec6adfe2e77573f5c132e2485fde5be9f4d877e24b3e3cd6d2"
+    "sha256": "2fa6133d5fcffb6a6a71ed978a2db50c187db3aab20475e6ad538420b9b6ca52"
   },
   "exams": {
     "COMPTIA-A-1201": {
@@ -46,6 +46,31 @@
           "bank": "core1-a2-fixtures.md",
           "path": "content/exams/COMPTIA-A-1201/questions/core1-a2-fixtures.md",
           "sha256": "c3c724b521aea34de1ac20af635b6f5656f2218fa85c61f97f6696ae73e068ff"
+        },
+        {
+          "bank": "core1-domain1-bank.md",
+          "path": "content/exams/COMPTIA-A-1201/questions/core1-domain1-bank.md",
+          "sha256": "19eddb39b27aff3ff583ec991ab8f19a4bf192225a165390e22e0e0f924dd1af"
+        },
+        {
+          "bank": "core1-domain2-bank.md",
+          "path": "content/exams/COMPTIA-A-1201/questions/core1-domain2-bank.md",
+          "sha256": "42a8497f16bb1886ac57124b4a165a5d7dc09234ed5fe9712bd66b72cbbaee9b"
+        },
+        {
+          "bank": "core1-domain3-bank.md",
+          "path": "content/exams/COMPTIA-A-1201/questions/core1-domain3-bank.md",
+          "sha256": "38c1e87c5a51b8b8f437589523a94b42c12c96db9282dedf3e3cc764c9e5cf29"
+        },
+        {
+          "bank": "core1-domain4-bank.md",
+          "path": "content/exams/COMPTIA-A-1201/questions/core1-domain4-bank.md",
+          "sha256": "df8483a46ad2338379941d1e0d79aaba8c0a01a7f9c106ff2d9b710c49c8972d"
+        },
+        {
+          "bank": "core1-domain5-bank.md",
+          "path": "content/exams/COMPTIA-A-1201/questions/core1-domain5-bank.md",
+          "sha256": "97d705d45580b3d5ad23d3dbc10ad6fe7aa57ce93fa709639c36b52e50e873a0"
         }
       ]
     },
@@ -557,6 +582,496 @@
       "itemId": "COMPTIA-A-1201/core1-a2-fixtures.md/Q16",
       "path": "content/provenance/COMPTIA-A-1201/Q16.json",
       "sha256": "e3747a90ba86549b1a25dcb5d187c0764249b3e5544b97aceb21be012096b93c",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "COMPTIA-A-1201/core1-domain1-bank.md/Q17",
+      "path": "content/provenance/COMPTIA-A-1201/Q17.json",
+      "sha256": "c9ebe76872795e71596b2ac38c1ac475259db9984433274960adf01f283eb493",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "COMPTIA-A-1201/core1-domain1-bank.md/Q18",
+      "path": "content/provenance/COMPTIA-A-1201/Q18.json",
+      "sha256": "37330434bed88c271d3746e2d3ed22831037c5ecf5b8c9efddb931b7593b956d",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "COMPTIA-A-1201/core1-domain1-bank.md/Q19",
+      "path": "content/provenance/COMPTIA-A-1201/Q19.json",
+      "sha256": "6dd7bc6fb4ce28835246dbc7b90a9b8b150b0c00494ffd620f13aa48ad066bae",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "COMPTIA-A-1201/core1-domain1-bank.md/Q20",
+      "path": "content/provenance/COMPTIA-A-1201/Q20.json",
+      "sha256": "c45cbcb8a24b4def5414ab1545b653c6a6693c83ff3e4027d29f7321aceb9966",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "COMPTIA-A-1201/core1-domain1-bank.md/Q21",
+      "path": "content/provenance/COMPTIA-A-1201/Q21.json",
+      "sha256": "9928ac7c779c9430cd5922412cb3383048dbc01394ace399dc266b40a4438908",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "COMPTIA-A-1201/core1-domain1-bank.md/Q22",
+      "path": "content/provenance/COMPTIA-A-1201/Q22.json",
+      "sha256": "5ba8bdff54adc940c41ad398ac0ef6dfac9389462cde5a70d53b0ec72e65adce",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "COMPTIA-A-1201/core1-domain1-bank.md/Q23",
+      "path": "content/provenance/COMPTIA-A-1201/Q23.json",
+      "sha256": "4535316df23c9548a558a2d3037e220fc050711e818a9c4b8eeaeb30dad277dd",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "COMPTIA-A-1201/core1-domain1-bank.md/Q24",
+      "path": "content/provenance/COMPTIA-A-1201/Q24.json",
+      "sha256": "cf0800d78b782e2a6207c8db6f986a0f1df505313433c085553f914b6d77d4ca",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "COMPTIA-A-1201/core1-domain1-bank.md/Q25",
+      "path": "content/provenance/COMPTIA-A-1201/Q25.json",
+      "sha256": "848c3654d6cc2c25c368cd55926e963426e1ae5accf564a4b65eaa4af50f085f",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "COMPTIA-A-1201/core1-domain2-bank.md/Q26",
+      "path": "content/provenance/COMPTIA-A-1201/Q26.json",
+      "sha256": "ac4746a7a7dd909fac18fb7a4c8ea6d2470d502479c50ea801bde26a65925060",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "COMPTIA-A-1201/core1-domain2-bank.md/Q27",
+      "path": "content/provenance/COMPTIA-A-1201/Q27.json",
+      "sha256": "539d879ee5864825e77e132895be4b2df49aef2e150317d679770d3dc162d813",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "COMPTIA-A-1201/core1-domain2-bank.md/Q28",
+      "path": "content/provenance/COMPTIA-A-1201/Q28.json",
+      "sha256": "0c598e61d7be1629fdb9c864557ca7517062e074dfd9c30a67231d88b63bed4b",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "COMPTIA-A-1201/core1-domain2-bank.md/Q29",
+      "path": "content/provenance/COMPTIA-A-1201/Q29.json",
+      "sha256": "ace93386e967135f77b4a0a67ddb4c5474be89ead08413f5d66e1cab5717f013",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "COMPTIA-A-1201/core1-domain2-bank.md/Q30",
+      "path": "content/provenance/COMPTIA-A-1201/Q30.json",
+      "sha256": "c8e7872e205decbdfb66c7d4aa7faed108dcb620633ca416c27fc570170c606e",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "COMPTIA-A-1201/core1-domain2-bank.md/Q31",
+      "path": "content/provenance/COMPTIA-A-1201/Q31.json",
+      "sha256": "d34439a8096f4be10b7f5ee03734a17be4cc15d33fb5237634ee5792b7001c1c",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "COMPTIA-A-1201/core1-domain2-bank.md/Q32",
+      "path": "content/provenance/COMPTIA-A-1201/Q32.json",
+      "sha256": "5e8fa3d65311660a18a7fe6ba94010417bf09bd8d43d6e4255a5fb3129a6c8a9",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "COMPTIA-A-1201/core1-domain2-bank.md/Q33",
+      "path": "content/provenance/COMPTIA-A-1201/Q33.json",
+      "sha256": "bbf66462bb67601e2e60fcc70954b7f29df3304a47f4082310ed96f02a4bce29",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "COMPTIA-A-1201/core1-domain2-bank.md/Q34",
+      "path": "content/provenance/COMPTIA-A-1201/Q34.json",
+      "sha256": "a2273a10159d7d1308541c575e1c267f5abeace8801f9a849ebf671d695e0194",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "COMPTIA-A-1201/core1-domain2-bank.md/Q35",
+      "path": "content/provenance/COMPTIA-A-1201/Q35.json",
+      "sha256": "a3bebacb0d60152340f9e841905b2bb6bb7195015b2be3bc6f0ac79a860ececa",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "COMPTIA-A-1201/core1-domain2-bank.md/Q36",
+      "path": "content/provenance/COMPTIA-A-1201/Q36.json",
+      "sha256": "601d9fc21acf11c246f2a147c8d24ad8869efe0e613591b9157e9e86d916a9c6",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "COMPTIA-A-1201/core1-domain2-bank.md/Q37",
+      "path": "content/provenance/COMPTIA-A-1201/Q37.json",
+      "sha256": "19d66f23d19dbe1d659fcee0adddd744b077d8588fa99b5686476fd0ac90c13b",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "COMPTIA-A-1201/core1-domain2-bank.md/Q38",
+      "path": "content/provenance/COMPTIA-A-1201/Q38.json",
+      "sha256": "fc5a1282b9932d0b571d06f3c599b2c99f969669635efbe73bfaab367cc77984",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "COMPTIA-A-1201/core1-domain2-bank.md/Q39",
+      "path": "content/provenance/COMPTIA-A-1201/Q39.json",
+      "sha256": "35033024f0bc878f954014283c4aaf6a76af627ce26308b15a1bc4855e3224af",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "COMPTIA-A-1201/core1-domain2-bank.md/Q40",
+      "path": "content/provenance/COMPTIA-A-1201/Q40.json",
+      "sha256": "56b6e126e64f1b6caac84bdfae92f47b63965fd27e65d42b924e64fa47b853e1",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "COMPTIA-A-1201/core1-domain2-bank.md/Q41",
+      "path": "content/provenance/COMPTIA-A-1201/Q41.json",
+      "sha256": "aa23ceb5fe5483c1fbe5360db215b990dbcd96a753a37b7e5628edd26464683b",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "COMPTIA-A-1201/core1-domain3-bank.md/Q42",
+      "path": "content/provenance/COMPTIA-A-1201/Q42.json",
+      "sha256": "4a1a13543bffff285c4eee3995d9ecccd94ff3a8575b732b97d62ff89a2b9759",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "COMPTIA-A-1201/core1-domain3-bank.md/Q43",
+      "path": "content/provenance/COMPTIA-A-1201/Q43.json",
+      "sha256": "a00cf7b73cdc27ae080e41ae66f8d33c88ff2c49e5616096561cb9cf0a6d23fe",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "COMPTIA-A-1201/core1-domain3-bank.md/Q44",
+      "path": "content/provenance/COMPTIA-A-1201/Q44.json",
+      "sha256": "58af2ede5b73537efa8bcf9f0c578a6e05fed2f14f05053a7b4d78a60f217848",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "COMPTIA-A-1201/core1-domain3-bank.md/Q45",
+      "path": "content/provenance/COMPTIA-A-1201/Q45.json",
+      "sha256": "84c2ab124e5501747c0bb3e31b66d4325254d66a4f7a48cbdff6ddceee0e09ef",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "COMPTIA-A-1201/core1-domain3-bank.md/Q46",
+      "path": "content/provenance/COMPTIA-A-1201/Q46.json",
+      "sha256": "c77155ba1ca2d032cf2219f5d2fb1f159e35e7af849400a5bc89a917f603dc5d",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "COMPTIA-A-1201/core1-domain3-bank.md/Q47",
+      "path": "content/provenance/COMPTIA-A-1201/Q47.json",
+      "sha256": "32f5b9a7b8b417cc28d9f1e7e55596f5724311810fad7bdf715f2b2cf90b93ea",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "COMPTIA-A-1201/core1-domain3-bank.md/Q48",
+      "path": "content/provenance/COMPTIA-A-1201/Q48.json",
+      "sha256": "950d8bd3b0503e30d65cb25e343b872192c8ff92bd38904304e640e839bb57f0",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "COMPTIA-A-1201/core1-domain3-bank.md/Q49",
+      "path": "content/provenance/COMPTIA-A-1201/Q49.json",
+      "sha256": "5dc4ca7fdd861c862a8fe724bd28348285306d3fce7c2f635fbe5d9eaf91dd09",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "COMPTIA-A-1201/core1-domain3-bank.md/Q50",
+      "path": "content/provenance/COMPTIA-A-1201/Q50.json",
+      "sha256": "9d58d368bc1f72aa516d1eeda9885cc19eff9ea07ed878afa3b4e87b60d8e421",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "COMPTIA-A-1201/core1-domain3-bank.md/Q51",
+      "path": "content/provenance/COMPTIA-A-1201/Q51.json",
+      "sha256": "d2ea97e6327c01a541488f634c548747827cf2b6561233a05624fd258935bc65",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "COMPTIA-A-1201/core1-domain3-bank.md/Q52",
+      "path": "content/provenance/COMPTIA-A-1201/Q52.json",
+      "sha256": "cb17cc67446625283ee9cda82080ab93713fce61ac3324af1c75fb46234ae662",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "COMPTIA-A-1201/core1-domain3-bank.md/Q53",
+      "path": "content/provenance/COMPTIA-A-1201/Q53.json",
+      "sha256": "1aa310bad7cb5372ac6aa0f0594dd65de561dbb014f139fec91da2f63fc85718",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "COMPTIA-A-1201/core1-domain3-bank.md/Q54",
+      "path": "content/provenance/COMPTIA-A-1201/Q54.json",
+      "sha256": "1f6da87faed116cd5fdcf94c55710477390842659f4cd42f6b0d2a2abf5cf407",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "COMPTIA-A-1201/core1-domain3-bank.md/Q55",
+      "path": "content/provenance/COMPTIA-A-1201/Q55.json",
+      "sha256": "6fffd7d42b5d2d2f102f77b80917739be25bd6eb707832324e98e78739b46a03",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "COMPTIA-A-1201/core1-domain3-bank.md/Q56",
+      "path": "content/provenance/COMPTIA-A-1201/Q56.json",
+      "sha256": "80e6f5c5e81db5c723b03920aa3e0c6deb71d57820f6f55d7ee4d1aa0e2868c9",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "COMPTIA-A-1201/core1-domain3-bank.md/Q57",
+      "path": "content/provenance/COMPTIA-A-1201/Q57.json",
+      "sha256": "2b03d405384a31b01cdbdaed056e41725dde93543151847fa135ad685bd44d41",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "COMPTIA-A-1201/core1-domain3-bank.md/Q58",
+      "path": "content/provenance/COMPTIA-A-1201/Q58.json",
+      "sha256": "17328fc1e2ee6abb5bd166265e21449bbff9409208e103f1a500c9e7a860c800",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "COMPTIA-A-1201/core1-domain3-bank.md/Q59",
+      "path": "content/provenance/COMPTIA-A-1201/Q59.json",
+      "sha256": "4ed7b3c0c63446ae58a57be26893ea778a6ef85dc74451ae78d3c1178e8feee0",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "COMPTIA-A-1201/core1-domain3-bank.md/Q60",
+      "path": "content/provenance/COMPTIA-A-1201/Q60.json",
+      "sha256": "0b888691f62aeae97234d50c51a3905825294d1e7375aced4dd68f846b5799cf",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "COMPTIA-A-1201/core1-domain3-bank.md/Q61",
+      "path": "content/provenance/COMPTIA-A-1201/Q61.json",
+      "sha256": "4010f3cfad86eb639855381095a49f8c1f96f6357c3b26e131811c27d939ccbf",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "COMPTIA-A-1201/core1-domain3-bank.md/Q62",
+      "path": "content/provenance/COMPTIA-A-1201/Q62.json",
+      "sha256": "3990f6897bcdc5a381f82ad6be2949b9a91dc23c437700820692c924e8caad9d",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "COMPTIA-A-1201/core1-domain3-bank.md/Q63",
+      "path": "content/provenance/COMPTIA-A-1201/Q63.json",
+      "sha256": "61b81425aa3f3fd916b64eb9a197ef567ccc86ae66ecb51f14db87abdd6ca7f5",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "COMPTIA-A-1201/core1-domain3-bank.md/Q64",
+      "path": "content/provenance/COMPTIA-A-1201/Q64.json",
+      "sha256": "991fdc189ead4cdbc3a0a8a221f9836f90482a76633d5d99e6bdee71f22cf7ee",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "COMPTIA-A-1201/core1-domain3-bank.md/Q65",
+      "path": "content/provenance/COMPTIA-A-1201/Q65.json",
+      "sha256": "67ccb7b0bcda5d84e6ae39f92ac6ac61140ff849cfb320dab298d4697ee9a955",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "COMPTIA-A-1201/core1-domain4-bank.md/Q66",
+      "path": "content/provenance/COMPTIA-A-1201/Q66.json",
+      "sha256": "bd9d75b20143338de3f8c592796c63fcf085aa03066ac84a8bc7c65adacad0b2",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "COMPTIA-A-1201/core1-domain4-bank.md/Q67",
+      "path": "content/provenance/COMPTIA-A-1201/Q67.json",
+      "sha256": "93693d28db4c0e0b2e2bd93f66bcff34b0cf10c88de5e6c4516fd399a68ae288",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "COMPTIA-A-1201/core1-domain4-bank.md/Q68",
+      "path": "content/provenance/COMPTIA-A-1201/Q68.json",
+      "sha256": "14f1bfba1a19c8fd88e099f3b7ece8531fd0b04b5565d0c3719db4ac171df664",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "COMPTIA-A-1201/core1-domain4-bank.md/Q69",
+      "path": "content/provenance/COMPTIA-A-1201/Q69.json",
+      "sha256": "0676fcbf4888eb4fd4b8e057c8a90e48fd4ca1ae43ab5c47480325f6cb79d795",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "COMPTIA-A-1201/core1-domain4-bank.md/Q70",
+      "path": "content/provenance/COMPTIA-A-1201/Q70.json",
+      "sha256": "534f97cbd8718d881ee51fd05ca30c4ecbd7dc5ea04ce056fce45d506488dd0f",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "COMPTIA-A-1201/core1-domain4-bank.md/Q71",
+      "path": "content/provenance/COMPTIA-A-1201/Q71.json",
+      "sha256": "d39f845d5f47d31e40e5b4c274a83ac1d603567e04c42e6cb424e566ba70aabd",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "COMPTIA-A-1201/core1-domain5-bank.md/Q72",
+      "path": "content/provenance/COMPTIA-A-1201/Q72.json",
+      "sha256": "65f0b09b6a0e708a73d3c60eeba3cf62c4efa012ad17e79abfc82f29a0b5cd87",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "COMPTIA-A-1201/core1-domain5-bank.md/Q73",
+      "path": "content/provenance/COMPTIA-A-1201/Q73.json",
+      "sha256": "06f46faa2702c634b88e4c630fe8d38c0696dddbdac4d7d93eeeed69c78229db",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "COMPTIA-A-1201/core1-domain5-bank.md/Q74",
+      "path": "content/provenance/COMPTIA-A-1201/Q74.json",
+      "sha256": "b99d7a5095ec10b1995cb519b6888679d6f3add1f58c7109fec7a80c55ea6f78",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "COMPTIA-A-1201/core1-domain5-bank.md/Q75",
+      "path": "content/provenance/COMPTIA-A-1201/Q75.json",
+      "sha256": "1b377c50d939672b87713dc46eece94f7af6ee794e7bcd5842ecfd501a8d1346",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "COMPTIA-A-1201/core1-domain5-bank.md/Q76",
+      "path": "content/provenance/COMPTIA-A-1201/Q76.json",
+      "sha256": "bb8a3161953524d18e71d9fa1811514a93132158ae33e2ca6fe68939f22d9681",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "COMPTIA-A-1201/core1-domain5-bank.md/Q77",
+      "path": "content/provenance/COMPTIA-A-1201/Q77.json",
+      "sha256": "395008999af414565048510dbc733cffdac62096bdacf760b4ffbc3580e5fddd",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "COMPTIA-A-1201/core1-domain5-bank.md/Q78",
+      "path": "content/provenance/COMPTIA-A-1201/Q78.json",
+      "sha256": "3f3610b596d7394461c72cfd4218655d1f59d28a14c2f748d78b352b715ff916",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "COMPTIA-A-1201/core1-domain5-bank.md/Q79",
+      "path": "content/provenance/COMPTIA-A-1201/Q79.json",
+      "sha256": "1267485888da0d8fc4e62d0c846bbf2e2538f0e915fe107bf7afaf778aaec8f3",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "COMPTIA-A-1201/core1-domain5-bank.md/Q80",
+      "path": "content/provenance/COMPTIA-A-1201/Q80.json",
+      "sha256": "bd4a668440698c86a98bc10fdc00aed3b41ce81c412367b72bed4db4eeaa6e2c",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "COMPTIA-A-1201/core1-domain5-bank.md/Q81",
+      "path": "content/provenance/COMPTIA-A-1201/Q81.json",
+      "sha256": "87839671c706ff05e89e2fdfeb2477db95e4b0b4195d50fd9c0a5451bc609ebd",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "COMPTIA-A-1201/core1-domain5-bank.md/Q82",
+      "path": "content/provenance/COMPTIA-A-1201/Q82.json",
+      "sha256": "75231989711a57503afaba76b7b8a892c4d345ba307ad5974ddb07d50c9fb2ff",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "COMPTIA-A-1201/core1-domain5-bank.md/Q83",
+      "path": "content/provenance/COMPTIA-A-1201/Q83.json",
+      "sha256": "c4bd6a9d557111723a4844bb701ce929e03a4b12a7d8a7a0eb2bcb3ae2806c01",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "COMPTIA-A-1201/core1-domain5-bank.md/Q84",
+      "path": "content/provenance/COMPTIA-A-1201/Q84.json",
+      "sha256": "6b0ae7313a4ebfe6d603ecb3dac43c99cc32d96e4df015d7bd7ab14c65670ffd",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "COMPTIA-A-1201/core1-domain5-bank.md/Q85",
+      "path": "content/provenance/COMPTIA-A-1201/Q85.json",
+      "sha256": "397876e668767dcec43a0c2ca59e05419c206790579be059b9fdf120586c83c5",
+      "status": "draft",
+      "reviewDate": ""
+    },
+    {
+      "itemId": "COMPTIA-A-1201/core1-domain5-bank.md/Q86",
+      "path": "content/provenance/COMPTIA-A-1201/Q86.json",
+      "sha256": "dddd171b28ca86911f08714a5331d887436b796091dd93faf520fb6f142fd189",
       "status": "draft",
       "reviewDate": ""
     },
