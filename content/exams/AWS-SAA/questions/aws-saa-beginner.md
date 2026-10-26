@@ -675,3 +675,56 @@ EC2 instances in a private subnet upload large volumes of data to an S3 bucket i
 A gateway endpoint for S3 carries no hourly or data processing charge and is added as a route, so the traffic reaches S3 without passing through the NAT gateway. An interface endpoint also works but bills hourly and per gigabyte. A larger NAT instance still processes every gigabyte, and Transfer Acceleration changes the upload path to S3 rather than removing the NAT charge.
 
 ---
+### Q51
+A relational database is read-heavy: every request runs the same small set of queries, and read latency dominates the user experience. Which change improves this most directly?
+- A) A standby instance in a second availability zone
+- B) A longer automated backup retention period
+- C) A larger storage volume
+- D) A read replica serving read traffic
+
+**Answer: D**
+A read replica takes the read queries onto a separate database instance, so read traffic stops competing with writes for one instance's resources. A standby (A) exists for failover and does not serve reads. Backup retention (B) and volume size (C) do not change query concurrency or latency.
+
+---
+### Q52
+Users around the world download large objects from a single region and report slow transfers. Which service improves this with the least application change?
+- A) A NAT gateway in each region
+- B) A content delivery network
+- C) A virtual private network connection
+- D) A larger internet gateway
+
+**Answer: B**
+A content delivery network caches objects at edge locations near the users, so a request travels a short distance instead of crossing the world. A NAT gateway (A) is outbound address translation. A VPN (C) is for private connectivity. An internet gateway (D) is the regional door to the internet; making it larger does not move the content closer.
+
+---
+### Q53
+Hundreds of sources continuously stream click events that must be buffered and then delivered in order to several consumers. Which service fits?
+- A) A managed streaming service that buffers and replays records
+- B) A relational database with a trigger on insert
+- C) A batch job reading files once an hour
+- D) A single server writing to a shared file system
+
+**Answer: A**
+A managed streaming service accepts many producers, holds records with their order, and lets several consumers read independently at their own pace. A database trigger (B) couples every write to its consumer and does not buffer. Hourly batch (C) is not continuous. One server and a shared file system (D) adds a single point of failure and no ordering guarantees.
+
+---
+### Q54
+A development database is used a few hours each week and must keep its data between sessions. Which choice minimizes cost?
+- A) A provisioned instance running continuously
+- B) A read replica in another region
+- C) A serverless option that scales capacity down when idle
+- D) A dedicated physical host
+
+**Answer: C**
+A serverless database reduces capacity when nothing is running, so the idle hours that dominate a development workload stop being billed at full size. Continuous provisioning (A) pays for those idle hours. A cross-region replica (B) doubles cost. A dedicated host (D) is the most expensive option here.
+
+---
+### Q55
+Traffic between two virtual networks in the same region is routed through a NAT gateway, which bills per gigabyte. Which change reduces the cost?
+- A) Add a second NAT gateway for redundancy
+- B) Send the traffic over the public internet gateway
+- C) Replicate the data to a second region
+- D) Route the traffic over a virtual network peering connection
+
+**Answer: D**
+Peering routes traffic privately between the two networks, so it no longer passes through the metered NAT path. A second NAT gateway (A) adds cost. The public internet path (B) adds exposure and is not cheaper. Cross-region replication (C) adds both transfer and storage charges.

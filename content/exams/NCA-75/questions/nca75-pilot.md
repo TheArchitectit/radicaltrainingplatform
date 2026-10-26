@@ -492,3 +492,51 @@ Storage is reported at 70% full. Why is the trend more useful than the number al
 
 **Answer: B**
 The level says where you are; the trend says how long you have. Storage at 70% and stable is comfortable, while storage at 70% and climbing 2% a week is a plan with a deadline — the same number, two different situations. The percentage is not miscalculated, and it does not set the replication factor.
+
+---
+
+### Q41
+A node is added to a running cluster, and the existing data must spread onto it without downtime. What handles this?
+- A) A background rebalance moves existing data across the nodes
+- B) The replication factor rises to include the new node automatically
+- C) The cluster must be rebuilt from backups to include the node
+- D) Snapshots are converted into clones on the new node
+
+**Answer: A**
+The cluster rebalances in the background, copying extents onto the new node and freeing space on the others while the cluster stays in service. The replication factor (B) is a separate policy and is not changed by adding hardware. A rebuild (C) is not required for an expansion. Snapshots (D) are point-in-time copies, not a data placement mechanism.
+
+---
+
+### Q42
+A cluster's entitlement is measured by the number of processor cores in the nodes rather than by the number of virtual machines. Which licensing model is this?
+- A) Per-seat subscription
+- B) Per-core, per-node subscription
+- C) Per-ticket support billing
+- D) Per-VM perpetual licences
+
+**Answer: B**
+Counting cores across installed nodes is the per-core model, which follows the hardware the software runs on rather than the workload count. Per-seat (A) counts users. Per-ticket billing (C) is a support arrangement. Per-VM perpetual (D) counts virtual machines, which the description explicitly rules out.
+
+---
+
+### Q43
+A case with the vendor requires the cluster's diagnostic bundle. Where is it produced?
+- A) By rebooting each controller virtual machine in turn
+- B) From the physical switch's system log
+- C) From the cluster's built-in log collection
+- D) From the hypervisor's boot menu
+
+**Answer: C**
+The management layer includes log collection that gathers cluster and controller logs into one bundle for support. Rebooting controllers (A) is disruptive and does not package logs. The switch log (B) covers only the network fabric. A boot menu (D) has no access to cluster diagnostics.
+
+---
+
+### Q44
+Disk latency on one virtual machine rises sharply whenever the nightly backup runs. What should be examined first?
+- A) The amount of memory assigned to the virtual machine
+- B) Whether the guest operating system needs reinstalling
+- C) The number of snapshots stored for the virtual machine
+- D) The virtual machine's I/O metrics against the backup window
+
+**Answer: D**
+Comparing the workload's own I/O measurements with the time the backup runs shows whether the two are related and which resource saturates. Memory (A) would not track a nightly schedule. A guest reinstall (B) discards evidence. Snapshot count (C) is worth knowing, but the timing question is about load, not capacity.

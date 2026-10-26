@@ -8001,7 +8001,7 @@ export const ITEMS = [
     "objectiveId": "1.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "bda2b9f53ffb6ed5",
+    "textHash": "c269704d3972935c",
     "bank": "nca75-pilot.md"
   },
   {
@@ -8022,7 +8022,7 @@ export const ITEMS = [
     "objectiveId": "1.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "50b1336c75bb3aa4",
+    "textHash": "862a4e6c8096d60c",
     "bank": "nca75-pilot.md"
   },
   {
@@ -8043,7 +8043,7 @@ export const ITEMS = [
     "objectiveId": "1.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "04e8489dc202b5e6",
+    "textHash": "e391b542758502a3",
     "bank": "nca75-pilot.md"
   },
   {
@@ -8064,7 +8064,7 @@ export const ITEMS = [
     "objectiveId": "1.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "8265e0b7791834f3",
+    "textHash": "c04488ede2a4c1a8",
     "bank": "nca75-pilot.md"
   },
   {
@@ -8085,7 +8085,7 @@ export const ITEMS = [
     "objectiveId": "1.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "ee4cedf74c6763a8",
+    "textHash": "c4869f5a509c0bbe",
     "bank": "nca75-pilot.md"
   },
   {
@@ -8106,7 +8106,7 @@ export const ITEMS = [
     "objectiveId": "1.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "393a97fa3acf7777",
+    "textHash": "459dd45e54c1af35",
     "bank": "nca75-pilot.md"
   },
   {
@@ -8127,7 +8127,7 @@ export const ITEMS = [
     "objectiveId": "1.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "72d6eae7c03d4afb",
+    "textHash": "c26355d2362f8328",
     "bank": "nca75-pilot.md"
   },
   {
@@ -8148,7 +8148,7 @@ export const ITEMS = [
     "objectiveId": "1.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "941063b7d7ef8997",
+    "textHash": "967f7df0bd6242a0",
     "bank": "nca75-pilot.md"
   },
   {
@@ -8169,7 +8169,7 @@ export const ITEMS = [
     "objectiveId": "1.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "06186d40385b01d6",
+    "textHash": "2960de10ac714b58",
     "bank": "nca75-pilot.md"
   },
   {
@@ -8190,7 +8190,7 @@ export const ITEMS = [
     "objectiveId": "1.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "198c1e0cda76c4a7",
+    "textHash": "007a39314daeee5f",
     "bank": "nca75-pilot.md"
   },
   {
@@ -8211,7 +8211,7 @@ export const ITEMS = [
     "objectiveId": "2.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "c5f21218edf54f7d",
+    "textHash": "81483e76777f46a0",
     "bank": "nca75-pilot.md"
   },
   {
@@ -8232,7 +8232,7 @@ export const ITEMS = [
     "objectiveId": "2.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "ef1d707468845d4c",
+    "textHash": "b6529aa063acf618",
     "bank": "nca75-pilot.md"
   },
   {
@@ -8253,7 +8253,7 @@ export const ITEMS = [
     "objectiveId": "2.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "645bf5fe0e21073d",
+    "textHash": "ed6db4e290df9145",
     "bank": "nca75-pilot.md"
   },
   {
@@ -8274,7 +8274,7 @@ export const ITEMS = [
     "objectiveId": "2.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "e25e16f19829c0d3",
+    "textHash": "ff8644a1236c589e",
     "bank": "nca75-pilot.md"
   },
   {
@@ -8295,7 +8295,7 @@ export const ITEMS = [
     "objectiveId": "2.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "e24d8c87c4efcfd2",
+    "textHash": "dc3b0b3331cb961f",
     "bank": "nca75-pilot.md"
   },
   {
@@ -8316,7 +8316,7 @@ export const ITEMS = [
     "objectiveId": "2.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "168d283252e3d16a",
+    "textHash": "cd4e7487688a55ea",
     "bank": "nca75-pilot.md"
   },
   {
@@ -8337,7 +8337,7 @@ export const ITEMS = [
     "objectiveId": "2.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "693b372ee9fc6fd8",
+    "textHash": "7c75f63f51682702",
     "bank": "nca75-pilot.md"
   },
   {
@@ -8358,7 +8358,7 @@ export const ITEMS = [
     "objectiveId": "2.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "5dd08fe81de7cff0",
+    "textHash": "cce695cfbcec3a9b",
     "bank": "nca75-pilot.md"
   },
   {
@@ -8379,7 +8379,7 @@ export const ITEMS = [
     "objectiveId": "2.4",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "5af1358ba62110b9",
+    "textHash": "45551dae9c9b92e3",
     "bank": "nca75-pilot.md"
   },
   {
@@ -8400,7 +8400,7 @@ export const ITEMS = [
     "objectiveId": "2.4",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "883c788924c2ce2e",
+    "textHash": "33beae230151fa41",
     "bank": "nca75-pilot.md"
   },
   {
@@ -8421,7 +8421,7 @@ export const ITEMS = [
     "objectiveId": "3.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "244e61847e2aaacf",
+    "textHash": "bf1a63677d6e92a0",
     "bank": "nca75-pilot.md"
   },
   {
@@ -8442,7 +8442,7 @@ export const ITEMS = [
     "objectiveId": "3.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "bc8fd45a02eeb7f1",
+    "textHash": "4910eabb4ef40cba",
     "bank": "nca75-pilot.md"
   },
   {
@@ -8463,7 +8463,7 @@ export const ITEMS = [
     "objectiveId": "3.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "0bb69176871562ac",
+    "textHash": "897e58cc6b39df5c",
     "bank": "nca75-pilot.md"
   },
   {
@@ -8484,7 +8484,7 @@ export const ITEMS = [
     "objectiveId": "3.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "067098cd17e07ef9",
+    "textHash": "21c0d53843190bfb",
     "bank": "nca75-pilot.md"
   },
   {
@@ -8505,7 +8505,7 @@ export const ITEMS = [
     "objectiveId": "3.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "c803e025397989a5",
+    "textHash": "950556c61609d112",
     "bank": "nca75-pilot.md"
   },
   {
@@ -8526,7 +8526,7 @@ export const ITEMS = [
     "objectiveId": "3.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "cd99e7b7d2f3dbf4",
+    "textHash": "d965bcf0c2b536ea",
     "bank": "nca75-pilot.md"
   },
   {
@@ -8547,7 +8547,7 @@ export const ITEMS = [
     "objectiveId": "3.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "7d884efe165ef1aa",
+    "textHash": "9fe3d4f5a4e0d200",
     "bank": "nca75-pilot.md"
   },
   {
@@ -8568,7 +8568,7 @@ export const ITEMS = [
     "objectiveId": "3.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "d03f39bca59f120f",
+    "textHash": "89abcdd0bd1657c8",
     "bank": "nca75-pilot.md"
   },
   {
@@ -8589,7 +8589,7 @@ export const ITEMS = [
     "objectiveId": "3.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "a2c15ae2c1d60717",
+    "textHash": "50f5f2fbc534bc2f",
     "bank": "nca75-pilot.md"
   },
   {
@@ -8610,7 +8610,7 @@ export const ITEMS = [
     "objectiveId": "3.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "b4641b6518517b01",
+    "textHash": "434cf170e37b60d4",
     "bank": "nca75-pilot.md"
   },
   {
@@ -8631,7 +8631,7 @@ export const ITEMS = [
     "objectiveId": "4.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "e1b5628b6bf227ee",
+    "textHash": "ac4a48a95892fa04",
     "bank": "nca75-pilot.md"
   },
   {
@@ -8652,7 +8652,7 @@ export const ITEMS = [
     "objectiveId": "4.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "64f57d72dfcd5f58",
+    "textHash": "4febe5fde50e54bc",
     "bank": "nca75-pilot.md"
   },
   {
@@ -8673,7 +8673,7 @@ export const ITEMS = [
     "objectiveId": "4.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "f0797dd06536baac",
+    "textHash": "7d707af9f8cab327",
     "bank": "nca75-pilot.md"
   },
   {
@@ -8694,7 +8694,7 @@ export const ITEMS = [
     "objectiveId": "4.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "152ae71d27d2e859",
+    "textHash": "ede45f690eb75429",
     "bank": "nca75-pilot.md"
   },
   {
@@ -8715,7 +8715,7 @@ export const ITEMS = [
     "objectiveId": "4.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "3c095cc57305f625",
+    "textHash": "d67d9634ff1bdf10",
     "bank": "nca75-pilot.md"
   },
   {
@@ -8736,7 +8736,7 @@ export const ITEMS = [
     "objectiveId": "4.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "7582b38cab0a8719",
+    "textHash": "a4ba6ef9bdf00979",
     "bank": "nca75-pilot.md"
   },
   {
@@ -8757,7 +8757,7 @@ export const ITEMS = [
     "objectiveId": "4.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "45984b23129e0a46",
+    "textHash": "ecf916efe3315e54",
     "bank": "nca75-pilot.md"
   },
   {
@@ -8778,7 +8778,7 @@ export const ITEMS = [
     "objectiveId": "4.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "9c31e5bfffad52f4",
+    "textHash": "a35504a3975ce3ab",
     "bank": "nca75-pilot.md"
   },
   {
@@ -8799,7 +8799,7 @@ export const ITEMS = [
     "objectiveId": "4.4",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "62a84deb01110d4c",
+    "textHash": "9e22fe0d39083096",
     "bank": "nca75-pilot.md"
   },
   {
@@ -8820,7 +8820,91 @@ export const ITEMS = [
     "objectiveId": "4.4",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "0ec09f329748acaf",
+    "textHash": "7f5cc5b5b522dbb7",
+    "bank": "nca75-pilot.md"
+  },
+  {
+    "id": "NCA-75/nca75-pilot.md/Q41",
+    "examId": "NCA-75",
+    "number": "Q41",
+    "stem": "A node is added to a running cluster, and the existing data must spread onto it without downtime. What handles this?",
+    "options": {
+      "A": "A background rebalance moves existing data across the nodes",
+      "B": "The replication factor rises to include the new node automatically",
+      "C": "The cluster must be rebuilt from backups to include the node",
+      "D": "Snapshots are converted into clones on the new node"
+    },
+    "keys": [
+      "A"
+    ],
+    "explanation": "The cluster rebalances in the background, copying extents onto the new node and freeing space on the others while the cluster stays in service. The replication factor (B) is a separate policy and is not changed by adding hardware. A rebuild (C) is not required for an expansion. Snapshots (D) are point-in-time copies, not a data placement mechanism.",
+    "objectiveId": "2.3",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "05f0e5735fa07f21",
+    "bank": "nca75-pilot.md"
+  },
+  {
+    "id": "NCA-75/nca75-pilot.md/Q42",
+    "examId": "NCA-75",
+    "number": "Q42",
+    "stem": "A cluster's entitlement is measured by the number of processor cores in the nodes rather than by the number of virtual machines. Which licensing model is this?",
+    "options": {
+      "A": "Per-seat subscription",
+      "B": "Per-core, per-node subscription",
+      "C": "Per-ticket support billing",
+      "D": "Per-VM perpetual licences"
+    },
+    "keys": [
+      "B"
+    ],
+    "explanation": "Counting cores across installed nodes is the per-core model, which follows the hardware the software runs on rather than the workload count. Per-seat (A) counts users. Per-ticket billing (C) is a support arrangement. Per-VM perpetual (D) counts virtual machines, which the description explicitly rules out.",
+    "objectiveId": "2.4",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "b5047d76683c31b3",
+    "bank": "nca75-pilot.md"
+  },
+  {
+    "id": "NCA-75/nca75-pilot.md/Q43",
+    "examId": "NCA-75",
+    "number": "Q43",
+    "stem": "A case with the vendor requires the cluster's diagnostic bundle. Where is it produced?",
+    "options": {
+      "A": "By rebooting each controller virtual machine in turn",
+      "B": "From the physical switch's system log",
+      "C": "From the cluster's built-in log collection",
+      "D": "From the hypervisor's boot menu"
+    },
+    "keys": [
+      "C"
+    ],
+    "explanation": "The management layer includes log collection that gathers cluster and controller logs into one bundle for support. Rebooting controllers (A) is disruptive and does not package logs. The switch log (B) covers only the network fabric. A boot menu (D) has no access to cluster diagnostics.",
+    "objectiveId": "4.3",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "013eea13fb6455e1",
+    "bank": "nca75-pilot.md"
+  },
+  {
+    "id": "NCA-75/nca75-pilot.md/Q44",
+    "examId": "NCA-75",
+    "number": "Q44",
+    "stem": "Disk latency on one virtual machine rises sharply whenever the nightly backup runs. What should be examined first?",
+    "options": {
+      "A": "The amount of memory assigned to the virtual machine",
+      "B": "Whether the guest operating system needs reinstalling",
+      "C": "The number of snapshots stored for the virtual machine",
+      "D": "The virtual machine's I/O metrics against the backup window"
+    },
+    "keys": [
+      "D"
+    ],
+    "explanation": "Comparing the workload's own I/O measurements with the time the backup runs shows whether the two are related and which resource saturates. Memory (A) would not track a nightly schedule. A guest reinstall (B) discards evidence. Snapshot count (C) is worth knowing, but the timing question is about load, not capacity.",
+    "objectiveId": "4.4",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "b7a1b67c846b9d34",
     "bank": "nca75-pilot.md"
   },
   {
@@ -8841,7 +8925,7 @@ export const ITEMS = [
     "objectiveId": "1.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "6a83ede03fffc5c5",
+    "textHash": "8edc99dc3fc9ff6c",
     "bank": "az104-beginner.md"
   },
   {
@@ -8862,7 +8946,7 @@ export const ITEMS = [
     "objectiveId": "1.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "741966a342858553",
+    "textHash": "e35fbcf94bfc1758",
     "bank": "az104-beginner.md"
   },
   {
@@ -8883,7 +8967,7 @@ export const ITEMS = [
     "objectiveId": "1.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "2962d837ad29b25c",
+    "textHash": "8a6c701002176efb",
     "bank": "az104-beginner.md"
   },
   {
@@ -8904,7 +8988,7 @@ export const ITEMS = [
     "objectiveId": "1.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "f3d5900c24533937",
+    "textHash": "1ab9c05ec89ced41",
     "bank": "az104-beginner.md"
   },
   {
@@ -8925,7 +9009,7 @@ export const ITEMS = [
     "objectiveId": "1.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "581f7d7da289c648",
+    "textHash": "5b72f0857e5cd55e",
     "bank": "az104-beginner.md"
   },
   {
@@ -8946,7 +9030,7 @@ export const ITEMS = [
     "objectiveId": "1.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "a179ec40152991d8",
+    "textHash": "720fc4857b03b0fe",
     "bank": "az104-beginner.md"
   },
   {
@@ -8967,7 +9051,7 @@ export const ITEMS = [
     "objectiveId": "1.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "84607ada1aefc490",
+    "textHash": "c7d5037190050948",
     "bank": "az104-beginner.md"
   },
   {
@@ -8988,7 +9072,7 @@ export const ITEMS = [
     "objectiveId": "1.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "83bc900ce5198ada",
+    "textHash": "e6123838d233da39",
     "bank": "az104-beginner.md"
   },
   {
@@ -9009,7 +9093,7 @@ export const ITEMS = [
     "objectiveId": "1.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "c2fc2b8f11db31c5",
+    "textHash": "413c3e94c1aa89af",
     "bank": "az104-beginner.md"
   },
   {
@@ -9030,7 +9114,7 @@ export const ITEMS = [
     "objectiveId": "1.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "bc5c8d3b5088bc5c",
+    "textHash": "e42df2482b356e8f",
     "bank": "az104-beginner.md"
   },
   {
@@ -9051,7 +9135,7 @@ export const ITEMS = [
     "objectiveId": "1.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "584b6a93497253a1",
+    "textHash": "94c8cd1519a86174",
     "bank": "az104-beginner.md"
   },
   {
@@ -9072,7 +9156,7 @@ export const ITEMS = [
     "objectiveId": "1.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "6c49f9dfc0dec247",
+    "textHash": "00c033e8c3d02602",
     "bank": "az104-beginner.md"
   },
   {
@@ -9094,7 +9178,7 @@ export const ITEMS = [
     "objectiveId": "2.1",
     "isMultiSelect": true,
     "provenanceStatus": "draft",
-    "textHash": "5cd9ae905db567b7",
+    "textHash": "17a04a15d9e961d4",
     "bank": "az104-beginner.md"
   },
   {
@@ -9115,7 +9199,7 @@ export const ITEMS = [
     "objectiveId": "2.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "651b6a82d9b41002",
+    "textHash": "cbfb319caff359ca",
     "bank": "az104-beginner.md"
   },
   {
@@ -9136,7 +9220,7 @@ export const ITEMS = [
     "objectiveId": "2.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "143dee798695eb11",
+    "textHash": "80e15f0a5e36fe63",
     "bank": "az104-beginner.md"
   },
   {
@@ -9157,7 +9241,7 @@ export const ITEMS = [
     "objectiveId": "2.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "b395e2ee34d11f0c",
+    "textHash": "b803278cad10b37b",
     "bank": "az104-beginner.md"
   },
   {
@@ -9178,7 +9262,7 @@ export const ITEMS = [
     "objectiveId": "2.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "f0ed994203b82141",
+    "textHash": "5d5371bbe98d362e",
     "bank": "az104-beginner.md"
   },
   {
@@ -9199,7 +9283,7 @@ export const ITEMS = [
     "objectiveId": "2.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "da97a4a041ffcd5b",
+    "textHash": "2ead6ace49d733b7",
     "bank": "az104-beginner.md"
   },
   {
@@ -9220,7 +9304,7 @@ export const ITEMS = [
     "objectiveId": "2.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "020c114dff3a02cb",
+    "textHash": "432617465d637649",
     "bank": "az104-beginner.md"
   },
   {
@@ -9241,7 +9325,7 @@ export const ITEMS = [
     "objectiveId": "2.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "eadc71d5881f0972",
+    "textHash": "8c0b2cb808c3e275",
     "bank": "az104-beginner.md"
   },
   {
@@ -9262,7 +9346,7 @@ export const ITEMS = [
     "objectiveId": "2.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "28621eba61d79608",
+    "textHash": "4663fe76566d71b6",
     "bank": "az104-beginner.md"
   },
   {
@@ -9283,7 +9367,7 @@ export const ITEMS = [
     "objectiveId": "2.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "35178e0f65f6a312",
+    "textHash": "ba953a1153c551f5",
     "bank": "az104-beginner.md"
   },
   {
@@ -9304,7 +9388,7 @@ export const ITEMS = [
     "objectiveId": "3.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "d13f94ba11ca268f",
+    "textHash": "c177fc2d1b98e35d",
     "bank": "az104-beginner.md"
   },
   {
@@ -9325,7 +9409,7 @@ export const ITEMS = [
     "objectiveId": "3.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "27703d5204c7ddad",
+    "textHash": "67581bbc0c3a860a",
     "bank": "az104-beginner.md"
   },
   {
@@ -9346,7 +9430,7 @@ export const ITEMS = [
     "objectiveId": "3.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "d162f258e90c1665",
+    "textHash": "c5d5d38f328a7e0f",
     "bank": "az104-beginner.md"
   },
   {
@@ -9367,7 +9451,7 @@ export const ITEMS = [
     "objectiveId": "3.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "97e027833572691f",
+    "textHash": "ce744e0b632a316c",
     "bank": "az104-beginner.md"
   },
   {
@@ -9388,7 +9472,7 @@ export const ITEMS = [
     "objectiveId": "3.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "0ed09303575e38d8",
+    "textHash": "3f4979e504d568cc",
     "bank": "az104-beginner.md"
   },
   {
@@ -9409,7 +9493,7 @@ export const ITEMS = [
     "objectiveId": "3.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "23c258f2cd656a4a",
+    "textHash": "971fae247b2ce477",
     "bank": "az104-beginner.md"
   },
   {
@@ -9430,7 +9514,7 @@ export const ITEMS = [
     "objectiveId": "3.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "07af824ea3eef234",
+    "textHash": "cee4839f00d07d31",
     "bank": "az104-beginner.md"
   },
   {
@@ -9451,7 +9535,7 @@ export const ITEMS = [
     "objectiveId": "3.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "ad5f9d84d33aae3d",
+    "textHash": "0d0a7e8ab4150e7c",
     "bank": "az104-beginner.md"
   },
   {
@@ -9472,7 +9556,7 @@ export const ITEMS = [
     "objectiveId": "3.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "8a54367a91ecb7b9",
+    "textHash": "06e2faf58b1a252c",
     "bank": "az104-beginner.md"
   },
   {
@@ -9493,7 +9577,7 @@ export const ITEMS = [
     "objectiveId": "3.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "d1928e422371d32c",
+    "textHash": "d2d8ce95b08cf55e",
     "bank": "az104-beginner.md"
   },
   {
@@ -9514,7 +9598,7 @@ export const ITEMS = [
     "objectiveId": "3.4",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "a8cce31d8d4f0907",
+    "textHash": "c4f3b926f55bd9cb",
     "bank": "az104-beginner.md"
   },
   {
@@ -9535,7 +9619,7 @@ export const ITEMS = [
     "objectiveId": "3.4",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "6e2009aa271aeaa7",
+    "textHash": "14f55200c57ea7d4",
     "bank": "az104-beginner.md"
   },
   {
@@ -9556,7 +9640,7 @@ export const ITEMS = [
     "objectiveId": "4.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "835d6e08d65db115",
+    "textHash": "d0621bdb0b2f3411",
     "bank": "az104-beginner.md"
   },
   {
@@ -9577,7 +9661,7 @@ export const ITEMS = [
     "objectiveId": "4.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "b200efa858617230",
+    "textHash": "3b8effff0c43a0b9",
     "bank": "az104-beginner.md"
   },
   {
@@ -9598,7 +9682,7 @@ export const ITEMS = [
     "objectiveId": "4.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "e158e1f8f955fb58",
+    "textHash": "f942a9771e14509a",
     "bank": "az104-beginner.md"
   },
   {
@@ -9619,7 +9703,7 @@ export const ITEMS = [
     "objectiveId": "4.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "e049ef457aa5e5af",
+    "textHash": "c76ac0eab6edede0",
     "bank": "az104-beginner.md"
   },
   {
@@ -9640,7 +9724,7 @@ export const ITEMS = [
     "objectiveId": "4.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "986e2c8d94ccd89e",
+    "textHash": "b567372510450099",
     "bank": "az104-beginner.md"
   },
   {
@@ -9661,7 +9745,7 @@ export const ITEMS = [
     "objectiveId": "4.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "3fe20de26bff712f",
+    "textHash": "020221c2612d906a",
     "bank": "az104-beginner.md"
   },
   {
@@ -9682,7 +9766,7 @@ export const ITEMS = [
     "objectiveId": "4.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "387e269dfc373a8c",
+    "textHash": "014c66ffda9f9d47",
     "bank": "az104-beginner.md"
   },
   {
@@ -9703,7 +9787,7 @@ export const ITEMS = [
     "objectiveId": "4.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "f33b9a1383409285",
+    "textHash": "7952cf4b9addf79c",
     "bank": "az104-beginner.md"
   },
   {
@@ -9724,7 +9808,7 @@ export const ITEMS = [
     "objectiveId": "4.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "10c86d687b21c43d",
+    "textHash": "e5422cc6563c9001",
     "bank": "az104-beginner.md"
   },
   {
@@ -9745,7 +9829,7 @@ export const ITEMS = [
     "objectiveId": "4.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "51cdfffdf1be1554",
+    "textHash": "1a12eb4bd655d7c7",
     "bank": "az104-beginner.md"
   },
   {
@@ -9766,7 +9850,7 @@ export const ITEMS = [
     "objectiveId": "5.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "293f51f222edbcbd",
+    "textHash": "06f175e1b3b56c34",
     "bank": "az104-beginner.md"
   },
   {
@@ -9787,7 +9871,7 @@ export const ITEMS = [
     "objectiveId": "5.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "98cfec4e5de8e87d",
+    "textHash": "3901c9f1c94e8fe7",
     "bank": "az104-beginner.md"
   },
   {
@@ -9808,7 +9892,7 @@ export const ITEMS = [
     "objectiveId": "5.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "8771187802782e73",
+    "textHash": "17e081e24a425cda",
     "bank": "az104-beginner.md"
   },
   {
@@ -9829,7 +9913,7 @@ export const ITEMS = [
     "objectiveId": "5.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "bcecf36346a0aae7",
+    "textHash": "ea90a51c20b9ff3d",
     "bank": "az104-beginner.md"
   },
   {
@@ -9850,7 +9934,7 @@ export const ITEMS = [
     "objectiveId": "5.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "6161cd38754ac757",
+    "textHash": "049e2db5135efc1d",
     "bank": "az104-beginner.md"
   },
   {
@@ -9871,7 +9955,28 @@ export const ITEMS = [
     "objectiveId": "5.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "70d8209ee7ea0bf8",
+    "textHash": "3b1ff2a971f66011",
+    "bank": "az104-beginner.md"
+  },
+  {
+    "id": "AZ-104/az104-beginner.md/Q51",
+    "examId": "AZ-104",
+    "number": "Q51",
+    "stem": "An App Service web app must add instances on its own when CPU usage stays high, and remove them when it falls. Which feature provides this?",
+    "options": {
+      "A": "A deployment slot swap",
+      "B": "A custom domain binding",
+      "C": "An App Service Environment",
+      "D": "Autoscale rules on the App Service plan"
+    },
+    "keys": [
+      "D"
+    ],
+    "explanation": "Autoscale rules watch a metric and add or remove instances against minimum and maximum bounds, which is exactly the behavior described. A slot swap (A) moves traffic between two deployment slots. A custom domain (B) changes the name a site answers to. An App Service Environment (C) is an isolated hosting deployment, not a scaling policy.",
+    "objectiveId": "3.4",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "5af8d31c5ceb4adb",
     "bank": "az104-beginner.md"
   },
   {
@@ -9892,7 +9997,7 @@ export const ITEMS = [
     "objectiveId": "1.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "d2ccb93c90ed3298",
+    "textHash": "387e72851a932759",
     "bank": "aws-saa-beginner.md"
   },
   {
@@ -9913,7 +10018,7 @@ export const ITEMS = [
     "objectiveId": "1.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "e3fee73835fb4ef2",
+    "textHash": "72b0439a54d90a28",
     "bank": "aws-saa-beginner.md"
   },
   {
@@ -9934,7 +10039,7 @@ export const ITEMS = [
     "objectiveId": "1.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "af48bc607425eb39",
+    "textHash": "c8b891c7ad92b7b1",
     "bank": "aws-saa-beginner.md"
   },
   {
@@ -9955,7 +10060,7 @@ export const ITEMS = [
     "objectiveId": "1.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "b591ee7d5ba1701c",
+    "textHash": "bf55bc1bb7154659",
     "bank": "aws-saa-beginner.md"
   },
   {
@@ -9976,7 +10081,7 @@ export const ITEMS = [
     "objectiveId": "1.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "0644f5edea0c7a68",
+    "textHash": "f40584cdeeb5c3f3",
     "bank": "aws-saa-beginner.md"
   },
   {
@@ -9997,7 +10102,7 @@ export const ITEMS = [
     "objectiveId": "1.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "59cab3535f4e0697",
+    "textHash": "83ba70d304eeadfe",
     "bank": "aws-saa-beginner.md"
   },
   {
@@ -10018,7 +10123,7 @@ export const ITEMS = [
     "objectiveId": "1.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "1e8205fda402956b",
+    "textHash": "ea9233b663f1da1e",
     "bank": "aws-saa-beginner.md"
   },
   {
@@ -10040,7 +10145,7 @@ export const ITEMS = [
     "objectiveId": "1.2",
     "isMultiSelect": true,
     "provenanceStatus": "draft",
-    "textHash": "f63eb0d528415f87",
+    "textHash": "613f4ca939c45147",
     "bank": "aws-saa-beginner.md"
   },
   {
@@ -10061,7 +10166,7 @@ export const ITEMS = [
     "objectiveId": "1.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "68475f7bf52029a8",
+    "textHash": "263d43c0727932f7",
     "bank": "aws-saa-beginner.md"
   },
   {
@@ -10082,7 +10187,7 @@ export const ITEMS = [
     "objectiveId": "1.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "122a9215a7df7df3",
+    "textHash": "c298e25480db3f4b",
     "bank": "aws-saa-beginner.md"
   },
   {
@@ -10103,7 +10208,7 @@ export const ITEMS = [
     "objectiveId": "1.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "26c8d4950c8db64b",
+    "textHash": "62478c500317f161",
     "bank": "aws-saa-beginner.md"
   },
   {
@@ -10124,7 +10229,7 @@ export const ITEMS = [
     "objectiveId": "1.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "e3af30ae76d67a0a",
+    "textHash": "10ba4fa2cac4dee4",
     "bank": "aws-saa-beginner.md"
   },
   {
@@ -10145,7 +10250,7 @@ export const ITEMS = [
     "objectiveId": "1.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "fb39c6b843cc2096",
+    "textHash": "b6d2376092a8bae4",
     "bank": "aws-saa-beginner.md"
   },
   {
@@ -10166,7 +10271,7 @@ export const ITEMS = [
     "objectiveId": "1.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "59a3cde2441d733e",
+    "textHash": "c444444bfc8a40e5",
     "bank": "aws-saa-beginner.md"
   },
   {
@@ -10187,7 +10292,7 @@ export const ITEMS = [
     "objectiveId": "1.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "5f8d128488399266",
+    "textHash": "fa49770698969d8a",
     "bank": "aws-saa-beginner.md"
   },
   {
@@ -10208,7 +10313,7 @@ export const ITEMS = [
     "objectiveId": "2.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "47d7cf3ff1b1ea8b",
+    "textHash": "547f311e04ea7b61",
     "bank": "aws-saa-beginner.md"
   },
   {
@@ -10229,7 +10334,7 @@ export const ITEMS = [
     "objectiveId": "2.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "dd528134a62dcab9",
+    "textHash": "b479a2da812f774b",
     "bank": "aws-saa-beginner.md"
   },
   {
@@ -10250,7 +10355,7 @@ export const ITEMS = [
     "objectiveId": "2.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "ec6bfeb773cfa0f7",
+    "textHash": "717099b07f36d021",
     "bank": "aws-saa-beginner.md"
   },
   {
@@ -10271,7 +10376,7 @@ export const ITEMS = [
     "objectiveId": "2.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "85e67adf857dd81e",
+    "textHash": "717a3e0f65473dc6",
     "bank": "aws-saa-beginner.md"
   },
   {
@@ -10292,7 +10397,7 @@ export const ITEMS = [
     "objectiveId": "2.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "0c972469924a84cc",
+    "textHash": "296381e0e3691525",
     "bank": "aws-saa-beginner.md"
   },
   {
@@ -10313,7 +10418,7 @@ export const ITEMS = [
     "objectiveId": "2.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "b4a6790463459a71",
+    "textHash": "4be6e035685a43b2",
     "bank": "aws-saa-beginner.md"
   },
   {
@@ -10334,7 +10439,7 @@ export const ITEMS = [
     "objectiveId": "2.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "27b80b828798bba8",
+    "textHash": "54e65d40169e1222",
     "bank": "aws-saa-beginner.md"
   },
   {
@@ -10355,7 +10460,7 @@ export const ITEMS = [
     "objectiveId": "2.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "a7659b37bc3923c5",
+    "textHash": "c8f3feb8af1da61e",
     "bank": "aws-saa-beginner.md"
   },
   {
@@ -10376,7 +10481,7 @@ export const ITEMS = [
     "objectiveId": "2.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "2704b901914e8497",
+    "textHash": "9b34476666d3e0b5",
     "bank": "aws-saa-beginner.md"
   },
   {
@@ -10397,7 +10502,7 @@ export const ITEMS = [
     "objectiveId": "2.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "20f5ade2c0981501",
+    "textHash": "75432a0bccb848fa",
     "bank": "aws-saa-beginner.md"
   },
   {
@@ -10418,7 +10523,7 @@ export const ITEMS = [
     "objectiveId": "2.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "aebd18d58b39fd85",
+    "textHash": "91a29cad5da42237",
     "bank": "aws-saa-beginner.md"
   },
   {
@@ -10439,7 +10544,7 @@ export const ITEMS = [
     "objectiveId": "2.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "e52aa4c405738e64",
+    "textHash": "a6835ffef752ef01",
     "bank": "aws-saa-beginner.md"
   },
   {
@@ -10460,7 +10565,7 @@ export const ITEMS = [
     "objectiveId": "2.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "0e324ced65a6ee79",
+    "textHash": "c572fc8f3a9c0ac6",
     "bank": "aws-saa-beginner.md"
   },
   {
@@ -10481,7 +10586,7 @@ export const ITEMS = [
     "objectiveId": "3.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "604d10878cf549e7",
+    "textHash": "b75c1cd2241704d6",
     "bank": "aws-saa-beginner.md"
   },
   {
@@ -10502,7 +10607,7 @@ export const ITEMS = [
     "objectiveId": "3.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "8ea7209ddd3329fc",
+    "textHash": "166743184b28b53e",
     "bank": "aws-saa-beginner.md"
   },
   {
@@ -10523,7 +10628,7 @@ export const ITEMS = [
     "objectiveId": "3.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "ce35fb4922229ea1",
+    "textHash": "d5faf6ca97a0c90d",
     "bank": "aws-saa-beginner.md"
   },
   {
@@ -10544,7 +10649,7 @@ export const ITEMS = [
     "objectiveId": "3.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "00c313b510c54d66",
+    "textHash": "eff5da051d26049c",
     "bank": "aws-saa-beginner.md"
   },
   {
@@ -10565,7 +10670,7 @@ export const ITEMS = [
     "objectiveId": "3.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "e33ce51a521e3e1a",
+    "textHash": "003ab1d56ded2217",
     "bank": "aws-saa-beginner.md"
   },
   {
@@ -10586,7 +10691,7 @@ export const ITEMS = [
     "objectiveId": "3.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "fe1bcd6d8548226e",
+    "textHash": "0c2807624f660b83",
     "bank": "aws-saa-beginner.md"
   },
   {
@@ -10607,7 +10712,7 @@ export const ITEMS = [
     "objectiveId": "3.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "441fb9a798359098",
+    "textHash": "0a08312ea7804e7c",
     "bank": "aws-saa-beginner.md"
   },
   {
@@ -10628,7 +10733,7 @@ export const ITEMS = [
     "objectiveId": "3.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "6170ad5ae28cf59f",
+    "textHash": "e4d65fda2e0b19f7",
     "bank": "aws-saa-beginner.md"
   },
   {
@@ -10649,7 +10754,7 @@ export const ITEMS = [
     "objectiveId": "3.4",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "5b28276d1bea62b4",
+    "textHash": "8426cac1da3f218a",
     "bank": "aws-saa-beginner.md"
   },
   {
@@ -10670,7 +10775,7 @@ export const ITEMS = [
     "objectiveId": "3.4",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "7a19dfd34ad80ded",
+    "textHash": "6c579dcbc5c25e51",
     "bank": "aws-saa-beginner.md"
   },
   {
@@ -10691,7 +10796,7 @@ export const ITEMS = [
     "objectiveId": "3.5",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "ab310a78ff72bf69",
+    "textHash": "914ca45484306634",
     "bank": "aws-saa-beginner.md"
   },
   {
@@ -10712,7 +10817,7 @@ export const ITEMS = [
     "objectiveId": "3.5",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "4287a3c54c455730",
+    "textHash": "2ac50fa946286910",
     "bank": "aws-saa-beginner.md"
   },
   {
@@ -10733,7 +10838,7 @@ export const ITEMS = [
     "objectiveId": "4.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "9558781d41bc6ef8",
+    "textHash": "bd3f773fd43cbe4b",
     "bank": "aws-saa-beginner.md"
   },
   {
@@ -10754,7 +10859,7 @@ export const ITEMS = [
     "objectiveId": "4.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "34450337714c614e",
+    "textHash": "e49dcac3690a81e4",
     "bank": "aws-saa-beginner.md"
   },
   {
@@ -10775,7 +10880,7 @@ export const ITEMS = [
     "objectiveId": "4.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "546fa3ad8103373f",
+    "textHash": "7b89027f839488b0",
     "bank": "aws-saa-beginner.md"
   },
   {
@@ -10796,7 +10901,7 @@ export const ITEMS = [
     "objectiveId": "4.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "12ce0c5029fd40c3",
+    "textHash": "84d9e4daff6015ab",
     "bank": "aws-saa-beginner.md"
   },
   {
@@ -10817,7 +10922,7 @@ export const ITEMS = [
     "objectiveId": "4.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "deafd9b471fcecd5",
+    "textHash": "3100408bd9d26013",
     "bank": "aws-saa-beginner.md"
   },
   {
@@ -10838,7 +10943,7 @@ export const ITEMS = [
     "objectiveId": "4.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "93a0377ace8e1e82",
+    "textHash": "f161d258ac3c12cf",
     "bank": "aws-saa-beginner.md"
   },
   {
@@ -10859,7 +10964,7 @@ export const ITEMS = [
     "objectiveId": "4.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "5c0bb3df1012bccd",
+    "textHash": "a771e73c35d49ac7",
     "bank": "aws-saa-beginner.md"
   },
   {
@@ -10880,7 +10985,7 @@ export const ITEMS = [
     "objectiveId": "4.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "0ddc02c601518058",
+    "textHash": "eeeb17c3b6a01245",
     "bank": "aws-saa-beginner.md"
   },
   {
@@ -10901,7 +11006,7 @@ export const ITEMS = [
     "objectiveId": "4.4",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "5c0ed33b63ee04bd",
+    "textHash": "2ab332b0517552c7",
     "bank": "aws-saa-beginner.md"
   },
   {
@@ -10922,7 +11027,112 @@ export const ITEMS = [
     "objectiveId": "4.4",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "86788542275365d3",
+    "textHash": "561240715f965290",
+    "bank": "aws-saa-beginner.md"
+  },
+  {
+    "id": "AWS-SAA/aws-saa-beginner.md/Q51",
+    "examId": "AWS-SAA",
+    "number": "Q51",
+    "stem": "A relational database is read-heavy: every request runs the same small set of queries, and read latency dominates the user experience. Which change improves this most directly?",
+    "options": {
+      "A": "A standby instance in a second availability zone",
+      "B": "A longer automated backup retention period",
+      "C": "A larger storage volume",
+      "D": "A read replica serving read traffic"
+    },
+    "keys": [
+      "D"
+    ],
+    "explanation": "A read replica takes the read queries onto a separate database instance, so read traffic stops competing with writes for one instance's resources. A standby (A) exists for failover and does not serve reads. Backup retention (B) and volume size (C) do not change query concurrency or latency.",
+    "objectiveId": "3.3",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "c3f796385d6b34c7",
+    "bank": "aws-saa-beginner.md"
+  },
+  {
+    "id": "AWS-SAA/aws-saa-beginner.md/Q52",
+    "examId": "AWS-SAA",
+    "number": "Q52",
+    "stem": "Users around the world download large objects from a single region and report slow transfers. Which service improves this with the least application change?",
+    "options": {
+      "A": "A NAT gateway in each region",
+      "B": "A content delivery network",
+      "C": "A virtual private network connection",
+      "D": "A larger internet gateway"
+    },
+    "keys": [
+      "B"
+    ],
+    "explanation": "A content delivery network caches objects at edge locations near the users, so a request travels a short distance instead of crossing the world. A NAT gateway (A) is outbound address translation. A VPN (C) is for private connectivity. An internet gateway (D) is the regional door to the internet; making it larger does not move the content closer.",
+    "objectiveId": "3.4",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "c6d3deeb828a0f9c",
+    "bank": "aws-saa-beginner.md"
+  },
+  {
+    "id": "AWS-SAA/aws-saa-beginner.md/Q53",
+    "examId": "AWS-SAA",
+    "number": "Q53",
+    "stem": "Hundreds of sources continuously stream click events that must be buffered and then delivered in order to several consumers. Which service fits?",
+    "options": {
+      "A": "A managed streaming service that buffers and replays records",
+      "B": "A relational database with a trigger on insert",
+      "C": "A batch job reading files once an hour",
+      "D": "A single server writing to a shared file system"
+    },
+    "keys": [
+      "A"
+    ],
+    "explanation": "A managed streaming service accepts many producers, holds records with their order, and lets several consumers read independently at their own pace. A database trigger (B) couples every write to its consumer and does not buffer. Hourly batch (C) is not continuous. One server and a shared file system (D) adds a single point of failure and no ordering guarantees.",
+    "objectiveId": "3.5",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "e8b407910f453ff3",
+    "bank": "aws-saa-beginner.md"
+  },
+  {
+    "id": "AWS-SAA/aws-saa-beginner.md/Q54",
+    "examId": "AWS-SAA",
+    "number": "Q54",
+    "stem": "A development database is used a few hours each week and must keep its data between sessions. Which choice minimizes cost?",
+    "options": {
+      "A": "A provisioned instance running continuously",
+      "B": "A read replica in another region",
+      "C": "A serverless option that scales capacity down when idle",
+      "D": "A dedicated physical host"
+    },
+    "keys": [
+      "C"
+    ],
+    "explanation": "A serverless database reduces capacity when nothing is running, so the idle hours that dominate a development workload stop being billed at full size. Continuous provisioning (A) pays for those idle hours. A cross-region replica (B) doubles cost. A dedicated host (D) is the most expensive option here.",
+    "objectiveId": "4.3",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "d48567ac07106b18",
+    "bank": "aws-saa-beginner.md"
+  },
+  {
+    "id": "AWS-SAA/aws-saa-beginner.md/Q55",
+    "examId": "AWS-SAA",
+    "number": "Q55",
+    "stem": "Traffic between two virtual networks in the same region is routed through a NAT gateway, which bills per gigabyte. Which change reduces the cost?",
+    "options": {
+      "A": "Add a second NAT gateway for redundancy",
+      "B": "Send the traffic over the public internet gateway",
+      "C": "Replicate the data to a second region",
+      "D": "Route the traffic over a virtual network peering connection"
+    },
+    "keys": [
+      "D"
+    ],
+    "explanation": "Peering routes traffic privately between the two networks, so it no longer passes through the metered NAT path. A second NAT gateway (A) adds cost. The public internet path (B) adds exposure and is not cheaper. Cross-region replication (C) adds both transfer and storage charges.",
+    "objectiveId": "4.4",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "0047641699d9b5bb",
     "bank": "aws-saa-beginner.md"
   }
 ];

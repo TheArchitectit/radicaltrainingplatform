@@ -681,3 +681,13 @@ Which statement correctly describes the relationship between a backup vault and 
 The vault is the container that holds backup data, while the backup policy is a separate object defining how often backups are taken and how long each is kept. The remaining options reverse those roles or treat the two as a single object, which would make it impossible to apply one schedule to many resources while keeping their data together in one container.
 
 ---
+
+### Q51
+An App Service web app must add instances on its own when CPU usage stays high, and remove them when it falls. Which feature provides this?
+- A) A deployment slot swap
+- B) A custom domain binding
+- C) An App Service Environment
+- D) Autoscale rules on the App Service plan
+
+**Answer: D**
+Autoscale rules watch a metric and add or remove instances against minimum and maximum bounds, which is exactly the behavior described. A slot swap (A) moves traffic between two deployment slots. A custom domain (B) changes the name a site answers to. An App Service Environment (C) is an isolated hosting deployment, not a scaling policy.

@@ -91,7 +91,7 @@
         {
           "bank": "aws-saa-beginner.md",
           "path": "content/exams/AWS-SAA/questions/aws-saa-beginner.md",
-          "sha256": "61c7cb542f0c9b5e539555c55c45cc5289e1c5acdf404180b122ff49ae835348"
+          "sha256": "ed2120a7ea79894fbf35487339f3402bd137b11763d80059b6f3433147688e93"
         }
       ]
     },
@@ -181,7 +181,7 @@
         {
           "bank": "az104-beginner.md",
           "path": "content/exams/AZ-104/questions/az104-beginner.md",
-          "sha256": "6974dda2be342daf0eeae595f412d72a119fecea842298eb4a14d8c3275108c4"
+          "sha256": "111042df3e27c39f4a63e59f05083d0f8fac7d58eb5b75c2ea95957b93ae431b"
         }
       ]
     },
@@ -471,7 +471,7 @@
         {
           "bank": "nca75-pilot.md",
           "path": "content/exams/NCA-75/questions/nca75-pilot.md",
-          "sha256": "9fcb3b76db03a31db05156175542b5c62d45e8eb8fd54e0aacfcd07e4a3f3254"
+          "sha256": "02899ba6f508af715989b088bb90476caf5645d022158e5426cbe22d7dfdf216"
         }
       ]
     }
@@ -796,6 +796,26 @@
       "sha256": "51784a6163e5e46afb11217628e7a571c0505d6bba54ad446b23bdce1d7e0f8d"
     },
     {
+      "path": "content/provenance/AWS-SAA/Q51.json",
+      "sha256": "8168a0db7638b23f1df9fc70f6b1318c165ef98ea39cda6b66acee778795fb44"
+    },
+    {
+      "path": "content/provenance/AWS-SAA/Q52.json",
+      "sha256": "5de7ab47a2e641a7e84290402dff7d8d18f93bcf27ae873c0c682a1df636b412"
+    },
+    {
+      "path": "content/provenance/AWS-SAA/Q53.json",
+      "sha256": "0aa6cd0ac612d54661803cfff7a1db52c939fe9c2fe50bcaf300d07c8ff50f99"
+    },
+    {
+      "path": "content/provenance/AWS-SAA/Q54.json",
+      "sha256": "5c8c3f8968414252136a3b7ef65b225b0a5cd1225a09cf64505835ffe9036b2f"
+    },
+    {
+      "path": "content/provenance/AWS-SAA/Q55.json",
+      "sha256": "f7533942a309fd6732f0603807ae122cbc9632336f02eb5d7089f16a0edef4b8"
+    },
+    {
       "path": "content/provenance/AWS-SAA/Q6.json",
       "sha256": "8289d3ebc4f30a1bc1181cb9ad3c761fd225050e1255ce16f61a6c83d8034f56"
     },
@@ -994,6 +1014,10 @@
     {
       "path": "content/provenance/AZ-104/Q50.json",
       "sha256": "3715ed7b0ec3766572875c2315d554af032a48bfb8edfd4b3337d5144c89411d"
+    },
+    {
+      "path": "content/provenance/AZ-104/Q51.json",
+      "sha256": "b2c1af5b5b7c5a72f60330b4074be5651180287ba9b7ae2c521c5535dd0a4da3"
     },
     {
       "path": "content/provenance/AZ-104/Q6.json",
@@ -2228,6 +2252,22 @@
       "sha256": "80dd8af1d6e5b1f4a02e81671037dd7ba602e085486eb00a5ca348838355703d"
     },
     {
+      "path": "content/provenance/NCA-75/Q41.json",
+      "sha256": "07bb1b7ff45ded13452836a651f8fe3ff577818667b57418f119049c468bb647"
+    },
+    {
+      "path": "content/provenance/NCA-75/Q42.json",
+      "sha256": "12c08eecbb13ff912ca646ce9ec943e28608559feace4644922a5ad4f620aee3"
+    },
+    {
+      "path": "content/provenance/NCA-75/Q43.json",
+      "sha256": "9c128dc6d7849b9d2313b7449756d320929913f470eec66b9bab338ef9c62b9a"
+    },
+    {
+      "path": "content/provenance/NCA-75/Q44.json",
+      "sha256": "9b790820d5262a6b2db55fe587ab3193da6e3f8afc82f857891327b28bae6ee2"
+    },
+    {
       "path": "content/provenance/NCA-75/Q5.json",
       "sha256": "b498b8a57e31d15e1999c81221456bc61423424c3045bd10206cd24ff6014574"
     },
@@ -2436,8 +2476,8 @@
     },
     {
       "path": "content/exams/AWS-SAA/questions/aws-saa-beginner.md",
-      "sha256": "61c7cb542f0c9b5e539555c55c45cc5289e1c5acdf404180b122ff49ae835348",
-      "bytes": 46095
+      "sha256": "ed2120a7ea79894fbf35487339f3402bd137b11763d80059b6f3433147688e93",
+      "bytes": 49478
     },
     {
       "path": "content/exams/AZ-104/exam.json",
@@ -2521,8 +2561,8 @@
     },
     {
       "path": "content/exams/AZ-104/questions/az104-beginner.md",
-      "sha256": "6974dda2be342daf0eeae595f412d72a119fecea842298eb4a14d8c3275108c4",
-      "bytes": 40264
+      "sha256": "111042df3e27c39f4a63e59f05083d0f8fac7d58eb5b75c2ea95957b93ae431b",
+      "bytes": 40902
     },
     {
       "path": "content/exams/COMPTIA-A-1201/exam.json",
@@ -2791,8 +2831,8 @@
     },
     {
       "path": "content/exams/NCA-75/questions/nca75-pilot.md",
-      "sha256": "9fcb3b76db03a31db05156175542b5c62d45e8eb8fd54e0aacfcd07e4a3f3254",
-      "bytes": 23820
+      "sha256": "02899ba6f508af715989b088bb90476caf5645d022158e5426cbe22d7dfdf216",
+      "bytes": 26493
     },
     {
       "path": "content/exams/NCA-75/remap.csv",
@@ -3027,6 +3067,31 @@
     {
       "path": "content/provenance/AWS-SAA/Q50.json",
       "sha256": "51784a6163e5e46afb11217628e7a571c0505d6bba54ad446b23bdce1d7e0f8d",
+      "bytes": 371
+    },
+    {
+      "path": "content/provenance/AWS-SAA/Q51.json",
+      "sha256": "8168a0db7638b23f1df9fc70f6b1318c165ef98ea39cda6b66acee778795fb44",
+      "bytes": 371
+    },
+    {
+      "path": "content/provenance/AWS-SAA/Q52.json",
+      "sha256": "5de7ab47a2e641a7e84290402dff7d8d18f93bcf27ae873c0c682a1df636b412",
+      "bytes": 371
+    },
+    {
+      "path": "content/provenance/AWS-SAA/Q53.json",
+      "sha256": "0aa6cd0ac612d54661803cfff7a1db52c939fe9c2fe50bcaf300d07c8ff50f99",
+      "bytes": 371
+    },
+    {
+      "path": "content/provenance/AWS-SAA/Q54.json",
+      "sha256": "5c8c3f8968414252136a3b7ef65b225b0a5cd1225a09cf64505835ffe9036b2f",
+      "bytes": 371
+    },
+    {
+      "path": "content/provenance/AWS-SAA/Q55.json",
+      "sha256": "f7533942a309fd6732f0603807ae122cbc9632336f02eb5d7089f16a0edef4b8",
       "bytes": 371
     },
     {
@@ -3278,6 +3343,11 @@
       "path": "content/provenance/AZ-104/Q50.json",
       "sha256": "3715ed7b0ec3766572875c2315d554af032a48bfb8edfd4b3337d5144c89411d",
       "bytes": 363
+    },
+    {
+      "path": "content/provenance/AZ-104/Q51.json",
+      "sha256": "b2c1af5b5b7c5a72f60330b4074be5651180287ba9b7ae2c521c5535dd0a4da3",
+      "bytes": 366
     },
     {
       "path": "content/provenance/AZ-104/Q6.json",
@@ -4817,6 +4887,26 @@
     {
       "path": "content/provenance/NCA-75/Q40.json",
       "sha256": "80dd8af1d6e5b1f4a02e81671037dd7ba602e085486eb00a5ca348838355703d",
+      "bytes": 362
+    },
+    {
+      "path": "content/provenance/NCA-75/Q41.json",
+      "sha256": "07bb1b7ff45ded13452836a651f8fe3ff577818667b57418f119049c468bb647",
+      "bytes": 362
+    },
+    {
+      "path": "content/provenance/NCA-75/Q42.json",
+      "sha256": "12c08eecbb13ff912ca646ce9ec943e28608559feace4644922a5ad4f620aee3",
+      "bytes": 359
+    },
+    {
+      "path": "content/provenance/NCA-75/Q43.json",
+      "sha256": "9c128dc6d7849b9d2313b7449756d320929913f470eec66b9bab338ef9c62b9a",
+      "bytes": 362
+    },
+    {
+      "path": "content/provenance/NCA-75/Q44.json",
+      "sha256": "9b790820d5262a6b2db55fe587ab3193da6e3f8afc82f857891327b28bae6ee2",
       "bytes": 362
     },
     {
