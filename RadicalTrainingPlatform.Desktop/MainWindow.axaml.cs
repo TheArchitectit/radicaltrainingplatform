@@ -46,12 +46,22 @@ public partial class MainWindow : Window
     private ExamSessionViewModel? _reviewReturnSession;
     private bool InReviewMode => _reviewReturnSession != null;
 
+    /// <summary>
+    /// The session left behind when navigating to Stats / Blueprint / Lab /
+    /// the selector. Clicking that exam again resumes it (navigating away used
+    /// to discard an in-progress test with no way back). Reset restarts.
+    /// </summary>
+    private ExamSessionViewModel? _pausedSession;
+
     public MainWindow() : this(((App)Application.Current!).Services!) { }
 
     public MainWindow(IServiceProvider services)
     {
         InitializeComponent();
         Loaded += OnLoaded;
+        // The lab view is cached across navigations; dispose it only when the
+        // app closes (disposing on navigation left a dead cached instance).
+        Closed += (_, _) => _labView?.Dispose();
 
         _examRepository = services.GetRequiredService<IExamRepository>();
         _questionParser = services.GetRequiredService<IQuestionParser>();
@@ -112,11 +122,7 @@ public partial class MainWindow : Window
 
         var selector = new ExamSelectorView();
         selector.SetExams(_catalog);
-        selector.StartExamRequested += (examCode) =>
-        {
-            if (_exams.TryGetValue(examCode, out var questions))
-                StartSession(examCode, questions);
-        };
+        selector.StartExamRequested += OpenExam;
         MainContent.Content = selector;
     }
 
@@ -124,8 +130,9 @@ public partial class MainWindow : Window
     {
         if (MainContent.Content is QuestionView qv)
             qv.DataContext = null;
-        if (MainContent.Content is LabSimulator.LabSimulatorView lab)
-            lab.Dispose();
+        // Pause rather than discard. From review, the study session is the
+        // one worth resuming, not the throwaway review VM.
+        _pausedSession = (InReviewMode ? _reviewReturnSession : _session) ?? _pausedSession;
         _session = null;
         // Leaving review (via any nav button) ends the review return path.
         if (InReviewMode)
@@ -135,17 +142,48 @@ public partial class MainWindow : Window
         }
     }
 
+    /// <summary>Resume the paused session for this exam, else start a new one.</summary>
+    private void OpenExam(string examCode)
+    {
+        if (_pausedSession != null
+            && string.Equals(_pausedSession.ExamCode, examCode, StringComparison.OrdinalIgnoreCase))
+        {
+            ResumeSession(_pausedSession);
+            return;
+        }
+        if (_exams.TryGetValue(examCode, out var questions))
+            StartSession(examCode, questions);
+    }
+
+    private void ResumeSession(ExamSessionViewModel session)
+    {
+        ReleaseCurrentView();
+        _pausedSession = null;
+        _questionView ??= new QuestionView();
+        _session = session;
+        _lastExamCode = session.ExamCode;
+        // ShowReviewSession unsubscribes the study session; -= first so a
+        // session that kept its handler is not subscribed twice.
+        _session.PropertyChanged -= OnSessionPropertyChanged;
+        _session.PropertyChanged += OnSessionPropertyChanged;
+        _questionView.DataContext = _session;
+        MainContent.Content = _questionView;
+        UpdateStats();
+    }
+
     // ─── Session Management ────────────────────────────────────────
 
     private void StartSession(string examCode, List<Question> questions)
     {
         ReleaseCurrentView();
+        _pausedSession = null;
 
         if (_questionView == null)
             _questionView = new QuestionView();
 
         int? limit = _currentMode == "Test" ? 75 : null;
-        _session = new ExamSessionViewModel(questions, examCode, limit);
+        // Shuffle: legacy banks key up to 100% of answers to one letter.
+        _session = new ExamSessionViewModel(questions, examCode, limit, shuffleOptions: true);
         _lastExamCode = examCode;
         _session.PropertyChanged += OnSessionPropertyChanged;
 
@@ -160,6 +198,7 @@ public partial class MainWindow : Window
     {
         if (e.PropertyName is nameof(ExamSessionViewModel.CorrectCount)
                          or nameof(ExamSessionViewModel.WrongCount)
+                         or nameof(ExamSessionViewModel.Streak)
                          or nameof(ExamSessionViewModel.AccuracyPercent))
         {
             Dispatcher.UIThread.Post(UpdateStats);
@@ -176,7 +215,7 @@ public partial class MainWindow : Window
             return;
         }
         TxtScore.Text = $"{_session.CorrectCount}/{_session.TotalQuestions}";
-        TxtStreak.Text = $"{_session.CorrectCount} 🔥";
+        TxtStreak.Text = $"{_session.Streak} 🔥";
         TxtAccuracy.Text = $"{_session.AccuracyPercent:F0}%";
     }
 
@@ -186,14 +225,16 @@ public partial class MainWindow : Window
     {
         if (sender is not Button btn) return;
         var code = btn.Tag?.ToString();
-        if (code != null && _exams.TryGetValue(code, out var questions))
-            StartSession(code, questions);
+        if (code != null)
+            OpenExam(code);
     }
 
     private void OnModeChanged(object? sender, RoutedEventArgs e)
     {
         if (sender is not Button btn) return;
         _currentMode = btn.Content?.ToString() ?? "Study";
+        // A paused session belongs to the old mode; don't resume it.
+        _pausedSession = null;
         UpdateModeButtonVisuals();
 
         if (_session != null && _exams.TryGetValue(_session.ExamCode, out var questions))
@@ -231,8 +272,10 @@ public partial class MainWindow : Window
 
     private void OnResetClicked(object? sender, RoutedEventArgs e)
     {
-        if (_session != null && _exams.TryGetValue(_session.ExamCode, out var questions))
-            StartSession(_session.ExamCode, questions);
+        // Reset restarts whatever is active or paused (review → its study exam).
+        var code = (InReviewMode ? _reviewReturnSession : _session ?? _pausedSession)?.ExamCode;
+        if (code != null && _exams.TryGetValue(code, out var questions))
+            StartSession(code, questions);
         else
             ShowExamSelector();
     }
@@ -255,7 +298,11 @@ public partial class MainWindow : Window
         // Real data pipeline (was: injected _blueprintService never used,
         // LoadBlueprint never called — the canvas rendered empty).
         var blueprint = _blueprintService.GetBlueprint(code);
-        if (blueprint == null) return;
+        if (blueprint == null)
+        {
+            _blueprintView.ShowNoBlueprint(code);
+            return;
+        }
         var questions = _exams.GetValueOrDefault(code) ?? new();
         var qTexts = questions
             .Select(q => q.Stem + " " + string.Join(" ", q.Options.Select(o => o.Text)))
@@ -268,7 +315,7 @@ public partial class MainWindow : Window
     {
         // Snapshot the session: ReleaseCurrentView nulls _session, so the
         // stats view gets whatever was active when Stats was clicked.
-        var snapshot = _session;
+        var snapshot = (InReviewMode ? _reviewReturnSession : _session) ?? _pausedSession;
         ReleaseCurrentView();
         _statsView ??= new StatsView();
         _statsView.LoadStats(snapshot);

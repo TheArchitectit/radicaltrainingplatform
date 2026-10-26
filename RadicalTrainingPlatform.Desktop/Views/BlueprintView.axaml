@@ -6,9 +6,19 @@
 
   <ScrollViewer VerticalScrollBarVisibility="Auto"
                 HorizontalScrollBarVisibility="Disabled">
-    <ctrl:BlueprintCanvas x:Name="Canvas"
-                          HorizontalAlignment="Stretch"
-                          VerticalAlignment="Top"
-                          Margin="20" />
+    <Panel>
+      <!-- Exams without a blueprint (e.g. the CompTIA tracks) used to leave
+           the PREVIOUS exam's blueprint on the cached canvas. -->
+      <TextBlock x:Name="EmptyStateText"
+                 IsVisible="False"
+                 FontSize="14"
+                 Foreground="{StaticResource TextDimBrush}"
+                 TextWrapping="Wrap"
+                 Margin="20" />
+      <ctrl:BlueprintCanvas x:Name="Canvas"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Top"
+                            Margin="20" />
+    </Panel>
   </ScrollViewer>
 </UserControl>

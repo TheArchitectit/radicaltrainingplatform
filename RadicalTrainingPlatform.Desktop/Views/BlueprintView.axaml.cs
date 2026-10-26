@@ -21,5 +21,17 @@ public partial class BlueprintView : UserControl
     /// the screen rendered an empty canvas).
     /// </summary>
     public void LoadBlueprintData(ExamBlueprint blueprint, Dictionary<string, int> coverage)
-        => Canvas.LoadBlueprint(blueprint, coverage);
+    {
+        EmptyStateText.IsVisible = false;
+        Canvas.IsVisible = true;
+        Canvas.LoadBlueprint(blueprint, coverage);
+    }
+
+    /// <summary>Honest empty state for an exam with no blueprint defined.</summary>
+    public void ShowNoBlueprint(string examCode)
+    {
+        Canvas.IsVisible = false;
+        EmptyStateText.Text = $"No exam blueprint is available for {examCode} yet.";
+        EmptyStateText.IsVisible = true;
+    }
 }

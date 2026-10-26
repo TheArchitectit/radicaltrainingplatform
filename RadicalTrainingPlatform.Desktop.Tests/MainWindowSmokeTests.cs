@@ -149,6 +149,72 @@ public class MainWindowSmokeTests
         window.Close();
     }
 
+    private static Button? FindExamButton(Window window, string examCode) =>
+        window.GetVisualDescendants().OfType<Button>()
+              .FirstOrDefault(b => string.Equals(b.Tag as string, examCode, System.StringComparison.OrdinalIgnoreCase));
+
+    private static ExamSessionViewModel? CurrentVm(Window window) =>
+        window.GetVisualDescendants().OfType<QuestionView>().FirstOrDefault()?.DataContext as ExamSessionViewModel;
+
+    [AvaloniaFact]
+    public void Stats_ThenSameExam_ResumesSession_NotRestart()
+    {
+        var (window, vm) = OpenMainWindowWithSession();
+        SubmitWrongAnswer(vm);
+
+        // Navigating to Stats used to discard the session with no way back.
+        FindButton(window, "Stats").RaiseEvent(new RoutedEventArgs(Button.ClickEvent!));
+        FindExamButton(window, vm.ExamCode)!.RaiseEvent(new RoutedEventArgs(Button.ClickEvent!));
+
+        var resumed = CurrentVm(window);
+        resumed.ShouldBeSameAs(vm);
+        resumed!.WrongCount.ShouldBe(1);
+
+        // Reset still restarts.
+        FindButton(window, "Reset").RaiseEvent(new RoutedEventArgs(Button.ClickEvent!));
+        CurrentVm(window).ShouldNotBeSameAs(vm);
+        window.Close();
+    }
+
+    [AvaloniaFact]
+    public void StreakLabel_ShowsStreak_NotCorrectCount()
+    {
+        var (window, vm) = OpenMainWindowWithSession();
+        var streak = window.FindControl<TextBlock>("TxtStreak")!;
+
+        vm.SelectAnswer(vm.CurrentQuestion.CorrectAnswers[0]);
+        foreach (var l in vm.CurrentQuestion.CorrectAnswers.Skip(1)) vm.SelectAnswer(l);
+        vm.Submit();
+        vm.Next();
+        global::Avalonia.Threading.Dispatcher.UIThread.RunJobs();
+        streak.Text.ShouldBe("1 🔥");
+
+        // A miss resets the streak while CorrectCount stays 1.
+        vm.Skip();
+        global::Avalonia.Threading.Dispatcher.UIThread.RunJobs();
+        vm.CorrectCount.ShouldBe(1);
+        streak.Text.ShouldBe("0 🔥");
+        window.Close();
+    }
+
+    [AvaloniaFact]
+    public void Blueprint_ExamWithoutBlueprint_ShowsEmptyState_NotPreviousExam()
+    {
+        var (window, _) = OpenMainWindowWithSession();
+        FindExamButton(window, "NCA-75")!.RaiseEvent(new RoutedEventArgs(Button.ClickEvent!));
+        FindButton(window, "Blueprint").RaiseEvent(new RoutedEventArgs(Button.ClickEvent!));
+        var view = window.GetVisualDescendants().OfType<BlueprintView>().First();
+        view.FindControl<TextBlock>("EmptyStateText")!.IsVisible.ShouldBeFalse();
+
+        // CompTIA has no blueprint: the cached canvas used to keep NCA-75's.
+        FindExamButton(window, "COMPTIA-A-1201")!.RaiseEvent(new RoutedEventArgs(Button.ClickEvent!));
+        FindButton(window, "Blueprint").RaiseEvent(new RoutedEventArgs(Button.ClickEvent!));
+        view.FindControl<TextBlock>("EmptyStateText")!.IsVisible.ShouldBeTrue();
+        view.FindControl<global::RadicalTrainingPlatform.Avalonia.Controls.BlueprintCanvas>("Canvas")!
+            .IsVisible.ShouldBeFalse();
+        window.Close();
+    }
+
     [AvaloniaFact]
     public void BackToStudy_FromReview_ResumesOriginalSession()
     {
