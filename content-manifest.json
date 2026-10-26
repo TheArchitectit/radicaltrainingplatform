@@ -188,13 +188,33 @@
     "COMPTIA-A-1201": {
       "manifest": {
         "path": "content/exams/COMPTIA-A-1201/exam.json",
-        "sha256": "ed1c0f777b06a74f2557307fb01beb73d2daafa19aba5d191c12f1ebb77a734c"
+        "sha256": "5b1ab8b0ac53f106a7449f39e744d433750d765bb05cca870c422c141b45dd06"
       },
       "lessons": [
+        {
+          "lessonId": "a1",
+          "path": "content/exams/COMPTIA-A-1201/lessons/a1.md",
+          "sha256": "914a21c65a7a6f6bade9583c0fe5348733147fbf3f7c51296fca2bdc3f6112b4"
+        },
         {
           "lessonId": "a2",
           "path": "content/exams/COMPTIA-A-1201/lessons/a2.md",
           "sha256": "abbbe5aa470db42e79a3563bde56749a06d33284d4b765d901156af3b50dd9a4"
+        },
+        {
+          "lessonId": "a3",
+          "path": "content/exams/COMPTIA-A-1201/lessons/a3.md",
+          "sha256": "be5d81212d53448e8f19ab52c225da169ffc44e0c5fcdca013925b5301ad8ffd"
+        },
+        {
+          "lessonId": "a4",
+          "path": "content/exams/COMPTIA-A-1201/lessons/a4.md",
+          "sha256": "b5a1d22f6193e1e4081bc3a1f21545a7a6bceeea9dfde9030f61f82d7ec660a1"
+        },
+        {
+          "lessonId": "a5",
+          "path": "content/exams/COMPTIA-A-1201/lessons/a5.md",
+          "sha256": "b9cc422fc09c80109e0ce5acec523f6596cae9e782415c963fe09d7f806b33e7"
         }
       ],
       "banks": [
@@ -208,9 +228,24 @@
     "COMPTIA-A-1202": {
       "manifest": {
         "path": "content/exams/COMPTIA-A-1202/exam.json",
-        "sha256": "c6c47ede4e32625047687005006773f6bd802d1ff2d04f52b99c469683665268"
+        "sha256": "a717362866a3f25782cddc8443f114535ac872a3b03d0056a3a9ded41ea8d95a"
       },
       "lessons": [
+        {
+          "lessonId": "b1",
+          "path": "content/exams/COMPTIA-A-1202/lessons/b1.md",
+          "sha256": "e091dc417e162b0b7e8808f6c47976e8198591373f58fe010657475ca528cd04"
+        },
+        {
+          "lessonId": "b2",
+          "path": "content/exams/COMPTIA-A-1202/lessons/b2.md",
+          "sha256": "8f6fdbc453df6f56e6fd65db439f66ed55b95d805db2333fa89c60c37bd624fb"
+        },
+        {
+          "lessonId": "b3",
+          "path": "content/exams/COMPTIA-A-1202/lessons/b3.md",
+          "sha256": "58c726e66eb8a3cfccb34090b6b8e93f67fa61593d7b4de0471787684148c78b"
+        },
         {
           "lessonId": "b4",
           "path": "content/exams/COMPTIA-A-1202/lessons/b4.md",
@@ -228,13 +263,28 @@
     "COMPTIA-NET-009": {
       "manifest": {
         "path": "content/exams/COMPTIA-NET-009/exam.json",
-        "sha256": "8055d75975ad935ea7c589708af7533bfaf6bae5206b1d4f1b39aeffd6649ff3"
+        "sha256": "90fc995b8ecc9e501a9908aad6661fb5b97fa876eff32eb80510c975ca5319c9"
       },
       "lessons": [
         {
           "lessonId": "n1",
           "path": "content/exams/COMPTIA-NET-009/lessons/n1.md",
           "sha256": "da96427ee5fb60d7c5fd9a9ea810455161627d5e702d862168120d215a7f2832"
+        },
+        {
+          "lessonId": "n2",
+          "path": "content/exams/COMPTIA-NET-009/lessons/n2.md",
+          "sha256": "3e4ce9fef5311d7f926925079f3de614daa036db681f04eba4e7e91a694d7f4b"
+        },
+        {
+          "lessonId": "n3",
+          "path": "content/exams/COMPTIA-NET-009/lessons/n3.md",
+          "sha256": "8fbe4b4727b5e4c5b777ae7d403d9553f1cbadc5e34d0b68c8b2a3188221b83c"
+        },
+        {
+          "lessonId": "n4",
+          "path": "content/exams/COMPTIA-NET-009/lessons/n4.md",
+          "sha256": "e30df4854de58bb22d5ae7a2fbaaed10979dc3441055d3cdcba458c6e9c7a052"
         },
         {
           "lessonId": "n5",
@@ -1526,13 +1576,33 @@
     },
     {
       "path": "content/exams/COMPTIA-A-1201/exam.json",
-      "sha256": "ed1c0f777b06a74f2557307fb01beb73d2daafa19aba5d191c12f1ebb77a734c",
-      "bytes": 4534
+      "sha256": "5b1ab8b0ac53f106a7449f39e744d433750d765bb05cca870c422c141b45dd06",
+      "bytes": 4622
+    },
+    {
+      "path": "content/exams/COMPTIA-A-1201/lessons/a1.md",
+      "sha256": "914a21c65a7a6f6bade9583c0fe5348733147fbf3f7c51296fca2bdc3f6112b4",
+      "bytes": 6106
     },
     {
       "path": "content/exams/COMPTIA-A-1201/lessons/a2.md",
       "sha256": "abbbe5aa470db42e79a3563bde56749a06d33284d4b765d901156af3b50dd9a4",
       "bytes": 6081
+    },
+    {
+      "path": "content/exams/COMPTIA-A-1201/lessons/a3.md",
+      "sha256": "be5d81212d53448e8f19ab52c225da169ffc44e0c5fcdca013925b5301ad8ffd",
+      "bytes": 9914
+    },
+    {
+      "path": "content/exams/COMPTIA-A-1201/lessons/a4.md",
+      "sha256": "b5a1d22f6193e1e4081bc3a1f21545a7a6bceeea9dfde9030f61f82d7ec660a1",
+      "bytes": 6674
+    },
+    {
+      "path": "content/exams/COMPTIA-A-1201/lessons/a5.md",
+      "sha256": "b9cc422fc09c80109e0ce5acec523f6596cae9e782415c963fe09d7f806b33e7",
+      "bytes": 7236
     },
     {
       "path": "content/exams/COMPTIA-A-1201/questions/core1-a2-fixtures.md",
@@ -1541,8 +1611,23 @@
     },
     {
       "path": "content/exams/COMPTIA-A-1202/exam.json",
-      "sha256": "c6c47ede4e32625047687005006773f6bd802d1ff2d04f52b99c469683665268",
-      "bytes": 5711
+      "sha256": "a717362866a3f25782cddc8443f114535ac872a3b03d0056a3a9ded41ea8d95a",
+      "bytes": 5831
+    },
+    {
+      "path": "content/exams/COMPTIA-A-1202/lessons/b1.md",
+      "sha256": "e091dc417e162b0b7e8808f6c47976e8198591373f58fe010657475ca528cd04",
+      "bytes": 8387
+    },
+    {
+      "path": "content/exams/COMPTIA-A-1202/lessons/b2.md",
+      "sha256": "8f6fdbc453df6f56e6fd65db439f66ed55b95d805db2333fa89c60c37bd624fb",
+      "bytes": 8640
+    },
+    {
+      "path": "content/exams/COMPTIA-A-1202/lessons/b3.md",
+      "sha256": "58c726e66eb8a3cfccb34090b6b8e93f67fa61593d7b4de0471787684148c78b",
+      "bytes": 6838
     },
     {
       "path": "content/exams/COMPTIA-A-1202/lessons/b4.md",
@@ -1556,13 +1641,28 @@
     },
     {
       "path": "content/exams/COMPTIA-NET-009/exam.json",
-      "sha256": "8055d75975ad935ea7c589708af7533bfaf6bae5206b1d4f1b39aeffd6649ff3",
-      "bytes": 8202
+      "sha256": "90fc995b8ecc9e501a9908aad6661fb5b97fa876eff32eb80510c975ca5319c9",
+      "bytes": 8214
     },
     {
       "path": "content/exams/COMPTIA-NET-009/lessons/n1.md",
       "sha256": "da96427ee5fb60d7c5fd9a9ea810455161627d5e702d862168120d215a7f2832",
       "bytes": 7320
+    },
+    {
+      "path": "content/exams/COMPTIA-NET-009/lessons/n2.md",
+      "sha256": "3e4ce9fef5311d7f926925079f3de614daa036db681f04eba4e7e91a694d7f4b",
+      "bytes": 7055
+    },
+    {
+      "path": "content/exams/COMPTIA-NET-009/lessons/n3.md",
+      "sha256": "8fbe4b4727b5e4c5b777ae7d403d9553f1cbadc5e34d0b68c8b2a3188221b83c",
+      "bytes": 9371
+    },
+    {
+      "path": "content/exams/COMPTIA-NET-009/lessons/n4.md",
+      "sha256": "e30df4854de58bb22d5ae7a2fbaaed10979dc3441055d3cdcba458c6e9c7a052",
+      "bytes": 10560
     },
     {
       "path": "content/exams/COMPTIA-NET-009/lessons/n5.md",

@@ -41,9 +41,12 @@ ANSWER_LINE = re.compile(
 # exam; everything else renders as "planned". Released scored items are the
 # banks listed here; draft provenance status is the honest release state.
 RELEASED_LESSONS = {
-    "COMPTIA-A-1201": ["a2"],
-    "COMPTIA-A-1202": ["b4"],
-    "COMPTIA-NET-009": ["n1", "n5"],
+    # Beginner-track content (2026-10-26): every A+ Core 1 / Core 2 and
+    # Network+ domain now has its module lesson, so every objective in those
+    # three manifests names a released lesson.
+    "COMPTIA-A-1201": ["a1", "a2", "a3", "a4", "a5"],
+    "COMPTIA-A-1202": ["b1", "b2", "b3", "b4"],
+    "COMPTIA-NET-009": ["n1", "n2", "n3", "n4", "n5"],
     # REQ-NCA-02: the 14-lesson NCA pilot, one lesson per current objective.
     "NCA-75": [
         "s1_1", "s1_2", "s1_3",

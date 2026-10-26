@@ -15,7 +15,7 @@
       "studyItemAllocation": 23,
       "objectives": [
         { "id": "1.1", "title": "Explain concepts related to the Open Systems Interconnection (OSI) reference model.", "lessonIds": ["n1"] },
-        { "id": "1.2", "title": "Compare and contrast networking appliances, applications, and functions.", "lessonIds": [] },
+        { "id": "1.2", "title": "Compare and contrast networking appliances, applications, and functions.", "lessonIds": ["n1"] },
         { "id": "1.3", "title": "Summarize cloud concepts and connectivity options.", "lessonIds": ["n1"] },
         { "id": "1.4", "title": "Explain common networking ports, protocols, services, and traffic types.", "lessonIds": ["n1"] },
         { "id": "1.5", "title": "Compare and contrast transmission media and transceivers.", "lessonIds": ["n1"] },
@@ -67,8 +67,8 @@
       "studyItemAllocation": 24,
       "objectives": [
         { "id": "5.1", "title": "Explain the troubleshooting methodology.", "lessonIds": ["n5"] },
-        { "id": "5.2", "title": "Given a scenario, troubleshoot common cabling and physical interface issues.", "lessonIds": [] },
-        { "id": "5.3", "title": "Given a scenario, troubleshoot common issues with network services.", "lessonIds": [] },
+        { "id": "5.2", "title": "Given a scenario, troubleshoot common cabling and physical interface issues.", "lessonIds": ["n5"] },
+        { "id": "5.3", "title": "Given a scenario, troubleshoot common issues with network services.", "lessonIds": ["n5"] },
         { "id": "5.4", "title": "Given a scenario, troubleshoot common performance issues.", "lessonIds": ["n5"] },
         { "id": "5.5", "title": "Given a scenario, use the appropriate tool or protocol to solve networking issues.", "lessonIds": ["n5"] }
       ]

@@ -14,9 +14,9 @@
       "weightPercent": 13,
       "studyItemAllocation": 8,
       "objectives": [
-        { "id": "1.1", "title": "Given a scenario, monitor mobile device hardware and use appropriate replacement techniques.", "lessonIds": [] },
-        { "id": "1.2", "title": "Compare and contrast accessories and connectivity options for mobile devices.", "lessonIds": [] },
-        { "id": "1.3", "title": "Given a scenario, configure basic mobile device network connectivity and provide application support.", "lessonIds": [] }
+        { "id": "1.1", "title": "Given a scenario, monitor mobile device hardware and use appropriate replacement techniques.", "lessonIds": ["a1"] },
+        { "id": "1.2", "title": "Compare and contrast accessories and connectivity options for mobile devices.", "lessonIds": ["a1"] },
+        { "id": "1.3", "title": "Given a scenario, configure basic mobile device network connectivity and provide application support.", "lessonIds": ["a1"] }
       ]
     },
     {
@@ -29,10 +29,10 @@
         { "id": "2.2", "title": "Explain wireless networking technologies.", "lessonIds": ["a2"] },
         { "id": "2.3", "title": "Summarize services provided by networked hosts.", "lessonIds": ["a2"] },
         { "id": "2.4", "title": "Explain common network configuration concepts.", "lessonIds": ["a2"] },
-        { "id": "2.5", "title": "Compare and contrast common networking hardware devices.", "lessonIds": [] },
+        { "id": "2.5", "title": "Compare and contrast common networking hardware devices.", "lessonIds": ["a2"] },
         { "id": "2.6", "title": "Given a scenario, configure basic wired/wireless small office/home office (SOHO) networks.", "lessonIds": ["a2"] },
-        { "id": "2.7", "title": "Compare and contrast internet connection types, network types, and their characteristics.", "lessonIds": [] },
-        { "id": "2.8", "title": "Explain networking tools and their purposes.", "lessonIds": [] }
+        { "id": "2.7", "title": "Compare and contrast internet connection types, network types, and their characteristics.", "lessonIds": ["a2"] },
+        { "id": "2.8", "title": "Explain networking tools and their purposes.", "lessonIds": ["a2"] }
       ]
     },
     {
@@ -41,14 +41,14 @@
       "weightPercent": 25,
       "studyItemAllocation": 15,
       "objectives": [
-        { "id": "3.1", "title": "Compare and contrast display components and attributes.", "lessonIds": [] },
-        { "id": "3.2", "title": "Summarize basic cable types and their connectors, features, and purposes.", "lessonIds": [] },
-        { "id": "3.3", "title": "Compare and contrast RAM characteristics.", "lessonIds": [] },
-        { "id": "3.4", "title": "Compare and contrast storage devices.", "lessonIds": [] },
-        { "id": "3.5", "title": "Given a scenario, install and configure motherboards, central processing units (CPUs), and add-on cards.", "lessonIds": [] },
-        { "id": "3.6", "title": "Given a scenario, install the appropriate power supply.", "lessonIds": [] },
-        { "id": "3.7", "title": "Given a scenario, deploy and configure multifunction devices/printers and settings.", "lessonIds": [] },
-        { "id": "3.8", "title": "Given a scenario, perform appropriate printer maintenance.", "lessonIds": [] }
+        { "id": "3.1", "title": "Compare and contrast display components and attributes.", "lessonIds": ["a3"] },
+        { "id": "3.2", "title": "Summarize basic cable types and their connectors, features, and purposes.", "lessonIds": ["a3"] },
+        { "id": "3.3", "title": "Compare and contrast RAM characteristics.", "lessonIds": ["a3"] },
+        { "id": "3.4", "title": "Compare and contrast storage devices.", "lessonIds": ["a3"] },
+        { "id": "3.5", "title": "Given a scenario, install and configure motherboards, central processing units (CPUs), and add-on cards.", "lessonIds": ["a3"] },
+        { "id": "3.6", "title": "Given a scenario, install the appropriate power supply.", "lessonIds": ["a3"] },
+        { "id": "3.7", "title": "Given a scenario, deploy and configure multifunction devices/printers and settings.", "lessonIds": ["a3"] },
+        { "id": "3.8", "title": "Given a scenario, perform appropriate printer maintenance.", "lessonIds": ["a3"] }
       ]
     },
     {
@@ -57,8 +57,8 @@
       "weightPercent": 11,
       "studyItemAllocation": 7,
       "objectives": [
-        { "id": "4.1", "title": "Explain virtualization concepts.", "lessonIds": [] },
-        { "id": "4.2", "title": "Summarize cloud computing concepts.", "lessonIds": [] }
+        { "id": "4.1", "title": "Explain virtualization concepts.", "lessonIds": ["a4"] },
+        { "id": "4.2", "title": "Summarize cloud computing concepts.", "lessonIds": ["a4"] }
       ]
     },
     {
@@ -67,12 +67,12 @@
       "weightPercent": 28,
       "studyItemAllocation": 16,
       "objectives": [
-        { "id": "5.1", "title": "Given a scenario, troubleshoot motherboards, RAM, CPUs, and power.", "lessonIds": [] },
-        { "id": "5.2", "title": "Given a scenario, troubleshoot drive and RAID issues.", "lessonIds": [] },
-        { "id": "5.3", "title": "Given a scenario, troubleshoot video, projector, and display issues.", "lessonIds": [] },
-        { "id": "5.4", "title": "Given a scenario, troubleshoot common mobile device issues.", "lessonIds": [] },
-        { "id": "5.5", "title": "Given a scenario, troubleshoot network issues.", "lessonIds": [] },
-        { "id": "5.6", "title": "Given a scenario, troubleshoot printer issues.", "lessonIds": [] }
+        { "id": "5.1", "title": "Given a scenario, troubleshoot motherboards, RAM, CPUs, and power.", "lessonIds": ["a5"] },
+        { "id": "5.2", "title": "Given a scenario, troubleshoot drive and RAID issues.", "lessonIds": ["a5"] },
+        { "id": "5.3", "title": "Given a scenario, troubleshoot video, projector, and display issues.", "lessonIds": ["a5"] },
+        { "id": "5.4", "title": "Given a scenario, troubleshoot common mobile device issues.", "lessonIds": ["a5"] },
+        { "id": "5.5", "title": "Given a scenario, troubleshoot network issues.", "lessonIds": ["a5"] },
+        { "id": "5.6", "title": "Given a scenario, troubleshoot printer issues.", "lessonIds": ["a5"] }
       ]
     }
   ],

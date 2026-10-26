@@ -5,10 +5,12 @@
  * fixture is written to hold the *refusals* down as firmly as the links:
  *
  *   1. **An item reaches its lesson through its blueprint objective, and only
- *      when a released lesson really covers that objective.** 24 of the 189
- *      items have no covering lesson in this build; those must render no link
- *      at all. A link to a lesson that does not teach the item is worse than
- *      no link, because a learner would trust it.
+ *      when a released lesson really covers that objective.** Every objective
+ *      in the six manifests now names a released lesson, so every shipped item
+ *      resolves; an item whose objective no lesson covers must still render no
+ *      link at all, and that refusal is pinned against a synthetic item since
+ *      the corpus no longer contains one. A link to a lesson that does not
+ *      teach the item is worse than no link, because a learner would trust it.
  *   2. **Every href the link layer hands out is a route the app registers.**
  *      Read out of `js/app.js`, same as the search fixture — a hash router
  *      never 404s, it silently bounces to the dashboard.
@@ -53,17 +55,23 @@ await runner.test('a resolved lesson really lists the objective', async () => {
 });
 
 await runner.test('an uncovered objective resolves to null, never to a neighbour', async () => {
-    // Both branches are real in this build: 165 items have a covering lesson,
-    // 24 do not. If the uncovered branch were empty this test would pass for
-    // the wrong reason, so the counts are asserted.
-    const covered = ITEMS.filter(i => lessonForObjective(i.examId, i.objectiveId));
-    const uncovered = ITEMS.filter(i => !lessonForObjective(i.examId, i.objectiveId));
-    assert(covered.length > 0, 'precondition: some items are covered');
-    assert(uncovered.length > 0, 'precondition: some items are not covered');
-    for (const item of uncovered) {
-        assertEqual(linksForItem(item).lesson, null,
-            `${item.id} has no covering lesson and must render no lesson link`);
+    // The corpus reached full lesson coverage on 2026-10-26: every objective in
+    // every manifest names a released lesson. That makes the uncovered branch
+    // unreachable from shipped items, so it is pinned with a synthetic item
+    // rather than dropped — the resolver's refusal is still a promise.
+    assert(ITEMS.length > 0, 'precondition: the build ships items');
+    for (const item of ITEMS) {
+        assert(lessonForObjective(item.examId, item.objectiveId),
+            `${item.id} names objective ${item.objectiveId}, which no released lesson covers`);
     }
+    const synthetic = {
+        id: 'SYNTHETIC/1', examId: 'COMPTIA-A-1201', objectiveId: '99.99',
+        number: 1, stem: 'synthetic', options: {}, keys: [],
+    };
+    assertEqual(lessonForObjective(synthetic.examId, synthetic.objectiveId), null,
+        'an objective no lesson lists must resolve to null, not to a neighbour');
+    assertEqual(linksForItem(synthetic).lesson, null,
+        'an item with no covering lesson must render no lesson link');
 });
 
 await runner.test('the resolution is the lowest lesson ID, deterministically', async () => {
@@ -203,8 +211,12 @@ await runner.test('a submitted practice item links to the lesson that teaches it
 });
 
 await runner.test('an item with no covering lesson renders no lesson link, and says why not', async () => {
-    const item = ITEMS.find(i => !lessonForObjective(i.examId, i.objectiveId));
-    assert(item, 'precondition: some item has no covering lesson');
+    // Synthetic, for the same reason as above: full lesson coverage means no
+    // shipped item can exercise the refusal any more.
+    const item = {
+        id: 'SYNTHETIC/2', examId: 'COMPTIA-A-1201', objectiveId: '99.99',
+        number: 2, stem: 'synthetic', options: {}, keys: [],
+    };
     const links = linksForItem(item);
     assertEqual(links.lesson, null);
     // The feedback line still names the objective — the absence of a lesson is

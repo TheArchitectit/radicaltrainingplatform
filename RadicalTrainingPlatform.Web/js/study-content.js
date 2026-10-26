@@ -15,25 +15,27 @@ export const TRACKS = {
     "order": 1,
     "coverage": {
       "total": 63,
-      "covered": 6,
-      "percent": 10,
+      "covered": 8,
+      "percent": 13,
       "coveredObjectiveIds": [],
       "examCoverage": {
         "COMPTIA-A-1201": {
           "total": 27,
-          "covered": 3,
-          "percent": 11,
+          "covered": 4,
+          "percent": 15,
           "coveredObjectiveIds": [
             "2.1",
             "2.3",
-            "2.4"
+            "2.4",
+            "5.5"
           ]
         },
         "COMPTIA-A-1202": {
           "total": 36,
-          "covered": 3,
-          "percent": 8,
+          "covered": 4,
+          "percent": 11,
           "coveredObjectiveIds": [
+            "2.5",
             "4.1",
             "4.2",
             "4.3"
@@ -238,18 +240,28 @@ export const TRACKS = {
     "order": 2,
     "coverage": {
       "total": 25,
-      "covered": 6,
-      "percent": 24,
+      "covered": 16,
+      "percent": 64,
       "coveredObjectiveIds": [],
       "examCoverage": {
         "COMPTIA-NET-009": {
           "total": 25,
-          "covered": 6,
-          "percent": 24,
+          "covered": 16,
+          "percent": 64,
           "coveredObjectiveIds": [
             "1.1",
             "1.4",
             "1.7",
+            "2.1",
+            "2.2",
+            "2.3",
+            "2.4",
+            "3.1",
+            "3.2",
+            "3.3",
+            "4.1",
+            "4.2",
+            "4.3",
             "5.1",
             "5.4",
             "5.5"
@@ -605,17 +617,23 @@ export const EXAMS = {
           {
             "id": "1.1",
             "title": "Given a scenario, monitor mobile device hardware and use appropriate replacement techniques.",
-            "lessonIds": []
+            "lessonIds": [
+              "a1"
+            ]
           },
           {
             "id": "1.2",
             "title": "Compare and contrast accessories and connectivity options for mobile devices.",
-            "lessonIds": []
+            "lessonIds": [
+              "a1"
+            ]
           },
           {
             "id": "1.3",
             "title": "Given a scenario, configure basic mobile device network connectivity and provide application support.",
-            "lessonIds": []
+            "lessonIds": [
+              "a1"
+            ]
           }
         ]
       },
@@ -656,7 +674,9 @@ export const EXAMS = {
           {
             "id": "2.5",
             "title": "Compare and contrast common networking hardware devices.",
-            "lessonIds": []
+            "lessonIds": [
+              "a2"
+            ]
           },
           {
             "id": "2.6",
@@ -668,12 +688,16 @@ export const EXAMS = {
           {
             "id": "2.7",
             "title": "Compare and contrast internet connection types, network types, and their characteristics.",
-            "lessonIds": []
+            "lessonIds": [
+              "a2"
+            ]
           },
           {
             "id": "2.8",
             "title": "Explain networking tools and their purposes.",
-            "lessonIds": []
+            "lessonIds": [
+              "a2"
+            ]
           }
         ]
       },
@@ -686,42 +710,58 @@ export const EXAMS = {
           {
             "id": "3.1",
             "title": "Compare and contrast display components and attributes.",
-            "lessonIds": []
+            "lessonIds": [
+              "a3"
+            ]
           },
           {
             "id": "3.2",
             "title": "Summarize basic cable types and their connectors, features, and purposes.",
-            "lessonIds": []
+            "lessonIds": [
+              "a3"
+            ]
           },
           {
             "id": "3.3",
             "title": "Compare and contrast RAM characteristics.",
-            "lessonIds": []
+            "lessonIds": [
+              "a3"
+            ]
           },
           {
             "id": "3.4",
             "title": "Compare and contrast storage devices.",
-            "lessonIds": []
+            "lessonIds": [
+              "a3"
+            ]
           },
           {
             "id": "3.5",
             "title": "Given a scenario, install and configure motherboards, central processing units (CPUs), and add-on cards.",
-            "lessonIds": []
+            "lessonIds": [
+              "a3"
+            ]
           },
           {
             "id": "3.6",
             "title": "Given a scenario, install the appropriate power supply.",
-            "lessonIds": []
+            "lessonIds": [
+              "a3"
+            ]
           },
           {
             "id": "3.7",
             "title": "Given a scenario, deploy and configure multifunction devices/printers and settings.",
-            "lessonIds": []
+            "lessonIds": [
+              "a3"
+            ]
           },
           {
             "id": "3.8",
             "title": "Given a scenario, perform appropriate printer maintenance.",
-            "lessonIds": []
+            "lessonIds": [
+              "a3"
+            ]
           }
         ]
       },
@@ -734,12 +774,16 @@ export const EXAMS = {
           {
             "id": "4.1",
             "title": "Explain virtualization concepts.",
-            "lessonIds": []
+            "lessonIds": [
+              "a4"
+            ]
           },
           {
             "id": "4.2",
             "title": "Summarize cloud computing concepts.",
-            "lessonIds": []
+            "lessonIds": [
+              "a4"
+            ]
           }
         ]
       },
@@ -752,32 +796,44 @@ export const EXAMS = {
           {
             "id": "5.1",
             "title": "Given a scenario, troubleshoot motherboards, RAM, CPUs, and power.",
-            "lessonIds": []
+            "lessonIds": [
+              "a5"
+            ]
           },
           {
             "id": "5.2",
             "title": "Given a scenario, troubleshoot drive and RAID issues.",
-            "lessonIds": []
+            "lessonIds": [
+              "a5"
+            ]
           },
           {
             "id": "5.3",
             "title": "Given a scenario, troubleshoot video, projector, and display issues.",
-            "lessonIds": []
+            "lessonIds": [
+              "a5"
+            ]
           },
           {
             "id": "5.4",
             "title": "Given a scenario, troubleshoot common mobile device issues.",
-            "lessonIds": []
+            "lessonIds": [
+              "a5"
+            ]
           },
           {
             "id": "5.5",
             "title": "Given a scenario, troubleshoot network issues.",
-            "lessonIds": []
+            "lessonIds": [
+              "a5"
+            ]
           },
           {
             "id": "5.6",
             "title": "Given a scenario, troubleshoot printer issues.",
-            "lessonIds": []
+            "lessonIds": [
+              "a5"
+            ]
           }
         ]
       }
@@ -807,57 +863,79 @@ export const EXAMS = {
           {
             "id": "1.1",
             "title": "Explain common operating system (OS) types and their purposes.",
-            "lessonIds": []
+            "lessonIds": [
+              "b1"
+            ]
           },
           {
             "id": "1.2",
             "title": "Given a scenario, perform OS installations and upgrades in a diverse environment.",
-            "lessonIds": []
+            "lessonIds": [
+              "b1"
+            ]
           },
           {
             "id": "1.3",
             "title": "Compare and contrast basic features of Microsoft Windows editions.",
-            "lessonIds": []
+            "lessonIds": [
+              "b1"
+            ]
           },
           {
             "id": "1.4",
             "title": "Given a scenario, use Microsoft Windows operating system features and tools.",
-            "lessonIds": []
+            "lessonIds": [
+              "b1"
+            ]
           },
           {
             "id": "1.5",
             "title": "Given a scenario, use the appropriate Microsoft command-line tools.",
-            "lessonIds": []
+            "lessonIds": [
+              "b1"
+            ]
           },
           {
             "id": "1.6",
             "title": "Given a scenario, configure Microsoft Windows settings.",
-            "lessonIds": []
+            "lessonIds": [
+              "b1"
+            ]
           },
           {
             "id": "1.7",
             "title": "Given a scenario, configure Microsoft Windows networking features on a client/desktop.",
-            "lessonIds": []
+            "lessonIds": [
+              "b1"
+            ]
           },
           {
             "id": "1.8",
             "title": "Explain common features and tools of the macOS/desktop operating system.",
-            "lessonIds": []
+            "lessonIds": [
+              "b1"
+            ]
           },
           {
             "id": "1.9",
             "title": "Identify common features and tools of the Linux client/desktop operating system.",
-            "lessonIds": []
+            "lessonIds": [
+              "b1"
+            ]
           },
           {
             "id": "1.10",
             "title": "Given a scenario, install applications according to requirements.",
-            "lessonIds": []
+            "lessonIds": [
+              "b1"
+            ]
           },
           {
             "id": "1.11",
             "title": "Given a scenario, install and configure cloud-based productivity tools.",
-            "lessonIds": []
+            "lessonIds": [
+              "b1"
+            ]
           }
         ]
       },
@@ -870,22 +948,30 @@ export const EXAMS = {
           {
             "id": "2.1",
             "title": "Summarize various security measures and their purposes.",
-            "lessonIds": []
+            "lessonIds": [
+              "b2"
+            ]
           },
           {
             "id": "2.2",
             "title": "Given a scenario, configure and apply basic Microsoft Windows OS security settings.",
-            "lessonIds": []
+            "lessonIds": [
+              "b2"
+            ]
           },
           {
             "id": "2.3",
             "title": "Compare and contrast wireless security protocols and authentication methods.",
-            "lessonIds": []
+            "lessonIds": [
+              "b2"
+            ]
           },
           {
             "id": "2.4",
             "title": "Summarize types of malware and tools/methods for detection, removal, and prevention.",
-            "lessonIds": []
+            "lessonIds": [
+              "b2"
+            ]
           },
           {
             "id": "2.5",
@@ -897,32 +983,44 @@ export const EXAMS = {
           {
             "id": "2.6",
             "title": "Given a scenario, implement procedures for basic small office/home office (SOHO) malware removal.",
-            "lessonIds": []
+            "lessonIds": [
+              "b2"
+            ]
           },
           {
             "id": "2.7",
             "title": "Given a scenario, apply workstation security options and hardening techniques.",
-            "lessonIds": []
+            "lessonIds": [
+              "b2"
+            ]
           },
           {
             "id": "2.8",
             "title": "Given a scenario, apply common methods for securing mobile devices.",
-            "lessonIds": []
+            "lessonIds": [
+              "b2"
+            ]
           },
           {
             "id": "2.9",
             "title": "Compare and contrast common data destruction and disposal methods.",
-            "lessonIds": []
+            "lessonIds": [
+              "b2"
+            ]
           },
           {
             "id": "2.10",
             "title": "Given a scenario, apply security settings on SOHO wireless and wired networks.",
-            "lessonIds": []
+            "lessonIds": [
+              "b2"
+            ]
           },
           {
             "id": "2.11",
             "title": "Given a scenario, configure relevant security settings in a browser.",
-            "lessonIds": []
+            "lessonIds": [
+              "b2"
+            ]
           }
         ]
       },
@@ -935,22 +1033,30 @@ export const EXAMS = {
           {
             "id": "3.1",
             "title": "Given a scenario, troubleshoot common Windows OS issues.",
-            "lessonIds": []
+            "lessonIds": [
+              "b3"
+            ]
           },
           {
             "id": "3.2",
             "title": "Given a scenario, troubleshoot common mobile OS and application issues.",
-            "lessonIds": []
+            "lessonIds": [
+              "b3"
+            ]
           },
           {
             "id": "3.3",
             "title": "Given a scenario, troubleshoot common mobile OS and application security issues.",
-            "lessonIds": []
+            "lessonIds": [
+              "b3"
+            ]
           },
           {
             "id": "3.4",
             "title": "Given a scenario, troubleshoot common personal computer (PC) security issues.",
-            "lessonIds": []
+            "lessonIds": [
+              "b3"
+            ]
           }
         ]
       },
@@ -991,12 +1097,16 @@ export const EXAMS = {
           {
             "id": "4.5",
             "title": "Summarize environmental impacts and local environment controls.",
-            "lessonIds": []
+            "lessonIds": [
+              "b4"
+            ]
           },
           {
             "id": "4.6",
             "title": "Explain the importance of prohibited content/activity and privacy, licensing, and policy concepts.",
-            "lessonIds": []
+            "lessonIds": [
+              "b4"
+            ]
           },
           {
             "id": "4.7",
@@ -1008,17 +1118,23 @@ export const EXAMS = {
           {
             "id": "4.8",
             "title": "Explain the basics of scripting.",
-            "lessonIds": []
+            "lessonIds": [
+              "b4"
+            ]
           },
           {
             "id": "4.9",
             "title": "Given a scenario, use remote access technologies.",
-            "lessonIds": []
+            "lessonIds": [
+              "b4"
+            ]
           },
           {
             "id": "4.10",
             "title": "Explain basic concepts related to artificial intelligence (AI).",
-            "lessonIds": []
+            "lessonIds": [
+              "b4"
+            ]
           }
         ]
       }
@@ -1055,7 +1171,9 @@ export const EXAMS = {
           {
             "id": "1.2",
             "title": "Compare and contrast networking appliances, applications, and functions.",
-            "lessonIds": []
+            "lessonIds": [
+              "n1"
+            ]
           },
           {
             "id": "1.3",
@@ -1225,12 +1343,16 @@ export const EXAMS = {
           {
             "id": "5.2",
             "title": "Given a scenario, troubleshoot common cabling and physical interface issues.",
-            "lessonIds": []
+            "lessonIds": [
+              "n5"
+            ]
           },
           {
             "id": "5.3",
             "title": "Given a scenario, troubleshoot common issues with network services.",
-            "lessonIds": []
+            "lessonIds": [
+              "n5"
+            ]
           },
           {
             "id": "5.4",
@@ -1450,9 +1572,13 @@ export const LESSONS = {
     "examId": "COMPTIA-A-1201",
     "title": "Mobile devices and accessories",
     "domainNumber": "1",
-    "status": "planned",
-    "markdown": "",
-    "objectiveIds": []
+    "status": "released",
+    "markdown": "# Mobile Devices and Accessories (A1)\n\n*Module A1 \u2014 CompTIA A+ Core 1 study track. Independent study material \u2014 see the disclaimer at the end.*\n\nPhones and tablets are most of what a beginning technician actually touches. This lesson\ncovers the hardware you monitor and replace on a mobile device, the accessories and\nconnections that attach to it, and the network configuration and provisioning decisions\nyou make when a phone joins a company.\n\n## Monitoring mobile device hardware\n\nA phone is a small computer with a fixed parts list, and the failure rates are not evenly\ndistributed across it:\n\n- **Battery** \u2014 the consumable. Lithium-ion cells lose capacity with every charge cycle;\n  a two-year-old phone that dies at 30% or swells enough to lift its back cover needs a\n  replacement, and a **swollen** battery is a safety item, not a convenience one \u2014 it gets\n  replaced promptly and disposed of properly, never punctured.\n- **Screen assembly** \u2014 glass, digitizer (the touch layer) and LCD or OLED behind it.\n  Cracked glass with working touch is a glass replacement; dead touch zones or bleeding\n  pixels mean the assembly. Most phone repairs replace all three as one unit.\n- **Charging port** \u2014 the second most common failure after the battery, and often not a\n  failure at all: pocket lint packed into the port prevents the cable from seating. Compressed\n  air or a wooden pick fixes more \"broken ports\" than new parts do.\n- **Cameras, speakers, microphones, haptics** \u2014 modular and replaceable on most models.\n\nThe technician's first tool here is the built-in diagnostics: most platforms have a\nhardware test mode (dialer codes on phones, vendor diagnostics on tablets and laptops)\nthat exercises each component and reports pass or fail \u2014 run it before ordering parts.\n\n## Accessories and connectivity options\n\nThe connector standards are the exam's favorite detail:\n\n- **USB-C** \u2014 the modern universal connector: reversible, carries data, video, and power\n  up to substantial wattages. USB 3.x/4 and Thunderbolt ride the same plug. Not every\n  USB-C port does everything; the small icons beside the port (SS, lightning bolt) tell\n  you which features are live.\n- **Lightning** \u2014 Apple's older proprietary phone connector.\n- **Micro-USB** \u2014 the trapezoid predecessor still found on cheap accessories; being\n  forced to keep this cable alive is a normal part of the job.\n\nWireless attachment options each trade something:\n\n- **Bluetooth** \u2014 about 10 meters, low bandwidth, pairs with explicit approval. Headsets,\n  keyboards, watches.\n- **Wi-Fi** \u2014 building scale, high bandwidth, the normal data path.\n- **NFC** \u2014 a few centimeters, almost no bandwidth. Tap-to-pair and tap-to-pay; the short\n  range **is** the security.\n- **Cellular** \u2014 everywhere, bandwidth depends on plan and signal. The fallback when no\n  Wi-Fi exists, and the reason a phone is useful outside the office.\n- **USB tethering** \u2014 cable length, high bandwidth, shares the phone's data with one\n  device and charges it while doing it.\n\nTwo concepts recur. **Hotspot/tethering** means the phone becomes the modem for other\ndevices \u2014 over Wi-Fi, Bluetooth or USB. And **wireless charging** uses inductive coils:\nconvenient, slower, and it heats the battery slightly, which is worth knowing when a\ncustomer complains their phone gets warm overnight.\n\nSynchronization deserves one honest paragraph: phones sync contacts, calendars, e-mail and\nfiles with cloud services and with a host computer. The A+ answer for company data on a\npersonal phone is **containerization** \u2014 the company's e-mail and files live in a managed,\nencrypted container the employer can wipe remotely, while personal photos stay personal\nand untouched. That single design resolves most of the \"bring your own device\" arguments\nyou will hear in the field.\n\n## Network connectivity and provisioning for mobile\n\nA phone gets network settings the same way a laptop does \u2014 DHCP hands out address, mask,\ngateway and DNS (see module A2) \u2014 with two mobile-specific twists:\n\n- **Static addressing on a phone** exists but is rare (kiosk devices in a fixed\n  environment); almost everything is DHCP or a cellular carrier's dynamic assignment.\n- **E-mail settings** are usually installed by a **configuration profile** rather than\n  typed: on iOS/Android this is the Exchange/ActiveSync or gateway account, with server,\n  port, encryption (TLS) and credential fields that must match the mail server exactly.\n\n**Provisioning** is the answer to \"how do we get 40 phones set up the same way\". Typing\naccounts, Wi-Fi and policies 40 times guarantees 40 subtly different phones, so a\n**MDM (mobile device management)** system handles it:\n\n1. The device enrolls (scanning a QR code or tapping NFC once).\n2. MDM installs configuration profiles: Wi-Fi, e-mail, certificates, VPN.\n3. MDM enforces policy: passcode length and complexity, encryption on, camera or\n   app-store restrictions, and **remote wipe** capability.\n4. When the phone is lost, it is located or wiped \u2014 a wipe can be **full** (the device\n   returns to factory state) or **selective** (only the managed container, which is the\n   one you use on a personal device).\n\nThe policies that show up most in questions: passcode requirements, encryption (modern\nphones ship encrypted by default \u2014 the policy question is whether you **require** it),\napp allow/block lists, jailbreak/root detection (a rooted phone bypasses MDM trust and\nshould be treated as non-compliant), and geofencing \u2014 taking an action when a device\nleaves a defined area, like an employee badge or a store device wandering off site.\n\n## Where this leads\n\nMobile hardware faults surface in the troubleshooting module (A5); the connectivity\nsettings here are what A2 taught from the network side, applied to devices people cry\nabout. Accessories and provisioning reappear in Core 2 when security policy (B2) starts\nenforcing what you enable here.\n\n---\n\n*This is independent study material. It is not official training and is not endorsed or approved by CompTIA, Nutanix, or any other certification body.*\n",
+    "objectiveIds": [
+      "1.1",
+      "1.2",
+      "1.3"
+    ]
   },
   "COMPTIA-A-1201/A2": {
     "lessonId": "A2",
@@ -1466,7 +1592,10 @@ export const LESSONS = {
       "2.2",
       "2.3",
       "2.4",
-      "2.6"
+      "2.5",
+      "2.6",
+      "2.7",
+      "2.8"
     ]
   },
   "COMPTIA-A-1201/A3": {
@@ -1474,54 +1603,102 @@ export const LESSONS = {
     "examId": "COMPTIA-A-1201",
     "title": "Hardware and peripherals",
     "domainNumber": "3",
-    "status": "planned",
-    "markdown": "",
-    "objectiveIds": []
+    "status": "released",
+    "markdown": "# Hardware and Peripherals (A3)\n\n*Module A3 \u2014 CompTIA A+ Core 1 study track. Independent study material \u2014 see the disclaimer at the end.*\n\nThis is the parts list. Every question in this module resolves to the same skill: knowing\nwhat a component does, what it plugs into, what it costs in power or money, and which\nnumber on the label actually matters. Learn the components by what they are for, and the\nspecifications stop being trivia.\n\n## Displays: panels and the numbers that describe them\n\nA display is a panel plus a signal path, and the exam asks about both.\n\n- **Panel types.** **LCD** panels light the whole screen from behind and block light with\n  liquid crystals; **IPS** is an LCD variant with wide viewing angles and better color,\n  which is why it is the default for work that involves looking at the screen from an\n  angle. **OLED** lights each pixel individually \u2014 true blacks, high contrast, thinner, and\n  susceptible to burn-in when the same static image sits on screen for years. **Plasma** is\n  legacy and effectively gone from the field.\n- **Resolution and aspect ratio.** Resolution is the pixel grid (1920x1080, 2560x1440,\n  3840x2160). Aspect ratio is its shape (16:9 widescreen, 16:10, 21:9 ultrawide, 4:3 on\n  older projectors). Higher resolution on the same physical size means more workspace and\n  smaller text; the operating system's scaling setting is what reconciles the two.\n- **Refresh rate and response time.** Refresh rate (60 Hz, 120 Hz, 144 Hz) is how many\n  times per second the panel redraws; response time is how fast a pixel changes. A monitor\n  that advertises 144 Hz but is fed 60 Hz by a misconfigured cable is a classic ticket.\n- **The attributes that decide a purchase:** contrast ratio, brightness in **nits**,\n  color gamut, and whether the panel is matte or glossy.\n\n**Connectors and cables** matter as much as the panel: **HDMI** carries video and audio\nand is the common consumer connection; **DisplayPort** carries video and audio and, unlike\nHDMI, supports daisy-chaining monitors; **DVI** is digital video only and legacy;\n**VGA** is analog and belongs on the shelf marked \"only if nothing else exists\"; **USB-C**\ncan carry DisplayPort video if the port supports it \u2014 check for the DisplayPort or\nThunderbolt icon. Cable length and quality matter at higher resolutions: a marginal cable\nthat worked at 1080p produces dropouts at 4K.\n\n## Cables, connectors and the physical layer\n\nThe skill here is matching a connector to its job:\n\n- **Power connectors.** **SATA** power for drives; **Molex** for legacy accessories;\n  **PCIe 8-pin and 6-pin** for graphics cards (a card that needs two 8-pin connectors will\n  not run on one); **24-pin ATX** for the motherboard. Adapters exist and are how fires\n  start.\n- **Data connectors.** **SATA** data over a thin seven-pin cable for drives; **M.2** for\n  NVMe and SATA solid-state drives mounted directly on the board; **eSATA** legacy\n  external. **USB** in its versions (USB 2.0, 3.x, 4) and connector shapes (Type-A,\n  Type-B, Type-C, Micro, Mini) \u2014 the version decides the speed, the shape decides whether\n  it fits.\n- **Network.** **RJ45** for Ethernet; **RJ11** for telephone; **fiber** connectors (LC,\n  SC, ST) where the run is too long or too noisy for copper.\n- **Video and audio.** HDMI, DisplayPort, DVI, VGA as above; **3.5 mm** analog audio\n  jacks (line out, microphone) and **S/PDIF** for digital audio over optical or coaxial.\n\nTwo rules worth memorizing as rules: the connector shape does not guarantee the protocol\n(a USB-C port can be USB 2.0), and the cable matters \u2014 a charge-only cable will not carry\ndata no matter what the ports support.\n\n## Memory: the numbers that matter\n\nRAM questions come down to four attributes:\n\n- **Capacity** per module and per channel. Modern boards want matched pairs, because two\n  sticks in the right slots run in **dual-channel** and roughly double memory bandwidth.\n- **Speed** in MT/s (DDR4-3200, DDR5-5600). Faster is better only if the motherboard and\n  CPU support it; otherwise the system downclocks, which is normal, not a fault.\n- **Form factor.** **DIMM** for desktops, **SO-DIMM** for laptops and small-form-factor\n  machines. They are not interchangeable, which is the point of the distinction.\n- **Generation.** DDR4 and DDR5 have different notch positions and will not seat in each\n  other's slots. Never mix generations; the board decides which generation is legal.\n\nThe failure modes and their symptoms: a module that is not fully seated produces a\nno-boot or a beep code; a failing module produces random errors, application crashes and\n**bit errors** that look like software problems. **ECC** memory detects and corrects\nsingle-bit errors and is the answer for servers and workstations where a flipped bit is\nunacceptable. **Parity** memory detects without correcting and is effectively historical.\n\n## Storage devices\n\nKnow each type by its interface, its media and its trade:\n\n- **Hard disk drive (HDD).** Magnetic spinning platters at 5400 or 7200 RPM. Cheap per\n  terabyte, slow, mechanically fragile, and the part that is most likely to fail after\n  five years of service.\n- **Solid-state drive (SSD).** Flash memory, no moving parts, dramatically faster random\n  access. SATA SSDs are limited by the SATA interface; **NVMe** drives over **M.2** use\n  the PCIe bus and are several times faster again.\n- **Removable and external.** USB flash drives, external drives, and **memory cards**\n  (SD, microSD, CF) \u2014 the medium of cameras, phones and dash cams.\n- **RAID**, covered in more depth in A5, is about the trade between speed, capacity and\n  redundancy: **RAID 0** stripes for speed with no protection, **RAID 1** mirrors for\n  redundancy, **RAID 5** stripes with parity for a compromise, **RAID 10** mirrors and\n  stripes for performance with protection at the cost of half the capacity.\n\nThe **file systems** on those disks are separate from the hardware: **NTFS** for Windows,\n**APFS** for modern macOS, **ext4** for most Linux systems, **exFAT** for removable media\nthat must work everywhere, and **FAT32** for compatibility with a 4 GB file-size ceiling\nthat still bites in the field.\n\n## Motherboards, CPUs and add-on cards\n\nThe motherboard is the bus, the sockets and the firmware all at once. What the exam asks:\n\n- **Form factor.** **ATX** full size, **microATX** and **mini-ITX** smaller \u2014 the choice\n  constrains how many cards and drives fit.\n- **CPU socket** must match the processor exactly; the socket type is the first\n  compatibility check on any build.\n- **Chipset** decides which features the board can offer \u2014 how many USB ports, whether\n  overclocking is permitted, how many PCIe lanes are available.\n- **Expansion slots.** **PCIe** x1, x4, x16 for graphics cards, network cards, storage\n  controllers and capture cards. The physical slot length and the electrical lane count\n  are separate facts, and a x16 card in a x4 slot works but runs slower.\n- **Firmware.** **BIOS** is the classic firmware; **UEFI** is its modern replacement, with\n  **Secure Boot** (refuses to run unsigned boot code), **GPT** partitioning for large\n  disks, and a graphical setup screen. Firmware settings are where boot order, virtualization\n  support and memory timing live.\n\n**Cooling** belongs here too: a heat sink and fan on the CPU, case airflow front to back,\nand thermal paste between the CPU and the heat sink. A machine that shuts down under load\nis often a cooling problem before it is anything else.\n\n## Power supplies\n\nA power supply is specified by **wattage** (total capacity), **efficiency** (the 80 PLUS\nratings \u2014 Bronze, Gold, Platinum \u2014 describe how much input power becomes output), and\n**modularity** (whether unused cables detach). Three practical rules:\n\n1. Size the supply above the sum of the components' draw, with headroom for a graphics\n   card and for aging.\n2. Use the **correct connectors** for the card; never split a rail with adapters to make\n   an underpowered supply fit.\n3. A failing supply shows up as random shutdowns, restarts under load, or a machine that\n   will not power on at all \u2014 and it is one of the few components that can take the rest\n   of the machine with it.\n\n## Multifunction devices and printer maintenance\n\nA **multifunction device (MFD)** is a printer plus scanner plus copier plus fax, sharing\none paper path. The technologies to recognize:\n\n- **Laser** \u2014 a drum, a laser that writes the image, toner, a fuser that melts the toner\n  onto the paper. Fast per page, sharp text, and a fuser that gets very hot.\n- **Inkjet** \u2014 liquid ink sprayed through a print head. Excellent photos, slower, and the\n  print head clogs when unused.\n- **Thermal** \u2014 heat applied to treated paper; receipt printers and label printers, no ink\n  at all.\n- **Impact/dot matrix** \u2014 a physical print head striking a ribbon; still used for\n  multipart forms because it prints through carbon copies.\n\n**Maintenance** is the practical half of the module. Clean the glass and the scanner\npath; replace toner and drums on a laser, ink and print heads on an inkjet; clear jams by\nopening the correct door rather than pulling paper backwards through the mechanism;\ncalibrate and align when output drifts; and know the consumables schedule so a printer\ndoes not fail mid-quarter. A printer that is \"slow\" may simply be set to the wrong paper\ntype or running a draft mode off.\n\n## Where this leads\n\nEvery part here returns in A5 as a fault: the display that flickers, the drive that\nclicks, the supply that shuts the machine off under load, the printer that jams in the\nsame place every time. The virtualization module (A4) takes the hardware and asks what\nhappens when several operating systems share one physical machine.\n\n---\n\n*This is independent study material. It is not official training and is not endorsed or approved by CompTIA, Nutanix, or any other certification body.*\n",
+    "objectiveIds": [
+      "3.1",
+      "3.2",
+      "3.3",
+      "3.4",
+      "3.5",
+      "3.6",
+      "3.7",
+      "3.8"
+    ]
   },
   "COMPTIA-A-1201/A4": {
     "lessonId": "A4",
     "examId": "COMPTIA-A-1201",
     "title": "Virtualization and cloud",
     "domainNumber": "4",
-    "status": "planned",
-    "markdown": "",
-    "objectiveIds": []
+    "status": "released",
+    "markdown": "# Virtualization and Cloud Computing (A4)\n\n*Module A4 \u2014 CompTIA A+ Core 1 study track. Independent study material \u2014 see the disclaimer at the end.*\n\nEverything in A3 assumed one operating system per machine. This module removes that\nassumption. Virtualization puts several operating systems on one computer; cloud computing\nrents someone else's computers over a network. They are related but different ideas, and\nthe exam asks you to keep them apart: one is a technique for using hardware you own, the\nother is a way of buying capacity you do not.\n\n## Virtualization: what it is and why it exists\n\nA **virtual machine (VM)** is a complete pretend computer \u2014 CPU, memory, disk, network \u2014\ncreated in software. The software that creates and runs it is the **hypervisor**, and the\nphysical machine underneath is the **host**; each VM is a **guest**. The guest sees\nhardware that looks normal and installs an ordinary operating system.\n\nThe reasons are mostly economic and practical:\n\n- **Server consolidation.** A physical server that spends its life at 10% utilization\n  becomes one of ten VMs on a host that is actually busy.\n- **Isolation.** A crash or compromise inside one VM does not automatically reach the\n  others, and a test VM can be destroyed and recreated at will.\n- **Snapshots.** A **snapshot** captures a VM's state at a moment so it can be rolled back\n  \u2014 the fastest undo button in computing, and not a backup.\n- **Legacy and cross-platform software.** An old application that only runs on an older\n  operating system gets its own VM instead of its own machine.\n- **Development and testing.** Build a clean environment, test the installer, throw it\n  away.\n\nTwo hypervisor types, and the distinction is exam material:\n\n- **Type 1 (bare metal).** The hypervisor runs directly on the hardware; the guest\n  operating systems sit above it. Used in data centers and on servers \u2014 faster, and the\n  standard for production virtualization.\n- **Type 2 (hosted).** The hypervisor runs as an application inside a normal desktop\n  operating system. Convenient for a workstation that needs a test VM, at the cost of a\n  layer of indirection.\n\n**Containers** are the other half of the story. A container shares the host's kernel and\npackages only the application and its dependencies. Containers start faster and are\nlighter than VMs, but isolation is weaker because they share a kernel \u2014 which is exactly\nthe trade the exam wants you to name.\n\n**Desktop virtualization** puts the desktop somewhere else. **VDI (virtual desktop\ninfrastructure)** runs each user's desktop as a VM in a data center; the user connects\nfrom a thin client. The benefit is centralized management and data that never leaves the\ndata center; the cost is that the network becomes the computer.\n\n**Resource requirements** do not disappear because the machine is virtual. Each VM needs\nits own allocation of CPU cores, memory, disk and network, and the host must have enough\nof all four for the guests it runs. Overcommitting memory is the classic cause of a\nvirtualization host that is \"slow for no reason\". **Virtual networking** adds its own\nlayer: each VM has a **virtual NIC**, the hypervisor runs a **virtual switch**, and the\nhost's physical NIC carries the traffic \u2014 so a VM's connectivity problem may be a\nvirtual-switch setting, not anything physical.\n\nOne licensing note worth remembering: a virtual machine still needs a license for its\nguest operating system, and some desktop operating systems have rules about where they may\nbe virtualized. A VM is not a way around licensing; it is a way around buying another\ncomputer.\n\n## Cloud computing: the same idea, rented\n\nCloud computing delivers computing resources over a network, on demand, with the provider\nowning the hardware. The exam tests three things: the service model, the deployment model,\nand the characteristics that make something \"cloud\" rather than \"a server somewhere\".\n\n**Service models**, from most to least that you manage:\n\n- **IaaS (infrastructure as a service).** The provider gives you virtual machines,\n  storage and networking; you install and manage the operating system and everything\n  above it. Maximum control, maximum responsibility.\n- **PaaS (platform as a service).** The provider gives you a runtime and the platform\n  underneath it; you deploy your application and data. You do not patch the operating\n  system.\n- **SaaS (software as a service).** The provider runs a finished application you use\n  through a browser or client. You manage your data and your users, and nothing else.\n\n**Deployment models:** **public** cloud is shared provider infrastructure available to\nanyone; **private** cloud is dedicated to one organization, on or off its own premises;\n**hybrid** combines the two with some integration between them. The word to recognize in\nquestions is ownership and tenancy, not location \u2014 a private cloud can be hosted.\n\n**The five characteristics** that define cloud computing: on-demand self-service,\nbroad network access, resource pooling, rapid elasticity, and measured service. Reading\nthem as sentences explains the appeal: you provision without a purchase order, you reach\nit from anywhere, you share hardware, you grow and shrink quickly, and you pay for what\nyou used.\n\n**The shared responsibility model** is the practical consequence: the provider secures the\nfacility, the hardware, and the platform layers it owns; you secure what you put on top \u2014\naccounts, data, configuration. A breached storage bucket in the cloud is almost always a\ncustomer-side configuration failure, and knowing which side owns which control is the\nskill being tested.\n\n**What cloud means for a technician:** an internet connection becomes a dependency, so\noffline work and local caching matter; **cloud storage** (file sync, object storage,\nbackup) is not the same as a network drive; and **cloud-based productivity tools** move\ndocuments from local disks to shared services, which changes where the data is and who\ncan reach it. **Virtualization** is what makes all of this possible underneath \u2014 the\nprovider's data center is a large number of VMs, and your company's private cloud is\nprobably one too.\n\n## Where this leads\n\nA5 uses virtualization as a troubleshooting tool and a troubleshooting target: a VM that\nwill not start, a host out of memory, a snapshot that filled a disk. B1's operating system\nmodule returns to containers and to the installation questions that change when the target\nis a VM rather than bare metal.\n\n---\n\n*This is independent study material. It is not official training and is not endorsed or approved by CompTIA, Nutanix, or any other certification body.*\n",
+    "objectiveIds": [
+      "4.1",
+      "4.2"
+    ]
   },
   "COMPTIA-A-1201/A5": {
     "lessonId": "A5",
     "examId": "COMPTIA-A-1201",
     "title": "Hardware/network troubleshooting",
     "domainNumber": "5",
-    "status": "planned",
-    "markdown": "",
-    "objectiveIds": []
+    "status": "released",
+    "markdown": "# Hardware and Network Troubleshooting (A5)\n\n*Module A5 \u2014 CompTIA A+ Core 1 study track. Independent study material \u2014 see the disclaimer at the end.*\n\nEvery component in A3 and every connection in A2 eventually fails. This module is the\ndiscipline for finding out which one, and it is deliberately the same loop the Network+\ntrack teaches: identify, theorize, test, plan, verify, document. The hardware is specific;\nthe method is not.\n\n## The method, applied to hardware\n\n1. **Identify the problem.** What exactly happens? When did it start? What changed just\n   before? Can you reproduce it? One fault at a time.\n2. **Establish a theory.** Start with the obvious and the cheap \u2014 a loose cable, a full\n   disk, a recent update. Consider several theories, then pick the most likely.\n3. **Test the theory.** Confirm or discard it with the least invasive test available. A\n   POST beep code costs nothing; swapping a motherboard does not.\n4. **Plan the fix.** Know what the change affects and what you will do if it makes things\n   worse. Back up data before any repair that touches storage.\n5. **Verify.** Not \"it powers on\" \u2014 the user's actual workflow works, and the fault does\n   not return under load.\n6. **Document.** What was wrong, what you changed, and what you would check next time.\n\nTwo habits make the loop fast: **change one thing at a time**, so you know what fixed it;\nand **test before you swap**, because a part you replaced on a hunch is money spent on a\nguess.\n\n## Motherboards, CPUs, RAM and power\n\nThe symptoms cluster, and the clusters are the lesson:\n\n- **No power at all** (no fans, no lights): power supply, power cord, wall outlet, or the\n  front-panel power switch connector. Test the supply before condemning the board.\n- **Powers on, no display, no beep, fans spin:** CPU seating, RAM seating, or a failed\n  board. Reseat memory and the CPU before replacing anything.\n- **Beep codes and POST codes:** the board's own diagnostic language. Look up the code for\n  the specific board or BIOS vendor; a repeating pattern of beeps usually means memory.\n- **Random shutdowns or restarts under load:** overheating (dust, failed fan, dried\n  thermal paste) or a failing power supply. Check temperatures first.\n- **Random crashes, application errors, corrupted files:** failing RAM or a failing\n  storage device. Run a memory test and check the drive's health before blaming software.\n- **Swollen capacitors, burn marks, a burning smell:** the board is done. Stop powering it.\n\n## Drives and RAID\n\n- **Clicking or grinding** from a hard drive means mechanical failure. Stop using it and\n  image it if the data matters; every further spin is a risk.\n- **A drive that disappears and reappears** is usually a cable, a connector, or a\n  controller \u2014 reseat and replace the cable before replacing the drive.\n- **SMART warnings** are the drive's own early-warning system. Treat them as a schedule,\n  not a suggestion: replace before failure.\n- **RAID faults** are read from the controller, not the operating system. A degraded array\n  (one member failed) still serves data and is the moment to replace the member; a failed\n  array is a restore, not a repair. **RAID is not backup** \u2014 it protects against one disk\n  failing, not against deletion, corruption, ransomware, or a controller failure.\n- **A drive that is full** explains a surprising share of \"slow\" and \"won't save\"\n  tickets, on desktops and phones alike.\n\n## Video, projectors and displays\n\n- **No image, but the machine is running:** check the input source on the monitor, the\n  cable at both ends, and whether the display is plugged into the graphics card rather\n  than the motherboard's video output on a desktop with a discrete card.\n- **Flickering, colored lines, intermittent dropouts:** cable or connector first, then the\n  display, then the GPU. A cable that works at 1080p and fails at 4K is a bandwidth\n  problem, not a broken monitor.\n- **Dim projector image:** lamp or laser hours, dust on the lens, ambient light, and\n  distance. A projector that shuts down after a few minutes is usually a thermal or filter\n  problem.\n- **Wrong resolution or overscan:** the display settings, not the hardware. Refresh-rate\n  mismatches produce the \"it looks like it is vibrating\" complaint.\n\n## Mobile device issues\n\nThe faults specific to phones and tablets:\n\n- **Battery** \u2014 short life (capacity loss), swelling (safety issue, replace now), or a\n  device that will not charge (port lint, cable, charger, or a failed charging circuit).\n- **Overheating** \u2014 a runaway app, a failing battery, charging under a pillow, or a case\n  that traps heat. A device that is hot while idle is usually software.\n- **Screen** \u2014 cracked glass, dead touch zones, discoloration, or a digitizer that is not\n  aligned with the display.\n- **Connectivity** \u2014 no signal, no Wi-Fi, Bluetooth that will not pair. Check the obvious\n  settings and airplane mode before suspecting hardware; a case with metal in it can\n  attenuate signal.\n- **Liquid damage** \u2014 corrosion continues after the device dries. Power it off, do not\n  charge it, and treat intermittent faults after a spill as liquid damage until proven\n  otherwise.\n- **The universal mobile fix** is a restart, then an update, then a factory reset after a\n  backup. If all three fail, it is hardware.\n\n## Network issues\n\n- **No connectivity on one machine, others fine:** that machine's cable, NIC, or\n  configuration. **No connectivity for everyone:** the switch, the router, or the ISP.\n- **Link light off:** physical layer \u2014 cable, port, or NIC. **Link light on, no traffic:**\n  configuration or a blocked port.\n- **Intermittent wireless:** channel congestion, distance, interference, or a client that\n  is sticky to a weak access point.\n- **Slow network:** measure first. Latency, packet loss and jitter distinguish a congested\n  link from a failing one, and a duplex mismatch from a saturated one.\n- **Duplicate IP address** warnings mean two devices were given the same static address, or\n  a static address sits inside the DHCP pool. The fix is the address plan, not the cable.\n\n## Printer issues\n\n- **Jams** \u2014 the paper type, a worn roller, or debris in the path. Pull paper in the\n  direction of travel and check the door the manufacturer names.\n- **Streaks and smears** \u2014 laser: dirty or worn drum, low toner, bad fuser. Inkjet: clogged\n  print head, low ink, or a misaligned head.\n- **Blank pages** \u2014 a protective tape still on a new cartridge, an empty cartridge, or the\n  wrong driver.\n- **Nothing prints but the queue fills** \u2014 spooler, driver, or connectivity; a print job\n  stuck in the queue blocks everything behind it.\n- **\"Printer offline\"** \u2014 the printer's network settings, a changed IP address, or the\n  print queue pointing at the old one. Static addressing or a reservation on the DHCP\n  server is the durable fix.\n\n## Where this leads\n\nCore 1 ends here. Core 2 takes the same discipline to operating systems, security and\nsoftware faults \u2014 and the method you just practiced is what B3 assumes you already have.\n\n---\n\n*This is independent study material. It is not official training and is not endorsed or approved by CompTIA, Nutanix, or any other certification body.*\n",
+    "objectiveIds": [
+      "5.1",
+      "5.2",
+      "5.3",
+      "5.4",
+      "5.5",
+      "5.6"
+    ]
   },
   "COMPTIA-A-1202/B1": {
     "lessonId": "B1",
     "examId": "COMPTIA-A-1202",
     "title": "Operating systems and configuration",
     "domainNumber": "1",
-    "status": "planned",
-    "markdown": "",
-    "objectiveIds": []
+    "status": "released",
+    "markdown": "# Operating Systems and Configuration (B1)\n\n*Module B1 \u2014 CompTIA A+ Core 2 study track. Independent study material \u2014 see the disclaimer at the end.*\n\nCore 2 starts at the operating system, because almost every later fault is an operating\nsystem fault once the hardware is ruled out. This lesson covers what an operating system\nis and does, how to install and upgrade one, how Windows is organized, the command line\nyou will actually type, and the two other desktop operating systems the exam expects you\nto recognize.\n\n## OS types and what they are for\n\nAn operating system manages the hardware, provides the file system, schedules processes,\nand presents a user interface. The types you need to recognize:\n\n- **Workstation OS** \u2014 Windows, macOS, a Linux distribution. Interactive, one user at a\n  time, optimized for applications and a screen.\n- **Server OS** \u2014 the same technologies, tuned for services rather than a person: more\n  concurrent connections, no local interactive workload, managed remotely.\n- **Mobile OS** \u2014 iOS and Android. Sandboxed applications, aggressive power management,\n  management through MDM rather than a local administrator.\n- **Embedded OS** \u2014 inside a device that is not a computer: kiosk, point-of-sale terminal,\n  network appliance. Often invisible, and rarely patched by its owner.\n- **Virtualized and cloud OS** \u2014 the same operating systems running as guests (A4), where\n  the hardware abstraction is a hypervisor and the \"disk\" is a virtual disk image.\n\nThe exam habit to build: read the scenario, decide the role (interactive desktop, shared\nserver, locked-down appliance), then pick the OS family that matches it.\n\n## Installation and upgrade\n\nA **clean install** erases the target and installs fresh: predictable, no accumulated\nfaults, and everything must be reconfigured. An **in-place upgrade** preserves files and\napplications and replaces the OS: fast to the user, and it carries forward every problem\nit started with. **Repair install** and **recovery partition** sit between the two \u2014 the\nrecovery environment exists so that a failed boot is fixable without media.\n\nThe mechanics the exam tests:\n\n- **Boot methods.** Optical/DVD where still used, **USB** as the modern standard, **network\n  boot (PXE)** for deploying many machines, and **internal drive** for imaging. Every one of\n  them requires changing the boot order in **UEFI/BIOS**.\n- **Partitioning and formatting.** Partition the disk, then format it with a file system.\n  **GPT** is the modern partition scheme and is required for large disks and for UEFI\n  Secure Boot; **MBR** is the legacy scheme with a 2 TB limit. Windows installs create a\n  **system partition** as well as the OS partition.\n- **File systems.** **NTFS** for Windows, with permissions, encryption and journaling;\n  **exFAT** for removable media that must work across platforms; **FAT32** for maximum\n  compatibility with a 4 GB file limit; **APFS** for macOS; **ext4** for Linux.\n- **Driver installation.** Install the chipset, storage and network drivers from the\n  vendor, not only what the OS found on its own. A missing network driver is why \"the\n  internet does not work after the install\" is such a common ticket.\n- **Post-install essentials.** Updates, a local account strategy, a backup tool, and a\n  verified restore path.\n\n## Windows editions and features\n\nThe edition determines what the machine is allowed to do. For the exam, the useful\ndistinction is: **Home** lacks domain join and some management features; **Pro** adds\ndomain join, BitLocker, Remote Desktop host, Hyper-V and Group Policy; **Enterprise**\nadds volume licensing and the larger management and security feature set; **Education**\ntracks Enterprise closely for schools. In practice, \"the feature is missing\" is often an\nedition question before it is a fault.\n\nThe tools you navigate by:\n\n- **Settings** \u2014 the modern interface for display, network, accounts, privacy, updates and\n  time.\n- **Control Panel** \u2014 the older interface, and still the only place for some settings.\n- **Task Manager** \u2014 processes, performance, startup impact, users, services. The first\n  place to look at a slow machine.\n- **Device Manager** \u2014 every piece of hardware, its driver, and whether it is working.\n- **Disk Management** \u2014 partitions, volumes, drive letters, and what is allocated.\n- **Event Viewer** \u2014 the record of what the system says went wrong, split into\n  application, security and system logs.\n- **Task Scheduler, Services, Resource Monitor, Performance Monitor, System Configuration\n  (msconfig), Registry Editor, Local Users and Groups, Group Policy Editor** \u2014 the\n  administrative set; **MMC** is the shell that hosts most of them.\n- **Windows Update** and the **Windows Recovery Environment** \u2014 patching and boot repair.\n\n## The command line\n\nKnow each tool by the question it answers:\n\n- **Configuration and testing:** `ipconfig` (and `/all`, `/release`, `/renew`, `/flushdns`),\n  `ping`, `tracert`, `pathping`, `nslookup`, `netstat`, `net use`, `whoami`, `hostname`,\n  `winver`.\n- **File and directory work:** `dir`, `cd`, `md`, `rd`, `copy`, `xcopy`, `robocopy`,\n  `del`, `move`. `robocopy` is the one to remember for copying large trees reliably.\n- **Disk and system repair:** `chkdsk`, `sfc /scannow`, `diskpart`, `format`, `defrag`.\n- **Management:** `gpupdate`, `gpresult`, `shutdown`, `tasklist`, `taskkill`,\n  `services.msc`, `regedit`.\n\nThe pattern: a GUI exists for every one of these, and the command line is faster, scriptable,\nand available when the GUI will not start. In a question, the command-line answer is\nusually the right one when it is the only path that works in a broken environment.\n\n## Windows settings and networking features\n\nThe settings categories the exam names: display and personalization, network and internet,\npower (including sleep and the **power plan**), users and accounts (local versus Microsoft\naccount), time and language, accessibility, privacy, and **Windows Firewall** with its rule\nsets.\n\nFor networking, the distinction that matters: a **workgroup** is a peer-to-peer arrangement\nwhere each machine has its own accounts; a **domain** is centrally managed, with accounts\nand policy from a directory service. **Shared folders**, **mapped drives** and **shared\nprinters** work in both, with different credential behavior. A machine that cannot see a\nshare is usually a network-profile problem (public versus private), a credential problem,\nor a firewall rule \u2014 in that order.\n\n## macOS and Linux\n\nYou are not expected to administer these, but you are expected to recognize them.\n\n**macOS:** **Finder** for files, the **Dock** for running applications, **Mission Control**\nfor windows and spaces, **Time Machine** for backup, **Keychain** for credentials, **Disk\nUtility** for disks and permissions, **Terminal** for the UNIX command line, and **APFS**\nas the file system. Applications arrive as disk images or from the App Store, and the\nsecurity model is Gatekeeper: unsigned software does not run by default.\n\n**Linux:** a shell (usually bash), a case-sensitive file system (**ext4** commonly), a\npackage manager (**apt**, **dnf**, **pacman** depending on distribution), permissions in\nthe classic owner/group/other model, **sudo** for elevation, and **systemd** with\n`systemctl` for services. The desktop environment (GNOME, KDE) is separate from the\noperating system, which is a distinction Windows does not have.\n\n## Applications and cloud productivity\n\nInstalling software has requirements, and the requirements are the exam: architecture\n(**32-bit versus 64-bit**), memory and disk, the OS version, and sometimes a specific\nruntime or a license. Distribution methods are a download, a package, a network share, or\na **cloud-based productivity suite** used through a browser. A cloud application changes\nthe support question: there is nothing to install locally, the data lives in the service,\nand the failure modes are account, network and browser rather than driver and disk.\n\n## Where this leads\n\nB2 adds security to everything configured here; B3 turns it into faults. The command line\nand the recovery environment come back in B3 as the tools you reach for when Windows will\nnot boot.\n\n---\n\n*This is independent study material. It is not official training and is not endorsed or approved by CompTIA, Nutanix, or any other certification body.*\n",
+    "objectiveIds": [
+      "1.1",
+      "1.2",
+      "1.3",
+      "1.4",
+      "1.5",
+      "1.6",
+      "1.7",
+      "1.8",
+      "1.9",
+      "1.10",
+      "1.11"
+    ]
   },
   "COMPTIA-A-1202/B2": {
     "lessonId": "B2",
     "examId": "COMPTIA-A-1202",
     "title": "Security and ticketing basics",
     "domainNumber": "2",
-    "status": "planned",
-    "markdown": "",
-    "objectiveIds": []
+    "status": "released",
+    "markdown": "# Security and Ticketing Basics (B2)\n\n*Module B2 \u2014 CompTIA A+ Core 2 study track. Independent study material \u2014 see the disclaimer at the end.*\n\nB1 configured the machine. This module makes it safe to own. Security at the A+ level is\nmostly about defaults, hygiene and people: accounts with too much power, passwords shared\nin a chat, wireless with no encryption, a user who clicks the link. The exam asks you to\nname the control, choose it for a scenario, and \u2014 in the ticketing half \u2014 say what you\nrecord when a security incident lands on you.\n\n## Security measures: physical, logical and human\n\nEvery control falls into one of three groups:\n\n- **Physical.** Locked rooms and cabinets, cable locks, badge access, cameras, locked\n  racks. A stolen laptop with an unencrypted disk is a data breach with a handle.\n- **Logical.** Authentication, permissions, encryption, firewalls, endpoint protection,\n  patching. The controls configured inside the operating system.\n- **Administrative.** Policy, training, least privilege, separation of duties, an asset\n  inventory, and an incident process that says who to call.\n\nThree principles carry the reasoning. **Least privilege**: accounts get the access their\njob needs and nothing more, which is why a technician does not work all day in an\nadministrator account. **Defense in depth**: several layers, so one failure does not end\nthe story. **Implicit deny**: when nothing grants access, access is refused \u2014 the safe\ndefault.\n\n## Windows security settings\n\nThe settings the exam names, and what each does:\n\n- **Users and groups.** A **standard user** can do normal work; an **administrator**\n  account can change the system. **UAC** is the prompt that puts a standard user's\n  elevation in front of the person at the keyboard, and the reason \"run as administrator\"\n  is a deliberate act instead of a habit.\n- **NTFS permissions.** Full control, modify, read and execute, and read \u2014 assigned to\n  users and groups, inherited by subfolders, and cumulative (the most permissive wins\n  across groups). **Share permissions** apply at the network layer; the effective result\n  is the more restrictive of the two.\n- **BitLocker.** Full-volume encryption, with a recovery key that must be stored somewhere\n  a locked-out user can reach. **BitLocker To Go** does the same for removable drives.\n- **Windows Defender and the firewall.** Endpoint protection for malware and the host\n  firewall for network traffic, both configurable by profile (domain, private, public).\n- **Password policy and account lockout.** Length and complexity requirements, an expiry\n  if the organization uses one, and a lockout threshold after repeated failures \u2014 the\n  specific control against brute force and password spraying.\n- **Security logs and auditing.** What Event Viewer's security log records, and the\n  reminder that the log is evidence only if the clock is right and the log is retained.\n\n## Wireless security and authentication\n\nThe evolution is the exam's favorite line:\n\n- **WEP** \u2014 broken long ago. Never correct, always a wrong answer.\n- **WPA** \u2014 a stopgap; TKIP encryption, superseded.\n- **WPA2** \u2014 AES encryption (CCMP), and still the common baseline.\n- **WPA3** \u2014 stronger key exchange and protection against offline guessing, with\n  **WPA3-Enterprise** for authenticated users.\n- **802.1X** \u2014 port-based authentication, where a **RADIUS** server checks the device or\n  user before the network grants access. This is the enterprise answer; a shared\n  pre-shared key is the small-office answer, and the trade is that everyone with the key\n  is everyone.\n\nTwo practical notes: a **guest network with a separate password** is what keeps visitors\noff the internal one, and **WPS** (the push-button or PIN pairing) should be disabled \u2014\nit is the easiest way into an otherwise well-configured wireless network.\n\n## Malware: types and removal\n\nKnow the types by their behavior:\n\n- **Virus** \u2014 attaches to a file and spreads when the file runs.\n- **Worm** \u2014 spreads on its own across networks, no user action needed.\n- **Trojan** \u2014 looks like something wanted, does something else.\n- **Ransomware** \u2014 encrypts data and demands payment; offline backups are the answer that\n  works.\n- **Rootkit** \u2014 hides inside the operating system and conceals itself.\n- **Spyware, adware, keylogger** \u2014 collects information, displays advertising, records\n  keystrokes.\n- **Botnet client** \u2014 turns the machine into a soldier in someone else's army.\n\nThe removal procedure has an order, and the order is the answer: **identify** the\ninfection; **quarantine** the infected system from the network; **disable System Restore**\nso the infection cannot be restored from a save point; **remediate** by scanning, removing,\nand repairing; **re-enable** System Restore and create a clean restore point; **update**\nthe OS and the security software; **scan again** to confirm; and **educate** the user about\nhow it arrived. When the infection is a rootkit or the system is no longer trustworthy,\n**reimage** \u2014 it is faster and more certain than cleaning.\n\n## Social engineering\n\nThe attacks target helpfulness, not software:\n\n- **Phishing** \u2014 fraudulent e-mail; **spear phishing** \u2014 crafted for one target;\n  **whaling** \u2014 aimed at executives.\n- **Vishing** \u2014 a phone call; **smishing** \u2014 a text message.\n- **Pretexting** \u2014 an invented story that justifies the request.\n- **Baiting** \u2014 a tempting object, physical or digital; **tailgating** \u2014 following someone\n  through a door.\n- **Shoulder surfing**, **dumpster diving**, **impersonation**, **evil twin** wireless,\n  **watering hole** sites, and **typosquatting** domains.\n\nThe manipulation levers to recognize: authority (\"this is IT\"), urgency (\"your account\ncloses in ten minutes\"), social proof (\"everyone else has already confirmed\"), and\nfamiliarity (a message that knows your manager's name). The defenses are procedural, not\ntechnical: verify through a second channel, never read a credential over the phone, and\nmake reporting a mistake safe \u2014 a user who confesses in ten minutes costs far less than\none who hides it for a week.\n\n## Hardening: workstation, mobile and SOHO\n\n**Workstations:** strong unique passwords, screen lock on idle, endpoint protection on,\nautomatic updates, host firewall on, autorun disabled, unused services and accounts\nremoved, and full-disk encryption on laptops.\n\n**Mobile devices:** a passcode or biometric lock, device encryption (on by default),\n**MDM** enrollment for company data, remote wipe configured and tested, updates applied,\napplications from the platform's own store only, and rooting or jailbreaking treated as a\ncompliance failure because it removes the platform's own protections.\n\n**SOHO wireless and routers:** change the default administrator password, use WPA2 or\nWPA3, disable WPS and remote administration, name the network without identifying the\nhardware or the resident, keep firmware updated, and separate guest traffic. **Content\nfiltering** and a **VPN** for remote workers are the two additions a small office usually\nneeds.\n\n**Browser and data:** clear cache and cookies on shared machines, understand what private\nbrowsing does and does not hide, keep extensions minimal, and heed certificate warnings \u2014\na warning that appears only sometimes is often the more interesting event.\n\n**Disposal.** Deleting a file and formatting a drive are not destruction. **Logical**\ndestruction overwrites the media or uses the drive's secure-erase command; **physical**\ndestruction shreds, drills, or degausses, and the choice depends on the media (degaussing\ndoes nothing to flash). A **certificate of destruction** is what turns \"we threw it out\" into\na documented act.\n\n## Tickets and security incidents\n\nSecurity work is ticket work. A security incident ticket carries the same fields as any\nother \u2014 symptom, what was tried, cause, action, verification \u2014 plus what was exposed, who\nwas notified, and what evidence was preserved. The B4 module covers the ticket discipline\nin full; what belongs here is the rule that a suspected compromise is documented as it\nhappens, because the timeline is the part you cannot reconstruct later.\n\n## Where this leads\n\nB3 is what happens when all of this fails anyway: the infected machine, the account that\nwas locked out, the browser taken over by a toolbar nobody installed. Every symptom there\nis a control from this module that was missing, misconfigured, or overridden.\n\n---\n\n*This is independent study material. It is not official training and is not endorsed or approved by CompTIA, Nutanix, or any other certification body.*\n",
+    "objectiveIds": [
+      "2.1",
+      "2.2",
+      "2.3",
+      "2.4",
+      "2.5",
+      "2.6",
+      "2.7",
+      "2.8",
+      "2.9",
+      "2.10",
+      "2.11"
+    ]
   },
   "COMPTIA-A-1202/B3": {
     "lessonId": "B3",
     "examId": "COMPTIA-A-1202",
     "title": "Software troubleshooting",
     "domainNumber": "3",
-    "status": "planned",
-    "markdown": "",
-    "objectiveIds": []
+    "status": "released",
+    "markdown": "# Software Troubleshooting (B3)\n\n*Module B3 \u2014 CompTIA A+ Core 2 study track. Independent study material \u2014 see the disclaimer at the end.*\n\nHardware faults announce themselves. Software faults argue. A machine that boots to a blue\nscreen, an application that closes itself, a phone that eats battery, a browser that\nredirects every search \u2014 the exam calls these software troubleshooting, and the method is\nthe one from A5: identify, theorize, test, plan, verify, document. What changes is the\nevidence you collect, because the evidence is now logs, settings and behavior rather than\nlights and sounds.\n\n## Windows operating system issues\n\nGroup the symptoms by when they happen, and the diagnosis gets much shorter.\n\n**It will not boot.** A **blue screen (BSOD)** at startup gives you a stop code \u2014 read it\nbefore anything else, because it usually names the failing component. **Startup Repair**\nand the **Windows Recovery Environment** are the first tools; **safe mode** boots with a\nminimal driver set, which tells you whether a driver or a startup program is the cause.\n`bootrec`, `sfc /scannow`, and `chkdsk` repair the boot configuration, the system files,\nand the disk in that order. If the disk is failing, repair is a detour: image the data\nfirst.\n\n**It boots, but slowly.** The usual suspects in order: too many **startup programs**\n(Task Manager's Startup tab shows their impact), a nearly full system drive, failing\nstorage, insufficient memory, malware, and a machine that is thermally throttling. Measure\nbefore changing anything \u2014 a boot-time number before and after is the only proof you fixed\nit.\n\n**Applications crash, hang, or will not install.** Check the architecture (32-bit\napplication on a 64-bit OS is fine; the reverse is not), the OS version, permissions, disk\nspace, and whether the application needs a runtime or a driver that is missing. **Event\nViewer** turns \"it just closes\" into an error code and a module name.\n\n**The profile is wrong.** A **temporary profile** at logon \u2014 the desktop is empty and the\ndocuments are gone \u2014 means the user profile could not load. The data is normally still on\ndisk; do not delete the profile before copying it out.\n\n**Updates fail.** Check free disk space, the time and the update service, and the error\ncode. Repeated failures on one machine usually trace to corrupted update components or\nthird-party software blocking the change.\n\n**Drives disconnect, printers stop, the clock drifts.** Mapped drives that drop are often\nthe network profile or the credential; a stuck print queue blocks every job behind it; a\nmachine whose clock is minutes off will fail certificate checks and domain logons, and a\ndead **CMOS battery** is the usual cause on an older desktop.\n\n## Mobile operating system and application issues\n\nThe same three questions \u2014 what changed, what does it do, can I reproduce it \u2014 with the\nmobile constraint that you often cannot see the logs.\n\n**Application problems.** An application that crashes at launch, will not update, or\ndemands permissions it should not need is usually fixed by force-stopping it, clearing its\ncache, reinstalling from the store, or checking that the OS version it needs is actually\ninstalled. An application that will not install at all is often out of storage, or blocked\nby a management profile.\n\n**Storage and performance.** \"Storage full\" explains a remarkable share of mobile\nmisbehavior: applications cannot write, updates cannot install, and the camera stops. A\nphone that is slow or hot while idle is usually one runaway application or a failing\nbattery, in that order.\n\n**Connectivity and sync.** No cellular data, no Wi-Fi, Bluetooth that will not pair \u2014\ncheck the settings and airplane mode first, then the carrier or network, then hardware. A\nphone that will not sync is usually an account credential, a full mailbox, or a management\nprofile that was never removed.\n\n**Updates and lockouts.** An OS update that fails repeatedly needs free space and a\nworking network; a device that is locked out by too many passcode attempts may need the\nmanagement system or the vendor's recovery path, and a device that is wiped without a\nbackup is the one outcome to prevent before anything else.\n\n**The mobile escalation ladder** is worth memorizing: restart, update the app and the OS,\nclear cache, reinstall, reset settings, factory reset after a backup, then hardware. Each\nstep is more invasive than the last, which is why the order matters.\n\n## PC security issues\n\nA machine with malware usually tells you in its behavior before any scanner does:\n\n- **Pop-ups and redirects** \u2014 a browser that opens windows or sends searches somewhere\n  unexpected.\n- **Slowdown and unexpected network traffic** \u2014 a machine that is busy when nobody is\n  using it, or a network link that is saturated at night.\n- **Security software disabled or missing** \u2014 malware that turns off the very thing meant\n  to catch it.\n- **Fake alerts** \u2014 a \"virus detected, call this number\" page is an attack, not a warning.\n  Nothing legitimate asks you to phone a support line.\n- **Changed settings** \u2014 a new home page, a new search provider, a toolbar nobody\n  installed, a proxy setting you did not make.\n- **Account and certificate warnings** \u2014 a locked account with no failed logons from the\n  user, or certificate warnings that appear on one machine only.\n\nThe response is the B2 removal procedure: identify, quarantine, disable System Restore,\nremediate, re-enable and create a clean restore point, update, rescan, and educate. For a\n**browser hijack**, resetting the browser to defaults after removing the extension usually\ndoes it. For a **rootkit**, or a machine whose trustworthiness is in doubt, **reimage** \u2014\nand if the machine handled sensitive data, treat it as an incident and preserve evidence\nbefore wiping.\n\n## The tools, in one list\n\n**Task Manager** for what is running and what starts at boot; **Event Viewer** for what the\nsystem recorded; **System Configuration (msconfig)** for startup and boot options;\n**safe mode** for isolating drivers; **System Restore** for rolling back a change;\n**`sfc /scannow`**, **`chkdsk`**, and **DISM** for repairing system files and images;\n**Windows Update** and **Device Manager** for the platform itself; and the **reset this PC**\noption when repair would take longer than reinstallation. Every one of these is a way to\nreplace a theory with evidence.\n\n## Where this leads\n\nThis is the last content module before B4's operational procedures, and the two are\ndeliberately adjacent: the fix is not finished until it is documented, verified with the\nuser, and closed as a ticket someone else could pick up cold.\n\n---\n\n*This is independent study material. It is not official training and is not endorsed or approved by CompTIA, Nutanix, or any other certification body.*\n",
+    "objectiveIds": [
+      "3.1",
+      "3.2",
+      "3.3",
+      "3.4"
+    ]
   },
   "COMPTIA-A-1202/B4": {
     "lessonId": "B4",
@@ -1535,7 +1712,12 @@ export const LESSONS = {
       "4.2",
       "4.3",
       "4.4",
-      "4.7"
+      "4.5",
+      "4.6",
+      "4.7",
+      "4.8",
+      "4.9",
+      "4.10"
     ]
   },
   "COMPTIA-NET-009/N1": {
@@ -1547,6 +1729,7 @@ export const LESSONS = {
     "markdown": "# Networking Concepts (N1)\n\n*Module N1 \u2014 CompTIA Network+ study track. Independent study material \u2014 see the disclaimer at the end.*\n\nNetworks are conventions that many different devices agree to follow. This lesson is the vocabulary pass: how to think in layers, what ports and protocols actually are, why IPv4 addressing and subnetting exist, how DNS and DHCP work at Network+ depth, and where the physical media and cloud concepts fit. The A+ networking lesson (A2) already covered the four settings every host needs; here those same ideas are revisited as a *path* a packet takes, not just as fields on a configuration panel.\n\n## The layered model as a mailing analogy\n\nThe OSI model is seven layers tall, but a beginner only needs four ideas to read a diagram without getting lost:\n\n1. **Physical (Layer 1)** \u2014 the wire, the fiber, the radio wave. Envelope in the truck.\n2. **Data link (Layer 2)** \u2014 frames on one local link, addressed by MAC, moved by switches. The local mail carrier walking a street.\n3. **Network (Layer 3)** \u2014 packets between different subnets, addressed by IP, moved by routers. The address that decides which town the letter goes to.\n4. **Transport (Layer 4)** \u2014 TCP and UDP segments, ports, delivery guarantees (or the lack of them). Whether the letter is registered mail or a postcard.\n\nHigher layers (session, presentation, application) matter for application design; for network troubleshooting, most symptoms live in layers 1\u20134. When a user says \"the website is down,\" your job is to decide *which layer* is actually lying \u2014 cable, local frame, routed path, or service port.\n\nThe TCP/IP model collapses this into four (link, internet, transport, application). Same physics, different names. Learn one well and the other is a translation.\n\n## Protocols and ports as agreed conventions\n\nAn IP address gets a packet to the right *machine*. A **port** gets it to the right *service* on that machine. There is no cleverness here \u2014 clients and servers simply agree in advance that web traffic is 80/443, DNS is 53, SSH is 22, DHCP is 67/68, and so on. If one side changes the convention without the other, the packets arrive and nobody answers.\n\nUseful habit: when a symptom is \"the host pings but the application fails,\" you are almost certainly above Layer 3 and looking at a port, a service, or a TLS/name problem \u2014 not at cabling.\n\n## IPv4 addressing and why subnetting exists\n\nAn IPv4 address is a 32-bit number written in four octets. The **subnet mask** (often written `/24` instead of `255.255.255.0`) cuts that number into a network part and a host part. The cut is what lets a host decide:\n\n- destination is **on my street** (same network) \u2192 deliver directly on the local link;\n- destination is **in another town** (different network) \u2192 hand the packet to the default gateway.\n\nThat single decision is why a wrong mask and a wrong gateway produce such different (and such recognizable) symptoms.\n\n**Subnetting** is the deliberate use of that cut to break one large block into smaller blocks. The reason is mostly *broadcast and operational*: one flat subnet with hundreds of hosts means every ARP and broadcast hits every interface. Smaller subnets limit who hears what, make access control easier, and give you room to grow without a flag day. You do not need to do binary by hand in this beginner pack \u2014 you do need to know *why* the boundary exists.\n\n## DNS and DHCP at Network+ depth\n\nA+ teaches what these services hand out. Network+ asks you to follow the path.\n\n### DHCP lease lifecycle\n\nA DHCP lease is not \"an IP appears.\" It is a timed agreement, classically described as **DORA**:\n\n1. **Discover** \u2014 the client broadcasts, looking for a server.\n2. **Offer** \u2014 a server proposes an address and options (mask, gateway, DNS, lease time).\n3. **Request** \u2014 the client asks for that proposal (important when several servers answered).\n4. **Acknowledge** \u2014 the server confirms; the lease timer starts.\n\nLater, the client **renews** at T1 (half the lease, usually unicast to the original server) and **rebinds** at T2 (broadcast, any server) before the lease actually expires. A brief periodic dropout is often a renewal-path failure: renew fails, rebind fails, the address is released, and a fresh DORA has to run. That symptom is different from \"never got a lease at all\" (APIPA on many hosts) and different from \"got a lease but the gateway is wrong.\"\n\n### DNS resolution path\n\nWhen a client needs `www.example.com`:\n\n1. Check the **stub resolver cache** (and the hosts file, if present).\n2. Ask the **configured recursive DNS server**.\n3. That server walks the hierarchy (root \u2192 TLD \u2192 authoritative) or uses cached answers.\n4. The client receives an address record and opens a connection to that address.\n\nThe classic split of symptoms follows directly:\n\n- **IP works, name fails** \u2192 the network path is fine; the translation step is broken (resolver setting, resolver down, or the name itself).\n- **Nothing works, name and IP** \u2192 you are not in the name layer; look at addressing, gateway, or the remote path.\n- **Internal names work, external names fail** \u2192 the resolver can answer from its own zone/forwarders path or not; this is a resolver/upstream question, not \"DNS is just broken.\"\n\nThis is the same idea as A+ A2's \"works by IP but not by name,\" walked one level deeper into *why* the two cases separate so cleanly.\n\n## Media types, briefly\n\n- **Copper (twisted pair)** \u2014 cheap, common, distance-limited (~100 m), sensitive to EMI; category matters for throughput.\n- **Fiber** \u2014 long distance, immune to electrical noise, higher install skill and cost.\n- **Wireless** \u2014 flexible placement, shared medium, needs channel/power/security design.\n\nChoosing media is usually a constraint question (distance, interference, existing plant, bandwidth) rather than a taste question.\n\n## Cloud and modern environments at concept level\n\nFor this track, cloud is a *connectivity* idea: workloads may sit on someone else's data center, reachable over private links, VPNs, or the public internet. You still need addressing, name resolution, segmentation, and monitoring \u2014 the players are just less physical. SDN and similar phrases are \"control of forwarding is programmable rather than only console-typed.\" Know what they change in the mental model; deep product configuration is out of scope here.\n\n## Scenario walkthrough: the failed client\n\nA user says \"nothing loads.\" Walk the path instead of guessing:\n\n1. **Identify** \u2014 what exactly fails? A name, a URL, one site, everything?\n2. **Local link** \u2014 does the host have a sane IP, mask, gateway (compare to a working neighbor)?\n3. **Local vs remote** \u2014 can you ping a host on the same subnet? The gateway? An external IP?\n4. **Name layer** \u2014 does an IP work while a name fails? Then look at DNS before touching anything else.\n5. **Service layer** \u2014 if IP and name both work and the port answers, the problem may be the application or content, not the network.\n\nThat order is layers 1\u21923\u2192name\u2192service, and it is also the N5 troubleshooting method applied to a client. Use it every time until it is habit.\n\n---\n\n*This is independent study material. It is not official training and is not endorsed or approved by CompTIA, Nutanix, or any other certification body.*\n",
     "objectiveIds": [
       "1.1",
+      "1.2",
       "1.3",
       "1.4",
       "1.5",
@@ -1560,27 +1743,42 @@ export const LESSONS = {
     "examId": "COMPTIA-NET-009",
     "title": "Network implementation",
     "domainNumber": "2",
-    "status": "planned",
-    "markdown": "",
-    "objectiveIds": []
+    "status": "released",
+    "markdown": "# Network Implementation (N2)\n\n*Module N2 \u2014 CompTIA Network+ study track. Independent study material \u2014 see the disclaimer at the end.*\n\nThe concepts lesson (N1) explained what travels across a network. This lesson is about the\ngear that moves it: how a router decides where a packet goes, how a switch keeps local\ntraffic local, how to pick a wireless setup that fits a real building, and what has to be\ntrue in the wiring closet for any of it to work.\n\n## Routing: how a router chooses\n\nA router has one job \u2014 forward packets between networks \u2014 and it does it by looking up the\ndestination IP address in a **routing table**. Each entry says, in effect: \"for this\nnetwork, send the packet to that next hop, out this interface.\" A default route\n(`0.0.0.0/0` for IPv4) catches everything the table does not match explicitly, which is\nwhy a small office can reach the whole internet with one route.\n\nRoutes get into the table three ways:\n\n- **Static** \u2014 an administrator types them in. Predictable, no protocol traffic, and\n  exactly as current as the person who last edited it. Best for small, stable networks\n  and for the default route pointing at an ISP.\n- **Dynamic** \u2014 routers exchange routing updates and learn from each other. When a link\n  fails, the protocol recalculates. Best when the topology changes or is too large to\n  hand-maintain.\n- **Directly connected** \u2014 any interface that is up and configured puts its own network\n  in the table automatically. Free, and the reason a router can talk to the networks it\n  is plugged into.\n\nTwo protocol families show up on this exam, and the distinction is the point:\n\n- **Distance vector** protocols (RIP being the classic) choose a path by hop count and\n  tell their neighbors the whole picture they know. Simple to configure, slow to\n  converge, and prone to routing loops without safeguards.\n- **Link state** protocols (OSPF being the one to know) each router builds a full map of\n  the area, then computes shortest paths itself. Faster convergence, more CPU and memory,\n  far better in a real enterprise.\n\nA useful shorthand for **administrative distance**: when two protocols both know a route\nto the same network, the router believes the source with the lower number. Static routes\nbeat dynamic ones by default for exactly this reason. And inside one protocol, the\n**metric** decides which of two equally believable paths wins.\n\n## Switching: keeping local traffic local\n\nA switch learns on its own. It looks at the **source MAC address** of every frame and\nrecords which port it arrived on, then forwards future frames only to the port where the\ndestination MAC lives. That is unicast, and it is why a switch is not a hub \u2014 a hub\nrepeats everything everywhere, a switch does not. Until a switch knows a destination, it\nfloods the frame to every port in the broadcast domain, so a MAC table full of guesses is\na sign of a network that is not talking normally.\n\nThree switching features matter at this level:\n\n- **VLANs** split one physical switch into several logical broadcast domains. Ports are\n  assigned to a VLAN; hosts in different VLANs cannot hear each other's broadcasts and\n  need a router (or a layer-3 switch) to communicate. The payoff is containment \u2014 a\n  misbehaving host, or a guest network, stays inside its own VLAN.\n- **Trunk ports** carry several VLANs over a single cable between switches, tagging each\n  frame so the far end knows which VLAN it belongs to. An **access port** belongs to\n  exactly one VLAN and carries untagged frames, which is what you connect a workstation\n  to. Mixing these two up is one of the most common beginner configuration faults.\n- **Spanning tree** exists because redundancy is dangerous. Two switches joined by two\n  cables loop frames forever, and a broadcast storm follows in seconds. Spanning tree\n  blocks one path logically so the loop cannot carry traffic, then unblocks it if the\n  active path dies. The trade you accept is a blocked port that looks idle but is\n  insurance.\n\n## Wireless: choosing devices and technology\n\nThree knobs decide how a wireless network behaves:\n\n- **Band.** 2.4 GHz reaches farther and gets through walls, and is crowded \u2014 microwave\n  ovens, Bluetooth and every neighbor's network live there. 5 GHz is faster and cleaner\n  but shorter ranged. 6 GHz adds wide clean channels in the newest standard, at the\n  shortest range of the three.\n- **Channel.** Adjacent networks on the same channel fight for airtime. In 2.4 GHz, only\n  channels 1, 6 and 11 do not overlap each other, so a site survey that places three\n  access points on 1, 6 and 11 beats four access points all on 6.\n- **Standards.** 802.11ac is 5 GHz only. 802.11ax (Wi-Fi 6) works on both bands and is\n  built for many clients in the same room, which is what a classroom or an office\n  actually is. A client can only use what both it and the access point support, so one\n  old laptop caps the whole conversation.\n\nPlacement is physics, not taste: an access point wants to be central, high, and clear of\nmetal and dense walls. Coverage planning means putting enough access points, on\nnon-overlapping channels, that each client has one strong signal to prefer.\n\n## Physical installation\n\nEverything above depends on cabling and power being right, and this is where careless work\ncomes back later as \"intermittent\" problems:\n\n- **Cable types.** Twisted-pair copper (Cat 5e and up) carries Ethernet over short runs.\n  **Single-mode fiber** uses a laser and goes kilometers \u2014 the link between buildings.\n  **Multimode fiber** uses a cheaper light source and is for shorter runs inside a\n  building. Fiber is immune to electrical interference; copper is not, so it stays away\n  from fluorescent lighting and power runs, and where it must cross power it crosses at a\n  right angle rather than running alongside.\n- **Standards and distances.** Structured cabling puts a wall jack near every workstation\n  and runs it back to a patch panel in a closet. The practical limit to remember for\n  twisted-pair Ethernet is 100 meters from the patch panel to the device, patch cords\n  included.\n- **PoE** delivers power over the same cable as data, which is how access points, cameras\n  and IP phones get installed in ceilings without an electrician. The switch port supplies\n  it; the classes determine what a device may draw.\n- **Racks, UPS and environmental basics.** Equipment gets mounted in racks with airflow\n  planned front-to-back, and a UPS keeps a power blip from becoming an outage \u2014 with\n  conditioning for brownouts, which a plain power strip does not handle.\n\n## Where this leads\n\nN3 takes over once the network is built: how it gets monitored, documented, and brought\nback after a failure. The scenario that goes with this module walks a real host through a\nwrong-VLAN and wrong-gateway fault \u2014 the two configuration mistakes this lesson sets you\nup to recognize.\n\n---\n\n*This is independent study material. It is not official training and is not endorsed or approved by CompTIA, Nutanix, or any other certification body.*\n",
+    "objectiveIds": [
+      "2.1",
+      "2.2",
+      "2.3",
+      "2.4"
+    ]
   },
   "COMPTIA-NET-009/N3": {
     "lessonId": "N3",
     "examId": "COMPTIA-NET-009",
     "title": "Network operations",
     "domainNumber": "3",
-    "status": "planned",
-    "markdown": "",
-    "objectiveIds": []
+    "status": "released",
+    "markdown": "# Network Operations (N3)\n\n*Module N3 \u2014 CompTIA Network+ study track. Independent study material \u2014 see the disclaimer at the end.*\n\nA built network is not a finished network. This lesson is about the part of the job that\nnever ends: the processes that keep change from becoming chaos, the monitoring that tells\nyou something is wrong before users do, the recovery plan you hope you never open, the\neveryday services that make addressing and naming work, and the ways you reach and manage\nthe devices themselves.\n\n## Processes and procedures\n\nThree documents and three habits carry most of the weight at this level.\n\n**The network documentation set.** A network diagram (physical: what plugs into what;\nlogical: how it addresses and routes), an **IP address scheme** showing what ranges are\nwhere, a **port layout** or **rack diagram** for each closet, and a list of **standard\nconfigurations** \u2014 the baseline every switch of a given kind should match. If a device\ndrifts from its standard configuration and nobody wrote down the standard, the drift looks\nlike a fault.\n\n**Change management.** Nobody changes a production network on a hunch. A change gets\nrequested, reviewed for impact, signed off, scheduled into a **maintenance window**,\ndocumented, and reviewed afterward. Three terms belong here:\n\n- **Standard change** \u2014 pre-cleared, low-risk, repeatable (replacing a failed cable of a\n  known type). Takes the fast path.\n- **Normal change** \u2014 needs the review and approval it has not had before.\n- **Emergency change** \u2014 happens now, gets reviewed afterwards. The post-review is not\n  optional; it is what stops \"emergency\" from becoming a permanent excuse.\n\nRelated vocabulary you will see in scenario questions: **push** configuration to many\ndevices from a central system; **zero-touch** provisioning, where a new device configures\nitself from a template when plugged in; and **firmware**, the software inside the device\nitself, which you update deliberately, with a tested version and a rollback plan \u2014 never\nbecause a banner offered an update.\n\n**The habits:** time synchronization (see below), backups of device configurations, and\nlabeling. Cables and ports that are labeled correctly save the next person an hour;\nlabeled badly, they cost the next outage an hour.\n\n## Monitoring: knowing before they call\n\nA monitoring system answers two different questions, and tools tend to specialize:\n\n- **Is it up?** **Up/down monitoring** and reachability checks. Cheap, and catches hard\n  failures only.\n- **How is it doing?** **Performance monitoring** \u2014 interface utilization, errors,\n  discards, latency, packet loss, jitter. This is what makes \"the network is slow\"\n  testable, because you compare against a **baseline** recorded when things were normal.\n  Without a baseline there is no such thing as \"slow\", only opinion.\n\nThe mechanics: a poller asks devices for counters on a schedule; **SNMP** is the classic\nprotocol for reading those counters, and a **trap** or an **SNMP inform** is how a device\npushes an alert instead of waiting to be asked. Newer setups stream or pull data from the\ndevice programmatically rather than polling \u2014 and the exam cares about the distinction\nbetween **pull** (I ask, on my schedule) and **push** (you tell me, when it happens).\n\n**Syslog** deserves its own line: devices send timestamped event messages to a central\ncollector, so that when three switches all flap at 02:14 you can see it in one place rather\nthan on three screens. Timestamps only mean something if the devices agree on the time,\nwhich is why **NTP** and a time source are part of monitoring, not an afterthought.\n\nWhere the data comes from matters too: an **agent** installed on a host reports what\nhappens inside it, while a **flow** record (NetFlow-style) tells you who talked to whom,\nhow much, and when, from the network's point of view. Agent data explains a slow server;\nflow data explains unexpected traffic.\n\n**SNMP versions** in one line: v1 and v2c authenticate with a community string sent in\nclear text and encrypt nothing; v3 adds authentication and encryption. If a question\nmentions capturing credentials off the wire, that is the difference it is testing.\n\n## Disaster recovery\n\nA **backup** copies data. A **disaster recovery plan** says how the business runs when the\nsite it lives in does not, and it is written before you need it. Three numbers define it:\n\n- **RPO \u2014 recovery point objective.** How much data you are willing to lose, measured in\n  time. An RPO of four hours means the newest acceptable copy is four hours old.\n- **RTO \u2014 recovery time objective.** How long you are willing to be down while recovering.\n- **MTBF / MTTR** describe the hardware underneath: mean time between failures, and mean\n  time to repair. A short RTO on components that take days to replace is a plan that\n  depends on spare parts being on the shelf.\n\nThe three classic recovery sites, ordered by cost and readiness:\n\n- **Cold site** \u2014 space, power and connectivity, no equipment ready. Cheapest, slowest.\n- **Warm site** \u2014 some equipment, not current. The middle ground.\n- **Hot site** \u2014 a full mirrored environment able to take over quickly. Most expensive,\n  least downtime.\n\nBackup **where** is the other half. **On-site** restores fastest and dies with the server\nroom. **Off-site** survives a building loss. **Offline** (powered down, disconnected,\nair-gapped) is the specific answer to ransomware, because an attacker who has the network\ncannot encrypt a copy that is not on it. The pattern behind those three is the familiar\n**3-2-1**: several copies, on different media, one of them somewhere else entirely.\n\nWhat you back up has a name worth knowing: **full, incremental, differential**. A full\nbackup copies everything; an incremental copies only what changed since the last backup of\nany kind, which is quick to take and slow to restore; a differential copies everything\nchanged since the last *full*, which is slower to take and much simpler to restore. Which\none is \"best\" depends entirely on whether restore speed or backup window is your RTO\nproblem. And a backup nobody has rehearsed restoring is a hope, not a backup \u2014 the plan is\nonly proven when someone has actually restored from it.\n\n## IPv4 and IPv6 services\n\nTwo services do most of the work, and both already appeared in A+ networking:\n\n- **DHCP** hands out addresses and options. The four settings every host needs \u2014 address,\n  mask, gateway, DNS \u2014 are exactly what a DHCP lease carries, plus a lease time. A\n  **scope** is the pool a DHCP server serves; a **reservation** pins one known device (by\n  its MAC) to one address so it is predictable without being hand-configured; an\n  **exclusion** keeps a range out of the pool for devices that must be static.\n  IPv6 uses its own mechanisms \u2014 stateless address autoconfiguration lets a host build its\n  own address from the router's advertisement, and stateless does not track leases;\n  stateful (DHCPv6) does, and is what you use when you also need to hand out other\n  settings.\n- **DNS** resolves names. The records to recognize: **A** (name to IPv4), **AAAA** (name\n  to IPv6), **CNAME** (an alias for another name), **MX** (where mail for this domain\n  goes), **TXT** (free-form text, used for verification and mail policy), **PTR**\n  (address back to name, the reverse direction), **NS** (which servers are authoritative\n  for the zone), and **SRV** (which host provides a service, on which port).\n\nThen the small services that are easy to forget until they fail: **NTP** for time, and a\n**TFTP** server for devices to fetch configuration and firmware \u2014 a device with no\ncredentials to give will happily pull a file over TFTP, which is exactly why it is a\nconcern.\n\n## Access and management methods\n\nReachability and manageability are different properties, and the exam asks about both:\n\n- **Out-of-band management** \u2014 a dedicated management port or console connection that does\n  not depend on the production network carrying your traffic. When the network is down,\n  in-band management is down with it. This is the reason the console cable is in the bag.\n- **In-band** \u2014 managing a device over the same network it is part of. Convenient, and\n  unavailable precisely when you most need it.\n- **Remote access** to the device itself: **SSH** for a command line (encrypted), **HTTPS**\n  for a web interface (encrypted), **console/serial** for first-time setup or a broken\n  device, and **RDP** when the target is a Windows host rather than a network device.\n  **Telnet** and plain HTTP send credentials visibly and should be treated as the wrong\n  answer unless a question specifically asks about them.\n- **Network access control** decides what a connecting device is allowed to touch: 802.1X\n  authenticates before granting port access, a **guest network** or captive portal\n  separates visitors from staff, and MAC or certificate-based checks say which devices may\n  join at all.\n\n## Where this leads\n\nN4 covers what protects all of this, and N5 is where it all pays off \u2014 because most of the\nfaults you will troubleshoot are one of these services being absent, or one of these\nsettings being wrong by a single field.\n\n---\n\n*This is independent study material. It is not official training and is not endorsed or approved by CompTIA, Nutanix, or any other certification body.*\n",
+    "objectiveIds": [
+      "3.1",
+      "3.2",
+      "3.3",
+      "3.4",
+      "3.5"
+    ]
   },
   "COMPTIA-NET-009/N4": {
     "lessonId": "N4",
     "examId": "COMPTIA-NET-009",
     "title": "Network security",
     "domainNumber": "4",
-    "status": "planned",
-    "markdown": "",
-    "objectiveIds": []
+    "status": "released",
+    "markdown": "# Network Security (N4)\n\n*Module N4 \u2014 CompTIA Network+ study track. Independent study material \u2014 see the disclaimer at the end.*\n\nN1 through N3 built a network that works and keeps working. This lesson is about the part\nthat keeps it working *for the right people*. It covers why network security is designed\nthe way it is, the attacks a network actually sees and what each one damages, and the\ndefenses that sit between those attacks and your traffic.\n\n## Why network security looks the way it does\n\nThree ideas explain almost every control in this module.\n\n**Defense in depth.** No single control is trusted to hold. A packet crosses several\ncheckpoints \u2014 wireless authentication, a port access control, a firewall rule, an\nintrusion system \u2014 so that when one is wrong or bypassed, the next one still applies. A\ndesign with one very strong wall and nothing behind it is a design with an outage waiting\nto happen.\n\n**Least privilege and implicit deny.** Devices and users get the access they need and not\na field more. Firewalls embody this by default: a **deny-all** inbound posture with\nnarrowly written exceptions beats an allow-all list with narrow exceptions, because the\ndeny-all fails safe. When you cannot explain what a rule exists to permit, that rule is\nrisk you are carrying without knowing it.\n\n**Confidentiality, integrity, availability.** Every attack in the next section damages at\nleast one of the three, and every control below protects at least one. Saying which is the\nfastest way to reason about a security question: ransomware attacks availability *and*\nconfidentiality; a tampered firmware update attacks integrity; a cable cut attacks\navailability only.\n\nA fourth habit belongs here too: **segmentation**. A flat network means one foothold means\neverything. VLANs and firewalls split the network so that the guest Wi-Fi cannot reach the\nfile server, and a printer cannot talk to a domain controller. The word to recognize is\nthat a compromise should stay **contained** \u2014 the same reason we did not run the whole\ncompany off the building's HVAC controller, if it had been networked.\n\n## Attacks, by what they do\n\nGroup the attacks by their effect and they stop being a list to memorize.\n\n**Overwhelming availability (denial of service).** A **DoS** floods a service with more\ntraffic than it can serve; a **DDoS** does it from many compromised hosts at once, which\nis why blocking one source does not help. **Amplification** makes it worse: the attacker\nsends a small request with your victim's address as the reply-to, and an open resolver\nanswers many times larger to the victim. The defense at this level is mostly upstream \u2014\nrate limiting, and a provider that scrubs traffic before it reaches you.\n\n**Listening and imitating.** On a shared medium, a host set to **promiscuous mode** reads\ntraffic not addressed to it. **ARP** poisoning tells a host \"the router is at my MAC\naddress,\" so its traffic comes to you instead; **DNS** spoofing answers name lookups with\nan address you control; **MAC flooding** overruns a switch's address table until it\ndegrades into a hub, repeating everything. All three are the same move \u2014 *become the middle\nof the path* \u2014 and the umbrella term you will see is a **man-in-the-middle**. Rogue access\npoints and **evil twin** networks do the same thing at layer 1 and 2: broadcast the SSID\nyour users already trust, then capture what joins. The user-facing defense is boring and\nreal: notice when a familiar site suddenly wants a password you already used this morning.\n\n**Attacking authentication directly.** **Brute force** tries passwords until one works.\n**Credential stuffing** tries username and password pairs bought from a **different** site's\nleak \u2014 which works only because people reuse them. **Password spraying** is its quieter\ninverted version: one common password tried against many accounts, deliberately staying\nunder a per-account lockout threshold. **Pass-the-hash** reuses captured credentials\nwithout ever cracking them. Countermeasures: account **lockout** thresholds, MFA,\npassword length over complexity theater, and unique credentials per system.\n\n**Abusing trust and input.** **IP spoofing** forges a source address so traffic appears to\ncome from somewhere trusted \u2014 which is why a perimeter device that filters traffic should\ndrop inbound packets claiming to be from inside your own network, and why the answer is\ncalled **anti-spoofing**. **Pointer redirection** and **buffer overflow** both exploit a\nprogram trusting input about how much data is coming. **XML injection** and other\ninjection attacks hand a program's interpreter instructions you meant as data.\n\n**Automated reconnaissance and exploitation.** **Privilege escalation** turns any foothold\ninto a better one. **Pass-the-ticket**, **driver malware** and **persistent shell**\nmaintain the foothold. **Zero-day** means a flaw with no fix available yet, which is why\npatching alone cannot be the whole plan.\n\n**Attacks on people.** **Phishing** is email; **smishing** is SMS; **vishing** is a phone\ncall; **spoofing** is impersonating a known number or address; **tailgating** is walking\nthrough a door behind someone who belongs there; **shoulder surfing** is reading a screen\nover a shoulder; **pretexting** is inventing a plausible story to justify asking;\n**baiting** is leaving something tempting where curiosity does the rest; **watering hole**\nmeans compromising a site a target group already visits; **typosquatting** is a domain\nmisspelled by one character; **brand impersonation** is a page that looks like a vendor's\nlogin. None of these require a vulnerability in your software \u2014 the vulnerability is\nhelpfulness. The technical controls that help are mail filtering, MFA so a stolen password\nis not enough, and training that tells people it is fine to report being fooled.\n\n## Defenses: what goes where\n\n**Firewalls and rules.** A firewall decides which flows are allowed. Know the axis each\nrule filters on: source and destination address, port and protocol, application, and\n**URL or category** (a web filter). A rule's position matters as much as its content,\nbecause most firewalls evaluate top-down and **stop at the first match** \u2014 a broad\nallow-listed rule above a narrow deny makes the deny unreachable. The three placement\npatterns to recognize: a **screened subnet** or **DMZ** puts public-facing servers in a\nneutral zone reachable from outside but not trusted inside; a **bastion** or jump host is\nthe single sanctioned way in to a protected network; and **network address translation**\nincidentally hides internal addressing behind one public address.\n\n**Detection and prevention.** An **IDS** watches and alerts. An **IPS** sits in the path\nand blocks. In **signature mode** both match known attack patterns \u2014 reliable, and blind to\nanything new. In **anomaly mode** they compare against a baseline and flag deviations \u2014\ncatches new things, and cries wolf on a Tuesday when the baseline was built on a Monday.\nA **honeypot** is a decoy worth nothing on purpose: activity on it is always suspicious,\nbecause nothing legitimate was told to go there.\n\n**Access control on the network itself.** **802.1X** with a **RADIUS** or **TACACS+**\nserver authenticates a device before the port carries its traffic. RADIUS carries\nauthentication and authorization for network access; TACACS+ separates authentication,\nauthorization and accounting and encrypts the whole session, which is why it tends to be\nthe answer for **device administration** specifically. **NAC** checks posture before letting\na device in. A **guest network** or **captive portal** serves visitors. **Port security**\nlimits which MAC addresses a switch port will learn, which is the direct answer to both\nMAC flooding and someone unplugging a phone and plugging in a laptop.\n\n**Wireless defenses.** WPA2 and WPA3 with a strong passphrase; **WPA3-Enterprise** and\n802.1X instead of a shared key when there are users to authenticate individually, because\na shared key means everyone shares one secret and one former employee. Management frame\nprotection stops the deauthentication floods that knock clients off a network. And\n**disable WPS** \u2014 the pin-based setup it offers is the weakest door on the device.\n\n**Segmentation and secure tunnels.** **VLANs** are the layer-2 answer; **ACLs** are the\nlayer-3 answer; a **private VLAN** keeps hosts in one subnet from talking to each other at\nall. For traffic across networks you do not own, a **VPN** builds a tunnel. Site-to-site\nconnects two offices; remote access connects one worker. Know the protocols by shape:\nIPsec protects at the IP layer and is common for site-to-site; TLS-based VPNs (OpenVPN\nstyle) ride on TCP/443 and get through most firewalls that block everything else.\n\n**Hardening and hygiene.** Change default credentials and disable unused services. Patch on\na schedule, and patch **firmware** on network gear \u2014 it is a computer, and it is frequently\nthe part nobody patches. Keep a **baseline configuration** for each device type, and\ndiff a device against it to find drift. Use encrypted management only \u2014 SSH, HTTPS \u2014 never\nTelnet or HTTP. Maintain an **asset inventory**: you cannot defend what you do not know\nexists.\n\n**Physical and residual.** **Faraday bags** block radio on a seized or lost device. A\n**cable lock** and a locked closet are still the only real control for many laptops. And\n**data destruction** \u2014 purge, degauss, shred \u2014 is what makes a decommissioned drive safe to\nrelease; deleting a file and formatting a volume are neither.\n\n**Risk vocabulary, briefly.** A **threat** is the bad thing that could happen, a\n**vulnerability** is the weakness that lets it, and a **risk** is the chance of the two\nmeeting times the damage done. **Mitigate** it (add a control), **transfer** it (buy\ninsurance or outsource it), **avoid** it (stop doing the activity), or **accept** it in\nwriting. Transfers and acceptances are business decisions, which is why the exam sometimes\nasks for the option that costs a control entirely.\n\n## Where this leads\n\nN5 brings concepts, implementation and operations together under the troubleshooting\nmethod \u2014 and a large share of the faults you meet will look like outages and turn out to\nbe security: a rule added on Friday, a certificate that expired, a port shut down by port\nsecurity because someone moved a desk.\n\n---\n\n*This is independent study material. It is not official training and is not endorsed or approved by CompTIA, Nutanix, or any other certification body.*\n",
+    "objectiveIds": [
+      "4.1",
+      "4.2",
+      "4.3"
+    ]
   },
   "COMPTIA-NET-009/N5": {
     "lessonId": "N5",
@@ -1591,6 +1789,8 @@ export const LESSONS = {
     "markdown": "# Troubleshooting (N5)\n\n*Module N5 \u2014 CompTIA Network+ study track. Independent study material \u2014 see the disclaimer at the end.*\n\nSomething stops working. The difference between an hour of guessing and ten minutes of fixing is almost never talent \u2014 it is whether you follow a method. This lesson covers the repeatable troubleshooting method, how to tell the three fault families apart, and the small toolkit that turns symptoms into measurements.\n\n## The method: identify, theorize, test, plan, verify, document\n\nNetwork+ formalizes what good technicians already do instinctively into six steps:\n\n1. **Identify the problem.** Gather information, question users, identify symptoms, determine what changed, duplicate the problem if you can, approach multiple problems one at a time.\n2. **Establish a theory of probable cause.** Start with the obvious. Consider multiple approaches \u2014 top-to-bottom or bottom-to-top the stack, divide and conquer.\n3. **Test the theory.** If the theory is confirmed, figure out the next step to resolve. If not, establish a new theory or escalate. Testing a theory is cheap; acting on a wrong one is not.\n4. **Establish a plan of action** to resolve the problem, and identify its potential effects. A fix that breaks something else is not a fix.\n5. **Verify full system functionality** and implement preventive measures if applicable.\n6. **Document findings, actions, outcomes, and lessons learned.**\n\nTwo habits distinguish professionals from tinkerers inside this loop. First, **safe tests before invasive ones**: `ping` before a cable swap, a config re-read before a firmware update. Second, **isolate by halves**: with a chain of client \u2192 switch \u2192 router \u2192 server, test the middle. Each result eliminates half the remaining chain. The A+ troubleshooting module (A5) teaches this same loop for hardware; here it is applied to networks, and the two are deliberately the same discipline.\n\n## The three fault families\n\nMost network faults fall into one of three families, and the family determines the tools:\n\n- **Physical faults** \u2014 cable damage, bad transceivers, wrong ports, power. The link light is the first witness: no light usually means the physical layer is not up at all.\n- **Service faults** \u2014 the wiring is fine but a *service* is broken: DHCP not leasing, DNS not resolving, a time service wrong. These fail selectively \u2014 the link is up, some things work, the affected function does not.\n- **Configuration faults** \u2014 everything is present but *wrong*: a bad gateway address, an incorrect VLAN assignment, a duplicate IP. Configuration faults are the most common and the most instructive, because the fix is often a single field.\n\n## Performance symptoms vs. hard failures\n\nA **hard failure** is binary: the ping replies or it does not, the page loads or it does not. A **performance symptom** is degraded but working: slow, intermittent, jittery. The distinction matters because they call for different responses \u2014 you *fix* a hard failure, but you first *measure* a performance symptom, because \"slow\" without a number is untestable. Latency (delay), packet loss, and jitter (variation in delay) are the three baseline measurements; the N3 module's monitoring lesson covers how baselines make \"slow\" meaningful.\n\n## The diagnostic toolkit\n\nFour tools cover the beginner's working set \u2014 each answers one question:\n\n- **ping** \u2014 \"is the destination reachable at all, and how long does a round trip take?\" The first safe test for almost anything.\n- **traceroute** \u2014 \"where along the path does it stop?\" Each hop that times out narrows the fault to a segment.\n- **nslookup** \u2014 \"is name resolution working, and what is it resolving *to*?\" The DNS-specific tool; it distinguishes \"no answer\" from \"an answer that is wrong.\"\n- **ipconfig / ifconfig** \u2014 \"what does this host *think* its configuration is?\" The cheapest possible test: read the four settings (IP, mask, gateway, DNS) before theorizing about anything remote.\n\nThe pattern across all four: each turns an anecdote (\"it's broken\") into a measurement (\"it stops answering after hop 3\"), and measurements are what the method's test-theory step actually consumes.\n\n## Where this leads\n\nThis lesson is the concept layer. The companion scenario (the misconfigured gateway) walks a real fault through the full method \u2014 from a user report to a verified fix \u2014 and the gateway lesson (N2/N1 depth) explains why a wrong gateway produces the local-works-remote-fails signature.\n\n---\n\n*This is independent study material. It is not official training and is not endorsed or approved by CompTIA, Nutanix, or any other certification body.*\n",
     "objectiveIds": [
       "5.1",
+      "5.2",
+      "5.3",
       "5.4",
       "5.5"
     ]

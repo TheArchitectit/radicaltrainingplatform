@@ -329,6 +329,21 @@ the targets. Both fixtures are still required, and the gate is wired into
 `tests/gates/run_freeze_chain.sh` and `.github/workflows/build.yml` in the same change
 that adds it, as `check-traceability.py` requires.
 
+### 5.5 Progress log
+
+| Date | Roadmap step | What landed | Measured effect |
+|---|---|---|---|
+| 2026-10-26 | 5.3 step 1 — repair the lesson graph | Ten module lessons written (`a1,a3,a4,a5`, `b1,b2,b3`, `n2,n3,n4`); all ten added to `RELEASED_LESSONS`; the 55 empty `lessonIds` in the A-1201, A-1202 and NET-009 manifests mapped to their domain's lesson; `content-links.mjs` now pins the "no covering lesson" refusal with a synthetic item, because the shipped corpus no longer contains one | Lesson coverage **63/131 → 131/131 objectives**; REQ-MAN-07 coverage **55 (42%) → 67 (51%)**; dangling lesson references **13 → 0**. Every remaining uncovered objective is now missing *items*, not lessons. Freeze chain 64/64. |
+
+Two notes for whoever picks up step 2. First, the lesson renderer is still an
+escape-first subset (headings, lists, bold, inline code) — no tables and no
+single-asterisk italics — so lesson authoring must stay inside it, or the renderer must
+grow first. Second, `content-links.mjs` had asserted that some shipped item lacked a
+covering lesson; when coverage became complete those two preconditions failed. They now
+assert full coverage explicitly and test the refusal with a synthetic item, so the gate
+still fails if the resolver ever links an item to a lesson that does not list its
+objective.
+
 ---
 
 ## 6. Decisions needed from the owner
