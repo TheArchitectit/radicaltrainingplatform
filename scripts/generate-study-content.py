@@ -92,12 +92,20 @@ RELEASED_BANKS = {
         "core2-b3-domain3-bank.md",
         "core2-b4-domain4-bank.md",
     ],
+    # Beginner banks (2026-10-26): three items per objective across all five
+    # domains, joining the five demo fixture banks that already cover 1.7, 2.2,
+    # 3.2 and parts of domains 2, 4 and 5.
     "COMPTIA-NET-009": [
         "net009-n1-fixtures.md",
         "net009-n2-fixtures.md",
         "net009-n3-fixtures.md",
         "net009-n4-fixtures.md",
         "net009-n5-fixtures.md",
+        "net009-domain1-bank.md",
+        "net009-domain2-bank.md",
+        "net009-domain3-bank.md",
+        "net009-domain4-bank.md",
+        "net009-domain5-bank.md",
     ],
     # REQ-NCA-02: the 40-item pilot, ten per current section. The 140 remapped
     # bank items stay in their root files and stay out of this list — they are

@@ -339,6 +339,31 @@
       ],
       "banks": [
         {
+          "bank": "net009-domain1-bank.md",
+          "path": "content/exams/COMPTIA-NET-009/questions/net009-domain1-bank.md",
+          "sha256": "ddb428b29e6a7614c12e113586489a4c1722d99eccacb15b65229876de1f9424"
+        },
+        {
+          "bank": "net009-domain2-bank.md",
+          "path": "content/exams/COMPTIA-NET-009/questions/net009-domain2-bank.md",
+          "sha256": "08143aa9aa18bbed5d7f3cdf8a28624b6b5a58d72225fee07f18289db19b6e71"
+        },
+        {
+          "bank": "net009-domain3-bank.md",
+          "path": "content/exams/COMPTIA-NET-009/questions/net009-domain3-bank.md",
+          "sha256": "767a8ed1f4ed44c329e81bf15bca9d923e3120ea99890cbc4df6f21be8eff89d"
+        },
+        {
+          "bank": "net009-domain4-bank.md",
+          "path": "content/exams/COMPTIA-NET-009/questions/net009-domain4-bank.md",
+          "sha256": "5c3d1e2fae5f20b822edc566697415c90aca08477e554c80ed5f09f003b8b526"
+        },
+        {
+          "bank": "net009-domain5-bank.md",
+          "path": "content/exams/COMPTIA-NET-009/questions/net009-domain5-bank.md",
+          "sha256": "b003235f5d4116094a0d99c47e093028dedd3be0957a3d21c9d4eff8e8e05141"
+        },
+        {
           "bank": "net009-n1-fixtures.md",
           "path": "content/exams/COMPTIA-NET-009/questions/net009-n1-fixtures.md",
           "sha256": "4a310948989f4bfe4e438033b305ac624fa90be1a7edbc4c173011e4ed6ea7fa"
@@ -1835,24 +1860,224 @@
       "sha256": "7c133698fafe66e8f04f3d9cc9a5dd581cdd456ba47fc17a58c8aea6a5dff114"
     },
     {
+      "path": "content/provenance/COMPTIA-NET-009/Q26.json",
+      "sha256": "77c0626b9afd3babeb47eb8028d4ac7d1fffafbf703fe8acd09ba2fb9bd03d59"
+    },
+    {
+      "path": "content/provenance/COMPTIA-NET-009/Q27.json",
+      "sha256": "d800b4382e5756b5bac61f343b2e945073dcff3f78e684f5faff7f2a05ba2f1b"
+    },
+    {
+      "path": "content/provenance/COMPTIA-NET-009/Q28.json",
+      "sha256": "9856c59d003956c065fe88f9d31f9100746f792861c850d0b303e45de5a95d55"
+    },
+    {
+      "path": "content/provenance/COMPTIA-NET-009/Q29.json",
+      "sha256": "438f9a9e229620d11f791d69264a76759fd9cce1f8f4ee2913b682e136724d5e"
+    },
+    {
       "path": "content/provenance/COMPTIA-NET-009/Q3.json",
       "sha256": "637034cf78dc2fe40239f32f8db38c83aba69aa93ef1d07c5eedcbec95d30be7"
+    },
+    {
+      "path": "content/provenance/COMPTIA-NET-009/Q30.json",
+      "sha256": "d8d0095c73e2f207725222c6eec1c04cb6be5189a9f32c02ba7a301c1415f241"
+    },
+    {
+      "path": "content/provenance/COMPTIA-NET-009/Q31.json",
+      "sha256": "93dc0247119efb30bf5e50405579524fcecb752389a13201590d8b991fa2fc95"
+    },
+    {
+      "path": "content/provenance/COMPTIA-NET-009/Q32.json",
+      "sha256": "fa19908621ef7bddfa9795b5ff968dc8faa33b0c002ed3992a35160f7eac1ec6"
+    },
+    {
+      "path": "content/provenance/COMPTIA-NET-009/Q33.json",
+      "sha256": "b6c40b4526374d66c28493c67f0429e4fa3af053e6c620e8017af57bb2d93fe5"
+    },
+    {
+      "path": "content/provenance/COMPTIA-NET-009/Q34.json",
+      "sha256": "fb0fffb240797c046c3f2dd50e77fb5d9224da026fb065bb0e6e1f3a3a73be86"
+    },
+    {
+      "path": "content/provenance/COMPTIA-NET-009/Q35.json",
+      "sha256": "bbc7345833d58276bfeccb99c9d09ef88d42198aebc39ab6765ca6c80e986ac2"
+    },
+    {
+      "path": "content/provenance/COMPTIA-NET-009/Q36.json",
+      "sha256": "c287f69f90473932796b6e27c3dca0700024c11c0ef0bde55bacca34132332db"
+    },
+    {
+      "path": "content/provenance/COMPTIA-NET-009/Q37.json",
+      "sha256": "de87c46e3623cfa354bac19f94806ed744f19185585685cc599ed5445637feb2"
+    },
+    {
+      "path": "content/provenance/COMPTIA-NET-009/Q38.json",
+      "sha256": "d0a4c6751eddf907dda89f53cd30b36e9879aaf129185a257c4365ebf4dc41d3"
+    },
+    {
+      "path": "content/provenance/COMPTIA-NET-009/Q39.json",
+      "sha256": "ef1fc2ce9ef461aefedf5716a1747fd600ea434de469b31358c4fb80f5d1d2f1"
     },
     {
       "path": "content/provenance/COMPTIA-NET-009/Q4.json",
       "sha256": "44b689ca8063a87dd0a47a7180d145e6eabbcbf760eeeca8b0a8a5cdd9118e18"
     },
     {
+      "path": "content/provenance/COMPTIA-NET-009/Q40.json",
+      "sha256": "41bb07946a0771bb54df4fcac524bc322d17d4f273d2dc6b3f220582963bf6d2"
+    },
+    {
+      "path": "content/provenance/COMPTIA-NET-009/Q41.json",
+      "sha256": "f1eb385bf5168380947912dc6baedd5bcc39c2d41a933b071c5439ed4f465a8f"
+    },
+    {
+      "path": "content/provenance/COMPTIA-NET-009/Q42.json",
+      "sha256": "f4edf3666ea1f7bee9ff974385c4bcb3c7cd8e92b497b6443b3457409bbe4ce8"
+    },
+    {
+      "path": "content/provenance/COMPTIA-NET-009/Q43.json",
+      "sha256": "97b8604bf5d8c40d720c63bad26193f8f6cd9beab6b84c1a09a02cc56273fb9b"
+    },
+    {
+      "path": "content/provenance/COMPTIA-NET-009/Q44.json",
+      "sha256": "c34334b410c5ffbc7ff47d78211833ea914c5684969342c92a2be8c054cf4f58"
+    },
+    {
+      "path": "content/provenance/COMPTIA-NET-009/Q45.json",
+      "sha256": "db4bd003fb21640f39da1bf5ad24b15f6e8f3edb7aa8768a581482e467dce0db"
+    },
+    {
+      "path": "content/provenance/COMPTIA-NET-009/Q46.json",
+      "sha256": "552f4ba927bbab519284c66ee6339e35239cbc318b9b0d8b7e456e05c0a778ca"
+    },
+    {
+      "path": "content/provenance/COMPTIA-NET-009/Q47.json",
+      "sha256": "6c098cfc825ca209a018631e80d43f25b837ef1e90355341015c4263df6e68fd"
+    },
+    {
+      "path": "content/provenance/COMPTIA-NET-009/Q48.json",
+      "sha256": "299d4bc1b2e7d0ac119c92ef8a2b3248d78c38fd10c4710ed4cedd6327d60d2c"
+    },
+    {
+      "path": "content/provenance/COMPTIA-NET-009/Q49.json",
+      "sha256": "98d355fa9ba4e32d70c737583466ed15c691b4dfab75230b758038ddc9b03c1b"
+    },
+    {
       "path": "content/provenance/COMPTIA-NET-009/Q5.json",
       "sha256": "6bac2094ad7b504845a7b263e1ef8917ffe395959febd03354c1d03f8e256ec8"
+    },
+    {
+      "path": "content/provenance/COMPTIA-NET-009/Q50.json",
+      "sha256": "e5a5391dd08bd42f39fe4e0df1650f54fbc523c16d744dde557a8abf63974ef8"
+    },
+    {
+      "path": "content/provenance/COMPTIA-NET-009/Q51.json",
+      "sha256": "4cc80b9645cfa68ee833a28569ee4156918cb8310d80177e2659c53f905b7080"
+    },
+    {
+      "path": "content/provenance/COMPTIA-NET-009/Q52.json",
+      "sha256": "16ac1b40b20b02c502929b82b2be9ec05378ebfc3957023a945ec2720a95c6bb"
+    },
+    {
+      "path": "content/provenance/COMPTIA-NET-009/Q53.json",
+      "sha256": "c2248c30f895a20320bf5975b13c38f66eb2fcc4000e53ebc03594938c3d3370"
+    },
+    {
+      "path": "content/provenance/COMPTIA-NET-009/Q54.json",
+      "sha256": "fba8568d341554630c8357a442d2e36908727681aa4034804288a65bab644a38"
+    },
+    {
+      "path": "content/provenance/COMPTIA-NET-009/Q55.json",
+      "sha256": "2c2fe48cb31bf9967cd52ad6f6e6de3c62e5f46202b24a7555fe28542f40d6aa"
+    },
+    {
+      "path": "content/provenance/COMPTIA-NET-009/Q56.json",
+      "sha256": "622eeb320c193cdb9fdcb54148fcf18c23c36d22dd47a6558ef7328e90f0c35c"
+    },
+    {
+      "path": "content/provenance/COMPTIA-NET-009/Q57.json",
+      "sha256": "c58bc02c6f98323257e48465b4db16b829394f1d244bd986301e520c59c241a7"
+    },
+    {
+      "path": "content/provenance/COMPTIA-NET-009/Q58.json",
+      "sha256": "1bb633dc93a68badfc4b46fed4976f1172cde797f97ff70d69daca84a68e387b"
+    },
+    {
+      "path": "content/provenance/COMPTIA-NET-009/Q59.json",
+      "sha256": "152920659914ae0a82675ae007bc563685d3d853d5163f824650b8b6ee9cc9c2"
     },
     {
       "path": "content/provenance/COMPTIA-NET-009/Q6.json",
       "sha256": "0ab21fea7242156a76f2ac1cad3d093eb373d70cf9b1affb760d71176a359d27"
     },
     {
+      "path": "content/provenance/COMPTIA-NET-009/Q60.json",
+      "sha256": "5e9a817d5e71f71fddb8d06fa8940d8e567a39236d36975d320715c63ca9aa42"
+    },
+    {
+      "path": "content/provenance/COMPTIA-NET-009/Q61.json",
+      "sha256": "31cd9ae9fa9a4446ab17200081aa50e1def2e6e1b0f6f94b2540c3aa0c238de1"
+    },
+    {
+      "path": "content/provenance/COMPTIA-NET-009/Q62.json",
+      "sha256": "382527f3b33ba994a06d49d9aad694ae3c9105f3103abd5cc170f89d0d00cd29"
+    },
+    {
+      "path": "content/provenance/COMPTIA-NET-009/Q63.json",
+      "sha256": "7ed14db7fddb64b09a7b66c5c2dfee4f9eb9c6e7a43d1ae02b40b367f0d27dcb"
+    },
+    {
+      "path": "content/provenance/COMPTIA-NET-009/Q64.json",
+      "sha256": "f8b9b6f8975a8925faee6c25f6874e7b41689e0894969c35cd03ac9f1b72cb62"
+    },
+    {
+      "path": "content/provenance/COMPTIA-NET-009/Q65.json",
+      "sha256": "dd73e865fd4a982d226840dc41bd1e806ba7b70aceb7fa500daf16da4fde6340"
+    },
+    {
+      "path": "content/provenance/COMPTIA-NET-009/Q66.json",
+      "sha256": "85b16974a81e3c9005bfb046ffb5a1fc4b5a29f589890aa183ef62ce286b0415"
+    },
+    {
+      "path": "content/provenance/COMPTIA-NET-009/Q67.json",
+      "sha256": "fb6e723909c0ccca3046ad878e7967c312f1c677000317568107288400383679"
+    },
+    {
+      "path": "content/provenance/COMPTIA-NET-009/Q68.json",
+      "sha256": "34f7446303cd2dfb060bce08f554251eb7bd528641b88ff01c146482eed19f85"
+    },
+    {
+      "path": "content/provenance/COMPTIA-NET-009/Q69.json",
+      "sha256": "c0f723d6da5c818fb804423b8563c26d2491913955d494fab63907fc87db95c9"
+    },
+    {
       "path": "content/provenance/COMPTIA-NET-009/Q7.json",
       "sha256": "e4a93ca6066c4d243ab21993213e14d416c9ee6db53c7d6c8a62fc20115ca982"
+    },
+    {
+      "path": "content/provenance/COMPTIA-NET-009/Q70.json",
+      "sha256": "54226769eea3c9ec9d7d4fae7b11e262276b7cbee335fb08d7b0679449a99247"
+    },
+    {
+      "path": "content/provenance/COMPTIA-NET-009/Q71.json",
+      "sha256": "072c78aad58f57cdcdb752ab2ead003e81869f83cc96ac626204e903b825d637"
+    },
+    {
+      "path": "content/provenance/COMPTIA-NET-009/Q72.json",
+      "sha256": "e2405cc12b7a02997077cf5f45409951d5bb623522f15610ef55112118c58a60"
+    },
+    {
+      "path": "content/provenance/COMPTIA-NET-009/Q73.json",
+      "sha256": "e5c4c6bb1f2ffd4d088230629ad5a22d51f0970066a59bc31b454666a6753caa"
+    },
+    {
+      "path": "content/provenance/COMPTIA-NET-009/Q74.json",
+      "sha256": "30271a40a664a9069a331b3132cc8a50008f3a3f1efe3fde1bc0197d78a4e5ab"
+    },
+    {
+      "path": "content/provenance/COMPTIA-NET-009/Q75.json",
+      "sha256": "3513ae8215e047b59d0f8ce9654caea75a54239968aaea40323ebd58e150816a"
     },
     {
       "path": "content/provenance/COMPTIA-NET-009/Q8.json",
@@ -2438,6 +2663,31 @@
       "path": "content/exams/COMPTIA-NET-009/lessons/n5.md",
       "sha256": "967b9e067a384e93e13ab07051df0e1df676ffea53fc0947896ce2e771514787",
       "bytes": 4658
+    },
+    {
+      "path": "content/exams/COMPTIA-NET-009/questions/net009-domain1-bank.md",
+      "sha256": "ddb428b29e6a7614c12e113586489a4c1722d99eccacb15b65229876de1f9424",
+      "bytes": 9848
+    },
+    {
+      "path": "content/exams/COMPTIA-NET-009/questions/net009-domain2-bank.md",
+      "sha256": "08143aa9aa18bbed5d7f3cdf8a28624b6b5a58d72225fee07f18289db19b6e71",
+      "bytes": 4122
+    },
+    {
+      "path": "content/exams/COMPTIA-NET-009/questions/net009-domain3-bank.md",
+      "sha256": "767a8ed1f4ed44c329e81bf15bca9d923e3120ea99890cbc4df6f21be8eff89d",
+      "bytes": 5176
+    },
+    {
+      "path": "content/exams/COMPTIA-NET-009/questions/net009-domain4-bank.md",
+      "sha256": "5c3d1e2fae5f20b822edc566697415c90aca08477e554c80ed5f09f003b8b526",
+      "bytes": 2370
+    },
+    {
+      "path": "content/exams/COMPTIA-NET-009/questions/net009-domain5-bank.md",
+      "sha256": "b003235f5d4116094a0d99c47e093028dedd3be0957a3d21c9d4eff8e8e05141",
+      "bytes": 5469
     },
     {
       "path": "content/exams/COMPTIA-NET-009/questions/net009-n1-fixtures.md",
@@ -4110,9 +4360,79 @@
       "bytes": 385
     },
     {
+      "path": "content/provenance/COMPTIA-NET-009/Q26.json",
+      "sha256": "77c0626b9afd3babeb47eb8028d4ac7d1fffafbf703fe8acd09ba2fb9bd03d59",
+      "bytes": 383
+    },
+    {
+      "path": "content/provenance/COMPTIA-NET-009/Q27.json",
+      "sha256": "d800b4382e5756b5bac61f343b2e945073dcff3f78e684f5faff7f2a05ba2f1b",
+      "bytes": 386
+    },
+    {
+      "path": "content/provenance/COMPTIA-NET-009/Q28.json",
+      "sha256": "9856c59d003956c065fe88f9d31f9100746f792861c850d0b303e45de5a95d55",
+      "bytes": 386
+    },
+    {
+      "path": "content/provenance/COMPTIA-NET-009/Q29.json",
+      "sha256": "438f9a9e229620d11f791d69264a76759fd9cce1f8f4ee2913b682e136724d5e",
+      "bytes": 386
+    },
+    {
       "path": "content/provenance/COMPTIA-NET-009/Q3.json",
       "sha256": "637034cf78dc2fe40239f32f8db38c83aba69aa93ef1d07c5eedcbec95d30be7",
       "bytes": 384
+    },
+    {
+      "path": "content/provenance/COMPTIA-NET-009/Q30.json",
+      "sha256": "d8d0095c73e2f207725222c6eec1c04cb6be5189a9f32c02ba7a301c1415f241",
+      "bytes": 386
+    },
+    {
+      "path": "content/provenance/COMPTIA-NET-009/Q31.json",
+      "sha256": "93dc0247119efb30bf5e50405579524fcecb752389a13201590d8b991fa2fc95",
+      "bytes": 386
+    },
+    {
+      "path": "content/provenance/COMPTIA-NET-009/Q32.json",
+      "sha256": "fa19908621ef7bddfa9795b5ff968dc8faa33b0c002ed3992a35160f7eac1ec6",
+      "bytes": 386
+    },
+    {
+      "path": "content/provenance/COMPTIA-NET-009/Q33.json",
+      "sha256": "b6c40b4526374d66c28493c67f0429e4fa3af053e6c620e8017af57bb2d93fe5",
+      "bytes": 386
+    },
+    {
+      "path": "content/provenance/COMPTIA-NET-009/Q34.json",
+      "sha256": "fb0fffb240797c046c3f2dd50e77fb5d9224da026fb065bb0e6e1f3a3a73be86",
+      "bytes": 383
+    },
+    {
+      "path": "content/provenance/COMPTIA-NET-009/Q35.json",
+      "sha256": "bbc7345833d58276bfeccb99c9d09ef88d42198aebc39ab6765ca6c80e986ac2",
+      "bytes": 386
+    },
+    {
+      "path": "content/provenance/COMPTIA-NET-009/Q36.json",
+      "sha256": "c287f69f90473932796b6e27c3dca0700024c11c0ef0bde55bacca34132332db",
+      "bytes": 386
+    },
+    {
+      "path": "content/provenance/COMPTIA-NET-009/Q37.json",
+      "sha256": "de87c46e3623cfa354bac19f94806ed744f19185585685cc599ed5445637feb2",
+      "bytes": 386
+    },
+    {
+      "path": "content/provenance/COMPTIA-NET-009/Q38.json",
+      "sha256": "d0a4c6751eddf907dda89f53cd30b36e9879aaf129185a257c4365ebf4dc41d3",
+      "bytes": 383
+    },
+    {
+      "path": "content/provenance/COMPTIA-NET-009/Q39.json",
+      "sha256": "ef1fc2ce9ef461aefedf5716a1747fd600ea434de469b31358c4fb80f5d1d2f1",
+      "bytes": 383
     },
     {
       "path": "content/provenance/COMPTIA-NET-009/Q4.json",
@@ -4120,9 +4440,109 @@
       "bytes": 384
     },
     {
+      "path": "content/provenance/COMPTIA-NET-009/Q40.json",
+      "sha256": "41bb07946a0771bb54df4fcac524bc322d17d4f273d2dc6b3f220582963bf6d2",
+      "bytes": 386
+    },
+    {
+      "path": "content/provenance/COMPTIA-NET-009/Q41.json",
+      "sha256": "f1eb385bf5168380947912dc6baedd5bcc39c2d41a933b071c5439ed4f465a8f",
+      "bytes": 386
+    },
+    {
+      "path": "content/provenance/COMPTIA-NET-009/Q42.json",
+      "sha256": "f4edf3666ea1f7bee9ff974385c4bcb3c7cd8e92b497b6443b3457409bbe4ce8",
+      "bytes": 386
+    },
+    {
+      "path": "content/provenance/COMPTIA-NET-009/Q43.json",
+      "sha256": "97b8604bf5d8c40d720c63bad26193f8f6cd9beab6b84c1a09a02cc56273fb9b",
+      "bytes": 386
+    },
+    {
+      "path": "content/provenance/COMPTIA-NET-009/Q44.json",
+      "sha256": "c34334b410c5ffbc7ff47d78211833ea914c5684969342c92a2be8c054cf4f58",
+      "bytes": 386
+    },
+    {
+      "path": "content/provenance/COMPTIA-NET-009/Q45.json",
+      "sha256": "db4bd003fb21640f39da1bf5ad24b15f6e8f3edb7aa8768a581482e467dce0db",
+      "bytes": 383
+    },
+    {
+      "path": "content/provenance/COMPTIA-NET-009/Q46.json",
+      "sha256": "552f4ba927bbab519284c66ee6339e35239cbc318b9b0d8b7e456e05c0a778ca",
+      "bytes": 386
+    },
+    {
+      "path": "content/provenance/COMPTIA-NET-009/Q47.json",
+      "sha256": "6c098cfc825ca209a018631e80d43f25b837ef1e90355341015c4263df6e68fd",
+      "bytes": 386
+    },
+    {
+      "path": "content/provenance/COMPTIA-NET-009/Q48.json",
+      "sha256": "299d4bc1b2e7d0ac119c92ef8a2b3248d78c38fd10c4710ed4cedd6327d60d2c",
+      "bytes": 386
+    },
+    {
+      "path": "content/provenance/COMPTIA-NET-009/Q49.json",
+      "sha256": "98d355fa9ba4e32d70c737583466ed15c691b4dfab75230b758038ddc9b03c1b",
+      "bytes": 386
+    },
+    {
       "path": "content/provenance/COMPTIA-NET-009/Q5.json",
       "sha256": "6bac2094ad7b504845a7b263e1ef8917ffe395959febd03354c1d03f8e256ec8",
       "bytes": 384
+    },
+    {
+      "path": "content/provenance/COMPTIA-NET-009/Q50.json",
+      "sha256": "e5a5391dd08bd42f39fe4e0df1650f54fbc523c16d744dde557a8abf63974ef8",
+      "bytes": 386
+    },
+    {
+      "path": "content/provenance/COMPTIA-NET-009/Q51.json",
+      "sha256": "4cc80b9645cfa68ee833a28569ee4156918cb8310d80177e2659c53f905b7080",
+      "bytes": 386
+    },
+    {
+      "path": "content/provenance/COMPTIA-NET-009/Q52.json",
+      "sha256": "16ac1b40b20b02c502929b82b2be9ec05378ebfc3957023a945ec2720a95c6bb",
+      "bytes": 386
+    },
+    {
+      "path": "content/provenance/COMPTIA-NET-009/Q53.json",
+      "sha256": "c2248c30f895a20320bf5975b13c38f66eb2fcc4000e53ebc03594938c3d3370",
+      "bytes": 383
+    },
+    {
+      "path": "content/provenance/COMPTIA-NET-009/Q54.json",
+      "sha256": "fba8568d341554630c8357a442d2e36908727681aa4034804288a65bab644a38",
+      "bytes": 383
+    },
+    {
+      "path": "content/provenance/COMPTIA-NET-009/Q55.json",
+      "sha256": "2c2fe48cb31bf9967cd52ad6f6e6de3c62e5f46202b24a7555fe28542f40d6aa",
+      "bytes": 383
+    },
+    {
+      "path": "content/provenance/COMPTIA-NET-009/Q56.json",
+      "sha256": "622eeb320c193cdb9fdcb54148fcf18c23c36d22dd47a6558ef7328e90f0c35c",
+      "bytes": 386
+    },
+    {
+      "path": "content/provenance/COMPTIA-NET-009/Q57.json",
+      "sha256": "c58bc02c6f98323257e48465b4db16b829394f1d244bd986301e520c59c241a7",
+      "bytes": 383
+    },
+    {
+      "path": "content/provenance/COMPTIA-NET-009/Q58.json",
+      "sha256": "1bb633dc93a68badfc4b46fed4976f1172cde797f97ff70d69daca84a68e387b",
+      "bytes": 383
+    },
+    {
+      "path": "content/provenance/COMPTIA-NET-009/Q59.json",
+      "sha256": "152920659914ae0a82675ae007bc563685d3d853d5163f824650b8b6ee9cc9c2",
+      "bytes": 386
     },
     {
       "path": "content/provenance/COMPTIA-NET-009/Q6.json",
@@ -4130,9 +4550,89 @@
       "bytes": 694
     },
     {
+      "path": "content/provenance/COMPTIA-NET-009/Q60.json",
+      "sha256": "5e9a817d5e71f71fddb8d06fa8940d8e567a39236d36975d320715c63ca9aa42",
+      "bytes": 383
+    },
+    {
+      "path": "content/provenance/COMPTIA-NET-009/Q61.json",
+      "sha256": "31cd9ae9fa9a4446ab17200081aa50e1def2e6e1b0f6f94b2540c3aa0c238de1",
+      "bytes": 383
+    },
+    {
+      "path": "content/provenance/COMPTIA-NET-009/Q62.json",
+      "sha256": "382527f3b33ba994a06d49d9aad694ae3c9105f3103abd5cc170f89d0d00cd29",
+      "bytes": 383
+    },
+    {
+      "path": "content/provenance/COMPTIA-NET-009/Q63.json",
+      "sha256": "7ed14db7fddb64b09a7b66c5c2dfee4f9eb9c6e7a43d1ae02b40b367f0d27dcb",
+      "bytes": 386
+    },
+    {
+      "path": "content/provenance/COMPTIA-NET-009/Q64.json",
+      "sha256": "f8b9b6f8975a8925faee6c25f6874e7b41689e0894969c35cd03ac9f1b72cb62",
+      "bytes": 386
+    },
+    {
+      "path": "content/provenance/COMPTIA-NET-009/Q65.json",
+      "sha256": "dd73e865fd4a982d226840dc41bd1e806ba7b70aceb7fa500daf16da4fde6340",
+      "bytes": 386
+    },
+    {
+      "path": "content/provenance/COMPTIA-NET-009/Q66.json",
+      "sha256": "85b16974a81e3c9005bfb046ffb5a1fc4b5a29f589890aa183ef62ce286b0415",
+      "bytes": 386
+    },
+    {
+      "path": "content/provenance/COMPTIA-NET-009/Q67.json",
+      "sha256": "fb6e723909c0ccca3046ad878e7967c312f1c677000317568107288400383679",
+      "bytes": 386
+    },
+    {
+      "path": "content/provenance/COMPTIA-NET-009/Q68.json",
+      "sha256": "34f7446303cd2dfb060bce08f554251eb7bd528641b88ff01c146482eed19f85",
+      "bytes": 386
+    },
+    {
+      "path": "content/provenance/COMPTIA-NET-009/Q69.json",
+      "sha256": "c0f723d6da5c818fb804423b8563c26d2491913955d494fab63907fc87db95c9",
+      "bytes": 386
+    },
+    {
       "path": "content/provenance/COMPTIA-NET-009/Q7.json",
       "sha256": "e4a93ca6066c4d243ab21993213e14d416c9ee6db53c7d6c8a62fc20115ca982",
       "bytes": 694
+    },
+    {
+      "path": "content/provenance/COMPTIA-NET-009/Q70.json",
+      "sha256": "54226769eea3c9ec9d7d4fae7b11e262276b7cbee335fb08d7b0679449a99247",
+      "bytes": 386
+    },
+    {
+      "path": "content/provenance/COMPTIA-NET-009/Q71.json",
+      "sha256": "072c78aad58f57cdcdb752ab2ead003e81869f83cc96ac626204e903b825d637",
+      "bytes": 386
+    },
+    {
+      "path": "content/provenance/COMPTIA-NET-009/Q72.json",
+      "sha256": "e2405cc12b7a02997077cf5f45409951d5bb623522f15610ef55112118c58a60",
+      "bytes": 386
+    },
+    {
+      "path": "content/provenance/COMPTIA-NET-009/Q73.json",
+      "sha256": "e5c4c6bb1f2ffd4d088230629ad5a22d51f0970066a59bc31b454666a6753caa",
+      "bytes": 386
+    },
+    {
+      "path": "content/provenance/COMPTIA-NET-009/Q74.json",
+      "sha256": "30271a40a664a9069a331b3132cc8a50008f3a3f1efe3fde1bc0197d78a4e5ab",
+      "bytes": 386
+    },
+    {
+      "path": "content/provenance/COMPTIA-NET-009/Q75.json",
+      "sha256": "3513ae8215e047b59d0f8ce9654caea75a54239968aaea40323ebd58e150816a",
+      "bytes": 386
     },
     {
       "path": "content/provenance/COMPTIA-NET-009/Q8.json",

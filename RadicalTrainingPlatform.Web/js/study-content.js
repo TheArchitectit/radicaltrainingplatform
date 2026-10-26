@@ -295,18 +295,23 @@ export const TRACKS = {
     "order": 2,
     "coverage": {
       "total": 25,
-      "covered": 16,
-      "percent": 64,
+      "covered": 25,
+      "percent": 100,
       "coveredObjectiveIds": [],
       "examCoverage": {
         "COMPTIA-NET-009": {
           "total": 25,
-          "covered": 16,
-          "percent": 64,
+          "covered": 25,
+          "percent": 100,
           "coveredObjectiveIds": [
             "1.1",
+            "1.2",
+            "1.3",
             "1.4",
+            "1.5",
+            "1.6",
             "1.7",
+            "1.8",
             "2.1",
             "2.2",
             "2.3",
@@ -314,10 +319,14 @@ export const TRACKS = {
             "3.1",
             "3.2",
             "3.3",
+            "3.4",
+            "3.5",
             "4.1",
             "4.2",
             "4.3",
             "5.1",
+            "5.2",
+            "5.3",
             "5.4",
             "5.5"
           ]
@@ -6923,6 +6932,1056 @@ export const ITEMS = [
     "provenanceStatus": "draft",
     "textHash": "cf9f709b06d79f9d",
     "bank": "net009-n5-fixtures.md"
+  },
+  {
+    "id": "COMPTIA-NET-009/net009-domain1-bank.md/Q26",
+    "examId": "COMPTIA-NET-009",
+    "number": "Q26",
+    "stem": "A device connects two IP subnets and chooses a path for each packet by destination address. At which OSI layer does it operate?",
+    "options": {
+      "A": "Layer 3, the network layer",
+      "B": "Layer 1, the physical layer",
+      "C": "Layer 2, the data link layer",
+      "D": "Layer 4, the transport layer"
+    },
+    "keys": [
+      "A"
+    ],
+    "explanation": "Path selection by logical address is network-layer work, which is what a router does. Layer 1 (B) moves bits on a medium. Layer 2 (C) forwards frames by hardware address inside one network. Layer 4 (D) handles end-to-end delivery between processes.",
+    "objectiveId": "1.1",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "815dba2d5d56dbaa",
+    "bank": "net009-domain1-bank.md"
+  },
+  {
+    "id": "COMPTIA-NET-009/net009-domain1-bank.md/Q27",
+    "examId": "COMPTIA-NET-009",
+    "number": "Q27",
+    "stem": "A workstation reports that its network cable is unplugged, and no link light appears at either end. Which layer should be checked first?",
+    "options": {
+      "A": "The application layer",
+      "B": "The transport layer",
+      "C": "The physical layer",
+      "D": "The session layer"
+    },
+    "keys": [
+      "C"
+    ],
+    "explanation": "A missing link light and an unplugged indication are about the medium and the port, which is physical-layer territory: cable, connector, jack, or port. The application (A) and session (D) layers depend on a working link beneath them. The transport layer (B) has nothing to carry if no signal exists.",
+    "objectiveId": "1.1",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "485c4bee09b9980f",
+    "bank": "net009-domain1-bank.md"
+  },
+  {
+    "id": "COMPTIA-NET-009/net009-domain1-bank.md/Q28",
+    "examId": "COMPTIA-NET-009",
+    "number": "Q28",
+    "stem": "Three web servers share one published address, and requests are spread across them by current connection count. Which appliance performs this?",
+    "options": {
+      "A": "A content filter",
+      "B": "A load balancer",
+      "C": "A modem",
+      "D": "A wireless controller"
+    },
+    "keys": [
+      "B"
+    ],
+    "explanation": "A load balancer presents one address and distributes sessions across a pool by a chosen method. A content filter (A) classifies and blocks destinations. A modem (C) converts the provider's signal. A wireless controller (D) manages access points.",
+    "objectiveId": "1.2",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "55dcaa2e20187ef0",
+    "bank": "net009-domain1-bank.md"
+  },
+  {
+    "id": "COMPTIA-NET-009/net009-domain1-bank.md/Q29",
+    "examId": "COMPTIA-NET-009",
+    "number": "Q29",
+    "stem": "A security appliance receives a copy of the traffic, raises alerts on suspicious patterns, and never blocks a packet. What is it?",
+    "options": {
+      "A": "An intrusion prevention system",
+      "B": "A load balancer",
+      "C": "A proxy server",
+      "D": "An intrusion detection system"
+    },
+    "keys": [
+      "D"
+    ],
+    "explanation": "An intrusion detection system observes and alerts, which is what a passive monitor does. An intrusion prevention system (A) sits in the path and can drop traffic, which this appliance demonstrably does not. A load balancer (B) distributes sessions. A proxy (C) terminates and forwards requests.",
+    "objectiveId": "1.2",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "1ef365c1c5d195c8",
+    "bank": "net009-domain1-bank.md"
+  },
+  {
+    "id": "COMPTIA-NET-009/net009-domain1-bank.md/Q30",
+    "examId": "COMPTIA-NET-009",
+    "number": "Q30",
+    "stem": "Branch users repeatedly download the same large files from a distant site, and a local appliance keeps copies so the WAN link is not used twice. Which appliance is in place?",
+    "options": {
+      "A": "A caching proxy",
+      "B": "A DHCP relay",
+      "C": "A media converter",
+      "D": "A KVM switch"
+    },
+    "keys": [
+      "A"
+    ],
+    "explanation": "A caching proxy stores frequently requested content close to the users and serves repeats locally. A DHCP relay (B) forwards address requests across subnets. A media converter (C) changes between fiber and copper. A KVM switch (D) shares a keyboard, display and mouse.",
+    "objectiveId": "1.2",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "91fc588f73a8f330",
+    "bank": "net009-domain1-bank.md"
+  },
+  {
+    "id": "COMPTIA-NET-009/net009-domain1-bank.md/Q31",
+    "examId": "COMPTIA-NET-009",
+    "number": "Q31",
+    "stem": "A company rents virtual machines and storage from a provider and installs, patches and secures the operating systems itself. Which service model is this?",
+    "options": {
+      "A": "Software as a service",
+      "B": "Platform as a service",
+      "C": "Infrastructure as a service",
+      "D": "Desktop as a service"
+    },
+    "keys": [
+      "C"
+    ],
+    "explanation": "Infrastructure as a service supplies compute, storage and networking while the customer owns everything above the hypervisor, including the operating system. Software as a service (A) delivers a finished application. A platform (B) supplies a managed runtime. A hosted desktop (D) delivers a remote desktop session.",
+    "objectiveId": "1.3",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "a0000fe32d4ce918",
+    "bank": "net009-domain1-bank.md"
+  },
+  {
+    "id": "COMPTIA-NET-009/net009-domain1-bank.md/Q32",
+    "examId": "COMPTIA-NET-009",
+    "number": "Q32",
+    "stem": "A bank requires a dedicated circuit between its data centre and a cloud provider, with no internet transport in the path. Which option meets this?",
+    "options": {
+      "A": "A site-to-site VPN over broadband",
+      "B": "Carrier-grade NAT",
+      "C": "A public content delivery network",
+      "D": "A private leased circuit"
+    },
+    "keys": [
+      "D"
+    ],
+    "explanation": "A private circuit is provisioned for the customer alone and does not traverse the public internet, which is what the requirement demands. A site-to-site VPN (A) is encrypted but still crosses the internet. Carrier-grade NAT (B) shares public addresses. A content delivery network (C) caches content near users.",
+    "objectiveId": "1.3",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "1db00266f4bb770e",
+    "bank": "net009-domain1-bank.md"
+  },
+  {
+    "id": "COMPTIA-NET-009/net009-domain1-bank.md/Q33",
+    "examId": "COMPTIA-NET-009",
+    "number": "Q33",
+    "stem": "A branch office must reach cloud resources over its existing broadband service but with the traffic encrypted end to end between sites. Which option fits?",
+    "options": {
+      "A": "A private leased circuit",
+      "B": "A site-to-site VPN",
+      "C": "A public peering exchange",
+      "D": "A metered cellular link"
+    },
+    "keys": [
+      "B"
+    ],
+    "explanation": "A site-to-site VPN builds an encrypted tunnel across an existing internet connection, which matches both constraints. A private circuit (A) is not internet transport. A peering exchange (C) is where networks interconnect. A cellular link (D) is a different access medium, not an encryption method.",
+    "objectiveId": "1.3",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "bcf148a44d21f490",
+    "bank": "net009-domain1-bank.md"
+  },
+  {
+    "id": "COMPTIA-NET-009/net009-domain1-bank.md/Q34",
+    "examId": "COMPTIA-NET-009",
+    "number": "Q34",
+    "stem": "Which port does HTTPS use by default?",
+    "options": {
+      "A": "443",
+      "B": "80",
+      "C": "25",
+      "D": "3389"
+    },
+    "keys": [
+      "A"
+    ],
+    "explanation": "HTTPS is HTTP carried inside TLS on port 443. Port 80 (B) is plain HTTP. Port 25 (C) is SMTP. Port 3389 (D) is remote desktop.",
+    "objectiveId": "1.4",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "96df6f57f9c58e35",
+    "bank": "net009-domain1-bank.md"
+  },
+  {
+    "id": "COMPTIA-NET-009/net009-domain1-bank.md/Q35",
+    "examId": "COMPTIA-NET-009",
+    "number": "Q35",
+    "stem": "A monitoring platform polls switches for interface counters and receives unsolicited alerts from them. Which protocol and port carry this?",
+    "options": {
+      "A": "SMTP on port 25",
+      "B": "SNMP on UDP port 161",
+      "C": "SSH on port 22",
+      "D": "RDP on port 3389"
+    },
+    "keys": [
+      "B"
+    ],
+    "explanation": "SNMP agents answer polls on UDP 161 and send traps to a manager, which covers both directions described. SMTP (A) carries mail. SSH (C) is a remote shell. RDP (D) is a remote desktop protocol.",
+    "objectiveId": "1.4",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "28cab6ee2fa56dd0",
+    "bank": "net009-domain1-bank.md"
+  },
+  {
+    "id": "COMPTIA-NET-009/net009-domain1-bank.md/Q36",
+    "examId": "COMPTIA-NET-009",
+    "number": "Q36",
+    "stem": "A link must span 10 kilometers between two buildings without any repeater. Which fiber type is designed for that distance?",
+    "options": {
+      "A": "Multimode fiber",
+      "B": "Cat 6a twisted pair",
+      "C": "Single-mode fiber",
+      "D": "Coaxial cable"
+    },
+    "keys": [
+      "C"
+    ],
+    "explanation": "Single-mode fiber carries a narrow light path with very low loss, which is what long spans require. Multimode (A) is limited to shorter runs because the light disperses. Twisted pair (B) is limited to about 100 meters. Coax (D) is not used for spans of that length in modern networks.",
+    "objectiveId": "1.5",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "5d22b0261f3cda89",
+    "bank": "net009-domain1-bank.md"
+  },
+  {
+    "id": "COMPTIA-NET-009/net009-domain1-bank.md/Q37",
+    "examId": "COMPTIA-NET-009",
+    "number": "Q37",
+    "stem": "A switch SFP+ cage must connect to an existing copper RJ45 run. Which transceiver fits the requirement?",
+    "options": {
+      "A": "A 1000BASE-SX optical module",
+      "B": "An LC single-mode optical module",
+      "C": "A QSFP28 optical module",
+      "D": "A copper SFP module"
+    },
+    "keys": [
+      "D"
+    ],
+    "explanation": "A copper SFP module presents an RJ45 port inside the cage, so a twisted-pair run can terminate there. The optical modules (A, B) expect fiber, not copper. A QSFP28 module (C) is a different, larger form factor that does not fit an SFP+ cage.",
+    "objectiveId": "1.5",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "800b0443573db046",
+    "bank": "net009-domain1-bank.md"
+  },
+  {
+    "id": "COMPTIA-NET-009/net009-domain1-bank.md/Q38",
+    "examId": "COMPTIA-NET-009",
+    "number": "Q38",
+    "stem": "Which cable category supports 10 GbE to 100 meters in a new office installation?",
+    "options": {
+      "A": "Cat 6a",
+      "B": "Cat 3",
+      "C": "Cat 5",
+      "D": "RG-6"
+    },
+    "keys": [
+      "A"
+    ],
+    "explanation": "Cat 6a is specified for 10 GbE at 100 meters, which is why it is the usual choice for new 10G copper runs. Cat 3 (B) and Cat 5 (C) are far below that rate at any length. RG-6 (D) is coaxial cable for video and cable services.",
+    "objectiveId": "1.5",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "8c58324126cfbbe8",
+    "bank": "net009-domain1-bank.md"
+  },
+  {
+    "id": "COMPTIA-NET-009/net009-domain1-bank.md/Q39",
+    "examId": "COMPTIA-NET-009",
+    "number": "Q39",
+    "stem": "Every workstation connects to one central switch, and a failure of that switch takes the whole floor offline. Which topology is described?",
+    "options": {
+      "A": "Mesh",
+      "B": "Ring",
+      "C": "Star",
+      "D": "Point-to-point"
+    },
+    "keys": [
+      "C"
+    ],
+    "explanation": "A star places every endpoint on a central device, which makes that device a single point of failure. A mesh (A) provides multiple paths. A ring (B) passes traffic around a loop. A point-to-point link (D) joins exactly two endpoints.",
+    "objectiveId": "1.6",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "f2a89111efd55410",
+    "bank": "net009-domain1-bank.md"
+  },
+  {
+    "id": "COMPTIA-NET-009/net009-domain1-bank.md/Q40",
+    "examId": "COMPTIA-NET-009",
+    "number": "Q40",
+    "stem": "A design requires every site to hold a direct path to every other site, so a single failed link cannot isolate a site. Which topology meets this?",
+    "options": {
+      "A": "Star",
+      "B": "Full mesh",
+      "C": "Bus",
+      "D": "Hub-and-spoke"
+    },
+    "keys": [
+      "B"
+    ],
+    "explanation": "A full mesh connects every pair of sites, so no single link failure cuts a site off. A star (A) and hub-and-spoke (D) both depend on a central node. A bus (C) is a shared medium that a single break can divide.",
+    "objectiveId": "1.6",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "fae9a456df6fac6d",
+    "bank": "net009-domain1-bank.md"
+  },
+  {
+    "id": "COMPTIA-NET-009/net009-domain1-bank.md/Q41",
+    "examId": "COMPTIA-NET-009",
+    "number": "Q41",
+    "stem": "A campus design uses a high-speed backbone, a distribution layer per floor, and access switching at the desk. Which architecture is this?",
+    "options": {
+      "A": "A flat layer-2 network",
+      "B": "A hub-and-spoke WAN",
+      "C": "A peer-to-peer mesh",
+      "D": "A three-tier campus model"
+    },
+    "keys": [
+      "D"
+    ],
+    "explanation": "Core, distribution and access is the three-tier campus model, with each tier doing its own job. A flat layer-2 design (A) has no distribution tier. A hub-and-spoke WAN (B) describes site connectivity. A peer-to-peer mesh (C) describes many-to-many links.",
+    "objectiveId": "1.6",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "3d2de9cea0b6c122",
+    "bank": "net009-domain1-bank.md"
+  },
+  {
+    "id": "COMPTIA-NET-009/net009-domain1-bank.md/Q42",
+    "examId": "COMPTIA-NET-009",
+    "number": "Q42",
+    "stem": "A retailer wants branch traffic to take whichever path is best at that moment \u2014 broadband, cellular or a private circuit \u2014 chosen per application by policy. Which technology provides this?",
+    "options": {
+      "A": "SD-WAN",
+      "B": "A VLAN trunk",
+      "C": "Port mirroring",
+      "D": "A spanning-tree domain"
+    },
+    "keys": [
+      "A"
+    ],
+    "explanation": "Software-defined WAN steers traffic across multiple transports by application policy, which is exactly the described behavior. A VLAN trunk (B) carries several VLANs on one link. Port mirroring (C) copies traffic for analysis. A spanning-tree domain (D) prevents layer-2 loops.",
+    "objectiveId": "1.8",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "a194422598b64309",
+    "bank": "net009-domain1-bank.md"
+  },
+  {
+    "id": "COMPTIA-NET-009/net009-domain1-bank.md/Q43",
+    "examId": "COMPTIA-NET-009",
+    "number": "Q43",
+    "stem": "Remote staff must be inspected and have policy enforced wherever they work, with the security service delivered from the cloud. Which model fits?",
+    "options": {
+      "A": "A flat internal VLAN",
+      "B": "Secure access service edge",
+      "C": "A single perimeter firewall",
+      "D": "Static NAT"
+    },
+    "keys": [
+      "B"
+    ],
+    "explanation": "Secure access service edge converges network and security functions in a cloud-delivered service that follows the user, which matches \"wherever they work.\" A flat VLAN (A) is an internal segment. A single perimeter firewall (C) protects one location, which is the problem being solved. Static NAT (D) maps addresses.",
+    "objectiveId": "1.8",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "7476ec2b1ba8c400",
+    "bank": "net009-domain1-bank.md"
+  },
+  {
+    "id": "COMPTIA-NET-009/net009-domain1-bank.md/Q44",
+    "examId": "COMPTIA-NET-009",
+    "number": "Q44",
+    "stem": "Building sensors and cameras must reach their controller but must never reach office workstations. Which control achieves this?",
+    "options": {
+      "A": "A longer DHCP lease",
+      "B": "A larger MTU",
+      "C": "Port mirroring",
+      "D": "A separate VLAN with access rules"
+    },
+    "keys": [
+      "D"
+    ],
+    "explanation": "Placing the devices on their own VLAN and filtering traffic between VLANs limits them to their controller by policy. Lease length (A) and MTU (B) are addressing and framing settings. Port mirroring (C) copies traffic and filters nothing.",
+    "objectiveId": "1.8",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "31c2a325b69496c7",
+    "bank": "net009-domain1-bank.md"
+  },
+  {
+    "id": "COMPTIA-NET-009/net009-domain2-bank.md/Q45",
+    "examId": "COMPTIA-NET-009",
+    "number": "Q45",
+    "stem": "A small office has one uplink to its provider, and the administrator configures a single route that is used whenever no more specific match exists. What is this route called?",
+    "options": {
+      "A": "A default route",
+      "B": "A host route",
+      "C": "A summary route",
+      "D": "A floating static route"
+    },
+    "keys": [
+      "A"
+    ],
+    "explanation": "A default route matches everything that no other entry handles, which is why a single-uplink site needs only one. A host route (B) matches a single address. A summary route (C) aggregates a range of networks. A floating static route (D) is a backup that appears only when a preferred route fails.",
+    "objectiveId": "2.1",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "fbb9ab6b7f935bf6",
+    "bank": "net009-domain2-bank.md"
+  },
+  {
+    "id": "COMPTIA-NET-009/net009-domain2-bank.md/Q46",
+    "examId": "COMPTIA-NET-009",
+    "number": "Q46",
+    "stem": "Two routers exchange reachability information and recalculate their paths after a link fails, with no administrator action. Which characteristic is this?",
+    "options": {
+      "A": "Static routing",
+      "B": "Policy-based routing",
+      "C": "Dynamic routing",
+      "D": "Network address translation"
+    },
+    "keys": [
+      "C"
+    ],
+    "explanation": "Dynamic routing protocols learn neighbours and recompute paths when the topology changes, which is why no manual edit is needed. Static routing (A) requires the administrator to change the table. Policy-based routing (B) chooses a path by rule, not by learned topology. NAT (D) rewrites addresses.",
+    "objectiveId": "2.1",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "0131a77291f9dcbe",
+    "bank": "net009-domain2-bank.md"
+  },
+  {
+    "id": "COMPTIA-NET-009/net009-domain2-bank.md/Q47",
+    "examId": "COMPTIA-NET-009",
+    "number": "Q47",
+    "stem": "Two switches must carry three VLANs across one inter-switch link, with each frame identified by its VLAN as it crosses. Which configuration provides this?",
+    "options": {
+      "A": "Spanning Tree Protocol",
+      "B": "An 802.1Q trunk",
+      "C": "Link aggregation without tagging",
+      "D": "Port mirroring"
+    },
+    "keys": [
+      "B"
+    ],
+    "explanation": "802.1Q adds a tag to each frame so the receiving switch knows which VLAN it belongs to, which is what a trunk does. Spanning Tree (A) blocks loops. Untagged aggregation (C) combines links but does not identify VLANs. Port mirroring (D) copies traffic for analysis.",
+    "objectiveId": "2.2",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "554e365942709a0a",
+    "bank": "net009-domain2-bank.md"
+  },
+  {
+    "id": "COMPTIA-NET-009/net009-domain2-bank.md/Q48",
+    "examId": "COMPTIA-NET-009",
+    "number": "Q48",
+    "stem": "Wireless users must authenticate individually against a central server rather than with a shared key. Which configuration delivers this?",
+    "options": {
+      "A": "A longer pre-shared key",
+      "B": "A hidden network name",
+      "C": "Wi-Fi Protected Setup enabled",
+      "D": "WPA2 or WPA3-Enterprise with 802.1X"
+    },
+    "keys": [
+      "D"
+    ],
+    "explanation": "Enterprise mode uses 802.1X so each user is authenticated against a RADIUS server with their own credential. A longer shared key (A) is still one secret for everyone. Hiding the name (B) is not authentication. WPS (C) is a weak pairing convenience.",
+    "objectiveId": "2.3",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "506368cd7eb634ee",
+    "bank": "net009-domain2-bank.md"
+  },
+  {
+    "id": "COMPTIA-NET-009/net009-domain2-bank.md/Q49",
+    "examId": "COMPTIA-NET-009",
+    "number": "Q49",
+    "stem": "An access point is mounted on a ceiling with no electrical outlet nearby, and a single cable must carry both data and power. Which technology provides this?",
+    "options": {
+      "A": "A media converter",
+      "B": "Power over Ethernet",
+      "C": "A wireless repeater",
+      "D": "A VLAN trunk"
+    },
+    "keys": [
+      "B"
+    ],
+    "explanation": "Power over Ethernet delivers power on the same twisted-pair cable that carries data, which suits exactly this mounting. A media converter (A) changes media types. A repeater (C) extends wireless coverage. A trunk (D) carries multiple VLANs.",
+    "objectiveId": "2.3",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "33add8d1f4c20deb",
+    "bank": "net009-domain2-bank.md"
+  },
+  {
+    "id": "COMPTIA-NET-009/net009-domain2-bank.md/Q50",
+    "examId": "COMPTIA-NET-009",
+    "number": "Q50",
+    "stem": "A copper run measures 140 meters, and the link must still work at 1 GbE. What is the correct fix?",
+    "options": {
+      "A": "Fiber, or an intermediate switch within copper limits",
+      "B": "Use a higher cable category at the same length",
+      "C": "Raise the MTU on both ends",
+      "D": "Force the link to half duplex"
+    },
+    "keys": [
+      "A"
+    ],
+    "explanation": "Twisted-pair Ethernet is limited to about 100 meters, so the run must be split or converted to a medium that covers the distance. A higher category (B) raises bandwidth, not distance. MTU (C) is a packet size setting. Half duplex (D) slows the link and does not extend it.",
+    "objectiveId": "2.4",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "c74c359d2c49f7ad",
+    "bank": "net009-domain2-bank.md"
+  },
+  {
+    "id": "COMPTIA-NET-009/net009-domain2-bank.md/Q51",
+    "examId": "COMPTIA-NET-009",
+    "number": "Q51",
+    "stem": "In a campus building, the provider's cabling enters at one point and is cross-connected to the internal backbone. What is that space called?",
+    "options": {
+      "A": "An intermediate distribution frame on an upper floor",
+      "B": "A hot aisle",
+      "C": "The entrance facility or main distribution frame",
+      "D": "A server rack in an office"
+    },
+    "keys": [
+      "C"
+    ],
+    "explanation": "The entrance facility, often holding the main distribution frame, is where external cabling meets the building's own cabling. An intermediate distribution frame (A) serves a floor or area downstream of it. A hot aisle (B) is a cooling arrangement. An office rack (D) is not a demarcation point.",
+    "objectiveId": "2.4",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "4d5c702bdd93ed5b",
+    "bank": "net009-domain2-bank.md"
+  },
+  {
+    "id": "COMPTIA-NET-009/net009-domain3-bank.md/Q52",
+    "examId": "COMPTIA-NET-009",
+    "number": "Q52",
+    "stem": "A network change must be requested, reviewed, scheduled in a window and recorded before anyone implements it. Which process is this?",
+    "options": {
+      "A": "Change management",
+      "B": "Incident response",
+      "C": "Capacity planning",
+      "D": "Asset disposal"
+    },
+    "keys": [
+      "A"
+    ],
+    "explanation": "Change management is the process that reviews, approves, schedules and records changes so their impact is known in advance and can be reversed. Incident response (B) handles events that are already happening. Capacity planning (C) forecasts demand. Asset disposal (D) retires equipment.",
+    "objectiveId": "3.1",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "1f4f95351ff4cffd",
+    "bank": "net009-domain3-bank.md"
+  },
+  {
+    "id": "COMPTIA-NET-009/net009-domain3-bank.md/Q53",
+    "examId": "COMPTIA-NET-009",
+    "number": "Q53",
+    "stem": "A contract states that a service must be restored within four hours of an outage, with credits if it is not. Which document is this?",
+    "options": {
+      "A": "An acceptable use policy",
+      "B": "A network topology diagram",
+      "C": "A service level agreement",
+      "D": "A change request"
+    },
+    "keys": [
+      "C"
+    ],
+    "explanation": "A service level agreement sets measurable commitments such as restoration time, along with the consequences of missing them. An acceptable use policy (A) governs how people may use systems. A topology diagram (B) documents the network. A change request (D) proposes a modification.",
+    "objectiveId": "3.1",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "e6775781a1d31c5b",
+    "bank": "net009-domain3-bank.md"
+  },
+  {
+    "id": "COMPTIA-NET-009/net009-domain3-bank.md/Q54",
+    "examId": "COMPTIA-NET-009",
+    "number": "Q54",
+    "stem": "An outage may lose no more than 15 minutes of data. Which metric expresses that limit?",
+    "options": {
+      "A": "Recovery time objective",
+      "B": "Recovery point objective",
+      "C": "Mean time between failures",
+      "D": "Mean time to repair"
+    },
+    "keys": [
+      "B"
+    ],
+    "explanation": "The recovery point objective measures how much data may be lost, expressed as a time before the failure, which is what backup frequency is designed against. The recovery time objective (A) measures how long restoration may take. MTBF (C) measures reliability. MTTR (D) measures repair duration.",
+    "objectiveId": "3.3",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "c02bea6a4bf71892",
+    "bank": "net009-domain3-bank.md"
+  },
+  {
+    "id": "COMPTIA-NET-009/net009-domain3-bank.md/Q55",
+    "examId": "COMPTIA-NET-009",
+    "number": "Q55",
+    "stem": "A recovery site has power, cooling and network connectivity arranged, but no servers are installed there until an event occurs, so restoration takes days. Which site type is this?",
+    "options": {
+      "A": "Hot site",
+      "B": "Mirrored site",
+      "C": "Warm site",
+      "D": "Cold site"
+    },
+    "keys": [
+      "D"
+    ],
+    "explanation": "A cold site provides only the facility and infrastructure, so equipment must be delivered and installed after the event. A hot site (A) and a mirrored site (B) keep systems running and ready. A warm site (C) has hardware in place but needs data and configuration work.",
+    "objectiveId": "3.3",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "39d9c799bc55a15e",
+    "bank": "net009-domain3-bank.md"
+  },
+  {
+    "id": "COMPTIA-NET-009/net009-domain3-bank.md/Q56",
+    "examId": "COMPTIA-NET-009",
+    "number": "Q56",
+    "stem": "Clients on one subnet must obtain addresses from a DHCP server on a different subnet, and the router must not forward broadcasts. Which feature makes this work?",
+    "options": {
+      "A": "A DHCP relay",
+      "B": "A DNS forwarder",
+      "C": "An NTP server",
+      "D": "A NAT pool"
+    },
+    "keys": [
+      "A"
+    ],
+    "explanation": "A DHCP relay receives the broadcast locally and forwards it as a unicast message to the server, so no broadcast has to cross the router. A DNS forwarder (B) resolves names. An NTP server (C) provides time. A NAT pool (D) supplies public addresses.",
+    "objectiveId": "3.4",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "acf8e7df56085122",
+    "bank": "net009-domain3-bank.md"
+  },
+  {
+    "id": "COMPTIA-NET-009/net009-domain3-bank.md/Q57",
+    "examId": "COMPTIA-NET-009",
+    "number": "Q57",
+    "stem": "Which DNS record type holds a host's IPv6 address?",
+    "options": {
+      "A": "A",
+      "B": "MX",
+      "C": "AAAA",
+      "D": "PTR"
+    },
+    "keys": [
+      "C"
+    ],
+    "explanation": "The AAAA record maps a name to an IPv6 address. An A record (A) maps to an IPv4 address. An MX record (B) names a mail server. A PTR record (D) maps an address back to a name.",
+    "objectiveId": "3.4",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "a8152ea4c7b7ef71",
+    "bank": "net009-domain3-bank.md"
+  },
+  {
+    "id": "COMPTIA-NET-009/net009-domain3-bank.md/Q58",
+    "examId": "COMPTIA-NET-009",
+    "number": "Q58",
+    "stem": "Which statement about IPv6 is correct?",
+    "options": {
+      "A": "IPv6 resolves addresses with ARP",
+      "B": "IPv6 uses neighbor discovery and has no broadcast address",
+      "C": "IPv6 requires network address translation for internet access",
+      "D": "IPv6 addresses are 32 bits long"
+    },
+    "keys": [
+      "B"
+    ],
+    "explanation": "IPv6 replaces ARP with neighbor discovery and uses multicast instead of broadcast, which is why the broadcast address does not exist there. ARP (A) is an IPv4 mechanism. IPv6 (C) was designed for end-to-end addressing without NAT. Its addresses (D) are 128 bits.",
+    "objectiveId": "3.4",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "ef9f248344076e48",
+    "bank": "net009-domain3-bank.md"
+  },
+  {
+    "id": "COMPTIA-NET-009/net009-domain3-bank.md/Q59",
+    "examId": "COMPTIA-NET-009",
+    "number": "Q59",
+    "stem": "A server's management interface is unreachable over the production network, but an administrator can still log in through a console connection. Which access method allowed that?",
+    "options": {
+      "A": "In-band management over the production network",
+      "B": "A VPN into the data VLAN",
+      "C": "A jump host in the user VLAN",
+      "D": "Out-of-band management through a console server"
+    },
+    "keys": [
+      "D"
+    ],
+    "explanation": "Out-of-band management uses a path that does not depend on the production network, which is why it still worked when that network did not. In-band management (A) is exactly what failed. A VPN (B) and a jump host (C) both depend on network connectivity to reach the device.",
+    "objectiveId": "3.5",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "38654e6c8a368dee",
+    "bank": "net009-domain3-bank.md"
+  },
+  {
+    "id": "COMPTIA-NET-009/net009-domain3-bank.md/Q60",
+    "examId": "COMPTIA-NET-009",
+    "number": "Q60",
+    "stem": "Which protocol supports separate authentication, authorization and accounting for network device administration, and runs over TCP?",
+    "options": {
+      "A": "TACACS+",
+      "B": "RADIUS",
+      "C": "Kerberos",
+      "D": "LDAP"
+    },
+    "keys": [
+      "A"
+    ],
+    "explanation": "TACACS+ separates the three functions and runs over TCP, which is why it is used for device administration. RADIUS (B) combines authentication and authorization and runs over UDP. Kerberos (C) is a ticket-based authentication protocol. LDAP (D) is a directory access protocol.",
+    "objectiveId": "3.5",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "c0d80349ea18dd6b",
+    "bank": "net009-domain3-bank.md"
+  },
+  {
+    "id": "COMPTIA-NET-009/net009-domain3-bank.md/Q61",
+    "examId": "COMPTIA-NET-009",
+    "number": "Q61",
+    "stem": "Remote device administration must be encrypted instead of sending credentials in clear text. Which protocol should be used?",
+    "options": {
+      "A": "Telnet",
+      "B": "TFTP",
+      "C": "SSH",
+      "D": "SNMPv1"
+    },
+    "keys": [
+      "C"
+    ],
+    "explanation": "SSH encrypts the session, including the login exchange, so credentials are not readable on the wire. Telnet (A) sends everything in clear text. TFTP (B) transfers files with no authentication. SNMPv1 (D) has no encryption.",
+    "objectiveId": "3.5",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "5b76c9e5297ea008",
+    "bank": "net009-domain3-bank.md"
+  },
+  {
+    "id": "COMPTIA-NET-009/net009-domain4-bank.md/Q62",
+    "examId": "COMPTIA-NET-009",
+    "number": "Q62",
+    "stem": "A hospital requires that patient records stay unreadable to staff who have no need for them. Which security goal does that requirement express?",
+    "options": {
+      "A": "Availability",
+      "B": "Non-repudiation",
+      "C": "Integrity",
+      "D": "Confidentiality"
+    },
+    "keys": [
+      "D"
+    ],
+    "explanation": "Confidentiality is the goal that only authorized parties can read the data, which is what the requirement states. Availability (A) is about access when needed. Non-repudiation (B) is about proving an action happened. Integrity (C) is about data being unaltered.",
+    "objectiveId": "4.1",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "7b68197aec3cc8f3",
+    "bank": "net009-domain4-bank.md"
+  },
+  {
+    "id": "COMPTIA-NET-009/net009-domain4-bank.md/Q63",
+    "examId": "COMPTIA-NET-009",
+    "number": "Q63",
+    "stem": "Thousands of compromised hosts across many networks send requests to one web service until it stops responding. Which attack is this?",
+    "options": {
+      "A": "ARP poisoning",
+      "B": "A distributed denial of service",
+      "C": "VLAN hopping",
+      "D": "An evil twin access point"
+    },
+    "keys": [
+      "B"
+    ],
+    "explanation": "Traffic from many compromised hosts in many places is what makes the attack distributed, and overwhelming the service so it stops serving is the denial of service. ARP poisoning (A) corrupts address mappings on a local segment. VLAN hopping (C) crosses VLAN boundaries. An evil twin (D) impersonates a wireless network.",
+    "objectiveId": "4.2",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "3f80720a5a32f0ec",
+    "bank": "net009-domain4-bank.md"
+  },
+  {
+    "id": "COMPTIA-NET-009/net009-domain4-bank.md/Q64",
+    "examId": "COMPTIA-NET-009",
+    "number": "Q64",
+    "stem": "An attacker places a device between a user and a website, relays the traffic and alters pages in transit. Which attack is this?",
+    "options": {
+      "A": "An on-path attack",
+      "B": "A brute-force login attack",
+      "C": "A MAC flooding attack",
+      "D": "A smurf attack"
+    },
+    "keys": [
+      "A"
+    ],
+    "explanation": "Sitting in the traffic path to read and change it is the definition of an on-path attack. Brute force (B) guesses credentials. MAC flooding (C) overflows a switch's forwarding table. A smurf attack (D) reflects traffic through broadcast addresses.",
+    "objectiveId": "4.2",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "d52251b278c836ad",
+    "bank": "net009-domain4-bank.md"
+  },
+  {
+    "id": "COMPTIA-NET-009/net009-domain4-bank.md/Q65",
+    "examId": "COMPTIA-NET-009",
+    "number": "Q65",
+    "stem": "A public web server must be reachable from the internet but must not reach the internal database network. Where should it be placed?",
+    "options": {
+      "A": "On the internal server VLAN",
+      "B": "On the management VLAN",
+      "C": "In a screened subnet",
+      "D": "On a separate network with no firewall rule"
+    },
+    "keys": [
+      "C"
+    ],
+    "explanation": "A screened subnet, often called a DMZ, is reachable from outside and isolated from the internal network by rules, which is exactly the requirement. The internal server VLAN (A) exposes the inside to a public host. The management VLAN (B) holds administration interfaces. A separate network with no rule (D) removes the control rather than applying one.",
+    "objectiveId": "4.3",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "9867d7392cb4f9f8",
+    "bank": "net009-domain4-bank.md"
+  },
+  {
+    "id": "COMPTIA-NET-009/net009-domain5-bank.md/Q66",
+    "examId": "COMPTIA-NET-009",
+    "number": "Q66",
+    "stem": "A technician replaced a failed switch and confirmed that traffic now flows normally. Which step of the troubleshooting methodology comes next?",
+    "options": {
+      "A": "Establish a theory of probable cause",
+      "B": "Document the findings, actions and outcomes",
+      "C": "Identify the problem",
+      "D": "Test the theory to determine the cause"
+    },
+    "keys": [
+      "B"
+    ],
+    "explanation": "Once the fix is verified, the methodology closes the case by recording what was found and done, so the next person inherits the history. Establishing a theory (A), identifying the problem (C) and testing a theory (D) all happen before the repair.",
+    "objectiveId": "5.1",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "5e41b16564f18f7e",
+    "bank": "net009-domain5-bank.md"
+  },
+  {
+    "id": "COMPTIA-NET-009/net009-domain5-bank.md/Q67",
+    "examId": "COMPTIA-NET-009",
+    "number": "Q67",
+    "stem": "A copper run still passes traffic, but its CRC error counter climbs steadily. What is a likely cause?",
+    "options": {
+      "A": "Interference or a damaged cable",
+      "B": "A wrong default gateway",
+      "C": "An expired DNS record",
+      "D": "A duplicated IP address"
+    },
+    "keys": [
+      "A"
+    ],
+    "explanation": "CRC errors mean frames are arriving corrupted, which points at the medium: interference, a crushed or kinked cable, or a bad connector. A gateway error (B) misdirects traffic but does not corrupt it. DNS (C) affects name resolution. A duplicate address (D) causes conflicts and intermittent loss of connectivity, not frame corruption.",
+    "objectiveId": "5.2",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "b3b569442b0845a3",
+    "bank": "net009-domain5-bank.md"
+  },
+  {
+    "id": "COMPTIA-NET-009/net009-domain5-bank.md/Q68",
+    "examId": "COMPTIA-NET-009",
+    "number": "Q68",
+    "stem": "A link delivers very low throughput and shows late collisions, and one end is hard-set to full duplex while the other auto-negotiates. What is the fault?",
+    "options": {
+      "A": "An MTU mismatch",
+      "B": "A spanning-tree loop",
+      "C": "A duplex mismatch",
+      "D": "An expired DHCP lease"
+    },
+    "keys": [
+      "C"
+    ],
+    "explanation": "One side sending full duplex while the other expects half duplex produces collisions and retransmissions that crush throughput, which is the classic signature. MTU mismatch (A) breaks large packets. A loop (B) floods broadcasts and saturates the segment. An expired lease (D) is an addressing problem.",
+    "objectiveId": "5.2",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "7a6d1186db65d257",
+    "bank": "net009-domain5-bank.md"
+  },
+  {
+    "id": "COMPTIA-NET-009/net009-domain5-bank.md/Q69",
+    "examId": "COMPTIA-NET-009",
+    "number": "Q69",
+    "stem": "A new workstation run measures 120 meters and trains at a lower speed than expected. What is the cause?",
+    "options": {
+      "A": "The switch port is administratively disabled",
+      "B": "The network adapter driver is outdated",
+      "C": "The VLAN is not configured on the port",
+      "D": "The run exceeds the distance limit for the cable"
+    },
+    "keys": [
+      "D"
+    ],
+    "explanation": "Twisted-pair Ethernet is rated to about 100 meters, and beyond that the signal degrades, which shows up as a lower negotiated rate or link instability. A disabled port (A) gives no link at all. A driver (B) and a missing VLAN (C) do not depend on cable length.",
+    "objectiveId": "5.2",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "c9ce5adc8cccd9e6",
+    "bank": "net009-domain5-bank.md"
+  },
+  {
+    "id": "COMPTIA-NET-009/net009-domain5-bank.md/Q70",
+    "examId": "COMPTIA-NET-009",
+    "number": "Q70",
+    "stem": "Users can reach websites by IP address but cannot reach them by name. Which service should be checked first?",
+    "options": {
+      "A": "DHCP",
+      "B": "DNS",
+      "C": "NTP",
+      "D": "SNMP"
+    },
+    "keys": [
+      "B"
+    ],
+    "explanation": "Working by address but failing by name isolates the fault to name resolution. DHCP (A) supplies addresses, and those are working. NTP (C) provides time. SNMP (D) is for monitoring.",
+    "objectiveId": "5.3",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "ec3892fbdaf41bdd",
+    "bank": "net009-domain5-bank.md"
+  },
+  {
+    "id": "COMPTIA-NET-009/net009-domain5-bank.md/Q71",
+    "examId": "COMPTIA-NET-009",
+    "number": "Q71",
+    "stem": "New laptops on the office network receive addresses beginning with 169.254. What is the most likely cause?",
+    "options": {
+      "A": "The DHCP service is unreachable or out of addresses",
+      "B": "The DNS server is offline",
+      "C": "The default gateway is misconfigured",
+      "D": "The NTP server is unreachable"
+    },
+    "keys": [
+      "A"
+    ],
+    "explanation": "That range is the link-local address a host assigns itself when no DHCP offer arrives, so the server, the relay or the pool is the problem. DNS (B) does not assign addresses. A gateway error (C) would leave clients addressed but unable to route. NTP (D) is time.",
+    "objectiveId": "5.3",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "71f602f438dfb61d",
+    "bank": "net009-domain5-bank.md"
+  },
+  {
+    "id": "COMPTIA-NET-009/net009-domain5-bank.md/Q72",
+    "examId": "COMPTIA-NET-009",
+    "number": "Q72",
+    "stem": "Users are refused by a service with certificate errors, and the server's clock is two days behind. What should be corrected?",
+    "options": {
+      "A": "The firewall rule set",
+      "B": "The DNS zone",
+      "C": "Time synchronization",
+      "D": "The MAC address table"
+    },
+    "keys": [
+      "C"
+    ],
+    "explanation": "Certificates are validated against the current time, so a clock that is days off makes valid certificates appear expired or not yet valid. A firewall rule (A) would block the connection rather than produce a certificate error. DNS (B) affects name resolution. The MAC table (D) is a switch forwarding detail.",
+    "objectiveId": "5.3",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "c12158cb5681417d",
+    "bank": "net009-domain5-bank.md"
+  },
+  {
+    "id": "COMPTIA-NET-009/net009-domain5-bank.md/Q73",
+    "examId": "COMPTIA-NET-009",
+    "number": "Q73",
+    "stem": "Voice calls become robotic and break up only while large file transfers run to the same site. What is the cause?",
+    "options": {
+      "A": "DNS resolution latency",
+      "B": "A duplex mismatch",
+      "C": "An expired certificate",
+      "D": "Congestion with no priority for voice"
+    },
+    "keys": [
+      "D"
+    ],
+    "explanation": "The transfer is consuming the link, and without a priority mechanism the voice packets queue behind it, which produces exactly this pattern. DNS latency (A) would delay call setup, not the audio. A duplex mismatch (B) degrades every flow. A certificate (C) would block or warn, not distort audio.",
+    "objectiveId": "5.4",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "d52604bb7e84d456",
+    "bank": "net009-domain5-bank.md"
+  },
+  {
+    "id": "COMPTIA-NET-009/net009-domain5-bank.md/Q74",
+    "examId": "COMPTIA-NET-009",
+    "number": "Q74",
+    "stem": "Users report slow responses from an application hosted in another city, and a ping returns 180 ms round trip. Which characteristic is being measured?",
+    "options": {
+      "A": "Jitter",
+      "B": "Latency",
+      "C": "Packet loss",
+      "D": "Available bandwidth"
+    },
+    "keys": [
+      "B"
+    ],
+    "explanation": "Round-trip time is latency, the delay a message takes to travel and return. Jitter (A) is variation in that delay. Packet loss (C) is the percentage of messages that never arrive. Bandwidth (D) is capacity, not delay.",
+    "objectiveId": "5.4",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "57872cae8f1dbb85",
+    "bank": "net009-domain5-bank.md"
+  },
+  {
+    "id": "COMPTIA-NET-009/net009-domain5-bank.md/Q75",
+    "examId": "COMPTIA-NET-009",
+    "number": "Q75",
+    "stem": "A technician must see every router along the path to a remote host, with the delay at each hop. Which tool fits?",
+    "options": {
+      "A": "Traceroute",
+      "B": "A name lookup",
+      "C": "A cable tester",
+      "D": "A local connection listing"
+    },
+    "keys": [
+      "A"
+    ],
+    "explanation": "Traceroute increases the hop limit step by step and reports each responding router with its round-trip time, which is exactly the requirement. A name lookup (B) resolves names. A cable tester (C) checks a physical run. A local connection listing (D) shows sockets on one host.",
+    "objectiveId": "5.5",
+    "isMultiSelect": false,
+    "provenanceStatus": "draft",
+    "textHash": "a9d19048cb4d3d44",
+    "bank": "net009-domain5-bank.md"
   },
   {
     "id": "NCA-75/nca75-pilot.md/Q1",
