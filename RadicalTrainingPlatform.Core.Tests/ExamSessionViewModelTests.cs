@@ -511,4 +511,120 @@ public class ExamSessionViewModelTests
         vm.WrongCount.ShouldBe(1);
         vm.CurrentIndex.ShouldBe(1); // Moved to next
     }
+
+    // ─── Audit 2026-10-25: re-answer / skip accounting ─────────────
+
+    [Fact]
+    public void Reanswer_AfterPrevious_LatestAttemptWins_NoDoubleCount()
+    {
+        var questions = new List<Question> { MakeQuestion(1, ["A"]), MakeQuestion(2, ["B"]) };
+        var vm = new ExamSessionViewModel(questions, "TEST");
+
+        vm.SelectAnswer("B"); vm.Submit();   // wrong
+        vm.Next(); vm.Previous();
+        vm.SelectAnswer("A"); vm.Submit();   // now correct
+
+        vm.CorrectCount.ShouldBe(1);
+        vm.WrongCount.ShouldBe(0);
+        vm.GetWrongQuestions().ShouldBeEmpty();
+    }
+
+    [Fact]
+    public void Skip_AlreadyAnsweredCorrect_KeepsResult_AndNotifiesWrongCountOtherwise()
+    {
+        var questions = new List<Question> { MakeQuestion(1, ["A"]), MakeQuestion(2, ["B"]), MakeQuestion(3, ["C"]) };
+        var vm = new ExamSessionViewModel(questions, "TEST");
+        var changed = new List<string?>();
+        vm.PropertyChanged += (_, e) => changed.Add(e.PropertyName);
+
+        vm.SelectAnswer("A"); vm.Submit();
+        vm.Skip();                           // answered → stays correct
+        vm.CorrectCount.ShouldBe(1);
+        vm.WrongCount.ShouldBe(0);
+
+        changed.Clear();
+        vm.Skip();                           // unanswered → miss
+        vm.WrongCount.ShouldBe(1);
+        changed.ShouldContain(nameof(ExamSessionViewModel.WrongCount));
+    }
+
+    [Fact]
+    public void Constructor_EmptyOrNonPositiveLimit_Throws()
+    {
+        Should.Throw<ArgumentException>(() => new ExamSessionViewModel(new List<Question>(), "TEST"));
+        Should.Throw<ArgumentOutOfRangeException>(() =>
+            new ExamSessionViewModel(new List<Question> { MakeQuestion(1, ["A"]) }, "TEST", limit: 0));
+    }
+
+    // ─── Audit 2026-10-25: option shuffling ────────────────────────
+
+    // Neutral option text: "Option A" itself reads as a letter reference,
+    // which silently disabled shuffling in these tests.
+    private static Question MakeShuffleQuestion(int id, string[] correctAnswers, int optionCount = 4)
+    {
+        var q = MakeQuestion(id, correctAnswers, optionCount);
+        foreach (var o in q.Options) o.Text = $"Text {o.Letter}";
+        return q;
+    }
+
+    [Fact]
+    public void ShuffleOptions_RemapsCorrectAnswer_RelabelsInOrder_DoesNotMutateSource()
+    {
+        var source = MakeShuffleQuestion(1, ["A"], optionCount: 4);
+        var vm = new ExamSessionViewModel(new List<Question> { source }, "TEST",
+                                          shuffleOptions: true, random: new Random(7));
+
+        var q = vm.CurrentQuestion;
+        q.ShouldNotBeSameAs(source);                            // shuffled copy, not skipped
+        q.Options.Select(o => o.Letter).ShouldBe(new[] { "A", "B", "C", "D" });
+        q.Options.Select(o => o.Text).OrderBy(t => t)
+            .ShouldBe(source.Options.Select(o => o.Text).OrderBy(t => t));
+        var correctText = q.Options.Single(o => o.Letter == q.CorrectAnswers.Single()).Text;
+        correctText.ShouldBe("Text A");                       // same option, maybe new letter
+        source.Options[0].Text.ShouldBe("Text A");            // original untouched
+        source.CorrectAnswers.ShouldBe(new[] { "A" });
+    }
+
+    [Fact]
+    public void ShuffleOptions_SpreadsAnswerPositions()
+    {
+        // Mirrors the legacy banks: every key is "A".
+        var questions = Enumerable.Range(1, 200).Select(i => MakeShuffleQuestion(i, ["A"])).ToList();
+        var vm = new ExamSessionViewModel(questions, "TEST", shuffleOptions: true, random: new Random(1));
+
+        var positions = Enumerable.Range(0, vm.TotalQuestions)
+            .Select(i => { vm.JumpTo(i); return vm.CurrentQuestion.CorrectAnswers.Single(); })
+            .GroupBy(l => l).ToDictionary(g => g.Key, g => g.Count());
+
+        positions.Keys.Count.ShouldBe(4);
+        positions.Values.Max().ShouldBeLessThan(100);           // no letter dominates
+    }
+
+    [Theory]
+    [InlineData("All of the above", "")]
+    [InlineData("Both A and C", "")]
+    [InlineData("Plain option", "Option B is wrong because it is slower.")]
+    public void ShuffleOptions_LetterReferences_KeepAuthoredOrder(string optionDText, string explanation)
+    {
+        var q = MakeShuffleQuestion(1, ["D"]);
+        q.Options[3].Text = optionDText;
+        q.Explanation = explanation;
+        var vm = new ExamSessionViewModel(new List<Question> { q }, "TEST",
+                                          shuffleOptions: true, random: new Random(3));
+
+        vm.CurrentQuestion.ShouldBeSameAs(q);
+    }
+
+    [Fact]
+    public void ShuffleOptions_MultiSelect_MapsEveryCorrectAnswer()
+    {
+        var source = MakeShuffleQuestion(1, ["B", "D"], optionCount: 5);
+        var vm = new ExamSessionViewModel(new List<Question> { source }, "TEST",
+                                          shuffleOptions: true, random: new Random(11));
+
+        var q = vm.CurrentQuestion;
+        q.CorrectAnswers.Count.ShouldBe(2);
+        q.CorrectAnswers.Select(l => q.Options.Single(o => o.Letter == l).Text).OrderBy(t => t)
+            .ShouldBe(new[] { "Text B", "Text D" });
+    }
 }

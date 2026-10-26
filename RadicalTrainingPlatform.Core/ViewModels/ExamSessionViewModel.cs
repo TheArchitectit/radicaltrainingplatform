@@ -1,4 +1,5 @@
 using System.ComponentModel;
+using System.Text.RegularExpressions;
 using RadicalTrainingPlatform.Core.Models;
 
 namespace RadicalTrainingPlatform.Core.ViewModels;
@@ -9,7 +10,6 @@ namespace RadicalTrainingPlatform.Core.ViewModels;
 /// </summary>
 public class ExamSessionViewModel : INotifyPropertyChanged
 {
-    private readonly List<Question> _allQuestions;
     private readonly List<Question> _sessionQuestions;
     private readonly Dictionary<Question, int> _displayIndex = new();
     private int _currentIndex;
@@ -22,21 +22,38 @@ public class ExamSessionViewModel : INotifyPropertyChanged
 
     public event PropertyChangedEventHandler? PropertyChanged;
 
-    public ExamSessionViewModel(List<Question> questions, string examCode, int? limit = null)
+    /// <param name="shuffleOptions">
+    /// Present each question's options in random order (relabelled A, B, C…).
+    /// Several legacy banks key almost every answer to the same letter, so
+    /// without this "always pick A" scores far above chance. Questions whose
+    /// text refers to options by letter are left in their authored order.
+    /// </param>
+    /// <param name="random">Seedable source for tests; defaults to a new Random.</param>
+    public ExamSessionViewModel(List<Question> questions, string examCode, int? limit = null,
+                                bool shuffleOptions = false, Random? random = null)
     {
-        _allQuestions = questions ?? throw new ArgumentNullException(nameof(questions));
+        ArgumentNullException.ThrowIfNull(questions);
+        if (questions.Count == 0)
+            throw new ArgumentException("A session needs at least one question.", nameof(questions));
+        if (limit is <= 0)
+            throw new ArgumentOutOfRangeException(nameof(limit), limit, "Limit must be positive.");
         ExamCode = examCode;
+        var rng = random ?? new Random();
 
         // If limit specified, take a random subset for test mode
         if (limit.HasValue && limit.Value < questions.Count)
         {
-            var rng = new Random();
             _sessionQuestions = questions.OrderBy(_ => rng.Next()).Take(limit.Value).ToList();
         }
         else
         {
             _sessionQuestions = questions.ToList();
         }
+
+        // Shuffled copies — the parsed Question objects are shared with the
+        // PDF exporter and other sessions, so they are never mutated.
+        if (shuffleOptions)
+            _sessionQuestions = _sessionQuestions.Select(q => ShuffleOptions(q, rng)).ToList();
 
         // Build display index mapping without mutating shared model objects
         for (int i = 0; i < _sessionQuestions.Count; i++)
@@ -103,6 +120,10 @@ public class ExamSessionViewModel : INotifyPropertyChanged
         _submitted = true;
         var correct = CurrentQuestion.CorrectAnswers.OrderBy(a => a).SequenceEqual(_selectedAnswers.OrderBy(a => a));
         var key = MakeKey(CurrentQuestion);
+        // Latest attempt wins: re-answering after Previous used to leave the
+        // key in BOTH sets, counting one question as correct and wrong.
+        _correctKeys.Remove(key);
+        _wrongKeys.Remove(key);
         if (correct)
         {
             _correctKeys.Add(key);
@@ -150,7 +171,14 @@ public class ExamSessionViewModel : INotifyPropertyChanged
     public void Skip()
     {
         // A skip counts as a miss: it breaks the streak, same as a wrong answer.
-        _wrongKeys.Add(MakeKey(CurrentQuestion));
+        // Skipping a question already answered keeps that answer's result.
+        if (!IsAnswered(CurrentQuestion))
+        {
+            _wrongKeys.Add(MakeKey(CurrentQuestion));
+            Notify(nameof(WrongCount));
+            Notify(nameof(AccuracyPercent));
+            Notify(nameof(IsComplete));
+        }
         _streak = 0;
         Notify(nameof(Streak));
         Next();
@@ -191,6 +219,48 @@ public class ExamSessionViewModel : INotifyPropertyChanged
         Notify(nameof(SelectedAnswers));
         Notify(nameof(IsSubmitted));
         Notify(nameof(IsCorrect));
+    }
+
+    // Option text or explanation that names options by letter ("All of the
+    // above", "Both A and C", "option B is wrong…") would be wrong after a
+    // shuffle, so those questions keep their authored order.
+    private static readonly Regex LetterReferenceRx = new(
+        @"\b(?:all|none) of the above\b|\b(?:both|either|neither) [A-F] (?:and|or|nor) [A-F]\b|\b(?:options?|answers?|choices?) \(?[A-F]\)?(?![\w'])|\([A-F]\)",
+        RegexOptions.IgnoreCase | RegexOptions.Compiled);
+
+    private static bool RefersToOptionLetters(Question q) =>
+        LetterReferenceRx.IsMatch(q.Explanation)
+        || LetterReferenceRx.IsMatch(q.Stem)
+        || q.Options.Any(o => LetterReferenceRx.IsMatch(o.Text));
+
+    private static Question ShuffleOptions(Question q, Random rng)
+    {
+        if (q.Options.Count < 2 || RefersToOptionLetters(q)) return q;
+
+        var shuffled = q.Options.OrderBy(_ => rng.Next()).ToList();
+        var newLetter = new Dictionary<string, string>();
+        var options = new List<AnswerOption>();
+        for (int i = 0; i < shuffled.Count; i++)
+        {
+            var letter = ((char)('A' + i)).ToString();
+            newLetter[shuffled[i].Letter] = letter;
+            options.Add(new AnswerOption { Letter = letter, Text = shuffled[i].Text });
+        }
+
+        return new Question
+        {
+            Id = q.Id,
+            ExamCode = q.ExamCode,
+            Domain = q.Domain,
+            Stem = q.Stem,
+            Options = options,
+            CorrectAnswers = q.CorrectAnswers
+                .Select(a => newLetter.GetValueOrDefault(a, a))
+                .OrderBy(a => a)
+                .ToList(),
+            Explanation = q.Explanation,
+            SourceFile = q.SourceFile,
+        };
     }
 
     private static string MakeKey(Question q) => $"{q.ExamCode}:{q.SourceFile}:{q.Id}";
