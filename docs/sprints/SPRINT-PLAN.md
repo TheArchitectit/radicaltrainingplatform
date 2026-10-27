@@ -153,7 +153,7 @@ S1 (CI green) -> S2 (tests) -> S3 (DI) -> S6 (v0.1) -> S7 (MVVM) -> S9 (persiste
 | Risk | Impact on Timeline | Mitigation |
 |---|---|---|
 | .NET 10 preview breaking changes | +2-4 weeks | Pin SDK in global.json; maintain net8.0 fallback target |
-| CefGlue incompatibility with Avalonia updates | +2-3 weeks | Define ILabSimulatorHost abstraction early (S3); PWA fallback |
+| Lab Simulator NativeWebView migration | — | Done (S13): CefGlue removed; Avalonia.Controls.WebView (NativeWebView) loads real PWA origin |
 | Content authoring bottleneck (new questions) | +4-8 weeks | Start content work in parallel with development |
 | SQLite/EF Core 10 not ready | +1-2 weeks | Use raw `Microsoft.Data.Sqlite` as fallback |
 | ReactiveUI learning curve | +1-2 weeks | Spike in S6; pair programming |
@@ -245,7 +245,7 @@ must be reconciled during execution to avoid duplicate work:
 | Lab simulator integration | Sprint 22 | Sprint 46 scenario validator repair is a prerequisite; S22 builds on the repaired validator field |
 | Wire dead views / study UI | Sprint 8 | Compare S8 view work against S46-01 views; one learning surface, not two |
 | Persistence layer | Sprint 9 | OpenSpec ProgressStore (S46-02) targets the PWA; keep SQLite desktop work in S9, share concepts not code |
-| Multi-question types (ordering) | Sprints 15-16 | S45-04 lands the minimum ordered-response support needed by the demo cut; S15/S16 remain the full model/UI work |
+| Multi-question types (ordering) | Sprints 15-16 | Done (F7): positional grading + SelectionIndex UI; S15/S16 remain full model/UI work |
 | Packaging & release automation | Sprint 13 | S47-07 (PKG-01..04) repairs existing script defects; S13 remains the full automation build-out |
 | Multi-vendor plugin architecture | Sprints 27-28 | The manifest system (S45-06) is a concrete first slice of vendor extension; S27-28 generalize it later |
 
