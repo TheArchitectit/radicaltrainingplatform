@@ -33,6 +33,7 @@ class StateEngine {
     getById(collection, id) {
         return (this.#state[collection] || []).find(e => e.uuid === id) || null;
     }
+    get(collection, id) { return this.getById(collection, id); }
 
     async create(collection, entity) {
         if (!entity.uuid) entity.uuid = crypto.randomUUID();

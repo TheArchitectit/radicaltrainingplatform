@@ -20,10 +20,10 @@
     <!-- All four on one version line (bump together): dependabot bumped core 11.2.3 -> 12.x
          but never the satellite packages; mixed-resolution was a runtime
          XAML-load risk (SimpleTheme from 11.2.3 against a 12.x core). -->
-    <PackageReference Include="Avalonia" Version="12.1.4" />
-    <PackageReference Include="Avalonia.Desktop" Version="12.1.4" />
-    <PackageReference Include="Avalonia.Themes.Simple" Version="12.1.4" />
-    <PackageReference Include="Avalonia.Fonts.Inter" Version="12.1.4" />
+    <PackageReference Include="Avalonia" Version="12.1.1" />
+    <PackageReference Include="Avalonia.Desktop" Version="12.1.1" />
+    <PackageReference Include="Avalonia.Themes.Simple" Version="12.1.1" />
+    <PackageReference Include="Avalonia.Fonts.Inter" Version="12.1.1" />
     <!-- Native WebView (WebKitGTK on Linux, WebKit on macOS, WebView2 on Windows)
          for the Lab Simulator. No bundled Chromium — smaller footprint, no
          sandbox issues, and the platform browser already ships with the OS. -->
