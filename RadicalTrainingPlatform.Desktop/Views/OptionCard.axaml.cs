@@ -26,6 +26,14 @@ public partial class OptionCard : UserControl
     public static readonly StyledProperty<string> TextProperty =
         AvaloniaProperty.Register<OptionCard, string>(nameof(Text), defaultValue: "");
 
+    /// <summary>
+    /// 1-based position in the learner's pick order, for sequence questions
+    /// (0 when not picked / not a sequence question). Displayed in place of the
+    /// letter circle's plain letter so the order they clicked is visible.
+    /// </summary>
+    public static readonly StyledProperty<int> SelectionIndexProperty =
+        AvaloniaProperty.Register<OptionCard, int>(nameof(SelectionIndex), defaultValue: 0);
+
     public event EventHandler? Click;
 
     public bool IsSelected
@@ -58,6 +66,27 @@ public partial class OptionCard : UserControl
         set => SetValue(TextProperty, value);
     }
 
+    public int SelectionIndex
+    {
+        get => GetValue(SelectionIndexProperty);
+        set => SetValue(SelectionIndexProperty, value);
+    }
+
+    /// <summary>
+    /// What the letter circle shows: the pick position once the learner has
+    /// clicked a sequence option (so they can read their order back), otherwise
+    /// the plain letter. Kept as a styled property rather than a computed getter
+    /// so the TextBlock binding updates when the index changes.
+    /// </summary>
+    public static readonly StyledProperty<string> LetterDisplayProperty =
+        AvaloniaProperty.Register<OptionCard, string>(nameof(LetterDisplay), defaultValue: "");
+
+    public string LetterDisplay
+    {
+        get => GetValue(LetterDisplayProperty);
+        set => SetValue(LetterDisplayProperty, value);
+    }
+
     public OptionCard()
     {
         InitializeComponent();
@@ -66,6 +95,8 @@ public partial class OptionCard : UserControl
         IsSelectedProperty.Changed.AddClassHandler<OptionCard>((s, e) => s.UpdateVisualState());
         IsCorrectProperty.Changed.AddClassHandler<OptionCard>((s, e) => s.UpdateVisualState());
         IsWrongProperty.Changed.AddClassHandler<OptionCard>((s, e) => s.UpdateVisualState());
+        SelectionIndexProperty.Changed.AddClassHandler<OptionCard>((s, _) => s.UpdateVisualState());
+        LetterProperty.Changed.AddClassHandler<OptionCard>((s, _) => s.UpdateVisualState());
     }
 
     protected override void OnInitialized()
@@ -84,6 +115,9 @@ public partial class OptionCard : UserControl
 
     private void UpdateVisualState()
     {
+        // Letter circle shows the pick position for sequence questions.
+        LetterDisplay = SelectionIndex > 0 ? SelectionIndex.ToString() : Letter;
+
         // Clear all state classes
         var states = new[] { "selected", "correct", "wrong" };
         foreach (var state in states)

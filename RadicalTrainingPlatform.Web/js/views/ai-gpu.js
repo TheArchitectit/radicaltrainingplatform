@@ -76,7 +76,7 @@ export class AiGpuView extends BaseView {
                 { key: 'name', label: 'GPU', sortable: true, render: (v) => `<strong>${v}</strong>` },
                 { key: 'model', label: 'Model', sortable: true, render: (v) => {
                     const spec = GPU_MODELS.find(m => m.id === v);
-                    return `${spec?.name || v} (${spec?.vram_gb}GB)`;
+                    return `${escapeHtml(spec?.name || v)} (${spec?.vram_gb}GB)`;
                 }},
                 { key: 'host', label: 'Host Node', sortable: true },
                 { key: 'mode', label: 'Mode', sortable: true, render: (v) => {

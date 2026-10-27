@@ -17,9 +17,8 @@
   <Grid>
 
     <!--
-      ═══ Loading Placeholder ═══
-      Shown until the embedded Chromium page fires its first
-      paint event (or Cef initialization completes).
+      Shown until the embedded page fires its first paint
+      event (or WebView initialization completes).
     -->
     <Border x:Name="LoadingPanel"
             IsVisible="True"
@@ -63,13 +62,12 @@
                    HorizontalAlignment="Center" />
       </StackPanel>
     </Border>
-
     <!--
-      ═══ CefGlue WebView Host ═══
-      A plain Avalonia ContentControl is the parent for the
-      ChromiumWebBrowser instance which is added to the visual
-      tree from code-behind (CefGlue.Avalonia requires
-      WinForms-style control hosting).
+      ═══ Native WebView Host ═══
+      Native WebView host.
+      The NativeWebView instance is added to the visual
+      tree from code-behind (the platform adapter handles
+      hosting automatically).
     -->
     <ContentControl x:Name="WebViewHost"
                     IsVisible="False"
@@ -79,9 +77,8 @@
                     VerticalContentAlignment="Stretch" />
 
     <!--
-      ═══ Error / Fallback Panel ═══
-      Shown if CefGlue cannot be loaded (missing native binaries
-      in a non-bundled run, e.g. on Linux/macOS dev machines).
+      Shown if the native WebView adapter cannot be loaded
+      (missing native libraries in a non-bundled run).
     -->
     <Border x:Name="ErrorPanel"
             IsVisible="False"
@@ -138,7 +135,7 @@
           <TextBlock Text="Open GitHub Releases" />
         </Button>
 
-        <TextBlock Text="The CefGlue Chromium runtime did not load. This usually means the bundled native binaries (libcef.dll / libcef.so / libcef.dylib) are missing for this platform."
+        <TextBlock Text="The native WebView adapter could not be loaded. This usually means the required platform libraries are missing."
                    FontSize="11"
                    Foreground="{StaticResource TextDimBrush}"
                    TextAlignment="Center"

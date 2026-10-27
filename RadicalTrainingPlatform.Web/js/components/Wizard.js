@@ -15,6 +15,8 @@
  *   });
  *   wizard.open();
  */
+import { escapeHtml } from '../core/html.js';
+
 export class Wizard {
     #config;
     #data = {};
@@ -88,7 +90,13 @@ export class Wizard {
 
         // Render step content
         const body = this.#overlay.querySelector('#wizard-step-body');
-        const content = step.render(this.#data);
+        // Views interpolate data.* into `value="…"` attributes without escaping,
+        // so a typed name can break out of the attribute and inject markup.
+        // Escape once here, at the source: #collectInputs reads values back off
+        // the DOM attribute (which un-escapes), so round-tripping stays lossless
+        // and views that already escape would double-escape.
+        const safeData = this.#escapeValues(this.#data);
+        const content = step.render(safeData);
         if (typeof content === 'string') {
             body.innerHTML = content;
         } else if (content instanceof HTMLElement) {
@@ -134,7 +142,7 @@ export class Wizard {
             const errors = step.validate(this.#data);
             if (errors && errors.length > 0) {
                 const errEl = this.#overlay.querySelector('#wizard-errors');
-                errEl.innerHTML = errors.map(e => `<div>• ${e}</div>`).join('');
+                errEl.innerHTML = errors.map(e => `<div>• ${escapeHtml(String(e))}</div>`).join('');
                 return;
             }
         }
@@ -157,5 +165,15 @@ export class Wizard {
             this.#currentStep--;
             this.#render();
         }
+    }
+
+    /** Escape every string value for the step render, leaving the raw copy in
+     *  #data — validate/onComplete still see what the user actually typed. */
+    #escapeValues(data) {
+        const out = {};
+        for (const [k, v] of Object.entries(data)) {
+            out[k] = typeof v === 'string' ? escapeHtml(v) : v;
+        }
+        return out;
     }
 }

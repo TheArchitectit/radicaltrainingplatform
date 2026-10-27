@@ -150,10 +150,15 @@ public partial class MainWindow : Window
     /// <summary>Resume the paused session for this exam, else start a new one.</summary>
     private void OpenExam(string examCode)
     {
-        if (_pausedSession != null
-            && string.Equals(_pausedSession.ExamCode, examCode, StringComparison.OrdinalIgnoreCase))
+        // While reviewing, the study session is parked in _reviewReturnSession,
+        // not _pausedSession. StartSession()'s ReleaseCurrentView() parks it on
+        // the way out, but the line after that sets _pausedSession = null, so
+        // the study session was discarded. Consider it here, before starting.
+        var parked = _pausedSession ?? (InReviewMode ? _reviewReturnSession : null);
+        if (parked != null
+            && string.Equals(parked.ExamCode, examCode, StringComparison.OrdinalIgnoreCase))
         {
-            ResumeSession(_pausedSession);
+            ResumeSession(parked);
             return;
         }
         if (_exams.TryGetValue(examCode, out var questions))

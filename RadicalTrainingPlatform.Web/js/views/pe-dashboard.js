@@ -1,5 +1,6 @@
 import { BaseView } from './BaseView.js';
 import { state } from '../core/StateEngine.js';
+import { escapeHtml } from '../core/html.js';
 
 /**
  * Prism Element Dashboard — Cluster health overview.
@@ -24,7 +25,7 @@ export class PeDashboardView extends BaseView {
         return this.html(`
             <div class="page-title">
                 <h1>Dashboard</h1>
-                <span class="text-secondary text-sm">${cluster.name} — ${cluster.version}</span>
+                <span class="text-secondary text-sm">${escapeHtml(cluster.name)} — ${escapeHtml(cluster.version)}</span>
             </div>
 
             <!-- Health Summary -->
@@ -65,13 +66,13 @@ export class PeDashboardView extends BaseView {
                     <div class="card-header">Cluster Details</div>
                     <div class="card-body">
                         <table style="width:100%; font-size: var(--font-size-sm);">
-                            <tr><td class="text-secondary" style="padding: 4px 8px;">Cluster Name</td><td style="padding: 4px 8px;">${cluster.name}</td></tr>
-                            <tr><td class="text-secondary" style="padding: 4px 8px;">AOS Version</td><td style="padding: 4px 8px;">${cluster.version}</td></tr>
-                            <tr><td class="text-secondary" style="padding: 4px 8px;">Hypervisor</td><td style="padding: 4px 8px;">${cluster.hypervisor}</td></tr>
-                            <tr><td class="text-secondary" style="padding: 4px 8px;">Cluster VIP</td><td style="padding: 4px 8px; font-family: var(--font-mono);">${cluster.clusterVIP}</td></tr>
-                            <tr><td class="text-secondary" style="padding: 4px 8px;">Data Services IP</td><td style="padding: 4px 8px; font-family: var(--font-mono);">${cluster.dataServicesIP}</td></tr>
-                            <tr><td class="text-secondary" style="padding: 4px 8px;">Replication Factor</td><td style="padding: 4px 8px;">RF${cluster.rf}</td></tr>
-                            <tr><td class="text-secondary" style="padding: 4px 8px;">Nodes</td><td style="padding: 4px 8px;">${cluster.numNodes}</td></tr>
+                            <tr><td class="text-secondary" style="padding: 4px 8px;">Cluster Name</td><td style="padding: 4px 8px;">${escapeHtml(cluster.name)}</td></tr>
+                            <tr><td class="text-secondary" style="padding: 4px 8px;">AOS Version</td><td style="padding: 4px 8px;">${escapeHtml(cluster.version)}</td></tr>
+                            <tr><td class="text-secondary" style="padding: 4px 8px;">Hypervisor</td><td style="padding: 4px 8px;">${escapeHtml(cluster.hypervisor)}</td></tr>
+                            <tr><td class="text-secondary" style="padding: 4px 8px;">Cluster VIP</td><td style="padding: 4px 8px; font-family: var(--font-mono);">${escapeHtml(cluster.clusterVIP)}</td></tr>
+                            <tr><td class="text-secondary" style="padding: 4px 8px;">Data Services IP</td><td style="padding: 4px 8px; font-family: var(--font-mono);">${escapeHtml(cluster.dataServicesIP)}</td></tr>
+                            <tr><td class="text-secondary" style="padding: 4px 8px;">Replication Factor</td><td style="padding: 4px 8px;">RF${escapeHtml(String(cluster.rf))}</td></tr>
+                            <tr><td class="text-secondary" style="padding: 4px 8px;">Nodes</td><td style="padding: 4px 8px;">${escapeHtml(String(cluster.numNodes))}</td></tr>
                         </table>
                     </div>
                 </div>

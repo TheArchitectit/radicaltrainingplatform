@@ -13,7 +13,7 @@ using Xunit;
 namespace RadicalTrainingPlatform.Desktop.Tests;
 
 /// <summary>
-/// Drives the REAL CefBridge handlers through the same entry point CefGlue
+/// Drives the REAL SimulatorBridge handlers through the same entry point Avalonia WebView adapter
 /// uses — Call(json) → handler → response envelope pumped back into JS.
 /// Every handler used to be a mock: load_exam_list returned 5 hardcoded rows,
 /// get_stats a literal 475, save/load_progress acknowledged without persisting.
@@ -22,14 +22,14 @@ namespace RadicalTrainingPlatform.Desktop.Tests;
 /// No CEF runtime required: the bridge takes an Action&lt;string&gt; for the
 /// send side, so we capture the dispatch script and unwrap the envelope.
 /// </summary>
-public class CefBridgeHandlerTests
+public class SimulatorBridgeHandlerTests
 {
     private static readonly object Gate = new();
 
     /// <summary>Bridge under test + the captured JS dispatch sink.</summary>
     private sealed class Harness : IDisposable
     {
-        public CefBridge Bridge { get; }
+        public SimulatorBridge Bridge { get; }
         public List<string> Sent { get; } = new();
         public ManualResetEventSlim Got { get; } = new(false);
 
@@ -51,7 +51,7 @@ public class CefBridgeHandlerTests
                     if (script.Contains("JSON.parse(", StringComparison.Ordinal)) Got.Set();
                 }
             };
-            Bridge = new CefBridge(
+            Bridge = new SimulatorBridge(
                 send,
                 services.GetRequiredService<IQuestionParser>(),
                 store);
@@ -200,8 +200,8 @@ public class CefBridgeHandlerTests
     {
         var now = new DateTimeOffset(2026, 10, 26, 12, 0, 0, TimeSpan.Zero);
         var times = Enumerable.Range(0, daysBack + 1).Select(d => now.AddDays(-d)).ToList();
-        CefBridge.StreakDays(times, now).ShouldBe(1 + extra);
-        CefBridge.StreakDays(new[] { now.AddDays(-3) }, now).ShouldBe(0); // broken streak
+        SimulatorBridge.StreakDays(times, now).ShouldBe(1 + extra);
+        SimulatorBridge.StreakDays(new[] { now.AddDays(-3) }, now).ShouldBe(0); // broken streak
     }
 
     [Fact]

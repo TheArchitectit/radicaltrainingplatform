@@ -3,7 +3,7 @@ import { state } from '../core/StateEngine.js';
 import { bus } from '../core/EventBus.js';
 import { toast } from '../components/Toast.js';
 import { confirm } from '../components/Confirm.js';
-import { html } from '../core/html.js';
+import { html, escapeHtml } from '../core/html.js';
 
 /**
  * NC2 Networking — AWS VPC + Azure VNet/Flow Gateway configuration.
@@ -38,7 +38,7 @@ export class CiNetworkingView extends BaseView {
                 <div class="form-group" style="max-width:400px;margin-bottom:var(--space-xl);">
                     <label class="form-label">Select Cluster</label>
                     <select class="form-input" id="cluster-select">
-                        ${clusters.map((c, i) => `<option value="${c.uuid}" ${i === 0 ? 'selected' : ''}>${c.name} (${c.provider} — ${c.region})</option>`).join('')}
+                        ${clusters.map((c, i) => `<option value="${c.uuid}" ${i === 0 ? 'selected' : ''}>${escapeHtml(c.name)} (${escapeHtml(c.provider)} — ${escapeHtml(c.region)})</option>`).join('')}
                     </select>
                 </div>
                 <div id="networking-content"></div>
@@ -167,7 +167,7 @@ VNet (custom address space)
         const container = document.getElementById('networking-content');
         if (!container) return;
 
-        const c = state.get('nc2_clusters', uuid);
+        const c = state.getById('nc2_clusters', uuid);
         if (!c) { container.innerHTML = '<p class="text-secondary">Cluster not found</p>'; return; }
 
         this.#selectedCluster = c;
@@ -184,15 +184,15 @@ VNet (custom address space)
             <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:var(--space-lg);margin-bottom:var(--space-xl);">
                 <div class="card"><div class="card-body" style="text-align:center;">
                     <div style="font-size:24px;font-weight:700;color:var(--prism-blue);">🟠 AWS</div>
-                    <div class="text-secondary text-sm">${c.region}</div>
+                    <div class="text-secondary text-sm">${escapeHtml(c.region)}</div>
                 </div></div>
                 <div class="card"><div class="card-body" style="text-align:center;">
-                    <div style="font-size:20px;font-weight:700;"><code>${c.vpc_cidr}</code></div>
+                    <div style="font-size:20px;font-weight:700;"><code>${escapeHtml(c.vpc_cidr)}</code></div>
                     <div class="text-secondary text-sm">VPC CIDR</div>
                 </div></div>
                 <div class="card"><div class="card-body" style="text-align:center;">
                     <div style="font-size:20px;font-weight:700;"><code>${c.subnet_cidr}</code></div>
-                    <div class="text-secondary text-sm">Host Subnet (AZ: ${c.az})</div>
+                    <div class="text-secondary text-sm">Host Subnet (AZ: ${escapeHtml(c.az)})</div>
                 </div></div>
                 <div class="card"><div class="card-body" style="text-align:center;">
                     <div style="font-size:20px;font-weight:700;">No FGW</div>
@@ -262,10 +262,10 @@ VNet (custom address space)
             <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:var(--space-lg);margin-bottom:var(--space-xl);">
                 <div class="card"><div class="card-body" style="text-align:center;">
                     <div style="font-size:24px;font-weight:700;color:var(--prism-blue);">🔵 Azure</div>
-                    <div class="text-secondary text-sm">${c.region}</div>
+                    <div class="text-secondary text-sm">${escapeHtml(c.region)}</div>
                 </div></div>
                 <div class="card"><div class="card-body" style="text-align:center;">
-                    <div style="font-size:20px;font-weight:700;"><code>${c.vpc_cidr}</code></div>
+                    <div style="font-size:20px;font-weight:700;"><code>${escapeHtml(c.vpc_cidr)}</code></div>
                     <div class="text-secondary text-sm">VNet CIDR</div>
                 </div></div>
                 <div class="card"><div class="card-body" style="text-align:center;">

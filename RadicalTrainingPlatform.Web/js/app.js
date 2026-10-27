@@ -1,5 +1,6 @@
 import { bus } from './core/EventBus.js';
 import { bridge } from './core/BridgeClient.js';
+import { escapeHtml } from './core/html.js';
 import { router } from './core/Router.js';
 import { state } from './core/StateEngine.js';
 import { PeDashboardView } from './views/pe-dashboard.js';
@@ -212,14 +213,16 @@ class App {
         }
     }
 
-    #onRouteChanged({ path }) {
+    // bus.emit('route:changed', { path, params }) — the listener above pulls
+    // `path` out, so this receives a plain string, not the payload object.
+    #onRouteChanged(path) {
         // Update breadcrumb
         const bc = document.getElementById('breadcrumb');
         if (bc) {
             const parts = path.split('/').filter(Boolean);
             const ctx = parts[0] === 'pc' ? 'Prism Central' : 'Prism Element';
             const page = parts.slice(1).map(p => p.charAt(0).toUpperCase() + p.slice(1)).join(' > ');
-            bc.innerHTML = `<a href="#/${parts[0]}/dashboard">${ctx}</a><span class="separator">›</span><span class="current">${page || 'Dashboard'}</span>`;
+            bc.innerHTML = `<a href="#/${parts[0]}/dashboard">${ctx}</a><span class="separator">›</span><span class="current">${escapeHtml(page || 'Dashboard')}</span>`;
         }
 
         // Highlight active nav items

@@ -1,5 +1,6 @@
 import { BaseView } from './BaseView.js';
 import { state } from '../core/StateEngine.js';
+import { escapeHtml } from '../core/html.js';
 import { bus } from '../core/EventBus.js';
 import { toast } from '../components/Toast.js';
 
@@ -130,7 +131,7 @@ export class CiMonitoringView extends BaseView {
                     return `
                         <div class="card">
                             <div class="card-header" style="display:flex;justify-content:space-between;align-items:center;">
-                                <span style="font-weight:600;">${c.name}</span>
+                                <span style="font-weight:600;">${escapeHtml(c.name)}</span>
                                 <span class="badge" style="background:${providerColors[c.provider] || 'var(--prism-blue)'};color:var(--text-inverse);">${c.provider}</span>
                             </div>
                             <div class="card-body">

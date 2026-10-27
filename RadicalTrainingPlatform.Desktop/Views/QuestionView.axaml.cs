@@ -25,6 +25,19 @@ public partial class QuestionView : UserControl
 
         DataContextChanged += OnDataContextChanged;
         Unloaded += OnUnloaded;
+
+        // Tunnel so our shortcut runs BEFORE a focused nav button. With a
+        // bubbling handler, Enter on a focused (possibly invisible) NEXT
+        // button activates the button instead of submitting — the footer
+        // advertises "Enter: submit".
+        AddHandler(KeyDownEvent, OnKeyDown, RoutingStrategies.Tunnel);
+
+        // The OptionsList is a plain (non-virtualizing) ItemsControl, so its
+        // ItemTemplate children are only materialised during layout — which
+        // lands after the posted Render work. Wiring once on a post missed
+        // every first question (clicks were no-ops). Re-check on layout
+        // instead: idempotent, so it is safe to re-run every pass.
+        OptionsList.LayoutUpdated += (_, _) => WireOptionCards();
     }
 
     private void OnUnloaded(object? sender, RoutedEventArgs e)
@@ -67,11 +80,10 @@ public partial class QuestionView : UserControl
         _viewModel = vm;
         _viewModel.PropertyChanged += OnViewModelPropertyChanged;
 
+        // RefreshUI only. Wiring happens from OptionsList.LayoutUpdated, which
+        // runs after the ItemTemplate children are materialised — a post from
+        // here fires too early on the first question and never wires.
         RefreshUI();
-        // Defer wiring until ItemsControl has rendered its children.
-        // Calling synchronously here misses the cards because the visual
-        // tree is built on the next layout pass.
-        Dispatcher.UIThread.Post(WireOptionCards, DispatcherPriority.Render);
     }
 
     private void OnViewModelPropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
@@ -81,10 +93,10 @@ public partial class QuestionView : UserControl
             case nameof(ExamSessionViewModel.CurrentQuestion):
             case nameof(ExamSessionViewModel.CurrentNumber):
                 _explanationVisible = false;
+                // Drop references only — LayoutUpdated re-wires and unsubscribes
+                // stale cards by identity.
                 _optionCards.Clear();
                 RefreshUI();
-                // Re-wire after ItemsControl renders
-                Dispatcher.UIThread.Post(WireOptionCards, DispatcherPriority.Render);
                 break;
 
             case nameof(ExamSessionViewModel.SelectedAnswers):
@@ -121,8 +133,14 @@ public partial class QuestionView : UserControl
             : 0;
         ProgressBar.Progress = progressPercent;
 
-        // Multi-select hint
-        MultiSelectHint.IsVisible = _viewModel.CurrentQuestion?.IsMultiSelect ?? false;
+        // Multi-select hint. Sequence questions are multi-select too, but the
+        // click order is the answer, so they need their own instruction.
+        bool isMulti = _viewModel.CurrentQuestion?.IsMultiSelect ?? false;
+        bool isOrdering = _viewModel.CurrentQuestion?.IsOrdering ?? false;
+        MultiSelectHint.IsVisible = isMulti || isOrdering;
+        MultiSelectHint.Text = isOrdering
+            ? "Click the options in the required order (click again to undo)"
+            : "Select all that apply";
 
         // Reset explanation
         _explanationVisible = false;
@@ -148,19 +166,26 @@ public partial class QuestionView : UserControl
 
     private void WireOptionCards()
     {
+        var cards = OptionsList.GetVisualDescendants().OfType<OptionCard>().ToList();
+
+        // LayoutUpdated fires on every pass; only resubscribe when the set of
+        // realized cards actually changed (new question, re-realized template).
+        if (cards.Count == _optionCards.Count &&
+            cards.All(c => _optionCards.TryGetValue(c.Letter, out var wired) && ReferenceEquals(wired, c)))
+        {
+            return;
+        }
+
         foreach (var (_, card) in _optionCards)
         {
             card.Click -= OnOptionCardClick;
         }
         _optionCards.Clear();
 
-        foreach (var descendant in OptionsList.GetVisualDescendants())
+        foreach (var card in cards)
         {
-            if (descendant is OptionCard card)
-            {
-                _optionCards[card.Letter] = card;
-                card.Click += OnOptionCardClick;
-            }
+            _optionCards[card.Letter] = card;
+            card.Click += OnOptionCardClick;
         }
 
         UpdateOptionCardStates();
@@ -179,6 +204,12 @@ public partial class QuestionView : UserControl
         if (_viewModel == null)
             return;
 
+        // For sequence questions the pick order is the answer, so surface it:
+        // the card shows 1,2,3… in the order the learner clicked.
+        var orderIndex = _viewModel.SelectedOrder
+            .Select((letter, i) => (letter, i))
+            .ToDictionary(t => t.letter, t => t.i + 1);
+
         foreach (var (letter, card) in _optionCards)
         {
             bool isSelected = _viewModel.SelectedAnswers.Contains(letter);
@@ -190,6 +221,7 @@ public partial class QuestionView : UserControl
             card.IsSelected = isSelected;
             card.IsCorrect = reveal && isCorrectAnswer;
             card.IsWrong = reveal && isSelected && !isCorrectAnswer;
+            card.SelectionIndex = orderIndex.TryGetValue(letter, out var pos) ? pos : 0;
 
             // Dim unselected cards after submit
             if (reveal)

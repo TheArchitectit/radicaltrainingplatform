@@ -45,7 +45,7 @@ This roadmap is organized into **years**, **quarters**, and **sprints**. Each sp
 
 | Sprint | Goal | Deliverable |
 |--------|------|-------------|
-| S13 | Lab Simulator embedded in Avalonia | CefGlue WebView hosts PWA in desktop shell |
+| S13 | Lab Simulator embedded in Avalonia | Avalonia WebView (NativeWebView) hosts PWA in desktop shell |
 | S14 | Answer randomization (anti-position-bias) | Shuffled options, tracked per-session |
 | S15 | Question difficulty ratings | Easy/Medium/Hard tagging + filtering |
 | S16 | Score tracking & persistence | SQLite per-user database,跨session progress |

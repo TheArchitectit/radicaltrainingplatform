@@ -23,6 +23,7 @@ class BridgeClient {
         if (window.chrome?.webview?.postMessage) {
             this.#mode = 'webview2';
             window.chrome.webview.addEventListener('message', (e) => this.#onMessage(e.data));
+            window.__cefBridgeDispatch = (msg) => this.#onMessage(msg);
         } else if (window.dotnetBridge?.call) {
             this.#mode = 'cef';
             window.__cefBridgeDispatch = (msg) => this.#onMessage(msg);

@@ -1,5 +1,6 @@
 import { BaseView } from './BaseView.js';
 import { state } from '../core/StateEngine.js';
+import { escapeHtml } from '../core/html.js';
 import { toast } from '../components/Toast.js';
 
 /**
@@ -56,7 +57,7 @@ export class PcReportsView extends BaseView {
                             ${reports.length === 0 ? '<tr><td colspan="4" class="text-secondary" style="padding:24px;text-align:center;">No reports generated yet. Click a template above to generate one.</td></tr>' :
                             reports.map(r => `
                                 <tr>
-                                    <td style="padding:8px 12px;font-weight:500;">${r.name}</td>
+                                    <td style="padding:8px 12px;font-weight:500;">${escapeHtml(r.name)}</td>
                                     <td style="padding:8px 12px;">${r.type}</td>
                                     <td style="padding:8px 12px;">${r.generated_at}</td>
                                     <td style="padding:8px 12px;">
@@ -119,7 +120,7 @@ export class PcReportsView extends BaseView {
             const reports = state.getAll('reports');
             tbody.innerHTML = reports.map(r => `
                 <tr>
-                    <td style="padding:8px 12px;font-weight:500;">${r.name}</td>
+                    <td style="padding:8px 12px;font-weight:500;">${escapeHtml(r.name)}</td>
                     <td style="padding:8px 12px;">${r.type}</td>
                     <td style="padding:8px 12px;">${r.generated_at}</td>
                     <td style="padding:8px 12px;"><button class="btn btn-secondary btn-sm view-report-btn" data-report-id="${r.uuid}">View</button></td>
@@ -158,7 +159,7 @@ export class PcReportsView extends BaseView {
                 return {
                     name: `Cluster Efficiency — ${new Date().toLocaleDateString()}`,
                     content: `
-                        <h4>Cluster: ${cluster.name}</h4>
+                        <h4>Cluster: ${escapeHtml(cluster.name)}</h4>
                         <table style="width:100%;font-size:13px;border-collapse:collapse;">
                             <tr style="border-bottom:1px solid var(--border-light);"><td style="padding:8px;" class="text-secondary">Total Capacity</td><td style="padding:8px;font-weight:600;">${totalCap.toFixed(1)} TB</td></tr>
                             <tr style="border-bottom:1px solid var(--border-light);"><td style="padding:8px;" class="text-secondary">Used</td><td style="padding:8px;">${usedCap.toFixed(1)} TB (${Math.round(usedCap / totalCap * 100)}%)</td></tr>
@@ -179,7 +180,7 @@ export class PcReportsView extends BaseView {
                         <table style="width:100%;font-size:12px;border-collapse:collapse;">
                             <tr style="background:var(--surface-secondary);"><th style="padding:6px;text-align:left;">Name</th><th style="padding:6px;">vCPU</th><th style="padding:6px;">RAM</th><th style="padding:6px;">State</th><th style="padding:6px;">Host</th></tr>
                             ${vms.map(v => `<tr style="border-bottom:1px solid var(--border-light);">
-                                <td style="padding:6px;">${v.name}</td>
+                                <td style="padding:6px;">${escapeHtml(v.name)}</td>
                                 <td style="padding:6px;text-align:center;">${v.vcpus}</td>
                                 <td style="padding:6px;text-align:center;">${v.memory_gb} GB</td>
                                 <td style="padding:6px;text-align:center;">${v.power_state === 'on' ? '🟢' : '🔴'}</td>
@@ -215,7 +216,7 @@ export class PcReportsView extends BaseView {
                     content: `
                         <h4>Security Posture</h4>
                         <table style="width:100%;font-size:13px;border-collapse:collapse;">
-                            <tr style="border-bottom:1px solid var(--border-light);"><td style="padding:8px;" class="text-secondary">Cluster</td><td style="padding:8px;">${cluster.name}</td></tr>
+                            <tr style="border-bottom:1px solid var(--border-light);"><td style="padding:8px;" class="text-secondary">Cluster</td><td style="padding:8px;">${escapeHtml(cluster.name)}</td></tr>
                             <tr style="border-bottom:1px solid var(--border-light);"><td style="padding:8px;" class="text-secondary">Flow Policies</td><td style="padding:8px;">${state.getAll('flow_policies').length} (${state.getAll('flow_policies').filter(p => p.mode === 'applied').length} enforced)</td></tr>
                             <tr style="border-bottom:1px solid var(--border-light);"><td style="padding:8px;" class="text-secondary">Local Users</td><td style="padding:8px;">${state.getAll('users').length}</td></tr>
                             <tr style="border-bottom:1px solid var(--border-light);"><td style="padding:8px;" class="text-secondary">AD Connected</td><td style="padding:8px;">${state.getAll('ad_config').some(c => c.connected) ? '✅ Yes' : '❌ No'}</td></tr>

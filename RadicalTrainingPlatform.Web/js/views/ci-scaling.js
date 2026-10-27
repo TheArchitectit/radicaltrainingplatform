@@ -1,5 +1,6 @@
 import { BaseView } from './BaseView.js';
 import { state } from '../core/StateEngine.js';
+import { escapeHtml } from '../core/html.js';
 import { bus } from '../core/EventBus.js';
 import { EntityTable } from '../components/EntityTable.js';
 import { Wizard } from '../components/Wizard.js';
@@ -270,7 +271,7 @@ export class CiScalingView extends BaseView {
                         return `
                             <div class="card">
                                 <div class="card-header" style="display:flex;justify-content:space-between;align-items:center;">
-                                    <span style="font-weight:600;">${p.name}</span>
+                                    <span style="font-weight:600;">${escapeHtml(p.name)}</span>
                                     <span class="badge" style="background:${enabledColor};color:var(--text-inverse);">${p.enabled ? 'Enabled' : 'Disabled'}</span>
                                 </div>
                                 <div class="card-body">
@@ -330,7 +331,7 @@ export class CiScalingView extends BaseView {
                             <label class="form-label">Cluster</label>
                             <select class="form-input" data-field="cluster">
                                 <option value="">Select cluster…</option>
-                                ${clusters.map(c => `<option value="${c.name}" ${data.cluster === c.name ? 'selected' : ''}>${c.name}</option>`).join('')}
+                                ${clusters.map(c => `<option value="${escapeHtml(c.name)}" ${data.cluster === c.name ? 'selected' : ''}>${escapeHtml(c.name)}</option>`).join('')}
                             </select>
                         </div>
                         <div class="form-group">

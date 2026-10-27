@@ -130,7 +130,7 @@ export class PcNetworkView extends BaseView {
             columns: [
                 { key: 'name', label: 'Subnet Name' },
                 { key: 'type', label: 'Type', render: v => `<span class="badge">${v}</span>` },
-                { key: 'vpc_uuid', label: 'VPC', render: v => { const vpc = vpcs.find(x => x.uuid === v); return vpc ? vpc.name : '—'; }},
+                { key: 'vpc_uuid', label: 'VPC', render: v => { const vpc = vpcs.find(x => x.uuid === v); return vpc ? escapeHtml(vpc.name) : '—'; }},
                 { key: 'cidr', label: 'CIDR' },
                 { key: 'gateway', label: 'Gateway' },
                 { key: 'ip_pool', label: 'IP Pool', render: (_, row) => row.pool_start && row.pool_end ? `${row.pool_start} – ${row.pool_end}` : '—' },

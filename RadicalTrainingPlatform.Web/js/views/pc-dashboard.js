@@ -1,5 +1,6 @@
 import { BaseView } from './BaseView.js';
 import { state } from '../core/StateEngine.js';
+import { escapeHtml } from '../core/html.js';
 
 /**
  * Prism Central Dashboard — Multi-cluster overview with global entity counts,
@@ -62,8 +63,8 @@ export class PcDashboardView extends BaseView {
                         <div style="display:flex;align-items:center;gap:12px;padding:8px 0;">
                             <span class="status-badge good"><span class="dot"></span>Healthy</span>
                             <div>
-                                <div style="font-weight:600;">${cluster.name}</div>
-                                <div class="text-secondary text-sm">${cluster.version} • ${hosts.length} nodes • RF${cluster.rf}</div>
+                                <div style="font-weight:600;">${escapeHtml(cluster.name)}</div>
+                                <div class="text-secondary text-sm">${escapeHtml(cluster.version)} • ${hosts.length} nodes • RF${escapeHtml(String(cluster.rf))}</div>
                             </div>
                         </div>
                     </div>
@@ -99,11 +100,14 @@ export class PcDashboardView extends BaseView {
         `);
     }
 
+    // title/value/subtitle reach innerHTML; callers pass either literals or
+    // state-derived text (cluster names, counts), so escape at the helper
+    // rather than trusting each caller.
     #card(title, value, color, subtitle) {
         return `<div class="card"><div class="card-body" style="text-align:center;">
-            <div style="font-size:32px;font-weight:700;color:${color};">${value}</div>
-            <div class="text-secondary text-sm">${title}</div>
-            <div class="text-secondary" style="font-size:var(--font-size-xs);">${subtitle}</div>
+            <div style="font-size:32px;font-weight:700;color:${color};">${escapeHtml(String(value))}</div>
+            <div class="text-secondary text-sm">${escapeHtml(String(title))}</div>
+            <div class="text-secondary" style="font-size:var(--font-size-xs);">${escapeHtml(String(subtitle))}</div>
         </div></div>`;
     }
 

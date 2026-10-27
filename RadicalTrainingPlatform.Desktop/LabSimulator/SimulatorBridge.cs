@@ -13,12 +13,10 @@ using RadicalTrainingPlatform.Core.Models;
 namespace RadicalTrainingPlatform.Avalonia.LabSimulator;
 
 /// <summary>
-/// Bridge between the Lab Simulator JS app (running in CefGlue's
-/// ChromiumWebBrowser) and the host C# process.
+/// Bridge between the Lab Simulator JS app and the host C# process.
 ///
-/// Exposed to JS as <c>window.dotnetBridge</c> via CefGlue's
-/// <c>RegisterJsObject</c>. The JS side can call into us with a
-/// PostMessage-style JSON envelope:
+/// Exposed to JS as <c>window.dotnetBridge</c>. The JS side can call into us
+/// with a PostMessage-style JSON envelope:
 ///
 ///   window.dotnetBridge.call(JSON.stringify({
 ///       type:   "ping",
@@ -26,13 +24,12 @@ namespace RadicalTrainingPlatform.Avalonia.LabSimulator;
 ///       payload:{ ... }
 ///   }));
 ///
-/// We respond asynchronously by invoking
-/// <see cref="CefRuntime.PostMessage"/> or, if the running CefGlue
-/// flavour exposes an ExecuteScriptAsync-style helper, by calling it
-/// on the parent browser. The exact delivery mechanism depends on
-/// the package version in use; <see cref="CefBridge"/> works with
-/// both the CefV8Handler-style API and the higher-level wrapper
-/// packages that ship a "send" helper.
+/// We respond asynchronously by invoking the host-provided
+/// <see cref="SimulatorBridge.SendScript"/> delegate (C# → JS), which the
+/// host wires to its WebView's JavaScript-injection API. The exact delivery
+/// mechanism depends on the host (WebView2's <c>chrome.webview.postMessage</c>,
+/// Avalonia WebView's <c>WebMessageReceived</c>, etc.); this class knows
+/// nothing about any of them.
 ///
 /// Incoming message types (mirror the original WebView2 bridge so
 /// BridgeClient.js is source-compatible):
@@ -41,7 +38,7 @@ namespace RadicalTrainingPlatform.Avalonia.LabSimulator;
 ///   reset_session, export_results, import_results, get_settings,
 ///   set_setting
 /// </summary>
-public sealed class CefBridge : IDisposable
+public sealed class SimulatorBridge : IDisposable
 {
     private readonly Action<string> _sendScript;
     private readonly IQuestionParser _parser;
@@ -53,7 +50,7 @@ public sealed class CefBridge : IDisposable
     /// <param name="sendScript">Executes JS in the browser (C# → JS leg).</param>
     /// <param name="parser">Real question/catalog data source.</param>
     /// <param name="sessionStore">Durable progress persistence.</param>
-    public CefBridge(Action<string> sendScript, IQuestionParser parser, ISessionStore sessionStore)
+    public SimulatorBridge(Action<string> sendScript, IQuestionParser parser, ISessionStore sessionStore)
     {
         _sendScript = sendScript;
         _parser = parser;
@@ -63,13 +60,13 @@ public sealed class CefBridge : IDisposable
     }
 
     // ─────────────────────────────────────────────────────────────────────
-    //  JS → C# :  CefV8Handler-style entry point
+    //  JS → C# : host bridge entry point
     // ─────────────────────────────────────────────────────────────────────
 
     /// <summary>
-    /// Called by CefGlue when JS invokes a function on the
-    /// registered "dotnetBridge" object. We expect the JS to call
-    /// us with a single string argument that is a JSON envelope.
+    /// Called by the host when JS invokes a function on the registered
+    /// "dotnetBridge" object. We expect the JS to call us with a single
+    /// string argument that is a JSON envelope.
     /// </summary>
     /// <param name="json">A JSON string of the form
     /// <c>{ "type": "...", "id": "...", "payload": ... }</c>.</param>
@@ -92,7 +89,7 @@ public sealed class CefBridge : IDisposable
             if (_handlers.TryGetValue(type, out var handler))
             {
                 // Fire-and-await the handler on a background task so we
-                // never block the CEF IO thread.
+                // never block the host's UI thread.
                 _ = Task.Run(async () =>
                 {
                     try
@@ -111,14 +108,14 @@ public sealed class CefBridge : IDisposable
             }
             else
             {
-                Debug.WriteLine($"[CefBridge] No handler for type '{type}'");
+                Debug.WriteLine($"[SimulatorBridge] No handler for type '{type}'");
                 if (id != null)
                     PostResponse(id, success: false, error: $"unknown type '{type}'");
             }
         }
         catch (Exception ex)
         {
-            Debug.WriteLine($"[CefBridge] Call() parse error: {ex.Message}");
+            Debug.WriteLine($"[SimulatorBridge] Call() parse error: {ex.Message}");
         }
         return null;
     }
@@ -130,7 +127,7 @@ public sealed class CefBridge : IDisposable
     /// <summary>
     /// Send a message to the JS app. Mirrors the old WebView2
     /// bridge's <c>PostToJs</c> method. The JS BridgeClient listens
-    /// on the chromium message event and dispatches by <c>type</c>.
+    /// on the message event and dispatches by <c>type</c>.
     /// </summary>
     public void PostToJs(string type, object? payload = null)
     {
@@ -149,9 +146,10 @@ public sealed class CefBridge : IDisposable
 
     /// <summary>
     /// Wrap a JSON envelope in the JS-callable helper
-    /// <c>window.__cefBridgeOnMessage(...)</c> and execute it. This
-    /// is the lowest-common-denominator approach that works with
-    /// every CefGlue flavour.
+    /// <c>window.__cefBridgeDispatch(...)</c> and execute it. This is the
+    /// lowest-common-denominator approach that works with every WebView
+    /// flavour: BridgeClient.js installs <c>window.__cefBridgeDispatch</c>
+    /// and dispatches the envelope by <c>type</c>.
     /// </summary>
     private void ExecuteScriptAsync(string json)
     {
@@ -175,7 +173,7 @@ public sealed class CefBridge : IDisposable
         }
         catch (Exception ex)
         {
-            Debug.WriteLine($"[CefBridge] ExecuteScriptAsync error: {ex.Message}");
+            Debug.WriteLine($"[SimulatorBridge] ExecuteScriptAsync error: {ex.Message}");
         }
     }
 
@@ -200,8 +198,7 @@ public sealed class CefBridge : IDisposable
         {
             PostToJs("init", new
             {
-                appVersion = typeof(CefBridge).Assembly.GetName().Version?.ToString() ?? "0.0.0",
-                cefVersion = "120.6099.215", // CefGlue package version in the csproj
+                appVersion = typeof(SimulatorBridge).Assembly.GetName().Version?.ToString() ?? "0.0.0",
             });
             return Task.FromResult<object?>(null);
         });
@@ -299,7 +296,7 @@ public sealed class CefBridge : IDisposable
             if (string.IsNullOrEmpty(questionId))
                 return Task.FromResult<object?>(new { recorded = false, error = "questionId required" });
 
-            // Was logged and acknowledged but never stored.
+            // Persist the answer.
             lock (_storeLock)
             {
                 var answers = LoadAnswers();
@@ -313,8 +310,7 @@ public sealed class CefBridge : IDisposable
         // Contract: "EXAMCODE:FILE:NUMBER" (e.g. "NCA-75:NCA-75-Part1.md:12")
         // is exact. Question numbers restart in every bank file, so the short
         // "EXAMCODE:NUMBER" is accepted only when exactly one file has that
-        // number; otherwise the reply lists the candidates (it used to return
-        // whichever file happened to load first).
+        // number; otherwise the reply lists the candidates.
         On("get_question", payload =>
         {
             string? id = null;
@@ -369,7 +365,6 @@ public sealed class CefBridge : IDisposable
 
         On("reset_session", _ =>
         {
-            // Was acknowledged ({ reset = true }) without clearing anything.
             lock (_storeLock) _sessionStore.Delete(AnswersRecordId);
             return Task.FromResult<object?>(new { reset = true });
         });
@@ -377,7 +372,6 @@ public sealed class CefBridge : IDisposable
         // ── export_results / import_results : CSV exchange ──
         On("export_results", _ =>
         {
-            // Was a TODO returning an empty CSV.
             var answers = LoadAnswers();
             var sb = new StringBuilder(CsvHeader).Append('\n');
             foreach (var a in answers)
@@ -390,7 +384,6 @@ public sealed class CefBridge : IDisposable
 
         On("import_results", payload =>
         {
-            // Was: reported the CSV's line count as "imported" and stored nothing.
             var csv = payload?.ValueKind == JsonValueKind.Object
                       && payload.Value.TryGetProperty("csv", out var c) && c.ValueKind == JsonValueKind.String
                 ? c.GetString() : null;
@@ -430,7 +423,6 @@ public sealed class CefBridge : IDisposable
                 || !payload.Value.TryGetProperty("value", out var v))
                 return Task.FromResult<object?>(new { ok = false, error = "key and value required" });
 
-            // Was logged and acknowledged but never stored.
             lock (_storeLock)
             {
                 var settings = LoadSettings();
@@ -461,7 +453,7 @@ public sealed class CefBridge : IDisposable
             try { return JsonSerializer.Deserialize<List<AnswerRecord>>(json) ?? new(); }
             catch (JsonException ex)
             {
-                Debug.WriteLine($"[CefBridge] answer history unreadable, starting fresh: {ex.Message}");
+                Debug.WriteLine($"[SimulatorBridge] answer history unreadable, starting fresh: {ex.Message}");
                 return new();
             }
         }
@@ -491,7 +483,7 @@ public sealed class CefBridge : IDisposable
             }
             catch (JsonException ex)
             {
-                Debug.WriteLine($"[CefBridge] settings unreadable, using defaults: {ex.Message}");
+                Debug.WriteLine($"[SimulatorBridge] settings unreadable, using defaults: {ex.Message}");
             }
         }
         return settings;

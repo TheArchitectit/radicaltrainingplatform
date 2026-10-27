@@ -5,10 +5,6 @@ using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Microsoft.Extensions.DependencyInjection;
 using Avalonia.Threading;
-using Xilium.CefGlue;
-using Xilium.CefGlue.Avalonia;
-using Xilium.CefGlue.Common;
-using Xilium.CefGlue.Common.Events;
 using RadicalTrainingPlatform.Avalonia.LabSimulator;
 
 namespace RadicalTrainingPlatform.Avalonia.LabSimulator;
@@ -16,34 +12,28 @@ namespace RadicalTrainingPlatform.Avalonia.LabSimulator;
 /// <summary>
 /// Code-behind for the Lab Simulator UserControl.
 ///
-/// Hosts a CefGlue (Xilium.CefGlue / CefGlue.Avalonia) AvaloniaCefBrowser
-/// pointed at the bundled Web/index.html. If the native CefGlue binaries
-/// cannot be loaded (e.g. running on a dev machine without the runtime
-/// bundle), a friendly fallback panel is shown instead.
+/// Hosts Avalonia's native <see cref="NativeWebView"/> (WebKitGTK on Linux,
+/// WebKit on macOS, WebView2 on Windows) pointed at the bundled
+/// Web/index.html served over a loopback HTTP origin so ES modules
+/// and the service worker work correctly. If the native adapter is
+/// unavailable the fallback panel is shown.
 ///
-/// Bridge: the CefBridge class is registered into the JS context as
-/// "dotnetBridge" so the existing BridgeClient.js can call
-/// <c>window.dotnetBridge.call(type, payload)</c>.
-///
-/// Lifetime: call <see cref="Dispose"/> on window close to ensure
-/// CefRuntime.Shutdown is invoked exactly once.
+/// Bridge: <see cref="SimulatorBridge"/> is registered into the JS
+/// context via the adapter's injected <c>window.chrome.webview</c>
+/// shim; <see cref="BridgeClient.js"/> uses that transport and
+/// receives C# → JS messages through <c>window.__cefBridgeDispatch</c>.
 /// </summary>
 public partial class LabSimulatorView : UserControl, IDisposable
 {
-    private AvaloniaCefBrowser? _browser;
-    private CefBridge? _bridge;
-    private bool _cefInitialized;
+    private NativeWebView? _browser;
+    private SimulatorBridge? _bridge;
+    private SimulatorHttpServer? _server;
     private bool _disposed;
 
     public LabSimulatorView()
     {
         InitializeComponent();
         Loaded += OnLoaded;
-        // NOTE: do NOT subscribe to Unloaded → Dispose. CefRuntime is a
-        // process-wide singleton; shutting it down when this control is
-        // removed from the visual tree (e.g. tab switch) would prevent
-        // the simulator from ever loading again. The browser is closed
-        // and recreated inside the same runtime instead.
     }
 
     // ─────────────────────────────────────────────────────────────────────
@@ -52,25 +42,16 @@ public partial class LabSimulatorView : UserControl, IDisposable
 
     private void OnLoaded(object? sender, RoutedEventArgs e)
     {
-        if (_cefInitialized || _disposed) return;
-        TryStartCef();
+        if (_disposed) return;
+        TryStartWebView();
     }
 
-    /// <summary>
-    /// Tear down the browser control and the bridge but leave the
-    /// process-wide CEF runtime alive. Call this only when the entire
-    /// application is shutting down.
-    /// </summary>
     public void Dispose()
     {
         if (_disposed) return;
         _disposed = true;
 
-        try
-        {
-            _bridge?.Dispose();
-        }
-        catch (Exception ex)
+        try { _bridge?.Dispose(); } catch (Exception ex)
         {
             Debug.WriteLine($"[LabSimulator] Bridge dispose error: {ex.Message}");
         }
@@ -78,38 +59,34 @@ public partial class LabSimulatorView : UserControl, IDisposable
 
         try
         {
-            // Closing the host before disposing the browser is required
-            // by CEF to avoid native crashes. AvaloniaCefBrowser.Dispose
-            // handles that internally.
-            _browser?.Dispose();
+            if (_browser != null)
+            {
+                _browser.WebMessageReceived -= OnWebMessageReceived;
+                _browser.Source = null;
+                _browser = null;
+            }
         }
         catch (Exception ex)
         {
             Debug.WriteLine($"[LabSimulator] Browser dispose error: {ex.Message}");
         }
         _browser = null;
+
+        try { _server?.Dispose(); } catch { }
+        _server = null;
     }
 
     // ─────────────────────────────────────────────────────────────────────
-    //  CefGlue availability detection + startup
+    //  Native WebView startup + loopback server
     // ─────────────────────────────────────────────────────────────────────
 
-    private void TryStartCef()
+    private void TryStartWebView()
     {
         try
         {
-            // 1+2) Hand CefGlue our settings. They were built here but never
-            //      applied (cache, log file, sandbox all ignored), and the old
-            //      bare CefRuntime.Load() probe bypassed CefGlue's own native
-            //      library resolution. CefRuntimeLoader applies the settings
-            //      when the first browser loads the runtime, once per process.
-            EnsureCefRuntimeConfigured();
-
-            // 3) Resolve the local index.html (sibling of the app binary,
-            //    under  LabSimulator/Web/index.html  in the source tree,
-            //    copied to  LabSimulator/Web/index.html  next to the .exe).
-            var htmlPath = ResolveLocalIndexPath();
-            if (htmlPath == null || !File.Exists(htmlPath))
+            // Resolve the web app root (shipped next to binary under LabSimulator/Web).
+            var webRoot = ResolveWebRoot();
+            if (string.IsNullOrEmpty(webRoot) || !Directory.Exists(webRoot))
             {
                 ShowError(
                     "Lab Simulator requires the desktop app bundle. " +
@@ -117,58 +94,31 @@ public partial class LabSimulatorView : UserControl, IDisposable
                 return;
             }
 
-            // 4) Create the bridge and the browser. The CefBridge
-            //    is registered into JS as window.dotnetBridge. Handlers are
-            //    backed by the real Core services from the composition root.
+            // Serve over loopback so ES modules and the service worker
+            // work without file:// CORS restrictions.
+            _server = new SimulatorHttpServer(webRoot);
+            var url = _server.BaseUrl + "index.html";
+
+            // Create the bridge (host-agnostic; uses Action<string> sendScript).
             var services = ((App)global::Avalonia.Application.Current!).Services;
-            _bridge = new CefBridge(
+            _bridge = new SimulatorBridge(
                 ExecuteScript,
                 services.GetRequiredService<RadicalTrainingPlatform.Core.Abstractions.IQuestionParser>(),
                 services.GetRequiredService<RadicalTrainingPlatform.Core.ISessionStore>());
 
-            _browser = new AvaloniaCefBrowser();
-            _browser.Address = new Uri(htmlPath).AbsoluteUri;
-            // Register the bridge so JS can call window.dotnetBridge.call(...).
-            // MethodCallHandler is a wrapper around the actual JS→C# invocation.
-            // It receives a Func<object> (the original call) and returns its result.
-            // Using func => func() simply forwards the call without interception.
-            _browser.RegisterJavascriptObject(
-                _bridge,
-                "dotnetBridge",
-                new MethodCallHandler(func => func()));
-            _browser.TitleChanged += OnBrowserTitleChanged;
-
-            // 5) The AvaloniaCefBrowser is itself an Avalonia Control; add
-            //    it directly to the host. If the user's package flavour
-            //    returns a raw WinForms control, the wrapper package
-            //    provides the integration. We degrade to a placeholder
-            //    so the panel still lays out.
+            // Build the NativeWebView. If no adapter is available the
+            // constructor / navigation throws — we degrade to the panel.
+            _browser = new NativeWebView();
+            _browser.Source = new Uri(url);
+            _browser.WebMessageReceived += OnWebMessageReceived;
+            // The adapter's injected chrome.webview.shim delivers JS→C#;
+            // C#→JS is done via InvokeScript calling __cefBridgeDispatch.
             WebViewHost.Content = _browser;
             WebViewHost.IsVisible = true;
             LoadingPanel.IsVisible = false;
-
-            _cefInitialized = true;
-        }
-        catch (DllNotFoundException ex)
-        {
-            Debug.WriteLine($"[LabSimulator] CefGlue native lib missing: {ex.Message}");
-            ShowError("Lab Simulator requires the desktop app bundle. Download from GitHub releases.");
-        }
-        catch (FileNotFoundException ex)
-        {
-            Debug.WriteLine($"[LabSimulator] CefGlue file missing: {ex.Message}");
-            ShowError("Lab Simulator requires the desktop app bundle. Download from GitHub releases.");
-        }
-        catch (CefRuntimeException ex)
-        {
-            Debug.WriteLine($"[LabSimulator] Cef init failed: {ex.Message}");
-            ShowError(
-                "Lab Simulator failed to initialize. The Cef runtime reported: " +
-                ex.Message);
         }
         catch (Exception ex)
         {
-            // Last-ditch catch — never let the simulator page crash the app.
             Debug.WriteLine($"[LabSimulator] Unexpected error: {ex}");
             ShowError(
                 "Lab Simulator could not be started. " +
@@ -178,88 +128,51 @@ public partial class LabSimulatorView : UserControl, IDisposable
     }
 
     /// <summary>
-    /// Locate the bundled LabSimulator/Web/index.html. We try the
-    /// installed location first (<c>AppContext.BaseDirectory</c>), and
-    /// fall back to the source-tree location during development.
+    /// Locate the bundled LabSimulator/Web folder. We try the installed
+    /// location first (AppContext.BaseDirectory), then the source-tree
+    /// fallback, then one level up from the binary (publish layouts).
     /// </summary>
-    private static readonly object CefInitLock = new();
-    private static bool _cefConfigured;
-
-    private static void EnsureCefRuntimeConfigured()
-    {
-        lock (CefInitLock)
-        {
-            if (_cefConfigured || CefRuntimeLoader.IsLoaded) return;
-
-            // Caches under %LocalAppData%/RadicalTrainingPlatform/CefCache
-            // (or the platform equivalent).
-            var cacheDir = Path.Combine(
-                Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-                "RadicalTrainingPlatform", "CefCache");
-            Directory.CreateDirectory(cacheDir);
-
-            CefRuntimeLoader.Initialize(new CefSettings
-            {
-                RootCachePath = cacheDir,
-                CachePath = cacheDir,
-                LogFile = Path.Combine(cacheDir, "cef.log"),
-                LogSeverity = CefLogSeverity.Warning,
-                NoSandbox = true,            // Sandboxes don't play well with bundled apps
-                WindowlessRenderingEnabled = false,
-                RemoteDebuggingPort = 0,     // 0 = disabled
-            });
-            _cefConfigured = true;
-        }
-    }
-
-    private static string? ResolveLocalIndexPath()
+    private static string? ResolveWebRoot()
     {
         var candidates = new[]
         {
-            // 1) Deployed location (bin output)
-            Path.Combine(AppContext.BaseDirectory, "LabSimulator", "Web", "index.html"),
-            // 2) Source-tree fallback (bin/<Config>/net10.0 → repo root). The
-            //    old candidate pointed at a folder that never existed.
+            Path.Combine(AppContext.BaseDirectory, "LabSimulator", "Web"),
             Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..",
-                "RadicalTrainingPlatform.Web", "index.html"),
-            // 3) One level up from the app binary (publish layouts)
-            Path.Combine(AppContext.BaseDirectory, "..", "LabSimulator", "Web", "index.html"),
+                "RadicalTrainingPlatform.Web"),
+            Path.Combine(AppContext.BaseDirectory, "..", "LabSimulator", "Web"),
         };
-
         foreach (var p in candidates)
         {
             try
             {
                 var full = Path.GetFullPath(p);
-                if (File.Exists(full)) return full;
+                if (Directory.Exists(full)) return full;
             }
             catch (Exception ex)
             {
-                // Path.GetFullPath can throw on weird inputs — skip candidate.
-                Debug.WriteLine($"[LabSimulator] Candidate path check failed: {ex.Message}");
+                Debug.WriteLine($"[LabSimulator] Candidate check failed: {ex.Message}");
             }
         }
         return null;
     }
 
     // ─────────────────────────────────────────────────────────────────────
-    //  Bridge helper — allows CefBridge to push JS into the page
+    //  Bridge helpers — C# → JS (InvokeScript) and JS → C# (WebMessageReceived)
     // ─────────────────────────────────────────────────────────────────────
 
     /// <summary>
-    /// Execute a JavaScript snippet in the browser. Delegates to the
-    /// CefGlue <c>AvaloniaCefBrowser.ExecuteJavaScript</c> helper
-    /// when available; otherwise no-ops so the simulator gracefully
-    /// degrades.
+    /// Execute a JavaScript snippet in the browser via NativeWebView's
+    /// <see cref="NativeWebView.InvokeScript"/> (maps to the adapter's
+    /// InvokeScript / ExecuteJavaScript helper).
     /// </summary>
     public void ExecuteScript(string script)
     {
         if (_disposed || _browser == null) return;
         try
         {
-            // AvaloniaCefBrowser exposes an ExecuteJavaScript method
-            // which runs a snippet in the browser's main frame.
-            _browser.ExecuteJavaScript(script, null, 0);
+            // Fire-and-forget; InvokeScript is synchronous and returns a
+            // result string that we ignore for the bridge dispatch.
+            _ = _browser.InvokeScript(script);
         }
         catch (Exception ex)
         {
@@ -267,14 +180,24 @@ public partial class LabSimulatorView : UserControl, IDisposable
         }
     }
 
-    // ─────────────────────────────────────────────────────────────────────
-    //  Browser events
-    // ─────────────────────────────────────────────────────────────────────
+    private void OnWebMessageReceived(object? sender, WebMessageReceivedEventArgs e)
+    {
+        // The adapter's injected chrome.webview.postMessage delivers a
+        // JSON string in Body. Pass straight to the host-agnostic bridge.
+        if (_bridge == null) return;
+        try
+        {
+            _bridge.Call(e.Body ?? "{}");
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"[LabSimulator] WebMessageReceived error: {ex.Message}");
+        }
+    }
 
+    // Title change = page loaded fully (BridgeClient posts ready).
     private void OnBrowserTitleChanged(object? sender, string title)
     {
-        // The JS app sets document.title = "Nutanix Lab Simulator" on boot;
-        // when we observe that, hide the loading panel.
         Dispatcher.UIThread.Post(() =>
         {
             if (_disposed) return;
@@ -295,6 +218,11 @@ public partial class LabSimulatorView : UserControl, IDisposable
             ErrorPanel.IsVisible = true;
             LoadingPanel.IsVisible = false;
             WebViewHost.IsVisible = false;
+            if (_browser != null)
+            {
+                _browser.WebMessageReceived -= OnWebMessageReceived;
+                _browser.Source = null;
+            }
         });
     }
 
@@ -302,8 +230,6 @@ public partial class LabSimulatorView : UserControl, IDisposable
     {
         try
         {
-            // Use Avalonia's launcher if available (cross-platform), else
-            // fall back to OS shell.
             var url = "https://github.com/TheArchitectit/radicaltrainingplatform/releases";
 #if WINDOWS
             Process.Start(new ProcessStartInfo(url) { UseShellExecute = true });

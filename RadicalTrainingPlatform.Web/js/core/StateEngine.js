@@ -122,11 +122,47 @@ class StateEngine {
 
     async importState(json) {
         const data = JSON.parse(json);
-        if (!data.cluster) throw new Error('Invalid state: missing cluster');
-        this.#state = data;
+        this.#state = this.#validateImportedState(data);
         await this.#persist();
         bus.emit('state:reset');
         bus.emit('state:ready', this.#state);
+    }
+
+    /**
+     * Validate an imported state tree before it is persisted.
+     *
+     * A saved state file is attacker-transferable (Settings → Import), so it
+     * is untrusted input: reject shapes the app does not produce, and drop
+     * __proto__/constructor keys so a poisoned file cannot pollute Object.prototype
+     * for every later view. Markup in string values is handled at the render
+     * sinks (escapeHtml), not here — stripping it would corrupt legitimate
+     * values that legitimately contain < or &.
+     */
+    #validateImportedState(data) {
+        if (!data || typeof data !== 'object' || Array.isArray(data)) {
+            throw new Error('Invalid state: expected an object');
+        }
+        if (!data.cluster || typeof data.cluster !== 'object' || Array.isArray(data.cluster)) {
+            throw new Error('Invalid state: missing cluster');
+        }
+        return this.#sanitizeNode(data, 0);
+    }
+
+    #sanitizeNode(node, depth) {
+        // Cap depth so a deeply nested file cannot blow the stack.
+        if (depth > 8) throw new Error('Invalid state: nesting too deep');
+        if (Array.isArray(node)) {
+            return node.map(v => this.#sanitizeNode(v, depth + 1));
+        }
+        if (node && typeof node === 'object') {
+            const out = {};
+            for (const [key, value] of Object.entries(node)) {
+                if (key === '__proto__' || key === 'constructor' || key === 'prototype') continue;
+                out[key] = this.#sanitizeNode(value, depth + 1);
+            }
+            return out;
+        }
+        return node;
     }
 
     // ── Persistence ──

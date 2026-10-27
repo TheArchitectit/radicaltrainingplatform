@@ -24,9 +24,10 @@
     <PackageReference Include="Avalonia.Desktop" Version="12.1.4" />
     <PackageReference Include="Avalonia.Themes.Simple" Version="12.1.4" />
     <PackageReference Include="Avalonia.Fonts.Inter" Version="12.1.4" />
-    <!-- Chromium Embedded for cross-platform WebView (Lab Simulator) -->
-    <PackageReference Include="CefGlue.Avalonia" Version="120.6099.215" />
-    <PackageReference Include="CefGlue.Common" Version="120.6099.215" />
+    <!-- Native WebView (WebKitGTK on Linux, WebKit on macOS, WebView2 on Windows)
+         for the Lab Simulator. No bundled Chromium — smaller footprint, no
+         sandbox issues, and the platform browser already ships with the OS. -->
+    <PackageReference Include="Avalonia.Controls.WebView" Version="12.1.1" />
     <!-- Dependency Injection -->
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.14" />
     <!-- Logging -->

@@ -95,7 +95,7 @@ export class PcVmsView extends BaseView {
                 },
                 {
                     key: 'cluster_name', label: 'Cluster',
-                    render: (val) => val ? this.#esc(val) : state.cluster.name
+                    render: (val) => val ? this.#esc(val) : this.#esc(state.cluster.name)
                 },
             ],
             data: state.vms,

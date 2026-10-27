@@ -1,5 +1,6 @@
 import { BaseView } from './BaseView.js';
 import { state } from '../core/StateEngine.js';
+import { escapeHtml } from '../core/html.js';
 import { toast } from '../components/Toast.js';
 
 /**
@@ -344,7 +345,7 @@ Practical Total     ≈ Model Weights × Overhead Factor (1.3× to 2.0×)
 
         // Validate auth format
         if (!auth?.startsWith('Bearer ')) {
-            respDiv.innerHTML = `<div style="padding:12px;background:var(--status-critical-bg);border-radius:6px;"><strong>401 Unauthorized</strong><br><br>Invalid authorization header format.<br>Expected: <code>Authorization: Bearer &lt;token&gt;</code><br>Got: <code>${auth}</code><br><br>❌ Exam trap: Use <code>Bearer</code>, NOT <code>Token</code>.</div>`;
+            respDiv.innerHTML = `<div style="padding:12px;background:var(--status-critical-bg);border-radius:6px;"><strong>401 Unauthorized</strong><br><br>Invalid authorization header format.<br>Expected: <code>Authorization: Bearer &lt;token&gt;</code><br>Got: <code>${escapeHtml(auth)}</code><br><br>❌ Exam trap: Use <code>Bearer</code>, NOT <code>Token</code>.</div>`;
             return;
         }
 

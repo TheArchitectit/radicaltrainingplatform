@@ -144,7 +144,7 @@
               Margin="12,8,8,8">
         <TextBlock x:Name="LetterTextBlock"
                    Classes="letterText"
-                   Text="{Binding #Root.Letter}"/>
+                   Text="{Binding #Root.LetterDisplay}"/>
       </Border>
 
       <!-- Option text -->

@@ -24,12 +24,12 @@ RadicalTrainingPlatform.Core.Tests (xUnit — parser, blueprint, viewmodel, infr
 RadicalTrainingPlatform.Desktop (net10.0 — Avalonia 12.1)
   ├── Views/           ExamSelectorView, QuestionView, OptionCard, BlueprintView, StatsView
   ├── Controls/        SynthwaveProgressBar, BlueprintCanvas
-  ├── LabSimulator/    CefBridge, LabSimulatorView
+  ├── LabSimulator/    SimulatorBridge, LabSimulatorView
   └── Simulators/      Lab simulator templates
   (ships the question banks, errata.json and the Web/ folder next to the binary)
 
 RadicalTrainingPlatform.Desktop.Tests (xunit.v3 + Avalonia.Headless — smoke tests
-  of the real MainWindow, CefBridge handlers; `dotnet test` or run the built exe)
+  of the real MainWindow, SimulatorBridge handlers; `dotnet test` or run the built exe)
 
 RadicalTrainingPlatform.Web (static PWA — the ONLY copy of the simulator web app;
   Desktop and WinForms link it as LabSimulator/Web)

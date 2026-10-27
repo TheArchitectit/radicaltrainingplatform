@@ -15,6 +15,12 @@ public class ExamSessionViewModel : INotifyPropertyChanged
     private readonly Dictionary<Question, int> _displayIndex = new();
     private int _currentIndex;
     private readonly HashSet<string> _selectedAnswers = new();
+    /// <summary>
+    /// Selection order for sequence questions (<see cref="Question.IsOrdering"/>).
+    /// The set above can't express "B then C", so positional grading reads this
+    /// instead; it is cleared alongside the set.
+    /// </summary>
+    private readonly List<string> _selectedOrder = new();
     private bool _submitted;
     private readonly HashSet<string> _wrongKeys = new();
     private readonly HashSet<string> _correctKeys = new();
@@ -80,9 +86,27 @@ public class ExamSessionViewModel : INotifyPropertyChanged
     public Question CurrentQuestion => _sessionQuestions[_currentIndex];
 
     public IReadOnlySet<string> SelectedAnswers => _selectedAnswers;
+    /// <summary>
+    /// The learner's picks in the order they clicked them. Only meaningful for
+    /// sequence questions (<see cref="Question.IsOrdering"/>); empty otherwise.
+    /// </summary>
+    public IReadOnlyList<string> SelectedOrder => _selectedOrder;
     public bool IsSubmitted => _submitted;
-    public bool IsCorrect => _submitted &&
-        CurrentQuestion.CorrectAnswers.OrderBy(a => a).SequenceEqual(_selectedAnswers.OrderBy(a => a));
+    public bool IsCorrect => _submitted && IsAnswerCorrect();
+
+    /// <summary>
+    /// Compare the current selection against the key. Sequence questions
+    /// compare POSITION (B,C,D,A,E means that exact order); everything else
+    /// compares membership, so answer order never matters.
+    /// </summary>
+    private bool IsAnswerCorrect()
+    {
+        if (CurrentQuestion.IsOrdering)
+            return CurrentQuestion.CorrectAnswers.SequenceEqual(_selectedOrder);
+
+        return CurrentQuestion.CorrectAnswers.OrderBy(a => a)
+            .SequenceEqual(_selectedAnswers.OrderBy(a => a));
+    }
 
     public bool HasPrevious => _currentIndex > 0;
     public bool HasNext => _currentIndex < _sessionQuestions.Count - 1;
@@ -114,7 +138,22 @@ public class ExamSessionViewModel : INotifyPropertyChanged
     {
         if (_submitted) return;
 
-        if (CurrentQuestion.IsMultiSelect)
+        if (CurrentQuestion.IsOrdering)
+        {
+            // Sequence question: the click order IS the answer. Clicking an
+            // already-picked option removes it so a mis-click is fixable.
+            if (_selectedAnswers.Contains(letter))
+            {
+                _selectedAnswers.Remove(letter);
+                _selectedOrder.Remove(letter);
+            }
+            else
+            {
+                _selectedAnswers.Add(letter);
+                _selectedOrder.Add(letter);
+            }
+        }
+        else if (CurrentQuestion.IsMultiSelect)
         {
             if (_selectedAnswers.Contains(letter))
                 _selectedAnswers.Remove(letter);
@@ -127,6 +166,7 @@ public class ExamSessionViewModel : INotifyPropertyChanged
             _selectedAnswers.Add(letter);
         }
         Notify(nameof(SelectedAnswers));
+        Notify(nameof(SelectedOrder));
     }
 
     public bool Submit()
@@ -134,7 +174,7 @@ public class ExamSessionViewModel : INotifyPropertyChanged
         if (_submitted || _selectedAnswers.Count == 0) return false;
 
         _submitted = true;
-        var correct = CurrentQuestion.CorrectAnswers.OrderBy(a => a).SequenceEqual(_selectedAnswers.OrderBy(a => a));
+        var correct = IsAnswerCorrect();
         var key = MakeKey(CurrentQuestion);
         // Latest attempt wins: re-answering after Previous used to leave the
         // key in BOTH sets, counting one question as correct and wrong.
@@ -232,6 +272,7 @@ public class ExamSessionViewModel : INotifyPropertyChanged
     private void ResetState()
     {
         _selectedAnswers.Clear();
+        _selectedOrder.Clear();
         _submitted = false;
         Notify(nameof(CurrentQuestion));
         Notify(nameof(CurrentIndex));
@@ -239,6 +280,7 @@ public class ExamSessionViewModel : INotifyPropertyChanged
         Notify(nameof(HasPrevious));
         Notify(nameof(HasNext));
         Notify(nameof(SelectedAnswers));
+        Notify(nameof(SelectedOrder));
         Notify(nameof(IsSubmitted));
         Notify(nameof(IsCorrect));
     }
@@ -257,7 +299,10 @@ public class ExamSessionViewModel : INotifyPropertyChanged
 
     private static Question ShuffleOptions(Question q, Random rng)
     {
-        if (q.Options.Count < 2 || RefersToOptionLetters(q)) return q;
+        // Sequence questions encode the answer in the key's ORDER, which a
+        // shuffle + relabel scrambles; shuffling them also removes any sense
+        // that the learner is ordering the presented steps.
+        if (q.Options.Count < 2 || q.IsOrdering || RefersToOptionLetters(q)) return q;
 
         var shuffled = q.Options.OrderBy(_ => rng.Next()).ToList();
         var newLetter = new Dictionary<string, string>();

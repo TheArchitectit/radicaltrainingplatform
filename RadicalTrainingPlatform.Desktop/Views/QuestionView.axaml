@@ -7,8 +7,9 @@
              x:DataType="vm:ExamSessionViewModel"
              x:Name="Root"
              Background="#0B0B1A"
-             Focusable="True"
-             KeyDown="OnKeyDown">
+             Focusable="True">
+  <!-- KeyDown is registered in the code-behind as a TUNNEL handler so the
+       view's shortcuts win over a focused nav button (Enter submits). -->
 
   <UserControl.Resources>
     <!-- Main neon gradient -->
