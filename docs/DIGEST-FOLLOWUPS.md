@@ -3,6 +3,7 @@
 Items caught by the ArchitectIT daily digest and routed here by the backlog bridge (NEXT ids = Mission Control hit-list). Triage in MC; do not edit ids.
 
 ## Open
+- [ ] **NEXT-493 —** The GitHub sweep returned 403 rate-limit errors for Project N35, Project N68, Project N107, Project N12, Project N54 and Project N17 — add token rotation plus backoff-with-resume so tomorrow's feed is not blind on six repos.  *(source: digest 2026-10-28)*.  *(digest: 2026-10-28; source: MC hit-list)*
 - [ ] **NEXT-376 —** Project N107's ship-gate that could not fail and the harness false-pass need a shared meta-test that mutates each artifact and asserts red; also date the tutor recorded-fallback so it does not become permanent by inertia.  *(source: digest 2026-10-12)*.  *(digest: 2026-10-12; source: MC hit-list)*
 - [ ] **NEXT-362 —** Add a fail-closed negative test proving Project N107's repaired vulnerability gate now blocks.  *(source: digest 2026-10-11)*.  *(digest: 2026-10-12; source: MC hit-list)*
 - [ ] **NEXT-368 —** Push Project N107's local feature burst (study tracks, ticket lab, RedEye gate, demo cuts) so the October 23 demo work is CI-covered.  *(source: digest 2026-10-11)*.  *(digest: 2026-10-12; source: MC hit-list)*
