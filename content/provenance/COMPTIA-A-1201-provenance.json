@@ -1,0 +1,1462 @@
+{
+ "exam": "COMPTIA-A-1201",
+ "item_count": 180,
+ "items": [
+  {
+   "id": "COMPTIA-A-1201-Q001",
+   "objective": "1.1",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 1.1 battery replacement techniques",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q002",
+   "objective": "1.1",
+   "type": "recall",
+   "source": "OBJ1201",
+   "locator": "Objective 1.1 RAM replacement",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q003",
+   "objective": "1.1",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 1.1 HDD/SSD replacement",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q004",
+   "objective": "1.1",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 1.1 wireless cards, Wi-Fi antenna connector/placement",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q005",
+   "objective": "1.1",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 1.1 keyboard/keys replacement",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q006",
+   "objective": "1.1",
+   "type": "recall",
+   "source": "OBJ1201",
+   "locator": "Objective 1.1 biometrics, near-field scanner features",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q007",
+   "objective": "1.1",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 1.1 wireless cards, antenna placement",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q008",
+   "objective": "1.1",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 1.1 camera/webcam, microphone",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q009",
+   "objective": "1.2",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 1.2 connection methods USB/USB-C",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q010",
+   "objective": "1.2",
+   "type": "recall",
+   "source": "OBJ1201",
+   "locator": "Objective 1.2 NFC",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q011",
+   "objective": "1.2",
+   "type": "recall",
+   "source": "OBJ1201",
+   "locator": "Objective 1.2 tethering/hotspot",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q012",
+   "objective": "1.2",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 1.2 docking station vs port replicator",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q013",
+   "objective": "1.2",
+   "type": "recall",
+   "source": "OBJ1201",
+   "locator": "Objective 1.2 accessories stylus, drawing pad",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q014",
+   "objective": "1.2",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 1.2 Bluetooth accessories headsets",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q015",
+   "objective": "1.2",
+   "type": "recall",
+   "source": "OBJ1201",
+   "locator": "Objective 1.2 USB/USB-C/microUSB/miniUSB",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q016",
+   "objective": "1.2",
+   "type": "recall",
+   "source": "OBJ1201",
+   "locator": "Objective 1.2 Lightning connection method",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q017",
+   "objective": "1.3",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 1.3 wireless/cellular data network enable/disable",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q018",
+   "objective": "1.3",
+   "type": "recall",
+   "source": "OBJ1201",
+   "locator": "Objective 1.3 SIM/eSIM",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q019",
+   "objective": "1.3",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 1.3 Bluetooth pairing, enter the appropriate PIN code",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q020",
+   "objective": "1.3",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 1.3 location services, GPS services",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q021",
+   "objective": "1.3",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 1.3 MDM, corporate vs BYOD, policy enforcement",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q022",
+   "objective": "1.3",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 1.3 synchronization, recognizing data caps",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q023",
+   "objective": "1.3",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 1.3 synchronization mail, calendar, contacts",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q024",
+   "objective": "1.3",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 1.3 wireless network connectivity, MDM device configurations",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q025",
+   "objective": "2.1",
+   "type": "recall",
+   "source": "OBJ1201",
+   "locator": "Objective 2.1 ports and protocols SSH 22",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q026",
+   "objective": "2.1",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 2.1 DNS 53",
+   "demoCandidate": true,
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q027",
+   "objective": "2.1",
+   "type": "recall",
+   "source": "OBJ1201",
+   "locator": "Objective 2.1 HTTPS 443",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q028",
+   "objective": "2.1",
+   "type": "recall",
+   "source": "OBJ1201",
+   "locator": "Objective 2.1 RDP 3389",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q029",
+   "objective": "2.1",
+   "type": "recall",
+   "source": "OBJ1201",
+   "locator": "Objective 2.1 SMB/CIFS 445",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q030",
+   "objective": "2.1",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 2.1 TCP vs UDP",
+   "demoCandidate": true,
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q031",
+   "objective": "2.2",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 2.2 frequencies 2.4GHz/5GHz/6GHz",
+   "demoCandidate": true,
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q032",
+   "objective": "2.2",
+   "type": "recall",
+   "source": "OBJ1201",
+   "locator": "Objective 2.2 frequencies",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q033",
+   "objective": "2.2",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 2.2 channels, regulations, channel selection",
+   "demoCandidate": true,
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q034",
+   "objective": "2.2",
+   "type": "recall",
+   "source": "OBJ1201",
+   "locator": "Objective 2.2 RFID",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q035",
+   "objective": "2.2",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 2.2 802.11 standards, bands",
+   "demoCandidate": true,
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q036",
+   "objective": "2.4",
+   "type": "recall",
+   "source": "OBJ1201",
+   "locator": "Objective 2.4 VPN",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q037",
+   "objective": "2.4",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 2.4 DHCP leases, reservations",
+   "demoCandidate": true,
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q038",
+   "objective": "2.4",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 2.4 DHCP scope, leases",
+   "demoCandidate": true,
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q039",
+   "objective": "2.4",
+   "type": "recall",
+   "source": "OBJ1201",
+   "locator": "Objective 2.4 DNS record types CNAME",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q040",
+   "objective": "2.4",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 2.4 DNS TXT, SPF/DKIM/DMARC spam management",
+   "demoCandidate": true,
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q041",
+   "objective": "2.4",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 2.4 VLAN",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q042",
+   "objective": "2.4",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 2.4 DHCP reservations, exclusions",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q043",
+   "objective": "2.3",
+   "type": "recall",
+   "source": "OBJ1201",
+   "locator": "Objective 2.3 server roles syslog",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q044",
+   "objective": "2.3",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 2.3 server roles NTP",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q045",
+   "objective": "2.3",
+   "type": "recall",
+   "source": "OBJ1201",
+   "locator": "Objective 2.3 internet appliances load balancers",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q046",
+   "objective": "2.3",
+   "type": "recall",
+   "source": "OBJ1201",
+   "locator": "Objective 2.3 internet appliances UTM",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q047",
+   "objective": "2.3",
+   "type": "recall",
+   "source": "OBJ1201",
+   "locator": "Objective 2.3 internet appliances proxy servers",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q048",
+   "objective": "2.3",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 2.3 legacy/embedded systems SCADA",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q049",
+   "objective": "2.5",
+   "type": "recall",
+   "source": "OBJ1201",
+   "locator": "Objective 2.5 switches managed vs unmanaged",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q050",
+   "objective": "2.5",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 2.5 PoE injectors, switch, standards",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q051",
+   "objective": "2.5",
+   "type": "recall",
+   "source": "OBJ1201",
+   "locator": "Objective 2.5 cable modem, DSL, ONT",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q052",
+   "objective": "2.5",
+   "type": "recall",
+   "source": "OBJ1201",
+   "locator": "Objective 2.5 NIC, physical MAC address",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q053",
+   "objective": "2.5",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 2.5 patch panel",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q054",
+   "objective": "2.6",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 2.6 IPv4 addressing, APIPA",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q055",
+   "objective": "2.6",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 2.6 IP addressing, gateway, SOHO configuration",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q056",
+   "objective": "2.6",
+   "type": "recall",
+   "source": "OBJ1201",
+   "locator": "Objective 2.6 private vs public addresses",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q057",
+   "objective": "2.7",
+   "type": "recall",
+   "source": "OBJ1201",
+   "locator": "Objective 2.7 internet connection types satellite",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q058",
+   "objective": "2.7",
+   "type": "recall",
+   "source": "OBJ1201",
+   "locator": "Objective 2.7 network types LAN/WAN/PAN/MAN/SAN/WLAN",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q059",
+   "objective": "2.8",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 2.8 networking tools cable tester",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q060",
+   "objective": "2.8",
+   "type": "recall",
+   "source": "OBJ1201",
+   "locator": "Objective 2.8 networking tools toner probe",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q061",
+   "objective": "2.1",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 2.1 FTP 20-21",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q062",
+   "objective": "2.1",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 2.1 Telnet 23 vs SSH",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q063",
+   "objective": "2.2",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 2.2 channels, widths",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q064",
+   "objective": "2.4",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 2.4 DHCP exclusions vs reservations",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q065",
+   "objective": "2.4",
+   "type": "recall",
+   "source": "OBJ1201",
+   "locator": "Objective 2.4 DNS record types AAAA",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q066",
+   "objective": "2.6",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 2.6 static vs dynamic addressing",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q067",
+   "objective": "3.1",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 3.1 channel configurations",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q068",
+   "objective": "3.1",
+   "type": "recall",
+   "source": "OBJ1201",
+   "locator": "Objective 3.1 ECC vs non-ECC",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q069",
+   "objective": "3.1",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 3.1 DDR iterations",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q070",
+   "objective": "3.1",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 3.1 RAM installation",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q071",
+   "objective": "3.1",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 3.1 DDR iterations, channel configurations",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q072",
+   "objective": "3.1",
+   "type": "recall",
+   "source": "OBJ1201",
+   "locator": "Objective 3.1 form factors DIMM",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q073",
+   "objective": "3.2",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 3.2 SSD communications interfaces NVMe vs SATA",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q074",
+   "objective": "3.2",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 3.2 form factors M.2, interfaces",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q075",
+   "objective": "3.2",
+   "type": "recall",
+   "source": "OBJ1201",
+   "locator": "Objective 3.2 RAID 0,1,5,6,10",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q076",
+   "objective": "3.2",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 3.2 RAID levels minimum drives",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q077",
+   "objective": "3.2",
+   "type": "recall",
+   "source": "OBJ1201",
+   "locator": "Objective 3.2 hard drives spindle speeds",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q078",
+   "objective": "3.2",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 3.2 removable storage flash drives, memory cards",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q079",
+   "objective": "3.3",
+   "type": "recall",
+   "source": "OBJ1201",
+   "locator": "Objective 3.3 motherboard form factors",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q080",
+   "objective": "3.3",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 3.3 CPU socket types AMD/Intel",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q081",
+   "objective": "3.3",
+   "type": "recall",
+   "source": "OBJ1201",
+   "locator": "Objective 3.3 BIOS/UEFI settings boot options",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q082",
+   "objective": "3.3",
+   "type": "recall",
+   "source": "OBJ1201",
+   "locator": "Objective 3.3 TPM security features, encryption",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q083",
+   "objective": "3.3",
+   "type": "recall",
+   "source": "OBJ1201",
+   "locator": "Objective 3.3 Secure Boot",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q084",
+   "objective": "3.3",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 3.3 virtualization support",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q085",
+   "objective": "3.3",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 3.3 cooling, heat sink, thermal paste/pads",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q086",
+   "objective": "3.3",
+   "type": "recall",
+   "source": "OBJ1201",
+   "locator": "Objective 3.3 expansion cards network interface card",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q087",
+   "objective": "3.3",
+   "type": "recall",
+   "source": "OBJ1201",
+   "locator": "Objective 3.3 CPU architecture x86/x64 vs ARM",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q088",
+   "objective": "3.3",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 3.3 motherboard connector types PCI vs PCIe",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q089",
+   "objective": "3.4",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 3.4 wattage rating",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q090",
+   "objective": "3.4",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 3.4 input 110-120 VAC vs 220-240 VAC",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q091",
+   "objective": "3.4",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 3.4 wattage rating, energy efficiency",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q092",
+   "objective": "3.4",
+   "type": "recall",
+   "source": "OBJ1201",
+   "locator": "Objective 3.4 modular power supply",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q093",
+   "objective": "3.4",
+   "type": "recall",
+   "source": "OBJ1201",
+   "locator": "Objective 3.4 redundant power supply",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q094",
+   "objective": "3.4",
+   "type": "recall",
+   "source": "OBJ1201",
+   "locator": "Objective 3.4 20+4 pin motherboard connector",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q095",
+   "objective": "3.5",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 3.5 drivers PCL vs PostScript",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q096",
+   "objective": "3.5",
+   "type": "recall",
+   "source": "OBJ1201",
+   "locator": "Objective 3.5 device connectivity USB/Ethernet/wireless",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q097",
+   "objective": "3.5",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 3.5 security user authentication, secured prints",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q098",
+   "objective": "3.5",
+   "type": "recall",
+   "source": "OBJ1201",
+   "locator": "Objective 3.5 configuration settings duplex",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q099",
+   "objective": "3.5",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 3.5 firmware",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q100",
+   "objective": "3.5",
+   "type": "recall",
+   "source": "OBJ1201",
+   "locator": "Objective 3.5 network scan services SMB",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q101",
+   "objective": "3.5",
+   "type": "recall",
+   "source": "OBJ1201",
+   "locator": "Objective 3.5 ADF/flatbed scanner",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q102",
+   "objective": "3.5",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 3.5 public/shared devices printer share vs print server",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q103",
+   "objective": "3.5",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 3.5 properly unbox device and consider set-up location",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q104",
+   "objective": "3.6",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 3.6 laser maintenance replace toner",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q105",
+   "objective": "3.6",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 3.6 inkjet maintenance clean printheads",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q106",
+   "objective": "3.6",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 3.6 thermal special paper, heating element",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q107",
+   "objective": "3.6",
+   "type": "recall",
+   "source": "OBJ1201",
+   "locator": "Objective 3.6 impact maintenance replace ribbon",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q108",
+   "objective": "3.6",
+   "type": "recall",
+   "source": "OBJ1201",
+   "locator": "Objective 3.6 laser maintenance kit, calibrate, clean",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q109",
+   "objective": "3.6",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 3.6 clear jams, maintenance",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q110",
+   "objective": "3.1",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 3.1 channel configurations, DDR iterations",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q111",
+   "objective": "3.2",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 3.2 RAID 0 striping",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q112",
+   "objective": "4.1",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 4.1 purpose of virtual machines sandbox",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q113",
+   "objective": "4.1",
+   "type": "recall",
+   "source": "OBJ1201",
+   "locator": "Objective 4.1 hypervisors Type 1 vs Type 2",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q114",
+   "objective": "4.1",
+   "type": "recall",
+   "source": "OBJ1201",
+   "locator": "Objective 4.1 hypervisor Type 2",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q115",
+   "objective": "4.1",
+   "type": "recall",
+   "source": "OBJ1201",
+   "locator": "Objective 4.1 desktop virtualization VDI",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q116",
+   "objective": "4.1",
+   "type": "recall",
+   "source": "OBJ1201",
+   "locator": "Objective 4.1 containers",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q117",
+   "objective": "4.2",
+   "type": "recall",
+   "source": "OBJ1201",
+   "locator": "Objective 4.2 cloud service models IaaS/PaaS/SaaS",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q118",
+   "objective": "4.2",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 4.2 cloud characteristics elasticity, metered utilization",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q119",
+   "objective": "4.2",
+   "type": "recall",
+   "source": "OBJ1201",
+   "locator": "Objective 4.2 common cloud models community",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q120",
+   "objective": "4.2",
+   "type": "recall",
+   "source": "OBJ1201",
+   "locator": "Objective 4.2 common cloud models hybrid",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q121",
+   "objective": "4.1",
+   "type": "recall",
+   "source": "OBJ1201",
+   "locator": "Objective 4.1 legacy software/OS, test development",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q122",
+   "objective": "4.1",
+   "type": "recall",
+   "source": "OBJ1201",
+   "locator": "Objective 4.1 application virtualization, cross-platform",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q123",
+   "objective": "4.1",
+   "type": "recall",
+   "source": "OBJ1201",
+   "locator": "Objective 4.1 requirements security, network, storage",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q124",
+   "objective": "4.1",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 4.1 requirements, resource allocation",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q125",
+   "objective": "4.2",
+   "type": "recall",
+   "source": "OBJ1201",
+   "locator": "Objective 4.2 common cloud models private",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q126",
+   "objective": "4.2",
+   "type": "recall",
+   "source": "OBJ1201",
+   "locator": "Objective 4.2 service models PaaS",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q127",
+   "objective": "4.2",
+   "type": "recall",
+   "source": "OBJ1201",
+   "locator": "Objective 4.2 service models IaaS",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q128",
+   "objective": "4.2",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 4.2 metered utilization, ingress/egress",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q129",
+   "objective": "4.2",
+   "type": "recall",
+   "source": "OBJ1201",
+   "locator": "Objective 4.2 shared vs dedicated resources, multitenancy",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q130",
+   "objective": "4.2",
+   "type": "recall",
+   "source": "OBJ1201",
+   "locator": "Objective 4.2 cloud characteristics file synchronization",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q131",
+   "objective": "4.2",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 4.2 cloud characteristics availability",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q132",
+   "objective": "4.1",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 4.1 purpose of virtual machines test development",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q133",
+   "objective": "5.1",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 5.1 common symptoms POST beeps",
+   "demoCandidate": true,
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q134",
+   "objective": "5.1",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 5.1 common symptoms overheating, random shutdown",
+   "demoCandidate": true,
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q135",
+   "objective": "5.1",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 5.1 common symptoms no power",
+   "demoCandidate": true,
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q136",
+   "objective": "5.1",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 5.1 common symptoms capacitor swelling, burning smell",
+   "demoCandidate": true,
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q137",
+   "objective": "5.1",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 5.1 common symptoms inaccurate system date/time",
+   "demoCandidate": true,
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q138",
+   "objective": "5.1",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 5.1 common symptoms sluggish performance",
+   "demoCandidate": true,
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q139",
+   "objective": "5.1",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 5.1 troubleshoot motherboards, RAM, CPUs",
+   "demoCandidate": true,
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q140",
+   "objective": "5.1",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 5.1 unusual noise; 5.2 grinding sounds",
+   "demoCandidate": true,
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q141",
+   "objective": "5.1",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 5.1 blank screen, RAM troubleshooting",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q142",
+   "objective": "5.2",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 5.2 LED status indicators, RAID failure",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q143",
+   "objective": "5.2",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 5.2 bootable device not found",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q144",
+   "objective": "5.2",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 5.2 S.M.A.R.T. failure",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q145",
+   "objective": "5.2",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 5.2 data loss/corruption, extended read/write times",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q146",
+   "objective": "5.2",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 5.2 missing drives in OS, array missing",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q147",
+   "objective": "5.2",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 5.2 low performance IOPS",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q148",
+   "objective": "5.2",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 5.2 low performance, drive troubleshooting",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q149",
+   "objective": "5.3",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 5.3 incorrect input source",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q150",
+   "objective": "5.3",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 5.3 fuzzy image, physical cabling issues",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q151",
+   "objective": "5.3",
+   "type": "recall",
+   "source": "OBJ1201",
+   "locator": "Objective 5.3 display burn-in",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q152",
+   "objective": "5.3",
+   "type": "recall",
+   "source": "OBJ1201",
+   "locator": "Objective 5.3 dead pixels",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q153",
+   "objective": "5.3",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 5.3 intermittent projector shutdown, dim image",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q154",
+   "objective": "5.3",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 5.3 incorrect color display, physical cabling issues",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q155",
+   "objective": "5.3",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 5.3 flashing screen, physical cabling issues",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q156",
+   "objective": "5.3",
+   "type": "recall",
+   "source": "OBJ1201",
+   "locator": "Objective 5.3 sizing issues, distorted image",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q157",
+   "objective": "5.4",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 5.4 digitizer issues, touch calibration",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q158",
+   "objective": "5.4",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 5.4 poor battery health",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q159",
+   "objective": "5.4",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 5.4 swollen battery",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q160",
+   "objective": "5.4",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 5.4 improper charging, physically damaged ports",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q161",
+   "objective": "5.4",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 5.4 liquid damage",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q162",
+   "objective": "5.4",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 5.4 malware, degraded performance, overheating",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q163",
+   "objective": "5.4",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 5.4 unable to install new applications, degraded performance",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q164",
+   "objective": "5.4",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 5.4 stylus does not work",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q165",
+   "objective": "5.5",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 5.5 intermittent wireless connectivity, external interference",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q166",
+   "objective": "5.5",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 5.5 jitter, poor VoIP quality",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q167",
+   "objective": "5.5",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 5.5 port flapping",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q168",
+   "objective": "5.5",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 5.5 high latency, slow network speeds",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q169",
+   "objective": "5.5",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 5.5 limited connectivity, intermittent internet connectivity",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q170",
+   "objective": "5.5",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 5.5 authentication failures",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q171",
+   "objective": "5.5",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 5.5 intermittent internet connectivity",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q172",
+   "objective": "5.5",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 5.5 limited connectivity; 2.6 APIPA",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q173",
+   "objective": "5.5",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 5.5 external interference, intermittent wireless connectivity",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q174",
+   "objective": "5.6",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 5.6 lines down the printed pages",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q175",
+   "objective": "5.6",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 5.6 garbled print",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q176",
+   "objective": "5.6",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 5.6 multiple prints pending in queue",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q177",
+   "objective": "5.6",
+   "type": "recall",
+   "source": "OBJ1201",
+   "locator": "Objective 5.6 double/echo images on the print",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q178",
+   "objective": "5.6",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 5.6 finishing issues staple jams",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q179",
+   "objective": "5.6",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 5.6 speckling on printed pages",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1201-Q180",
+   "objective": "5.6",
+   "type": "diagnosis",
+   "source": "OBJ1201",
+   "locator": "Objective 5.6 tray not recognized",
+   "verified": "2026-10-10"
+  }
+ ]
+}

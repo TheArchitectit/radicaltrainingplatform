@@ -1,0 +1,1454 @@
+{
+ "exam": "COMPTIA-A-1202",
+ "item_count": 180,
+ "items": [
+  {
+   "id": "COMPTIA-A-1202-Q001",
+   "objective": "1.1",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 1.1 common OS types and purposes",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q002",
+   "objective": "1.1",
+   "type": "recall",
+   "source": "OBJ1202",
+   "locator": "Objective 1.1 OS types server vs workstation",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q003",
+   "objective": "1.1",
+   "type": "recall",
+   "source": "OBJ1202",
+   "locator": "Objective 1.1 OS types and purposes",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q004",
+   "objective": "1.2",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 1.2 OS installations and upgrades in diverse environments",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q005",
+   "objective": "1.2",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 1.2 perform OS installations and upgrades",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q006",
+   "objective": "1.2",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 1.2 OS installations in a diverse environment",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q007",
+   "objective": "1.2",
+   "type": "recall",
+   "source": "OBJ1202",
+   "locator": "Objective 1.2 installation types",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q008",
+   "objective": "1.3",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 1.3 Microsoft Windows editions features",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q009",
+   "objective": "1.3",
+   "type": "recall",
+   "source": "OBJ1202",
+   "locator": "Objective 1.3 Windows editions domain features",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q010",
+   "objective": "1.4",
+   "type": "recall",
+   "source": "OBJ1202",
+   "locator": "Objective 1.4 Windows features and tools Task Manager",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q011",
+   "objective": "1.4",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 1.4 Windows tools disk management",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q012",
+   "objective": "1.4",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 1.4 Windows features, Settings vs Control Panel",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q013",
+   "objective": "1.4",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 1.4 Windows features and tools",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q014",
+   "objective": "1.4",
+   "type": "recall",
+   "source": "OBJ1202",
+   "locator": "Objective 1.4 Device Manager",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q015",
+   "objective": "1.5",
+   "type": "recall",
+   "source": "OBJ1202",
+   "locator": "Objective 1.5 Microsoft command-line tools ipconfig",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q016",
+   "objective": "1.5",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 1.5 command-line tools sfc",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q017",
+   "objective": "1.5",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 1.5 command-line tools net use",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q018",
+   "objective": "1.5",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 1.5 ipconfig options",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q019",
+   "objective": "1.5",
+   "type": "recall",
+   "source": "OBJ1202",
+   "locator": "Objective 1.5 command-line tools ping",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q020",
+   "objective": "1.5",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 1.5 command-line tools nslookup",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q021",
+   "objective": "1.6",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 1.6 configure Microsoft Windows settings",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q022",
+   "objective": "1.6",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 1.6 user accounts and settings",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q023",
+   "objective": "1.7",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 1.7 Windows networking features",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q024",
+   "objective": "1.7",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 1.7 Windows networking profiles",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q025",
+   "objective": "1.7",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 1.7 Windows networking features sharing",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q026",
+   "objective": "1.8",
+   "type": "recall",
+   "source": "OBJ1202",
+   "locator": "Objective 1.8 macOS features and tools",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q027",
+   "objective": "1.8",
+   "type": "recall",
+   "source": "OBJ1202",
+   "locator": "Objective 1.8 macOS tools Activity Monitor",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q028",
+   "objective": "1.8",
+   "type": "recall",
+   "source": "OBJ1202",
+   "locator": "Objective 1.8 macOS Time Machine",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q029",
+   "objective": "1.9",
+   "type": "recall",
+   "source": "OBJ1202",
+   "locator": "Objective 1.9 Linux client features package management",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q030",
+   "objective": "1.9",
+   "type": "recall",
+   "source": "OBJ1202",
+   "locator": "Objective 1.9 Linux features and tools",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q031",
+   "objective": "1.9",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 1.9 Linux features permissions",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q032",
+   "objective": "1.11",
+   "type": "recall",
+   "source": "OBJ1202",
+   "locator": "Objective 1.11 cloud-based productivity tools",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q033",
+   "objective": "1.11",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 1.11 install and configure cloud-based productivity tools",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q034",
+   "objective": "1.10",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 1.10 install applications according to requirements",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q035",
+   "objective": "1.10",
+   "type": "recall",
+   "source": "OBJ1202",
+   "locator": "Objective 1.10 install applications according to requirements",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q036",
+   "objective": "1.6",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 1.6 Windows settings, account types",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q037",
+   "objective": "1.2",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 1.2 installations and upgrades, migration",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q038",
+   "objective": "1.2",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 1.2 OS upgrades, requirements",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q039",
+   "objective": "1.4",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 1.4 Windows tools System Configuration",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q040",
+   "objective": "1.4",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 1.4 Windows features search and indexing",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q041",
+   "objective": "1.5",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 1.5 command-line tools, elevation",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q042",
+   "objective": "1.5",
+   "type": "recall",
+   "source": "OBJ1202",
+   "locator": "Objective 1.5 command-line tools robocopy",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q043",
+   "objective": "1.5",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 1.5 command-line tools netstat",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q044",
+   "objective": "1.9",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 1.9 Linux client/desktop features",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q045",
+   "objective": "1.1",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 1.1 OS types and purposes, licensing",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q046",
+   "objective": "1.4",
+   "type": "recall",
+   "source": "OBJ1202",
+   "locator": "Objective 1.4 Windows tools Disk Cleanup",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q047",
+   "objective": "1.6",
+   "type": "recall",
+   "source": "OBJ1202",
+   "locator": "Objective 1.6 configure Windows settings default apps",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q048",
+   "objective": "1.7",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 1.7 Windows networking features profiles",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q049",
+   "objective": "1.8",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 1.8 macOS features, cross-platform needs",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q050",
+   "objective": "1.8",
+   "type": "recall",
+   "source": "OBJ1202",
+   "locator": "Objective 1.8 macOS tools Force Quit",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q051",
+   "objective": "2.1",
+   "type": "recall",
+   "source": "OBJ1202",
+   "locator": "Objective 2.1 security measures, authentication factors",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q052",
+   "objective": "2.1",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 2.1 security measures, permissions",
+   "demoCandidate": true,
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q053",
+   "objective": "2.1",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 2.1 security measures, encryption",
+   "demoCandidate": true,
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q054",
+   "objective": "2.1",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 2.1 security measures, MFA rationale",
+   "demoCandidate": true,
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q055",
+   "objective": "2.1",
+   "type": "recall",
+   "source": "OBJ1202",
+   "locator": "Objective 2.1 security measures, firewall",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q056",
+   "objective": "2.1",
+   "type": "recall",
+   "source": "OBJ1202",
+   "locator": "Objective 2.1 security measures, data destruction",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q057",
+   "objective": "2.1",
+   "type": "recall",
+   "source": "OBJ1202",
+   "locator": "Objective 2.1 security measures, anti-malware detection",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q058",
+   "objective": "2.2",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 2.2 Windows OS security settings",
+   "demoCandidate": true,
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q059",
+   "objective": "2.2",
+   "type": "recall",
+   "source": "OBJ1202",
+   "locator": "Objective 2.2 configure Windows OS security settings",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q060",
+   "objective": "2.2",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 2.2 Windows security settings, lock/timeout",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q061",
+   "objective": "1.8",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 1.8 macOS features and tools, accounts",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q062",
+   "objective": "2.2",
+   "type": "recall",
+   "source": "OBJ1202",
+   "locator": "Objective 2.2 Windows security settings, biometrics",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q063",
+   "objective": "2.3",
+   "type": "recall",
+   "source": "OBJ1202",
+   "locator": "Objective 2.3 wireless security protocols",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q064",
+   "objective": "2.3",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 2.3 wireless security protocols and authentication methods",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q065",
+   "objective": "2.4",
+   "type": "recall",
+   "source": "OBJ1202",
+   "locator": "Objective 2.4 types of malware",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q066",
+   "objective": "2.4",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 2.4 malware types, detection",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q067",
+   "objective": "2.4",
+   "type": "recall",
+   "source": "OBJ1202",
+   "locator": "Objective 2.4 types of malware rootkit",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q068",
+   "objective": "2.4",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 2.4 malware types, prevention",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q069",
+   "objective": "2.5",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 2.5 social engineering attacks",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q070",
+   "objective": "2.5",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 2.5 social engineering vishing",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q071",
+   "objective": "2.5",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 2.5 social engineering, physical",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q072",
+   "objective": "2.5",
+   "type": "recall",
+   "source": "OBJ1202",
+   "locator": "Objective 2.5 social engineering smishing",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q073",
+   "objective": "2.5",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 2.5 threats and vulnerabilities, removable media",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q074",
+   "objective": "2.5",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 2.5 social engineering, attachments",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q075",
+   "objective": "2.6",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 2.6 SOHO malware removal",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q076",
+   "objective": "2.6",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 2.6 malware removal procedures",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q077",
+   "objective": "2.6",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 2.6 malware removal, remediation",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q078",
+   "objective": "2.6",
+   "type": "recall",
+   "source": "OBJ1202",
+   "locator": "Objective 2.6 detection, removal, and prevention methods",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q079",
+   "objective": "2.7",
+   "type": "recall",
+   "source": "OBJ1202",
+   "locator": "Objective 2.7 workstation security options and hardening",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q080",
+   "objective": "2.7",
+   "type": "recall",
+   "source": "OBJ1202",
+   "locator": "Objective 2.7 hardening techniques",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q081",
+   "objective": "2.7",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 2.7 workstation security options",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q082",
+   "objective": "2.8",
+   "type": "recall",
+   "source": "OBJ1202",
+   "locator": "Objective 2.8 securing mobile devices",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q083",
+   "objective": "2.8",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 2.8 securing mobile devices, disposal",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q084",
+   "objective": "2.9",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 2.9 data destruction and disposal methods",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q085",
+   "objective": "2.9",
+   "type": "recall",
+   "source": "OBJ1202",
+   "locator": "Objective 2.9 data destruction methods, sanitization",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q086",
+   "objective": "2.10",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 2.10 SOHO wired network security settings",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q087",
+   "objective": "2.10",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 2.10 SOHO wireless security settings, segmentation",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q088",
+   "objective": "2.10",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 2.10 SOHO network security, firmware",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q089",
+   "objective": "2.11",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 2.11 browser security settings",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q090",
+   "objective": "2.11",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 2.11 browser security, certificates",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q091",
+   "objective": "2.11",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 2.11 browser security settings, password handling",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q092",
+   "objective": "2.11",
+   "type": "recall",
+   "source": "OBJ1202",
+   "locator": "Objective 2.11 browser security settings, private mode",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q093",
+   "objective": "2.11",
+   "type": "recall",
+   "source": "OBJ1202",
+   "locator": "Objective 2.11 browser security settings, cookies and permissions",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q094",
+   "objective": "3.1",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 3.1 troubleshoot Windows OS issues, boot",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q095",
+   "objective": "3.1",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 3.1 Windows OS issues, Safe Mode, System Restore",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q096",
+   "objective": "3.1",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 3.1 Windows OS issues, updates",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q097",
+   "objective": "3.1",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 3.1 Windows OS issues, application failures",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q098",
+   "objective": "3.1",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 3.1 Windows issues, malware symptoms",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q099",
+   "objective": "3.1",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 3.1 troubleshoot Windows OS issues, update failures",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q100",
+   "objective": "3.1",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 3.1 Windows OS issues, browser/app faults",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q101",
+   "objective": "3.2",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 3.2 mobile OS and application issues",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q102",
+   "objective": "3.2",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 3.2 mobile application issues, battery drain",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q103",
+   "objective": "3.2",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 3.2 mobile OS issues, storage",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q104",
+   "objective": "3.2",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 3.2 mobile OS and application issues, touchscreen",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q105",
+   "objective": "3.3",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 3.3 mobile OS and application security issues",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q106",
+   "objective": "3.3",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 3.3 mobile application security issues",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q107",
+   "objective": "3.3",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 3.3 mobile OS security issues, updates",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q108",
+   "objective": "3.3",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 3.3 mobile application security issues",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q109",
+   "objective": "3.4",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 3.4 troubleshoot PC security issues, browser hijack",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q110",
+   "objective": "3.4",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 3.4 PC security issues, account compromise",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q111",
+   "objective": "3.4",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 3.4 PC security issues, ransom scams",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q112",
+   "objective": "3.4",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 3.4 PC security issues, cryptomining symptoms",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q113",
+   "objective": "3.4",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 3.4 troubleshoot PC security issues, investigation",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q114",
+   "objective": "3.4",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 3.4 PC security issues, prevention",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q115",
+   "objective": "3.1",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 3.1 Windows OS issues, policies",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q116",
+   "objective": "3.1",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 3.1 Windows OS issues, slow boot",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q117",
+   "objective": "3.1",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 3.1 Windows OS issues, application faults",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q118",
+   "objective": "3.2",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 3.2 mobile application issues, performance",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q119",
+   "objective": "3.2",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 3.2 mobile application issues, sync",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q120",
+   "objective": "3.1",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 3.1 Windows OS issues, time/settings",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q121",
+   "objective": "2.1",
+   "type": "recall",
+   "source": "OBJ1202",
+   "locator": "Objective 2.1 security measures, password practices",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q122",
+   "objective": "2.10",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 2.10 SOHO wireless security settings, guest network",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q123",
+   "objective": "2.11",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 2.11 browser security settings, extensions",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q124",
+   "objective": "2.2",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 2.2 Windows security settings, account management",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q125",
+   "objective": "2.11",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 2.11 browser security, phishing indicators",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q126",
+   "objective": "2.4",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 2.4 malware prevention, backup protection",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q127",
+   "objective": "2.7",
+   "type": "recall",
+   "source": "OBJ1202",
+   "locator": "Objective 2.7 hardening, default credentials",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q128",
+   "objective": "2.8",
+   "type": "recall",
+   "source": "OBJ1202",
+   "locator": "Objective 2.8 securing mobile devices, controls",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q129",
+   "objective": "2.2",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 2.2 Windows security, encryption outcomes",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q130",
+   "objective": "3.1",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 3.1 Windows OS issues, network configuration",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q131",
+   "objective": "3.1",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 3.1 Windows OS issues, printing",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q132",
+   "objective": "3.1",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 3.1 Windows OS issues, display settings",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q133",
+   "objective": "3.4",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 3.4 PC security issues, software conflicts",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q134",
+   "objective": "3.2",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 3.2 mobile OS issues, reboots",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q135",
+   "objective": "3.1",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 3.1 Windows OS issues, drivers",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q136",
+   "objective": "3.4",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 3.4 PC security issues, remote access awareness",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q137",
+   "objective": "3.1",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 3.1 Windows OS issues, hardware detection",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q138",
+   "objective": "3.1",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 3.1 Windows OS issues, boot errors",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q139",
+   "objective": "3.2",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 3.2 mobile OS issues, sensors",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q140",
+   "objective": "3.1",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 3.1 Windows OS issues, storage symptoms",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q141",
+   "objective": "3.1",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 3.1 Windows OS issues, performance",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q142",
+   "objective": "3.1",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 3.1 Windows OS issues, compatibility",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q143",
+   "objective": "3.2",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 3.2 mobile OS issues, Bluetooth",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q144",
+   "objective": "3.2",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 3.2 mobile OS issues, battery",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q145",
+   "objective": "4.1",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 4.1 documentation and support systems",
+   "demoCandidate": true,
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q146",
+   "objective": "4.2",
+   "type": "recall",
+   "source": "OBJ1202",
+   "locator": "Objective 4.2 change management procedures",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q147",
+   "objective": "4.2",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 4.2 apply change management",
+   "demoCandidate": true,
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q148",
+   "objective": "4.3",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 4.3 workstation backup and recovery methods",
+   "demoCandidate": true,
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q149",
+   "objective": "4.3",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 4.3 backup and recovery methods",
+   "demoCandidate": true,
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q150",
+   "objective": "4.3",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 4.3 backup and recovery, testing",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q151",
+   "objective": "4.4",
+   "type": "recall",
+   "source": "OBJ1202",
+   "locator": "Objective 4.4 common safety procedures, electrical",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q152",
+   "objective": "4.4",
+   "type": "recall",
+   "source": "OBJ1202",
+   "locator": "Objective 4.4 safety procedures, ESD",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q153",
+   "objective": "4.4",
+   "type": "recall",
+   "source": "OBJ1202",
+   "locator": "Objective 4.4 safety procedures, lifting",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q154",
+   "objective": "4.4",
+   "type": "recall",
+   "source": "OBJ1202",
+   "locator": "Objective 4.4 safety procedures, toner handling",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q155",
+   "objective": "4.5",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 4.5 environmental impacts and controls",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q156",
+   "objective": "4.5",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 4.5 environmental impacts, dust controls",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q157",
+   "objective": "4.5",
+   "type": "recall",
+   "source": "OBJ1202",
+   "locator": "Objective 4.5 environmental impacts, disposal",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q158",
+   "objective": "4.6",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 4.6 prohibited content/activity, licensing",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q159",
+   "objective": "4.6",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 4.6 privacy concepts",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q160",
+   "objective": "4.6",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 4.6 privacy and policy concepts",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q161",
+   "objective": "4.7",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 4.7 communication techniques and professionalism",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q162",
+   "objective": "4.7",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 4.7 communication techniques",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q163",
+   "objective": "4.7",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 4.7 professionalism, expectation setting",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q164",
+   "objective": "4.7",
+   "type": "recall",
+   "source": "OBJ1202",
+   "locator": "Objective 4.7 communication techniques and professionalism",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q165",
+   "objective": "4.8",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 4.8 basics of scripting, automation",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q166",
+   "objective": "4.8",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 4.8 basics of scripting, safe practice",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q167",
+   "objective": "4.8",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 4.8 basics of scripting, variables",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q168",
+   "objective": "4.9",
+   "type": "recall",
+   "source": "OBJ1202",
+   "locator": "Objective 4.9 remote access technologies",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q169",
+   "objective": "4.9",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 4.9 remote access technologies, security",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q170",
+   "objective": "4.10",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 4.10 basic AI concepts, data handling",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q171",
+   "objective": "4.10",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 4.10 AI concepts, limitations",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q172",
+   "objective": "4.10",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 4.10 AI concepts, workplace use",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q173",
+   "objective": "4.10",
+   "type": "recall",
+   "source": "OBJ1202",
+   "locator": "Objective 4.10 AI concepts, appropriate use",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q174",
+   "objective": "4.1",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 4.1 documentation, knowledge management",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q175",
+   "objective": "4.1",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 4.1 support systems, verification procedures",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q176",
+   "objective": "4.5",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 4.5 environmental controls, power protection",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q177",
+   "objective": "4.1",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 4.1 documentation and support systems information management",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q178",
+   "objective": "4.1",
+   "type": "recall",
+   "source": "OBJ1202",
+   "locator": "Objective 4.1 documentation best practices",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q179",
+   "objective": "4.2",
+   "type": "recall",
+   "source": "OBJ1202",
+   "locator": "Objective 4.2 change management documentation",
+   "verified": "2026-10-10"
+  },
+  {
+   "id": "COMPTIA-A-1202-Q180",
+   "objective": "4.7",
+   "type": "diagnosis",
+   "source": "OBJ1202",
+   "locator": "Objective 4.7 communication techniques and professionalism",
+   "verified": "2026-10-10"
+  }
+ ]
+}

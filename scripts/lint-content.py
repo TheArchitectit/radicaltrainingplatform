@@ -6,6 +6,14 @@ Checks (legacy root banks):
 1. Question count matches answer count per file
 2. All answers use the full canonical grammar the parser accepts
 3. No empty or malformed answer lines
+4. New content under content/exams/ uses only canonical answer separators
+   (SPEC-09 R-07 forbids the "A and B" form in new content; commit-time here
+   so the rule is enforced, not just documented).
+
+Scope (SPEC-01 D4, SPEC-10): repo-root *.md (legacy Nutanix banks, untouched)
+PLUS content/exams/**/*.md (new tracks). The new-content grammar rule applies
+only under content/, so the legacy root bank NCP-AI-Part4.md keeps its
+historical "and" items until S45-03 repairs them; new packs cannot.
 
 Checks (content/exams/<examId>/questions/*.md — manifest-aware, SPEC-10 10.6):
 4. Canonical answer separators (same rule as legacy)
@@ -50,6 +58,16 @@ CANONICAL_ANSWER = re.compile(r"^\*\*(?:Correct )?Answer:\s*[A-F](?:,\s*[A-F])*\
 EMPTY_ANSWER = re.compile(r"^\*\*Answer:\s*\*\*", re.MULTILINE)
 TITLE_HEADER = re.compile(r"^#\s+\S", re.MULTILINE)
 DOMAIN_HEADER = re.compile(r"^##\s+(?:DOMAIN|Domain)\s*\d+", re.MULTILINE)
+# SPEC-09 R-07: the "B and D" / "B or D" prose form must not appear in new
+# content. Canonical multi-select is "**Correct Answer: B, D**".
+NONCANONICAL_ANSWER = re.compile(
+    r"^\*\*(?:Correct )?Answer:\s*[A-F]\s+(?:and|or)\s+[A-F]",
+    re.MULTILINE,
+)
+
+# New-track content root (SPEC-01 D4). The extended rules below apply only
+# here; root-level legacy banks stay under the original checks.
+CONTENT_EXAMS = REPO_ROOT / "content" / "exams"
 
 # C-02 required provenance keys (optional ones are sourceUrl, sourceLocator,
 # retrievalDate — marked '?' in the spec record shape).
