@@ -170,6 +170,11 @@ gate "bash tests/gates/run_security_baseline_fixtures.sh" bash tests/gates/run_s
 gate "python3 scripts/check-item-hygiene.py"             python3 scripts/check-item-hygiene.py
 gate "python3 scripts/check-item-hygiene.py --self-test" python3 scripts/check-item-hygiene.py --self-test
 gate "bash tests/gates/run_item_hygiene_fixtures.sh"    bash tests/gates/run_item_hygiene_fixtures.sh
+# Added for the content roadmap (gap analysis §5.4): a ratchet over per-objective
+# item and lesson counts. The tree does not yet meet every floor, so the gate
+# fails on regressions and prints the remaining gap.
+gate "python3 scripts/check-content-targets.py"          python3 scripts/check-content-targets.py
+gate "python3 scripts/check-content-targets.py --self-test" python3 scripts/check-content-targets.py --self-test
 
 # ── .NET ──
 gate "dotnet build Core (Release)" \

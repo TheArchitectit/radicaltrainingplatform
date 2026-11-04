@@ -243,6 +243,10 @@ jobs:
           python3 scripts/check-item-hygiene.py
           python3 scripts/check-item-hygiene.py --self-test
           bash tests/gates/run_item_hygiene_fixtures.sh
+      - name: Content targets ratchet (gap analysis §5.4)
+        run: |
+          python3 scripts/check-content-targets.py
+          python3 scripts/check-content-targets.py --self-test
 
       # No setup-dotnet here: the runner image (localhost/devgate-runner-rtp,
       # infra Containerfile convention) bakes the .NET 10 SDK — setup-dotnet
