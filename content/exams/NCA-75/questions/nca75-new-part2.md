@@ -1,11 +1,11 @@
 # Nutanix Certified Associate (NCA) 7.5 Practice Questions - New Bank Part 2
-# Original study items. Independent material, not official or endorsed by Nutanix.
+*This is independent study material. It is not official training and is not endorsed or approved by CompTIA, Nutanix, or any other certification body.*
 
 ## DOMAIN 3: Cluster Configuration and Maintenance (study allocation)
 
 ---
 
-### Q61
+### Q105
 A new cluster's alerts never reach the operations inbox even though test alerts fire. Which cluster setting should be verified first?
 - A) The VM template list
 - B) The rack elevation diagram
@@ -14,11 +14,11 @@ A new cluster's alerts never reach the operations inbox even though test alerts 
 
 **Answer: C**
 Alert email depends on a correct SMTP relay configuration (server, port, sender, authentication). Verifying it, and the test message, is the standard cluster commissioning step.
-<!-- {"id":"NUTANIX-NCA-75-Q161","objective":"3.1","type":"diagnosis","source":"NCAEBG","locator":"Objective 3.1 SMTP configuration","verified":"2026-10-10"} -->
+<!-- {"id":"NUTANIX-NCA-75-Q105","objective":"3.1","type":"diagnosis","source":"NCAEBG","locator":"Objective 3.1 SMTP configuration","verified":"2026-10-10"} -->
 
 ---
 
-### Q62
+### Q106
 During commissioning, name resolution for cluster services fails intermittently. Which configuration is suspect?
 - A) The DNS (name server) entries for the cluster
 - B) The deduplication setting
@@ -27,11 +27,11 @@ During commissioning, name resolution for cluster services fails intermittently.
 
 **Answer: A**
 Cluster services, Prism, and support functions depend on reliable DNS. Wrong or unreachable name servers cause exactly these intermittent resolution failures; commissioning checklists verify DNS alongside NTP.
-<!-- {"id":"NUTANIX-NCA-75-Q162","objective":"3.1","type":"diagnosis","source":"NCAEBG","locator":"Objective 3.1 DNS configuration","verified":"2026-10-10"} -->
+<!-- {"id":"NUTANIX-NCA-75-Q106","objective":"3.1","type":"diagnosis","source":"NCAEBG","locator":"Objective 3.1 DNS configuration","verified":"2026-10-10"} -->
 
 ---
 
-### Q63
+### Q107
 Log timestamps disagree between nodes, confusing a support investigation. Which cluster configuration causes this when wrong?
 - A) Category values
 - B) NTP settings
@@ -40,11 +40,11 @@ Log timestamps disagree between nodes, confusing a support investigation. Which 
 
 **Answer: B**
 Time synchronization via NTP keeps node and cluster logs aligned; drift or missing NTP configuration makes cross-node correlation painful. Commissioning verifies NTP with DNS and SMTP.
-<!-- {"id":"NUTANIX-NCA-75-Q163","objective":"3.1","type":"diagnosis","source":"NCAEBG","locator":"Objective 3.1 NTP configuration","verified":"2026-10-10"} -->
+<!-- {"id":"NUTANIX-NCA-75-Q107","objective":"3.1","type":"diagnosis","source":"NCAEBG","locator":"Objective 3.1 NTP configuration","verified":"2026-10-10"} -->
 
 ---
 
-### Q64
+### Q108
 A monitoring platform should receive hardware and cluster health traps from the Nutanix cluster. What must be configured on the cluster side?
 - A) More VM snapshots
 - B) SNMP settings pointing at the monitoring destination
@@ -53,11 +53,11 @@ A monitoring platform should receive hardware and cluster health traps from the 
 
 **Answer: B**
 SNMP configuration lets the cluster emit traps and answer polls for health and hardware status, integrating it with enterprise monitoring like any other infrastructure device.
-<!-- {"id":"NUTANIX-NCA-75-Q164","objective":"3.1","type":"recall","source":"NCAEBG","locator":"Objective 3.1 SNMP configuration","verified":"2026-10-10"} -->
+<!-- {"id":"NUTANIX-NCA-75-Q108","objective":"3.1","type":"recall","source":"NCAEBG","locator":"Objective 3.1 SNMP configuration","verified":"2026-10-10"} -->
 
 ---
 
-### Q65
+### Q109
 A four-node RF2 cluster loses one node. What is the expected behavior?
 - A) Cluster keeps running and serving data, then rebuilds redundancy on surviving nodes if capacity allows
 - B) Total cluster outage
@@ -66,11 +66,11 @@ A four-node RF2 cluster loses one node. What is the expected behavior?
 
 **Answer: A**
 RF2 tolerates one failure domain: VMs keep running (HA restarts any that were on the failed node), and the fabric re-protects data using free capacity. This is the baseline fault tolerance of the design.
-<!-- {"id":"NUTANIX-NCA-75-Q165","objective":"3.1","type":"diagnosis","source":"NCAEBG","locator":"Objective 3.1 fault tolerance levels","verified":"2026-10-10"} -->
+<!-- {"id":"NUTANIX-NCA-75-Q109","objective":"3.1","type":"diagnosis","source":"NCAEBG","locator":"Objective 3.1 fault tolerance levels","verified":"2026-10-10"} -->
 
 ---
 
-### Q66
+### Q110
 A compliance-driven design must survive two simultaneous node failures. Which configuration achieves this?
 - A) Disabling HA
 - B) Replication factor 3 (with sufficient nodes and capacity)
@@ -79,11 +79,11 @@ A compliance-driven design must survive two simultaneous node failures. Which co
 
 **Answer: B**
 RF3 maintains three data copies across nodes, tolerating two concurrent failures. It demands more nodes and capacity than RF2, which is the tradeoff the design must budget for.
-<!-- {"id":"NUTANIX-NCA-75-Q166","objective":"3.1","type":"recall","source":"NCAEBG","locator":"Objective 3.1 fault tolerance, RF3","verified":"2026-10-10"} -->
+<!-- {"id":"NUTANIX-NCA-75-Q110","objective":"3.1","type":"recall","source":"NCAEBG","locator":"Objective 3.1 fault tolerance, RF3","verified":"2026-10-10"} -->
 
 ---
 
-### Q67
+### Q111
 An admin registers a new cluster with Prism Central. What does registration change operationally?
 - A) All VMs are deleted
 - B) Licensing becomes unnecessary
@@ -92,11 +92,11 @@ An admin registers a new cluster with Prism Central. What does registration chan
 
 **Answer: C**
 Prism Central aggregates registered clusters into one management plane for monitoring, policy, and operations. Registration is the enrollment step; it changes nothing about data protection settings.
-<!-- {"id":"NUTANIX-NCA-75-Q167","objective":"3.1","type":"recall","source":"NCAEBG","locator":"Objective 3.1 Prism Central settings","verified":"2026-10-10"} -->
+<!-- {"id":"NUTANIX-NCA-75-Q111","objective":"3.1","type":"recall","source":"NCAEBG","locator":"Objective 3.1 Prism Central settings","verified":"2026-10-10"} -->
 
 ---
 
-### Q68
+### Q112
 A security review of the cluster asks about options for controlling administrative access and encrypting data. Which areas should the review cover? (Choose two.)
 - A) Role-based access and authentication configuration for management
 - B) Data-at-rest encryption options for the storage layer
@@ -106,11 +106,11 @@ A security review of the cluster asks about options for controlling administrati
 
 **Correct Answer: A, B**
 Cluster security options include management-plane access controls (RBAC, directory integration) and data-plane protections like encryption at rest. Cosmetic and alerting settings do not bear on the review.
-<!-- {"id":"NUTANIX-NCA-75-Q168","objective":"3.1","type":"recall","source":"NCAEBG","locator":"Objective 3.1 security options","verified":"2026-10-10"} -->
+<!-- {"id":"NUTANIX-NCA-75-Q112","objective":"3.1","type":"recall","source":"NCAEBG","locator":"Objective 3.1 security options","verified":"2026-10-10"} -->
 
 ---
 
-### Q69
+### Q113
 An admin must verify Prism Central's version and health before planning upgrades. Where is this validated?
 - A) On a VM's desktop
 - B) In the Witness VM's browser
@@ -119,11 +119,11 @@ An admin must verify Prism Central's version and health before planning upgrades
 
 **Answer: D**
 Prism Central exposes its own version, services, and health in its console, and compatibility with registered clusters matters when sequencing upgrades. It is a commissioning and pre-upgrade check.
-<!-- {"id":"NUTANIX-NCA-75-Q169","objective":"3.1","type":"recall","source":"NCAEBG","locator":"Objective 3.1 validate Prism Central","verified":"2026-10-10"} -->
+<!-- {"id":"NUTANIX-NCA-75-Q113","objective":"3.1","type":"recall","source":"NCAEBG","locator":"Objective 3.1 validate Prism Central","verified":"2026-10-10"} -->
 
 ---
 
-### Q70
+### Q114
 A cluster's fault-tolerance dashboard shows "rebuild in progress" after a node failure, and the admin wants to know when full redundancy returns. What determines this?
 - A) The number of categories
 - B) The SMTP port
@@ -132,11 +132,11 @@ A cluster's fault-tolerance dashboard shows "rebuild in progress" after a node f
 
 **Answer: C**
 Redundancy restores when the re-protection rebuild finishes writing replacement replicas. Its duration depends on how much data must be copied and the spare capacity and bandwidth available.
-<!-- {"id":"NUTANIX-NCA-75-Q170","objective":"3.1","type":"diagnosis","source":"NCAEBG","locator":"Objective 3.1 rebuild/fault tolerance","verified":"2026-10-10"} -->
+<!-- {"id":"NUTANIX-NCA-75-Q114","objective":"3.1","type":"diagnosis","source":"NCAEBG","locator":"Objective 3.1 rebuild/fault tolerance","verified":"2026-10-10"} -->
 
 ---
 
-### Q71
+### Q115
 A node needs its drives replaced and firmware updated without impacting running VMs. What is the first step?
 - A) Delete the node from the cluster first
 - B) Shut down every VM manually
@@ -145,11 +145,11 @@ A node needs its drives replaced and firmware updated without impacting running 
 
 **Answer: C**
 Maintenance mode evacuates workloads and takes the node out of service gracefully, making hardware work safe. Power-pulling without it risks data availability and VM disruption.
-<!-- {"id":"NUTANIX-NCA-75-Q171","objective":"3.2","type":"recall","source":"NCAEBG","locator":"Objective 3.2 maintenance mode","verified":"2026-10-10"} -->
+<!-- {"id":"NUTANIX-NCA-75-Q115","objective":"3.2","type":"recall","source":"NCAEBG","locator":"Objective 3.2 maintenance mode","verified":"2026-10-10"} -->
 
 ---
 
-### Q72
+### Q116
 While a node is in maintenance mode, what happens to its guest VMs?
 - A) They move to the Witness
 - B) They are migrated or restarted on other nodes per HA, staying available
@@ -158,11 +158,11 @@ While a node is in maintenance mode, what happens to its guest VMs?
 
 **Answer: B**
 The platform relocates workloads from a maintenance-mode node so service continues. The node can then be serviced and returned to rotation, after which it rejoins normal operation.
-<!-- {"id":"NUTANIX-NCA-75-Q172","objective":"3.2","type":"recall","source":"NCAEBG","locator":"Objective 3.2 maintenance mode guest status","verified":"2026-10-10"} -->
+<!-- {"id":"NUTANIX-NCA-75-Q116","objective":"3.2","type":"recall","source":"NCAEBG","locator":"Objective 3.2 maintenance mode guest status","verified":"2026-10-10"} -->
 
 ---
 
-### Q73
+### Q117
 A cluster needs more storage capacity but has plenty of compute headroom. Which expansion node type fits?
 - A) A Witness VM
 - B) A laptop
@@ -171,11 +171,11 @@ A cluster needs more storage capacity but has plenty of compute headroom. Which 
 
 **Answer: C**
 Storage-only nodes add capacity (and storage performance) without adding compute licensing or CPU, matching storage-bound growth. Compute-only nodes solve the opposite imbalance.
-<!-- {"id":"NUTANIX-NCA-75-Q173","objective":"3.2","type":"recall","source":"NCAEBG","locator":"Objective 3.2 node expansion types","verified":"2026-10-10"} -->
+<!-- {"id":"NUTANIX-NCA-75-Q117","objective":"3.2","type":"recall","source":"NCAEBG","locator":"Objective 3.2 node expansion types","verified":"2026-10-10"} -->
 
 ---
 
-### Q74
+### Q118
 A virtual-desktop rollout needs more CPU and memory in the cluster but storage is fine. Which expansion choice applies?
 - A) A compute-only node
 - B) A storage-only node
@@ -184,11 +184,11 @@ A virtual-desktop rollout needs more CPU and memory in the cluster but storage i
 
 **Answer: A**
 Compute-only nodes grow processing capacity for workloads like VDI without adding storage the cluster does not need. Expansion can target whichever resource is constrained.
-<!-- {"id":"NUTANIX-NCA-75-Q174","objective":"3.2","type":"recall","source":"NCAEBG","locator":"Objective 3.2 compute-only nodes","verified":"2026-10-10"} -->
+<!-- {"id":"NUTANIX-NCA-75-Q118","objective":"3.2","type":"recall","source":"NCAEBG","locator":"Objective 3.2 compute-only nodes","verified":"2026-10-10"} -->
 
 ---
 
-### Q75
+### Q119
 An admin wants to check failed drive status and locate the physical disk in the chassis. Which Prism view helps?
 - A) The VM console
 - B) The licensing page
@@ -197,11 +197,11 @@ An admin wants to check failed drive status and locate the physical disk in the 
 
 **Answer: D**
 The hardware view visualizes node and disk layout with health status, guiding physical replacement to the right slot. Data-drive failure and replacement procedures build on it.
-<!-- {"id":"NUTANIX-NCA-75-Q175","objective":"3.2","type":"recall","source":"NCAEBG","locator":"Objective 3.2 hardware diagram view","verified":"2026-10-10"} -->
+<!-- {"id":"NUTANIX-NCA-75-Q119","objective":"3.2","type":"recall","source":"NCAEBG","locator":"Objective 3.2 hardware diagram view","verified":"2026-10-10"} -->
 
 ---
 
-### Q76
+### Q120
 A data-center technician must service a node's power supply without logging into the cluster from a laptop in the hot aisle. Which capability provides lights-out access?
 - A) Out-of-band management (BMC/IPMI-class interface) on the node
 - B) The guest VM console
@@ -210,11 +210,11 @@ A data-center technician must service a node's power supply without logging into
 
 **Answer: A**
 OOB management interfaces give remote console, power control, and hardware health independent of the cluster software, essential for physical and low-level work. Configuring its credentials securely is part of commissioning.
-<!-- {"id":"NUTANIX-NCA-75-Q176","objective":"3.2","type":"recall","source":"NCAEBG","locator":"Objective 3.2 OOB management","verified":"2026-10-10"} -->
+<!-- {"id":"NUTANIX-NCA-75-Q120","objective":"3.2","type":"recall","source":"NCAEBG","locator":"Objective 3.2 OOB management","verified":"2026-10-10"} -->
 
 ---
 
-### Q77
+### Q121
 A failed data drive must be replaced on a running cluster. What is the safe sequence?
 - A) Use the documented disk removal procedure (verify data is protected elsewhere, remove the disk logically, then physically replace)
 - B) Yank the drive during business hours with no checks
@@ -223,11 +223,11 @@ A failed data drive must be replaced on a running cluster. What is the safe sequ
 
 **Answer: A**
 Disk replacement follows procedure: confirm redundancy tolerates the removal, detach the disk through the management interface, replace physically, and let the cluster absorb the new drive. Shortcuts risk data loss.
-<!-- {"id":"NUTANIX-NCA-75-Q177","objective":"3.2","type":"diagnosis","source":"NCAEBG","locator":"Objective 3.2 disk replacement","verified":"2026-10-10"} -->
+<!-- {"id":"NUTANIX-NCA-75-Q121","objective":"3.2","type":"diagnosis","source":"NCAEBG","locator":"Objective 3.2 disk replacement","verified":"2026-10-10"} -->
 
 ---
 
-### Q78
+### Q122
 Before expanding a cluster from four to six nodes, what must be verified?
 - A) Nothing; racking is enough
 - B) That all VMs are off
@@ -236,11 +236,11 @@ Before expanding a cluster from four to six nodes, what must be verified?
 
 **Answer: C**
 Cluster expansion has documented prerequisites: hardware/software compatibility, network configuration, Foundation imaging of new nodes, and license capacity. Checking them first avoids failed expansions mid-window.
-<!-- {"id":"NUTANIX-NCA-75-Q178","objective":"3.2","type":"diagnosis","source":"NCAEBG","locator":"Objective 3.2 expansion prerequisites","verified":"2026-10-10"} -->
+<!-- {"id":"NUTANIX-NCA-75-Q122","objective":"3.2","type":"diagnosis","source":"NCAEBG","locator":"Objective 3.2 expansion prerequisites","verified":"2026-10-10"} -->
 
 ---
 
-### Q79
+### Q123
 A decommissioned node must be re-imaged to a newer AOS before joining a different cluster. Which tool performs bare-metal imaging?
 - A) Pulse
 - B) NGT
@@ -249,11 +249,11 @@ A decommissioned node must be re-imaged to a newer AOS before joining a differen
 
 **Answer: D**
 Foundation images bare-metal nodes with the target AOS/hypervisor versions, preparing them for cluster creation or expansion. The other tools serve telemetry, guest integration, and testing roles.
-<!-- {"id":"NUTANIX-NCA-75-Q179","objective":"3.2","type":"recall","source":"NCAEBG","locator":"Objective 3.2 bare-metal imaging","verified":"2026-10-10"} -->
+<!-- {"id":"NUTANIX-NCA-75-Q123","objective":"3.2","type":"recall","source":"NCAEBG","locator":"Objective 3.2 bare-metal imaging","verified":"2026-10-10"} -->
 
 ---
 
-### Q80
+### Q124
 Facilities wants per-node power consumption visible for capacity planning. What supports this?
 - A) The snapshot schedule
 - B) Power monitoring via the nodes' management interfaces/OOB telemetry
@@ -262,11 +262,11 @@ Facilities wants per-node power consumption visible for capacity planning. What 
 
 **Answer: B**
 Node power telemetry comes from the hardware management layer (OOB/BMC), which can feed monitoring for power and cooling planning. It is hardware telemetry, not a cluster software setting.
-<!-- {"id":"NUTANIX-NCA-75-Q180","objective":"3.2","type":"recall","source":"NCAEBG","locator":"Objective 3.2 power monitoring","verified":"2026-10-10"} -->
+<!-- {"id":"NUTANIX-NCA-75-Q124","objective":"3.2","type":"recall","source":"NCAEBG","locator":"Objective 3.2 power monitoring","verified":"2026-10-10"} -->
 
 ---
 
-### Q81
+### Q125
 An admin must bring the cluster's firmware and software up to date. What is the first LCM step?
 - A) Click update blindly on everything
 - B) Reboot all nodes at once
@@ -275,11 +275,11 @@ An admin must bring the cluster's firmware and software up to date. What is the 
 
 **Answer: D**
 LCM starts with inventory: it detects installed component versions and applicable updates, then plans the rolling sequence. Skipping inventory means guessing at versions and compatibility.
-<!-- {"id":"NUTANIX-NCA-75-Q181","objective":"3.3","type":"recall","source":"NCAEBG","locator":"Objective 3.3 LCM inventory","verified":"2026-10-10"} -->
+<!-- {"id":"NUTANIX-NCA-75-Q125","objective":"3.3","type":"recall","source":"NCAEBG","locator":"Objective 3.3 LCM inventory","verified":"2026-10-10"} -->
 
 ---
 
-### Q82
+### Q126
 LCM pre-checks fail before an upgrade, citing insufficient cluster resources. Why do pre-checks exist?
 - A) They sell licenses
 - B) They test the internet speed
@@ -288,11 +288,11 @@ LCM pre-checks fail before an upgrade, citing insufficient cluster resources. Wh
 
 **Answer: C**
 Pre-checks are the safety gate: they catch conditions (unhealthy cluster, low space, unsupported paths) that would turn an upgrade into an outage. Passing them is a prerequisite, not a formality.
-<!-- {"id":"NUTANIX-NCA-75-Q182","objective":"3.3","type":"diagnosis","source":"NCAEBG","locator":"Objective 3.3 LCM pre-checks","verified":"2026-10-10"} -->
+<!-- {"id":"NUTANIX-NCA-75-Q126","objective":"3.3","type":"diagnosis","source":"NCAEBG","locator":"Objective 3.3 LCM pre-checks","verified":"2026-10-10"} -->
 
 ---
 
-### Q83
+### Q127
 A disconnected military site must update cluster software. Which method applies?
 - A) Never update
 - B) Update via consumer USB recovery
@@ -301,11 +301,11 @@ A disconnected military site must update cluster software. Which method applies?
 
 **Answer: C**
 Dark-site updates transfer bundles to the isolated environment and follow the recommended offline upgrade order. It keeps air-gapped systems patch-current without breaking isolation.
-<!-- {"id":"NUTANIX-NCA-75-Q183","objective":"3.3","type":"recall","source":"NCAEBG","locator":"Objective 3.3 dark site updates","verified":"2026-10-10"} -->
+<!-- {"id":"NUTANIX-NCA-75-Q127","objective":"3.3","type":"recall","source":"NCAEBG","locator":"Objective 3.3 dark site updates","verified":"2026-10-10"} -->
 
 ---
 
-### Q84
+### Q128
 An upgrade plan lists AOS, hypervisor, firmware, and Prism Central. What determines a safe sequence?
 - A) The software compatibility matrix and documented upgrade order
 - B) Alphabetical order
@@ -314,11 +314,11 @@ An upgrade plan lists AOS, hypervisor, firmware, and Prism Central. What determi
 
 **Answer: A**
 Component versions must remain mutually supported, so the compatibility matrix and recommended order (Prism Central before clusters, and so on) define the safe path. Deviating risks unsupported mixed states.
-<!-- {"id":"NUTANIX-NCA-75-Q184","objective":"3.3","type":"recall","source":"NCAEBG","locator":"Objective 3.3 compatibility matrix","verified":"2026-10-10"} -->
+<!-- {"id":"NUTANIX-NCA-75-Q128","objective":"3.3","type":"recall","source":"NCAEBG","locator":"Objective 3.3 compatibility matrix","verified":"2026-10-10"} -->
 
 ---
 
-### Q85
+### Q129
 VMs keep running during a rolling AOS upgrade. How?
 - A) Upgrades only happen in emergencies
 - B) Nodes upgrade one at a time while workloads migrate between them
@@ -327,11 +327,11 @@ VMs keep running during a rolling AOS upgrade. How?
 
 **Answer: B**
 Rolling upgrades service one node at a time, live-migrating workloads off and back, so the cluster stays available throughout. This is the design point of the one-click upgrade experience.
-<!-- {"id":"NUTANIX-NCA-75-Q185","objective":"3.3","type":"recall","source":"NCAEBG","locator":"Objective 3.3 rolling upgrades","verified":"2026-10-10"} -->
+<!-- {"id":"NUTANIX-NCA-75-Q129","objective":"3.3","type":"recall","source":"NCAEBG","locator":"Objective 3.3 rolling upgrades","verified":"2026-10-10"} -->
 
 ---
 
-### Q86
+### Q130
 Guest tools are outdated on 300 VMs. What is the efficient maintenance path?
 - A) Bulk NGT upgrade across the VMs from the management interface
 - B) Logging into 300 consoles manually
@@ -340,11 +340,11 @@ Guest tools are outdated on 300 VMs. What is the efficient maintenance path?
 
 **Answer: A**
 NGT supports bulk upgrade operations across many VMs, turning an afternoon of manual work into a managed task. Current NGT keeps guest-aware features (snapshots, SSR, IP reporting) working correctly.
-<!-- {"id":"NUTANIX-NCA-75-Q186","objective":"3.3","type":"recall","source":"NCAEBG","locator":"Objective 3.3 NGT bulk upgrade","verified":"2026-10-10"} -->
+<!-- {"id":"NUTANIX-NCA-75-Q130","objective":"3.3","type":"recall","source":"NCAEBG","locator":"Objective 3.3 NGT bulk upgrade","verified":"2026-10-10"} -->
 
 ---
 
-### Q87
+### Q131
 A newly imaged node fails to join the cluster, citing a version mismatch. What should the admin check?
 - A) The node's hostname font
 - B) The rack's serial number
@@ -353,11 +353,11 @@ A newly imaged node fails to join the cluster, citing a version mismatch. What s
 
 **Answer: D**
 Joining nodes must run compatible software versions; mismatches block expansion by design. Foundation re-images the node to the matching version, after which the join proceeds.
-<!-- {"id":"NUTANIX-NCA-75-Q187","objective":"3.3","type":"diagnosis","source":"NCAEBG","locator":"Objective 3.3 version compatibility","verified":"2026-10-10"} -->
+<!-- {"id":"NUTANIX-NCA-75-Q131","objective":"3.3","type":"diagnosis","source":"NCAEBG","locator":"Objective 3.3 version compatibility","verified":"2026-10-10"} -->
 
 ---
 
-### Q88
+### Q132
 Prism Central must be upgraded before the clusters it manages. Why?
 - A) It is alphabetical
 - B) It uses less power
@@ -366,11 +366,11 @@ Prism Central must be upgraded before the clusters it manages. Why?
 
 **Answer: D**
 The management layer is upgraded first so it can manage both old and new cluster versions during the rollout. Reversing the order can leave Prism Central unable to manage upgraded clusters.
-<!-- {"id":"NUTANIX-NCA-75-Q188","objective":"3.3","type":"recall","source":"NCAEBG","locator":"Objective 3.3 upgrade order","verified":"2026-10-10"} -->
+<!-- {"id":"NUTANIX-NCA-75-Q132","objective":"3.3","type":"recall","source":"NCAEBG","locator":"Objective 3.3 upgrade order","verified":"2026-10-10"} -->
 
 ---
 
-### Q89
+### Q133
 Routine software maintenance windows keep getting skipped because updates look risky. What practice makes them routine?
 - A) Disabling all updates permanently
 - B) One-click/LCM-driven updates with pre-checks, scheduled regularly and validated by the platform
@@ -379,11 +379,11 @@ Routine software maintenance windows keep getting skipped because updates look r
 
 **Answer: B**
 The platform's automated, pre-checked, rolling update path exists to make maintenance low-risk and habitual. Deferring updates accumulates security and stability debt until it forces a crisis.
-<!-- {"id":"NUTANIX-NCA-75-Q189","objective":"3.3","type":"diagnosis","source":"NCAEBG","locator":"Objective 3.3 maintenance practices","verified":"2026-10-10"} -->
+<!-- {"id":"NUTANIX-NCA-75-Q133","objective":"3.3","type":"diagnosis","source":"NCAEBG","locator":"Objective 3.3 maintenance practices","verified":"2026-10-10"} -->
 
 ---
 
-### Q90
+### Q134
 An AHV upgrade shows as available in LCM alongside AOS. What should the admin confirm first?
 - A) The supported combination/order of AOS and hypervisor versions for that cluster
 - B) The number of VMs with odd names
@@ -392,7 +392,7 @@ An AHV upgrade shows as available in LCM alongside AOS. What should the admin co
 
 **Answer: A**
 Hypervisor and AOS versions are validated as pairs; LCM and the compatibility matrix show the supported combinations and sequence. Confirming before starting keeps every intermediate state supported.
-<!-- {"id":"NUTANIX-NCA-75-Q190","objective":"3.3","type":"recall","source":"NCAEBG","locator":"Objective 3.3 AHV upgrade specs","verified":"2026-10-10"} -->
+<!-- {"id":"NUTANIX-NCA-75-Q134","objective":"3.3","type":"recall","source":"NCAEBG","locator":"Objective 3.3 AHV upgrade specs","verified":"2026-10-10"} -->
 
 ---
 
@@ -400,7 +400,7 @@ Hypervisor and AOS versions are validated as pairs; LCM and the compatibility ma
 
 ---
 
-### Q91
+### Q135
 Support asks for logs from a cluster after an incident. What is the standard collection route?
 - A) Copying /var/log from random VMs
 - B) Asking users what they saw
@@ -409,11 +409,11 @@ Support asks for logs from a cluster after an incident. What is the standard col
 
 **Answer: C**
 The platform provides structured log collection that bundles the right component logs for support analysis, via the console or Logbay tooling. Ad-hoc grabs miss the components that matter.
-<!-- {"id":"NUTANIX-NCA-75-Q191","objective":"4.1","type":"recall","source":"NCAEBG","locator":"Objective 4.1 log collection","verified":"2026-10-10"} -->
+<!-- {"id":"NUTANIX-NCA-75-Q135","objective":"4.1","type":"recall","source":"NCAEBG","locator":"Objective 4.1 log collection","verified":"2026-10-10"} -->
 
 ---
 
-### Q92
+### Q136
 An admin runs NCC against the cluster weekly. What is NCC?
 - A) Nutanix Cluster Check: a battery of health checks validating configuration and state against best practices
 - B) A benchmarking game
@@ -422,11 +422,11 @@ An admin runs NCC against the cluster weekly. What is NCC?
 
 **Answer: A**
 NCC runs automated checks across cluster components and reports pass/fail with guidance, catching misconfigurations and emerging issues before they become outages. Frequency is configurable.
-<!-- {"id":"NUTANIX-NCA-75-Q192","objective":"4.1","type":"recall","source":"NCAEBG","locator":"Objective 4.1 NCC","verified":"2026-10-10"} -->
+<!-- {"id":"NUTANIX-NCA-75-Q136","objective":"4.1","type":"recall","source":"NCAEBG","locator":"Objective 4.1 NCC","verified":"2026-10-10"} -->
 
 ---
 
-### Q93
+### Q137
 An NCC run flags a failed check for time drift on one node. What is the appropriate response?
 - A) Delete the check
 - B) Ignore single-node failures always
@@ -435,11 +435,11 @@ An NCC run flags a failed check for time drift on one node. What is the appropri
 
 **Answer: D**
 NCC failures are actionable findings: fix the underlying condition (here, NTP drift), then verify with a re-run. Suppressing checks without remediation defeats the purpose of health monitoring.
-<!-- {"id":"NUTANIX-NCA-75-Q193","objective":"4.1","type":"diagnosis","source":"NCAEBG","locator":"Objective 4.1 NCC remediation","verified":"2026-10-10"} -->
+<!-- {"id":"NUTANIX-NCA-75-Q137","objective":"4.1","type":"diagnosis","source":"NCAEBG","locator":"Objective 4.1 NCC remediation","verified":"2026-10-10"} -->
 
 ---
 
-### Q94
+### Q138
 Where does an admin determine overall cluster status at a glance, including whether redundancy is currently degraded?
 - A) The Prism dashboard/cluster health view
 - B) The VM template list
@@ -448,11 +448,11 @@ Where does an admin determine overall cluster status at a glance, including whet
 
 **Answer: A**
 The Prism dashboard aggregates cluster health, capacity, and resilience state, showing immediately if the cluster is running degraded (for example, during a rebuild). It is the first stop of any health review.
-<!-- {"id":"NUTANIX-NCA-75-Q194","objective":"4.1","type":"recall","source":"NCAEBG","locator":"Objective 4.1 cluster status","verified":"2026-10-10"} -->
+<!-- {"id":"NUTANIX-NCA-75-Q138","objective":"4.1","type":"recall","source":"NCAEBG","locator":"Objective 4.1 cluster status","verified":"2026-10-10"} -->
 
 ---
 
-### Q95
+### Q139
 An analyst builds a chart tracking one VM's CPU over time, then another chart aggregating IOPS across all VMs on a container. What distinguishes these two chart types?
 - A) They are identical
 - B) One is only for licenses
@@ -461,11 +461,11 @@ An analyst builds a chart tracking one VM's CPU over time, then another chart ag
 
 **Answer: D**
 Entity charts focus on one object (a VM, host, disk); metric charts work across metrics and entities for comparisons and aggregates. Choosing the right one is part of the health-check workflow on the exam.
-<!-- {"id":"NUTANIX-NCA-75-Q195","objective":"4.1","type":"recall","source":"NCAEBG","locator":"Objective 4.1 metric vs entity charts","verified":"2026-10-10"} -->
+<!-- {"id":"NUTANIX-NCA-75-Q139","objective":"4.1","type":"recall","source":"NCAEBG","locator":"Objective 4.1 metric vs entity charts","verified":"2026-10-10"} -->
 
 ---
 
-### Q96
+### Q140
 A weekly health routine reviews cluster status, NCC results, capacity trends, and open alerts. What is the value of doing this on a schedule?
 - A) It replaces backups
 - B) It speeds up CPUs
@@ -474,11 +474,11 @@ A weekly health routine reviews cluster status, NCC results, capacity trends, an
 
 **Answer: C**
 Routine health checks turn monitoring from reactive to preventive: trends (capacity, rebuilds, recurring alerts) get addressed before users notice. The platform's tooling is built to make the routine quick.
-<!-- {"id":"NUTANIX-NCA-75-Q196","objective":"4.1","type":"diagnosis","source":"NCAEBG","locator":"Objective 4.1 health check routine","verified":"2026-10-10"} -->
+<!-- {"id":"NUTANIX-NCA-75-Q140","objective":"4.1","type":"diagnosis","source":"NCAEBG","locator":"Objective 4.1 health check routine","verified":"2026-10-10"} -->
 
 ---
 
-### Q97
+### Q141
 The health dashboard shows degraded resilience while a rebuild runs after a disk replacement. What does the admin conclude?
 - A) All data is lost
 - B) The cluster must be shut down
@@ -487,11 +487,11 @@ The health dashboard shows degraded resilience while a rebuild runs after a disk
 
 **Answer: D**
 Degraded states are informational: service continues with less redundancy while the system re-protects data. The correct response is monitoring rebuild progress and capacity, not panic.
-<!-- {"id":"NUTANIX-NCA-75-Q197","objective":"4.1","type":"diagnosis","source":"NCAEBG","locator":"Objective 4.1 degraded states","verified":"2026-10-10"} -->
+<!-- {"id":"NUTANIX-NCA-75-Q141","objective":"4.1","type":"diagnosis","source":"NCAEBG","locator":"Objective 4.1 degraded states","verified":"2026-10-10"} -->
 
 ---
 
-### Q98
+### Q142
 An operations team wants health-check data forwarded to its central syslog for long-term retention. Is this supported?
 - A) Only through social media
 - B) Yes; logs can be sent to a remote syslog server
@@ -500,11 +500,11 @@ An operations team wants health-check data forwarded to its central syslog for l
 
 **Answer: B**
 Remote syslog integration ships cluster logs to centralized collectors, aligning the platform with enterprise log retention and correlation practices.
-<!-- {"id":"NUTANIX-NCA-75-Q198","objective":"4.2","type":"recall","source":"NCAEBG","locator":"Objective 4.2 remote syslog","verified":"2026-10-10"} -->
+<!-- {"id":"NUTANIX-NCA-75-Q142","objective":"4.2","type":"recall","source":"NCAEBG","locator":"Objective 4.2 remote syslog","verified":"2026-10-10"} -->
 
 ---
 
-### Q99
+### Q143
 Pulse is enabled on a cluster. What does Pulse do?
 - A) Replaces all monitoring
 - B) Blocks SNMP
@@ -513,11 +513,11 @@ Pulse is enabled on a cluster. What does Pulse do?
 
 **Answer: C**
 Pulse streams diagnostic telemetry to Nutanix so support can detect issues and engage proactively, often before the customer notices. It complements, rather than replaces, local monitoring.
-<!-- {"id":"NUTANIX-NCA-75-Q199","objective":"4.2","type":"recall","source":"NCAEBG","locator":"Objective 4.2 Pulse","verified":"2026-10-10"} -->
+<!-- {"id":"NUTANIX-NCA-75-Q143","objective":"4.2","type":"recall","source":"NCAEBG","locator":"Objective 4.2 Pulse","verified":"2026-10-10"} -->
 
 ---
 
-### Q100
+### Q144
 An admin wants an alert only when a specific VM's memory ballooning exceeds a threshold for ten minutes, not for every alert type. What should be created?
 - A) A new cluster
 - B) A DNS entry
@@ -526,11 +526,11 @@ An admin wants an alert only when a specific VM's memory ballooning exceeds a th
 
 **Answer: C**
 Custom alert policies target specific entities, metrics, thresholds, and durations, cutting noise by paging only for conditions the team actually acts on. Default policies cover the common cases.
-<!-- {"id":"NUTANIX-NCA-75-Q200","objective":"4.2","type":"recall","source":"NCAEBG","locator":"Objective 4.2 custom alert policies","verified":"2026-10-10"} -->
+<!-- {"id":"NUTANIX-NCA-75-Q144","objective":"4.2","type":"recall","source":"NCAEBG","locator":"Objective 4.2 custom alert policies","verified":"2026-10-10"} -->
 
 ---
 
-### Q101
+### Q145
 The alert console mixes critical, warning, and informational entries. How should on-call response differ?
 - A) Severity drives triage: critical alerts page immediately, warnings queue for business hours, informational feeds reports
 - B) Everything pages everyone always
@@ -539,11 +539,11 @@ The alert console mixes critical, warning, and informational entries. How should
 
 **Answer: A**
 Alert severity exists to route attention: impact and urgency determine response. Treating all alerts equally produces fatigue and missed criticals, the failure mode severity tiers prevent.
-<!-- {"id":"NUTANIX-NCA-75-Q201","objective":"4.2","type":"diagnosis","source":"NCAEBG","locator":"Objective 4.2 alert severity","verified":"2026-10-10"} -->
+<!-- {"id":"NUTANIX-NCA-75-Q145","objective":"4.2","type":"diagnosis","source":"NCAEBG","locator":"Objective 4.2 alert severity","verified":"2026-10-10"} -->
 
 ---
 
-### Q102
+### Q146
 An alert reports high CPU ready time on a production VM. What does this metric indicate, and what is a first resolution step?
 - A) The network cable is loose; reseat it
 - B) The VM needs a new name
@@ -552,11 +552,11 @@ An alert reports high CPU ready time on a production VM. What does this metric i
 
 **Answer: C**
 CPU ready measures how long a VM that wants to run waits for physical CPU: a contention signal. Resolutions include rightsizing the VM, reducing host oversubscription, or migrating workloads.
-<!-- {"id":"NUTANIX-NCA-75-Q202","objective":"4.2","type":"diagnosis","source":"NCAEBG","locator":"Objective 4.2 CPU ready","verified":"2026-10-10"} -->
+<!-- {"id":"NUTANIX-NCA-75-Q146","objective":"4.2","type":"diagnosis","source":"NCAEBG","locator":"Objective 4.2 CPU ready","verified":"2026-10-10"} -->
 
 ---
 
-### Q103
+### Q147
 A disk-failure alert fires and automatically attaches recent logs to the support case. Which capability is this?
 - A) Manual screenshots
 - B) Pulse being disabled
@@ -565,11 +565,11 @@ A disk-failure alert fires and automatically attaches recent logs to the support
 
 **Answer: D**
 The platform can gather relevant logs automatically when specific alerts fire, so a support case starts with diagnostics attached. It shortens time-to-resolution by removing the data-collection round trip.
-<!-- {"id":"NUTANIX-NCA-75-Q203","objective":"4.2","type":"recall","source":"NCAEBG","locator":"Objective 4.2 alert-triggered log collection","verified":"2026-10-10"} -->
+<!-- {"id":"NUTANIX-NCA-75-Q147","objective":"4.2","type":"recall","source":"NCAEBG","locator":"Objective 4.2 alert-triggered log collection","verified":"2026-10-10"} -->
 
 ---
 
-### Q104
+### Q148
 An alert storm follows every monthly patch window, burying real issues. What is the right operational fix?
 - A) Maintenance-aware alert handling (schedules/suppression windows) plus policy tuning, not disabling alerting
 - B) Turning off all alerts permanently
@@ -578,11 +578,11 @@ An alert storm follows every monthly patch window, burying real issues. What is 
 
 **Answer: A**
 Expected-change windows should silence expected noise through scheduling or suppression while keeping protection for the unexpected. Permanent deafness to alerts trades calm for blindness.
-<!-- {"id":"NUTANIX-NCA-75-Q204","objective":"4.2","type":"diagnosis","source":"NCAEBG","locator":"Objective 4.2 alert noise management","verified":"2026-10-10"} -->
+<!-- {"id":"NUTANIX-NCA-75-Q148","objective":"4.2","type":"diagnosis","source":"NCAEBG","locator":"Objective 4.2 alert noise management","verified":"2026-10-10"} -->
 
 ---
 
-### Q105
+### Q149
 Given an alert "storage container 85% full," what does a good resolution plan look like?
 - A) Assess growth rate and reclaim/expand capacity or enable efficiency features, then set a threshold alert below critical
 - B) Delete random VMs
@@ -591,11 +591,11 @@ Given an alert "storage container 85% full," what does a good resolution plan lo
 
 **Answer: A**
 Impact assessment (what fills, how fast) drives the fix: cleanup, efficiency features, expansion, or workload moves, plus earlier-warning thresholds. Capacity alerts are planning signals, not just emergencies.
-<!-- {"id":"NUTANIX-NCA-75-Q205","objective":"4.2","type":"diagnosis","source":"NCAEBG","locator":"Objective 4.2 alert impact and resolution","verified":"2026-10-10"} -->
+<!-- {"id":"NUTANIX-NCA-75-Q149","objective":"4.2","type":"diagnosis","source":"NCAEBG","locator":"Objective 4.2 alert impact and resolution","verified":"2026-10-10"} -->
 
 ---
 
-### Q106
+### Q150
 A manager wants a monthly health summary for leadership without building it manually each time. What feature helps?
 - A) Verbal updates
 - B) The printer's log
@@ -604,11 +604,11 @@ A manager wants a monthly health summary for leadership without building it manu
 
 **Answer: C**
 Scheduled custom reports assemble chosen metrics and health data automatically, turning repetitive status packaging into a set-once deliverable.
-<!-- {"id":"NUTANIX-NCA-75-Q206","objective":"4.2","type":"recall","source":"NCAEBG","locator":"Objective 4.2 custom reports","verified":"2026-10-10"} -->
+<!-- {"id":"NUTANIX-NCA-75-Q150","objective":"4.2","type":"recall","source":"NCAEBG","locator":"Objective 4.2 custom reports","verified":"2026-10-10"} -->
 
 ---
 
-### Q107
+### Q151
 An admin opens a support case for a recurring cluster alert. What information makes the case productive from the first touch?
 - A) Only "it is broken"
 - B) A photo of the rack
@@ -617,11 +617,11 @@ An admin opens a support case for a recurring cluster alert. What information ma
 
 **Answer: D**
 Support cases move fastest with complete context: what happened, when, which entities, and the diagnostic bundle. Priority definitions and response times then apply to a well-formed case.
-<!-- {"id":"NUTANIX-NCA-75-Q207","objective":"4.3","type":"recall","source":"NCAEBG","locator":"Objective 4.3 support case documentation","verified":"2026-10-10"} -->
+<!-- {"id":"NUTANIX-NCA-75-Q151","objective":"4.3","type":"recall","source":"NCAEBG","locator":"Objective 4.3 support case documentation","verified":"2026-10-10"} -->
 
 ---
 
-### Q108
+### Q152
 How are support case priorities generally determined?
 - A) By impact and urgency (production down versus minor question), mapping to defined response times
 - B) By who yells loudest
@@ -630,11 +630,11 @@ How are support case priorities generally determined?
 
 **Answer: A**
 Support priority definitions tie severity (system down, degraded, minor, question) to response targets. Setting the right priority, with evidence, gets the right response clock started.
-<!-- {"id":"NUTANIX-NCA-75-Q208","objective":"4.3","type":"recall","source":"NCAEBG","locator":"Objective 4.3 support priorities","verified":"2026-10-10"} -->
+<!-- {"id":"NUTANIX-NCA-75-Q152","objective":"4.3","type":"recall","source":"NCAEBG","locator":"Objective 4.3 support priorities","verified":"2026-10-10"} -->
 
 ---
 
-### Q109
+### Q153
 A cluster with Pulse enabled shows a proactive notification that a disk is predicted to fail, before any failure occurs. Which capability produced this?
 - A) A manual inspection
 - B) Insights/predictive health analyzing telemetry for failure patterns
@@ -643,11 +643,11 @@ A cluster with Pulse enabled shows a proactive notification that a disk is predi
 
 **Answer: B**
 Insights applies analytics to fleet telemetry, surfacing predictive failures and recommended actions ahead of impact: the automation layer on top of Pulse's data pipeline.
-<!-- {"id":"NUTANIX-NCA-75-Q209","objective":"4.3","type":"recall","source":"NCAEBG","locator":"Objective 4.3 Insights predictive health","verified":"2026-10-10"} -->
+<!-- {"id":"NUTANIX-NCA-75-Q153","objective":"4.3","type":"recall","source":"NCAEBG","locator":"Objective 4.3 Insights predictive health","verified":"2026-10-10"} -->
 
 ---
 
-### Q110
+### Q154
 A predictive alert recommends a firmware update to avoid a known issue. What is the sensible handling?
 - A) Disable Pulse
 - B) Review the recommendation, then schedule the update through normal change/LCM processes
@@ -656,11 +656,11 @@ A predictive alert recommends a firmware update to avoid a known issue. What is 
 
 **Answer: B**
 Predictive recommendations feed the same change discipline as any maintenance: review, schedule, pre-check, execute. Their value is foresight, not exemption from process.
-<!-- {"id":"NUTANIX-NCA-75-Q210","objective":"4.3","type":"diagnosis","source":"NCAEBG","locator":"Objective 4.3 acting on Insights","verified":"2026-10-10"} -->
+<!-- {"id":"NUTANIX-NCA-75-Q154","objective":"4.3","type":"diagnosis","source":"NCAEBG","locator":"Objective 4.3 acting on Insights","verified":"2026-10-10"} -->
 
 ---
 
-### Q111
+### Q155
 An admin cannot open a support case because Pulse and portal access were never set up after install. What does this illustrate?
 - A) Portals configure themselves retroactively
 - B) Support functions (portal accounts, Pulse, contact details) belong in commissioning, before they are needed
@@ -669,11 +669,11 @@ An admin cannot open a support case because Pulse and portal access were never s
 
 **Answer: B**
 The time to wire support access is deployment day: portal accounts, Pulse enablement, and alert routing verified while everything is healthy. Incident time is the wrong moment to discover the gap.
-<!-- {"id":"NUTANIX-NCA-75-Q211","objective":"4.3","type":"diagnosis","source":"NCAEBG","locator":"Objective 4.3 support readiness","verified":"2026-10-10"} -->
+<!-- {"id":"NUTANIX-NCA-75-Q155","objective":"4.3","type":"diagnosis","source":"NCAEBG","locator":"Objective 4.3 support readiness","verified":"2026-10-10"} -->
 
 ---
 
-### Q112
+### Q156
 A VM owner reports sluggish performance. Which two metrics first distinguish CPU contention from storage latency? (Choose two.)
 - A) CPU ready time
 - B) Storage I/O latency for the VM's disks
@@ -683,11 +683,11 @@ A VM owner reports sluggish performance. Which two metrics first distinguish CPU
 
 **Correct Answer: A, B**
 CPU ready exposes compute contention; disk latency exposes storage-path delay. Together they split the two most common performance causes before any changes are made.
-<!-- {"id":"NUTANIX-NCA-75-Q212","objective":"4.4","type":"diagnosis","source":"NCAEBG","locator":"Objective 4.4 CPU ready vs I/O latency","verified":"2026-10-10"} -->
+<!-- {"id":"NUTANIX-NCA-75-Q156","objective":"4.4","type":"diagnosis","source":"NCAEBG","locator":"Objective 4.4 CPU ready vs I/O latency","verified":"2026-10-10"} -->
 
 ---
 
-### Q113
+### Q157
 A host's VMs all feel slow, and every VM shows elevated CPU ready. What does the pattern indicate?
 - A) A DNS outage
 - B) Host-level CPU oversubscription/contention; reduce load, add capacity, or rebalance VMs
@@ -696,11 +696,11 @@ A host's VMs all feel slow, and every VM shows elevated CPU ready. What does the
 
 **Answer: B**
 When all VMs on a host wait for CPU, the host is oversubscribed. Remedies are load reduction, rebalancing across the cluster, or more compute, rather than per-VM tweaks.
-<!-- {"id":"NUTANIX-NCA-75-Q213","objective":"4.4","type":"diagnosis","source":"NCAEBG","locator":"Objective 4.4 CPU contention","verified":"2026-10-10"} -->
+<!-- {"id":"NUTANIX-NCA-75-Q157","objective":"4.4","type":"diagnosis","source":"NCAEBG","locator":"Objective 4.4 CPU contention","verified":"2026-10-10"} -->
 
 ---
 
-### Q114
+### Q158
 A database VM's charts show high memory utilization with swapping/ballooning. What is the constraint and the fix?
 - A) Too many snapshots: delete them all
 - B) A bad VLAN: recreate it
@@ -709,11 +709,11 @@ A database VM's charts show high memory utilization with swapping/ballooning. Wh
 
 **Answer: D**
 Memory constraints show as high utilization, ballooning, or swapping inside and around the guest. The fix is memory: allocate more to the VM or relieve host-level overcommit.
-<!-- {"id":"NUTANIX-NCA-75-Q214","objective":"4.4","type":"diagnosis","source":"NCAEBG","locator":"Objective 4.4 memory constraints","verified":"2026-10-10"} -->
+<!-- {"id":"NUTANIX-NCA-75-Q158","objective":"4.4","type":"diagnosis","source":"NCAEBG","locator":"Objective 4.4 memory constraints","verified":"2026-10-10"} -->
 
 ---
 
-### Q115
+### Q159
 An application team's latency complaints trace to storage: VM disk latency spikes during a nightly batch job on the same container. What are two valid mitigations? (Choose two.)
 - A) Move the batch workload or its data to a different container/time window
 - B) Review workload placement and I/O patterns to reduce contention on shared storage
@@ -723,11 +723,11 @@ An application team's latency complaints trace to storage: VM disk latency spike
 
 **Correct Answer: A, B**
 Shared-storage contention resolves by separating or rescheduling the competing workloads and by placement decisions informed by the observed I/O patterns. Cosmetics and blindness change nothing.
-<!-- {"id":"NUTANIX-NCA-75-Q215","objective":"4.4","type":"diagnosis","source":"NCAEBG","locator":"Objective 4.4 I/O latency contention","verified":"2026-10-10"} -->
+<!-- {"id":"NUTANIX-NCA-75-Q159","objective":"4.4","type":"diagnosis","source":"NCAEBG","locator":"Objective 4.4 I/O latency contention","verified":"2026-10-10"} -->
 
 ---
 
-### Q116
+### Q160
 A performance review shows one VM consuming most of a host's IOPS, starving neighbors. What is the first interpretation step?
 - A) Identify whether the VM's demand is legitimate (workload) or runaway (loop/misconfig), using its metric history
 - B) Delete the VM immediately
@@ -736,11 +736,11 @@ A performance review shows one VM consuming most of a host's IOPS, starving neig
 
 **Answer: A**
 "Noisy neighbor" analysis starts with intent: legitimate heavy workloads get placement/sizing answers; runaway processes get fixed. Metric history distinguishes the two before any disruptive action.
-<!-- {"id":"NUTANIX-NCA-75-Q216","objective":"4.4","type":"diagnosis","source":"NCAEBG","locator":"Objective 4.4 workload interpretation","verified":"2026-10-10"} -->
+<!-- {"id":"NUTANIX-NCA-75-Q160","objective":"4.4","type":"diagnosis","source":"NCAEBG","locator":"Objective 4.4 workload interpretation","verified":"2026-10-10"} -->
 
 ---
 
-### Q117
+### Q161
 An analyst compares last month's and this month's latency charts for the same VM and sees a slow upward drift. What is the value of this comparison?
 - A) None; only live data matters
 - B) It fixes the latency automatically
@@ -749,11 +749,11 @@ An analyst compares last month's and this month's latency charts for the same VM
 
 **Answer: D**
 Threshold alerts catch events; trends catch trajectories. Comparing periods reveals slow-burn capacity and performance problems while there is still time to plan the fix.
-<!-- {"id":"NUTANIX-NCA-75-Q217","objective":"4.4","type":"diagnosis","source":"NCAEBG","locator":"Objective 4.4 performance trending","verified":"2026-10-10"} -->
+<!-- {"id":"NUTANIX-NCA-75-Q161","objective":"4.4","type":"diagnosis","source":"NCAEBG","locator":"Objective 4.4 performance trending","verified":"2026-10-10"} -->
 
 ---
 
-### Q118
+### Q162
 A VM was recently moved and now shows higher disk latency than peers on its new host. What should be checked?
 - A) The VM's font settings
 - B) The cluster's SNMP community
@@ -762,11 +762,11 @@ A VM was recently moved and now shows higher disk latency than peers on its new 
 
 **Answer: D**
 After moves, data may temporarily sit remote from the compute, adding latency until locality re-establishes. Checking placement and letting locality settle explains transient post-move latency.
-<!-- {"id":"NUTANIX-NCA-75-Q218","objective":"4.4","type":"diagnosis","source":"NCAEBG","locator":"Objective 4.4 data locality","verified":"2026-10-10"} -->
+<!-- {"id":"NUTANIX-NCA-75-Q162","objective":"4.4","type":"diagnosis","source":"NCAEBG","locator":"Objective 4.4 data locality","verified":"2026-10-10"} -->
 
 ---
 
-### Q119
+### Q163
 A dashboard shows VM CPU usage high inside the guest but the host shows the VM's vCPUs mostly idle. What is a likely explanation?
 - A) The VM is on fire
 - B) The guest's view includes its own scheduler behavior; compare both views to find limits like vCPU count versus demand
@@ -775,11 +775,11 @@ A dashboard shows VM CPU usage high inside the guest but the host shows the VM's
 
 **Answer: B**
 Guest-internal and host-level CPU metrics answer different questions. Reconciling them is part of performance interpretation: an undersized vCPU allocation shows busy guest, quiet host.
-<!-- {"id":"NUTANIX-NCA-75-Q219","objective":"4.4","type":"diagnosis","source":"NCAEBG","locator":"Objective 4.4 metric interpretation","verified":"2026-10-10"} -->
+<!-- {"id":"NUTANIX-NCA-75-Q163","objective":"4.4","type":"diagnosis","source":"NCAEBG","locator":"Objective 4.4 metric interpretation","verified":"2026-10-10"} -->
 
 ---
 
-### Q120
+### Q164
 Before a big payroll run, ops reviews CPU ready, memory, and I/O latency baselines for the payroll VM and its host. Why?
 - A) It replaces the run itself
 - B) Knowing normal values lets them spot and prove abnormal behavior quickly during the critical window
@@ -788,6 +788,6 @@ Before a big payroll run, ops reviews CPU ready, memory, and I/O latency baselin
 
 **Answer: B**
 Baselines turn "is this slow?" into a measurable question during high-stakes windows. Any deviation then stands out against recorded normal behavior, shortening diagnosis when minutes matter.
-<!-- {"id":"NUTANIX-NCA-75-Q220","objective":"4.4","type":"diagnosis","source":"NCAEBG","locator":"Objective 4.4 performance baselines","verified":"2026-10-10"} -->
+<!-- {"id":"NUTANIX-NCA-75-Q164","objective":"4.4","type":"diagnosis","source":"NCAEBG","locator":"Objective 4.4 performance baselines","verified":"2026-10-10"} -->
 
 ---
