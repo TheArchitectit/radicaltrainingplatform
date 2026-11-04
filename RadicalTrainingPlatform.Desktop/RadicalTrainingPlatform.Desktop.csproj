@@ -39,7 +39,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="..\RadicalTrainingPlatform.Legacy.WinForms\LabSimulator\Web\**\*" LinkBase="LabSimulator\Web">
+    <!-- Point at the canonical Web tree (owner decision: "Desktop must match").
+         The Legacy.WinForms LabSimulator/Web copy is deleted; this is the one
+         source of truth for the bundled lab simulator assets. -->
+    <Content Include="..\RadicalTrainingPlatform.Web\**\*" LinkBase="LabSimulator\Web">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

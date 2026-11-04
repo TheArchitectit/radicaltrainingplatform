@@ -43,7 +43,9 @@ import tempfile
 REPO_ROOT = pathlib.Path(__file__).resolve().parent.parent
 
 BRIDGE = "RadicalTrainingPlatform.Legacy.WinForms/LabSimulator/LabSimulatorBridge.cs"
-JS_DIR = "RadicalTrainingPlatform.Legacy.WinForms/LabSimulator/Web/js"
+# The divergent Legacy LabSimulator/Web copy was deleted (owner: "Desktop must
+# match"); the JS surface is now the canonical Web tree.
+JS_DIR = "RadicalTrainingPlatform.Web/js"
 
 # Handlers removed in T-15/S46-05: each acknowledged without an effect. A
 # handler with no backing implementation is absent from the surface, and

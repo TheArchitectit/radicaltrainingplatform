@@ -21,8 +21,8 @@
     <ProjectReference Include="../RadicalTrainingPlatform.Core/RadicalTrainingPlatform.Core.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Content Include="LabSimulator\Web\**\*" CopyToOutputDirectory="PreserveNewest" />
-  </ItemGroup>
+  <!-- The divergent LabSimulator/Web copy was deleted (owner: "Desktop must
+       match"); the canonical tree is RadicalTrainingPlatform.Web, which the
+       Desktop project bundles directly. -->
 
 </Project>
