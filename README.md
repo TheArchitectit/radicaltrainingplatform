@@ -112,7 +112,7 @@ file system does not work — ES modules and the service worker need an `http://
 
 **Deploying it yourself?** The whole platform is a folder of files: no account, no
 backend, no database, no network at runtime. [docs/SELF-HOST.md](docs/SELF-HOST.md) is
-the deployment guide — classroom machines, a school file server, a USB stick with no
+the deployment guide — shared machines, a file server, a USB stick with no
 internet, and the one limitation worth knowing (progress belongs to a browser profile,
 not a person).
 
