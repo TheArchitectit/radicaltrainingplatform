@@ -36,6 +36,7 @@ Every row names its requirement IDs, the test type (unit / integration / E2E / g
 | TM-29a | Cross-track reuse record names both exam IDs; duplicate item IDs fail | gate | REQ-NP-03 |
 | TM-29b | Beta logistics: no waiver code / beta scheduling call-to-action in current pack; vendor scheduling link + review date present | gate | C-07, REQ-NCA-04 |
 | TM-29c | Cheatsheet beta framing (SPEC-18): no heading carries a beta qualifier, the expired waiver code is absent, and the dated closed-beta history is still present | gate + fixtures | SPEC-18 REQ-CS-01..03 |
+| TM-29d | No released bank concentrates more than 40% of its single-key answers on one letter; the answer-key rebalance changes no item's stem, options, correct-option text or explanation and renumbers nothing; a technical `system:` clause is not an injection flag | gate + fixtures | SPEC-21 REQ-PB-01..04, REQ-IN-01 — `check-answer-balance.py` + `--self-test` (clustered, at-threshold and flat banks), `tests/gates/redeye/self_test.py` (both injection seeds) |
 
 ## TM-30 series — study UI, persistence, branding
 

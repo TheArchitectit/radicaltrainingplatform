@@ -18,24 +18,24 @@ Urgency and a sign-in request are common in phishing, but they also appear in le
 
 ### Q2
 A caller says they are from IT and need the user's password to apply an urgent security patch. What should the user do?
-- A) Give the password now so the patch is not delayed
-- B) Give only the username, not the password
-- C) Decline and verify the request through a known IT channel
-- D) Change the password after the call and then share it
+- A) Change the password after the call and then share it
+- B) Give the password now so the patch is not delayed
+- C) Give only the username, not the password
+- D) Decline and verify the request through a known IT channel
 
-**Answer: C**
+**Answer: D**
 IT staff do not need a user's password to apply a patch — that request is a social-engineering attempt (vishing), not a support procedure. The correct next action is to hang up and verify through a channel the user already trusts (the published help desk number, the IT portal, the known manager). Giving the password (A) hands over the account; sharing only a username (B) still confirms the user is a live target and helps the attacker; changing the password afterwards (D) does not undo a password that was already shared.
 
 ---
 
 ### Q3
 A user receives an unexpected invoice attachment from a vendor they do recognize, but the message urges them to open it today to avoid a late fee, and the reply-to address differs from the usual vendor contact. Which response is safest?
-- A) Open the attachment quickly and verify the amount later
-- B) Forward the email to the vendor's known contact and ask whether they sent it
-- C) Reply to the message and ask whether it is legitimate
-- D) Delete the message without telling anyone
+- A) Delete the message without telling anyone
+- B) Open the attachment quickly and verify the amount later
+- C) Forward the email to the vendor's known contact and ask whether they sent it
+- D) Reply to the message and ask whether it is legitimate
 
-**Answer: B**
+**Answer: C**
 The mix of urgency, an unexpected attachment, and a mismatched reply-to is a classic phishing shape. The safe test is out-of-band verification: contact the vendor using a known-good address or phone number you already had, not the one in the suspicious message. Opening the attachment (A) risks malware; replying to the message (C) talks to whoever wrote it, which proves nothing; deleting silently (D) removes evidence and leaves the next target uninformed.
 
 ---
@@ -46,24 +46,24 @@ The mix of urgency, an unexpected attachment, and a mismatched reply-to is a cla
 
 ### Q4
 A technician is about to take over a ticket someone else started. Which ticket field is most important for picking up the work without re-diagnosing from zero?
-- A) The technician's employee ID
-- B) The time the ticket was created
-- C) The symptom as reported, plus the tests already performed
-- D) The priority level chosen by the help desk software
+- A) The symptom as reported, plus the tests already performed
+- B) The priority level chosen by the help desk software
+- C) The technician's employee ID
+- D) The time the ticket was created
 
-**Answer: C**
+**Answer: A**
 The handoff value of a ticket is the symptom and the trail of tests already run — what was ruled out is as important as what was found. That history is what lets the next technician start at the frontier instead of repeating work. Employee ID (A) is attribution, not diagnosis; creation time (B) helps with SLAs but not with the fix; the priority label (D) routes the work, it does not explain the fault.
 
 ---
 
 ### Q5
 A resolution note says only: "Fixed it." What is missing that the next technician most needs?
-- A) The user's phone number
-- B) The cause, the change made, and how the fix was verified
-- C) A screenshot of the desktop after the fix
-- D) The model number of the workstation
+- A) A screenshot of the desktop after the fix
+- B) The model number of the workstation
+- C) The user's phone number
+- D) The cause, the change made, and how the fix was verified
 
-**Answer: B**
+**Answer: D**
 A resolution note has to carry cause → change → verification. Without those, nobody can tell whether the right problem was solved, whether it will recur, or how to undo the change. Contact details (A) and hardware model (D) are useful metadata but they do not explain the fix; a desktop screenshot (C) rarely proves the user's own workflow works again, which is the verification that matters.
 
 ---
@@ -82,12 +82,12 @@ Option C names the symptom layer (DNS), the actual cause, the exact change, and 
 
 ### Q7
 Before changing the DHCP scope on a production server that three floors of users depend on, what should the technician do first?
-- A) Make the change quickly during business hours so users can report problems immediately
-- B) Document the planned change, the expected result, the verification step, and the rollback
-- C) Reboot the DHCP server to clear any stale leases
-- D) Change one setting at a time with no written record, to keep the work fast
+- A) Document the planned change, the expected result, the verification step, and the rollback
+- B) Reboot the DHCP server to clear any stale leases
+- C) Change one setting at a time with no written record, to keep the work fast
+- D) Make the change quickly during business hours so users can report problems immediately
 
-**Answer: B**
+**Answer: A**
 Change control at this scale is: write down what you will do before you do it. The note should cover the change, what you expect, how you will tell it worked, and how you will put it back if it does not. Changing live without a plan (A/D) turns a controlled edit into an outage with no rollback; rebooting first (C) is an invasive action that is not required to plan a scope change and may itself disrupt service.
 
 ---

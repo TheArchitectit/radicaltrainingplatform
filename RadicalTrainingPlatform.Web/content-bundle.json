@@ -6,7 +6,7 @@
   "disclaimer": "This is independent study material. It is not official training and is not endorsed or approved by CompTIA, Nutanix, or any other certification body.",
   "compiled": {
     "path": "RadicalTrainingPlatform.Web/js/study-content.js",
-    "sha256": "125aef2a237241c7a6d72eb07e836d5da4bdb9e4c4cfae923c2a9e42c1c17189"
+    "sha256": "3e00c86a8affbd589da2eeefb5bd6e9b71a25e1134a891ac3af62fbd760d6a37"
   },
   "exams": {
     "COMPTIA-A-1201": {
@@ -45,7 +45,7 @@
         {
           "bank": "core1-demo-cut.md",
           "path": "content/exams/COMPTIA-A-1201/questions/core1-demo-cut.md",
-          "sha256": "ce10cb98748a44d6273ea612c3dca568e349c5cbdd53c4c22b4a2aa889cdd9c9"
+          "sha256": "9df291e58160afcb06343b74db0d05a4c13661f64ba5e8533c15e3ade39fecaf"
         },
         {
           "bank": "core1-domain1-bank.md",
@@ -105,7 +105,7 @@
         {
           "bank": "core2-demo-cut.md",
           "path": "content/exams/COMPTIA-A-1202/questions/core2-demo-cut.md",
-          "sha256": "81b5ab4a420d7a189230c7cb6f85d74c4d04583b0a794b59bc74cf6fe49d55b5"
+          "sha256": "cc808f245fa9f1f8fa90d28cb9e643097bf40a8aa71fefaceaf72434064499e9"
         },
         {
           "bank": "core2-b1-domain1-bank.md",
@@ -165,7 +165,7 @@
         {
           "bank": "net009-n1-demo-cut.md",
           "path": "content/exams/COMPTIA-NET-009/questions/net009-n1-demo-cut.md",
-          "sha256": "c2555c5692cdcf75ddabef81505668ce6cfdb9e5d41243b3f677ae03660a7e5e"
+          "sha256": "c15a41549cc9c1557bdd3e9ec743aa344a080845233e7a0b9fc8555a6a384ee8"
         },
         {
           "bank": "net009-n2-demo-cut.md",
@@ -175,12 +175,12 @@
         {
           "bank": "net009-n3-demo-cut.md",
           "path": "content/exams/COMPTIA-NET-009/questions/net009-n3-demo-cut.md",
-          "sha256": "0af53ce2b589cafb1593595f842311def2bbc0ce5ad838ba96e7c5ed6532b213"
+          "sha256": "2b036cd7ef7c0d4fdefab4788462ca2d69fa23be1f5d4fc05f89f52b03ccfa07"
         },
         {
           "bank": "net009-n4-demo-cut.md",
           "path": "content/exams/COMPTIA-NET-009/questions/net009-n4-demo-cut.md",
-          "sha256": "4616b94c784caec7e9f5a2334cb5d3ff13ac3d6bcc6d4f3bd1a95300a4471c9e"
+          "sha256": "2ce32f0d7b47d2696f86a6380048afc7cb6fa23dd840e7f75b4942aee09eefe3"
         },
         {
           "bank": "net009-n5-demo-cut.md",

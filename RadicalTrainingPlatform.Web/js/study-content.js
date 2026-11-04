@@ -2353,7 +2353,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "2026-10-23",
-    "textHash": "8a9105ea17660beb",
+    "textHash": "70057e6158286333",
     "bank": "core1-demo-cut.md"
   },
   {
@@ -2362,20 +2362,20 @@ export const ITEMS = [
     "number": "Q2",
     "stem": "Which of the following is the primary purpose of DNS?",
     "options": {
-      "A": "Routing packets between different networks",
-      "B": "Encrypting web traffic between client and server",
-      "C": "Translating names like www.example.com into IP addresses",
-      "D": "Assigning IP addresses to devices automatically"
+      "A": "Assigning IP addresses to devices automatically",
+      "B": "Routing packets between different networks",
+      "C": "Encrypting web traffic between client and server",
+      "D": "Translating names like www.example.com into IP addresses"
     },
     "keys": [
-      "C"
+      "D"
     ],
     "explanation": "DNS is the network's name-resolution service: it turns names people can remember into the IP addresses networks actually route. Automatic address assignment is DHCP's job, routing between networks is the router/gateway's job, and web encryption is HTTPS (port 443), not DNS.",
     "objectiveId": "2.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "2026-10-23",
-    "textHash": "6295c6b813a3cb3e",
+    "textHash": "86ed7cc228eb7f74",
     "bank": "core1-demo-cut.md"
   },
   {
@@ -2384,20 +2384,20 @@ export const ITEMS = [
     "number": "Q3",
     "stem": "A user reports that no websites load by name on a workstation, but pinging the company file server's IP address works. Which two settings are most worth verifying first?",
     "options": {
-      "A": "The subnet mask and the IP address",
-      "B": "The Wi-Fi passphrase and the SSID",
-      "C": "The NIC driver version and the switch port speed",
-      "D": "The DNS server setting and the DNS service itself"
+      "A": "The DNS server setting and the DNS service itself",
+      "B": "The subnet mask and the IP address",
+      "C": "The Wi-Fi passphrase and the SSID",
+      "D": "The NIC driver version and the switch port speed"
     },
     "keys": [
-      "D"
+      "A"
     ],
     "explanation": "Local reachability by IP proves the host's IP, mask, and local network path are functioning. The failure is specific to name resolution, so the DNS server configured on the host (and whether the DNS service itself is reachable) is the first thing to verify. Checking mask/IP would re-test something already proven, and passphrase or driver issues would not leave IP connectivity intact.",
     "objectiveId": "2.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "2026-10-23",
-    "textHash": "776e1ed30fb25b4b",
+    "textHash": "822ba2e2da552039",
     "bank": "core1-demo-cut.md"
   },
   {
@@ -2406,20 +2406,20 @@ export const ITEMS = [
     "number": "Q4",
     "stem": "Which port number is used for standard HTTPS web traffic?",
     "options": {
-      "A": "443",
-      "B": "21",
-      "C": "53",
-      "D": "80"
+      "A": "53",
+      "B": "80",
+      "C": "443",
+      "D": "21"
     },
     "keys": [
-      "A"
+      "C"
     ],
     "explanation": "HTTPS \u2014 the encrypted web traffic behind the browser padlock \u2014 uses TCP port 443. Port 80 is unencrypted HTTP, port 53 is DNS, and port 21 is FTP control. Recognizing these three everyday ports (80, 443, 53) is the working set for A+ scope.",
     "objectiveId": "2.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "2026-10-23",
-    "textHash": "a9757fe4267310cd",
+    "textHash": "bd17d382f80bfa6d",
     "bank": "core1-demo-cut.md"
   },
   {
@@ -2428,20 +2428,20 @@ export const ITEMS = [
     "number": "Q5",
     "stem": "Which of the following correctly describes what a DHCP lease provides to a joining device?",
     "options": {
-      "A": "An IP address, subnet mask, default gateway, and DNS server address",
-      "B": "Only an IP address; the rest must be configured manually",
-      "C": "A permanent, never-expiring IP assignment",
-      "D": "An encrypted tunnel for all the device's traffic"
+      "A": "A permanent, never-expiring IP assignment",
+      "B": "An encrypted tunnel for all the device's traffic",
+      "C": "An IP address, subnet mask, default gateway, and DNS server address",
+      "D": "Only an IP address; the rest must be configured manually"
     },
     "keys": [
-      "A"
+      "C"
     ],
     "explanation": "A DHCP lease hands out the complete IPv4 configuration set \u2014 IP address, subnet mask, default gateway, and DNS server \u2014 for a limited time, after which the client renews. The lease is temporary, not permanent, it is not a tunnel, and the point of DHCP is precisely that the device does not configure the rest by hand.",
     "objectiveId": "2.4",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "2026-10-23",
-    "textHash": "41d038ade0a253a1",
+    "textHash": "02d308fe8f09aef8",
     "bank": "core1-demo-cut.md"
   },
   {
@@ -2450,20 +2450,20 @@ export const ITEMS = [
     "number": "Q6",
     "stem": "A laptop joined to a small office network shows an address in the 169.254.x.x range and cannot reach anything beyond its own segment. What is the most likely cause?",
     "options": {
-      "A": "The DHCP server did not deliver a lease",
-      "B": "The DNS server is down",
-      "C": "The default gateway is misconfigured with the wrong subnet",
-      "D": "The wireless radio is disabled"
+      "A": "The DNS server is down",
+      "B": "The default gateway is misconfigured with the wrong subnet",
+      "C": "The wireless radio is disabled",
+      "D": "The DHCP server did not deliver a lease"
     },
     "keys": [
-      "A"
+      "D"
     ],
     "explanation": "An APIPA (169.254.x.x) address is the operating system's fallback when no DHCP lease arrives: the device can talk to its local segment but has no gateway or DNS, so nothing beyond the segment works. A down DNS server would not cause the 169.254 address, a radio-disabled laptop would have no address at all, and a wrong gateway on a manually configured host would not produce an APIPA address.",
     "objectiveId": "2.4",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "2026-10-23",
-    "textHash": "96d5081b9f0d399b",
+    "textHash": "1d52b7e5171ec43c",
     "bank": "core1-demo-cut.md"
   },
   {
@@ -2472,20 +2472,20 @@ export const ITEMS = [
     "number": "Q7",
     "stem": "A user can reach the local printer and other workstations on their subnet, but cannot open any website. Which setting is the most likely culprit?",
     "options": {
-      "A": "The subnet mask",
-      "B": "The host's IP address",
-      "C": "The default gateway",
-      "D": "The wireless SSID"
+      "A": "The host's IP address",
+      "B": "The default gateway",
+      "C": "The wireless SSID",
+      "D": "The subnet mask"
     },
     "keys": [
-      "C"
+      "B"
     ],
     "explanation": "Local devices are reachable, so the IP address and mask are correct \u2014 the host can tell local from remote just fine. Everything *remote* (the internet) depends on the default gateway, so a wrong or unreachable gateway produces exactly this split: local works, nothing outside does. The SSID is irrelevant when the device is connected.",
     "objectiveId": "2.4",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "2026-10-23",
-    "textHash": "f9528341cbe906aa",
+    "textHash": "89442c1b72ac5502",
     "bank": "core1-demo-cut.md"
   },
   {
@@ -2507,7 +2507,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "2026-10-23",
-    "textHash": "03351cded32f79fa",
+    "textHash": "b391918d1133a3ce",
     "bank": "core1-demo-cut.md"
   },
   {
@@ -2529,7 +2529,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "2026-10-23",
-    "textHash": "4ff54f48748a9cc1",
+    "textHash": "7ecbe1a528f52ed7",
     "bank": "core1-demo-cut.md"
   },
   {
@@ -2538,20 +2538,20 @@ export const ITEMS = [
     "number": "Q10",
     "stem": "A workstation cannot reach anything by name or by IP address. The link light is on. Which field in the IPv4 configuration is the most likely single cause?",
     "options": {
-      "A": "The DNS server points to the wrong host",
-      "B": "The IP address is a duplicate of another device's address",
-      "C": "The gateway address points at a nonexistent device",
-      "D": "The subnet mask is set to the wrong network"
+      "A": "The subnet mask is set to the wrong network",
+      "B": "The DNS server points to the wrong host",
+      "C": "The IP address is a duplicate of another device's address",
+      "D": "The gateway address points at a nonexistent device"
     },
     "keys": [
-      "D"
+      "A"
     ],
     "explanation": "Both name resolution *and* raw IP connectivity are broken, so the fault is below DNS \u2014 in the addressing itself. A wrong mask makes the host misjudge which destinations are local versus remote, breaking delivery for both named and direct-IP traffic. A bad DNS server would leave IP-address access working; a duplicate or bad gateway would not break local traffic the way a mask error does.",
     "objectiveId": "5.5",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "2026-10-23",
-    "textHash": "6ab98232743a60e9",
+    "textHash": "80f36ee9619b0a60",
     "bank": "core1-demo-cut.md"
   },
   {
@@ -2560,20 +2560,20 @@ export const ITEMS = [
     "number": "Q11",
     "stem": "Internal server names stopped resolving on several workstations, but public websites still load normally. What does this split most suggest?",
     "options": {
-      "A": "The default gateway is down for the whole building",
-      "B": "Every workstation lost its IP address",
-      "C": "The internal DNS zone or internal DNS service is the problem",
-      "D": "The internet service provider is blocking web traffic"
+      "A": "The internet service provider is blocking web traffic",
+      "B": "The default gateway is down for the whole building",
+      "C": "Every workstation lost its IP address",
+      "D": "The internal DNS zone or internal DNS service is the problem"
     },
     "keys": [
-      "C"
+      "D"
     ],
     "explanation": "Public names working means the clients can still reach *some* DNS and the internet path is up \u2014 only the internal names fail. That isolates the fault to the internal zone or the internal DNS service those names live in, not to the gateway (A) or to addressing (B), which would break public traffic too. An ISP block on web traffic (D) would not leave public sites loading.",
     "objectiveId": "2.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "2026-10-23",
-    "textHash": "a36f4c2d20d39c64",
+    "textHash": "dc71a8a0c1f9e5e3",
     "bank": "core1-demo-cut.md"
   },
   {
@@ -2582,20 +2582,20 @@ export const ITEMS = [
     "number": "Q12",
     "stem": "A firewall rule must be opened so clients can send DNS name lookups to the campus DNS server. Which port should the rule allow?",
     "options": {
-      "A": "80",
-      "B": "443",
-      "C": "53",
-      "D": "21"
+      "A": "53",
+      "B": "21",
+      "C": "80",
+      "D": "443"
     },
     "keys": [
-      "C"
+      "A"
     ],
     "explanation": "DNS name lookups use port 53 (UDP for ordinary queries, TCP for larger responses). Port 80 is unencrypted HTTP, 443 is HTTPS, and 21 is FTP control \u2014 none of those carry name resolution. Opening 80 or 443 because \"that is web\" is the classic confusion: web *uses* DNS, but DNS itself is not web traffic.",
     "objectiveId": "2.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "2026-10-23",
-    "textHash": "dfa83a9e76ef4587",
+    "textHash": "5a311403321625e9",
     "bank": "core1-demo-cut.md"
   },
   {
@@ -2604,20 +2604,20 @@ export const ITEMS = [
     "number": "Q13",
     "stem": "One user cannot reach the company intranet by name. Colleagues on the same switch can. What is the safest first test on that user's workstation?",
     "options": {
-      "A": "Reinstall the operating system",
-      "B": "Replace the network switch",
-      "C": "Record the current IP configuration and try a name lookup (nslookup) to see what fails",
-      "D": "Change the DNS server to a public resolver and leave it that way"
+      "A": "Record the current IP configuration and try a name lookup (nslookup) to see what fails",
+      "B": "Change the DNS server to a public resolver and leave it that way",
+      "C": "Reinstall the operating system",
+      "D": "Replace the network switch"
     },
     "keys": [
-      "C"
+      "A"
     ],
     "explanation": "When one host is affected and its neighbors are fine, start with a safe, reversible test: capture the configuration as it is, then measure name resolution directly. That tells you whether the client is asking, what it is asking, and what answer it gets \u2014 without changing anything you cannot undo. Reinstalling (A) and replacing the switch (B) are invasive and unsupported by the symptom; pointing DNS at a public resolver (D) may mask an internal-zone problem and leaks internal names.",
     "objectiveId": "5.5",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "2026-10-23",
-    "textHash": "44fa94e6694aafb0",
+    "textHash": "4b5dd2673ee80118",
     "bank": "core1-demo-cut.md"
   },
   {
@@ -2626,20 +2626,20 @@ export const ITEMS = [
     "number": "Q14",
     "stem": "After a desk move, a laptop gets no DHCP address and shows a 169.254.x.x APIPA address. Link light is on. What should the technician verify first, before replacing any hardware?",
     "options": {
-      "A": "That the wall port / switch port actually reaches a DHCP-enabled network (correct VLAN or uplink)",
-      "B": "That the laptop battery is fully charged",
-      "C": "That the printer driver is up to date",
-      "D": "That the monitor cable is seated"
+      "A": "That the laptop battery is fully charged",
+      "B": "That the printer driver is up to date",
+      "C": "That the monitor cable is seated",
+      "D": "That the wall port / switch port actually reaches a DHCP-enabled network (correct VLAN or uplink)"
     },
     "keys": [
-      "A"
+      "D"
     ],
     "explanation": "APIPA with a link light means the NIC is up but no lease arrived \u2014 the usual cause after a move is that the new port is on the wrong VLAN, unpatched, or otherwise not delivering DHCP. Verifying the port path is the safe, non-invasive first check. Battery, printer driver, and monitor cable are unrelated to address delivery and would not produce APIPA.",
     "objectiveId": "5.5",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "2026-10-23",
-    "textHash": "ea2fb447b2971bc5",
+    "textHash": "03d813ec9d46675d",
     "bank": "core1-demo-cut.md"
   },
   {
@@ -2648,20 +2648,20 @@ export const ITEMS = [
     "number": "Q15",
     "stem": "A user reports that file transfers to one server are slow, while other servers feel normal. What is the safest first measurement?",
     "options": {
-      "A": "Increase the NIC speed/duplex settings immediately",
-      "B": "Replace the workstation's network cable",
-      "C": "Compare a ping or path test to the slow server against the same test to a known-good server",
-      "D": "Defragment the workstation's hard drive"
+      "A": "Replace the workstation's network cable",
+      "B": "Compare a ping or path test to the slow server against the same test to a known-good server",
+      "C": "Defragment the workstation's hard drive",
+      "D": "Increase the NIC speed/duplex settings immediately"
     },
     "keys": [
-      "C"
+      "B"
     ],
     "explanation": "Before changing anything, measure. Comparing the slow path against a known-good one tells you whether the delay is on the network path to that server, on the server itself, or unique to the client \u2014 and it gives you a baseline to prove any later fix. Changing speed/duplex (A) and swapping cable (B) are guesses that can make things worse; defragmenting (D) does not test a network path at all.",
     "objectiveId": "5.5",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "2026-10-23",
-    "textHash": "e0e9232bde064b92",
+    "textHash": "1d90173f91baa1fd",
     "bank": "core1-demo-cut.md"
   },
   {
@@ -2683,7 +2683,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "2026-10-23",
-    "textHash": "32b9c12d324b5ecf",
+    "textHash": "0c110a56bf6c41b2",
     "bank": "core1-demo-cut.md"
   },
   {
@@ -4245,7 +4245,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "2026-10-23",
-    "textHash": "f36a25755425fc29",
+    "textHash": "f6959eff594317bc",
     "bank": "core2-demo-cut.md"
   },
   {
@@ -4254,20 +4254,20 @@ export const ITEMS = [
     "number": "Q2",
     "stem": "A caller says they are from IT and need the user's password to apply an urgent security patch. What should the user do?",
     "options": {
-      "A": "Give the password now so the patch is not delayed",
-      "B": "Give only the username, not the password",
-      "C": "Decline and verify the request through a known IT channel",
-      "D": "Change the password after the call and then share it"
+      "A": "Change the password after the call and then share it",
+      "B": "Give the password now so the patch is not delayed",
+      "C": "Give only the username, not the password",
+      "D": "Decline and verify the request through a known IT channel"
     },
     "keys": [
-      "C"
+      "D"
     ],
     "explanation": "IT staff do not need a user's password to apply a patch \u2014 that request is a social-engineering attempt (vishing), not a support procedure. The correct next action is to hang up and verify through a channel the user already trusts (the published help desk number, the IT portal, the known manager). Giving the password (A) hands over the account; sharing only a username (B) still confirms the user is a live target and helps the attacker; changing the password afterwards (D) does not undo a password that was already shared.",
     "objectiveId": "2.5",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "2026-10-23",
-    "textHash": "f8f4d48a39e57df0",
+    "textHash": "93885ce558de12c3",
     "bank": "core2-demo-cut.md"
   },
   {
@@ -4276,20 +4276,20 @@ export const ITEMS = [
     "number": "Q3",
     "stem": "A user receives an unexpected invoice attachment from a vendor they do recognize, but the message urges them to open it today to avoid a late fee, and the reply-to address differs from the usual vendor contact. Which response is safest? ## Domain 4: Operational Procedures (220-1202) ---",
     "options": {
-      "A": "Open the attachment quickly and verify the amount later",
-      "B": "Forward the email to the vendor's known contact and ask whether they sent it",
-      "C": "Reply to the message and ask whether it is legitimate",
-      "D": "Delete the message without telling anyone"
+      "A": "Delete the message without telling anyone",
+      "B": "Open the attachment quickly and verify the amount later",
+      "C": "Forward the email to the vendor's known contact and ask whether they sent it",
+      "D": "Reply to the message and ask whether it is legitimate"
     },
     "keys": [
-      "B"
+      "C"
     ],
     "explanation": "The mix of urgency, an unexpected attachment, and a mismatched reply-to is a classic phishing shape. The safe test is out-of-band verification: contact the vendor using a known-good address or phone number you already had, not the one in the suspicious message. Opening the attachment (A) risks malware; replying to the message (C) talks to whoever wrote it, which proves nothing; deleting silently (D) removes evidence and leaves the next target uninformed.",
     "objectiveId": "2.5",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "2026-10-23",
-    "textHash": "206a921d66dcd70a",
+    "textHash": "82dbfb437bdb7cc2",
     "bank": "core2-demo-cut.md"
   },
   {
@@ -4298,20 +4298,20 @@ export const ITEMS = [
     "number": "Q4",
     "stem": "A technician is about to take over a ticket someone else started. Which ticket field is most important for picking up the work without re-diagnosing from zero?",
     "options": {
-      "A": "The technician's employee ID",
-      "B": "The time the ticket was created",
-      "C": "The symptom as reported, plus the tests already performed",
-      "D": "The priority level chosen by the help desk software"
+      "A": "The symptom as reported, plus the tests already performed",
+      "B": "The priority level chosen by the help desk software",
+      "C": "The technician's employee ID",
+      "D": "The time the ticket was created"
     },
     "keys": [
-      "C"
+      "A"
     ],
     "explanation": "The handoff value of a ticket is the symptom and the trail of tests already run \u2014 what was ruled out is as important as what was found. That history is what lets the next technician start at the frontier instead of repeating work. Employee ID (A) is attribution, not diagnosis; creation time (B) helps with SLAs but not with the fix; the priority label (D) routes the work, it does not explain the fault.",
     "objectiveId": "4.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "2026-10-23",
-    "textHash": "cbe18e5ec7ed2bdf",
+    "textHash": "129c5c63dff1bfd7",
     "bank": "core2-demo-cut.md"
   },
   {
@@ -4320,20 +4320,20 @@ export const ITEMS = [
     "number": "Q5",
     "stem": "A resolution note says only: \"Fixed it.\" What is missing that the next technician most needs?",
     "options": {
-      "A": "The user's phone number",
-      "B": "The cause, the change made, and how the fix was verified",
-      "C": "A screenshot of the desktop after the fix",
-      "D": "The model number of the workstation"
+      "A": "A screenshot of the desktop after the fix",
+      "B": "The model number of the workstation",
+      "C": "The user's phone number",
+      "D": "The cause, the change made, and how the fix was verified"
     },
     "keys": [
-      "B"
+      "D"
     ],
     "explanation": "A resolution note has to carry cause \u2192 change \u2192 verification. Without those, nobody can tell whether the right problem was solved, whether it will recur, or how to undo the change. Contact details (A) and hardware model (D) are useful metadata but they do not explain the fix; a desktop screenshot (C) rarely proves the user's own workflow works again, which is the verification that matters.",
     "objectiveId": "4.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "2026-10-23",
-    "textHash": "dfbba0b2e81446c1",
+    "textHash": "415fde40e94d4dbf",
     "bank": "core2-demo-cut.md"
   },
   {
@@ -4355,7 +4355,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "2026-10-23",
-    "textHash": "8a70a0f209103e67",
+    "textHash": "e86f7c6bec68b6a2",
     "bank": "core2-demo-cut.md"
   },
   {
@@ -4364,20 +4364,20 @@ export const ITEMS = [
     "number": "Q7",
     "stem": "Before changing the DHCP scope on a production server that three floors of users depend on, what should the technician do first?",
     "options": {
-      "A": "Make the change quickly during business hours so users can report problems immediately",
-      "B": "Document the planned change, the expected result, the verification step, and the rollback",
-      "C": "Reboot the DHCP server to clear any stale leases",
-      "D": "Change one setting at a time with no written record, to keep the work fast"
+      "A": "Document the planned change, the expected result, the verification step, and the rollback",
+      "B": "Reboot the DHCP server to clear any stale leases",
+      "C": "Change one setting at a time with no written record, to keep the work fast",
+      "D": "Make the change quickly during business hours so users can report problems immediately"
     },
     "keys": [
-      "B"
+      "A"
     ],
     "explanation": "Change control at this scale is: write down what you will do before you do it. The note should cover the change, what you expect, how you will tell it worked, and how you will put it back if it does not. Changing live without a plan (A/D) turns a controlled edit into an outage with no rollback; rebooting first (C) is an invasive action that is not required to plan a scope change and may itself disrupt service.",
     "objectiveId": "4.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "2026-10-23",
-    "textHash": "27bceb3aa6a5c7a1",
+    "textHash": "e4cad4dfa9c1c5a3",
     "bank": "core2-demo-cut.md"
   },
   {
@@ -4399,7 +4399,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "2026-10-23",
-    "textHash": "b981921abfa0a7fd",
+    "textHash": "62a9de8fa17eb7c0",
     "bank": "core2-demo-cut.md"
   },
   {
@@ -6621,7 +6621,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "2026-10-23",
-    "textHash": "4fc212cfd27262b0",
+    "textHash": "d18f4b5ca50d95a3",
     "bank": "net009-n1-demo-cut.md"
   },
   {
@@ -6630,20 +6630,20 @@ export const ITEMS = [
     "number": "Q7",
     "stem": "A laptop on a corporate VLAN keeps dropping off the network for about thirty seconds every few hours, then recovers on its own. At Network+ lease-lifecycle depth, which stage is the most useful place to start, and what would you look for?",
     "options": {
-      "A": "The DORA handshake at first join, because the laptop would never get an address if it failed",
-      "B": "The renewal path (T1 renew, T2 rebind, and expiry) \u2014 look for renewals that fail and fall through to expiry",
-      "C": "The DNS resolution path, because name lookups reset after each drop",
-      "D": "The subnet mask, because the laptop cannot tell local from remote during the gap"
+      "A": "The subnet mask, because the laptop cannot tell local from remote during the gap",
+      "B": "The DORA handshake at first join, because the laptop would never get an address if it failed",
+      "C": "The renewal path (T1 renew, T2 rebind, and expiry) \u2014 look for renewals that fail and fall through to expiry",
+      "D": "The DNS resolution path, because name lookups reset after each drop"
     },
     "keys": [
-      "B"
+      "C"
     ],
     "explanation": "A brief recurring outage with automatic recovery is the signature of a lease that is not renewing cleanly: the client reaches T1, the renew does not complete, it reaches T2 and rebroadcasts, then the lease expires and the interface resets before a new DORA completes. First join (A) is a one-time event and would not explain periodic drops; DNS follows addressing rather than causing address loss; the mask does not change over time. *(Cross-track concept: A+ A2 teaches what a lease hands out; this item assesses the lifecycle that keeps it \u2014 deliberately different depth, separate evidence.)*",
     "objectiveId": "1.7",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "2026-10-23",
-    "textHash": "f907cefc8dd4b7e5",
+    "textHash": "5f03c26cf2614d3d",
     "bank": "net009-n1-demo-cut.md"
   },
   {
@@ -6652,20 +6652,20 @@ export const ITEMS = [
     "number": "Q8",
     "stem": "Which protocol and transport port pair is correct?",
     "options": {
-      "A": "SSH on TCP 22",
-      "B": "DNS on TCP 80",
-      "C": "HTTPS on TCP 21",
-      "D": "DHCP on TCP 443"
+      "A": "DHCP on TCP 443",
+      "B": "SSH on TCP 22",
+      "C": "DNS on TCP 80",
+      "D": "HTTPS on TCP 21"
     },
     "keys": [
-      "A"
+      "B"
     ],
     "explanation": "SSH \u2014 remote terminal and secure file copy \u2014 uses TCP port 22. DNS primarily uses UDP/TCP 53 (not 80), HTTPS uses TCP 443 (21 is FTP control), and DHCP uses UDP 67/68 (443 is HTTPS). Protocol-port pairs are agreed conventions: the number only works because clients and servers both use the same one.",
     "objectiveId": "1.4",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "2026-10-23",
-    "textHash": "9e5665b70f1172d3",
+    "textHash": "a217c4cc6d577c8e",
     "bank": "net009-n1-demo-cut.md"
   },
   {
@@ -6674,20 +6674,20 @@ export const ITEMS = [
     "number": "Q9",
     "stem": "A technician is reading a layered network diagram and needs to know where IP addressing and routing decisions live. Which OSI layer is that?",
     "options": {
-      "A": "Layer 1 \u2014 Physical",
-      "B": "Layer 2 \u2014 Data Link",
-      "C": "Layer 3 \u2014 Network",
-      "D": "Layer 4 \u2014 Transport"
+      "A": "Layer 3 \u2014 Network",
+      "B": "Layer 4 \u2014 Transport",
+      "C": "Layer 1 \u2014 Physical",
+      "D": "Layer 2 \u2014 Data Link"
     },
     "keys": [
-      "C"
+      "A"
     ],
     "explanation": "IP addressing, subnetting, and routing belong to Layer 3, the Network layer. Layer 1 is cabling and signals, Layer 2 moves frames on a local link (MAC addresses, switching), and Layer 4 handles end-to-end segments and ports (TCP/UDP). A mailing analogy fits here: Layer 3 is the address on the envelope that decides which town the letter goes to; Layer 2 is the local mail carrier who walks it to the right street.",
     "objectiveId": "1.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "2026-10-23",
-    "textHash": "a453fa37614cb21e",
+    "textHash": "0c9108817666a43f",
     "bank": "net009-n1-demo-cut.md"
   },
   {
@@ -6696,20 +6696,20 @@ export const ITEMS = [
     "number": "Q10",
     "stem": "An organization has 250 workstations in one flat 10.0.0.0/24 and is seeing heavy broadcast noise and a growing number of address conflicts after a bring-your-own-device push. What problem is subnetting (or VLAN segmentation paired with it) actually solving here?",
     "options": {
-      "A": "Subnetting makes each host's IP address longer and therefore harder to conflict",
-      "B": "Subnetting splits one large broadcast domain into smaller ones, limiting who hears every broadcast",
-      "C": "Subnetting replaces the need for a default gateway on each host",
-      "D": "Subnetting encrypts traffic between workstations so conflicts cannot occur"
+      "A": "Subnetting replaces the need for a default gateway on each host",
+      "B": "Subnetting encrypts traffic between workstations so conflicts cannot occur",
+      "C": "Subnetting makes each host's IP address longer and therefore harder to conflict",
+      "D": "Subnetting splits one large broadcast domain into smaller ones, limiting who hears every broadcast"
     },
     "keys": [
-      "B"
+      "D"
     ],
     "explanation": "The purpose of subnetting is to break one large broadcast domain into smaller, more manageable segments \u2014 fewer hosts hear every ARP and broadcast, which cuts noise and limits the blast radius of a misbehaving device. It does not lengthen addresses (A), it does not remove the need for a gateway to leave the segment (C), and it is a topology and addressing tool, not encryption (D). Paired with VLANs, it is the standard first answer to \"the flat network got too loud.\"",
     "objectiveId": "1.7",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "2026-10-23",
-    "textHash": "0be9f5b1be326eaf",
+    "textHash": "6550b43d11ce4b24",
     "bank": "net009-n1-demo-cut.md"
   },
   {
@@ -6828,20 +6828,20 @@ export const ITEMS = [
     "number": "Q16",
     "stem": "A monitoring dashboard shows round-trip latency to a core server at 40\u201360 ms for three months, then 300\u2013400 ms starting Tuesday at 14:00. How should this reading be classified first?",
     "options": {
-      "A": "A baseline change that marks an incident \u2014 the long-running band is \"normal,\" the shift is the anomaly",
-      "B": "A cosmetic graph issue, because latency graphs drift",
-      "C": "A hard down condition, because the server is not answering",
-      "D": "A DNS problem, because the graph name may not resolve"
+      "A": "A DNS problem, because the graph name may not resolve",
+      "B": "A baseline change that marks an incident \u2014 the long-running band is \"normal,\" the shift is the anomaly",
+      "C": "A cosmetic graph issue, because latency graphs drift",
+      "D": "A hard down condition, because the server is not answering"
     },
     "keys": [
-      "A"
+      "B"
     ],
     "explanation": "A baseline is a measured range of normal, not a feeling. When the measurement leaves that band at a known time, you have an incident to investigate (what changed at 14:00?), not a mystery. The server still answers (so not down), graph cosmetics do not produce a clean step-change (B), and DNS failure would typically break the measurement source or the name, not raise latency cleanly (D).",
     "objectiveId": "3.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "2026-10-23",
-    "textHash": "f08cf1bc5868ddab",
+    "textHash": "d4337a4444e73451",
     "bank": "net009-n3-demo-cut.md"
   },
   {
@@ -6850,20 +6850,20 @@ export const ITEMS = [
     "number": "Q17",
     "stem": "An operator is handed a latency chart with no baseline and asked whether \"this is bad.\" What is the correct first response?",
     "options": {
-      "A": "Declare an incident immediately, because latency above zero is always an outage",
-      "B": "Restore from backup to clear the symptom",
-      "C": "Establish what normal looked like for that service and interval before judging the current trace",
-      "D": "Restart the monitoring tool so the chart resets"
+      "A": "Establish what normal looked like for that service and interval before judging the current trace",
+      "B": "Restart the monitoring tool so the chart resets",
+      "C": "Declare an incident immediately, because latency above zero is always an outage",
+      "D": "Restore from backup to clear the symptom"
     },
     "keys": [
-      "C"
+      "A"
     ],
     "explanation": "Without a baseline there is no defensible \"normal,\" so the first step is to recover history (peer devices, prior captures, vendor SLAs, a quiet-time sample) and then compare. Declaring an incident on unexamined numbers (A) and rebooting the tool (D) both destroy or ignore the evidence; a restore (B) is an invasive action aimed at an unknown cause.",
     "objectiveId": "3.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "2026-10-23",
-    "textHash": "501e5afb586a9588",
+    "textHash": "11a85ea479f534c7",
     "bank": "net009-n3-demo-cut.md"
   },
   {
@@ -6872,20 +6872,20 @@ export const ITEMS = [
     "number": "Q18",
     "stem": "What is the operational purpose of keeping current network diagrams and an inventory of devices, circuits, and credentials?",
     "options": {
-      "A": "They are required decorations for audit visitors only",
-      "B": "They are the map you need before and during an emergency, and the basis for change planning",
-      "C": "They replace the need for monitoring baselines",
-      "D": "They are only useful after the network is decommissioned"
+      "A": "They are the map you need before and during an emergency, and the basis for change planning",
+      "B": "They replace the need for monitoring baselines",
+      "C": "They are only useful after the network is decommissioned",
+      "D": "They are required decorations for audit visitors only"
     },
     "keys": [
-      "B"
+      "A"
     ],
     "explanation": "Diagrams and inventory are how anyone \u2014 not just the person who built the network \u2014 understands what exists and how it connects. They speed incident response, make change plans reviewable, and support capacity and lifecycle work. They are operational tools, not paperwork theater (A), and they complement rather than replace measurements (C).",
     "objectiveId": "3.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "2026-10-23",
-    "textHash": "02bfc43328b1a986",
+    "textHash": "3d524fddf8a1e1ae",
     "bank": "net009-n3-demo-cut.md"
   },
   {
@@ -6907,7 +6907,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "2026-10-23",
-    "textHash": "20c53004f70c45de",
+    "textHash": "6f82abde3d42fc87",
     "bank": "net009-n3-demo-cut.md"
   },
   {
@@ -6916,20 +6916,20 @@ export const ITEMS = [
     "number": "Q20",
     "stem": "In disaster recovery terms, what does RPO describe?",
     "options": {
-      "A": "How long a restore is allowed to take",
-      "B": "How much data the organization accepts losing, expressed as time since the last good copy",
-      "C": "The order in which servers are rebuilt",
-      "D": "The number of backup copies to keep offsite"
+      "A": "The number of backup copies to keep offsite",
+      "B": "How long a restore is allowed to take",
+      "C": "How much data the organization accepts losing, expressed as time since the last good copy",
+      "D": "The order in which servers are rebuilt"
     },
     "keys": [
-      "B"
+      "C"
     ],
     "explanation": "Recovery Point Objective is the maximum tolerable data loss measured in time \u2014 if backups run nightly and RPO is 24 hours, you accept up to a day of work lost. Recovery Time Objective (A) is how fast service must return, restoration order (C) is a runbook choice informed by RTO/RPO, and offsite copy count (D) is a retention design detail, not the objective itself.",
     "objectiveId": "3.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "2026-10-23",
-    "textHash": "a9ffbcb9d49edb20",
+    "textHash": "8206bc376a47fee1",
     "bank": "net009-n3-demo-cut.md"
   },
   {
@@ -6938,20 +6938,20 @@ export const ITEMS = [
     "number": "Q21",
     "stem": "A hospital places medical devices, staff workstations, and guest Wi-Fi on separate network segments with controlled paths between them. What security purpose does this segmentation primarily serve?",
     "options": {
-      "A": "It encrypts all traffic between the segments",
-      "B": "It limits lateral movement so a compromise in one segment cannot freely reach the others",
-      "C": "It increases raw bandwidth on every segment",
-      "D": "It replaces the need for user authentication"
+      "A": "It replaces the need for user authentication",
+      "B": "It encrypts all traffic between the segments",
+      "C": "It limits lateral movement so a compromise in one segment cannot freely reach the others",
+      "D": "It increases raw bandwidth on every segment"
     },
     "keys": [
-      "B"
+      "C"
     ],
     "explanation": "Segmentation is damage control: if a guest device or a flat IoT gadget is compromised, a segmented design means the attacker does not automatically land on clinical workstations. Inter-segment traffic can be inspected and limited. Encryption is a separate control (A), segmentation is not a bandwidth tool (C), and identity checks still matter inside every segment (D).",
     "objectiveId": "4.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "2026-10-23",
-    "textHash": "18a555631446ffb2",
+    "textHash": "c7e0fac7e21c1424",
     "bank": "net009-n4-demo-cut.md"
   },
   {
@@ -6960,20 +6960,20 @@ export const ITEMS = [
     "number": "Q22",
     "stem": "After a workstation on the user VLAN is infected with malware, the security team finds the malware only reached other user workstations and never touched the server VLAN. Which design choice produced that outcome?",
     "options": {
-      "A": "A longer subnet mask on the server VLAN",
-      "B": "Segmentation with an explicit deny-by-default path from user VLANs to the server VLAN",
-      "C": "A larger DHCP scope on the user VLAN",
-      "D": "Disabling ICMP on the server VLAN"
+      "A": "A larger DHCP scope on the user VLAN",
+      "B": "Disabling ICMP on the server VLAN",
+      "C": "A longer subnet mask on the server VLAN",
+      "D": "Segmentation with an explicit deny-by-default path from user VLANs to the server VLAN"
     },
     "keys": [
-      "B"
+      "D"
     ],
     "explanation": "The observed containment is the expected result of segmentation plus a restrictive path between zones \u2014 the malware's lateral movement stopped at the boundary. Mask length (A) and DHCP scope size (C) do not enforce trust boundaries, and blocking ICMP (D) only silences one diagnostic protocol; it does not stop server-directed traffic the malware could still attempt.",
     "objectiveId": "4.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "2026-10-23",
-    "textHash": "31533ce6dfc64f39",
+    "textHash": "aec93b945e921ba8",
     "bank": "net009-n4-demo-cut.md"
   },
   {
@@ -6982,20 +6982,20 @@ export const ITEMS = [
     "number": "Q23",
     "stem": "Which of the following is a multi-factor authentication pairing?",
     "options": {
-      "A": "A password and a PIN, both of which the user knows",
-      "B": "A password and a fingerprint, which are two different factor categories",
-      "C": "Two different passwords from the same password manager",
-      "D": "A security question and a password, both from memory"
+      "A": "A password and a fingerprint, which are two different factor categories",
+      "B": "Two different passwords from the same password manager",
+      "C": "A security question and a password, both from memory",
+      "D": "A password and a PIN, both of which the user knows"
     },
     "keys": [
-      "B"
+      "A"
     ],
     "explanation": "Multi-factor authentication requires factors from different categories: something you know, something you have, something you are. A password plus a fingerprint uses knowledge plus biometrics. Password + PIN (A), two passwords (C), and a security question plus a password (D) are all single-factor (knowledge) combinations, however long they feel.",
     "objectiveId": "4.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "2026-10-23",
-    "textHash": "41768e03f40a52c6",
+    "textHash": "cae6f038f9783376",
     "bank": "net009-n4-demo-cut.md"
   },
   {
@@ -7017,7 +7017,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "2026-10-23",
-    "textHash": "ca68d2e3ef63c170",
+    "textHash": "75605cd72f67ea76",
     "bank": "net009-n4-demo-cut.md"
   },
   {
@@ -7026,20 +7026,20 @@ export const ITEMS = [
     "number": "Q25",
     "stem": "A new firewall policy is being reviewed. Which change is the better hardening judgment?",
     "options": {
-      "A": "Leave every unused port open so future applications do not need a change request",
-      "B": "Disable unused services and ports, and allow only what the business path requires",
-      "C": "Turn off logging to reduce noise and save disk",
-      "D": "Share one administrator account among the on-call team so nobody gets locked out"
+      "A": "Share one administrator account among the on-call team so nobody gets locked out",
+      "B": "Leave every unused port open so future applications do not need a change request",
+      "C": "Disable unused services and ports, and allow only what the business path requires",
+      "D": "Turn off logging to reduce noise and save disk"
     },
     "keys": [
-      "B"
+      "C"
     ],
     "explanation": "Hardening is removing what you do not need: unused services and open ports are standing attack surface. Allow-what-you-need with documented changes is the default-deny habit. Leaving everything open (A) maximizes exposure, turning off logging (C) removes detection and evidence, and a shared admin account (D) destroys attribution and breaks accountability during an incident.",
     "objectiveId": "4.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "2026-10-23",
-    "textHash": "210daea093d8d289",
+    "textHash": "eb4aeb45143bf166",
     "bank": "net009-n4-demo-cut.md"
   },
   {

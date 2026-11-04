@@ -19,7 +19,7 @@ Product-level gaps and the per-objective content roadmap (2026-10-20):
 | Base head | main @ 904106a (Oct 5, 2026); package dated Oct 10, 2026 |
 | Scope | Three tracks / four exam IDs (COMPTIA-A-1201, COMPTIA-A-1202, COMPTIA-NET-009, NCA-75): manifests, study UI, content, scenarios, tutor slice, RedEye review lane, runtime repairs R-01..R-24, CI/packaging gates |
 | Deadlines | Oct 23, 2026 student demo (A+/Network+) · Oct 25-28 Nutanix HQ trip (NCA 7.5) |
-| Per-spec docs | [`docs/sprints/openspec/`](sprints/openspec/README.md) — SPEC-00..SPEC-20 |
+| Per-spec docs | [`docs/sprints/openspec/`](sprints/openspec/README.md) — SPEC-00..SPEC-21 |
 | Execution | [SPRINT-45](sprints/SPRINT-45.md) (Oct 10-12, Sprint A) · [SPRINT-46](sprints/SPRINT-46.md) (Oct 13-16, Sprint B) · [SPRINT-47](sprints/SPRINT-47.md) (Oct 17-22, Sprints C+D) · [SPRINT-48](sprints/SPRINT-48.md) (Sprint E, NCA travel freeze) — tasks T-01..T-46, 97 pts |
 | Master index | [docs/sprints/SPRINT-PLAN.md](sprints/SPRINT-PLAN.md), Phase 5 + OpenSpec alignment matrix |
 

@@ -80,6 +80,9 @@ gate "python3 scripts/check-item-identity.py"           python3 scripts/check-it
 gate "python3 scripts/check-item-identity.py --self-test" python3 scripts/check-item-identity.py --self-test
 gate "python3 scripts/check-item-types.py"              python3 scripts/check-item-types.py
 gate "python3 scripts/check-item-types.py --self-test"  python3 scripts/check-item-types.py --self-test
+# Added with SPEC-21: no released bank may concentrate its keys by position.
+gate "python3 scripts/check-answer-balance.py"          python3 scripts/check-answer-balance.py
+gate "python3 scripts/check-answer-balance.py --self-test" python3 scripts/check-answer-balance.py --self-test
 gate "python3 scripts/generate-study-content.py --check" python3 scripts/generate-study-content.py --check
 # Added in Sprint 48 (S48-01). The Sprint 47 freeze record's "39/39 at 0d1f565"
 # was produced by the 39-gate revision of this script, which is still

@@ -41,8 +41,12 @@ INJECTION_PATTERNS = (
     re.compile(r"you\s+are\s+now", re.IGNORECASE),
     re.compile(r"mark\s+this\s+(?:item|answer)\s+(?:as\s+)?(?:approved|correct|passing)", re.IGNORECASE),
     re.compile(r"disregard\s+.+\s+and\s+", re.IGNORECASE),
-    re.compile(r"system\s*:\s*", re.IGNORECASE),
 )
+# The word "system" before a colon is ordinary technical English in these packs
+# ("debris in the guest system: anything left inside"). It was its own pattern
+# and it produced both flags the 2026-11-04 review opened; it now needs an
+# instruction after the colon, and still only ever raises a review signal.
+SYSTEM_COLON = re.compile(r"\bsystem\s*:\s*(?P<rest>[^.]*)", re.IGNORECASE)
 
 def sha256(text):
     return hashlib.sha256(text.encode("utf-8")).hexdigest()
@@ -153,8 +157,24 @@ def check_provenance(record, item_id):
     return review_record.check_provenance(record, item_id)
 
 
+# SPEC-21: the words that make a "system:" clause an instruction rather than a
+# noun phrase. The line still goes to a human: the screen is a review signal,
+# never an approval or a block.
+INSTRUCTION_AFTER_COLON = re.compile(
+    r"\b(?:you|ignore|disregard|mark|must|always|never|respond|reply|answer|approve|"
+    r"output|print|return|follow|pretend|act\s+as|instructions?|prompt|assistant)\b",
+    re.IGNORECASE)
+
+
 def check_injection(text):
-    hits = [pat.pattern for pat in INJECTION_PATTERNS if pat.search(text)]
+    hits = []
+    for pat in INJECTION_PATTERNS:
+        if pat is INJECTION_PATTERNS[-1]:  # SYSTEM_COLON
+            m = SYSTEM_COLON.search(text)
+            if m and INSTRUCTION_AFTER_COLON.search(m.group("rest")):
+                hits.append(pat.pattern)
+        elif pat.search(text):
+            hits.append(pat.pattern)
     return hits or None
 
 

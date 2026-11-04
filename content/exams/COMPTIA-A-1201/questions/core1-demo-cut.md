@@ -18,72 +18,72 @@ If the site loads by IP address, the network path and the server both work — p
 
 ### Q2
 Which of the following is the primary purpose of DNS?
-- A) Routing packets between different networks
-- B) Encrypting web traffic between client and server
-- C) Translating names like www.example.com into IP addresses
-- D) Assigning IP addresses to devices automatically
+- A) Assigning IP addresses to devices automatically
+- B) Routing packets between different networks
+- C) Encrypting web traffic between client and server
+- D) Translating names like www.example.com into IP addresses
 
-**Answer: C**
+**Answer: D**
 DNS is the network's name-resolution service: it turns names people can remember into the IP addresses networks actually route. Automatic address assignment is DHCP's job, routing between networks is the router/gateway's job, and web encryption is HTTPS (port 443), not DNS.
 
 ---
 
 ### Q3
 A user reports that no websites load by name on a workstation, but pinging the company file server's IP address works. Which two settings are most worth verifying first?
-- A) The subnet mask and the IP address
-- B) The Wi-Fi passphrase and the SSID
-- C) The NIC driver version and the switch port speed
-- D) The DNS server setting and the DNS service itself
+- A) The DNS server setting and the DNS service itself
+- B) The subnet mask and the IP address
+- C) The Wi-Fi passphrase and the SSID
+- D) The NIC driver version and the switch port speed
 
-**Answer: D**
+**Answer: A**
 Local reachability by IP proves the host's IP, mask, and local network path are functioning. The failure is specific to name resolution, so the DNS server configured on the host (and whether the DNS service itself is reachable) is the first thing to verify. Checking mask/IP would re-test something already proven, and passphrase or driver issues would not leave IP connectivity intact.
 
 ---
 
 ### Q4
 Which port number is used for standard HTTPS web traffic?
-- A) 443
-- B) 21
-- C) 53
-- D) 80
+- A) 53
+- B) 80
+- C) 443
+- D) 21
 
-**Answer: A**
+**Answer: C**
 HTTPS — the encrypted web traffic behind the browser padlock — uses TCP port 443. Port 80 is unencrypted HTTP, port 53 is DNS, and port 21 is FTP control. Recognizing these three everyday ports (80, 443, 53) is the working set for A+ scope.
 
 ---
 
 ### Q5
 Which of the following correctly describes what a DHCP lease provides to a joining device?
-- A) An IP address, subnet mask, default gateway, and DNS server address
-- B) Only an IP address; the rest must be configured manually
-- C) A permanent, never-expiring IP assignment
-- D) An encrypted tunnel for all the device's traffic
+- A) A permanent, never-expiring IP assignment
+- B) An encrypted tunnel for all the device's traffic
+- C) An IP address, subnet mask, default gateway, and DNS server address
+- D) Only an IP address; the rest must be configured manually
 
-**Answer: A**
+**Answer: C**
 A DHCP lease hands out the complete IPv4 configuration set — IP address, subnet mask, default gateway, and DNS server — for a limited time, after which the client renews. The lease is temporary, not permanent, it is not a tunnel, and the point of DHCP is precisely that the device does not configure the rest by hand.
 
 ---
 
 ### Q6
 A laptop joined to a small office network shows an address in the 169.254.x.x range and cannot reach anything beyond its own segment. What is the most likely cause?
-- A) The DHCP server did not deliver a lease
-- B) The DNS server is down
-- C) The default gateway is misconfigured with the wrong subnet
-- D) The wireless radio is disabled
+- A) The DNS server is down
+- B) The default gateway is misconfigured with the wrong subnet
+- C) The wireless radio is disabled
+- D) The DHCP server did not deliver a lease
 
-**Answer: A**
+**Answer: D**
 An APIPA (169.254.x.x) address is the operating system's fallback when no DHCP lease arrives: the device can talk to its local segment but has no gateway or DNS, so nothing beyond the segment works. A down DNS server would not cause the 169.254 address, a radio-disabled laptop would have no address at all, and a wrong gateway on a manually configured host would not produce an APIPA address.
 
 ---
 
 ### Q7
 A user can reach the local printer and other workstations on their subnet, but cannot open any website. Which setting is the most likely culprit?
-- A) The subnet mask
-- B) The host's IP address
-- C) The default gateway
-- D) The wireless SSID
+- A) The host's IP address
+- B) The default gateway
+- C) The wireless SSID
+- D) The subnet mask
 
-**Answer: C**
+**Answer: B**
 Local devices are reachable, so the IP address and mask are correct — the host can tell local from remote just fine. Everything *remote* (the internet) depends on the default gateway, so a wrong or unreachable gateway produces exactly this split: local works, nothing outside does. The SSID is irrelevant when the device is connected.
 
 ---
@@ -114,72 +114,72 @@ The symptom — APIPA address — says no DHCP lease arrived, most plausibly bec
 
 ### Q10
 A workstation cannot reach anything by name or by IP address. The link light is on. Which field in the IPv4 configuration is the most likely single cause?
-- A) The DNS server points to the wrong host
-- B) The IP address is a duplicate of another device's address
-- C) The gateway address points at a nonexistent device
-- D) The subnet mask is set to the wrong network
+- A) The subnet mask is set to the wrong network
+- B) The DNS server points to the wrong host
+- C) The IP address is a duplicate of another device's address
+- D) The gateway address points at a nonexistent device
 
-**Answer: D**
+**Answer: A**
 Both name resolution *and* raw IP connectivity are broken, so the fault is below DNS — in the addressing itself. A wrong mask makes the host misjudge which destinations are local versus remote, breaking delivery for both named and direct-IP traffic. A bad DNS server would leave IP-address access working; a duplicate or bad gateway would not break local traffic the way a mask error does.
 
 ---
 
 ### Q11
 Internal server names stopped resolving on several workstations, but public websites still load normally. What does this split most suggest?
-- A) The default gateway is down for the whole building
-- B) Every workstation lost its IP address
-- C) The internal DNS zone or internal DNS service is the problem
-- D) The internet service provider is blocking web traffic
+- A) The internet service provider is blocking web traffic
+- B) The default gateway is down for the whole building
+- C) Every workstation lost its IP address
+- D) The internal DNS zone or internal DNS service is the problem
 
-**Answer: C**
+**Answer: D**
 Public names working means the clients can still reach *some* DNS and the internet path is up — only the internal names fail. That isolates the fault to the internal zone or the internal DNS service those names live in, not to the gateway (A) or to addressing (B), which would break public traffic too. An ISP block on web traffic (D) would not leave public sites loading.
 
 ---
 
 ### Q12
 A firewall rule must be opened so clients can send DNS name lookups to the campus DNS server. Which port should the rule allow?
-- A) 80
-- B) 443
-- C) 53
-- D) 21
+- A) 53
+- B) 21
+- C) 80
+- D) 443
 
-**Answer: C**
+**Answer: A**
 DNS name lookups use port 53 (UDP for ordinary queries, TCP for larger responses). Port 80 is unencrypted HTTP, 443 is HTTPS, and 21 is FTP control — none of those carry name resolution. Opening 80 or 443 because "that is web" is the classic confusion: web *uses* DNS, but DNS itself is not web traffic.
 
 ---
 
 ### Q13
 One user cannot reach the company intranet by name. Colleagues on the same switch can. What is the safest first test on that user's workstation?
-- A) Reinstall the operating system
-- B) Replace the network switch
-- C) Record the current IP configuration and try a name lookup (nslookup) to see what fails
-- D) Change the DNS server to a public resolver and leave it that way
+- A) Record the current IP configuration and try a name lookup (nslookup) to see what fails
+- B) Change the DNS server to a public resolver and leave it that way
+- C) Reinstall the operating system
+- D) Replace the network switch
 
-**Answer: C**
+**Answer: A**
 When one host is affected and its neighbors are fine, start with a safe, reversible test: capture the configuration as it is, then measure name resolution directly. That tells you whether the client is asking, what it is asking, and what answer it gets — without changing anything you cannot undo. Reinstalling (A) and replacing the switch (B) are invasive and unsupported by the symptom; pointing DNS at a public resolver (D) may mask an internal-zone problem and leaks internal names.
 
 ---
 
 ### Q14
 After a desk move, a laptop gets no DHCP address and shows a 169.254.x.x APIPA address. Link light is on. What should the technician verify first, before replacing any hardware?
-- A) That the wall port / switch port actually reaches a DHCP-enabled network (correct VLAN or uplink)
-- B) That the laptop battery is fully charged
-- C) That the printer driver is up to date
-- D) That the monitor cable is seated
+- A) That the laptop battery is fully charged
+- B) That the printer driver is up to date
+- C) That the monitor cable is seated
+- D) That the wall port / switch port actually reaches a DHCP-enabled network (correct VLAN or uplink)
 
-**Answer: A**
+**Answer: D**
 APIPA with a link light means the NIC is up but no lease arrived — the usual cause after a move is that the new port is on the wrong VLAN, unpatched, or otherwise not delivering DHCP. Verifying the port path is the safe, non-invasive first check. Battery, printer driver, and monitor cable are unrelated to address delivery and would not produce APIPA.
 
 ---
 
 ### Q15
 A user reports that file transfers to one server are slow, while other servers feel normal. What is the safest first measurement?
-- A) Increase the NIC speed/duplex settings immediately
-- B) Replace the workstation's network cable
-- C) Compare a ping or path test to the slow server against the same test to a known-good server
-- D) Defragment the workstation's hard drive
+- A) Replace the workstation's network cable
+- B) Compare a ping or path test to the slow server against the same test to a known-good server
+- C) Defragment the workstation's hard drive
+- D) Increase the NIC speed/duplex settings immediately
 
-**Answer: C**
+**Answer: B**
 Before changing anything, measure. Comparing the slow path against a known-good one tells you whether the delay is on the network path to that server, on the server itself, or unique to the client — and it gives you a baseline to prove any later fix. Changing speed/duplex (A) and swapping cable (B) are guesses that can make things worse; defragmenting (D) does not test a network path at all.
 
 ---

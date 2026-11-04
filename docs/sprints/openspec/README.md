@@ -30,6 +30,7 @@ Full per-spec documents extracted from the [October 10 OpenSpec package](../../d
 | [SPEC-18](SPEC-18-nca-cheatsheet-beta.md) | NCA cheatsheet: retire the closed beta framing and expired waiver code | TM-29c |
 | [SPEC-19](SPEC-19-demo-cut-banks.md) | Rename the demo-cut banks out of `*-fixtures.md` and date their origin | TM-110a |
 | [SPEC-20](SPEC-20-reviewer-provenance.md) | `reviewer` names a human or nothing; the lane run moves to `automatedReview` | TM-110b |
+| [SPEC-21](SPEC-21-answer-position-and-injection.md) | Rebalance clustered answer positions; stop flagging `system:` in technical prose | TM-29d |
 
 ## Residue register
 
@@ -41,6 +42,7 @@ spec, gate and commit:
 | [SPEC-18](SPEC-18-nca-cheatsheet-beta.md) | The NCA cheatsheet still titled itself a beta exam and reproduced the expired waiver code | TM-29c |
 | [SPEC-19](SPEC-19-demo-cut-banks.md) | Seven released banks were named `*-fixtures.md` and their demo-cut origin was recorded nowhere | TM-110a |
 | [SPEC-20](SPEC-20-reviewer-provenance.md) | 419 records named the RedEye lane as their `reviewer` — a tool read as a person — while 780 said nothing at all | TM-110b |
+| [SPEC-21](SPEC-21-answer-position-and-injection.md) | Five demo-cut banks concentrated one answer letter (up to 5 of 5) and two technical `system:` sentences read as injection | TM-29d |
 
 ## Sprint rollups
 
