@@ -26,7 +26,7 @@ cd "$(dirname "$0")/../.."
 fail=0
 REPO="$PWD"
 GATE=(python3 scripts/check-item-hygiene.py)
-BANK=content/exams/COMPTIA-A-1201/questions/core1-a2-fixtures.md
+BANK=content/exams/COMPTIA-A-1201/questions/core1-demo-cut.md
 
 WS="$(mktemp -d)"
 trap 'rm -rf "$WS"' EXIT

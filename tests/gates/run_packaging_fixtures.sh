@@ -106,7 +106,7 @@ expect_pass "the packaging scripts make the claims they can back (PKG-03/04)" \
 # ── A. content edited after the manifest was generated ──────────────────────
 sandbox "$WS/stale"
 printf '\n<!-- edited after the manifest was written -->\n' \
-    >> "$WS/stale/content/exams/COMPTIA-NET-009/questions/net009-n3-fixtures.md"
+    >> "$WS/stale/content/exams/COMPTIA-NET-009/questions/net009-n3-demo-cut.md"
 expect_fail "content edited after the manifest was generated" \
     bash -c "cd '$WS/stale' && ${MANIFEST_CHECK[*]}"
 

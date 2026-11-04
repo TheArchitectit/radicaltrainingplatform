@@ -267,7 +267,7 @@ def _write_tree(dest):
         path.write_text(text, encoding="utf-8")
 
 
-RELEASED_A = "content/exams/COMPTIA-A-1201/questions/core1-a2-fixtures.md"
+RELEASED_A = "content/exams/COMPTIA-A-1201/questions/core1-demo-cut.md"
 AZ_BANK = "content/exams/AZ-104/questions/az104-beginner.md"
 
 # (path, anchor, replacement, the defect this reintroduces)

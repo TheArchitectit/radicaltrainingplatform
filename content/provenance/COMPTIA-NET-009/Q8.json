@@ -1,5 +1,5 @@
 {
-  "itemId": "COMPTIA-NET-009/net009-n1-fixtures.md/Q8",
+  "itemId": "COMPTIA-NET-009/net009-n1-demo-cut.md/Q8",
   "examId": "COMPTIA-NET-009",
   "objectiveId": "1.4",
   "author": "executor",
@@ -10,5 +10,6 @@
   "originalityCheck": "no-exam-item-proximity",
   "status": "draft",
   "type": "recall",
-  "lesson": "N1"
+  "lesson": "N1",
+  "demoCut": "2026-10-23"
 }

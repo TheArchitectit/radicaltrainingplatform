@@ -142,6 +142,7 @@ naming no gate is a **named gap**, not a covered requirement.
 | TM-108 | LICENSE present; owner confirmation logged | doc | R-10 — HG-01 owner gate, **open**: the file drop is deferred by design ([LICENSE-DECISION.md](../../LICENSE-DECISION.md)) |
 | TM-109 | README counts, badge and release state match the generated manifest | gate | R-12 — `scripts/check-readme-counts.py` + `run_readme_counts_fixtures.sh` |
 | TM-110 | Source files stay reviewable: any source file over 500 lines, or test file over 600, fails the tree; generated files and the preserved legacy tree are exempt by a checked rule, not a path allowlist | gate | SPEC-16 — `scripts/check-file-sizes.py` + `--self-test` (oversize source, oversize test, and a stale exemption each fail; an honest tree passes) |
+| TM-110a | Released banks are learner surfaces, not gate inputs: no released bank filename matches `fixture`, every `*-demo-cut.md` item carries a `demoCut` date, and per-exam item counts are unchanged by the rename | gate + fixtures | SPEC-19 REQ-DC-01..04 — `check-content-bundle.py` + `run_content_bundle_fixtures.sh` (fixture name, undated demo cut, missing asset, stale bundle, dishonest state each fail) |
 
 ## Requirement-to-test index
 

@@ -16,14 +16,14 @@ const { store } = await import('../../../RadicalTrainingPlatform.Web/js/core/Sta
 
 await runner.test('recordItem persists and restore() recovers it (REQ-UI-04)', async () => {
     await progress.init();
-    const r = await progress.recordItem('COMPTIA-A-1201', 'core1-a2-fixtures.md/Q1', {
+    const r = await progress.recordItem('COMPTIA-A-1201', 'core1-demo-cut.md/Q1', {
         isCorrect: true, reason: '', answeredAt: '2026-10-11T00:00:00Z',
     });
     assertEqual(r.saved, true, 'first save must succeed');
 
     // Reload semantics: read the record back through storage, the way a
     // fresh page load's restore() would.
-    const rec = await progress.getItem('COMPTIA-A-1201', 'core1-a2-fixtures.md/Q1');
+    const rec = await progress.getItem('COMPTIA-A-1201', 'core1-demo-cut.md/Q1');
     assert(rec, 'record must be readable back');
     assertEqual(rec.isCorrect, true);
     assertEqual(rec.attempts, 1);
@@ -31,20 +31,20 @@ await runner.test('recordItem persists and restore() recovers it (REQ-UI-04)', a
     assertEqual(rec.latestCorrect, true);
 
     const restored = await progress.restore('COMPTIA-A-1201', [
-        'core1-a2-fixtures.md/Q1', 'core1-a2-fixtures.md/Q2',
+        'core1-demo-cut.md/Q1', 'core1-demo-cut.md/Q2',
     ]);
     assertEqual(restored.attempted, 1, 'only one item answered');
     assertEqual(restored.correct, 1);
     assertEqual(restored.firstCorrect, 1);
-    assert(restored.items['core1-a2-fixtures.md/Q1'], 'answered item restored');
-    assert(!restored.items['core1-a2-fixtures.md/Q2'], 'unanswered item absent');
+    assert(restored.items['core1-demo-cut.md/Q1'], 'answered item restored');
+    assert(!restored.items['core1-demo-cut.md/Q2'], 'unanswered item absent');
 });
 
 await runner.test('attempt counts accumulate across re-answers', async () => {
-    await progress.recordItem('COMPTIA-A-1201', 'core1-a2-fixtures.md/Q1', {
+    await progress.recordItem('COMPTIA-A-1201', 'core1-demo-cut.md/Q1', {
         isCorrect: false, reason: 'set-mismatch',
     });
-    const rec = await progress.getItem('COMPTIA-A-1201', 'core1-a2-fixtures.md/Q1');
+    const rec = await progress.getItem('COMPTIA-A-1201', 'core1-demo-cut.md/Q1');
     assertEqual(rec.attempts, 2, 'second answer bumps attempts');
     assertEqual(rec.isCorrect, false, 'latest outcome is the displayed outcome');
     assertEqual(rec.latestCorrect, false);
@@ -52,7 +52,7 @@ await runner.test('attempt counts accumulate across re-answers', async () => {
 });
 
 await runner.test('summary counts unique items, not scored events (R-04/R-14)', async () => {
-    await progress.recordItem('COMPTIA-A-1201', 'core1-a2-fixtures.md/Q3', {
+    await progress.recordItem('COMPTIA-A-1201', 'core1-demo-cut.md/Q3', {
         isCorrect: true, reason: '',
     });
     const summary = await store.get('progress/COMPTIA-A-1201/summary');
@@ -74,7 +74,7 @@ await runner.test('storage failure returns saved:false, never a false save (L-02
         throw new Error('QuotaExceededError');
     };
     try {
-        const r = await progress.recordItem('COMPTIA-A-1201', 'core1-a2-fixtures.md/Q4', {
+        const r = await progress.recordItem('COMPTIA-A-1201', 'core1-demo-cut.md/Q4', {
             isCorrect: true, reason: '',
         });
         assertEqual(r.saved, false, 'failed save must report saved:false');

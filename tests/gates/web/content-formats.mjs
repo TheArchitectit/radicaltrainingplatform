@@ -139,11 +139,11 @@ await runner.test('formatFor never returns flashcard — a card shares its item 
 
 await runner.test('progressKeyFor builds the documented key', async () => {
     assertEqual(progressKeyFor('lesson', 'COMPTIA-A-1201/A2'), 'progress/content/lesson/COMPTIA-A-1201/A2');
-    assertEqual(progressKeyFor('item', 'COMPTIA-A-1201/core1-a2-fixtures.md/Q1'),
-        'progress/content/item/COMPTIA-A-1201/core1-a2-fixtures.md/Q1');
+    assertEqual(progressKeyFor('item', 'COMPTIA-A-1201/core1-demo-cut.md/Q1'),
+        'progress/content/item/COMPTIA-A-1201/core1-demo-cut.md/Q1');
     assertEqual(progressKeyFor('scenario', 'mci-01'), 'progress/content/scenario/mci-01');
-    assertEqual(progressKeyFor('flashcard', 'COMPTIA-A-1201/core1-a2-fixtures.md/Q1'),
-        'progress/content/flashcard/COMPTIA-A-1201/core1-a2-fixtures.md/Q1');
+    assertEqual(progressKeyFor('flashcard', 'COMPTIA-A-1201/core1-demo-cut.md/Q1'),
+        'progress/content/flashcard/COMPTIA-A-1201/core1-demo-cut.md/Q1');
 });
 
 await runner.test('progressKeyFor refuses an unknown format or an empty id', async () => {

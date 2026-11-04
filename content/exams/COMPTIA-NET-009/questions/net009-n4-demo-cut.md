@@ -1,4 +1,4 @@
-# CompTIA Network+ N10-009 — Module N4 fixtures (October 23 cut, N4 scope)
+# CompTIA Network+ N10-009 — Module N4 demo cut (October 23 cut, N4 scope)
 
 ## Domain 4: Network Security (N10-009)
 

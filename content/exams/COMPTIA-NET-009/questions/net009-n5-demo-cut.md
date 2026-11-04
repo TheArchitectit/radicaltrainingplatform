@@ -1,4 +1,4 @@
-# CompTIA Network+ N10-009 — Module N5 fixtures (October 23 cut, N5 scope)
+# CompTIA Network+ N10-009 — Module N5 demo cut (October 23 cut, N5 scope)
 
 ## Domain 5: Network Troubleshooting (N10-009)
 

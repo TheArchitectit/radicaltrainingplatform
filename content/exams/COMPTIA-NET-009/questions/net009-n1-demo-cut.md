@@ -1,4 +1,4 @@
-# CompTIA Network+ N10-009 — Module N1 fixtures (October 23 cut, N1 scope)
+# CompTIA Network+ N10-009 — Module N1 demo cut (October 23 cut, N1 scope)
 
 ## Domain 1: Networking Concepts (N10-009)
 

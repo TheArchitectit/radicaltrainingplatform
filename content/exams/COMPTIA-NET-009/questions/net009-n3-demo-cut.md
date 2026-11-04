@@ -1,4 +1,4 @@
-# CompTIA Network+ N10-009 — Module N3 fixtures (October 23 cut, N3 scope)
+# CompTIA Network+ N10-009 — Module N3 demo cut (October 23 cut, N3 scope)
 
 ## Domain 3: Network Operations (N10-009)
 

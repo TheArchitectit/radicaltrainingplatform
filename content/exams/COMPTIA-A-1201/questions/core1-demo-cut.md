@@ -1,4 +1,4 @@
-# CompTIA A+ Core 1 — A2/A5 demo cut fixtures (October 23 cut)
+# CompTIA A+ Core 1 — A2/A5 demo cut (October 23 cut)
 
 ## Domain 2: Networking (220-1201)
 

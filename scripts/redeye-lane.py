@@ -23,7 +23,7 @@ any bound input change invalidates the log and scripts/redeye-gate.py will
 exclude the item.
 
 Usage:
-  python3 scripts/redeye-lane.py content/exams/COMPTIA-A-1201/questions/core1-a2-fixtures.md
+  python3 scripts/redeye-lane.py content/exams/COMPTIA-A-1201/questions/core1-demo-cut.md
   python3 scripts/redeye-lane.py --exam COMPTIA-A-1201            # all banks of the exam
   python3 scripts/redeye-lane.py bank.md --allow-model-pending    # self-test aid only
 

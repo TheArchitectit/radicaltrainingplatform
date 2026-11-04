@@ -76,7 +76,7 @@ RELEASED_BANKS = {
     # Beginner banks (2026-10-26): three items per objective across all five
     # domains, joining the demo fixtures that already cover 2.1, 2.3, 2.4, 5.5.
     "COMPTIA-A-1201": [
-        "core1-a2-fixtures.md",
+        "core1-demo-cut.md",
         "core1-domain1-bank.md",
         "core1-domain2-bank.md",
         "core1-domain3-bank.md",
@@ -86,7 +86,7 @@ RELEASED_BANKS = {
     # Beginner banks (2026-10-26): three items per objective across domains
     # 1-3, and the two objectives in domain 4 that the demo cut did not reach.
     "COMPTIA-A-1202": [
-        "core2-b2b4-fixtures.md",
+        "core2-demo-cut.md",
         "core2-b1-domain1-bank.md",
         "core2-b2-domain2-bank.md",
         "core2-b3-domain3-bank.md",
@@ -96,11 +96,11 @@ RELEASED_BANKS = {
     # domains, joining the five demo fixture banks that already cover 1.7, 2.2,
     # 3.2 and parts of domains 2, 4 and 5.
     "COMPTIA-NET-009": [
-        "net009-n1-fixtures.md",
-        "net009-n2-fixtures.md",
-        "net009-n3-fixtures.md",
-        "net009-n4-fixtures.md",
-        "net009-n5-fixtures.md",
+        "net009-n1-demo-cut.md",
+        "net009-n2-demo-cut.md",
+        "net009-n3-demo-cut.md",
+        "net009-n4-demo-cut.md",
+        "net009-n5-demo-cut.md",
         "net009-domain1-bank.md",
         "net009-domain2-bank.md",
         "net009-domain3-bank.md",
@@ -236,6 +236,9 @@ def main():
                     "objectiveId": objective_id,
                     "isMultiSelect": len(item["keys"]) > 1,
                     "provenanceStatus": "draft",
+                    # SPEC-19 REQ-DC-03: the practice header derives the demo-cut
+                    # share from the published items, never a hand-kept list.
+                    "demoCut": record.get("demoCut", ""),
                     "textHash": hashlib.sha256(
                         (bank_path.read_text(encoding="utf-8") + item["number"]).encode("utf-8")).hexdigest()[:16],
                     "bank": bank,

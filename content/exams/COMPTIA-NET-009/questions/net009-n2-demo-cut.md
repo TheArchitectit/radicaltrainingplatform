@@ -1,4 +1,4 @@
-# CompTIA Network+ N10-009 — Module N2 fixtures (October 23 cut, N2 scope)
+# CompTIA Network+ N10-009 — Module N2 demo cut (October 23 cut, N2 scope)
 
 ## Domain 2: Network Implementation (N10-009)
 

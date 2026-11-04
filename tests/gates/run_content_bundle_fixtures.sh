@@ -6,6 +6,8 @@
 #   B. stale bundle            — a released asset changed without regenerating
 #   C. review-state dishonesty — provenance claims 'reviewed' with no reviewDate
 #   D. unreviewed corpus ships — the bundle drops a bank its items still come from
+#   E. released bank named as a fixture — SPEC-19 REQ-DC-01
+#   F. demo-cut record with no date     — SPEC-19 REQ-DC-02
 # Passing fixture:
 #   E. untouched workspace     — must PASS
 # Live:
@@ -35,6 +37,10 @@ expect_fail() {
     if python3 "$GATE" --root "$dir" >/dev/null 2>&1; then
         echo "FAIL: $label passed the gate (the gate cannot detect it)"
         fail=1
+    elif [ -n "${expect:-}" ] && ! python3 "$GATE" --root "$dir" 2>&1 | grep -q "$expect"; then
+        echo "FAIL: $label failed, but not on: $expect"
+        python3 "$GATE" --root "$dir" 2>&1 | sed 's/^/      | /' | head -5
+        fail=1
     else
         echo "PASS: $label failed the gate as required"
     fi
@@ -54,7 +60,7 @@ expect_pass() {
 WS="$(mktemp -d)"
 trap 'rm -rf "$WS"' EXIT
 
-BANK="content/exams/COMPTIA-NET-009/questions/net009-n3-fixtures.md"
+BANK="content/exams/COMPTIA-NET-009/questions/net009-n3-demo-cut.md"
 PROV="content/provenance/COMPTIA-A-1201/Q1.json"
 
 # E. the untouched workspace is the passing fixture
@@ -92,11 +98,45 @@ p = pathlib.Path(sys.argv[1])
 b = json.loads(p.read_text())
 b["exams"]["COMPTIA-NET-009"]["banks"] = [
     x for x in b["exams"]["COMPTIA-NET-009"]["banks"]
-    if x["bank"] != "net009-n3-fixtures.md"
+    if x["bank"] != "net009-n3-demo-cut.md"
 ]
 p.write_text(json.dumps(b, indent=2))
 PY
 expect_fail "unreviewed corpus ships (items from an unnamed bank)" "$WS/unreviewed"
+
+# E. a released bank renamed back to a fixture name (SPEC-19 REQ-DC-01)
+build_workspace "$WS/fixture-name"
+mv "$WS/fixture-name/$BANK" "$WS/fixture-name/content/exams/COMPTIA-NET-009/questions/net009-n3-fixtures.md"
+python3 - "$WS/fixture-name" <<'PY'
+import json, pathlib, sys
+root = pathlib.Path(sys.argv[1])
+old, new = "net009-n3-demo-cut.md", "net009-n3-fixtures.md"
+bundle = root / "RadicalTrainingPlatform.Web" / "content-bundle.json"
+data = json.loads(bundle.read_text())
+for exam in data["exams"].values():
+    for bank in exam["banks"]:
+        if bank["bank"] == old:
+            bank["bank"] = new
+for record in data["provenance"]:
+    record["itemId"] = record["itemId"].replace(old, new)
+bundle.write_text(json.dumps(data, indent=2) + "\n")
+PY
+expect_fail "released bank named as a test fixture (SPEC-19)" "$WS/fixture-name"
+
+# F. a demo-cut record with its date removed (SPEC-19 REQ-DC-02)
+build_workspace "$WS/undated"
+python3 - "$WS/undated" <<'PY'
+import json, pathlib, sys
+root = pathlib.Path(sys.argv[1])
+prov = root / "content" / "provenance" / "COMPTIA-A-1201" / "Q1.json"
+data = json.loads(prov.read_text())
+data.pop("demoCut", None)
+prov.write_text(json.dumps(data, indent=2) + "\n")
+PY
+# The record's hash changes with it; regenerate so the gate reaches the rule
+# under test rather than stopping at the integrity check.
+python3 "$GATE" --root "$WS/undated" --write >/dev/null 2>&1
+expect="undated demo cut" expect_fail "demo-cut record with no date (SPEC-19)" "$WS/undated"
 
 # Live: the repository tree must be clean
 if python3 "$GATE" >/dev/null 2>&1; then

@@ -2335,7 +2335,7 @@ export const LESSONS = {
 };
 export const ITEMS = [
   {
-    "id": "COMPTIA-A-1201/core1-a2-fixtures.md/Q1",
+    "id": "COMPTIA-A-1201/core1-demo-cut.md/Q1",
     "examId": "COMPTIA-A-1201",
     "number": "Q1",
     "stem": "A coworker says a website \"works by IP address but not by name.\" Which service should you check first?",
@@ -2352,11 +2352,12 @@ export const ITEMS = [
     "objectiveId": "2.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "949ab43e701d7ab9",
-    "bank": "core1-a2-fixtures.md"
+    "demoCut": "2026-10-23",
+    "textHash": "8a9105ea17660beb",
+    "bank": "core1-demo-cut.md"
   },
   {
-    "id": "COMPTIA-A-1201/core1-a2-fixtures.md/Q2",
+    "id": "COMPTIA-A-1201/core1-demo-cut.md/Q2",
     "examId": "COMPTIA-A-1201",
     "number": "Q2",
     "stem": "Which of the following is the primary purpose of DNS?",
@@ -2373,11 +2374,12 @@ export const ITEMS = [
     "objectiveId": "2.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "a216ac5347068712",
-    "bank": "core1-a2-fixtures.md"
+    "demoCut": "2026-10-23",
+    "textHash": "6295c6b813a3cb3e",
+    "bank": "core1-demo-cut.md"
   },
   {
-    "id": "COMPTIA-A-1201/core1-a2-fixtures.md/Q3",
+    "id": "COMPTIA-A-1201/core1-demo-cut.md/Q3",
     "examId": "COMPTIA-A-1201",
     "number": "Q3",
     "stem": "A user reports that no websites load by name on a workstation, but pinging the company file server's IP address works. Which two settings are most worth verifying first?",
@@ -2394,11 +2396,12 @@ export const ITEMS = [
     "objectiveId": "2.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "9ca62d39ba5da3ee",
-    "bank": "core1-a2-fixtures.md"
+    "demoCut": "2026-10-23",
+    "textHash": "776e1ed30fb25b4b",
+    "bank": "core1-demo-cut.md"
   },
   {
-    "id": "COMPTIA-A-1201/core1-a2-fixtures.md/Q4",
+    "id": "COMPTIA-A-1201/core1-demo-cut.md/Q4",
     "examId": "COMPTIA-A-1201",
     "number": "Q4",
     "stem": "Which port number is used for standard HTTPS web traffic?",
@@ -2415,11 +2418,12 @@ export const ITEMS = [
     "objectiveId": "2.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "bbea6fe234d7e06d",
-    "bank": "core1-a2-fixtures.md"
+    "demoCut": "2026-10-23",
+    "textHash": "a9757fe4267310cd",
+    "bank": "core1-demo-cut.md"
   },
   {
-    "id": "COMPTIA-A-1201/core1-a2-fixtures.md/Q5",
+    "id": "COMPTIA-A-1201/core1-demo-cut.md/Q5",
     "examId": "COMPTIA-A-1201",
     "number": "Q5",
     "stem": "Which of the following correctly describes what a DHCP lease provides to a joining device?",
@@ -2436,11 +2440,12 @@ export const ITEMS = [
     "objectiveId": "2.4",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "acd6e16ac5b96ae2",
-    "bank": "core1-a2-fixtures.md"
+    "demoCut": "2026-10-23",
+    "textHash": "41d038ade0a253a1",
+    "bank": "core1-demo-cut.md"
   },
   {
-    "id": "COMPTIA-A-1201/core1-a2-fixtures.md/Q6",
+    "id": "COMPTIA-A-1201/core1-demo-cut.md/Q6",
     "examId": "COMPTIA-A-1201",
     "number": "Q6",
     "stem": "A laptop joined to a small office network shows an address in the 169.254.x.x range and cannot reach anything beyond its own segment. What is the most likely cause?",
@@ -2457,11 +2462,12 @@ export const ITEMS = [
     "objectiveId": "2.4",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "90d959efcc613500",
-    "bank": "core1-a2-fixtures.md"
+    "demoCut": "2026-10-23",
+    "textHash": "96d5081b9f0d399b",
+    "bank": "core1-demo-cut.md"
   },
   {
-    "id": "COMPTIA-A-1201/core1-a2-fixtures.md/Q7",
+    "id": "COMPTIA-A-1201/core1-demo-cut.md/Q7",
     "examId": "COMPTIA-A-1201",
     "number": "Q7",
     "stem": "A user can reach the local printer and other workstations on their subnet, but cannot open any website. Which setting is the most likely culprit?",
@@ -2478,11 +2484,12 @@ export const ITEMS = [
     "objectiveId": "2.4",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "3b5b3e33c1883138",
-    "bank": "core1-a2-fixtures.md"
+    "demoCut": "2026-10-23",
+    "textHash": "f9528341cbe906aa",
+    "bank": "core1-demo-cut.md"
   },
   {
-    "id": "COMPTIA-A-1201/core1-a2-fixtures.md/Q8",
+    "id": "COMPTIA-A-1201/core1-demo-cut.md/Q8",
     "examId": "COMPTIA-A-1201",
     "number": "Q8",
     "stem": "What role does the default gateway play on a host's network configuration?",
@@ -2499,11 +2506,12 @@ export const ITEMS = [
     "objectiveId": "2.4",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "a7f7a39d26c9da7d",
-    "bank": "core1-a2-fixtures.md"
+    "demoCut": "2026-10-23",
+    "textHash": "03351cded32f79fa",
+    "bank": "core1-demo-cut.md"
   },
   {
-    "id": "COMPTIA-A-1201/core1-a2-fixtures.md/Q9",
+    "id": "COMPTIA-A-1201/core1-demo-cut.md/Q9",
     "examId": "COMPTIA-A-1201",
     "number": "Q9",
     "stem": "A technician replaces a workstation's failing NIC. After boot, the machine shows an APIPA address and no internet access. Which action should the technician take first?",
@@ -2520,11 +2528,12 @@ export const ITEMS = [
     "objectiveId": "5.5",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "fa70484521ee4cf0",
-    "bank": "core1-a2-fixtures.md"
+    "demoCut": "2026-10-23",
+    "textHash": "4ff54f48748a9cc1",
+    "bank": "core1-demo-cut.md"
   },
   {
-    "id": "COMPTIA-A-1201/core1-a2-fixtures.md/Q10",
+    "id": "COMPTIA-A-1201/core1-demo-cut.md/Q10",
     "examId": "COMPTIA-A-1201",
     "number": "Q10",
     "stem": "A workstation cannot reach anything by name or by IP address. The link light is on. Which field in the IPv4 configuration is the most likely single cause?",
@@ -2541,11 +2550,12 @@ export const ITEMS = [
     "objectiveId": "5.5",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "54b4787533430abc",
-    "bank": "core1-a2-fixtures.md"
+    "demoCut": "2026-10-23",
+    "textHash": "6ab98232743a60e9",
+    "bank": "core1-demo-cut.md"
   },
   {
-    "id": "COMPTIA-A-1201/core1-a2-fixtures.md/Q11",
+    "id": "COMPTIA-A-1201/core1-demo-cut.md/Q11",
     "examId": "COMPTIA-A-1201",
     "number": "Q11",
     "stem": "Internal server names stopped resolving on several workstations, but public websites still load normally. What does this split most suggest?",
@@ -2562,11 +2572,12 @@ export const ITEMS = [
     "objectiveId": "2.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "d0eb22088cacb647",
-    "bank": "core1-a2-fixtures.md"
+    "demoCut": "2026-10-23",
+    "textHash": "a36f4c2d20d39c64",
+    "bank": "core1-demo-cut.md"
   },
   {
-    "id": "COMPTIA-A-1201/core1-a2-fixtures.md/Q12",
+    "id": "COMPTIA-A-1201/core1-demo-cut.md/Q12",
     "examId": "COMPTIA-A-1201",
     "number": "Q12",
     "stem": "A firewall rule must be opened so clients can send DNS name lookups to the campus DNS server. Which port should the rule allow?",
@@ -2583,11 +2594,12 @@ export const ITEMS = [
     "objectiveId": "2.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "1a540d4ae5597ac1",
-    "bank": "core1-a2-fixtures.md"
+    "demoCut": "2026-10-23",
+    "textHash": "dfa83a9e76ef4587",
+    "bank": "core1-demo-cut.md"
   },
   {
-    "id": "COMPTIA-A-1201/core1-a2-fixtures.md/Q13",
+    "id": "COMPTIA-A-1201/core1-demo-cut.md/Q13",
     "examId": "COMPTIA-A-1201",
     "number": "Q13",
     "stem": "One user cannot reach the company intranet by name. Colleagues on the same switch can. What is the safest first test on that user's workstation?",
@@ -2604,11 +2616,12 @@ export const ITEMS = [
     "objectiveId": "5.5",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "ae2754d0702abfb6",
-    "bank": "core1-a2-fixtures.md"
+    "demoCut": "2026-10-23",
+    "textHash": "44fa94e6694aafb0",
+    "bank": "core1-demo-cut.md"
   },
   {
-    "id": "COMPTIA-A-1201/core1-a2-fixtures.md/Q14",
+    "id": "COMPTIA-A-1201/core1-demo-cut.md/Q14",
     "examId": "COMPTIA-A-1201",
     "number": "Q14",
     "stem": "After a desk move, a laptop gets no DHCP address and shows a 169.254.x.x APIPA address. Link light is on. What should the technician verify first, before replacing any hardware?",
@@ -2625,11 +2638,12 @@ export const ITEMS = [
     "objectiveId": "5.5",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "046e9163a3fce2a1",
-    "bank": "core1-a2-fixtures.md"
+    "demoCut": "2026-10-23",
+    "textHash": "ea2fb447b2971bc5",
+    "bank": "core1-demo-cut.md"
   },
   {
-    "id": "COMPTIA-A-1201/core1-a2-fixtures.md/Q15",
+    "id": "COMPTIA-A-1201/core1-demo-cut.md/Q15",
     "examId": "COMPTIA-A-1201",
     "number": "Q15",
     "stem": "A user reports that file transfers to one server are slow, while other servers feel normal. What is the safest first measurement?",
@@ -2646,11 +2660,12 @@ export const ITEMS = [
     "objectiveId": "5.5",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "4ad99a8d69b16996",
-    "bank": "core1-a2-fixtures.md"
+    "demoCut": "2026-10-23",
+    "textHash": "e0e9232bde064b92",
+    "bank": "core1-demo-cut.md"
   },
   {
-    "id": "COMPTIA-A-1201/core1-a2-fixtures.md/Q16",
+    "id": "COMPTIA-A-1201/core1-demo-cut.md/Q16",
     "examId": "COMPTIA-A-1201",
     "number": "Q16",
     "stem": "A technician confirmed the workstation has a valid IP address and can ping its default gateway. Name resolution still fails. What is the next step in isolating the cause?",
@@ -2667,8 +2682,9 @@ export const ITEMS = [
     "objectiveId": "5.5",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "fa244a7afea2a5ec",
-    "bank": "core1-a2-fixtures.md"
+    "demoCut": "2026-10-23",
+    "textHash": "32b9c12d324b5ecf",
+    "bank": "core1-demo-cut.md"
   },
   {
     "id": "COMPTIA-A-1201/core1-domain1-bank.md/Q17",
@@ -2688,6 +2704,7 @@ export const ITEMS = [
     "objectiveId": "1.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "beba3e232028e337",
     "bank": "core1-domain1-bank.md"
   },
@@ -2709,6 +2726,7 @@ export const ITEMS = [
     "objectiveId": "1.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "928791f79e25c4e1",
     "bank": "core1-domain1-bank.md"
   },
@@ -2730,6 +2748,7 @@ export const ITEMS = [
     "objectiveId": "1.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "a1384139e76ce047",
     "bank": "core1-domain1-bank.md"
   },
@@ -2751,6 +2770,7 @@ export const ITEMS = [
     "objectiveId": "1.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "35c0d3e97b811549",
     "bank": "core1-domain1-bank.md"
   },
@@ -2772,6 +2792,7 @@ export const ITEMS = [
     "objectiveId": "1.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "cdd2e2462198a454",
     "bank": "core1-domain1-bank.md"
   },
@@ -2793,6 +2814,7 @@ export const ITEMS = [
     "objectiveId": "1.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "d3333279ec51d058",
     "bank": "core1-domain1-bank.md"
   },
@@ -2814,6 +2836,7 @@ export const ITEMS = [
     "objectiveId": "1.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "3feeb89c879aac5b",
     "bank": "core1-domain1-bank.md"
   },
@@ -2835,6 +2858,7 @@ export const ITEMS = [
     "objectiveId": "1.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "a8cf4c72c3f1d518",
     "bank": "core1-domain1-bank.md"
   },
@@ -2856,6 +2880,7 @@ export const ITEMS = [
     "objectiveId": "1.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "56fdd68ee58a09fd",
     "bank": "core1-domain1-bank.md"
   },
@@ -2877,6 +2902,7 @@ export const ITEMS = [
     "objectiveId": "2.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "47e06f2c600bfea1",
     "bank": "core1-domain2-bank.md"
   },
@@ -2898,6 +2924,7 @@ export const ITEMS = [
     "objectiveId": "2.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "f4b2d9e41936195b",
     "bank": "core1-domain2-bank.md"
   },
@@ -2919,6 +2946,7 @@ export const ITEMS = [
     "objectiveId": "2.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "828df0a4d5d934e0",
     "bank": "core1-domain2-bank.md"
   },
@@ -2940,6 +2968,7 @@ export const ITEMS = [
     "objectiveId": "2.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "7d64a812506f725f",
     "bank": "core1-domain2-bank.md"
   },
@@ -2961,6 +2990,7 @@ export const ITEMS = [
     "objectiveId": "2.5",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "d8ba3c4a20cb5e3c",
     "bank": "core1-domain2-bank.md"
   },
@@ -2982,6 +3012,7 @@ export const ITEMS = [
     "objectiveId": "2.5",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "2f4f8a7b5ddd7a63",
     "bank": "core1-domain2-bank.md"
   },
@@ -3003,6 +3034,7 @@ export const ITEMS = [
     "objectiveId": "2.5",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "bcd669ce23a401a9",
     "bank": "core1-domain2-bank.md"
   },
@@ -3024,6 +3056,7 @@ export const ITEMS = [
     "objectiveId": "2.6",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "1b2194b652cde835",
     "bank": "core1-domain2-bank.md"
   },
@@ -3045,6 +3078,7 @@ export const ITEMS = [
     "objectiveId": "2.6",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "a9b42e653faceccc",
     "bank": "core1-domain2-bank.md"
   },
@@ -3066,6 +3100,7 @@ export const ITEMS = [
     "objectiveId": "2.6",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "e96da3d80d8717b5",
     "bank": "core1-domain2-bank.md"
   },
@@ -3087,6 +3122,7 @@ export const ITEMS = [
     "objectiveId": "2.7",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "277765fc04108a04",
     "bank": "core1-domain2-bank.md"
   },
@@ -3108,6 +3144,7 @@ export const ITEMS = [
     "objectiveId": "2.7",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "55209487620a42f6",
     "bank": "core1-domain2-bank.md"
   },
@@ -3129,6 +3166,7 @@ export const ITEMS = [
     "objectiveId": "2.7",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "684444be0d3629d7",
     "bank": "core1-domain2-bank.md"
   },
@@ -3150,6 +3188,7 @@ export const ITEMS = [
     "objectiveId": "2.8",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "f584924dd2c3256e",
     "bank": "core1-domain2-bank.md"
   },
@@ -3171,6 +3210,7 @@ export const ITEMS = [
     "objectiveId": "2.8",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "b002802e68c889a4",
     "bank": "core1-domain2-bank.md"
   },
@@ -3192,6 +3232,7 @@ export const ITEMS = [
     "objectiveId": "2.8",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "9b77df14a45420fd",
     "bank": "core1-domain2-bank.md"
   },
@@ -3213,6 +3254,7 @@ export const ITEMS = [
     "objectiveId": "3.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "618a2624bfa42cc3",
     "bank": "core1-domain3-bank.md"
   },
@@ -3234,6 +3276,7 @@ export const ITEMS = [
     "objectiveId": "3.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "45db2fc8e0d10ff5",
     "bank": "core1-domain3-bank.md"
   },
@@ -3255,6 +3298,7 @@ export const ITEMS = [
     "objectiveId": "3.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "6a61fb06e1396407",
     "bank": "core1-domain3-bank.md"
   },
@@ -3276,6 +3320,7 @@ export const ITEMS = [
     "objectiveId": "3.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "5492f0affe51317e",
     "bank": "core1-domain3-bank.md"
   },
@@ -3297,6 +3342,7 @@ export const ITEMS = [
     "objectiveId": "3.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "5a1a26a1fe63f56c",
     "bank": "core1-domain3-bank.md"
   },
@@ -3318,6 +3364,7 @@ export const ITEMS = [
     "objectiveId": "3.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "d5217dd207342e2f",
     "bank": "core1-domain3-bank.md"
   },
@@ -3339,6 +3386,7 @@ export const ITEMS = [
     "objectiveId": "3.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "8e97a5b454604db0",
     "bank": "core1-domain3-bank.md"
   },
@@ -3360,6 +3408,7 @@ export const ITEMS = [
     "objectiveId": "3.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "562462f4e05592f9",
     "bank": "core1-domain3-bank.md"
   },
@@ -3381,6 +3430,7 @@ export const ITEMS = [
     "objectiveId": "3.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "57defa2f7ccb7659",
     "bank": "core1-domain3-bank.md"
   },
@@ -3402,6 +3452,7 @@ export const ITEMS = [
     "objectiveId": "3.4",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "a06dbfcecd01db71",
     "bank": "core1-domain3-bank.md"
   },
@@ -3423,6 +3474,7 @@ export const ITEMS = [
     "objectiveId": "3.4",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "742a1b9ce99b352e",
     "bank": "core1-domain3-bank.md"
   },
@@ -3444,6 +3496,7 @@ export const ITEMS = [
     "objectiveId": "3.4",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "a3f43d5b763f7d67",
     "bank": "core1-domain3-bank.md"
   },
@@ -3465,6 +3518,7 @@ export const ITEMS = [
     "objectiveId": "3.5",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "cb409b11e534d632",
     "bank": "core1-domain3-bank.md"
   },
@@ -3486,6 +3540,7 @@ export const ITEMS = [
     "objectiveId": "3.5",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "8e48371ffc613325",
     "bank": "core1-domain3-bank.md"
   },
@@ -3507,6 +3562,7 @@ export const ITEMS = [
     "objectiveId": "3.5",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "32ecbf39e5d3b63b",
     "bank": "core1-domain3-bank.md"
   },
@@ -3528,6 +3584,7 @@ export const ITEMS = [
     "objectiveId": "3.6",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "8a328b0a7aaef77e",
     "bank": "core1-domain3-bank.md"
   },
@@ -3549,6 +3606,7 @@ export const ITEMS = [
     "objectiveId": "3.6",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "10a1107e75feba7b",
     "bank": "core1-domain3-bank.md"
   },
@@ -3570,6 +3628,7 @@ export const ITEMS = [
     "objectiveId": "3.6",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "8c0c3ee91e3e4205",
     "bank": "core1-domain3-bank.md"
   },
@@ -3591,6 +3650,7 @@ export const ITEMS = [
     "objectiveId": "3.7",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "39d2a6159b38d12c",
     "bank": "core1-domain3-bank.md"
   },
@@ -3612,6 +3672,7 @@ export const ITEMS = [
     "objectiveId": "3.7",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "3c9cc39a19e0cd99",
     "bank": "core1-domain3-bank.md"
   },
@@ -3633,6 +3694,7 @@ export const ITEMS = [
     "objectiveId": "3.7",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "8233621275d57fcb",
     "bank": "core1-domain3-bank.md"
   },
@@ -3654,6 +3716,7 @@ export const ITEMS = [
     "objectiveId": "3.8",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "dc76b876bf576cad",
     "bank": "core1-domain3-bank.md"
   },
@@ -3675,6 +3738,7 @@ export const ITEMS = [
     "objectiveId": "3.8",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "4013ddd9ab4d8b68",
     "bank": "core1-domain3-bank.md"
   },
@@ -3696,6 +3760,7 @@ export const ITEMS = [
     "objectiveId": "3.8",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "d7bb7085e6da26be",
     "bank": "core1-domain3-bank.md"
   },
@@ -3717,6 +3782,7 @@ export const ITEMS = [
     "objectiveId": "4.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "233b2c46d143a27f",
     "bank": "core1-domain4-bank.md"
   },
@@ -3738,6 +3804,7 @@ export const ITEMS = [
     "objectiveId": "4.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "7e6124e71155a53c",
     "bank": "core1-domain4-bank.md"
   },
@@ -3759,6 +3826,7 @@ export const ITEMS = [
     "objectiveId": "4.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "758b200657513944",
     "bank": "core1-domain4-bank.md"
   },
@@ -3780,6 +3848,7 @@ export const ITEMS = [
     "objectiveId": "4.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "a8945a9fb78c6353",
     "bank": "core1-domain4-bank.md"
   },
@@ -3801,6 +3870,7 @@ export const ITEMS = [
     "objectiveId": "4.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "fc5cda19e98dcc94",
     "bank": "core1-domain4-bank.md"
   },
@@ -3822,6 +3892,7 @@ export const ITEMS = [
     "objectiveId": "4.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "7889c958e4fc88fb",
     "bank": "core1-domain4-bank.md"
   },
@@ -3843,6 +3914,7 @@ export const ITEMS = [
     "objectiveId": "5.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "49ce5641302d39cf",
     "bank": "core1-domain5-bank.md"
   },
@@ -3864,6 +3936,7 @@ export const ITEMS = [
     "objectiveId": "5.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "48f3dd1bfe8c98db",
     "bank": "core1-domain5-bank.md"
   },
@@ -3885,6 +3958,7 @@ export const ITEMS = [
     "objectiveId": "5.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "d77ac22898da6a02",
     "bank": "core1-domain5-bank.md"
   },
@@ -3906,6 +3980,7 @@ export const ITEMS = [
     "objectiveId": "5.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "5149f3eaa393e9cc",
     "bank": "core1-domain5-bank.md"
   },
@@ -3927,6 +4002,7 @@ export const ITEMS = [
     "objectiveId": "5.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "a1488e826d5354f0",
     "bank": "core1-domain5-bank.md"
   },
@@ -3948,6 +4024,7 @@ export const ITEMS = [
     "objectiveId": "5.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "8343540936dc1a74",
     "bank": "core1-domain5-bank.md"
   },
@@ -3969,6 +4046,7 @@ export const ITEMS = [
     "objectiveId": "5.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "6b611add8768df0f",
     "bank": "core1-domain5-bank.md"
   },
@@ -3990,6 +4068,7 @@ export const ITEMS = [
     "objectiveId": "5.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "569601bb2a0c5ce8",
     "bank": "core1-domain5-bank.md"
   },
@@ -4011,6 +4090,7 @@ export const ITEMS = [
     "objectiveId": "5.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "ef098a522e82896f",
     "bank": "core1-domain5-bank.md"
   },
@@ -4032,6 +4112,7 @@ export const ITEMS = [
     "objectiveId": "5.4",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "caa4826f33c4318c",
     "bank": "core1-domain5-bank.md"
   },
@@ -4053,6 +4134,7 @@ export const ITEMS = [
     "objectiveId": "5.4",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "06b09d4f31ee624e",
     "bank": "core1-domain5-bank.md"
   },
@@ -4074,6 +4156,7 @@ export const ITEMS = [
     "objectiveId": "5.4",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "7dbd0e11278fe7fa",
     "bank": "core1-domain5-bank.md"
   },
@@ -4095,6 +4178,7 @@ export const ITEMS = [
     "objectiveId": "5.6",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "2b6a3c7c665f3b96",
     "bank": "core1-domain5-bank.md"
   },
@@ -4116,6 +4200,7 @@ export const ITEMS = [
     "objectiveId": "5.6",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "b0ccd01721a0798a",
     "bank": "core1-domain5-bank.md"
   },
@@ -4137,11 +4222,12 @@ export const ITEMS = [
     "objectiveId": "5.6",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "c433f28c96a2e34f",
     "bank": "core1-domain5-bank.md"
   },
   {
-    "id": "COMPTIA-A-1202/core2-b2b4-fixtures.md/Q1",
+    "id": "COMPTIA-A-1202/core2-demo-cut.md/Q1",
     "examId": "COMPTIA-A-1202",
     "number": "Q1",
     "stem": "An email tells the recipient their account will be closed in 24 hours unless they click a link and sign in immediately. The sender address is `support@account-verify-helpdesk.example`. Which signal most strongly indicates phishing?",
@@ -4158,11 +4244,12 @@ export const ITEMS = [
     "objectiveId": "2.5",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "2026-10-23",
     "textHash": "f36a25755425fc29",
-    "bank": "core2-b2b4-fixtures.md"
+    "bank": "core2-demo-cut.md"
   },
   {
-    "id": "COMPTIA-A-1202/core2-b2b4-fixtures.md/Q2",
+    "id": "COMPTIA-A-1202/core2-demo-cut.md/Q2",
     "examId": "COMPTIA-A-1202",
     "number": "Q2",
     "stem": "A caller says they are from IT and need the user's password to apply an urgent security patch. What should the user do?",
@@ -4179,11 +4266,12 @@ export const ITEMS = [
     "objectiveId": "2.5",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "2026-10-23",
     "textHash": "f8f4d48a39e57df0",
-    "bank": "core2-b2b4-fixtures.md"
+    "bank": "core2-demo-cut.md"
   },
   {
-    "id": "COMPTIA-A-1202/core2-b2b4-fixtures.md/Q3",
+    "id": "COMPTIA-A-1202/core2-demo-cut.md/Q3",
     "examId": "COMPTIA-A-1202",
     "number": "Q3",
     "stem": "A user receives an unexpected invoice attachment from a vendor they do recognize, but the message urges them to open it today to avoid a late fee, and the reply-to address differs from the usual vendor contact. Which response is safest? ## Domain 4: Operational Procedures (220-1202) ---",
@@ -4200,11 +4288,12 @@ export const ITEMS = [
     "objectiveId": "2.5",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "2026-10-23",
     "textHash": "206a921d66dcd70a",
-    "bank": "core2-b2b4-fixtures.md"
+    "bank": "core2-demo-cut.md"
   },
   {
-    "id": "COMPTIA-A-1202/core2-b2b4-fixtures.md/Q4",
+    "id": "COMPTIA-A-1202/core2-demo-cut.md/Q4",
     "examId": "COMPTIA-A-1202",
     "number": "Q4",
     "stem": "A technician is about to take over a ticket someone else started. Which ticket field is most important for picking up the work without re-diagnosing from zero?",
@@ -4221,11 +4310,12 @@ export const ITEMS = [
     "objectiveId": "4.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "2026-10-23",
     "textHash": "cbe18e5ec7ed2bdf",
-    "bank": "core2-b2b4-fixtures.md"
+    "bank": "core2-demo-cut.md"
   },
   {
-    "id": "COMPTIA-A-1202/core2-b2b4-fixtures.md/Q5",
+    "id": "COMPTIA-A-1202/core2-demo-cut.md/Q5",
     "examId": "COMPTIA-A-1202",
     "number": "Q5",
     "stem": "A resolution note says only: \"Fixed it.\" What is missing that the next technician most needs?",
@@ -4242,11 +4332,12 @@ export const ITEMS = [
     "objectiveId": "4.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "2026-10-23",
     "textHash": "dfbba0b2e81446c1",
-    "bank": "core2-b2b4-fixtures.md"
+    "bank": "core2-demo-cut.md"
   },
   {
-    "id": "COMPTIA-A-1202/core2-b2b4-fixtures.md/Q6",
+    "id": "COMPTIA-A-1202/core2-demo-cut.md/Q6",
     "examId": "COMPTIA-A-1202",
     "number": "Q6",
     "stem": "A workstation could not resolve names. The technician found the DNS server field pointed at a decommissioned address, changed it to the correct server, and confirmed the user can open the intranet site by name again. Which resolution note is most useful?",
@@ -4263,11 +4354,12 @@ export const ITEMS = [
     "objectiveId": "4.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "2026-10-23",
     "textHash": "8a70a0f209103e67",
-    "bank": "core2-b2b4-fixtures.md"
+    "bank": "core2-demo-cut.md"
   },
   {
-    "id": "COMPTIA-A-1202/core2-b2b4-fixtures.md/Q7",
+    "id": "COMPTIA-A-1202/core2-demo-cut.md/Q7",
     "examId": "COMPTIA-A-1202",
     "number": "Q7",
     "stem": "Before changing the DHCP scope on a production server that three floors of users depend on, what should the technician do first?",
@@ -4284,11 +4376,12 @@ export const ITEMS = [
     "objectiveId": "4.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "2026-10-23",
     "textHash": "27bceb3aa6a5c7a1",
-    "bank": "core2-b2b4-fixtures.md"
+    "bank": "core2-demo-cut.md"
   },
   {
-    "id": "COMPTIA-A-1202/core2-b2b4-fixtures.md/Q8",
+    "id": "COMPTIA-A-1202/core2-demo-cut.md/Q8",
     "examId": "COMPTIA-A-1202",
     "number": "Q8",
     "stem": "A user keeps their only backup on an external drive that stays plugged into the same desk as the workstation. What is the biggest risk of this setup?",
@@ -4305,8 +4398,9 @@ export const ITEMS = [
     "objectiveId": "4.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "2026-10-23",
     "textHash": "b981921abfa0a7fd",
-    "bank": "core2-b2b4-fixtures.md"
+    "bank": "core2-demo-cut.md"
   },
   {
     "id": "COMPTIA-A-1202/core2-b1-domain1-bank.md/Q9",
@@ -4326,6 +4420,7 @@ export const ITEMS = [
     "objectiveId": "1.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "3c328c5949600ebb",
     "bank": "core2-b1-domain1-bank.md"
   },
@@ -4347,6 +4442,7 @@ export const ITEMS = [
     "objectiveId": "1.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "bea16696da6fce8e",
     "bank": "core2-b1-domain1-bank.md"
   },
@@ -4368,6 +4464,7 @@ export const ITEMS = [
     "objectiveId": "1.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "2742593832222f7e",
     "bank": "core2-b1-domain1-bank.md"
   },
@@ -4389,6 +4486,7 @@ export const ITEMS = [
     "objectiveId": "1.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "2ca807d73a936753",
     "bank": "core2-b1-domain1-bank.md"
   },
@@ -4410,6 +4508,7 @@ export const ITEMS = [
     "objectiveId": "1.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "1be818f65124bfcf",
     "bank": "core2-b1-domain1-bank.md"
   },
@@ -4431,6 +4530,7 @@ export const ITEMS = [
     "objectiveId": "1.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "67d503d1b085bd3b",
     "bank": "core2-b1-domain1-bank.md"
   },
@@ -4452,6 +4552,7 @@ export const ITEMS = [
     "objectiveId": "1.4",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "306a79d1551472d6",
     "bank": "core2-b1-domain1-bank.md"
   },
@@ -4473,6 +4574,7 @@ export const ITEMS = [
     "objectiveId": "1.4",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "ab748acdc85f7621",
     "bank": "core2-b1-domain1-bank.md"
   },
@@ -4494,6 +4596,7 @@ export const ITEMS = [
     "objectiveId": "1.4",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "4b7465435a22170e",
     "bank": "core2-b1-domain1-bank.md"
   },
@@ -4515,6 +4618,7 @@ export const ITEMS = [
     "objectiveId": "1.5",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "71ebd6ea5e0d25b3",
     "bank": "core2-b1-domain1-bank.md"
   },
@@ -4536,6 +4640,7 @@ export const ITEMS = [
     "objectiveId": "1.5",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "c8e6a5f72eb99cc8",
     "bank": "core2-b1-domain1-bank.md"
   },
@@ -4557,6 +4662,7 @@ export const ITEMS = [
     "objectiveId": "1.5",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "88014516dd8a044f",
     "bank": "core2-b1-domain1-bank.md"
   },
@@ -4578,6 +4684,7 @@ export const ITEMS = [
     "objectiveId": "1.6",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "d23bd251a2059b9e",
     "bank": "core2-b1-domain1-bank.md"
   },
@@ -4599,6 +4706,7 @@ export const ITEMS = [
     "objectiveId": "1.6",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "b241e3f36a9c2038",
     "bank": "core2-b1-domain1-bank.md"
   },
@@ -4620,6 +4728,7 @@ export const ITEMS = [
     "objectiveId": "1.6",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "8b06b6c865db9f81",
     "bank": "core2-b1-domain1-bank.md"
   },
@@ -4641,6 +4750,7 @@ export const ITEMS = [
     "objectiveId": "1.7",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "47970b0590386894",
     "bank": "core2-b1-domain1-bank.md"
   },
@@ -4662,6 +4772,7 @@ export const ITEMS = [
     "objectiveId": "1.7",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "a4bd02bf789bae60",
     "bank": "core2-b1-domain1-bank.md"
   },
@@ -4683,6 +4794,7 @@ export const ITEMS = [
     "objectiveId": "1.7",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "ea309a0d56c579ae",
     "bank": "core2-b1-domain1-bank.md"
   },
@@ -4704,6 +4816,7 @@ export const ITEMS = [
     "objectiveId": "1.8",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "f38ff68132fc4e86",
     "bank": "core2-b1-domain1-bank.md"
   },
@@ -4725,6 +4838,7 @@ export const ITEMS = [
     "objectiveId": "1.8",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "89ecb120be3ed332",
     "bank": "core2-b1-domain1-bank.md"
   },
@@ -4746,6 +4860,7 @@ export const ITEMS = [
     "objectiveId": "1.8",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "493a070bb031b2f6",
     "bank": "core2-b1-domain1-bank.md"
   },
@@ -4767,6 +4882,7 @@ export const ITEMS = [
     "objectiveId": "1.9",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "9e6a2216149e09db",
     "bank": "core2-b1-domain1-bank.md"
   },
@@ -4788,6 +4904,7 @@ export const ITEMS = [
     "objectiveId": "1.9",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "155362727fc62862",
     "bank": "core2-b1-domain1-bank.md"
   },
@@ -4809,6 +4926,7 @@ export const ITEMS = [
     "objectiveId": "1.10",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "0d29c18842b05bfe",
     "bank": "core2-b1-domain1-bank.md"
   },
@@ -4830,6 +4948,7 @@ export const ITEMS = [
     "objectiveId": "1.10",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "161a81212428885c",
     "bank": "core2-b1-domain1-bank.md"
   },
@@ -4851,6 +4970,7 @@ export const ITEMS = [
     "objectiveId": "1.10",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "ffc3405abdc8a95b",
     "bank": "core2-b1-domain1-bank.md"
   },
@@ -4872,6 +4992,7 @@ export const ITEMS = [
     "objectiveId": "1.11",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "0a53de2334164f29",
     "bank": "core2-b1-domain1-bank.md"
   },
@@ -4893,6 +5014,7 @@ export const ITEMS = [
     "objectiveId": "1.11",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "57b31bdd822ead79",
     "bank": "core2-b1-domain1-bank.md"
   },
@@ -4914,6 +5036,7 @@ export const ITEMS = [
     "objectiveId": "1.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "920386d7d67ed193",
     "bank": "core2-b1-domain1-bank.md"
   },
@@ -4935,6 +5058,7 @@ export const ITEMS = [
     "objectiveId": "1.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "1e91cde04b8cff17",
     "bank": "core2-b1-domain1-bank.md"
   },
@@ -4956,6 +5080,7 @@ export const ITEMS = [
     "objectiveId": "1.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "5a81f2f60e46c37b",
     "bank": "core2-b1-domain1-bank.md"
   },
@@ -4977,6 +5102,7 @@ export const ITEMS = [
     "objectiveId": "1.9",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "c3ee93033e67c32e",
     "bank": "core2-b1-domain1-bank.md"
   },
@@ -4998,6 +5124,7 @@ export const ITEMS = [
     "objectiveId": "1.11",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "180c96b00d31377e",
     "bank": "core2-b1-domain1-bank.md"
   },
@@ -5019,6 +5146,7 @@ export const ITEMS = [
     "objectiveId": "2.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "d39d1f3266c6e953",
     "bank": "core2-b2-domain2-bank.md"
   },
@@ -5040,6 +5168,7 @@ export const ITEMS = [
     "objectiveId": "2.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "6ade5845aae133d4",
     "bank": "core2-b2-domain2-bank.md"
   },
@@ -5061,6 +5190,7 @@ export const ITEMS = [
     "objectiveId": "2.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "615f24337c79b7b2",
     "bank": "core2-b2-domain2-bank.md"
   },
@@ -5082,6 +5212,7 @@ export const ITEMS = [
     "objectiveId": "2.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "bdcbaba5494e5f48",
     "bank": "core2-b2-domain2-bank.md"
   },
@@ -5103,6 +5234,7 @@ export const ITEMS = [
     "objectiveId": "2.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "e48e4e93962b3aa0",
     "bank": "core2-b2-domain2-bank.md"
   },
@@ -5124,6 +5256,7 @@ export const ITEMS = [
     "objectiveId": "2.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "fd0753f5ab6a844f",
     "bank": "core2-b2-domain2-bank.md"
   },
@@ -5145,6 +5278,7 @@ export const ITEMS = [
     "objectiveId": "2.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "10994292f8668782",
     "bank": "core2-b2-domain2-bank.md"
   },
@@ -5166,6 +5300,7 @@ export const ITEMS = [
     "objectiveId": "2.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "0dd5dedfc7b895fe",
     "bank": "core2-b2-domain2-bank.md"
   },
@@ -5187,6 +5322,7 @@ export const ITEMS = [
     "objectiveId": "2.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "c8ec8e468685dc55",
     "bank": "core2-b2-domain2-bank.md"
   },
@@ -5208,6 +5344,7 @@ export const ITEMS = [
     "objectiveId": "2.4",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "6a5795db9ccdc8b5",
     "bank": "core2-b2-domain2-bank.md"
   },
@@ -5229,6 +5366,7 @@ export const ITEMS = [
     "objectiveId": "2.4",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "11490e61ba7b1b50",
     "bank": "core2-b2-domain2-bank.md"
   },
@@ -5250,6 +5388,7 @@ export const ITEMS = [
     "objectiveId": "2.4",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "0077f42589e9eee0",
     "bank": "core2-b2-domain2-bank.md"
   },
@@ -5271,6 +5410,7 @@ export const ITEMS = [
     "objectiveId": "2.6",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "ab88ce5075605c69",
     "bank": "core2-b2-domain2-bank.md"
   },
@@ -5292,6 +5432,7 @@ export const ITEMS = [
     "objectiveId": "2.6",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "9a8d573139957478",
     "bank": "core2-b2-domain2-bank.md"
   },
@@ -5313,6 +5454,7 @@ export const ITEMS = [
     "objectiveId": "2.6",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "c638ea4855a65490",
     "bank": "core2-b2-domain2-bank.md"
   },
@@ -5334,6 +5476,7 @@ export const ITEMS = [
     "objectiveId": "2.7",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "e35ae1399a4f72ff",
     "bank": "core2-b2-domain2-bank.md"
   },
@@ -5355,6 +5498,7 @@ export const ITEMS = [
     "objectiveId": "2.7",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "c91d2ba2ed3845c0",
     "bank": "core2-b2-domain2-bank.md"
   },
@@ -5376,6 +5520,7 @@ export const ITEMS = [
     "objectiveId": "2.7",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "11325b255b19083d",
     "bank": "core2-b2-domain2-bank.md"
   },
@@ -5397,6 +5542,7 @@ export const ITEMS = [
     "objectiveId": "2.8",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "f87a9fff40d03833",
     "bank": "core2-b2-domain2-bank.md"
   },
@@ -5418,6 +5564,7 @@ export const ITEMS = [
     "objectiveId": "2.8",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "255f60ba62b2c80d",
     "bank": "core2-b2-domain2-bank.md"
   },
@@ -5439,6 +5586,7 @@ export const ITEMS = [
     "objectiveId": "2.8",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "7c7677ecf81d1b79",
     "bank": "core2-b2-domain2-bank.md"
   },
@@ -5460,6 +5608,7 @@ export const ITEMS = [
     "objectiveId": "2.9",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "bd89349d57c4cf1c",
     "bank": "core2-b2-domain2-bank.md"
   },
@@ -5481,6 +5630,7 @@ export const ITEMS = [
     "objectiveId": "2.9",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "0cf3f1500d57f328",
     "bank": "core2-b2-domain2-bank.md"
   },
@@ -5502,6 +5652,7 @@ export const ITEMS = [
     "objectiveId": "2.9",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "42160c01a4f10308",
     "bank": "core2-b2-domain2-bank.md"
   },
@@ -5523,6 +5674,7 @@ export const ITEMS = [
     "objectiveId": "2.10",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "fc9f5747d6f2fb64",
     "bank": "core2-b2-domain2-bank.md"
   },
@@ -5544,6 +5696,7 @@ export const ITEMS = [
     "objectiveId": "2.10",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "a252c4094570c219",
     "bank": "core2-b2-domain2-bank.md"
   },
@@ -5565,6 +5718,7 @@ export const ITEMS = [
     "objectiveId": "2.10",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "1dc2c76fadfa4d7f",
     "bank": "core2-b2-domain2-bank.md"
   },
@@ -5586,6 +5740,7 @@ export const ITEMS = [
     "objectiveId": "2.11",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "ea5b7ab5ea673e38",
     "bank": "core2-b2-domain2-bank.md"
   },
@@ -5607,6 +5762,7 @@ export const ITEMS = [
     "objectiveId": "2.11",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "092de7ad718662e2",
     "bank": "core2-b2-domain2-bank.md"
   },
@@ -5628,6 +5784,7 @@ export const ITEMS = [
     "objectiveId": "2.11",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "2f21d30c83ed56ca",
     "bank": "core2-b2-domain2-bank.md"
   },
@@ -5649,6 +5806,7 @@ export const ITEMS = [
     "objectiveId": "3.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "4a064b5f513c5519",
     "bank": "core2-b3-domain3-bank.md"
   },
@@ -5670,6 +5828,7 @@ export const ITEMS = [
     "objectiveId": "3.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "9d29cfe0451e79f8",
     "bank": "core2-b3-domain3-bank.md"
   },
@@ -5691,6 +5850,7 @@ export const ITEMS = [
     "objectiveId": "3.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "7bbaae09e92e4546",
     "bank": "core2-b3-domain3-bank.md"
   },
@@ -5712,6 +5872,7 @@ export const ITEMS = [
     "objectiveId": "3.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "af0ad11078a34df3",
     "bank": "core2-b3-domain3-bank.md"
   },
@@ -5733,6 +5894,7 @@ export const ITEMS = [
     "objectiveId": "3.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "304cd2a4ecfcef54",
     "bank": "core2-b3-domain3-bank.md"
   },
@@ -5754,6 +5916,7 @@ export const ITEMS = [
     "objectiveId": "3.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "e91ea7e18600a43c",
     "bank": "core2-b3-domain3-bank.md"
   },
@@ -5775,6 +5938,7 @@ export const ITEMS = [
     "objectiveId": "3.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "5d4c896c32885cba",
     "bank": "core2-b3-domain3-bank.md"
   },
@@ -5796,6 +5960,7 @@ export const ITEMS = [
     "objectiveId": "3.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "5b182ba8900ca312",
     "bank": "core2-b3-domain3-bank.md"
   },
@@ -5817,6 +5982,7 @@ export const ITEMS = [
     "objectiveId": "3.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "bd642dfe566035f0",
     "bank": "core2-b3-domain3-bank.md"
   },
@@ -5838,6 +6004,7 @@ export const ITEMS = [
     "objectiveId": "3.4",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "27d4f78dcd5c9c43",
     "bank": "core2-b3-domain3-bank.md"
   },
@@ -5859,6 +6026,7 @@ export const ITEMS = [
     "objectiveId": "3.4",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "40a3d00334458858",
     "bank": "core2-b3-domain3-bank.md"
   },
@@ -5880,6 +6048,7 @@ export const ITEMS = [
     "objectiveId": "3.4",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "fc383b090cbbddfc",
     "bank": "core2-b3-domain3-bank.md"
   },
@@ -5901,6 +6070,7 @@ export const ITEMS = [
     "objectiveId": "4.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "0a44aa1e0915305e",
     "bank": "core2-b4-domain4-bank.md"
   },
@@ -5922,6 +6092,7 @@ export const ITEMS = [
     "objectiveId": "4.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "34474ff38ba8cb31",
     "bank": "core2-b4-domain4-bank.md"
   },
@@ -5943,6 +6114,7 @@ export const ITEMS = [
     "objectiveId": "4.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "b295208b417f6bfb",
     "bank": "core2-b4-domain4-bank.md"
   },
@@ -5964,6 +6136,7 @@ export const ITEMS = [
     "objectiveId": "4.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "2c1b2b60349b6267",
     "bank": "core2-b4-domain4-bank.md"
   },
@@ -5985,6 +6158,7 @@ export const ITEMS = [
     "objectiveId": "4.4",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "d0d112bbd9cb41be",
     "bank": "core2-b4-domain4-bank.md"
   },
@@ -6006,6 +6180,7 @@ export const ITEMS = [
     "objectiveId": "4.4",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "e5b94e9cfb84fb10",
     "bank": "core2-b4-domain4-bank.md"
   },
@@ -6027,6 +6202,7 @@ export const ITEMS = [
     "objectiveId": "4.4",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "048013bde7476e4c",
     "bank": "core2-b4-domain4-bank.md"
   },
@@ -6048,6 +6224,7 @@ export const ITEMS = [
     "objectiveId": "4.5",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "0ab2e37eb023856e",
     "bank": "core2-b4-domain4-bank.md"
   },
@@ -6069,6 +6246,7 @@ export const ITEMS = [
     "objectiveId": "4.5",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "554050b5f1d1e8c2",
     "bank": "core2-b4-domain4-bank.md"
   },
@@ -6090,6 +6268,7 @@ export const ITEMS = [
     "objectiveId": "4.5",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "17b2a8d41865068f",
     "bank": "core2-b4-domain4-bank.md"
   },
@@ -6111,6 +6290,7 @@ export const ITEMS = [
     "objectiveId": "4.6",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "094d972abfb6db86",
     "bank": "core2-b4-domain4-bank.md"
   },
@@ -6132,6 +6312,7 @@ export const ITEMS = [
     "objectiveId": "4.6",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "37f3dedf798e92a1",
     "bank": "core2-b4-domain4-bank.md"
   },
@@ -6153,6 +6334,7 @@ export const ITEMS = [
     "objectiveId": "4.6",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "1ebe55beb272ea6d",
     "bank": "core2-b4-domain4-bank.md"
   },
@@ -6174,6 +6356,7 @@ export const ITEMS = [
     "objectiveId": "4.7",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "79593100fa771f4a",
     "bank": "core2-b4-domain4-bank.md"
   },
@@ -6195,6 +6378,7 @@ export const ITEMS = [
     "objectiveId": "4.7",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "ba507fe977cd9776",
     "bank": "core2-b4-domain4-bank.md"
   },
@@ -6216,6 +6400,7 @@ export const ITEMS = [
     "objectiveId": "4.7",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "00bb586bad045ceb",
     "bank": "core2-b4-domain4-bank.md"
   },
@@ -6237,6 +6422,7 @@ export const ITEMS = [
     "objectiveId": "4.8",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "08e6a41036716e68",
     "bank": "core2-b4-domain4-bank.md"
   },
@@ -6258,6 +6444,7 @@ export const ITEMS = [
     "objectiveId": "4.8",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "a1d2cefe935a3ae9",
     "bank": "core2-b4-domain4-bank.md"
   },
@@ -6279,6 +6466,7 @@ export const ITEMS = [
     "objectiveId": "4.8",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "d98f67e2c9fac8ad",
     "bank": "core2-b4-domain4-bank.md"
   },
@@ -6300,6 +6488,7 @@ export const ITEMS = [
     "objectiveId": "4.9",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "54638359972ef748",
     "bank": "core2-b4-domain4-bank.md"
   },
@@ -6321,6 +6510,7 @@ export const ITEMS = [
     "objectiveId": "4.9",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "60133902f4d50647",
     "bank": "core2-b4-domain4-bank.md"
   },
@@ -6342,6 +6532,7 @@ export const ITEMS = [
     "objectiveId": "4.9",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "2bab8907f8a8fbf1",
     "bank": "core2-b4-domain4-bank.md"
   },
@@ -6363,6 +6554,7 @@ export const ITEMS = [
     "objectiveId": "4.10",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "136e228135d2d5f9",
     "bank": "core2-b4-domain4-bank.md"
   },
@@ -6384,6 +6576,7 @@ export const ITEMS = [
     "objectiveId": "4.10",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "8e036fb8e48a41d6",
     "bank": "core2-b4-domain4-bank.md"
   },
@@ -6405,11 +6598,12 @@ export const ITEMS = [
     "objectiveId": "4.10",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "b470162311bf2948",
     "bank": "core2-b4-domain4-bank.md"
   },
   {
-    "id": "COMPTIA-NET-009/net009-n1-fixtures.md/Q6",
+    "id": "COMPTIA-NET-009/net009-n1-demo-cut.md/Q6",
     "examId": "COMPTIA-NET-009",
     "number": "Q6",
     "stem": "A workstation is addressed 10.1.20.55/24 with default gateway 10.1.20.1 and DNS server 10.1.20.10. It can ping 10.1.20.1 and 10.1.20.10, but every destination outside 10.1.20.0/24 times out. Which role in the host's IPv4 configuration is the first place to look, and why?",
@@ -6426,11 +6620,12 @@ export const ITEMS = [
     "objectiveId": "1.7",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "2398688452faf662",
-    "bank": "net009-n1-fixtures.md"
+    "demoCut": "2026-10-23",
+    "textHash": "4fc212cfd27262b0",
+    "bank": "net009-n1-demo-cut.md"
   },
   {
-    "id": "COMPTIA-NET-009/net009-n1-fixtures.md/Q7",
+    "id": "COMPTIA-NET-009/net009-n1-demo-cut.md/Q7",
     "examId": "COMPTIA-NET-009",
     "number": "Q7",
     "stem": "A laptop on a corporate VLAN keeps dropping off the network for about thirty seconds every few hours, then recovers on its own. At Network+ lease-lifecycle depth, which stage is the most useful place to start, and what would you look for?",
@@ -6447,11 +6642,12 @@ export const ITEMS = [
     "objectiveId": "1.7",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "16b19943c65ced4d",
-    "bank": "net009-n1-fixtures.md"
+    "demoCut": "2026-10-23",
+    "textHash": "f907cefc8dd4b7e5",
+    "bank": "net009-n1-demo-cut.md"
   },
   {
-    "id": "COMPTIA-NET-009/net009-n1-fixtures.md/Q8",
+    "id": "COMPTIA-NET-009/net009-n1-demo-cut.md/Q8",
     "examId": "COMPTIA-NET-009",
     "number": "Q8",
     "stem": "Which protocol and transport port pair is correct?",
@@ -6468,11 +6664,12 @@ export const ITEMS = [
     "objectiveId": "1.4",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "443b76701ca149dc",
-    "bank": "net009-n1-fixtures.md"
+    "demoCut": "2026-10-23",
+    "textHash": "9e5665b70f1172d3",
+    "bank": "net009-n1-demo-cut.md"
   },
   {
-    "id": "COMPTIA-NET-009/net009-n1-fixtures.md/Q9",
+    "id": "COMPTIA-NET-009/net009-n1-demo-cut.md/Q9",
     "examId": "COMPTIA-NET-009",
     "number": "Q9",
     "stem": "A technician is reading a layered network diagram and needs to know where IP addressing and routing decisions live. Which OSI layer is that?",
@@ -6489,11 +6686,12 @@ export const ITEMS = [
     "objectiveId": "1.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "53dc9604e0117b2e",
-    "bank": "net009-n1-fixtures.md"
+    "demoCut": "2026-10-23",
+    "textHash": "a453fa37614cb21e",
+    "bank": "net009-n1-demo-cut.md"
   },
   {
-    "id": "COMPTIA-NET-009/net009-n1-fixtures.md/Q10",
+    "id": "COMPTIA-NET-009/net009-n1-demo-cut.md/Q10",
     "examId": "COMPTIA-NET-009",
     "number": "Q10",
     "stem": "An organization has 250 workstations in one flat 10.0.0.0/24 and is seeing heavy broadcast noise and a growing number of address conflicts after a bring-your-own-device push. What problem is subnetting (or VLAN segmentation paired with it) actually solving here?",
@@ -6510,11 +6708,12 @@ export const ITEMS = [
     "objectiveId": "1.7",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "c9289dd2edc39a6c",
-    "bank": "net009-n1-fixtures.md"
+    "demoCut": "2026-10-23",
+    "textHash": "0be9f5b1be326eaf",
+    "bank": "net009-n1-demo-cut.md"
   },
   {
-    "id": "COMPTIA-NET-009/net009-n2-fixtures.md/Q11",
+    "id": "COMPTIA-NET-009/net009-n2-demo-cut.md/Q11",
     "examId": "COMPTIA-NET-009",
     "number": "Q11",
     "stem": "A small office wants guest Wi-Fi users blocked from reaching the file server and printers, while keeping both on the same physical switch. What is the clearest implementation choice?",
@@ -6531,11 +6730,12 @@ export const ITEMS = [
     "objectiveId": "2.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "6562195a537c93c9",
-    "bank": "net009-n2-fixtures.md"
+    "demoCut": "2026-10-23",
+    "textHash": "04ac26f59c2177e6",
+    "bank": "net009-n2-demo-cut.md"
   },
   {
-    "id": "COMPTIA-NET-009/net009-n2-fixtures.md/Q12",
+    "id": "COMPTIA-NET-009/net009-n2-demo-cut.md/Q12",
     "examId": "COMPTIA-NET-009",
     "number": "Q12",
     "stem": "Two VLANs share one access switch. Hosts in VLAN 10 can reach each other, and hosts in VLAN 20 can reach each other, but a VLAN 10 host cannot reach a VLAN 20 host. What does this result tell you about what a VLAN is doing?",
@@ -6552,11 +6752,12 @@ export const ITEMS = [
     "objectiveId": "2.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "55e55dd73d33c3ae",
-    "bank": "net009-n2-fixtures.md"
+    "demoCut": "2026-10-23",
+    "textHash": "710692d141643c79",
+    "bank": "net009-n2-demo-cut.md"
   },
   {
-    "id": "COMPTIA-NET-009/net009-n2-fixtures.md/Q13",
+    "id": "COMPTIA-NET-009/net009-n2-demo-cut.md/Q13",
     "examId": "COMPTIA-NET-009",
     "number": "Q13",
     "stem": "A packet's destination is on a different IP subnet from the sending host, and the host has a default gateway configured. Which device makes the forwarding decision to get that packet off the local segment?",
@@ -6573,11 +6774,12 @@ export const ITEMS = [
     "objectiveId": "2.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "7c1a0cca2aff2f00",
-    "bank": "net009-n2-fixtures.md"
+    "demoCut": "2026-10-23",
+    "textHash": "5735dfb706ea6f15",
+    "bank": "net009-n2-demo-cut.md"
   },
   {
-    "id": "COMPTIA-NET-009/net009-n2-fixtures.md/Q14",
+    "id": "COMPTIA-NET-009/net009-n2-demo-cut.md/Q14",
     "examId": "COMPTIA-NET-009",
     "number": "Q14",
     "stem": "Which wireless security mode is the minimum acceptable choice for a small-business WLAN that carries company data?",
@@ -6594,11 +6796,12 @@ export const ITEMS = [
     "objectiveId": "2.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "b0f9921315e686eb",
-    "bank": "net009-n2-fixtures.md"
+    "demoCut": "2026-10-23",
+    "textHash": "62e8f0693e1082ea",
+    "bank": "net009-n2-demo-cut.md"
   },
   {
-    "id": "COMPTIA-NET-009/net009-n2-fixtures.md/Q15",
+    "id": "COMPTIA-NET-009/net009-n2-demo-cut.md/Q15",
     "examId": "COMPTIA-NET-009",
     "number": "Q15",
     "stem": "During a wiring-closet install, a technician is terminating copper cables near fluorescent light fixtures and a power conduit. What is the most important physical-installation judgment here?",
@@ -6615,11 +6818,12 @@ export const ITEMS = [
     "objectiveId": "2.4",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "335efafc72284049",
-    "bank": "net009-n2-fixtures.md"
+    "demoCut": "2026-10-23",
+    "textHash": "799e019abb4ec702",
+    "bank": "net009-n2-demo-cut.md"
   },
   {
-    "id": "COMPTIA-NET-009/net009-n3-fixtures.md/Q16",
+    "id": "COMPTIA-NET-009/net009-n3-demo-cut.md/Q16",
     "examId": "COMPTIA-NET-009",
     "number": "Q16",
     "stem": "A monitoring dashboard shows round-trip latency to a core server at 40\u201360 ms for three months, then 300\u2013400 ms starting Tuesday at 14:00. How should this reading be classified first?",
@@ -6636,11 +6840,12 @@ export const ITEMS = [
     "objectiveId": "3.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "b723f66cbb00806b",
-    "bank": "net009-n3-fixtures.md"
+    "demoCut": "2026-10-23",
+    "textHash": "f08cf1bc5868ddab",
+    "bank": "net009-n3-demo-cut.md"
   },
   {
-    "id": "COMPTIA-NET-009/net009-n3-fixtures.md/Q17",
+    "id": "COMPTIA-NET-009/net009-n3-demo-cut.md/Q17",
     "examId": "COMPTIA-NET-009",
     "number": "Q17",
     "stem": "An operator is handed a latency chart with no baseline and asked whether \"this is bad.\" What is the correct first response?",
@@ -6657,11 +6862,12 @@ export const ITEMS = [
     "objectiveId": "3.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "9d4d29378bbbeae4",
-    "bank": "net009-n3-fixtures.md"
+    "demoCut": "2026-10-23",
+    "textHash": "501e5afb586a9588",
+    "bank": "net009-n3-demo-cut.md"
   },
   {
-    "id": "COMPTIA-NET-009/net009-n3-fixtures.md/Q18",
+    "id": "COMPTIA-NET-009/net009-n3-demo-cut.md/Q18",
     "examId": "COMPTIA-NET-009",
     "number": "Q18",
     "stem": "What is the operational purpose of keeping current network diagrams and an inventory of devices, circuits, and credentials?",
@@ -6678,11 +6884,12 @@ export const ITEMS = [
     "objectiveId": "3.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "8eeb19c42694d7cb",
-    "bank": "net009-n3-fixtures.md"
+    "demoCut": "2026-10-23",
+    "textHash": "02bfc43328b1a986",
+    "bank": "net009-n3-demo-cut.md"
   },
   {
-    "id": "COMPTIA-NET-009/net009-n3-fixtures.md/Q19",
+    "id": "COMPTIA-NET-009/net009-n3-demo-cut.md/Q19",
     "examId": "COMPTIA-NET-009",
     "number": "Q19",
     "stem": "A change request to replace a core switch has been signed off and scheduled. Which sequence is the correct next-step discipline?",
@@ -6699,11 +6906,12 @@ export const ITEMS = [
     "objectiveId": "3.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "ce864bcf9e7858cb",
-    "bank": "net009-n3-fixtures.md"
+    "demoCut": "2026-10-23",
+    "textHash": "20c53004f70c45de",
+    "bank": "net009-n3-demo-cut.md"
   },
   {
-    "id": "COMPTIA-NET-009/net009-n3-fixtures.md/Q20",
+    "id": "COMPTIA-NET-009/net009-n3-demo-cut.md/Q20",
     "examId": "COMPTIA-NET-009",
     "number": "Q20",
     "stem": "In disaster recovery terms, what does RPO describe?",
@@ -6720,11 +6928,12 @@ export const ITEMS = [
     "objectiveId": "3.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "96205a1d82f79523",
-    "bank": "net009-n3-fixtures.md"
+    "demoCut": "2026-10-23",
+    "textHash": "a9ffbcb9d49edb20",
+    "bank": "net009-n3-demo-cut.md"
   },
   {
-    "id": "COMPTIA-NET-009/net009-n4-fixtures.md/Q21",
+    "id": "COMPTIA-NET-009/net009-n4-demo-cut.md/Q21",
     "examId": "COMPTIA-NET-009",
     "number": "Q21",
     "stem": "A hospital places medical devices, staff workstations, and guest Wi-Fi on separate network segments with controlled paths between them. What security purpose does this segmentation primarily serve?",
@@ -6741,11 +6950,12 @@ export const ITEMS = [
     "objectiveId": "4.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "40e27575b9a9e8b0",
-    "bank": "net009-n4-fixtures.md"
+    "demoCut": "2026-10-23",
+    "textHash": "18a555631446ffb2",
+    "bank": "net009-n4-demo-cut.md"
   },
   {
-    "id": "COMPTIA-NET-009/net009-n4-fixtures.md/Q22",
+    "id": "COMPTIA-NET-009/net009-n4-demo-cut.md/Q22",
     "examId": "COMPTIA-NET-009",
     "number": "Q22",
     "stem": "After a workstation on the user VLAN is infected with malware, the security team finds the malware only reached other user workstations and never touched the server VLAN. Which design choice produced that outcome?",
@@ -6762,11 +6972,12 @@ export const ITEMS = [
     "objectiveId": "4.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "a43ab76dc1fbaa14",
-    "bank": "net009-n4-fixtures.md"
+    "demoCut": "2026-10-23",
+    "textHash": "31533ce6dfc64f39",
+    "bank": "net009-n4-demo-cut.md"
   },
   {
-    "id": "COMPTIA-NET-009/net009-n4-fixtures.md/Q23",
+    "id": "COMPTIA-NET-009/net009-n4-demo-cut.md/Q23",
     "examId": "COMPTIA-NET-009",
     "number": "Q23",
     "stem": "Which of the following is a multi-factor authentication pairing?",
@@ -6783,11 +6994,12 @@ export const ITEMS = [
     "objectiveId": "4.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "567cbfdcd4f28282",
-    "bank": "net009-n4-fixtures.md"
+    "demoCut": "2026-10-23",
+    "textHash": "41768e03f40a52c6",
+    "bank": "net009-n4-demo-cut.md"
   },
   {
-    "id": "COMPTIA-NET-009/net009-n4-fixtures.md/Q24",
+    "id": "COMPTIA-NET-009/net009-n4-demo-cut.md/Q24",
     "examId": "COMPTIA-NET-009",
     "number": "Q24",
     "stem": "Users report that a familiar-looking login page is asking for their corporate credentials after they clicked a link in an email. Which threat is this?",
@@ -6804,11 +7016,12 @@ export const ITEMS = [
     "objectiveId": "4.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "921dd0b734892843",
-    "bank": "net009-n4-fixtures.md"
+    "demoCut": "2026-10-23",
+    "textHash": "ca68d2e3ef63c170",
+    "bank": "net009-n4-demo-cut.md"
   },
   {
-    "id": "COMPTIA-NET-009/net009-n4-fixtures.md/Q25",
+    "id": "COMPTIA-NET-009/net009-n4-demo-cut.md/Q25",
     "examId": "COMPTIA-NET-009",
     "number": "Q25",
     "stem": "A new firewall policy is being reviewed. Which change is the better hardening judgment?",
@@ -6825,11 +7038,12 @@ export const ITEMS = [
     "objectiveId": "4.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "69065855e752fc82",
-    "bank": "net009-n4-fixtures.md"
+    "demoCut": "2026-10-23",
+    "textHash": "210daea093d8d289",
+    "bank": "net009-n4-demo-cut.md"
   },
   {
-    "id": "COMPTIA-NET-009/net009-n5-fixtures.md/Q1",
+    "id": "COMPTIA-NET-009/net009-n5-demo-cut.md/Q1",
     "examId": "COMPTIA-NET-009",
     "number": "Q1",
     "stem": "A technician follows the standard troubleshooting methodology. After forming a theory of probable cause, what should the technician do next?",
@@ -6846,11 +7060,12 @@ export const ITEMS = [
     "objectiveId": "5.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "f1ebea05fa39f633",
-    "bank": "net009-n5-fixtures.md"
+    "demoCut": "2026-10-23",
+    "textHash": "0f946a1b9f13b3ba",
+    "bank": "net009-n5-demo-cut.md"
   },
   {
-    "id": "COMPTIA-NET-009/net009-n5-fixtures.md/Q2",
+    "id": "COMPTIA-NET-009/net009-n5-demo-cut.md/Q2",
     "examId": "COMPTIA-NET-009",
     "number": "Q2",
     "stem": "During troubleshooting, a technician wants to determine whether the fault is in the cabling or further up the stack. Which step of the troubleshooting methodology does testing this belong to?",
@@ -6867,11 +7082,12 @@ export const ITEMS = [
     "objectiveId": "5.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "533c096e8291d2a5",
-    "bank": "net009-n5-fixtures.md"
+    "demoCut": "2026-10-23",
+    "textHash": "b2f07be911a3b73e",
+    "bank": "net009-n5-demo-cut.md"
   },
   {
-    "id": "COMPTIA-NET-009/net009-n5-fixtures.md/Q3",
+    "id": "COMPTIA-NET-009/net009-n5-demo-cut.md/Q3",
     "examId": "COMPTIA-NET-009",
     "number": "Q3",
     "stem": "A user cannot reach a server across the network. The technician pings the server and gets no reply, then pings the local switch gateway and gets a reply. Which tool-family and result pattern is this?",
@@ -6888,11 +7104,12 @@ export const ITEMS = [
     "objectiveId": "5.5",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "1c6fd28c8921891a",
-    "bank": "net009-n5-fixtures.md"
+    "demoCut": "2026-10-23",
+    "textHash": "24c3e928d94b4baa",
+    "bank": "net009-n5-demo-cut.md"
   },
   {
-    "id": "COMPTIA-NET-009/net009-n5-fixtures.md/Q4",
+    "id": "COMPTIA-NET-009/net009-n5-demo-cut.md/Q4",
     "examId": "COMPTIA-NET-009",
     "number": "Q4",
     "stem": "Which tool is the right first choice to verify whether a hostname is resolving, and to what address?",
@@ -6909,11 +7126,12 @@ export const ITEMS = [
     "objectiveId": "5.5",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "4a844535613b87b0",
-    "bank": "net009-n5-fixtures.md"
+    "demoCut": "2026-10-23",
+    "textHash": "e2e09190298acbbb",
+    "bank": "net009-n5-demo-cut.md"
   },
   {
-    "id": "COMPTIA-NET-009/net009-n5-fixtures.md/Q5",
+    "id": "COMPTIA-NET-009/net009-n5-demo-cut.md/Q5",
     "examId": "COMPTIA-NET-009",
     "number": "Q5",
     "stem": "Users on a subnet report that a file transfer that used to take seconds now takes minutes, while web browsing is normal. The link lights are up and no configuration changed. How should this symptom be classified first?",
@@ -6930,8 +7148,9 @@ export const ITEMS = [
     "objectiveId": "5.4",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
-    "textHash": "cf9f709b06d79f9d",
-    "bank": "net009-n5-fixtures.md"
+    "demoCut": "2026-10-23",
+    "textHash": "e2c9a0314fe24d2f",
+    "bank": "net009-n5-demo-cut.md"
   },
   {
     "id": "COMPTIA-NET-009/net009-domain1-bank.md/Q26",
@@ -6951,6 +7170,7 @@ export const ITEMS = [
     "objectiveId": "1.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "815dba2d5d56dbaa",
     "bank": "net009-domain1-bank.md"
   },
@@ -6972,6 +7192,7 @@ export const ITEMS = [
     "objectiveId": "1.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "485c4bee09b9980f",
     "bank": "net009-domain1-bank.md"
   },
@@ -6993,6 +7214,7 @@ export const ITEMS = [
     "objectiveId": "1.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "55dcaa2e20187ef0",
     "bank": "net009-domain1-bank.md"
   },
@@ -7014,6 +7236,7 @@ export const ITEMS = [
     "objectiveId": "1.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "1ef365c1c5d195c8",
     "bank": "net009-domain1-bank.md"
   },
@@ -7035,6 +7258,7 @@ export const ITEMS = [
     "objectiveId": "1.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "91fc588f73a8f330",
     "bank": "net009-domain1-bank.md"
   },
@@ -7056,6 +7280,7 @@ export const ITEMS = [
     "objectiveId": "1.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "a0000fe32d4ce918",
     "bank": "net009-domain1-bank.md"
   },
@@ -7077,6 +7302,7 @@ export const ITEMS = [
     "objectiveId": "1.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "1db00266f4bb770e",
     "bank": "net009-domain1-bank.md"
   },
@@ -7098,6 +7324,7 @@ export const ITEMS = [
     "objectiveId": "1.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "bcf148a44d21f490",
     "bank": "net009-domain1-bank.md"
   },
@@ -7119,6 +7346,7 @@ export const ITEMS = [
     "objectiveId": "1.4",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "96df6f57f9c58e35",
     "bank": "net009-domain1-bank.md"
   },
@@ -7140,6 +7368,7 @@ export const ITEMS = [
     "objectiveId": "1.4",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "28cab6ee2fa56dd0",
     "bank": "net009-domain1-bank.md"
   },
@@ -7161,6 +7390,7 @@ export const ITEMS = [
     "objectiveId": "1.5",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "5d22b0261f3cda89",
     "bank": "net009-domain1-bank.md"
   },
@@ -7182,6 +7412,7 @@ export const ITEMS = [
     "objectiveId": "1.5",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "800b0443573db046",
     "bank": "net009-domain1-bank.md"
   },
@@ -7203,6 +7434,7 @@ export const ITEMS = [
     "objectiveId": "1.5",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "8c58324126cfbbe8",
     "bank": "net009-domain1-bank.md"
   },
@@ -7224,6 +7456,7 @@ export const ITEMS = [
     "objectiveId": "1.6",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "f2a89111efd55410",
     "bank": "net009-domain1-bank.md"
   },
@@ -7245,6 +7478,7 @@ export const ITEMS = [
     "objectiveId": "1.6",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "fae9a456df6fac6d",
     "bank": "net009-domain1-bank.md"
   },
@@ -7266,6 +7500,7 @@ export const ITEMS = [
     "objectiveId": "1.6",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "3d2de9cea0b6c122",
     "bank": "net009-domain1-bank.md"
   },
@@ -7287,6 +7522,7 @@ export const ITEMS = [
     "objectiveId": "1.8",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "a194422598b64309",
     "bank": "net009-domain1-bank.md"
   },
@@ -7308,6 +7544,7 @@ export const ITEMS = [
     "objectiveId": "1.8",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "7476ec2b1ba8c400",
     "bank": "net009-domain1-bank.md"
   },
@@ -7329,6 +7566,7 @@ export const ITEMS = [
     "objectiveId": "1.8",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "31c2a325b69496c7",
     "bank": "net009-domain1-bank.md"
   },
@@ -7350,6 +7588,7 @@ export const ITEMS = [
     "objectiveId": "2.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "fbb9ab6b7f935bf6",
     "bank": "net009-domain2-bank.md"
   },
@@ -7371,6 +7610,7 @@ export const ITEMS = [
     "objectiveId": "2.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "0131a77291f9dcbe",
     "bank": "net009-domain2-bank.md"
   },
@@ -7392,6 +7632,7 @@ export const ITEMS = [
     "objectiveId": "2.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "554e365942709a0a",
     "bank": "net009-domain2-bank.md"
   },
@@ -7413,6 +7654,7 @@ export const ITEMS = [
     "objectiveId": "2.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "506368cd7eb634ee",
     "bank": "net009-domain2-bank.md"
   },
@@ -7434,6 +7676,7 @@ export const ITEMS = [
     "objectiveId": "2.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "33add8d1f4c20deb",
     "bank": "net009-domain2-bank.md"
   },
@@ -7455,6 +7698,7 @@ export const ITEMS = [
     "objectiveId": "2.4",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "c74c359d2c49f7ad",
     "bank": "net009-domain2-bank.md"
   },
@@ -7476,6 +7720,7 @@ export const ITEMS = [
     "objectiveId": "2.4",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "4d5c702bdd93ed5b",
     "bank": "net009-domain2-bank.md"
   },
@@ -7497,6 +7742,7 @@ export const ITEMS = [
     "objectiveId": "3.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "1f4f95351ff4cffd",
     "bank": "net009-domain3-bank.md"
   },
@@ -7518,6 +7764,7 @@ export const ITEMS = [
     "objectiveId": "3.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "e6775781a1d31c5b",
     "bank": "net009-domain3-bank.md"
   },
@@ -7539,6 +7786,7 @@ export const ITEMS = [
     "objectiveId": "3.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "c02bea6a4bf71892",
     "bank": "net009-domain3-bank.md"
   },
@@ -7560,6 +7808,7 @@ export const ITEMS = [
     "objectiveId": "3.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "39d9c799bc55a15e",
     "bank": "net009-domain3-bank.md"
   },
@@ -7581,6 +7830,7 @@ export const ITEMS = [
     "objectiveId": "3.4",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "acf8e7df56085122",
     "bank": "net009-domain3-bank.md"
   },
@@ -7602,6 +7852,7 @@ export const ITEMS = [
     "objectiveId": "3.4",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "a8152ea4c7b7ef71",
     "bank": "net009-domain3-bank.md"
   },
@@ -7623,6 +7874,7 @@ export const ITEMS = [
     "objectiveId": "3.4",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "ef9f248344076e48",
     "bank": "net009-domain3-bank.md"
   },
@@ -7644,6 +7896,7 @@ export const ITEMS = [
     "objectiveId": "3.5",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "38654e6c8a368dee",
     "bank": "net009-domain3-bank.md"
   },
@@ -7665,6 +7918,7 @@ export const ITEMS = [
     "objectiveId": "3.5",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "c0d80349ea18dd6b",
     "bank": "net009-domain3-bank.md"
   },
@@ -7686,6 +7940,7 @@ export const ITEMS = [
     "objectiveId": "3.5",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "5b76c9e5297ea008",
     "bank": "net009-domain3-bank.md"
   },
@@ -7707,6 +7962,7 @@ export const ITEMS = [
     "objectiveId": "4.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "7b68197aec3cc8f3",
     "bank": "net009-domain4-bank.md"
   },
@@ -7728,6 +7984,7 @@ export const ITEMS = [
     "objectiveId": "4.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "3f80720a5a32f0ec",
     "bank": "net009-domain4-bank.md"
   },
@@ -7749,6 +8006,7 @@ export const ITEMS = [
     "objectiveId": "4.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "d52251b278c836ad",
     "bank": "net009-domain4-bank.md"
   },
@@ -7770,6 +8028,7 @@ export const ITEMS = [
     "objectiveId": "4.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "9867d7392cb4f9f8",
     "bank": "net009-domain4-bank.md"
   },
@@ -7791,6 +8050,7 @@ export const ITEMS = [
     "objectiveId": "5.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "5e41b16564f18f7e",
     "bank": "net009-domain5-bank.md"
   },
@@ -7812,6 +8072,7 @@ export const ITEMS = [
     "objectiveId": "5.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "b3b569442b0845a3",
     "bank": "net009-domain5-bank.md"
   },
@@ -7833,6 +8094,7 @@ export const ITEMS = [
     "objectiveId": "5.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "7a6d1186db65d257",
     "bank": "net009-domain5-bank.md"
   },
@@ -7854,6 +8116,7 @@ export const ITEMS = [
     "objectiveId": "5.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "c9ce5adc8cccd9e6",
     "bank": "net009-domain5-bank.md"
   },
@@ -7875,6 +8138,7 @@ export const ITEMS = [
     "objectiveId": "5.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "ec3892fbdaf41bdd",
     "bank": "net009-domain5-bank.md"
   },
@@ -7896,6 +8160,7 @@ export const ITEMS = [
     "objectiveId": "5.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "71f602f438dfb61d",
     "bank": "net009-domain5-bank.md"
   },
@@ -7917,6 +8182,7 @@ export const ITEMS = [
     "objectiveId": "5.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "c12158cb5681417d",
     "bank": "net009-domain5-bank.md"
   },
@@ -7938,6 +8204,7 @@ export const ITEMS = [
     "objectiveId": "5.4",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "d52604bb7e84d456",
     "bank": "net009-domain5-bank.md"
   },
@@ -7959,6 +8226,7 @@ export const ITEMS = [
     "objectiveId": "5.4",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "57872cae8f1dbb85",
     "bank": "net009-domain5-bank.md"
   },
@@ -7980,6 +8248,7 @@ export const ITEMS = [
     "objectiveId": "5.5",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "a9d19048cb4d3d44",
     "bank": "net009-domain5-bank.md"
   },
@@ -8001,6 +8270,7 @@ export const ITEMS = [
     "objectiveId": "1.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "c269704d3972935c",
     "bank": "nca75-pilot.md"
   },
@@ -8022,6 +8292,7 @@ export const ITEMS = [
     "objectiveId": "1.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "862a4e6c8096d60c",
     "bank": "nca75-pilot.md"
   },
@@ -8043,6 +8314,7 @@ export const ITEMS = [
     "objectiveId": "1.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "e391b542758502a3",
     "bank": "nca75-pilot.md"
   },
@@ -8064,6 +8336,7 @@ export const ITEMS = [
     "objectiveId": "1.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "c04488ede2a4c1a8",
     "bank": "nca75-pilot.md"
   },
@@ -8085,6 +8358,7 @@ export const ITEMS = [
     "objectiveId": "1.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "c4869f5a509c0bbe",
     "bank": "nca75-pilot.md"
   },
@@ -8106,6 +8380,7 @@ export const ITEMS = [
     "objectiveId": "1.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "459dd45e54c1af35",
     "bank": "nca75-pilot.md"
   },
@@ -8127,6 +8402,7 @@ export const ITEMS = [
     "objectiveId": "1.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "c26355d2362f8328",
     "bank": "nca75-pilot.md"
   },
@@ -8148,6 +8424,7 @@ export const ITEMS = [
     "objectiveId": "1.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "967f7df0bd6242a0",
     "bank": "nca75-pilot.md"
   },
@@ -8169,6 +8446,7 @@ export const ITEMS = [
     "objectiveId": "1.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "2960de10ac714b58",
     "bank": "nca75-pilot.md"
   },
@@ -8190,6 +8468,7 @@ export const ITEMS = [
     "objectiveId": "1.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "007a39314daeee5f",
     "bank": "nca75-pilot.md"
   },
@@ -8211,6 +8490,7 @@ export const ITEMS = [
     "objectiveId": "2.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "81483e76777f46a0",
     "bank": "nca75-pilot.md"
   },
@@ -8232,6 +8512,7 @@ export const ITEMS = [
     "objectiveId": "2.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "b6529aa063acf618",
     "bank": "nca75-pilot.md"
   },
@@ -8253,6 +8534,7 @@ export const ITEMS = [
     "objectiveId": "2.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "ed6db4e290df9145",
     "bank": "nca75-pilot.md"
   },
@@ -8274,6 +8556,7 @@ export const ITEMS = [
     "objectiveId": "2.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "ff8644a1236c589e",
     "bank": "nca75-pilot.md"
   },
@@ -8295,6 +8578,7 @@ export const ITEMS = [
     "objectiveId": "2.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "dc3b0b3331cb961f",
     "bank": "nca75-pilot.md"
   },
@@ -8316,6 +8600,7 @@ export const ITEMS = [
     "objectiveId": "2.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "cd4e7487688a55ea",
     "bank": "nca75-pilot.md"
   },
@@ -8337,6 +8622,7 @@ export const ITEMS = [
     "objectiveId": "2.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "7c75f63f51682702",
     "bank": "nca75-pilot.md"
   },
@@ -8358,6 +8644,7 @@ export const ITEMS = [
     "objectiveId": "2.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "cce695cfbcec3a9b",
     "bank": "nca75-pilot.md"
   },
@@ -8379,6 +8666,7 @@ export const ITEMS = [
     "objectiveId": "2.4",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "45551dae9c9b92e3",
     "bank": "nca75-pilot.md"
   },
@@ -8400,6 +8688,7 @@ export const ITEMS = [
     "objectiveId": "2.4",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "33beae230151fa41",
     "bank": "nca75-pilot.md"
   },
@@ -8421,6 +8710,7 @@ export const ITEMS = [
     "objectiveId": "3.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "bf1a63677d6e92a0",
     "bank": "nca75-pilot.md"
   },
@@ -8442,6 +8732,7 @@ export const ITEMS = [
     "objectiveId": "3.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "4910eabb4ef40cba",
     "bank": "nca75-pilot.md"
   },
@@ -8463,6 +8754,7 @@ export const ITEMS = [
     "objectiveId": "3.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "897e58cc6b39df5c",
     "bank": "nca75-pilot.md"
   },
@@ -8484,6 +8776,7 @@ export const ITEMS = [
     "objectiveId": "3.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "21c0d53843190bfb",
     "bank": "nca75-pilot.md"
   },
@@ -8505,6 +8798,7 @@ export const ITEMS = [
     "objectiveId": "3.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "950556c61609d112",
     "bank": "nca75-pilot.md"
   },
@@ -8526,6 +8820,7 @@ export const ITEMS = [
     "objectiveId": "3.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "d965bcf0c2b536ea",
     "bank": "nca75-pilot.md"
   },
@@ -8547,6 +8842,7 @@ export const ITEMS = [
     "objectiveId": "3.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "9fe3d4f5a4e0d200",
     "bank": "nca75-pilot.md"
   },
@@ -8568,6 +8864,7 @@ export const ITEMS = [
     "objectiveId": "3.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "89abcdd0bd1657c8",
     "bank": "nca75-pilot.md"
   },
@@ -8589,6 +8886,7 @@ export const ITEMS = [
     "objectiveId": "3.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "50f5f2fbc534bc2f",
     "bank": "nca75-pilot.md"
   },
@@ -8610,6 +8908,7 @@ export const ITEMS = [
     "objectiveId": "3.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "434cf170e37b60d4",
     "bank": "nca75-pilot.md"
   },
@@ -8631,6 +8930,7 @@ export const ITEMS = [
     "objectiveId": "4.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "ac4a48a95892fa04",
     "bank": "nca75-pilot.md"
   },
@@ -8652,6 +8952,7 @@ export const ITEMS = [
     "objectiveId": "4.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "4febe5fde50e54bc",
     "bank": "nca75-pilot.md"
   },
@@ -8673,6 +8974,7 @@ export const ITEMS = [
     "objectiveId": "4.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "7d707af9f8cab327",
     "bank": "nca75-pilot.md"
   },
@@ -8694,6 +8996,7 @@ export const ITEMS = [
     "objectiveId": "4.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "ede45f690eb75429",
     "bank": "nca75-pilot.md"
   },
@@ -8715,6 +9018,7 @@ export const ITEMS = [
     "objectiveId": "4.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "d67d9634ff1bdf10",
     "bank": "nca75-pilot.md"
   },
@@ -8736,6 +9040,7 @@ export const ITEMS = [
     "objectiveId": "4.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "a4ba6ef9bdf00979",
     "bank": "nca75-pilot.md"
   },
@@ -8757,6 +9062,7 @@ export const ITEMS = [
     "objectiveId": "4.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "ecf916efe3315e54",
     "bank": "nca75-pilot.md"
   },
@@ -8778,6 +9084,7 @@ export const ITEMS = [
     "objectiveId": "4.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "a35504a3975ce3ab",
     "bank": "nca75-pilot.md"
   },
@@ -8799,6 +9106,7 @@ export const ITEMS = [
     "objectiveId": "4.4",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "9e22fe0d39083096",
     "bank": "nca75-pilot.md"
   },
@@ -8820,6 +9128,7 @@ export const ITEMS = [
     "objectiveId": "4.4",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "7f5cc5b5b522dbb7",
     "bank": "nca75-pilot.md"
   },
@@ -8841,6 +9150,7 @@ export const ITEMS = [
     "objectiveId": "2.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "05f0e5735fa07f21",
     "bank": "nca75-pilot.md"
   },
@@ -8862,6 +9172,7 @@ export const ITEMS = [
     "objectiveId": "2.4",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "b5047d76683c31b3",
     "bank": "nca75-pilot.md"
   },
@@ -8883,6 +9194,7 @@ export const ITEMS = [
     "objectiveId": "4.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "013eea13fb6455e1",
     "bank": "nca75-pilot.md"
   },
@@ -8904,6 +9216,7 @@ export const ITEMS = [
     "objectiveId": "4.4",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "b7a1b67c846b9d34",
     "bank": "nca75-pilot.md"
   },
@@ -8925,6 +9238,7 @@ export const ITEMS = [
     "objectiveId": "1.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "8edc99dc3fc9ff6c",
     "bank": "az104-beginner.md"
   },
@@ -8946,6 +9260,7 @@ export const ITEMS = [
     "objectiveId": "1.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "e35fbcf94bfc1758",
     "bank": "az104-beginner.md"
   },
@@ -8967,6 +9282,7 @@ export const ITEMS = [
     "objectiveId": "1.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "8a6c701002176efb",
     "bank": "az104-beginner.md"
   },
@@ -8988,6 +9304,7 @@ export const ITEMS = [
     "objectiveId": "1.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "1ab9c05ec89ced41",
     "bank": "az104-beginner.md"
   },
@@ -9009,6 +9326,7 @@ export const ITEMS = [
     "objectiveId": "1.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "5b72f0857e5cd55e",
     "bank": "az104-beginner.md"
   },
@@ -9030,6 +9348,7 @@ export const ITEMS = [
     "objectiveId": "1.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "720fc4857b03b0fe",
     "bank": "az104-beginner.md"
   },
@@ -9051,6 +9370,7 @@ export const ITEMS = [
     "objectiveId": "1.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "c7d5037190050948",
     "bank": "az104-beginner.md"
   },
@@ -9072,6 +9392,7 @@ export const ITEMS = [
     "objectiveId": "1.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "e6123838d233da39",
     "bank": "az104-beginner.md"
   },
@@ -9093,6 +9414,7 @@ export const ITEMS = [
     "objectiveId": "1.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "413c3e94c1aa89af",
     "bank": "az104-beginner.md"
   },
@@ -9114,6 +9436,7 @@ export const ITEMS = [
     "objectiveId": "1.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "e42df2482b356e8f",
     "bank": "az104-beginner.md"
   },
@@ -9135,6 +9458,7 @@ export const ITEMS = [
     "objectiveId": "1.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "94c8cd1519a86174",
     "bank": "az104-beginner.md"
   },
@@ -9156,6 +9480,7 @@ export const ITEMS = [
     "objectiveId": "1.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "00c033e8c3d02602",
     "bank": "az104-beginner.md"
   },
@@ -9178,6 +9503,7 @@ export const ITEMS = [
     "objectiveId": "2.1",
     "isMultiSelect": true,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "17a04a15d9e961d4",
     "bank": "az104-beginner.md"
   },
@@ -9199,6 +9525,7 @@ export const ITEMS = [
     "objectiveId": "2.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "cbfb319caff359ca",
     "bank": "az104-beginner.md"
   },
@@ -9220,6 +9547,7 @@ export const ITEMS = [
     "objectiveId": "2.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "80e15f0a5e36fe63",
     "bank": "az104-beginner.md"
   },
@@ -9241,6 +9569,7 @@ export const ITEMS = [
     "objectiveId": "2.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "b803278cad10b37b",
     "bank": "az104-beginner.md"
   },
@@ -9262,6 +9591,7 @@ export const ITEMS = [
     "objectiveId": "2.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "5d5371bbe98d362e",
     "bank": "az104-beginner.md"
   },
@@ -9283,6 +9613,7 @@ export const ITEMS = [
     "objectiveId": "2.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "2ead6ace49d733b7",
     "bank": "az104-beginner.md"
   },
@@ -9304,6 +9635,7 @@ export const ITEMS = [
     "objectiveId": "2.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "432617465d637649",
     "bank": "az104-beginner.md"
   },
@@ -9325,6 +9657,7 @@ export const ITEMS = [
     "objectiveId": "2.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "8c0b2cb808c3e275",
     "bank": "az104-beginner.md"
   },
@@ -9346,6 +9679,7 @@ export const ITEMS = [
     "objectiveId": "2.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "4663fe76566d71b6",
     "bank": "az104-beginner.md"
   },
@@ -9367,6 +9701,7 @@ export const ITEMS = [
     "objectiveId": "2.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "ba953a1153c551f5",
     "bank": "az104-beginner.md"
   },
@@ -9388,6 +9723,7 @@ export const ITEMS = [
     "objectiveId": "3.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "c177fc2d1b98e35d",
     "bank": "az104-beginner.md"
   },
@@ -9409,6 +9745,7 @@ export const ITEMS = [
     "objectiveId": "3.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "67581bbc0c3a860a",
     "bank": "az104-beginner.md"
   },
@@ -9430,6 +9767,7 @@ export const ITEMS = [
     "objectiveId": "3.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "c5d5d38f328a7e0f",
     "bank": "az104-beginner.md"
   },
@@ -9451,6 +9789,7 @@ export const ITEMS = [
     "objectiveId": "3.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "ce744e0b632a316c",
     "bank": "az104-beginner.md"
   },
@@ -9472,6 +9811,7 @@ export const ITEMS = [
     "objectiveId": "3.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "3f4979e504d568cc",
     "bank": "az104-beginner.md"
   },
@@ -9493,6 +9833,7 @@ export const ITEMS = [
     "objectiveId": "3.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "971fae247b2ce477",
     "bank": "az104-beginner.md"
   },
@@ -9514,6 +9855,7 @@ export const ITEMS = [
     "objectiveId": "3.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "cee4839f00d07d31",
     "bank": "az104-beginner.md"
   },
@@ -9535,6 +9877,7 @@ export const ITEMS = [
     "objectiveId": "3.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "0d0a7e8ab4150e7c",
     "bank": "az104-beginner.md"
   },
@@ -9556,6 +9899,7 @@ export const ITEMS = [
     "objectiveId": "3.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "06e2faf58b1a252c",
     "bank": "az104-beginner.md"
   },
@@ -9577,6 +9921,7 @@ export const ITEMS = [
     "objectiveId": "3.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "d2d8ce95b08cf55e",
     "bank": "az104-beginner.md"
   },
@@ -9598,6 +9943,7 @@ export const ITEMS = [
     "objectiveId": "3.4",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "c4f3b926f55bd9cb",
     "bank": "az104-beginner.md"
   },
@@ -9619,6 +9965,7 @@ export const ITEMS = [
     "objectiveId": "3.4",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "14f55200c57ea7d4",
     "bank": "az104-beginner.md"
   },
@@ -9640,6 +9987,7 @@ export const ITEMS = [
     "objectiveId": "4.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "d0621bdb0b2f3411",
     "bank": "az104-beginner.md"
   },
@@ -9661,6 +10009,7 @@ export const ITEMS = [
     "objectiveId": "4.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "3b8effff0c43a0b9",
     "bank": "az104-beginner.md"
   },
@@ -9682,6 +10031,7 @@ export const ITEMS = [
     "objectiveId": "4.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "f942a9771e14509a",
     "bank": "az104-beginner.md"
   },
@@ -9703,6 +10053,7 @@ export const ITEMS = [
     "objectiveId": "4.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "c76ac0eab6edede0",
     "bank": "az104-beginner.md"
   },
@@ -9724,6 +10075,7 @@ export const ITEMS = [
     "objectiveId": "4.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "b567372510450099",
     "bank": "az104-beginner.md"
   },
@@ -9745,6 +10097,7 @@ export const ITEMS = [
     "objectiveId": "4.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "020221c2612d906a",
     "bank": "az104-beginner.md"
   },
@@ -9766,6 +10119,7 @@ export const ITEMS = [
     "objectiveId": "4.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "014c66ffda9f9d47",
     "bank": "az104-beginner.md"
   },
@@ -9787,6 +10141,7 @@ export const ITEMS = [
     "objectiveId": "4.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "7952cf4b9addf79c",
     "bank": "az104-beginner.md"
   },
@@ -9808,6 +10163,7 @@ export const ITEMS = [
     "objectiveId": "4.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "e5422cc6563c9001",
     "bank": "az104-beginner.md"
   },
@@ -9829,6 +10185,7 @@ export const ITEMS = [
     "objectiveId": "4.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "1a12eb4bd655d7c7",
     "bank": "az104-beginner.md"
   },
@@ -9850,6 +10207,7 @@ export const ITEMS = [
     "objectiveId": "5.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "06f175e1b3b56c34",
     "bank": "az104-beginner.md"
   },
@@ -9871,6 +10229,7 @@ export const ITEMS = [
     "objectiveId": "5.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "3901c9f1c94e8fe7",
     "bank": "az104-beginner.md"
   },
@@ -9892,6 +10251,7 @@ export const ITEMS = [
     "objectiveId": "5.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "17e081e24a425cda",
     "bank": "az104-beginner.md"
   },
@@ -9913,6 +10273,7 @@ export const ITEMS = [
     "objectiveId": "5.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "ea90a51c20b9ff3d",
     "bank": "az104-beginner.md"
   },
@@ -9934,6 +10295,7 @@ export const ITEMS = [
     "objectiveId": "5.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "049e2db5135efc1d",
     "bank": "az104-beginner.md"
   },
@@ -9955,6 +10317,7 @@ export const ITEMS = [
     "objectiveId": "5.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "3b1ff2a971f66011",
     "bank": "az104-beginner.md"
   },
@@ -9976,6 +10339,7 @@ export const ITEMS = [
     "objectiveId": "3.4",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "5af8d31c5ceb4adb",
     "bank": "az104-beginner.md"
   },
@@ -9997,6 +10361,7 @@ export const ITEMS = [
     "objectiveId": "1.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "387e72851a932759",
     "bank": "aws-saa-beginner.md"
   },
@@ -10018,6 +10383,7 @@ export const ITEMS = [
     "objectiveId": "1.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "72b0439a54d90a28",
     "bank": "aws-saa-beginner.md"
   },
@@ -10039,6 +10405,7 @@ export const ITEMS = [
     "objectiveId": "1.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "c8b891c7ad92b7b1",
     "bank": "aws-saa-beginner.md"
   },
@@ -10060,6 +10427,7 @@ export const ITEMS = [
     "objectiveId": "1.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "bf55bc1bb7154659",
     "bank": "aws-saa-beginner.md"
   },
@@ -10081,6 +10449,7 @@ export const ITEMS = [
     "objectiveId": "1.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "f40584cdeeb5c3f3",
     "bank": "aws-saa-beginner.md"
   },
@@ -10102,6 +10471,7 @@ export const ITEMS = [
     "objectiveId": "1.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "83ba70d304eeadfe",
     "bank": "aws-saa-beginner.md"
   },
@@ -10123,6 +10493,7 @@ export const ITEMS = [
     "objectiveId": "1.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "ea9233b663f1da1e",
     "bank": "aws-saa-beginner.md"
   },
@@ -10145,6 +10516,7 @@ export const ITEMS = [
     "objectiveId": "1.2",
     "isMultiSelect": true,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "613f4ca939c45147",
     "bank": "aws-saa-beginner.md"
   },
@@ -10166,6 +10538,7 @@ export const ITEMS = [
     "objectiveId": "1.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "263d43c0727932f7",
     "bank": "aws-saa-beginner.md"
   },
@@ -10187,6 +10560,7 @@ export const ITEMS = [
     "objectiveId": "1.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "c298e25480db3f4b",
     "bank": "aws-saa-beginner.md"
   },
@@ -10208,6 +10582,7 @@ export const ITEMS = [
     "objectiveId": "1.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "62478c500317f161",
     "bank": "aws-saa-beginner.md"
   },
@@ -10229,6 +10604,7 @@ export const ITEMS = [
     "objectiveId": "1.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "10ba4fa2cac4dee4",
     "bank": "aws-saa-beginner.md"
   },
@@ -10250,6 +10626,7 @@ export const ITEMS = [
     "objectiveId": "1.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "b6d2376092a8bae4",
     "bank": "aws-saa-beginner.md"
   },
@@ -10271,6 +10648,7 @@ export const ITEMS = [
     "objectiveId": "1.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "c444444bfc8a40e5",
     "bank": "aws-saa-beginner.md"
   },
@@ -10292,6 +10670,7 @@ export const ITEMS = [
     "objectiveId": "1.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "fa49770698969d8a",
     "bank": "aws-saa-beginner.md"
   },
@@ -10313,6 +10692,7 @@ export const ITEMS = [
     "objectiveId": "2.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "547f311e04ea7b61",
     "bank": "aws-saa-beginner.md"
   },
@@ -10334,6 +10714,7 @@ export const ITEMS = [
     "objectiveId": "2.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "b479a2da812f774b",
     "bank": "aws-saa-beginner.md"
   },
@@ -10355,6 +10736,7 @@ export const ITEMS = [
     "objectiveId": "2.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "717099b07f36d021",
     "bank": "aws-saa-beginner.md"
   },
@@ -10376,6 +10758,7 @@ export const ITEMS = [
     "objectiveId": "2.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "717a3e0f65473dc6",
     "bank": "aws-saa-beginner.md"
   },
@@ -10397,6 +10780,7 @@ export const ITEMS = [
     "objectiveId": "2.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "296381e0e3691525",
     "bank": "aws-saa-beginner.md"
   },
@@ -10418,6 +10802,7 @@ export const ITEMS = [
     "objectiveId": "2.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "4be6e035685a43b2",
     "bank": "aws-saa-beginner.md"
   },
@@ -10439,6 +10824,7 @@ export const ITEMS = [
     "objectiveId": "2.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "54e65d40169e1222",
     "bank": "aws-saa-beginner.md"
   },
@@ -10460,6 +10846,7 @@ export const ITEMS = [
     "objectiveId": "2.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "c8f3feb8af1da61e",
     "bank": "aws-saa-beginner.md"
   },
@@ -10481,6 +10868,7 @@ export const ITEMS = [
     "objectiveId": "2.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "9b34476666d3e0b5",
     "bank": "aws-saa-beginner.md"
   },
@@ -10502,6 +10890,7 @@ export const ITEMS = [
     "objectiveId": "2.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "75432a0bccb848fa",
     "bank": "aws-saa-beginner.md"
   },
@@ -10523,6 +10912,7 @@ export const ITEMS = [
     "objectiveId": "2.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "91a29cad5da42237",
     "bank": "aws-saa-beginner.md"
   },
@@ -10544,6 +10934,7 @@ export const ITEMS = [
     "objectiveId": "2.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "a6835ffef752ef01",
     "bank": "aws-saa-beginner.md"
   },
@@ -10565,6 +10956,7 @@ export const ITEMS = [
     "objectiveId": "2.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "c572fc8f3a9c0ac6",
     "bank": "aws-saa-beginner.md"
   },
@@ -10586,6 +10978,7 @@ export const ITEMS = [
     "objectiveId": "3.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "b75c1cd2241704d6",
     "bank": "aws-saa-beginner.md"
   },
@@ -10607,6 +11000,7 @@ export const ITEMS = [
     "objectiveId": "3.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "166743184b28b53e",
     "bank": "aws-saa-beginner.md"
   },
@@ -10628,6 +11022,7 @@ export const ITEMS = [
     "objectiveId": "3.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "d5faf6ca97a0c90d",
     "bank": "aws-saa-beginner.md"
   },
@@ -10649,6 +11044,7 @@ export const ITEMS = [
     "objectiveId": "3.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "eff5da051d26049c",
     "bank": "aws-saa-beginner.md"
   },
@@ -10670,6 +11066,7 @@ export const ITEMS = [
     "objectiveId": "3.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "003ab1d56ded2217",
     "bank": "aws-saa-beginner.md"
   },
@@ -10691,6 +11088,7 @@ export const ITEMS = [
     "objectiveId": "3.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "0c2807624f660b83",
     "bank": "aws-saa-beginner.md"
   },
@@ -10712,6 +11110,7 @@ export const ITEMS = [
     "objectiveId": "3.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "0a08312ea7804e7c",
     "bank": "aws-saa-beginner.md"
   },
@@ -10733,6 +11132,7 @@ export const ITEMS = [
     "objectiveId": "3.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "e4d65fda2e0b19f7",
     "bank": "aws-saa-beginner.md"
   },
@@ -10754,6 +11154,7 @@ export const ITEMS = [
     "objectiveId": "3.4",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "8426cac1da3f218a",
     "bank": "aws-saa-beginner.md"
   },
@@ -10775,6 +11176,7 @@ export const ITEMS = [
     "objectiveId": "3.4",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "6c579dcbc5c25e51",
     "bank": "aws-saa-beginner.md"
   },
@@ -10796,6 +11198,7 @@ export const ITEMS = [
     "objectiveId": "3.5",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "914ca45484306634",
     "bank": "aws-saa-beginner.md"
   },
@@ -10817,6 +11220,7 @@ export const ITEMS = [
     "objectiveId": "3.5",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "2ac50fa946286910",
     "bank": "aws-saa-beginner.md"
   },
@@ -10838,6 +11242,7 @@ export const ITEMS = [
     "objectiveId": "4.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "bd3f773fd43cbe4b",
     "bank": "aws-saa-beginner.md"
   },
@@ -10859,6 +11264,7 @@ export const ITEMS = [
     "objectiveId": "4.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "e49dcac3690a81e4",
     "bank": "aws-saa-beginner.md"
   },
@@ -10880,6 +11286,7 @@ export const ITEMS = [
     "objectiveId": "4.1",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "7b89027f839488b0",
     "bank": "aws-saa-beginner.md"
   },
@@ -10901,6 +11308,7 @@ export const ITEMS = [
     "objectiveId": "4.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "84d9e4daff6015ab",
     "bank": "aws-saa-beginner.md"
   },
@@ -10922,6 +11330,7 @@ export const ITEMS = [
     "objectiveId": "4.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "3100408bd9d26013",
     "bank": "aws-saa-beginner.md"
   },
@@ -10943,6 +11352,7 @@ export const ITEMS = [
     "objectiveId": "4.2",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "f161d258ac3c12cf",
     "bank": "aws-saa-beginner.md"
   },
@@ -10964,6 +11374,7 @@ export const ITEMS = [
     "objectiveId": "4.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "a771e73c35d49ac7",
     "bank": "aws-saa-beginner.md"
   },
@@ -10985,6 +11396,7 @@ export const ITEMS = [
     "objectiveId": "4.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "eeeb17c3b6a01245",
     "bank": "aws-saa-beginner.md"
   },
@@ -11006,6 +11418,7 @@ export const ITEMS = [
     "objectiveId": "4.4",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "2ab332b0517552c7",
     "bank": "aws-saa-beginner.md"
   },
@@ -11027,6 +11440,7 @@ export const ITEMS = [
     "objectiveId": "4.4",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "561240715f965290",
     "bank": "aws-saa-beginner.md"
   },
@@ -11048,6 +11462,7 @@ export const ITEMS = [
     "objectiveId": "3.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "c3f796385d6b34c7",
     "bank": "aws-saa-beginner.md"
   },
@@ -11069,6 +11484,7 @@ export const ITEMS = [
     "objectiveId": "3.4",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "c6d3deeb828a0f9c",
     "bank": "aws-saa-beginner.md"
   },
@@ -11090,6 +11506,7 @@ export const ITEMS = [
     "objectiveId": "3.5",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "e8b407910f453ff3",
     "bank": "aws-saa-beginner.md"
   },
@@ -11111,6 +11528,7 @@ export const ITEMS = [
     "objectiveId": "4.3",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "d48567ac07106b18",
     "bank": "aws-saa-beginner.md"
   },
@@ -11132,6 +11550,7 @@ export const ITEMS = [
     "objectiveId": "4.4",
     "isMultiSelect": false,
     "provenanceStatus": "draft",
+    "demoCut": "",
     "textHash": "0047641699d9b5bb",
     "bank": "aws-saa-beginner.md"
   }

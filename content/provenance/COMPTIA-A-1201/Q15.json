@@ -1,5 +1,5 @@
 {
-  "itemId": "COMPTIA-A-1201/core1-a2-fixtures.md/Q15",
+  "itemId": "COMPTIA-A-1201/core1-demo-cut.md/Q15",
   "examId": "COMPTIA-A-1201",
   "objectiveId": "5.5",
   "lesson": "A5",
@@ -10,5 +10,6 @@
   "reviewer": "redeye-lane",
   "reviewDate": "",
   "originalityCheck": "no-exam-item-proximity",
-  "status": "draft"
+  "status": "draft",
+  "demoCut": "2026-10-23"
 }

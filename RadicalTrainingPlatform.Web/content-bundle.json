@@ -6,7 +6,7 @@
   "disclaimer": "This is independent study material. It is not official training and is not endorsed or approved by CompTIA, Nutanix, or any other certification body.",
   "compiled": {
     "path": "RadicalTrainingPlatform.Web/js/study-content.js",
-    "sha256": "bf2595591f68c19e0789d62b49eea95bb56c04d8cc8f4024b485da242970b5da"
+    "sha256": "125aef2a237241c7a6d72eb07e836d5da4bdb9e4c4cfae923c2a9e42c1c17189"
   },
   "exams": {
     "COMPTIA-A-1201": {
@@ -43,9 +43,9 @@
       ],
       "banks": [
         {
-          "bank": "core1-a2-fixtures.md",
-          "path": "content/exams/COMPTIA-A-1201/questions/core1-a2-fixtures.md",
-          "sha256": "c3c724b521aea34de1ac20af635b6f5656f2218fa85c61f97f6696ae73e068ff"
+          "bank": "core1-demo-cut.md",
+          "path": "content/exams/COMPTIA-A-1201/questions/core1-demo-cut.md",
+          "sha256": "ce10cb98748a44d6273ea612c3dca568e349c5cbdd53c4c22b4a2aa889cdd9c9"
         },
         {
           "bank": "core1-domain1-bank.md",
@@ -103,8 +103,8 @@
       ],
       "banks": [
         {
-          "bank": "core2-b2b4-fixtures.md",
-          "path": "content/exams/COMPTIA-A-1202/questions/core2-b2b4-fixtures.md",
+          "bank": "core2-demo-cut.md",
+          "path": "content/exams/COMPTIA-A-1202/questions/core2-demo-cut.md",
           "sha256": "81b5ab4a420d7a189230c7cb6f85d74c4d04583b0a794b59bc74cf6fe49d55b5"
         },
         {
@@ -163,29 +163,29 @@
       ],
       "banks": [
         {
-          "bank": "net009-n1-fixtures.md",
-          "path": "content/exams/COMPTIA-NET-009/questions/net009-n1-fixtures.md",
-          "sha256": "4a310948989f4bfe4e438033b305ac624fa90be1a7edbc4c173011e4ed6ea7fa"
+          "bank": "net009-n1-demo-cut.md",
+          "path": "content/exams/COMPTIA-NET-009/questions/net009-n1-demo-cut.md",
+          "sha256": "c2555c5692cdcf75ddabef81505668ce6cfdb9e5d41243b3f677ae03660a7e5e"
         },
         {
-          "bank": "net009-n2-fixtures.md",
-          "path": "content/exams/COMPTIA-NET-009/questions/net009-n2-fixtures.md",
-          "sha256": "aa729beaf636f476e1c24ab207cdd537f056d26ea770bc26f6ae2cbc5c9de0c7"
+          "bank": "net009-n2-demo-cut.md",
+          "path": "content/exams/COMPTIA-NET-009/questions/net009-n2-demo-cut.md",
+          "sha256": "21ac9d25958aacc213728b791d7fcffd090b9529d903cd79df969543debf4c75"
         },
         {
-          "bank": "net009-n3-fixtures.md",
-          "path": "content/exams/COMPTIA-NET-009/questions/net009-n3-fixtures.md",
-          "sha256": "1a468e3a3af008665bfc6f3768b68dbcbd81c325484dd8140cad9af211a213fc"
+          "bank": "net009-n3-demo-cut.md",
+          "path": "content/exams/COMPTIA-NET-009/questions/net009-n3-demo-cut.md",
+          "sha256": "0af53ce2b589cafb1593595f842311def2bbc0ce5ad838ba96e7c5ed6532b213"
         },
         {
-          "bank": "net009-n4-fixtures.md",
-          "path": "content/exams/COMPTIA-NET-009/questions/net009-n4-fixtures.md",
-          "sha256": "4debdd5c909e795c8b4c5a39d76f4cbc485a191ed8627ef7b9653a29a251a742"
+          "bank": "net009-n4-demo-cut.md",
+          "path": "content/exams/COMPTIA-NET-009/questions/net009-n4-demo-cut.md",
+          "sha256": "4616b94c784caec7e9f5a2334cb5d3ff13ac3d6bcc6d4f3bd1a95300a4471c9e"
         },
         {
-          "bank": "net009-n5-fixtures.md",
-          "path": "content/exams/COMPTIA-NET-009/questions/net009-n5-fixtures.md",
-          "sha256": "df038a6415d4ec70733736b0e5a556805c46be723950e5ce7049fec7678cfcde"
+          "bank": "net009-n5-demo-cut.md",
+          "path": "content/exams/COMPTIA-NET-009/questions/net009-n5-demo-cut.md",
+          "sha256": "e3a18d5bf3e8a16e3ccd7ef37c70ab93c870c5546bf8951a2247e490ae730325"
         },
         {
           "bank": "net009-domain1-bank.md",
@@ -499,2937 +499,3356 @@
   ],
   "provenance": [
     {
-      "itemId": "COMPTIA-A-1201/core1-a2-fixtures.md/Q1",
+      "itemId": "COMPTIA-A-1201/core1-demo-cut.md/Q1",
       "path": "content/provenance/COMPTIA-A-1201/Q1.json",
-      "sha256": "0aee4bd9bb4253973ab2a02fdeaf83437fb5d45073ee9a50ecc329e539abd333",
+      "sha256": "e4fd35384610da7df393f720d8cadcf2aa9dee886df658157be0eba6ce755a58",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": "2026-10-23"
     },
     {
-      "itemId": "COMPTIA-A-1201/core1-a2-fixtures.md/Q2",
+      "itemId": "COMPTIA-A-1201/core1-demo-cut.md/Q2",
       "path": "content/provenance/COMPTIA-A-1201/Q2.json",
-      "sha256": "d664c14bfde0211f5179cb3501ab5e5b52614839547cbe1146d13df74b2b1541",
+      "sha256": "55ed3e64cebe7d1d76360c3016f3265d0921c32e41a85d6589505ba5c1f96e4c",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": "2026-10-23"
     },
     {
-      "itemId": "COMPTIA-A-1201/core1-a2-fixtures.md/Q3",
+      "itemId": "COMPTIA-A-1201/core1-demo-cut.md/Q3",
       "path": "content/provenance/COMPTIA-A-1201/Q3.json",
-      "sha256": "8362b5f7fb944f0f05e1509060fa9993ea1497037a50d6010bf3ac2a3565747f",
+      "sha256": "24b37e372db51c5b76928cb20f012b9c660e1e6b0510e08cb216a89dd5207284",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": "2026-10-23"
     },
     {
-      "itemId": "COMPTIA-A-1201/core1-a2-fixtures.md/Q4",
+      "itemId": "COMPTIA-A-1201/core1-demo-cut.md/Q4",
       "path": "content/provenance/COMPTIA-A-1201/Q4.json",
-      "sha256": "906a53d8dc127425fd9ad6874a78e6bf5b62b8b6e86eb349ccd0c46ce73b0ea9",
+      "sha256": "c86c9b7a34b6219418eba2fb00cfc713bf783d9117c237c82abcf60f3323a27c",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": "2026-10-23"
     },
     {
-      "itemId": "COMPTIA-A-1201/core1-a2-fixtures.md/Q5",
+      "itemId": "COMPTIA-A-1201/core1-demo-cut.md/Q5",
       "path": "content/provenance/COMPTIA-A-1201/Q5.json",
-      "sha256": "7050056c4469806afa7a025087842569f4452f33613d2c41db5fb4ac04d36d61",
+      "sha256": "1fae110524dee67dc232b6d166135f2bbee67035257fe6f15a200d01f118a9b0",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": "2026-10-23"
     },
     {
-      "itemId": "COMPTIA-A-1201/core1-a2-fixtures.md/Q6",
+      "itemId": "COMPTIA-A-1201/core1-demo-cut.md/Q6",
       "path": "content/provenance/COMPTIA-A-1201/Q6.json",
-      "sha256": "df3f2739163d5d1cf4890211014aa1b2c73390538a3bcb11e67b3a33ea26f9b8",
+      "sha256": "17a8ca63eff4d14385b5c3284be45a461285ca481ef400fccd42d6d700acec48",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": "2026-10-23"
     },
     {
-      "itemId": "COMPTIA-A-1201/core1-a2-fixtures.md/Q7",
+      "itemId": "COMPTIA-A-1201/core1-demo-cut.md/Q7",
       "path": "content/provenance/COMPTIA-A-1201/Q7.json",
-      "sha256": "2831b177d14fe4c345e7eccacb77459137d1e582f2b631ddc642159174911f16",
+      "sha256": "993d37985fcea88e0c2827596a99550584c1271b132f379377dc0189b76333b8",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": "2026-10-23"
     },
     {
-      "itemId": "COMPTIA-A-1201/core1-a2-fixtures.md/Q8",
+      "itemId": "COMPTIA-A-1201/core1-demo-cut.md/Q8",
       "path": "content/provenance/COMPTIA-A-1201/Q8.json",
-      "sha256": "5f9f612d521b78a0f3ee6c99d4b63c894fd871e9190d90b2a005ebd449a7daaa",
+      "sha256": "ab4cecc4769f602354e192b4da8f5b1a6d9936dee60fef88b26f933e78dd4fd3",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": "2026-10-23"
     },
     {
-      "itemId": "COMPTIA-A-1201/core1-a2-fixtures.md/Q9",
+      "itemId": "COMPTIA-A-1201/core1-demo-cut.md/Q9",
       "path": "content/provenance/COMPTIA-A-1201/Q9.json",
-      "sha256": "8a0140d584d80f5bda1969feca7a7248ea49b88948649b0d352e67a54987c9ce",
+      "sha256": "8cbf0c13ca752e56a299049fb2db77d6f58f0f9f363215da617aef15e8e06385",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": "2026-10-23"
     },
     {
-      "itemId": "COMPTIA-A-1201/core1-a2-fixtures.md/Q10",
+      "itemId": "COMPTIA-A-1201/core1-demo-cut.md/Q10",
       "path": "content/provenance/COMPTIA-A-1201/Q10.json",
-      "sha256": "eecee3cd2a0d19314a67848e85eff45bc5fddfee6e50d07a3a5bf8f3c04fc2d8",
+      "sha256": "ffe1f09e5d7ff45620da6e82224a8604fc51c08b3ee765a2eebf61345aaf2040",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": "2026-10-23"
     },
     {
-      "itemId": "COMPTIA-A-1201/core1-a2-fixtures.md/Q11",
+      "itemId": "COMPTIA-A-1201/core1-demo-cut.md/Q11",
       "path": "content/provenance/COMPTIA-A-1201/Q11.json",
-      "sha256": "667e088615080892e9828360f39564d8ead27c6d21244ae515bd1761dd49a186",
+      "sha256": "653580b495d384b8cd9a9c52461da21c2d8673532305777962e725ada4e909e6",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": "2026-10-23"
     },
     {
-      "itemId": "COMPTIA-A-1201/core1-a2-fixtures.md/Q12",
+      "itemId": "COMPTIA-A-1201/core1-demo-cut.md/Q12",
       "path": "content/provenance/COMPTIA-A-1201/Q12.json",
-      "sha256": "4d33d9cebf1563595ec9aa853ec24f546f475331a9b3dc21089ace552ee5c8d2",
+      "sha256": "4109c3a4e71b268f6a91a7e409b577c8d5007821e1b51709abdddd0aec04ccdf",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": "2026-10-23"
     },
     {
-      "itemId": "COMPTIA-A-1201/core1-a2-fixtures.md/Q13",
+      "itemId": "COMPTIA-A-1201/core1-demo-cut.md/Q13",
       "path": "content/provenance/COMPTIA-A-1201/Q13.json",
-      "sha256": "b330fcd572a45c97d76276b4869d08d4b1e1a642afecff0c15e6e9be772e36c1",
+      "sha256": "e6ab8607fa65b60624b5b61005dbf819d8e80fddd6a4eef5a48f463b1ccf77af",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": "2026-10-23"
     },
     {
-      "itemId": "COMPTIA-A-1201/core1-a2-fixtures.md/Q14",
+      "itemId": "COMPTIA-A-1201/core1-demo-cut.md/Q14",
       "path": "content/provenance/COMPTIA-A-1201/Q14.json",
-      "sha256": "f794feaa7a84d164b6cd3f83256bd5f3abcbe2b212c37a853c61528207ddae3c",
+      "sha256": "186a853dbd26ef4d3b84873552e2600a3e11311c92c4524662ff96b3e6474927",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": "2026-10-23"
     },
     {
-      "itemId": "COMPTIA-A-1201/core1-a2-fixtures.md/Q15",
+      "itemId": "COMPTIA-A-1201/core1-demo-cut.md/Q15",
       "path": "content/provenance/COMPTIA-A-1201/Q15.json",
-      "sha256": "982b9dfc8811eb19d0330242a2fb38432a2a212688048e8ea9e76d8826b616e3",
+      "sha256": "11223c82dcdb72aecf47cb66dbe9617dba194bbb4d327d6317c536c29c10995c",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": "2026-10-23"
     },
     {
-      "itemId": "COMPTIA-A-1201/core1-a2-fixtures.md/Q16",
+      "itemId": "COMPTIA-A-1201/core1-demo-cut.md/Q16",
       "path": "content/provenance/COMPTIA-A-1201/Q16.json",
-      "sha256": "e3747a90ba86549b1a25dcb5d187c0764249b3e5544b97aceb21be012096b93c",
+      "sha256": "a93e7d7651fd84c878adb20d01eb7436ba32aca878b963deb2ccc6872b469e43",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": "2026-10-23"
     },
     {
       "itemId": "COMPTIA-A-1201/core1-domain1-bank.md/Q17",
       "path": "content/provenance/COMPTIA-A-1201/Q17.json",
       "sha256": "c9ebe76872795e71596b2ac38c1ac475259db9984433274960adf01f283eb493",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1201/core1-domain1-bank.md/Q18",
       "path": "content/provenance/COMPTIA-A-1201/Q18.json",
       "sha256": "37330434bed88c271d3746e2d3ed22831037c5ecf5b8c9efddb931b7593b956d",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1201/core1-domain1-bank.md/Q19",
       "path": "content/provenance/COMPTIA-A-1201/Q19.json",
       "sha256": "6dd7bc6fb4ce28835246dbc7b90a9b8b150b0c00494ffd620f13aa48ad066bae",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1201/core1-domain1-bank.md/Q20",
       "path": "content/provenance/COMPTIA-A-1201/Q20.json",
       "sha256": "c45cbcb8a24b4def5414ab1545b653c6a6693c83ff3e4027d29f7321aceb9966",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1201/core1-domain1-bank.md/Q21",
       "path": "content/provenance/COMPTIA-A-1201/Q21.json",
       "sha256": "9928ac7c779c9430cd5922412cb3383048dbc01394ace399dc266b40a4438908",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1201/core1-domain1-bank.md/Q22",
       "path": "content/provenance/COMPTIA-A-1201/Q22.json",
       "sha256": "5ba8bdff54adc940c41ad398ac0ef6dfac9389462cde5a70d53b0ec72e65adce",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1201/core1-domain1-bank.md/Q23",
       "path": "content/provenance/COMPTIA-A-1201/Q23.json",
       "sha256": "4535316df23c9548a558a2d3037e220fc050711e818a9c4b8eeaeb30dad277dd",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1201/core1-domain1-bank.md/Q24",
       "path": "content/provenance/COMPTIA-A-1201/Q24.json",
       "sha256": "cf0800d78b782e2a6207c8db6f986a0f1df505313433c085553f914b6d77d4ca",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1201/core1-domain1-bank.md/Q25",
       "path": "content/provenance/COMPTIA-A-1201/Q25.json",
       "sha256": "848c3654d6cc2c25c368cd55926e963426e1ae5accf564a4b65eaa4af50f085f",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1201/core1-domain2-bank.md/Q26",
       "path": "content/provenance/COMPTIA-A-1201/Q26.json",
       "sha256": "ac4746a7a7dd909fac18fb7a4c8ea6d2470d502479c50ea801bde26a65925060",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1201/core1-domain2-bank.md/Q27",
       "path": "content/provenance/COMPTIA-A-1201/Q27.json",
       "sha256": "539d879ee5864825e77e132895be4b2df49aef2e150317d679770d3dc162d813",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1201/core1-domain2-bank.md/Q28",
       "path": "content/provenance/COMPTIA-A-1201/Q28.json",
       "sha256": "0c598e61d7be1629fdb9c864557ca7517062e074dfd9c30a67231d88b63bed4b",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1201/core1-domain2-bank.md/Q29",
       "path": "content/provenance/COMPTIA-A-1201/Q29.json",
       "sha256": "ace93386e967135f77b4a0a67ddb4c5474be89ead08413f5d66e1cab5717f013",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1201/core1-domain2-bank.md/Q30",
       "path": "content/provenance/COMPTIA-A-1201/Q30.json",
       "sha256": "c8e7872e205decbdfb66c7d4aa7faed108dcb620633ca416c27fc570170c606e",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1201/core1-domain2-bank.md/Q31",
       "path": "content/provenance/COMPTIA-A-1201/Q31.json",
       "sha256": "d34439a8096f4be10b7f5ee03734a17be4cc15d33fb5237634ee5792b7001c1c",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1201/core1-domain2-bank.md/Q32",
       "path": "content/provenance/COMPTIA-A-1201/Q32.json",
       "sha256": "5e8fa3d65311660a18a7fe6ba94010417bf09bd8d43d6e4255a5fb3129a6c8a9",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1201/core1-domain2-bank.md/Q33",
       "path": "content/provenance/COMPTIA-A-1201/Q33.json",
       "sha256": "bbf66462bb67601e2e60fcc70954b7f29df3304a47f4082310ed96f02a4bce29",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1201/core1-domain2-bank.md/Q34",
       "path": "content/provenance/COMPTIA-A-1201/Q34.json",
       "sha256": "a2273a10159d7d1308541c575e1c267f5abeace8801f9a849ebf671d695e0194",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1201/core1-domain2-bank.md/Q35",
       "path": "content/provenance/COMPTIA-A-1201/Q35.json",
       "sha256": "a3bebacb0d60152340f9e841905b2bb6bb7195015b2be3bc6f0ac79a860ececa",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1201/core1-domain2-bank.md/Q36",
       "path": "content/provenance/COMPTIA-A-1201/Q36.json",
       "sha256": "601d9fc21acf11c246f2a147c8d24ad8869efe0e613591b9157e9e86d916a9c6",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1201/core1-domain2-bank.md/Q37",
       "path": "content/provenance/COMPTIA-A-1201/Q37.json",
       "sha256": "19d66f23d19dbe1d659fcee0adddd744b077d8588fa99b5686476fd0ac90c13b",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1201/core1-domain2-bank.md/Q38",
       "path": "content/provenance/COMPTIA-A-1201/Q38.json",
       "sha256": "fc5a1282b9932d0b571d06f3c599b2c99f969669635efbe73bfaab367cc77984",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1201/core1-domain2-bank.md/Q39",
       "path": "content/provenance/COMPTIA-A-1201/Q39.json",
       "sha256": "35033024f0bc878f954014283c4aaf6a76af627ce26308b15a1bc4855e3224af",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1201/core1-domain2-bank.md/Q40",
       "path": "content/provenance/COMPTIA-A-1201/Q40.json",
       "sha256": "56b6e126e64f1b6caac84bdfae92f47b63965fd27e65d42b924e64fa47b853e1",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1201/core1-domain2-bank.md/Q41",
       "path": "content/provenance/COMPTIA-A-1201/Q41.json",
       "sha256": "aa23ceb5fe5483c1fbe5360db215b990dbcd96a753a37b7e5628edd26464683b",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1201/core1-domain3-bank.md/Q42",
       "path": "content/provenance/COMPTIA-A-1201/Q42.json",
       "sha256": "4a1a13543bffff285c4eee3995d9ecccd94ff3a8575b732b97d62ff89a2b9759",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1201/core1-domain3-bank.md/Q43",
       "path": "content/provenance/COMPTIA-A-1201/Q43.json",
       "sha256": "a00cf7b73cdc27ae080e41ae66f8d33c88ff2c49e5616096561cb9cf0a6d23fe",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1201/core1-domain3-bank.md/Q44",
       "path": "content/provenance/COMPTIA-A-1201/Q44.json",
       "sha256": "58af2ede5b73537efa8bcf9f0c578a6e05fed2f14f05053a7b4d78a60f217848",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1201/core1-domain3-bank.md/Q45",
       "path": "content/provenance/COMPTIA-A-1201/Q45.json",
       "sha256": "84c2ab124e5501747c0bb3e31b66d4325254d66a4f7a48cbdff6ddceee0e09ef",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1201/core1-domain3-bank.md/Q46",
       "path": "content/provenance/COMPTIA-A-1201/Q46.json",
       "sha256": "c77155ba1ca2d032cf2219f5d2fb1f159e35e7af849400a5bc89a917f603dc5d",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1201/core1-domain3-bank.md/Q47",
       "path": "content/provenance/COMPTIA-A-1201/Q47.json",
       "sha256": "32f5b9a7b8b417cc28d9f1e7e55596f5724311810fad7bdf715f2b2cf90b93ea",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1201/core1-domain3-bank.md/Q48",
       "path": "content/provenance/COMPTIA-A-1201/Q48.json",
       "sha256": "950d8bd3b0503e30d65cb25e343b872192c8ff92bd38904304e640e839bb57f0",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1201/core1-domain3-bank.md/Q49",
       "path": "content/provenance/COMPTIA-A-1201/Q49.json",
       "sha256": "5dc4ca7fdd861c862a8fe724bd28348285306d3fce7c2f635fbe5d9eaf91dd09",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1201/core1-domain3-bank.md/Q50",
       "path": "content/provenance/COMPTIA-A-1201/Q50.json",
       "sha256": "9d58d368bc1f72aa516d1eeda9885cc19eff9ea07ed878afa3b4e87b60d8e421",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1201/core1-domain3-bank.md/Q51",
       "path": "content/provenance/COMPTIA-A-1201/Q51.json",
       "sha256": "d2ea97e6327c01a541488f634c548747827cf2b6561233a05624fd258935bc65",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1201/core1-domain3-bank.md/Q52",
       "path": "content/provenance/COMPTIA-A-1201/Q52.json",
       "sha256": "cb17cc67446625283ee9cda82080ab93713fce61ac3324af1c75fb46234ae662",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1201/core1-domain3-bank.md/Q53",
       "path": "content/provenance/COMPTIA-A-1201/Q53.json",
       "sha256": "1aa310bad7cb5372ac6aa0f0594dd65de561dbb014f139fec91da2f63fc85718",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1201/core1-domain3-bank.md/Q54",
       "path": "content/provenance/COMPTIA-A-1201/Q54.json",
       "sha256": "1f6da87faed116cd5fdcf94c55710477390842659f4cd42f6b0d2a2abf5cf407",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1201/core1-domain3-bank.md/Q55",
       "path": "content/provenance/COMPTIA-A-1201/Q55.json",
       "sha256": "6fffd7d42b5d2d2f102f77b80917739be25bd6eb707832324e98e78739b46a03",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1201/core1-domain3-bank.md/Q56",
       "path": "content/provenance/COMPTIA-A-1201/Q56.json",
       "sha256": "80e6f5c5e81db5c723b03920aa3e0c6deb71d57820f6f55d7ee4d1aa0e2868c9",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1201/core1-domain3-bank.md/Q57",
       "path": "content/provenance/COMPTIA-A-1201/Q57.json",
       "sha256": "2b03d405384a31b01cdbdaed056e41725dde93543151847fa135ad685bd44d41",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1201/core1-domain3-bank.md/Q58",
       "path": "content/provenance/COMPTIA-A-1201/Q58.json",
       "sha256": "17328fc1e2ee6abb5bd166265e21449bbff9409208e103f1a500c9e7a860c800",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1201/core1-domain3-bank.md/Q59",
       "path": "content/provenance/COMPTIA-A-1201/Q59.json",
       "sha256": "4ed7b3c0c63446ae58a57be26893ea778a6ef85dc74451ae78d3c1178e8feee0",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1201/core1-domain3-bank.md/Q60",
       "path": "content/provenance/COMPTIA-A-1201/Q60.json",
       "sha256": "0b888691f62aeae97234d50c51a3905825294d1e7375aced4dd68f846b5799cf",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1201/core1-domain3-bank.md/Q61",
       "path": "content/provenance/COMPTIA-A-1201/Q61.json",
       "sha256": "4010f3cfad86eb639855381095a49f8c1f96f6357c3b26e131811c27d939ccbf",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1201/core1-domain3-bank.md/Q62",
       "path": "content/provenance/COMPTIA-A-1201/Q62.json",
       "sha256": "3990f6897bcdc5a381f82ad6be2949b9a91dc23c437700820692c924e8caad9d",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1201/core1-domain3-bank.md/Q63",
       "path": "content/provenance/COMPTIA-A-1201/Q63.json",
       "sha256": "61b81425aa3f3fd916b64eb9a197ef567ccc86ae66ecb51f14db87abdd6ca7f5",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1201/core1-domain3-bank.md/Q64",
       "path": "content/provenance/COMPTIA-A-1201/Q64.json",
       "sha256": "991fdc189ead4cdbc3a0a8a221f9836f90482a76633d5d99e6bdee71f22cf7ee",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1201/core1-domain3-bank.md/Q65",
       "path": "content/provenance/COMPTIA-A-1201/Q65.json",
       "sha256": "67ccb7b0bcda5d84e6ae39f92ac6ac61140ff849cfb320dab298d4697ee9a955",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1201/core1-domain4-bank.md/Q66",
       "path": "content/provenance/COMPTIA-A-1201/Q66.json",
       "sha256": "bd9d75b20143338de3f8c592796c63fcf085aa03066ac84a8bc7c65adacad0b2",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1201/core1-domain4-bank.md/Q67",
       "path": "content/provenance/COMPTIA-A-1201/Q67.json",
       "sha256": "93693d28db4c0e0b2e2bd93f66bcff34b0cf10c88de5e6c4516fd399a68ae288",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1201/core1-domain4-bank.md/Q68",
       "path": "content/provenance/COMPTIA-A-1201/Q68.json",
       "sha256": "14f1bfba1a19c8fd88e099f3b7ece8531fd0b04b5565d0c3719db4ac171df664",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1201/core1-domain4-bank.md/Q69",
       "path": "content/provenance/COMPTIA-A-1201/Q69.json",
       "sha256": "0676fcbf4888eb4fd4b8e057c8a90e48fd4ca1ae43ab5c47480325f6cb79d795",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1201/core1-domain4-bank.md/Q70",
       "path": "content/provenance/COMPTIA-A-1201/Q70.json",
       "sha256": "534f97cbd8718d881ee51fd05ca30c4ecbd7dc5ea04ce056fce45d506488dd0f",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1201/core1-domain4-bank.md/Q71",
       "path": "content/provenance/COMPTIA-A-1201/Q71.json",
       "sha256": "d39f845d5f47d31e40e5b4c274a83ac1d603567e04c42e6cb424e566ba70aabd",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1201/core1-domain5-bank.md/Q72",
       "path": "content/provenance/COMPTIA-A-1201/Q72.json",
       "sha256": "65f0b09b6a0e708a73d3c60eeba3cf62c4efa012ad17e79abfc82f29a0b5cd87",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1201/core1-domain5-bank.md/Q73",
       "path": "content/provenance/COMPTIA-A-1201/Q73.json",
       "sha256": "06f46faa2702c634b88e4c630fe8d38c0696dddbdac4d7d93eeeed69c78229db",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1201/core1-domain5-bank.md/Q74",
       "path": "content/provenance/COMPTIA-A-1201/Q74.json",
       "sha256": "b99d7a5095ec10b1995cb519b6888679d6f3add1f58c7109fec7a80c55ea6f78",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1201/core1-domain5-bank.md/Q75",
       "path": "content/provenance/COMPTIA-A-1201/Q75.json",
       "sha256": "1b377c50d939672b87713dc46eece94f7af6ee794e7bcd5842ecfd501a8d1346",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1201/core1-domain5-bank.md/Q76",
       "path": "content/provenance/COMPTIA-A-1201/Q76.json",
       "sha256": "bb8a3161953524d18e71d9fa1811514a93132158ae33e2ca6fe68939f22d9681",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1201/core1-domain5-bank.md/Q77",
       "path": "content/provenance/COMPTIA-A-1201/Q77.json",
       "sha256": "395008999af414565048510dbc733cffdac62096bdacf760b4ffbc3580e5fddd",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1201/core1-domain5-bank.md/Q78",
       "path": "content/provenance/COMPTIA-A-1201/Q78.json",
       "sha256": "3f3610b596d7394461c72cfd4218655d1f59d28a14c2f748d78b352b715ff916",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1201/core1-domain5-bank.md/Q79",
       "path": "content/provenance/COMPTIA-A-1201/Q79.json",
       "sha256": "1267485888da0d8fc4e62d0c846bbf2e2538f0e915fe107bf7afaf778aaec8f3",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1201/core1-domain5-bank.md/Q80",
       "path": "content/provenance/COMPTIA-A-1201/Q80.json",
       "sha256": "bd4a668440698c86a98bc10fdc00aed3b41ce81c412367b72bed4db4eeaa6e2c",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1201/core1-domain5-bank.md/Q81",
       "path": "content/provenance/COMPTIA-A-1201/Q81.json",
       "sha256": "87839671c706ff05e89e2fdfeb2477db95e4b0b4195d50fd9c0a5451bc609ebd",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1201/core1-domain5-bank.md/Q82",
       "path": "content/provenance/COMPTIA-A-1201/Q82.json",
       "sha256": "75231989711a57503afaba76b7b8a892c4d345ba307ad5974ddb07d50c9fb2ff",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1201/core1-domain5-bank.md/Q83",
       "path": "content/provenance/COMPTIA-A-1201/Q83.json",
       "sha256": "c4bd6a9d557111723a4844bb701ce929e03a4b12a7d8a7a0eb2bcb3ae2806c01",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1201/core1-domain5-bank.md/Q84",
       "path": "content/provenance/COMPTIA-A-1201/Q84.json",
       "sha256": "6b0ae7313a4ebfe6d603ecb3dac43c99cc32d96e4df015d7bd7ab14c65670ffd",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1201/core1-domain5-bank.md/Q85",
       "path": "content/provenance/COMPTIA-A-1201/Q85.json",
       "sha256": "397876e668767dcec43a0c2ca59e05419c206790579be059b9fdf120586c83c5",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1201/core1-domain5-bank.md/Q86",
       "path": "content/provenance/COMPTIA-A-1201/Q86.json",
       "sha256": "dddd171b28ca86911f08714a5331d887436b796091dd93faf520fb6f142fd189",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
-      "itemId": "COMPTIA-A-1202/core2-b2b4-fixtures.md/Q1",
+      "itemId": "COMPTIA-A-1202/core2-demo-cut.md/Q1",
       "path": "content/provenance/COMPTIA-A-1202/Q1.json",
-      "sha256": "742d5931fec6a72fadc289f0cbe30c578180ce2df9b224bd3d4376d8b1dd16ed",
+      "sha256": "ccd22c7ec1533262a1133474942bbf9de19977d69b11b4f3a0db407d7130c7ea",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": "2026-10-23"
     },
     {
-      "itemId": "COMPTIA-A-1202/core2-b2b4-fixtures.md/Q2",
+      "itemId": "COMPTIA-A-1202/core2-demo-cut.md/Q2",
       "path": "content/provenance/COMPTIA-A-1202/Q2.json",
-      "sha256": "f6a6ef3d03e24d5a170e74ef66324bf6095e559033f67f5ffed5d6af3e9940e6",
+      "sha256": "cf92cb20b3ce229b543f2de36b1534e2add5a82728bcc65de445566addfe69a8",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": "2026-10-23"
     },
     {
-      "itemId": "COMPTIA-A-1202/core2-b2b4-fixtures.md/Q3",
+      "itemId": "COMPTIA-A-1202/core2-demo-cut.md/Q3",
       "path": "content/provenance/COMPTIA-A-1202/Q3.json",
-      "sha256": "a39c07309abc1b1373245254323857adbb6b86c7f2e92edbdaddd47a4060a105",
+      "sha256": "697c5fc1b954a2719e8a7c12c15eca59c7eb5c3fa2c9c136ac7987756dca13f7",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": "2026-10-23"
     },
     {
-      "itemId": "COMPTIA-A-1202/core2-b2b4-fixtures.md/Q4",
+      "itemId": "COMPTIA-A-1202/core2-demo-cut.md/Q4",
       "path": "content/provenance/COMPTIA-A-1202/Q4.json",
-      "sha256": "c698318f86b2c8fb9ebda825242945e108fc64b3e8f59cde30753eeb8f6f35d1",
+      "sha256": "0a015dfd34d8e9eb09844c8263803c062928bacd350383621dc1eb0071486b07",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": "2026-10-23"
     },
     {
-      "itemId": "COMPTIA-A-1202/core2-b2b4-fixtures.md/Q5",
+      "itemId": "COMPTIA-A-1202/core2-demo-cut.md/Q5",
       "path": "content/provenance/COMPTIA-A-1202/Q5.json",
-      "sha256": "54434b7cccb0cecabe24b0b820e80170baa9c6f728c1f77ae3fb10bf795030dc",
+      "sha256": "edd8d6ab67036103feb0a63066f9c4a1793a5763681629e291d0d3ae0e42eb89",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": "2026-10-23"
     },
     {
-      "itemId": "COMPTIA-A-1202/core2-b2b4-fixtures.md/Q6",
+      "itemId": "COMPTIA-A-1202/core2-demo-cut.md/Q6",
       "path": "content/provenance/COMPTIA-A-1202/Q6.json",
-      "sha256": "544b783c40d3f162123322671ea61193fb3fdab24bf58f754745c3ee40babbff",
+      "sha256": "c81ec517fdf76d23cc564fca3ef560d282466e58fb4a832b72e9c09dfff25081",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": "2026-10-23"
     },
     {
-      "itemId": "COMPTIA-A-1202/core2-b2b4-fixtures.md/Q7",
+      "itemId": "COMPTIA-A-1202/core2-demo-cut.md/Q7",
       "path": "content/provenance/COMPTIA-A-1202/Q7.json",
-      "sha256": "94fdd0e4f3ffa722686cac0ee4625c0f62b00edfe16d4fcb76a422d54ae54407",
+      "sha256": "f6f3d34c1db0cef7b5750605e7789455ee3181ab22408886cef90b7003920831",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": "2026-10-23"
     },
     {
-      "itemId": "COMPTIA-A-1202/core2-b2b4-fixtures.md/Q8",
+      "itemId": "COMPTIA-A-1202/core2-demo-cut.md/Q8",
       "path": "content/provenance/COMPTIA-A-1202/Q8.json",
-      "sha256": "2386b087eaa49e88e25796f8def711e3daec49e553d0d827a0e984e98364d2b3",
+      "sha256": "3c418b8e1f7d88b63ed0ffc99327e9a2fb332bbb52ec563899da689c299d5f44",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": "2026-10-23"
     },
     {
       "itemId": "COMPTIA-A-1202/core2-b1-domain1-bank.md/Q9",
       "path": "content/provenance/COMPTIA-A-1202/Q9.json",
       "sha256": "44578022c36315983858862e2ba96d6c68d105ad21607457eb4fb263ccf9b091",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1202/core2-b1-domain1-bank.md/Q10",
       "path": "content/provenance/COMPTIA-A-1202/Q10.json",
       "sha256": "bab4baa6b2498dc268a616d2094600dd877239c64f78fb8e930333957fa83865",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1202/core2-b1-domain1-bank.md/Q11",
       "path": "content/provenance/COMPTIA-A-1202/Q11.json",
       "sha256": "97972a7e7cde5b546cb1172705f35ba10421bc7cea883d30291bf8ba9cc640d9",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1202/core2-b1-domain1-bank.md/Q12",
       "path": "content/provenance/COMPTIA-A-1202/Q12.json",
       "sha256": "7a46a1946a29dffde48ddb400446ed672e572d69bf7756e544543b8ce56a0f06",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1202/core2-b1-domain1-bank.md/Q13",
       "path": "content/provenance/COMPTIA-A-1202/Q13.json",
       "sha256": "6cb92b948baec901c84b8e733b54483ac2383d9ac9ef0f097f97a43874a3f0f4",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1202/core2-b1-domain1-bank.md/Q14",
       "path": "content/provenance/COMPTIA-A-1202/Q14.json",
       "sha256": "ae2943db27240a9b9e2c9fe535af25f1cde8d8de2274cf1ddfed23088fe123d8",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1202/core2-b1-domain1-bank.md/Q15",
       "path": "content/provenance/COMPTIA-A-1202/Q15.json",
       "sha256": "d9b49b45436b00926f2260b3511154ea20a4a02af23b653b10352f54a8a2c58f",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1202/core2-b1-domain1-bank.md/Q16",
       "path": "content/provenance/COMPTIA-A-1202/Q16.json",
       "sha256": "be76667aac98f2ebec9ea3cc3eed93e07e4143252500ba0ee5358e2eb91d8dd1",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1202/core2-b1-domain1-bank.md/Q17",
       "path": "content/provenance/COMPTIA-A-1202/Q17.json",
       "sha256": "58b0aa891e1c9cf7e94deecbf0be5d78e4671ac045da1fa138e5f5e51f0d65be",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1202/core2-b1-domain1-bank.md/Q18",
       "path": "content/provenance/COMPTIA-A-1202/Q18.json",
       "sha256": "d0e4a24d7f1d6dcafbc90de5e4644b30c9d7a69122b9d243862bb7cfc35ae5dd",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1202/core2-b1-domain1-bank.md/Q19",
       "path": "content/provenance/COMPTIA-A-1202/Q19.json",
       "sha256": "29ddba33850764cad968ccd21d80446012efdf0257c26c9f92a4e39d431cde75",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1202/core2-b1-domain1-bank.md/Q20",
       "path": "content/provenance/COMPTIA-A-1202/Q20.json",
       "sha256": "48e091b188f419c10f1a64eef8c8b2c52bd36dd115c69c059bee4b1d6cdf633b",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1202/core2-b1-domain1-bank.md/Q21",
       "path": "content/provenance/COMPTIA-A-1202/Q21.json",
       "sha256": "68dcf2d4bf694dabe0db2c80ca6cd5d5b6199f530509604a10076cf1a649e84a",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1202/core2-b1-domain1-bank.md/Q22",
       "path": "content/provenance/COMPTIA-A-1202/Q22.json",
       "sha256": "5377f4a357d481b5e263ac9a173cc1d7cf4a4d74878f875bb0680500d9808fcf",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1202/core2-b1-domain1-bank.md/Q23",
       "path": "content/provenance/COMPTIA-A-1202/Q23.json",
       "sha256": "8fe05c41153ec0b356a83d98416b13b87666eb46e489be9f333cb89d29eb1935",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1202/core2-b1-domain1-bank.md/Q24",
       "path": "content/provenance/COMPTIA-A-1202/Q24.json",
       "sha256": "7081b1eff025b9390319146853c75c0e355d25216efc4bf9c5ac46b80d026cb6",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1202/core2-b1-domain1-bank.md/Q25",
       "path": "content/provenance/COMPTIA-A-1202/Q25.json",
       "sha256": "83e46a93ff66bf78045785821a1840ab6f91f39082a15978c55ab97a9dcef17f",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1202/core2-b1-domain1-bank.md/Q26",
       "path": "content/provenance/COMPTIA-A-1202/Q26.json",
       "sha256": "77577916cd31e12102f2a386c3045c64cca08f0631cd75b0b33a055d0e340e0c",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1202/core2-b1-domain1-bank.md/Q27",
       "path": "content/provenance/COMPTIA-A-1202/Q27.json",
       "sha256": "f087863fd21da25eb5ebd8fdad7829baabba69072515612324a00cc1369fe7bd",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1202/core2-b1-domain1-bank.md/Q28",
       "path": "content/provenance/COMPTIA-A-1202/Q28.json",
       "sha256": "6d54fca7e88bb7635f96ab301a5c899a41b1f727225790a598fc95988b471ea4",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1202/core2-b1-domain1-bank.md/Q29",
       "path": "content/provenance/COMPTIA-A-1202/Q29.json",
       "sha256": "5008331e09b948c2acc7d7d4c0ea0b302df318ecdf48a09f1651b7825c9b4ef6",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1202/core2-b1-domain1-bank.md/Q30",
       "path": "content/provenance/COMPTIA-A-1202/Q30.json",
       "sha256": "b58198c66e60d591e61ea6376ce44903c45a5f140ef5bed276924dcbf2b6480c",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1202/core2-b1-domain1-bank.md/Q31",
       "path": "content/provenance/COMPTIA-A-1202/Q31.json",
       "sha256": "5916cd846fd8907e680ed355bc48ad4352126d63de7913f5d257d87e5bf6c54a",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1202/core2-b1-domain1-bank.md/Q32",
       "path": "content/provenance/COMPTIA-A-1202/Q32.json",
       "sha256": "ceecfd0a291e2db229a064e5fa6ae009b561be1cbed98c69079af098dd9760af",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1202/core2-b1-domain1-bank.md/Q33",
       "path": "content/provenance/COMPTIA-A-1202/Q33.json",
       "sha256": "fe8b24b83ea06a4f3731bb897ef862aafd77939061c922cc7f23720435014386",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1202/core2-b1-domain1-bank.md/Q34",
       "path": "content/provenance/COMPTIA-A-1202/Q34.json",
       "sha256": "8a29ccb17b742e72e02326a2d8f9c177fb628ce8a02c7e6bb1993da5c49b4182",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1202/core2-b1-domain1-bank.md/Q35",
       "path": "content/provenance/COMPTIA-A-1202/Q35.json",
       "sha256": "526b2a6410d6c8071c7350cb1b8bbbf99423b2fb471686d8284eb011c8750abf",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1202/core2-b1-domain1-bank.md/Q36",
       "path": "content/provenance/COMPTIA-A-1202/Q36.json",
       "sha256": "f9563d4bf6ae1eb2dfc6bbd82f809fe4344ea62fe5e4e31634acf63d8842bc1b",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1202/core2-b1-domain1-bank.md/Q37",
       "path": "content/provenance/COMPTIA-A-1202/Q37.json",
       "sha256": "035f7756876cae7375997332390d120163a492a75e2537968732e1f9cf4327e7",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1202/core2-b1-domain1-bank.md/Q38",
       "path": "content/provenance/COMPTIA-A-1202/Q38.json",
       "sha256": "7dfd9221e3a305b847dfbca7d844ec43c85085486b45a2b99d6e59d920f6564b",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1202/core2-b1-domain1-bank.md/Q39",
       "path": "content/provenance/COMPTIA-A-1202/Q39.json",
       "sha256": "fbb794e6958e690e4f40127eb3a1f7e701300070d03c66d6fbe9cfddd4086a85",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1202/core2-b1-domain1-bank.md/Q40",
       "path": "content/provenance/COMPTIA-A-1202/Q40.json",
       "sha256": "eace0dc31fa38d2c2130bdae8799f5c1b89036b9743728284d02099a048d763d",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1202/core2-b1-domain1-bank.md/Q41",
       "path": "content/provenance/COMPTIA-A-1202/Q41.json",
       "sha256": "462bdb66c4644a67bd46b50b39ea042a2e3d56571d53222e8fde785e37c6e127",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1202/core2-b2-domain2-bank.md/Q42",
       "path": "content/provenance/COMPTIA-A-1202/Q42.json",
       "sha256": "a80b27233a0829d1292c2cd76650f41f1708fd59f49c61b77096d2886262b042",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1202/core2-b2-domain2-bank.md/Q43",
       "path": "content/provenance/COMPTIA-A-1202/Q43.json",
       "sha256": "e55068b29fb2466e2091f101c54d05ec799e3c50de09a52582abaed358a9d14f",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1202/core2-b2-domain2-bank.md/Q44",
       "path": "content/provenance/COMPTIA-A-1202/Q44.json",
       "sha256": "beda0a655d08409122131b0a0b07adfb30766cce145a607761f3b994652688d5",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1202/core2-b2-domain2-bank.md/Q45",
       "path": "content/provenance/COMPTIA-A-1202/Q45.json",
       "sha256": "b9e5c9ade5f59a4201531739020d7c718c9821b79a3e108134baa6bd26bfea7f",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1202/core2-b2-domain2-bank.md/Q46",
       "path": "content/provenance/COMPTIA-A-1202/Q46.json",
       "sha256": "8e3fbc779e781117c2fb681c1dd8437b1225de2216558ffd40a97499e011a5d1",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1202/core2-b2-domain2-bank.md/Q47",
       "path": "content/provenance/COMPTIA-A-1202/Q47.json",
       "sha256": "d3639bcc1f4701848bd249080adf04bf14d4873cf793b315c28a9ff893f0837c",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1202/core2-b2-domain2-bank.md/Q48",
       "path": "content/provenance/COMPTIA-A-1202/Q48.json",
       "sha256": "c6564ed022332e1190a315934aa4f39bea478fa4d5502e5411fd43690ecbe425",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1202/core2-b2-domain2-bank.md/Q49",
       "path": "content/provenance/COMPTIA-A-1202/Q49.json",
       "sha256": "8df34e3b84bf4b6d006c3aa7b7ab3860d9615c372c029694473b4957d5aa72a7",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1202/core2-b2-domain2-bank.md/Q50",
       "path": "content/provenance/COMPTIA-A-1202/Q50.json",
       "sha256": "1787a20c6daf4a6dd154f251729bdb597983c7325ae72a40a4db94dc39a14b5a",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1202/core2-b2-domain2-bank.md/Q51",
       "path": "content/provenance/COMPTIA-A-1202/Q51.json",
       "sha256": "5bb21c7c8d9fd41a3e29081c56211bb2ce70f6d3f1d81c4e6dbd0ff7060caf6a",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1202/core2-b2-domain2-bank.md/Q52",
       "path": "content/provenance/COMPTIA-A-1202/Q52.json",
       "sha256": "e1e304ff49295f90b314ba816fe2db79a8d340ef7d899e92648a984b3b01ae40",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1202/core2-b2-domain2-bank.md/Q53",
       "path": "content/provenance/COMPTIA-A-1202/Q53.json",
       "sha256": "8a41f219381be9b792ab3ce78504e77ff1909d5631440a7c5242f5067a13b4d2",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1202/core2-b2-domain2-bank.md/Q54",
       "path": "content/provenance/COMPTIA-A-1202/Q54.json",
       "sha256": "2a473eb8422a3554e97c5980fd630badd6d1f5baa66dc9a63829ebaf49686728",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1202/core2-b2-domain2-bank.md/Q55",
       "path": "content/provenance/COMPTIA-A-1202/Q55.json",
       "sha256": "dceab002a518cfa8ef907a99e3b9a7f7c4c14708d2cea015a217b7b0b6e52dc3",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1202/core2-b2-domain2-bank.md/Q56",
       "path": "content/provenance/COMPTIA-A-1202/Q56.json",
       "sha256": "c310bb865a471f275506b4c6650166268fa777f7cd010e1a3342393edde6c919",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1202/core2-b2-domain2-bank.md/Q57",
       "path": "content/provenance/COMPTIA-A-1202/Q57.json",
       "sha256": "2eb19e5489d263fcfa08371cbb642b6916a1c30fcb66110c4283c49d4eef5ba0",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1202/core2-b2-domain2-bank.md/Q58",
       "path": "content/provenance/COMPTIA-A-1202/Q58.json",
       "sha256": "f775eae1db22a8635c5b1bcc7d07db4e6ea4f283005a5fd94a6250afe58bfbbd",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1202/core2-b2-domain2-bank.md/Q59",
       "path": "content/provenance/COMPTIA-A-1202/Q59.json",
       "sha256": "722a29f86f860bc07a432a324c6de80cc19d6910237e28f86361adf8c6bba56d",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1202/core2-b2-domain2-bank.md/Q60",
       "path": "content/provenance/COMPTIA-A-1202/Q60.json",
       "sha256": "052c826c8d978c35360531ecab0dae4b0a121319cb6c14e6e77cdb2c4ba26fdb",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1202/core2-b2-domain2-bank.md/Q61",
       "path": "content/provenance/COMPTIA-A-1202/Q61.json",
       "sha256": "04d9c3c9eafb6bfdd29a79f2305bedce8a712eb73ce209eee310b11e680b3201",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1202/core2-b2-domain2-bank.md/Q62",
       "path": "content/provenance/COMPTIA-A-1202/Q62.json",
       "sha256": "ddbb32463e4c11cc4344f6dbd1f8203e41ec45c46ac3ed1ab8789dcd2be713e4",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1202/core2-b2-domain2-bank.md/Q63",
       "path": "content/provenance/COMPTIA-A-1202/Q63.json",
       "sha256": "7c254aa9fc018a92e8b0e9f62c85aa7bfe858dd1ed27e1331ea5bfa7d4c1cb24",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1202/core2-b2-domain2-bank.md/Q64",
       "path": "content/provenance/COMPTIA-A-1202/Q64.json",
       "sha256": "b632120df587bdc69d43969e5cbc5737e7d38781e555e05d77500b9a4e626488",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1202/core2-b2-domain2-bank.md/Q65",
       "path": "content/provenance/COMPTIA-A-1202/Q65.json",
       "sha256": "e350b20f79929eb3cbac561fe441b13b8cd5e507e70d0e8010be95f1c8d08fed",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1202/core2-b2-domain2-bank.md/Q66",
       "path": "content/provenance/COMPTIA-A-1202/Q66.json",
       "sha256": "64a3604d858f57b315d2a02ec9b09824fa67635ee4f0fd2269b532f2f6e377ae",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1202/core2-b2-domain2-bank.md/Q67",
       "path": "content/provenance/COMPTIA-A-1202/Q67.json",
       "sha256": "543a7a80cfd7e8a09b87a5d7ba7920b3e0fbf4fdcd58c88db2e24e1a5b6367a2",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1202/core2-b2-domain2-bank.md/Q68",
       "path": "content/provenance/COMPTIA-A-1202/Q68.json",
       "sha256": "2044471ae5ca267b5357bc1c3df4a6aa90379586411a5a87c1aa70fbe15b8973",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1202/core2-b2-domain2-bank.md/Q69",
       "path": "content/provenance/COMPTIA-A-1202/Q69.json",
       "sha256": "241d15036359a5be618186c440553d208dffe5f0d56435b4dbfd344a00d9482f",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1202/core2-b2-domain2-bank.md/Q70",
       "path": "content/provenance/COMPTIA-A-1202/Q70.json",
       "sha256": "690fa9db828b184d4772ec9623e1d968faece215b6ef1a96259129995ebe0017",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1202/core2-b2-domain2-bank.md/Q71",
       "path": "content/provenance/COMPTIA-A-1202/Q71.json",
       "sha256": "6fac0b90f8782fa02e417e97cc71e2942f3515d6a3ae07e0f05e3db77b2e6edf",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1202/core2-b3-domain3-bank.md/Q72",
       "path": "content/provenance/COMPTIA-A-1202/Q72.json",
       "sha256": "1c745e6b3baa94874bec86b5717281bcb55e6c05af5d598007e226b3c61f53a7",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1202/core2-b3-domain3-bank.md/Q73",
       "path": "content/provenance/COMPTIA-A-1202/Q73.json",
       "sha256": "fa02e94855091bf13487c030f9bd845bc532dd0603af5438b5cce0e9b1b3ba19",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1202/core2-b3-domain3-bank.md/Q74",
       "path": "content/provenance/COMPTIA-A-1202/Q74.json",
       "sha256": "a8a2f08f36283be21d3256004d23cb7ae6e736fe2a66251e597d565039cda2d9",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1202/core2-b3-domain3-bank.md/Q75",
       "path": "content/provenance/COMPTIA-A-1202/Q75.json",
       "sha256": "807a75c7bead1e52153311d73ae2e3e5978e622a16d652120e8654a498c1025c",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1202/core2-b3-domain3-bank.md/Q76",
       "path": "content/provenance/COMPTIA-A-1202/Q76.json",
       "sha256": "9d2f057dd2f082916d88965cf655ce5a9f93ea6d6257b32077717563df09e358",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1202/core2-b3-domain3-bank.md/Q77",
       "path": "content/provenance/COMPTIA-A-1202/Q77.json",
       "sha256": "5d03182562942ff0108e99d27bedfe08e7d1535be1dde909349cc01e0808a5ca",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1202/core2-b3-domain3-bank.md/Q78",
       "path": "content/provenance/COMPTIA-A-1202/Q78.json",
       "sha256": "64e0030a5b975b4b164412f6c2985d831209b39c808da9201dc1ac91a2c4b905",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1202/core2-b3-domain3-bank.md/Q79",
       "path": "content/provenance/COMPTIA-A-1202/Q79.json",
       "sha256": "154247275ffb1ed8e9cce19ef4b294165ab000b7f2d7cd701cf5300073790cd7",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1202/core2-b3-domain3-bank.md/Q80",
       "path": "content/provenance/COMPTIA-A-1202/Q80.json",
       "sha256": "87b087db8e6ace20262550cc8c1f5183c9e1a8eaeffecd0e1953b2c38faeab0c",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1202/core2-b3-domain3-bank.md/Q81",
       "path": "content/provenance/COMPTIA-A-1202/Q81.json",
       "sha256": "9e6889b8d97721f9827212fa655167d195e73eb4a24cf19025e7b43a15df0ffb",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1202/core2-b3-domain3-bank.md/Q82",
       "path": "content/provenance/COMPTIA-A-1202/Q82.json",
       "sha256": "82642bc49fb4042b6e5843e954f10fc5f6f573a939274dfd251d5c0e25d05bb3",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1202/core2-b3-domain3-bank.md/Q83",
       "path": "content/provenance/COMPTIA-A-1202/Q83.json",
       "sha256": "aadbc7ee489f97b9526a895e5ebce700a967a57afc4dd89bd671ae4eaaa6110d",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1202/core2-b4-domain4-bank.md/Q84",
       "path": "content/provenance/COMPTIA-A-1202/Q84.json",
       "sha256": "184c8a450ea19ff02e1cc39fb00dd1739c8c260a080b8b47c6872236515a0311",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1202/core2-b4-domain4-bank.md/Q85",
       "path": "content/provenance/COMPTIA-A-1202/Q85.json",
       "sha256": "bdb071993df8a9ce176fe7ea9fa5a52504917ec1eb20b1f4f324d49caf786c7e",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1202/core2-b4-domain4-bank.md/Q86",
       "path": "content/provenance/COMPTIA-A-1202/Q86.json",
       "sha256": "26b8b48c0d6ca1c111a2c1aec14f59e23e5ff3ad2ef1bb3c01fcbaf86d662a6f",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1202/core2-b4-domain4-bank.md/Q87",
       "path": "content/provenance/COMPTIA-A-1202/Q87.json",
       "sha256": "db60d5aa8474d7aed5a9de2d8a0d059e58a664f5840f43ba9348a91b86f0b9e9",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1202/core2-b4-domain4-bank.md/Q88",
       "path": "content/provenance/COMPTIA-A-1202/Q88.json",
       "sha256": "1ed828b7737dd0478be78e9263be308dec7a7bc94142f5503fdbd40230421fa4",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1202/core2-b4-domain4-bank.md/Q89",
       "path": "content/provenance/COMPTIA-A-1202/Q89.json",
       "sha256": "5c5301c3f0ef08fb7608c6a4ff7047b41058d5e6a0a922b0c1fc25d8f4378ff1",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1202/core2-b4-domain4-bank.md/Q90",
       "path": "content/provenance/COMPTIA-A-1202/Q90.json",
       "sha256": "a75f2da0c3b0ab862cdfcb9b389eb2cd568459066760801448e78cea9b76e9dc",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1202/core2-b4-domain4-bank.md/Q91",
       "path": "content/provenance/COMPTIA-A-1202/Q91.json",
       "sha256": "ef342f1d62df4d235d3fc1a90e4dec2a01ef79e849173d9e5d6a6467dbd3e0e2",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1202/core2-b4-domain4-bank.md/Q92",
       "path": "content/provenance/COMPTIA-A-1202/Q92.json",
       "sha256": "d45b2f2dc87d36aec72904a673a37fa7b367d1949a6de8a3790e4b8e0e9bfd94",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1202/core2-b4-domain4-bank.md/Q93",
       "path": "content/provenance/COMPTIA-A-1202/Q93.json",
       "sha256": "2ff483d1ee69c2483db0eb4142c3c23fc9dcfa994e61da569dd0e5723dd132ae",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1202/core2-b4-domain4-bank.md/Q94",
       "path": "content/provenance/COMPTIA-A-1202/Q94.json",
       "sha256": "d1de803c1c9c6f923ee92297d800f134178dfe2b456a7a95be75c5f40fabd447",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1202/core2-b4-domain4-bank.md/Q95",
       "path": "content/provenance/COMPTIA-A-1202/Q95.json",
       "sha256": "fe576648651f9250744afb56a4f7d8b723ce48e229cd658c50197d1d5586be40",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1202/core2-b4-domain4-bank.md/Q96",
       "path": "content/provenance/COMPTIA-A-1202/Q96.json",
       "sha256": "0f0952a180643cce1fdea0a5ca0c06fd8c0b2bdc4244b38c5b7893aee8b6a61d",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1202/core2-b4-domain4-bank.md/Q97",
       "path": "content/provenance/COMPTIA-A-1202/Q97.json",
       "sha256": "ac6b1e9112c19024547ff80332dfbc2105732152cd248219eb813782b8cabe7b",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1202/core2-b4-domain4-bank.md/Q98",
       "path": "content/provenance/COMPTIA-A-1202/Q98.json",
       "sha256": "3839491bfff32634106ad82ee03223254578c383f30464f517f3472ae5e4a075",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1202/core2-b4-domain4-bank.md/Q99",
       "path": "content/provenance/COMPTIA-A-1202/Q99.json",
       "sha256": "b2de502152d9493034dc2810d9b83607afb53669065d6a5f035027291716800c",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1202/core2-b4-domain4-bank.md/Q100",
       "path": "content/provenance/COMPTIA-A-1202/Q100.json",
       "sha256": "5d07003d3583ac38b529f5d39416c9c046e2a1054848174ae31e11f1a8d476cf",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1202/core2-b4-domain4-bank.md/Q101",
       "path": "content/provenance/COMPTIA-A-1202/Q101.json",
       "sha256": "de183fac1cfa29e9c4dc1ac1f1b66955855f3bbf822ea46979c51e13ecd7b5e5",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1202/core2-b4-domain4-bank.md/Q102",
       "path": "content/provenance/COMPTIA-A-1202/Q102.json",
       "sha256": "12352f87df13eeb12d70e8f47bb64ba7e0854fa06dd9049215f5ec63f7a87cc9",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1202/core2-b4-domain4-bank.md/Q103",
       "path": "content/provenance/COMPTIA-A-1202/Q103.json",
       "sha256": "2dd35ddd5ce98fb40a72a096c8c034005988cdec2ad24c41f59927dd95b84497",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1202/core2-b4-domain4-bank.md/Q104",
       "path": "content/provenance/COMPTIA-A-1202/Q104.json",
       "sha256": "dd2279f3daafe51a8827d592991cce1721669aac6aacfb061df79040bbd5467f",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1202/core2-b4-domain4-bank.md/Q105",
       "path": "content/provenance/COMPTIA-A-1202/Q105.json",
       "sha256": "1abe834b89a3289dc712cb392496e082a919d651b4624da52ad53cb1d6bec5ae",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1202/core2-b4-domain4-bank.md/Q106",
       "path": "content/provenance/COMPTIA-A-1202/Q106.json",
       "sha256": "9b35b67ef82d4c76c574b3feaeb5628288c073fdc7dd74bd74b2b5673b323958",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1202/core2-b4-domain4-bank.md/Q107",
       "path": "content/provenance/COMPTIA-A-1202/Q107.json",
       "sha256": "42c00291646ec6131f0c1d6267dca5d565de2a0fe8200f739889aa072949f7ef",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-A-1202/core2-b4-domain4-bank.md/Q108",
       "path": "content/provenance/COMPTIA-A-1202/Q108.json",
       "sha256": "940928d751f806bdc5e69946c52d9868c681cca5f75c466e51150ba4150d8bd8",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
-      "itemId": "COMPTIA-NET-009/net009-n1-fixtures.md/Q6",
+      "itemId": "COMPTIA-NET-009/net009-n1-demo-cut.md/Q6",
       "path": "content/provenance/COMPTIA-NET-009/Q6.json",
-      "sha256": "0ab21fea7242156a76f2ac1cad3d093eb373d70cf9b1affb760d71176a359d27",
+      "sha256": "6364711d7ec8cfb48622264b464b2a544fa42295aacce38a1921f52332a3d0c7",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": "2026-10-23"
     },
     {
-      "itemId": "COMPTIA-NET-009/net009-n1-fixtures.md/Q7",
+      "itemId": "COMPTIA-NET-009/net009-n1-demo-cut.md/Q7",
       "path": "content/provenance/COMPTIA-NET-009/Q7.json",
-      "sha256": "e4a93ca6066c4d243ab21993213e14d416c9ee6db53c7d6c8a62fc20115ca982",
+      "sha256": "b59a8637ffdbb90f094c92a00f0f050ba57af49ef53e90cff3f7bb94ba74412d",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": "2026-10-23"
     },
     {
-      "itemId": "COMPTIA-NET-009/net009-n1-fixtures.md/Q8",
+      "itemId": "COMPTIA-NET-009/net009-n1-demo-cut.md/Q8",
       "path": "content/provenance/COMPTIA-NET-009/Q8.json",
-      "sha256": "6ce8a68bc930f57dbd33d34fa1eb423009b8fa174b366c9984413c40ca8bebd0",
+      "sha256": "ef1a6b91b2e32c45c89e7235e7a276b33aa9fefcdb1c02df1e1ed96a4ed4237f",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": "2026-10-23"
     },
     {
-      "itemId": "COMPTIA-NET-009/net009-n1-fixtures.md/Q9",
+      "itemId": "COMPTIA-NET-009/net009-n1-demo-cut.md/Q9",
       "path": "content/provenance/COMPTIA-NET-009/Q9.json",
-      "sha256": "8ecf87aac9ee6e5563b174e851a9dcf1e1421eb4f5f2e6795ff7ed8814271b7e",
+      "sha256": "9bcb63d278f377d7777f9f84808ced3a63d8f173cf462503f22cca9df6a485b2",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": "2026-10-23"
     },
     {
-      "itemId": "COMPTIA-NET-009/net009-n1-fixtures.md/Q10",
+      "itemId": "COMPTIA-NET-009/net009-n1-demo-cut.md/Q10",
       "path": "content/provenance/COMPTIA-NET-009/Q10.json",
-      "sha256": "9400e66075d941c905dd63729be1b21c1e402ecf3b59f761bb58a626b0509059",
+      "sha256": "5c9c4ec73a571f13a24ba3df78ec4a6d20223d7c468f922b40f5a96bb7168ceb",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": "2026-10-23"
     },
     {
-      "itemId": "COMPTIA-NET-009/net009-n2-fixtures.md/Q11",
+      "itemId": "COMPTIA-NET-009/net009-n2-demo-cut.md/Q11",
       "path": "content/provenance/COMPTIA-NET-009/Q11.json",
-      "sha256": "7ca44977b61e1e6fbc935ae1f9f479f9012b1853a6f834dcc49ad652ac302e77",
+      "sha256": "1e3caa5f8aacadca66aa79530904c2c00108e667f1d2657f3279484139302aa3",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": "2026-10-23"
     },
     {
-      "itemId": "COMPTIA-NET-009/net009-n2-fixtures.md/Q12",
+      "itemId": "COMPTIA-NET-009/net009-n2-demo-cut.md/Q12",
       "path": "content/provenance/COMPTIA-NET-009/Q12.json",
-      "sha256": "99deab90ebcd278a547d47cd6e8d8c9be97d45b9b4c19b5decbce4145896e72a",
+      "sha256": "ee0fdd4228b058d7128c1ca9ef441072d3a4b8e77ca37faaa8247acddd6d9e02",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": "2026-10-23"
     },
     {
-      "itemId": "COMPTIA-NET-009/net009-n2-fixtures.md/Q13",
+      "itemId": "COMPTIA-NET-009/net009-n2-demo-cut.md/Q13",
       "path": "content/provenance/COMPTIA-NET-009/Q13.json",
-      "sha256": "ed972b2547106742dae6112ef78460f8cddf48a689ae9827641587d0f9595220",
+      "sha256": "203d454b8b5e387dcd2d2da588989f5fbe94742a5ea8f45d3193969312d7f9e0",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": "2026-10-23"
     },
     {
-      "itemId": "COMPTIA-NET-009/net009-n2-fixtures.md/Q14",
+      "itemId": "COMPTIA-NET-009/net009-n2-demo-cut.md/Q14",
       "path": "content/provenance/COMPTIA-NET-009/Q14.json",
-      "sha256": "35a97dca89072a2da29596108743534f3f6f0e885943538c8b23bf7e92c22dcc",
+      "sha256": "625aa958ce3cc0bddd942a4978b76f06c1eea6495602cd5ef1a649e1b605d64b",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": "2026-10-23"
     },
     {
-      "itemId": "COMPTIA-NET-009/net009-n2-fixtures.md/Q15",
+      "itemId": "COMPTIA-NET-009/net009-n2-demo-cut.md/Q15",
       "path": "content/provenance/COMPTIA-NET-009/Q15.json",
-      "sha256": "06537e91a5f645250cffac591670053656dab0bf763fe316b17b4e67e8ade88e",
+      "sha256": "9e750a77f3042357d3209413c86d92ba6e85bb6556134a3e8464bb117ce90e8d",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": "2026-10-23"
     },
     {
-      "itemId": "COMPTIA-NET-009/net009-n3-fixtures.md/Q16",
+      "itemId": "COMPTIA-NET-009/net009-n3-demo-cut.md/Q16",
       "path": "content/provenance/COMPTIA-NET-009/Q16.json",
-      "sha256": "23b2c0ff99007a3a06533f49a2d3dbcf0df650e3585640eaabc8b5d6f8bfe932",
+      "sha256": "1a8b1fc75c3187af86e911c2798352885271b675fd92d24429a4e430f03f3ada",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": "2026-10-23"
     },
     {
-      "itemId": "COMPTIA-NET-009/net009-n3-fixtures.md/Q17",
+      "itemId": "COMPTIA-NET-009/net009-n3-demo-cut.md/Q17",
       "path": "content/provenance/COMPTIA-NET-009/Q17.json",
-      "sha256": "99ac52a8ffb6460eeea6f69208e8b876d9cc1e171d789637b5df291147a8a7b1",
+      "sha256": "a7b6f60c4746e1dbeb60c20814c745f68a6da982528cf464169ad2c751b1d142",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": "2026-10-23"
     },
     {
-      "itemId": "COMPTIA-NET-009/net009-n3-fixtures.md/Q18",
+      "itemId": "COMPTIA-NET-009/net009-n3-demo-cut.md/Q18",
       "path": "content/provenance/COMPTIA-NET-009/Q18.json",
-      "sha256": "75d0a3dbe49106b176acaf1df09424c024a1cea6b648d106098d65ae1c33f164",
+      "sha256": "91f46b1e4b5f09c2dd454257b77bb2fccd31d35b558bed9cf8e712ab8dced7b1",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": "2026-10-23"
     },
     {
-      "itemId": "COMPTIA-NET-009/net009-n3-fixtures.md/Q19",
+      "itemId": "COMPTIA-NET-009/net009-n3-demo-cut.md/Q19",
       "path": "content/provenance/COMPTIA-NET-009/Q19.json",
-      "sha256": "783916bd0dea9242c8ddd502ede6d83bea63311847a62539b627fd2b8ff324e3",
+      "sha256": "2391a836aeed71a593a7318beaf853e18381375f2a418f2d14e4164c5366f151",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": "2026-10-23"
     },
     {
-      "itemId": "COMPTIA-NET-009/net009-n3-fixtures.md/Q20",
+      "itemId": "COMPTIA-NET-009/net009-n3-demo-cut.md/Q20",
       "path": "content/provenance/COMPTIA-NET-009/Q20.json",
-      "sha256": "294732ecf9de412418d74faac55dcf0c5d20699c1da7a487a7bcc7280d379e37",
+      "sha256": "03a2189150b4c0e52c4c1526493a9530e6ebff78af67b5d7f7d543f1cfd28d6f",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": "2026-10-23"
     },
     {
-      "itemId": "COMPTIA-NET-009/net009-n4-fixtures.md/Q21",
+      "itemId": "COMPTIA-NET-009/net009-n4-demo-cut.md/Q21",
       "path": "content/provenance/COMPTIA-NET-009/Q21.json",
-      "sha256": "f0a2b2eb4998a1d7f9c5fc3215adc6b5a8ed72ccdd92dbe84d46cf87909679af",
+      "sha256": "b22199a55bf4ce2d2946d4200cb141913176879f98baa2f202236a78d7a6854d",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": "2026-10-23"
     },
     {
-      "itemId": "COMPTIA-NET-009/net009-n4-fixtures.md/Q22",
+      "itemId": "COMPTIA-NET-009/net009-n4-demo-cut.md/Q22",
       "path": "content/provenance/COMPTIA-NET-009/Q22.json",
-      "sha256": "5a5dd507d8420e008becd93e0a0905c053eaa589dfd2a1686f3e634f8268a50f",
+      "sha256": "7fbdd9f3cecdc3035ce9b71af698ce2d9869f8ab33ab7411c77288400e7724df",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": "2026-10-23"
     },
     {
-      "itemId": "COMPTIA-NET-009/net009-n4-fixtures.md/Q23",
+      "itemId": "COMPTIA-NET-009/net009-n4-demo-cut.md/Q23",
       "path": "content/provenance/COMPTIA-NET-009/Q23.json",
-      "sha256": "c8fb3b6c1f2f5fcf0d050f800b4d514fe586ef7ed2b871611d92f6a71763bd68",
+      "sha256": "08e7ef008cbe640ffdc14f16950e027a99421862f43d12ca98f7275f090707c5",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": "2026-10-23"
     },
     {
-      "itemId": "COMPTIA-NET-009/net009-n4-fixtures.md/Q24",
+      "itemId": "COMPTIA-NET-009/net009-n4-demo-cut.md/Q24",
       "path": "content/provenance/COMPTIA-NET-009/Q24.json",
-      "sha256": "832256f2979d7bdae5ff9132a0e062f3e8459c880d3fe974e8c7a3ffe7bca5d8",
+      "sha256": "c30ceaaa921d94fef241f84b18ed8136fd91d0782684fbf732ab0f637f44b551",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": "2026-10-23"
     },
     {
-      "itemId": "COMPTIA-NET-009/net009-n4-fixtures.md/Q25",
+      "itemId": "COMPTIA-NET-009/net009-n4-demo-cut.md/Q25",
       "path": "content/provenance/COMPTIA-NET-009/Q25.json",
-      "sha256": "7c133698fafe66e8f04f3d9cc9a5dd581cdd456ba47fc17a58c8aea6a5dff114",
+      "sha256": "8ffe05ab41b5e47bff38d909f6ec7324f99d3395d9bdfa002249eba635413bbc",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": "2026-10-23"
     },
     {
-      "itemId": "COMPTIA-NET-009/net009-n5-fixtures.md/Q1",
+      "itemId": "COMPTIA-NET-009/net009-n5-demo-cut.md/Q1",
       "path": "content/provenance/COMPTIA-NET-009/Q1.json",
-      "sha256": "9a7bbff688d7b8cffb0a739f95e8766a42cf5420914039c71804d76dc4fdcc05",
+      "sha256": "738c84fefcbbb19f6a2471fa49661685102119f9eb4a20f41f1b7aed6697e593",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": "2026-10-23"
     },
     {
-      "itemId": "COMPTIA-NET-009/net009-n5-fixtures.md/Q2",
+      "itemId": "COMPTIA-NET-009/net009-n5-demo-cut.md/Q2",
       "path": "content/provenance/COMPTIA-NET-009/Q2.json",
-      "sha256": "829635458e09341e94b2cccabb7cd4ce0d9f47a6627f9a85eef8b8d2eecf452e",
+      "sha256": "22fdae0c44d32e8c5adf7ffb1de42d248488fcbe9f3000ec0a3910d5ccd8cb90",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": "2026-10-23"
     },
     {
-      "itemId": "COMPTIA-NET-009/net009-n5-fixtures.md/Q3",
+      "itemId": "COMPTIA-NET-009/net009-n5-demo-cut.md/Q3",
       "path": "content/provenance/COMPTIA-NET-009/Q3.json",
-      "sha256": "637034cf78dc2fe40239f32f8db38c83aba69aa93ef1d07c5eedcbec95d30be7",
+      "sha256": "6fcf6dbdd1f99c4ba591916d65effa0e2d53b5e25f5cfe5e6875225e3b8869cd",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": "2026-10-23"
     },
     {
-      "itemId": "COMPTIA-NET-009/net009-n5-fixtures.md/Q4",
+      "itemId": "COMPTIA-NET-009/net009-n5-demo-cut.md/Q4",
       "path": "content/provenance/COMPTIA-NET-009/Q4.json",
-      "sha256": "44b689ca8063a87dd0a47a7180d145e6eabbcbf760eeeca8b0a8a5cdd9118e18",
+      "sha256": "a3a7c9e2a3c1755d965791c193ae754770b6f9e3f80165c8930bbdcf2051e9a8",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": "2026-10-23"
     },
     {
-      "itemId": "COMPTIA-NET-009/net009-n5-fixtures.md/Q5",
+      "itemId": "COMPTIA-NET-009/net009-n5-demo-cut.md/Q5",
       "path": "content/provenance/COMPTIA-NET-009/Q5.json",
-      "sha256": "6bac2094ad7b504845a7b263e1ef8917ffe395959febd03354c1d03f8e256ec8",
+      "sha256": "fdb109b15e2348c24397d19ef043bed6e4730885c965bf0e58f52a04d5ac8421",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": "2026-10-23"
     },
     {
       "itemId": "COMPTIA-NET-009/net009-domain1-bank.md/Q26",
       "path": "content/provenance/COMPTIA-NET-009/Q26.json",
       "sha256": "77c0626b9afd3babeb47eb8028d4ac7d1fffafbf703fe8acd09ba2fb9bd03d59",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-NET-009/net009-domain1-bank.md/Q27",
       "path": "content/provenance/COMPTIA-NET-009/Q27.json",
       "sha256": "d800b4382e5756b5bac61f343b2e945073dcff3f78e684f5faff7f2a05ba2f1b",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-NET-009/net009-domain1-bank.md/Q28",
       "path": "content/provenance/COMPTIA-NET-009/Q28.json",
       "sha256": "9856c59d003956c065fe88f9d31f9100746f792861c850d0b303e45de5a95d55",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-NET-009/net009-domain1-bank.md/Q29",
       "path": "content/provenance/COMPTIA-NET-009/Q29.json",
       "sha256": "438f9a9e229620d11f791d69264a76759fd9cce1f8f4ee2913b682e136724d5e",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-NET-009/net009-domain1-bank.md/Q30",
       "path": "content/provenance/COMPTIA-NET-009/Q30.json",
       "sha256": "d8d0095c73e2f207725222c6eec1c04cb6be5189a9f32c02ba7a301c1415f241",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-NET-009/net009-domain1-bank.md/Q31",
       "path": "content/provenance/COMPTIA-NET-009/Q31.json",
       "sha256": "93dc0247119efb30bf5e50405579524fcecb752389a13201590d8b991fa2fc95",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-NET-009/net009-domain1-bank.md/Q32",
       "path": "content/provenance/COMPTIA-NET-009/Q32.json",
       "sha256": "fa19908621ef7bddfa9795b5ff968dc8faa33b0c002ed3992a35160f7eac1ec6",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-NET-009/net009-domain1-bank.md/Q33",
       "path": "content/provenance/COMPTIA-NET-009/Q33.json",
       "sha256": "b6c40b4526374d66c28493c67f0429e4fa3af053e6c620e8017af57bb2d93fe5",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-NET-009/net009-domain1-bank.md/Q34",
       "path": "content/provenance/COMPTIA-NET-009/Q34.json",
       "sha256": "fb0fffb240797c046c3f2dd50e77fb5d9224da026fb065bb0e6e1f3a3a73be86",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-NET-009/net009-domain1-bank.md/Q35",
       "path": "content/provenance/COMPTIA-NET-009/Q35.json",
       "sha256": "bbc7345833d58276bfeccb99c9d09ef88d42198aebc39ab6765ca6c80e986ac2",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-NET-009/net009-domain1-bank.md/Q36",
       "path": "content/provenance/COMPTIA-NET-009/Q36.json",
       "sha256": "c287f69f90473932796b6e27c3dca0700024c11c0ef0bde55bacca34132332db",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-NET-009/net009-domain1-bank.md/Q37",
       "path": "content/provenance/COMPTIA-NET-009/Q37.json",
       "sha256": "de87c46e3623cfa354bac19f94806ed744f19185585685cc599ed5445637feb2",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-NET-009/net009-domain1-bank.md/Q38",
       "path": "content/provenance/COMPTIA-NET-009/Q38.json",
       "sha256": "d0a4c6751eddf907dda89f53cd30b36e9879aaf129185a257c4365ebf4dc41d3",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-NET-009/net009-domain1-bank.md/Q39",
       "path": "content/provenance/COMPTIA-NET-009/Q39.json",
       "sha256": "ef1fc2ce9ef461aefedf5716a1747fd600ea434de469b31358c4fb80f5d1d2f1",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-NET-009/net009-domain1-bank.md/Q40",
       "path": "content/provenance/COMPTIA-NET-009/Q40.json",
       "sha256": "41bb07946a0771bb54df4fcac524bc322d17d4f273d2dc6b3f220582963bf6d2",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-NET-009/net009-domain1-bank.md/Q41",
       "path": "content/provenance/COMPTIA-NET-009/Q41.json",
       "sha256": "f1eb385bf5168380947912dc6baedd5bcc39c2d41a933b071c5439ed4f465a8f",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-NET-009/net009-domain1-bank.md/Q42",
       "path": "content/provenance/COMPTIA-NET-009/Q42.json",
       "sha256": "f4edf3666ea1f7bee9ff974385c4bcb3c7cd8e92b497b6443b3457409bbe4ce8",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-NET-009/net009-domain1-bank.md/Q43",
       "path": "content/provenance/COMPTIA-NET-009/Q43.json",
       "sha256": "97b8604bf5d8c40d720c63bad26193f8f6cd9beab6b84c1a09a02cc56273fb9b",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-NET-009/net009-domain1-bank.md/Q44",
       "path": "content/provenance/COMPTIA-NET-009/Q44.json",
       "sha256": "c34334b410c5ffbc7ff47d78211833ea914c5684969342c92a2be8c054cf4f58",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-NET-009/net009-domain2-bank.md/Q45",
       "path": "content/provenance/COMPTIA-NET-009/Q45.json",
       "sha256": "db4bd003fb21640f39da1bf5ad24b15f6e8f3edb7aa8768a581482e467dce0db",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-NET-009/net009-domain2-bank.md/Q46",
       "path": "content/provenance/COMPTIA-NET-009/Q46.json",
       "sha256": "552f4ba927bbab519284c66ee6339e35239cbc318b9b0d8b7e456e05c0a778ca",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-NET-009/net009-domain2-bank.md/Q47",
       "path": "content/provenance/COMPTIA-NET-009/Q47.json",
       "sha256": "6c098cfc825ca209a018631e80d43f25b837ef1e90355341015c4263df6e68fd",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-NET-009/net009-domain2-bank.md/Q48",
       "path": "content/provenance/COMPTIA-NET-009/Q48.json",
       "sha256": "299d4bc1b2e7d0ac119c92ef8a2b3248d78c38fd10c4710ed4cedd6327d60d2c",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-NET-009/net009-domain2-bank.md/Q49",
       "path": "content/provenance/COMPTIA-NET-009/Q49.json",
       "sha256": "98d355fa9ba4e32d70c737583466ed15c691b4dfab75230b758038ddc9b03c1b",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-NET-009/net009-domain2-bank.md/Q50",
       "path": "content/provenance/COMPTIA-NET-009/Q50.json",
       "sha256": "e5a5391dd08bd42f39fe4e0df1650f54fbc523c16d744dde557a8abf63974ef8",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-NET-009/net009-domain2-bank.md/Q51",
       "path": "content/provenance/COMPTIA-NET-009/Q51.json",
       "sha256": "4cc80b9645cfa68ee833a28569ee4156918cb8310d80177e2659c53f905b7080",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-NET-009/net009-domain3-bank.md/Q52",
       "path": "content/provenance/COMPTIA-NET-009/Q52.json",
       "sha256": "16ac1b40b20b02c502929b82b2be9ec05378ebfc3957023a945ec2720a95c6bb",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-NET-009/net009-domain3-bank.md/Q53",
       "path": "content/provenance/COMPTIA-NET-009/Q53.json",
       "sha256": "c2248c30f895a20320bf5975b13c38f66eb2fcc4000e53ebc03594938c3d3370",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-NET-009/net009-domain3-bank.md/Q54",
       "path": "content/provenance/COMPTIA-NET-009/Q54.json",
       "sha256": "fba8568d341554630c8357a442d2e36908727681aa4034804288a65bab644a38",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-NET-009/net009-domain3-bank.md/Q55",
       "path": "content/provenance/COMPTIA-NET-009/Q55.json",
       "sha256": "2c2fe48cb31bf9967cd52ad6f6e6de3c62e5f46202b24a7555fe28542f40d6aa",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-NET-009/net009-domain3-bank.md/Q56",
       "path": "content/provenance/COMPTIA-NET-009/Q56.json",
       "sha256": "622eeb320c193cdb9fdcb54148fcf18c23c36d22dd47a6558ef7328e90f0c35c",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-NET-009/net009-domain3-bank.md/Q57",
       "path": "content/provenance/COMPTIA-NET-009/Q57.json",
       "sha256": "c58bc02c6f98323257e48465b4db16b829394f1d244bd986301e520c59c241a7",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-NET-009/net009-domain3-bank.md/Q58",
       "path": "content/provenance/COMPTIA-NET-009/Q58.json",
       "sha256": "1bb633dc93a68badfc4b46fed4976f1172cde797f97ff70d69daca84a68e387b",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-NET-009/net009-domain3-bank.md/Q59",
       "path": "content/provenance/COMPTIA-NET-009/Q59.json",
       "sha256": "152920659914ae0a82675ae007bc563685d3d853d5163f824650b8b6ee9cc9c2",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-NET-009/net009-domain3-bank.md/Q60",
       "path": "content/provenance/COMPTIA-NET-009/Q60.json",
       "sha256": "5e9a817d5e71f71fddb8d06fa8940d8e567a39236d36975d320715c63ca9aa42",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-NET-009/net009-domain3-bank.md/Q61",
       "path": "content/provenance/COMPTIA-NET-009/Q61.json",
       "sha256": "31cd9ae9fa9a4446ab17200081aa50e1def2e6e1b0f6f94b2540c3aa0c238de1",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-NET-009/net009-domain4-bank.md/Q62",
       "path": "content/provenance/COMPTIA-NET-009/Q62.json",
       "sha256": "382527f3b33ba994a06d49d9aad694ae3c9105f3103abd5cc170f89d0d00cd29",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-NET-009/net009-domain4-bank.md/Q63",
       "path": "content/provenance/COMPTIA-NET-009/Q63.json",
       "sha256": "7ed14db7fddb64b09a7b66c5c2dfee4f9eb9c6e7a43d1ae02b40b367f0d27dcb",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-NET-009/net009-domain4-bank.md/Q64",
       "path": "content/provenance/COMPTIA-NET-009/Q64.json",
       "sha256": "f8b9b6f8975a8925faee6c25f6874e7b41689e0894969c35cd03ac9f1b72cb62",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-NET-009/net009-domain4-bank.md/Q65",
       "path": "content/provenance/COMPTIA-NET-009/Q65.json",
       "sha256": "dd73e865fd4a982d226840dc41bd1e806ba7b70aceb7fa500daf16da4fde6340",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-NET-009/net009-domain5-bank.md/Q66",
       "path": "content/provenance/COMPTIA-NET-009/Q66.json",
       "sha256": "85b16974a81e3c9005bfb046ffb5a1fc4b5a29f589890aa183ef62ce286b0415",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-NET-009/net009-domain5-bank.md/Q67",
       "path": "content/provenance/COMPTIA-NET-009/Q67.json",
       "sha256": "fb6e723909c0ccca3046ad878e7967c312f1c677000317568107288400383679",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-NET-009/net009-domain5-bank.md/Q68",
       "path": "content/provenance/COMPTIA-NET-009/Q68.json",
       "sha256": "34f7446303cd2dfb060bce08f554251eb7bd528641b88ff01c146482eed19f85",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-NET-009/net009-domain5-bank.md/Q69",
       "path": "content/provenance/COMPTIA-NET-009/Q69.json",
       "sha256": "c0f723d6da5c818fb804423b8563c26d2491913955d494fab63907fc87db95c9",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-NET-009/net009-domain5-bank.md/Q70",
       "path": "content/provenance/COMPTIA-NET-009/Q70.json",
       "sha256": "54226769eea3c9ec9d7d4fae7b11e262276b7cbee335fb08d7b0679449a99247",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-NET-009/net009-domain5-bank.md/Q71",
       "path": "content/provenance/COMPTIA-NET-009/Q71.json",
       "sha256": "072c78aad58f57cdcdb752ab2ead003e81869f83cc96ac626204e903b825d637",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-NET-009/net009-domain5-bank.md/Q72",
       "path": "content/provenance/COMPTIA-NET-009/Q72.json",
       "sha256": "e2405cc12b7a02997077cf5f45409951d5bb623522f15610ef55112118c58a60",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-NET-009/net009-domain5-bank.md/Q73",
       "path": "content/provenance/COMPTIA-NET-009/Q73.json",
       "sha256": "e5c4c6bb1f2ffd4d088230629ad5a22d51f0970066a59bc31b454666a6753caa",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-NET-009/net009-domain5-bank.md/Q74",
       "path": "content/provenance/COMPTIA-NET-009/Q74.json",
       "sha256": "30271a40a664a9069a331b3132cc8a50008f3a3f1efe3fde1bc0197d78a4e5ab",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "COMPTIA-NET-009/net009-domain5-bank.md/Q75",
       "path": "content/provenance/COMPTIA-NET-009/Q75.json",
       "sha256": "3513ae8215e047b59d0f8ce9654caea75a54239968aaea40323ebd58e150816a",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "NCA-75/nca75-pilot.md/Q1",
       "path": "content/provenance/NCA-75/Q1.json",
       "sha256": "6af1c2e84a06227b29f2a0d9adc8c0b62b17bf8e2e1df1a72ed8faa30f76846b",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "NCA-75/nca75-pilot.md/Q2",
       "path": "content/provenance/NCA-75/Q2.json",
       "sha256": "34ca3f92d7355d1ca9aac52b527c083a3bfa5dab7709474d509199e04a37f355",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "NCA-75/nca75-pilot.md/Q3",
       "path": "content/provenance/NCA-75/Q3.json",
       "sha256": "9647bc309cfb2028d3513d95f586d6b780cc25d081c34fc940842833b20780a2",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "NCA-75/nca75-pilot.md/Q4",
       "path": "content/provenance/NCA-75/Q4.json",
       "sha256": "b80a044b91d3902c21dd0dbcec7c567c456308059e7214e19fdfe842de28c532",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "NCA-75/nca75-pilot.md/Q5",
       "path": "content/provenance/NCA-75/Q5.json",
       "sha256": "b498b8a57e31d15e1999c81221456bc61423424c3045bd10206cd24ff6014574",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "NCA-75/nca75-pilot.md/Q6",
       "path": "content/provenance/NCA-75/Q6.json",
       "sha256": "4e5be49c5a72916aaf8d678b4b4597973a18face5fd94ebfa5e44a7a4c5698a2",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "NCA-75/nca75-pilot.md/Q7",
       "path": "content/provenance/NCA-75/Q7.json",
       "sha256": "cd35c3448a30252846e80b7e06968c7b563e2bf9698e368b0b628c2f8215db88",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "NCA-75/nca75-pilot.md/Q8",
       "path": "content/provenance/NCA-75/Q8.json",
       "sha256": "53d2020492955e9acf4ee2f5d811551517a2bec4ff398a07c4cf037a24481cc9",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "NCA-75/nca75-pilot.md/Q9",
       "path": "content/provenance/NCA-75/Q9.json",
       "sha256": "57ac0f899eba84e83bda7e59d14133236bb770d231391e24b87127b7b58d09d0",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "NCA-75/nca75-pilot.md/Q10",
       "path": "content/provenance/NCA-75/Q10.json",
       "sha256": "11e9607eac6be27a6f5b56cb57fa257f4b0fd079d0df46b4eaa65fff8a809588",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "NCA-75/nca75-pilot.md/Q11",
       "path": "content/provenance/NCA-75/Q11.json",
       "sha256": "7f0e2372d3011c4de752d46000a293cf28f4a14e04c8566850933506912c38fe",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "NCA-75/nca75-pilot.md/Q12",
       "path": "content/provenance/NCA-75/Q12.json",
       "sha256": "2ce7529258d540d20a8f10678d4baa523bedda13a0ce4a8d93dbb8e3692107c8",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "NCA-75/nca75-pilot.md/Q13",
       "path": "content/provenance/NCA-75/Q13.json",
       "sha256": "c42ebd392c664b6d7f2c974046d836a5693d5f82e35338f2188420395658bbda",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "NCA-75/nca75-pilot.md/Q14",
       "path": "content/provenance/NCA-75/Q14.json",
       "sha256": "ced9b4d90f43bab680c1d74021fa1c6605c72602d6a33cf903ed25fa05ae05ee",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "NCA-75/nca75-pilot.md/Q15",
       "path": "content/provenance/NCA-75/Q15.json",
       "sha256": "ae2068803469c86c1aa077afdccb75c1e5a559960695593ebbca44b1e9b8b918",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "NCA-75/nca75-pilot.md/Q16",
       "path": "content/provenance/NCA-75/Q16.json",
       "sha256": "ce6468fa793a492594072786670bae0608e6a6832a31d44d3b26c6d264abe4cb",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "NCA-75/nca75-pilot.md/Q17",
       "path": "content/provenance/NCA-75/Q17.json",
       "sha256": "4829289ff66398dd4c7689b14c529925c3158dec69807e7e0bb19293723650b9",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "NCA-75/nca75-pilot.md/Q18",
       "path": "content/provenance/NCA-75/Q18.json",
       "sha256": "baa9cc4f4bf76cf24012702392dd7e40cf0a9d25b4089514bf637b91a2f83e7c",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "NCA-75/nca75-pilot.md/Q19",
       "path": "content/provenance/NCA-75/Q19.json",
       "sha256": "312f6d88877de468becbeaef8866f62c8b790e0a73fb089d4a7651040c288582",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "NCA-75/nca75-pilot.md/Q20",
       "path": "content/provenance/NCA-75/Q20.json",
       "sha256": "86bea65906b0c92a9f1ab3aa94a6c22f313da04c468d818abcf92c318d07a9a8",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "NCA-75/nca75-pilot.md/Q21",
       "path": "content/provenance/NCA-75/Q21.json",
       "sha256": "1fce409c2776aa23fc25e1435f0e37172dab58bb88ee79853198609fb03af1d9",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "NCA-75/nca75-pilot.md/Q22",
       "path": "content/provenance/NCA-75/Q22.json",
       "sha256": "5829be2ba92e64c1698cea05214b85e6893acac434ce38703e6cac77797ccb7a",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "NCA-75/nca75-pilot.md/Q23",
       "path": "content/provenance/NCA-75/Q23.json",
       "sha256": "a92cfd78193f19f8013375d22d971b1d4ddc1b8a9908c86d580c772673bcf188",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "NCA-75/nca75-pilot.md/Q24",
       "path": "content/provenance/NCA-75/Q24.json",
       "sha256": "9ac2e656a368ce1b765b7edf6fbe8ddbbedb745768a128970336e42ebdb3aa5c",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "NCA-75/nca75-pilot.md/Q25",
       "path": "content/provenance/NCA-75/Q25.json",
       "sha256": "472c8ee3a079d43b4e5b1751c024bbef3471b949814c469fa03bd30cc6110e1e",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "NCA-75/nca75-pilot.md/Q26",
       "path": "content/provenance/NCA-75/Q26.json",
       "sha256": "913e98fdd0ef990138e6687ae67e4db28cd284c7844452efb4188cacd998aafc",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "NCA-75/nca75-pilot.md/Q27",
       "path": "content/provenance/NCA-75/Q27.json",
       "sha256": "48af9a5b06db4633b826beeffb967b4cf056cef0f8b3e4654ee38bb84ee196e1",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "NCA-75/nca75-pilot.md/Q28",
       "path": "content/provenance/NCA-75/Q28.json",
       "sha256": "293b02af028d978f05f282e35fd142d71e2062b2e6f160a966fcf694d94b3e9e",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "NCA-75/nca75-pilot.md/Q29",
       "path": "content/provenance/NCA-75/Q29.json",
       "sha256": "86d28df6b0f0c9c5a330e2f6660c5e10ea02f61ffb3bf55bd22adbf888a19403",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "NCA-75/nca75-pilot.md/Q30",
       "path": "content/provenance/NCA-75/Q30.json",
       "sha256": "0e634e845a33a70f4f64653da3aaeb347d05e459d27c38faf0270627c3c06931",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "NCA-75/nca75-pilot.md/Q31",
       "path": "content/provenance/NCA-75/Q31.json",
       "sha256": "83d2f8011fa9442b1728557f5cd6bc44e38167c78deae30155c8177c4d305310",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "NCA-75/nca75-pilot.md/Q32",
       "path": "content/provenance/NCA-75/Q32.json",
       "sha256": "66e59e11b3146ed3ced55a384ad6503029aa5894d5537d3788a5abd647770019",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "NCA-75/nca75-pilot.md/Q33",
       "path": "content/provenance/NCA-75/Q33.json",
       "sha256": "b40d6d27f72d8cb7c67d2ce03f8fdd3310c7228664bace8cb26b8edadd982a72",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "NCA-75/nca75-pilot.md/Q34",
       "path": "content/provenance/NCA-75/Q34.json",
       "sha256": "c673c5254a929e8317ba909eaaf3de2e09d684ced7c210ae3923bb42935a59e4",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "NCA-75/nca75-pilot.md/Q35",
       "path": "content/provenance/NCA-75/Q35.json",
       "sha256": "05ee41a4ea2e6a35d4f163b7f1431cde782673a9f8e19ca17fb2f59de28b49c2",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "NCA-75/nca75-pilot.md/Q36",
       "path": "content/provenance/NCA-75/Q36.json",
       "sha256": "a8e8cd10c68893d10c440be4b16e63d11fcb0ca66227c77043b2e41c55ecf85e",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "NCA-75/nca75-pilot.md/Q37",
       "path": "content/provenance/NCA-75/Q37.json",
       "sha256": "4c9d5ac13d27df50916aecb6d6ee8845238a843fd0a6720a1d0df1656c00e755",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "NCA-75/nca75-pilot.md/Q38",
       "path": "content/provenance/NCA-75/Q38.json",
       "sha256": "d89595a20532d158dec34c371fd5bb5528d562eb90c067b7a2b16372cefd7118",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "NCA-75/nca75-pilot.md/Q39",
       "path": "content/provenance/NCA-75/Q39.json",
       "sha256": "e709c40c601c311d04a9f0dec083eda6ae12b65ef9985d3dfe9bf43cb7dc7cf7",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "NCA-75/nca75-pilot.md/Q40",
       "path": "content/provenance/NCA-75/Q40.json",
       "sha256": "80dd8af1d6e5b1f4a02e81671037dd7ba602e085486eb00a5ca348838355703d",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "NCA-75/nca75-pilot.md/Q41",
       "path": "content/provenance/NCA-75/Q41.json",
       "sha256": "07bb1b7ff45ded13452836a651f8fe3ff577818667b57418f119049c468bb647",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "NCA-75/nca75-pilot.md/Q42",
       "path": "content/provenance/NCA-75/Q42.json",
       "sha256": "12c08eecbb13ff912ca646ce9ec943e28608559feace4644922a5ad4f620aee3",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "NCA-75/nca75-pilot.md/Q43",
       "path": "content/provenance/NCA-75/Q43.json",
       "sha256": "9c128dc6d7849b9d2313b7449756d320929913f470eec66b9bab338ef9c62b9a",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "NCA-75/nca75-pilot.md/Q44",
       "path": "content/provenance/NCA-75/Q44.json",
       "sha256": "9b790820d5262a6b2db55fe587ab3193da6e3f8afc82f857891327b28bae6ee2",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "AZ-104/az104-beginner.md/Q1",
       "path": "content/provenance/AZ-104/Q1.json",
       "sha256": "d2869738bc530a00fe1f8a20a7131adb2c32506662c6f24791fd90b4b8cd2f13",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "AZ-104/az104-beginner.md/Q2",
       "path": "content/provenance/AZ-104/Q2.json",
       "sha256": "f9c98de16f8d5d6e930e485c138427b35d851a4f964f41996a3f5546e30e9892",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "AZ-104/az104-beginner.md/Q3",
       "path": "content/provenance/AZ-104/Q3.json",
       "sha256": "32de223b1cb50e8708ee1fdb35bef58689fc289f1c3256514815244692ead6c0",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "AZ-104/az104-beginner.md/Q4",
       "path": "content/provenance/AZ-104/Q4.json",
       "sha256": "1423b76666aad0f401f7e501922451fd5f40856b7c85376f1585c4a75b99dca7",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "AZ-104/az104-beginner.md/Q5",
       "path": "content/provenance/AZ-104/Q5.json",
       "sha256": "944df66272bc64d325ed534f29574fde55c7056f63fe3da0aee28a3ac10ba2e1",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "AZ-104/az104-beginner.md/Q6",
       "path": "content/provenance/AZ-104/Q6.json",
       "sha256": "5f3186c3194e32d0e07caca6672717f14f3737028b8f6748670f0e05bc376c54",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "AZ-104/az104-beginner.md/Q7",
       "path": "content/provenance/AZ-104/Q7.json",
       "sha256": "5ecb5e7d212254b74070c32411951fbc310818e3595f5507b5bb7e03434adc61",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "AZ-104/az104-beginner.md/Q8",
       "path": "content/provenance/AZ-104/Q8.json",
       "sha256": "877cc9263fdb5dd2007a202053d09be1c1529100b049b31560e7b612ec72bb13",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "AZ-104/az104-beginner.md/Q9",
       "path": "content/provenance/AZ-104/Q9.json",
       "sha256": "0319881ba94a4f9693629c0c06fc0bcb2c71655ec7beac93fe715cc2c0d633cd",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "AZ-104/az104-beginner.md/Q10",
       "path": "content/provenance/AZ-104/Q10.json",
       "sha256": "5de8584cf0fb2aae4c2b2f892aac597305b4368bdb370fbc808a1141e648db2b",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "AZ-104/az104-beginner.md/Q11",
       "path": "content/provenance/AZ-104/Q11.json",
       "sha256": "b78d097873050e20d027dbfc58219aa8d551f279479d749a095a12bac48d39f0",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "AZ-104/az104-beginner.md/Q12",
       "path": "content/provenance/AZ-104/Q12.json",
       "sha256": "6a8b0af8ad37c7cbf40af965beb2cd0d8d3cc2ebd8aeec4d19490fc372b2e995",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "AZ-104/az104-beginner.md/Q13",
       "path": "content/provenance/AZ-104/Q13.json",
       "sha256": "e572d50115636914b57a58b3afe6688366764fcb2bbc7c4ede9be502ffe7e718",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "AZ-104/az104-beginner.md/Q14",
       "path": "content/provenance/AZ-104/Q14.json",
       "sha256": "e19ee4ba3021c7b00f788fc949f8939bc6432f017c974b474baf78a4be52dc8e",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "AZ-104/az104-beginner.md/Q15",
       "path": "content/provenance/AZ-104/Q15.json",
       "sha256": "8e86fd8f09a47420e452630c719e8722a12858ca730d8750e5b16ae10477d36a",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "AZ-104/az104-beginner.md/Q16",
       "path": "content/provenance/AZ-104/Q16.json",
       "sha256": "fdb31be1db2ec3ddb44745c8c34a0974552ad6bdc48d2c0c0041a774eeb9c4b6",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "AZ-104/az104-beginner.md/Q17",
       "path": "content/provenance/AZ-104/Q17.json",
       "sha256": "422538bcb486ea38bf3e942dc5eb8c46ff31dfcf174b43db0c15e0a9cc1f67b9",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "AZ-104/az104-beginner.md/Q18",
       "path": "content/provenance/AZ-104/Q18.json",
       "sha256": "3bde5a8b4b989c0718c3cdf9af0de44cff6f53e99903730ada84005247c57987",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "AZ-104/az104-beginner.md/Q19",
       "path": "content/provenance/AZ-104/Q19.json",
       "sha256": "e5e6a6985cd16a2155685215e1245ad8c2839d125ce678e79fb92b64a787129e",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "AZ-104/az104-beginner.md/Q20",
       "path": "content/provenance/AZ-104/Q20.json",
       "sha256": "0f17d01cdcf1f487207664e20de6e62c148d2b890fa70c4e90c1547f007237e6",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "AZ-104/az104-beginner.md/Q21",
       "path": "content/provenance/AZ-104/Q21.json",
       "sha256": "7c25bda0acc502f6eea7461e3cbabfc4be4d86dc4bd71bcb83d306d4072e897a",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "AZ-104/az104-beginner.md/Q22",
       "path": "content/provenance/AZ-104/Q22.json",
       "sha256": "a0777b729d25bb888485232b448a1e617dfcbff20f0cc6942e4d39c3c185f27b",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "AZ-104/az104-beginner.md/Q23",
       "path": "content/provenance/AZ-104/Q23.json",
       "sha256": "38e623ec4b9d6a64bb42e44487bf42103b7609ae314a45104b51a039535ec60e",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "AZ-104/az104-beginner.md/Q24",
       "path": "content/provenance/AZ-104/Q24.json",
       "sha256": "ef52a3dff4fc9ff43b6766a7be194533e5a7a1ab32836ea76771e568bca28169",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "AZ-104/az104-beginner.md/Q25",
       "path": "content/provenance/AZ-104/Q25.json",
       "sha256": "2ce11b630d89308a068ea91cf9f3a5f01e24b0910620781098e6a4bf2a8d2aac",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "AZ-104/az104-beginner.md/Q26",
       "path": "content/provenance/AZ-104/Q26.json",
       "sha256": "e6bfa7e2a15857c3b48153496acba34c800a7dd83812131715ee42b51db3be94",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "AZ-104/az104-beginner.md/Q27",
       "path": "content/provenance/AZ-104/Q27.json",
       "sha256": "54e34774df7e699e3d54ea9a47b862ceed55176aee8a9e025da6c2dc9470a743",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "AZ-104/az104-beginner.md/Q28",
       "path": "content/provenance/AZ-104/Q28.json",
       "sha256": "76606f8e0c4f955bcf003f8d58624c34f40f4c5bc502675e08f228d492653332",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "AZ-104/az104-beginner.md/Q29",
       "path": "content/provenance/AZ-104/Q29.json",
       "sha256": "f1d74925efe7c9f3f455ca175eacc14f8ddf9a33c3f148cf9bff1074868c5bf6",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "AZ-104/az104-beginner.md/Q30",
       "path": "content/provenance/AZ-104/Q30.json",
       "sha256": "ecded658686dc2ec709045b376df6933bb96f1489dec4a076ce00e581bd358df",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "AZ-104/az104-beginner.md/Q31",
       "path": "content/provenance/AZ-104/Q31.json",
       "sha256": "6d1b088d2c57a1d3945c2178cb7f740556d3f3f3ed96195ce3d8d1f7aa643c05",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "AZ-104/az104-beginner.md/Q32",
       "path": "content/provenance/AZ-104/Q32.json",
       "sha256": "dbc4e64cb0a0e1b8f0321f0ca048d5fa2f56cd980f63fc0d31bcfa7b29dddfd6",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "AZ-104/az104-beginner.md/Q33",
       "path": "content/provenance/AZ-104/Q33.json",
       "sha256": "80b152c18516b501707a3f4c845c3cda166e35f380b07f70a9fcf0bd1494bfe2",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "AZ-104/az104-beginner.md/Q34",
       "path": "content/provenance/AZ-104/Q34.json",
       "sha256": "3a307bd19049b6b4c90dca147dd0e621f433286a43a39c545c714807448fff03",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "AZ-104/az104-beginner.md/Q35",
       "path": "content/provenance/AZ-104/Q35.json",
       "sha256": "9b6f6851bc0edb4428b96f06fce06cee240dd940acd8d2bd16d62d6b0bccc115",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "AZ-104/az104-beginner.md/Q36",
       "path": "content/provenance/AZ-104/Q36.json",
       "sha256": "a2363fd420122c5ec57d2685ba678321156309a057d48c1ba60ff7e537a9fcca",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "AZ-104/az104-beginner.md/Q37",
       "path": "content/provenance/AZ-104/Q37.json",
       "sha256": "bdf751512c104a3654a5503e6838eeebbf887fb34982f21548ee40714991a1da",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "AZ-104/az104-beginner.md/Q38",
       "path": "content/provenance/AZ-104/Q38.json",
       "sha256": "8c8d7236b9f095afaee3f81e60c8facb7c6189bed40973619e529efdef455ea3",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "AZ-104/az104-beginner.md/Q39",
       "path": "content/provenance/AZ-104/Q39.json",
       "sha256": "c3434568b2bd535c43bc5035c68ebb5117bf47a1374dc30253910d19c7e1a3f6",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "AZ-104/az104-beginner.md/Q40",
       "path": "content/provenance/AZ-104/Q40.json",
       "sha256": "76ab5ca1746b0404b6cc4bd48450168e600ba9640b97b77554633a9ba7ca12f4",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "AZ-104/az104-beginner.md/Q41",
       "path": "content/provenance/AZ-104/Q41.json",
       "sha256": "45b83a7fc62110a723cc7133f0530d6a749ac1935e381cbf41406872fcbee811",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "AZ-104/az104-beginner.md/Q42",
       "path": "content/provenance/AZ-104/Q42.json",
       "sha256": "223214be328a137446e922381183e066b6b9b2c3166121179bf8d14a78e9152e",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "AZ-104/az104-beginner.md/Q43",
       "path": "content/provenance/AZ-104/Q43.json",
       "sha256": "1c81aea669b362059fcbe921dbddf584ff4236910101fad998064ea5481d22c3",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "AZ-104/az104-beginner.md/Q44",
       "path": "content/provenance/AZ-104/Q44.json",
       "sha256": "6baac42812cb0c74006ad88326784d99309a092cdc8bb1364367c32214f8e38d",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "AZ-104/az104-beginner.md/Q45",
       "path": "content/provenance/AZ-104/Q45.json",
       "sha256": "22e605916f0bf2a6e5211437b60f2c4d3e5c93bdc3463921928b321830c6ec93",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "AZ-104/az104-beginner.md/Q46",
       "path": "content/provenance/AZ-104/Q46.json",
       "sha256": "b2fac0eac157b3cd60d128ca140860e954c6081e29b1d0212132b0e19f1b190c",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "AZ-104/az104-beginner.md/Q47",
       "path": "content/provenance/AZ-104/Q47.json",
       "sha256": "51222108c640b1d5ec59cd99047a0e6ad82ceefd32741db8d8a6bfd84b138dc9",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "AZ-104/az104-beginner.md/Q48",
       "path": "content/provenance/AZ-104/Q48.json",
       "sha256": "3d185dc56e0ddfecbb6cd79f86c18106e922da040f34f0f7b5ee1c98b3ffa3c3",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "AZ-104/az104-beginner.md/Q49",
       "path": "content/provenance/AZ-104/Q49.json",
       "sha256": "f4fed834ff37dc47b437b551ba04c30883b3c74d231a88708b19e1114cfa0213",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "AZ-104/az104-beginner.md/Q50",
       "path": "content/provenance/AZ-104/Q50.json",
       "sha256": "3715ed7b0ec3766572875c2315d554af032a48bfb8edfd4b3337d5144c89411d",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "AZ-104/az104-beginner.md/Q51",
       "path": "content/provenance/AZ-104/Q51.json",
       "sha256": "b2c1af5b5b7c5a72f60330b4074be5651180287ba9b7ae2c521c5535dd0a4da3",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "AWS-SAA/aws-saa-beginner.md/Q1",
       "path": "content/provenance/AWS-SAA/Q1.json",
       "sha256": "09c08e045b1714d14e9e64725a09cfc3c0f4158930be16eb5ee3e664d3b29135",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "AWS-SAA/aws-saa-beginner.md/Q2",
       "path": "content/provenance/AWS-SAA/Q2.json",
       "sha256": "f4bd5b8df770004a5b9d714dff90f777186831400aed5bf4a14721b4c081a2cd",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "AWS-SAA/aws-saa-beginner.md/Q3",
       "path": "content/provenance/AWS-SAA/Q3.json",
       "sha256": "ed715fc0677bbee6b886651a9640810e01fc1864d5d1b3251ae5f509f47103f4",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "AWS-SAA/aws-saa-beginner.md/Q4",
       "path": "content/provenance/AWS-SAA/Q4.json",
       "sha256": "282b7f7a51facec94c2e69fa66dbbf0ad54da85b3614c091791f36eb392d09ff",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "AWS-SAA/aws-saa-beginner.md/Q5",
       "path": "content/provenance/AWS-SAA/Q5.json",
       "sha256": "2b0e2455ab69d18628fa89355ba104a681e03d0ae8b165b72e417c4bbb1ed05f",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "AWS-SAA/aws-saa-beginner.md/Q6",
       "path": "content/provenance/AWS-SAA/Q6.json",
       "sha256": "8289d3ebc4f30a1bc1181cb9ad3c761fd225050e1255ce16f61a6c83d8034f56",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "AWS-SAA/aws-saa-beginner.md/Q7",
       "path": "content/provenance/AWS-SAA/Q7.json",
       "sha256": "8bb737dc579620ec8d39d50fdf29ee4cfcca6bcb99b7ce4f45e8c72768cd4645",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "AWS-SAA/aws-saa-beginner.md/Q8",
       "path": "content/provenance/AWS-SAA/Q8.json",
       "sha256": "79fc58ea10ff426e44f886412b92238c9f902ba263d406fd49209caaf475e89d",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "AWS-SAA/aws-saa-beginner.md/Q9",
       "path": "content/provenance/AWS-SAA/Q9.json",
       "sha256": "3fa9af2597692e3d6faa60a19e28dad9621e0081602ce2bfb12dc75c5267368d",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "AWS-SAA/aws-saa-beginner.md/Q10",
       "path": "content/provenance/AWS-SAA/Q10.json",
       "sha256": "ad5b44071bffb7771e77153831abdbed33c4971bfa193baf7575f93f2466b0f9",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "AWS-SAA/aws-saa-beginner.md/Q11",
       "path": "content/provenance/AWS-SAA/Q11.json",
       "sha256": "bb80c737dd01cc2a60763c0adf0c97033e67ba6e64643d9d811da1648b0a1068",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "AWS-SAA/aws-saa-beginner.md/Q12",
       "path": "content/provenance/AWS-SAA/Q12.json",
       "sha256": "b3fa4257566295d8f44dc05dc236ca362358ac767decfa6fc65e9e7400a76b58",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "AWS-SAA/aws-saa-beginner.md/Q13",
       "path": "content/provenance/AWS-SAA/Q13.json",
       "sha256": "f75b7af1ca486e4085fbfa33c4de055beb71ca8708a6a255cd1b46b7ec98a862",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "AWS-SAA/aws-saa-beginner.md/Q14",
       "path": "content/provenance/AWS-SAA/Q14.json",
       "sha256": "9b2829ade546a7776bde8dbc69659485eeb5b63a6b7c9309e1ab72c3a3a1b9b2",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "AWS-SAA/aws-saa-beginner.md/Q15",
       "path": "content/provenance/AWS-SAA/Q15.json",
       "sha256": "77be3ab7d818e6777b79b38f57cf13ccc4580c494b022b7e379d426a057a1fc3",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "AWS-SAA/aws-saa-beginner.md/Q16",
       "path": "content/provenance/AWS-SAA/Q16.json",
       "sha256": "d3fba1fe1cf4dd277c23d045ec6743a068798a8667b1eb249d528430b641beee",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "AWS-SAA/aws-saa-beginner.md/Q17",
       "path": "content/provenance/AWS-SAA/Q17.json",
       "sha256": "ac46f419988339146be61c688008bbd3623a21af73d53a442f210fe8c3767cad",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "AWS-SAA/aws-saa-beginner.md/Q18",
       "path": "content/provenance/AWS-SAA/Q18.json",
       "sha256": "7bb376ec12daec853b0c6605216152ee8b5c7b5add42d41fc8366b933e59e913",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "AWS-SAA/aws-saa-beginner.md/Q19",
       "path": "content/provenance/AWS-SAA/Q19.json",
       "sha256": "9c8e4e33c7ef5ba9606ee60a4bcde7fdee2a7f9f1760b5f78869a9ceb18952c6",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "AWS-SAA/aws-saa-beginner.md/Q20",
       "path": "content/provenance/AWS-SAA/Q20.json",
       "sha256": "34fb35fcd1d7e22db28301eeeae978a6c642dc625cb862bbbba2a4a4f1851391",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "AWS-SAA/aws-saa-beginner.md/Q21",
       "path": "content/provenance/AWS-SAA/Q21.json",
       "sha256": "bea493790511d52e13f3fe170b0de25db29d4d6bc8dfb10c55afc7f7f1c8703d",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "AWS-SAA/aws-saa-beginner.md/Q22",
       "path": "content/provenance/AWS-SAA/Q22.json",
       "sha256": "11d796ff55d30731d9dfede11577288c6b4d18c54435242db41012b17f2a5d63",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "AWS-SAA/aws-saa-beginner.md/Q23",
       "path": "content/provenance/AWS-SAA/Q23.json",
       "sha256": "849f778efb4d22111e000c8cb948daa45b6c9b02776dc68fd1b28f68d7e3cc40",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "AWS-SAA/aws-saa-beginner.md/Q24",
       "path": "content/provenance/AWS-SAA/Q24.json",
       "sha256": "dfd261301ae9398035fddd5eb2483a4f03e1b571477cc2af213b2b3f27c87836",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "AWS-SAA/aws-saa-beginner.md/Q25",
       "path": "content/provenance/AWS-SAA/Q25.json",
       "sha256": "73cc5f79d7ae6b2e1e5bebf644aa6d5b72f17cb65e680168a17117d27762798b",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "AWS-SAA/aws-saa-beginner.md/Q26",
       "path": "content/provenance/AWS-SAA/Q26.json",
       "sha256": "26ac36af36cfe9ad62aa503973b5818ad6791672760080f6fae1b5c97441f307",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "AWS-SAA/aws-saa-beginner.md/Q27",
       "path": "content/provenance/AWS-SAA/Q27.json",
       "sha256": "e88bc74563fbbcc503e83a38a7551a3f04e14f2b97519d1fe85806f5a9533b78",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "AWS-SAA/aws-saa-beginner.md/Q28",
       "path": "content/provenance/AWS-SAA/Q28.json",
       "sha256": "4500d3313883e135d1515d9090c4725df7ff5f020c34749e9955cbc205bc6d2d",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "AWS-SAA/aws-saa-beginner.md/Q29",
       "path": "content/provenance/AWS-SAA/Q29.json",
       "sha256": "d5bc664457e734d3da54ff23a56c9ea1b87ab78380d974b4f4ef4ae6ccab5dd6",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "AWS-SAA/aws-saa-beginner.md/Q30",
       "path": "content/provenance/AWS-SAA/Q30.json",
       "sha256": "121bd9d0c53a85a05bfb28e19ec282b9c1a5831eb731f844aef99d09e4d8045f",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "AWS-SAA/aws-saa-beginner.md/Q31",
       "path": "content/provenance/AWS-SAA/Q31.json",
       "sha256": "dcf5c02a3aa6e51cbec570e1a1d8212d4148d596504af5216c0493fc1616a3b5",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "AWS-SAA/aws-saa-beginner.md/Q32",
       "path": "content/provenance/AWS-SAA/Q32.json",
       "sha256": "35291823d04ee8e195dc2caf3d7c965e56627e3577abfc98c60fff459f10aca2",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "AWS-SAA/aws-saa-beginner.md/Q33",
       "path": "content/provenance/AWS-SAA/Q33.json",
       "sha256": "fe9f9f16035f51861d4dbfc9ad27532ab32a38c0655acc43f4995145260bdc04",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "AWS-SAA/aws-saa-beginner.md/Q34",
       "path": "content/provenance/AWS-SAA/Q34.json",
       "sha256": "89fe7a59e3489d659e11b9737761b22249eecdba8873483ec20db1291a09e930",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "AWS-SAA/aws-saa-beginner.md/Q35",
       "path": "content/provenance/AWS-SAA/Q35.json",
       "sha256": "79868f430b270a69afd69c3f72341960c445129061b98da7c7cffd9892366760",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "AWS-SAA/aws-saa-beginner.md/Q36",
       "path": "content/provenance/AWS-SAA/Q36.json",
       "sha256": "d782dbed182b9d6e88b09fe2355b5791074135873f09ac705eaceb2c89b48dfc",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "AWS-SAA/aws-saa-beginner.md/Q37",
       "path": "content/provenance/AWS-SAA/Q37.json",
       "sha256": "4ad8e66b71603136da8a5bf399c38b1be1fd3401791f6016fd9387f04a68e9c8",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "AWS-SAA/aws-saa-beginner.md/Q38",
       "path": "content/provenance/AWS-SAA/Q38.json",
       "sha256": "7419ce962721327fb7840f45b8f3e2fc2fee0163aeaf33f2b297956a03295f99",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "AWS-SAA/aws-saa-beginner.md/Q39",
       "path": "content/provenance/AWS-SAA/Q39.json",
       "sha256": "b6867a19f14e76deb16efceb314b95b1f7e6e784d2168cb6f43f70ecc178879a",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "AWS-SAA/aws-saa-beginner.md/Q40",
       "path": "content/provenance/AWS-SAA/Q40.json",
       "sha256": "a183a39c9dbe829aaa47d132e72065c10bbbe4199d68a44a0f024801becc6ada",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "AWS-SAA/aws-saa-beginner.md/Q41",
       "path": "content/provenance/AWS-SAA/Q41.json",
       "sha256": "fc465af8aecc04d467ef8890d6a08ac739978f89ec4c20b54111954d2714a278",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "AWS-SAA/aws-saa-beginner.md/Q42",
       "path": "content/provenance/AWS-SAA/Q42.json",
       "sha256": "146e397a7d772e764c7e51c6343f364a4e2a023331ecc35c530a0ee6faadc77c",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "AWS-SAA/aws-saa-beginner.md/Q43",
       "path": "content/provenance/AWS-SAA/Q43.json",
       "sha256": "465a7b2e513ee7ea929ad8e2b4b6e519721c39ed43f8b06f023e47983b11a29a",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "AWS-SAA/aws-saa-beginner.md/Q44",
       "path": "content/provenance/AWS-SAA/Q44.json",
       "sha256": "5abcd24f0f588029ab47b9f1d55999ad6e299aa94d689f4089d7e6f36786822e",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "AWS-SAA/aws-saa-beginner.md/Q45",
       "path": "content/provenance/AWS-SAA/Q45.json",
       "sha256": "a227f0086b793416787cd7c93ec706548ea22d15be3009048bad71b2ab609b9b",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "AWS-SAA/aws-saa-beginner.md/Q46",
       "path": "content/provenance/AWS-SAA/Q46.json",
       "sha256": "83ad1c3bf106b750a53f1dd6b00629584443ab1d18fe999416211fe33d9e5259",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "AWS-SAA/aws-saa-beginner.md/Q47",
       "path": "content/provenance/AWS-SAA/Q47.json",
       "sha256": "f263e725102ca567be52c34b808917b295e8d2e5c4936252f11275ab92e158e4",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "AWS-SAA/aws-saa-beginner.md/Q48",
       "path": "content/provenance/AWS-SAA/Q48.json",
       "sha256": "1ff7c3f6bdb308b88756af11b85b727f3af3c870e5c08f121e1bfcf7d7a009a2",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "AWS-SAA/aws-saa-beginner.md/Q49",
       "path": "content/provenance/AWS-SAA/Q49.json",
       "sha256": "b42f91577dce2ce96d43893dbfc558a59ce46a4508cc4826dd17799dd9c0923d",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "AWS-SAA/aws-saa-beginner.md/Q50",
       "path": "content/provenance/AWS-SAA/Q50.json",
       "sha256": "51784a6163e5e46afb11217628e7a571c0505d6bba54ad446b23bdce1d7e0f8d",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "AWS-SAA/aws-saa-beginner.md/Q51",
       "path": "content/provenance/AWS-SAA/Q51.json",
       "sha256": "8168a0db7638b23f1df9fc70f6b1318c165ef98ea39cda6b66acee778795fb44",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "AWS-SAA/aws-saa-beginner.md/Q52",
       "path": "content/provenance/AWS-SAA/Q52.json",
       "sha256": "5de7ab47a2e641a7e84290402dff7d8d18f93bcf27ae873c0c682a1df636b412",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "AWS-SAA/aws-saa-beginner.md/Q53",
       "path": "content/provenance/AWS-SAA/Q53.json",
       "sha256": "0aa6cd0ac612d54661803cfff7a1db52c939fe9c2fe50bcaf300d07c8ff50f99",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "AWS-SAA/aws-saa-beginner.md/Q54",
       "path": "content/provenance/AWS-SAA/Q54.json",
       "sha256": "5c8c3f8968414252136a3b7ef65b225b0a5cd1225a09cf64505835ffe9036b2f",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     },
     {
       "itemId": "AWS-SAA/aws-saa-beginner.md/Q55",
       "path": "content/provenance/AWS-SAA/Q55.json",
       "sha256": "f7533942a309fd6732f0603807ae122cbc9632336f02eb5d7089f16a0edef4b8",
       "status": "draft",
-      "reviewDate": ""
+      "reviewDate": "",
+      "demoCut": ""
     }
   ]
 }

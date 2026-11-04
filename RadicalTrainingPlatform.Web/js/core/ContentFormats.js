@@ -19,9 +19,9 @@
  * ## The four formats
  *
  *   lesson     `<examId>/<lessonId>`                     COMPTIA-A-1201/A2
- *   item       `<examId>/<sourceFile>/<number>`          COMPTIA-A-1201/core1-a2-fixtures.md/Q1
+ *   item       `<examId>/<sourceFile>/<number>`          COMPTIA-A-1201/core1-demo-cut.md/Q1
  *   scenario   `<scenarioId>`                            mci-01
- *   flashcard  — shares the **item** ID space            COMPTIA-A-1201/core1-a2-fixtures.md/Q1
+ *   flashcard  — shares the **item** ID space            COMPTIA-A-1201/core1-demo-cut.md/Q1
  *
  * The item ID shape is not a convention invented here: it is the source-aware
  * semantic ID the content pipeline already uses (R-13), and this registry
@@ -72,7 +72,7 @@ export const CONTENT_FORMATS = Object.freeze({
         label: 'Practice item',
         plural: 'Practice items',
         idShape: '<examId>/<sourceFile>/<number>',
-        example: 'COMPTIA-A-1201/core1-a2-fixtures.md/Q1',
+        example: 'COMPTIA-A-1201/core1-demo-cut.md/Q1',
         source: 'js/study-content.js — ITEMS',
         route: '#/practice/:examId',
         progressKind: 'scored',
@@ -95,7 +95,7 @@ export const CONTENT_FORMATS = Object.freeze({
         plural: 'Flashcards',
         // Deliberately the same shape as `item`: a card is a view over an item.
         idShape: '<examId>/<sourceFile>/<number>  (shared with item)',
-        example: 'COMPTIA-A-1201/core1-a2-fixtures.md/Q1',
+        example: 'COMPTIA-A-1201/core1-demo-cut.md/Q1',
         source: 'derived from js/study-content.js — ITEMS (no new content)',
         route: '#/flashcards/:examId',
         progressKind: 'reviewed',

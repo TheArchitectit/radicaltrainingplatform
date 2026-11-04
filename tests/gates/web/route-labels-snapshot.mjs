@@ -98,7 +98,7 @@ await runner.test('dynamic IDs stay honest IDs (never fake-title-cased)', async 
     assertEqual(labelForSegment('COMPTIA-A-1201'), 'COMPTIA-A-1201');
     assertEqual(breadcrumbFor('/tracks/COMPTIA-A-1201').page, 'COMPTIA-A-1201');
     assertEqual(breadcrumbFor('/practice/COMPTIA-NET-009').page, 'COMPTIA-NET-009');
-    assertEqual(labelForSegment('core1-a2-fixtures.md'), 'core1-a2-fixtures.md');
+    assertEqual(labelForSegment('core1-demo-cut.md'), 'core1-demo-cut.md');
 });
 
 await runner.test('nested study pages label the known middle segments', async () => {

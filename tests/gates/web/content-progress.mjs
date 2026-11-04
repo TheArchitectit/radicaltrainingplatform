@@ -23,7 +23,7 @@ const { ITEMS } = await import('../../../RadicalTrainingPlatform.Web/js/study-co
 
 await progress.init();
 
-const ITEM_ID = ITEMS[0].id;      // COMPTIA-A-1201/core1-a2-fixtures.md/Q1
+const ITEM_ID = ITEMS[0].id;      // COMPTIA-A-1201/core1-demo-cut.md/Q1
 const EXAM_ID = ITEMS[0].examId;
 const LESSON_ID = 'COMPTIA-A-1201/A2';
 

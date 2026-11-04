@@ -28,6 +28,7 @@ Full per-spec documents extracted from the [October 10 OpenSpec package](../../d
 | [SPEC-16](SPEC-16-executor-brief.md) | Executor brief, boot sequence, evidence packs, presenter runbook | — (handoff) |
 | [SPEC-17](SPEC-17-sources.md) | Sources and evidence, uncertainty register | — (reference) |
 | [SPEC-18](SPEC-18-nca-cheatsheet-beta.md) | NCA cheatsheet: retire the closed beta framing and expired waiver code | TM-29c |
+| [SPEC-19](SPEC-19-demo-cut-banks.md) | Rename the demo-cut banks out of `*-fixtures.md` and date their origin | TM-110a |
 
 ## Residue register
 
@@ -37,6 +38,7 @@ spec, gate and commit:
 | Spec | Residue | Gate |
 |---|---|---|
 | [SPEC-18](SPEC-18-nca-cheatsheet-beta.md) | The NCA cheatsheet still titled itself a beta exam and reproduced the expired waiver code | TM-29c |
+| [SPEC-19](SPEC-19-demo-cut-banks.md) | Seven released banks were named `*-fixtures.md` and their demo-cut origin was recorded nowhere | TM-110a |
 
 ## Sprint rollups
 

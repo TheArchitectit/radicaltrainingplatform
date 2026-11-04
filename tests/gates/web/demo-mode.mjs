@@ -116,8 +116,8 @@ await runner.test('station reset clears progress/ and scenario/ keyspaces', asyn
     await demo.enter(SCENARIOS);
 
     // Lay down learner state of every persisted shape.
-    await progress.recordItem('COMPTIA-A-1201', 'COMPTIA-A-1201/core1-a2-fixtures.md/Q1', { isCorrect: true });
-    await progress.recordItem('COMPTIA-A-1201', 'COMPTIA-A-1201/core1-a2-fixtures.md/Q2', { isCorrect: false });
+    await progress.recordItem('COMPTIA-A-1201', 'COMPTIA-A-1201/core1-demo-cut.md/Q1', { isCorrect: true });
+    await progress.recordItem('COMPTIA-A-1201', 'COMPTIA-A-1201/core1-demo-cut.md/Q2', { isCorrect: false });
     await progress.saveContinuation('COMPTIA-A-1201', { index: 3, selection: ['A'], results: [{ isCorrect: true }], total: 24 });
     await progress.recordScenario('aplus-dns-01');
 
@@ -134,7 +134,7 @@ await runner.test('station reset clears progress/ and scenario/ keyspaces', asyn
         `the report must count what it cleared (got ${report.clearedKeys})`);
 
     // No student answers survive a reset (REQ-DEMO-05).
-    const restored = await progress.restore('COMPTIA-A-1201', ['COMPTIA-A-1201/core1-a2-fixtures.md/Q1']);
+    const restored = await progress.restore('COMPTIA-A-1201', ['COMPTIA-A-1201/core1-demo-cut.md/Q1']);
     assertEqual(restored.attempted, 0, 'no scored answer may survive a station reset');
     assertEqual(await progress.getScenario('aplus-dns-01'), null, 'no scenario record may survive a reset');
 });
@@ -177,7 +177,7 @@ await runner.test('reseed verification reports a poisoned validator as failed, n
 await runner.test('leaving demo mode resets the station and clears the flag', async () => {
     await progress.init();
     await demo.enter(SCENARIOS);
-    await progress.recordItem('COMPTIA-A-1201', 'COMPTIA-A-1201/core1-a2-fixtures.md/Q1', { isCorrect: true });
+    await progress.recordItem('COMPTIA-A-1201', 'COMPTIA-A-1201/core1-demo-cut.md/Q1', { isCorrect: true });
 
     await demo.exit();
 

@@ -52,6 +52,11 @@ BUNDLE_VERSION = 1
 # "beginner preview" and never implies pass readiness.
 RELEASE_STATE = "draft-preview"
 
+# SPEC-19: a released bank is a learner surface, not a gate input.
+RELEASED_FIXTURE_RE = re.compile(r"fixtures?\.md$", re.IGNORECASE)
+DEMO_BANK_RE = re.compile(r"-demo-cut\.md$", re.IGNORECASE)
+DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
+
 
 def load_generator():
     """Import generate-study-content.py for its release record.
@@ -137,6 +142,7 @@ def build_bundle(gen, root):
             "sha256": sha256(p),
             "status": record.get("status", ""),
             "reviewDate": record.get("reviewDate", ""),
+            "demoCut": record.get("demoCut", ""),
         })
 
     compiled = root / "RadicalTrainingPlatform.Web" / "js" / "study-content.js"
@@ -242,6 +248,33 @@ def main():
             failures.append(
                 f"undeclared review state: {record['itemId']} has status '{status}', "
                 f"which the bundle's release state '{bundle['releaseState']}' does not cover")
+
+    # ── 6. Demo-cut banks are named and dated (SPEC-19) ──
+    # A released bank is a learner surface. `fixture` in the name means a gate
+    # input everywhere else in this tree, so a released bank may not carry it.
+    # A demo-cut bank must also say when its cut was, per record.
+    for record in bundle["provenance"]:
+        bank = record["itemId"].split("/")[1]
+        if DEMO_BANK_RE.search(bank):
+            cut = (record.get("demoCut") or "").strip()
+            if not DATE_RE.match(cut):
+                failures.append(
+                    f"undated demo cut: {record['itemId']} is in {bank} but its "
+                    f"record has no demoCut date (SPEC-19 REQ-DC-02)")
+
+    for eid, exam in bundle["exams"].items():
+        for bank in exam["banks"]:
+            name = bank["bank"]
+            if RELEASED_FIXTURE_RE.search(name):
+                failures.append(
+                    f"released bank named as a test fixture: {eid}/{name} — a "
+                    f"learner's bank is not a fixture; rename it (SPEC-19 REQ-DC-01)")
+            if DEMO_BANK_RE.search(name) and not any(
+                    r["itemId"].split("/")[1] == name and (r.get("demoCut") or "").strip()
+                    for r in bundle["provenance"]):
+                failures.append(
+                    f"demo-cut bank with no dated record: {eid}/{name} "
+                    f"(SPEC-19 REQ-DC-02)")
 
     if failures:
         print("CONTENT BUNDLE: FAIL")

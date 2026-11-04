@@ -21,7 +21,7 @@ const { progress } = await import('../../../RadicalTrainingPlatform.Web/js/core/
 const { store } = await import('../../../RadicalTrainingPlatform.Web/js/core/StateStore.js');
 
 const EXAM = 'COMPTIA-A-1201';
-const ITEM = 'core1-a2-fixtures.md/Q1';
+const ITEM = 'core1-demo-cut.md/Q1';
 const ITEM_KEY = `progress/${EXAM}/${ITEM}`;
 const SCENARIO_KEY = 'scenario/ticket-one';
 

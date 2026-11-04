@@ -137,11 +137,17 @@ export class PracticeView extends BaseView {
         const resumeNote = this.#index > 0
             ? '<p class="practice-prior-note">Resumed at question ' + (this.#index + 1) + '.</p>'
             : '';
+        // SPEC-19 REQ-DC-03: state the demo-cut share when the pack has one.
+        // Derived from the published items, so it cannot drift from the bank.
+        const demoCut = this.#queue.filter(i => i.demoCut).length;
+        const demoNote = demoCut
+            ? ` · ${demoCut} of its ${this.#queue.length} items are the October 23 demo cut`
+            : '';
         return this.html(`
             <div class="study-page practice-page">
                 <a class="study-back" href="#/tracks/${track?.trackId ?? ''}">‹ ${track?.title ?? 'Tracks'}</a>
                 <h1 class="study-title">Practice — ${exam.displayName}</h1>
-                <p class="study-sub">Draft pack (${track?.previewLabel ?? 'beginner preview'})${track?.coverageLabel ? ` · ${track.coverageLabel}` : ''} · draws from released, unreviewed items — none carries a human review date.</p>
+                <p class="study-sub">Draft pack (${track?.previewLabel ?? 'beginner preview'})${track?.coverageLabel ? ` · ${track.coverageLabel}` : ''} · draws from released, unreviewed items — none carries a human review date.${demoNote}</p>
                 ${priorNote}
                 ${resumeNote}
                 <div class="practice-progress">${progressLine}</div>
