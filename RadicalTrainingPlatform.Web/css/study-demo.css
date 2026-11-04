@@ -1,0 +1,101 @@
+/* ── Demo mode (T-21, REQ-DEMO-01..06) ── */
+
+/* The label is on every screen: it lives in the app shell, not a view.
+   High-contrast, text-first, and never a hover tooltip. */
+.demo-banner {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    flex-wrap: wrap;
+    padding: 10px var(--space-md);
+    background: #3b1d5e;
+    border-bottom: 2px solid #a855f7;
+    color: #f5f3ff;
+    font-size: var(--font-size-sm);
+}
+
+.demo-banner-label {
+    letter-spacing: 0.12em;
+    font-size: var(--font-size-sm);
+    padding: 3px 12px;
+    border-radius: 4px;
+    background: #a855f7;
+    color: #1a0b2e;
+}
+
+.demo-banner-text {
+    flex: 1;
+    min-width: 240px;
+}
+
+.demo-banner-link {
+    color: #f5f3ff;
+    text-decoration: underline;
+    font-weight: 600;
+}
+
+.demo-page .study-title {
+    font-size: var(--font-size-2xl, 28px);
+}
+
+.demo-status {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: var(--space-md);
+    border-radius: 10px;
+    border: 1px solid var(--border-light);
+    margin: var(--space-md) 0;
+}
+
+.demo-status.on {
+    border-color: #a855f7;
+    background: rgba(168, 85, 247, 0.12);
+}
+
+.demo-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    margin: var(--space-md) 0;
+}
+
+.demo-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--font-size-sm);
+}
+
+.demo-table th,
+.demo-table td {
+    text-align: left;
+    padding: 6px 10px;
+    border-bottom: 1px solid var(--border-light);
+}
+
+.demo-table tr.ok td:last-child {
+    color: var(--success, #22c55e);
+}
+
+.demo-table tr.bad td:last-child {
+    color: var(--danger, #ef4444);
+}
+
+.demo-notes {
+    margin-top: var(--space-xl);
+    padding: var(--space-md);
+    border: 1px dashed var(--border-light);
+    border-radius: 12px;
+}
+
+.demo-notes ul {
+    padding-left: 20px;
+    color: var(--text-secondary);
+    font-size: var(--font-size-sm);
+}
+
+/* Wide tables scroll inside their own box — the page body never does. */
+.table-scroll {
+    overflow-x: auto;
+    margin-top: var(--space-sm);
+}

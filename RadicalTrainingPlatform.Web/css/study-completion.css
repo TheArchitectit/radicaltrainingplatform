@@ -1,0 +1,143 @@
+/* ── Completion panel (REQ-DEMO-06) — truth-telling, never a score ── */
+
+.completion-panel {
+    text-align: left;
+    padding: var(--space-md);
+}
+
+.completion-title {
+    margin: 0 0 var(--space-xs);
+    color: var(--text-primary);
+}
+
+.completion-summary {
+    margin: 0;
+    color: var(--text-secondary);
+    font-size: var(--font-size-sm);
+}
+
+.completion-framing {
+    margin: var(--space-sm) 0 var(--space-md);
+    padding: var(--space-xs) var(--space-sm);
+    border-left: 3px solid var(--text-link);
+    color: var(--text-secondary);
+    font-size: var(--font-size-sm);
+}
+
+.completion-section {
+    margin: var(--space-md) 0 var(--space-xs);
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.completion-conditions,
+.completion-trace {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.completion-condition {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 8px 10px;
+    border-bottom: 1px solid var(--border-light);
+    font-size: var(--font-size-sm);
+}
+
+.completion-condition.met .completion-mark {
+    color: var(--success, #22c55e);
+}
+
+.completion-condition.remaining .completion-mark {
+    color: var(--text-secondary);
+}
+
+.completion-requested {
+    color: var(--text-primary);
+}
+
+.completion-actual {
+    color: var(--text-secondary);
+    font-size: var(--font-size-xs);
+}
+
+.completion-trace-row {
+    display: flex;
+    gap: var(--space-sm);
+    padding: 4px 10px;
+    border-bottom: 1px solid var(--border-light);
+    font-size: var(--font-size-xs);
+}
+
+.completion-trace-action {
+    color: var(--text-link);
+    font-weight: 600;
+    min-width: 14ch;
+}
+
+.completion-trace-detail {
+    color: var(--text-secondary);
+}
+
+.completion-trace-empty {
+    color: var(--text-secondary);
+    font-size: var(--font-size-xs);
+    padding: 4px 10px;
+}
+
+.completion-record {
+    margin-top: var(--space-md);
+    color: var(--text-secondary);
+    font-size: var(--font-size-xs);
+}
+
+/* ── Observation objectives: recorded interpretation (REQ-DEMO-06) ── */
+
+.objective-row {
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border-light);
+}
+
+.objective-head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.interpretation-form {
+    margin: var(--space-sm) 0 var(--space-xs) 32px;
+    padding: var(--space-sm);
+    border: 1px dashed var(--border-light);
+    border-radius: 8px;
+}
+
+.interpretation-label {
+    display: block;
+    color: var(--text-secondary);
+    font-size: var(--font-size-xs);
+    margin-bottom: 4px;
+}
+
+.interpretation-input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid var(--border-light);
+    background: rgba(255, 255, 255, 0.03);
+    color: var(--text-primary);
+    font-family: inherit;
+    font-size: var(--font-size-sm);
+    resize: vertical;
+}
+
+.interpretation-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    margin-top: 6px;
+}

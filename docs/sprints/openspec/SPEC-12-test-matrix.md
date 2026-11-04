@@ -140,6 +140,7 @@ naming no gate is a **named gap**, not a covered requirement.
 | TM-107 | Persistence wired end to end: save, restore after reload, honest failure | E2E + unit | R-06 — `tests/gates/web/progress-store.mjs`, `study-continuation.mjs`; Desktop.Tests (built by CI, executed by the chain's MTP runner) |
 | TM-108 | LICENSE present; owner confirmation logged | doc | R-10 — HG-01 owner gate, **open**: the file drop is deferred by design ([LICENSE-DECISION.md](../../LICENSE-DECISION.md)) |
 | TM-109 | README counts, badge and release state match the generated manifest | gate | R-12 — `scripts/check-readme-counts.py` + `run_readme_counts_fixtures.sh` |
+| TM-110 | Source files stay reviewable: any source file over 500 lines, or test file over 600, fails the tree; generated files and the preserved legacy tree are exempt by a checked rule, not a path allowlist | gate | SPEC-16 — `scripts/check-file-sizes.py` + `--self-test` (oversize source, oversize test, and a stale exemption each fail; an honest tree passes) |
 
 ## Requirement-to-test index
 

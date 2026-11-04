@@ -68,6 +68,12 @@ IMPORT = re.compile(r"""\bfrom\s+['"]([^'"]+)['"]"""
 STATIC_ASSETS = re.compile(r"const\s+STATIC_ASSETS\s*=\s*\[(.*?)\]", re.DOTALL)
 QUOTED = re.compile(r"""['"]([^'"]+)['"]""")
 
+# Stylesheet partials: a split stylesheet is an entry file plus `@import`s.
+# Without following them, a partial can be missing from the precache and the
+# installed app renders unstyled offline — the same failure the module check
+# exists to prevent, one layer down.
+CSS_IMPORT = re.compile(r"""@import\s+(?:url\(\s*)?['"]?([^'";)\s]+)""")
+
 # A remote or root-absolute reference in the shell. The app is served from a
 # subdirectory on every host it actually runs on, so a leading `/` resolves to
 # the host root and a remote host makes the copy depend on the network.
@@ -137,6 +143,17 @@ def reachable_assets(root):
             broken.append(rel)
             continue
         assets.add(rel)
+        if path.suffix == ".css":
+            for groups in CSS_IMPORT.finditer(path.read_text(encoding="utf-8")):
+                spec = groups.group(1)
+                if not spec.startswith("."):
+                    continue
+                target = (path.parent / spec).resolve()
+                if target.is_file() and target.is_relative_to(web.resolve()):
+                    queue.append(target.relative_to(web.resolve()).as_posix())
+                else:
+                    broken.append(f"{rel} -> {spec}")
+            continue
         if path.suffix != ".js":
             continue
         for groups in IMPORT.finditer(path.read_text(encoding="utf-8")):
@@ -288,7 +305,8 @@ GOOD = {
 </body></html>
 """,
     f"{WEB_DIR}/manifest.json": '{"name":"t","start_url":".","scope":"."}\n',
-    f"{WEB_DIR}/css/a.css": "body { color: black; }\n",
+    f"{WEB_DIR}/css/a.css": "@import url('./a-part.css');\nbody { color: black; }\n",
+    f"{WEB_DIR}/css/a-part.css": "p { margin: 0; }\n",
     f"{WEB_DIR}/js/app.js": "import './b.js';\n",
     f"{WEB_DIR}/js/b.js": "export const b = 1;\n",
     f"{WEB_DIR}/js/boot.js": "navigator.serviceWorker.register('sw.js');\n",
@@ -298,6 +316,7 @@ const STATIC_ASSETS = [
   './index.html',
   './manifest.json',
   './css/a.css',
+  './css/a-part.css',
   './js/app.js',
   './js/b.js',
   './js/boot.js'
@@ -316,6 +335,8 @@ python3 -m http.server -d RadicalTrainingPlatform.Web 8080
 MUTATIONS = [
     (f"{WEB_DIR}/sw.js", "  './js/b.js'", "  './js/not-imported.js'",
      "a runtime-loaded module is dropped from the precache"),
+    (f"{WEB_DIR}/sw.js", "  './css/a-part.css',\n", "",
+     "a stylesheet partial is dropped from the precache"),
     (f"{WEB_DIR}/sw.js", "  './js/b.js'", "  './js/b.js',\n  './js/ghost.js'",
      "the precache names a file that does not exist"),
     (f"{WEB_DIR}/index.html", 'src="js/app.js"', 'src="js/missing.js"',

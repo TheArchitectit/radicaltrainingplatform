@@ -1,0 +1,116 @@
+.study-page {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: var(--space-lg) var(--space-md);
+}
+
+.study-title {
+    font-size: var(--font-size-xl);
+    color: var(--text-primary);
+    margin: var(--space-sm) 0;
+}
+
+.study-sub {
+    color: var(--text-secondary);
+    font-size: var(--font-size-sm);
+    margin-bottom: var(--space-lg);
+}
+
+/* Links sitting in prose carry a non-colour indicator (WCAG 1.4.1): colour
+   alone does not identify them for a reader who cannot perceive the
+   difference. Scoped to the study pages, and excluding the card/row/button
+   -styled links — those are identified by their shape and position, not by
+   being inline in a sentence. Nav items and breadcrumbs live outside
+   .study-page and are untouched. */
+.study-page a:not(.study-button):not(.module-item):not(.track-card):not(.search-result-link),
+.study-back {
+    text-decoration: underline;
+}
+
+.study-back {
+    display: inline-block;
+    color: var(--text-link);
+    font-size: var(--font-size-sm);
+    margin-bottom: var(--space-sm);
+}
+
+.study-disclaimer {
+    margin-top: var(--space-xl);
+    padding: var(--space-sm) var(--space-md);
+    border: 1px solid var(--border-light);
+    border-radius: 8px;
+    color: var(--text-secondary);
+    font-size: var(--font-size-xs);
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.preview-label {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 999px;
+    border: 1px solid var(--text-link);
+    color: var(--text-link);
+    font-size: var(--font-size-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.coverage-label {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 999px;
+    border: 1px solid var(--text-secondary);
+    color: var(--text-secondary);
+    font-size: var(--font-size-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* Declared-gap worked examples (REQ-NP-04) — labeled, never interactive. */
+.gap-list {
+    margin: var(--space-sm) 0 var(--space-md);
+}
+
+.gap-tag {
+    display: inline-block;
+    margin: 2px 6px 2px 0;
+    padding: 2px 8px;
+    border-radius: 999px;
+    border: 1px dashed var(--border-light);
+    color: var(--text-secondary);
+    font-size: var(--font-size-xs);
+}
+
+.worked-example {
+    margin: var(--space-md) 0;
+    padding: var(--space-md);
+    border: 1px dashed var(--border-light);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.worked-example-label {
+    color: var(--text-link);
+    font-size: var(--font-size-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: var(--space-xs);
+}
+
+.worked-example-title {
+    color: var(--text-primary);
+    font-size: var(--font-size-md);
+    margin-bottom: var(--space-xs);
+}
+
+.worked-example-gap {
+    color: var(--text-secondary);
+    font-size: var(--font-size-xs);
+    margin-bottom: var(--space-sm);
+}
+
+.worked-example-body {
+    color: var(--text-secondary);
+    font-size: var(--font-size-sm);
+    line-height: 1.55;
+}

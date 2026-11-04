@@ -1,0 +1,145 @@
+/* ── Track picker ── */
+
+.track-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: var(--space-md);
+}
+
+.track-card {
+    display: block;
+    padding: var(--space-md);
+    border: 1px solid var(--border-light);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.03);
+    text-decoration: none;
+    transition: border-color 0.15s ease, transform 0.15s ease;
+}
+
+.track-card:hover {
+    border-color: var(--text-link);
+    transform: translateY(-2px);
+}
+
+.track-card-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-xs);
+}
+
+.track-title {
+    color: var(--text-primary);
+    font-weight: 600;
+    font-size: var(--font-size-md);
+}
+
+.track-audience {
+    color: var(--text-secondary);
+    font-size: var(--font-size-sm);
+    margin-bottom: var(--space-md);
+}
+
+.track-coverage {
+    margin-bottom: var(--space-md);
+}
+
+.coverage-bar {
+    height: 6px;
+    border-radius: 3px;
+    background: rgba(255, 255, 255, 0.08);
+    overflow: hidden;
+    margin-bottom: 4px;
+}
+
+.coverage-fill {
+    height: 100%;
+    background: var(--text-link);
+    border-radius: 3px;
+}
+
+.coverage-text {
+    color: var(--text-secondary);
+    font-size: var(--font-size-xs);
+}
+
+.track-cta {
+    color: var(--text-link);
+    font-size: var(--font-size-sm);
+}
+
+/* ── Track overview: exam blocks + module list ── */
+
+.exam-block {
+    margin-bottom: var(--space-lg);
+}
+
+.exam-block-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: var(--space-sm);
+    border-bottom: 1px solid var(--border-light);
+    padding-bottom: var(--space-xs);
+    margin-bottom: var(--space-sm);
+}
+
+.exam-name {
+    font-size: var(--font-size-md);
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.module-list {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.module-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: 10px var(--space-sm);
+    border: 1px solid var(--border-light);
+    border-radius: 8px;
+    text-decoration: none;
+    background: rgba(255, 255, 255, 0.02);
+}
+
+a.module-item:hover {
+    border-color: var(--text-link);
+}
+
+.module-item.planned {
+    opacity: 0.55;
+}
+
+.module-id {
+    font-weight: 600;
+    color: var(--text-link);
+    min-width: 3ch;
+}
+
+.module-title {
+    color: var(--text-primary);
+    flex: 1;
+    font-size: var(--font-size-sm);
+}
+
+.module-tag {
+    font-size: var(--font-size-xs);
+    padding: 1px 8px;
+    border-radius: 999px;
+    border: 1px solid var(--border-light);
+}
+
+.released-tag {
+    color: var(--success, #22c55e);
+    border-color: var(--success, #22c55e);
+}
+
+.planned-tag {
+    color: var(--text-secondary);
+}

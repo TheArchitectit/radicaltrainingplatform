@@ -105,6 +105,10 @@ Types: `feat`, `fix`, `docs`, `style`, `refactor`, `test`, `chore`, `rename`
 - Commit after each logical change
 - Core changes must build on `net10.0` with zero warnings
 - Desktop changes must build on `net10.0` with Avalonia 12.0
+- **Source file size is enforced** by `scripts/check-file-sizes.py`: 500 lines for
+  source, 600 for tests, 300 is a warning. Generated files (a `GENERATED` marker in
+  the first five lines) and `RadicalTrainingPlatform.Legacy.WinForms/` are exempt.
+  Split a file before you grow it past the limit — the gate fails the chain and CI.
 
 ## Key Files
 

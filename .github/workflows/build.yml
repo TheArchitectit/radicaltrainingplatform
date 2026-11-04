@@ -267,6 +267,16 @@ jobs:
           python3 scripts/check-coverage.py
           python3 scripts/check-coverage.py --self-test
 
+      # SPEC-16/TM-110: source files stay reviewable. Hard limits are 500
+      # lines for source and 600 for tests; generated files (GENERATED marker)
+      # and the preserved Legacy.WinForms tree are exempt by a checked rule.
+      # The gate existed nowhere in this repo before — DevGate's copy is an
+      # uncopied template that walks one directory and exits 0 on a breach.
+      - name: Enforce source file size limits (TM-110)
+        run: |
+          python3 scripts/check-file-sizes.py
+          python3 scripts/check-file-sizes.py --self-test
+
       # Headless Avalonia UI smoke suite (xunit.v3/MTP — runs as the built exe,
       # not via VSTest). Boots the real App + MainWindow on the fleet runner
       # with no display: catches XAML-load breaks (e.g. Avalonia package skew)

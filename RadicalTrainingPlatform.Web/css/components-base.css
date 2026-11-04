@@ -1,0 +1,68 @@
+/* ── Reset ── */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* The UA stylesheet hides `[hidden]` with a plain `display: none`, which ANY
+   author `display` rule outranks — so an element that is hidden in markup but
+   styled `display: flex` paints anyway and the attribute reads as if it worked.
+   That is exactly how REQ-DEMO-02 shipped: `DemoBanner.js` set `el.hidden`
+   correctly, `.demo-banner { display: flex }` (study.css) beat the UA rule, and
+   a learner in normal mode was shown "DEMO MODE". Restated here with
+   `!important` so the attribute means what it says regardless of load order or
+   specificity — the property is not one an author should be able to win against
+   while the attribute is set. */
+[hidden] {
+    display: none !important;
+}
+
+/* ── Visible focus (WCAG 2.4.7 Focus Visible) ──
+   Before Sprints 35-36 the tree had no `:focus-visible` rule at all: three
+   component rules set `outline: none` and only two of them replaced it with
+   something else, so a keyboard user tabbing through the header had no way to
+   see where they were. Declared here, early, so a component that paints its own
+   indicator (`.form-input:focus`'s ring) can still override it; anything that
+   does not gets the outline. `--border-focus` is #22a5f7 in both themes and
+   measures 5.7:1 against the dark chrome, above the 3:1 that WCAG 1.4.11 asks
+   of a non-text indicator. */
+:focus-visible {
+    outline: 3px solid var(--border-focus);
+    outline-offset: 2px;
+}
+
+/* ── Skip link (WCAG 2.4.1 Bypass Blocks) ──
+   The first focusable element in the document, off-screen until focused and
+   then pinned over the header. Without it, reaching the view content from the
+   keyboard means tabbing past the hamburger, the context switcher, the search
+   box, the theme toggle and the breadcrumb on every single route.
+   `--bg-card` on `--text-link` clears AA in both themes (5.38:1 light); the
+   outline comes from the rule above and must not be suppressed here. */
+.skip-link {
+    position: absolute;
+    left: -9999px;
+    top: 0;
+    z-index: var(--z-tooltip);
+    padding: var(--space-sm) var(--space-lg);
+    background: var(--bg-card);
+    color: var(--text-link);
+    border: 2px solid var(--text-link);
+    border-radius: var(--radius-sm);
+    font-size: var(--font-size-md);
+    text-decoration: none;
+}
+
+.skip-link:focus {
+    left: var(--space-sm);
+    top: var(--space-sm);
+}
+
+body {
+    font-family: var(--font-family);
+    font-size: var(--font-size-base);
+    color: var(--text-primary);
+    background: var(--bg-page);
+    line-height: 1.5;
+    overflow: hidden;
+}

@@ -1,0 +1,107 @@
+/* ── Form fields ── */
+.form-group {
+    margin-bottom: var(--space-lg);
+}
+
+.form-label {
+    display: block;
+    font-size: var(--font-size-sm);
+    font-weight: 500;
+    color: var(--text-primary);
+    margin-bottom: var(--space-xs);
+}
+
+.form-input {
+    width: 100%;
+    padding: var(--space-sm) var(--space-md);
+    border: 1px solid var(--border-default);
+    border-radius: var(--radius-md);
+    font-size: var(--font-size-base);
+    font-family: var(--font-family);
+    color: var(--text-primary);
+    background: var(--bg-input);
+    transition: border-color var(--transition-fast);
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: var(--border-focus);
+    box-shadow: 0 0 0 3px rgba(34, 165, 247, 0.15);
+}
+
+.form-input.error {
+    border-color: var(--status-critical);
+}
+
+.form-error {
+    font-size: var(--font-size-xs);
+    color: var(--status-critical-ink);
+    margin-top: var(--space-xs);
+}
+
+/* ── Wizard ── */
+.wizard-steps {
+    display: flex;
+    align-items: center;
+    padding: var(--space-lg) var(--space-xl);
+    border-bottom: 1px solid var(--border-light);
+    background: var(--gray-50);
+}
+
+.wizard-step {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+}
+
+.wizard-step.active {
+    color: var(--text-link);
+    font-weight: 600;
+}
+
+.wizard-step.completed {
+    color: var(--status-good-ink);
+}
+
+.wizard-step .step-number {
+    width: 24px;
+    height: 24px;
+    border-radius: var(--radius-round);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--font-size-xs);
+    font-weight: 600;
+    border: 2px solid var(--gray-300);
+    background: var(--bg-card);
+}
+
+/* White on these fills is 2.70:1 (active) and 2.66:1 (completed) — below AA for the
+   11px/600 digit inside. `--text-on-accent` is the token this codebase already uses for
+   text on a saturated accent fill (.pc-sidebar .nav-item.active), and clears both at
+   ~6.8:1. The wizard is reachable from ~25 views; the audit never opens it because it
+   sits behind a click, so the gate cannot see this either way. */
+.wizard-step.active .step-number {
+    border-color: var(--prism-blue);
+    background: var(--prism-blue);
+    color: var(--text-on-accent);
+}
+
+.wizard-step.completed .step-number {
+    border-color: var(--status-good);
+    background: var(--status-good);
+    color: var(--text-on-accent);
+}
+
+.wizard-connector {
+    flex: 1;
+    height: 2px;
+    background: var(--gray-200);
+    margin: 0 var(--space-sm);
+}
+
+.wizard-connector.completed {
+    background: var(--status-good);
+}

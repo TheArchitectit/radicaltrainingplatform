@@ -190,6 +190,8 @@ gate "dotnet run Desktop.Tests (MTP runner)" \
         --configuration Release
 gate "python3 scripts/check-coverage.py"                python3 scripts/check-coverage.py
 gate "python3 scripts/check-coverage.py --self-test"    python3 scripts/check-coverage.py --self-test
+gate "python3 scripts/check-file-sizes.py"              python3 scripts/check-file-sizes.py
+gate "python3 scripts/check-file-sizes.py --self-test"  python3 scripts/check-file-sizes.py --self-test
 gate "python3 .github/scripts/vuln_gate.py" \
     python3 .github/scripts/vuln_gate.py \
         RadicalTrainingPlatform.Core/RadicalTrainingPlatform.Core.csproj \

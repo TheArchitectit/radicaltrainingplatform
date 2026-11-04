@@ -32,8 +32,11 @@ cp -r RadicalTrainingPlatform.Web "$WS/bad"
 cp -r RadicalTrainingPlatform.Web "$WS/good"
 
 # R-02 shape: a validator that cannot fail.
+# The target lives in scenarios-nca.js (scenarios.js is a re-export shell after
+# the S48 file-split); the sed must hit a real validator line or the fixture
+# is vacuous.
 TARGET="if (!got.length) return unmet('no maintenance sequence has been built yet');"
-BROKEN="$WS/bad/js/views/scenarios.js"
+BROKEN="$WS/bad/js/views/scenarios-nca.js"
 sed -i "0,/$TARGET/s//if (true) return met();/" "$BROKEN"
 
 if grep -q "if (true) return met();" "$BROKEN"; then

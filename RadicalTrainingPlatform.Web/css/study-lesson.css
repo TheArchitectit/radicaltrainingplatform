@@ -1,0 +1,98 @@
+/* ── Lesson reader ── */
+
+.lesson-objectives {
+    border: 1px solid var(--border-light);
+    border-radius: 8px;
+    padding: var(--space-sm) var(--space-md);
+    margin-bottom: var(--space-md);
+    background: rgba(255, 255, 255, 0.02);
+}
+
+/* `:is()`, not `h3`. The heading level here is a semantic choice — it was raised
+   from h3 to h2 to fix an h1→h3 skip — and this rule is presentation. Pinning it
+   to one element meant the accessibility fix silently orphaned the styling and the
+   heading fell back to the browser default. Same specificity, same rendering. */
+.lesson-objectives :is(h2, h3) {
+    margin: 0 0 var(--space-xs);
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.lesson-objectives ul {
+    margin: 0;
+    padding-left: 18px;
+}
+
+.lesson-objectives li {
+    color: var(--text-secondary);
+    font-size: var(--font-size-sm);
+    margin-bottom: 2px;
+}
+
+.objective-id {
+    color: var(--text-link);
+    font-weight: 600;
+    margin-right: 6px;
+}
+
+.lesson-body {
+    line-height: 1.65;
+    color: var(--text-primary);
+    font-size: var(--font-size-sm);
+}
+
+.lesson-body h2, .lesson-body h3, .lesson-body h4 {
+    color: var(--text-link);
+    margin: var(--space-lg) 0 var(--space-xs);
+}
+
+.lesson-body code {
+    background: rgba(255, 255, 255, 0.08);
+    padding: 1px 5px;
+    border-radius: 4px;
+    font-size: 0.9em;
+}
+
+.lesson-body ul, .lesson-body ol {
+    padding-left: 22px;
+    margin: var(--space-xs) 0;
+}
+
+.lesson-actions {
+    display: flex;
+    gap: var(--space-sm);
+    margin: var(--space-lg) 0 var(--space-sm);
+}
+
+.study-button {
+    display: inline-block;
+    padding: 8px 18px;
+    border-radius: 8px;
+    border: 1px solid var(--text-link);
+    background: transparent;
+    color: var(--text-link);
+    font-size: var(--font-size-sm);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.study-button:hover {
+    background: var(--text-link);
+    /* --bg-header was only ever a stand-in for "ink that reads on the filled
+       button". It stops working now that the light-theme fill is the deepened
+       link blue (dark ink on a dark fill); --text-inverse is the token that
+       actually means this, and it flips the right way in both themes. */
+    color: var(--text-inverse);
+}
+
+.study-button.secondary {
+    border-color: var(--border-light);
+    color: var(--text-secondary);
+}
+
+.study-button:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}

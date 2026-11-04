@@ -1,6 +1,15 @@
 import { store } from './StateStore.js';
 import { bus } from './EventBus.js';
 import { progressKeyFor } from './ContentFormats.js';
+import {
+    PORTABLE_PREFIXES as PROGRESS_PORTABLE_PREFIXES,
+    EXPORT_SCHEMA as PROGRESS_EXPORT_SCHEMA,
+    EXPORT_SCHEMA_VERSION as PROGRESS_EXPORT_SCHEMA_VERSION,
+    exportProgress as exportPortableProgress,
+    importProgress as importPortableProgress,
+    classifyWriteFailure,
+    reportSaveFailure,
+} from './ProgressPersistence.js';
 
 /**
  * ProgressStore (T-12, REQ-UI-04/05) — durable learner progress over
@@ -134,8 +143,8 @@ class ProgressStore {
             });
             await this.#recordAttemptInMeta(examId, itemId, latest);
         } catch (e) {
-            const reason = this.#classifyWriteFailure(e);
-            this.#reportFailure(e, `progress record ${key}`, reason);
+            const reason = classifyWriteFailure(e);
+            reportSaveFailure(e, `progress record ${key}`, reason);
             return { saved: false, reason };
         }
         return { saved: true, record };
@@ -176,8 +185,8 @@ class ProgressStore {
         try {
             await store.set(key, { scenarioId, completedAt: new Date().toISOString() });
         } catch (e) {
-            const reason = this.#classifyWriteFailure(e);
-            this.#reportFailure(e, `scenario record ${key}`, reason);
+            const reason = classifyWriteFailure(e);
+            reportSaveFailure(e, `scenario record ${key}`, reason);
             return { saved: false, reason };
         }
         return { saved: true };
@@ -189,103 +198,22 @@ class ProgressStore {
     }
 
     // ─── Learner-progress portability (S39, local classroom kit) ───
+    // The keyspace, envelope and validation live in ProgressPersistence.js;
+    // these entry points keep the class's public API unchanged.
 
-    /**
-     * Export the learner-owned keyspaces so progress can move between browser
-     * profiles or machines **without an account and without a server**.
-     *
-     * Only `progress/` and `scenario/` are portable. Simulator fixtures
-     * (`clusterState`, `pc_settings`, …) belong to StateEngine and are not
-     * learner progress; exporting them here would conflate a study record with
-     * a demo station's seed state, and importing them would let a progress file
-     * rewrite a lab environment. They are deliberately excluded.
-     */
     async exportProgress() {
         this.#assertReady();
-        const entries = {};
-        for (const prefix of ProgressStore.PORTABLE_PREFIXES) {
-            for (const key of await store.keys(prefix)) {
-                entries[key] = await store.get(key);
-            }
-        }
-        return {
-            schema: ProgressStore.EXPORT_SCHEMA,
-            schemaVersion: ProgressStore.EXPORT_SCHEMA_VERSION,
-            exportedAt: new Date().toISOString(),
-            entries,
-        };
+        return exportPortableProgress(store);
     }
 
-    /**
-     * Restore progress from an `exportProgress()` envelope (object or JSON
-     * text). Import is additive over the same keys and leaves keys the file
-     * does not contain untouched; `{ replace: true }` clears the learner
-     * keyspaces first.
-     *
-     * A file is untrusted input, so the envelope is validated before a single
-     * key is written: unknown schema, unknown version, a key outside the
-     * portable prefixes, or a non-object record is refused rather than guessed
-     * at. Storage failure is reported, never presented as a successful import
-     * (the same honest-failure rule as `recordItem`).
-     */
     async importProgress(envelope, { replace = false } = {}) {
         this.#assertReady();
-        let data = envelope;
-        if (typeof envelope === 'string') {
-            try {
-                data = JSON.parse(envelope);
-            } catch (e) {
-                return { imported: false, reason: 'invalid-json' };
-            }
-        }
-        const invalid = ProgressStore.#validateExport(data);
-        if (invalid) return { imported: false, reason: 'invalid-export', detail: invalid };
-
-        const keys = Object.keys(data.entries);
-        try {
-            if (replace) {
-                for (const prefix of ProgressStore.PORTABLE_PREFIXES) {
-                    for (const key of await store.keys(prefix)) await store.delete(key);
-                }
-            }
-            for (const key of keys) await store.set(key, data.entries[key]);
-        } catch (e) {
-            const reason = this.#classifyWriteFailure(e);
-            this.#reportFailure(e, 'progress import', reason);
-            return { imported: false, reason };
-        }
-        return { imported: true, keys: keys.length, exportedAt: data.exportedAt || null };
+        return importPortableProgress(store, envelope, { replace });
     }
 
-    static PORTABLE_PREFIXES = ['progress/', 'scenario/'];
-    static EXPORT_SCHEMA = 'rtp-progress-export';
-    static EXPORT_SCHEMA_VERSION = 1;
-
-    /** Return a human-readable reason the envelope is unusable, or null. */
-    static #validateExport(data) {
-        if (!data || typeof data !== 'object' || Array.isArray(data)) {
-            return 'not an object';
-        }
-        if (data.schema !== ProgressStore.EXPORT_SCHEMA) {
-            return `unknown schema '${data.schema}'`;
-        }
-        if (data.schemaVersion !== ProgressStore.EXPORT_SCHEMA_VERSION) {
-            return `unsupported schemaVersion '${data.schemaVersion}'`;
-        }
-        const entries = data.entries;
-        if (!entries || typeof entries !== 'object' || Array.isArray(entries)) {
-            return 'entries is not an object';
-        }
-        for (const [key, value] of Object.entries(entries)) {
-            if (typeof key !== 'string' || !ProgressStore.PORTABLE_PREFIXES.some(p => key.startsWith(p) && key.length > p.length)) {
-                return `key '${key}' is outside the learner keyspaces`;
-            }
-            if (!value || typeof value !== 'object' || Array.isArray(value)) {
-                return `value for '${key}' is not a record`;
-            }
-        }
-        return null;
-    }
+    static PORTABLE_PREFIXES = PROGRESS_PORTABLE_PREFIXES;
+    static EXPORT_SCHEMA = PROGRESS_EXPORT_SCHEMA;
+    static EXPORT_SCHEMA_VERSION = PROGRESS_EXPORT_SCHEMA_VERSION;
 
     // ─── Per-format content progress (S37-06) ──────────────────────
 
@@ -327,8 +255,8 @@ class ProgressStore {
         try {
             await store.set(key, record);
         } catch (e) {
-            const reason = this.#classifyWriteFailure(e);
-            this.#reportFailure(e, `content record ${key}`, reason);
+            const reason = classifyWriteFailure(e);
+            reportSaveFailure(e, `content record ${key}`, reason);
             return { saved: false, reason };
         }
         return { saved: true, record };
@@ -450,8 +378,8 @@ class ProgressStore {
         try {
             await store.set(key, record);
         } catch (e) {
-            const reason = this.#classifyWriteFailure(e);
-            this.#reportFailure(e, `continuation ${key}`, reason);
+            const reason = classifyWriteFailure(e);
+            reportSaveFailure(e, `continuation ${key}`, reason);
             return { saved: false, reason };
         }
         return { saved: true, record };
@@ -531,29 +459,6 @@ class ProgressStore {
             updatedAt: new Date().toISOString(),
         };
         await store.set(key, next);
-    }
-
-    /**
-     * Map a storage error to the honest recovery reason (R-23). Name-based
-     * (DOMException.name is standardized) so a message that merely mentions
-     * quota is not misclassified.
-     */
-    #classifyWriteFailure(err) {
-        const name = String(err?.name || '');
-        if (name === 'StorageBlockedError') return 'storage-blocked';
-        if (name === 'QuotaExceededError' || name === 'NS_ERROR_DOM_QUOTA_REACHED') {
-            return 'storage-quota-exceeded';
-        }
-        return 'storage-write-failed';
-    }
-
-    #reportFailure(err, what, reason) {
-        console.error('[ProgressStore] save failed for', what, reason, err);
-        bus.emit('progress:saveFailed', {
-            what,
-            reason: reason || 'storage-write-failed',
-            message: String(err?.message || err),
-        });
     }
 }
 
