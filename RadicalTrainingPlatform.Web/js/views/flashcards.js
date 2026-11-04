@@ -35,7 +35,9 @@ import { CONTENT_FORMATS } from '../core/ContentFormats.js';
  * and not the distractors, so it tests recall of the key, not the
  * discrimination the scored item tests. And because the cards come from
  * `draft`-provenance items, every card carries the same draft label the
- * practice set carries.
+ * practice set carries — including "none human-reviewed", which is the
+ * owner's 2026-11-04 ruling that draft-preview items may be used while the
+ * label stays honest.
  *
  * ## Progress
  *
@@ -249,7 +251,7 @@ export class FlashcardReviewView extends BaseView {
             <div class="study-page flashcard-page">
                 <a class="study-back" href="#/flashcards">‹ All decks</a>
                 <h1 class="study-title">Flashcards — ${deck.displayName}</h1>
-                <p class="study-sub">Draft pack (${deck.previewLabel}) · cards derived from the released practice bank, answer and explanation included.</p>
+                <p class="study-sub">Draft pack (${deck.previewLabel}) · cards derived from the released practice bank, answer and explanation included, none human-reviewed.</p>
                 <div class="flashcard-progress">${this.#index + 1} / ${this.#cards.length}${this.#seen ? ` · ${this.#got}/${this.#seen} recalled this run` : ''}</div>
                 ${priorNote}
                 <div class="flashcard">

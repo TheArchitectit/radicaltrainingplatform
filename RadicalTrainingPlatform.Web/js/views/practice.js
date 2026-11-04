@@ -71,8 +71,12 @@ export class PracticeView extends BaseView {
             return this.html(`<div class="study-page"><h1 class="study-title">Unknown exam</h1>
                 <p><a href="#/tracks">Back to tracks</a></p></div>`);
         }
-        // Draw only from released reviewed items for this exam (REQ-AP-02:
-        // "practice sets draw only from the reviewed items and say so").
+        // Draw from every released item for this exam. The owner ruled on
+        // 2026-11-04 that `draft-preview` items may be used by students, so
+        // these are the released set — and the header says so, rather than
+        // claiming a review that has not happened. REQ-AP-02's "reviewed
+        // items" is read as "released items", which is what the release
+        // record declares and what check-content-bundle.py can verify.
         this.#queue = ITEMS.filter(i => i.examId === examId)
             .slice()
             .sort((a, b) => a.id.localeCompare(b.id, undefined, { numeric: true }));
@@ -137,7 +141,7 @@ export class PracticeView extends BaseView {
             <div class="study-page practice-page">
                 <a class="study-back" href="#/tracks/${track?.trackId ?? ''}">‹ ${track?.title ?? 'Tracks'}</a>
                 <h1 class="study-title">Practice — ${exam.displayName}</h1>
-                <p class="study-sub">Draft pack (${track?.previewLabel ?? 'beginner preview'})${track?.coverageLabel ? ` · ${track.coverageLabel}` : ''} · draws only from reviewed items in this build.</p>
+                <p class="study-sub">Draft pack (${track?.previewLabel ?? 'beginner preview'})${track?.coverageLabel ? ` · ${track.coverageLabel}` : ''} · draws from released, unreviewed items — none carries a human review date.</p>
                 ${priorNote}
                 ${resumeNote}
                 <div class="practice-progress">${progressLine}</div>

@@ -26,10 +26,13 @@ they are the numbers this README is accountable to:
 | Released items | **1199** — A+ Core 1: 266 · A+ Core 2: 288 · Network+: 375 · NCA 7.5: 164 · Azure AZ-104: 51 · AWS SAA-C03: 55 |
 | Release state | `draft-preview` — draft packs for the beginner preview |
 
-**These are draft packs, not released study material.** No item carries a human source
+**These are draft packs, not verified study material.** No item carries a human source
 review date, and the scored-item gate fails closed: every released item's review log
 records `verdict: return` because the key-vs-source review stage has no provider
-configured. Read the counts as *what compiles*, not as *what is verified*.
+configured. Read the counts as *what compiles*, not as *what is verified*. Practising
+with them is a decision the owner made on 2026-11-04 — the items are usable as practice
+material, and the app says so in those words rather than implying a review that did not
+happen.
 
 The **legacy question banks** at the repository root (`NCP-US-*.md`, `NCP-CI-*.md`,
 `NCP-AI-*.md`, `NCM-MCI-*.md`, `NCA-75-Part*.md`) are a separate, larger corpus that the

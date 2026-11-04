@@ -196,7 +196,7 @@ What that does **not** cover is listed as V-01..V-06 in §3.
 |---|---|---|---|---|
 | C-01 | 64/131 objectives have no released item; A+ track is 10% covered | §2.3 | **S1** | Author to the R2 target in §5 |
 | C-02 | 68/131 objectives have no released lesson; 13 `lessonIds` point at missing files; 55 declare none | §2.3 | **S1** | R1 in §5 |
-| C-03 | No shipped item has passed human review; all are `draft` with empty `reviewDate`, review verdicts are `return` | §2.3 | **S1** | Owner decision on the review standard (§6); until then the `draft-preview` label is the honest state |
+| C-03 | No shipped item has passed human review; all are `draft` with empty `reviewDate`, review verdicts are `return` | §2.3 | **S1** | **Ruled 2026-11-04:** the owner ruled `draft-preview` items may be used by students. No review gate is added; every label that implied a review was corrected (§6 decision 2) |
 | C-04 | 3 of 6 exams have zero scenarios; the two CompTIA exams have 1 each; AZ-104 and AWS-SAA have none despite full lesson coverage | §2.3 | S2 | R3 in §5 |
 | C-05 | 41/189 shipped items carry a longest-option-is-correct cue; the legacy banks exceed the answer-position threshold (one NET+ bank is 100% 'B') | `check-item-hygiene.py` advisory `[V]` | S3 | Fold into item authoring; promote the cue check to blocking once the shipped set is clean |
 | C-06 | NCA remap: objective 3.2 has zero mapped legacy items; 60/140 rows are section-granular | `check-nca-remap.py` `[A]` | S3 | Resolve with the current guide read (blocked, S48-02) |
@@ -320,6 +320,10 @@ objectives with empty `lessonIds` need a manifest mapping, and the 13 dangling
    conflict-aware simulation behind it. The remaining 13 are blocked on renderer and
    route work, not on content, and are recorded as such rather than cloned.
 6. **Human review sweep** (R4) over whatever is shipped at that point.
+   **Resolved 2026-11-04:** the owner ruled that `draft-preview` items may be used by
+   students, so there is no sweep to run. Every label that implied a completed review
+   was corrected instead (§6 decision 2); the items stay `draft` with an empty
+   `reviewDate`, and the UI says so.
 
 Every authoring step ships with provenance records (the generator refuses an untracked
 scored item), hygiene checks, and the content gates already in the chain.
@@ -329,7 +333,7 @@ scored item), hygiene checks, and the content gates already in the chain.
 | Target | Gate | Failing fixture | Passing fixture |
 |---|---|---|---|
 | R1, R2, R3 | new `scripts/check-content-targets.py` | an objective with 0 lessons or 2 items; an exam section with no scenario | a tree meeting all three floors |
-| R4 | extend `scripts/check-item-hygiene.py` to fail on `status: draft` or an empty `reviewDate` for any released item | one released item left as draft | a reviewed item |
+| R4 | **Ruled 2026-11-04 — no gate.** The owner ruled `draft-preview` items may be used by students, so "reviewed" is not a release condition; `check-content-bundle.py` already refuses a record that claims `reviewed` without a date | n/a | n/a |
 | R5 | existing `check-item-identity.py`, `check-item-hygiene.py`, `scan-scenario-validators.py` | already covered | already covered |
 
 **The new gate cannot ship enforcing the full targets, because the tree fails them
@@ -375,6 +379,13 @@ shell, not in `questions/*.md`.
    alternatives are human review with a recorded reviewer and date, or an explicit
    owner decision that `draft-preview` items may be used by students — which would
    mean changing the label rather than the content.
+   **DECIDED 2026-11-04 — the owner chose the second: `draft-preview` items may be
+   used by students.** No review gate is added and no provenance record claims a review
+   that did not happen; `status: draft` and the empty `reviewDate` stay as they are.
+   The change is to the labels only, so none reads as reviewed. Practice and flashcard
+   headers now say "released, unreviewed items — none carries a human review date"
+   instead of "draws only from reviewed items", and `lesson-reader.js` calls a lesson
+   released, not reviewed. R4 is closed as *ruled*, not as *met*.
 3. **npm, later, and with which approval?** §4 recommends waiting. Publishing is a
    SPEC-15 tripwire, so it is a decision for the owner, not a task.
 

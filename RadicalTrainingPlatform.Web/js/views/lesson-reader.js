@@ -4,7 +4,7 @@ import { mountTutorPanel } from './tutor-panel.js';
 import { linksForLesson } from '../data/content-links.js';
 
 /**
- * Lesson reader (T-11, REQ-UI-02) — renders a reviewed lesson's markdown
+ * Lesson reader (T-11, REQ-UI-02) — renders a released lesson's markdown
  * with the objective IDs the manifest maps it to. Markdown rendering is
  * deliberately minimal and escape-first: paragraphs, ##/### headings, bold,
  * inline code, lists. No raw HTML from lesson files reaches the DOM.
