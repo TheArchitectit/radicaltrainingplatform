@@ -1,11 +1,12 @@
-# NCA 7.5 Beta Exam — Quick Reference Cheat Sheet
+# NCA 7.5 — Quick Reference Cheat Sheet
 
-> **Status note — dated 2026-10-11.** This sheet was written against the NCA 7.5
-> **beta** blueprint and has *not* been re-verified claim-by-claim against the
-> current (June 15, 2026) guide. Per REQ-NCA-04, "beta" wording is removed only
-> from claims individually re-verified; everything else keeps its original label
-> rather than being silently relabelled. One claim **has** been corrected and is
-> marked inline: the CVM SSH default (errata **NCA-75-Part3-GapFill-Q3**).
+> **Status note — dated 2026-10-11.** This sheet was originally written against the
+> NCA 7.5 beta blueprint and has *not* been re-verified claim-by-claim against the
+> current (June 15, 2026) guide. Per REQ-NCA-04, wording is changed only where a claim
+> was individually re-verified; the rest keeps its original wording rather than being
+> silently relabelled. One claim **has** been corrected and is marked inline: the CVM
+> SSH default (errata **NCA-75-Part3-GapFill-Q3**). The beta window this sheet was
+> first written for closed on 2026-06-14 (SPEC-18).
 
 ## Must-Know Numbers
 | Metric | Value |
@@ -139,16 +140,17 @@
 | RBAC + Projects | No | Yes |
 | Categories | No | Yes |
 
-## Beta Exam Tips — dated 2026-10-11 (beta window has closed)
+## Closed sitting — dated 2026-10-11
 
-> Kept as a historical record only. The beta period below ended **June 14, 2026**;
-> as of the date on this note the waiver code is no longer valid and these tips
-> describe an exam sitting that is over. They are dated, not deleted, because no
-> current-guide equivalent was verified at the time of writing.
+> Kept as a historical record only: the beta window below closed on **June 14, 2026**,
+> so the waiver code issued for it is no longer valid and these tips describe an exam
+> sitting that is over. They are dated, not deleted, because no current-guide equivalent
+> was verified at the time of writing. The code itself is not
+> reproduced (SPEC-18): it has no value as history and only a risk as a live string.
 
 - More questions than live exam (used for scoring calibration)
 - Answer everything — no penalty for wrong answers
 - Mark-and-skip uncertain ones, come back later
 - Results take 1-2 months
-- Waiver code: **NCA75BETANEW** — expired, do not attempt to use
+- Waiver code: **expired — the window closed 2026-06-14; do not attempt to use**
 - Beta period through **June 14, 2026** (closed)

@@ -17,7 +17,7 @@ Roger, October 10, 2026, verbatim: “And we have to address it all understand.�
 | C-04 | NCA beta map not current | REQ-NCA-01/05, REQ-MAN-04 | T-09, T-31, T-32 | TM-13/24/25 green |
 | C-05 | Keyword coverage != curriculum coverage | R-08 | T-06 (mapping fields), T-31 | TM-28 green |
 | C-06 | Corrected content contradicts cheatsheet | REQ-NCA-04 | T-34 | TM-27 scan green; canonical correction record propagates to cheatsheet/reference/tutor/export |
-| C-07 | Beta-era logistics stale (waiver code, beta tips) | REQ-NCA-04 | T-34 | TM-29b green |
+| C-07 | Beta-era logistics stale (waiver code, beta tips) | REQ-NCA-04, SPEC-18 REQ-CS-01..03 | T-34, SPEC-18 | TM-29b/29c green; the sheet's heading no longer names a beta exam, the expired code is removed, and the dated history is kept |
 | C-08 | Content identity too narrow | REQ-MAN-01..06, D1 | T-06, T-07 | TM-12 green; semantic identity + revision in progress keys |
 | C-09 | Content/source licensing unresolved | R-10, C-02/C-03 records | T-06 (rights fields), T-31a (**S48-07**) | LICENSE present; PDF inventory with hash/license record; transmission rights gate tutor corpus — **2 of 3 met**: the inventory is [`docs/SOURCE-INVENTORY.md`](../../SOURCE-INVENTORY.md), gated by `scripts/check-source-inventory.py`; the transmission-rights gate is `tests/gates/tutor-eval.mjs`. "LICENSE present" stays open by owner decision ([LICENSE-DECISION.md](../../LICENSE-DECISION.md)). T-31a was absent from SPEC-11's tables; S48-07 is its sprint home |
 | C-10 | CompTIA AI posture | SPEC-00 00.3, REQ-BRAND, REQ-AI | T-21, T-23 | TM-36/61-67 green; disclaimer on all surfaces + demo script; REQ-BRAND-03 gated claims |

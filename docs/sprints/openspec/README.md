@@ -27,6 +27,16 @@ Full per-spec documents extracted from the [October 10 OpenSpec package](../../d
 | [SPEC-15](SPEC-15-assumptions.md) | Assumptions ASM-01..19, HG-01, fail-closed tripwires | — (standing) |
 | [SPEC-16](SPEC-16-executor-brief.md) | Executor brief, boot sequence, evidence packs, presenter runbook | — (handoff) |
 | [SPEC-17](SPEC-17-sources.md) | Sources and evidence, uncertainty register | — (reference) |
+| [SPEC-18](SPEC-18-nca-cheatsheet-beta.md) | NCA cheatsheet: retire the closed beta framing and expired waiver code | TM-29c |
+
+## Residue register
+
+The product-hygiene residue the 2026-11-04 packaging review found, each with its own
+spec, gate and commit:
+
+| Spec | Residue | Gate |
+|---|---|---|
+| [SPEC-18](SPEC-18-nca-cheatsheet-beta.md) | The NCA cheatsheet still titled itself a beta exam and reproduced the expired waiver code | TM-29c |
 
 ## Sprint rollups
 
