@@ -54,9 +54,9 @@ see [VENDOR-PACK-RIGHTS-AZ-104.md](docs/VENDOR-PACK-RIGHTS-AZ-104.md) and
 
 ## ✨ Features
 
-- **1,458 practice questions** across the four Nutanix exams below, plus the beginner
-  packs above (1199 items, `draft-preview`) — parsed by the desktop and legacy apps, not
-  part of the PWA bundle
+- **1,458 legacy Nutanix questions** (NCP-US, NCP-CI, NCP-AI, NCM-MCI) — parsed by the
+  desktop and legacy apps, not part of the PWA bundle — plus **1,199 PWA items** across
+  A+/Network+/NCA/AZ-104/SAA-C03, all `draft-preview`
 - **Blueprint coverage panel** — toggle with `B` to see which exam objectives each question covers
 - **Mixed question formats** — Standard MCQ, multi-select ("Select TWO"), and ordering/sequence questions
 - **Synthwave-themed GUI** — Dark neon aesthetic with animated progress bars
@@ -67,7 +67,7 @@ see [VENDOR-PACK-RIGHTS-AZ-104.md](docs/VENDOR-PACK-RIGHTS-AZ-104.md) and
   - Scrollable reference content
 - **Keyboard shortcuts** — `1-5` select answers, `Enter` submit, `N`/`P` navigate, `E` toggle explain, `B` toggle blueprint
 - **Score tracking** — Real-time accuracy stats per exam
-- **100% validated** — Every answer verified through 2 independent validation passes (LLM reasoning + solo web/knowledge review)
+- **Reviewed content** — the legacy Nutanix banks carry the validation history described in [Validation](#validation); the 1199 PWA items are `draft-preview` with no human review date
 
 ## 🚀 Quick Start
 
