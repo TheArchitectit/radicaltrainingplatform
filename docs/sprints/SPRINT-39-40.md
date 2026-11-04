@@ -1,11 +1,12 @@
-# Sprints 39-40: Local Classroom Kit (rescoped from "Enterprise Admin Console")
+# Sprints 39-40: Local Self-Study Kit (rescoped from "Enterprise Admin Console")
 
 **Phase:** Enterprise  
 **Duration:** Weeks 77-80 (4 weeks)  
 **Goal (as written in June 2026):** Build an admin console for user management, license provisioning, and LMS integration.  
-**Goal (as executed):** Give a learner and a teacher the offline tools an administrator
+**Goal (as executed):** Give a learner the offline tools an administrator
 console was standing in for — progress that can move between machines without an account,
-and coverage that says *which* objectives are still missing.
+and coverage that says *which* objectives are still missing. This is a self-study
+platform; it is not tied to a class or teacher.
 
 **Status:** 🟢 Landed at `2d3af16` — account-free progress export/import, per-objective
 coverage detail, and a fixture holding both. Freeze chain **59/59**.

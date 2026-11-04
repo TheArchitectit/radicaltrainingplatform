@@ -9,7 +9,7 @@ import { toast } from '../components/Toast.js';
  * (REQ-MAN-07) and the exact non-endorsement disclaimer (REQ-BRAND-02,
  * rendered by reference from the manifest string).
  *
- * Also carries the classroom kit's progress portability controls (S39). The
+ * Also carries the self-study kit's progress portability controls (S39). The
  * platform has no account and no server, so a learner's history belongs to a
  * browser profile; export/import is the only way it can follow them to
  * another profile or machine. It writes a local file and touches no network.

@@ -197,7 +197,7 @@ class ProgressStore {
         return store.get(`scenario/${scenarioId}`);
     }
 
-    // ─── Learner-progress portability (S39, local classroom kit) ───
+    // ─── Learner-progress portability (S39, local self-study kit) ───
     // The keyspace, envelope and validation live in ProgressPersistence.js;
     // these entry points keep the class's public API unchanged.
 

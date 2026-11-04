@@ -18,8 +18,8 @@ export class TrackOverviewView extends BaseView {
             const exam = EXAMS[examId];
             const cov = track.coverage.examCoverage[examId] ||
                 { total: 0, covered: 0, percent: 0, coveredObjectiveIds: [] };
-            // S39: the percentage is not actionable on its own. A teacher or a
-            // learner needs to know WHICH published objectives have no released
+            // S39: the percentage is not actionable on its own. A learner needs
+            // to know WHICH published objectives have no released
             // lesson-and-item pair yet, so the detail names them. The list is
             // derived from the exam's own objective structure rather than a
             // second hand-maintained list, and is empty when the compiler's
