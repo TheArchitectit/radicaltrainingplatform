@@ -7,9 +7,10 @@
   "author": "executor",
   "assistance": "ai-drafted",
   "rightsBasis": "original work; no vendor text lifted",
-  "reviewer": "redeye-lane",
+  "reviewer": "",
   "reviewDate": "",
   "originalityCheck": "no-exam-item-proximity",
   "status": "draft",
-  "demoCut": "2026-10-23"
+  "demoCut": "2026-10-23",
+  "automatedReview": "redeye-lane:2026-10-20"
 }

@@ -55,6 +55,7 @@ from datetime import datetime, timezone
 REPO_ROOT = pathlib.Path(__file__).resolve().parent.parent
 
 LANE_VERSION = "redeye-lane/0.1.0-deterministic-skeleton"
+TOOL = "redeye-lane"
 CONFIG_PATH = REPO_ROOT / "scripts" / "redeye-config.json"
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
@@ -88,7 +89,7 @@ def load_config():
 
 
 
-def write_log(log_dir, exam_id, item_id, checks, model_pending, manifest_hash, config_hash, item_text_hash):
+def write_log(log_dir, exam_id, item_id, checks, model_pending, manifest_hash, config_hash, item_text_hash, run_date):
     out_dir = pathlib.Path(log_dir) / exam_id
     out_dir.mkdir(parents=True, exist_ok=True)
     log = {
@@ -110,8 +111,15 @@ def write_log(log_dir, exam_id, item_id, checks, model_pending, manifest_hash, c
     return path
 
 
-def review_bank(bank_path, exam_id, log_dir, provenance_dir=None, allow_model_pending=False):
-    """Run all checks over one bank. Returns (per-item results, fatal errors)."""
+def review_bank(bank_path, exam_id, log_dir, provenance_dir=None, allow_model_pending=False,
+                run_date=None):
+    """Run all checks over one bank. Returns (per-item results, fatal errors).
+
+    `run_date` (YYYY-MM-DD) is what the lane records on the provenance record
+    it stamps (SPEC-20). It is passed in, never the wall clock, so a log and
+    its provenance stamp always agree.
+    """
+    run_date = run_date or datetime.now(timezone.utc).date().isoformat()
     manifest_path, objective_ids = load_manifest_objective_ids(exam_id)
     manifest_hash = sha256(manifest_path.read_text(encoding="utf-8"))
     config_hash = sha256(load_config())
@@ -144,7 +152,7 @@ def review_bank(bank_path, exam_id, log_dir, provenance_dir=None, allow_model_pe
         checks = []
 
         # mapping-check (deterministic, REQ-REV-01b)
-        record, _ = load_provenance(exam_id, item_id, provenance_dir)
+        record, prov_path = load_provenance(exam_id, item_id, provenance_dir)
         objective_id = (record or {}).get("objectiveId", "")
         if not objective_id:
             checks.append({"name": "mapping-check", "outcome": "fail",
@@ -194,6 +202,11 @@ def review_bank(bank_path, exam_id, log_dir, provenance_dir=None, allow_model_pe
         else:
             checks.append({"name": "provenance", "outcome": "pass",
                            "detail": "complete record"})
+        # SPEC-20: the lane stamps what it ran on, and nothing about who read it.
+        if record is not None and prov_path is not None \
+                and str(record.get("reviewer", "")).strip() != TOOL:
+            record["automatedReview"] = f"{TOOL}:{run_date}"
+            prov_path.write_text(json.dumps(record, indent=2) + "\n", encoding="utf-8")
 
         # injection screen (deterministic, REQ-REV-06)
         hits = check_injection(item["text"])
@@ -213,7 +226,7 @@ def review_bank(bank_path, exam_id, log_dir, provenance_dir=None, allow_model_pe
         checks.append({"name": "key-vs-source", "outcome": model_outcome, "detail": model_detail})
 
         write_log(log_dir, exam_id, item_id, checks, allow_model_pending,
-                  manifest_hash, config_hash, sha256(item["text"]))
+                  manifest_hash, config_hash, sha256(item["text"]), run_date)
         results.append({"itemId": item_id, "checks": checks})
 
     return results, errors
@@ -304,7 +317,7 @@ def self_test():
                 "author": "executor",
                 "assistance": "ai-drafted",
                 "rightsBasis": "original work",
-                "reviewer": "redeye-lane",
+                "reviewer": "",
                 "reviewDate": "",
                 "originalityCheck": "no-exam-item-proximity",
                 "status": status,
@@ -419,6 +432,20 @@ def self_test():
         inj_chk = outcome(inj_results.get(f"{exam_id}/bank-injection.md/Q1", []), "injection-screen")
         if not inj_chk or inj_chk["outcome"] != "flag":
             failures.append("SEEDED INJECTION NOT CAUGHT")
+
+        # SPEC-20 REQ-RV-04: the lane stamps automatedReview and never touches
+        # reviewer — a human's name survives byte-identical.
+        provenance("bank-clean.md", "Q2", reviewer="a-human", reviewDate="2026-10-15")
+        human_before = json.loads((prov_dir / "bank-clean-Q2.json").read_text())
+        run(base / "bank-clean.md")
+        human_after = json.loads((prov_dir / "bank-clean-Q2.json").read_text())
+        if human_after.get("reviewer") != "a-human" \
+                or human_after.get("reviewDate") != "2026-10-15":
+            failures.append("LANE REWROTE A HUMAN REVIEWER (REQ-RV-04)")
+        for qn in ("Q1", "Q3", "Q4"):
+            rec = json.loads((prov_dir / f"bank-clean-{qn}.json").read_text())
+            if rec.get("reviewer") != "" or not rec.get("automatedReview", "").startswith("redeye-lane:"):
+                failures.append(f"LANE DID NOT STAMP automatedReview ON {qn} (REQ-RV-04)")
 
         # Seed 4: incomplete provenance caught.
         prov_results, _ = run(base / "bank-missing-prov.md")

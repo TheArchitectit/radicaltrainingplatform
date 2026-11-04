@@ -41,7 +41,7 @@ defect = sys.argv[2]
 BANKS = {"NCA-75-Part1.md": 40, "NCA-75-Part2.md": 40, "NCA-75-Part3-GapFill.md": 60}
 COLUMNS = ["itemId","sourceFile","oldDomain","oldObjectiveId","newSection",
            "newObjectiveId","productVersion","keyReviewed","explanationReviewed",
-           "rightsStatus","reviewer","notes"]
+           "rightsStatus","reviewer","automatedReview","notes"]
 
 exam_dir = root / "content" / "exams" / "NCA-75"
 exam_dir.mkdir(parents=True, exist_ok=True)
@@ -72,7 +72,8 @@ for name, count in BANKS.items():
             "keyReviewed": "false",
             "explanationReviewed": "false",
             "rightsStatus": "original-bank",
-            "reviewer": "redeye-lane",
+            "reviewer": "",
+            "automatedReview": "redeye-lane:date-not-recorded",
             "notes": "fixture",
         })
 
@@ -88,6 +89,10 @@ elif defect == "duplicate":
     rows[1]["sourceFile"] = rows[0]["sourceFile"]
 elif defect == "beta":
     rows[7]["productVersion"] = "AOS 6.5"
+elif defect == "tool-reviewer":
+    rows[9]["reviewer"] = "redeye-lane"          # REQ-RV-01: a tool in reviewer
+elif defect == "bad-automated":
+    rows[10]["automatedReview"] = "lane ran"
 
 with exam_dir.joinpath("remap.csv").open("w", encoding="utf-8", newline="") as fh:
     writer = csv.DictWriter(fh, fieldnames=COLUMNS)
@@ -127,6 +132,8 @@ must_fail blank     "keyReviewed is ''"
 must_fail objective "is not an objective declared in exam.json"
 must_fail duplicate "duplicate itemId"
 must_fail beta      "productVersion 'AOS 6.5'"
+must_fail tool-reviewer "names a tool"
+must_fail bad-automated "'<tool>:<YYYY-MM-DD>'"
 must_fail header    "SPEC-01 01.3 contract"
 
 # Passing fixture — the same generator, no defect.

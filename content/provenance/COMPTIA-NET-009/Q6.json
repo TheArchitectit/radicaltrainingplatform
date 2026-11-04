@@ -5,7 +5,7 @@
   "author": "executor",
   "assistance": "ai-drafted",
   "rightsBasis": "original work; no vendor text lifted",
-  "reviewer": "redeye-lane",
+  "reviewer": "",
   "reviewDate": "",
   "originalityCheck": "no-exam-item-proximity",
   "status": "draft",
@@ -16,5 +16,6 @@
     "COMPTIA-NET-009"
   ],
   "crossExamReuse": "A+ A2 DNS/DHCP concept reused at Network+ depth (resolution path and lease lifecycle). Distinct item ID and distinct assessment depth; this question is never counted as independent evidence in both tracks (REQ-NP-03).",
-  "demoCut": "2026-10-23"
+  "demoCut": "2026-10-23",
+  "automatedReview": "redeye-lane:2026-10-20"
 }

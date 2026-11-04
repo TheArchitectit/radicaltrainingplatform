@@ -14,8 +14,9 @@ requirement names plus the four that keep the control document honest:
 
   1. exactly 140 rows, header exactly the SPEC-01 01.3 column contract;
   2. every itemId resolves to a parsed question in the file it names;
-  3. no row lacks a review state (key/explanation review flags, rights status,
-     reviewer);
+  3. no row lacks a review state (key/explanation review flags, rights status);
+     `reviewer` is a human or empty, and the lane run lives in `automatedReview`
+     (SPEC-20);
   4. ID stability — the itemId set equals the bank's question set exactly, so
      nothing was dropped, invented or renumbered (Plan v2 C-01/F-02);
   5. mapping sanity — newSection is a declared section, newObjectiveId is a
@@ -42,6 +43,10 @@ import re
 import sys
 import tempfile
 
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+
+from review_record import review_record_errors  # noqa: E402
+
 # SPEC-01 01.3 — normative column order. Not a set: a reordered or renamed
 # column silently changes what the document means, so this is compared exactly.
 COLUMNS = [
@@ -56,6 +61,7 @@ COLUMNS = [
     "explanationReviewed",
     "rightsStatus",
     "reviewer",
+    "automatedReview",
     "notes",
 ]
 
@@ -208,7 +214,11 @@ def validate(root: pathlib.Path) -> tuple[list[str], list[str], dict]:
         # section, not by beta objective, so 60 items have no old objective to
         # record. Demanding a value there would force an invented ID — the
         # blank is the true provenance. It is counted and reported below.
-        for column in ("rightsStatus", "reviewer", "oldDomain"):
+        # SPEC-20: reviewer is a human or empty; the lane run lives in
+        # automatedReview, whose value may be a date or "date-not-recorded".
+        violations.extend(review_record_errors(
+            where, row | {"reviewDateField": None}, date_marker="automatedReview"))
+        for column in ("rightsStatus", "oldDomain"):
             if not (row.get(column) or "").strip():
                 violations.append(f"{where} {column} is blank")
         if not (row.get("oldObjectiveId") or "").strip():
@@ -283,11 +293,6 @@ def run_self_test() -> int:
     failures: list[str] = []
     scratch: list[tempfile.TemporaryDirectory] = []
 
-    def new_root() -> pathlib.Path:
-        td = tempfile.TemporaryDirectory()
-        scratch.append(td)
-        return pathlib.Path(td.name)
-
     def fixture(root: pathlib.Path, rows: list[dict], banks: dict[str, int]) -> pathlib.Path:
         exam_dir = root / "content" / "exams" / EXAM_ID
         exam_dir.mkdir(parents=True, exist_ok=True)
@@ -333,7 +338,8 @@ def run_self_test() -> int:
             "keyReviewed": "false",
             "explanationReviewed": "false",
             "rightsStatus": "original-bank",
-            "reviewer": "redeye-lane",
+            "reviewer": "",
+            "automatedReview": "redeye-lane:date-not-recorded",
             "notes": "",
         }
         base.update(over)
@@ -359,6 +365,11 @@ def run_self_test() -> int:
             failures.append(f"clean fixture should claim 3 items, got {stats.get('claimed')}")
         if not any("2.1" in n for n in notes):
             failures.append(f"clean fixture should report objective 2.1 as an authoring gap, got {notes}")
+
+    def new_root() -> pathlib.Path:
+        td = tempfile.TemporaryDirectory()
+        scratch.append(td)
+        return pathlib.Path(td.name)
 
     # ── failing fixtures ───────────────────────────────────────────────
     cases = [
@@ -407,15 +418,6 @@ def run_self_test() -> int:
             ),
             "duplicate itemId",
         ),
-        (
-            "beta-era product version",
-            lambda: fixture(
-                new_root(),
-                [row("NCA-75-Part1.md:1", productVersion="AOS 6.5")],
-                {"NCA-75-Part1.md": 1, "NCA-75-Part2.md": 0, "NCA-75-Part3-GapFill.md": 0},
-            ),
-            "productVersion 'AOS 6.5'",
-        ),
     ]
 
     for name, build, needle in cases:
@@ -423,6 +425,9 @@ def run_self_test() -> int:
         violations, _, _ = validate(root)
         if not any(needle in v for v in violations):
             failures.append(f"failing fixture {name!r} not detected (got {violations})")
+
+    for td in scratch:
+        td.cleanup()
 
     # ── header contract fixture ────────────────────────────────────────
     with tempfile.TemporaryDirectory() as td:
@@ -435,17 +440,15 @@ def run_self_test() -> int:
         if not any("SPEC-01 01.3 contract" in v for v in violations):
             failures.append(f"header fixture not detected (got {violations})")
 
-    for td in scratch:
-        td.cleanup()
-
     if failures:
         for f in failures:
             print(f"FAIL fixture: {f}", file=sys.stderr)
         return 2
     print(
         "SELF-TEST: PASS (clean passes; unresolvable ID, blank review state, "
-        "undeclared objective, dropped item, duplicate ID, beta version and "
-        "header drift all fail)"
+        "undeclared objective, dropped item, duplicate ID and header drift "
+        "all fail; beta version, tool reviewer and malformed automatedReview "
+        "are covered by run_remap_fixtures.sh)"
     )
     return 0
 

@@ -16,6 +16,10 @@ import pathlib
 import re
 import sys
 
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+
+import review_record  # noqa: E402
+
 REPO_ROOT = pathlib.Path(__file__).resolve().parent.parent
 
 # Mirrors QuestionParser.AnswerRegex — keep in sync (see lint-content.py note).
@@ -28,12 +32,6 @@ ANSWER_LINE = re.compile(
 CONCENTRATION_THRESHOLD = 0.40
 NGRAM_SIZE = 5
 DUPLICATE_THRESHOLD = 0.6
-
-REQUIRED_PROVENANCE_FIELDS = (
-    "itemId", "examId", "objectiveId", "author", "assistance",
-    "rightsBasis", "reviewer", "originalityCheck",
-)
-VALID_PROVENANCE_STATUSES = ("draft", "reviewed", "released")
 
 # REQ-REV-06: model output is data; content containing instruction-shaped text
 # is flagged, never followed. Patterns are heuristic — a flag is a review
@@ -146,17 +144,13 @@ def load_provenance(exam_id, item_id, provenance_dir):
 
 
 def check_provenance(record, item_id):
-    """Return None if the provenance record is complete, else a failure detail."""
-    if record is None:
-        return "missing provenance record"
-    if record.get("itemId") and record["itemId"] != item_id:
-        return f"provenance itemId mismatch: record says {record['itemId']!r}"
-    missing = [f for f in REQUIRED_PROVENANCE_FIELDS if not str(record.get(f, "")).strip()]
-    if missing:
-        return f"incomplete provenance: empty fields {', '.join(missing)}"
-    if record.get("status") not in VALID_PROVENANCE_STATUSES:
-        return f"invalid provenance status: {record.get('status')!r}"
-    return None
+    """Return None if the provenance record is complete and honest, else the detail.
+
+    SPEC-20: an empty `reviewer` is a true statement and is not a failure; a
+    record that names a tool as its reviewer, or claims a review it cannot
+    back, is. The rules live in review_record.py so every gate agrees.
+    """
+    return review_record.check_provenance(record, item_id)
 
 
 def check_injection(text):

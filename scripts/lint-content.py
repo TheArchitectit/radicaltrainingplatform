@@ -45,6 +45,10 @@ import re
 import sys
 import pathlib
 
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+
+from review_record import review_record_errors  # noqa: E402
+
 REPO_ROOT = pathlib.Path(__file__).resolve().parent.parent
 
 # Regex patterns — keep ANSWER_LINE in sync with QuestionParser.AnswerRegex
@@ -194,6 +198,7 @@ def lint_manifest_file(filepath: pathlib.Path, exam_dir: pathlib.Path) -> list[s
         missing = [k for k in C02_REQUIRED if k not in prov]
         if missing:
             errors.append(f"Q{qn}: provenance missing required field(s): {', '.join(missing)}")
+        errors.extend(review_record_errors(f"Q{qn}", prov))
         if objectives:
             oid = str(prov.get("objectiveId", ""))
             if oid and oid not in objectives:
@@ -228,172 +233,115 @@ def collect_manifest_files(root: pathlib.Path) -> list[tuple[pathlib.Path, pathl
     return pairs
 
 
+def _legacy_fixtures(base: pathlib.Path, failures: list[str]) -> None:
+    """A non-canonical separator fails; the comma form passes."""
+    bad_root = base / "legacy-bad"
+    bad_root.mkdir()
+    (bad_root / "bad-bank.md").write_text(
+        "### Q1\nPick two.\n- A) x\n- B) y\n- C) z\n**Answer: B and D**\nexpl\n---\n"
+        "### Q2\nPick one.\n- A) x\n- B) y\n**Answer: B**\nexpl\n---\n",
+        encoding="utf-8",
+    )
+    if _run_lint(bad_root)[0] == 0:
+        failures.append("legacy non-canonical separator file must fail lint")
+
+    good_root = base / "legacy-good"
+    good_root.mkdir()
+    (good_root / "good-bank.md").write_text(
+        "### Q1\nPick two.\n- A) x\n- B) y\n- C) z\n**Answer: B, D**\nexpl\n---\n"
+        "### Q2\nPick one.\n- A) x\n- B) y\n**Answer: B**\nexpl\n---\n",
+        encoding="utf-8",
+    )
+    if _run_lint(good_root)[0] != 0:
+        failures.append("legacy canonical file must pass lint")
+
+
+def _manifest_fixtures(base: pathlib.Path, failures: list[str]) -> None:
+    """Title/domain headers, C-02 provenance presence, objective ids, role skips."""
+    clean = ("# Fixture Bank\n\n## Domain 2: Networking\n\n---\n\n"
+             "### Q1\nPick one.\n- A) x\n- B) y\n**Answer: B**\nexpl\n---\n")
+
+    def expect(root, should_pass, message):
+        rc, out = _run_lint(root)
+        if (rc == 0) != should_pass:
+            failures.append(message)
+            print(out, file=sys.stderr)
+
+    r = base / "prov-missing"; r.mkdir()
+    write_pack(r, "EX-1", clean, provenance={})
+    expect(r, False, "content/exams question without provenance must fail (C-02)")
+
+    r = base / "prov-incomplete"; r.mkdir()
+    rec = c02_record("EX-1", 1)
+    del rec["reviewer"]
+    write_pack(r, "EX-1", clean, provenance={1: rec})
+    expect(r, False, "provenance missing a C-02 required field must fail")
+
+    r = base / "prov-orphan-objective"; r.mkdir()
+    write_pack(r, "EX-1", clean,
+               provenance={1: c02_record("EX-1", 1, objective_id="9.9")})
+    expect(r, False, "provenance objectiveId outside exam.json must fail")
+
+    r = base / "no-domain"; r.mkdir()
+    write_pack(r, "EX-1", "# Fixture Bank\n\n---\n\n### Q1\nPick.\n- A) x\n- B) y\n"
+               "**Answer: B**\nexpl\n", provenance={1: c02_record("EX-1", 1)})
+    expect(r, False, "content/exams file without a domain header must fail")
+
+    r = base / "clean"; r.mkdir()
+    write_pack(r, "EX-1", clean, provenance={1: c02_record("EX-1", 1)})
+    expect(r, True, "complete content/exams pack must pass lint")
+
+    r = base / "lesson-skip"; r.mkdir()
+    write_pack(r, "EX-1", clean, provenance={1: c02_record("EX-1", 1)})
+    lessons = r / "content" / "exams" / "EX-1" / "lessons"
+    lessons.mkdir()
+    (lessons / "CHEATSHEET.md").write_text(
+        "# Cheatsheet\n\nSome prose. **Answer: B**\n", encoding="utf-8")
+    expect(r, True, "lessons/ prose must be skipped by role, not linted as a bank")
+
+    r = base / "role-over-name"; r.mkdir()
+    write_pack(r, "EX-1", clean, provenance={1: c02_record("EX-1", 1)})
+    qdir = r / "content" / "exams" / "EX-1" / "questions"
+    (qdir / "CHEATSHEET.md").write_text(
+        "# Sneaky Bank\n\n## Domain 2: Networking\n\n### Q1\nPick.\n- A) x\n- B) y\n"
+        "**Answer: B and D**\nexpl\n", encoding="utf-8")
+    expect(r, False, "questions/CHEATSHEET.md must be linted (role wins over name skip)")
+
+
+def _review_record_fixtures(base: pathlib.Path, failures: list[str]) -> None:
+    """SPEC-20 REQ-RV-01..03: a tool in reviewer fails, an honest empty passes."""
+    clean = ("# Fixture Bank\n\n## Domain 2: Networking\n\n---\n\n"
+             "### Q1\nPick one.\n- A) x\n- B) y\n**Answer: B**\nexpl\n---\n")
+
+    def run(name, **over):
+        root = base / name
+        rec = c02_record("EX-1", 1)
+        rec.update(over)
+        write_pack(root, "EX-1", clean, provenance={1: rec})
+        return _run_lint(root)[0]
+
+    if run("prov-tool-reviewer", reviewer="redeye-lane") == 0:
+        failures.append("reviewer naming a tool must fail (SPEC-20 REQ-RV-01)")
+    if run("prov-rv-ok", automatedReview="redeye-lane:2026-10-20") != 0:
+        failures.append("empty reviewer + valid automatedReview must pass (SPEC-20)")
+    if run("prov-claims-reviewed", status="reviewed") == 0:
+        failures.append("status 'reviewed' with an empty reviewer must fail (REQ-RV-03)")
+    if run("prov-named-no-date", reviewer="a-human") == 0:
+        failures.append("a named reviewer with no date must fail (REQ-RV-03)")
+    if run("prov-named-ok", reviewer="a-human", reviewDate="2026-10-15") != 0:
+        failures.append("a named reviewer with a date must pass (SPEC-20)")
+
+
 def run_self_test() -> int:
     """Failing+passing fixture pair for every rule this gate enforces."""
     import tempfile
 
-    failures = []
-
+    failures: list[str] = []
     with tempfile.TemporaryDirectory() as td:
         base = pathlib.Path(td)
-
-        # ── legacy root: non-canonical separator must fail ──
-        bad_root = base / "legacy-bad"
-        bad_root.mkdir()
-        (bad_root / "bad-bank.md").write_text(
-            "### Q1\nPick two.\n- A) x\n- B) y\n- C) z\n**Answer: B and D**\nexpl\n---\n"
-            "### Q2\nPick one.\n- A) x\n- B) y\n**Answer: B**\nexpl\n---\n",
-            encoding="utf-8",
-        )
-        rc, out = _run_lint(bad_root)
-        if rc == 0:
-            failures.append("legacy non-canonical separator file must fail lint")
-            print(out, file=sys.stderr)
-
-        # ── legacy root: canonical file must pass ──
-        good_root = base / "legacy-good"
-        good_root.mkdir()
-        (good_root / "good-bank.md").write_text(
-            "### Q1\nPick two.\n- A) x\n- B) y\n- C) z\n**Answer: B, D**\nexpl\n---\n"
-            "### Q2\nPick one.\n- A) x\n- B) y\n**Answer: B**\nexpl\n---\n",
-            encoding="utf-8",
-        )
-        rc, out = _run_lint(good_root)
-        if rc != 0:
-            failures.append("legacy canonical file must pass lint")
-            print(out, file=sys.stderr)
-
-        # ── content/exams: question without provenance must fail (C-02) ──
-        def write_pack(root, exam_id, questions_md, provenance=None, objectives=None):
-            exam_dir = root / "content" / "exams" / exam_id
-            qdir = exam_dir / "questions"
-            qdir.mkdir(parents=True)
-            (qdir / "bank.md").write_text(questions_md, encoding="utf-8")
-            if objectives is None:
-                objectives = ["2.3"]
-            manifest = {
-                "examId": exam_id,
-                "vendor": "Test",
-                "displayName": "Test Exam",
-                "officialVersion": "v1",
-                "objectivesDocVersion": "1.0",
-                "sourceUrl": "https://example.com",
-                "sourceReviewDate": "2026-10-10",
-                "sections": [
-                    {"number": "1", "title": "Net", "objectives": [
-                        {"id": oid, "title": o, "lessonIds": []} for oid, o in
-                        ((o, f"Objective {o}") for o in objectives)
-                    ]}
-                ],
-            }
-            (exam_dir / "exam.json").write_text(json.dumps(manifest), encoding="utf-8")
-            if provenance:
-                pdir = root / "content" / "provenance" / exam_id
-                pdir.mkdir(parents=True, exist_ok=True)
-                for qn, rec in provenance.items():
-                    (pdir / f"Q{qn}.json").write_text(json.dumps(rec), encoding="utf-8")
-
-        def c02_record(exam_id, qn, objective_id="2.3"):
-            return {
-                "itemId": f"{exam_id}/bank.md/Q{qn}",
-                "examId": exam_id,
-                "objectiveId": objective_id,
-                "author": "executor",
-                "assistance": "ai-drafted",
-                "rightsBasis": "original work",
-                "reviewer": "redeye-lane",
-                "reviewDate": "",
-                "originalityCheck": "no-exam-item-proximity",
-                "status": "draft",
-            }
-
-        clean_questions = (
-            "# Fixture Bank\n\n## Domain 2: Networking\n\n---\n\n"
-            "### Q1\nPick one.\n- A) x\n- B) y\n**Answer: B**\nexpl\n---\n"
-        )
-
-        # missing provenance
-        r = base / "prov-missing"
-        r.mkdir()
-        write_pack(r, "EX-1", clean_questions, provenance={})
-        rc, out = _run_lint(r)
-        if rc == 0:
-            failures.append("content/exams question without provenance must fail (C-02)")
-            print(out, file=sys.stderr)
-
-        # incomplete provenance (missing reviewer)
-        r = base / "prov-incomplete"
-        r.mkdir()
-        rec = c02_record("EX-1", 1)
-        del rec["reviewer"]
-        write_pack(r, "EX-1", clean_questions, provenance={1: rec})
-        rc, out = _run_lint(r)
-        if rc == 0:
-            failures.append("provenance missing a C-02 required field must fail")
-            print(out, file=sys.stderr)
-
-        # objectiveId not in manifest
-        r = base / "prov-orphan-objective"
-        r.mkdir()
-        write_pack(r, "EX-1", clean_questions,
-                   provenance={1: c02_record("EX-1", 1, objective_id="9.9")},
-                   objectives=["2.3"])
-        rc, out = _run_lint(r)
-        if rc == 0:
-            failures.append("provenance objectiveId outside exam.json must fail")
-            print(out, file=sys.stderr)
-
-        # missing domain header
-        r = base / "no-domain"
-        r.mkdir()
-        write_pack(r, "EX-1",
-                   "# Fixture Bank\n\n---\n\n### Q1\nPick one.\n- A) x\n- B) y\n**Answer: B**\nexpl\n",
-                   provenance={1: c02_record("EX-1", 1)})
-        rc, out = _run_lint(r)
-        if rc == 0:
-            failures.append("content/exams file without a domain header must fail")
-            print(out, file=sys.stderr)
-
-        # clean pack must pass
-        r = base / "clean"
-        r.mkdir()
-        write_pack(r, "EX-1", clean_questions, provenance={1: c02_record("EX-1", 1)})
-        rc, out = _run_lint(r)
-        if rc != 0:
-            failures.append("complete content/exams pack must pass lint")
-            print(out, file=sys.stderr)
-
-        # skip logic: a lesson named CHEATSHEET is prose, not a bank — even
-        # though the legacy name-substring skip would have hidden it. Role
-        # comes from the directory, so a lessons/ file with no questions is
-        # simply not scored content and must not fail the gate.
-        r = base / "lesson-skip"
-        r.mkdir()
-        write_pack(r, "EX-1", clean_questions, provenance={1: c02_record("EX-1", 1)})
-        lessons = r / "content" / "exams" / "EX-1" / "lessons"
-        lessons.mkdir()
-        (lessons / "CHEATSHEET.md").write_text(
-            "# Cheatsheet\n\nSome prose. **Answer: B**\n", encoding="utf-8"
-        )
-        rc, out = _run_lint(r)
-        if rc != 0:
-            failures.append("lessons/ prose must be skipped by role, not linted as a bank")
-            print(out, file=sys.stderr)
-
-        # skip logic: a bank file named CHEATSHEET inside questions/ IS linted
-        # (role wins over the legacy name-substring skip).
-        r = base / "role-over-name"
-        r.mkdir()
-        write_pack(r, "EX-1", clean_questions, provenance={1: c02_record("EX-1", 1)})
-        qdir = r / "content" / "exams" / "EX-1" / "questions"
-        (qdir / "CHEATSHEET.md").write_text(
-            "# Sneaky Bank\n\n## Domain 2: Networking\n\n### Q1\nPick.\n- A) x\n- B) y\n**Answer: B and D**\nexpl\n",
-            encoding="utf-8",
-        )
-        rc, out = _run_lint(r)
-        if rc == 0:
-            failures.append("questions/CHEATSHEET.md must be linted (role wins over name skip)")
-            print(out, file=sys.stderr)
+        _legacy_fixtures(base, failures)
+        _manifest_fixtures(base, failures)
+        _review_record_fixtures(base, failures)
 
     if failures:
         for f in failures:
@@ -402,6 +350,41 @@ def run_self_test() -> int:
 
     print("SELF-TEST: PASS (legacy pair + manifest-aware C-02/structure/skip pairs)")
     return 0
+
+
+
+def write_pack(root, exam_id, questions_md, provenance=None, objectives=None):
+    """A minimal content/exams pack: manifest, bank, optional provenance."""
+    exam_dir = root / "content" / "exams" / exam_id
+    qdir = exam_dir / "questions"
+    qdir.mkdir(parents=True)
+    (qdir / "bank.md").write_text(questions_md, encoding="utf-8")
+    objectives = objectives or ["2.3"]
+    manifest = {
+        "examId": exam_id, "vendor": "Test", "displayName": "Test Exam",
+        "officialVersion": "v1", "objectivesDocVersion": "1.0",
+        "sourceUrl": "https://example.com", "sourceReviewDate": "2026-10-10",
+        "sections": [{"number": "1", "title": "Net", "objectives": [
+            {"id": oid, "title": f"Objective {oid}", "lessonIds": []}
+            for oid in objectives]}],
+    }
+    (exam_dir / "exam.json").write_text(json.dumps(manifest), encoding="utf-8")
+    if provenance:
+        pdir = root / "content" / "provenance" / exam_id
+        pdir.mkdir(parents=True, exist_ok=True)
+        for qn, rec in provenance.items():
+            (pdir / f"Q{qn}.json").write_text(json.dumps(rec), encoding="utf-8")
+
+
+def c02_record(exam_id, qn, objective_id="2.3"):
+    """A complete C-02 record with an honest empty reviewer."""
+    return {
+        "itemId": f"{exam_id}/bank.md/Q{qn}", "examId": exam_id,
+        "objectiveId": objective_id, "author": "executor",
+        "assistance": "ai-drafted", "rightsBasis": "original work",
+        "reviewer": "", "reviewDate": "",
+        "originalityCheck": "no-exam-item-proximity", "status": "draft",
+    }
 
 
 def _run_lint(root: pathlib.Path) -> tuple[int, str]:

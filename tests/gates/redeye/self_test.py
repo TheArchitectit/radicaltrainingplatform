@@ -53,7 +53,7 @@ def setup_provenance(prov_dir):
     prov_dir.mkdir(parents=True)
     fields = {
         "examId": EXAM_ID, "author": "executor", "assistance": "ai-drafted",
-        "rightsBasis": "original work", "reviewer": "redeye-lane",
+        "rightsBasis": "original work", "reviewer": "",
         "reviewDate": "", "originalityCheck": "no-exam-item-proximity",
         "status": "draft",
     }
@@ -110,6 +110,25 @@ def main():
               model and model["outcome"] in ("blocked", "pending"),
               str(model))
 
+        # Seed: SPEC-20 REQ-RV-01 — a tool's name in reviewer is a failure;
+        # the lane stamps automatedReview instead and leaves reviewer alone.
+        rec = json.loads((prov_dir / "bank-clean-Q3.json").read_text(encoding="utf-8"))
+        rec["reviewer"] = "redeye-lane"
+        rec["reviewDate"] = "2026-10-15"
+        (prov_dir / "bank-clean-Q3.json").write_text(json.dumps(rec), encoding="utf-8")
+        tool_results, _ = run("bank-clean.md")
+        tool = outcome(tool_results[f"{EXAM_ID}/bank-clean.md/Q3"], "provenance")
+        check("seeded tool name in reviewer caught (REQ-RV-01)",
+              tool and tool["outcome"] == "fail", str(tool))
+        # Running the lane over a clean record must not change reviewer and
+        # must stamp automatedReview (REQ-RV-04).
+        run("bank-clean.md")
+        untrusted = json.loads((prov_dir / "bank-clean-Q1.json").read_text(encoding="utf-8"))
+        check("lane leaves reviewer empty and stamps automatedReview (REQ-RV-04)",
+              untrusted.get("reviewer") == ""
+              and untrusted.get("automatedReview", "").startswith("redeye-lane:"),
+              str(untrusted.get("automatedReview")))
+
         # Seed: mis-mapped objective.
         biased_results, _ = run("bank-biased.md")
         mapping = outcome(biased_results[f"{EXAM_ID}/bank-biased.md/Q1"], "mapping-check")
@@ -137,7 +156,7 @@ def main():
         (prov_dir / "bank-clean-Q2.json").write_text(
             json.dumps({"itemId": f"{EXAM_ID}/bank-clean.md/Q2", "examId": EXAM_ID,
                         "objectiveId": "2.4", "author": "executor", "assistance": "ai-drafted",
-                        "rightsBasis": "", "reviewer": "redeye-lane", "reviewDate": "",
+                        "rightsBasis": "", "reviewer": "", "reviewDate": "",
                         "originalityCheck": "no-exam-item-proximity", "status": "draft"}),
             encoding="utf-8")
         prov_results, _ = run("bank-clean.md")

@@ -143,6 +143,7 @@ naming no gate is a **named gap**, not a covered requirement.
 | TM-109 | README counts, badge and release state match the generated manifest | gate | R-12 — `scripts/check-readme-counts.py` + `run_readme_counts_fixtures.sh` |
 | TM-110 | Source files stay reviewable: any source file over 500 lines, or test file over 600, fails the tree; generated files and the preserved legacy tree are exempt by a checked rule, not a path allowlist | gate | SPEC-16 — `scripts/check-file-sizes.py` + `--self-test` (oversize source, oversize test, and a stale exemption each fail; an honest tree passes) |
 | TM-110a | Released banks are learner surfaces, not gate inputs: no released bank filename matches `fixture`, every `*-demo-cut.md` item carries a `demoCut` date, and per-exam item counts are unchanged by the rename | gate + fixtures | SPEC-19 REQ-DC-01..04 — `check-content-bundle.py` + `run_content_bundle_fixtures.sh` (fixture name, undated demo cut, missing asset, stale bundle, dishonest state each fail) |
+| TM-110b | `reviewer` never names a tool; `automatedReview` is `<tool>:<date>`; a named review carries a date; `status: reviewed` requires a reviewer. The lane stamps `automatedReview` and leaves `reviewer` byte-identical | gate + fixtures | SPEC-20 REQ-RV-01..05 — `lint-content.py` (`--self-test`), `redeye_analysis.check_provenance`, `check-nca-remap.py` + `run_remap_fixtures.sh` (tool-reviewer and malformed-automatedReview each fail), `tests/gates/redeye/self_test.py` |
 
 ## Requirement-to-test index
 
