@@ -13,7 +13,7 @@
     "AWS-SAA": {
       "manifest": {
         "path": "content/exams/AWS-SAA/exam.json",
-        "sha256": "5599a3dffbd398cc668ab596d7757ea325bd49dabddb64a3a440c16cf49dcdbe"
+        "sha256": "6b0e1d23f4498863ef0f0dc7d145826221606017b7f86ec5bcb7831f1accec59"
       },
       "lessons": [
         {
@@ -98,7 +98,7 @@
     "AZ-104": {
       "manifest": {
         "path": "content/exams/AZ-104/exam.json",
-        "sha256": "6d18a704aa6dd90c9f79cda08b696e6597ca00aadaf81a6e6b9a24c81bd0efbf"
+        "sha256": "0571e3328acc055e06953b6f64656a916ea874c75a65eea8815dfd4396e72baf"
       },
       "lessons": [
         {
@@ -188,7 +188,7 @@
     "COMPTIA-A-1201": {
       "manifest": {
         "path": "content/exams/COMPTIA-A-1201/exam.json",
-        "sha256": "5b1ab8b0ac53f106a7449f39e744d433750d765bb05cca870c422c141b45dd06"
+        "sha256": "79c3a766c80fd3b8c10fb1d7cdce2c4a388203c2ad3419c7dc6b48d20f82d10f"
       },
       "lessons": [
         {
@@ -268,7 +268,7 @@
     "COMPTIA-A-1202": {
       "manifest": {
         "path": "content/exams/COMPTIA-A-1202/exam.json",
-        "sha256": "a717362866a3f25782cddc8443f114535ac872a3b03d0056a3a9ded41ea8d95a"
+        "sha256": "a423e263592fb5acbd1a32c3e3e98cfedbfe2983e8ef26df9b975c8444c87f75"
       },
       "lessons": [
         {
@@ -338,7 +338,7 @@
     "COMPTIA-NET-009": {
       "manifest": {
         "path": "content/exams/COMPTIA-NET-009/exam.json",
-        "sha256": "90fc995b8ecc9e501a9908aad6661fb5b97fa876eff32eb80510c975ca5319c9"
+        "sha256": "ab626ca4dace527e5ce00f50e6024bf04378036348c250eca7f03c967f6b2834"
       },
       "lessons": [
         {
@@ -448,7 +448,7 @@
     "NCA-75": {
       "manifest": {
         "path": "content/exams/NCA-75/exam.json",
-        "sha256": "ba513ca2dd0ab7a707addcf5cd7857e852fb3d6fe9a0ef23d7b76f64711ae7bc"
+        "sha256": "e50a33274461e590cce4591c8b15ac233d39f2d3a9776eefdf6d50fd3f1c06c9"
       },
       "lessons": [
         {
@@ -5586,8 +5586,8 @@
     },
     {
       "path": "content/exams/AWS-SAA/exam.json",
-      "sha256": "5599a3dffbd398cc668ab596d7757ea325bd49dabddb64a3a440c16cf49dcdbe",
-      "bytes": 3827
+      "sha256": "6b0e1d23f4498863ef0f0dc7d145826221606017b7f86ec5bcb7831f1accec59",
+      "bytes": 4757
     },
     {
       "path": "content/exams/AWS-SAA/lessons/aws1_1.md",
@@ -5666,8 +5666,8 @@
     },
     {
       "path": "content/exams/AZ-104/exam.json",
-      "sha256": "6d18a704aa6dd90c9f79cda08b696e6597ca00aadaf81a6e6b9a24c81bd0efbf",
-      "bytes": 3773
+      "sha256": "0571e3328acc055e06953b6f64656a916ea874c75a65eea8815dfd4396e72baf",
+      "bytes": 4763
     },
     {
       "path": "content/exams/AZ-104/lessons/az1_1.md",
@@ -5751,8 +5751,8 @@
     },
     {
       "path": "content/exams/COMPTIA-A-1201/exam.json",
-      "sha256": "5b1ab8b0ac53f106a7449f39e744d433750d765bb05cca870c422c141b45dd06",
-      "bytes": 4622
+      "sha256": "79c3a766c80fd3b8c10fb1d7cdce2c4a388203c2ad3419c7dc6b48d20f82d10f",
+      "bytes": 6501
     },
     {
       "path": "content/exams/COMPTIA-A-1201/lessons/a1.md",
@@ -5826,8 +5826,8 @@
     },
     {
       "path": "content/exams/COMPTIA-A-1202/exam.json",
-      "sha256": "a717362866a3f25782cddc8443f114535ac872a3b03d0056a3a9ded41ea8d95a",
-      "bytes": 5831
+      "sha256": "a423e263592fb5acbd1a32c3e3e98cfedbfe2983e8ef26df9b975c8444c87f75",
+      "bytes": 8251
     },
     {
       "path": "content/exams/COMPTIA-A-1202/lessons/b1.md",
@@ -5891,8 +5891,8 @@
     },
     {
       "path": "content/exams/COMPTIA-NET-009/exam.json",
-      "sha256": "90fc995b8ecc9e501a9908aad6661fb5b97fa876eff32eb80510c975ca5319c9",
-      "bytes": 8214
+      "sha256": "ab626ca4dace527e5ce00f50e6024bf04378036348c250eca7f03c967f6b2834",
+      "bytes": 10094
     },
     {
       "path": "content/exams/COMPTIA-NET-009/lessons/n1.md",
@@ -5996,8 +5996,8 @@
     },
     {
       "path": "content/exams/NCA-75/exam.json",
-      "sha256": "ba513ca2dd0ab7a707addcf5cd7857e852fb3d6fe9a0ef23d7b76f64711ae7bc",
-      "bytes": 3030
+      "sha256": "e50a33274461e590cce4591c8b15ac233d39f2d3a9776eefdf6d50fd3f1c06c9",
+      "bytes": 3955
     },
     {
       "path": "content/exams/NCA-75/lessons/s1_1.md",

@@ -20,18 +20,19 @@ Give RTP explicit, versioned identity for three tracks and four exams without br
 | REQ-MAN-05 | Cross-exam ID collision is impossible: validator fails CI on duplicate exam IDs, repeated question IDs within an exam, or progress-key collisions (`progress/<examId>/<itemId>` namespacing). | Fixture tree with duplicated exam ID fails CI naming both files. |
 | REQ-MAN-06 | Every manifest carries `sourceUrl`, `sourceReviewDate`, `officialVersion`, `objectivesDocVersion`. Stale review date (>180 days) → loud CI warning with exam ID and date; missing `sourceUrl` → CI fails. | Both branches proven by fixtures. |
 | REQ-MAN-07 | Incomplete objective coverage is visible: coverage = (objectives with ≥1 released lesson AND ≥1 released scored item) / manifest objectives, shown with the “beginner preview” label. No screen computes or implies pass readiness. | October 23 A+ pack renders covered subset + preview label. |
+| REQ-MAN-08 | Bank-level release gating: `exam.json` carries `releasedBanks` (list of bank filenames under `questions/`). `null` = legacy manifest, every bank released (old behavior). `[]` = explicit decision to release nothing. The desktop catalog shows released count plus an unreleased note; the session pool excludes unreleased banks. The PWA generator (`RELEASED_BANKS`) and the manifest are the same record — drift is a CI failure. | Given a mixed-bank manifest (one released, one draft bank), the catalog shows `QuestionCount=2, UnreleasedQuestionCount=1`, `LoadAllExams` excludes the draft, and the session pool contains only released items. |
 
 ## Data model (normative shapes)
 
 - `track.json`: `{ trackId, title, examIds[], audience, previewLabel: "beginner preview", disclaimer, order }`
-- `exam.json`: `{ examId, vendor, displayName, officialVersion, objectivesDocVersion, sourceUrl, sourceReviewDate, productVersions{}, sections[{ number, title, weightPercent?, objectives[{ id, title, lessonIds[] }] }], questionPolicy: { authorship: "original", review: "human-required" } }` — `weightPercent` only when the official source publishes weights (CompTIA); NCA manifest omits it (equal study allocation, ASM-13).
+- `exam.json`: `{ examId, vendor, displayName, officialVersion, objectivesDocVersion, sourceUrl, sourceReviewDate, productVersions{}, releasedBanks[]?, sections[{ number, title, weightPercent?, objectives[{ id, title, lessonIds[] }] }], questionPolicy: { authorship: "original", review: "human-required" } }` — `weightPercent` only when the official source publishes weights (CompTIA); NCA manifest omits it (equal study allocation, ASM-13). `releasedBanks` declares which bank files under `questions/` ship in a session pool — `null` means "no decision recorded, all banks released" (legacy); `[]` means "nothing released" (REQ-MAN-08).
 - Question markdown stays in the existing parser format (`## DOMAIN <n>`, `### Q<n>`, `- A)` options, `**Answer:**`/`**Correct Answer:**`); the manifest, not the heading text, is the authority on section titles.
 
 ## Files
 
-**New:** `content/tracks/*/track.json`; `content/exams/{COMPTIA-A-1201,COMPTIA-A-1202,COMPTIA-NET-009,NCA-75}/exam.json`; `RadicalTrainingPlatform.Core/Models/TrackManifest.cs`; `Core/Models/ExamManifest.cs`; `Core/Models/LessonRef.cs`; `Core/Services/ManifestExamCatalog.cs`; `Core/Services/ManifestBlueprintService.cs`; `Core/Abstractions/IManifestLoader.cs`; `scripts/validate-manifests.py`; `Core.Tests/ManifestCatalogTests.cs`; `Core.Tests/ManifestBlueprintTests.cs`; additions to `Core.Tests/DeriveExamCodeTests.cs`.
+**New:** `content/tracks/*/track.json`; `content/exams/{COMPTIA-A-1201,COMPTIA-A-1202,COMPTIA-NET-009,NCA-75,AZ-104,AWS-SAA}/exam.json`; `RadicalTrainingPlatform.Core/Models/TrackManifest.cs`; `Core/Models/ExamManifest.cs`; `Core/Models/LessonRef.cs`; `Core/Services/ManifestExamCatalog.cs`; `Core/Services/ManifestBlueprintService.cs`; `Core/Abstractions/IManifestLoader.cs`; `Core/Services/BankReleasePolicy.cs`; `Core/Services/QuestionParser.Catalog.cs`; `scripts/validate-manifests.py`; `Core.Tests/ManifestCatalogTests.cs`; `Core.Tests/ManifestBlueprintTests.cs`; additions to `Core.Tests/DeriveExamCodeTests.cs`.
 
-**Modified:** `Core/Services/QuestionParser.cs` (only the R-07 AnswerRegex repair; no derivation changes); `Core.Tests/CompositionRootTests.cs`; `scripts/lint-content.py` (SPEC-10); `.github/workflows/build.yml` (run validator).
+**Modified:** `Core/Services/QuestionParser.cs` (R-07 AnswerRegex repair + REQ-MAN-08 constructor overloads); `Core/ServiceCollectionExtensions.cs` (register `IManifestLoader` before `IQuestionParser`); `Core/Models/ExamCatalogItem.cs` (UnreleasedQuestionCount); `Desktop/MainWindow.axaml.cs` (release count + unreleased note); `Desktop/Views/ExamSelectorView.axaml` (unreleased badge); `Core.Tests/CompositionRootTests.cs`; `scripts/lint-content.py` (SPEC-10); `.github/workflows/build.yml` (run validator).
 
 ## Commands
 
@@ -50,4 +51,4 @@ dotnet test RadicalTrainingPlatform.Core.Tests --filter "FullyQualifiedName~Deri
 
 ## Acceptance
 
-All REQ-MAN-01..07 scenarios pass at the release head on the Linux leg; catalog shows seven exams (five Nutanix legacy + four new, NCA-75 shared) with correct display names; coverage labels render; no legacy test modified to pass.
+All REQ-MAN-01..08 scenarios pass at the release head on the Linux leg; catalog shows seven exams (five Nutanix legacy + four new, NCA-75 shared) with correct display names; coverage labels render; unreleased banks are excluded from the session pool with their counts shown separately; no legacy test modified to pass.

@@ -22,6 +22,10 @@ public static class ServiceCollectionExtensions
         services.AddSingleton<IExamRepository, MarkdownExamRepository>();
         services.AddSingleton<IErrataProvider, JsonErrataStore>();
         services.AddSingleton<ILessonCatalog, BundleLessonCatalog>();
+        // REQ-MAN-08: the manifest decides which banks reach a session pool.
+        // Registered before QuestionParser so DI injects it into the greedy
+        // ctor; the desktop's parser and the catalog then read one answer.
+        services.AddSingleton<IManifestLoader, ManifestLoader>();
         // DI selects the greediest ctor, so the registered IErrataProvider above
         // is injected into QuestionParser (errata corrections get applied).
         services.AddSingleton<IQuestionParser, QuestionParser>();
@@ -44,8 +48,7 @@ public static class ServiceCollectionExtensions
 
         services.AddSingleton<IManifestLoader, ManifestLoader>();
 
-        // REQ-MAN-04: manifest blueprints take precedence; the hardcoded service
-        // is kept as the fallback for legacy exams without manifests. S27-02
+        // REQ-MAN-04: manifest blueprints take precedence; the hardcoded service        // is kept as the fallback for legacy exams without manifests. S27-02
         // turns the manifest source into one provider among several, so a vendor
         // pack plugs in here without the service learning about plugins.
         services.AddSingleton<HardcodedBlueprintService>();

@@ -14,14 +14,62 @@
       "weightPercent": 23,
       "studyItemAllocation": 23,
       "objectives": [
-        { "id": "1.1", "title": "Explain concepts related to the Open Systems Interconnection (OSI) reference model.", "lessonIds": ["n1"] },
-        { "id": "1.2", "title": "Compare and contrast networking appliances, applications, and functions.", "lessonIds": ["n1"] },
-        { "id": "1.3", "title": "Summarize cloud concepts and connectivity options.", "lessonIds": ["n1"] },
-        { "id": "1.4", "title": "Explain common networking ports, protocols, services, and traffic types.", "lessonIds": ["n1"] },
-        { "id": "1.5", "title": "Compare and contrast transmission media and transceivers.", "lessonIds": ["n1"] },
-        { "id": "1.6", "title": "Compare and contrast network topologies, architectures, and types.", "lessonIds": ["n1"] },
-        { "id": "1.7", "title": "Given a scenario, use appropriate IPv4 network addressing.", "lessonIds": ["n1"] },
-        { "id": "1.8", "title": "Summarize evolving use cases for modern network environments.", "lessonIds": ["n1"] }
+        {
+          "id": "1.1",
+          "title": "Explain concepts related to the Open Systems Interconnection (OSI) reference model.",
+          "lessonIds": [
+            "n1"
+          ]
+        },
+        {
+          "id": "1.2",
+          "title": "Compare and contrast networking appliances, applications, and functions.",
+          "lessonIds": [
+            "n1"
+          ]
+        },
+        {
+          "id": "1.3",
+          "title": "Summarize cloud concepts and connectivity options.",
+          "lessonIds": [
+            "n1"
+          ]
+        },
+        {
+          "id": "1.4",
+          "title": "Explain common networking ports, protocols, services, and traffic types.",
+          "lessonIds": [
+            "n1"
+          ]
+        },
+        {
+          "id": "1.5",
+          "title": "Compare and contrast transmission media and transceivers.",
+          "lessonIds": [
+            "n1"
+          ]
+        },
+        {
+          "id": "1.6",
+          "title": "Compare and contrast network topologies, architectures, and types.",
+          "lessonIds": [
+            "n1"
+          ]
+        },
+        {
+          "id": "1.7",
+          "title": "Given a scenario, use appropriate IPv4 network addressing.",
+          "lessonIds": [
+            "n1"
+          ]
+        },
+        {
+          "id": "1.8",
+          "title": "Summarize evolving use cases for modern network environments.",
+          "lessonIds": [
+            "n1"
+          ]
+        }
       ]
     },
     {
@@ -30,10 +78,34 @@
       "weightPercent": 20,
       "studyItemAllocation": 20,
       "objectives": [
-        { "id": "2.1", "title": "Explain characteristics of routing technologies.", "lessonIds": ["n2"] },
-        { "id": "2.2", "title": "Given a scenario, configure switching technologies and features.", "lessonIds": ["n2"] },
-        { "id": "2.3", "title": "Given a scenario, select and configure wireless devices and technologies.", "lessonIds": ["n2"] },
-        { "id": "2.4", "title": "Explain important factors of physical installations.", "lessonIds": ["n2"] }
+        {
+          "id": "2.1",
+          "title": "Explain characteristics of routing technologies.",
+          "lessonIds": [
+            "n2"
+          ]
+        },
+        {
+          "id": "2.2",
+          "title": "Given a scenario, configure switching technologies and features.",
+          "lessonIds": [
+            "n2"
+          ]
+        },
+        {
+          "id": "2.3",
+          "title": "Given a scenario, select and configure wireless devices and technologies.",
+          "lessonIds": [
+            "n2"
+          ]
+        },
+        {
+          "id": "2.4",
+          "title": "Explain important factors of physical installations.",
+          "lessonIds": [
+            "n2"
+          ]
+        }
       ]
     },
     {
@@ -42,11 +114,41 @@
       "weightPercent": 19,
       "studyItemAllocation": 19,
       "objectives": [
-        { "id": "3.1", "title": "Explain the purpose of organizational processes and procedures.", "lessonIds": ["n3"] },
-        { "id": "3.2", "title": "Given a scenario, use network monitoring technologies.", "lessonIds": ["n3"] },
-        { "id": "3.3", "title": "Explain disaster recovery (DR) concepts.", "lessonIds": ["n3"] },
-        { "id": "3.4", "title": "Given a scenario, implement IPv4 and IPv6 network services.", "lessonIds": ["n3"] },
-        { "id": "3.5", "title": "Compare and contrast network access and management methods.", "lessonIds": ["n3"] }
+        {
+          "id": "3.1",
+          "title": "Explain the purpose of organizational processes and procedures.",
+          "lessonIds": [
+            "n3"
+          ]
+        },
+        {
+          "id": "3.2",
+          "title": "Given a scenario, use network monitoring technologies.",
+          "lessonIds": [
+            "n3"
+          ]
+        },
+        {
+          "id": "3.3",
+          "title": "Explain disaster recovery (DR) concepts.",
+          "lessonIds": [
+            "n3"
+          ]
+        },
+        {
+          "id": "3.4",
+          "title": "Given a scenario, implement IPv4 and IPv6 network services.",
+          "lessonIds": [
+            "n3"
+          ]
+        },
+        {
+          "id": "3.5",
+          "title": "Compare and contrast network access and management methods.",
+          "lessonIds": [
+            "n3"
+          ]
+        }
       ]
     },
     {
@@ -55,9 +157,27 @@
       "weightPercent": 14,
       "studyItemAllocation": 14,
       "objectives": [
-        { "id": "4.1", "title": "Explain the importance of basic network security concepts.", "lessonIds": ["n4"] },
-        { "id": "4.2", "title": "Summarize various types of attacks and their impact to the network.", "lessonIds": ["n4"] },
-        { "id": "4.3", "title": "Given a scenario, apply network security features, defense techniques, and solutions.", "lessonIds": ["n4"] }
+        {
+          "id": "4.1",
+          "title": "Explain the importance of basic network security concepts.",
+          "lessonIds": [
+            "n4"
+          ]
+        },
+        {
+          "id": "4.2",
+          "title": "Summarize various types of attacks and their impact to the network.",
+          "lessonIds": [
+            "n4"
+          ]
+        },
+        {
+          "id": "4.3",
+          "title": "Given a scenario, apply network security features, defense techniques, and solutions.",
+          "lessonIds": [
+            "n4"
+          ]
+        }
       ]
     },
     {
@@ -66,15 +186,48 @@
       "weightPercent": 24,
       "studyItemAllocation": 24,
       "objectives": [
-        { "id": "5.1", "title": "Explain the troubleshooting methodology.", "lessonIds": ["n5"] },
-        { "id": "5.2", "title": "Given a scenario, troubleshoot common cabling and physical interface issues.", "lessonIds": ["n5"] },
-        { "id": "5.3", "title": "Given a scenario, troubleshoot common issues with network services.", "lessonIds": ["n5"] },
-        { "id": "5.4", "title": "Given a scenario, troubleshoot common performance issues.", "lessonIds": ["n5"] },
-        { "id": "5.5", "title": "Given a scenario, use the appropriate tool or protocol to solve networking issues.", "lessonIds": ["n5"] }
+        {
+          "id": "5.1",
+          "title": "Explain the troubleshooting methodology.",
+          "lessonIds": [
+            "n5"
+          ]
+        },
+        {
+          "id": "5.2",
+          "title": "Given a scenario, troubleshoot common cabling and physical interface issues.",
+          "lessonIds": [
+            "n5"
+          ]
+        },
+        {
+          "id": "5.3",
+          "title": "Given a scenario, troubleshoot common issues with network services.",
+          "lessonIds": [
+            "n5"
+          ]
+        },
+        {
+          "id": "5.4",
+          "title": "Given a scenario, troubleshoot common performance issues.",
+          "lessonIds": [
+            "n5"
+          ]
+        },
+        {
+          "id": "5.5",
+          "title": "Given a scenario, use the appropriate tool or protocol to solve networking issues.",
+          "lessonIds": [
+            "n5"
+          ]
+        }
       ]
     }
   ],
-  "questionPolicy": { "authorship": "original", "review": "human-required" },
+  "questionPolicy": {
+    "authorship": "original",
+    "review": "human-required"
+  },
   "gaps": [
     "routing protocols",
     "subnetting drills",
@@ -110,5 +263,17 @@
       "title": "Worked example — packet analysis reading (not a scored item)",
       "body": "A capture shows: TCP SYN from client 10.1.20.55:50000 to server 10.1.20.10:443, then no SYN-ACK, repeated SYNs, and the client eventually resets. Worked reading: the client is willing and the path at Layer 3 carried the SYN (we see it addressed), but the service on 443 did not answer — either the port is closed/filtered, the host is unreachable at Layer 4, or something in between is dropping the session. Compare with a capture of the same client to port 22 where SYN/SYN-ACK/ACK completes: the network path works, so the fault is specific to the HTTPS service. No packet-analysis homework ships in this preview; this labeled example stands in until a capture lab exists (REQ-NP-04)."
     }
+  ],
+  "releasedBanks": [
+    "net009-domain1-bank.md",
+    "net009-domain2-bank.md",
+    "net009-domain3-bank.md",
+    "net009-domain4-bank.md",
+    "net009-domain5-bank.md",
+    "net009-n1-demo-cut.md",
+    "net009-n2-demo-cut.md",
+    "net009-n3-demo-cut.md",
+    "net009-n4-demo-cut.md",
+    "net009-n5-demo-cut.md"
   ]
 }

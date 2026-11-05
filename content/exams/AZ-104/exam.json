@@ -18,9 +18,27 @@
       "title": "Manage Azure identities and governance",
       "studyItemAllocation": 12,
       "objectives": [
-        { "id": "1.1", "title": "Manage Microsoft Entra users and groups", "lessonIds": ["az1_1"] },
-        { "id": "1.2", "title": "Manage access to Azure resources", "lessonIds": ["az1_2"] },
-        { "id": "1.3", "title": "Manage Azure subscriptions and governance", "lessonIds": ["az1_3"] }
+        {
+          "id": "1.1",
+          "title": "Manage Microsoft Entra users and groups",
+          "lessonIds": [
+            "az1_1"
+          ]
+        },
+        {
+          "id": "1.2",
+          "title": "Manage access to Azure resources",
+          "lessonIds": [
+            "az1_2"
+          ]
+        },
+        {
+          "id": "1.3",
+          "title": "Manage Azure subscriptions and governance",
+          "lessonIds": [
+            "az1_3"
+          ]
+        }
       ]
     },
     {
@@ -28,9 +46,27 @@
       "title": "Implement and manage storage",
       "studyItemAllocation": 10,
       "objectives": [
-        { "id": "2.1", "title": "Configure access to storage", "lessonIds": ["az2_1"] },
-        { "id": "2.2", "title": "Configure and manage storage accounts", "lessonIds": ["az2_2"] },
-        { "id": "2.3", "title": "Configure Azure Files and Azure Blob Storage", "lessonIds": ["az2_3"] }
+        {
+          "id": "2.1",
+          "title": "Configure access to storage",
+          "lessonIds": [
+            "az2_1"
+          ]
+        },
+        {
+          "id": "2.2",
+          "title": "Configure and manage storage accounts",
+          "lessonIds": [
+            "az2_2"
+          ]
+        },
+        {
+          "id": "2.3",
+          "title": "Configure Azure Files and Azure Blob Storage",
+          "lessonIds": [
+            "az2_3"
+          ]
+        }
       ]
     },
     {
@@ -38,10 +74,34 @@
       "title": "Deploy and manage Azure compute resources",
       "studyItemAllocation": 12,
       "objectives": [
-        { "id": "3.1", "title": "Automate deployment with ARM templates or Bicep files", "lessonIds": ["az3_1"] },
-        { "id": "3.2", "title": "Create and configure virtual machines", "lessonIds": ["az3_2"] },
-        { "id": "3.3", "title": "Provision and manage containers", "lessonIds": ["az3_3"] },
-        { "id": "3.4", "title": "Create and configure Azure App Service", "lessonIds": ["az3_4"] }
+        {
+          "id": "3.1",
+          "title": "Automate deployment with ARM templates or Bicep files",
+          "lessonIds": [
+            "az3_1"
+          ]
+        },
+        {
+          "id": "3.2",
+          "title": "Create and configure virtual machines",
+          "lessonIds": [
+            "az3_2"
+          ]
+        },
+        {
+          "id": "3.3",
+          "title": "Provision and manage containers",
+          "lessonIds": [
+            "az3_3"
+          ]
+        },
+        {
+          "id": "3.4",
+          "title": "Create and configure Azure App Service",
+          "lessonIds": [
+            "az3_4"
+          ]
+        }
       ]
     },
     {
@@ -49,9 +109,27 @@
       "title": "Implement and manage virtual networking",
       "studyItemAllocation": 10,
       "objectives": [
-        { "id": "4.1", "title": "Configure and manage virtual networks in Azure", "lessonIds": ["az4_1"] },
-        { "id": "4.2", "title": "Configure secure access to virtual networks", "lessonIds": ["az4_2"] },
-        { "id": "4.3", "title": "Configure name resolution and load balancing", "lessonIds": ["az4_3"] }
+        {
+          "id": "4.1",
+          "title": "Configure and manage virtual networks in Azure",
+          "lessonIds": [
+            "az4_1"
+          ]
+        },
+        {
+          "id": "4.2",
+          "title": "Configure secure access to virtual networks",
+          "lessonIds": [
+            "az4_2"
+          ]
+        },
+        {
+          "id": "4.3",
+          "title": "Configure name resolution and load balancing",
+          "lessonIds": [
+            "az4_3"
+          ]
+        }
       ]
     },
     {
@@ -59,17 +137,35 @@
       "title": "Monitor and maintain Azure resources",
       "studyItemAllocation": 6,
       "objectives": [
-        { "id": "5.1", "title": "Monitor resources in Azure", "lessonIds": ["az5_1"] },
-        { "id": "5.2", "title": "Implement backup and recovery", "lessonIds": ["az5_2"] }
+        {
+          "id": "5.1",
+          "title": "Monitor resources in Azure",
+          "lessonIds": [
+            "az5_1"
+          ]
+        },
+        {
+          "id": "5.2",
+          "title": "Implement backup and recovery",
+          "lessonIds": [
+            "az5_2"
+          ]
+        }
       ]
     }
   ],
-  "questionPolicy": { "authorship": "original", "review": "human-required" },
+  "questionPolicy": {
+    "authorship": "original",
+    "review": "human-required"
+  },
   "gaps": [
     "1.1 self-service password reset and external-user (B2B) guest management",
     "2.1 stored access policies and identity-based access for Azure Files",
     "3.1 exporting a deployment as a template and ARM-to-Bicep conversion",
     "4.2 Azure Bastion and private endpoints for PaaS",
     "5.2 Azure Site Recovery failover to a secondary region"
+  ],
+  "releasedBanks": [
+    "az104-beginner.md"
   ]
 }

@@ -18,9 +18,27 @@
       "title": "Recognize Nutanix Solutions and Tools",
       "studyItemAllocation": 10,
       "objectives": [
-        { "id": "1.1", "title": "Recognize Nutanix solutions, use cases, and features of Nutanix Cloud Infrastructure (NCI) technologies", "lessonIds": ["s1_1"] },
-        { "id": "1.2", "title": "Recognize Nutanix solutions, use cases, and features of non-Nutanix Cloud Infrastructure (NCI) technologies", "lessonIds": ["s1_2"] },
-        { "id": "1.3", "title": "Recognize the use cases and features of Nutanix tools", "lessonIds": ["s1_3"] }
+        {
+          "id": "1.1",
+          "title": "Recognize Nutanix solutions, use cases, and features of Nutanix Cloud Infrastructure (NCI) technologies",
+          "lessonIds": [
+            "s1_1"
+          ]
+        },
+        {
+          "id": "1.2",
+          "title": "Recognize Nutanix solutions, use cases, and features of non-Nutanix Cloud Infrastructure (NCI) technologies",
+          "lessonIds": [
+            "s1_2"
+          ]
+        },
+        {
+          "id": "1.3",
+          "title": "Recognize the use cases and features of Nutanix tools",
+          "lessonIds": [
+            "s1_3"
+          ]
+        }
       ]
     },
     {
@@ -28,10 +46,34 @@
       "title": "Describe Nutanix Platform Administration",
       "studyItemAllocation": 10,
       "objectives": [
-        { "id": "2.1", "title": "Describe VM tasks", "lessonIds": ["s2_1"] },
-        { "id": "2.2", "title": "Identify virtual networking tasks", "lessonIds": ["s2_2"] },
-        { "id": "2.3", "title": "Discuss storage operations", "lessonIds": ["s2_3"] },
-        { "id": "2.4", "title": "Describe licensing tasks", "lessonIds": ["s2_4"] }
+        {
+          "id": "2.1",
+          "title": "Describe VM tasks",
+          "lessonIds": [
+            "s2_1"
+          ]
+        },
+        {
+          "id": "2.2",
+          "title": "Identify virtual networking tasks",
+          "lessonIds": [
+            "s2_2"
+          ]
+        },
+        {
+          "id": "2.3",
+          "title": "Discuss storage operations",
+          "lessonIds": [
+            "s2_3"
+          ]
+        },
+        {
+          "id": "2.4",
+          "title": "Describe licensing tasks",
+          "lessonIds": [
+            "s2_4"
+          ]
+        }
       ]
     },
     {
@@ -39,9 +81,27 @@
       "title": "Describe Cluster Configuration and Maintenance",
       "studyItemAllocation": 10,
       "objectives": [
-        { "id": "3.1", "title": "Describe valid cluster options", "lessonIds": ["s3_1"] },
-        { "id": "3.2", "title": "Identify hardware maintenance tasks", "lessonIds": ["s3_2"] },
-        { "id": "3.3", "title": "Identify software maintenance tasks", "lessonIds": ["s3_3"] }
+        {
+          "id": "3.1",
+          "title": "Describe valid cluster options",
+          "lessonIds": [
+            "s3_1"
+          ]
+        },
+        {
+          "id": "3.2",
+          "title": "Identify hardware maintenance tasks",
+          "lessonIds": [
+            "s3_2"
+          ]
+        },
+        {
+          "id": "3.3",
+          "title": "Identify software maintenance tasks",
+          "lessonIds": [
+            "s3_3"
+          ]
+        }
       ]
     },
     {
@@ -49,18 +109,48 @@
       "title": "Demonstrate and Understand of Platform Health and Monitoring",
       "studyItemAllocation": 10,
       "objectives": [
-        { "id": "4.1", "title": "Perform and interpret a health check", "lessonIds": ["s4_1"] },
-        { "id": "4.2", "title": "Review and interpret alerts and events", "lessonIds": ["s4_2"] },
-        { "id": "4.3", "title": "Leverage support functions", "lessonIds": ["s4_3"] },
-        { "id": "4.4", "title": "Review and interpret workload performance", "lessonIds": ["s4_4"] }
+        {
+          "id": "4.1",
+          "title": "Perform and interpret a health check",
+          "lessonIds": [
+            "s4_1"
+          ]
+        },
+        {
+          "id": "4.2",
+          "title": "Review and interpret alerts and events",
+          "lessonIds": [
+            "s4_2"
+          ]
+        },
+        {
+          "id": "4.3",
+          "title": "Leverage support functions",
+          "lessonIds": [
+            "s4_3"
+          ]
+        },
+        {
+          "id": "4.4",
+          "title": "Review and interpret workload performance",
+          "lessonIds": [
+            "s4_4"
+          ]
+        }
       ]
     }
   ],
-  "questionPolicy": { "authorship": "original", "review": "human-required" },
+  "questionPolicy": {
+    "authorship": "original",
+    "review": "human-required"
+  },
   "gaps": [
     "1.x solutions/tools (Nutanix and non-Nutanix NCI product awareness)",
     "2.4 licensing tasks",
     "4.3 support-case workflow",
     "4.4 workload performance interpretation"
+  ],
+  "releasedBanks": [
+    "nca75-pilot.md"
   ]
 }

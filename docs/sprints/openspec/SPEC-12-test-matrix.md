@@ -19,6 +19,7 @@ Every row names its requirement IDs, the test type (unit / integration / E2E / g
 | TM-16 | Multi-select scoring fixtures incl. partial/incorrect selections | unit | L-06, REQ-UI-03 |
 | TM-17 | Ordered-response fixtures: permutations, missing/duplicate/extra/empty/reversed/shuffled | unit | R-03 |
 | TM-18 | Retry fixtures: first-attempt vs latest-attempt metrics, no inflation | unit | R-04 |
+| TM-19 | Release-gated catalog: mixed-bank manifest separates released/unreleased counts; session pool excludes unreleased; null vs empty ReleasedBanks semantics; missing-bank detection | unit | REQ-MAN-08 |
 
 ## TM-20 series — content and provenance
 

@@ -147,6 +147,14 @@ public partial class MainWindow : Window
         MainContent.Content = panel;
     }
 
+    static string FormatExamLabel(ExamCatalogItem exam)
+    {
+        var label = $"{exam.DisplayName}  ({exam.QuestionCount})";
+        if (exam.UnreleasedQuestionCount > 0)
+            label += $"  +{exam.UnreleasedQuestionCount} unreleased";
+        return label;
+    }
+
     private void PopulateSidebarButtons()
     {
         var panel = SidebarExamButtons;
@@ -158,7 +166,7 @@ public partial class MainWindow : Window
         {
             var btn = new Button
             {
-                Content = $"{exam.DisplayName}  ({exam.QuestionCount})",
+                Content = FormatExamLabel(exam),
                 HorizontalAlignment = HorizontalAlignment.Stretch,
                 Background = Brushes.Transparent,
                 BorderBrush = new SolidColorBrush(Color.Parse(exam.Color)),

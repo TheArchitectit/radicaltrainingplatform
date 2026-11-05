@@ -62,6 +62,18 @@ public class ExamManifest
     public ManifestQuestionPolicy? QuestionPolicy { get; set; }
     /// <summary>Declared study gaps — domains not yet covered by lessons/items.</summary>
     public List<string> Gaps { get; set; } = new();
+    /// <summary>
+    /// The bank files under questions/ that ship in a session pool, by file
+    /// name. A bank not listed is in the tree but not in the pool: it is
+    /// authored content the release record has not accepted yet.
+    ///
+    /// Null means the manifest predates the field. The catalog then treats
+    /// every bank as released, which is what every surface did before this
+    /// existed; an empty list means the manifest says nothing has been
+    /// released, and the exam ships no questions. The two are deliberately
+    /// different answers to "did anyone decide?".
+    /// </summary>
+    public List<string>? ReleasedBanks { get; set; }
     /// <summary>Set by the loader: the exam.json path this manifest was read from.</summary>
     public string ManifestPath { get; set; } = "";
 }

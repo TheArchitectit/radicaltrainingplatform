@@ -18,9 +18,27 @@
       "title": "Design secure architectures",
       "studyItemAllocation": 15,
       "objectives": [
-        { "id": "1.1", "title": "Design secure access to AWS resources", "lessonIds": ["aws1_1"] },
-        { "id": "1.2", "title": "Design secure workloads and applications", "lessonIds": ["aws1_2"] },
-        { "id": "1.3", "title": "Determine appropriate data security controls", "lessonIds": ["aws1_3"] }
+        {
+          "id": "1.1",
+          "title": "Design secure access to AWS resources",
+          "lessonIds": [
+            "aws1_1"
+          ]
+        },
+        {
+          "id": "1.2",
+          "title": "Design secure workloads and applications",
+          "lessonIds": [
+            "aws1_2"
+          ]
+        },
+        {
+          "id": "1.3",
+          "title": "Determine appropriate data security controls",
+          "lessonIds": [
+            "aws1_3"
+          ]
+        }
       ]
     },
     {
@@ -28,8 +46,20 @@
       "title": "Design resilient architectures",
       "studyItemAllocation": 13,
       "objectives": [
-        { "id": "2.1", "title": "Design scalable and loosely coupled architectures", "lessonIds": ["aws2_1"] },
-        { "id": "2.2", "title": "Design highly available and fault-tolerant architectures", "lessonIds": ["aws2_2"] }
+        {
+          "id": "2.1",
+          "title": "Design scalable and loosely coupled architectures",
+          "lessonIds": [
+            "aws2_1"
+          ]
+        },
+        {
+          "id": "2.2",
+          "title": "Design highly available and fault-tolerant architectures",
+          "lessonIds": [
+            "aws2_2"
+          ]
+        }
       ]
     },
     {
@@ -37,11 +67,41 @@
       "title": "Design high-performing architectures",
       "studyItemAllocation": 12,
       "objectives": [
-        { "id": "3.1", "title": "Determine high-performing and scalable storage solutions", "lessonIds": ["aws3_1"] },
-        { "id": "3.2", "title": "Design high-performing and elastic compute solutions", "lessonIds": ["aws3_2"] },
-        { "id": "3.3", "title": "Determine high-performing database solutions", "lessonIds": ["aws3_3"] },
-        { "id": "3.4", "title": "Determine high-performing and scalable network architectures", "lessonIds": ["aws3_4"] },
-        { "id": "3.5", "title": "Determine high-performing data ingestion and transformation solutions", "lessonIds": ["aws3_5"] }
+        {
+          "id": "3.1",
+          "title": "Determine high-performing and scalable storage solutions",
+          "lessonIds": [
+            "aws3_1"
+          ]
+        },
+        {
+          "id": "3.2",
+          "title": "Design high-performing and elastic compute solutions",
+          "lessonIds": [
+            "aws3_2"
+          ]
+        },
+        {
+          "id": "3.3",
+          "title": "Determine high-performing database solutions",
+          "lessonIds": [
+            "aws3_3"
+          ]
+        },
+        {
+          "id": "3.4",
+          "title": "Determine high-performing and scalable network architectures",
+          "lessonIds": [
+            "aws3_4"
+          ]
+        },
+        {
+          "id": "3.5",
+          "title": "Determine high-performing data ingestion and transformation solutions",
+          "lessonIds": [
+            "aws3_5"
+          ]
+        }
       ]
     },
     {
@@ -49,16 +109,46 @@
       "title": "Design cost-optimized architectures",
       "studyItemAllocation": 10,
       "objectives": [
-        { "id": "4.1", "title": "Design cost-optimized storage solutions", "lessonIds": ["aws4_1"] },
-        { "id": "4.2", "title": "Design cost-optimized compute solutions", "lessonIds": ["aws4_2"] },
-        { "id": "4.3", "title": "Design cost-optimized database solutions", "lessonIds": ["aws4_3"] },
-        { "id": "4.4", "title": "Design cost-optimized network architectures", "lessonIds": ["aws4_4"] }
+        {
+          "id": "4.1",
+          "title": "Design cost-optimized storage solutions",
+          "lessonIds": [
+            "aws4_1"
+          ]
+        },
+        {
+          "id": "4.2",
+          "title": "Design cost-optimized compute solutions",
+          "lessonIds": [
+            "aws4_2"
+          ]
+        },
+        {
+          "id": "4.3",
+          "title": "Design cost-optimized database solutions",
+          "lessonIds": [
+            "aws4_3"
+          ]
+        },
+        {
+          "id": "4.4",
+          "title": "Design cost-optimized network architectures",
+          "lessonIds": [
+            "aws4_4"
+          ]
+        }
       ]
     }
   ],
-  "questionPolicy": { "authorship": "original", "review": "human-required" },
+  "questionPolicy": {
+    "authorship": "original",
+    "review": "human-required"
+  },
   "gaps": [
     "2.1 workflow orchestration with AWS Step Functions — named in the task statement, no lesson or item covers it",
     "3.2 selecting the resource type and size for a serverless function (for example the amount of Lambda memory) — named in the task statement, no lesson or item covers it"
+  ],
+  "releasedBanks": [
+    "aws-saa-beginner.md"
   ]
 }

@@ -40,9 +40,18 @@
                     <Border Background="{StaticResource DarkPanelBrush}"
                             CornerRadius="4"
                             Padding="8,2">
-                      <TextBlock Text="{Binding QuestionCount, Mode=OneWay}"
+                      <TextBlock Text="{Binding QuestionCount, Mode=OneWay, StringFormat={}{0} released}"
                                  FontSize="11"
                                  Foreground="{StaticResource TextDimBrush}" />
+                    </Border>
+                    <Border Background="{StaticResource DarkPanelBrush}"
+                            CornerRadius="4"
+                            Padding="8,2"
+                            IsVisible="{Binding UnreleasedQuestionCount, Mode=OneWay, Converter={x:Static ObjectConverters.IsNotNull}, FallbackValue=Collapsed}">
+                      <TextBlock Text="{Binding UnreleasedQuestionCount, Mode=OneWay, StringFormat={}{0} unreleased}"
+                                 FontSize="11"
+                                 Foreground="{StaticResource StatusAmberBrush}"
+                                 IsVisible="{Binding UnreleasedQuestionCount, Mode=OneWay, Converter={x:Static ObjectConverters.IsNotNull}}" />
                     </Border>
                     <Border Background="{StaticResource DarkPanelBrush}"
                             CornerRadius="4"

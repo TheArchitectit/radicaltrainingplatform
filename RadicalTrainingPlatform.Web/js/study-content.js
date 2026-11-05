@@ -492,6 +492,9 @@ export const EXAMS = {
     "gaps": [
       "2.1 workflow orchestration with AWS Step Functions \u2014 named in the task statement, no lesson or item covers it",
       "3.2 selecting the resource type and size for a serverless function (for example the amount of Lambda memory) \u2014 named in the task statement, no lesson or item covers it"
+    ],
+    "releasedBanks": [
+      "aws-saa-beginner.md"
     ]
   },
   "AZ-104": {
@@ -660,6 +663,9 @@ export const EXAMS = {
       "3.1 exporting a deployment as a template and ARM-to-Bicep conversion",
       "4.2 Azure Bastion and private endpoints for PaaS",
       "5.2 Azure Site Recovery failover to a secondary region"
+    ],
+    "releasedBanks": [
+      "az104-beginner.md"
     ]
   },
   "COMPTIA-A-1201": {
@@ -906,7 +912,15 @@ export const EXAMS = {
       "authorship": "original",
       "review": "human-required"
     },
-    "gaps": []
+    "gaps": [],
+    "releasedBanks": [
+      "core1-demo-cut.md",
+      "core1-domain1-bank.md",
+      "core1-domain2-bank.md",
+      "core1-domain3-bank.md",
+      "core1-domain4-bank.md",
+      "core1-domain5-bank.md"
+    ]
   },
   "COMPTIA-A-1202": {
     "examId": "COMPTIA-A-1202",
@@ -1207,7 +1221,14 @@ export const EXAMS = {
       "authorship": "original",
       "review": "human-required"
     },
-    "gaps": []
+    "gaps": [],
+    "releasedBanks": [
+      "core2-b1-domain1-bank.md",
+      "core2-b2-domain2-bank.md",
+      "core2-b3-domain3-bank.md",
+      "core2-b4-domain4-bank.md",
+      "core2-demo-cut.md"
+    ]
   },
   "COMPTIA-NET-009": {
     "examId": "COMPTIA-NET-009",
@@ -1474,6 +1495,18 @@ export const EXAMS = {
         "title": "Worked example \u2014 packet analysis reading (not a scored item)",
         "body": "A capture shows: TCP SYN from client 10.1.20.55:50000 to server 10.1.20.10:443, then no SYN-ACK, repeated SYNs, and the client eventually resets. Worked reading: the client is willing and the path at Layer 3 carried the SYN (we see it addressed), but the service on 443 did not answer \u2014 either the port is closed/filtered, the host is unreachable at Layer 4, or something in between is dropping the session. Compare with a capture of the same client to port 22 where SYN/SYN-ACK/ACK completes: the network path works, so the fault is specific to the HTTPS service. No packet-analysis homework ships in this preview; this labeled example stands in until a capture lab exists (REQ-NP-04)."
       }
+    ],
+    "releasedBanks": [
+      "net009-domain1-bank.md",
+      "net009-domain2-bank.md",
+      "net009-domain3-bank.md",
+      "net009-domain4-bank.md",
+      "net009-domain5-bank.md",
+      "net009-n1-demo-cut.md",
+      "net009-n2-demo-cut.md",
+      "net009-n3-demo-cut.md",
+      "net009-n4-demo-cut.md",
+      "net009-n5-demo-cut.md"
     ]
   },
   "NCA-75": {
@@ -1627,6 +1660,9 @@ export const EXAMS = {
       "2.4 licensing tasks",
       "4.3 support-case workflow",
       "4.4 workload performance interpretation"
+    ],
+    "releasedBanks": [
+      "nca75-pilot.md"
     ]
   }
 };

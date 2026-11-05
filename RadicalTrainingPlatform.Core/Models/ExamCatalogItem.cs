@@ -11,6 +11,13 @@ public class ExamCatalogItem
     public string Description { get; set; } = "";
     public string Vendor { get; set; } = "";
     public int QuestionCount { get; set; }
+    /// <summary>
+    /// Questions in banks present under questions/ that the manifest does not
+    /// list in releasedBanks. They are counted for the selector's "unreleased"
+    /// note and never enter a session pool, so QuestionCount +
+    /// UnreleasedQuestionCount is the full total on disk.
+    /// </summary>
+    public int UnreleasedQuestionCount { get; set; }
     public int DomainCount { get; set; }
     public string Level { get; set; } = "";           // Entry, Associate, Professional, Advanced, Expert
     public string Color { get; set; } = "#00F0FF";    // Neon accent for the card border

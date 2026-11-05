@@ -18,6 +18,8 @@ public partial class QuestionParser : IQuestionParser
     private readonly IExamRepository _examRepository;
     private readonly ILogger<QuestionParser>? _logger;
     private readonly IErrataProvider? _errata;
+    private readonly Abstractions.IManifestLoader? _manifestLoader;
+    private readonly IFileProvider? _files;
 
     public QuestionParser(IExamRepository examRepository, ILogger<QuestionParser>? logger = null)
     {
@@ -29,6 +31,18 @@ public partial class QuestionParser : IQuestionParser
     {
         _examRepository = examRepository;
         _errata = errata;
+        _logger = logger;
+    }
+
+    public QuestionParser(IExamRepository examRepository, IErrataProvider errata,
+                          Abstractions.IManifestLoader manifestLoader,
+                          IFileProvider files,
+                          ILogger<QuestionParser>? logger = null)
+    {
+        _examRepository = examRepository;
+        _errata = errata;
+        _manifestLoader = manifestLoader;
+        _files = files;
         _logger = logger;
     }
 
@@ -92,58 +106,6 @@ public partial class QuestionParser : IQuestionParser
         if (parts.Length >= 2)
             return $"{parts[0]}-{parts[1]}";
         return current;
-    }
-
-    /// <summary>
-    /// Build a lightweight catalog of all discovered exams without
-    /// parsing every question. Counts questions via regex for speed.
-    /// </summary>
-    public List<ExamCatalogItem> BuildCatalog()
-    {
-        var catalog = new Dictionary<string, ExamCatalogItem>(StringComparer.OrdinalIgnoreCase);
-        var domainCounter = new Dictionary<string, HashSet<string>>(StringComparer.OrdinalIgnoreCase);
-
-        foreach (var file in _examRepository.FindExamFiles())
-        {
-            var content = _examRepository.ReadExamFile(file);
-            var fileName = Path.GetFileName(file);
-            var code = DeriveExamCode(fileName);
-
-            // Count questions and domains via regex (fast, no full parse)
-            var qCount = QuestionHeaderRx.Matches(content).Count;
-            var domainMatches = DomainHeaderRx.Matches(content);
-            var domains = new HashSet<string>();
-            foreach (Match dm in domainMatches)
-                domains.Add(dm.Groups[1].Value);
-
-            if (!catalog.TryGetValue(code, out var item))
-            {
-                item = new ExamCatalogItem
-                {
-                    ExamCode = code,
-                    DisplayName = DeriveDisplayName(code),
-                    Vendor = DeriveVendor(code),
-                    Level = DeriveLevel(code),
-                    Color = DeriveColor(code),
-                };
-                catalog[code] = item;
-                domainCounter[code] = new HashSet<string>();
-            }
-
-            item.QuestionCount += qCount;
-            domainCounter[code].UnionWith(domains);
-            item.SourceFiles.Add(fileName);
-        }
-
-        foreach (var (code, item) in catalog)
-        {
-            item.DomainCount = domainCounter.GetValueOrDefault(code)?.Count ?? 0;
-            item.Description = $"{item.Vendor} — {item.Level}";
-        }
-
-        return catalog.Values
-            .OrderByDescending(c => c.QuestionCount)
-            .ToList();
     }
 
     public List<Question> ParseFile(string filePath)
@@ -325,28 +287,6 @@ public partial class QuestionParser : IQuestionParser
         _logger?.LogInformation("Parsed {File}: {Count} questions extracted", Path.GetFileName(filePath), questions.Count);
 
         return questions;
-    }
-
-    /// <summary>
-    /// Load all exams. No longer restricted by hardcoded prefixes —
-    /// any .md file with ### QN headers is an exam.
-    /// </summary>
-    public Dictionary<string, List<Question>> LoadAllExams()
-    {
-        var exams = new Dictionary<string, List<Question>>(StringComparer.OrdinalIgnoreCase);
-
-        foreach (var file in _examRepository.FindExamFiles())
-        {
-            var questions = ParseFile(file);
-            if (questions.Count == 0) continue;
-
-            var code = DeriveExamCode(Path.GetFileName(file));
-            if (!exams.ContainsKey(code))
-                exams[code] = new List<Question>();
-            exams[code].AddRange(questions);
-        }
-
-        return exams;
     }
 
     // ─── Vendor-neutral metadata derivations ────────────────────────

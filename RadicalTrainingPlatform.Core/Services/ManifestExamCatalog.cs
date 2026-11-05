@@ -74,13 +74,20 @@ public class ManifestExamCatalog
                 {
                     claimedLegacyFiles.Add(Path.GetFileName(f));
                     var parsed = _parser.ParseFile(f);
+                    item.SourceFiles.Add(Path.GetFileName(f));
+
+                    if (!BankReleasePolicy.IsReleased(manifest, f))
+                    {
+                        item.UnreleasedQuestionCount += parsed.Count;
+                        continue;
+                    }
+
                     // REQ-MAN-05: a question ID repeating within an exam fails the build.
                     var dup = parsed.GroupBy(q => q.Id).FirstOrDefault(g => g.Count() > 1);
                     if (dup != null)
                         throw new InvalidOperationException(
                             $"Duplicate question ID {dup.Key} in {Path.GetFileName(f)} (exam {examId})");
                     item.QuestionCount += parsed.Count;
-                    item.SourceFiles.Add(Path.GetFileName(f));
                 }
             }
             catalog[examId] = item;

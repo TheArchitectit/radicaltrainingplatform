@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Microsoft.Extensions.DependencyInjection;
@@ -248,5 +249,170 @@ public class ManifestCatalogTests : IDisposable
 
         provider.GetRequiredService<IManifestLoader>().ShouldBeAssignableTo<ManifestLoader>();
         provider.GetRequiredService<IBlueprintService>().ShouldBeAssignableTo<ManifestBlueprintService>();
+    }
+
+    // ─── REQ-MAN-08: release gating ───────────────────────────────────
+
+    private const string ReleasedBanksManifest = """"
+        {
+          "examId": "GATED-EX",
+          "vendor": "TestVendor",
+          "displayName": "Release-Gated Exam",
+          "officialVersion": "v1",
+          "objectivesDocVersion": "1.0",
+          "sourceUrl": "https://example.com",
+          "sourceReviewDate": "2026-10-10",
+          "sections": [],
+          "releasedBanks": [ "released-bank.md" ]
+        }
+        """";
+
+    private const string TwoQuestionBank = "### Q1. One?\n\n- A) a\n- B) b\n\n**Answer: A**\n\nBecause.\n\n"
+        + "### Q2. Two?\n\n- A) c\n- B) d\n\n**Answer: B**\n\nReason.\n";
+
+    private const string OneQuestionBank = "### Q1. Only?\n\n- A) yes\n- B) no\n\n**Answer: A**\n\nBecause.\n";
+
+    [Fact]
+    public void Catalog_UnreleasedBank_CountsSeparately()
+    {
+        WriteFile("content/exams/GATED-EX/exam.json", ReleasedBanksManifest);
+        WriteFile("content/exams/GATED-EX/questions/released-bank.md", TwoQuestionBank);
+        WriteFile("content/exams/GATED-EX/questions/draft-bank.md", OneQuestionBank);
+
+        var catalog = MakeCatalog();
+        var items = catalog.Build();
+
+        var entry = items.Single(i => i.ExamCode == "GATED-EX");
+        entry.QuestionCount.ShouldBe(2);
+        entry.UnreleasedQuestionCount.ShouldBe(1);
+        entry.SourceFiles.Count.ShouldBe(2);
+    }
+
+    private const string NoReleasedBanksManifest = """"
+        {
+          "examId": "GATED-EX",
+          "vendor": "TestVendor",
+          "displayName": "Legacy Exam",
+          "officialVersion": "v1",
+          "objectivesDocVersion": "1.0",
+          "sourceUrl": "https://example.com",
+          "sourceReviewDate": "2026-10-10",
+          "sections": []
+        }
+        """";
+
+    [Fact]
+    public void Catalog_NoReleasedBanksField_RetainsLegacyBehavior()
+    {
+        WriteFile("content/exams/GATED-EX/exam.json", NoReleasedBanksManifest);
+        WriteFile("content/exams/GATED-EX/questions/released-bank.md", TwoQuestionBank);
+        WriteFile("content/exams/GATED-EX/questions/draft-bank.md", OneQuestionBank);
+
+        var catalog = MakeCatalog();
+        var items = catalog.Build();
+
+        var entry = items.Single(i => i.ExamCode == "GATED-EX");
+        entry.QuestionCount.ShouldBe(3);
+        entry.UnreleasedQuestionCount.ShouldBe(0);
+    }
+
+    [Fact]
+    public void Catalog_EmptyReleasedBanks_ReleasesNothing()
+    {
+        var manifest = ReleasedBanksManifest.Replace(
+            "[ \"released-bank.md\" ]", "[]");
+        WriteFile("content/exams/GATED-EX/exam.json", manifest);
+        WriteFile("content/exams/GATED-EX/questions/released-bank.md", TwoQuestionBank);
+
+        var catalog = MakeCatalog();
+        var items = catalog.Build();
+
+        var entry = items.Single(i => i.ExamCode == "GATED-EX");
+        entry.QuestionCount.ShouldBe(0);
+        entry.UnreleasedQuestionCount.ShouldBe(2);
+    }
+
+    [Fact]
+    public void BankReleasePolicy_MissingListedBank_Detected()
+    {
+        var manifest = new Core.Models.ExamManifest
+        {
+            ReleasedBanks = new List<string> { "real.md", "typo.md" },
+        };
+        var present = new List<string> { "/tmp/real.md" };
+
+        var missing = BankReleasePolicy.MissingListedBanks(manifest, present);
+
+        missing.ShouldContain("typo.md");
+        missing.ShouldNotContain("real.md");
+    }
+
+    [Fact]
+    public void BankReleasePolicy_NoDeclaredList_EverythingReleased()
+    {
+        var manifest = new Core.Models.ExamManifest { ReleasedBanks = null };
+        BankReleasePolicy.IsReleased(manifest, "anything.md").ShouldBeTrue();
+        BankReleasePolicy.HasDecision(manifest).ShouldBeFalse();
+    }
+
+    [Fact]
+    public void BankReleasePolicy_EmptyDeclaredList_NothingReleased()
+    {
+        var manifest = new Core.Models.ExamManifest { ReleasedBanks = new List<string>() };
+        BankReleasePolicy.IsReleased(manifest, "anything.md").ShouldBeFalse();
+        BankReleasePolicy.HasDecision(manifest).ShouldBeTrue();
+    }
+
+    [Fact]
+    public void Parser_LoadAllExams_ExcludesUnreleasedBanks()
+    {
+        WriteFile("content/exams/GATED-EX/exam.json", ReleasedBanksManifest);
+        WriteFile("content/exams/GATED-EX/questions/released-bank.md", TwoQuestionBank);
+        WriteFile("content/exams/GATED-EX/questions/draft-bank.md", OneQuestionBank);
+
+        var files = new DefaultFileProvider();
+        var repo = MakeRepo();
+        var loader = new ManifestLoader(repo, files);
+        var errata = new JsonErrataStore(files);
+        var parser = new QuestionParser(repo, errata, loader, files);
+
+        var exams = parser.LoadAllExams();
+
+        exams.ShouldContainKey("GATED-EX");
+        exams["GATED-EX"].Count.ShouldBe(2);
+    }
+
+    [Fact]
+    public void Parser_BuildCatalog_UnreleasedInSeparateCount()
+    {
+        WriteFile("content/exams/GATED-EX/exam.json", ReleasedBanksManifest);
+        WriteFile("content/exams/GATED-EX/questions/released-bank.md", TwoQuestionBank);
+        WriteFile("content/exams/GATED-EX/questions/draft-bank.md", OneQuestionBank);
+
+        var files = new DefaultFileProvider();
+        var repo = MakeRepo();
+        var loader = new ManifestLoader(repo, files);
+        var errata = new JsonErrataStore(files);
+        var parser = new QuestionParser(repo, errata, loader, files);
+
+        var catalog = parser.BuildCatalog();
+
+        var entry = catalog.Single(c => c.ExamCode == "GATED-EX");
+        entry.QuestionCount.ShouldBe(2);
+        entry.UnreleasedQuestionCount.ShouldBe(1);
+    }
+
+    [Fact]
+    public void Parser_NoManifestLoader_LoadsEverything()
+    {
+        WriteFile("legacy-ex-part1.md", OneQuestionBank);
+
+        var repo = MakeRepo();
+        var parser = new QuestionParser(repo);
+
+        var exams = parser.LoadAllExams();
+
+        exams.ShouldContainKey("legacy-ex");
+        exams["legacy-ex"].Count.ShouldBe(1);
     }
 }
