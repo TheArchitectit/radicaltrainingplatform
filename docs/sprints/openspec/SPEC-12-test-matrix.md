@@ -104,7 +104,7 @@ Every row names its requirement IDs, the test type (unit / integration / E2E / g
 | TM-87 | Clean-install content independence incl. errata; no links to nonexistent releases | integration + doc gate | R-19 |
 | TM-88 | Kill-during-write atomicity; corrupt-file quarantine + clean start; ID safety per platform | unit | R-20 |
 | TM-89 | Navigation allowlist fixture (if embedded browser stays in demo path); review record exists | fixture + doc | R-21 |
-| TM-90 | Web batch fixtures: this.root render, getById accessor, CLI resolved text, audit-log ordering, router serialization, poisoned-item isolation, scenario attempt/history, cosmetic snapshots | unit + E2E | R-22 |
+| TM-90 | Web batch fixtures: this.root render, getById accessor, CLI resolved text, audit-log ordering, router serialization/fallback, poisoned-item isolation, scenario attempt/history, cosmetic snapshots and browser-rendered unknown-route placeholder | unit + E2E | R-22 |
 | TM-91 | Storage recovery: corrupt entry, quota pressure, blocked storage — honest outcomes recorded | E2E | R-23 |
 | TM-92 | ShellCheck gate + packaging script behavior fixtures (diagnostic-branch exit codes, icon paths) | gate | R-24 |
 | TM-93 | RedEye lane: seeded wrong key + mapping error returned; edited item loses release; injection fixture flagged; lane-down = zero release | gate | REQ-REV-01..06 |

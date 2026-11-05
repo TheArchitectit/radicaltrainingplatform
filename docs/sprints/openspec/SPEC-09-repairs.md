@@ -125,7 +125,7 @@ The desktop embedded browser runs with NoSandbox=true. No exploit asserted; a sc
 - router has an overlapping-render source risk (render serialization + fixture)
 - initial validator wraps the whole list in one catch (per-item isolation so one bad item cannot blank the list — fixture with one poisoned item)
 - scenario attempt/reset/history gap (attempt recording and history on scenario runs, wired to REQ-DEMO/TM-44)
-- placeholder/breadcrumb cosmetics (fixed labels; snapshot fixtures)
+- placeholder/breadcrumb cosmetics (fixed labels; snapshot fixtures; unknown non-root routes render the reachable placeholder while `/` still resolves to the dashboard, with unit and browser fixtures)
 
 **Acceptance:** one fixture per bullet, each reproduced before and passing after; no bundled “web fixes” commit without per-fixture evidence.
 

@@ -7,6 +7,7 @@ class Router {
     #routes = new Map();
     #currentView = null;
     #viewContainer = null;
+    #fallbackView = null;
     #renderToken = 0;
 
     constructor() {
@@ -21,6 +22,11 @@ class Router {
     /** Register a route: path → ViewClass. */
     register(path, ViewClass) {
         this.#routes.set(path, ViewClass);
+    }
+
+    /** Register the view for an unknown non-root path. */
+    registerFallback(ViewClass) {
+        this.#fallbackView = ViewClass;
     }
 
     /** Navigate to a path programmatically. */
@@ -59,9 +65,12 @@ class Router {
         }
 
         if (!ViewClass) {
-            // Default: redirect to dashboard
-            this.navigate('/pe/dashboard');
-            return;
+            if (path !== '/' && this.#fallbackView) {
+                ViewClass = this.#fallbackView;
+            } else {
+                this.navigate('/pe/dashboard');
+                return;
+            }
         }
 
         this.#renderView(ViewClass, params, path);
@@ -97,7 +106,7 @@ class Router {
         this.#currentView = view;
 
         if (this.#viewContainer) {
-            const el = await view.render(params);
+            const el = await view.render(params, path);
 
             // A newer navigation started while this render was in flight;
             // discard the stale result.

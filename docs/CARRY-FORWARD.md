@@ -56,14 +56,13 @@ Provider activation and `spendKillSwitch` remain unset owner decisions (G-05).
 The shipped default is still `activation: false`; no provider was enabled and
 no paid call was made.
 
-### 2. `PlaceholderView` reachability
+### 2. `PlaceholderView` reachability — closed 2026-11-04
 
-`RadicalTrainingPlatform.Web/js/views/PlaceholderView.js` is precached
-(`sw.js:48`) and tested (`tests/gates/web/route-labels-snapshot.mjs:117`), but
-imported by no application code. Unmatched routes redirect to `/pe/dashboard`
-instead (`js/core/Router.js:61-65`). Options: wire it as the router's fallback
-(the view's documented intent), or remove the view and its direct test. This
-is a product/UX choice, not a defect with one safe answer.
+`app.js` now registers `PlaceholderView` as the router fallback. Unknown
+non-root paths keep their URL and render the existing “Not in this build”
+copy with the correct route context; `/` still redirects to `/pe/dashboard`.
+`tests/gates/web/router-fallback.mjs` covers both routing directions, and the
+real-browser smoke checks that an unknown route renders without redirecting.
 
 ### 3. `content-bundle.json` — checked, not a defect
 
@@ -76,6 +75,6 @@ an offline-cache gap, and no action is warranted.
 
 1. Supply whichever blocked inputs are available (the LICENSE line and the
    travel cutoff are owner-only; the guide needs a human read).
-2. Resolve `PlaceholderView` reachability and the remaining advisory reviews.
+2. Review the remaining item-hygiene advisories without casually rewriting keys.
 3. Re-run `bash tests/gates/run_freeze_chain.sh --expect-sha <full SHA>` after
    any change and record the new total at the new head.

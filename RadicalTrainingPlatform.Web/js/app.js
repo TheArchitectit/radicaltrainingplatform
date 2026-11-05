@@ -62,6 +62,7 @@ import { DemoModeView } from './views/demo-mode.js';
 import { initDemoBanner } from './components/DemoBanner.js';
 import { demo } from './core/DemoMode.js';
 import { TutorView } from './views/tutor-panel.js';
+import { PlaceholderView } from './views/PlaceholderView.js';
 
 /**
  * App — Bootstrap the Nutanix Lab Simulator.
@@ -193,6 +194,8 @@ class App {
         // reached from outside a lesson.
         router.register('/tutor', TutorView);
         router.register('/tutor/:examId', TutorView);
+
+        router.registerFallback(PlaceholderView);
     }
 
     #wireNavigation() {

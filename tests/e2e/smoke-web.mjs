@@ -248,6 +248,16 @@ async function main() {
         if (!title) fail('the rendered view has no text content');
         else pass('the rendered view has content');
 
+        await evaluate(`location.hash = '#/not-a-real-route'`);
+        await waitForExpr(
+            `/Not in this build/.test(document.querySelector('#view-container')?.textContent || '')`,
+            'the unknown-route placeholder');
+        if (await evaluate(`location.hash`) !== '#/not-a-real-route') {
+            fail('unknown route redirected instead of retaining its context');
+        } else {
+            pass('unknown route renders the placeholder without redirecting');
+        }
+
         // One meaningful interaction: enter demo mode, reset the station, and
         // confirm the reseed verification report actually renders in a browser.
         await evaluate(`location.hash = '#/demo'`);

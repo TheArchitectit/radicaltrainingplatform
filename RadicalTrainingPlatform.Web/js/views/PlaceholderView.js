@@ -15,8 +15,8 @@ export class PlaceholderView extends BaseView {
         this.#route = route;
     }
 
-    async render() {
-        const crumb = breadcrumbFor(this.#route);
+    async render(_params, path = this.#route) {
+        const crumb = breadcrumbFor(path);
         return this.html(`
             <div class="empty-state" style="padding-top: 80px;">
                 <div class="icon">🚧</div>
