@@ -2389,7 +2389,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "2026-10-23",
-    "textHash": "70057e6158286333",
+    "textHash": "beb8e4870ad7c1e8",
     "bank": "core1-demo-cut.md"
   },
   {
@@ -2411,7 +2411,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "2026-10-23",
-    "textHash": "86ed7cc228eb7f74",
+    "textHash": "6c36fe3236794bc6",
     "bank": "core1-demo-cut.md"
   },
   {
@@ -2433,7 +2433,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "2026-10-23",
-    "textHash": "822ba2e2da552039",
+    "textHash": "6587f184902637ee",
     "bank": "core1-demo-cut.md"
   },
   {
@@ -2455,7 +2455,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "2026-10-23",
-    "textHash": "bd17d382f80bfa6d",
+    "textHash": "88db27c43eac7afe",
     "bank": "core1-demo-cut.md"
   },
   {
@@ -2477,7 +2477,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "2026-10-23",
-    "textHash": "02d308fe8f09aef8",
+    "textHash": "cd2d851ac26336eb",
     "bank": "core1-demo-cut.md"
   },
   {
@@ -2499,7 +2499,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "2026-10-23",
-    "textHash": "1d52b7e5171ec43c",
+    "textHash": "f769038be30b4f30",
     "bank": "core1-demo-cut.md"
   },
   {
@@ -2521,7 +2521,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "2026-10-23",
-    "textHash": "89442c1b72ac5502",
+    "textHash": "f7e300f7e0fa2ea4",
     "bank": "core1-demo-cut.md"
   },
   {
@@ -2530,7 +2530,7 @@ export const ITEMS = [
     "number": "Q8",
     "stem": "What role does the default gateway play on a host's network configuration?",
     "options": {
-      "A": "It is the address the host uses for all local subnet traffic",
+      "A": "It is the address the host uses as the next hop for all local subnet traffic",
       "B": "It is the server that assigns the host its IP address",
       "C": "It is the service that resolves hostnames to IP addresses",
       "D": "It is the router address where the host sends traffic destined for other networks"
@@ -2543,7 +2543,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "2026-10-23",
-    "textHash": "b391918d1133a3ce",
+    "textHash": "106e4913848fb0b4",
     "bank": "core1-demo-cut.md"
   },
   {
@@ -2565,7 +2565,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "2026-10-23",
-    "textHash": "7ecbe1a528f52ed7",
+    "textHash": "c68c86ab91bd8e29",
     "bank": "core1-demo-cut.md"
   },
   {
@@ -2587,7 +2587,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "2026-10-23",
-    "textHash": "80f36ee9619b0a60",
+    "textHash": "48052749125d29ce",
     "bank": "core1-demo-cut.md"
   },
   {
@@ -2609,7 +2609,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "2026-10-23",
-    "textHash": "dc71a8a0c1f9e5e3",
+    "textHash": "59f2623b2266932f",
     "bank": "core1-demo-cut.md"
   },
   {
@@ -2631,7 +2631,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "2026-10-23",
-    "textHash": "5a311403321625e9",
+    "textHash": "d6db902901b923aa",
     "bank": "core1-demo-cut.md"
   },
   {
@@ -2641,7 +2641,7 @@ export const ITEMS = [
     "stem": "One user cannot reach the company intranet by name. Colleagues on the same switch can. What is the safest first test on that user's workstation?",
     "options": {
       "A": "Record the current IP configuration and try a name lookup (nslookup) to see what fails",
-      "B": "Change the DNS server to a public resolver and leave it that way",
+      "B": "Change the DNS server to a public resolver and leave it that way for all future queries",
       "C": "Reinstall the operating system",
       "D": "Replace the network switch"
     },
@@ -2653,7 +2653,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "2026-10-23",
-    "textHash": "4b5dd2673ee80118",
+    "textHash": "286261554c248b41",
     "bank": "core1-demo-cut.md"
   },
   {
@@ -2662,9 +2662,9 @@ export const ITEMS = [
     "number": "Q14",
     "stem": "After a desk move, a laptop gets no DHCP address and shows a 169.254.x.x APIPA address. Link light is on. What should the technician verify first, before replacing any hardware?",
     "options": {
-      "A": "That the laptop battery is fully charged",
-      "B": "That the printer driver is up to date",
-      "C": "That the monitor cable is seated",
+      "A": "That the laptop uses the same DNS server address as the other workstations on this floor",
+      "B": "That the laptop's default gateway matches the address used at the old desk and building",
+      "C": "That the laptop's subnet mask matches the mask configured on the old port and VLAN",
       "D": "That the wall port / switch port actually reaches a DHCP-enabled network (correct VLAN or uplink)"
     },
     "keys": [
@@ -2675,7 +2675,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "2026-10-23",
-    "textHash": "03d813ec9d46675d",
+    "textHash": "77843f6c4687d9a8",
     "bank": "core1-demo-cut.md"
   },
   {
@@ -2684,10 +2684,10 @@ export const ITEMS = [
     "number": "Q15",
     "stem": "A user reports that file transfers to one server are slow, while other servers feel normal. What is the safest first measurement?",
     "options": {
-      "A": "Replace the workstation's network cable",
+      "A": "Replace the workstation's network cable with a known-good cable and repeat the transfer",
       "B": "Compare a ping or path test to the slow server against the same test to a known-good server",
-      "C": "Defragment the workstation's hard drive",
-      "D": "Increase the NIC speed/duplex settings immediately"
+      "C": "Defragment the workstation's hard drive before repeating the same file transfer",
+      "D": "Set the NIC to a fixed speed and duplex before repeating the file transfer"
     },
     "keys": [
       "B"
@@ -2697,7 +2697,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "2026-10-23",
-    "textHash": "1d90173f91baa1fd",
+    "textHash": "f2c6594ea629654d",
     "bank": "core1-demo-cut.md"
   },
   {
@@ -2706,10 +2706,10 @@ export const ITEMS = [
     "number": "Q16",
     "stem": "A technician confirmed the workstation has a valid IP address and can ping its default gateway. Name resolution still fails. What is the next step in isolating the cause?",
     "options": {
-      "A": "Replace the workstation's NIC",
-      "B": "Reinstall the operating system",
+      "A": "Replace the workstation's NIC with a known-good adapter and repeat the lookup",
+      "B": "Reinstall the operating system and restore the workstation's original network settings",
       "C": "Test DNS specifically \u2014 try a lookup (nslookup) and verify the configured DNS server answers",
-      "D": "Change the subnet mask and reboot"
+      "D": "Change the subnet mask to match the gateway and reboot before trying another lookup"
     },
     "keys": [
       "C"
@@ -2719,7 +2719,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "2026-10-23",
-    "textHash": "0c110a56bf6c41b2",
+    "textHash": "f8479183340dbda2",
     "bank": "core1-demo-cut.md"
   },
   {
@@ -4268,10 +4268,10 @@ export const ITEMS = [
     "number": "Q1",
     "stem": "An email tells the recipient their account will be closed in 24 hours unless they click a link and sign in immediately. The sender address is `support@account-verify-helpdesk.example`. Which signal most strongly indicates phishing?",
     "options": {
-      "A": "The message mentions a 24-hour deadline",
+      "A": "The message creates a 24-hour deadline for the recipient to respond",
       "B": "The sender domain does not match the organization's real domain",
-      "C": "The message asks the user to sign in",
-      "D": "The email arrived during business hours"
+      "C": "The message asks the user to sign in through the supplied link",
+      "D": "The email arrived during normal business hours on a weekday"
     },
     "keys": [
       "B"
@@ -4281,7 +4281,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "2026-10-23",
-    "textHash": "f6959eff594317bc",
+    "textHash": "b7a778b839f95348",
     "bank": "core2-demo-cut.md"
   },
   {
@@ -4303,7 +4303,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "2026-10-23",
-    "textHash": "93885ce558de12c3",
+    "textHash": "0ea73ec3d3fd3bc5",
     "bank": "core2-demo-cut.md"
   },
   {
@@ -4312,10 +4312,10 @@ export const ITEMS = [
     "number": "Q3",
     "stem": "A user receives an unexpected invoice attachment from a vendor they do recognize, but the message urges them to open it today to avoid a late fee, and the reply-to address differs from the usual vendor contact. Which response is safest? ## Domain 4: Operational Procedures (220-1202) ---",
     "options": {
-      "A": "Delete the message without telling anyone",
-      "B": "Open the attachment quickly and verify the amount later",
+      "A": "Delete the message immediately without reporting the unexpected attachment to anyone",
+      "B": "Open the attachment quickly to inspect the invoice amount before deciding whether to verify it",
       "C": "Forward the email to the vendor's known contact and ask whether they sent it",
-      "D": "Reply to the message and ask whether it is legitimate"
+      "D": "Reply to the message at its reply-to address and ask the sender whether it is legitimate"
     },
     "keys": [
       "C"
@@ -4325,7 +4325,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "2026-10-23",
-    "textHash": "82dbfb437bdb7cc2",
+    "textHash": "dee06b55c1a35476",
     "bank": "core2-demo-cut.md"
   },
   {
@@ -4347,7 +4347,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "2026-10-23",
-    "textHash": "129c5c63dff1bfd7",
+    "textHash": "e31e4a87d8f9d625",
     "bank": "core2-demo-cut.md"
   },
   {
@@ -4369,7 +4369,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "2026-10-23",
-    "textHash": "415fde40e94d4dbf",
+    "textHash": "b1ab4db2d2001120",
     "bank": "core2-demo-cut.md"
   },
   {
@@ -4378,10 +4378,10 @@ export const ITEMS = [
     "number": "Q6",
     "stem": "A workstation could not resolve names. The technician found the DNS server field pointed at a decommissioned address, changed it to the correct server, and confirmed the user can open the intranet site by name again. Which resolution note is most useful?",
     "options": {
-      "A": "\"Network OK now.\"",
-      "B": "\"Changed DNS, user happy.\"",
+      "A": "\"Status: intranet access appears to be working again. The workstation was tested briefly after the desk visit and the user was told to report any further problems.\"",
+      "B": "\"Action: replaced the decommissioned DNS server address with 10.0.0.10 after checking the adapter settings. The ticket notes that the user was satisfied when the change was complete.\"",
       "C": "\"Cause: DNS server field set to decommissioned 10.0.0.9. Change: set DNS to 10.0.0.10. Verified: user opened intranet by name; nslookup resolves.\"",
-      "D": "\"Ticket closed per user request.\""
+      "D": "\"Closure: network ticket closed at the user's request after a short discussion. No configuration changes or verification results were added to the ticket history.\""
     },
     "keys": [
       "C"
@@ -4391,7 +4391,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "2026-10-23",
-    "textHash": "e86f7c6bec68b6a2",
+    "textHash": "a48c0a058a4a0c0c",
     "bank": "core2-demo-cut.md"
   },
   {
@@ -4413,7 +4413,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "2026-10-23",
-    "textHash": "e4cad4dfa9c1c5a3",
+    "textHash": "8953e3e1f2325c84",
     "bank": "core2-demo-cut.md"
   },
   {
@@ -4422,10 +4422,10 @@ export const ITEMS = [
     "number": "Q8",
     "stem": "A user keeps their only backup on an external drive that stays plugged into the same desk as the workstation. What is the biggest risk of this setup?",
     "options": {
-      "A": "The drive is too slow for large files",
+      "A": "The external drive's sustained transfer speed may be too slow for large backup files",
       "B": "A single local copy can be lost to theft, fire, or ransomware along with the workstation",
-      "C": "External drives cannot store more than one backup generation",
-      "D": "The user has to remember to plug the drive in"
+      "C": "An external drive cannot retain more than one backup generation at the same time",
+      "D": "The user has to remember to plug in the external drive before each scheduled backup"
     },
     "keys": [
       "B"
@@ -4435,7 +4435,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "2026-10-23",
-    "textHash": "62a9de8fa17eb7c0",
+    "textHash": "1bfcca3d3383da6e",
     "bank": "core2-demo-cut.md"
   },
   {
@@ -4457,7 +4457,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "3c328c5949600ebb",
+    "textHash": "1553cb9b4294bd17",
     "bank": "core2-b1-domain1-bank.md"
   },
   {
@@ -4479,7 +4479,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "bea16696da6fce8e",
+    "textHash": "0f4a38e674147214",
     "bank": "core2-b1-domain1-bank.md"
   },
   {
@@ -4501,7 +4501,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "2742593832222f7e",
+    "textHash": "6bb19bfa1e311a1f",
     "bank": "core2-b1-domain1-bank.md"
   },
   {
@@ -4523,7 +4523,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "2ca807d73a936753",
+    "textHash": "ba107cfbd2b116ca",
     "bank": "core2-b1-domain1-bank.md"
   },
   {
@@ -4545,7 +4545,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "1be818f65124bfcf",
+    "textHash": "aef37c3b09871231",
     "bank": "core2-b1-domain1-bank.md"
   },
   {
@@ -4567,7 +4567,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "67d503d1b085bd3b",
+    "textHash": "6f1abe02460083ab",
     "bank": "core2-b1-domain1-bank.md"
   },
   {
@@ -4589,7 +4589,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "306a79d1551472d6",
+    "textHash": "e54123f8aa63f52b",
     "bank": "core2-b1-domain1-bank.md"
   },
   {
@@ -4611,7 +4611,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "ab748acdc85f7621",
+    "textHash": "816087ef5cb0a42b",
     "bank": "core2-b1-domain1-bank.md"
   },
   {
@@ -4633,7 +4633,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "4b7465435a22170e",
+    "textHash": "1e159918ab9c7ca0",
     "bank": "core2-b1-domain1-bank.md"
   },
   {
@@ -4642,10 +4642,10 @@ export const ITEMS = [
     "number": "Q18",
     "stem": "A laptop has an address in the correct subnet but cannot reach anything outside it, and the technician suspects the lease is stale. Which command requests a new address from the DHCP server?",
     "options": {
-      "A": "ipconfig /flushdns",
+      "A": "ipconfig /flushdns followed by ipconfig /displaydns",
       "B": "ipconfig /release followed by ipconfig /renew",
-      "C": "netstat -an",
-      "D": "nslookup"
+      "C": "netstat -an followed by ipconfig /all",
+      "D": "nslookup followed by ipconfig /registerdns"
     },
     "keys": [
       "B"
@@ -4655,7 +4655,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "71ebd6ea5e0d25b3",
+    "textHash": "709486b844f0444c",
     "bank": "core2-b1-domain1-bank.md"
   },
   {
@@ -4677,7 +4677,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "c8e6a5f72eb99cc8",
+    "textHash": "1d4cd02f9b27bbc5",
     "bank": "core2-b1-domain1-bank.md"
   },
   {
@@ -4699,7 +4699,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "88014516dd8a044f",
+    "textHash": "881fd42728cffac2",
     "bank": "core2-b1-domain1-bank.md"
   },
   {
@@ -4721,7 +4721,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "d23bd251a2059b9e",
+    "textHash": "55047d872e66ae83",
     "bank": "core2-b1-domain1-bank.md"
   },
   {
@@ -4743,7 +4743,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "b241e3f36a9c2038",
+    "textHash": "b98c5ae790537234",
     "bank": "core2-b1-domain1-bank.md"
   },
   {
@@ -4765,7 +4765,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "8b06b6c865db9f81",
+    "textHash": "53dba1070b203c10",
     "bank": "core2-b1-domain1-bank.md"
   },
   {
@@ -4787,7 +4787,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "47970b0590386894",
+    "textHash": "d10a1fa2004d0e04",
     "bank": "core2-b1-domain1-bank.md"
   },
   {
@@ -4809,7 +4809,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "a4bd02bf789bae60",
+    "textHash": "f66fb9fba748b937",
     "bank": "core2-b1-domain1-bank.md"
   },
   {
@@ -4831,7 +4831,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "ea309a0d56c579ae",
+    "textHash": "5606463be5e2852e",
     "bank": "core2-b1-domain1-bank.md"
   },
   {
@@ -4853,7 +4853,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "f38ff68132fc4e86",
+    "textHash": "637ac1f6a943d001",
     "bank": "core2-b1-domain1-bank.md"
   },
   {
@@ -4875,7 +4875,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "89ecb120be3ed332",
+    "textHash": "d1f90e77cb224514",
     "bank": "core2-b1-domain1-bank.md"
   },
   {
@@ -4897,7 +4897,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "493a070bb031b2f6",
+    "textHash": "a776291ac32d6c3f",
     "bank": "core2-b1-domain1-bank.md"
   },
   {
@@ -4919,7 +4919,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "9e6a2216149e09db",
+    "textHash": "68a999b76f92ea6a",
     "bank": "core2-b1-domain1-bank.md"
   },
   {
@@ -4941,7 +4941,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "155362727fc62862",
+    "textHash": "6d6e9b6d67399dbb",
     "bank": "core2-b1-domain1-bank.md"
   },
   {
@@ -4963,7 +4963,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "0d29c18842b05bfe",
+    "textHash": "22ed8c02cc60ab63",
     "bank": "core2-b1-domain1-bank.md"
   },
   {
@@ -4985,7 +4985,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "161a81212428885c",
+    "textHash": "75b7bd083d505449",
     "bank": "core2-b1-domain1-bank.md"
   },
   {
@@ -5007,7 +5007,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "ffc3405abdc8a95b",
+    "textHash": "0bd25d5499179c15",
     "bank": "core2-b1-domain1-bank.md"
   },
   {
@@ -5029,7 +5029,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "0a53de2334164f29",
+    "textHash": "67bea21afb66d5ec",
     "bank": "core2-b1-domain1-bank.md"
   },
   {
@@ -5051,7 +5051,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "57b31bdd822ead79",
+    "textHash": "213ad615127f5563",
     "bank": "core2-b1-domain1-bank.md"
   },
   {
@@ -5073,7 +5073,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "920386d7d67ed193",
+    "textHash": "c7b4dd63c27c6c22",
     "bank": "core2-b1-domain1-bank.md"
   },
   {
@@ -5095,7 +5095,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "1e91cde04b8cff17",
+    "textHash": "9ad3b19502f638c7",
     "bank": "core2-b1-domain1-bank.md"
   },
   {
@@ -5117,7 +5117,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "5a81f2f60e46c37b",
+    "textHash": "86bce86ea1fd6e74",
     "bank": "core2-b1-domain1-bank.md"
   },
   {
@@ -5139,7 +5139,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "c3ee93033e67c32e",
+    "textHash": "a2e765b43e1ba766",
     "bank": "core2-b1-domain1-bank.md"
   },
   {
@@ -5161,7 +5161,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "180c96b00d31377e",
+    "textHash": "f27c269728ee4a72",
     "bank": "core2-b1-domain1-bank.md"
   },
   {
@@ -6767,7 +6767,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "2026-10-23",
-    "textHash": "04ac26f59c2177e6",
+    "textHash": "bc61e507c0e9eee8",
     "bank": "net009-n2-demo-cut.md"
   },
   {
@@ -6776,10 +6776,10 @@ export const ITEMS = [
     "number": "Q12",
     "stem": "Two VLANs share one access switch. Hosts in VLAN 10 can reach each other, and hosts in VLAN 20 can reach each other, but a VLAN 10 host cannot reach a VLAN 20 host. What does this result tell you about what a VLAN is doing?",
     "options": {
-      "A": "The switch is broken and needs a reboot",
+      "A": "The switch has an unspecified hardware fault and should be rebooted before checking the VLAN configuration",
       "B": "The VLAN boundary is acting as a separate Layer 2 segment; inter-VLAN traffic must be routed and explicitly allowed",
-      "C": "VLAN tags are encryption, so the two groups cannot communicate",
-      "D": "The hosts need a longer subnet mask to talk across VLANs"
+      "C": "The VLAN tags encrypt frames, so hosts need matching decryption keys before cross-VLAN traffic can flow",
+      "D": "The hosts need a longer subnet mask, which will let them resolve addresses across the VLAN boundary"
     },
     "keys": [
       "B"
@@ -6789,7 +6789,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "2026-10-23",
-    "textHash": "710692d141643c79",
+    "textHash": "eb646f712999ff17",
     "bank": "net009-n2-demo-cut.md"
   },
   {
@@ -6798,10 +6798,10 @@ export const ITEMS = [
     "number": "Q13",
     "stem": "A packet's destination is on a different IP subnet from the sending host, and the host has a default gateway configured. Which device makes the forwarding decision to get that packet off the local segment?",
     "options": {
-      "A": "The access switch, because it forwards all frames to every port",
+      "A": "The access switch, because it forwards all frames to every port in its VLAN",
       "B": "The router (default gateway), because the destination is outside the host's local subnet",
-      "C": "The DHCP server, because it knows every address",
-      "D": "The DNS server, because the destination was named"
+      "C": "The DHCP server, because it tracks each host's assigned IP address and gateway lease",
+      "D": "The DNS server, because the destination hostname must be resolved before any frame is sent"
     },
     "keys": [
       "B"
@@ -6811,7 +6811,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "2026-10-23",
-    "textHash": "5735dfb706ea6f15",
+    "textHash": "3a67f574f687eb84",
     "bank": "net009-n2-demo-cut.md"
   },
   {
@@ -6820,10 +6820,10 @@ export const ITEMS = [
     "number": "Q14",
     "stem": "Which wireless security mode is the minimum acceptable choice for a small-business WLAN that carries company data?",
     "options": {
-      "A": "Open network with a captive portal",
-      "B": "WEP",
+      "A": "An open network with a captive portal and a click-through acceptable-use page",
+      "B": "WEP with a long shared passphrase, because the longer secret compensates for its age",
       "C": "WPA2 (or WPA3) with a strong passphrase or Enterprise authentication",
-      "D": "WPS push-button only"
+      "D": "WPS push-button only, with PIN authentication disabled after the initial enrollment"
     },
     "keys": [
       "C"
@@ -6833,7 +6833,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "2026-10-23",
-    "textHash": "62e8f0693e1082ea",
+    "textHash": "d20570add7f4abde",
     "bank": "net009-n2-demo-cut.md"
   },
   {
@@ -6843,9 +6843,9 @@ export const ITEMS = [
     "stem": "During a wiring-closet install, a technician is terminating copper cables near fluorescent light fixtures and a power conduit. What is the most important physical-installation judgment here?",
     "options": {
       "A": "Keep data cabling separated from power and lighting runs to avoid EMI and near-end crosstalk",
-      "B": "Bundle data and power cables together for a tidier rack",
-      "C": "Use the cheapest cable available to finish the closet quickly",
-      "D": "Leave the patch panel unlabeled so later technicians can trace by tone"
+      "B": "Bundle data and power cables together in the same trays for a tidier rack and shorter installation time",
+      "C": "Use uncertified cable that merely fits the connectors, provided the links pass a simple continuity check",
+      "D": "Leave patch-panel ports unlabeled because tone tracing can identify every run during a later outage"
     },
     "keys": [
       "A"
@@ -6855,7 +6855,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "2026-10-23",
-    "textHash": "799e019abb4ec702",
+    "textHash": "3e16bce01380f6f5",
     "bank": "net009-n2-demo-cut.md"
   },
   {
@@ -6864,10 +6864,10 @@ export const ITEMS = [
     "number": "Q16",
     "stem": "A monitoring dashboard shows round-trip latency to a core server at 40\u201360 ms for three months, then 300\u2013400 ms starting Tuesday at 14:00. How should this reading be classified first?",
     "options": {
-      "A": "A DNS problem, because the graph name may not resolve",
+      "A": "A name-resolution problem, because a slowly resolving dashboard hostname would add DNS delay to every probe",
       "B": "A baseline change that marks an incident \u2014 the long-running band is \"normal,\" the shift is the anomaly",
-      "C": "A cosmetic graph issue, because latency graphs drift",
-      "D": "A hard down condition, because the server is not answering"
+      "C": "A normal cosmetic drift in the graph, because monitoring charts commonly rescale older measurements by hundreds of milliseconds",
+      "D": "A hard-down condition, because any latency above the historical baseline means the server has stopped answering probes"
     },
     "keys": [
       "B"
@@ -6877,7 +6877,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "2026-10-23",
-    "textHash": "d4337a4444e73451",
+    "textHash": "5cf56590d3e3eff2",
     "bank": "net009-n3-demo-cut.md"
   },
   {
@@ -6899,7 +6899,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "2026-10-23",
-    "textHash": "11a85ea479f534c7",
+    "textHash": "06c05d082aa83986",
     "bank": "net009-n3-demo-cut.md"
   },
   {
@@ -6909,9 +6909,9 @@ export const ITEMS = [
     "stem": "What is the operational purpose of keeping current network diagrams and an inventory of devices, circuits, and credentials?",
     "options": {
       "A": "They are the map you need before and during an emergency, and the basis for change planning",
-      "B": "They replace the need for monitoring baselines",
-      "C": "They are only useful after the network is decommissioned",
-      "D": "They are required decorations for audit visitors only"
+      "B": "They eliminate the need for monitoring baselines because a complete inventory predicts normal performance",
+      "C": "They are archival records used only after decommissioning, when the hardware can no longer be inspected",
+      "D": "They exist solely to satisfy audit visitors and should be updated only when an assessment is scheduled"
     },
     "keys": [
       "A"
@@ -6921,7 +6921,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "2026-10-23",
-    "textHash": "3d524fddf8a1e1ae",
+    "textHash": "d7e83da5d1d0e61c",
     "bank": "net009-n3-demo-cut.md"
   },
   {
@@ -6930,10 +6930,10 @@ export const ITEMS = [
     "number": "Q19",
     "stem": "A change request to replace a core switch has been signed off and scheduled. Which sequence is the correct next-step discipline?",
     "options": {
-      "A": "Execute immediately during business hours to shorten the window",
+      "A": "Execute immediately during business hours, before the approval expires, and use the scheduled window only for verification",
       "B": "Record the plan and rollback steps, take a backup, implement in the window, verify services, then document the outcome",
-      "C": "Skip verification if the console looks normal",
-      "D": "Delete the old configuration first to avoid confusion"
+      "C": "Skip post-change service verification when the console login works and no new alarms appear on the replaced switch",
+      "D": "Delete every saved copy of the old configuration before starting so operators cannot accidentally restore obsolete settings"
     },
     "keys": [
       "B"
@@ -6943,7 +6943,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "2026-10-23",
-    "textHash": "6f82abde3d42fc87",
+    "textHash": "1207ae2567d8189c",
     "bank": "net009-n3-demo-cut.md"
   },
   {
@@ -6952,10 +6952,10 @@ export const ITEMS = [
     "number": "Q20",
     "stem": "In disaster recovery terms, what does RPO describe?",
     "options": {
-      "A": "The number of backup copies to keep offsite",
-      "B": "How long a restore is allowed to take",
+      "A": "The number of backup copies that must be retained offsite before recovery can begin",
+      "B": "The maximum elapsed time allowed for restoring the service to normal operation after a disaster",
       "C": "How much data the organization accepts losing, expressed as time since the last good copy",
-      "D": "The order in which servers are rebuilt"
+      "D": "The mandatory order in which servers and dependencies must be rebuilt during a recovery exercise"
     },
     "keys": [
       "C"
@@ -6965,7 +6965,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "2026-10-23",
-    "textHash": "8206bc376a47fee1",
+    "textHash": "2ea42517c4b9dc84",
     "bank": "net009-n3-demo-cut.md"
   },
   {
@@ -6974,10 +6974,10 @@ export const ITEMS = [
     "number": "Q21",
     "stem": "A hospital places medical devices, staff workstations, and guest Wi-Fi on separate network segments with controlled paths between them. What security purpose does this segmentation primarily serve?",
     "options": {
-      "A": "It replaces the need for user authentication",
-      "B": "It encrypts all traffic between the segments",
+      "A": "It replaces user authentication because every device inherits the trust level assigned to its network segment",
+      "B": "It automatically encrypts every packet that crosses a segment boundary, regardless of the protocol in use",
       "C": "It limits lateral movement so a compromise in one segment cannot freely reach the others",
-      "D": "It increases raw bandwidth on every segment"
+      "D": "It guarantees additional raw bandwidth on all segments by eliminating congestion between device classes"
     },
     "keys": [
       "C"
@@ -6987,7 +6987,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "2026-10-23",
-    "textHash": "c7e0fac7e21c1424",
+    "textHash": "e57916662a13f050",
     "bank": "net009-n4-demo-cut.md"
   },
   {
@@ -6996,9 +6996,9 @@ export const ITEMS = [
     "number": "Q22",
     "stem": "After a workstation on the user VLAN is infected with malware, the security team finds the malware only reached other user workstations and never touched the server VLAN. Which design choice produced that outcome?",
     "options": {
-      "A": "A larger DHCP scope on the user VLAN",
-      "B": "Disabling ICMP on the server VLAN",
-      "C": "A longer subnet mask on the server VLAN",
+      "A": "A larger DHCP scope on the user VLAN, so infected clients receive addresses outside the servers' address range",
+      "B": "Disabling ICMP on the server VLAN, which prevents the malware from discovering or reaching any server address",
+      "C": "A longer subnet mask on the server VLAN, which isolates its hosts without requiring any filtering rule",
       "D": "Segmentation with an explicit deny-by-default path from user VLANs to the server VLAN"
     },
     "keys": [
@@ -7009,7 +7009,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "2026-10-23",
-    "textHash": "aec93b945e921ba8",
+    "textHash": "9ceac349da900419",
     "bank": "net009-n4-demo-cut.md"
   },
   {
@@ -7031,7 +7031,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "2026-10-23",
-    "textHash": "cae6f038f9783376",
+    "textHash": "336bb5f0c06e4d42",
     "bank": "net009-n4-demo-cut.md"
   },
   {
@@ -7040,10 +7040,10 @@ export const ITEMS = [
     "number": "Q24",
     "stem": "Users report that a familiar-looking login page is asking for their corporate credentials after they clicked a link in an email. Which threat is this?",
     "options": {
-      "A": "DDoS",
+      "A": "A distributed denial-of-service attack against the login service",
       "B": "Phishing (credential harvesting via a deceptive page)",
-      "C": "VLAN hopping",
-      "D": "A routing loop"
+      "C": "VLAN hopping into a restricted server segment",
+      "D": "A routing loop that redirects users to the deceptive page"
     },
     "keys": [
       "B"
@@ -7053,7 +7053,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "2026-10-23",
-    "textHash": "75605cd72f67ea76",
+    "textHash": "22e1b323ebf83960",
     "bank": "net009-n4-demo-cut.md"
   },
   {
@@ -7075,7 +7075,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "2026-10-23",
-    "textHash": "eb4aeb45143bf166",
+    "textHash": "275e629bafceb17c",
     "bank": "net009-n4-demo-cut.md"
   },
   {
@@ -8307,7 +8307,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "c269704d3972935c",
+    "textHash": "2eb66b64a7ee514c",
     "bank": "nca75-pilot.md"
   },
   {
@@ -8329,7 +8329,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "862a4e6c8096d60c",
+    "textHash": "d1f45dc641b5819e",
     "bank": "nca75-pilot.md"
   },
   {
@@ -8351,7 +8351,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "e391b542758502a3",
+    "textHash": "0bc632fc96706f2c",
     "bank": "nca75-pilot.md"
   },
   {
@@ -8373,7 +8373,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "c04488ede2a4c1a8",
+    "textHash": "6b448afa2ae0f894",
     "bank": "nca75-pilot.md"
   },
   {
@@ -8395,7 +8395,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "c4869f5a509c0bbe",
+    "textHash": "5015049b07d6315f",
     "bank": "nca75-pilot.md"
   },
   {
@@ -8417,7 +8417,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "459dd45e54c1af35",
+    "textHash": "f044de4a2f9f125d",
     "bank": "nca75-pilot.md"
   },
   {
@@ -8439,7 +8439,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "c26355d2362f8328",
+    "textHash": "e6f3e1b238e0c293",
     "bank": "nca75-pilot.md"
   },
   {
@@ -8461,7 +8461,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "967f7df0bd6242a0",
+    "textHash": "a4c23ec952c0a8dd",
     "bank": "nca75-pilot.md"
   },
   {
@@ -8483,7 +8483,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "2960de10ac714b58",
+    "textHash": "d964a7b2e74c1164",
     "bank": "nca75-pilot.md"
   },
   {
@@ -8505,7 +8505,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "007a39314daeee5f",
+    "textHash": "27a2b84672fcd923",
     "bank": "nca75-pilot.md"
   },
   {
@@ -8527,7 +8527,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "81483e76777f46a0",
+    "textHash": "23bfe73c36382ba2",
     "bank": "nca75-pilot.md"
   },
   {
@@ -8536,9 +8536,9 @@ export const ITEMS = [
     "number": "Q12",
     "stem": "An administrator takes a snapshot of a virtual machine before a risky change. What does that snapshot protect against?",
     "options": {
-      "A": "The loss of the entire cluster",
-      "B": "A disk failure on another node",
-      "C": "The loss of the cluster's other data",
+      "A": "The loss of the entire cluster and every snapshot stored on that cluster",
+      "B": "A disk failure on another node that already holds redundant copies of the data",
+      "C": "A mistaken deletion of an unrelated virtual machine elsewhere in the cluster",
       "D": "A mistake made during the change, for as long as the snapshot is kept"
     },
     "keys": [
@@ -8549,7 +8549,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "b6529aa063acf618",
+    "textHash": "36504469c386e22a",
     "bank": "nca75-pilot.md"
   },
   {
@@ -8571,7 +8571,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "ed6db4e290df9145",
+    "textHash": "f491f56c125265b6",
     "bank": "nca75-pilot.md"
   },
   {
@@ -8580,9 +8580,9 @@ export const ITEMS = [
     "number": "Q14",
     "stem": "What is the purpose of a VLAN?",
     "options": {
-      "A": "To encrypt traffic between virtual machines",
-      "B": "To assign IP addresses automatically",
-      "C": "To increase the bandwidth of a network link",
+      "A": "To encrypt traffic between virtual machines on the same physical network",
+      "B": "To assign IP addresses automatically to every machine connected to the network",
+      "C": "To combine several physical links into one higher-bandwidth logical connection",
       "D": "To carry several logically separate networks over one physical network"
     },
     "keys": [
@@ -8593,7 +8593,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "ff8644a1236c589e",
+    "textHash": "055afe926ee01438",
     "bank": "nca75-pilot.md"
   },
   {
@@ -8615,7 +8615,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "dc3b0b3331cb961f",
+    "textHash": "3d8ac829f48b53fb",
     "bank": "nca75-pilot.md"
   },
   {
@@ -8624,9 +8624,9 @@ export const ITEMS = [
     "number": "Q16",
     "stem": "What is the practical difference between a managed and an unmanaged virtual network?",
     "options": {
-      "A": "Managed networks are faster than unmanaged ones",
-      "B": "Unmanaged networks cannot carry VLAN tags",
-      "C": "Managed networks cannot be used by virtual machines",
+      "A": "Managed networks always provide higher throughput and lower latency than unmanaged networks using the same physical adapters",
+      "B": "Unmanaged networks cannot carry VLAN tags between the physical switches and the virtual machines",
+      "C": "Managed networks are reserved for controller traffic and cannot be assigned to virtual machines",
       "D": "A managed network is defined on the cluster; an unmanaged one is defined on the physical network and repeated on the cluster"
     },
     "keys": [
@@ -8637,7 +8637,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "cd4e7487688a55ea",
+    "textHash": "fcec9214c98cc52b",
     "bank": "nca75-pilot.md"
   },
   {
@@ -8659,7 +8659,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "7c75f63f51682702",
+    "textHash": "e6ab25c1c039abbc",
     "bank": "nca75-pilot.md"
   },
   {
@@ -8681,7 +8681,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "cce695cfbcec3a9b",
+    "textHash": "941cc4010dc03ee4",
     "bank": "nca75-pilot.md"
   },
   {
@@ -8691,9 +8691,9 @@ export const ITEMS = [
     "stem": "A cluster was expanded from four nodes to six last quarter. This week several management features stopped working. What is the most useful first thing to check?",
     "options": {
       "A": "Whether the two new nodes are covered by the licence, and whether the current tier includes those features",
-      "B": "Whether the new nodes have failed",
-      "C": "Whether the virtual machines need more memory",
-      "D": "Whether the cluster should be rebuilt at RF3"
+      "B": "Whether either new node has failed or lost its network connection to the cluster",
+      "C": "Whether virtual machines need more memory now that the cluster has additional capacity",
+      "D": "Whether expanding the cluster requires rebuilding its storage at replication factor 3"
     },
     "keys": [
       "A"
@@ -8703,7 +8703,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "45551dae9c9b92e3",
+    "textHash": "c0e751dd188549e0",
     "bank": "nca75-pilot.md"
   },
   {
@@ -8725,7 +8725,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "33beae230151fa41",
+    "textHash": "2a4e8491878889c5",
     "bank": "nca75-pilot.md"
   },
   {
@@ -8747,7 +8747,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "bf1a63677d6e92a0",
+    "textHash": "f6b75883cb593803",
     "bank": "nca75-pilot.md"
   },
   {
@@ -8769,7 +8769,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "4910eabb4ef40cba",
+    "textHash": "81660c7f2ae8cf73",
     "bank": "nca75-pilot.md"
   },
   {
@@ -8779,9 +8779,9 @@ export const ITEMS = [
     "stem": "What does block awareness add to node awareness?",
     "options": {
       "A": "It places copies on nodes in different chassis, so a whole block can be lost",
-      "B": "It places copies on different disks within one node",
-      "C": "It increases the replication factor automatically",
-      "D": "It removes the need for a Witness in a two-node cluster"
+      "B": "It places redundant copies on separate disks within the same node",
+      "C": "It raises the replication factor automatically when a second chassis is detected",
+      "D": "It removes the need for an external Witness in every two-node cluster"
     },
     "keys": [
       "A"
@@ -8791,7 +8791,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "897e58cc6b39df5c",
+    "textHash": "fb6e338f23f27908",
     "bank": "nca75-pilot.md"
   },
   {
@@ -8813,7 +8813,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "21c0d53843190bfb",
+    "textHash": "b83e6b464c7679a1",
     "bank": "nca75-pilot.md"
   },
   {
@@ -8835,7 +8835,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "950556c61609d112",
+    "textHash": "37d1c8fb9a9239a5",
     "bank": "nca75-pilot.md"
   },
   {
@@ -8844,9 +8844,9 @@ export const ITEMS = [
     "number": "Q26",
     "stem": "A disk in the cluster fails. What is the administrator's first action?",
     "options": {
-      "A": "Immediately power off the node to protect the remaining disks",
-      "B": "Manually copy the data off the failed disk",
-      "C": "Rebuild the cluster from a backup",
+      "A": "Immediately power off the node to protect all remaining disks from further damage",
+      "B": "Manually copy the data from the failed disk before the cluster begins rebuilding it",
+      "C": "Rebuild the entire cluster from the latest backup before returning the node to service",
       "D": "Confirm the failure is genuine, since the data has already been rebuilt from its other copies"
     },
     "keys": [
@@ -8857,7 +8857,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "d965bcf0c2b536ea",
+    "textHash": "1d74fbeb0dc10609",
     "bank": "nca75-pilot.md"
   },
   {
@@ -8879,7 +8879,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "9fe3d4f5a4e0d200",
+    "textHash": "16114c51fb65080b",
     "bank": "nca75-pilot.md"
   },
   {
@@ -8888,10 +8888,10 @@ export const ITEMS = [
     "number": "Q28",
     "stem": "Which LCM step should come before applying any update?",
     "options": {
-      "A": "Applying the update to one node to see what happens",
+      "A": "Apply the update to one production node first and observe any failures",
       "B": "Checking compatibility with this specific environment and running pre-checks",
-      "C": "Notifying users that the cluster will be unavailable",
-      "D": "Taking a snapshot of every virtual machine"
+      "C": "Notify users that every cluster service will be unavailable during the update",
+      "D": "Take and retain a snapshot of every virtual machine on the cluster"
     },
     "keys": [
       "B"
@@ -8901,7 +8901,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "89abcdd0bd1657c8",
+    "textHash": "7e43f32c643534b1",
     "bank": "nca75-pilot.md"
   },
   {
@@ -8910,10 +8910,10 @@ export const ITEMS = [
     "number": "Q29",
     "stem": "An LCM pre-check fails before a planned upgrade. What is the correct response?",
     "options": {
-      "A": "Override the pre-check and proceed",
+      "A": "Override the failed pre-check and continue the upgrade on every affected node",
       "B": "Address the condition the pre-check identified, then return to the upgrade",
-      "C": "Skip that node and upgrade the rest",
-      "D": "Reboot the cluster and try again"
+      "C": "Exclude the affected node and upgrade the remaining nodes instead",
+      "D": "Reboot every node in the cluster and run the same upgrade again"
     },
     "keys": [
       "B"
@@ -8923,7 +8923,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "50f5f2fbc534bc2f",
+    "textHash": "cb0f4ba1117c49e1",
     "bank": "nca75-pilot.md"
   },
   {
@@ -8933,9 +8933,9 @@ export const ITEMS = [
     "stem": "A cluster at a secure site with no internet access needs a software update. What must be arranged?",
     "options": {
       "A": "The update media must be brought in through a controlled channel before the maintenance window",
-      "B": "Nothing \u2014 LCM downloads updates automatically in all environments",
-      "C": "The cluster must be moved to a site with internet access",
-      "D": "Pulse must be enabled first"
+      "B": "Nothing \u2014 LCM can download updates automatically even when the site has no internet access",
+      "C": "Disconnect the cluster from its workloads and move it temporarily to a site with internet access",
+      "D": "Enable Pulse so it can transfer the required update media to the cluster automatically"
     },
     "keys": [
       "A"
@@ -8945,7 +8945,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "434cf170e37b60d4",
+    "textHash": "f9184da633b68cb4",
     "bank": "nca75-pilot.md"
   },
   {
@@ -8967,7 +8967,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "ac4a48a95892fa04",
+    "textHash": "496377e9f39f4b05",
     "bank": "nca75-pilot.md"
   },
   {
@@ -8976,10 +8976,10 @@ export const ITEMS = [
     "number": "Q32",
     "stem": "A health check on a working cluster reports that a component is degraded. The cluster is performing normally. What does this mean?",
     "options": {
-      "A": "The report is a false positive and can be ignored",
+      "A": "That the report is a false positive because workload performance is still normal",
       "B": "Something has failed and the cluster is compensating for it, so there is no margin",
-      "C": "The cluster must be shut down immediately",
-      "D": "The virtual machines on that component have stopped"
+      "C": "That the cluster should be shut down immediately before the component fails completely",
+      "D": "That every virtual machine on that component has already stopped responding"
     },
     "keys": [
       "B"
@@ -8989,7 +8989,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "4febe5fde50e54bc",
+    "textHash": "fd9e9e9daf7aa674",
     "bank": "nca75-pilot.md"
   },
   {
@@ -9011,7 +9011,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "7d707af9f8cab327",
+    "textHash": "86ee05e3ad71bdc0",
     "bank": "nca75-pilot.md"
   },
   {
@@ -9020,10 +9020,10 @@ export const ITEMS = [
     "number": "Q34",
     "stem": "What is the difference between an event and an alert?",
     "options": {
-      "A": "An event is more serious than an alert",
-      "B": "Alerts are stored and events are not",
+      "A": "An event is always more serious than an alert and needs a faster response",
+      "B": "Alerts are stored in cluster history, while events are discarded immediately",
       "C": "An event records that something happened; an alert is a raised condition needing attention",
-      "D": "Events only come from hardware and alerts only from software"
+      "D": "Events come only from hardware faults; alerts come only from detected software faults"
     },
     "keys": [
       "C"
@@ -9033,7 +9033,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "ede45f690eb75429",
+    "textHash": "a2a50d61f575908a",
     "bank": "nca75-pilot.md"
   },
   {
@@ -9042,10 +9042,10 @@ export const ITEMS = [
     "number": "Q35",
     "stem": "An administrator acknowledges an alert. What has been accomplished?",
     "options": {
-      "A": "The underlying condition has been resolved",
+      "A": "The underlying condition has been resolved and will no longer affect cluster health",
       "B": "The alert has been recorded as seen by a person, and the condition may still be active",
-      "C": "The alert has been deleted",
-      "D": "The cluster has been told to ignore that condition in future"
+      "C": "The alert has been deleted from the cluster's active and historical views",
+      "D": "The cluster has been told to suppress that condition whenever it occurs again"
     },
     "keys": [
       "B"
@@ -9055,7 +9055,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "d67d9634ff1bdf10",
+    "textHash": "ba0c44625f1af8aa",
     "bank": "nca75-pilot.md"
   },
   {
@@ -9077,7 +9077,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "a4ba6ef9bdf00979",
+    "textHash": "5c114c2ee093403b",
     "bank": "nca75-pilot.md"
   },
   {
@@ -9086,10 +9086,10 @@ export const ITEMS = [
     "number": "Q37",
     "stem": "A problem began at 14:00 yesterday. Which log collection is most useful for a support case?",
     "options": {
-      "A": "The full cluster collection for the last hour",
+      "A": "The full cluster collection for the last hour, regardless of when the problem began",
       "B": "A collection covering the component implicated, over a window that includes 14:00 yesterday",
-      "C": "A collection of every component over the last month",
-      "D": "No collection \u2014 the description alone is enough"
+      "C": "A collection of every available component over the last month without further scoping",
+      "D": "No collection \u2014 the problem description and timestamps alone are enough for diagnosis"
     },
     "keys": [
       "B"
@@ -9099,7 +9099,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "ecf916efe3315e54",
+    "textHash": "96f75639961eddbe",
     "bank": "nca75-pilot.md"
   },
   {
@@ -9108,10 +9108,10 @@ export const ITEMS = [
     "number": "Q38",
     "stem": "What is Pulse?",
     "options": {
-      "A": "A tool an administrator runs to collect logs for a support case",
+      "A": "A tool an administrator runs manually to gather logs for an individual support case",
       "B": "A continuous telemetry service that periodically sends diagnostic and health information to the vendor",
-      "C": "The alerting engine inside Prism",
-      "D": "A health-check command"
+      "C": "The alerting engine inside Prism that evaluates every event and raises notifications",
+      "D": "A health-check command that an administrator runs to test cluster components on demand"
     },
     "keys": [
       "B"
@@ -9121,7 +9121,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "a35504a3975ce3ab",
+    "textHash": "16bf61b8b552ad0d",
     "bank": "nca75-pilot.md"
   },
   {
@@ -9143,7 +9143,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "9e22fe0d39083096",
+    "textHash": "39b1f20babcc4f51",
     "bank": "nca75-pilot.md"
   },
   {
@@ -9152,10 +9152,10 @@ export const ITEMS = [
     "number": "Q40",
     "stem": "Storage is reported at 70% full. Why is the trend more useful than the number alone?",
     "options": {
-      "A": "Because 70% is always a critical threshold",
+      "A": "Because 70% is always a critical threshold that requires immediate capacity expansion",
       "B": "Because a level that is climbing tells you when the limit will be reached, which the number alone does not",
-      "C": "Because the percentage is calculated incorrectly",
-      "D": "Because the trend determines the replication factor"
+      "C": "Because the current percentage is calculated incorrectly until several measurements exist",
+      "D": "Because the observed trend automatically determines the cluster's replication factor for new data"
     },
     "keys": [
       "B"
@@ -9165,7 +9165,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "7f5cc5b5b522dbb7",
+    "textHash": "7d91d91c49c79629",
     "bank": "nca75-pilot.md"
   },
   {
@@ -9187,7 +9187,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "05f0e5735fa07f21",
+    "textHash": "b572206323217be3",
     "bank": "nca75-pilot.md"
   },
   {
@@ -9209,7 +9209,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "b5047d76683c31b3",
+    "textHash": "3c10ab1370bf2cd5",
     "bank": "nca75-pilot.md"
   },
   {
@@ -9231,7 +9231,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "013eea13fb6455e1",
+    "textHash": "51b336888a35f564",
     "bank": "nca75-pilot.md"
   },
   {
@@ -9253,7 +9253,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "b7a1b67c846b9d34",
+    "textHash": "4518c92d3475c99a",
     "bank": "nca75-pilot.md"
   },
   {
@@ -9275,7 +9275,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "8edc99dc3fc9ff6c",
+    "textHash": "5a946f106a403944",
     "bank": "az104-beginner.md"
   },
   {
@@ -9297,7 +9297,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "e35fbcf94bfc1758",
+    "textHash": "91702701dd0885cc",
     "bank": "az104-beginner.md"
   },
   {
@@ -9319,7 +9319,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "8a6c701002176efb",
+    "textHash": "306cb93d13780f26",
     "bank": "az104-beginner.md"
   },
   {
@@ -9341,7 +9341,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "1ab9c05ec89ced41",
+    "textHash": "d6eccde2c2dc1e32",
     "bank": "az104-beginner.md"
   },
   {
@@ -9363,7 +9363,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "5b72f0857e5cd55e",
+    "textHash": "1a5f443218ec6d12",
     "bank": "az104-beginner.md"
   },
   {
@@ -9385,7 +9385,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "720fc4857b03b0fe",
+    "textHash": "d5bac2921c400d42",
     "bank": "az104-beginner.md"
   },
   {
@@ -9407,7 +9407,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "c7d5037190050948",
+    "textHash": "61334a9c0d05714e",
     "bank": "az104-beginner.md"
   },
   {
@@ -9429,7 +9429,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "e6123838d233da39",
+    "textHash": "9a197976811cc986",
     "bank": "az104-beginner.md"
   },
   {
@@ -9451,7 +9451,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "413c3e94c1aa89af",
+    "textHash": "0b2ca8a8f795e067",
     "bank": "az104-beginner.md"
   },
   {
@@ -9473,7 +9473,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "e42df2482b356e8f",
+    "textHash": "8d8fa0c88a24fbd3",
     "bank": "az104-beginner.md"
   },
   {
@@ -9495,7 +9495,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "94c8cd1519a86174",
+    "textHash": "24375c97924a4695",
     "bank": "az104-beginner.md"
   },
   {
@@ -9517,7 +9517,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "00c033e8c3d02602",
+    "textHash": "1ff0991d5e2fb8af",
     "bank": "az104-beginner.md"
   },
   {
@@ -9540,7 +9540,7 @@ export const ITEMS = [
     "isMultiSelect": true,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "17a04a15d9e961d4",
+    "textHash": "7bd93b34ac5ecf01",
     "bank": "az104-beginner.md"
   },
   {
@@ -9562,7 +9562,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "cbfb319caff359ca",
+    "textHash": "b33d9cfeee799e69",
     "bank": "az104-beginner.md"
   },
   {
@@ -9584,7 +9584,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "80e15f0a5e36fe63",
+    "textHash": "99585f14fd0b9ee9",
     "bank": "az104-beginner.md"
   },
   {
@@ -9606,7 +9606,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "b803278cad10b37b",
+    "textHash": "955b40974153ede9",
     "bank": "az104-beginner.md"
   },
   {
@@ -9628,7 +9628,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "5d5371bbe98d362e",
+    "textHash": "f18d8f0a65ba3ac4",
     "bank": "az104-beginner.md"
   },
   {
@@ -9650,7 +9650,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "2ead6ace49d733b7",
+    "textHash": "3d5a21b7a74745e6",
     "bank": "az104-beginner.md"
   },
   {
@@ -9662,7 +9662,7 @@ export const ITEMS = [
       "A": "Platform-managed keys encrypt the data at rest, and infrastructure encryption adds a second, independent encryption layer",
       "B": "Nothing is encrypted until the account owner enables encryption on each container",
       "C": "Only data in transit is encrypted, and infrastructure encryption adds encryption at rest",
-      "D": "A customer-managed key is mandatory, and infrastructure encryption rotates that key on a schedule"
+      "D": "A customer-managed key is mandatory, and infrastructure encryption automatically rotates that key on a fixed annual schedule"
     },
     "keys": [
       "A"
@@ -9672,7 +9672,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "432617465d637649",
+    "textHash": "88667f5a0c6f256a",
     "bank": "az104-beginner.md"
   },
   {
@@ -9694,7 +9694,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "8c0b2cb808c3e275",
+    "textHash": "242e6c814ec879b4",
     "bank": "az104-beginner.md"
   },
   {
@@ -9716,7 +9716,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "4663fe76566d71b6",
+    "textHash": "57ef13570d74265a",
     "bank": "az104-beginner.md"
   },
   {
@@ -9738,7 +9738,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "ba953a1153c551f5",
+    "textHash": "09e8afb630bbe382",
     "bank": "az104-beginner.md"
   },
   {
@@ -9760,7 +9760,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "c177fc2d1b98e35d",
+    "textHash": "5b1d6e322d9bcc19",
     "bank": "az104-beginner.md"
   },
   {
@@ -9782,7 +9782,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "67581bbc0c3a860a",
+    "textHash": "b599acbc227f7115",
     "bank": "az104-beginner.md"
   },
   {
@@ -9804,7 +9804,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "c5d5d38f328a7e0f",
+    "textHash": "e7d5bcf344c1f0c2",
     "bank": "az104-beginner.md"
   },
   {
@@ -9826,7 +9826,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "ce744e0b632a316c",
+    "textHash": "49029e5eee3f1654",
     "bank": "az104-beginner.md"
   },
   {
@@ -9848,7 +9848,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "3f4979e504d568cc",
+    "textHash": "4062e8be36c1e5f1",
     "bank": "az104-beginner.md"
   },
   {
@@ -9870,7 +9870,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "971fae247b2ce477",
+    "textHash": "f5f4158d35c2323e",
     "bank": "az104-beginner.md"
   },
   {
@@ -9892,7 +9892,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "cee4839f00d07d31",
+    "textHash": "bea98e966d900ef3",
     "bank": "az104-beginner.md"
   },
   {
@@ -9914,7 +9914,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "0d0a7e8ab4150e7c",
+    "textHash": "76139fcefc72ebf5",
     "bank": "az104-beginner.md"
   },
   {
@@ -9936,7 +9936,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "06e2faf58b1a252c",
+    "textHash": "62038fe9170c40aa",
     "bank": "az104-beginner.md"
   },
   {
@@ -9958,7 +9958,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "d2d8ce95b08cf55e",
+    "textHash": "457173afdef5043c",
     "bank": "az104-beginner.md"
   },
   {
@@ -9980,7 +9980,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "c4f3b926f55bd9cb",
+    "textHash": "63923330c540b955",
     "bank": "az104-beginner.md"
   },
   {
@@ -10002,7 +10002,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "14f55200c57ea7d4",
+    "textHash": "14a730412cb9bd83",
     "bank": "az104-beginner.md"
   },
   {
@@ -10024,7 +10024,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "d0621bdb0b2f3411",
+    "textHash": "a13900f084a6e94a",
     "bank": "az104-beginner.md"
   },
   {
@@ -10046,7 +10046,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "3b8effff0c43a0b9",
+    "textHash": "f06818d666289e9c",
     "bank": "az104-beginner.md"
   },
   {
@@ -10057,7 +10057,7 @@ export const ITEMS = [
     "options": {
       "A": "Standard SKU public IP addresses do not support HTTPS traffic",
       "B": "The public IP address must be dynamic rather than static",
-      "C": "A load balancer must be placed in front of the virtual machine",
+      "C": "A public load balancer must be placed in front of the virtual machine before it can accept inbound HTTPS traffic",
       "D": "Standard SKU public IP addresses are secure by default and need an explicit allow rule"
     },
     "keys": [
@@ -10068,7 +10068,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "f942a9771e14509a",
+    "textHash": "fd309e74737f3267",
     "bank": "az104-beginner.md"
   },
   {
@@ -10090,7 +10090,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "c76ac0eab6edede0",
+    "textHash": "8ed19e65de5ab10e",
     "bank": "az104-beginner.md"
   },
   {
@@ -10112,7 +10112,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "b567372510450099",
+    "textHash": "6a7b754df679891a",
     "bank": "az104-beginner.md"
   },
   {
@@ -10134,7 +10134,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "020221c2612d906a",
+    "textHash": "4cca845d4ba25475",
     "bank": "az104-beginner.md"
   },
   {
@@ -10156,7 +10156,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "014c66ffda9f9d47",
+    "textHash": "9b61a0e4cea13043",
     "bank": "az104-beginner.md"
   },
   {
@@ -10178,7 +10178,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "7952cf4b9addf79c",
+    "textHash": "c6bba9b4565f8d7b",
     "bank": "az104-beginner.md"
   },
   {
@@ -10200,7 +10200,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "e5422cc6563c9001",
+    "textHash": "43899a38146b8ad9",
     "bank": "az104-beginner.md"
   },
   {
@@ -10222,7 +10222,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "1a12eb4bd655d7c7",
+    "textHash": "341e7dbcbd4c56ea",
     "bank": "az104-beginner.md"
   },
   {
@@ -10244,7 +10244,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "06f175e1b3b56c34",
+    "textHash": "5a1b8c8f308ad6a1",
     "bank": "az104-beginner.md"
   },
   {
@@ -10266,7 +10266,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "3901c9f1c94e8fe7",
+    "textHash": "d6c4e80f220abcd3",
     "bank": "az104-beginner.md"
   },
   {
@@ -10288,7 +10288,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "17e081e24a425cda",
+    "textHash": "e3338890d7cb6f95",
     "bank": "az104-beginner.md"
   },
   {
@@ -10310,7 +10310,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "ea90a51c20b9ff3d",
+    "textHash": "9107b6c1ac44107a",
     "bank": "az104-beginner.md"
   },
   {
@@ -10332,7 +10332,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "049e2db5135efc1d",
+    "textHash": "ec74889429b09a63",
     "bank": "az104-beginner.md"
   },
   {
@@ -10354,7 +10354,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "3b1ff2a971f66011",
+    "textHash": "8f1960bfca97a097",
     "bank": "az104-beginner.md"
   },
   {
@@ -10376,7 +10376,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "5af8d31c5ceb4adb",
+    "textHash": "a7fd698b487fe1f3",
     "bank": "az104-beginner.md"
   },
   {
@@ -10398,7 +10398,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "387e72851a932759",
+    "textHash": "20cebd5a8df25df0",
     "bank": "aws-saa-beginner.md"
   },
   {
@@ -10420,7 +10420,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "72b0439a54d90a28",
+    "textHash": "168050ff5b187d7a",
     "bank": "aws-saa-beginner.md"
   },
   {
@@ -10442,7 +10442,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "c8b891c7ad92b7b1",
+    "textHash": "97753b6cdb2ca421",
     "bank": "aws-saa-beginner.md"
   },
   {
@@ -10464,7 +10464,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "bf55bc1bb7154659",
+    "textHash": "c2425cb58750b875",
     "bank": "aws-saa-beginner.md"
   },
   {
@@ -10486,7 +10486,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "f40584cdeeb5c3f3",
+    "textHash": "d1572f9982e6a81e",
     "bank": "aws-saa-beginner.md"
   },
   {
@@ -10508,7 +10508,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "83ba70d304eeadfe",
+    "textHash": "091f001f5168c434",
     "bank": "aws-saa-beginner.md"
   },
   {
@@ -10530,7 +10530,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "ea9233b663f1da1e",
+    "textHash": "2810d7665833a254",
     "bank": "aws-saa-beginner.md"
   },
   {
@@ -10553,7 +10553,7 @@ export const ITEMS = [
     "isMultiSelect": true,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "613f4ca939c45147",
+    "textHash": "272cfea5d1523876",
     "bank": "aws-saa-beginner.md"
   },
   {
@@ -10575,7 +10575,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "263d43c0727932f7",
+    "textHash": "253df1e184933451",
     "bank": "aws-saa-beginner.md"
   },
   {
@@ -10597,7 +10597,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "c298e25480db3f4b",
+    "textHash": "cc23979f99ed6973",
     "bank": "aws-saa-beginner.md"
   },
   {
@@ -10619,7 +10619,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "62478c500317f161",
+    "textHash": "58940f516be2d18f",
     "bank": "aws-saa-beginner.md"
   },
   {
@@ -10641,7 +10641,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "10ba4fa2cac4dee4",
+    "textHash": "5f40ed4e70d61ddd",
     "bank": "aws-saa-beginner.md"
   },
   {
@@ -10663,7 +10663,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "b6d2376092a8bae4",
+    "textHash": "823650f150cec75d",
     "bank": "aws-saa-beginner.md"
   },
   {
@@ -10685,7 +10685,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "c444444bfc8a40e5",
+    "textHash": "1269c98dfe110969",
     "bank": "aws-saa-beginner.md"
   },
   {
@@ -10694,10 +10694,10 @@ export const ITEMS = [
     "number": "Q15",
     "stem": "An application stores objects in Amazon S3 that must be retained for seven years for regulatory reasons, but any object must be retrievable within minutes if an auditor asks. Objects are rarely accessed after the first year. Which design should a solutions architect recommend? --- ## Domain 2: Design resilient architectures ---",
     "options": {
-      "A": "Delete the objects after one year and rely on bucket versioning for the remainder of the retention period.",
-      "B": "Move every object to Amazon S3 Glacier Deep Archive immediately after upload.",
+      "A": "Use an S3 Lifecycle policy that deletes the current objects after one year and relies on bucket versioning to preserve every remaining version for the full seven-year retention period.",
+      "B": "Use an S3 Lifecycle policy that transitions objects to S3 Glacier Deep Archive after 30 days, retaining every object for seven years regardless of how long an auditor must wait for retrieval.",
       "C": "Use an S3 Lifecycle policy that transitions objects to S3 Standard-IA after 30 days and to S3 Glacier Instant Retrieval after one year, expiring them at seven years.",
-      "D": "Enable S3 Cross-Region Replication and keep every object in S3 Standard for seven years."
+      "D": "Enable S3 Cross-Region Replication to a second bucket and retain every object in S3 Standard in both Regions for the full seven-year retention period."
     },
     "keys": [
       "C"
@@ -10707,7 +10707,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "fa49770698969d8a",
+    "textHash": "a572f170e0bf0f40",
     "bank": "aws-saa-beginner.md"
   },
   {
@@ -10729,7 +10729,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "547f311e04ea7b61",
+    "textHash": "dfd3717e92f811aa",
     "bank": "aws-saa-beginner.md"
   },
   {
@@ -10751,7 +10751,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "b479a2da812f774b",
+    "textHash": "080cfd9848b5726d",
     "bank": "aws-saa-beginner.md"
   },
   {
@@ -10773,7 +10773,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "717099b07f36d021",
+    "textHash": "863e54915feaf1e5",
     "bank": "aws-saa-beginner.md"
   },
   {
@@ -10795,7 +10795,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "717a3e0f65473dc6",
+    "textHash": "4e2a5d402a799370",
     "bank": "aws-saa-beginner.md"
   },
   {
@@ -10817,7 +10817,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "296381e0e3691525",
+    "textHash": "a5ff6ff7f215195b",
     "bank": "aws-saa-beginner.md"
   },
   {
@@ -10839,7 +10839,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "4be6e035685a43b2",
+    "textHash": "d721c8e46ed719e0",
     "bank": "aws-saa-beginner.md"
   },
   {
@@ -10861,7 +10861,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "54e65d40169e1222",
+    "textHash": "bc1ed9f7c397207a",
     "bank": "aws-saa-beginner.md"
   },
   {
@@ -10883,7 +10883,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "c8f3feb8af1da61e",
+    "textHash": "b8d45517ad738507",
     "bank": "aws-saa-beginner.md"
   },
   {
@@ -10894,7 +10894,7 @@ export const ITEMS = [
     "options": {
       "A": "Attach an internet gateway directly to the private subnets.",
       "B": "Move the application instances into the public subnet.",
-      "C": "Enable cross-zone load balancing on the load balancer in front of the application.",
+      "C": "Enable cross-zone load balancing on the Application Load Balancer so requests continue to be distributed evenly when one Availability Zone is isolated.",
       "D": "Deploy a NAT gateway in each Availability Zone and point each subnet's route table at the NAT gateway in its own zone."
     },
     "keys": [
@@ -10905,7 +10905,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "9b34476666d3e0b5",
+    "textHash": "c363f06c4651f18a",
     "bank": "aws-saa-beginner.md"
   },
   {
@@ -10927,7 +10927,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "75432a0bccb848fa",
+    "textHash": "1a8411007b51df09",
     "bank": "aws-saa-beginner.md"
   },
   {
@@ -10949,7 +10949,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "91a29cad5da42237",
+    "textHash": "3474f59ce1deeaf5",
     "bank": "aws-saa-beginner.md"
   },
   {
@@ -10971,7 +10971,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "a6835ffef752ef01",
+    "textHash": "b6671eadd04c1bae",
     "bank": "aws-saa-beginner.md"
   },
   {
@@ -10993,7 +10993,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "c572fc8f3a9c0ac6",
+    "textHash": "40464bed6243eb5a",
     "bank": "aws-saa-beginner.md"
   },
   {
@@ -11015,7 +11015,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "b75c1cd2241704d6",
+    "textHash": "f700f7dcc1b80b66",
     "bank": "aws-saa-beginner.md"
   },
   {
@@ -11037,7 +11037,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "166743184b28b53e",
+    "textHash": "d03dbb9f0c51b770",
     "bank": "aws-saa-beginner.md"
   },
   {
@@ -11059,7 +11059,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "d5faf6ca97a0c90d",
+    "textHash": "714dbb3fbd82e245",
     "bank": "aws-saa-beginner.md"
   },
   {
@@ -11081,7 +11081,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "eff5da051d26049c",
+    "textHash": "b4cffe73672e6a77",
     "bank": "aws-saa-beginner.md"
   },
   {
@@ -11103,7 +11103,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "003ab1d56ded2217",
+    "textHash": "e54aab81d1cff72e",
     "bank": "aws-saa-beginner.md"
   },
   {
@@ -11113,9 +11113,9 @@ export const ITEMS = [
     "stem": "In AWS Lambda, what is the effect of increasing a function's configured memory?",
     "options": {
       "A": "The function receives proportionally more CPU, which can shorten its execution time",
-      "B": "The function's maximum execution timeout is increased",
-      "C": "The function's reserved concurrency limit is increased",
-      "D": "The function is pinned to a dedicated Availability Zone"
+      "B": "The function's maximum execution timeout increases in proportion to the memory setting",
+      "C": "The function's reserved concurrency limit increases in proportion to the memory setting",
+      "D": "The function is pinned to an Availability Zone selected by its memory setting"
     },
     "keys": [
       "A"
@@ -11125,7 +11125,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "0c2807624f660b83",
+    "textHash": "e93ad008c7831cab",
     "bank": "aws-saa-beginner.md"
   },
   {
@@ -11147,7 +11147,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "0a08312ea7804e7c",
+    "textHash": "23efc334c048d170",
     "bank": "aws-saa-beginner.md"
   },
   {
@@ -11169,7 +11169,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "e4d65fda2e0b19f7",
+    "textHash": "74cbafa0ecc817b0",
     "bank": "aws-saa-beginner.md"
   },
   {
@@ -11191,7 +11191,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "8426cac1da3f218a",
+    "textHash": "1c18dc969dde50f7",
     "bank": "aws-saa-beginner.md"
   },
   {
@@ -11213,7 +11213,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "6c579dcbc5c25e51",
+    "textHash": "2e4bcd7a2880b7b3",
     "bank": "aws-saa-beginner.md"
   },
   {
@@ -11235,7 +11235,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "914ca45484306634",
+    "textHash": "d57a738158468ed9",
     "bank": "aws-saa-beginner.md"
   },
   {
@@ -11257,7 +11257,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "2ac50fa946286910",
+    "textHash": "b12b7ba3b9f5ba52",
     "bank": "aws-saa-beginner.md"
   },
   {
@@ -11269,7 +11269,7 @@ export const ITEMS = [
       "A": "Add a lifecycle rule that transitions objects to S3 Standard-IA after 30 days and to S3 Glacier Deep Archive after 90 days",
       "B": "Enable S3 Transfer Acceleration on the bucket",
       "C": "Enable Requester Pays on the bucket",
-      "D": "Move the objects to an EBS st1 volume attached to a long-running instance"
+      "D": "Move the 60 TB of logs to throughput-optimized EBS st1 volumes attached to a long-running EC2 instance and retain the instance for seven years"
     },
     "keys": [
       "A"
@@ -11279,7 +11279,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "bd3f773fd43cbe4b",
+    "textHash": "d0d95ab2c6f669a2",
     "bank": "aws-saa-beginner.md"
   },
   {
@@ -11301,7 +11301,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "e49dcac3690a81e4",
+    "textHash": "5e77de68bbd8f936",
     "bank": "aws-saa-beginner.md"
   },
   {
@@ -11323,7 +11323,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "7b89027f839488b0",
+    "textHash": "03b711fcb5b85699",
     "bank": "aws-saa-beginner.md"
   },
   {
@@ -11345,7 +11345,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "84d9e4daff6015ab",
+    "textHash": "2e766532c49ceb63",
     "bank": "aws-saa-beginner.md"
   },
   {
@@ -11367,7 +11367,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "3100408bd9d26013",
+    "textHash": "bf58596bfbae94de",
     "bank": "aws-saa-beginner.md"
   },
   {
@@ -11389,7 +11389,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "f161d258ac3c12cf",
+    "textHash": "4d9eef87ca1d7361",
     "bank": "aws-saa-beginner.md"
   },
   {
@@ -11411,7 +11411,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "a771e73c35d49ac7",
+    "textHash": "83b16cacc7d01e6e",
     "bank": "aws-saa-beginner.md"
   },
   {
@@ -11433,7 +11433,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "eeeb17c3b6a01245",
+    "textHash": "fe8f1defd2b48b91",
     "bank": "aws-saa-beginner.md"
   },
   {
@@ -11455,7 +11455,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "2ab332b0517552c7",
+    "textHash": "f9c58616cde6e70d",
     "bank": "aws-saa-beginner.md"
   },
   {
@@ -11477,7 +11477,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "561240715f965290",
+    "textHash": "811813faa23a6885",
     "bank": "aws-saa-beginner.md"
   },
   {
@@ -11499,7 +11499,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "c3f796385d6b34c7",
+    "textHash": "5abb3aa46c0c3cbc",
     "bank": "aws-saa-beginner.md"
   },
   {
@@ -11521,7 +11521,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "c6d3deeb828a0f9c",
+    "textHash": "646d681816be288e",
     "bank": "aws-saa-beginner.md"
   },
   {
@@ -11543,7 +11543,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "e8b407910f453ff3",
+    "textHash": "21ce0c0f301361af",
     "bank": "aws-saa-beginner.md"
   },
   {
@@ -11565,7 +11565,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "d48567ac07106b18",
+    "textHash": "60a47cffa98c97a6",
     "bank": "aws-saa-beginner.md"
   },
   {
@@ -11587,7 +11587,7 @@ export const ITEMS = [
     "isMultiSelect": false,
     "provenanceStatus": "draft",
     "demoCut": "",
-    "textHash": "0047641699d9b5bb",
+    "textHash": "bb27acca6ee72803",
     "bank": "aws-saa-beginner.md"
   }
 ];

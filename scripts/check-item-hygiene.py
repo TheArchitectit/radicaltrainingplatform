@@ -23,14 +23,11 @@ MIN_AUDIT_ITEMS single-answer keys; below that, one key moves the share by
 5-20 points, so the threshold cannot tell authored bias from a small sample.
 Small banks are reported, not failed.
 
-Two signals are advisory and never fail:
-
-  * the "longest option is correct" cue — a real authoring smell, but a
-    statistical one, and deciding whether an item is actually guessable is a
-    content-review judgement, not a deterministic rule;
-  * the legacy root-level banks (NCP/NCM/NCA Part files), which are in review
-    and are not shipped into the PWA. They are measured so the debt is visible
-    rather than forgotten.
+The "longest option is correct" cue blocks after the released set was cleaned:
+it is a bounded textual heuristic, not a claim about item quality, and its false
+positives are removed by editing distractors rather than accepted as debt. The
+legacy root-level bank measurement remains advisory and never fails; those
+banks are not shipped into the PWA, but are measured so debt stays visible.
 
 Usage:
   python3 scripts/check-item-hygiene.py
@@ -164,6 +161,10 @@ def audit_released(root):
             for item in parsed:
                 if analyse_item(rel, item, failures, advisories):
                     longest += 1
+                    failures.append(
+                        f"{rel}/{item.get('number', '?')}: the correct option is "
+                        f"over {LONGEST_MARGIN} characters longer than every "
+                        f"alternative — correct answers are identifiable by length")
 
             single = [i["keys"][0] for i in parsed if len(i["keys"]) == 1]
             counts = collections.Counter(single)
@@ -284,6 +285,9 @@ MUTATIONS = [
      "the item has no answer key at all"),
     (AZ_BANK, "__OVERWRITE__", _bank(20, key_cycle="A"),
      "a 20-item bank puts every key on A"),
+    (RELEASED_A, "- A) alpha",
+     "- A) alpha with explanatory detail absent from every other option",
+     "the correct option is identifiable by its length"),
 ]
 
 DELETE_MUTATION = (
@@ -376,7 +380,8 @@ def main():
 
     print(f"ITEM HYGIENE CHECK: PASS — {result['banks']} released bank(s), "
           f"{result['items']} item(s); no duplicate options, no position-"
-          f"dependent wording, no ungradeable keys, answer positions within "
+          f"dependent wording, no ungradeable keys, no longest-option cue, "
+          f"answer positions within "
           f"the {CONCENTRATION_THRESHOLD:.0%} threshold wherever the bank is "
           f"large enough to audit")
     for advisory in result["advisories"]:
@@ -386,10 +391,6 @@ def main():
               f"in review; {legacy_over} over the "
               f"{CONCENTRATION_THRESHOLD:.0%} threshold and not shipped — "
               f"see scripts/report-key-distribution.py")
-    if result["longest"]:
-        print(f"  advisory: longest-option-is-correct cue on "
-              f"{result['longest']} of {result['items']} released item(s) — "
-              f"a review signal, not a grading rule")
     return 0
 
 

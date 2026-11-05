@@ -193,10 +193,10 @@ The key policy is the resource policy on a KMS key and it is authoritative: no I
 ### Q15
 An application stores objects in Amazon S3 that must be retained for seven years for regulatory reasons, but any object must be retrievable within minutes if an auditor asks. Objects are rarely accessed after the first year. Which design should a solutions architect recommend?
 
-- A) Delete the objects after one year and rely on bucket versioning for the remainder of the retention period.
-- B) Move every object to Amazon S3 Glacier Deep Archive immediately after upload.
+- A) Use an S3 Lifecycle policy that deletes the current objects after one year and relies on bucket versioning to preserve every remaining version for the full seven-year retention period.
+- B) Use an S3 Lifecycle policy that transitions objects to S3 Glacier Deep Archive after 30 days, retaining every object for seven years regardless of how long an auditor must wait for retrieval.
 - C) Use an S3 Lifecycle policy that transitions objects to S3 Standard-IA after 30 days and to S3 Glacier Instant Retrieval after one year, expiring them at seven years.
-- D) Enable S3 Cross-Region Replication and keep every object in S3 Standard for seven years.
+- D) Enable S3 Cross-Region Replication to a second bucket and retain every object in S3 Standard in both Regions for the full seven-year retention period.
 
 **Answer: C**
 A lifecycle policy moves rarely accessed objects to cheaper storage while the Glacier Instant Retrieval class still returns them in milliseconds, and the expiration rule enforces the seven-year retention. Versioning does not preserve objects that were deleted, Glacier Deep Archive retrieval takes hours and would fail the minutes requirement, and keeping everything in S3 Standard for seven years meets the rules but ignores the cost-optimization goal.
@@ -318,7 +318,7 @@ An application's private subnets route their outbound internet traffic through a
 
 - A) Attach an internet gateway directly to the private subnets.
 - B) Move the application instances into the public subnet.
-- C) Enable cross-zone load balancing on the load balancer in front of the application.
+- C) Enable cross-zone load balancing on the Application Load Balancer so requests continue to be distributed evenly when one Availability Zone is isolated.
 - D) Deploy a NAT gateway in each Availability Zone and point each subnet's route table at the NAT gateway in its own zone.
 
 **Answer: D**
@@ -453,9 +453,9 @@ SNS is publish/subscribe: one published message is delivered to every subscripti
 In AWS Lambda, what is the effect of increasing a function's configured memory?
 
 - A) The function receives proportionally more CPU, which can shorten its execution time
-- B) The function's maximum execution timeout is increased
-- C) The function's reserved concurrency limit is increased
-- D) The function is pinned to a dedicated Availability Zone
+- B) The function's maximum execution timeout increases in proportion to the memory setting
+- C) The function's reserved concurrency limit increases in proportion to the memory setting
+- D) The function is pinned to an Availability Zone selected by its memory setting
 
 **Answer: A**
 Lambda allocates CPU in proportion to the memory setting, so a larger memory value usually produces a faster, shorter — and therefore often cheaper — invocation. Timeout and concurrency are separate settings that memory does not affect, and Lambda execution environments are not placed in a customer-selected Availability Zone.
@@ -552,7 +552,7 @@ A solutions architect reviews an S3 bucket holding 60 TB of application logs. Ob
 - A) Add a lifecycle rule that transitions objects to S3 Standard-IA after 30 days and to S3 Glacier Deep Archive after 90 days
 - B) Enable S3 Transfer Acceleration on the bucket
 - C) Enable Requester Pays on the bucket
-- D) Move the objects to an EBS st1 volume attached to a long-running instance
+- D) Move the 60 TB of logs to throughput-optimized EBS st1 volumes attached to a long-running EC2 instance and retain the instance for seven years
 
 **Answer: A**
 The access pattern is known and cold after the first week, so a lifecycle rule that ages objects into cheaper classes reduces the standing per-gigabyte charge while leaving the objects retrievable. Transfer Acceleration speeds up uploads and changes nothing about storage cost. Requester Pays shifts request and transfer charges to the caller, which is not appropriate for the account's own logs, and an EBS volume is block storage for a single instance and would cost more than object storage at this volume.

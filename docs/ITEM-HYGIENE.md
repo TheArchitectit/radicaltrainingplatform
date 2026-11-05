@@ -19,19 +19,18 @@ visible in the item text itself:
 | Missing answer key | The item cannot be graded |
 | Impossible key | The key names no option; the item cannot be graded |
 | Answer-position concentration (blocks at ≥20 single-answer keys) | A learner can farm apparent accuracy by always picking one letter |
+| Longest-option-is-correct (over a 20-character margin) | A learner can identify the answer from verbosity rather than knowledge |
 
-Duplicate text, positional wording, missing key, and impossible key always fail.
+Duplicate text, positional wording, missing key, impossible key, and the
+longest-option cue always fail.
 Concentration fails only once a bank has at least 20 single-answer keys — below
 that, one key moves the share by 5–20 points, so authored bias and a small
 sample cannot be told apart; small banks are reported as advisories.
 
-Two signals are advisory only:
+One signal is advisory only:
 
-* **Longest-option-is-correct** — a real authoring smell, but statistical;
-  deciding whether an item is actually guessable is a content-review judgement,
-  not a deterministic rule.
 * **Legacy root-level banks** (`NCP-*`, `NCM-MCI-*`, `NCA-75-Part*.md`) — in
-  review, not shipped. Measured so the debt is visible, never failed.
+  review, not shipped to the PWA. Measured so debt stays visible, never failed.
 
 ## The patterns
 

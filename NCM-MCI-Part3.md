@@ -31,60 +31,60 @@ NUMA locality is optimized when vCPU allocation is balanced across socket bounda
 
 ### Q3
 During NGT VSS snapshot operations on a Windows VM, which component must be running for application-consistent snapshots?
-- A) Nutanix Volume Shadow Copy Service (VSS) provider
-- B) Guest Customization Service
-- C) Nutanix Insights daemon
-- D) Prism Analytics Engine
+- A) Prism Analytics Engine
+- B) Nutanix Volume Shadow Copy Service (VSS) provider
+- C) Guest Customization Service
+- D) Nutanix Insights daemon
 
-**Answer: A**
+**Answer: B**
 NGT installs the Nutanix VSS provider on Windows VMs. This enables VSS-based application-consistent snapshots. Verify installation: Programs & Features > Nutanix Guest Tools > VSS provider listed. Without it, only crash-consistent snapshots are possible.
 
 ---
 
 ### Q4
 You're analyzing storage latency in Prism and see a single vDisk with >20ms latency while cluster average is 2ms. What's the most likely cause, and where should you investigate?
-- A) Network congestion; run `nstat -rtnap | grep TCP_LISTEN` from CVM
-- B) Hot vDisk with high IOPS; analyze via Prism > Storage > Volume Group > Per-Disk analysis
-- C) Insufficient host RAM; check memory pressure and balloon driver stats
-- D) CPU saturation; increase vCPU count
+- A) Insufficient host RAM; check memory pressure and balloon driver stats
+- B) CPU saturation; increase vCPU count
+- C) Network congestion; run `nstat -rtnap | grep TCP_LISTEN` from CVM
+- D) Hot vDisk with high IOPS; analyze via Prism > Storage > Volume Group > Per-Disk analysis
 
-**Answer: B**
+**Answer: D**
 Per-vDisk latency analysis in Prism shows which specific disks are hot. >20ms indicates I/O bottleneck on that vDisk, not a cluster-wide issue. Check Prism > Dashboards > Storage > Volume Groups, then drill into the specific vDisk's IOPS/latency metrics. May need to migrate vDisk to faster tier or increase replica count.
 
 ---
 
 ### Q5
 A VM has memory overcommit enabled with ballooning active. You notice guest OS memory pressure is high. What does this indicate?
-- A) Ballooning is working correctly; no action needed
-- B) Hypervisor memory overhead is consuming more than expected
-- C) The VM is reclaiming pages at host level; performance may degrade further
-- D) Storage latency is causing memory swaps
+- A) The VM is reclaiming pages at host level; performance may degrade further
+- B) Storage latency is causing memory swaps
+- C) Ballooning is working correctly; no action needed
+- D) Hypervisor memory overhead is consuming more than expected
 
-**Answer: C**
+**Answer: A**
 When ballooning is active and memory pressure rises, the hypervisor is reclaiming memory from the guest. This moves memory to host swap, causing VM performance degradation. Solution: add physical host RAM, reduce VM memory overcommit ratio via Prism settings, or migrate VMs off host. Monitor via `acpi_memory_hotplug` statistics.
 
 ---
 
 ### Q6
 You need to configure a hard VM affinity rule to keep VMs on the same host. Which Prism interface would you use?
-- A) Prism > VM > Policies > Scheduling
-- B) Prism > Cluster > Affinity Rules
-- C) Prism > VM > VM Affinity > Create Affinity Policy
-- D) Prism > Infrastructure > Host Grouping
+- A) Prism > Cluster > Affinity Rules
+- B) Prism > VM > VM Affinity > Create Affinity Policy
+- C) Prism > Infrastructure > Host Grouping
+- D) Prism > VM > Policies > Scheduling
 
-**Answer: C**
+**Answer: B**
 Hard affinity rules prevent VMs from being separated across hosts or force them to stay together. Access via Prism > VM > VM Affinity > Create Affinity Policy. Select "Hard Affinity" to enforce the rule. Soft affinity is preferred, applied via anti-affinity or host labels.
 
 ---
 
 ### Q7
 Your Nutanix cluster has 4 hosts with 20 cores each. You're planning VM workloads and want to maintain <70% CPU utilization. Based on Prism capacity analysis, what's your safe vCPU allocation ceiling?
-- A) 160 vCPU (80 cores × 2x overcommit)
-- B) 112 vCPU (80 cores × 1.4x overcommit at 70%)
-- C) 80 vCPU (1:1 ratio)
-- D) 224 vCPU (80 cores × 2.8x overcommit)
+- A) 112 vCPU (80 cores × 1.4x overcommit at 70%)
+- B) 80 vCPU (1:1 ratio)
+- C) 224 vCPU (80 cores × 2.8x overcommit)
+- D) 160 vCPU (80 cores × 2x overcommit)
 
-**Answer: B**
+**Answer: A**
 Safe allocation = Physical cores × Target utilization ÷ Overcommit ratio. At 70% target: 80 physical cores × 0.70 = 56 effective cores. With typical 2:1 overcommit = 112 vCPU ceiling. Verify via Prism > Analysis > Capacity > CPU Runway reports and VM-level CPU ready time metrics.
 
 ---
@@ -115,72 +115,72 @@ Leap recovery plans are prerequisites for any failover operation. Define boot or
 
 ### Q10
 Your Windows VM needs self-service restore capability. Which combination of tools is required?
-- A) Prism API + custom scripts
-- B) NGT installed + VSS snapshots + SMB Previous Versions enabled
-- C) Backup software + Leap recovery plans
-- D) Standalone snapshot schedules + manual restore scripts
+- A) Standalone snapshot schedules + manual restore scripts
+- B) Prism API + custom scripts
+- C) NGT installed + VSS snapshots + SMB Previous Versions enabled
+- D) Backup software + Leap recovery plans
 
-**Answer: B**
+**Answer: C**
 NGT enables VSS snapshots (app-consistent). Previous Versions (SMB shadow copies) makes snapshots accessible to users via "Previous Versions" tab on shared folders. Users can self-restore files without IT intervention. Enable via: 1) NGT VSS provider, 2) SMB Previous Versions registry key, 3) Snapshot schedule, 4) User access to backup share.
 
 ---
 
 ### Q11
 During CVM maintenance mode entry, what is the minimum recommended RAM for the CVM on a 4-socket production host?
-- A) 8 GB
-- B) 16 GB
-- C) 20-32 GB (depends on node size)
-- D) 64 GB
+- A) 64 GB
+- B) 8 GB
+- C) 16 GB
+- D) 20-32 GB (depends on node size)
 
-**Answer: C**
+**Answer: D**
 20-32GB is the recommended minimum for production CVMs. Sizing depends on cluster size and workload. Enter maintenance mode: Prism > Infrastructure > Hosts > Select Host > Actions > Enter Maintenance Mode. During this, CVM continues managing data, so sufficient RAM is critical. Under-sized CVMs cause performance degradation.
 
 ---
 
 ### Q12
 You notice TX/RX throughput drops on a VM despite sufficient network capacity. Which optimization should you apply?
-- A) Increase vCPU count
-- B) Enable virtio-net driver in guest OS
-- C) Reduce MTU size to 1400 bytes
-- D) Add more vNICs to the VM
+- A) Reduce MTU size to 1400 bytes
+- B) Add more vNICs to the VM
+- C) Increase vCPU count
+- D) Enable virtio-net driver in guest OS
 
-**Answer: B**
+**Answer: D**
 Virtio-net is the high-performance paravirtual NIC driver. Legacy e1000 emulation is slower. Install virtio-net via: Linux: `ethtool -K eth0 sg on tso on`, Windows: Nutanix Guest Tools. Monitor via Prism > VM > Network stats. Virtio-net provides 2-3x higher throughput.
 
 ---
 
 ### Q13
 A protection domain replicates VMs every 1 hour via async replication. A host fails at 11:30 AM; last snapshot was at 11:00 AM. What is the RPO for this scenario?
-- A) Zero RPO (continuous protection)
-- B) 30 minutes (data from 11:00-11:30 is lost)
-- C) 1 hour RPO (design spec)
-- D) Depends on failover method
+- A) 1 hour RPO (design spec)
+- B) Depends on failover method
+- C) Zero RPO (continuous protection)
+- D) 30 minutes (data from 11:00-11:30 is lost)
 
-**Answer: B**
+**Answer: D**
 RPO = time between last successful replication and failure. With 1-hour schedule and failure at 11:30, RPO = 30 minutes (data from 11:00-11:30 is lost). Configure via Prism > Protection Domain > Replication Settings. NearSync achieves 1-15 min RPO; Sync metro achieves zero RPO.
 
 ---
 
 ### Q14
 When adding VMs to a protection domain, which operation must complete before remote replication begins?
-- A) Create policy tag on all VMs
-- B) Initial snapshot created and seeded to remote site
-- C) Disable snapshots on source site
-- D) Increase protection domain bandwidth limit
+- A) Initial snapshot created and seeded to remote site
+- B) Disable snapshots on source site
+- C) Increase protection domain bandwidth limit
+- D) Create policy tag on all VMs
 
-**Answer: B**
+**Answer: A**
 Initial seeding (baseline copy of snapshots) to remote site must complete first. Configure protection domain: Prism > Protection Domain > Create > Select VMs > Set replication schedule > Seeding begins automatically. Verify seeding status via Prism > Replication Jobs. Only incremental snapshots are sent afterward.
 
 ---
 
 ### Q15
 You're planning DR site capacity for 50 production VMs (avg 4 vCPU, 8 GB RAM each). What minimum capacity should the DR site have?
-- A) 50 VMs worth (same as production: 200 vCPU, 400 GB RAM)
-- B) 25-30 VMs worth (50% of production)
-- C) 75-100% of production capacity
-- D) 10-20% of production (just for critical tier)
+- A) 25-30 VMs worth (50% of production)
+- B) 75-100% of production capacity
+- C) 10-20% of production (just for critical tier)
+- D) 50 VMs worth (same as production: 200 vCPU, 400 GB RAM)
 
-**Answer: C**
+**Answer: B**
 DR site should have 75-100% of production capacity to handle failover. Many failures are unpredictable; assume worst-case all production VMs fail simultaneously. If cost-prohibitive, implement tiered failover: critical (100%), important (75%), non-critical (50%). Configure via capacity analysis reports and Leap recovery plan priorities.
 
 ---
@@ -211,72 +211,72 @@ Retention policies are configured per protection domain to control snapshot life
 
 ### Q18
 You're implementing planned failover for maintenance. What is the critical difference from unplanned failover?
-- A) Planned failover requires more bandwidth
-- B) Planned failover is bi-directional; unplanned is one-way
-- C) Planned failover allows graceful VM shutdown and minimal data loss; unplanned triggers immediate failover
-- D) Planned failover only works with sync replication
+- A) Planned failover only works with sync replication
+- B) Planned failover requires more bandwidth
+- C) Planned failover is bi-directional; unplanned is one-way
+- D) Planned failover allows graceful VM shutdown and minimal data loss; unplanned triggers immediate failover
 
-**Answer: C**
+**Answer: D**
 Planned failover: shut down source VMs gracefully, ensure all data is replicated, then activate at DR. Unplanned: source site is unavailable; DR site activates immediately with potential data loss (up to RPO). Both use Leap recovery plans; planned has additional pre-shutdown validation steps. Configure via Prism > Disaster Recovery > Execute Failover > Planned vs Unplanned.
 
 ---
 
 ### Q19
 During a test failover using Leap, what is protected from being affected?
-- A) Production snapshots on source site
-- B) Live production VMs on source site  
-- C) Replication schedule
-- D) All of the above
+- A) All of the above
+- B) Production snapshots on source site
+- C) Live production VMs on source site  
+- D) Replication schedule
 
-**Answer: D**
+**Answer: A**
 Test failover is non-destructive. Production VMs remain untouched, snapshots on source stay intact, replication continues. DR site spins up isolated copies to test recovery plan. After validation, discard test VMs. This enables safe DR drills without impacting production. Run via Prism > Disaster Recovery > Test Failover.
 
 ---
 
 ### Q20
 You need to analyze per-core CPU utilization across all nodes. Which Prism interface provides this visibility?
-- A) Prism > Dashboard > CPU Summary
-- B) Prism > Analysis > CPU > Per-Core Breakdown
-- C) Prism > Infrastructure > Hosts > Select Host > CPU Performance Graph
-- D) SSH to CVM and run `mpstat -P ALL`
+- A) Prism > Infrastructure > Hosts > Select Host > CPU Performance Graph
+- B) SSH to CVM and run `mpstat -P ALL`
+- C) Prism > Dashboard > CPU Summary
+- D) Prism > Analysis > CPU > Per-Core Breakdown
 
-**Answer: C**
+**Answer: A**
 Per-host CPU analysis: Prism > Infrastructure > Hosts > Select Host > Performance tab > CPU graph (shows per-core and aggregate). Per-socket/per-core breakdown helps identify NUMA imbalance, hot cores, or cache contention. `mpstat` on CVM is also valid for detailed kernel-level analysis.
 
 ---
 
 ### Q21
 A host consistently shows high CPU overhead in Prism compared to other hosts. Which component is likely consuming the overhead?
-- A) Guest OS processes
-- B) CVM services (metadata, replication, snapshot)
-- C) Network drivers
-- D) Physical hardware management controller
+- A) Network drivers
+- B) Physical hardware management controller
+- C) Guest OS processes
+- D) CVM services (metadata, replication, snapshot)
 
-**Answer: B**
+**Answer: D**
 CVM CPU overhead varies by role: storage/replication intensive CVMs consume more CPU. Compare via Prism > Infrastructure > Hosts > CPU metrics. If one CVM is hot, check replication jobs, snapshot operations, or storage I/O on `ps aux` on that CVM. May need to balance workload or increase CVM vCPU.
 
 ---
 
 ### Q22
 Your VM requires SCSI disks instead of virtio. What is the primary tradeoff of this choice?
-- A) Better performance due to native support
-- B) More realistic simulation of physical hardware; slight performance penalty vs. virtio
-- C) Required for Windows Server Failover Clustering
-- D) No tradeoff; use SCSI for all VMs
+- A) More realistic simulation of physical hardware; slight performance penalty vs. virtio
+- B) Required for Windows Server Failover Clustering
+- C) No tradeoff; use SCSI for all VMs
+- D) Better performance due to native support
 
-**Answer: B**
+**Answer: A**
 SCSI emulation is more realistic but has ~5-10% performance overhead vs. virtio-blk (paravirtual). Use SCSI for compatibility with legacy applications, WSFC, or 3rd-party tools that require true SCSI support. Use virtio for performance-critical VMs. Configure via Prism > VM > Edit > Disk Controller Type.
 
 ---
 
 ### Q23
 You're sizing VMs for a database with 50,000 IOPS requirement. Prism analysis shows average vDisk utilization is 35%. What should you do?
-- A) Use SSDs only; vDisk utilization is already high
-- B) Analyze hot vDisks to identify bottlenecks; 35% avg may hide peaks
-- C) Reduce vCPU to lower I/O contention
-- D) Increase vDisk count to distribute load
+- A) Analyze hot vDisks to identify bottlenecks; 35% avg may hide peaks
+- B) Reduce vCPU to lower I/O contention
+- C) Increase vDisk count to distribute load
+- D) Use SSDs only; vDisk utilization is already high
 
-**Answer: B**
+**Answer: A**
 Average utilization hides hot spots. Analyze via Prism > Storage > Volume Group > Select VG > Per-Disk breakdown. Some vDisks may be at 80%+ while others idle. Distribute load: split database files across vDisks, or move hot vDisk to faster tier. Peak analysis is critical for right-sizing.
 
 ---
@@ -307,72 +307,72 @@ After enabling SMB Previous Versions (Windows feature) and NGT VSS snapshots, us
 
 ### Q26
 A VM fails with high page fault rate. Which memory diagnostic should you run first?
-- A) Increase vCPU to reduce memory pressure
-- B) Check balloon driver stats in Prism > VM > Memory metrics
-- C) Add 50% more RAM to VM
-- D) Enable memory compression
+- A) Enable memory compression
+- B) Increase vCPU to reduce memory pressure
+- C) Check balloon driver stats in Prism > VM > Memory metrics
+- D) Add 50% more RAM to VM
 
-**Answer: B**
+**Answer: C**
 Page faults indicate memory pressure. Check Prism > VM > Select VM > Monitor > Memory tab for: active/granted/swapped memory. If swapped > 10%, ballooning is active and VM is using disk swap. Solution: reduce overcommit, add host RAM, or migrate VM. Adding vCPU doesn't help memory pressure.
 
 ---
 
 ### Q27
 You need to implement a multi-site DR topology: Site A → Site B (primary) and Site A → Site C (secondary). How many protection domains are required?
-- A) 1 (A → B/C both in same PD)
-- B) 2 (separate PDs for B and C)
-- C) 3 (one for each pair)
-- D) Depends on RPO requirement
+- A) Depends on RPO requirement
+- B) 1 (A → B/C both in same PD)
+- C) 2 (separate PDs for B and C)
+- D) 3 (one for each pair)
 
-**Answer: B**
+**Answer: C**
 One protection domain can replicate to one remote site only. For A → B and A → C, create 2 PDs: PD1 (A → B), PD2 (A → C). Configure via Prism > Protection Domain > Create > Set remote site. Allows different retention/RPO policies per remote site.
 
 ---
 
 ### Q28
 Your protection domain replication is failing. You check Prism > Replication Jobs and see "Replication Capacity Reached." What is the immediate solution?
-- A) Increase snapshot frequency
-- B) Increase replication bandwidth limit via Prism > Network > QoS
-- C) Delete old snapshots to free capacity
-- D) Disable and recreate protection domain
+- A) Delete old snapshots to free capacity
+- B) Disable and recreate protection domain
+- C) Increase snapshot frequency
+- D) Increase replication bandwidth limit via Prism > Network > QoS
 
-**Answer: B**
+**Answer: D**
 Replication bandwidth limit is a QoS setting. Increase via Prism > Network > Quality of Service > Edit Replication Policies > Bandwidth Limit. Default is conservative to protect production traffic. Increase gradually and monitor impact on cluster performance.
 
 ---
 
 ### Q29
 Leap runbook contains a pre-failover script that validates database consistency. When does this script execute?
-- A) Only on recovery plan creation
-- B) Before failover is initiated; if script fails, failover is blocked
-- C) After failover completes; before services start
-- D) Only during test failover
+- A) After failover completes; before services start
+- B) Only during test failover
+- C) Only on recovery plan creation
+- D) Before failover is initiated; if script fails, failover is blocked
 
-**Answer: B**
+**Answer: D**
 Pre-scripts run before failover; failures block the operation. Post-scripts run after VMs boot on DR. Validation scripts should check: network connectivity, shared storage accessibility, critical service status. Configure via Leap > Recovery Plan > Pre/Post Scripts section.
 
 ---
 
 ### Q30
 You observe dropped packets on a VM vNIC in Prism metrics. What is the most likely cause on Nutanix?
-- A) Physical NIC is full; bandwidth throttling is dropping frames
-- B) Virtio-net ring buffer overflow; upgrade to virtio-net v1.1
-- C) CVM network I/O processing bottleneck on over-committed host
-- D) Guest OS network driver issue; update via NGT
+- A) Virtio-net ring buffer overflow; upgrade to virtio-net v1.1
+- B) CVM network I/O processing bottleneck on over-committed host
+- C) Guest OS network driver issue; update via NGT
+- D) Physical NIC is full; bandwidth throttling is dropping frames
 
-**Answer: C**
+**Answer: B**
 Dropped packets typically indicate: CVM network processing is saturated from many VM traffic flows, or vhost-net kernel thread is CPU-bound. Check via `ethtool -S vmX` (drop counters) and CVM `top` for vhost processes. Solution: vMotion one or more VMs off host, or optimize CVM network performance via NIC tuning (RX/TX ring size).
 
 ---
 
 ### Q31
 A VM is configured with hot vCPU add support. During operation, you add 4 vCPUs via Prism > VM > Edit. What happens inside the guest?
-- A) New vCPUs are immediately available to kernel; no reboot needed
-- B) ACPI hotplug event is triggered; guest OS must enable CPUs manually
-- C) VM must be powered off; vCPU change takes effect on reboot
-- D) Hypervisor waits for guest acknowledgment before assigning vCPUs
+- A) ACPI hotplug event is triggered; guest OS must enable CPUs manually
+- B) VM must be powered off; vCPU change takes effect on reboot
+- C) Hypervisor waits for guest acknowledgment before assigning vCPUs
+- D) New vCPUs are immediately available to kernel; no reboot needed
 
-**Answer: B**
+**Answer: A**
 Hot vCPU addition triggers ACPI hotplug events. Guest OS must register new vCPUs. Linux: `echo 1 > /sys/devices/system/cpu/cpuX/online`. Windows: Device Manager detects "Unknown Device" (new vCPU), drivers are auto-loaded. To verify: `lscpu` (Linux) or Device Manager (Windows). Some workloads require restart for kernel thread affinity.
 
 ---
@@ -403,72 +403,72 @@ You're configuring a snapshot schedule for a protection domain: every 2 hours wi
 
 ### Q34
 A VM experiences CPU ready time of 8%. Is this acceptable?
-- A) Yes; <10% is the recommended threshold
-- B) No; any CPU ready time indicates contention
-- C) Depends on workload; 8% is borderline
-- D) Yes; only >20% is problematic
+- A) Yes; only >20% is problematic
+- B) Yes; <10% is the recommended threshold
+- C) No; any CPU ready time indicates contention
+- D) Depends on workload; 8% is borderline
 
-**Answer: A**
+**Answer: B**
 <10% CPU ready time is acceptable. >10% indicates contention. 8% is healthy. Monitor via Prism > VM > Monitor > CPU tab or vSphere Performance Charts (if using ESXi). For non-latency-sensitive workloads, up to 15% may be tolerable. Critical apps should maintain <5%.
 
 ---
 
 ### Q35
 You need to verify CVM maintenance mode completed successfully. Which command on the CVM confirms its status?
-- A) `cvm_status.sh`
-- B) `manage_cvm.sh --status`
-- C) SSH to cluster and run `cluster status` at Prism UI
-- D) Check Prism > Infrastructure > Hosts > Host status field
+- A) Check Prism > Infrastructure > Hosts > Host status field
+- B) `cvm_status.sh`
+- C) `manage_cvm.sh --status`
+- D) SSH to cluster and run `cluster status` at Prism UI
 
-**Answer: D**
+**Answer: A**
 Prism > Infrastructure > Hosts shows host status: Normal, Maintenance Mode (if in progress), or alerts. During maintenance mode, the host is removed from cluster operations. The CVM still runs cluster services. Verify completion: Host status returns to Normal, and cluster state is stable. Also check `cluster status` via SSH: `nutanix@cvm$ cluster status` (shows all nodes).
 
 ---
 
 ### Q36
 A user reports VM snapshots are not appearing in Previous Versions. You've already confirmed NGT is installed. What is the next diagnostic step?
-- A) Check snapshot schedule exists and last run was recent
-- B) Restart CVM to refresh VSS provider
-- C) Delete and recreate VM snapshots
-- D) Verify SMB Previous Versions registry setting is enabled
+- A) Delete and recreate VM snapshots
+- B) Verify SMB Previous Versions registry setting is enabled
+- C) Check snapshot schedule exists and last run was recent
+- D) Restart CVM to refresh VSS provider
 
-**Answer: A**
+**Answer: C**
 Snapshots must exist before Previous Versions can show them. Check Prism > VM > Snapshots tab for recent snapshots. If none exist, create manual snapshot. Then verify: 1) SMB Previous Versions enabled (Windows feature), 2) Snapshot schedule configured, 3) NGT VSS service running. If schedule exists but no snapshots, check Prism > Protection Domain > Replication Jobs for errors.
 
 ---
 
 ### Q37
 Your cluster is running with 5 nodes, each with 20TB raw capacity. You want 2x replication. What is usable capacity?
-- A) 100TB (5 × 20TB)
-- B) 50TB (5 × 20TB ÷ 2)
-- C) 75TB (5 × 20TB × 0.75)
-- D) 40TB (2 × 20TB)
+- A) 75TB (5 × 20TB × 0.75)
+- B) 40TB (2 × 20TB)
+- C) 100TB (5 × 20TB)
+- D) 50TB (5 × 20TB ÷ 2)
 
-**Answer: B**
+**Answer: D**
 With 2x replication: usable capacity = (Total raw capacity) ÷ (Replication factor). 100TB raw ÷ 2 = 50TB usable. This assumes full redundancy. With 3x replication: 100TB ÷ 3 = 33TB. Calculate via Prism > Capacity > Effective Usable Capacity or Prism > Storage > Capacity Summary.
 
 ---
 
 ### Q38
 You want to prevent a critical database VM from migrating off its current host. Which VM affinity configuration should you use?
-- A) Soft affinity with preferred host label
-- B) Hard affinity to current host with override disabled
-- C) Host policy restriction via cluster settings
-- D) vNUMA pinning to physical NUMA nodes
+- A) Hard affinity to current host with override disabled
+- B) Host policy restriction via cluster settings
+- C) vNUMA pinning to physical NUMA nodes
+- D) Soft affinity with preferred host label
 
-**Answer: B**
+**Answer: A**
 Hard affinity with override disabled prevents any vMotion of that VM. Configure via Prism > VM > VM Affinity > Hard Affinity > Select Target Host > Disable Override. Note: This can impact load balancing and HA recovery if host fails. Consider soft affinity instead: create label "critical_db" and assign preferred hosts, allowing flexibility during maintenance.
 
 ---
 
 ### Q39
 A Leap recovery plan for a 3-tier app shows: Tier 1 boot time 2 minutes, Tier 2 boot time 5 minutes, Tier 3 boot time 3 minutes. What is the minimum failover RTO if booted sequentially?
-- A) 5 minutes (longest tier)
-- B) 10 minutes (Tier 1 + Tier 2)
-- C) 10 minutes (2 + 5 + 3, sequential)
-- D) 3 minutes (parallel boot of all tiers)
+- A) 10 minutes (Tier 1 + Tier 2)
+- B) 10 minutes (2 + 5 + 3, sequential)
+- C) 3 minutes (parallel boot of all tiers)
+- D) 5 minutes (longest tier)
 
-**Answer: C**
+**Answer: B**
 Sequential boot with dependencies: Tier 1 boots (2 min), then Tier 2 (5 min), then Tier 3 (3 min) = 10 minutes total RTO. If tiers are independent and boot in parallel, RTO = 5 minutes (longest tier). Configure boot groups in Leap > Recovery Plan > Tier Groups. Parallel boot reduces RTO significantly.
 
 ---
@@ -499,72 +499,72 @@ RPO = time between failures and last good backup. 6-hour schedule = worst-case 6
 
 ### Q42
 You're troubleshooting a VM's high memory usage. Prism shows: Active=6GB, Granted=8GB, Swapped=2GB. What does this reveal?
-- A) VM has true memory leak; restart required
-- B) Hypervisor is ballooning; memory pressure is real; VM needs more RAM or host capacity
-- C) VM is caching aggressively; normal behavior
-- D) Network memory transfer is active; wait for completion
+- A) Network memory transfer is active; wait for completion
+- B) VM has true memory leak; restart required
+- C) Hypervisor is ballooning; memory pressure is real; VM needs more RAM or host capacity
+- D) VM is caching aggressively; normal behavior
 
-**Answer: B**
+**Answer: C**
 Breakdown: Active (6GB) = actually used by guest; Granted (8GB) = allocated; Swapped (2GB) = ballooned out to host swap. Total needed: 8GB, but only 6GB active. This indicates memory pressure: either over-committed VM or under-provisioned host. Solution: migrate VM to less-loaded host or reduce overcommit ratio.
 
 ---
 
 ### Q43
 Leap executes a recovery plan on DR site, and a VM fails to boot. The recovery plan includes a post-boot validation script. What happens?
-- A) Recovery plan marks VM as "Failed"; stops remaining boot sequence
-- B) VM continues running; post-script reports error but doesn't block
-- C) Depends on script error handling: if script exit code ≠ 0, failover can be rolled back
-- D) Post-script only runs if boot succeeds; VM failure prevents script execution
+- A) Post-script only runs if boot succeeds; VM failure prevents script execution
+- B) Recovery plan marks VM as "Failed"; stops remaining boot sequence
+- C) VM continues running; post-script reports error but doesn't block
+- D) Depends on script error handling: if script exit code ≠ 0, failover can be rolled back
 
-**Answer: D**
+**Answer: A**
 Post-boot scripts only execute if VM boots successfully. Pre-boot scripts run before boot and can block failover. If VM fails to boot, post-script doesn't run. Configure via Leap > Recovery Plan > Edit VM > Post-Boot Scripts. Ensure boot order and pre-scripts satisfy VM dependencies so boot doesn't fail.
 
 ---
 
 ### Q44
 You implement a multi-site DR: 3 protection domains (PD1, PD2, PD3) all replicating from Site A to Site B. How do you prevent Site B from becoming oversubscribed?
-- A) Configure PD replication schedules to stagger: PD1 every 2h, PD2 every 2h+30m, PD3 every 2h+60m
-- B) Set QoS bandwidth limits per PD to balance replication traffic
-- C) Capacity plan: ensure Site B has ≥ capacity of Site A for all PDs combined
-- D) All of the above
+- A) Capacity plan: ensure Site B has ≥ capacity of Site A for all PDs combined
+- B) All of the above
+- C) Configure PD replication schedules to stagger: PD1 every 2h, PD2 every 2h+30m, PD3 every 2h+60m
+- D) Set QoS bandwidth limits per PD to balance replication traffic
 
-**Answer: D**
+**Answer: B**
 All three strategies apply: 1) Stagger schedules to avoid simultaneous replication spikes, 2) QoS limits prevent network congestion, 3) Capacity planning ensures Site B can accommodate all VMs if failover occurs. Configure via: Prism > Network > QoS > Set Per-PD Bandwidth Limits, and Prism > Protection Domain > Schedule > Stagger times.
 
 ---
 
 ### Q45
 A cluster node fails and a VM on that host is protected by a protection domain. Will Leap DR automatically failover the VM?
-- A) Yes; Leap triggers automatic failover if node fails
-- B) No; Leap requires manual failover initiation
-- C) Depends on protection domain "Auto Failover" setting
-- D) Only if VM is configured with HA affinity rules
+- A) Depends on protection domain "Auto Failover" setting
+- B) Only if VM is configured with HA affinity rules
+- C) Yes; Leap triggers automatic failover if node fails
+- D) No; Leap requires manual failover initiation
 
-**Answer: B**
+**Answer: D**
 Leap is a manual failover tool; it doesn't auto-trigger on node failure. Nutanix native HA will restart VM on another node if possible. Leap is for planned/unplanned DR failover to remote site. If VM is in a protection domain and you decide to failover to remote site due to node failure, you manually execute Leap failover. Configure via Prism > Disaster Recovery > Execute Failover.
 
 ---
 
 ### Q46
 You're configuring a vNIC for optimal performance on a Linux VM. Which settings should you enable?
-- A) Virtio-net driver, GSO (Generic Segmentation Offload), checksum offload
-- B) E1000 emulation, TSO disabled, checksum in-kernel
-- C) SRIOV passthrough, disable CVM monitoring
-- D) Jumbo frames 9000 MTU, disable virtio
+- A) E1000 emulation, TSO disabled, checksum in-kernel
+- B) SRIOV passthrough, disable CVM monitoring
+- C) Jumbo frames 9000 MTU, disable virtio
+- D) Virtio-net driver, GSO (Generic Segmentation Offload), checksum offload
 
-**Answer: A**
+**Answer: D**
 Virtio-net with GSO/TSO/checksum offload provides optimal performance: reduces CPU overhead by offloading segmentation/checksums. Verify on Linux: `ethtool -k eth0` (check gso, tso on) and `ethtool -c eth0` (rx/tx descriptors). Jumbo frames help but aren't critical if default MTU 1500 works. SRIOV bypasses CVM, reducing visibility and live migration capability.
 
 ---
 
 ### Q47
 A VM's vDisk performance shows 10ms latency during peak hours, but 2ms during off-peak. Which analysis should you perform?
-- A) Ignore; normal variation is expected
-- B) Check vDisk IOPS and queue length to identify peak load characteristics
-- C) Increase vCPU to handle peaks
-- D) Migrate vDisk to SSD tier
+- A) Check vDisk IOPS and queue length to identify peak load characteristics
+- B) Increase vCPU to handle peaks
+- C) Migrate vDisk to SSD tier
+- D) Ignore; normal variation is expected
 
-**Answer: B**
+**Answer: A**
 Latency increases with queue depth (load). Analyze via Prism > Storage > Volume Group > Per-Disk breakdown > Peak IOPS. If peak IOPS are acceptable but latency is high, it's queue depth/congestion. Solutions: distribute load across vDisks, optimize query/workload to reduce IOPS, or migrate to faster tier. SSD is option only if all tiers are saturated.
 
 ---
@@ -595,36 +595,36 @@ Different tools serve different purposes: `ethtool -S` shows detailed NIC stats 
 
 ### Q50
 A VM requires NGT installation but the host kernel version is 4.x. Will NGT install successfully?
-- A) Yes; NGT supports all Linux kernels
-- B) No; NGT requires kernel 5.x or later
-- C) Yes; but with reduced functionality (no VSS snapshots on 4.x kernels)
-- D) Depends on specific kernel patch level
+- A) Depends on specific kernel patch level
+- B) Yes; NGT supports all Linux kernels
+- C) No; NGT requires kernel 5.x or later
+- D) Yes; but with reduced functionality (no VSS snapshots on 4.x kernels)
 
-**Answer: A**
+**Answer: B**
 NGT supports kernel 4.x and later. VSS snapshots are Windows-specific (use VSS provider). Linux VMs use crash-consistent snapshots or app-consistent snapshots via custom pre/post scripts. Installation: Linux → download NGT ISO, mount, run installer. Verify: `rpm -q nutanix-guest-tools` or `dpkg -l | grep nutanix`.
 
 ---
 
 ### Q51
 You're analyzing a VM's NUMA performance. The VM has 8 vCPU (4 cores per socket on 2-socket host), 16GB RAM. Memory access times are slow. What should you check?
-- A) Run `numactl --hardware` on guest to verify NUMA configuration
-- B) Check guest OS process affinity is aligned with NUMA nodes
-- C) Verify vCPU placement in Prism > VM > Properties > NUMA Pinning
-- D) All of the above
+- A) All of the above
+- B) Run `numactl --hardware` on guest to verify NUMA configuration
+- C) Check guest OS process affinity is aligned with NUMA nodes
+- D) Verify vCPU placement in Prism > VM > Properties > NUMA Pinning
 
-**Answer: D**
+**Answer: A**
 NUMA optimization requires: 1) numactl to understand host/guest topology, 2) process affinity via taskset/numactl to bind processes to specific nodes, 3) Prism to verify vCPU placement. Slow memory access indicates remote access (memory on opposite socket). Solution: pin vCPU to socket, allocate memory on same socket, or use interleave if app requires cross-socket access.
 
 ---
 
 ### Q52
 A protection domain is configured to replicate to a remote site but "Seeding" status has been "In Progress" for 24 hours. What is the likely issue?
-- A) Network bandwidth between sites is insufficient
-- B) Remote site cluster has insufficient disk space
-- C) Seeding is blocked by cluster lock acquisition
-- D) A or B
+- A) Seeding is blocked by cluster lock acquisition
+- B) A or B
+- C) Network bandwidth between sites is insufficient
+- D) Remote site cluster has insufficient disk space
 
-**Answer: D**
+**Answer: B**
 Slow seeding typically indicates: insufficient bandwidth (increase QoS limit for initial seeding), insufficient remote capacity (check via Prism on remote site), or network connectivity issues. Check Prism > Replication Jobs > Seeding Job > Monitor > bandwidth utilization. If bandwidth shows zero, network path is broken. Verify: `ping remote_cluster_vip`, `nstat` on CVM.
 
 ---
@@ -643,24 +643,24 @@ Retention policy defines how long snapshots are kept. Set via Prism > Protection
 
 ### Q54
 A VM with high I/O workload is on a host with high CVM CPU. Should you immediately vMotion the VM?
-- A) Yes; the CVM is overloaded and can't handle the I/O
-- B) No; move the VM only if its own CPU/memory is high
-- C) First investigate: CVM CPU may be handling replication for other VMs, not necessarily this one
-- D) Move only if accompanied by CVM RAM increase
+- A) No; move the VM only if its own CPU/memory is high
+- B) First investigate: CVM CPU may be handling replication for other VMs, not necessarily this one
+- C) Move only if accompanied by CVM RAM increase
+- D) Yes; the CVM is overloaded and can't handle the I/O
 
-**Answer: C**
+**Answer: B**
 CVM CPU usage includes: metadata, replication, snapshots, and deduplication for all VMs on host. High CVM CPU doesn't necessarily mean the high-I/O VM is the cause. Investigate: check CVM network/disk I/O per VM, identify actual source. Then vMotion only the hot VM if it's the cause. Blind vMotion risks moving the wrong VM.
 
 ---
 
 ### Q55
 Your Prism shows a VM with "CPU.EffectiveReadyTime" metric of 50ms. Does this indicate contention?
-- A) Yes; any >0 ready time is contention
-- B) No; 50ms is negligible for non-real-time workloads
-- C) Depends on measurement interval; 50ms effective over 1 second = 5% ready time (acceptable)
-- D) 50ms always indicates critical contention
+- A) No; 50ms is negligible for non-real-time workloads
+- B) Depends on measurement interval; 50ms effective over 1 second = 5% ready time (acceptable)
+- C) 50ms always indicates critical contention
+- D) Yes; any >0 ready time is contention
 
-**Answer: C**
+**Answer: B**
 CPU ready time is a percentage, not an absolute value. 50ms ready time within a 1-second interval = 50/1000 = 5% ready time (acceptable). The metric interpretation depends on sampling interval. Check Prism metric definitions: typically reports as percentage. If metric shows raw milliseconds, divide by sampling interval to get percentage.
 
 ---
@@ -691,36 +691,36 @@ All three are required: 1) Windows Feature (Server Roles > File Services > File 
 
 ### Q58
 A cluster has two hosts, each with 4 NIC uplinks to the same L2 network. One uplink on Host A fails. What happens to VM network traffic from Host A VMs?
-- A) VMs lose connectivity; manual intervention needed
-- B) Traffic fails over to remaining 3 uplinks on Host A automatically
-- C) Prism alerts but doesn't auto-recover
-- D) Depends on NIC teaming/bonding configuration
+- A) Depends on NIC teaming/bonding configuration
+- B) VMs lose connectivity; manual intervention needed
+- C) Traffic fails over to remaining 3 uplinks on Host A automatically
+- D) Prism alerts but doesn't auto-recover
 
-**Answer: D**
+**Answer: A**
 Failover depends on NIC bonding mode: Active-Backup = traffic immediately shifts to standby NIC (transparent), Balance-ALB = traffic rebalances across active NICs, LACP = depends on switch config. Nutanix doesn't mandate a specific bonding mode; cluster inherits host OS config. Verify via: Linux `cat /proc/net/bonding/bond0` or Windows `Get-NetLbfoTeam`. Prism alerts on NIC failure regardless.
 
 ---
 
 ### Q59
 You're right-sizing a VM after analyzing 30 days of performance data. Current: 8 vCPU, avg CPU utilization 25%, peak 45%. Recommendation?
-- A) Keep 8 vCPU; add RAM instead
-- B) Reduce to 4 vCPU; 25% utilization on 8 cores = 2 core equivalent
-- C) Increase to 16 vCPU; include 50% headroom above peak
-- D) Reduce to 6 vCPU; maintain some headroom for bursts
+- A) Reduce to 6 vCPU; maintain some headroom for bursts
+- B) Keep 8 vCPU; add RAM instead
+- C) Reduce to 4 vCPU; 25% utilization on 8 cores = 2 core equivalent
+- D) Increase to 16 vCPU; include 50% headroom above peak
 
-**Answer: D**
+**Answer: A**
 Right-sizing formula: (Peak utilization ÷ 100) × Current vCPU + headroom. Peak 45% on 8 vCPU = 3.6 cores needed. Add 30-50% headroom for growth/bursts: 3.6 + (1-2 cores) = 5-6 cores target. Reducing to 4 vCPU is risky (no headroom). Verify change by setting new config, monitoring for 7 days, ensuring CPU ready time <10%.
 
 ---
 
 ### Q60
 A VM's storage latency is consistently >20ms. You've ruled out IOPS saturation. What should you investigate next?
-- A) Network latency between cluster and remote storage
-- B) CVM disk I/O processing time via `iostat` on CVM
-- C) Hypervisor cache effectiveness: check hit rates in Prism
-- D) Physical hardware: SSD wear, SATA speed limitations
+- A) Hypervisor cache effectiveness: check hit rates in Prism
+- B) Physical hardware: SSD wear, SATA speed limitations
+- C) Network latency between cluster and remote storage
+- D) CVM disk I/O processing time via `iostat` on CVM
 
-**Answer: B**
+**Answer: D**
 If IOPS are acceptable but latency is high, investigate CVM I/O path: CVM disk processing, extent group calculations, replication overhead. Run on CVM: `iostat -xmt 1 10` to see avg I/O time per disk. If CVM I/O time is high, issue is in CVM processing. If CVM latency is low but guest sees high latency, bottleneck is network/replication. Check Prism > Storage > Latency Breakdown to identify source.
 
 ---
@@ -867,12 +867,12 @@ Arrange the steps for entering host maintenance mode and verifying readiness:
 4. Verify the host status changes to "Maintenance Mode" in Prism
 5. Monitor replication/rebuild completion on remaining nodes
 
-- A) 1 → 2 → 3 → 4 → 5
-- B) 3 → 1 → 2 → 4 → 5
-- C) 2 → 1 → 3 → 5 → 4
-- D) 1 → 3 → 2 → 5 → 4
+- A) 3 → 1 → 2 → 4 → 5
+- B) 2 → 1 → 3 → 5 → 4
+- C) 1 → 3 → 2 → 5 → 4
+- D) 1 → 2 → 3 → 4 → 5
 
-**Answer: B**
+**Answer: A**
 Rationale: Step 3 (verify cluster health first) ensures cluster can handle the evacuation. Step 1 (vMotion) evacuates VMs. Step 2 initiates maintenance mode. Step 4 verifies mode is active. Step 5 monitors rebuild. Doing anything out of order risks data loss or incomplete evacuation.
 
 ---
@@ -923,12 +923,12 @@ Arrange the diagnostic steps for troubleshooting low VM IOPS performance:
 4. Check if iSCSI/NFS network latency is the bottleneck
 5. Compare peak IOPS against disk/storage tier limits
 
-- A) 2 → 1 → 3 → 5 → 4
-- B) 1 → 2 → 5 → 3 → 4
-- C) 1 → 3 → 2 → 4 → 5
-- D) 2 → 5 → 1 → 3 → 4
+- A) 2 → 5 → 1 → 3 → 4
+- B) 2 → 1 → 3 → 5 → 4
+- C) 1 → 2 → 5 → 3 → 4
+- D) 1 → 3 → 2 → 4 → 5
 
-**Answer: B**
+**Answer: C**
 Rationale: Step 1 (CPU) rules out CPU contention masking I/O issue. Step 2 (per-disk) identifies which disk is hot. Step 5 (compare to limits) determines if it's a capacity issue. Step 3 (CVM processing) checks data path latency. Step 4 (network) checks if it's remote storage issue. Logical progression from VM → storage → infrastructure.
 
 ---
@@ -942,12 +942,12 @@ Arrange the steps for right-sizing a VM based on 30-day performance analysis:
 5. Monitor for 7 days post-change to validate CPU ready time and performance
 6. Adjust again if CPU ready time >10% or new bottlenecks appear
 
-- A) 1 → 2 → 3 → 4 → 5 → 6
-- B) 2 → 1 → 3 → 5 → 4 → 6
-- C) 1 → 3 → 2 → 4 → 6 → 5
-- D) 3 → 1 → 2 → 5 → 4 → 6
+- A) 3 → 1 → 2 → 5 → 4 → 6
+- B) 1 → 2 → 3 → 4 → 5 → 6
+- C) 2 → 1 → 3 → 5 → 4 → 6
+- D) 1 → 3 → 2 → 4 → 6 → 5
 
-**Answer: A**
+**Answer: B**
 Rationale: Logical progression from collection → analysis → calculation → implementation → validation → iteration. Each step depends on prior step's output.
 
 ---
@@ -960,12 +960,12 @@ Arrange the steps for enabling self-service file restore on a Windows file serve
 4. Configure registry settings for snapshot accessibility
 5. Create a test file and verify it appears in Previous Versions within 30 seconds
 
-- A) 1 → 2 → 3 → 4 → 5
-- B) 3 → 2 → 4 → 1 → 5
-- C) 2 → 3 → 4 → 1 → 5
-- D) 2 → 4 → 3 → 1 → 5
+- A) 2 → 3 → 4 → 1 → 5
+- B) 2 → 4 → 3 → 1 → 5
+- C) 1 → 2 → 3 → 4 → 5
+- D) 3 → 2 → 4 → 1 → 5
 
-**Answer: C**
+**Answer: A**
 Rationale: Step 2 (NGT) installs VSS capability. Step 3 (Previous Versions) enables UI. Step 4 (registry) configures enablement. Step 1 (schedule) starts creating snapshots. Step 5 (test) validates end-to-end. Can't test until infrastructure is ready.
 
 ---
@@ -978,12 +978,12 @@ Arrange the steps for analyzing and optimizing NUMA memory performance on a VM:
 4. Allocate VM RAM to match socket topology
 5. Monitor memory latency metrics before and after optimization
 
-- A) 1 → 3 → 4 → 2 → 5
-- B) 1 → 2 → 3 → 4 → 5
-- C) 3 → 1 → 4 → 2 → 5
-- D) 1 → 4 → 3 → 2 → 5
+- A) 3 → 1 → 4 → 2 → 5
+- B) 1 → 4 → 3 → 2 → 5
+- C) 1 → 3 → 4 → 2 → 5
+- D) 1 → 2 → 3 → 4 → 5
 
-**Answer: A**
+**Answer: C**
 Rationale: Step 1 (discover topology). Step 3 (pin vCPU) in hypervisor. Step 4 (allocate RAM) on same socket. Step 2 (test affinity) with `numactl`. Step 5 (measure improvement). Must understand topology first, then configure hypervisor, then validate in guest.
 
 ---
@@ -997,12 +997,12 @@ Arrange the steps for multi-site DR setup (A→B and A→C):
 5. Test failover to B, verify recovery plan validates successfully
 6. Test failover to C, verify recovery plan validates successfully
 
-- A) 1 → 2 → 3 → 4 → 5 → 6
-- B) 1 → 3 → 2 → 4 → 6 → 5
-- C) 4 → 1 → 2 → 3 → 5 → 6
-- D) 1 → 2 → 4 → 3 → 5 → 6
+- A) 1 → 3 → 2 → 4 → 6 → 5
+- B) 4 → 1 → 2 → 3 → 5 → 6
+- C) 1 → 2 → 4 → 3 → 5 → 6
+- D) 1 → 2 → 3 → 4 → 5 → 6
 
-**Answer: A**
+**Answer: D**
 Rationale: Steps 1-2 (create PDs with different schedules to avoid congestion). Step 3 (verify replication is ready). Steps 4-6 (create and test recovery plans independently). Testing must follow seeding completion.
 
 ---
@@ -1016,12 +1016,12 @@ Arrange the troubleshooting steps for a VM with CPU ready time = 15%:
 5. vMotion this VM off the host or reduce vCPU
 6. Monitor CPU ready time post-vMotion to validate improvement
 
-- A) 1 → 2 → 3 → 4 → 5 → 6
-- B) 2 → 1 → 3 → 4 → 5 → 6
-- C) 1 → 3 → 2 → 4 → 5 → 6
-- D) 2 → 3 → 1 → 5 → 4 → 6
+- A) 2 → 1 → 3 → 4 → 5 → 6
+- B) 1 → 3 → 2 → 4 → 5 → 6
+- C) 2 → 3 → 1 → 5 → 4 → 6
+- D) 1 → 2 → 3 → 4 → 5 → 6
 
-**Answer: B**
+**Answer: A**
 Rationale: Step 2 (confirm metric is real, not a spike). Step 1 (check cluster CPU health). Step 3 (identify hot host). Step 4 (confirm overcommit is the issue). Step 5 (remediate). Step 6 (verify fix). Must confirm problem before diagnosis.
 
 ---

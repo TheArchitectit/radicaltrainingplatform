@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""SPEC-21: spread a bank's correct-answer positions without changing what it teaches.
+"""Spread a bank's correct-answer positions without changing what it teaches.
 
 A learner who always clicks B can score by position alone when a bank's keys
 cluster. This rotates the option *labels* of such a bank: a permutation moves
@@ -8,7 +8,8 @@ changes. The question, the option texts, the correct option's text and the
 explanation are identical afterwards; the facts are only reordered.
 
 The rotation is a fixed sequence with no randomness, so a rerun produces the
-same file and the diff is reviewable. A bank that mentions options by letter in
+same file and the diff is reviewable. Released pack banks and the named legacy
+root bank families are processed. A bank that mentions options by letter in
 its explanation ("see option B") is refused, not rotated: a rotation would
 silently change what that sentence points at.
 
@@ -26,7 +27,10 @@ import sys
 LETTERS = "ABCDEF"
 OPTION = re.compile(r"^- ([A-F])\) (.*)$", re.MULTILINE)
 ANSWER = re.compile(r"^\*\*(?:Correct )?Answer:\s*([A-F](?:,\s*[A-F])*)\*\*", re.MULTILINE)
-CROSS_REF = re.compile(r"\boption\s+[A-F]\b", re.IGNORECASE)
+CROSS_REF = re.compile(
+    r"(?i:\b(?:options?|answers?|choices?)\s+[A-F](?:\s*(?:/|,|&|and|or)\s*[A-F])?\b)"
+    r"|\b[Bb]oth\s+[A-F]\b"
+)
 
 THRESHOLD = 0.40
 
@@ -58,6 +62,8 @@ def rebuild(block: str, rotation: int):
     new_of_old = {old_letter: LETTERS[(p + rotation) % n]
                   for p, (old_letter, _) in enumerate(opts)}
     keys = [k.strip() for k in ANSWER.match(lines[ans_idx].strip()).group(1).split(",")]
+    if len(keys) != 1:
+        return block, keys
     new_keys = sorted(new_of_old[k] for k in keys)
     label = lines[ans_idx].split("Answer:")[0]
     out = lines[:first]
@@ -155,6 +161,47 @@ def letter_shares(text: str):
     return counts, total
 
 
+def self_test():
+    blocks = []
+    for number in range(1, 7):
+        key = "A, B" if number == 5 else "A"
+        explanation = {
+            3: "Option B and options C/D retain their labels.",
+            4: "The wording Both A and C retains its labels.",
+            5: "A multi-answer item must not be rotated.",
+            6: "both a and c are ordinary lowercase words here, not labels.",
+        }.get(number, "Explanation for review.")
+        blocks.append(
+            f"### Q{number}\nChoose an answer.\n- A) alpha\n- B) bravo\n"
+            f"- C) charlie\n- D) delta\n**Answer: {key}**\n{explanation}\n---\n")
+    original = "".join(blocks)
+    rewritten, notes = rebalance_text(original)
+    before = dict(enumerate(blocks, 1))
+    after = {
+        int(re.search(r"### Q(\d+)", block).group(1)): block
+        for block in re.split(r"(?m)^(?=### Q\d+)", rewritten)
+        if block.startswith("### Q")
+    }
+    failures = []
+    for number in (3, 4, 5):
+        if after[number] != before[number]:
+            failures.append(f"Q{number} was rotated despite its protected shape")
+    if len(notes) != 2:
+        failures.append(f"expected two letter-reference refusals, got {len(notes)}")
+    counts, total = letter_shares(rewritten)
+    if total != 5 or max(counts.values()) / total > THRESHOLD:
+        failures.append("single-key distribution was not rebalanced")
+    if rebalance_text(rewritten)[0] != rewritten:
+        failures.append("a second rebalance is not a no-op")
+    if failures:
+        for failure in failures:
+            print(f"REBALANCE SELF-TEST: FAIL — {failure}")
+        return 2
+    print("REBALANCE SELF-TEST: PASS — references refused, multi-key items intact, "
+          "single keys balanced, second run unchanged")
+    return 0
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
@@ -163,10 +210,17 @@ def main():
     mode = ap.add_mutually_exclusive_group(required=True)
     mode.add_argument("--dry-run", action="store_true")
     mode.add_argument("--write", action="store_true")
+    mode.add_argument("--self-test", action="store_true")
     args = ap.parse_args()
 
+    if args.self_test:
+        return self_test()
+
     root = pathlib.Path(args.root)
-    banks = sorted((root / "content" / "exams").glob("*/questions/*.md"))
+    banks = list((root / "content" / "exams").glob("*/questions/*.md"))
+    for pattern in ("NCA-75-Part*.md", "NCM-MCI-Part*.md", "NCP-*-Part*.md"):
+        banks.extend(root.glob(pattern))
+    banks = sorted(banks)
     if args.only:
         banks = [b for b in banks if b.name in set(args.only)]
     if not banks:

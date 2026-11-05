@@ -6,36 +6,36 @@
 
 ### Q1
 Which tool is used to discover and manage firmware and software updates on a Nutanix cluster?
-- A) Nutanix Cluster Check (NCC)
-- B) Life Cycle Manager (LCM)
-- C) Pulse
-- D) Stargate
+- A) Stargate
+- B) Nutanix Cluster Check (NCC)
+- C) Life Cycle Manager (LCM)
+- D) Pulse
 
-**Answer: B**
+**Answer: C**
 Life Cycle Manager (LCM) is the Nutanix tool for discovering, staging, and applying firmware and software updates across AOS, AHV/hypervisor, and hardware components. NCC checks health, Pulse sends telemetry, and Stargate handles I/O.
 
 ---
 
 ### Q2
 What is the correct order of operations when performing an LCM update on a Nutanix cluster?
-- A) Notify users → Take inventory → Run pre-checks → Apply updates
-- B) Take inventory → Run pre-checks → Notify users → Apply updates
-- C) Run pre-checks → Take inventory → Apply updates → Notify users
-- D) Notify users → Run pre-checks → Take inventory → Apply updates
+- A) Run pre-checks → Take inventory → Apply updates → Notify users
+- B) Notify users → Run pre-checks → Take inventory → Apply updates
+- C) Notify users → Take inventory → Run pre-checks → Apply updates
+- D) Take inventory → Run pre-checks → Notify users → Apply updates
 
-**Answer: B**
+**Answer: D**
 The standard LCM workflow is: 1) Inventory — discover available updates; 2) Pre-checks — validate cluster health and readiness; 3) Notifications — alert users of pending maintenance; 4) Apply updates in recommended order.
 
 ---
 
 ### Q3
 An administrator needs to upgrade a 5-node cluster. Which upgrade order is recommended by Nutanix best practices?
-- A) Firmware → AOS → Hypervisor
-- B) Hypervisor → Firmware → AOS
-- C) AOS → Hypervisor → Firmware
-- D) Firmware → Hypervisor → AOS
+- A) Hypervisor → Firmware → AOS
+- B) AOS → Hypervisor → Firmware
+- C) Firmware → Hypervisor → AOS
+- D) Firmware → AOS → Hypervisor
 
-**Answer: C**
+**Answer: B**
 The recommended Nutanix best-practice upgrade order is: 1) AOS first — CVMs must have updated storage management APIs to orchestrate host maintenance modes; 2) Hypervisor second — guest VMs can then be safely live-migrated during rolling host reboots; 3) Firmware (BIOS, BMC, drive firmware) last to minimize bare-metal reset conflicts on a stabilized stack.
 
 ---
@@ -54,24 +54,24 @@ Prism Central LCM provides multi-cluster orchestration, allowing administrators 
 
 ### Q5
 Before placing nodes into maintenance mode for an LCM upgrade, what should an administrator verify first?
-- A) That all VMs are powered off
-- B) That VM-to-host affinity rules are in place
-- C) That there are sufficient cluster resources for HA to restart VMs on remaining nodes
-- D) That the cluster is licensed for Pro or Ultimate
+- A) That the cluster is licensed for Pro or Ultimate
+- B) That all VMs are powered off
+- C) That VM-to-host affinity rules are in place
+- D) That there are sufficient cluster resources for HA to restart VMs on remaining nodes
 
-**Answer: C**
+**Answer: D**
 Placing a node in maintenance mode causes HA to restart its VMs on other cluster nodes. The administrator must ensure the remaining nodes have sufficient CPU, memory, and storage resources to absorb these VMs. VMs do not need to be powered off manually.
 
 ---
 
 ### Q6
 Which statement is true regarding LCM dark site mode for air-gapped environments?
-- A) Dark site mode requires an HTTPS proxy to Nutanix support
-- B) Dark site mode uses a local HTTP server to host update packages for offline clusters
-- C) Dark site mode automatically syncs packages via satellite link
-- D) Dark site mode is not supported for firmware updates
+- A) Dark site mode automatically syncs packages via satellite link
+- B) Dark site mode is not supported for firmware updates
+- C) Dark site mode requires an HTTPS proxy to Nutanix support
+- D) Dark site mode uses a local HTTP server to host update packages for offline clusters
 
-**Answer: B**
+**Answer: D**
 LCM dark site mode enables offline/air-gapped clusters to receive updates by hosting packages on a local web server within the environment. The cluster points to this local repository instead of the Nutanix public update catalog.
 
 ---
@@ -102,24 +102,24 @@ A production Nutanix cluster requires a minimum of 3 nodes. This provides the mi
 
 ### Q9
 An LCM pre-check fails with a warning about VM anti-affinity rules. What does this indicate?
-- A) VMs will automatically be migrated to balance load
-- B) VMs that must remain separated are at risk of landing on the same node during upgrade
-- C) The cluster has too many VMs and cannot perform the upgrade
-- D) The node will not enter maintenance mode
+- A) The node will not enter maintenance mode
+- B) VMs will automatically be migrated to balance load
+- C) VMs that must remain separated are at risk of landing on the same node during upgrade
+- D) The cluster has too many VMs and cannot perform the upgrade
 
-**Answer: B**
+**Answer: C**
 During LCM, nodes enter maintenance mode sequentially, causing VM HA restarts. If anti-affinity rules separate critical VMs (e.g., domain controllers), the pre-check warns that these VMs could potentially be placed on the same surviving node. Manual verification or temporary affinity adjustments may be needed.
 
 ---
 
 ### Q10
 Which component handles the rolling restart of CVMs during an AOS upgrade?
-- A) Stargate
-- B) Genesis
-- C) Curator
-- D) LCM orchestration framework
+- A) Curator
+- B) LCM orchestration framework
+- C) Stargate
+- D) Genesis
 
-**Answer: D**
+**Answer: B**
 LCM orchestrates the entire upgrade process, including the rolling restart of CVMs one at a time, with automatic health checks between each restart. Genesis starts services, Stargate handles I/O, and Curator manages background tasks — but LCM drives the upgrade workflow.
 
 ---
@@ -130,12 +130,12 @@ LCM orchestrates the entire upgrade process, including the rolling restart of CV
 
 ### Q11
 What differentiates Prism Element from Prism Central?
-- A) Prism Element is cloud-based; Prism Central is on-premises
-- B) Prism Element manages a single cluster; Prism Central manages multiple clusters
-- C) Prism Element requires a separate VM; Prism Central is built-in
-- D) Prism Element is REST-API only; Prism Central has a GUI
+- A) Prism Element manages a single cluster; Prism Central manages multiple clusters
+- B) Prism Element requires a separate VM; Prism Central is built-in
+- C) Prism Element is REST-API only; Prism Central has a GUI
+- D) Prism Element is cloud-based; Prism Central is on-premises
 
-**Answer: B**
+**Answer: A**
 Prism Element (PE) is built into every AOS cluster and manages that single cluster. Prism Central (PC) is a multi-cluster management appliance (or SaaS) that provides centralized management, policies, Flow, Calm, and RBAC across multiple clusters.
 
 ---
@@ -154,36 +154,36 @@ SAML-based authentication and Single Sign-On (SSO) are only available in Prism C
 
 ### Q13
 Which built-in role in Prism Central has full access to all features and settings?
-- A) Cluster Admin
-- B) Operator
-- C) Viewer
-- D) Super Admin
+- A) Super Admin
+- B) Cluster Admin
+- C) Operator
+- D) Viewer
 
-**Answer: D**
+**Answer: A**
 Super Admin is the built-in Prism Central role with unrestricted access to all features and settings. Cluster Admin manages cluster-level operations, Operator handles day-to-day tasks, and Viewer has read-only access.
 
 ---
 
 ### Q14
 An administrator needs to assign multiple VMs to a protection policy based on a shared attribute. Which Prism Central feature should be used?
-- A) Projects
-- B) Categories
-- C) Roles
-- D) Virtual Private Clouds
+- A) Roles
+- B) Virtual Private Clouds
+- C) Projects
+- D) Categories
 
-**Answer: B**
+**Answer: D**
 Categories are key-value pairs (e.g., `AppType:Web`, `Environment:Production`) applied to entities like VMs. They enable policy-based management — protection policies, security policies, and governance rules can target VMs by category rather than by individual selection.
 
 ---
 
 ### Q15
 What is the primary purpose of a Project in Prism Central?
-- A) To define VM hardware templates
-- B) To scope user access to specific resources for multi-tenancy
-- C) To create network subnets
-- D) To schedule LCM upgrades
+- A) To scope user access to specific resources for multi-tenancy
+- B) To create network subnets
+- C) To schedule LCM upgrades
+- D) To define VM hardware templates
 
-**Answer: B**
+**Answer: A**
 Projects in Prism Central scope user access to specific resources, enabling multi-tenancy. Users are assigned to projects with specific roles. The project defines *where* (scope) a user can act, while the role defines *what* they can do.
 
 ---
@@ -202,24 +202,24 @@ aCLI (Acropolis CLI) is AHV-only and runs on CVMs. It manages VMs, networks, and
 
 ### Q17
 Which REST API version is the current GA and recommended version for Prism Central?
-- A) v1
-- B) v2.0
-- C) v3
-- D) v4
+- A) v4
+- B) v1
+- C) v2.0
+- D) v3
 
-**Answer: D**
+**Answer: A**
 API v4 is the current GA and recommended API for Prism Central. It uses namespace-based URLs, supports IAM API keys, and requires the `Ntnx-Request-Id` header. v1 is deprecated, v2.0 is for Prism Element, and v3 is legacy PC.
 
 ---
 
 ### Q18
 An administrator takes a snapshot of a running VM without NGT installed. What type of snapshot is created?
-- A) Application-consistent snapshot
-- B) Crash-consistent snapshot
-- C) VSS snapshot
-- D) Self-service restore snapshot
+- A) VSS snapshot
+- B) Self-service restore snapshot
+- C) Application-consistent snapshot
+- D) Crash-consistent snapshot
 
-**Answer: B**
+**Answer: D**
 Without NGT, snapshots are crash-consistent — they capture the state of vDisks at a point in time, equivalent to pulling the power cord. Application-consistent snapshots require NGT with VSS (Windows) or quiesce scripts (Linux) to coordinate with the guest OS and applications.
 
 ---
@@ -250,36 +250,36 @@ Stargate is the data I/O engine running on every CVM. It handles all reads, writ
 
 ### Q21
 What happens when a VM is live-migrated to a different host in an AHV cluster?
-- A) The VM is powered off and restarted on the new host
-- B) The VM memory state is transferred while the VM continues running
-- C) Only the vDisks are moved to the new host
-- D) A snapshot is taken before migration
+- A) A snapshot is taken before migration
+- B) The VM is powered off and restarted on the new host
+- C) The VM memory state is transferred while the VM continues running
+- D) Only the vDisks are moved to the new host
 
-**Answer: B**
+**Answer: C**
 Live migration (AHV) transfers the VM's memory state from the source to the destination host while the VM continues running, with minimal downtime. The VM is not powered off, and vDisks remain in the distributed storage fabric (they do not move with the VM).
 
 ---
 
 ### Q22
 Which vNIC type is the default and recommended option for best network performance on AHV?
-- A) e1000
-- B) RTL8139
-- C) VirtIO
-- D) vmxnet3
+- A) VirtIO
+- B) vmxnet3
+- C) e1000
+- D) RTL8139
 
-**Answer: C**
+**Answer: A**
 VirtIO is the default and recommended vNIC type on AHV, providing paravirtualized drivers for best performance. e1000 is a legacy emulated Intel NIC for compatibility, RTL8139 is a low-performance Realtek option, and vmxnet3 is a VMware-only adapter.
 
 ---
 
 ### Q23
 An administrator needs to create a VM from the command line on an AHV cluster. Which tool should be used?
-- A) `ncli vm.create`
-- B) `acli vm.create`
-- C) `nutanixctl vm create`
-- D) `prism-cli vm create`
+- A) `acli vm.create`
+- B) `nutanixctl vm create`
+- C) `prism-cli vm create`
+- D) `ncli vm.create`
 
-**Answer: B**
+**Answer: A**
 `acli vm.create` creates a VM from the Acropolis CLI on an AHV CVM. nCLI does not have a direct `vm.create` command for VM provisioning — aCLI is the AHV-specific CLI for VM management.
 
 ---
@@ -298,36 +298,36 @@ SSR allows a guest administrator inside the VM to browse and restore individual 
 
 ### Q25
 Which is the correct hierarchy of Nutanix storage organization from largest to smallest?
-- A) vDisk → Container → Storage Pool
-- B) Storage Pool → Container → vDisk → Extent Group
-- C) Storage Pool → Container → vDisk → vBlock → Extent → Extent Group
-- D) Container → Storage Pool → vDisk → Extent
+- A) Container → Storage Pool → vDisk → Extent
+- B) vDisk → Container → Storage Pool
+- C) Storage Pool → Container → vDisk → Extent Group
+- D) Storage Pool → Container → vDisk → vBlock → Extent → Extent Group
 
-**Answer: C**
+**Answer: D**
 The correct hierarchy is: Storage Pool (all physical disks in the cluster) → Container (logical segmentation, policy boundaries) → vDisk (virtual disk >512KB) → vBlock (1MB chunk of vDisk) → Extent (logically contiguous data) → Extent Group (physically contiguous on disk).
 
 ---
 
 ### Q26
 What is the Nutanix default bond mode for AHV host uplinks?
-- A) active-backup
-- B) balance-slb
-- C) balance-tcp (LACP)
-- D) balance-rr
+- A) balance-tcp (LACP)
+- B) balance-rr
+- C) active-backup
+- D) balance-slb
 
-**Answer: A**
+**Answer: C**
 Factory default is `active-backup` — one link active, others on standby for failover. `balance-slb` (source MAC hash-based load balancing) is the recommended production mode. `balance-tcp` (LACP) requires upstream switch configuration.
 
 ---
 
 ### Q27
 Which Prism Central feature provides a visual map of network traffic flows between VMs?
-- A) Network Topology
-- B) Flow Visualization
-- C) VM Dashboard
-- D) Calm
+- A) Flow Visualization
+- B) VM Dashboard
+- C) Calm
+- D) Network Topology
 
-**Answer: B**
+**Answer: A**
 Flow Visualization in Prism Central (under Network & Security → Flow) shows a visual map of which VMs communicate with which, helping administrators understand traffic patterns and build security policies. Network Topology in Prism Element is simpler and does not include flow-level analysis.
 
 ---
@@ -346,36 +346,36 @@ Prism Central supports automated bulk NGT installation across multiple VMs using
 
 ### Q29
 Which API version is specific to Prism Element (single cluster) operations?
-- A) v1
-- B) v2.0
-- C) v3
-- D) v4
+- A) v4
+- B) v1
+- C) v2.0
+- D) v3
 
-**Answer: B**
+**Answer: C**
 API v2.0 is designed for Prism Element and handles cluster-local operations like storage containers, hosts, storage pools, and VM management. v3 and v4 are Prism Central APIs. v1 is deprecated.
 
 ---
 
 ### Q30
 What is the default port for Prism web UI access?
-- A) 80
-- B) 443
-- C) 9440
-- D) 8080
+- A) 9440
+- B) 8080
+- C) 80
+- D) 443
 
-**Answer: C**
+**Answer: A**
 Prism uses port 9440 for HTTPS web UI and API access. Port 80 is available for HTTP but redirects to HTTPS. Port 443 is not used by Prism by default. Port 8080 is not a standard Prism port.
 
 ---
 
 ### Q31
 What must be configured before deploying Nutanix Files for SMB access?
-- A) iSCSI target configuration
-- B) Active Directory and DNS
-- C) Volume Group mapping
-- D) Flow security policies
+- A) Active Directory and DNS
+- B) Volume Group mapping
+- C) Flow security policies
+- D) iSCSI target configuration
 
-**Answer: B**
+**Answer: A**
 Before deploying Nutanix Files, Active Directory and DNS must be configured. The file server joins the AD domain, and DNS A records for FSVM IPs are required. Without AD, SMB authentication will not function.
 
 ---
@@ -394,36 +394,36 @@ Volume Groups present block storage via iSCSI and enable shared block storage be
 
 ### Q33
 An administrator needs to ensure two domain controller VMs never run on the same host. Which VM policy should be configured?
-- A) VM-Host Affinity
-- B) VM Anti-Affinity
-- C) Host Affinity Only
-- D) VM-to-VM Affinity
+- A) VM-to-VM Affinity
+- B) VM-Host Affinity
+- C) VM Anti-Affinity
+- D) Host Affinity Only
 
-**Answer: B**
+**Answer: C**
 VM Anti-Affinity ensures specified VMs are kept on separate hosts, preventing single points of failure for critical paired services. If cluster constraints force a violation, availability overrides the rule. VM-Host Affinity pins a VM to specific host(s).
 
 ---
 
 ### Q34
 Which Nutanix service is responsible for leader election across cluster services like Prism, Acropolis, and Curator?
-- A) Medusa
-- B) Genesis
-- C) Zeus (ZooKeeper)
-- D) Stargate
+- A) Zeus (ZooKeeper)
+- B) Stargate
+- C) Medusa
+- D) Genesis
 
-**Answer: C**
+**Answer: A**
 Zeus is the access layer for Apache ZooKeeper, which is the authoritative source for cluster configuration and leader election. Every service that needs a leader (Prism, Acropolis, Curator, Chronos, Cerebro) coordinates its election through Zeus/ZooKeeper.
 
 ---
 
 ### Q35
 What is the maximum number of VMs that Prism Central can manage in AOS 7.5?
-- A) 5,000
-- B) 10,000
-- C) 15,000
-- D) 25,000
+- A) 10,000
+- B) 15,000
+- C) 25,000
+- D) 5,000
 
-**Answer: D**
+**Answer: C**
 Prism Central in AOS 7.5 can manage up to 25,000 VMs in a scale-out 3-VM deployment. A single large VM instance supports up to 10,000 VMs; the 3-VM scale-out architecture extends this to 25,000.
 
 ---
@@ -442,36 +442,36 @@ Which Nutanix CLI tool is used exclusively on Prism Central and is typically use
 
 ### Q37
 An administrator wants to assign a static IP to a VM vNIC that persists across reboots and live migrations without configuring the guest OS manually. Which feature enables this?
-- A) External DHCP server
-- B) IP Address Management (IPAM)
-- C) DNS A record
-- D) DHCP Relay
+- A) DHCP Relay
+- B) External DHCP server
+- C) IP Address Management (IPAM)
+- D) DNS A record
 
-**Answer: B**
+**Answer: C**
 IPAM on an AHV subnet provides lifelong static IP assignments to VM vNICs. AHV intercepts DHCP requests and injects an IP from the configured pool. The assignment persists across reboots and live migrations — it is not a traditional expiring DHCP lease.
 
 ---
 
 ### Q38
 What is the default vDisk controller type recommended for Windows VMs on AHV?
-- A) IDE
-- B) SCSI
-- C) VirtIO-SCSI
-- D) NVMe
+- A) VirtIO-SCSI
+- B) NVMe
+- C) IDE
+- D) SCSI
 
-**Answer: C**
+**Answer: A**
 VirtIO-SCSI is the default and recommended disk controller for Windows VMs on AHV, providing the best I/O performance. SCSI is also supported. IDE is the slowest option (legacy compatibility). NVMe is a different class of device interface.
 
 ---
 
 ### Q39
 Which statement about Nutanix Image Management in Prism Central is correct?
-- A) Images can only be stored on a single designated cluster
-- B) Disk images and ISOs are stored in the Acropolis Tuple Store (ATS) and can be distributed to multiple clusters
-- C) Images must be deleted manually from each cluster after use
-- D) Images cannot be used by multiple VMs simultaneously
+- A) Disk images and ISOs are stored in the Acropolis Tuple Store (ATS) and can be distributed to multiple clusters
+- B) Images must be deleted manually from each cluster after use
+- C) Images cannot be used by multiple VMs simultaneously
+- D) Images can only be stored on a single designated cluster
 
-**Answer: B**
+**Answer: A**
 Prism Central Image Management stores disk images and ISOs in ATS and supports distribution to multiple clusters. Images can be shared by multiple VMs (linked clones for efficiency). "Discard" removes a local copy without deleting the central image.
 
 ---

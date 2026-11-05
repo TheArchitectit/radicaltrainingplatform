@@ -71,10 +71,30 @@ The PWA runtime does not load it; study content ships compiled in
 `scripts/check-content-bundle.py` and `tests/gates/tutor-eval.mjs`. It is not
 an offline-cache gap, and no action is warranted.
 
+### 4. Item-hygiene advisories — closed 2026-11-04
+
+The 42 released items with a longest-option-is-correct cue were edited at the
+distractor level only; item IDs, stems, keys, correct-option text, explanations
+and provenance attribution are unchanged. The cue is now a blocking gate, with
+a seeded failure in the hygiene self-test, so this set cannot regress silently.
+The three content groups were reviewed in their combined diff; one distractor
+that had accidentally become a second valid DHCP answer was corrected.
+
+All 22 legacy root banks (1,598 items) were rebalanced through the verified
+rotation tool. No stem, option text, correct-option text, explanation or item ID
+changed, and multi-answer items stayed byte-identical. Items referring to
+options by letter (`option B`, `options C/D`, `Both A and C`) were refused and
+left intact. Every legacy bank is now below the 40% dominant-letter threshold;
+a second dry run is a no-op. The rebalancer's self-test covers those refusal,
+multi-key, balance and idempotence properties.
+
+Small released banks still print their below-audit-size distributions as
+advisories by design; the two deferred signals above are no longer present.
+
 ## Next session
 
 1. Supply whichever blocked inputs are available (the LICENSE line and the
    travel cutoff are owner-only; the guide needs a human read).
-2. Review the remaining item-hygiene advisories without casually rewriting keys.
+2. Supply the owner-only inputs above; no coding workaround can close those rows.
 3. Re-run `bash tests/gates/run_freeze_chain.sh --expect-sha <full SHA>` after
    any change and record the new total at the new head.

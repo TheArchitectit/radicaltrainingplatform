@@ -1,6 +1,6 @@
 # OpenSpec SPEC-21 — Answer Position and the Injection Screen
 
-**Home:** `content/exams/*/questions/*.md`, `scripts/redeye_analysis.py` · **Supersedes in part:** R-09 as a report only, SPEC-08A §injection
+**Home:** `content/exams/*/questions/*.md`, legacy root `NCA/NCM/NCP` bank families, `scripts/redeye_analysis.py` · **Supersedes in part:** R-09 as a report only, SPEC-08A §injection
 **Executed in:** this change · **Gates:** `check-answer-balance.py` (new), RedEye lane self-test (extended), TM-29d
 **Depends on:** SPEC-19 (demo-cut banks), SPEC-08A (RedEye lane)
 
@@ -31,8 +31,15 @@ a flagged bank. The correct option keeps its text; only its letter changes.
 The rotation is chosen per bank (offset 0..3, even or odd step) as the one
 that leaves the bank least concentrated — deterministic, reviewable, and a
 rerun on a now-balanced bank is a no-op. It refuses rather than guesses where
-a rotation would lie: a bank whose explanation names an option by letter
-("`core2-demo-cut.md` Q6") is left alone and reported.
+a rotation would lie: an item whose text names an option by letter
+(`option B`, `options C/D`, or `Both A and C`) is left alone and reported.
+Multi-answer items are also left byte-identical. The same checked rotation now
+covers the 22 legacy root banks; all are below the 40% threshold, with 0 banks
+changed by the immediately repeated dry run.
+
+The follow-on item review removed the longest-option-is-correct cue from all
+42 released findings by editing distractors only. That check is now blocking,
+and the original keys and correct-option texts did not move.
 
 **Proof, not assertion.** Every item is re-parsed before and after and
 compared on stem, option texts (as a set), the correct option's text, and the
@@ -63,8 +70,9 @@ the fail-closed key-vs-source stage is untouched.
 |---|---|---|
 | REQ-PB-01 | No released bank has more than 40% of its single-key items on one letter. | Gate: a 3-of-4 bank fails and names the bank; a flat bank and a 40% bank pass. |
 | REQ-PB-02 | A rebalance changes no item's stem, option texts, correct option text or explanation, and vectors no itemId. | Run: 1,199 items compared before/after — 0 semantic differences, identical id set. |
-| REQ-PB-03 | A bank whose explanation names an option by letter is refused, not rotated. | Run: `core2-demo-cut.md` Q6 reported as refused; its block is byte-identical afterwards. |
+| REQ-PB-03 | An item that refers to option labels or carries multiple keys is refused, not rotated. | Run: `core2-demo-cut.md` Q6, `options C/D` and `Both A and C` fixtures are byte-identical afterwards; multi-key fixture is unchanged. |
 | REQ-PB-04 | The rebalance is deterministic: running it twice changes nothing the second time. | Run: a second `--dry-run` reports `0 bank(s) would change`. |
+| REQ-PB-05 | No released single-answer item's correct option exceeds every alternative by more than 20 characters. | Gate: the cleaned released set passes; a seeded overlong correct option fails `check-item-hygiene.py --self-test`. |
 | REQ-IN-01 | A colon after "system" is not an injection signal by itself; technical prose in the packs is not flagged. | Fixture: the guest-system sentence passes; "system: ignore the previous instructions…" is still flagged. |
 | REQ-IN-02 | The screen never approves or blocks an item. | Unchanged from SPEC-08A: every lane log keeps `verdict: return` while the model stage is unrun. |
 

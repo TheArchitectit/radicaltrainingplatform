@@ -9,12 +9,12 @@
 ### Q1
 An architect is sizing an NC2 deployment. On AWS, the bare-metal instance type used for NC2 nodes is:
 
-- A) m5.metal
-- B) i3.metal
-- C) r5.metal
-- D) c5.metal
+- A) c5.metal
+- B) m5.metal
+- C) i3.metal
+- D) r5.metal
 
-**Correct Answer: B**
+**Correct Answer: C**
 **Explanation:** NC2 on AWS runs exclusively on **i3.metal** bare-metal instances, which provide local NVMe SSD storage consumed by Nutanix DSF. The other metal instance families are not supported for NC2.
 
 ---
@@ -22,12 +22,12 @@ An architect is sizing an NC2 deployment. On AWS, the bare-metal instance type u
 ### Q2
 What is the Azure equivalent of the bare-metal host type used for NC2?
 
-- A) Azure Dedicated Host (Dsv3-Type1)
-- B) Azure BareMetal Infrastructure
-- C) Azure VMware Solution Host
-- D) Azure Stack HCI Node
+- A) Azure VMware Solution Host
+- B) Azure Stack HCI Node
+- C) Azure Dedicated Host (Dsv3-Type1)
+- D) Azure BareMetal Infrastructure
 
-**Correct Answer: B**
+**Correct Answer: D**
 **Explanation:** NC2 on Azure leverages **Azure BareMetal Infrastructure**, providing dedicated physical servers. Azure Dedicated Hosts and Azure VMware Solution use different underlying architectures not compatible with NC2.
 
 ---
@@ -35,12 +35,12 @@ What is the Azure equivalent of the bare-metal host type used for NC2?
 ### Q3
 NC2 on AWS connects the Nutanix cluster to customer workloads via:
 
-- A) Azure VNet Peering
-- B) AWS VPC with delegated subnets
-- C) AWS Outposts local gateway
-- D) AWS Transit Gateway only
+- A) AWS VPC with delegated subnets
+- B) AWS Outposts local gateway
+- C) AWS Transit Gateway only
+- D) Azure VNet Peering
 
-**Correct Answer: B**
+**Correct Answer: A**
 **Explanation:** On AWS, NC2 clusters are deployed within an **AWS VPC** using delegated subnets. The management and data planes reside in this VPC, and customer workloads connect through standard VPC networking constructs.
 
 ---
@@ -61,12 +61,12 @@ On Azure, the NC2 cluster's networking is anchored to which construct?
 ### Q5
 A company needs a dedicated, private connection from their on-premises data center to NC2 on AWS. Which service should they use?
 
-- A) Azure ExpressRoute
-- B) AWS Site-to-Site VPN
-- C) AWS Direct Connect
-- D) AWS PrivateLink
+- A) AWS PrivateLink
+- B) Azure ExpressRoute
+- C) AWS Site-to-Site VPN
+- D) AWS Direct Connect
 
-**Correct Answer: C**
+**Correct Answer: D**
 **Explanation:** **AWS Direct Connect** provides a dedicated private connection from on-premises to AWS. While Site-to-Site VPN works over the internet, Direct Connect offers consistent low-latency bandwidth, which is preferred for NC2 production workloads.
 
 ---
@@ -74,12 +74,12 @@ A company needs a dedicated, private connection from their on-premises data cent
 ### Q6
 For the same dedicated private connectivity requirement on Azure, the equivalent service is:
 
-- A) Azure VPN Gateway
-- B) AWS Direct Connect
-- C) Azure ExpressRoute
-- D) Azure Front Door
+- A) Azure ExpressRoute
+- B) Azure Front Door
+- C) Azure VPN Gateway
+- D) AWS Direct Connect
 
-**Correct Answer: C**
+**Correct Answer: A**
 **Explanation:** **Azure ExpressRoute** is the Azure equivalent of AWS Direct Connect, providing a private, dedicated connection from on-premises to Azure, bypassing the public internet.
 
 ---
@@ -87,12 +87,12 @@ For the same dedicated private connectivity requirement on Azure, the equivalent
 ### Q7
 Which statement accurately describes a difference between NC2 on AWS and NC2 on Azure?
 
-- A) NC2 on Azure uses i3.metal instances
-- B) NC2 on AWS requires Flow Gateway for external connectivity
-- C) NC2 on Azure uses Flow Gateway to provide overlay-to-underlay connectivity for VM networking
-- D) NC2 on AWS uses Azure BareMetal Infrastructure
+- A) NC2 on AWS requires Flow Gateway for external connectivity
+- B) NC2 on Azure uses Flow Gateway to provide overlay-to-underlay connectivity for VM networking
+- C) NC2 on AWS uses Azure BareMetal Infrastructure
+- D) NC2 on Azure uses i3.metal instances
 
-**Correct Answer: C**
+**Correct Answer: B**
 **Explanation:** A key architectural difference is that NC2 on **Azure requires Flow Gateway** to bridge the Nutanix AHV overlay network to the Azure underlay (VNet). On AWS, this bridging is handled differently through VPC integration without requiring Flow Gateway.
 
 ---
@@ -113,12 +113,12 @@ An engineer is comparing NC2 deployments. Which of the following is true about t
 ### Q9
 Which cloud-native load-balancing service can be used to front-end workloads running on NC2 on AWS?
 
-- A) Azure Application Gateway
-- B) AWS Elastic Load Balancer (ELB)
-- C) Nutanix Load Balancer appliance
-- D) F5 BIG-IP VE exclusively
+- A) F5 BIG-IP VE exclusively
+- B) Azure Application Gateway
+- C) AWS Elastic Load Balancer (ELB)
+- D) Nutanix Load Balancer appliance
 
-**Correct Answer: B**
+**Correct Answer: C**
 **Explanation:** Workloads on NC2 in AWS can leverage **AWS Elastic Load Balancer** (ALB/NLB) since VMs obtain IPs routable within the VPC. Cloud-native services integrate naturally with NC2 networking on their respective platforms.
 
 ---
@@ -126,12 +126,12 @@ Which cloud-native load-balancing service can be used to front-end workloads run
 ### Q10
 When deploying NC2, Prism Central is hosted differently on AWS vs Azure. Which statement is correct?
 
-- A) Prism Central must always be deployed on-premises
-- B) On AWS, Prism Central runs as a native EC2 instance; on Azure, it runs as an AHV VM
-- C) Prism Central runs as a VM on the NC2 cluster in both AWS and Azure
-- D) Prism Central is a SaaS-only service for NC2
+- A) Prism Central runs as a VM on the NC2 cluster in both AWS and Azure
+- B) Prism Central is a SaaS-only service for NC2
+- C) Prism Central must always be deployed on-premises
+- D) On AWS, Prism Central runs as a native EC2 instance; on Azure, it runs as an AHV VM
 
-**Correct Answer: C**
+**Correct Answer: A**
 **Explanation:** **Prism Central runs as a VM on the NC2 AHV cluster** in both AWS and Azure deployments. It is deployed during the cluster creation workflow and manages the NC2 cluster just as it would an on-premises Nutanix cluster.
 
 ---
@@ -141,12 +141,12 @@ When deploying NC2, Prism Central is hosted differently on AWS vs Azure. Which s
 ### Q11
 What is the primary role of Flow Gateway in NC2 on Azure?
 
-- A) To encrypt all traffic between Azure regions
-- B) To provide NAT for internet-bound traffic only
-- C) To bridge the AHV overlay network to the Azure VNet underlay network
-- D) To replace Azure NSGs for micro-segmentation
+- A) To provide NAT for internet-bound traffic only
+- B) To bridge the AHV overlay network to the Azure VNet underlay network
+- C) To replace Azure NSGs for micro-segmentation
+- D) To encrypt all traffic between Azure regions
 
-**Correct Answer: C**
+**Correct Answer: B**
 **Explanation:** **Flow Gateway on Azure** acts as a gateway that bridges traffic between the Nutanix AHV internal overlay network and the Azure VNet underlay, enabling VMs on the overlay to communicate with Azure-native services and networks.
 
 ---
@@ -167,12 +167,12 @@ An architect wants to connect multiple VPCs hosting NC2 clusters on AWS with a h
 ### Q13
 What is a key limitation of AWS VPC Peering compared to Transit Gateway for NC2 environments?
 
-- A) VPC Peering supports transitive routing; Transit Gateway does not
-- B) VPC Peering does not support transitive routing; each pair must be explicitly peered
-- C) VPC Peering is more expensive than Transit Gateway
-- D) VPC Peering cannot cross availability zones
+- A) VPC Peering cannot cross availability zones
+- B) VPC Peering supports transitive routing; Transit Gateway does not
+- C) VPC Peering does not support transitive routing; each pair must be explicitly peered
+- D) VPC Peering is more expensive than Transit Gateway
 
-**Correct Answer: B**
+**Correct Answer: C**
 **Explanation:** **VPC Peering is non-transitive** — traffic cannot route through a peered VPC to reach a third VPC. Each VPC pair requires its own peering connection. Transit Gateway solves this by acting as a centralized router.
 
 ---
@@ -180,12 +180,12 @@ What is a key limitation of AWS VPC Peering compared to Transit Gateway for NC2 
 ### Q14
 ECMP (Equal-Cost Multi-Path) routing in an NC2 environment is primarily used to:
 
-- A) Encrypt multiple network paths simultaneously
-- B) Distribute traffic across multiple equal-cost paths for higher throughput and redundancy
-- C) Replace VXLAN encapsulation in the overlay network
-- D) Provide DNS-based load balancing across clusters
+- A) Replace VXLAN encapsulation in the overlay network
+- B) Provide DNS-based load balancing across clusters
+- C) Encrypt multiple network paths simultaneously
+- D) Distribute traffic across multiple equal-cost paths for higher throughput and redundancy
 
-**Correct Answer: B**
+**Correct Answer: D**
 **Explanation:** **ECMP** distributes network traffic across multiple equal-cost routes, improving aggregate throughput and providing path redundancy. In NC2, ECMP can be leveraged for north-south traffic distribution across gateway paths.
 
 ---
@@ -193,12 +193,12 @@ ECMP (Equal-Cost Multi-Path) routing in an NC2 environment is primarily used to:
 ### Q15
 For NC2 on AWS, which service provides managed NAT for outbound internet access from VMs that do not have public IPs?
 
-- A) AWS Internet Gateway
-- B) AWS NAT Gateway
-- C) Nutanix Flow Gateway
-- D) AWS Elastic IP directly on each VM
+- A) AWS NAT Gateway
+- B) Nutanix Flow Gateway
+- C) AWS Elastic IP directly on each VM
+- D) AWS Internet Gateway
 
-**Correct Answer: B**
+**Correct Answer: A**
 **Explanation:** **AWS NAT Gateway** enables instances in private subnets (including NC2 VMs) to initiate outbound internet connections while preventing unsolicited inbound connections. An Internet Gateway alone requires public IPs on instances.
 
 ---
@@ -219,12 +219,12 @@ An NC2 on Azure deployment needs DNS resolution that resolves internal names dif
 ### Q17
 In an NC2 on AWS deployment, which component handles routing between the Nutanix overlay network and the AWS VPC underlay?
 
-- A) Flow Gateway (same as Azure)
-- B) Nutanix AHV's built-in VPC bridge integration with AWS VPC
-- C) An IPsec tunnel to the AWS VPN Gateway
-- D) A third-party virtual router appliance
+- A) A third-party virtual router appliance
+- B) Flow Gateway (same as Azure)
+- C) Nutanix AHV's built-in VPC bridge integration with AWS VPC
+- D) An IPsec tunnel to the AWS VPN Gateway
 
-**Correct Answer: B**
+**Correct Answer: C**
 **Explanation:** On AWS, the **AHV networking stack integrates directly with the AWS VPC** to provide overlay-to-underlay bridging, unlike Azure where Flow Gateway is required. This is a key architectural difference between the two platforms.
 
 ---
@@ -232,12 +232,12 @@ In an NC2 on AWS deployment, which component handles routing between the Nutanix
 ### Q18
 When configuring Flow Gateway on Azure, what happens if Flow Gateway becomes unavailable?
 
-- A) VMs automatically fail over to Azure native networking
-- B) Only north-south traffic is affected; east-west traffic between VMs on the same host continues
-- C) All VM networking traffic is disrupted since Flow Gateway bridges overlay to underlay
-- D) Prism Central takes over the gateway function automatically
+- A) All VM networking traffic is disrupted since Flow Gateway bridges overlay to underlay
+- B) Prism Central takes over the gateway function automatically
+- C) VMs automatically fail over to Azure native networking
+- D) Only north-south traffic is affected; east-west traffic between VMs on the same host continues
 
-**Correct Answer: C**
+**Correct Answer: A**
 **Explanation:** Flow Gateway is critical for traffic entering and leaving the overlay network on Azure. If it becomes unavailable, VMs lose connectivity to the Azure VNet, disrupting north-south and cross-host east-west traffic. However, VMs on the same AHV host can communicate via the local OVS bridge without traversing Flow Gateway, so same-host east-west traffic is unaffected.
 
 ---
@@ -245,12 +245,12 @@ When configuring Flow Gateway on Azure, what happens if Flow Gateway becomes una
 ### Q19
 A network engineer needs to establish connectivity between an NC2 cluster on AWS and an on-premises Nutanix cluster over a VPN. Which combination is correct?
 
-- A) AWS Site-to-Site VPN + AWS Virtual Private Gateway
-- B) AWS Direct Connect + Azure ExpressRoute
-- C) AWS NAT Gateway + on-premises firewall
-- D) AWS PrivateLink + Nutanix Flow
+- A) AWS Direct Connect + Azure ExpressRoute
+- B) AWS NAT Gateway + on-premises firewall
+- C) AWS PrivateLink + Nutanix Flow
+- D) AWS Site-to-Site VPN + AWS Virtual Private Gateway
 
-**Correct Answer: A**
+**Correct Answer: D**
 **Explanation:** An **AWS Site-to-Site VPN** terminates on an **AWS Virtual Private Gateway** (or Transit Gateway) to create an encrypted IPsec tunnel to the on-premises network. This is a standard approach for secure hybrid connectivity to NC2 on AWS.
 
 ---
@@ -273,12 +273,12 @@ Which Azure networking feature must be configured to allow traffic from the NC2 
 ### Q21
 NC2 on AWS uses which type of storage for the Nutanix Distributed Storage Fabric (DSF)?
 
-- A) Amazon EBS gp3 volumes
-- B) Amazon S3 object storage
-- C) Local NVMe SSDs on i3.metal instances
-- D) Amazon FSx for Lustre
+- A) Amazon FSx for Lustre
+- B) Amazon EBS gp3 volumes
+- C) Amazon S3 object storage
+- D) Local NVMe SSDs on i3.metal instances
 
-**Correct Answer: C**
+**Correct Answer: D**
 **Explanation:** NC2 on AWS exclusively uses the **local NVMe SSDs** on i3.metal instances for DSF. EBS, S3, and FSx are not used for the Nutanix storage pool. The local NVMe drives are pooled by DSF just as on-premises Nutanix nodes pool their local drives.
 
 ---
@@ -286,12 +286,12 @@ NC2 on AWS uses which type of storage for the Nutanix Distributed Storage Fabric
 ### Q22
 An administrator asks if they can attach additional Amazon EBS volumes to expand NC2 storage capacity. What is the correct response?
 
-- A) Yes, EBS gp3 volumes can be added to the Nutanix storage pool
-- B) Yes, but only EBS io2 volumes are supported
-- C) No, NC2 storage can only be expanded by adding more NC2 nodes to the cluster
-- D) No, but you can tier cold data to S3 automatically
+- A) No, NC2 storage can only be expanded by adding more NC2 nodes to the cluster
+- B) No, but you can tier cold data to S3 automatically
+- C) Yes, EBS gp3 volumes can be added to the Nutanix storage pool
+- D) Yes, but only EBS io2 volumes are supported
 
-**Correct Answer: C**
+**Correct Answer: A**
 **Explanation:** NC2 does **not support EBS or any external cloud storage** for expanding the DSF storage pool. The only way to increase storage capacity is by **adding more NC2 nodes**, each contributing their local NVMe drives to the pool.
 
 ---
@@ -299,12 +299,12 @@ An administrator asks if they can attach additional Amazon EBS volumes to expand
 ### Q23
 How does DSF on NC2 compare to DSF on an on-premises Nutanix cluster?
 
-- A) DSF on NC2 does not support data locality
-- B) DSF on NC2 operates identically — same replication, deduplication, compression, and erasure coding capabilities
-- C) DSF on NC2 uses only RF1 for cost savings
-- D) DSF on NC2 replaces CVM with a cloud-native storage controller
+- A) DSF on NC2 operates identically — same replication, deduplication, compression, and erasure coding capabilities
+- B) DSF on NC2 uses only RF1 for cost savings
+- C) DSF on NC2 replaces CVM with a cloud-native storage controller
+- D) DSF on NC2 does not support data locality
 
-**Correct Answer: B**
+**Correct Answer: A**
 **Explanation:** **DSF on NC2 is functionally identical to on-premises DSF.** The same CVM runs on each node, providing the same RF2/RF3 replication, inline deduplication, compression, erasure coding, and data locality features.
 
 ---
@@ -325,12 +325,12 @@ What is the minimum replication factor recommended for production NC2 clusters?
 ### Q25
 On NC2, what happens to DSF data if one of the bare-metal nodes fails?
 
-- A) Data is permanently lost since it is on local NVMe only
-- B) DSF automatically rebuilds the data replicas on remaining healthy nodes from the surviving copies
-- C) An EBS snapshot is restored to a replacement node
-- D) The administrator must manually restore from an S3 backup
+- A) The administrator must manually restore from an S3 backup
+- B) Data is permanently lost since it is on local NVMe only
+- C) DSF automatically rebuilds the data replicas on remaining healthy nodes from the surviving copies
+- D) An EBS snapshot is restored to a replacement node
 
-**Correct Answer: B**
+**Correct Answer: C**
 **Explanation:** Because DSF maintains **RF2 or RF3 replicas across nodes**, a single node failure does not result in data loss. DSF automatically **re-replicates data** from surviving copies to other healthy nodes in the cluster.
 
 ---
@@ -338,12 +338,12 @@ On NC2, what happens to DSF data if one of the bare-metal nodes fails?
 ### Q26
 An architect proposes using Amazon EFS alongside NC2 for shared file storage. What is the correct assessment?
 
-- A) EFS can be mounted directly inside AHV VMs as a native DSF datastore
-- B) EFS can be accessed by guest VMs over NFS if network connectivity permits, but it is not part of DSF
-- C) EFS replaces the need for Nutanix Files on NC2
-- D) EFS is the only shared storage option for NC2
+- A) EFS replaces the need for Nutanix Files on NC2
+- B) EFS is the only shared storage option for NC2
+- C) EFS can be mounted directly inside AHV VMs as a native DSF datastore
+- D) EFS can be accessed by guest VMs over NFS if network connectivity permits, but it is not part of DSF
 
-**Correct Answer: B**
+**Correct Answer: D**
 **Explanation:** **Amazon EFS** is an independent AWS NFS service. Guest VMs on NC2 could potentially mount EFS over the network, but EFS is **not integrated with or part of DSF**. Nutanix Files can be deployed on NC2 for native file services.
 
 ---
@@ -351,12 +351,12 @@ An architect proposes using Amazon EFS alongside NC2 for shared file storage. Wh
 ### Q27
 Erasure Coding (EC-X) on NC2 provides which benefit compared to RF2?
 
-- A) Higher data durability with more storage overhead
-- B) Lower storage overhead while maintaining fault tolerance, at the cost of higher rebuild time
-- C) Faster random write performance
-- D) Elimination of the need for CVMs
+- A) Lower storage overhead while maintaining fault tolerance, at the cost of higher rebuild time
+- B) Faster random write performance
+- C) Elimination of the need for CVMs
+- D) Higher data durability with more storage overhead
 
-**Correct Answer: B**
+**Correct Answer: A**
 **Explanation:** **Erasure Coding** provides fault tolerance similar to RF2 but with **lower storage overhead** (e.g., EC-X uses strip+parity vs. full copies). The tradeoff is increased compute overhead for parity calculations and longer rebuild times.
 
 ---
@@ -377,12 +377,12 @@ What is the role of the Controller VM (CVM) in NC2 storage operations?
 ### Q29
 Data locality in DSF on NC2 means:
 
-- A) Data is always stored in the same AWS Availability Zone as the requesting VM
-- B) DSF tries to keep data on the same node as the VM consuming it, minimizing network I/O
-- C) Data is cached in Amazon ElastiCache for low-latency access
-- D) Data is pinned to a specific NVMe drive and never moved
+- A) Data is pinned to a specific NVMe drive and never moved
+- B) Data is always stored in the same AWS Availability Zone as the requesting VM
+- C) DSF tries to keep data on the same node as the VM consuming it, minimizing network I/O
+- D) Data is cached in Amazon ElastiCache for low-latency access
 
-**Correct Answer: B**
+**Correct Answer: C**
 **Explanation:** **Data locality** ensures DSF attempts to keep data blocks on the **same physical node** as the VM accessing them, reducing network traversal and latency. If a VM migrates, DSF gradually moves data to follow it.
 
 ---
@@ -390,12 +390,12 @@ Data locality in DSF on NC2 means:
 ### Q30
 An NC2 cluster has 4 nodes with 7.6 TB NVMe each. With RF2, what is the approximate usable storage capacity?
 
-- A) 30.4 TB
-- B) 22.8 TB
-- C) 15.2 TB
-- D) 7.6 TB
+- A) 15.2 TB
+- B) 7.6 TB
+- C) 30.4 TB
+- D) 22.8 TB
 
-**Correct Answer: C**
+**Correct Answer: A**
 **Explanation:** Total raw = 4 × 7.6 TB = 30.4 TB. With **RF2**, data is written twice, so usable capacity is approximately **30.4 / 2 = 15.2 TB** (before additional overhead for metadata, CVM reservation, etc.).
 
 ---
@@ -405,12 +405,12 @@ An NC2 cluster has 4 nodes with 7.6 TB NVMe each. With RF2, what is the approxim
 ### Q31
 NC2 licensing follows which model?
 
-- A) Perpetual license per node
-- B) Subscription-based license (term-based)
-- C) Free with AWS/Azure infrastructure charges only
-- D) Pay-per-VM license
+- A) Subscription-based license (term-based)
+- B) Free with AWS/Azure infrastructure charges only
+- C) Pay-per-VM license
+- D) Perpetual license per node
 
-**Correct Answer: B**
+**Correct Answer: A**
 **Explanation:** NC2 uses a **subscription-based licensing model** where customers pay a term-based Nutanix software subscription in addition to the cloud infrastructure costs from AWS or Azure.
 
 ---
@@ -431,12 +431,12 @@ What is the NC2 "hibernation" feature, and how does it impact costs?
 ### Q33
 How can an organization reduce AWS infrastructure costs for NC2 bare-metal nodes?
 
-- A) Use AWS Spot Instances for NC2 nodes
-- B) Purchase AWS Reserved Instances or Savings Plans for i3.metal
-- C) Use AWS Free Tier for the first 12 months
-- D) Deploy NC2 on t3.micro instances instead
+- A) Deploy NC2 on t3.micro instances instead
+- B) Use AWS Spot Instances for NC2 nodes
+- C) Purchase AWS Reserved Instances or Savings Plans for i3.metal
+- D) Use AWS Free Tier for the first 12 months
 
-**Correct Answer: B**
+**Correct Answer: C**
 **Explanation:** **AWS Reserved Instances or Savings Plans** for i3.metal instances can significantly reduce the hourly infrastructure cost compared to On-Demand pricing. Spot Instances are not suitable for NC2 since bare-metal nodes require guaranteed availability.
 
 ---
@@ -444,12 +444,12 @@ How can an organization reduce AWS infrastructure costs for NC2 bare-metal nodes
 ### Q34
 During NC2 cluster hibernation, which cost component continues to apply?
 
-- A) AWS/Azure bare-metal compute charges
-- B) Nutanix software subscription fees (depending on contract terms)
-- C) AWS EBS storage charges for NVMe data
-- D) No costs are incurred during hibernation
+- A) AWS EBS storage charges for NVMe data
+- B) No costs are incurred during hibernation
+- C) AWS/Azure bare-metal compute charges
+- D) Nutanix software subscription fees (depending on contract terms)
 
-**Correct Answer: B**
+**Correct Answer: D**
 **Explanation:** While cloud infrastructure charges stop during hibernation, the **Nutanix software subscription** may still be active depending on the contract structure. Customers should review their specific subscription terms regarding hibernation periods.
 
 ---
@@ -457,12 +457,12 @@ During NC2 cluster hibernation, which cost component continues to apply?
 ### Q35
 Which statement about NC2 subscription tiers is correct?
 
-- A) NC2 Pro includes all features; NC2 Ultimate adds only Calm automation
-- B) NC2 is available in different tiers (e.g., Starter, Pro, Ultimate) with increasing feature sets including DR, Flow security, and advanced management
-- C) All NC2 subscriptions are identical; pricing varies only by cloud provider
-- D) NC2 licensing is included in the AWS Marketplace at no additional software cost
+- A) NC2 is available in different tiers (e.g., Starter, Pro, Ultimate) with increasing feature sets including DR, Flow security, and advanced management
+- B) All NC2 subscriptions are identical; pricing varies only by cloud provider
+- C) NC2 licensing is included in the AWS Marketplace at no additional software cost
+- D) NC2 Pro includes all features; NC2 Ultimate adds only Calm automation
 
-**Correct Answer: B**
+**Correct Answer: A**
 **Explanation:** NC2 offers **multiple subscription tiers** with escalating feature sets. Higher tiers include capabilities like Nutanix DR (Leap), Flow micro-segmentation, and advanced Prism Central features. Customers select the tier that matches their requirements.
 
 ---
@@ -483,12 +483,12 @@ An organization runs NC2 clusters only during business hours (12 hours/day). Whi
 ### Q37
 What is the billing relationship for NC2 infrastructure costs?
 
-- A) Nutanix bills for both software and infrastructure on a single invoice
-- B) Cloud infrastructure is billed directly by AWS/Azure; Nutanix software is billed separately by Nutanix
-- C) AWS/Azure bills for everything including the Nutanix software license
-- D) NC2 is available only through the AWS/Azure Marketplace with unified billing
+- A) NC2 is available only through the AWS/Azure Marketplace with unified billing
+- B) Nutanix bills for both software and infrastructure on a single invoice
+- C) Cloud infrastructure is billed directly by AWS/Azure; Nutanix software is billed separately by Nutanix
+- D) AWS/Azure bills for everything including the Nutanix software license
 
-**Correct Answer: B**
+**Correct Answer: C**
 **Explanation:** NC2 has a **split billing model**: AWS or Azure bills for the bare-metal infrastructure (compute, networking, etc.), while Nutanix separately bills for the software subscription. Some marketplace options may offer consolidated billing.
 
 ---
@@ -496,12 +496,12 @@ What is the billing relationship for NC2 infrastructure costs?
 ### Q38
 Which factor does NOT directly affect NC2 cloud infrastructure costs?
 
-- A) Number of bare-metal nodes deployed
-- B) AWS region or Azure region selected
-- C) Number of VMs running on the cluster
-- D) Data transfer charges for inter-region traffic
+- A) Number of VMs running on the cluster
+- B) Data transfer charges for inter-region traffic
+- C) Number of bare-metal nodes deployed
+- D) AWS region or Azure region selected
 
-**Correct Answer: C**
+**Correct Answer: A**
 **Explanation:** Cloud infrastructure costs are based on the **bare-metal nodes** (fixed compute cost per node), region pricing, and data transfer. The **number of VMs** running on those nodes does not change the infrastructure cost since VMs share the fixed bare-metal capacity.
 
 ---
@@ -509,12 +509,12 @@ Which factor does NOT directly affect NC2 cloud infrastructure costs?
 ### Q39
 A customer wants to evaluate NC2 before committing to a long-term subscription. What option is typically available?
 
-- A) A permanent free tier with 2 nodes
-- B) A time-limited trial or proof-of-concept engagement through Nutanix
-- C) NC2 is free for the first year on AWS GovCloud
-- D) No evaluation option exists; a 3-year commitment is mandatory
+- A) A time-limited trial or proof-of-concept engagement through Nutanix
+- B) NC2 is free for the first year on AWS GovCloud
+- C) No evaluation option exists; a 3-year commitment is mandatory
+- D) A permanent free tier with 2 nodes
 
-**Correct Answer: B**
+**Correct Answer: A**
 **Explanation:** Nutanix typically offers **trial or POC engagements** to allow customers to evaluate NC2 before committing to a full subscription. The specific terms are arranged through Nutanix sales or partner channels.
 
 ---
@@ -537,12 +537,12 @@ When estimating total cost of ownership (TCO) for NC2, which costs must be inclu
 ### Q41
 Nutanix Leap enables disaster recovery between which environments when using NC2?
 
-- A) Only between two on-premises Nutanix clusters
-- B) Between on-premises Nutanix clusters and NC2 clusters (on AWS or Azure), and between NC2 clusters
-- C) Only between NC2 on AWS and NC2 on Azure
-- D) Only from on-premises to AWS S3 as a backup target
+- A) Only from on-premises to AWS S3 as a backup target
+- B) Only between two on-premises Nutanix clusters
+- C) Between on-premises Nutanix clusters and NC2 clusters (on AWS or Azure), and between NC2 clusters
+- D) Only between NC2 on AWS and NC2 on Azure
 
-**Correct Answer: B**
+**Correct Answer: C**
 **Explanation:** **Nutanix Leap** supports DR between **on-premises ↔ NC2** and **NC2 ↔ NC2** clusters. Since NC2 runs the same Nutanix stack, Leap operates identically to on-premises DR with synchronous or asynchronous replication.
 
 ---
@@ -550,12 +550,12 @@ Nutanix Leap enables disaster recovery between which environments when using NC2
 ### Q42
 Which Nutanix tool is specifically designed for migrating VMs from on-premises environments (VMware, Hyper-V, AHV) to NC2?
 
-- A) Nutanix Leap
-- B) Nutanix Move
-- C) Nutanix Calm
-- D) Nutanix Karbon
+- A) Nutanix Calm
+- B) Nutanix Karbon
+- C) Nutanix Leap
+- D) Nutanix Move
 
-**Correct Answer: B**
+**Correct Answer: D**
 **Explanation:** **Nutanix Move** is purpose-built for migrating VMs from various source hypervisors (VMware ESXi, Hyper-V, AWS EC2, AHV) to a target Nutanix AHV cluster, including NC2 clusters. Leap is for DR/replication, not bulk migration.
 
 ---
@@ -563,12 +563,12 @@ Which Nutanix tool is specifically designed for migrating VMs from on-premises e
 ### Q43
 During a Leap failover from on-premises to NC2 on AWS, what happens to the protection domain VMs?
 
-- A) VMs are cold-migrated by copying VMDK files to S3
-- B) The most recent recovery point is activated on the NC2 cluster, and VMs are powered on at the DR site
-- C) VMs are live-migrated with zero downtime using vMotion
-- D) VMs must be manually recreated from AMI images on AWS
+- A) The most recent recovery point is activated on the NC2 cluster, and VMs are powered on at the DR site
+- B) VMs are live-migrated with zero downtime using vMotion
+- C) VMs must be manually recreated from AMI images on AWS
+- D) VMs are cold-migrated by copying VMDK files to S3
 
-**Correct Answer: B**
+**Correct Answer: A**
 **Explanation:** During Leap failover, the **latest recovery point snapshot** is activated on the NC2 DR cluster, and VMs are powered on there. This is not a live migration — there is a recovery window based on RPO and the time to boot VMs.
 
 ---
@@ -589,12 +589,12 @@ Protection domains in Nutanix can span across which environments?
 ### Q45
 What is the minimum RPO achievable with Nutanix Leap using NearSync replication to NC2?
 
-- A) 24 hours
-- B) 1 hour
-- C) As low as 1 minute (with NearSync)
-- D) Zero RPO (synchronous replication only)
+- A) Zero RPO (synchronous replication only)
+- B) 24 hours
+- C) 1 hour
+- D) As low as 1 minute (with NearSync)
 
-**Correct Answer: C**
+**Correct Answer: D**
 **Explanation:** **NearSync** replication can achieve RPOs as low as **1 minute** by streaming incremental snapshots at very short intervals. Standard async replication offers hourly RPOs. Synchronous replication (zero RPO) has distance/latency limitations.
 
 ---
@@ -602,12 +602,12 @@ What is the minimum RPO achievable with Nutanix Leap using NearSync replication 
 ### Q46
 When using Nutanix Move to migrate VMs to NC2, which of the following is true?
 
-- A) Move requires the source VMs to be powered off during the entire migration
-- B) Move performs seeding (initial bulk copy) while VMs remain running, then a brief cutover with minimal downtime
-- C) Move only supports Windows VMs
-- D) Move requires VMware vCenter on the target NC2 cluster
+- A) Move only supports Windows VMs
+- B) Move requires VMware vCenter on the target NC2 cluster
+- C) Move requires the source VMs to be powered off during the entire migration
+- D) Move performs seeding (initial bulk copy) while VMs remain running, then a brief cutover with minimal downtime
 
-**Correct Answer: B**
+**Correct Answer: D**
 **Explanation:** **Nutanix Move** performs an initial **seed** (bulk data copy) while the source VM remains powered on. When ready, a brief **cutover** migrates the final changes and starts the VM on the target NC2 cluster, minimizing downtime.
 
 ---
@@ -615,12 +615,12 @@ When using Nutanix Move to migrate VMs to NC2, which of the following is true?
 ### Q47
 To set up Leap DR between an on-premises cluster and NC2, which component must be deployed at both sites?
 
-- A) Nutanix Move
-- B) Prism Central (managing both the source and target clusters)
-- C) AWS CloudFormation
-- D) VMware Site Recovery Manager
+- A) Prism Central (managing both the source and target clusters)
+- B) AWS CloudFormation
+- C) VMware Site Recovery Manager
+- D) Nutanix Move
 
-**Correct Answer: B**
+**Correct Answer: A**
 **Explanation:** **Prism Central** must manage both the source and target clusters for Leap to function. Prism Central orchestrates the replication schedules, recovery plans, and failover/failback operations between sites.
 
 ---
@@ -641,12 +641,12 @@ During a planned failback from NC2 (DR site) back to on-premises (primary site),
 ### Q49
 Which network consideration is critical when planning Leap replication between on-premises and NC2?
 
-- A) Both sites must use the same IP subnet
-- B) Sufficient bandwidth between sites to sustain the replication traffic within RPO targets
-- C) Replication only works over AWS Direct Connect, never over VPN
-- D) Both sites must be in the same AWS region
+- A) Both sites must be in the same AWS region
+- B) Both sites must use the same IP subnet
+- C) Sufficient bandwidth between sites to sustain the replication traffic within RPO targets
+- D) Replication only works over AWS Direct Connect, never over VPN
 
-**Correct Answer: B**
+**Correct Answer: C**
 **Explanation:** **Network bandwidth** between the on-premises and NC2 environments must be sufficient to replicate changed data within the configured RPO window. Insufficient bandwidth causes RPO violations. Both VPN and Direct Connect/ExpressRoute are supported.
 
 ---
@@ -654,12 +654,12 @@ Which network consideration is critical when planning Leap replication between o
 ### Q50
 An organization has VMs running on VMware on-premises and wants to migrate them to NC2 on Azure. Which workflow should they use?
 
-- A) Nutanix Leap with protection domains
-- B) Azure Migrate integrated with NC2
-- C) Nutanix Move from VMware ESXi source to NC2 AHV target
-- D) Manual P2V conversion using Disk2VHD
+- A) Nutanix Move from VMware ESXi source to NC2 AHV target
+- B) Manual P2V conversion using Disk2VHD
+- C) Nutanix Leap with protection domains
+- D) Azure Migrate integrated with NC2
 
-**Correct Answer: C**
+**Correct Answer: A**
 **Explanation:** **Nutanix Move** supports migrating from **VMware ESXi** as a source to any **AHV target**, including NC2 on Azure. Move handles the hypervisor conversion (VMDK → AHV format) automatically during migration.
 
 ---
@@ -669,12 +669,12 @@ An organization has VMs running on VMware on-premises and wants to migrate them 
 ### Q51
 An NC2 cluster deployment on AWS fails during the initial provisioning phase. What should the administrator check first?
 
-- A) The Nutanix Prism Element firmware version
-- B) IAM role permissions for the NC2 deployment service account
-- C) The AHV ISO version on the local USB drive
-- D) The on-premises vCenter connectivity
+- A) IAM role permissions for the NC2 deployment service account
+- B) The AHV ISO version on the local USB drive
+- C) The on-premises vCenter connectivity
+- D) The Nutanix Prism Element firmware version
 
-**Correct Answer: B**
+**Correct Answer: A**
 **Explanation:** NC2 deployment requires specific **IAM permissions** to provision bare-metal instances, configure networking, and manage resources. Insufficient IAM permissions are a common cause of deployment failures and should be verified first.
 
 ---
@@ -695,12 +695,12 @@ During NC2 deployment, the error "InsufficientInstanceCapacity" appears. What do
 ### Q53
 An NC2 node on Azure becomes unresponsive. After investigation, it is determined the bare-metal host has a hardware failure. What is the correct remediation procedure?
 
-- A) Reboot the node from Prism Element and wait for it to recover
-- B) Remove (destroy) the failed node from the cluster, then add a new bare-metal node as a replacement
-- C) Contact AWS Support to replace the i3.metal instance
-- D) Restore the node from an EBS snapshot
+- A) Restore the node from an EBS snapshot
+- B) Reboot the node from Prism Element and wait for it to recover
+- C) Remove (destroy) the failed node from the cluster, then add a new bare-metal node as a replacement
+- D) Contact AWS Support to replace the i3.metal instance
 
-**Correct Answer: B**
+**Correct Answer: C**
 **Explanation:** For NC2 node failures, the standard procedure is to **remove the failed node** from the Nutanix cluster and then **provision a new bare-metal node** to replace it. DSF will automatically re-replicate data to the new node.
 
 ---
@@ -708,12 +708,12 @@ An NC2 node on Azure becomes unresponsive. After investigation, it is determined
 ### Q54
 The NC2 cluster on AWS shows that VMs cannot reach the internet. The VPC configuration appears correct. What is a likely cause?
 
-- A) The AHV overlay network is using an incorrect VXLAN ID
-- B) The NAT Gateway in the public subnet is missing or misconfigured, or route tables for the private subnet do not point to the NAT Gateway
-- C) The Nutanix license has restricted internet access
-- D) AWS has blocked all outbound traffic by default since September 2023
+- A) The Nutanix license has restricted internet access
+- B) AWS has blocked all outbound traffic by default since September 2023
+- C) The AHV overlay network is using an incorrect VXLAN ID
+- D) The NAT Gateway in the public subnet is missing or misconfigured, or route tables for the private subnet do not point to the NAT Gateway
 
-**Correct Answer: B**
+**Correct Answer: D**
 **Explanation:** If VMs in private subnets cannot reach the internet, the most likely cause is a **missing or misconfigured NAT Gateway** or **incorrect route table entries** in the private subnet that should route 0.0.0.0/0 through the NAT Gateway.
 
 ---
@@ -721,12 +721,12 @@ The NC2 cluster on AWS shows that VMs cannot reach the internet. The VPC configu
 ### Q55
 After adding a new node to an NC2 cluster, the node shows as "not part of the cluster" in Prism Element. What should the administrator verify?
 
-- A) That the node has been licensed separately in the AWS Marketplace
-- B) That the CVM on the new node can communicate with existing CVMs and the cluster has accepted the node
-- C) That the node is running ESXi instead of AHV
-- D) That the node's EBS volumes are properly attached
+- A) That the CVM on the new node can communicate with existing CVMs and the cluster has accepted the node
+- B) That the node is running ESXi instead of AHV
+- C) That the node's EBS volumes are properly attached
+- D) That the node has been licensed separately in the AWS Marketplace
 
-**Correct Answer: B**
+**Correct Answer: A**
 **Explanation:** When a new node fails to join the cluster, the most common issues are **CVM network connectivity** (ensure the CVM can reach other CVMs on the cluster network) and ensuring the **node expansion workflow** completed successfully in Prism.
 
 ---
@@ -747,12 +747,12 @@ An NC2 on AWS deployment experiences subnet capacity issues. What is the root ca
 ### Q57
 A Prism Central instance on an NC2 cluster becomes unreachable. Which troubleshooting step should be performed first?
 
-- A) Redeploy the NC2 cluster from scratch
-- B) Check the Prism Central VM status from a CVM CLI via SSH, verify network connectivity, and review PC logs
-- C) Contact AWS Support to check the underlying hardware
-- D) Restore Prism Central from an AWS AMI backup
+- A) Restore Prism Central from an AWS AMI backup
+- B) Redeploy the NC2 cluster from scratch
+- C) Check the Prism Central VM status from a CVM CLI via SSH, verify network connectivity, and review PC logs
+- D) Contact AWS Support to check the underlying hardware
 
-**Correct Answer: B**
+**Correct Answer: C**
 **Explanation:** When Prism Central is unreachable, the administrator should **SSH to a CVM** on the cluster and check the Prism Central VM status (`ncli vm list`), verify its network settings, and examine logs for errors before escalating.
 
 ---
@@ -760,12 +760,12 @@ A Prism Central instance on an NC2 cluster becomes unreachable. Which troublesho
 ### Q58
 During NC2 deployment, the Nutanix cluster creation fails with a VPC networking error. Which AWS configuration should be verified?
 
-- A) The S3 bucket policy for the deployment logs
-- B) VPC settings including DHCP options, DNS resolution, DNS hostnames, subnet associations, and security group rules
-- C) The AWS Lambda function timeout
-- D) The Route 53 hosted zone TTL settings
+- A) The AWS Lambda function timeout
+- B) The Route 53 hosted zone TTL settings
+- C) The S3 bucket policy for the deployment logs
+- D) VPC settings including DHCP options, DNS resolution, DNS hostnames, subnet associations, and security group rules
 
-**Correct Answer: B**
+**Correct Answer: D**
 **Explanation:** VPC networking errors during NC2 deployment typically stem from misconfigured **DHCP options, DNS settings, subnet associations, or security group rules**. These must be properly configured to allow NC2 components to communicate.
 
 ---
@@ -773,12 +773,12 @@ During NC2 deployment, the Nutanix cluster creation fails with a VPC networking 
 ### Q59
 After a power event, two NC2 nodes restart but the cluster does not reform automatically. What is the most likely issue?
 
-- A) The Nutanix license expired during the outage
-- B) The cluster requires a quorum of nodes to be online; with only 2 of 4 nodes available, the cluster cannot achieve quorum
-- C) AHV does not support automatic cluster reformation
-- D) The EBS volumes were detached during the power event
+- A) The cluster requires a quorum of nodes to be online; with only 2 of 4 nodes available, the cluster cannot achieve quorum
+- B) AHV does not support automatic cluster reformation
+- C) The EBS volumes were detached during the power event
+- D) The Nutanix license expired during the outage
 
-**Correct Answer: B**
+**Correct Answer: A**
 **Explanation:** Nutanix clusters require a **majority quorum** of nodes to be online. In a 4-node cluster, at least 3 nodes must be available. With only 2 nodes running, the cluster **cannot form a quorum** and will not start cluster services.
 
 ---
@@ -801,12 +801,12 @@ An administrator notices high latency on NC2 VMs after a recent node addition. W
 ### Q61
 Prism Central in an NC2 environment provides:
 
-- A) Management of AWS-native EC2 instances only
-- B) A unified management plane for on-premises Nutanix, NC2 on AWS, and NC2 on Azure clusters
-- C) Azure portal integration only
-- D) Management of only NC2 clusters, not on-premises
+- A) Management of only NC2 clusters, not on-premises
+- B) Management of AWS-native EC2 instances only
+- C) A unified management plane for on-premises Nutanix, NC2 on AWS, and NC2 on Azure clusters
+- D) Azure portal integration only
 
-**Correct Answer: B**
+**Correct Answer: C**
 **Explanation:** **Prism Central** provides a **unified management dashboard** for all Nutanix environments, including on-premises clusters, NC2 on AWS, and NC2 on Azure. This enables consistent operations across hybrid and multi-cloud deployments.
 
 ---
@@ -814,12 +814,12 @@ Prism Central in an NC2 environment provides:
 ### Q62
 Which Prism Central feature allows administrators to tag and organize VMs consistently across on-premises and NC2 environments?
 
-- A) AWS Resource Tags
-- B) Azure Resource Groups
-- C) Nutanix Categories
-- D) Nutanix Projects only
+- A) Nutanix Categories
+- B) Nutanix Projects only
+- C) AWS Resource Tags
+- D) Azure Resource Groups
 
-**Correct Answer: C**
+**Correct Answer: A**
 **Explanation:** **Nutanix Categories** provide a consistent tagging mechanism across all Nutanix-managed environments. Categories are key-value pairs that work identically on on-premises and NC2 clusters, enabling unified policy enforcement and organization.
 
 ---
@@ -827,12 +827,12 @@ Which Prism Central feature allows administrators to tag and organize VMs consis
 ### Q63
 How does Prism Central assist with capacity planning for NC2 clusters?
 
-- A) It only reports current usage; capacity planning requires AWS CloudWatch
-- B) It provides capacity runway analysis, showing projected resource exhaustion dates and recommending node additions
-- C) It automatically provisions new nodes when capacity is low
-- D) Capacity planning is only available for on-premises clusters
+- A) It provides capacity runway analysis, showing projected resource exhaustion dates and recommending node additions
+- B) It automatically provisions new nodes when capacity is low
+- C) Capacity planning is only available for on-premises clusters
+- D) It only reports current usage; capacity planning requires AWS CloudWatch
 
-**Correct Answer: B**
+**Correct Answer: A**
 **Explanation:** Prism Central's **capacity planning** feature analyzes historical usage trends and projects **when resources (CPU, memory, storage) will be exhausted**, providing a "runway" estimate. It recommends when to add nodes but does not auto-provision them.
 
 ---
@@ -853,12 +853,12 @@ An administrator wants a single view of all VMs across 3 on-premises clusters an
 ### Q65
 Nutanix Calm, when used with NC2 through Prism Central, provides:
 
-- A) Only infrastructure monitoring
-- B) Application automation, blueprints, and self-service provisioning across on-premises and NC2 environments
-- C) Automated bare-metal provisioning of i3.metal instances
-- D) Cost management only
+- A) Cost management only
+- B) Only infrastructure monitoring
+- C) Application automation, blueprints, and self-service provisioning across on-premises and NC2 environments
+- D) Automated bare-metal provisioning of i3.metal instances
 
-**Correct Answer: B**
+**Correct Answer: C**
 **Explanation:** **Nutanix Calm** provides application-level automation including **blueprints, self-service provisioning, and lifecycle management** that works consistently across on-premises Nutanix and NC2 clusters managed by Prism Central.
 
 ---
@@ -866,12 +866,12 @@ Nutanix Calm, when used with NC2 through Prism Central, provides:
 ### Q66
 When Prism Central manages both on-premises and NC2 clusters, alert policies:
 
-- A) Must be configured separately for each cluster type
-- B) Can be defined once and applied consistently across all managed clusters using categories
-- C) Are only available for on-premises clusters
-- D) Require AWS CloudWatch for NC2 alerts
+- A) Are only available for on-premises clusters
+- B) Require AWS CloudWatch for NC2 alerts
+- C) Must be configured separately for each cluster type
+- D) Can be defined once and applied consistently across all managed clusters using categories
 
-**Correct Answer: B**
+**Correct Answer: D**
 **Explanation:** Prism Central allows **unified alert policies** that apply consistently across all managed clusters. By using **categories**, administrators can define policies once and have them enforced across on-premises and NC2 environments.
 
 ---
@@ -879,12 +879,12 @@ When Prism Central manages both on-premises and NC2 clusters, alert policies:
 ### Q67
 Which Prism Central report helps an organization understand the cost implications of their NC2 deployment?
 
-- A) Prism Central does not provide cost reporting for NC2
-- B) Chargeback and showback reports that attribute resource consumption to departments or projects
-- C) AWS Cost Explorer is the only option
-- D) The Nutanix Beam cost governance dashboard
+- A) Chargeback and showback reports that attribute resource consumption to departments or projects
+- B) AWS Cost Explorer is the only option
+- C) The Nutanix Beam cost governance dashboard
+- D) Prism Central does not provide cost reporting for NC2
 
-**Correct Answer: B**
+**Correct Answer: A**
 **Explanation:** Prism Central provides **chargeback/showback reports** that help organizations understand resource consumption per department or project. Additionally, **Nutanix Beam** (now part of Nutanix Cost Governance) provides cloud cost optimization recommendations.
 
 ---
@@ -905,12 +905,12 @@ An administrator needs to apply a consistent security policy to VMs across on-pr
 ### Q69
 Prism Central's "Analysis" page for NC2 clusters allows administrators to:
 
-- A) View only real-time metrics; no historical data is available for cloud clusters
-- B) Create custom dashboards with performance charts, correlate metrics across entities, and analyze historical trends
-- C) Only export data to Azure Monitor
-- D) View storage metrics only; compute metrics require CloudWatch
+- A) View storage metrics only; compute metrics require CloudWatch
+- B) View only real-time metrics; no historical data is available for cloud clusters
+- C) Create custom dashboards with performance charts, correlate metrics across entities, and analyze historical trends
+- D) Only export data to Azure Monitor
 
-**Correct Answer: B**
+**Correct Answer: C**
 **Explanation:** Prism Central's **Analysis page** provides customizable dashboards with performance charts, metric correlation, and historical trend analysis for **all managed clusters**, including NC2, with the same depth of visibility as on-premises.
 
 ---
@@ -918,12 +918,12 @@ Prism Central's "Analysis" page for NC2 clusters allows administrators to:
 ### Q70
 When registering an NC2 cluster with Prism Central, which prerequisite is essential?
 
-- A) The NC2 cluster must be running VMware ESXi
-- B) Network connectivity between the NC2 cluster and Prism Central, with appropriate firewall rules allowing communication on required ports
-- C) Both must be in the same AWS region
-- D) Prism Central must be running on AWS EC2 as a native instance
+- A) Both must be in the same AWS region
+- B) Prism Central must be running on AWS EC2 as a native instance
+- C) The NC2 cluster must be running VMware ESXi
+- D) Network connectivity between the NC2 cluster and Prism Central, with appropriate firewall rules allowing communication on required ports
 
-**Correct Answer: B**
+**Correct Answer: D**
 **Explanation:** The primary prerequisite for registering any cluster with Prism Central is **network connectivity and appropriate firewall rules**. The NC2 cluster's CVMs and Prism Central must be able to communicate on the required ports (typically 9440).
 
 ---
@@ -933,12 +933,12 @@ When registering an NC2 cluster with Prism Central, which prerequisite is essent
 ### Q71
 Nutanix Flow micro-segmentation on NC2 operates at which level?
 
-- A) At the AWS Security Group level only
-- B) At the VM NIC level within AHV, independent of cloud-native security groups
-- C) At the Azure NSG level only
-- D) At the physical switch port level
+- A) At the VM NIC level within AHV, independent of cloud-native security groups
+- B) At the Azure NSG level only
+- C) At the physical switch port level
+- D) At the AWS Security Group level only
 
-**Correct Answer: B**
+**Correct Answer: A**
 **Explanation:** **Flow micro-segmentation** on NC2 operates at the **AHV hypervisor level**, applying policies at the VM NIC. This is independent of and complementary to AWS Security Groups or Azure NSGs, providing defense-in-depth.
 
 ---
@@ -959,12 +959,12 @@ Data at rest on NC2 NVMe drives is protected by:
 ### Q73
 For data in transit between CVMs in an NC2 cluster, which encryption mechanism is used?
 
-- A) AWS TLS termination at the load balancer
-- B) Nutanix-provided encryption for inter-CVM communication over the cluster network
-- C) IPsec tunnels managed by AWS VPN
-- D) No encryption is available for intra-cluster traffic
+- A) No encryption is available for intra-cluster traffic
+- B) AWS TLS termination at the load balancer
+- C) Nutanix-provided encryption for inter-CVM communication over the cluster network
+- D) IPsec tunnels managed by AWS VPN
 
-**Correct Answer: B**
+**Correct Answer: C**
 **Explanation:** Nutanix provides **encryption for data in transit** between CVMs within the cluster. This protects replication traffic and inter-node communication. This Nutanix-native encryption operates independently of cloud provider encryption services.
 
 ---
@@ -972,12 +972,12 @@ For data in transit between CVMs in an NC2 cluster, which encryption mechanism i
 ### Q74
 An organization requires SAML-based SSO for accessing Prism Central on NC2. Which configuration is needed?
 
-- A) Configure SAML SSO only on the AWS IAM Identity Center
-- B) Configure a SAML Identity Provider (IdP) integration directly in Prism Central's authentication settings
-- C) SAML SSO is not supported on NC2; only local accounts work
-- D) Deploy ADFS on an EC2 instance and use LDAP only
+- A) SAML SSO is not supported on NC2; only local accounts work
+- B) Deploy ADFS on an EC2 instance and use LDAP only
+- C) Configure SAML SSO only on the AWS IAM Identity Center
+- D) Configure a SAML Identity Provider (IdP) integration directly in Prism Central's authentication settings
 
-**Correct Answer: B**
+**Correct Answer: D**
 **Explanation:** Prism Central supports **SAML SSO integration** directly in its authentication configuration. Administrators configure their SAML IdP (such as Okta, Azure AD, or ADFS) in Prism Central's settings, enabling SSO for both on-premises and NC2-managed environments.
 
 ---
@@ -985,12 +985,12 @@ An organization requires SAML-based SSO for accessing Prism Central on NC2. Whic
 ### Q75
 Integrating Active Directory (AD) with Prism Central for NC2 provides:
 
-- A) Automatic provisioning of bare-metal nodes
-- B) Role-based access control (RBAC) using AD groups to manage permissions in Prism Central
-- C) Encryption of VM disks using AD certificates
-- D) DNS-only services for the NC2 cluster
+- A) Role-based access control (RBAC) using AD groups to manage permissions in Prism Central
+- B) Encryption of VM disks using AD certificates
+- C) DNS-only services for the NC2 cluster
+- D) Automatic provisioning of bare-metal nodes
 
-**Correct Answer: B**
+**Correct Answer: A**
 **Explanation:** **AD/LDAP integration** in Prism Central enables **RBAC using AD groups**, allowing administrators to map AD groups to Prism Central roles (Admin, Viewer, etc.). This provides centralized identity management for NC2 cluster access.
 
 ---
@@ -1011,12 +1011,12 @@ Which security best practice should be applied to the IAM role used for NC2 depl
 ### Q77
 Flow Network Security on NC2 can enforce which type of policies?
 
-- A) Only allow-all or deny-all rules between VMs
-- B) Granular application-centric policies including allowlisting, denylisting, isolation, and quarantine based on categories
-- C) Only L3 firewall rules; no application-level awareness
-- D) Only policies between NC2 and on-premises; not between VMs within NC2
+- A) Only policies between NC2 and on-premises; not between VMs within NC2
+- B) Only allow-all or deny-all rules between VMs
+- C) Granular application-centric policies including allowlisting, denylisting, isolation, and quarantine based on categories
+- D) Only L3 firewall rules; no application-level awareness
 
-**Correct Answer: B**
+**Correct Answer: C**
 **Explanation:** **Flow Network Security** supports granular, **application-centric security policies** including allowlisting (whitelist), denylisting (blacklist), isolation, and quarantine. Policies are applied using Nutanix categories, enabling intent-based security.
 
 ---
@@ -1024,12 +1024,12 @@ Flow Network Security on NC2 can enforce which type of policies?
 ### Q78
 For NC2 on Azure, which layer of encryption protects data traversing between the Azure VNet and on-premises over ExpressRoute?
 
-- A) ExpressRoute traffic is always encrypted by default
-- B) MACsec encryption on ExpressRoute Direct, or application/VPN-level encryption must be implemented since standard ExpressRoute is not encrypted
-- C) Azure automatically applies AES-256 encryption to all ExpressRoute traffic
-- D) Nutanix Flow encrypts all ExpressRoute traffic natively
+- A) Azure automatically applies AES-256 encryption to all ExpressRoute traffic
+- B) Nutanix Flow encrypts all ExpressRoute traffic natively
+- C) ExpressRoute traffic is always encrypted by default
+- D) MACsec encryption on ExpressRoute Direct, or application/VPN-level encryption must be implemented since standard ExpressRoute is not encrypted
 
-**Correct Answer: B**
+**Correct Answer: D**
 **Explanation:** Standard **ExpressRoute is not encrypted by default** — it is a private connection but traffic is not encrypted. For encryption, organizations must use **MACsec** (on ExpressRoute Direct) or implement **VPN/application-level encryption** over the ExpressRoute circuit.
 
 ---
@@ -1037,12 +1037,12 @@ For NC2 on Azure, which layer of encryption protects data traversing between the
 ### Q79
 An organization needs to ensure that only VMs with specific security categories can communicate with each other on an NC2 cluster. Which Nutanix feature enables this?
 
-- A) AWS Network ACLs
-- B) Flow micro-segmentation with isolation policies based on Nutanix categories
-- C) Azure Private Endpoints
-- D) AHV affinity rules
+- A) Flow micro-segmentation with isolation policies based on Nutanix categories
+- B) Azure Private Endpoints
+- C) AHV affinity rules
+- D) AWS Network ACLs
 
-**Correct Answer: B**
+**Correct Answer: A**
 **Explanation:** **Flow isolation policies** restrict communication between VM groups based on their **Nutanix categories**. Only VMs with explicitly allowed category pairs can communicate, providing zero-trust segmentation within the NC2 cluster.
 
 ---

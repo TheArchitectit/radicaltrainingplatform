@@ -39,12 +39,12 @@ The `acli net.create` syntax uses `vlan=` for the VLAN ID and `ip_config=` with 
 ### Q3
 An administrator needs to create an asynchronous protection domain named "PD-Finance" for replication. Which command is correct?
 
-- A) `ncli pd create name=PD-Finance type=async`
-- B) `ncli protection-domain create name=PD-Finance mode=async`
-- C) `acli pd.create PD-Finance replication_type=async`
-- D) `ncli pd create name=PD-Finance replication-mode=asynchronous`
+- A) `ncli pd create name=PD-Finance replication-mode=asynchronous`
+- B) `ncli pd create name=PD-Finance type=async`
+- C) `ncli protection-domain create name=PD-Finance mode=async`
+- D) `acli pd.create PD-Finance replication_type=async`
 
-**Answer: A**
+**Answer: B**
 The `ncli pd create` command uses `name=` and `type=async` to create an asynchronous protection domain. The full subcommand is `pd`, not `protection-domain`, and the type parameter accepts `async` or `sync`.
 
 ---
@@ -65,12 +65,12 @@ The `ncli container create` command uses `sp-name=` to specify the storage pool 
 ### Q5
 An administrator wants to verify the overall cluster health, including service status and cluster configuration. Which pair of commands provides the most comprehensive view?
 
-- A) `ncli cluster info` and `ncli cluster status`
-- B) `ncli cluster get-params` and `ncli cluster list`
-- C) `acli cluster.info` and `acli cluster.health`
-- D) `cluster status` and `cluster info`
+- A) `acli cluster.info` and `acli cluster.health`
+- B) `cluster status` and `cluster info`
+- C) `ncli cluster info` and `ncli cluster status`
+- D) `ncli cluster get-params` and `ncli cluster list`
 
-**Answer: A**
+**Answer: C**
 `ncli cluster info` displays cluster configuration details (name, ID, IPs, version), while `ncli cluster status` shows real-time service health across all CVMs. These are the two primary commands for cluster verification. `acli` does not have cluster-level commands.
 
 ---
@@ -78,12 +78,12 @@ An administrator wants to verify the overall cluster health, including service s
 ### Q6
 An administrator needs to add an existing disk image to a VM named "test-vm01" as a SCSI disk using `acli`. Which command correctly attaches the disk?
 
-- A) `acli vm.disk_create test-vm01 clone_from_image=CentOS-8 bus=scsi`
-- B) `acli vm.add_disk test-vm01 image=CentOS-8 type=scsi`
-- C) `acli vm.disk_create test-vm01 image_name=CentOS-8 bus=scsi`
-- D) `acli vm.disk_attach test-vm01 clone_from_image=CentOS-8 bus=scsi`
+- A) `acli vm.add_disk test-vm01 image=CentOS-8 type=scsi`
+- B) `acli vm.disk_create test-vm01 image_name=CentOS-8 bus=scsi`
+- C) `acli vm.disk_attach test-vm01 clone_from_image=CentOS-8 bus=scsi`
+- D) `acli vm.disk_create test-vm01 clone_from_image=CentOS-8 bus=scsi`
 
-**Answer: A**
+**Answer: D**
 The correct `acli` syntax uses `vm.disk_create` with `clone_from_image=` to clone from an existing image and `bus=scsi` to specify the bus type. There is no `vm.add_disk` or `vm.disk_attach` subcommand in `acli`.
 
 ---
@@ -130,12 +130,12 @@ The `acli vm.update` command with `memory=8G` correctly updates the VM's memory 
 ### Q10
 An administrator wants to take a snapshot of a VM named "critical-app" and label it "pre-upgrade-snap". Which command is correct?
 
-- A) `acli vm.snapshot_create critical-app snapshot_name_list=pre-upgrade-snap`
-- B) `acli vm.create_snapshot critical-app name=pre-upgrade-snap`
-- C) `ncli snapshot create vm-name=critical-app name=pre-upgrade-snap`
-- D) `acli vm.snapshot critical-app label=pre-upgrade-snap`
+- A) `acli vm.snapshot critical-app label=pre-upgrade-snap`
+- B) `acli vm.snapshot_create critical-app snapshot_name_list=pre-upgrade-snap`
+- C) `acli vm.create_snapshot critical-app name=pre-upgrade-snap`
+- D) `ncli snapshot create vm-name=critical-app name=pre-upgrade-snap`
 
-**Answer: A**
+**Answer: B**
 The `acli vm.snapshot_create` command uses `snapshot_name_list=` to assign a name to the snapshot. The parameter is `snapshot_name_list` because `acli` supports creating snapshots of multiple VMs simultaneously.
 
 ---
@@ -147,12 +147,12 @@ The `acli vm.snapshot_create` command uses `snapshot_name_list=` to assign a nam
 ### Q11
 An administrator needs to create a VM using the Nutanix v3 API. Which HTTP method and endpoint are correct?
 
-- A) `PUT /api/nutanix/v3/vms/{uuid}`
-- B) `POST /api/nutanix/v3/vms`
-- C) `POST /api/nutanix/v3/vms/create`
-- D) `POST /api/nutanix/v2.0/vms`
+- A) `POST /api/nutanix/v2.0/vms`
+- B) `PUT /api/nutanix/v3/vms/{uuid}`
+- C) `POST /api/nutanix/v3/vms`
+- D) `POST /api/nutanix/v3/vms/create`
 
-**Answer: B**
+**Answer: C**
 The v3 API uses `POST /api/nutanix/v3/vms` with a JSON body containing `spec` and `metadata` objects to create a new VM. There is no `/create` suffix — the POST method on the collection endpoint implies creation. `PUT` is used for updates on an existing resource identified by UUID.
 
 ---
@@ -160,12 +160,12 @@ The v3 API uses `POST /api/nutanix/v3/vms` with a JSON body containing `spec` an
 ### Q12
 An administrator wants to list all VMs on the cluster using the v3 API with pagination. Which request is correct?
 
-- A) `GET /api/nutanix/v3/vms?limit=50&offset=0`
-- B) `POST /api/nutanix/v3/vms/list` with body `{"kind": "vm", "length": 50, "offset": 0, "sort_order": "ASCENDING", "sort_attribute": "name"}`
-- C) `GET /api/nutanix/v3/vms/list?length=50`
-- D) `POST /api/nutanix/v3/vms/list` with body `{"limit": 50, "page": 1}`
+- A) `GET /api/nutanix/v3/vms/list?length=50`
+- B) `POST /api/nutanix/v3/vms/list` with body `{"limit": 50, "page": 1}`
+- C) `GET /api/nutanix/v3/vms?limit=50&offset=0`
+- D) `POST /api/nutanix/v3/vms/list` with body `{"kind": "vm", "length": 50, "offset": 0, "sort_order": "ASCENDING", "sort_attribute": "name"}`
 
-**Answer: B**
+**Answer: D**
 The v3 API uses a `POST` to the `/list` endpoint with a JSON body specifying `kind`, `length`, `offset`, `sort_order`, and `sort_attribute`. Including sort fields is critical for pagination stability — without explicit sorting, results may vary between API calls, causing offset-based pagination to skip or duplicate records. The standard response includes: `{"entities": [...], "metadata": {"total_matches": N, "length": 50, "offset": 0}}`. The parameter names are `length` and `offset`, not `limit` and `page`.
 
 ---
@@ -173,12 +173,12 @@ The v3 API uses a `POST` to the `/list` endpoint with a JSON body specifying `ki
 ### Q13
 An administrator needs to authenticate to the Prism Central v3 API. Which authentication method is correct?
 
-- A) `Authorization: Bearer <JWT-token>`
-- B) `Authorization: Basic <base64(username:password)>`
-- C) `X-Nutanix-Auth: <api-key>`
-- D) `Cookie: NTNX_SESSION=<session-id>`
+- A) `X-Nutanix-Auth: <api-key>`
+- B) `Cookie: NTNX_SESSION=<session-id>`
+- C) `Authorization: Bearer <JWT-token>`
+- D) `Authorization: Basic <base64(username:password)>`
 
-**Answer: B**
+**Answer: D**
 The Nutanix v3 API uses HTTP Basic Authentication with a Base64-encoded `username:password` string in the `Authorization` header. JWT bearer tokens and API keys are not supported for direct API authentication. Session cookies exist but are not the recommended programmatic approach.
 
 ---
@@ -199,12 +199,12 @@ The v3 images API nests the image configuration under `spec.resources` with the 
 ### Q15
 An administrator needs to assign a category value "Production" under category key "Environment" using the v3 API. Which request is correct?
 
-- A) `POST /api/nutanix/v3/categories/Environment/Production`
-- B) `PUT /api/nutanix/v3/categories/Environment/Production` with body `{"value": "Production"}`
-- C) `PUT /api/nutanix/v3/categories/Environment` with body `{"value": "Production"}`
-- D) `POST /api/nutanix/v3/categories` with body `{"name": "Environment", "value": "Production"}`
+- A) `PUT /api/nutanix/v3/categories/Environment/Production` with body `{"value": "Production"}`
+- B) `PUT /api/nutanix/v3/categories/Environment` with body `{"value": "Production"}`
+- C) `POST /api/nutanix/v3/categories` with body `{"name": "Environment", "value": "Production"}`
+- D) `POST /api/nutanix/v3/categories/Environment/Production`
 
-**Answer: B**
+**Answer: A**
 Category values in the v3 API are created or updated using `PUT /api/nutanix/v3/categories/{name}/{value}` with a JSON body containing the `value` field. The `PUT` method is used because category values are idempotent — creating and updating use the same operation.
 
 ---
@@ -238,12 +238,12 @@ The v3 API follows an intent-based model — there is no dedicated power-on endp
 ### Q18
 An administrator is writing a script and receives an HTTP 409 Conflict when trying to update a VM via the v3 API. What is the most likely cause?
 
-- A) The VM UUID does not exist on the cluster
-- B) The `spec_version` in the PUT body does not match the current version
-- C) The API rate limit has been exceeded
-- D) The VM is in a powered-on state and cannot be modified
+- A) The VM is in a powered-on state and cannot be modified
+- B) The VM UUID does not exist on the cluster
+- C) The `spec_version` in the PUT body does not match the current version
+- D) The API rate limit has been exceeded
 
-**Answer: B**
+**Answer: C**
 A 409 Conflict in the v3 API indicates an optimistic concurrency control failure — the `spec_version` in the request body does not match the server's current version. This occurs when another operation modified the entity between the GET and PUT. The solution is to re-GET the entity and retry the update.
 
 ---
@@ -251,12 +251,12 @@ A 409 Conflict in the v3 API indicates an optimistic concurrency control failure
 ### Q19
 An administrator wants to retrieve a task status after submitting an asynchronous v3 API operation. The task UUID was returned in the initial response. Which endpoint should be polled?
 
-- A) `GET /api/nutanix/v3/tasks/{task_uuid}`
-- B) `GET /api/nutanix/v3/jobs/{task_uuid}`
-- C) `POST /api/nutanix/v3/tasks/list` with filter for task UUID
-- D) `GET /api/nutanix/v2.0/tasks/{task_uuid}`
+- A) `GET /api/nutanix/v2.0/tasks/{task_uuid}`
+- B) `GET /api/nutanix/v3/tasks/{task_uuid}`
+- C) `GET /api/nutanix/v3/jobs/{task_uuid}`
+- D) `POST /api/nutanix/v3/tasks/list` with filter for task UUID
 
-**Answer: A**
+**Answer: B**
 Asynchronous v3 API operations return a `task_uuid` which can be polled at `GET /api/nutanix/v3/tasks/{task_uuid}`. The response includes `status` (QUEUED, RUNNING, SUCCEEDED, FAILED) and `percentage_complete` fields to track progress.
 
 ---
@@ -264,12 +264,12 @@ Asynchronous v3 API operations return a `task_uuid` which can be polled at `GET 
 ### Q20
 An administrator needs to delete a VM and its associated disks using the v3 API. Which request is correct?
 
-- A) `DELETE /api/nutanix/v3/vms/{uuid}` (disks are automatically deleted)
-- B) `DELETE /api/nutanix/v3/vms/{uuid}?delete_snapshots=true&delete_disks=true`
-- C) `POST /api/nutanix/v3/vms/{uuid}/delete` with body `{"delete_disks": true}`
-- D) `DELETE /api/nutanix/v3/vms/{uuid}` followed by separate `DELETE` for each disk
+- A) `POST /api/nutanix/v3/vms/{uuid}/delete` with body `{"delete_disks": true}`
+- B) `DELETE /api/nutanix/v3/vms/{uuid}` followed by separate `DELETE` for each disk
+- C) `DELETE /api/nutanix/v3/vms/{uuid}` (disks are automatically deleted)
+- D) `DELETE /api/nutanix/v3/vms/{uuid}?delete_snapshots=true&delete_disks=true`
 
-**Answer: A**
+**Answer: C**
 The v3 API `DELETE /api/nutanix/v3/vms/{uuid}` automatically deletes all disks that were created with the VM (cloned disks). Disks that were explicitly attached from an existing volume are preserved. No additional parameters or separate disk deletion calls are needed.
 
 ---
@@ -281,12 +281,12 @@ The v3 API `DELETE /api/nutanix/v3/vms/{uuid}` automatically deletes all disks t
 ### Q21
 An administrator reports that virtual machines are experiencing high storage I/O latency. Which CVM service is primarily responsible for handling storage I/O, and on which port does its status page run?
 
-- A) Curator on port 2010
-- B) Stargate on port 2009
-- C) Cerebro on port 2020
-- D) Prism on port 9080
+- A) Cerebro on port 2020
+- B) Prism on port 9080
+- C) Curator on port 2010
+- D) Stargate on port 2009
 
-**Answer: B**
+**Answer: D**
 Stargate is the primary I/O handler managing all storage read/write operations. Its status page at `http://<cvm_ip>:2009` provides oplog utilization, iSCSI sessions, NFS exports, and disk queue depths. For comprehensive latency diagnosis, also monitor: **Curator (port 2010)** for garbage collection pause times and extent group calculations (GC pauses can block I/O), and **Zookeeper (port 2181)** for consistency coordination. Cross-reference Stargate oplog usage with Curator GC metrics in Prism to isolate whether latency is from I/O dispatch or background maintenance tasks.
 
 ---
@@ -294,12 +294,12 @@ Stargate is the primary I/O handler managing all storage read/write operations. 
 ### Q22
 An administrator needs to dump the entire Zeus configuration database to review the cluster's authoritative configuration. Which command should be used?
 
-- A) `zeus_config_printer`
-- B) `zeus --dump-config`
-- C) `ncli zeus show-config`
-- D) `cat /home/nutanix/data/zeus/config.db`
+- A) `zeus --dump-config`
+- B) `ncli zeus show-config`
+- C) `cat /home/nutanix/data/zeus/config.db`
+- D) `zeus_config_printer`
 
-**Answer: A**
+**Answer: D**
 The `zeus_config_printer` command outputs the complete Zeus configuration in a human-readable protobuf format. Zeus is the distributed configuration database built on Zookeeper, and its configuration includes all cluster, node, container, and network definitions. The configuration is not stored as a flat file that can be read with `cat`.
 
 ---
@@ -307,12 +307,12 @@ The `zeus_config_printer` command outputs the complete Zeus configuration in a h
 ### Q23
 An administrator suspects the Genesis service has crashed on a CVM and needs to restart it. Which approach is correct?
 
-- A) `genesis restart`
-- B) `sudo systemctl restart genesis`
-- C) `cluster restart` (Genesis auto-restarts all services)
-- D) Genesis is self-healing and restarts automatically via the watchdog; manually restart with `genesis stop && cluster start`
+- A) `sudo systemctl restart genesis`
+- B) `cluster restart` (Genesis auto-restarts all services)
+- C) Genesis is self-healing and restarts automatically via the watchdog; manually restart with `genesis stop && cluster start`
+- D) `genesis restart`
 
-**Answer: A**
+**Answer: D**
 The `genesis restart` command is a valid command documented in the AOS Command Reference (AOS 6.5+). Genesis supports `start|stop|restart|status` subcommands. While Genesis does have a self-healing watchdog that auto-restarts crashed services, when manual intervention is explicitly needed, `genesis restart` is the most direct approach. The alternative `genesis stop && cluster start` also works but is a two-step process typically used for broader cluster service reinitialization.
 
 ---
@@ -346,12 +346,12 @@ The `genesis status` command (run on a single CVM) shows the status of all servi
 ### Q26
 An administrator notices that background storage optimization tasks (dedup, compression, garbage collection) are not running. Which CVM service should be investigated, and what is its status page port?
 
-- A) Stargate on port 2009
-- B) Cerebro on port 2020
-- C) Curator on port 2010
-- D) Chronos on port 2011
+- A) Chronos on port 2011
+- B) Stargate on port 2009
+- C) Cerebro on port 2020
+- D) Curator on port 2010
 
-**Answer: C**
+**Answer: D**
 Curator is the MapReduce framework responsible for background storage tasks including deduplication, compression, garbage collection, and disk balancing. Its status page at `http://<cvm_ip>:2010` shows scan status, job history, and task execution details. Chronos (port 2011) is the job scheduler but Curator owns the optimization logic.
 
 ---
@@ -359,12 +359,12 @@ Curator is the MapReduce framework responsible for background storage tasks incl
 ### Q27
 An administrator needs to restart the Prism service on a specific CVM because the web UI is unresponsive. Which sequence of commands is correct?
 
-- A) `genesis stop prism && genesis start prism`
-- B) `sudo systemctl restart prism`
-- C) `genesis stop prism` followed by `cluster start`
-- D) `restart_prism`
+- A) `restart_prism`
+- B) `genesis stop prism && genesis start prism`
+- C) `sudo systemctl restart prism`
+- D) `genesis stop prism` followed by `cluster start`
 
-**Answer: C**
+**Answer: D**
 The correct procedure is to stop the individual service with `genesis stop prism` and then use `cluster start` to restart it. The `cluster start` command is idempotent and only starts services that are not running. There is no `genesis start` command — `genesis stop` stops services, but `cluster start` is used to bring them back.
 
 ---
@@ -372,12 +372,12 @@ The correct procedure is to stop the individual service with `genesis stop prism
 ### Q28
 An administrator notices that replication between two clusters has stalled. Which CVM service handles inter-cluster replication, and on which port is its status page?
 
-- A) Stargate on port 2009
-- B) Curator on port 2010
-- C) Cerebro on port 2020
-- D) Pithos on port 2027
+- A) Cerebro on port 2020
+- B) Pithos on port 2027
+- C) Stargate on port 2009
+- D) Curator on port 2010
 
-**Answer: C**
+**Answer: A**
 Cerebro is the replication service responsible for managing protection domains, snapshots, and inter-cluster data replication. Its status page at `http://<cvm_ip>:2020` provides details on replication progress, bandwidth utilization, and any replication errors between paired remote sites.
 
 ---
@@ -385,12 +385,12 @@ Cerebro is the replication service responsible for managing protection domains, 
 ### Q29
 An administrator wants to check the Prism leader CVM in the cluster to direct API requests efficiently. Which command identifies the Prism leader?
 
-- A) `ncli cluster get-prism-leader`
-- B) `curl -s http://localhost:9080/PrismGateway/services/rest/v1/cluster/prism_leader`
-- C) `genesis status | grep prism`
-- D) `zeus_config_printer | grep prism_leader`
+- A) `genesis status | grep prism`
+- B) `zeus_config_printer | grep prism_leader`
+- C) `ncli cluster get-prism-leader`
+- D) `curl -s http://localhost:9080/PrismGateway/services/rest/v1/cluster/prism_leader`
 
-**Answer: B**
+**Answer: D**
 The Prism leader can be identified by querying the local Prism REST API endpoint at `http://localhost:9080/PrismGateway/services/rest/v1/cluster/prism_leader`. This returns the IP address of the CVM currently acting as the Prism leader, which handles all web UI and API requests for the cluster.
 
 ---
@@ -415,12 +415,12 @@ Zookeeper runs on port 2181 and responds to four-letter commands. Sending `ruok`
 ### Q31
 An administrator needs to review Stargate I/O errors on a CVM. Which log file should be examined first?
 
-- A) `/home/nutanix/data/logs/stargate.INFO`
-- B) `/home/nutanix/data/logs/stargate.out`
-- C) `/var/log/stargate/stargate.log`
-- D) `/home/nutanix/data/logs/storage_io.log`
+- A) `/home/nutanix/data/logs/stargate.out`
+- B) `/var/log/stargate/stargate.log`
+- C) `/home/nutanix/data/logs/storage_io.log`
+- D) `/home/nutanix/data/logs/stargate.INFO`
 
-**Answer: A**
+**Answer: D**
 Stargate logs follow the Google glog convention and are located at `/home/nutanix/data/logs/stargate.INFO`. For error investigation, also check `stargate.WARNING` and `stargate.ERROR` in the same directory. The `.INFO` file contains all severity levels and is the most comprehensive starting point.
 
 ---
@@ -467,12 +467,12 @@ On AHV hosts, individual VM logs (QEMU process output) are stored in `/var/log/l
 ### Q35
 An administrator needs to review the Genesis service manager log to understand why services failed to start after a CVM reboot. Which log file should be reviewed?
 
-- A) `/home/nutanix/data/logs/genesis.log`
-- B) `/home/nutanix/data/logs/genesis.out`
-- C) `/home/nutanix/data/logs/genesis_service.log`
-- D) `/var/log/genesis/startup.log`
+- A) `/var/log/genesis/startup.log`
+- B) `/home/nutanix/data/logs/genesis.log`
+- C) `/home/nutanix/data/logs/genesis.out`
+- D) `/home/nutanix/data/logs/genesis_service.log`
 
-**Answer: B**
+**Answer: C**
 The Genesis service manager writes its output to `/home/nutanix/data/logs/genesis.out`. This log contains service startup sequences, dependency resolution, and any errors encountered during service initialization. Unlike other services that use glog format (.INFO/.WARNING), Genesis uses a `.out` file.
 
 ---
@@ -493,12 +493,12 @@ AHV is based on CentOS/RHEL, which uses `/var/log/messages` as the primary syste
 ### Q37
 An administrator needs to review the Curator scan history to determine when the last full scan completed. Which log file should be reviewed?
 
-- A) `/home/nutanix/data/logs/curator.INFO`
-- B) `/home/nutanix/data/logs/curator_cli.log`
-- C) `/home/nutanix/data/logs/background_tasks.log`
-- D) `/home/nutanix/data/logs/curator.out`
+- A) `/home/nutanix/data/logs/background_tasks.log`
+- B) `/home/nutanix/data/logs/curator.out`
+- C) `/home/nutanix/data/logs/curator.INFO`
+- D) `/home/nutanix/data/logs/curator_cli.log`
 
-**Answer: A**
+**Answer: C**
 Curator logs follow the glog convention at `/home/nutanix/data/logs/curator.INFO`. This log contains details of partial and full scan initiation, duration, tasks executed, and data processed. The Curator status page at port 2010 also shows scan history but the log provides more detail.
 
 ---
@@ -506,12 +506,12 @@ Curator logs follow the glog convention at `/home/nutanix/data/logs/curator.INFO
 ### Q38
 An administrator is troubleshooting a failed LCM (Life Cycle Manager) firmware update. Where should they look for LCM-specific logs?
 
-- A) `/home/nutanix/data/logs/lcm.log`
-- B) `/home/nutanix/data/logs/lcm/lcm_ops.log`
-- C) `/home/nutanix/data/logs/genesis.out` (LCM operations logged here)
-- D) `/home/nutanix/data/logs/lcm_leader.log`
+- A) `/home/nutanix/data/logs/lcm/lcm_ops.log`
+- B) `/home/nutanix/data/logs/genesis.out` (LCM operations logged here)
+- C) `/home/nutanix/data/logs/lcm_leader.log`
+- D) `/home/nutanix/data/logs/lcm.log`
 
-**Answer: B**
+**Answer: A**
 LCM maintains its own log directory at `/home/nutanix/data/logs/lcm/` with the primary operations log at `lcm_ops.log`. This log contains inventory detection results, firmware download status, update execution steps, and any failure details. While Genesis may log LCM service events, the detailed update operations are in the dedicated LCM log directory.
 
 ---
@@ -519,12 +519,12 @@ LCM maintains its own log directory at `/home/nutanix/data/logs/lcm/` with the p
 ### Q39
 An administrator needs to review Cerebro replication logs to troubleshoot a failed snapshot replication. Which log file is relevant?
 
-- A) `/home/nutanix/data/logs/cerebro.INFO`
-- B) `/home/nutanix/data/logs/replication.log`
-- C) `/home/nutanix/data/logs/cerebro_repl.log`
-- D) `/home/nutanix/data/logs/data_protection.log`
+- A) `/home/nutanix/data/logs/replication.log`
+- B) `/home/nutanix/data/logs/cerebro_repl.log`
+- C) `/home/nutanix/data/logs/data_protection.log`
+- D) `/home/nutanix/data/logs/cerebro.INFO`
 
-**Answer: A**
+**Answer: D**
 Cerebro logs follow the glog convention at `/home/nutanix/data/logs/cerebro.INFO`. This log contains replication schedule execution, snapshot transfer progress, bandwidth throttling events, and any replication failures between paired remote sites.
 
 ---
@@ -562,12 +562,12 @@ The `ovs-vsctl show` command displays the complete OVS database configuration, i
 ### Q42
 An administrator suspects that VLAN tagging is not working correctly on an AHV host. Which command shows the OpenFlow rules that handle VLAN traffic on bridge br0?
 
-- A) `ovs-vsctl list-ports br0`
-- B) `ovs-ofctl dump-flows br0`
-- C) `ovs-appctl fdb/show br0`
-- D) `ovs-vsctl get bridge br0 vlans`
+- A) `ovs-vsctl get bridge br0 vlans`
+- B) `ovs-vsctl list-ports br0`
+- C) `ovs-ofctl dump-flows br0`
+- D) `ovs-appctl fdb/show br0`
 
-**Answer: B**
+**Answer: C**
 The `ovs-ofctl dump-flows br0` command displays all OpenFlow rules on the bridge, including VLAN push/pop actions and traffic matching rules. This is essential for verifying that VLAN tagging and stripping are configured correctly for VM traffic.
 
 ---
@@ -588,12 +588,12 @@ The `ovs-appctl bond/show br0-up` command shows the OVS bond status including th
 ### Q44
 An administrator needs to verify that jumbo frames (MTU 9000) are working end-to-end between two VMs. Which command correctly tests jumbo frame connectivity?
 
-- A) `ping -s 9000 -M do <destination_ip>`
-- B) `ping -s 8972 -M do <destination_ip>`
-- C) `ping -s 9000 <destination_ip>`
-- D) `ping -s 8972 <destination_ip>`
+- A) `ping -s 9000 <destination_ip>`
+- B) `ping -s 8972 <destination_ip>`
+- C) `ping -s 9000 -M do <destination_ip>`
+- D) `ping -s 8972 -M do <destination_ip>`
 
-**Answer: B**
+**Answer: D**
 The correct test uses `ping -s 8972 -M do` because: the `-s 8972` sets the payload size, and with 20 bytes of IP header + 8 bytes of ICMP header, the total frame is 9000 bytes. The `-M do` flag ("don't fragment") prevents fragmentation, ensuring the full jumbo frame traverses the entire path.
 
 ---
@@ -601,12 +601,12 @@ The correct test uses `ping -s 8972 -M do` because: the `-s 8972` sets the paylo
 ### Q45
 An administrator needs to verify the overall OVS bridge configuration and uplink status on an AHV host. Which Nutanix-specific command provides a consolidated view?
 
-- A) `manage_ovs --bridge_status`
-- B) `manage_ovs show_uplinks`
-- C) `acli host.list_networks`
-- D) `ncli host get-network-config`
+- A) `acli host.list_networks`
+- B) `ncli host get-network-config`
+- C) `manage_ovs --bridge_status`
+- D) `manage_ovs show_uplinks`
 
-**Answer: A**
+**Answer: C**
 The `manage_ovs --bridge_status` command is the Nutanix-provided wrapper that shows a consolidated view of all OVS bridges, their uplinks, bond configurations, and MTU settings on the AHV host. This is the recommended first command for network troubleshooting as it presents information in a summarized format.
 
 ---
@@ -666,12 +666,12 @@ Port 2181 (Zookeeper) is critical for CVM-to-CVM cluster communication as it mai
 ### Q50
 An administrator is troubleshooting a VM that cannot reach its default gateway. The VM is on VLAN 100. On the AHV host, which command verifies that the VM's virtual NIC (tap interface) is correctly tagged to VLAN 100?
 
-- A) `ovs-vsctl show | grep -A2 "tap"`
-- B) `ovs-vsctl list port <tap-interface-name>`
-- C) `virsh domiflist <vm-name>`
-- D) `ovs-ofctl show br0 | grep tap`
+- A) `ovs-ofctl show br0 | grep tap`
+- B) `ovs-vsctl show | grep -A2 "tap"`
+- C) `ovs-vsctl list port <tap-interface-name>`
+- D) `virsh domiflist <vm-name>`
 
-**Answer: B**
+**Answer: C**
 The `ovs-vsctl list port <tap-interface-name>` command shows the full port configuration for the VM's tap interface, including the `tag` field that specifies the VLAN assignment. If the `tag` field is missing or set incorrectly, the VM will not be placed on the intended VLAN.
 
 ---
@@ -683,12 +683,12 @@ The `ovs-vsctl list port <tap-interface-name>` command shows the full port confi
 ### Q51
 An administrator suspects a physical disk has failed in the cluster. Which command lists all disks and their current status?
 
-- A) `ncli disk ls`
-- B) `ncli disk list`
-- C) `acli disk.list`
-- D) `ncli storage list-disks`
+- A) `ncli storage list-disks`
+- B) `ncli disk ls`
+- C) `ncli disk list`
+- D) `acli disk.list`
 
-**Answer: A**
+**Answer: B**
 The `ncli disk ls` command lists all physical disks in the cluster with their status (online, offline, bad), tier (SSD/HDD), storage pool assignment, and capacity. The short form `ls` is used instead of `list` for the disk subcommand.
 
 ---
@@ -696,12 +696,12 @@ The `ncli disk ls` command lists all physical disks in the cluster with their st
 ### Q52
 An administrator notices that a storage container is nearly full. Which command provides detailed container usage including reserved space, replication factor overhead, and snapshot usage?
 
-- A) `ncli container ls`
-- B) `ncli ctr stats`
-- C) `ncli container stats name=<container-name>`
-- D) `ncli container list name=<container-name>`
+- A) `ncli container stats name=<container-name>`
+- B) `ncli container list name=<container-name>`
+- C) `ncli container ls`
+- D) `ncli ctr stats`
 
-**Answer: A**
+**Answer: C**
 The `ncli container ls` command provides a comprehensive view of all containers with their capacity statistics including total capacity, used space, reserved capacity, implicit reservation (RF overhead), and snapshot usage. For a specific container, filtering with `name=` can be appended.
 
 ---
@@ -709,12 +709,12 @@ The `ncli container ls` command provides a comprehensive view of all containers 
 ### Q53
 An administrator is investigating high storage latency and suspects the OpLog (write buffer on SSD) is full. Where can OpLog utilization be checked?
 
-- A) `ncli storage get-oplog-status`
-- B) The Stargate 2009 page under the "OpLog" section
-- C) `/home/nutanix/data/logs/oplog.INFO`
-- D) `ncli disk ls tier=ssd-oplog`
+- A) `/home/nutanix/data/logs/oplog.INFO`
+- B) `ncli disk ls tier=ssd-oplog`
+- C) `ncli storage get-oplog-status`
+- D) The Stargate 2009 page under the "OpLog" section
 
-**Answer: B**
+**Answer: D**
 OpLog utilization is visible on the Stargate status page at `http://<cvm_ip>:2009` under the OpLog section. This shows current OpLog usage, drain rate, and whether OpLog is bypassed for sequential I/O. When OpLog utilization is consistently high, write latency increases because new writes must wait for OpLog space.
 
 ---
@@ -722,12 +722,12 @@ OpLog utilization is visible on the Stargate status page at `http://<cvm_ip>:200
 ### Q54
 An administrator has a failed SSD disk in a node within an RF2 cluster. What happens to the data automatically?
 
-- A) The cluster enters read-only mode until the disk is replaced
-- B) The data is automatically rebuilt to other disks in the cluster to maintain RF2 redundancy
-- C) An administrator must manually trigger a rebuild with `ncli disk rebuild`
-- D) Only metadata is rebuilt; data blocks remain degraded until disk replacement
+- A) The data is automatically rebuilt to other disks in the cluster to maintain RF2 redundancy
+- B) An administrator must manually trigger a rebuild with `ncli disk rebuild`
+- C) Only metadata is rebuilt; data blocks remain degraded until disk replacement
+- D) The cluster enters read-only mode until the disk is replaced
 
-**Answer: B**
+**Answer: A**
 When a disk fails in an RF2 cluster, the Curator service automatically detects the failure and triggers a self-healing rebuild. Data blocks that had a replica on the failed disk are re-replicated to other available disks to maintain RF2 redundancy. No manual intervention is required, and the cluster remains fully operational during the rebuild.
 
 ---
@@ -735,12 +735,12 @@ When a disk fails in an RF2 cluster, the Curator service automatically detects t
 ### Q55
 An administrator notices that deduplication savings are lower than expected on a container. Which command checks the actual dedup ratio and savings?
 
-- A) `ncli container stats name=<name> | grep dedup`
-- B) `ncli container ls name=<name>`
-- C) `curator_cli display_data_reduction_report`
-- D) `ncli container get-dedup-stats name=<name>`
+- A) `ncli container ls name=<name>`
+- B) `curator_cli display_data_reduction_report`
+- C) `ncli container get-dedup-stats name=<name>`
+- D) `ncli container stats name=<name> | grep dedup`
 
-**Answer: C**
+**Answer: B**
 The `curator_cli display_data_reduction_report` command provides a detailed breakdown of storage savings from deduplication, compression, and erasure coding across the cluster. This report shows pre-dedup size, post-dedup size, and actual savings ratios — more detailed than the container-level statistics.
 
 ---
@@ -774,12 +774,12 @@ The `nodetool -h 0 status` command shows the Cassandra cluster status including 
 ### Q58
 An administrator needs to identify which VMs are consuming the most storage in a specific container. Which approach is most effective?
 
-- A) `ncli vm ls | sort-by storage`
-- B) Use the Prism Storage > Container > VM Usage view or `nuclei vm.list` with storage details
-- C) `acli vm.list container=<name> sort_by=disk_usage`
-- D) `ncli container get-vm-usage name=<name>`
+- A) `ncli container get-vm-usage name=<name>`
+- B) `ncli vm ls | sort-by storage`
+- C) Use the Prism Storage > Container > VM Usage view or `nuclei vm.list` with storage details
+- D) `acli vm.list container=<name> sort_by=disk_usage`
 
-**Answer: B**
+**Answer: C**
 The Prism web interface provides a Storage > Container view that shows per-VM disk usage within a container. Programmatically, `nuclei vm.list` with appropriate fields provides storage consumption details. There is no direct `ncli` or `acli` command that sorts VMs by storage usage within a container.
 
 ---
@@ -787,12 +787,12 @@ The Prism web interface provides a Storage > Container view that shows per-VM di
 ### Q59
 An administrator suspects that orphaned snapshots are consuming excessive storage in a protection domain. Which command lists all snapshots for a protection domain?
 
-- A) `ncli pd list-snapshots name=<pd-name>`
-- B) `ncli snapshot list protection-domain=<pd-name>`
-- C) `ncli pd ls-snaps name=<pd-name>`
-- D) `acli pd.snapshot_list <pd-name>`
+- A) `acli pd.snapshot_list <pd-name>`
+- B) `ncli pd list-snapshots name=<pd-name>`
+- C) `ncli snapshot list protection-domain=<pd-name>`
+- D) `ncli pd ls-snaps name=<pd-name>`
 
-**Answer: A**
+**Answer: B**
 The `ncli pd list-snapshots name=<pd-name>` command lists all snapshots associated with a protection domain, including snapshot IDs, creation timestamps, and sizes. This allows administrators to identify old or orphaned snapshots that may need to be manually expired to reclaim storage space.
 
 ---
@@ -800,12 +800,12 @@ The `ncli pd list-snapshots name=<pd-name>` command lists all snapshots associat
 ### Q60
 An administrator wants to force a Curator full scan to reclaim space after a large number of VM deletions. Which command triggers a full scan?
 
-- A) `curator_cli start_scan type=full`
-- B) `allssh "genesis stop curator && cluster start"`
-- C) `ncli curator start-full-scan`
-- D) `curator_cli start_curator_full_scan`
+- A) `ncli curator start-full-scan`
+- B) `curator_cli start_curator_full_scan`
+- C) `curator_cli start_scan type=full`
+- D) `allssh "genesis stop curator && cluster start"`
 
-**Answer: A**
+**Answer: C**
 The `curator_cli start_scan type=full` command manually triggers a Curator full scan. Full scans analyze all data across the cluster and perform garbage collection, deduplication, and space reclamation. Partial scans run more frequently but only process recently changed data.
 
 ---
@@ -817,12 +817,12 @@ The `curator_cli start_scan type=full` command manually triggers a Curator full 
 ### Q61
 An administrator needs to create a protection domain with an hourly replication schedule. Which sequence of commands is correct?
 
-- A) `ncli pd create name=PD-HR type=async` then `ncli pd add-hourly-schedule name=PD-HR every-nth-hour=1`
-- B) `ncli pd create name=PD-HR type=async` then `ncli pd set-schedule name=PD-HR every-nth-min=60`
-- C) `ncli pd create name=PD-HR type=async schedule=hourly`
-- D) `acli pd.create PD-HR repl_schedule=3600`
+- A) `ncli pd create name=PD-HR type=async schedule=hourly`
+- B) `acli pd.create PD-HR repl_schedule=3600`
+- C) `ncli pd create name=PD-HR type=async` then `ncli pd add-hourly-schedule name=PD-HR every-nth-hour=1`
+- D) `ncli pd create name=PD-HR type=async` then `ncli pd set-schedule name=PD-HR every-nth-min=60`
 
-**Answer: A**
+**Answer: C**
 Protection domain creation and schedule configuration are separate operations. First, create the PD with `ncli pd create`, then add a replication schedule with `ncli pd add-hourly-schedule` specifying the interval. The two-step process allows multiple schedules on a single PD. Alternative schedule commands include `add-daily-schedule` and `add-minutely-schedule`.
 
 ---
@@ -830,12 +830,12 @@ Protection domain creation and schedule configuration are separate operations. F
 ### Q62
 An administrator needs to configure a remote site for replication between Cluster-A and Cluster-B. Which command on Cluster-A initiates the pairing?
 
-- A) `ncli remote-site create name=ClusterB address-list=<ClusterB-VIP>`
-- B) `ncli pd add-remote-site name=PD-1 remote=ClusterB ip=<ClusterB-IP>`
-- C) `acli remote.create ClusterB ip=<ClusterB-VIP>`
-- D) `ncli replication create-pair local=ClusterA remote=ClusterB`
+- A) `ncli pd add-remote-site name=PD-1 remote=ClusterB ip=<ClusterB-IP>`
+- B) `acli remote.create ClusterB ip=<ClusterB-VIP>`
+- C) `ncli replication create-pair local=ClusterA remote=ClusterB`
+- D) `ncli remote-site create name=ClusterB address-list=<ClusterB-VIP>`
 
-**Answer: A**
+**Answer: D**
 The `ncli remote-site create` command establishes a remote site pairing by specifying the remote cluster's virtual IP via `address-list=`. Authentication is handled through cluster-level trust (Prism credentials are exchanged during setup). The remote site can then be referenced when configuring protection domain replication schedules.
 
 ---
@@ -843,12 +843,12 @@ The `ncli remote-site create` command establishes a remote site pairing by speci
 ### Q63
 An administrator needs to add specific VMs to an existing protection domain named "PD-Finance". Which command adds VMs to the PD?
 
-- A) `ncli pd add-vms name=PD-Finance vm-names=VM1,VM2`
-- B) `ncli pd protect name=PD-Finance vm-name=VM1`
-- C) `acli pd.add_entity PD-Finance vm=VM1`
-- D) `ncli pd add-entity name=PD-Finance vm-name=VM1`
+- A) `ncli pd protect name=PD-Finance vm-name=VM1`
+- B) `acli pd.add_entity PD-Finance vm=VM1`
+- C) `ncli pd add-entity name=PD-Finance vm-name=VM1`
+- D) `ncli pd add-vms name=PD-Finance vm-names=VM1,VM2`
 
-**Answer: A**
+**Answer: D**
 The `ncli pd add-vms` command adds one or more VMs to a protection domain using a comma-separated list of VM names. This is the direct method for protecting VMs — once added, the VMs are included in the PD's replication schedule.
 
 ---
@@ -882,12 +882,12 @@ In an unplanned (disaster) failover, `ncli pd activate name=PD-Finance` is execu
 ### Q66
 After a failover, the original primary cluster has been recovered. The administrator needs to set up reverse replication from the DR site back to the recovered primary. What is the correct procedure?
 
-- A) Re-create the protection domain on the recovered primary and perform initial replication
-- B) On the DR site (now active): configure the recovered primary as a remote site and update the PD schedule to replicate back
-- C) Run `ncli pd reverse-replication name=PD-Finance` on the DR site
-- D) Simply run `ncli pd migrate name=PD-Finance` on the DR site to fail back
+- A) Simply run `ncli pd migrate name=PD-Finance` on the DR site to fail back
+- B) Re-create the protection domain on the recovered primary and perform initial replication
+- C) On the DR site (now active): configure the recovered primary as a remote site and update the PD schedule to replicate back
+- D) Run `ncli pd reverse-replication name=PD-Finance` on the DR site
 
-**Answer: B**
+**Answer: C**
 After failover, the DR site is now the active site. To set up reverse replication, you must ensure the recovered primary is configured as a remote site on the DR cluster and then update (or create) the replication schedule on the protection domain to target the recovered primary. There is no automatic reverse replication command.
 
 ---
@@ -895,12 +895,12 @@ After failover, the DR site is now the active site. To set up reverse replicatio
 ### Q67
 An administrator wants to perform a test failover to verify DR readiness without affecting production replication. Which approach is correct?
 
-- A) `ncli pd test-failover name=PD-Finance` — creates test VMs from the latest snapshot on the remote site
-- B) On the remote site: `ncli pd activate name=PD-Finance test-mode=true`
-- C) On the remote site: (1) Identify latest replicated PD snapshot, (2) Create a new VLAN/network segment isolated from production, (3) Use Prism to restore individual VMs from the snapshot to that isolated network, (4) Power on VMs and validate application functionality, (5) Document test results, (6) Delete test VMs to free storage
-- D) `ncli pd clone name=PD-Finance target=Test-PD`
+- A) `ncli pd clone name=PD-Finance target=Test-PD`
+- B) `ncli pd test-failover name=PD-Finance` — creates test VMs from the latest snapshot on the remote site
+- C) On the remote site: `ncli pd activate name=PD-Finance test-mode=true`
+- D) On the remote site: (1) Identify latest replicated PD snapshot, (2) Create a new VLAN/network segment isolated from production, (3) Use Prism to restore individual VMs from the snapshot to that isolated network, (4) Power on VMs and validate application functionality, (5) Document test results, (6) Delete test VMs to free storage
 
-**Answer: C**
+**Answer: D**
 Nutanix does not have an automated "test failover" command. The approved procedure is manual: identify the latest replicated snapshot on the remote cluster, isolate test VMs to a separate VLAN (preventing accidental production network access), restore VMs from snapshot via Prism, verify applications function correctly, then clean up test VMs. This validates disaster recovery procedures and RPO/RTO metrics without disrupting ongoing replication or production systems. Document any configuration differences discovered during testing.
 
 ---
@@ -908,12 +908,12 @@ Nutanix does not have an automated "test failover" command. The approved procedu
 ### Q68
 An administrator needs to check the replication status and last successful replication time for a protection domain. Which command provides this information?
 
-- A) `ncli pd get-replication-status name=PD-Finance`
-- B) `ncli pd ls name=PD-Finance`
-- C) `ncli pd list-replications name=PD-Finance`
-- D) `cerebro_cli show_replication_status`
+- A) `ncli pd list-replications name=PD-Finance`
+- B) `cerebro_cli show_replication_status`
+- C) `ncli pd get-replication-status name=PD-Finance`
+- D) `ncli pd ls name=PD-Finance`
 
-**Answer: B**
+**Answer: D**
 The `ncli pd ls name=PD-Finance` command shows the protection domain details including replication schedules, last successful replication time, replication status, and any pending replications. For more detailed replication metrics, the Cerebro status page at port 2020 can also be consulted.
 
 ---
@@ -921,12 +921,12 @@ The `ncli pd ls name=PD-Finance` command shows the protection domain details inc
 ### Q69
 An administrator needs to expire (delete) old snapshots from a protection domain to free up storage on the remote site. Which command is correct?
 
-- A) `ncli pd remove-snapshot name=PD-Finance snapshot-id=<id>`
-- B) `ncli pd expire-snapshot name=PD-Finance id=<snapshot-id>`
-- C) `ncli snapshot delete id=<snapshot-id>`
-- D) `ncli pd delete-snapshot name=PD-Finance snapshot-id=<id>`
+- A) `ncli snapshot delete id=<snapshot-id>`
+- B) `ncli pd delete-snapshot name=PD-Finance snapshot-id=<id>`
+- C) `ncli pd remove-snapshot name=PD-Finance snapshot-id=<id>`
+- D) `ncli pd expire-snapshot name=PD-Finance id=<snapshot-id>`
 
-**Answer: A**
+**Answer: C**
 The `ncli pd remove-snapshot` command with the protection domain name and snapshot ID removes a specific snapshot and reclaims the associated storage. Administrators should verify that the snapshot is not needed for ongoing replication chains before deletion.
 
 ---
@@ -934,12 +934,12 @@ The `ncli pd remove-snapshot` command with the protection domain name and snapsh
 ### Q70
 An administrator is configuring a NearSync protection domain for an RPO of 1 minute. Which is a key requirement for NearSync replication?
 
-- A) Both clusters must be running AOS 5.0 or later and have SSD-only storage pools
-- B) The network latency between clusters must be under 5ms, and a dedicated NearSync storage container is required
-- C) NearSync requires lightweight snapshots and operates at the vStore level with network latency under 5ms RTT
-- D) NearSync requires synchronous replication licenses and identical hardware on both clusters
+- A) The network latency between clusters must be under 5ms, and a dedicated NearSync storage container is required
+- B) NearSync requires lightweight snapshots and operates at the vStore level with network latency under 5ms RTT
+- C) NearSync requires synchronous replication licenses and identical hardware on both clusters
+- D) Both clusters must be running AOS 5.0 or later and have SSD-only storage pools
 
-**Answer: C**
+**Answer: B**
 NearSync replication achieves RPOs as low as 1 minute by using lightweight snapshots at the vStore (container) level rather than full crash-consistent snapshots. A key requirement is that network round-trip latency between the two clusters must be less than 5 milliseconds. NearSync is an enhancement of the async replication engine, not a separate synchronous feature.
 
 ---
@@ -951,12 +951,12 @@ NearSync replication achieves RPOs as low as 1 minute by using lightweight snaps
 ### Q71
 An administrator needs to enable cluster lockdown to disable password-based SSH access to CVMs. Which command is correct?
 
-- A) `ncli cluster edit-params enable-ssh-lockdown=true`
-- B) `ncli cluster edit enable-lockdown=true`
-- C) `ncli cluster lockdown enable`
-- D) `ncli cluster edit-params ssh-lockdown=enabled`
+- A) `ncli cluster edit enable-lockdown=true`
+- B) `ncli cluster lockdown enable`
+- C) `ncli cluster edit-params ssh-lockdown=enabled`
+- D) `ncli cluster edit-params enable-ssh-lockdown=true`
 
-**Answer: A**
+**Answer: D**
 The `ncli cluster edit-params enable-ssh-lockdown=true` command enables cluster lockdown mode, which disables password-based SSH access to all CVMs. After enabling, only key-based SSH authentication is permitted. Administrator SSH keys must be added before enabling lockdown to avoid being locked out.
 
 ---
@@ -990,12 +990,12 @@ SCMA is integrated into the NCC framework and can be triggered with `ncc health_
 ### Q74
 An administrator needs to replace the default self-signed SSL certificate on Prism Element with a CA-signed certificate. Which command installs the new certificate?
 
-- A) `ncli cluster edit-params ssl-cert-file=<cert.pem> ssl-key-file=<key.pem>`
-- B) `ncli http-proxy edit cert-file=<cert.pem> key-file=<key.pem>`
-- C) Import via Prism > Settings > SSL Certificate, or use `nuclei certificate install` with cert and key files
-- D) `openssl s_server -cert <cert.pem> -key <key.pem> -accept 9440`
+- A) `openssl s_server -cert <cert.pem> -key <key.pem> -accept 9440`
+- B) `ncli cluster edit-params ssl-cert-file=<cert.pem> ssl-key-file=<key.pem>`
+- C) `ncli http-proxy edit cert-file=<cert.pem> key-file=<key.pem>`
+- D) Import via Prism > Settings > SSL Certificate, or use `nuclei certificate install` with cert and key files
 
-**Answer: C**
+**Answer: D**
 SSL certificate replacement for Prism is performed through the Prism UI under Settings > SSL Certificate, or programmatically using the `nuclei` CLI. The certificate, private key, and CA chain are uploaded together. After installation, Prism services automatically restart to apply the new certificate. There is no `ncli` command for certificate management.
 
 ---
@@ -1003,12 +1003,12 @@ SSL certificate replacement for Prism is performed through the Prism UI under Se
 ### Q75
 An administrator wants to enable data-at-rest encryption on the cluster using a local key manager (LKM). Which is the correct first step?
 
-- A) `ncli cluster edit-params enable-encryption=true encryption-type=software`
-- B) Enable encryption through Prism > Settings > Data at Rest Encryption, and select Local Key Manager
-- C) `ncli data-encryption enable key-management=local`
-- D) `ncli container edit name=<name> encryption-enabled=true`
+- A) `ncli container edit name=<name> encryption-enabled=true`
+- B) `ncli cluster edit-params enable-encryption=true encryption-type=software`
+- C) Enable encryption through Prism > Settings > Data at Rest Encryption, and select Local Key Manager
+- D) `ncli data-encryption enable key-management=local`
 
-**Answer: B**
+**Answer: C**
 Data-at-rest encryption is enabled through the Prism UI under Settings > Data at Rest Encryption. The administrator selects either Local Key Manager (LKM) for self-managed keys or an external Key Management Server (KMS). Encryption is a cluster-wide setting, not per-container, and requires self-encrypting drives (SEDs) or software-based encryption.
 
 ---
@@ -1016,12 +1016,12 @@ Data-at-rest encryption is enabled through the Prism UI under Settings > Data at
 ### Q76
 An administrator wants to verify the current security hardening status of the cluster, including SCMA compliance state. Which NCC command provides a comprehensive security report?
 
-- A) `ncc health_checks run_all type=security`
-- B) `ncc health_checks security_checks all_checks`
-- C) `ncc health_checks security_checks`
-- D) `ncc --security-audit`
+- A) `ncc health_checks security_checks`
+- B) `ncc --security-audit`
+- C) `ncc health_checks run_all type=security`
+- D) `ncc health_checks security_checks all_checks`
 
-**Answer: C**
+**Answer: A**
 Running `ncc health_checks security_checks` executes all security-related NCC checks, including SCMA compliance, CVE vulnerability status, certificate expiration, and cluster lockdown state. This provides a comprehensive security posture assessment of the cluster.
 
 ---
@@ -1029,12 +1029,12 @@ Running `ncc health_checks security_checks` executes all security-related NCC ch
 ### Q77
 An administrator needs to configure an external Key Management Server (KMS) for data-at-rest encryption. Which protocol does Nutanix use to communicate with the KMS?
 
-- A) HTTPS REST API
-- B) KMIP (Key Management Interoperability Protocol)
-- C) PKCS#11
-- D) TLS-PSK (Pre-Shared Key)
+- A) PKCS#11
+- B) TLS-PSK (Pre-Shared Key)
+- C) HTTPS REST API
+- D) KMIP (Key Management Interoperability Protocol)
 
-**Answer: B**
+**Answer: D**
 Nutanix uses KMIP (Key Management Interoperability Protocol) to communicate with external Key Management Servers. KMIP is the industry-standard protocol for key lifecycle management operations. Supported KMS solutions include SafeNet, Vormetric, and IBM Security Key Lifecycle Manager, all communicating over KMIP.
 
 ---
@@ -1055,12 +1055,12 @@ The `ncli cluster get-params` command with a grep for SSH-related parameters sho
 ### Q79
 An administrator needs to configure RBAC in Prism Central to restrict a user group to only manage VMs in a specific project. Which Prism Central feature should be used?
 
-- A) Create a custom Role with VM permissions and assign it to the user group within the Project
-- B) Configure directory-level AD group policies to restrict access
-- C) Enable cluster lockdown and restrict SSH access per user group
-- D) Create a separate Prism Central instance for each user group
+- A) Configure directory-level AD group policies to restrict access
+- B) Enable cluster lockdown and restrict SSH access per user group
+- C) Create a separate Prism Central instance for each user group
+- D) Create a custom Role with VM permissions and assign it to the user group within the Project
 
-**Answer: A**
+**Answer: D**
 Prism Central RBAC uses the combination of Roles (defining permissions) and Projects (defining scope) to implement granular access control. A custom role with specific VM management permissions is created and then assigned to the user group within the target project, ensuring they can only manage VMs within that project's scope.
 
 ---

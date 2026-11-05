@@ -21,12 +21,12 @@ INT4 quantization of 70B model = 35GB base + 40GB overhead (optimizer state, bat
 ### Q2
 Which of the following best describes the primary role of the NAI Operator in a Nutanix AI deployment on NKP (Nutanix Kubernetes Platform)?
 
-- A) It handles all GPU scheduling and CUDA version management directly on nodes
-- B) It manages the lifecycle of NAI components including model serving, API endpoints, and controller reconciliation
-- C) It provides persistent storage exclusively through NFS integration
-- D) It replaces Helm and manages all Kubernetes manifests manually
+- A) It replaces Helm and manages all Kubernetes manifests manually
+- B) It handles all GPU scheduling and CUDA version management directly on nodes
+- C) It manages the lifecycle of NAI components including model serving, API endpoints, and controller reconciliation
+- D) It provides persistent storage exclusively through NFS integration
 
-**Answer: B**
+**Answer: C**
 The NAI Operator is a Kubernetes operator that watches for custom resources and reconciles the desired state, managing model serving deployments, API endpoints, and other NAI lifecycle aspects. GPU scheduling is Kubernetes' responsibility via node selectors.
 
 ---
@@ -34,12 +34,12 @@ The NAI Operator is a Kubernetes operator that watches for custom resources and 
 ### Q3
 A customer deploys a Llama 2 13B model in FP16 format on NAI. What is the approximate VRAM requirement for the model weights alone?
 
-- A) 13GB
-- B) 26GB
-- C) 52GB
-- D) 104GB
+- A) 104GB
+- B) 13GB
+- C) 26GB
+- D) 52GB
 
-**Answer: B**
+**Answer: C**
 FP16 (half-precision) = 2 bytes per parameter. 13B parameters × 2B = 26GB for model weights only, before accounting for KV cache or optimizer state.
 
 ---
@@ -47,12 +47,12 @@ FP16 (half-precision) = 2 bytes per parameter. 13B parameters × 2B = 26GB for m
 ### Q4
 When configuring a model serving deployment on NAI, which inference engine would you select if you need the broadest LLM support with Python-based optimization and moderate performance requirements?
 
-- A) TensorRT-LLM compiled with ONNX runtime
-- B) vLLM with PagedAttention optimization
-- C) NVIDIA Triton without PagedAttention
-- D) JAX-based inference server
+- A) NVIDIA Triton without PagedAttention
+- B) JAX-based inference server
+- C) TensorRT-LLM compiled with ONNX runtime
+- D) vLLM with PagedAttention optimization
 
-**Answer: B**
+**Answer: D**
 vLLM is Python-based, supports a wide range of models, and uses PagedAttention for efficient KV cache management. TensorRT-LLM is more specialized and requires compilation; it's better for maximum performance but narrower model support.
 
 ---
@@ -60,12 +60,12 @@ vLLM is Python-based, supports a wide range of models, and uses PagedAttention f
 ### Q5
 A NAI deployment requires GPU passthrough for a specialized ML workload. You notice the GPU is not detected inside the pod despite being assigned to the node. Which is the MOST likely cause?
 
-- A) The node lacks nvidia.com/gpu node selectors
-- B) NVIDIA container toolkit is not installed or NVIDIA drivers are outdated on the node
-- C) The pod is using a non-NVIDIA container image
-- D) The NAI Operator hasn't been updated to latest version
+- A) The pod is using a non-NVIDIA container image
+- B) The NAI Operator hasn't been updated to latest version
+- C) The node lacks nvidia.com/gpu node selectors
+- D) NVIDIA container toolkit is not installed or NVIDIA drivers are outdated on the node
 
-**Answer: B**
+**Answer: D**
 GPU passthrough requires NVIDIA drivers and the container runtime to support GPU access. Without proper drivers or container toolkit, the GPU won't appear inside containers despite passthrough being configured.
 
 ---
@@ -73,12 +73,12 @@ GPU passthrough requires NVIDIA drivers and the container runtime to support GPU
 ### Q6
 Which model format is preferred for quantized inference on NAI when using vLLM, offering broad framework support and excellent compression?
 
-- A) ONNX only
-- B) SafeTensors, GPTQ, and AWQ (quantized formats optimized for vLLM)
-- C) Raw PyTorch pickles
-- D) TensorFlow SavedModel
+- A) SafeTensors, GPTQ, and AWQ (quantized formats optimized for vLLM)
+- B) Raw PyTorch pickles
+- C) TensorFlow SavedModel
+- D) ONNX only
 
-**Answer: B**
+**Answer: A**
 vLLM natively supports SafeTensors, GPTQ, and AWQ formats, which provide excellent compression and framework compatibility. While GGUF is a popular quantized format, it's primarily designed for llama.cpp rather than vLLM. vLLM's optimization focuses on the aforementioned formats for maximum performance and compatibility.
 
 ---
@@ -86,12 +86,12 @@ vLLM natively supports SafeTensors, GPTQ, and AWQ formats, which provide excelle
 ### Q7
 An organization implements NAI with OpenAI-compatible API endpoints. What is the correct endpoint path for sending a completion request that returns token usage information?
 
-- A) /v1/chat/completions
-- B) /v1/completions
-- C) /v1/models
-- D) /v1/tokens
+- A) /v1/completions
+- B) /v1/models
+- C) /v1/tokens
+- D) /v1/chat/completions
 
-**Answer: A**
+**Answer: D**
 The /v1/chat/completions endpoint is the standard OpenAI-compatible endpoint for chat-based completions and returns detailed token usage metrics. The /v1/completions endpoint is for older completion models.
 
 ---
@@ -125,12 +125,12 @@ The Nutanix CSI driver integrates Nutanix storage with Kubernetes, providing Per
 ### Q10
 When using the Nutanix CSI driver with NAI model deployments, which statement accurately describes the workflow?
 
-- A) All models must be pre-downloaded to node local storage before pod creation
-- B) PersistentVolumes are dynamically provisioned on Nutanix storage, mounted at pod startup
-- C) The CSI driver only supports read-only volumes
-- D) Models must be stored in HDFS
+- A) Models must be stored in HDFS
+- B) All models must be pre-downloaded to node local storage before pod creation
+- C) PersistentVolumes are dynamically provisioned on Nutanix storage, mounted at pod startup
+- D) The CSI driver only supports read-only volumes
 
-**Answer: B**
+**Answer: C**
 The CSI driver dynamically provisions Nutanix storage volumes, which are mounted into pods at startup. This enables flexible model management without node-local storage constraints.
 
 ---
@@ -138,12 +138,12 @@ The CSI driver dynamically provisions Nutanix storage volumes, which are mounted
 ### Q11
 A customer has trained a 30B parameter model with LoRA fine-tuning for domain adaptation. After quantizing to INT8 (1B per parameter), what is the approximate base model size plus LoRA adapter overhead?
 
-- A) 15GB base + 5GB adapter = 20GB
-- B) 30GB base + 5GB adapter = 35GB
-- C) 30GB base + 1GB adapter = 31GB
-- D) 60GB base + 10GB adapter = 70GB
+- A) 60GB base + 10GB adapter = 70GB
+- B) 15GB base + 5GB adapter = 20GB
+- C) 30GB base + 5GB adapter = 35GB
+- D) 30GB base + 1GB adapter = 31GB
 
-**Answer: C**
+**Answer: D**
 Base model: 30B × 1B (INT8) = 30GB. LoRA adapters are typically 1-2% of base model size, so ~0.3-0.6GB. Total ~31GB. LoRA doesn't require full optimizer state at inference time.
 
 ---
@@ -151,12 +151,12 @@ Base model: 30B × 1B (INT8) = 30GB. LoRA adapters are typically 1-2% of base mo
 ### Q12
 You're deploying vLLM on NAI with a 13B model and notice inference throughput is suboptimal despite sufficient VRAM. Which vLLM feature directly addresses KV cache memory pressure and batch size limitations?
 
-- A) Mixed precision training
-- B) PagedAttention (virtual paging for KV cache)
-- C) Tensor parallelism only
-- D) Beam search optimization
+- A) Tensor parallelism only
+- B) Beam search optimization
+- C) Mixed precision training
+- D) PagedAttention (virtual paging for KV cache)
 
-**Answer: B**
+**Answer: D**
 PagedAttention pages KV cache blocks like OS virtual memory, allowing larger batch sizes and higher throughput by managing VRAM more efficiently than traditional dense KV storage.
 
 ---
@@ -164,12 +164,12 @@ PagedAttention pages KV cache blocks like OS virtual memory, allowing larger bat
 ### Q13
 A NAI model serving deployment must support OpenAI SDK as a drop-in replacement. What is the minimum configuration change to the client code?
 
-- A) Rewrite all API calls to use gRPC
-- B) Change base_url to the NAI OpenAI-compatible endpoint; Bearer token auth
-- C) Switch to a different API library entirely
-- D) No changes needed; it works automatically
+- A) Switch to a different API library entirely
+- B) No changes needed; it works automatically
+- C) Rewrite all API calls to use gRPC
+- D) Change base_url to the NAI OpenAI-compatible endpoint; Bearer token auth
 
-**Answer: B**
+**Answer: D**
 OpenAI SDK supports custom base_url and custom API keys (Bearer token). Setting `client = OpenAI(api_key="token", base_url="https://nai-endpoint")` enables drop-in compatibility with NAI.
 
 ---
@@ -177,12 +177,12 @@ OpenAI SDK supports custom base_url and custom API keys (Bearer token). Setting 
 ### Q14
 Your organization requires per-user API key management and audit logging for NAI API access. Which security mechanism aligns with this requirement?
 
-- A) Single shared API key for all users
-- B) Per-user API keys managed in Prism Central RBAC with API audit logging
-- C) No authentication required for internal use
-- D) Use Kubernetes secrets without RBAC
+- A) Per-user API keys managed in Prism Central RBAC with API audit logging
+- B) No authentication required for internal use
+- C) Use Kubernetes secrets without RBAC
+- D) Single shared API key for all users
 
-**Answer: B**
+**Answer: A**
 Nutanix Prism Central provides RBAC for per-user API key generation and rotation, with audit logging tracking all API requests by user. This satisfies compliance requirements for multi-user environments.
 
 ---
@@ -190,12 +190,12 @@ Nutanix Prism Central provides RBAC for per-user API key generation and rotation
 ### Q15
 A model serving pod fails with CrashLoopBackOff status. The most direct troubleshooting step is:
 
-- A) Restart the entire NAI Operator
-- B) Check pod logs and describe pod events for resource constraints or configuration errors
-- C) Assume the model is incompatible and select a different model
-- D) Increase node CPU to arbitrary high value
+- A) Check pod logs and describe pod events for resource constraints or configuration errors
+- B) Assume the model is incompatible and select a different model
+- C) Increase node CPU to arbitrary high value
+- D) Restart the entire NAI Operator
 
-**Answer: B**
+**Answer: A**
 CrashLoopBackOff indicates the container is crashing repeatedly. `kubectl logs` and `kubectl describe pod` reveal the actual error (missing volume mount, insufficient memory requests, syntax errors, etc.).
 
 ---
@@ -229,12 +229,12 @@ Slow responses despite sufficient replicas indicate individual pods are resource
 ### Q18
 Which Kubernetes primitive is used in NAI deployments to schedule GPU-requiring pods on appropriate nodes?
 
-- A) PodPreset
-- B) NodeAffinity with nvidia.com/gpu labels
-- C) Namespace policies
-- D) Service mesh routing
+- A) Service mesh routing
+- B) PodPreset
+- C) NodeAffinity with nvidia.com/gpu labels
+- D) Namespace policies
 
-**Answer: B**
+**Answer: C**
 Kubernetes nodes with NVIDIA GPUs are labeled with `nvidia.com/gpu=true`. Pod node selectors or affinity rules match this label to ensure GPU pods run on GPU-capable nodes.
 
 ---
@@ -242,12 +242,12 @@ Kubernetes nodes with NVIDIA GPUs are labeled with `nvidia.com/gpu=true`. Pod no
 ### Q19
 A NAI deployment requires TLS encryption for API endpoints. Where is the certificate typically managed?
 
-- A) Hardcoded in Python application code
-- B) Kubernetes Secret mounted into the NAI pod, referenced by Ingress or NAI configuration
-- C) NVIDIA driver manages TLS
-- D) No TLS needed for internal Kubernetes communication
+- A) No TLS needed for internal Kubernetes communication
+- B) Hardcoded in Python application code
+- C) Kubernetes Secret mounted into the NAI pod, referenced by Ingress or NAI configuration
+- D) NVIDIA driver manages TLS
 
-**Answer: B**
+**Answer: C**
 TLS certificates are stored in Kubernetes Secrets and referenced by Ingress objects or NAI service configuration, enabling secure external API access without hardcoding secrets.
 
 ---
@@ -255,12 +255,12 @@ TLS certificates are stored in Kubernetes Secrets and referenced by Ingress obje
 ### Q20
 You're building a RAG (Retrieval-Augmented Generation) pipeline with NAI. Which components are essential?
 
-- A) LLM inference endpoint + vector database for embeddings + retrieval mechanism
-- B) LLM alone; retrieval is automatic
-- C) Vector database only
-- D) External GPUs not needed
+- A) Vector database only
+- B) External GPUs not needed
+- C) LLM inference endpoint + vector database for embeddings + retrieval mechanism
+- D) LLM alone; retrieval is automatic
 
-**Answer: A**
+**Answer: C**
 RAG requires: (1) embedding model to vectorize documents, (2) vector store for similarity search, (3) LLM inference for generating responses. All three are essential for effective retrieval and generation.
 
 ---
@@ -268,12 +268,12 @@ RAG requires: (1) embedding model to vectorize documents, (2) vector store for s
 ### Q21
 A customer deploys a model and configures an Ingress for the NAI API endpoint. After successful deployment, external clients cannot reach the endpoint despite pod logs showing normal operation. What is the most likely cause?
 
-- A) The pod is crashing silently
-- B) Ingress routing rules don't match the service port or hostname
-- C) Models don't support Ingress
-- D) The NAI cluster is misconfigured at the operator level
+- A) Models don't support Ingress
+- B) The NAI cluster is misconfigured at the operator level
+- C) The pod is crashing silently
+- D) Ingress routing rules don't match the service port or hostname
 
-**Answer: B**
+**Answer: D**
 Ingress routes external traffic to Kubernetes services based on hostname and path rules. Mismatched port numbers, hostname rules, or missing service selector bindings prevent traffic from reaching the pod.
 
 ---
@@ -281,12 +281,12 @@ Ingress routes external traffic to Kubernetes services based on hostname and pat
 ### Q22
 For a 7B parameter model in FP16, which GPU can comfortably support it with room for KV cache and batch processing?
 
-- A) NVIDIA T4 (16GB)
-- B) NVIDIA L40S (48GB)
-- C) NVIDIA A100 (80GB)
-- D) All of the above
+- A) NVIDIA L40S (48GB)
+- B) NVIDIA A100 (80GB)
+- C) All of the above
+- D) NVIDIA T4 (16GB)
 
-**Answer: B**
+**Answer: A**
 7B × 2B (FP16) = 14GB. L40S with 48GB provides ample headroom for 14GB model + 20-30GB KV cache and batch processing. T4's 16GB is too tight; A100/H100 are overkill for this size.
 
 ---
@@ -294,12 +294,12 @@ For a 7B parameter model in FP16, which GPU can comfortably support it with room
 ### Q23
 A NAI model update requires rolling new container images without downtime. What Kubernetes deployment strategy enables this?
 
-- A) Delete old pod, launch new pod
-- B) Readiness probes with rolling updates (RollingUpdateStrategy)
-- C) Blue-green deployment requires cluster downtime
-- D) Manual pod replacement one at a time
+- A) Readiness probes with rolling updates (RollingUpdateStrategy)
+- B) Blue-green deployment requires cluster downtime
+- C) Manual pod replacement one at a time
+- D) Delete old pod, launch new pod
 
-**Answer: B**
+**Answer: A**
 RollingUpdateStrategy progressively replaces old pods with new ones, using readiness probes to verify health before removing old replicas. This ensures zero-downtime updates.
 
 ---
@@ -333,12 +333,12 @@ MIG creates independent logical GPUs with isolated memory pools. A 40GB partitio
 ### Q26
 A customer uploads a custom model to NAI via manual artifact upload. Which formats are immediately supported for inference without conversion?
 
-- A) SafeTensors, GPTQ, and AWQ formats
-- B) Raw PyTorch checkpoints only
-- C) TensorFlow SavedModel exclusively
-- D) All formats require conversion to ONNX first
+- A) All formats require conversion to ONNX first
+- B) SafeTensors, GPTQ, and AWQ formats
+- C) Raw PyTorch checkpoints only
+- D) TensorFlow SavedModel exclusively
 
-**Answer: A**
+**Answer: B**
 SafeTensors (efficient tensor serialization), GPTQ (quantized), and AWQ (quantized) are directly supported by vLLM on NAI. GGUF is designed for llama.cpp and is not natively supported by vLLM or TensorRT-LLM. Raw PyTorch checkpoints require loading as Python objects.
 
 ---
@@ -346,12 +346,12 @@ SafeTensors (efficient tensor serialization), GPTQ (quantized), and AWQ (quantiz
 ### Q27
 Which Nutanix component ensures LoRA fine-tuning adapters are properly versioned and retrieved during model serving on NAI?
 
-- A) NVIDIA driver versioning
-- B) Helm chart with ConfigMap for adapter registry
-- C) Kubernetes CSI driver and PersistentVolume management
-- D) Prism Central storage snapshots only
+- A) Prism Central storage snapshots only
+- B) NVIDIA driver versioning
+- C) Helm chart with ConfigMap for adapter registry
+- D) Kubernetes CSI driver and PersistentVolume management
 
-**Answer: C**
+**Answer: D**
 LoRA adapters are small files stored in PersistentVolumes via the Nutanix CSI driver. This provides versioning, retrieval, and management of adapter artifacts.
 
 ---
@@ -359,12 +359,12 @@ LoRA adapters are small files stored in PersistentVolumes via the Nutanix CSI dr
 ### Q28
 A NAI cluster requires Prometheus monitoring for inference metrics. Which metric is most critical for performance troubleshooting?
 
-- A) Pod restart count only
-- B) Inference latency (p50, p95, p99) + token generation throughput + model memory usage
-- C) Node CPU count
-- D) Kubernetes API server uptime
+- A) Node CPU count
+- B) Kubernetes API server uptime
+- C) Pod restart count only
+- D) Inference latency (p50, p95, p99) + token generation throughput + model memory usage
 
-**Answer: B**
+**Answer: D**
 For inference workloads, latency percentiles reveal user experience, throughput indicates efficiency, and memory tracks resource pressure. These directly correlate with model performance and scaling needs.
 
 ---
@@ -372,12 +372,12 @@ For inference workloads, latency percentiles reveal user experience, throughput 
 ### Q29
 When rotating API keys in a NAI multi-tenant environment, which best practice ensures uninterrupted access?
 
-- A) Revoke old key immediately, generate new key
-- B) Generate new key first, allow dual operation for a grace period, then revoke old key
-- C) Disable RBAC during rotation to avoid lockout
-- D) Keys never need rotation
+- A) Disable RBAC during rotation to avoid lockout
+- B) Keys never need rotation
+- C) Revoke old key immediately, generate new key
+- D) Generate new key first, allow dual operation for a grace period, then revoke old key
 
-**Answer: B**
+**Answer: D**
 Grace period rotation (overlap) prevents client lockout. Generate new key → communicate to users → allow both to work temporarily → retire old key after confirmed adoption.
 
 ---
@@ -385,12 +385,12 @@ Grace period rotation (overlap) prevents client lockout. Generate new key → co
 ### Q30
 A model's inference is slow despite sufficient GPU VRAM. Prometheus metrics show low GPU utilization (~20%) and high I/O wait. What is the likely bottleneck?
 
-- A) Model requires recompilation
-- B) Slow model artifact loading from storage or slow PersistentVolume I/O
-- C) Batch size is too small
-- D) The GPU needs more VRAM
+- A) Slow model artifact loading from storage or slow PersistentVolume I/O
+- B) Batch size is too small
+- C) The GPU needs more VRAM
+- D) Model requires recompilation
 
-**Answer: B**
+**Answer: A**
 Low GPU utilization + high I/O wait indicates storage/I/O bottleneck (slow PersistentVolume, slow network storage). Model isn't starved for compute; it's starved for data. Optimize CSI driver, storage backend, or model caching.
 
 ---
@@ -398,12 +398,12 @@ Low GPU utilization + high I/O wait indicates storage/I/O bottleneck (slow Persi
 ### Q31
 A customer needs to fine-tune a model using HuggingFace transformers on NAI. What is the recommended workflow?
 
-- A) Run training directly in production pods
-- B) Use a training pod with GPU, save model, store in CSI volume, then deploy for inference
-- C) Training cannot be done on NAI
-- D) Download model, train locally, manually reupload
+- A) Use a training pod with GPU, save model, store in CSI volume, then deploy for inference
+- B) Training cannot be done on NAI
+- C) Download model, train locally, manually reupload
+- D) Run training directly in production pods
 
-**Answer: B**
+**Answer: A**
 NAI training pods run in isolated environments with GPU access, save results to Nutanix CSI volumes, then redeploy the trained model via the serving stack. This separates training from inference workloads.
 
 ---
@@ -437,12 +437,12 @@ The NVIDIA GPU device plugin is a Kubernetes DaemonSet that advertises nvidia.co
 ### Q34
 SSE (Server-Sent Events) streaming is enabled for NAI chat completions. What is the primary benefit for users?
 
-- A) Faster response times by 50%
-- B) Token-by-token streaming for real-time output display (better UX, reduced perceived latency)
-- C) Lower API cost
-- D) No functional benefit; purely aesthetic
+- A) No functional benefit; purely aesthetic
+- B) Faster response times by 50%
+- C) Token-by-token streaming for real-time output display (better UX, reduced perceived latency)
+- D) Lower API cost
 
-**Answer: B**
+**Answer: C**
 SSE streaming returns tokens as they're generated, enabling real-time display in client applications. Users see partial responses immediately rather than waiting for complete generation.
 
 ---
@@ -450,12 +450,12 @@ SSE streaming returns tokens as they're generated, enabling real-time display in
 ### Q35
 Rate limiting is configured on NAI API endpoints (100 requests/minute per key). A client exceeds limits. What HTTP status code should the API return?
 
-- A) 200 OK
-- B) 404 Not Found
-- C) 429 Too Many Requests
-- D) 500 Internal Server Error
+- A) 500 Internal Server Error
+- B) 200 OK
+- C) 404 Not Found
+- D) 429 Too Many Requests
 
-**Answer: C**
+**Answer: D**
 HTTP 429 indicates rate limit exceeded. Client should implement exponential backoff and retry after the delay specified in response headers.
 
 ---
@@ -463,12 +463,12 @@ HTTP 429 indicates rate limit exceeded. Client should implement exponential back
 ### Q36
 A deployed model requires inference across multiple GPUs (tensor parallelism). Which is true for vLLM?
 
-- A) vLLM doesn't support tensor parallelism
-- B) vLLM supports tensor parallelism via --tensor-parallel-size flag, splitting model across GPUs
-- C) Tensor parallelism requires manual CUDA coding
-- D) Only TensorRT-LLM supports tensor parallelism
+- A) Tensor parallelism requires manual CUDA coding
+- B) Only TensorRT-LLM supports tensor parallelism
+- C) vLLM doesn't support tensor parallelism
+- D) vLLM supports tensor parallelism via --tensor-parallel-size flag, splitting model across GPUs
 
-**Answer: B**
+**Answer: D**
 vLLM's `--tensor-parallel-size` flag enables tensor parallelism, distributing model layers across multiple GPUs on the same node. This is simpler than TensorRT-LLM's approach.
 
 ---
@@ -476,12 +476,12 @@ vLLM's `--tensor-parallel-size` flag enables tensor parallelism, distributing mo
 ### Q37
 A customer requests function calling support via NAI OpenAI-compatible endpoints. Which model family natively supports this feature?
 
-- A) Llama 2 (base model)
-- B) GPT-3.5 and higher, or Mistral-Nemo, or open models fine-tuned for tool use
-- C) All models support function calling automatically
-- D) Function calling is not possible on open-source models
+- A) All models support function calling automatically
+- B) Function calling is not possible on open-source models
+- C) Llama 2 (base model)
+- D) GPT-3.5 and higher, or Mistral-Nemo, or open models fine-tuned for tool use
 
-**Answer: B**
+**Answer: D**
 Function calling requires models trained with tool-use instructions (GPT models inherently, or open models like Mistral-Nemo fine-tuned for it). Base Llama 2 lacks this capability unless fine-tuned.
 
 ---
@@ -489,12 +489,12 @@ Function calling requires models trained with tool-use instructions (GPT models 
 ### Q38
 An embeddings endpoint is deployed on NAI alongside an LLM. A client calls /v1/embeddings with a 1000-token document. What determines the output dimensions?
 
-- A) GPU VRAM size
-- B) Token count of input
-- C) The specific embedding model used (e.g., BERT = 768D, NVIDIA e5-large = 1024D)
-- D) OpenAI's default is always 1536D
+- A) Token count of input
+- B) The specific embedding model used (e.g., BERT = 768D, NVIDIA e5-large = 1024D)
+- C) OpenAI's default is always 1536D
+- D) GPU VRAM size
 
-**Answer: C**
+**Answer: B**
 Embedding model architecture (transformer layers, hidden size) determines output dimension, independent of input length or hardware. BERT ≈768D, e5-large ≈1024D.
 
 ---
@@ -502,12 +502,12 @@ Embedding model architecture (transformer layers, hidden size) determines output
 ### Q39
 A NAI namespace isolates a customer's models and API keys from others. Which Kubernetes RBAC element enforces this isolation?
 
-- A) Ingress policies alone
-- B) NetworkPolicy and RBAC Role/RoleBinding scoped to the namespace
-- C) Pod names are unique globally
-- D) No isolation is possible on shared clusters
+- A) NetworkPolicy and RBAC Role/RoleBinding scoped to the namespace
+- B) Pod names are unique globally
+- C) No isolation is possible on shared clusters
+- D) Ingress policies alone
 
-**Answer: B**
+**Answer: A**
 Kubernetes RBAC (Role, RoleBinding) and NetworkPolicy enforce namespace isolation, preventing cross-namespace API calls and resource access. ServiceAccounts are namespace-scoped.
 
 ---
@@ -541,12 +541,12 @@ cert-manager is a Kubernetes operator that automates certificate lifecycle manag
 ### Q42
 A model serving pod requests 8GB GPU memory but the node only has 6GB available. What happens?
 
-- A) Kubernetes allows the pod to launch and GPU oversubscription occurs
-- B) The pod remains Pending (unschedulable) until a node with 8GB is available
-- C) The pod launches with reduced performance
-- D) GPU memory is automatically borrowed from CPU RAM
+- A) GPU memory is automatically borrowed from CPU RAM
+- B) Kubernetes allows the pod to launch and GPU oversubscription occurs
+- C) The pod remains Pending (unschedulable) until a node with 8GB is available
+- D) The pod launches with reduced performance
 
-**Answer: B**
+**Answer: C**
 Kubernetes checks resource requests before scheduling. If no node matches the request, the pod stays Pending in queue until a suitable node is available.
 
 ---
@@ -554,12 +554,12 @@ Kubernetes checks resource requests before scheduling. If no node matches the re
 ### Q43
 A customer uses Nutanix Files NFS mount for model artifacts. Performance degrades when 5 concurrent pods load a 50GB model. What is the primary bottleneck?
 
-- A) NFS is not suitable for model serving
-- B) Network bandwidth saturation: 5 × 50GB concurrent reads overwhelm NFS network throughput
-- C) NVIDIA drivers don't support NFS
-- D) Pod CPU is insufficient
+- A) Pod CPU is insufficient
+- B) NFS is not suitable for model serving
+- C) Network bandwidth saturation: 5 × 50GB concurrent reads overwhelm NFS network throughput
+- D) NVIDIA drivers don't support NFS
 
-**Answer: B**
+**Answer: C**
 NFS uses network bandwidth for all I/O. Concurrent large model loads can saturate network, causing slowness. Solution: pre-cache models locally, use Nutanix iSCSI block storage, or implement read-only PersistentVolume replicas.
 
 ---
@@ -567,12 +567,12 @@ NFS uses network bandwidth for all I/O. Concurrent large model loads can saturat
 ### Q44
 When deploying a model via Helm on NAI, where are model URIs and hyperparameters specified?
 
-- A) Hardcoded in Python source
-- B) Helm values.yaml or ConfigMap referenced by pod
-- C) NVIDIA environment variables only
-- D) Kubernetes secrets exclusively
+- A) NVIDIA environment variables only
+- B) Kubernetes secrets exclusively
+- C) Hardcoded in Python source
+- D) Helm values.yaml or ConfigMap referenced by pod
 
-**Answer: B**
+**Answer: D**
 Helm charts use values.yaml to externalize configuration (model URI, inference engine, batch size, etc.). ConfigMaps provide runtime configuration, decoupling model artifacts from application code.
 
 ---
@@ -580,12 +580,12 @@ Helm charts use values.yaml to externalize configuration (model URI, inference e
 ### Q45
 A 13B model fine-tuned with LoRA is deployed. The base model and LoRA adapter are stored separately. At inference, what is loaded?
 
-- A) Base model only; LoRA is ignored
-- B) LoRA only; base model is not needed
-- C) Base model weights merged with LoRA adapter at pod startup
-- D) Both are concatenated without merging
+- A) Base model weights merged with LoRA adapter at pod startup
+- B) Both are concatenated without merging
+- C) Base model only; LoRA is ignored
+- D) LoRA only; base model is not needed
 
-**Answer: C**
+**Answer: A**
 During inference initialization, LoRA adapters are merged (injected into attention/MLP modules) with base model weights, creating an effective combined model. This merging happens once at startup.
 
 ---
@@ -593,12 +593,12 @@ During inference initialization, LoRA adapters are merged (injected into attenti
 ### Q46
 A customer requires audit logging of all API requests (model, user, timestamp, tokens) for compliance. Which component logs this?
 
-- A) NVIDIA driver audit module
-- B) NAI API server with structured logging to Kubernetes cluster log aggregator (Loki, ELK, etc.)
-- C) Prism Central only
-- D) Audit logs are not supported
+- A) NAI API server with structured logging to Kubernetes cluster log aggregator (Loki, ELK, etc.)
+- B) Prism Central only
+- C) Audit logs are not supported
+- D) NVIDIA driver audit module
 
-**Answer: B**
+**Answer: A**
 NAI API endpoints log requests structured as JSON (model, user, timestamp, tokens, latency). Kubernetes log aggregators (Loki, ELK, Splunk) centralize these for audit trails and compliance reporting.
 
 ---
@@ -606,12 +606,12 @@ NAI API endpoints log requests structured as JSON (model, user, timestamp, token
 ### Q47
 A model checkpoint stored as SafeTensors is 60GB. After quantization to INT8, the new size is approximately:
 
-- A) 15GB
-- B) 30GB
-- C) 40GB
-- D) 60GB
+- A) 30GB
+- B) 40GB
+- C) 60GB
+- D) 15GB
 
-**Answer: A**
+**Answer: D**
 Quantization reduces bit depth through the formula: params × bytes_per_param. FP32 → INT8 reduces from 4 bytes/param to 1 byte/param, a 4x reduction. For a 60B parameter model: 60GB (FP32) ÷ 4 = 15GB (INT8). Note: Actual file size may vary slightly depending on the model's original precision and metadata included in SafeTensors, but the 4x reduction factor for FP32→INT8 conversion is consistent.
 
 ---
@@ -645,12 +645,12 @@ ImagePullBackOff indicates the pod failed to pull the container image—either t
 ### Q50
 A NAI cluster is upgraded from vLLM 0.2 to 0.4. The deployment manifest references a specific vLLM version. How should you update it?
 
-- A) No action needed; Kubernetes automatically uses latest version
-- B) Update image tag in Deployment spec to 0.4, trigger rolling update
-- C) Manually pull and rebuild containers
-- D) Version upgrades are not supported
+- A) Version upgrades are not supported
+- B) No action needed; Kubernetes automatically uses latest version
+- C) Update image tag in Deployment spec to 0.4, trigger rolling update
+- D) Manually pull and rebuild containers
 
-**Answer: B**
+**Answer: C**
 Update the container image tag in Deployment spec (e.g., `vllm:0.4-openai`), then Kubernetes applies a rolling update. Readiness probes ensure new version is healthy before removing old pods.
 
 ---
@@ -658,12 +658,12 @@ Update the container image tag in Deployment spec (e.g., `vllm:0.4-openai`), the
 ### Q51
 A model's inference latency is 2 seconds per token on a single H100. A customer wants sub-second per-token latency. Which optimization is NOT directly applicable?
 
-- A) Increase batch size to 32
-- B) Enable PagedAttention to reduce memory pressure
-- C) Use speculative decoding (draft model for faster prediction)
-- D) Switch to smaller model (7B instead of 70B)
+- A) Switch to smaller model (7B instead of 70B)
+- B) Increase batch size to 32
+- C) Enable PagedAttention to reduce memory pressure
+- D) Use speculative decoding (draft model for faster prediction)
 
-**Answer: A**
+**Answer: B**
 Increasing batch size improves *throughput* (tokens/second across all requests) but increases *latency* per request (more queuing). For single-request latency, batch size doesn't help. Speculative decoding, smaller models, or faster inference engines reduce latency.
 
 ---
@@ -671,12 +671,12 @@ Increasing batch size improves *throughput* (tokens/second across all requests) 
 ### Q52
 A customer's API key is exposed in a GitHub commit. What is the immediate remediation on NAI?
 
-- A) No action needed; GitHub will hide it
-- B) Immediately revoke the compromised key in Prism Central, generate new key, update clients
-- C) Change only the RBAC role, keep the same key
-- D) Keys cannot be revoked
+- A) Change only the RBAC role, keep the same key
+- B) Keys cannot be revoked
+- C) No action needed; GitHub will hide it
+- D) Immediately revoke the compromised key in Prism Central, generate new key, update clients
 
-**Answer: B**
+**Answer: D**
 Compromised keys must be revoked immediately in Prism Central (removes API access), then a new key is generated and distributed to clients. This prevents unauthorized API usage.
 
 ---
@@ -684,12 +684,12 @@ Compromised keys must be revoked immediately in Prism Central (removes API acces
 ### Q53
 A NAI pod has resource requests (GPU: 1, Memory: 16Gi) but limits (GPU: 1, Memory: 32Gi). The pod crashes after 10 minutes with OOM. What is the issue?
 
-- A) Requests are too high
-- B) Limits are too low; the running model consumes >32GB memory (model + batch + KV cache)
-- C) GPU and memory limits must be equal
-- D) Kubernetes misconfigured
+- A) GPU and memory limits must be equal
+- B) Kubernetes misconfigured
+- C) Requests are too high
+- D) Limits are too low; the running model consumes >32GB memory (model + batch + KV cache)
 
-**Answer: B**
+**Answer: D**
 Memory limit (32Gi) is the hard cap; exceeding it terminates the pod (OOM Kill). If model + KV cache + batch > 32GB, it will crash. Increase memory limit or reduce model size/batch size.
 
 ---
@@ -697,12 +697,12 @@ Memory limit (32Gi) is the hard cap; exceeding it terminates the pod (OOM Kill).
 ### Q54
 TensorRT-LLM requires explicit compilation. What is the primary purpose of this build step?
 
-- A) To convert model weights to ONNX format
-- B) To generate optimized CUDA kernels for target GPU and model architecture
-- C) To add NVIDIA driver support
-- D) To apply quantization
+- A) To generate optimized CUDA kernels for target GPU and model architecture
+- B) To add NVIDIA driver support
+- C) To apply quantization
+- D) To convert model weights to ONNX format
 
-**Answer: B**
+**Answer: A**
 TensorRT-LLM compilation generates hand-optimized CUDA kernels specific to the target GPU (A100, H100, etc.) and model structure (layer counts, dimensions), delivering maximum performance but reducing portability.
 
 ---
@@ -710,12 +710,12 @@ TensorRT-LLM compilation generates hand-optimized CUDA kernels specific to the t
 ### Q55
 A NAI deployment uses ServiceMonitor (Prometheus operator) to scrape metrics from model serving pods. What metrics are typically exposed?
 
-- A) Pod creation timestamp only
-- B) Inference latency, token throughput, model load time, GPU memory usage, request queue length
-- C) Kubernetes API server metrics only
-- D) Metrics are not supported in NAI
+- A) Inference latency, token throughput, model load time, GPU memory usage, request queue length
+- B) Kubernetes API server metrics only
+- C) Metrics are not supported in NAI
+- D) Pod creation timestamp only
 
-**Answer: B**
+**Answer: A**
 Model serving pods expose application-level metrics (latency percentiles, throughput) alongside resource metrics (GPU memory, CPU). ServiceMonitor defines scrape configuration for Prometheus collection.
 
 ---
@@ -749,12 +749,12 @@ H100 delivers roughly 2–3× the inference throughput of A100 depending on work
 ### Q58
 An inference request specifies max_tokens=2000 for a 7B model. The API returns 2048 tokens. Why?
 
-- A) max_tokens is not enforced
-- B) max_tokens is a soft limit; the model stops at completion token or max_tokens, but may include special tokens beyond max_tokens
-- C) The model is misconfigured
-- D) 48 tokens were hallucinated
+- A) 48 tokens were hallucinated
+- B) max_tokens is not enforced
+- C) max_tokens is a soft limit; the model stops at completion token or max_tokens, but may include special tokens beyond max_tokens
+- D) The model is misconfigured
 
-**Answer: B**
+**Answer: C**
 max_tokens typically limits generated content tokens, but special tokens (EOS, BOS) or token-counting differences can result in slightly more output tokens. True limit is approximately honored.
 
 ---
@@ -762,12 +762,12 @@ max_tokens typically limits generated content tokens, but special tokens (EOS, B
 ### Q59
 A customer requires multi-language support (English, Mandarin, Spanish) for model inference. Which model characteristic is most relevant?
 
-- A) GPU memory only
-- B) Model tokenizer and training data language coverage (e.g., multilingual models like Llama 2-7B which support 6+ languages)
-- C) NVIDIA driver version
-- D) Kubernetes namespace count
+- A) Kubernetes namespace count
+- B) GPU memory only
+- C) Model tokenizer and training data language coverage (e.g., multilingual models like Llama 2-7B which support 6+ languages)
+- D) NVIDIA driver version
 
-**Answer: B**
+**Answer: C**
 Model's tokenizer and training data determine language support. Multilingual models (Llama 2, Mistral) have diverse language coverage; English-only models fail on other languages. Check model card for language support matrix.
 
 ---
@@ -781,12 +781,12 @@ The NAI team monitors a 99th percentile latency (p99) SLO of 1 second. A spike o
 
 What is the likely cause?
 
-- A) Network congestion
-- B) CPU bottleneck
-- C) GPU compute or memory saturation (queue buildup, long kernel execution)
-- D) Model is faulty
+- A) GPU compute or memory saturation (queue buildup, long kernel execution)
+- B) Model is faulty
+- C) Network congestion
+- D) CPU bottleneck
 
-**Answer: C**
+**Answer: A**
 High GPU utilization and memory with low CPU/network indicate GPU is the bottleneck. Requests queue waiting for GPU, causing latency spike. Solution: reduce batch size, add GPUs, or enable model parallelism.
 
 ---
@@ -944,12 +944,12 @@ You are deploying a new model version on NAI with zero-downtime requirements. Wh
 4. Wait for readiness probes to pass on new pods
 5. Update Ingress/Service to route to new deployment
 
-- A) 1 → 3 → 5 → 4 → 2
-- B) 1 → 4 → 5 → 3 → 2
-- C) 5 → 1 → 4 → 3 → 2
-- D) 1 → 4 → 3 → 5 → 2
+- A) 1 → 4 → 5 → 3 → 2
+- B) 5 → 1 → 4 → 3 → 2
+- C) 1 → 4 → 3 → 5 → 2
+- D) 1 → 3 → 5 → 4 → 2
 
-**Answer: B**
+**Answer: A**
 First, create new deployment (1), wait for new pods to be ready (4), then route traffic via Ingress/Service (5). Once new pods are healthy and receiving traffic, scale down old deployment (3) and verify they're offline (2). Rolling updates with readiness probes simplify this, but the manual sequence is: new → healthy → route → retire → verify.
 
 ---
@@ -1002,12 +1002,12 @@ A NAI cluster certificate is expiring soon. What is the correct renewal sequence
 4. Update cert-manager or manual renewal request
 5. Verify TLS handshake succeeds with new cert
 
-- A) 1 → 4 → 2 → 3 → 5
-- B) 4 → 2 → 3 → 5 → 1
-- C) 4 → 2 → 1 → 3 → 5
-- D) 4 → 3 → 2 → 5 → 1
+- A) 4 → 3 → 2 → 5 → 1
+- B) 1 → 4 → 2 → 3 → 5
+- C) 4 → 2 → 3 → 5 → 1
+- D) 4 → 2 → 1 → 3 → 5
 
-**Answer: B**
+**Answer: C**
 Request/generate new certificate (4), store in Kubernetes Secret (2), restart pods to use new cert (3), verify TLS works (5), then retire old cert (1). Revoke first would cause outage.
 
 ---
@@ -1021,12 +1021,12 @@ Optimizing a slow inference pipeline on NAI. What is the logical troubleshooting
 4. Measure improvement against baseline
 5. Identify bottleneck (GPU compute vs memory vs I/O)
 
-- A) 1 → 2 → 5 → 3 → 4
-- B) 2 → 5 → 1 → 3 → 4
-- C) 2 → 1 → 5 → 3 → 4
-- D) 5 → 2 → 1 → 3 → 4
+- A) 5 → 2 → 1 → 3 → 4
+- B) 1 → 2 → 5 → 3 → 4
+- C) 2 → 5 → 1 → 3 → 4
+- D) 2 → 1 → 5 → 3 → 4
 
-**Answer: B**
+**Answer: C**
 Establish baseline (2), identify bottleneck type (5), dig deeper with profiling (1), implement optimization (3), measure results (4). This is a standard optimization cycle.
 
 ---
@@ -1041,12 +1041,12 @@ Setting up multi-tenant NAI with isolation. What is the correct order of these c
 5. Configure CSI PersistentVolume claim in tenant namespace
 6. Deploy model serving pod in tenant namespace
 
-- A) 1 → 2 → 3 → 4 → 5 → 6
-- B) 2 → 1 → 3 → 4 → 5 → 6
-- C) 2 → 3 → 1 → 4 → 5 → 6
-- D) 2 → 3 → 4 → 1 → 5 → 6
+- A) 2 → 3 → 1 → 4 → 5 → 6
+- B) 2 → 3 → 4 → 1 → 5 → 6
+- C) 1 → 2 → 3 → 4 → 5 → 6
+- D) 2 → 1 → 3 → 4 → 5 → 6
 
-**Answer: C**
+**Answer: A**
 Create namespace first (2), enforce network isolation (3), define RBAC roles (1), provision API keys (4), setup storage (5), deploy workload (6). Storage and pods depend on namespace/RBAC existing.
 
 ---
@@ -1061,12 +1061,12 @@ A model fails to load into vLLM, reporting memory error. What is the correct dia
 5. Examine vLLM logs for allocation failures
 6. Increase GPU per pod or add more GPU nodes
 
-- A) 4 → 5 → 2 → 3 → 1 → 6
-- B) 2 → 4 → 5 → 3 → 1 → 6
-- C) 5 → 4 → 2 → 3 → 1 → 6
-- D) 5 → 2 → 4 → 3 → 1 → 6
+- A) 5 → 4 → 2 → 3 → 1 → 6
+- B) 5 → 2 → 4 → 3 → 1 → 6
+- C) 4 → 5 → 2 → 3 → 1 → 6
+- D) 2 → 4 → 5 → 3 → 1 → 6
 
-**Answer: C**
+**Answer: A**
 Review logs first (5), determine model format (4), calculate required memory (2), check pod/node limits (3), reduce batch size as quick fix (1), scale infrastructure if needed (6).
 
 ---
@@ -1082,12 +1082,12 @@ Rolling out a new vLLM version with feature improvements. What is the correct de
 6. Update documentation with new features
 7. Keep old image available for quick rollback
 
-- A) 3 → 1 → 2 → 4 → 5 → 6 (with 7 throughout)
-- B) 1 → 2 → 3 → 5 → 4 → 6 (with 7 throughout)
-- C) 1 → 2 → 3 → 4 → 5 → 6 (with 7 throughout)
-- D) 1 → 3 → 2 → 4 → 5 → 6 (with 7 throughout)
+- A) 1 → 2 → 3 → 5 → 4 → 6 (with 7 throughout)
+- B) 1 → 2 → 3 → 4 → 5 → 6 (with 7 throughout)
+- C) 1 → 3 → 2 → 4 → 5 → 6 (with 7 throughout)
+- D) 3 → 1 → 2 → 4 → 5 → 6 (with 7 throughout)
 
-**Answer: C**
+**Answer: B**
 Build image (1), push to registry (2), trigger Kubernetes update (3), monitor progress (4), validate with tests (5), document changes (6). Always retain old image for rollback (7). Never delete old images immediately.
 
 ---
@@ -1103,12 +1103,12 @@ Implementing disaster recovery for NAI. What is the correct preparation sequence
 6. Document and automate restore procedures
 7. Schedule monthly backup/restore validation
 
-- A) 2 → 3 → 1 → 4 → 5 → 6 → 7
-- B) 1 → 2 → 3 → 4 → 5 → 6 → 7
-- C) 1 → 2 → 3 → 4 → 6 → 5 → 7
-- D) 1 → 4 → 2 → 3 → 5 → 6 → 7
+- A) 1 → 2 → 3 → 4 → 5 → 6 → 7
+- B) 1 → 2 → 3 → 4 → 6 → 5 → 7
+- C) 1 → 4 → 2 → 3 → 5 → 6 → 7
+- D) 2 → 3 → 1 → 4 → 5 → 6 → 7
 
-**Answer: B**
+**Answer: A**
 Document everything first (1), implement automated backups (2-3), setup isolated test environment (4), execute restore test (5), refine procedures (6), establish recurring validation cadence (7).
 
 ---

@@ -6,36 +6,36 @@
 
 ### Q1
 Which feature became the default for new all-flash deployments in AOS 7.5, replacing the legacy extent store metadata path?
-- A) Information Lifecycle Management (ILM)
-- B) Autonomous Extent Store (AES)
-- C) Unified Cache
-- D) Shadow Clones
+- A) Shadow Clones
+- B) Information Lifecycle Management (ILM)
+- C) Autonomous Extent Store (AES)
+- D) Unified Cache
 
-**Answer: B**
+**Answer: C**
 Autonomous Extent Store (AES) is the new default for all new all-flash deployments and is automatically enabled for qualifying hybrid clusters during upgrade to AOS 7.5. AES uses primarily local metadata for more efficient sustained write performance. Do not confuse with AES-256 encryption.
 
 ---
 
 ### Q2
 What new security feature in AOS 7.5 allows VMs to use a virtual Trusted Platform Module backed by an external Key Management Service?
-- A) BitLocker integration
-- B) vTPM + External KMS
-- C) Self-Encrypting Drives (SED)
-- D) Prism Central SSL offloading
+- A) Self-Encrypting Drives (SED)
+- B) Prism Central SSL offloading
+- C) BitLocker integration
+- D) vTPM + External KMS
 
-**Answer: B**
+**Answer: D**
 vTPM (virtual Trusted Platform Module) with external KMS integration is new in AOS 7.5. It requires a third-party KMIP-based Key Management Service and enables guest OS features that require a TPM, such as Windows 11 compatibility and BitLocker.
 
 ---
 
 ### Q3
 In AOS 7.5, what is the default SSH access state for CVMs on fresh installations?
-- A) SSH enabled with password auth
-- B) SSH enabled with key-based auth only
-- C) SSH disabled by default
-- D) SSH requires Prism Central approval
+- A) SSH enabled with key-based auth only
+- B) SSH disabled by default
+- C) SSH requires Prism Central approval
+- D) SSH enabled with password auth
 
-**Answer: A**
+**Answer: D**
 Per GA documentation for AOS 7.5, SSH/Bash shell access remains **enabled by default** on fresh installations. The engineering plan to disable SSH by default was deferred to a subsequent Nutanix Cloud Infrastructure (NCI) feature release after 7.5. Administrators can still restrict CVM SSH access as a hardening measure after deployment.
 
 ---
@@ -54,36 +54,36 @@ VM Startup Policies, new in AOS 7.5, define the order in which VMs start during 
 
 ### Q5
 What is Elastic VM Storage in AOS 7.5?
-- A) VMs that automatically resize their vDisks based on demand
-- B) VMs can consume storage from a different cluster within the same Prism Central domain
-- C) Storage containers that expand automatically when full
-- D) Dynamic RAM allocation for VM storage caches
+- A) Dynamic RAM allocation for VM storage caches
+- B) VMs that automatically resize their vDisks based on demand
+- C) VMs can consume storage from a different cluster within the same Prism Central domain
+- D) Storage containers that expand automatically when full
 
-**Answer: B**
+**Answer: C**
 Elastic VM Storage allows VMs to use storage resources from a different Nutanix cluster within the same Prism Central domain. This provides flexibility for capacity planning and workload distribution across clusters without requiring cross-cluster live migration.
 
 ---
 
 ### Q6
 Which new Prism Central feature in 7.5 provides an upgrade orchestrator for air-gapped / dark site environments?
-- A) LCM Offline Sync
-- B) LCM DUO (Dark Site Upgrade Orchestrator)
-- C) Nutanix Central On-Premises
-- D) Prism Central Air-Gap Manager
+- A) Nutanix Central On-Premises
+- B) Prism Central Air-Gap Manager
+- C) LCM Offline Sync
+- D) LCM DUO (Dark Site Upgrade Orchestrator)
 
-**Answer: B**
+**Answer: D**
 LCM DUO (Dark Site Upgrade Orchestrator) in Prism Central manages the complete upgrade workflow for air-gapped environments, streamlining the process of staging, validating, and applying updates in dark sites using the MCL (Multi-Cluster LCM) framework.
 
 ---
 
 ### Q7
 Starting with AOS 7.5, what architectural change occurred regarding AHV versioning?
-- A) AHV is now bundled more tightly with AOS releases
-- B) AHV 11 is released independently from AOS with its own lifecycle
-- C) AHV is now only available through Prism Central
-- D) AHV has been replaced by ESXi as the default hypervisor
+- A) AHV 11 is released independently from AOS with its own lifecycle
+- B) AHV is now only available through Prism Central
+- C) AHV has been replaced by ESXi as the default hypervisor
+- D) AHV is now bundled more tightly with AOS releases
 
-**Answer: B**
+**Answer: A**
 AHV 11.0 is a significant architectural change — it is released independently from AOS with its own lifecycle and version track. Previously AHV was bundled with AOS releases. This allows independent updates of the hypervisor and storage platform.
 
 ---
@@ -102,36 +102,36 @@ Prism Central backup in AOS 7.5 supports S3-compatible object stores including W
 
 ### Q9
 Which network protocol support was added to AHV 11?
-- A) Fibre Channel
-- B) IPv6 dual-stack
-- C) InfiniBand
-- D) Token Ring
+- A) Token Ring
+- B) Fibre Channel
+- C) IPv6 dual-stack
+- D) InfiniBand
 
-**Answer: B**
+**Answer: C**
 AHV 11 adds IPv6 dual-stack support for AHV hosts, enabling both IPv4 and IPv6 addressing simultaneously. This is important for environments transitioning to IPv6 or requiring IPv6 compliance.
 
 ---
 
 ### Q10
 How many fault domains are supported for multisite DR in PC 7.5?
-- A) 2
-- B) 3
-- C) 4
-- D) 5
+- A) 4
+- B) 5
+- C) 2
+- D) 3
 
-**Answer: C**
+**Answer: A**
 PC 7.5 supports up to 4 fault domains for multisite DR, enabling 1→2, 1→3, and more complex topologies. This extends beyond the traditional 1→1 or 1→2 configurations available in earlier versions.
 
 ---
 
 ### Q11
 Which new authentication feature in AOS 7.5 uses SHA algorithms for NTP time synchronization, important for regulated industries?
-- A) NTPsec
-- B) Authenticated NTP
-- C) Kerberos NTP
-- D) TLS-NTP
+- A) Authenticated NTP
+- B) Kerberos NTP
+- C) TLS-NTP
+- D) NTPsec
 
-**Answer: B**
+**Answer: A**
 Authenticated NTP in AOS 7.5 supports SHA algorithms for cryptographically verified time synchronization. This is critical for regulated industries (finance, healthcare) where accurate and verifiable timestamps are required for compliance.
 
 ---
@@ -150,36 +150,36 @@ NIM (Nutanix Infrastructure Manager) is a new orchestrator for NVD (Nutanix Vali
 
 ### Q13
 What is Nutanix Central On-Premises?
-- A) A renamed version of Prism Element
-- B) A Prism Central deployment managing up to 25 Prism domains, available via Marketplace
-- C) A cloud-only management SaaS
-- D) A hypervisor for edge deployments
+- A) A hypervisor for edge deployments
+- B) A renamed version of Prism Element
+- C) A Prism Central deployment managing up to 25 Prism domains, available via Marketplace
+- D) A cloud-only management SaaS
 
-**Answer: B**
+**Answer: C**
 Nutanix Central On-Premises is a deployment option that can manage up to 25 Prism domains, available through the Nutanix Marketplace. It provides centralized management capabilities similar to the cloud-based Nutanix Central but deployed on-premises.
 
 ---
 
 ### Q14
 In PC 7.5 IAM, what is the difference between deactivating and deleting a user?
-- A) There is no difference
-- B) Deactivation preserves the user record and audit trail while revoking access; deletion removes the user entirely
-- C) Deactivation is temporary; deletion is for external users only
-- D) Deactivation requires Prism Element; deletion requires Prism Central
+- A) Deactivation is temporary; deletion is for external users only
+- B) Deactivation requires Prism Element; deletion requires Prism Central
+- C) There is no difference
+- D) Deactivation preserves the user record and audit trail while revoking access; deletion removes the user entirely
 
-**Answer: B**
+**Answer: D**
 User deactivation in PC 7.5 IAM preserves the user's record and full audit trail while revoking all access permissions. Deletion removes the user entirely and may impact audit reporting. Deactivation is preferred for employees who leave the organization.
 
 ---
 
 ### Q15
 Which guest customization improvement was introduced with NGT 4.5 in AOS 7.5?
-- A) Automatic OS licensing
-- B) Reusable guest customization profiles and auto-NGT on clone
-- C) Built-in antivirus scanning
-- D) Automatic domain joining without credentials
+- A) Reusable guest customization profiles and auto-NGT on clone
+- B) Built-in antivirus scanning
+- C) Automatic domain joining without credentials
+- D) Automatic OS licensing
 
-**Answer: B**
+**Answer: A**
 NGT 4.5 introduces reusable guest customization profiles that can be applied across multiple VMs, and automatic NGT installation when cloning VMs that already have NGT. This simplifies template management and VM provisioning workflows.
 
 ---
@@ -256,36 +256,36 @@ The correct order is enable compression first, then deduplication. This is becau
 
 ### Q21
 Which service on each CVM handles ALL storage I/O including reads, writes, caching, and replication?
-- A) Curator
-- B) Stargate
-- C) Medusa
-- D) Zeus
+- A) Zeus
+- B) Curator
+- C) Stargate
+- D) Medusa
 
-**Answer: B**
+**Answer: C**
 Stargate is the data I/O engine on every CVM. It receives I/O from the hypervisor, writes to the OpLog or Extent Store, manages the Unified Cache, and replicates data to remote CVMs for redundancy. Curator handles background analytics, Medusa is the Cassandra layer, and Zeus handles ZooKeeper configuration.
 
 ---
 
 ### Q22
 Which service is the access layer for Apache Cassandra, which stores the cluster's global metadata in a distributed ring?
-- A) Stargate
-- B) Curator
-- C) Medusa
-- D) Zeus
+- A) Medusa
+- B) Zeus
+- C) Stargate
+- D) Curator
 
-**Answer: C**
+**Answer: A**
 Medusa provides the access/abstraction layer for Cassandra, the distributed key-value store that holds vDisk block maps, extent-to-node mappings, time-series stats, and configuration metadata. Stargate handles I/O, Curator runs analytics, and Zeus is the ZooKeeper layer.
 
 ---
 
 ### Q23
 What is the formula for calculating Unified Cache size?
-- A) (CVM RAM − 4 GB) × 0.25
-- B) (Total RAM × 0.50)
-- C) ((CVM RAM − 12 GB) × 0.45)
-- D) (CVM RAM − 8 GB) × 0.30
+- A) (Total RAM × 0.50)
+- B) ((CVM RAM − 12 GB) × 0.45)
+- C) (CVM RAM − 8 GB) × 0.30
+- D) (CVM RAM − 4 GB) × 0.25
 
-**Answer: C**
+**Answer: B**
 Unified Cache uses CVM memory above the 12 GB baseline. The formula is ((CVM RAM − 12 GB) × 0.45). For example, a CVM with 32 GB RAM has ((32 − 12) × 0.45) = 9 GB of Unified Cache.
 
 ---
@@ -316,24 +316,24 @@ Factory default is active-backup (one link active, others standby). The recommen
 
 ### Q26
 Which Nutanix service runs map-reduce jobs for analytics, ILM tiering, disk balancing, erasure coding, and garbage collection?
-- A) Stargate
-- B) Curator
-- C) Medusa
-- D) Genesis
+- A) Medusa
+- B) Genesis
+- C) Stargate
+- D) Curator
 
-**Answer: B**
+**Answer: D**
 Curator is the map-reduce framework running on every CVM with an elected Curator Master. It coordinates background tasks that optimize and maintain the storage fabric, including tiering, compression, deduplication, EC-X, and cleanup. Stargate handles I/O, Medusa is the Cassandra layer, and Genesis starts services.
 
 ---
 
 ### Q27
 Which component is the authoritative source for cluster configuration and leader election, running on 3 or 5 nodes with quorum-based writes?
-- A) Medusa (Cassandra)
-- B) Curator
-- C) Stargate
-- D) Zeus (ZooKeeper)
+- A) Curator
+- B) Stargate
+- C) Zeus (ZooKeeper)
+- D) Medusa (Cassandra)
 
-**Answer: D**
+**Answer: C**
 ZooKeeper, accessed through the Zeus abstraction layer, is the authoritative configuration store and leader election service. It runs on 3 or 5 CVMs and uses Paxos-based consensus. A majority of nodes must be available for writes.
 
 ---
@@ -352,36 +352,36 @@ VSS is required for application-consistent snapshots on Windows. The NGT VSS age
 
 ### Q29
 The write coalescing buffer on SSD that absorbs random writes before asynchronously draining to the Extent Store is called the:
-- A) Unified Cache
-- B) Extent Store
-- C) OpLog
-- D) Curator Buffer
+- A) Curator Buffer
+- B) Unified Cache
+- C) Extent Store
+- D) OpLog
 
-**Answer: C**
+**Answer: D**
 The OpLog is a persistent write buffer on SSD (approximately 6 GB per Stargate) that absorbs bursty random writes. Writes are synchronously replicated to remote OpLogs before ACK. Curator drains OpLog data to the Extent Store asynchronously.
 
 ---
 
 ### Q30
 At what tier utilization threshold does ILM trigger down-migration of cold data from SSD to HDD?
-- A) 50%
-- B) 60%
-- C) 75%
-- D) 90%
+- A) 75%
+- B) 90%
+- C) 50%
+- D) 60%
 
-**Answer: C**
+**Answer: A**
 ILM down-migration triggers when overall tier utilization exceeds 75% (configurable). The system attempts to free at least 15% of data or bring utilization to the threshold, whichever is greater. Up-migration occurs based on access patterns.
 
 ---
 
 ### Q31
 Which Nutanix tool collects comprehensive diagnostic logs for support cases using the command `logbay collect`?
-- A) Pulse
-- B) NCC
-- C) Logbay
-- D) Genesis
+- A) NCC
+- B) Logbay
+- C) Genesis
+- D) Pulse
 
-**Answer: C**
+**Answer: B**
 Logbay collects logs from CVMs, hypervisors, and other cluster components into a support bundle. It is the primary diagnostic collection tool for Nutanix support cases, supplementing the telemetry data sent by Pulse. NCC runs health checks, and Genesis starts services.
 
 ---
@@ -400,36 +400,36 @@ AOS 7.5 supports up to 185 TB of raw all-flash storage capacity per node. This i
 
 ### Q33
 Which Nutanix management service runs on every CVM and provides the UI, REST API, and CLI?
-- A) Acropolis
-- B) Prism
-- C) Curator
-- D) Genesis
+- A) Genesis
+- B) Acropolis
+- C) Prism
+- D) Curator
 
-**Answer: B**
+**Answer: C**
 Prism is the management service running on every CVM. One CVM is elected Prism Leader and handles all HTTP requests. If the leader fails, a new one is elected and assumes the cluster VIP via gratuitous ARP. Acropolis manages the hypervisor, Curator runs analytics, and Genesis starts services.
 
 ---
 
 ### Q34
 Which Nutanix feature automatically creates read-only local copies of heavily-read vDisks across nodes for VDI boot storm optimization?
-- A) Erasure Coding (EC-X)
-- B) Shadow Clones
-- C) NearSync
-- D) Compression
+- A) NearSync
+- B) Compression
+- C) Erasure Coding (EC-X)
+- D) Shadow Clones
 
-**Answer: B**
+**Answer: D**
 Shadow Clones automatically cache read-only data locally on each node for heavily-read vDisks. This is specifically designed for VDI environments where many VMs read the same base image during boot storms. EC-X provides space efficiency, NearSync provides low-RPO DR, and Compression reduces data size.
 
 ---
 
 ### Q35
 In NGT architecture, which ports are used by the NGT Master and NGT Proxy respectively?
-- A) Port 9440 and Port 80
-- B) Port 2073 and Port 2074
-- C) Port 443 and Port 8080
-- D) Port 2074 and Port 2073
+- A) Port 2073 and Port 2074
+- B) Port 443 and Port 8080
+- C) Port 2074 and Port 2073
+- D) Port 9440 and Port 80
 
-**Answer: B**
+**Answer: A**
 NGT Master runs on the Prism Leader CVM and listens on port 2073. NGT Proxy runs on every CVM and listens on port 2074. The guest agent communicates with the proxy on port 2074 via SSL/TCP or through the IP-less serial port method.
 
 ---
@@ -452,36 +452,36 @@ For linked-clone VDI: RF2 provides adequate protection for non-critical desktops
 
 ### Q37
 An administrator observes that a storage container with EC-X enabled is experiencing high write latency on a workload with heavy random writes. What is the most likely cause and appropriate action?
-- A) The OpLog is full; increase Stargate memory
-- B) EC-X adds CPU overhead and write amplification on random write workloads; move the workload to a non-EC container
-- C) The SSD tier is at 100%; add more SSDs
-- D) Shadow Clones are interfering; disable Shadow Clones
+- A) Shadow Clones are interfering; disable Shadow Clones
+- B) The OpLog is full; increase Stargate memory
+- C) EC-X adds CPU overhead and write amplification on random write workloads; move the workload to a non-EC container
+- D) The SSD tier is at 100%; add more SSDs
 
-**Answer: B**
+**Answer: C**
 EC-X is designed for cold, read-heavy data. On heavy random write workloads, EC-X adds significant CPU overhead and write amplification due to re-encoding. Transactional and write-heavy workloads should use a container without EC-X, with compression only.
 
 ---
 
 ### Q38
 After migrating a VM from Node A to Node B via live migration, how does AOS handle I/O for that VM's existing data?
-- A) All data is immediately copied to Node B
-- B) Reads of existing data are forwarded from Node B to Node A; writes go local to Node B; data migrates in background after access thresholds
-- C) The VM's vDisks are moved to Node B during migration
-- D) Data locality is disabled until the next Curator scan
+- A) The VM's vDisks are moved to Node B during migration
+- B) Data locality is disabled until the next Curator scan
+- C) All data is immediately copied to Node B
+- D) Reads of existing data are forwarded from Node B to Node A; writes go local to Node B; data migrates in background after access thresholds
 
-**Answer: B**
+**Answer: D**
 After live migration: writes go immediately local to Node B; reads of existing (old) data are forwarded through the local CVM on Node B to Node A where the data resides. AOS performs background extent group migration to Node B after read access thresholds are met (3 random or 10 sequential touches within 10 minutes).
 
 ---
 
 ### Q39
 A cluster has 6 nodes with Redundancy Factor 2. An administrator needs maximum space efficiency for an archive workload that is written once and rarely read. Which EC-X strip size is most appropriate?
-- A) 2+1
-- B) 3+1
-- C) 4+1
-- D) 4+2
+- A) 3+1
+- B) 4+1
+- C) 4+2
+- D) 2+1
 
-**Answer: C**
+**Answer: B**
 On a 6-node RF2 cluster, a 4+1 strip provides ~37.5% space savings with reasonable rebuild characteristics. The strip size + 1 node should be available for safe rebuild (4+1 = 5 nodes needed; 6 available = safe). A 2+1 strip provides less savings. 4+2 is for RF3.
 
 ---
@@ -513,24 +513,24 @@ Application-consistent snapshots require: 1) NGT installed and enabled; 2) VSS e
 
 ### Q42
 An administrator configures a subnet with VLAN ID 0 in AHV. What type of network traffic is sent on the physical wire?
-- A) Tagged traffic with VLAN 0
-- B) Untagged traffic on the native VLAN
-- C) Double-tagged QinQ traffic
-- D) VXLAN encapsulated traffic
+- A) Double-tagged QinQ traffic
+- B) VXLAN encapsulated traffic
+- C) Tagged traffic with VLAN 0
+- D) Untagged traffic on the native VLAN
 
-**Answer: B**
+**Answer: D**
 VLAN ID 0 in AHV represents the native VLAN, and traffic is sent untagged on the wire. The physical switch port must have its native/access VLAN configured to match. VLAN IDs 1-4094 send tagged traffic.
 
 ---
 
 ### Q43
 What is the primary difference between a Nutanix Template and a Nutanix Calm Blueprint?
-- A) Templates are for networks; Blueprints are for VMs
-- B) Templates standardize single VM deployment; Blueprints define multi-VM application stacks with automation
-- C) Templates require Prism Central; Blueprints run on Prism Element
-- D) Templates are free; Blueprints require a license
+- A) Templates standardize single VM deployment; Blueprints define multi-VM application stacks with automation
+- B) Templates require Prism Central; Blueprints run on Prism Element
+- C) Templates are free; Blueprints require a license
+- D) Templates are for networks; Blueprints are for VMs
 
-**Answer: B**
+**Answer: A**
 Templates standardize single VM deployments with hardware config and guest customization. Blueprints in Calm define complete multi-VM application stacks with pre/post scripts, lifecycle management, and multi-cloud deployment. Both are managed in Prism Central.
 
 ---
@@ -549,36 +549,36 @@ Volume Group security uses both CHAP (Challenge-Handshake Authentication Protoco
 
 ### Q45
 Which statement about Nutanix Files FSVMs is correct?
-- A) A single FSVM is recommended for production HA
-- B) Minimum 3 FSVMs for production; maximum 16 per file server
-- C) FSVMs run on ESXi only
-- D) Files does not require DNS configuration
+- A) Files does not require DNS configuration
+- B) A single FSVM is recommended for production HA
+- C) Minimum 3 FSVMs for production; maximum 16 per file server
+- D) FSVMs run on ESXi only
 
-**Answer: B**
+**Answer: C**
 Nutanix Files requires a minimum of 3 FSVMs for production HA. Single-FSVM deployments are for small/test only. Maximum is 16 FSVMs per file server. DNS and AD must be configured before deployment. Files runs on AHV or ESXi.
 
 ---
 
 ### Q46
 In a NearSync protection domain, what happens when the snapshot frequency is set to 10 minutes?
-- A) NearSync is not applicable; Async DR is used instead
-- B) NearSync automatically activates and uses Light-Weight Snapshots
-- C) The system falls back to Metro Availability
-- D) A witness VM is required
+- A) The system falls back to Metro Availability
+- B) A witness VM is required
+- C) NearSync is not applicable; Async DR is used instead
+- D) NearSync automatically activates and uses Light-Weight Snapshots
 
-**Answer: B**
+**Answer: D**
 NearSync automatically activates when snapshot frequency is ≤ 15 minutes. It uses Light-Weight Snapshots (LWS) to achieve RPO of ~15-30 seconds. No witness VM is required. Metro Availability uses synchronous replication and requires a witness, but is a separate configuration.
 
 ---
 
 ### Q47
 What is the relationship between Protection Domains, Consistency Groups, and VMs?
-- A) VMs contain Consistency Groups which contain Protection Domains
-- B) Protection Domains contain Consistency Groups which contain VMs
-- C) Consistency Groups contain Protection Domains which contain VMs
-- D) Protection Domains and Consistency Groups are the same thing
+- A) Protection Domains contain Consistency Groups which contain VMs
+- B) Consistency Groups contain Protection Domains which contain VMs
+- C) Protection Domains and Consistency Groups are the same thing
+- D) VMs contain Consistency Groups which contain Protection Domains
 
-**Answer: B**
+**Answer: A**
 The hierarchy is: Protection Domain (top-level DR container) → Consistency Groups (group VMs snapped together at the same point in time) → VMs. CGs ensure multi-VM applications are consistent across snapshots.
 
 ---
@@ -597,24 +597,24 @@ Pulse HD automatically creates support cases for critical alerts and sends enhan
 
 ### Q49
 Which product name change is correct for the Nutanix Kubernetes offering?
-- A) NKE → Kubernetes Engine → NKP
-- B) Karbon → NKE → NKP (Nutanix Kubernetes Platform)
-- C) Karbon → OpenShift → NKP
-- D) NKE → Nutanix Kubernetes Enterprise → NKP
+- A) NKE → Nutanix Kubernetes Enterprise → NKP
+- B) NKE → Kubernetes Engine → NKP
+- C) Karbon → NKE → NKP (Nutanix Kubernetes Platform)
+- D) Karbon → OpenShift → NKP
 
-**Answer: B**
+**Answer: C**
 The evolution is: Karbon (original name) → NKE (Nutanix Kubernetes Engine) → NKP (Nutanix Kubernetes Platform). This is a common exam trap question.
 
 ---
 
 ### Q50
 What is the correct product name for what was previously called "Xi Leap"?
-- A) Xi Backup
-- B) Xi DR
-- C) Nutanix DRaaS
-- D) Leap Standard
+- A) Nutanix DRaaS
+- B) Leap Standard
+- C) Xi Backup
+- D) Xi DR
 
-**Answer: B**
+**Answer: D**
 Xi Leap has been rebranded as Xi DR. Product name changes are common exam traps: Prism Pro → NCM; Karbon/NKE → NKP; NDB/Era → Nutanix Database Service; AFS → Nutanix Files; Flow Security → Flow Network Security.
 
 ---
@@ -645,36 +645,36 @@ The maximum number of VMs with NGT installed per cluster is 2,048. This is a spe
 
 ### Q53
 Which NCA 7.5 feature provides behavioral ransomware detection through cloud-based analysis of file activity?
-- A) File Analytics
-- B) Data Lens
-- C) Flow Network Security
-- D) NCC Ransomware Check
+- A) NCC Ransomware Check
+- B) File Analytics
+- C) Data Lens
+- D) Flow Network Security
 
-**Answer: B**
+**Answer: C**
 Data Lens is the cloud-based SaaS analytics service that scans Files data for PII/PHI/PCI patterns and provides behavioral ransomware detection. File Analytics is the on-prem VM-based counterpart without cloud-based classification.
 
 ---
 
 ### Q54
 An administrator needs to verify the network configuration of an AHV host from the CVM. Which command shows the current uplinks?
-- A) `ovs-vsctl show`
-- B) `manage_ovs show_uplinks`
-- C) `acli net.list`
-- D) `ncli host list`
+- A) `acli net.list`
+- B) `ncli host list`
+- C) `ovs-vsctl show`
+- D) `manage_ovs show_uplinks`
 
-**Answer: B**
+**Answer: D**
 `manage_ovs show_uplinks` shows the current physical NIC uplinks for the OVS bridge on the local AHV host. `ovs-vsctl show` shows OVS configuration but is lower-level. `acli net.list` lists networks (VM subnets). `ncli host list` shows node inventory.
 
 ---
 
 ### Q55
 What is the recommended first step when troubleshooting a VM that cannot mount an NFS export from Nutanix Files?
-- A) Restart the entire file server
-- B) Verify forward and reverse DNS resolution for FSVM IPs and check client allowlists
-- C) Reinstall NGT on the client VM
-- D) Upgrade the cluster firmware
+- A) Verify forward and reverse DNS resolution for FSVM IPs and check client allowlists
+- B) Reinstall NGT on the client VM
+- C) Upgrade the cluster firmware
+- D) Restart the entire file server
 
-**Answer: B**
+**Answer: A**
 The first troubleshooting steps for Files NFS access issues are: 1) Verify DNS (forward and reverse) resolves correctly for FSVM IPs; 2) Check the client allowlist on the export to ensure the VM's IP/subnet is permitted; 3) Verify network connectivity. Mass restarts and upgrades should be last resorts.
 
 ---
@@ -693,36 +693,36 @@ Stargate has no leader — every CVM runs Stargate and handles only its local no
 
 ### Q57
 What is the purpose of the `ncli cluster get-domain-fault-tolerance-status type=rackable_unit` command?
-- A) Check if nodes can tolerate rack-level failures
-- B) Check network fault tolerance
-- C) Check power domain redundancy
-- D) Check CVM memory utilization
+- A) Check CVM memory utilization
+- B) Check if nodes can tolerate rack-level failures
+- C) Check network fault tolerance
+- D) Check power domain redundancy
 
-**Answer: A**
+**Answer: B**
 This command checks whether the cluster can tolerate failures at the block/rackable unit level. Nutanix nodes are arranged in blocks of up to 4 nodes; this verifies data and metadata are distributed such that the loss of an entire block (e.g., power failure) does not cause unavailability.
 
 ---
 
 ### Q58
 In the Nutanix write path, sequential sustained writes greater than 1.5 MB outstanding bypass which component?
-- A) Unified Cache
-- B) OpLog
-- C) Extent Store
-- D) Medusa
+- A) Extent Store
+- B) Medusa
+- C) Unified Cache
+- D) OpLog
 
-**Answer: B**
+**Answer: D**
 The Write Characterizer in Stargate examines I/O patterns. Bursty random writes go to the OpLog for coalescing. Sustained sequential writes (>1.5 MB outstanding to a vDisk) bypass the OpLog and go directly to the Extent Store, avoiding unnecessary write amplification.
 
 ---
 
 ### Q59
 Which Nutanix feature allows a file server to share data across both SMB and NFS protocols from the same server?
-- A) Multiprotocol Shares
-- B) Distributed Shares
-- C) Native Protocol Selection
-- D) Dual-Protocol FSVMs
+- A) Distributed Shares
+- B) Native Protocol Selection
+- C) Dual-Protocol FSVMs
+- D) Multiprotocol Shares
 
-**Answer: A**
+**Answer: D**
 Nutanix Files supports multiprotocol access where a single file server can serve the same data via SMB and NFS. However, you must choose a native protocol for ACL management, and concurrent writes from both protocols to the same file are blocked (concurrent reads are OK).
 
 ---

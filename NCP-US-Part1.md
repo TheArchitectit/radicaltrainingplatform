@@ -11,12 +11,12 @@
 ### Q1
 An administrator is planning a production deployment of Nutanix Files. What is the **minimum** number of File Server VMs (FSVMs) required for high availability?
 
-- A) 1
-- B) 2
-- C) 3
-- D) 4
+- A) 4
+- B) 1
+- C) 2
+- D) 3
 
-**Answer: C**
+**Answer: D**
 A minimum of 3 FSVMs is required for production deployments to ensure high availability and data resiliency.
 
 ---
@@ -24,12 +24,12 @@ A minimum of 3 FSVMs is required for production deployments to ensure high avail
 ### Q2
 What is the **maximum** number of FSVMs that can be deployed in a single Nutanix Files cluster?
 
-- A) 8
-- B) 12
-- C) 16
-- D) 32
+- A) 16
+- B) 32
+- C) 8
+- D) 12
 
-**Answer: C**
+**Answer: A**
 Nutanix Files supports a maximum of 16 FSVMs per file server deployment, allowing scale-out as demand grows.
 
 ---
@@ -37,12 +37,12 @@ Nutanix Files supports a maximum of 16 FSVMs per file server deployment, allowin
 ### Q3
 What is the **standard** vCPU and memory sizing for each FSVM in a default Nutanix Files deployment?
 
-- A) 2 vCPU / 8 GB RAM
-- B) 4 vCPU / 12 GB RAM
-- C) 8 vCPU / 16 GB RAM
-- D) 4 vCPU / 16 GB RAM
+- A) 4 vCPU / 12 GB RAM
+- B) 8 vCPU / 16 GB RAM
+- C) 4 vCPU / 16 GB RAM
+- D) 2 vCPU / 8 GB RAM
 
-**Answer: B**
+**Answer: A**
 The standard FSVM resource allocation is 4 vCPUs and 12 GB RAM per FSVM by default.
 
 ---
@@ -63,12 +63,12 @@ For non-production or test scenarios, Nutanix Files can be deployed with a singl
 ### Q5
 Which two networks are required when deploying Nutanix Files? (Choose the BEST answer.)
 
-- A) Management network and iSCSI network
-- B) Client-side network and storage network
-- C) Public network and private network
-- D) External network and internal network
+- A) External network and internal network
+- B) Management network and iSCSI network
+- C) Client-side network and storage network
+- D) Public network and private network
 
-**Answer: B**
+**Answer: C**
 Nutanix Files requires a client-side network (for SMB/NFS client access) and a storage network (for FSVM-to-CVM communication on the backplane).
 
 ---
@@ -76,12 +76,12 @@ Nutanix Files requires a client-side network (for SMB/NFS client access) and a s
 ### Q6
 During Nutanix Files deployment, which DNS record type must be created for client access to the file server?
 
-- A) MX record
-- B) PTR record
-- C) A record
-- D) CNAME record
+- A) A record
+- B) CNAME record
+- C) MX record
+- D) PTR record
 
-**Answer: C**
+**Answer: A**
 DNS A records must be created for the file server name, mapping to the FSVM client-side IP addresses for proper name resolution and load distribution.
 
 ---
@@ -89,12 +89,12 @@ DNS A records must be created for the file server name, mapping to the FSVM clie
 ### Q7
 Which requirement must be met before deploying Nutanix Files with SMB share support?
 
-- A) An LDAP server must be configured
-- B) The file server must be joined to an Active Directory domain
-- C) A RADIUS server must be configured
-- D) A local user database must be populated
+- A) The file server must be joined to an Active Directory domain
+- B) A RADIUS server must be configured
+- C) A local user database must be populated
+- D) An LDAP server must be configured
 
-**Answer: B**
+**Answer: A**
 For SMB share support, the file server must be joined to Active Directory so that Kerberos and NTLM authentication can function for Windows clients.
 
 ---
@@ -115,12 +115,12 @@ Nutanix Objects is deployed and managed exclusively through Prism Central, makin
 ### Q9
 What is the minimum number of worker nodes required for a Nutanix Objects deployment?
 
-- A) 1
-- B) 2
-- C) 3
-- D) 5
+- A) 5
+- B) 1
+- C) 2
+- D) 3
 
-**Answer: C**
+**Answer: D**
 Nutanix Objects requires a minimum of 3 worker nodes to ensure availability and distributed processing of S3 requests.
 
 ---
@@ -128,12 +128,12 @@ Nutanix Objects requires a minimum of 3 worker nodes to ensure availability and 
 ### Q10
 Which underlying platform does Nutanix Objects use to run its containerized microservices?
 
-- A) Docker Swarm
-- B) Kubernetes via MSP (Microservices Platform)
-- C) VMware Tanzu
-- D) OpenShift
+- A) VMware Tanzu
+- B) OpenShift
+- C) Docker Swarm
+- D) Kubernetes via MSP (Microservices Platform)
 
-**Answer: B**
+**Answer: D**
 Nutanix Objects runs on the Microservices Platform (MSP), which is a Kubernetes-based infrastructure managed by Prism Central for deploying containerized services.
 
 ---
@@ -141,12 +141,12 @@ Nutanix Objects runs on the Microservices Platform (MSP), which is a Kubernetes-
 ### Q11
 When deploying Nutanix Objects, which network type must the internal and external networks be?
 
-- A) Unmanaged AHV networks
-- B) VLAN-backed managed networks
-- C) Overlay (VPC) networks
-- D) Any network type is supported
+- A) VLAN-backed managed networks
+- B) Overlay (VPC) networks
+- C) Any network type is supported
+- D) Unmanaged AHV networks
 
-**Answer: B**
+**Answer: A**
 Both the internal and external networks for Objects must be VLAN-backed managed networks configured in Prism Central to ensure proper connectivity.
 
 ---
@@ -167,12 +167,12 @@ Load balancers front the Objects deployment and distribute incoming S3 API reque
 ### Q13
 Which Nutanix Objects component is responsible for handling I/O operations to the underlying storage?
 
-- A) Load balancer
-- B) Atlas service
-- C) Object Controller
-- D) MSP controller
+- A) MSP controller
+- B) Load balancer
+- C) Atlas service
+- D) Object Controller
 
-**Answer: C**
+**Answer: D**
 Object Controllers handle the actual data I/O operations, reading and writing object data to the Nutanix storage layer.
 
 ---
@@ -180,12 +180,12 @@ Object Controllers handle the actual data I/O operations, reading and writing ob
 ### Q14
 What is the role of the Atlas service in Nutanix Objects?
 
-- A) It distributes S3 requests to worker nodes
-- B) It manages lifecycle policies and audit logging
-- C) It handles iSCSI target discovery
-- D) It performs data deduplication
+- A) It handles iSCSI target discovery
+- B) It performs data deduplication
+- C) It distributes S3 requests to worker nodes
+- D) It manages lifecycle policies and audit logging
 
-**Answer: B**
+**Answer: D**
 The Atlas service manages object lifecycle operations and audit/compliance logging within the Objects deployment.
 
 ---
@@ -193,12 +193,12 @@ The Atlas service manages object lifecycle operations and audit/compliance loggi
 ### Q15
 An administrator needs to provide block-level storage to a bare-metal Linux server outside the Nutanix cluster. Which Nutanix service should be used?
 
-- A) Nutanix Files
-- B) Nutanix Objects
-- C) Nutanix Volumes
-- D) Nutanix Mine
+- A) Nutanix Objects
+- B) Nutanix Volumes
+- C) Nutanix Mine
+- D) Nutanix Files
 
-**Answer: C**
+**Answer: B**
 Nutanix Volumes provides iSCSI-based block storage that external clients (including bare-metal servers) can consume via standard iSCSI initiators.
 
 ---
@@ -219,12 +219,12 @@ A cluster-wide iSCSI Data Services IP must be configured so external iSCSI initi
 ### Q17
 During a Nutanix Files upgrade, how are FSVMs upgraded?
 
-- A) All FSVMs are upgraded simultaneously
-- B) FSVMs are upgraded in a rolling fashion, one at a time
-- C) The file server must be taken offline for the upgrade
-- D) Only the primary FSVM is upgraded; secondaries auto-sync
+- A) Only the primary FSVM is upgraded; secondaries auto-sync
+- B) All FSVMs are upgraded simultaneously
+- C) FSVMs are upgraded in a rolling fashion, one at a time
+- D) The file server must be taken offline for the upgrade
 
-**Answer: B**
+**Answer: C**
 Files uses a rolling upgrade process where one FSVM is upgraded at a time to maintain service availability throughout the process.
 
 ---
@@ -232,12 +232,12 @@ Files uses a rolling upgrade process where one FSVM is upgraded at a time to mai
 ### Q18
 What happens to active client connections on an FSVM during a Nutanix Files rolling upgrade?
 
-- A) Connections are dropped and clients must reconnect manually
-- B) Connections are migrated to another FSVM before the upgrade begins on that node
-- C) The upgrade waits indefinitely until all clients disconnect
-- D) All I/O is paused cluster-wide during the upgrade
+- A) The upgrade waits indefinitely until all clients disconnect
+- B) All I/O is paused cluster-wide during the upgrade
+- C) Connections are dropped and clients must reconnect manually
+- D) Connections are migrated to another FSVM before the upgrade begins on that node
 
-**Answer: B**
+**Answer: D**
 During a rolling upgrade, active connections are gracefully migrated to other healthy FSVMs before the FSVM being upgraded is taken offline.
 
 ---
@@ -245,12 +245,12 @@ During a rolling upgrade, active connections are gracefully migrated to other he
 ### Q19
 Which pre-check is performed before a Nutanix Files upgrade begins?
 
-- A) Verification that all shares are empty
-- B) Verification of FSVM health, AD connectivity, and network reachability
-- C) Verification that no snapshots exist
-- D) Verification that all clients are disconnected
+- A) Verification of FSVM health, AD connectivity, and network reachability
+- B) Verification that no snapshots exist
+- C) Verification that all clients are disconnected
+- D) Verification that all shares are empty
 
-**Answer: B**
+**Answer: A**
 Pre-upgrade checks verify FSVM health, Active Directory connectivity, DNS resolution, network reachability, and other environmental prerequisites.
 
 ---
@@ -271,12 +271,12 @@ Objects is managed through Prism Central, so the PC version must be compatible w
 ### Q21
 How are Nutanix Objects worker nodes upgraded?
 
-- A) All worker nodes are upgraded simultaneously
-- B) Worker nodes are upgraded in a rolling fashion
-- C) A new set of worker nodes is deployed and traffic is switched over
-- D) The object store must be taken offline
+- A) The object store must be taken offline
+- B) All worker nodes are upgraded simultaneously
+- C) Worker nodes are upgraded in a rolling fashion
+- D) A new set of worker nodes is deployed and traffic is switched over
 
-**Answer: B**
+**Answer: C**
 Objects worker nodes are upgraded in a rolling process to maintain availability of the S3 endpoint during the upgrade.
 
 ---
@@ -284,12 +284,12 @@ Objects worker nodes are upgraded in a rolling process to maintain availability 
 ### Q22
 An architect is planning Nutanix Files for a VDI environment with 500 users. The vendor recommends budgeting 5 IOPS per user. How many total IOPS should be planned for?
 
-- A) 500
-- B) 1,000
-- C) 2,500
-- D) 5,000
+- A) 2,500
+- B) 5,000
+- C) 500
+- D) 1,000
 
-**Answer: C**
+**Answer: A**
 500 users × 5 IOPS per user = 2,500 IOPS total should be planned for the VDI file storage workload.
 
 ---
@@ -297,12 +297,12 @@ An architect is planning Nutanix Files for a VDI environment with 500 users. The
 ### Q23
 When sizing a Nutanix Files deployment for throughput-intensive workloads, which action increases aggregate throughput capacity?
 
-- A) Increasing the share quota
-- B) Adding more FSVMs (scale-out)
-- C) Creating more shares on the same FSVM
-- D) Enabling compression on the storage container
+- A) Adding more FSVMs (scale-out)
+- B) Creating more shares on the same FSVM
+- C) Enabling compression on the storage container
+- D) Increasing the share quota
 
-**Answer: B**
+**Answer: A**
 Adding more FSVMs scales out the file server, distributing I/O across more nodes and increasing aggregate throughput capacity.
 
 ---
@@ -323,12 +323,12 @@ Creating a dedicated storage container for Files is a best practice, allowing in
 ### Q25
 Which Nutanix Files share type spreads data across all FSVMs in the file server?
 
-- A) Standard share
-- B) Distributed share
-- C) Home share
-- D) Nested share
+- A) Nested share
+- B) Standard share
+- C) Distributed share
+- D) Home share
 
-**Answer: B**
+**Answer: C**
 Distributed shares spread data across all FSVMs in the deployment, with each Top-Level Directory (TLD) assigned to a specific FSVM for higher aggregate throughput.
 
 ---
@@ -336,12 +336,12 @@ Distributed shares spread data across all FSVMs in the deployment, with each Top
 ### Q26
 Which Nutanix Files share type stores all data on a single FSVM?
 
-- A) Distributed share
-- B) Home share
-- C) Standard share
-- D) Clustered share
+- A) Standard share
+- B) Clustered share
+- C) Distributed share
+- D) Home share
 
-**Answer: C**
+**Answer: A**
 Standard shares keep all their data on a single FSVM, making them simpler to manage but with a lower throughput ceiling compared to distributed shares.
 
 ---
@@ -349,12 +349,12 @@ Standard shares keep all their data on a single FSVM, making them simpler to man
 ### Q27
 When should an administrator choose a distributed share over a standard share?
 
-- A) When simplicity is preferred over performance
-- B) When higher aggregate throughput is needed across many users
-- C) When only a single user will access the share
-- D) When the share will store fewer than 100 files
+- A) When higher aggregate throughput is needed across many users
+- B) When only a single user will access the share
+- C) When the share will store fewer than 100 files
+- D) When simplicity is preferred over performance
 
-**Answer: B**
+**Answer: A**
 Distributed shares are ideal when many users need concurrent access and higher aggregate throughput, as data is spread across all FSVMs.
 
 ---
@@ -375,12 +375,12 @@ A multi-site object store deployment allows access to the same logical object st
 ### Q29
 When configuring a Nutanix Objects endpoint, what protocol do clients use to interact with stored objects?
 
-- A) NFS v4.1
-- B) S3-compatible REST API
-- C) SMB 3.0
-- D) iSCSI
+- A) iSCSI
+- B) NFS v4.1
+- C) S3-compatible REST API
+- D) SMB 3.0
 
-**Answer: B**
+**Answer: C**
 Nutanix Objects exposes an S3-compatible REST API endpoint that clients use for all object storage operations.
 
 ---
@@ -388,12 +388,12 @@ Nutanix Objects exposes an S3-compatible REST API endpoint that clients use for 
 ### Q30
 How does Nutanix Volumes distribute I/O across the cluster?
 
-- A) All I/O goes through a single CVM
-- B) I/O is distributed across CVMs in the cluster
-- C) I/O is routed through a dedicated storage gateway VM
-- D) External clients must manually select a CVM
+- A) I/O is routed through a dedicated storage gateway VM
+- B) External clients must manually select a CVM
+- C) All I/O goes through a single CVM
+- D) I/O is distributed across CVMs in the cluster
 
-**Answer: B**
+**Answer: D**
 Volumes distributes I/O across all CVMs in the cluster, leveraging the Nutanix distributed storage fabric for performance and resilience.
 
 ---
@@ -401,12 +401,12 @@ Volumes distributes I/O across all CVMs in the cluster, leveraging the Nutanix d
 ### Q31
 What is the purpose of the iSCSI Data Services IP in Nutanix Volumes?
 
-- A) It provides a floating IP used only for CVM management
-- B) It provides a cluster-wide discovery IP for external iSCSI initiators
-- C) It provides the IP address for the Prism web console
-- D) It provides the replication target IP for DR
+- A) It provides a cluster-wide discovery IP for external iSCSI initiators
+- B) It provides the IP address for the Prism web console
+- C) It provides the replication target IP for DR
+- D) It provides a floating IP used only for CVM management
 
-**Answer: B**
+**Answer: A**
 The iSCSI Data Services IP is a cluster-wide virtual IP that external initiators use for iSCSI target discovery and initial connection.
 
 ---
@@ -427,12 +427,12 @@ Administrators can scale up individual FSVMs by increasing their vCPU and RAM al
 ### Q33
 An administrator deploys Nutanix Files with 3 FSVMs. Six months later, user demand has doubled. What is the recommended scaling approach?
 
-- A) Delete and redeploy with more FSVMs
-- B) Add additional FSVMs to the existing file server (scale-out)
-- C) Increase the share quota
-- D) Deploy a second file server and manually split users
+- A) Deploy a second file server and manually split users
+- B) Delete and redeploy with more FSVMs
+- C) Add additional FSVMs to the existing file server (scale-out)
+- D) Increase the share quota
 
-**Answer: B**
+**Answer: C**
 Nutanix Files supports non-disruptive scale-out by adding FSVMs to an existing file server deployment, up to the maximum of 16.
 
 ---
@@ -440,12 +440,12 @@ Nutanix Files supports non-disruptive scale-out by adding FSVMs to an existing f
 ### Q34
 Which network is used for communication between FSVMs and CVMs on the Nutanix cluster?
 
-- A) Client-side network
-- B) Management network
-- C) Storage network (backplane)
-- D) iSCSI network
+- A) Storage network (backplane)
+- B) iSCSI network
+- C) Client-side network
+- D) Management network
 
-**Answer: C**
+**Answer: A**
 The storage network serves as the backplane for FSVM-to-CVM communication, carrying all storage I/O traffic internally.
 
 ---
@@ -453,12 +453,12 @@ The storage network serves as the backplane for FSVM-to-CVM communication, carry
 ### Q35
 How many IP addresses are required on the client-side network for a 3-FSVM deployment?
 
-- A) 1
-- B) 2
-- C) 3 (one per FSVM)
-- D) 6
+- A) 2
+- B) 3 (one per FSVM)
+- C) 6
+- D) 1
 
-**Answer: C**
+**Answer: B**
 Each FSVM requires one IP address on the client-side network, so a 3-FSVM deployment needs 3 client-side IPs.
 
 ---
@@ -479,12 +479,12 @@ The worker VMs run containerized microservices including load balancers, object 
 ### Q37
 An organization requires a Nutanix Objects deployment that can serve a single location. Which deployment model is appropriate?
 
-- A) Multi-site object store
-- B) Federated object store
-- C) Single-site object store
-- D) Replicated object store
+- A) Replicated object store
+- B) Multi-site object store
+- C) Federated object store
+- D) Single-site object store
 
-**Answer: C**
+**Answer: D**
 A single-site object store is appropriate when all clients are at one location and there is no need for multi-site access.
 
 ---
@@ -492,12 +492,12 @@ A single-site object store is appropriate when all clients are at one location a
 ### Q38
 When planning capacity for Nutanix Files in a general-purpose file server use case, which metric is MOST important?
 
-- A) Number of Prism Central instances
-- B) Expected capacity, user count, and IOPS profile
-- C) Number of hypervisor hosts
-- D) Number of Active Directory domains
+- A) Number of hypervisor hosts
+- B) Number of Active Directory domains
+- C) Number of Prism Central instances
+- D) Expected capacity, user count, and IOPS profile
 
-**Answer: B**
+**Answer: D**
 Capacity planning for Files should account for expected total capacity, the number of concurrent users, and the expected IOPS profile of the workload.
 
 ---
@@ -505,12 +505,12 @@ Capacity planning for Files should account for expected total capacity, the numb
 ### Q39
 What happens if a single FSVM fails in a 3-FSVM production deployment?
 
-- A) The entire file server goes offline
-- B) Clients connected to that FSVM are automatically migrated to surviving FSVMs
-- C) Only distributed shares are affected
-- D) An administrator must manually failover connections
+- A) Clients connected to that FSVM are automatically migrated to surviving FSVMs
+- B) Only distributed shares are affected
+- C) An administrator must manually failover connections
+- D) The entire file server goes offline
 
-**Answer: B**
+**Answer: A**
 With 3 or more FSVMs, the file server remains available and client connections are automatically migrated to the surviving FSVMs.
 
 ---
@@ -531,12 +531,12 @@ The storage network is an internal-only network used for FSVM-to-CVM communicati
 ### Q41
 During a Nutanix Files deployment, what must be configured in DNS to enable clients to resolve the file server name?
 
-- A) A single A record pointing to the Prism Element VIP
-- B) Multiple A records (one per FSVM client IP) for the file server name
-- C) A CNAME record pointing to the CVM IP
-- D) An SRV record for the file server
+- A) An SRV record for the file server
+- B) A single A record pointing to the Prism Element VIP
+- C) Multiple A records (one per FSVM client IP) for the file server name
+- D) A CNAME record pointing to the CVM IP
 
-**Answer: B**
+**Answer: C**
 Multiple DNS A records for the file server name (one per FSVM client-side IP) provide round-robin DNS for client load distribution.
 
 ---
@@ -544,12 +544,12 @@ Multiple DNS A records for the file server name (one per FSVM client-side IP) pr
 ### Q42
 An administrator wants to scale an FSVM from 4 vCPU/12 GB RAM to 8 vCPU/24 GB RAM. What is the impact?
 
-- A) The file server must be redeployed
-- B) All shares must be recreated
-- C) The FSVM must be briefly powered off for the resource change
-- D) There is no impact; changes are made live without disruption
+- A) The FSVM must be briefly powered off for the resource change
+- B) There is no impact; changes are made live without disruption
+- C) The file server must be redeployed
+- D) All shares must be recreated
 
-**Answer: C**
+**Answer: A**
 Scaling FSVM resources requires briefly powering off the FSVM to apply the new vCPU and RAM settings, causing a temporary interruption for that FSVM.
 
 ---
@@ -557,12 +557,12 @@ Scaling FSVM resources requires briefly powering off the FSVM to apply the new v
 ### Q43
 Which Nutanix Objects component provides a single entry point (virtual IP or FQDN) for S3 clients?
 
-- A) Object Controller
-- B) Atlas service
-- C) Load balancer endpoint
-- D) MSP controller
+- A) Atlas service
+- B) Load balancer endpoint
+- C) MSP controller
+- D) Object Controller
 
-**Answer: C**
+**Answer: B**
 The load balancer provides the S3 endpoint (virtual IP or FQDN) that clients connect to, distributing requests to the backend worker nodes.
 
 ---
@@ -583,12 +583,12 @@ A Volume Group aggregates one or more virtual disks and presents them as iSCSI t
 ### Q45
 Which of the following is true about single-node Nutanix Files deployments?
 
-- A) They provide full high availability
-- B) They are suitable for production workloads
-- C) They use only 1 FSVM and do not provide HA
-- D) They require a minimum of 2 storage containers
+- A) They require a minimum of 2 storage containers
+- B) They provide full high availability
+- C) They are suitable for production workloads
+- D) They use only 1 FSVM and do not provide HA
 
-**Answer: C**
+**Answer: D**
 Single-node Files deployments use one FSVM, which means there is no failover target, making them unsuitable for production HA requirements.
 
 ---
@@ -596,12 +596,12 @@ Single-node Files deployments use one FSVM, which means there is no failover tar
 ### Q46
 During a Nutanix Objects upgrade, what should an administrator verify first?
 
-- A) That all buckets are empty
-- B) That Prism Central is at a compatible version for the target Objects version
-- C) That all access keys have been revoked
-- D) That the object store is offline
+- A) That all access keys have been revoked
+- B) That the object store is offline
+- C) That all buckets are empty
+- D) That Prism Central is at a compatible version for the target Objects version
 
-**Answer: B**
+**Answer: D**
 PC version compatibility is the first and most critical check before upgrading Objects, as Objects is managed and deployed through PC.
 
 ---
@@ -609,12 +609,12 @@ PC version compatibility is the first and most critical check before upgrading O
 ### Q47
 An administrator is deploying Nutanix Files on a cluster with 4 nodes. What is the recommended minimum for a production deployment?
 
-- A) 1 FSVM with 8 vCPU
-- B) 2 FSVMs with 4 vCPU each
-- C) 3 FSVMs with 4 vCPU/12 GB RAM each
-- D) 4 FSVMs with 2 vCPU each
+- A) 2 FSVMs with 4 vCPU each
+- B) 3 FSVMs with 4 vCPU/12 GB RAM each
+- C) 4 FSVMs with 2 vCPU each
+- D) 1 FSVM with 8 vCPU
 
-**Answer: C**
+**Answer: B**
 The production best practice is a minimum of 3 FSVMs, each with the standard 4 vCPU/12 GB RAM configuration, to ensure HA.
 
 ---
@@ -635,12 +635,12 @@ Home shares are nested within distributed shares and provide per-user home direc
 ### Q49
 Which statement correctly describes the relationship between Nutanix Objects and Prism Central?
 
-- A) Objects can be deployed from either Prism Element or Prism Central
-- B) Objects requires Prism Central for deployment and management
-- C) Objects only uses Prism Central for monitoring, not deployment
-- D) Objects does not require Prism Central
+- A) Objects does not require Prism Central
+- B) Objects can be deployed from either Prism Element or Prism Central
+- C) Objects requires Prism Central for deployment and management
+- D) Objects only uses Prism Central for monitoring, not deployment
 
-**Answer: B**
+**Answer: C**
 Nutanix Objects is exclusively deployed and managed through Prism Central and cannot be managed from Prism Element alone.
 
 ---
@@ -648,12 +648,12 @@ Nutanix Objects is exclusively deployed and managed through Prism Central and ca
 ### Q50
 How does an FSVM communicate with the Nutanix storage layer?
 
-- A) Through the client-side network directly to the storage pool
-- B) Through the storage network to the local CVM using iSCSI/NFS
-- C) Through a dedicated FC (Fibre Channel) network
-- D) Through the management network to the Prism API
+- A) Through a dedicated FC (Fibre Channel) network
+- B) Through the management network to the Prism API
+- C) Through the client-side network directly to the storage pool
+- D) Through the storage network to the local CVM using iSCSI/NFS
 
-**Answer: B**
+**Answer: D**
 FSVMs communicate with CVMs over the storage network using internal protocols to read and write data to the Nutanix distributed storage fabric.
 
 ---
@@ -661,12 +661,12 @@ FSVMs communicate with CVMs over the storage network using internal protocols to
 ### Q51
 An enterprise wants to deploy Nutanix Files for a VDI environment supporting 2,000 users. Assuming 3 IOPS per user, what is the minimum IOPS the file server must support?
 
-- A) 2,000
-- B) 3,000
-- C) 6,000
-- D) 9,000
+- A) 3,000
+- B) 6,000
+- C) 9,000
+- D) 2,000
 
-**Answer: C**
+**Answer: B**
 2,000 users × 3 IOPS per user = 6,000 IOPS minimum should be planned for this VDI environment.
 
 ---
@@ -687,12 +687,12 @@ A dedicated container allows independent configuration of storage policies like 
 ### Q53
 When deploying Nutanix Objects, which two separate networks must be configured?
 
-- A) Storage network and backplane network
-- B) Internal network (inter-service) and external network (client-facing S3 endpoint)
-- C) Management network and iSCSI network
-- D) Client network and AD network
+- A) Client network and AD network
+- B) Storage network and backplane network
+- C) Internal network (inter-service) and external network (client-facing S3 endpoint)
+- D) Management network and iSCSI network
 
-**Answer: B**
+**Answer: C**
 Objects requires an internal network for inter-service communication between microservices and an external network for the client-facing S3 endpoint.
 
 ---
@@ -700,12 +700,12 @@ Objects requires an internal network for inter-service communication between mic
 ### Q54
 How many storage network IPs are needed for a 3-FSVM Nutanix Files deployment?
 
-- A) 1
-- B) 2
-- C) 3
-- D) 6
+- A) 3
+- B) 6
+- C) 1
+- D) 2
 
-**Answer: C**
+**Answer: A**
 Each FSVM needs one IP on the storage network, so a 3-FSVM deployment requires 3 storage network IPs.
 
 ---
@@ -713,12 +713,12 @@ Each FSVM needs one IP on the storage network, so a 3-FSVM deployment requires 3
 ### Q55
 During a Nutanix Files rolling upgrade, what ensures data availability while an FSVM is being upgraded?
 
-- A) Data is temporarily copied to Prism Central
-- B) The remaining healthy FSVMs serve all client requests
-- C) A temporary FSVM is deployed to replace the upgrading one
-- D) I/O is queued until the FSVM comes back online
+- A) The remaining healthy FSVMs serve all client requests
+- B) A temporary FSVM is deployed to replace the upgrading one
+- C) I/O is queued until the FSVM comes back online
+- D) Data is temporarily copied to Prism Central
 
-**Answer: B**
+**Answer: A**
 The rolling upgrade ensures that while one FSVM is being upgraded, the remaining healthy FSVMs continue serving all client requests without interruption.
 
 ---
@@ -739,12 +739,12 @@ An architect is designing a Nutanix Files solution needing 20 Gbps aggregate thr
 ### Q57
 What is the function of DNS round-robin in a Nutanix Files deployment?
 
-- A) It provides automatic failover of the file server
-- B) It distributes client connections across multiple FSVM client IPs
-- C) It replicates file data across FSVMs
-- D) It manages AD join operations
+- A) It manages AD join operations
+- B) It provides automatic failover of the file server
+- C) It distributes client connections across multiple FSVM client IPs
+- D) It replicates file data across FSVMs
 
-**Answer: B**
+**Answer: C**
 DNS round-robin distributes client connections across the FSVM client-side IP addresses, providing basic load balancing for new connections.
 
 ---
@@ -752,12 +752,12 @@ DNS round-robin distributes client connections across the FSVM client-side IP ad
 ### Q58
 When joining the Nutanix file server to Active Directory, which information is NOT required?
 
-- A) AD domain name
-- B) AD administrator credentials
-- C) RADIUS shared secret
-- D) Preferred domain controller (optional)
+- A) RADIUS shared secret
+- B) Preferred domain controller (optional)
+- C) AD domain name
+- D) AD administrator credentials
 
-**Answer: C**
+**Answer: A**
 RADIUS is not used for Nutanix Files AD integration. The AD domain name, credentials, and optionally a preferred DC are needed.
 
 ---
@@ -765,12 +765,12 @@ RADIUS is not used for Nutanix Files AD integration. The AD domain name, credent
 ### Q59
 Nutanix Objects worker VMs run on which infrastructure?
 
-- A) Dedicated physical servers outside the Nutanix cluster
-- B) AHV VMs on the same Nutanix cluster managed by MSP/Kubernetes
-- C) External Kubernetes clusters
-- D) Docker containers on Prism Central
+- A) AHV VMs on the same Nutanix cluster managed by MSP/Kubernetes
+- B) External Kubernetes clusters
+- C) Docker containers on Prism Central
+- D) Dedicated physical servers outside the Nutanix cluster
 
-**Answer: B**
+**Answer: A**
 Objects worker VMs are AHV VMs running on the Nutanix cluster, managed by the MSP (Microservices Platform) Kubernetes infrastructure.
 
 ---
@@ -791,12 +791,12 @@ The iSCSI Data Services IP must be configured at the cluster level to enable ext
 ### Q61
 An administrator attempts to deploy Nutanix Objects but the deployment fails. Which is the MOST likely cause?
 
-- A) The Nutanix cluster has too many VMs
-- B) Prism Central is not deployed or registered
-- C) The cluster is running AHV 7.0
-- D) The storage container is encrypted
+- A) The storage container is encrypted
+- B) The Nutanix cluster has too many VMs
+- C) Prism Central is not deployed or registered
+- D) The cluster is running AHV 7.0
 
-**Answer: B**
+**Answer: C**
 The most common cause of Objects deployment failure is Prism Central not being deployed or not properly registered with the cluster.
 
 ---
@@ -804,12 +804,12 @@ The most common cause of Objects deployment failure is Prism Central not being d
 ### Q62
 Which statement is true about Nutanix Files upgrade pre-checks?
 
-- A) Pre-checks only verify disk space on FSVMs
-- B) Pre-checks verify FSVM health, AD connectivity, DNS, and network reachability
-- C) Pre-checks are optional and can be skipped
-- D) Pre-checks only run on the first FSVM
+- A) Pre-checks are optional and can be skipped
+- B) Pre-checks only run on the first FSVM
+- C) Pre-checks only verify disk space on FSVMs
+- D) Pre-checks verify FSVM health, AD connectivity, DNS, and network reachability
 
-**Answer: B**
+**Answer: D**
 Comprehensive pre-checks verify multiple environmental factors including FSVM health, AD connectivity, DNS resolution, and network reachability before starting the upgrade.
 
 ---
@@ -817,12 +817,12 @@ Comprehensive pre-checks verify multiple environmental factors including FSVM he
 ### Q63
 When scaling out Nutanix Files, what happens to existing distributed shares when a new FSVM is added?
 
-- A) All data must be manually migrated
-- B) New TLDs can be assigned to the new FSVM; existing TLDs can be rebalanced
-- C) Existing distributed shares must be deleted and recreated
-- D) The new FSVM only serves standard shares
+- A) New TLDs can be assigned to the new FSVM; existing TLDs can be rebalanced
+- B) Existing distributed shares must be deleted and recreated
+- C) The new FSVM only serves standard shares
+- D) All data must be manually migrated
 
-**Answer: B**
+**Answer: A**
 When a new FSVM is added, new Top-Level Directories in distributed shares can be assigned to it, and existing TLDs can be rebalanced across all FSVMs.
 
 ---
@@ -843,12 +843,12 @@ In multi-site deployments, each site has its own S3 endpoint that clients use fo
 ### Q65
 What is the purpose of pre-upgrade checks in a Nutanix Objects upgrade?
 
-- A) To verify all buckets have lifecycle policies
-- B) To ensure PC compatibility, worker node health, and MSP readiness
-- C) To confirm all access keys are active
-- D) To verify WORM policies are disabled
+- A) To verify WORM policies are disabled
+- B) To verify all buckets have lifecycle policies
+- C) To ensure PC compatibility, worker node health, and MSP readiness
+- D) To confirm all access keys are active
 
-**Answer: B**
+**Answer: C**
 Objects pre-upgrade checks verify Prism Central compatibility, worker node health, MSP platform readiness, and other environmental prerequisites.
 
 ---
@@ -856,12 +856,12 @@ Objects pre-upgrade checks verify Prism Central compatibility, worker node healt
 ### Q66
 An administrator has a Nutanix cluster with the iSCSI Data Services IP configured. External Windows servers need block storage. Which Nutanix feature provides this?
 
-- A) Nutanix Files with SMB shares
-- B) Nutanix Objects with S3 buckets
-- C) Nutanix Volumes with Volume Groups
-- D) Nutanix Calm with blueprints
+- A) Nutanix Volumes with Volume Groups
+- B) Nutanix Calm with blueprints
+- C) Nutanix Files with SMB shares
+- D) Nutanix Objects with S3 buckets
 
-**Answer: C**
+**Answer: A**
 Nutanix Volumes with Volume Groups provides iSCSI block storage that external Windows servers can access using their built-in iSCSI initiator.
 
 ---
@@ -869,12 +869,12 @@ Nutanix Volumes with Volume Groups provides iSCSI block storage that external Wi
 ### Q67
 During Nutanix Files capacity planning, which factor determines the number of FSVMs required?
 
-- A) The number of Active Directory domains
-- B) The number of Prism Central instances
-- C) The expected concurrent users, IOPS, and throughput requirements
-- D) The number of hypervisor hosts
+- A) The number of Prism Central instances
+- B) The expected concurrent users, IOPS, and throughput requirements
+- C) The number of hypervisor hosts
+- D) The number of Active Directory domains
 
-**Answer: C**
+**Answer: B**
 FSVM count is determined by workload demands including concurrent user count, IOPS requirements, and aggregate throughput needs.
 
 ---
@@ -895,12 +895,12 @@ The Microservices Platform (MSP) manages the Kubernetes infrastructure that orch
 ### Q69
 What happens to Nutanix Volumes I/O if the CVM on the host where the iSCSI Data Services IP resides fails?
 
-- A) All external iSCSI connections are permanently lost
-- B) The iSCSI Data Services IP fails over to another CVM, and I/O resumes
-- C) The administrator must manually reconfigure the IP
-- D) External clients must reconnect to a different IP
+- A) External clients must reconnect to a different IP
+- B) All external iSCSI connections are permanently lost
+- C) The iSCSI Data Services IP fails over to another CVM, and I/O resumes
+- D) The administrator must manually reconfigure the IP
 
-**Answer: B**
+**Answer: C**
 The iSCSI Data Services IP is a floating IP that automatically fails over to another healthy CVM, ensuring continued external iSCSI access.
 
 ---
@@ -908,12 +908,12 @@ The iSCSI Data Services IP is a floating IP that automatically fails over to ano
 ### Q70
 Which deployment consideration is unique to Nutanix Objects compared to Files and Volumes?
 
-- A) It requires a hypervisor
-- B) It requires Prism Central and the MSP platform
-- C) It requires Active Directory
-- D) It requires a storage container
+- A) It requires Active Directory
+- B) It requires a storage container
+- C) It requires a hypervisor
+- D) It requires Prism Central and the MSP platform
 
-**Answer: B**
+**Answer: D**
 Unlike Files (deployed from PE) and Volumes (configured in PE), Objects uniquely requires both Prism Central and the MSP Kubernetes platform for deployment.
 
 ---
@@ -921,12 +921,12 @@ Unlike Files (deployed from PE) and Volumes (configured in PE), Objects uniquely
 ### Q71
 An administrator wants to deploy Nutanix Files with 5 FSVMs. How many total IPs are needed (client-side + storage)?
 
-- A) 5
-- B) 8
-- C) 10
-- D) 15
+- A) 8
+- B) 10
+- C) 15
+- D) 5
 
-**Answer: C**
+**Answer: B**
 5 FSVMs × 2 IPs each (1 client-side + 1 storage) = 10 total IP addresses required.
 
 ---
@@ -947,12 +947,12 @@ Best practice is to create a dedicated container with appropriate replication fa
 ### Q73
 What type of network must the client-side network be for Nutanix Files?
 
-- A) Any overlay network
-- B) A routable network accessible by SMB/NFS clients
-- C) An isolated network with no default gateway
-- D) A network on the same VLAN as the CVM management network
+- A) A network on the same VLAN as the CVM management network
+- B) Any overlay network
+- C) A routable network accessible by SMB/NFS clients
+- D) An isolated network with no default gateway
 
-**Answer: B**
+**Answer: C**
 The client-side network must be routable and accessible by the SMB and NFS clients that will connect to the file server.
 
 ---
@@ -960,12 +960,12 @@ The client-side network must be routable and accessible by the SMB and NFS clien
 ### Q74
 An administrator adds a fourth FSVM to an existing 3-FSVM deployment. Which share type benefits MOST from the additional FSVM?
 
-- A) Standard shares
-- B) Distributed shares
-- C) Both benefit equally
-- D) Neither benefits
+- A) Both benefit equally
+- B) Neither benefits
+- C) Standard shares
+- D) Distributed shares
 
-**Answer: B**
+**Answer: D**
 Distributed shares benefit most because they spread data across all FSVMs, so an additional FSVM increases aggregate throughput and capacity for distributed shares.
 
 ---
@@ -973,12 +973,12 @@ Distributed shares benefit most because they spread data across all FSVMs, so an
 ### Q75
 When Nutanix Objects is deployed, how do S3 clients resolve the object store endpoint?
 
-- A) By using the Prism Central IP
-- B) By using a DNS name or IP configured as the Objects endpoint
-- C) By querying the CVM directly
-- D) By using the hypervisor management IP
+- A) By using a DNS name or IP configured as the Objects endpoint
+- B) By querying the CVM directly
+- C) By using the hypervisor management IP
+- D) By using the Prism Central IP
 
-**Answer: B**
+**Answer: A**
 Clients access the object store through a configured DNS name or IP address that serves as the S3 endpoint, backed by the load balancer.
 
 ---
@@ -999,12 +999,12 @@ When FSVM resources are exhausted, clients experience degraded performance with 
 ### Q77
 Which statement about Nutanix Objects internal network is correct?
 
-- A) It carries client S3 traffic
-- B) It carries inter-service communication between microservice pods
-- C) It is optional and only needed for multi-site deployments
-- D) It must be on the same VLAN as the external network
+- A) It must be on the same VLAN as the external network
+- B) It carries client S3 traffic
+- C) It carries inter-service communication between microservice pods
+- D) It is optional and only needed for multi-site deployments
 
-**Answer: B**
+**Answer: C**
 The internal network carries communication between the microservice pods on the worker VMs and must be separate from the external client-facing network.
 
 ---
@@ -1012,12 +1012,12 @@ The internal network carries communication between the microservice pods on the 
 ### Q78
 An administrator needs to verify that a Nutanix Files deployment is ready for upgrade. Which tool should be used?
 
-- A) Prism Central Health Dashboard
-- B) The Files upgrade pre-check utility in Prism Element
-- C) nCLI cluster status
-- D) The Foundation upgrade wizard
+- A) nCLI cluster status
+- B) The Foundation upgrade wizard
+- C) Prism Central Health Dashboard
+- D) The Files upgrade pre-check utility in Prism Element
 
-**Answer: B**
+**Answer: D**
 The Files upgrade pre-check utility available in Prism Element verifies all prerequisites are met before initiating the upgrade process.
 
 ---
@@ -1025,12 +1025,12 @@ The Files upgrade pre-check utility available in Prism Element verifies all prer
 ### Q79
 When deploying Nutanix Volumes for an external Oracle RAC cluster, what construct is created to present storage?
 
-- A) An NFS export
-- B) An SMB share
-- C) A Volume Group with multiple virtual disks
-- D) An S3 bucket
+- A) An SMB share
+- B) A Volume Group with multiple virtual disks
+- C) An S3 bucket
+- D) An NFS export
 
-**Answer: C**
+**Answer: B**
 A Volume Group containing multiple virtual disks is created and presented as iSCSI targets to the Oracle RAC nodes for shared block storage.
 
 ---
@@ -1055,12 +1055,12 @@ For a non-HA proof-of-concept, a single FSVM with the standard 4 vCPU/12 GB RAM 
 ### Q81
 An administrator creates an SMB share on Nutanix Files. Which authentication protocols can be used by Windows clients? (Choose the BEST answer.)
 
-- A) LDAP and RADIUS
-- B) Kerberos and NTLM
-- C) SAML and OAuth
-- D) Certificate-based and smart card
+- A) Certificate-based and smart card
+- B) LDAP and RADIUS
+- C) Kerberos and NTLM
+- D) SAML and OAuth
 
-**Answer: B**
+**Answer: C**
 Nutanix Files SMB shares support Kerberos (preferred) and NTLM authentication, both requiring Active Directory integration.
 
 ---
@@ -1068,12 +1068,12 @@ Nutanix Files SMB shares support Kerberos (preferred) and NTLM authentication, b
 ### Q82
 What is Access-Based Enumeration (ABE) on a Nutanix Files SMB share?
 
-- A) A feature that encrypts file names
-- B) A feature that only shows files and folders to users who have at least read access
-- C) A feature that enumerates all Active Directory users
-- D) A feature that sorts files alphabetically
+- A) A feature that enumerates all Active Directory users
+- B) A feature that sorts files alphabetically
+- C) A feature that encrypts file names
+- D) A feature that only shows files and folders to users who have at least read access
 
-**Answer: B**
+**Answer: D**
 ABE hides files and folders from users who do not have at least read permission, improving security and reducing clutter in share browsing.
 
 ---
@@ -1081,12 +1081,12 @@ ABE hides files and folders from users who do not have at least read permission,
 ### Q83
 An administrator configures an NFS export on Nutanix Files. Which authentication method provides the HIGHEST security?
 
-- A) AUTH_SYS
-- B) Kerberos (krb5)
-- C) Kerberos with integrity (krb5i)
-- D) Kerberos with privacy/encryption (krb5p)
+- A) Kerberos (krb5)
+- B) Kerberos with integrity (krb5i)
+- C) Kerberos with privacy/encryption (krb5p)
+- D) AUTH_SYS
 
-**Answer: D**
+**Answer: C**
 Kerberos with privacy (krb5p) provides authentication, integrity checking, AND encryption of all NFS traffic, offering the highest security level.
 
 ---
@@ -1107,12 +1107,12 @@ krb5i adds integrity checking (preventing tampering) to Kerberos authentication,
 ### Q85
 When using AUTH_SYS for an NFS export, how are users identified?
 
-- A) By Kerberos principal
-- B) By UID/GID sent by the NFS client
-- C) By Active Directory SID
-- D) By X.509 certificate
+- A) By X.509 certificate
+- B) By Kerberos principal
+- C) By UID/GID sent by the NFS client
+- D) By Active Directory SID
 
-**Answer: B**
+**Answer: C**
 AUTH_SYS uses the UID and GID from the client system to identify users, trusting the client to provide accurate identity information.
 
 ---
@@ -1120,12 +1120,12 @@ AUTH_SYS uses the UID and GID from the client system to identify users, trusting
 ### Q86
 What is the purpose of the "squash" option on an NFS export?
 
-- A) To compress data on the share
-- B) To map root or all users to an anonymous UID/GID for security
-- C) To limit the number of files per directory
-- D) To enable deduplication on the export
+- A) To limit the number of files per directory
+- B) To enable deduplication on the export
+- C) To compress data on the share
+- D) To map root or all users to an anonymous UID/GID for security
 
-**Answer: B**
+**Answer: D**
 Squash options map specific users (typically root) to an anonymous UID/GID to prevent privileged access from NFS clients to the export.
 
 ---
@@ -1133,12 +1133,12 @@ Squash options map specific users (typically root) to an anonymous UID/GID to pr
 ### Q87
 An NFS export is configured with "root squash" enabled. What happens when a root user on a client mounts and accesses the export?
 
-- A) The root user has full root access on the export
-- B) The root user is mapped to the anonymous nobody user
-- C) The mount is denied entirely
-- D) The root user can only read files
+- A) The root user is mapped to the anonymous nobody user
+- B) The mount is denied entirely
+- C) The root user can only read files
+- D) The root user has full root access on the export
 
-**Answer: B**
+**Answer: A**
 Root squash maps the root user (UID 0) from the client to the anonymous nobody user, preventing privileged root access to the NFS export.
 
 ---
@@ -1159,12 +1159,12 @@ Client allowlists on the NFS export specify which IP addresses or subnets are pe
 ### Q89
 An organization needs to allow both Windows (SMB) and Linux (NFS) clients to access the same data on Nutanix Files. Which feature should be configured?
 
-- A) Standard SMB share with NFS gateway
-- B) Multi-protocol share
-- C) Dual file server deployment
-- D) iSCSI shared volume
+- A) iSCSI shared volume
+- B) Standard SMB share with NFS gateway
+- C) Multi-protocol share
+- D) Dual file server deployment
 
-**Answer: B**
+**Answer: C**
 Multi-protocol shares allow both SMB and NFS clients to access the same data, with user mapping ensuring consistent permissions.
 
 ---
@@ -1172,12 +1172,12 @@ Multi-protocol shares allow both SMB and NFS clients to access the same data, wi
 ### Q90
 When creating a multi-protocol share, which concept determines the primary permission model?
 
-- A) The hypervisor type
-- B) The native protocol selection (SMB-native or NFS-native)
-- C) The storage container settings
-- D) The FSVM count
+- A) The storage container settings
+- B) The FSVM count
+- C) The hypervisor type
+- D) The native protocol selection (SMB-native or NFS-native)
 
-**Answer: B**
+**Answer: D**
 The native protocol (SMB-native or NFS-native) determines which permission model takes precedence and how permissions are managed on the share.
 
 ---
@@ -1185,12 +1185,12 @@ The native protocol (SMB-native or NFS-native) determines which permission model
 ### Q91
 In a multi-protocol share with SMB as the native protocol, how are NFS user identities mapped to Windows users?
 
-- A) By matching hostname
-- B) Using RFC 2307 attributes (UID/GID mappings) in Active Directory
-- C) By matching IP addresses
-- D) Manually through Prism Element
+- A) Using RFC 2307 attributes (UID/GID mappings) in Active Directory
+- B) By matching IP addresses
+- C) Manually through Prism Element
+- D) By matching hostname
 
-**Answer: B**
+**Answer: A**
 RFC 2307 attributes stored in Active Directory map NFS UIDs/GIDs to Windows user accounts, enabling consistent identity across protocols.
 
 ---
@@ -1211,12 +1211,12 @@ Concurrent write access from both SMB and NFS clients to the same file simultane
 ### Q93
 How does a distributed share assign data to FSVMs?
 
-- A) All data is randomly distributed
-- B) Each Top-Level Directory (TLD) is assigned to a specific FSVM
-- C) Data is striped at the block level across all FSVMs
-- D) The newest FSVM always receives new data
+- A) The newest FSVM always receives new data
+- B) All data is randomly distributed
+- C) Each Top-Level Directory (TLD) is assigned to a specific FSVM
+- D) Data is striped at the block level across all FSVMs
 
-**Answer: B**
+**Answer: C**
 In a distributed share, each Top-Level Directory (TLD) is assigned to a specific FSVM, and all data within that TLD resides on that FSVM.
 
 ---
@@ -1224,12 +1224,12 @@ In a distributed share, each Top-Level Directory (TLD) is assigned to a specific
 ### Q94
 What is the primary throughput advantage of distributed shares over standard shares?
 
-- A) Distributed shares use faster disks
-- B) Distributed shares leverage multiple FSVMs for higher aggregate throughput
-- C) Distributed shares use RDMA
-- D) Distributed shares bypass the CVM
+- A) Distributed shares use RDMA
+- B) Distributed shares bypass the CVM
+- C) Distributed shares use faster disks
+- D) Distributed shares leverage multiple FSVMs for higher aggregate throughput
 
-**Answer: B**
+**Answer: D**
 Distributed shares spread I/O across multiple FSVMs, providing higher aggregate throughput since each FSVM contributes its capacity.
 
 ---
@@ -1237,12 +1237,12 @@ Distributed shares spread I/O across multiple FSVMs, providing higher aggregate 
 ### Q95
 Which share type on Nutanix Files has a throughput ceiling limited by a single FSVM?
 
-- A) Distributed share
-- B) Home share
-- C) Standard share
-- D) Multi-protocol share
+- A) Home share
+- B) Standard share
+- C) Multi-protocol share
+- D) Distributed share
 
-**Answer: C**
+**Answer: B**
 Standard shares store all data on a single FSVM, so their maximum throughput is limited by that one FSVM's resources.
 
 ---
@@ -1263,12 +1263,12 @@ Home shares are nested within a distributed share, inheriting its distributed ar
 ### Q97
 What is the structure of a home share in Nutanix Files?
 
-- A) A flat directory with all user files mixed together
-- B) A directory per user (e.g., \\fileserver\home\username)
-- C) A single folder shared by all users
-- D) A directory per department
+- A) A directory per department
+- B) A flat directory with all user files mixed together
+- C) A directory per user (e.g., \\fileserver\home\username)
+- D) A single folder shared by all users
 
-**Answer: B**
+**Answer: C**
 Home shares automatically create a per-user directory structure, mapping each user's home directory under the share path (e.g., \\fileserver\home\username).
 
 ---
@@ -1276,12 +1276,12 @@ Home shares automatically create a per-user directory structure, mapping each us
 ### Q98
 An administrator sets a hard quota of 10 GB on a Nutanix Files share. What happens when a user reaches 10 GB?
 
-- A) The user receives a warning but can continue writing
-- B) Write operations are blocked for that user
-- C) Older files are automatically deleted
-- D) The user is disconnected from the share
+- A) Older files are automatically deleted
+- B) The user is disconnected from the share
+- C) The user receives a warning but can continue writing
+- D) Write operations are blocked for that user
 
-**Answer: B**
+**Answer: D**
 A hard quota enforces a strict limit — once reached, all further write operations are blocked until space is freed.
 
 ---
@@ -1289,12 +1289,12 @@ A hard quota enforces a strict limit — once reached, all further write operati
 ### Q99
 What is the behavior of a soft quota on Nutanix Files?
 
-- A) It blocks writes when the quota is reached
-- B) It sends a notification but does NOT block writes
-- C) It automatically expands the share
-- D) It compresses files to stay under the limit
+- A) It sends a notification but does NOT block writes
+- B) It automatically expands the share
+- C) It compresses files to stay under the limit
+- D) It blocks writes when the quota is reached
 
-**Answer: B**
+**Answer: A**
 A soft quota triggers notifications (alerts/emails) when the threshold is reached but does not prevent users from writing additional data.
 
 ---
@@ -1315,12 +1315,12 @@ Quotas can be configured at both the per-user level (limiting individual user co
 ### Q101
 What does delegation allow in Nutanix Files share management?
 
-- A) It delegates CVM management to non-admin users
-- B) It allows non-admin users to manage specific shares (create directories, manage permissions)
-- C) It delegates AD administration to the file server
-- D) It allows users to create new file servers
+- A) It allows users to create new file servers
+- B) It delegates CVM management to non-admin users
+- C) It allows non-admin users to manage specific shares (create directories, manage permissions)
+- D) It delegates AD administration to the file server
 
-**Answer: B**
+**Answer: C**
 Delegation allows administrators to grant share-level management permissions to non-admin users for specific shares without giving full system access.
 
 ---
@@ -1328,12 +1328,12 @@ Delegation allows administrators to grant share-level management permissions to 
 ### Q102
 Self-Service Restore (SSR) for Nutanix Files SMB shares is accessed by Windows users through which feature?
 
-- A) Recycle Bin
-- B) Previous Versions tab in file properties
-- C) Windows Backup utility
-- D) Shadow Copy Management snap-in
+- A) Windows Backup utility
+- B) Shadow Copy Management snap-in
+- C) Recycle Bin
+- D) Previous Versions tab in file properties
 
-**Answer: B**
+**Answer: D**
 Windows users access SSR through the "Previous Versions" tab in file or folder properties, which shows available snapshots for self-service recovery.
 
 ---
@@ -1341,12 +1341,12 @@ Windows users access SSR through the "Previous Versions" tab in file or folder p
 ### Q103
 How do NFS clients access Self-Service Restore snapshots on Nutanix Files?
 
-- A) Through the Prism UI
-- B) By browsing the .snapshot hidden directory within the export
-- C) By mounting a separate snapshot export
-- D) NFS does not support Self-Service Restore
+- A) By browsing the .snapshot hidden directory within the export
+- B) By mounting a separate snapshot export
+- C) NFS does not support Self-Service Restore
+- D) Through the Prism UI
 
-**Answer: B**
+**Answer: A**
 NFS clients access SSR snapshots by navigating to the hidden `.snapshot` directory within the NFS export, which contains point-in-time copies.
 
 ---
@@ -1367,12 +1367,12 @@ SSR relies on scheduled snapshots being configured for the share or export — w
 ### Q105
 When creating a bucket in Nutanix Objects, what credentials are needed for S3 client access?
 
-- A) Active Directory username and password
-- B) An access key and secret key pair
-- C) An SSL certificate
-- D) A Prism Central API token
+- A) A Prism Central API token
+- B) Active Directory username and password
+- C) An access key and secret key pair
+- D) An SSL certificate
 
-**Answer: B**
+**Answer: C**
 Nutanix Objects uses S3-compatible access key and secret key pairs for authenticating client requests to buckets.
 
 ---
@@ -1380,12 +1380,12 @@ Nutanix Objects uses S3-compatible access key and secret key pairs for authentic
 ### Q106
 Which API standard does Nutanix Objects follow for client compatibility?
 
-- A) Azure Blob Storage API
-- B) Google Cloud Storage API
-- C) Amazon S3-compatible API
-- D) OpenStack Swift API
+- A) Amazon S3-compatible API
+- B) OpenStack Swift API
+- C) Azure Blob Storage API
+- D) Google Cloud Storage API
 
-**Answer: C**
+**Answer: A**
 Nutanix Objects implements the Amazon S3-compatible API, allowing standard S3 tools and SDKs to work with the platform.
 
 ---
@@ -1393,12 +1393,12 @@ Nutanix Objects implements the Amazon S3-compatible API, allowing standard S3 to
 ### Q107
 How are bucket policies defined in Nutanix Objects?
 
-- A) In XML format following Azure conventions
-- B) In JSON format using AWS IAM-compatible syntax
-- C) Through a graphical wizard only
-- D) In YAML format
+- A) In JSON format using AWS IAM-compatible syntax
+- B) Through a graphical wizard only
+- C) In YAML format
+- D) In XML format following Azure conventions
 
-**Answer: B**
+**Answer: A**
 Bucket policies in Nutanix Objects are defined in JSON format using AWS IAM-compatible policy syntax, specifying principals, actions, and resources.
 
 ---
@@ -1419,12 +1419,12 @@ Bucket policies control access permissions by specifying which principals can pe
 ### Q109
 An administrator enables WORM on a Nutanix Objects bucket. What is the grace period before objects become immutable?
 
-- A) 1 hour
-- B) 12 hours
-- C) 24 hours
-- D) 48 hours
+- A) 48 hours
+- B) 1 hour
+- C) 12 hours
+- D) 24 hours
 
-**Answer: C**
+**Answer: D**
 WORM has a 24-hour grace period after an object is written, during which it can still be modified or deleted before becoming immutable.
 
 ---
@@ -1432,12 +1432,12 @@ WORM has a 24-hour grace period after an object is written, during which it can 
 ### Q110
 Once an object in a WORM-enabled bucket becomes immutable (after the grace period), which operation can still be performed?
 
-- A) Deleting the object
-- B) Modifying the object content
-- C) Extending the retention period
-- D) Reducing the retention period
+- A) Extending the retention period
+- B) Reducing the retention period
+- C) Deleting the object
+- D) Modifying the object content
 
-**Answer: C**
+**Answer: A**
 After an object becomes immutable, the retention period can only be extended, never shortened. The object cannot be deleted or modified until retention expires.
 
 ---
@@ -1445,12 +1445,12 @@ After an object becomes immutable, the retention period can only be extended, ne
 ### Q111
 Which S3 feature does Nutanix Objects WORM compliance align with?
 
-- A) S3 Transfer Acceleration
-- B) S3 Object Lock
-- C) S3 Glacier
-- D) S3 Cross-Region Replication
+- A) S3 Object Lock
+- B) S3 Glacier
+- C) S3 Cross-Region Replication
+- D) S3 Transfer Acceleration
 
-**Answer: B**
+**Answer: A**
 Nutanix Objects WORM compliance aligns with the S3 Object Lock specification for immutable object storage.
 
 ---
@@ -1471,12 +1471,12 @@ With versioning enabled, each version of an object receives a unique version ID,
 ### Q113
 How does versioning protect against accidental object deletion in Nutanix Objects?
 
-- A) It prevents all delete operations
-- B) A "delete" operation adds a delete marker instead of permanently removing the object; previous versions remain accessible
-- C) It creates a backup in Prism Central
-- D) It sends an email to the administrator
+- A) It sends an email to the administrator
+- B) It prevents all delete operations
+- C) A "delete" operation adds a delete marker instead of permanently removing the object; previous versions remain accessible
+- D) It creates a backup in Prism Central
 
-**Answer: B**
+**Answer: C**
 When versioning is enabled, delete operations add a delete marker rather than permanently removing the object, allowing recovery of previous versions.
 
 ---
@@ -1484,12 +1484,12 @@ When versioning is enabled, delete operations add a delete marker rather than pe
 ### Q114
 What is a lifecycle policy in Nutanix Objects used for?
 
-- A) Managing FSVM lifecycle
-- B) Automating the expiration and deletion of objects based on age or other criteria
-- C) Managing user account lifecycle
-- D) Controlling CVM restarts
+- A) Managing user account lifecycle
+- B) Controlling CVM restarts
+- C) Managing FSVM lifecycle
+- D) Automating the expiration and deletion of objects based on age or other criteria
 
-**Answer: B**
+**Answer: D**
 Lifecycle policies automate object expiration and deletion based on configurable criteria such as age, reducing manual data management overhead.
 
 ---
@@ -1497,12 +1497,12 @@ Lifecycle policies automate object expiration and deletion based on configurable
 ### Q115
 When a lifecycle policy is applied to an existing Nutanix Objects bucket, does it apply to objects already in the bucket?
 
-- A) No, it only applies to new objects
-- B) Yes, it is applied retroactively to existing objects
-- C) Only if the objects are less than 24 hours old
-- D) Only if versioning is disabled
+- A) Yes, it is applied retroactively to existing objects
+- B) Only if the objects are less than 24 hours old
+- C) Only if versioning is disabled
+- D) No, it only applies to new objects
 
-**Answer: B**
+**Answer: A**
 Lifecycle policies are applied retroactively to existing objects in the bucket, not just to newly created objects.
 
 ---
@@ -1523,12 +1523,12 @@ Lifecycle policies respect WORM retention periods — they cannot delete objects
 ### Q117
 What is the maximum size of a single object that can be uploaded to Nutanix Objects using multipart upload?
 
-- A) 1 TB
-- B) 5 TB
-- C) 10 TB
-- D) 50 TB
+- A) 50 TB
+- B) 1 TB
+- C) 5 TB
+- D) 10 TB
 
-**Answer: B**
+**Answer: C**
 The maximum object size with multipart upload is 5 TB, consistent with the S3 API specification.
 
 ---
@@ -1536,12 +1536,12 @@ The maximum object size with multipart upload is 5 TB, consistent with the S3 AP
 ### Q118
 What is the purpose of object tagging in Nutanix Objects?
 
-- A) To replicate objects to another cluster
-- B) To attach key-value metadata pairs to objects for categorization and policy application
-- C) To encrypt objects
-- D) To compress objects
+- A) To encrypt objects
+- B) To compress objects
+- C) To replicate objects to another cluster
+- D) To attach key-value metadata pairs to objects for categorization and policy application
 
-**Answer: B**
+**Answer: D**
 Object tagging allows attaching key-value metadata pairs to objects, which can be used for categorization, searching, and lifecycle policy targeting.
 
 ---
@@ -1549,12 +1549,12 @@ Object tagging allows attaching key-value metadata pairs to objects, which can b
 ### Q119
 When configuring Nutanix Volumes for external client access, which port does iSCSI use?
 
-- A) 443
-- B) 2049
-- C) 3260
-- D) 8443
+- A) 2049
+- B) 3260
+- C) 8443
+- D) 443
 
-**Answer: C**
+**Answer: B**
 iSCSI uses TCP port 3260 for target discovery and data transfer between initiators and Nutanix Volumes.
 
 ---
@@ -1575,12 +1575,12 @@ CHAP authentication can be configured on Volume Groups to authenticate iSCSI ini
 ### Q121
 How does an administrator restrict which iSCSI initiators can connect to a Nutanix Volume Group?
 
-- A) By configuring an IP whitelist on the CVM
-- B) By configuring an initiator IQN whitelist on the Volume Group
-- C) By configuring a VLAN ACL
-- D) By setting a Volume Group password
+- A) By setting a Volume Group password
+- B) By configuring an IP whitelist on the CVM
+- C) By configuring an initiator IQN whitelist on the Volume Group
+- D) By configuring a VLAN ACL
 
-**Answer: B**
+**Answer: C**
 An IQN (iSCSI Qualified Name) whitelist on the Volume Group restricts access to only authorized iSCSI initiators.
 
 ---
@@ -1588,12 +1588,12 @@ An IQN (iSCSI Qualified Name) whitelist on the Volume Group restricts access to 
 ### Q122
 A Windows server administrator needs to connect to a Nutanix Volume Group. Which built-in Windows tool is used?
 
-- A) Disk Management
-- B) iSCSI Initiator
-- C) Storage Spaces
-- D) Hyper-V Manager
+- A) Storage Spaces
+- B) Hyper-V Manager
+- C) Disk Management
+- D) iSCSI Initiator
 
-**Answer: B**
+**Answer: D**
 The Windows iSCSI Initiator tool is used to discover and connect to Nutanix Volume Group iSCSI targets.
 
 ---
@@ -1601,12 +1601,12 @@ The Windows iSCSI Initiator tool is used to discover and connect to Nutanix Volu
 ### Q123
 How does a Linux server connect to a Nutanix Volume Group?
 
-- A) By mounting an NFS export
-- B) By using the open-iscsi initiator (iscsiadm)
-- C) By using the SMB client
-- D) By installing the Nutanix Guest Agent
+- A) By using the open-iscsi initiator (iscsiadm)
+- B) By using the SMB client
+- C) By installing the Nutanix Guest Agent
+- D) By mounting an NFS export
 
-**Answer: B**
+**Answer: A**
 Linux servers use the open-iscsi initiator tools (iscsiadm) to discover and connect to Nutanix Volume Group iSCSI targets.
 
 ---
@@ -1627,12 +1627,12 @@ MPIO provides path redundancy and load balancing across multiple iSCSI paths, im
 ### Q125
 What is Nutanix Files Smart DR?
 
-- A) A backup solution that copies files to tape
-- B) Share-level replication to a remote Nutanix Files instance for disaster recovery
-- C) A deduplication technology for Files
-- D) An automated share deletion feature
+- A) An automated share deletion feature
+- B) A backup solution that copies files to tape
+- C) Share-level replication to a remote Nutanix Files instance for disaster recovery
+- D) A deduplication technology for Files
 
-**Answer: B**
+**Answer: C**
 Smart DR provides share-level replication to a remote Nutanix Files deployment, enabling disaster recovery with failover and failback capabilities.
 
 ---
@@ -1640,12 +1640,12 @@ Smart DR provides share-level replication to a remote Nutanix Files deployment, 
 ### Q126
 After a Smart DR failover activates the shares on the remote site, what additional step is required for client access?
 
-- A) Manually reconfigure all client drive mappings
-- B) Update DNS records to point to the remote file server
-- C) Reinstall the iSCSI initiator on all clients
-- D) Re-join the remote file server to Active Directory
+- A) Reinstall the iSCSI initiator on all clients
+- B) Re-join the remote file server to Active Directory
+- C) Manually reconfigure all client drive mappings
+- D) Update DNS records to point to the remote file server
 
-**Answer: B**
+**Answer: D**
 DNS records must be updated to point the file server name to the IP addresses of the remote site's FSVMs so clients can reconnect transparently.
 
 ---
@@ -1653,12 +1653,12 @@ DNS records must be updated to point the file server name to the IP addresses of
 ### Q127
 Which Nutanix Files data protection mechanism creates point-in-time copies of shares?
 
-- A) Erasure coding
-- B) Snapshots
-- C) Volume Groups
-- D) Lifecycle policies
+- A) Snapshots
+- B) Volume Groups
+- C) Lifecycle policies
+- D) Erasure coding
 
-**Answer: B**
+**Answer: A**
 Snapshots create point-in-time copies of shares that can be used for data protection, SSR, and recovery purposes.
 
 ---
@@ -1679,12 +1679,12 @@ Smart Tiering automatically moves cold (infrequently accessed) data from Nutanix
 ### Q129
 What happens when a user accesses a file that has been tiered to object storage by Smart Tiering?
 
-- A) The user receives an error message
-- B) The file is automatically recalled from object storage transparently
-- C) The user must manually retrieve the file from the object store
-- D) The user is redirected to the object store endpoint
+- A) The user is redirected to the object store endpoint
+- B) The user receives an error message
+- C) The file is automatically recalled from object storage transparently
+- D) The user must manually retrieve the file from the object store
 
-**Answer: B**
+**Answer: C**
 Smart Tiering automatically and transparently recalls files from object storage when a user accesses them, with no manual intervention required.
 
 ---
@@ -1692,12 +1692,12 @@ Smart Tiering automatically and transparently recalls files from object storage 
 ### Q130
 An administrator wants to configure an NFS export that only allows connections from the 10.0.1.0/24 subnet. Which setting should be configured?
 
-- A) Firewall rule in Prism Central
-- B) Client allowlist on the NFS export
-- C) Security group on the FSVM
-- D) Network policy in MSP
+- A) Security group on the FSVM
+- B) Network policy in MSP
+- C) Firewall rule in Prism Central
+- D) Client allowlist on the NFS export
 
-**Answer: B**
+**Answer: D**
 The client allowlist on the NFS export should be configured to permit only the 10.0.1.0/24 subnet, restricting access to authorized clients.
 
 ---
@@ -1705,12 +1705,12 @@ The client allowlist on the NFS export should be configured to permit only the 1
 ### Q131
 Which Nutanix Files quota type should be used to prevent a single user from consuming more than 5 GB of space?
 
-- A) Per-share soft quota
-- B) Per-share hard quota
-- C) Per-user hard quota
-- D) Per-user soft quota
+- A) Per-share hard quota
+- B) Per-user hard quota
+- C) Per-user soft quota
+- D) Per-share soft quota
 
-**Answer: C**
+**Answer: B**
 A per-user hard quota of 5 GB will enforce a strict limit, blocking writes for any individual user who reaches the 5 GB threshold.
 
 ---
@@ -1731,12 +1731,12 @@ With a soft quota, the write is allowed to proceed but a notification or alert i
 ### Q133
 In a distributed share, what determines which FSVM hosts a particular file?
 
-- A) The file extension
-- B) The Top-Level Directory (TLD) the file resides in, which is assigned to a specific FSVM
-- C) A random hash of the file name
-- D) The time of creation
+- A) The time of creation
+- B) The file extension
+- C) The Top-Level Directory (TLD) the file resides in, which is assigned to a specific FSVM
+- D) A random hash of the file name
 
-**Answer: B**
+**Answer: C**
 Files in a distributed share are located on the FSVM that owns the Top-Level Directory (TLD) where the file is stored.
 
 ---
@@ -1744,12 +1744,12 @@ Files in a distributed share are located on the FSVM that owns the Top-Level Dir
 ### Q134
 A company needs a Nutanix Files share where a team of 50 users will collaborate on a shared project folder. The data set is 200 GB. Which share type is MOST appropriate?
 
-- A) Distributed share
-- B) Standard share
-- C) Home share
-- D) WORM share
+- A) Home share
+- B) WORM share
+- C) Distributed share
+- D) Standard share
 
-**Answer: B**
+**Answer: D**
 A standard share is appropriate for a smaller collaborative dataset with moderate user count, as simplicity is preferred when throughput demands are modest.
 
 ---
@@ -1757,12 +1757,12 @@ A standard share is appropriate for a smaller collaborative dataset with moderat
 ### Q135
 Which protocol-specific permission model is used when an SMB-native multi-protocol share is accessed by an NFS client?
 
-- A) POSIX permissions derived from Windows NTFS ACLs via RFC 2307 mapping
-- B) NFS-native POSIX permissions independently
-- C) No permissions are enforced for NFS clients
-- D) LDAP group permissions only
+- A) NFS-native POSIX permissions independently
+- B) No permissions are enforced for NFS clients
+- C) LDAP group permissions only
+- D) POSIX permissions derived from Windows NTFS ACLs via RFC 2307 mapping
 
-**Answer: A**
+**Answer: D**
 In an SMB-native multi-protocol share, NFS users are mapped to Windows identities via RFC 2307, and permissions are derived from the NTFS ACL model.
 
 ---
@@ -1783,12 +1783,12 @@ krb5p (Kerberos with privacy) provides encryption of all NFS data in transit, in
 ### Q137
 What must be configured in Active Directory for multi-protocol share user mapping to work correctly?
 
-- A) Service Principal Names (SPNs)
-- B) RFC 2307 attributes (uidNumber, gidNumber) on user accounts
-- C) Group Policy Objects (GPOs)
-- D) Certificate templates
+- A) Certificate templates
+- B) Service Principal Names (SPNs)
+- C) RFC 2307 attributes (uidNumber, gidNumber) on user accounts
+- D) Group Policy Objects (GPOs)
 
-**Answer: B**
+**Answer: C**
 RFC 2307 attributes (uidNumber and gidNumber) must be populated on AD user accounts to enable correct UID/GID mapping for NFS access.
 
 ---
@@ -1796,12 +1796,12 @@ RFC 2307 attributes (uidNumber and gidNumber) must be populated on AD user accou
 ### Q138
 An administrator creates a bucket in Nutanix Objects. What is the FIRST step for enabling programmatic S3 access?
 
-- A) Configure a lifecycle policy
-- B) Generate an access key and secret key pair for the user
-- C) Enable WORM on the bucket
-- D) Create a bucket policy
+- A) Enable WORM on the bucket
+- B) Create a bucket policy
+- C) Configure a lifecycle policy
+- D) Generate an access key and secret key pair for the user
 
-**Answer: B**
+**Answer: D**
 The first step is generating access key and secret key credentials for the user, which are required for S3 API authentication.
 
 ---
@@ -1809,12 +1809,12 @@ The first step is generating access key and secret key credentials for the user,
 ### Q139
 Which JSON element in a Nutanix Objects bucket policy specifies who the policy applies to?
 
-- A) "Action"
-- B) "Resource"
-- C) "Principal"
-- D) "Effect"
+- A) "Resource"
+- B) "Principal"
+- C) "Effect"
+- D) "Action"
 
-**Answer: C**
+**Answer: B**
 The "Principal" element in the bucket policy JSON specifies which user(s) or account(s) the policy applies to.
 
 ---
@@ -1835,12 +1835,12 @@ WORM with a 7-year retention period ensures that objects are immutable and canno
 ### Q141
 An object is uploaded to a WORM-enabled bucket at 2:00 PM. At what time does the 24-hour grace period end?
 
-- A) 2:00 AM the next day
-- B) 2:00 PM the next day
-- C) Midnight the same day
-- D) 24 hours from the bucket creation time
+- A) 24 hours from the bucket creation time
+- B) 2:00 AM the next day
+- C) 2:00 PM the next day
+- D) Midnight the same day
 
-**Answer: B**
+**Answer: C**
 The 24-hour grace period is calculated from the object upload time, so it ends at 2:00 PM the next day.
 
 ---
@@ -1848,12 +1848,12 @@ The 24-hour grace period is calculated from the object upload time, so it ends a
 ### Q142
 After WORM retention expires on an object, what can an administrator do?
 
-- A) Nothing — WORM objects are permanent
-- B) Delete or modify the object normally
-- C) Only extend the retention further
-- D) Only add tags to the object
+- A) Only extend the retention further
+- B) Only add tags to the object
+- C) Nothing — WORM objects are permanent
+- D) Delete or modify the object normally
 
-**Answer: B**
+**Answer: D**
 Once the WORM retention period expires, the object can be deleted or modified like any normal object.
 
 ---
@@ -1861,12 +1861,12 @@ Once the WORM retention period expires, the object can be deleted or modified li
 ### Q143
 How does enabling versioning on a Nutanix Objects bucket affect storage consumption?
 
-- A) It has no effect on storage
-- B) Storage consumption increases because all versions of each object are retained
-- C) Storage consumption decreases due to deduplication
-- D) Only the latest two versions are stored
+- A) Storage consumption increases because all versions of each object are retained
+- B) Storage consumption decreases due to deduplication
+- C) Only the latest two versions are stored
+- D) It has no effect on storage
 
-**Answer: B**
+**Answer: A**
 Versioning retains all versions of every object, so storage consumption increases proportionally with the number of object versions.
 
 ---
@@ -1887,12 +1887,12 @@ WORM retention takes precedence over lifecycle policies, so the object remains p
 ### Q145
 Which statement about multipart upload in Nutanix Objects is correct?
 
-- A) Multipart upload is limited to 1 GB per object
-- B) Multipart upload allows uploading objects up to 5 TB by splitting them into parts
-- C) Multipart upload is only available for WORM buckets
-- D) Multipart upload requires versioning to be enabled
+- A) Multipart upload requires versioning to be enabled
+- B) Multipart upload is limited to 1 GB per object
+- C) Multipart upload allows uploading objects up to 5 TB by splitting them into parts
+- D) Multipart upload is only available for WORM buckets
 
-**Answer: B**
+**Answer: C**
 Multipart upload allows large objects (up to 5 TB) to be uploaded in manageable parts, which can be uploaded in parallel for better performance.
 
 ---
@@ -1900,12 +1900,12 @@ Multipart upload allows large objects (up to 5 TB) to be uploaded in manageable 
 ### Q146
 Which Nutanix Volumes feature allows multiple external hosts to access the same Volume Group simultaneously?
 
-- A) Shared Volume Group with multiple initiator IQNs whitelisted
-- B) SMB multi-channel
-- C) NFS multi-export
-- D) Clustered file system
+- A) NFS multi-export
+- B) Clustered file system
+- C) Shared Volume Group with multiple initiator IQNs whitelisted
+- D) SMB multi-channel
 
-**Answer: A**
+**Answer: C**
 A Volume Group can be shared among multiple hosts by whitelisting multiple initiator IQNs, enabling clustered applications like Oracle RAC.
 
 ---
@@ -1913,12 +1913,12 @@ A Volume Group can be shared among multiple hosts by whitelisting multiple initi
 ### Q147
 An administrator configures CHAP authentication on a Nutanix Volume Group. What must also be configured on the external server?
 
-- A) Kerberos keytab
-- B) The same CHAP credentials (username/secret) in the iSCSI initiator
-- C) SSL certificate
-- D) RADIUS server address
+- A) The same CHAP credentials (username/secret) in the iSCSI initiator
+- B) SSL certificate
+- C) RADIUS server address
+- D) Kerberos keytab
 
-**Answer: B**
+**Answer: A**
 The CHAP username and secret configured on the Volume Group must match the credentials configured on the external server's iSCSI initiator.
 
 ---
@@ -1939,12 +1939,12 @@ Smart DR operates at the share level, allowing administrators to selectively rep
 ### Q149
 During a Smart DR failover, which action must the administrator take to restore client connectivity?
 
-- A) Reconfigure all client IP addresses
-- B) Update DNS to point the file server name to the remote site's FSVM IPs
-- C) Create new shares on the remote site
-- D) Re-join the file server to AD
+- A) Re-join the file server to AD
+- B) Reconfigure all client IP addresses
+- C) Update DNS to point the file server name to the remote site's FSVM IPs
+- D) Create new shares on the remote site
 
-**Answer: B**
+**Answer: C**
 Updating DNS records is the critical step during failover to redirect client traffic from the failed primary site to the remote recovery site.
 
 ---
@@ -1952,12 +1952,12 @@ Updating DNS records is the critical step during failover to redirect client tra
 ### Q150
 What is the Smart DR failback process?
 
-- A) Data is manually copied back to the original site
-- B) Reverse replication synchronizes changes back to the original site, then shares are failed back
-- C) The original site is rebuilt from scratch
-- D) Failback is not supported
+- A) The original site is rebuilt from scratch
+- B) Failback is not supported
+- C) Data is manually copied back to the original site
+- D) Reverse replication synchronizes changes back to the original site, then shares are failed back
 
-**Answer: B**
+**Answer: D**
 Failback uses reverse replication to synchronize any changes made at the remote site back to the original site before restoring the primary.
 
 ---
@@ -1965,12 +1965,12 @@ Failback uses reverse replication to synchronize any changes made at the remote 
 ### Q151
 Protection Domains for Nutanix Files can include which data?
 
-- A) Only Volume Groups
-- B) File server shares and their associated metadata
-- C) Only S3 buckets
-- D) Only Prism Central configuration
+- A) File server shares and their associated metadata
+- B) Only S3 buckets
+- C) Only Prism Central configuration
+- D) Only Volume Groups
 
-**Answer: B**
+**Answer: A**
 Protection Domains for Files encompass the file server shares and their associated metadata for snapshot and replication purposes.
 
 ---
@@ -1991,12 +1991,12 @@ A distributed share with home share functionality provides per-user directories 
 ### Q153
 When ABE is enabled on an SMB share, what do users see when browsing the share?
 
-- A) All files and folders regardless of permissions
-- B) Only files and folders they have at least read access to
-- C) Only files they own
-- D) An empty folder structure until they search for specific files
+- A) An empty folder structure until they search for specific files
+- B) All files and folders regardless of permissions
+- C) Only files and folders they have at least read access to
+- D) Only files they own
 
-**Answer: B**
+**Answer: C**
 With ABE enabled, users only see files and folders for which they have at least read permission, hiding all other content from their view.
 
 ---
@@ -2004,12 +2004,12 @@ With ABE enabled, users only see files and folders for which they have at least 
 ### Q154
 An administrator needs to configure an NFS export with Kerberos authentication. Which NFS version is required?
 
-- A) NFSv2
-- B) NFSv3
-- C) NFSv4 or higher
-- D) Any NFS version supports Kerberos
+- A) NFSv4 or higher
+- B) Any NFS version supports Kerberos
+- C) NFSv2
+- D) NFSv3
 
-**Answer: C**
+**Answer: A**
 NFSv4 (or higher) is required for Kerberos authentication support on NFS exports.
 
 ---
@@ -2017,12 +2017,12 @@ NFSv4 (or higher) is required for Kerberos authentication support on NFS exports
 ### Q155
 A user accidentally overwrites an important file on an SMB share. SSR is enabled with daily snapshots. How can the user recover the file?
 
-- A) Contact the administrator to restore from a backup
-- B) Right-click the file > Properties > Previous Versions > Restore the desired version
-- C) Access the .snapshot directory from Windows Explorer
-- D) Use the Nutanix Objects S3 API to retrieve the file
+- A) Right-click the file > Properties > Previous Versions > Restore the desired version
+- B) Access the .snapshot directory from Windows Explorer
+- C) Use the Nutanix Objects S3 API to retrieve the file
+- D) Contact the administrator to restore from a backup
 
-**Answer: B**
+**Answer: A**
 Windows users can self-service restore by right-clicking the file, going to Properties > Previous Versions, and restoring the desired version from available snapshots.
 
 ---
@@ -2043,12 +2043,12 @@ Object tagging attaches key-value metadata pairs to objects for categorization a
 ### Q157
 When an NFS-native multi-protocol share is accessed by SMB clients, how are permissions handled?
 
-- A) SMB users are mapped to POSIX UIDs/GIDs via RFC 2307 and inherit POSIX permissions
-- B) SMB users have full admin access
-- C) SMB access is read-only
-- D) SMB access is denied entirely
+- A) SMB access is denied entirely
+- B) SMB users are mapped to POSIX UIDs/GIDs via RFC 2307 and inherit POSIX permissions
+- C) SMB users have full admin access
+- D) SMB access is read-only
 
-**Answer: A**
+**Answer: B**
 In an NFS-native multi-protocol share, SMB users are mapped to POSIX identities via RFC 2307, and POSIX permission semantics are applied.
 
 ---
@@ -2056,12 +2056,12 @@ In an NFS-native multi-protocol share, SMB users are mapped to POSIX identities 
 ### Q158
 An administrator enables Smart Tiering on a Nutanix Files share. Which type of data is automatically moved to object storage?
 
-- A) Data larger than 1 GB
-- B) Cold (infrequently accessed) data based on configurable policies
-- C) All data older than 30 days
-- D) Only compressed files
+- A) All data older than 30 days
+- B) Only compressed files
+- C) Data larger than 1 GB
+- D) Cold (infrequently accessed) data based on configurable policies
 
-**Answer: B**
+**Answer: D**
 Smart Tiering moves cold data — files that have not been accessed for a configurable period — to S3-compatible object storage.
 
 ---
@@ -2069,12 +2069,12 @@ Smart Tiering moves cold data — files that have not been accessed for a config
 ### Q159
 An external Linux server is configured with MPIO for Nutanix Volumes. What is the primary benefit during a CVM failure?
 
-- A) The volume is automatically snapshotted
-- B) I/O continues on the surviving path through another CVM without interruption
-- C) The volume is migrated to a different cluster
-- D) MPIO encrypts the iSCSI traffic
+- A) I/O continues on the surviving path through another CVM without interruption
+- B) The volume is migrated to a different cluster
+- C) MPIO encrypts the iSCSI traffic
+- D) The volume is automatically snapshotted
 
-**Answer: B**
+**Answer: A**
 MPIO provides path redundancy, so when one CVM fails, I/O automatically continues through the surviving path via another CVM.
 
 ---

@@ -6,10 +6,10 @@
 
 ### Q1
 An email tells the recipient their account will be closed in 24 hours unless they click a link and sign in immediately. The sender address is `support@account-verify-helpdesk.example`. Which signal most strongly indicates phishing?
-- A) The message mentions a 24-hour deadline
+- A) The message creates a 24-hour deadline for the recipient to respond
 - B) The sender domain does not match the organization's real domain
-- C) The message asks the user to sign in
-- D) The email arrived during business hours
+- C) The message asks the user to sign in through the supplied link
+- D) The email arrived during normal business hours on a weekday
 
 **Answer: B**
 Urgency and a sign-in request are common in phishing, but they also appear in legitimate mail. The strongest single signal is the sender domain: `account-verify-helpdesk.example` is not the organization's domain, so the message is not from who it claims to be. Deadline pressure (A) is a tactic that raises the stakes, not proof; many real services also ask users to sign in (C); timing (D) tells you nothing. When in doubt, inspect the sender and navigate to the site yourself rather than using the link.
@@ -30,10 +30,10 @@ IT staff do not need a user's password to apply a patch — that request is a so
 
 ### Q3
 A user receives an unexpected invoice attachment from a vendor they do recognize, but the message urges them to open it today to avoid a late fee, and the reply-to address differs from the usual vendor contact. Which response is safest?
-- A) Delete the message without telling anyone
-- B) Open the attachment quickly and verify the amount later
+- A) Delete the message immediately without reporting the unexpected attachment to anyone
+- B) Open the attachment quickly to inspect the invoice amount before deciding whether to verify it
 - C) Forward the email to the vendor's known contact and ask whether they sent it
-- D) Reply to the message and ask whether it is legitimate
+- D) Reply to the message at its reply-to address and ask the sender whether it is legitimate
 
 **Answer: C**
 The mix of urgency, an unexpected attachment, and a mismatched reply-to is a classic phishing shape. The safe test is out-of-band verification: contact the vendor using a known-good address or phone number you already had, not the one in the suspicious message. Opening the attachment (A) risks malware; replying to the message (C) talks to whoever wrote it, which proves nothing; deleting silently (D) removes evidence and leaves the next target uninformed.
@@ -70,10 +70,10 @@ A resolution note has to carry cause → change → verification. Without those,
 
 ### Q6
 A workstation could not resolve names. The technician found the DNS server field pointed at a decommissioned address, changed it to the correct server, and confirmed the user can open the intranet site by name again. Which resolution note is most useful?
-- A) "Network OK now."
-- B) "Changed DNS, user happy."
+- A) "Status: intranet access appears to be working again. The workstation was tested briefly after the desk visit and the user was told to report any further problems."
+- B) "Action: replaced the decommissioned DNS server address with 10.0.0.10 after checking the adapter settings. The ticket notes that the user was satisfied when the change was complete."
 - C) "Cause: DNS server field set to decommissioned 10.0.0.9. Change: set DNS to 10.0.0.10. Verified: user opened intranet by name; nslookup resolves."
-- D) "Ticket closed per user request."
+- D) "Closure: network ticket closed at the user's request after a short discussion. No configuration changes or verification results were added to the ticket history."
 
 **Answer: C**
 Option C names the symptom layer (DNS), the actual cause, the exact change, and a verification the user cares about plus a measurable test. That is the note a stranger can act on. "Network OK now" (A) hides every useful fact; "Changed DNS, user happy" (B) records an action without cause or proof; closing per user request (D) may end the SLA clock but leaves no technical record.
@@ -94,10 +94,10 @@ Change control at this scale is: write down what you will do before you do it. T
 
 ### Q8
 A user keeps their only backup on an external drive that stays plugged into the same desk as the workstation. What is the biggest risk of this setup?
-- A) The drive is too slow for large files
+- A) The external drive's sustained transfer speed may be too slow for large backup files
 - B) A single local copy can be lost to theft, fire, or ransomware along with the workstation
-- C) External drives cannot store more than one backup generation
-- D) The user has to remember to plug the drive in
+- C) An external drive cannot retain more than one backup generation at the same time
+- D) The user has to remember to plug in the external drive before each scheduled backup
 
 **Answer: B**
 This is one extra copy, on one medium, at one location — the opposite of the 3-2-1 idea. Ransomware that encrypts the workstation often reaches attached drives; theft or fire takes both copies at once. Speed (A) is a performance concern, not a backup-design failure; drives can hold many generations (C); remembering to plug in (D) is a reliability annoyance, not the structural risk of having no separated copy.

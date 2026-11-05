@@ -254,7 +254,7 @@ How is data protected at rest in an Azure storage account, and what does infrast
 - A) Platform-managed keys encrypt the data at rest, and infrastructure encryption adds a second, independent encryption layer
 - B) Nothing is encrypted until the account owner enables encryption on each container
 - C) Only data in transit is encrypted, and infrastructure encryption adds encryption at rest
-- D) A customer-managed key is mandatory, and infrastructure encryption rotates that key on a schedule
+- D) A customer-managed key is mandatory, and infrastructure encryption automatically rotates that key on a fixed annual schedule
 
 **Answer: A**
 Storage data is always encrypted at rest with platform-managed keys and this cannot be switched off, while infrastructure encryption applies a second layer of encryption at the infrastructure level. Encryption is not opt-in per container, data at rest is never left unencrypted by default, and customer-managed keys are an option for controlling the key rather than a requirement.
@@ -499,7 +499,7 @@ An administrator attaches a Standard SKU public IP address to a virtual machine,
 
 - A) Standard SKU public IP addresses do not support HTTPS traffic
 - B) The public IP address must be dynamic rather than static
-- C) A load balancer must be placed in front of the virtual machine
+- C) A public load balancer must be placed in front of the virtual machine before it can accept inbound HTTPS traffic
 - D) Standard SKU public IP addresses are secure by default and need an explicit allow rule
 
 **Answer: D**

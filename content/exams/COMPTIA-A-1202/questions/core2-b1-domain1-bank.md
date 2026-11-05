@@ -114,10 +114,10 @@ Disk Management initializes a new disk, creates a volume on it, formats that vol
 
 ### Q18
 A laptop has an address in the correct subnet but cannot reach anything outside it, and the technician suspects the lease is stale. Which command requests a new address from the DHCP server?
-- A) ipconfig /flushdns
+- A) ipconfig /flushdns followed by ipconfig /displaydns
 - B) ipconfig /release followed by ipconfig /renew
-- C) netstat -an
-- D) nslookup
+- C) netstat -an followed by ipconfig /all
+- D) nslookup followed by ipconfig /registerdns
 
 **Answer: B**
 `ipconfig /release` gives up the current lease and `ipconfig /renew` requests a new one, which is the pair for a stale or wrong DHCP lease. `/flushdns` (A) clears the local name cache and does not touch addressing. `netstat -an` (C) lists current connections and listening ports. `nslookup` (D) queries DNS records and cannot change an address.

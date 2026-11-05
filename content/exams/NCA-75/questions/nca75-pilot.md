@@ -145,9 +145,9 @@ The console delivers the machine's screen and keyboard over the network independ
 
 ### Q12
 An administrator takes a snapshot of a virtual machine before a risky change. What does that snapshot protect against?
-- A) The loss of the entire cluster
-- B) A disk failure on another node
-- C) The loss of the cluster's other data
+- A) The loss of the entire cluster and every snapshot stored on that cluster
+- B) A disk failure on another node that already holds redundant copies of the data
+- C) A mistaken deletion of an unrelated virtual machine elsewhere in the cluster
 - D) A mistake made during the change, for as long as the snapshot is kept
 
 **Answer: D**
@@ -169,9 +169,9 @@ Live migration copies the running machine's memory to another node and switches 
 
 ### Q14
 What is the purpose of a VLAN?
-- A) To encrypt traffic between virtual machines
-- B) To assign IP addresses automatically
-- C) To increase the bandwidth of a network link
+- A) To encrypt traffic between virtual machines on the same physical network
+- B) To assign IP addresses automatically to every machine connected to the network
+- C) To combine several physical links into one higher-bandwidth logical connection
 - D) To carry several logically separate networks over one physical network
 
 **Answer: D**
@@ -193,9 +193,9 @@ A machine attached to the wrong VLAN is up and running but sits on the wrong seg
 
 ### Q16
 What is the practical difference between a managed and an unmanaged virtual network?
-- A) Managed networks are faster than unmanaged ones
-- B) Unmanaged networks cannot carry VLAN tags
-- C) Managed networks cannot be used by virtual machines
+- A) Managed networks always provide higher throughput and lower latency than unmanaged networks using the same physical adapters
+- B) Unmanaged networks cannot carry VLAN tags between the physical switches and the virtual machines
+- C) Managed networks are reserved for controller traffic and cannot be assigned to virtual machines
 - D) A managed network is defined on the cluster; an unmanaged one is defined on the physical network and repeated on the cluster
 
 **Answer: D**
@@ -230,9 +230,9 @@ RF2 keeps two copies of every piece of data, so roughly half the raw capacity is
 ### Q19
 A cluster was expanded from four nodes to six last quarter. This week several management features stopped working. What is the most useful first thing to check?
 - A) Whether the two new nodes are covered by the licence, and whether the current tier includes those features
-- B) Whether the new nodes have failed
-- C) Whether the virtual machines need more memory
-- D) Whether the cluster should be rebuilt at RF3
+- B) Whether either new node has failed or lost its network connection to the cluster
+- C) Whether virtual machines need more memory now that the cluster has additional capacity
+- D) Whether expanding the cluster requires rebuilding its storage at replication factor 3
 
 **Answer: A**
 The change was to capacity and the symptom is about capability, so both halves need checking: the licence must cover the added hardware, and the tier must include the features that stopped working. Licensing is managed in Prism, which is where both answers live.
@@ -280,9 +280,9 @@ RF2 keeps two copies on two different nodes, so losing one node leaves a complet
 ### Q23
 What does block awareness add to node awareness?
 - A) It places copies on nodes in different chassis, so a whole block can be lost
-- B) It places copies on different disks within one node
-- C) It increases the replication factor automatically
-- D) It removes the need for a Witness in a two-node cluster
+- B) It places redundant copies on separate disks within the same node
+- C) It raises the replication factor automatically when a second chassis is detected
+- D) It removes the need for an external Witness in every two-node cluster
 
 **Answer: A**
 Node awareness spreads copies across nodes; block awareness spreads them across chassis as well, so the failure of an entire block — power loss or removal for service — is survivable. It does not change replication factor or provide arbitration.
@@ -315,9 +315,9 @@ Planned maintenance evacuates first so the node's data and workloads move elsewh
 
 ### Q26
 A disk in the cluster fails. What is the administrator's first action?
-- A) Immediately power off the node to protect the remaining disks
-- B) Manually copy the data off the failed disk
-- C) Rebuild the cluster from a backup
+- A) Immediately power off the node to protect all remaining disks from further damage
+- B) Manually copy the data from the failed disk before the cluster begins rebuilding it
+- C) Rebuild the entire cluster from the latest backup before returning the node to service
 - D) Confirm the failure is genuine, since the data has already been rebuilt from its other copies
 
 **Answer: D**
@@ -339,10 +339,10 @@ Evacuation moves the node's data and workloads elsewhere so that no data exists 
 
 ### Q28
 Which LCM step should come before applying any update?
-- A) Applying the update to one node to see what happens
+- A) Apply the update to one production node first and observe any failures
 - B) Checking compatibility with this specific environment and running pre-checks
-- C) Notifying users that the cluster will be unavailable
-- D) Taking a snapshot of every virtual machine
+- C) Notify users that every cluster service will be unavailable during the update
+- D) Take and retain a snapshot of every virtual machine on the cluster
 
 **Answer: B**
 LCM's value is in inventory, compatibility checking, and pre-checks before the one-click apply. Updating one node speculatively risks an unsupported combination, and a rolling update does not require cluster-wide unavailability.
@@ -351,10 +351,10 @@ LCM's value is in inventory, compatibility checking, and pre-checks before the o
 
 ### Q29
 An LCM pre-check fails before a planned upgrade. What is the correct response?
-- A) Override the pre-check and proceed
+- A) Override the failed pre-check and continue the upgrade on every affected node
 - B) Address the condition the pre-check identified, then return to the upgrade
-- C) Skip that node and upgrade the rest
-- D) Reboot the cluster and try again
+- C) Exclude the affected node and upgrade the remaining nodes instead
+- D) Reboot every node in the cluster and run the same upgrade again
 
 **Answer: B**
 A failed pre-check is the tool reporting that the environment is not in a fit state to be updated — the same discipline as confirming cluster health before hardware maintenance. Overriding it, skipping nodes, or rebooting does not fix the underlying condition.
@@ -364,9 +364,9 @@ A failed pre-check is the tool reporting that the environment is not in a fit st
 ### Q30
 A cluster at a secure site with no internet access needs a software update. What must be arranged?
 - A) The update media must be brought in through a controlled channel before the maintenance window
-- B) Nothing — LCM downloads updates automatically in all environments
-- C) The cluster must be moved to a site with internet access
-- D) Pulse must be enabled first
+- B) Nothing — LCM can download updates automatically even when the site has no internet access
+- C) Disconnect the cluster from its workloads and move it temporarily to a site with internet access
+- D) Enable Pulse so it can transfer the required update media to the cluster automatically
 
 **Answer: A**
 A dark site cannot fetch updates directly, so the media has to be transferred in through whatever controlled channel exists — and that is planned ahead of the window rather than discovered during it. Enabling Pulse is telemetry, not update delivery.
@@ -389,10 +389,10 @@ NCC runs many small checks and produces a report of findings rather than one ver
 
 ### Q32
 A health check on a working cluster reports that a component is degraded. The cluster is performing normally. What does this mean?
-- A) The report is a false positive and can be ignored
+- A) That the report is a false positive because workload performance is still normal
 - B) Something has failed and the cluster is compensating for it, so there is no margin
-- C) The cluster must be shut down immediately
-- D) The virtual machines on that component have stopped
+- C) That the cluster should be shut down immediately before the component fails completely
+- D) That every virtual machine on that component has already stopped responding
 
 **Answer: B**
 A degraded finding means a component has failed and the cluster is carrying on without it — the highest-value finding precisely because performance looks normal while the margin for a further failure is gone. It is not a false positive, it does not require an immediate shutdown, and the workloads are still running.
@@ -413,10 +413,10 @@ Running maintenance on an already-degraded cluster leaves no margin for anything
 
 ### Q34
 What is the difference between an event and an alert?
-- A) An event is more serious than an alert
-- B) Alerts are stored and events are not
+- A) An event is always more serious than an alert and needs a faster response
+- B) Alerts are stored in cluster history, while events are discarded immediately
 - C) An event records that something happened; an alert is a raised condition needing attention
-- D) Events only come from hardware and alerts only from software
+- D) Events come only from hardware faults; alerts come only from detected software faults
 
 **Answer: C**
 Events are the cluster's history of what happened, most of them routine; alerts are generated from events and represent a condition that needs attention, with a severity. Alerts are not inherently more serious, and both are recorded.
@@ -425,10 +425,10 @@ Events are the cluster's history of what happened, most of them routine; alerts 
 
 ### Q35
 An administrator acknowledges an alert. What has been accomplished?
-- A) The underlying condition has been resolved
+- A) The underlying condition has been resolved and will no longer affect cluster health
 - B) The alert has been recorded as seen by a person, and the condition may still be active
-- C) The alert has been deleted
-- D) The cluster has been told to ignore that condition in future
+- C) The alert has been deleted from the cluster's active and historical views
+- D) The cluster has been told to suppress that condition whenever it occurs again
 
 **Answer: B**
 Acknowledging is a statement about attention, not about state: it records that someone is aware. If the condition is still true the alert remains true, which is why acknowledged-but-unresolved alerts are worth reviewing.
@@ -449,10 +449,10 @@ A cluster of alerts appearing together is usually one root cause with several sy
 
 ### Q37
 A problem began at 14:00 yesterday. Which log collection is most useful for a support case?
-- A) The full cluster collection for the last hour
+- A) The full cluster collection for the last hour, regardless of when the problem began
 - B) A collection covering the component implicated, over a window that includes 14:00 yesterday
-- C) A collection of every component over the last month
-- D) No collection — the description alone is enough
+- C) A collection of every available component over the last month without further scoping
+- D) No collection — the problem description and timestamps alone are enough for diagnosis
 
 **Answer: B**
 The window must include when the problem started, and scoping to the implicated component produces something the vendor can work through. A one-hour window misses the start, a month-wide collection is slow and unfocused, and a description without evidence leaves the case guessing.
@@ -461,10 +461,10 @@ The window must include when the problem started, and scoping to the implicated 
 
 ### Q38
 What is Pulse?
-- A) A tool an administrator runs to collect logs for a support case
+- A) A tool an administrator runs manually to gather logs for an individual support case
 - B) A continuous telemetry service that periodically sends diagnostic and health information to the vendor
-- C) The alerting engine inside Prism
-- D) A health-check command
+- C) The alerting engine inside Prism that evaluates every event and raises notifications
+- D) A health-check command that an administrator runs to test cluster components on demand
 
 **Answer: B**
 Pulse is automatic and continuous outbound telemetry, which is why it supports proactive support. Collecting logs for a case is Collector's job, alerting happens in Prism, and health checks are run by Nutanix Cluster Check.
@@ -485,10 +485,10 @@ A single affected workload alongside normal aggregate utilisation points at cont
 
 ### Q40
 Storage is reported at 70% full. Why is the trend more useful than the number alone?
-- A) Because 70% is always a critical threshold
+- A) Because 70% is always a critical threshold that requires immediate capacity expansion
 - B) Because a level that is climbing tells you when the limit will be reached, which the number alone does not
-- C) Because the percentage is calculated incorrectly
-- D) Because the trend determines the replication factor
+- C) Because the current percentage is calculated incorrectly until several measurements exist
+- D) Because the observed trend automatically determines the cluster's replication factor for new data
 
 **Answer: B**
 The level says where you are; the trend says how long you have. Storage at 70% and stable is comfortable, while storage at 70% and climbing 2% a week is a plan with a deadline — the same number, two different situations. The percentage is not miscalculated, and it does not set the replication factor.

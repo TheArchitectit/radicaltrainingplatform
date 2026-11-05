@@ -6,7 +6,7 @@
   "disclaimer": "This is independent study material. It is not official training and is not endorsed or approved by CompTIA, Nutanix, or any other certification body.",
   "compiled": {
     "path": "RadicalTrainingPlatform.Web/js/study-content.js",
-    "sha256": "daef1d7ee0e66ae6501df2ad9dbdc8f27d041d5d2b5f3629c606b1aeafdd7344"
+    "sha256": "462209573073302ff487765482c268bf4fe4e5346eb8d0556f71829a725d2726"
   },
   "exams": {
     "COMPTIA-A-1201": {
@@ -45,7 +45,7 @@
         {
           "bank": "core1-demo-cut.md",
           "path": "content/exams/COMPTIA-A-1201/questions/core1-demo-cut.md",
-          "sha256": "9df291e58160afcb06343b74db0d05a4c13661f64ba5e8533c15e3ade39fecaf"
+          "sha256": "3dbbe0089049921cb35d50f7c17579a975f30220fb046f8cef765e5be7c8de36"
         },
         {
           "bank": "core1-domain1-bank.md",
@@ -105,12 +105,12 @@
         {
           "bank": "core2-demo-cut.md",
           "path": "content/exams/COMPTIA-A-1202/questions/core2-demo-cut.md",
-          "sha256": "cc808f245fa9f1f8fa90d28cb9e643097bf40a8aa71fefaceaf72434064499e9"
+          "sha256": "0d826306569a463f32dc8bde3cac21d980168892430098411ee9c4b90c118618"
         },
         {
           "bank": "core2-b1-domain1-bank.md",
           "path": "content/exams/COMPTIA-A-1202/questions/core2-b1-domain1-bank.md",
-          "sha256": "bcd28c200a2cc67b508917747a37175dcd8860d5a1f31f8e3ac134a621a18368"
+          "sha256": "c5b9da811a40f9d9c77b39684052a81787fcf35feebdc6dfcf55c025db65405d"
         },
         {
           "bank": "core2-b2-domain2-bank.md",
@@ -170,17 +170,17 @@
         {
           "bank": "net009-n2-demo-cut.md",
           "path": "content/exams/COMPTIA-NET-009/questions/net009-n2-demo-cut.md",
-          "sha256": "21ac9d25958aacc213728b791d7fcffd090b9529d903cd79df969543debf4c75"
+          "sha256": "f566819a09cd90db2b97e339f75ad87798f2613cc101e95da801692a0dd064b9"
         },
         {
           "bank": "net009-n3-demo-cut.md",
           "path": "content/exams/COMPTIA-NET-009/questions/net009-n3-demo-cut.md",
-          "sha256": "2b036cd7ef7c0d4fdefab4788462ca2d69fa23be1f5d4fc05f89f52b03ccfa07"
+          "sha256": "0718ccb5a70aa581ddc61187dab8ce2bc8096a25c5a5707539a258c2ffa4dd2e"
         },
         {
           "bank": "net009-n4-demo-cut.md",
           "path": "content/exams/COMPTIA-NET-009/questions/net009-n4-demo-cut.md",
-          "sha256": "2ce32f0d7b47d2696f86a6380048afc7cb6fa23dd840e7f75b4942aee09eefe3"
+          "sha256": "c71cbba98725fdc38c55ed18de6c52e592708eba1d9d24279e5be70dd3ae4712"
         },
         {
           "bank": "net009-n5-demo-cut.md",
@@ -295,7 +295,7 @@
         {
           "bank": "nca75-pilot.md",
           "path": "content/exams/NCA-75/questions/nca75-pilot.md",
-          "sha256": "02899ba6f508af715989b088bb90476caf5645d022158e5426cbe22d7dfdf216"
+          "sha256": "c985be781c3c7920da9b6b9f2c82330438d60618cf19b63e5b48bb53f8687dd8"
         }
       ]
     },
@@ -385,7 +385,7 @@
         {
           "bank": "az104-beginner.md",
           "path": "content/exams/AZ-104/questions/az104-beginner.md",
-          "sha256": "111042df3e27c39f4a63e59f05083d0f8fac7d58eb5b75c2ea95957b93ae431b"
+          "sha256": "06d74d7bb44b6914b91ae11f62124369ba8bd512ddaa6bd5a2cd07d047b6629b"
         }
       ]
     },
@@ -470,7 +470,7 @@
         {
           "bank": "aws-saa-beginner.md",
           "path": "content/exams/AWS-SAA/questions/aws-saa-beginner.md",
-          "sha256": "ed2120a7ea79894fbf35487339f3402bd137b11763d80059b6f3433147688e93"
+          "sha256": "724febcec9f0477a947a856c1ef7c69a7b54aca7874cb52dc570dd6734dff686"
         }
       ]
     }

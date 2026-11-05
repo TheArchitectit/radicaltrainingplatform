@@ -11,60 +11,60 @@
 
 ### Q1
 When deploying NC2 on AWS, you need to ensure compute instances are placed in an VPC with a minimum subnet size. What is the minimum subnet size (CIDR notation) required for an NC2 deployment?
-- A) /28
-- B) /26
-- C) /25
-- D) /23
+- A) /23
+- B) /28
+- C) /26
+- D) /25
 
-**Answer: C**
+**Answer: D**
 NC2 on AWS requires a VPC /25 subnet minimum to accommodate the cluster nodes, Flow Gateway instances, and management VMs. This provides 32 usable IP addresses, which is the minimum for a 3-node cluster with additional infrastructure.
 
 ---
 
 ### Q2
 You are designing an NC2 on AWS cluster with i3.metal instances. Where does Nutanix expect to store cluster metadata backups in AWS?
-- A) EBS volumes attached to each node
-- B) AWS S3 only
-- C) EFS shared storage
-- D) DynamoDB
+- A) EFS shared storage
+- B) DynamoDB
+- C) EBS volumes attached to each node
+- D) AWS S3 only
 
-**Answer: B**
+**Answer: D**
 NC2 on AWS uses local NVMe for all cluster data, while S3 is used exclusively for metadata backup only. This prevents any dependency on EBS performance and keeps data local for optimal performance.
 
 ---
 
 ### Q3
 An NC2 cluster on AWS requires Direct Connect connectivity. What is the primary purpose of using AWS Direct Connect instead of public internet connectivity?
-- A) To reduce AWS data transfer costs
-- B) To provide a dedicated, low-latency network connection between on-premises and AWS
-- C) To enable automatic failover between regions
-- D) To bypass IAM permission requirements
+- A) To enable automatic failover between regions
+- B) To bypass IAM permission requirements
+- C) To reduce AWS data transfer costs
+- D) To provide a dedicated, low-latency network connection between on-premises and AWS
 
-**Answer: B**
+**Answer: D**
 AWS Direct Connect provides a dedicated, private network connection from on-premises to AWS with consistent network performance and lower latency compared to internet-based connections, which is critical for hybrid cloud deployments and Leap disaster recovery.
 
 ---
 
 ### Q4
 When configuring security groups for NC2 on AWS, which three ports must be explicitly allowed for proper cluster functionality?
-- A) 9440, 80, 443
-- B) 9440, 2049, 3260
-- C) 8080, 3260, 443
-- D) 22, 9440, 443
+- A) 9440, 2049, 3260
+- B) 8080, 3260, 443
+- C) 22, 9440, 443
+- D) 9440, 80, 443
 
-**Answer: B**
+**Answer: A**
 NC2 on AWS security groups must allow: 9440 (Prism Central/Element UI), 2049 (NFS), and 3260 (iSCSI). These ports enable management, storage connectivity, and inter-node communication.
 
 ---
 
 ### Q5
 You are deploying NC2 on Azure using BareMetal Infrastructure. What is the purpose of Flow Gateway VMs in the Azure deployment?
-- A) To provide backup and disaster recovery capabilities
-- B) To bridge AHV overlay network connectivity to the Azure VNet underlay
-- C) To reduce storage costs by tiering data to Azure blob storage
-- D) To provide encryption key management
+- A) To bridge AHV overlay network connectivity to the Azure VNet underlay
+- B) To reduce storage costs by tiering data to Azure blob storage
+- C) To provide encryption key management
+- D) To provide backup and disaster recovery capabilities
 
-**Answer: B**
+**Answer: A**
 Flow Gateway VMs on Azure BareMetal bridge the AHV overlay network to the Azure VNet underlay, enabling connectivity between cluster VMs and the Azure virtual network. They work with Azure Route Server and BGP for dynamic routing.
 
 ---
@@ -95,60 +95,60 @@ NC2 on Azure uses BGP (Border Gateway Protocol) with Azure Route Server to enabl
 
 ### Q8
 You are configuring Flow Gateway VMs for an NC2 Azure deployment. What is the maximum number of Flow Gateway VMs you can configure for ECMP (Equal Cost Multi-Path) routing?
-- A) 2
-- B) 3
-- C) 4
-- D) 8
+- A) 8
+- B) 2
+- C) 3
+- D) 4
 
-**Answer: C**
+**Answer: D**
 ECMP on NC2 Azure supports a maximum of 4 Flow Gateway VMs for load-balanced routing across multiple gateways, improving redundancy and network throughput.
 
 ---
 
 ### Q9
 After initial NC2 cluster deployment, you need to access the management console. Which Nutanix portal should you use to manage your NC2 cluster?
-- A) Nutanix.cloud web portal
-- B) my.nutanix.com console
-- C) Prism Element
-- D) AWS CloudFormation dashboard
+- A) AWS CloudFormation dashboard
+- B) Nutanix.cloud web portal
+- C) my.nutanix.com console
+- D) Prism Element
 
-**Answer: B**
+**Answer: C**
 my.nutanix.com is the unified portal for managing NC2 clusters across AWS and Azure. This single-pane-of-glass console provides access to Prism Central, licensing, and cluster management.
 
 ---
 
 ### Q10
 What is the minimum number of nodes required for an NC2 cluster deployment?
-- A) 1 node
-- B) 2 nodes
-- C) 3 nodes
-- D) 5 nodes
+- A) 3 nodes
+- B) 5 nodes
+- C) 1 node
+- D) 2 nodes
 
-**Answer: C**
+**Answer: A**
 NC2 requires a minimum of 3 nodes for production deployment. This ensures quorum for the metadata service and provides redundancy for the Nutanix cluster.
 
 ---
 
 ### Q11
 You are deploying an NC2 cluster. The deployment wizard asks about the operating system and hypervisor stack. What is included in the full stack deployed with NC2?
-- A) AOS only
-- B) AHV only
-- C) AOS + AHV
-- D) AOS + KVM
+- A) AOS + AHV
+- B) AOS + KVM
+- C) AOS only
+- D) AHV only
 
-**Answer: C**
+**Answer: A**
 NC2 deployments include the full AOS (Acropolis Operating System) and AHV (Acropolis Hypervisor) stack pre-installed on cloud instances. Foundation is not needed because the cloud instances come with the full stack pre-loaded.
 
 ---
 
 ### Q12
 During NC2 deployment, the wizard asks whether you need Foundation. What is the correct approach?
-- A) Foundation must be used for cloud deployments
-- B) Foundation is optional but recommended
-- C) Foundation is NOT needed; cloud instances come pre-configured
-- D) Foundation must be run in a container on the first node
+- A) Foundation is optional but recommended
+- B) Foundation is NOT needed; cloud instances come pre-configured
+- C) Foundation must be run in a container on the first node
+- D) Foundation must be used for cloud deployments
 
-**Answer: C**
+**Answer: B**
 Foundation is not used for NC2 deployments because the cloud instances come pre-configured with AOS and AHV. The deployment process is simplified and Foundation is unnecessary.
 
 ---
@@ -191,72 +191,72 @@ NC2 on AWS requires IAM roles that grant permissions for EC2 instance management
 
 ### Q16
 You are planning an NC2 deployment on AWS and need to determine the AZ (Availability Zone) requirement. What is the critical requirement regarding Availability Zones?
-- A) All NC2 nodes must be in the same AZ
-- B) NC2 nodes can be distributed across multiple AZs
-- C) AZ placement doesn't matter for NC2
-- D) Each node must be in a different AZ
+- A) Each node must be in a different AZ
+- B) All NC2 nodes must be in the same AZ
+- C) NC2 nodes can be distributed across multiple AZs
+- D) AZ placement doesn't matter for NC2
 
-**Answer: A**
+**Answer: B**
 NC2 on AWS requires all cluster nodes to be in the same Availability Zone. This ensures low-latency communication between nodes and is a strict architectural requirement.
 
 ---
 
 ### Q17
 Your organization is considering NC2 on AWS with i3.metal instances. What storage is used for cluster data?
-- A) EBS volumes only
-- B) Local NVMe storage only
-- C) Mix of local NVMe and EBS
-- D) AWS Glacier for long-term storage
+- A) AWS Glacier for long-term storage
+- B) EBS volumes only
+- C) Local NVMe storage only
+- D) Mix of local NVMe and EBS
 
-**Answer: B**
+**Answer: C**
 NC2 on AWS uses local NVMe storage (which comes with i3.metal instances) exclusively for cluster data. EBS is not used for cluster data—only S3 is used for metadata backups.
 
 ---
 
 ### Q18
 You need to set up VPC peering between your on-premises network and an NC2 cluster on AWS. What networking component facilitates this connectivity?
-- A) Direct Connect only
-- B) Transit Gateway with Direct Connect
-- C) VPN gateway only
-- D) NAT Gateway
+- A) VPN gateway only
+- B) NAT Gateway
+- C) Direct Connect only
+- D) Transit Gateway with Direct Connect
 
-**Answer: B**
+**Answer: D**
 AWS Transit Gateway combined with Direct Connect enables secure, scalable connectivity between on-premises networks and NC2 clusters. Transit Gateway acts as a central hub for network routing.
 
 ---
 
 ### Q19
 An NC2 cluster requires split-horizon DNS configuration. What is the purpose of split-horizon DNS?
-- A) To reduce DNS query latency
-- B) To provide different DNS responses based on where the query originates (internal vs. external)
-- C) To enable DNS failover between regions
-- D) To encrypt DNS traffic
+- A) To enable DNS failover between regions
+- B) To encrypt DNS traffic
+- C) To reduce DNS query latency
+- D) To provide different DNS responses based on where the query originates (internal vs. external)
 
-**Answer: B**
+**Answer: D**
 Split-horizon DNS returns different IP addresses based on the requestor's location—internal IP addresses for on-premises clients and public IPs for cloud clients. This ensures optimal routing and connectivity.
 
 ---
 
 ### Q20
 You are designing a VPN failover solution for NC2 on AWS. Which networking configuration allows automatic failover for VPN connections?
-- A) Single VPN connection to NC2
-- B) Dual VPN connections with failover policy
-- C) VPN with Load Balancer only
-- D) BGP routing with redundant connections
+- A) Dual VPN connections with failover policy
+- B) VPN with Load Balancer only
+- C) BGP routing with redundant connections
+- D) Single VPN connection to NC2
 
-**Answer: D**
+**Answer: C**
 BGP (Border Gateway Protocol) with redundant VPN connections enables automatic failover. BGP dynamically updates routing tables when a connection fails, ensuring uninterrupted connectivity.
 
 ---
 
 ### Q21
 You are using Nutanix Leap to replicate a VM from on-premises Nutanix to NC2 on AWS. What is the primary advantage of using Leap for this migration?
-- A) Leap requires zero data transfer
-- B) Leap enables continuous replication and planned/unplanned failover capabilities
-- C) Leap only works for VM cloning
-- D) Leap requires manual failover only
+- A) Leap enables continuous replication and planned/unplanned failover capabilities
+- B) Leap only works for VM cloning
+- C) Leap requires manual failover only
+- D) Leap requires zero data transfer
 
-**Answer: B**
+**Answer: A**
 Leap provides continuous replication between on-premises and NC2, supporting both planned failover (scheduled migrations) and unplanned failover (disaster recovery). It enables bidirectional replication for flexibility.
 
 ---
@@ -287,72 +287,72 @@ Reverse replication enables bidirectional data sync, allowing you to fail back t
 
 ### Q24
 You are setting up Prism Central to manage both on-premises Nutanix clusters and NC2 clusters. What is the primary benefit of this unified management approach?
-- A) Reduced licensing costs
-- B) Single dashboard for monitoring, alerts, and policy enforcement across environments
-- C) Automatic replication between on-premises and NC2
-- D) Elimination of security group requirements
+- A) Elimination of security group requirements
+- B) Reduced licensing costs
+- C) Single dashboard for monitoring, alerts, and policy enforcement across environments
+- D) Automatic replication between on-premises and NC2
 
-**Answer: B**
+**Answer: C**
 Prism Central provides a unified dashboard for managing multiple Nutanix environments including on-premises and NC2 clusters. This enables consistent policy enforcement, monitoring, and operational oversight.
 
 ---
 
 ### Q25
 You need to categorize VMs across both on-premises and NC2 environments for resource allocation and billing. How does Nutanix support this?
-- A) Categories only work on-premises
-- B) Separate category systems for each environment
-- C) Categories work consistently across on-premises and NC2 environments in Prism Central
-- D) Categories must be manually synced
+- A) Categories must be manually synced
+- B) Categories only work on-premises
+- C) Separate category systems for each environment
+- D) Categories work consistently across on-premises and NC2 environments in Prism Central
 
-**Answer: C**
+**Answer: D**
 Categories in Prism Central work across both on-premises and NC2 environments, enabling consistent resource tagging, policy enforcement, and billing allocation across the hybrid cloud infrastructure.
 
 ---
 
 ### Q26
 You want to deploy Nutanix Calm blueprints on your NC2 cluster. What application framework is supported?
-- A) Calm only works on-premises
-- B) Calm blueprints work on NC2 for multi-cloud application deployment
-- C) Only IaaS blueprints are supported on NC2
-- D) Calm requires separate licensing on NC2
+- A) Only IaaS blueprints are supported on NC2
+- B) Calm requires separate licensing on NC2
+- C) Calm only works on-premises
+- D) Calm blueprints work on NC2 for multi-cloud application deployment
 
-**Answer: B**
+**Answer: D**
 Nutanix Calm blueprints are fully supported on NC2, enabling infrastructure-as-code deployment of multi-tier applications across on-premises and cloud environments with the same blueprint.
 
 ---
 
 ### Q27
 You want to run Kubernetes workloads on your NC2 cluster. Which Nutanix Kubernetes platform can be deployed on NC2?
-- A) NKE only (Nutanix Kubernetes Engine)
-- B) NKP only (Nutanix Kubernetes Platform)
-- C) Both NKE and NKP
-- D) Kubernetes is not supported on NC2
+- A) Both NKE and NKP
+- B) Kubernetes is not supported on NC2
+- C) NKE only (Nutanix Kubernetes Engine)
+- D) NKP only (Nutanix Kubernetes Platform)
 
-**Answer: C**
+**Answer: A**
 Both Nutanix Kubernetes Engine (NKE) and Nutanix Kubernetes Platform (NKP) are supported on NC2, enabling container workload deployment alongside traditional VMs in the same environment.
 
 ---
 
 ### Q28
 You are troubleshooting an NC2 deployment failure on AWS. The error message indicates "Insufficient EC2 capacity." What is the most likely cause?
-- A) Your security group is misconfigured
-- B) AWS quota for i3.metal instances has been reached
-- C) The VPC subnet is too small
-- D) IAM role permissions are missing
+- A) AWS quota for i3.metal instances has been reached
+- B) The VPC subnet is too small
+- C) IAM role permissions are missing
+- D) Your security group is misconfigured
 
-**Answer: B**
+**Answer: A**
 "Insufficient EC2 capacity" typically means AWS deployment quotas have been reached for the instance type. You need to request a quota increase from AWS Support or choose a different region/AZ.
 
 ---
 
 ### Q29
 During NC2 deployment on Azure, you receive an error about the delegated subnet. What validation should you perform first?
-- A) Verify the subnet is /24 or larger and properly delegated to BareMetal
-- B) Check only the region
-- C) Verify the storage account exists
-- D) Check the Virtual Network name only
+- A) Check only the region
+- B) Verify the storage account exists
+- C) Check the Virtual Network name only
+- D) Verify the subnet is /24 or larger and properly delegated to BareMetal
 
-**Answer: A**
+**Answer: D**
 When delegated subnet errors occur, verify that the subnet is at least /24, properly delegated to the BareMetal service in Azure, and not already hosting other resources. Delegation is critical for BareMetal infrastructure.
 
 ---
@@ -383,72 +383,72 @@ NC2 storage is scaled by adding new nodes to the cluster. You cannot expand per-
 
 ### Q32
 You are validating IAM permissions for NC2 on AWS and encounter "UnauthorizedOperation" errors. Which AWS service most likely needs additional permissions?
-- A) S3 only
-- B) EC2 and S3
-- C) CloudWatch only
-- D) RDS
+- A) RDS
+- B) S3 only
+- C) EC2 and S3
+- D) CloudWatch only
 
-**Answer: B**
+**Answer: C**
 NC2 on AWS requires IAM permissions for EC2 (instance management, security group modifications) and S3 (metadata backup storage). Missing permissions to either service will cause deployment or operational failures.
 
 ---
 
 ### Q33
 You need to backup metadata for your NC2 cluster on AWS. Where should this backup be stored?
-- A) EBS volumes
-- B) AWS S3
-- C) Local NVMe
-- D) AWS Glacier
+- A) AWS Glacier
+- B) EBS volumes
+- C) AWS S3
+- D) Local NVMe
 
-**Answer: B**
+**Answer: C**
 AWS S3 is the designated location for NC2 metadata backups on AWS. While cluster data uses local NVMe, metadata backups must be stored in S3 for disaster recovery and external redundancy.
 
 ---
 
 ### Q34
 You are planning a Nutanix Move migration of 100 VMs from on-premises to NC2 on Azure. What is the recommended approach for large migrations?
-- A) Migrate all VMs simultaneously
-- B) Migrate in batches with validation between batches
-- C) Use Leap for all migrations
-- D) Migrate only small VMs first
+- A) Use Leap for all migrations
+- B) Migrate only small VMs first
+- C) Migrate all VMs simultaneously
+- D) Migrate in batches with validation between batches
 
-**Answer: B**
+**Answer: D**
 Large migrations should be done in batches with validation between each batch. This approach reduces risk, allows for performance monitoring, and enables issue identification before migrating all workloads.
 
 ---
 
 ### Q35
 An NC2 cluster on AWS needs to communicate securely with an on-premises data center. Which Direct Connect configuration is recommended?
-- A) Public Virtual Interface (PublicVIF) only
-- B) Private Virtual Interface (PrivateVIF) with encryption
-- C) Both public and private VIFs
-- D) No Direct Connect is needed
+- A) Both public and private VIFs
+- B) No Direct Connect is needed
+- C) Public Virtual Interface (PublicVIF) only
+- D) Private Virtual Interface (PrivateVIF) with encryption
 
-**Answer: B**
+**Answer: D**
 Private Virtual Interface (PrivateVIF) is used for on-premises to AWS NC2 communication. Adding site-to-site encryption provides additional security for hybrid connectivity.
 
 ---
 
 ### Q36
 You notice high latency in your NC2 cluster on AWS. All nodes are properly configured and in the same AZ. What is the most likely cause?
-- A) Nodes are in different AZs
-- B) Security groups are blocking traffic on required ports
-- C) NVMe performance degradation
-- D) VPC subnet is too small
+- A) Security groups are blocking traffic on required ports
+- B) NVMe performance degradation
+- C) VPC subnet is too small
+- D) Nodes are in different AZs
 
-**Answer: B**
+**Answer: A**
 High latency with proper node placement typically indicates network issues, most commonly missing security group rules for inter-node communication (ports 9440, 2049, 3260).
 
 ---
 
 ### Q37
 Your organization wants to run test workloads on NC2 during business hours only, then suspend them at night. What cost optimization feature should you use?
-- A) Reserved Instances
-- B) Node hibernation
-- C) On-Demand instances only
-- D) Spot instances
+- A) Node hibernation
+- B) On-Demand instances only
+- C) Spot instances
+- D) Reserved Instances
 
-**Answer: B**
+**Answer: A**
 Node hibernation allows you to suspend NC2 nodes during off-peak hours, reducing cloud costs while maintaining the ability to resume quickly. This is ideal for dev/test environments with predictable usage patterns.
 
 ---
@@ -479,72 +479,72 @@ Flow provides microsegmentation on NC2, enabling policy-based network access con
 
 ### Q40
 You are designing NC2 on AWS with a 3-node cluster. Each node requires a unique IP address. What VPC subnet size calculation is correct?
-- A) /30 (2 usable IPs)
-- B) /27 (30 usable IPs)
-- C) /25 (123 usable IPs on AWS)
-- D) /24 (254 usable IPs)
+- A) /24 (254 usable IPs)
+- B) /30 (2 usable IPs)
+- C) /27 (30 usable IPs)
+- D) /25 (123 usable IPs on AWS)
 
-**Answer: C**
+**Answer: D**
 A /25 subnet provides 128 total addresses. AWS reserves 5 addresses (network, broadcast, AWS router, AWS DNS, AWS future use), leaving 123 usable IP addresses. This is sufficient for a 3-node cluster (3 IPs), Flow Gateway instances, NAT Gateways, and management infrastructure with room for growth and operational requirements.
 
 ---
 
 ### Q41
 You are configuring Azure Network Security Groups (NSGs) for an NC2 BareMetal cluster. What ports must be allowed for proper cluster functionality?
-- A) Only 443 for HTTPS
-- B) 9440 (management), 2049 (NFS), 3260 (iSCSI)
-- C) All ports from 1024-65535
-- D) 22 (SSH) only
+- A) 22 (SSH) only
+- B) Only 443 for HTTPS
+- C) 9440 (management), 2049 (NFS), 3260 (iSCSI)
+- D) All ports from 1024-65535
 
-**Answer: B**
+**Answer: C**
 NSGs for NC2 on Azure must allow the same critical ports as AWS security groups: 9440 (Prism UI), 2049 (NFS for storage), and 3260 (iSCSI for block storage).
 
 ---
 
 ### Q42
 Your NC2 deployment on AWS spans multiple VPCs for security isolation. How should you connect these VPCs to the NC2 cluster?
-- A) VPC peering only
-- B) Transit Gateway with proper routing and security policies
-- C) NAT Gateway only
-- D) Direct Connect only
+- A) NAT Gateway only
+- B) Direct Connect only
+- C) VPC peering only
+- D) Transit Gateway with proper routing and security policies
 
-**Answer: B**
+**Answer: D**
 AWS Transit Gateway is the recommended approach for multi-VPC connectivity to NC2, providing centralized routing, security policy enforcement, and scalability without direct VPC-to-VPC peering complexity.
 
 ---
 
 ### Q43
 You need to enable Prism Central to manage an NC2 cluster across the internet with security. What is the recommended architecture?
-- A) Direct internet connection to Prism Central
-- B) Prism Central with VPN tunnel or private connectivity via Direct Connect/ExpressRoute
-- C) Prism Central public IP only
-- D) No encryption needed for management traffic
+- A) Prism Central public IP only
+- B) No encryption needed for management traffic
+- C) Direct internet connection to Prism Central
+- D) Prism Central with VPN tunnel or private connectivity via Direct Connect/ExpressRoute
 
-**Answer: B**
+**Answer: D**
 Prism Central should be connected to NC2 via secure, private connectivity (VPN tunnel or Direct Connect/ExpressRoute) to protect management traffic. Internet-only connections are less secure and higher latency.
 
 ---
 
 ### Q44
 An NC2 cluster on AWS experiences a node failure. The cluster is 3 nodes total. What is the status after one node failure?
-- A) Cluster continues operating at reduced capacity
-- B) Cluster immediately shuts down
-- C) Automatic failover to Azure
-- D) Cluster is unavailable until node is repaired
+- A) Cluster immediately shuts down
+- B) Automatic failover to Azure
+- C) Cluster is unavailable until node is repaired
+- D) Cluster continues operating at reduced capacity
 
-**Answer: A**
+**Answer: D**
 A 3-node cluster can lose one node and continue operating (the remaining 2 nodes maintain quorum for metadata services). However, you should destroy and replace the failed node promptly to restore fault tolerance.
 
 ---
 
 ### Q45
 You want to implement automatic VM failover from on-premises to NC2 during a disaster. What Nutanix feature provides this capability?
-- A) Prism Central only
-- B) Leap with continuous replication and automated failover policies
-- C) Snapshots only
-- D) Manual Calm blueprints
+- A) Leap with continuous replication and automated failover policies
+- B) Snapshots only
+- C) Manual Calm blueprints
+- D) Prism Central only
 
-**Answer: B**
+**Answer: A**
 Leap enables continuous replication and supports automated failover policies based on RPO/RTO requirements, enabling automatic failover from on-premises to NC2 during unplanned failures.
 
 ---
@@ -575,72 +575,72 @@ IPSec VPN tunnels can be configured over Direct Connect connections for encrypte
 
 ### Q48
 You are troubleshooting an NC2 deployment on Azure that fails during initial provisioning. The error states "Insufficient BareMetal capacity." What should you attempt first?
-- A) Increase the subnet size
-- B) Retry in the same region after 15 minutes
-- C) Change Azure region or wait for capacity
-- D) Modify the Prism Central settings
+- A) Modify the Prism Central settings
+- B) Increase the subnet size
+- C) Retry in the same region after 15 minutes
+- D) Change Azure region or wait for capacity
 
-**Answer: C**
+**Answer: D**
 "Insufficient BareMetal capacity" means Azure currently has no available BareMetal instances in that region. Retry later, change to a different region, or contact Azure Support to understand availability.
 
 ---
 
 ### Q49
 An NC2 cluster is configured with Foundation image backup. How should metadata backups be validated on AWS?
-- A) No validation is needed
-- B) Verify S3 bucket access permissions and backup file integrity
-- C) Only check backup file names
-- D) Validate backups automatically occur
+- A) Validate backups automatically occur
+- B) No validation is needed
+- C) Verify S3 bucket access permissions and backup file integrity
+- D) Only check backup file names
 
-**Answer: B**
+**Answer: C**
 Metadata backup validation requires verifying S3 bucket access permissions (IAM roles grant access) and backup file integrity to ensure disaster recovery capability. Regular validation tests should be performed.
 
 ---
 
 ### Q50
 You are planning NC2 on AWS and need to calculate the subnet IP allocation. For a 3-node cluster with 4 Flow Gateway instances and additional management IPs, what is the minimum subnet?
-- A) /28 (14 IPs)
-- B) /27 (30 IPs)
-- C) /25 (123 usable IPs on AWS)
-- D) /24 (254 IPs)
+- A) /25 (123 usable IPs on AWS)
+- B) /24 (254 IPs)
+- C) /28 (14 IPs)
+- D) /27 (30 IPs)
 
-**Answer: C**
+**Answer: A**
 A /25 subnet provides 128 total addresses. After AWS reserves 5 addresses, 123 usable IPs remain, which is the Nutanix-documented minimum for NC2 on AWS. This accommodates cluster nodes (3), Flow Gateways (4+), management infrastructure, and DHCP/routing overhead.
 
 ---
 
 ### Q51
 You want to replicate VMs continuously between on-premises and NC2 using Leap. What metric defines the maximum acceptable data loss in case of disaster?
-- A) RTO (Recovery Time Objective)
-- B) RPO (Recovery Point Objective)
-- C) MTR (Mean Time to Recover)
-- D) MTTF (Mean Time To Failure)
+- A) MTR (Mean Time to Recover)
+- B) MTTF (Mean Time To Failure)
+- C) RTO (Recovery Time Objective)
+- D) RPO (Recovery Point Objective)
 
-**Answer: B**
+**Answer: D**
 RPO (Recovery Point Objective) defines the maximum acceptable data loss—the point in time to which data can be recovered. Leap replication frequency determines RPO.
 
 ---
 
 ### Q52
 You are designing a hybrid cloud architecture with on-premises Nutanix and NC2 on AWS. What connectivity approach provides the lowest latency?
-- A) Public internet only
-- B) AWS Direct Connect
-- C) AWS VPN only
-- D) Combination of VPN and S3
+- A) AWS Direct Connect
+- B) AWS VPN only
+- C) Combination of VPN and S3
+- D) Public internet only
 
-**Answer: B**
+**Answer: A**
 AWS Direct Connect provides dedicated, private network connectivity with consistent, low-latency performance compared to public internet connections. This is essential for replication and hybrid workloads.
 
 ---
 
 ### Q53
 A user reports that their VM on NC2 cannot reach the on-premises database. You verify the VM is powered on and has network connectivity. What should you check next?
-- A) VM RAM allocation
-- B) DNS resolution and security group/NSG rules for database ports
-- C) Storage capacity
-- D) Hypervisor version
+- A) DNS resolution and security group/NSG rules for database ports
+- B) Storage capacity
+- C) Hypervisor version
+- D) VM RAM allocation
 
-**Answer: B**
+**Answer: A**
 Network connectivity issues should be diagnosed by checking: DNS resolution (can the VM resolve the database hostname?), and security group/NSG rules (are database ports allowed in both directions?).
 
 ---
@@ -671,60 +671,60 @@ Minimum 2 Flow Gateway VMs provide redundancy on Azure NC2. While ECMP supports 
 
 ### Q56
 During NC2 migration, you want to avoid impacting production workloads on-premises. What Nutanix feature allows you to test failover without affecting production?
-- A) Live migration only
-- B) Test failover to an isolated network
-- C) Snapshot replication
-- D) Continuous backup only
+- A) Continuous backup only
+- B) Live migration only
+- C) Test failover to an isolated network
+- D) Snapshot replication
 
-**Answer: B**
+**Answer: C**
 Nutanix Leap and Move support test failover to an isolated test network (separate VLAN/subnet), allowing validation without production impact. This enables safe failover testing before actual cutover.
 
 ---
 
 ### Q57
 Your NC2 deployment requires redundant management paths. You have deployed Prism Central both on-premises and replicated to NC2. How are these instances synchronized?
-- A) Manual sync required
-- B) Continuous replication via Leap
-- C) Database replication via Nutanix support
-- D) Not synchronized—use separate instances
+- A) Not synchronized—use separate instances
+- B) Manual sync required
+- C) Continuous replication via Leap
+- D) Database replication via Nutanix support
 
-**Answer: B**
+**Answer: C**
 Nutanix Leap can replicate the entire Prism Central VM from on-premises to NC2, ensuring synchronized management infrastructure and enabling failover if needed.
 
 ---
 
 ### Q58
 You receive an alert that the NC2 cluster on AWS is experiencing high CPU utilization. All nodes show similar utilization. What is the most likely cause?
-- A) Insufficient memory
-- B) Network bandwidth saturation
-- C) High workload demand requiring cluster scaling
-- D) Storage controller failure
+- A) High workload demand requiring cluster scaling
+- B) Storage controller failure
+- C) Insufficient memory
+- D) Network bandwidth saturation
 
-**Answer: C**
+**Answer: A**
 Consistently high CPU utilization across all nodes typically indicates high demand from running workloads. This is resolved by horizontal scaling (adding nodes) or optimizing workload distribution.
 
 ---
 
 ### Q59
 You are planning a DR test failover from on-premises to NC2 on Azure. The test failover is scheduled for 2 AM on Sunday. What networking requirement allows isolated test traffic?
-- A) Test network must use different NSGs than production
-- B) Test network must be on a separate subnet with no production traffic
-- C) Test network requires separate NC2 cluster
-- D) Direct internet access for test traffic
+- A) Test network requires separate NC2 cluster
+- B) Direct internet access for test traffic
+- C) Test network must use different NSGs than production
+- D) Test network must be on a separate subnet with no production traffic
 
-**Answer: B**
+**Answer: D**
 Test failover networks must be isolated on separate subnets with dedicated NSGs (Azure) or security groups (AWS). This prevents test traffic from reaching production infrastructure or databases.
 
 ---
 
 ### Q60
 A critical application on NC2 requires <15 minute recovery time (RTO). You need to establish replication from on-premises. What configuration ensures this RTO?
-- A) Daily snapshots only
-- B) Hourly snapshots
-- C) Continuous replication via Leap with frequent RPO intervals
-- D) Weekly backups
+- A) Hourly snapshots
+- B) Continuous replication via Leap with frequent RPO intervals
+- C) Weekly backups
+- D) Daily snapshots only
 
-**Answer: C**
+**Answer: B**
 Achieving <15 min RTO requires continuous replication (Leap) so recovery points are recent and failover can execute rapidly. RPO (Recovery Point Objective—maximum acceptable data loss) and RTO (Recovery Time Objective—maximum acceptable recovery time) are independent metrics. Both require frequent replication to maintain low values; a low RPO does not automatically guarantee low RTO if failover execution is slow. Continuous Leap replication enables both metrics to be achieved.
 
 ---
@@ -892,12 +892,12 @@ What is the proper sequence for migrating a production VM from on-premises to NC
 6. Validate application functionality and connectivity on NC2
 7. Optionally configure reverse replication for failback
 
-- A) 4, 1, 2, 3, 5, 6, 7
-- B) 1, 4, 2, 3, 5, 6, 7
-- C) 4, 2, 1, 3, 5, 6, 7
-- D) 1, 2, 4, 3, 5, 6, 7
+- A) 1, 2, 4, 3, 5, 6, 7
+- B) 4, 1, 2, 3, 5, 6, 7
+- C) 1, 4, 2, 3, 5, 6, 7
+- D) 4, 2, 1, 3, 5, 6, 7
 
-**Answer: A**
+**Answer: B**
 Correct sequence: 1) Verify network connectivity first, 2) Establish replication, 3) Set up test network, 4) Test failover (validate without production impact), 5) Execute planned failover in maintenance window, 6) Validate production functionality, 7) Configure reverse replication. Pre-cutover validation is critical before production failover.
 
 ---
@@ -911,12 +911,12 @@ What is the correct order of configuration steps for NC2 on Azure BareMetal?
 5. Configure NSGs for cluster communication ports
 6. Access my.nutanix.com to complete cluster setup
 
-- A) 1, 5, 2, 3, 4, 6
-- B) 1, 2, 5, 3, 4, 6
-- C) 2, 1, 5, 3, 4, 6
-- D) 1, 5, 6, 2, 3, 4
+- A) 1, 5, 6, 2, 3, 4
+- B) 1, 5, 2, 3, 4, 6
+- C) 1, 2, 5, 3, 4, 6
+- D) 2, 1, 5, 3, 4, 6
 
-**Answer: B**
+**Answer: C**
 Correct sequence: 1) Create delegated subnet infrastructure, 2) Deploy BareMetal instances, 3) Configure NSGs, 4) Deploy and configure Flow Gateways with BGP, 5) Connect Route Server (this enables routing updates), 6) Complete cluster setup via my.nutanix.com. Infrastructure prerequisites must be in place before instance deployment.
 
 ---
@@ -931,12 +931,12 @@ What is the proper order of establishing hybrid cloud disaster recovery between 
 6. Perform test failover to NC2 in isolated network
 7. Document failover procedures and runbooks
 
-- A) 1, 2, 3, 4, 5, 6, 7
-- B) 2, 1, 3, 4, 5, 6, 7
-- C) 1, 3, 2, 4, 5, 6, 7
-- D) 2, 3, 1, 4, 5, 6, 7
+- A) 1, 3, 2, 4, 5, 6, 7
+- B) 2, 3, 1, 4, 5, 6, 7
+- C) 1, 2, 3, 4, 5, 6, 7
+- D) 2, 1, 3, 4, 5, 6, 7
 
-**Answer: A**
+**Answer: C**
 Correct sequence: 1) Ensure Prism Central exists, 2) Establish network connectivity (prerequisite for management), 3) Register clusters in Prism Central, 4) Enable Leap replication, 5) Configure RPO/RTO and replication schedule, 6) Test failover to validate, 7) Document procedures. Each step depends on previous steps being complete.
 
 ---
@@ -951,12 +951,12 @@ What is the correct order of steps when a node fails in a production NC2 cluster
 6. Monitor cluster resynchronization and data rebalancing
 7. Verify all cluster services are healthy and operational
 
-- A) 3, 1, 2, 4, 5, 6, 7
-- B) 3, 1, 2, 4, 5, 7, 6
-- C) 1, 2, 3, 4, 5, 6, 7
-- D) 3, 2, 1, 4, 5, 6, 7
+- A) 1, 2, 3, 4, 5, 6, 7
+- B) 3, 2, 1, 4, 5, 6, 7
+- C) 3, 1, 2, 4, 5, 6, 7
+- D) 3, 1, 2, 4, 5, 7, 6
 
-**Answer: A**
+**Answer: C**
 Correct sequence: 1) Receive alert, 2) Verify remaining cluster is stable, 3) Destroy failed instance (no repair possible), 4) Provision replacement, 5) Re-add to cluster, 6) Monitor recovery and rebalancing, 7) Verify health. Destroying failed node before verifying cluster stability could cause quorum loss.
 
 ---
@@ -970,12 +970,12 @@ What is the proper sequence for scaling NC2 storage capacity?
 5. Verify application performance remains acceptable
 6. Document capacity planning and scaling events
 
-- A) 1, 4, 2, 3, 5, 6
-- B) 1, 2, 3, 4, 5, 6
-- C) 4, 1, 2, 3, 5, 6
-- D) 1, 4, 3, 2, 5, 6
+- A) 1, 2, 3, 4, 5, 6
+- B) 4, 1, 2, 3, 5, 6
+- C) 1, 4, 3, 2, 5, 6
+- D) 1, 4, 2, 3, 5, 6
 
-**Answer: A**
+**Answer: D**
 Correct sequence: 1) Assess requirements, 2) Request quota if needed (ensure cloud capacity), 3) Add nodes via my.nutanix.com, 4) Monitor rebalancing, 5) Verify performance, 6) Document event. Quota request must occur before adding nodes to ensure instance provisioning succeeds.
 
 ---
@@ -990,12 +990,12 @@ What is the correct order for enabling Flow microsegmentation on a production NC
 6. Apply policies to production VMs gradually
 7. Monitor and alert on policy violations
 
-- A) 2, 1, 3, 4, 5, 6, 7
-- B) 1, 2, 3, 4, 5, 6, 7
-- C) 2, 3, 1, 4, 5, 6, 7
-- D) 1, 3, 2, 4, 5, 6, 7
+- A) 1, 2, 3, 4, 5, 6, 7
+- B) 2, 3, 1, 4, 5, 6, 7
+- C) 1, 3, 2, 4, 5, 6, 7
+- D) 2, 1, 3, 4, 5, 6, 7
 
-**Answer: A**
+**Answer: D**
 Correct sequence: 1) Plan categorization and policies first, 2) Enable Flow in Prism Central, 3) Create categories and rules, 4) Define application policies, 5) Test on non-critical VMs (validate before production), 6) Roll out to production gradually, 7) Monitor for issues. Planning before implementation prevents production disruptions.
 
 ---
@@ -1047,12 +1047,12 @@ What is the proper order for implementing metadata backup automation for NC2 on 
 5. Monitor backup logs and set alerts for backup failures
 6. Test metadata restore process from backup
 
-- A) 3, 1, 2, 4, 5, 6
-- B) 1, 3, 2, 4, 5, 6
-- C) 3, 2, 1, 4, 5, 6
-- D) 1, 2, 3, 4, 5, 6
+- A) 1, 2, 3, 4, 5, 6
+- B) 3, 1, 2, 4, 5, 6
+- C) 1, 3, 2, 4, 5, 6
+- D) 3, 2, 1, 4, 5, 6
 
-**Answer: A**
+**Answer: B**
 Correct sequence: 1) Create S3 bucket with retention policies first, 2) Verify bucket access via IAM, 3) Configure backup schedule, 4) Verify initial backup succeeds, 5) Set monitoring and alerts, 6) Test restore capability. Infrastructure (bucket) must exist before configuring backups.
 
 ---

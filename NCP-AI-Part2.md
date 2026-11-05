@@ -7,12 +7,12 @@
 ### Q1
 An ML engineer notices that inference latency for a large language model hosted on NAI has increased significantly during peak hours. The NKP dashboard shows GPU utilization at 98% with a growing request queue depth. Which action should the engineer take FIRST to reduce latency without deploying additional hardware?
 
-- A) Increase the KV cache allocation and enable PagedAttention in the vLLM serving configuration
-- B) Rotate the TLS certificates on the inference API endpoint
-- C) Switch the model from FP16 to FP32 precision for higher accuracy
-- D) Reduce the Kubernetes namespace resource quota to limit concurrent users
+- A) Reduce the Kubernetes namespace resource quota to limit concurrent users
+- B) Increase the KV cache allocation and enable PagedAttention in the vLLM serving configuration
+- C) Rotate the TLS certificates on the inference API endpoint
+- D) Switch the model from FP16 to FP32 precision for higher accuracy
 
-**Answer: A**
+**Answer: B**
 PagedAttention in vLLM optimizes GPU memory usage for the KV cache, allowing more concurrent requests to be served efficiently on existing hardware. Switching to FP32 would double memory consumption, worsening the problem.
 
 ---
@@ -20,12 +20,12 @@ PagedAttention in vLLM optimizes GPU memory usage for the KV cache, allowing mor
 ### Q2
 A platform administrator needs to monitor GPU health across a Nutanix AHV cluster running NAI workloads. Which combination of tools provides the MOST comprehensive view of GPU utilization, temperature, and ECC error counts?
 
-- A) nvidia-smi on the GPU node combined with Prism Central VM metrics
-- B) Kubernetes Horizontal Pod Autoscaler logs combined with Objects storage metrics
-- C) Nutanix Files analytics combined with NKP ingress controller logs
-- D) Prism Element storage dashboard combined with AOS replication metrics
+- A) Nutanix Files analytics combined with NKP ingress controller logs
+- B) Prism Element storage dashboard combined with AOS replication metrics
+- C) nvidia-smi on the GPU node combined with Prism Central VM metrics
+- D) Kubernetes Horizontal Pod Autoscaler logs combined with Objects storage metrics
 
-**Answer: A**
+**Answer: C**
 nvidia-smi reports real-time GPU utilization, memory usage, temperature, and ECC errors directly from the NVIDIA driver. Prism Central adds infrastructure-level VM health and resource tracking, giving a full picture of GPU node status.
 
 ---
@@ -33,12 +33,12 @@ nvidia-smi reports real-time GPU utilization, memory usage, temperature, and ECC
 ### Q3
 An organization requires that GPU pods for NAI inference endpoints never exceed 24 GB of GPU memory per container. Where should the administrator enforce this limit?
 
-- A) In the Kubernetes resource limits section of the pod spec, setting `nvidia.com/gpu-memory` limits
-- B) In Prism Central by configuring a storage policy on the volume group
-- C) In the AHV hypervisor by adjusting the VM BIOS settings
-- D) In the Nutanix Objects bucket policy attached to the model repository
+- A) In Prism Central by configuring a storage policy on the volume group
+- B) In the AHV hypervisor by adjusting the VM BIOS settings
+- C) In the Nutanix Objects bucket policy attached to the model repository
+- D) In the Kubernetes resource limits section of the pod spec, setting `nvidia.com/gpu-memory` limits
 
-**Answer: A**
+**Answer: D**
 Kubernetes resource limits in the pod specification are the correct mechanism to enforce GPU memory constraints per container. This ensures the Kubernetes scheduler and NVIDIA device plugin respect the allocation boundaries.
 
 ---
@@ -59,12 +59,12 @@ A Kubernetes rolling update gradually replaces old pods with new ones, ensuring 
 ### Q5
 Which metric is MOST useful for evaluating the real-time responsiveness of a streaming chat endpoint hosted on NAI?
 
-- A) Time-to-first-token (TTFT)
-- B) Total persistent volume IOPS
-- C) Nutanix Files share latency
-- D) Prism Central alert count
+- A) Prism Central alert count
+- B) Time-to-first-token (TTFT)
+- C) Total persistent volume IOPS
+- D) Nutanix Files share latency
 
-**Answer: A**
+**Answer: B**
 Time-to-first-token (TTFT) measures the delay between sending a prompt and receiving the first output token, directly reflecting the perceived responsiveness of a streaming inference endpoint.
 
 ---
@@ -72,12 +72,12 @@ Time-to-first-token (TTFT) measures the delay between sending a prompt and recei
 ### Q6
 An administrator receives an alert that the Prometheus scrape target for NAI inference metrics is returning errors. The Grafana dashboards are showing no data. Which is the MOST likely first step to diagnose the issue?
 
-- A) Verify that the NAI metrics endpoint is healthy and that the Prometheus ServiceMonitor is correctly targeting the inference service
-- B) Restart the Prism Central VM and re-register the NKP cluster
-- C) Re-download the model artifacts from the Nutanix Objects bucket
-- D) Increase the GPU passthrough allocation in AHV to provide more VRAM
+- A) Re-download the model artifacts from the Nutanix Objects bucket
+- B) Increase the GPU passthrough allocation in AHV to provide more VRAM
+- C) Verify that the NAI metrics endpoint is healthy and that the Prometheus ServiceMonitor is correctly targeting the inference service
+- D) Restart the Prism Central VM and re-register the NKP cluster
 
-**Answer: A**
+**Answer: C**
 Prometheus scrape failures are typically caused by a misconfigured ServiceMonitor or an unhealthy metrics endpoint. Verifying the endpoint health and Prometheus target configuration is the correct first diagnostic step.
 
 ---
@@ -85,12 +85,12 @@ Prometheus scrape failures are typically caused by a misconfigured ServiceMonito
 ### Q7
 A security team mandates that all NAI API keys must be rotated every 90 days. A compromised key is discovered during a routine audit. What should the administrator do IMMEDIATELY?
 
-- A) Revoke the compromised API key immediately, issue a new key, and update all consuming applications
-- B) Wait until the next scheduled 90-day rotation to replace the key
-- C) Disable GPU passthrough on the cluster to prevent further inference requests
-- D) Delete the NAI inference endpoint and redeploy it with a new name
+- A) Wait until the next scheduled 90-day rotation to replace the key
+- B) Disable GPU passthrough on the cluster to prevent further inference requests
+- C) Delete the NAI inference endpoint and redeploy it with a new name
+- D) Revoke the compromised API key immediately, issue a new key, and update all consuming applications
 
-**Answer: A**
+**Answer: D**
 A compromised API key must be revoked immediately regardless of the rotation schedule to prevent unauthorized access. Waiting for the scheduled rotation would leave the system vulnerable.
 
 ---
@@ -111,12 +111,12 @@ An NAI operator log shows repeated `ImagePullBackOff` errors for an inference en
 ### Q9
 Which of the following is NOT a valid reason to add additional GPU nodes to an NAI cluster instead of optimizing the existing model configuration?
 
-- A) The model is already quantized to the smallest viable precision, and request queue depth continues to grow during peak hours
-- B) The administrator wants to reduce Prometheus alert noise by spreading pods across more nodes
-- C) Multiple teams need dedicated GPU resources with hard namespace quotas that exceed current cluster capacity
-- D) The organization plans to serve additional models concurrently, and existing GPU memory is fully allocated
+- A) The organization plans to serve additional models concurrently, and existing GPU memory is fully allocated
+- B) The model is already quantized to the smallest viable precision, and request queue depth continues to grow during peak hours
+- C) The administrator wants to reduce Prometheus alert noise by spreading pods across more nodes
+- D) Multiple teams need dedicated GPU resources with hard namespace quotas that exceed current cluster capacity
 
-**Answer: B**
+**Answer: C**
 Reducing Prometheus alert noise is not a valid scaling justification. Scaling decisions should be driven by resource saturation, multi-tenancy requirements, or the need to serve additional models — not monitoring cosmetics.
 
 ---
@@ -124,12 +124,12 @@ Reducing Prometheus alert noise is not a valid scaling justification. Scaling de
 ### Q10
 An administrator is configuring Kubernetes resource quotas for a namespace that runs NAI inference pods. Which resource type must be included in the ResourceQuota to control GPU allocation?
 
-- A) `requests.nvidia.com/gpu`
-- B) `requests.nutanix.com/storage-class`
-- C) `limits.kubernetes.io/ingress-bandwidth`
-- D) `requests.amd.com/vgpu`
+- A) `limits.kubernetes.io/ingress-bandwidth`
+- B) `requests.amd.com/vgpu`
+- C) `requests.nvidia.com/gpu`
+- D) `requests.nutanix.com/storage-class`
 
-**Answer: A**
+**Answer: C**
 The NVIDIA device plugin registers GPUs as `nvidia.com/gpu` extended resources in Kubernetes. Resource quotas must reference this resource type to control GPU allocation per namespace.
 
 ---
@@ -137,12 +137,12 @@ The NVIDIA device plugin registers GPUs as `nvidia.com/gpu` extended resources i
 ### Q11
 A data scientist reports that tokens-per-second (TPS) throughput dropped after a model update. The GPU utilization is only at 40%. Which configuration change is MOST likely to improve throughput?
 
-- A) Increase the maximum batch size in the vLLM serving configuration to allow more concurrent requests to be processed together
-- B) Reduce the number of pod replicas to concentrate GPU usage on fewer pods
-- C) Disable Prometheus metric collection to free CPU cycles
-- D) Migrate the persistent volume from Nutanix Volumes to Nutanix Files
+- A) Reduce the number of pod replicas to concentrate GPU usage on fewer pods
+- B) Disable Prometheus metric collection to free CPU cycles
+- C) Migrate the persistent volume from Nutanix Volumes to Nutanix Files
+- D) Increase the maximum batch size in the vLLM serving configuration to allow more concurrent requests to be processed together
 
-**Answer: A**
+**Answer: D**
 Low GPU utilization with reduced TPS typically indicates the inference engine is not batching enough requests together. Increasing the batch size allows vLLM to process more tokens in parallel, improving throughput on underutilized GPUs.
 
 ---
@@ -163,12 +163,12 @@ A comprehensive backup includes model files (stored durably on Objects with vers
 ### Q13
 An administrator wants to set up alerting rules so the on-call team is notified when inference latency exceeds an SLA threshold. Which approach is MOST appropriate in an NAI environment?
 
-- A) Create a Prometheus alerting rule that triggers when the p99 inference latency metric exceeds the SLA threshold, routed via Alertmanager
-- B) Configure a Prism Central storage alert on volume group IOPS
-- C) Set up a cron job that runs nvidia-smi every 5 minutes and emails the output
-- D) Enable Kubernetes pod eviction policies based on memory pressure
+- A) Enable Kubernetes pod eviction policies based on memory pressure
+- B) Create a Prometheus alerting rule that triggers when the p99 inference latency metric exceeds the SLA threshold, routed via Alertmanager
+- C) Configure a Prism Central storage alert on volume group IOPS
+- D) Set up a cron job that runs nvidia-smi every 5 minutes and emails the output
 
-**Answer: A**
+**Answer: B**
 Prometheus alerting rules with Alertmanager provide automated, threshold-based alerting on inference latency metrics, which is the standard approach for SLA monitoring in Kubernetes-based ML serving environments.
 
 ---
@@ -176,12 +176,12 @@ Prometheus alerting rules with Alertmanager provide automated, threshold-based a
 ### Q14
 During a routine audit, the security team needs to determine which users accessed a specific NAI inference endpoint over the past 30 days and how many tokens each consumed. Which data source provides this information?
 
-- A) API gateway or NAI audit logs that record API key identity, endpoint, and token usage per request
-- B) AHV hypervisor console logs on each GPU node
-- C) Nutanix Files share access logs for the model artifact directory
-- D) NKP etcd backup snapshots from the control plane
+- A) Nutanix Files share access logs for the model artifact directory
+- B) NKP etcd backup snapshots from the control plane
+- C) API gateway or NAI audit logs that record API key identity, endpoint, and token usage per request
+- D) AHV hypervisor console logs on each GPU node
 
-**Answer: A**
+**Answer: C**
 Audit logs from the API gateway or NAI platform capture per-request metadata including the authenticated identity (API key), target endpoint, and token consumption — essential for usage attribution and compliance.
 
 ---
@@ -189,12 +189,12 @@ Audit logs from the API gateway or NAI platform capture per-request metadata inc
 ### Q15
 An ML engineer observes that a newly deployed NAI endpoint is consuming significantly more GPU memory than the previous version of the same model. The model file size has not changed. What is the MOST likely explanation?
 
-- A) The new deployment uses a larger KV cache allocation or increased maximum context length, consuming additional GPU memory at runtime
-- B) The Nutanix Objects bucket storing the model is using a different erasure coding policy
-- C) The Prism Central VM was upgraded to a newer AOS version
-- D) The Kubernetes namespace was moved to a different NKP cluster
+- A) The Nutanix Objects bucket storing the model is using a different erasure coding policy
+- B) The Prism Central VM was upgraded to a newer AOS version
+- C) The Kubernetes namespace was moved to a different NKP cluster
+- D) The new deployment uses a larger KV cache allocation or increased maximum context length, consuming additional GPU memory at runtime
 
-**Answer: A**
+**Answer: D**
 GPU memory usage during inference depends heavily on the KV cache size, which scales with the configured maximum context length and batch size — not just the static model file size.
 
 ---
@@ -215,12 +215,12 @@ Updating the Kubernetes TLS Secret and performing a rolling restart ensures that
 ### Q17
 Which statement about Kubernetes event logs in an NAI deployment is TRUE?
 
-- A) Kubernetes events record pod scheduling decisions, image pull status, and resource allocation failures, and they are automatically garbage-collected after a default retention period
-- B) Kubernetes events contain the full model weights and can be used to restore a model
-- C) Kubernetes events are stored permanently in Nutanix Objects and never expire
-- D) Kubernetes events can only be viewed through Prism Central and are not accessible via kubectl
+- A) Kubernetes events can only be viewed through Prism Central and are not accessible via kubectl
+- B) Kubernetes events record pod scheduling decisions, image pull status, and resource allocation failures, and they are automatically garbage-collected after a default retention period
+- C) Kubernetes events contain the full model weights and can be used to restore a model
+- D) Kubernetes events are stored permanently in Nutanix Objects and never expire
 
-**Answer: A**
+**Answer: B**
 Kubernetes events are short-lived records of cluster operations (scheduling, pulling images, errors) that are garbage-collected by default (typically after 1 hour). They are accessible via `kubectl get events` and through the NKP dashboard.
 
 ---
@@ -228,12 +228,12 @@ Kubernetes events are short-lived records of cluster operations (scheduling, pul
 ### Q18
 A platform team notices that a single tenant is consuming 80% of the GPU resources in a shared NAI cluster, starving other teams. What is the BEST way to enforce fair GPU sharing?
 
-- A) Create per-namespace Kubernetes ResourceQuotas with GPU limits and assign each team to a separate namespace
-- B) Manually stop the tenant's pods during business hours and restart them overnight
-- C) Reduce the total GPU count in the cluster to discourage overconsumption
-- D) Disable GPU passthrough for the tenant's AHV VMs
+- A) Reduce the total GPU count in the cluster to discourage overconsumption
+- B) Disable GPU passthrough for the tenant's AHV VMs
+- C) Create per-namespace Kubernetes ResourceQuotas with GPU limits and assign each team to a separate namespace
+- D) Manually stop the tenant's pods during business hours and restart them overnight
 
-**Answer: A**
+**Answer: C**
 Per-namespace ResourceQuotas with GPU limits enforce hard boundaries on GPU consumption per team, ensuring fair resource sharing without manual intervention or infrastructure reduction.
 
 ---
@@ -241,12 +241,12 @@ Per-namespace ResourceQuotas with GPU limits enforce hard boundaries on GPU cons
 ### Q19
 An NAI inference endpoint has been running reliably for months. After a routine NKP cluster upgrade, the endpoint starts returning 503 errors. Inference pods are running, but the Kubernetes Service shows no healthy endpoints. What should the administrator check FIRST?
 
-- A) Verify that the pod readiness probe configuration is correct and that pods are passing health checks after the cluster upgrade
-- B) Re-download the model artifacts from Hugging Face Hub
-- C) Increase the GPU memory allocation by 50%
-- D) Rotate the API keys for all consuming applications
+- A) Re-download the model artifacts from Hugging Face Hub
+- B) Increase the GPU memory allocation by 50%
+- C) Rotate the API keys for all consuming applications
+- D) Verify that the pod readiness probe configuration is correct and that pods are passing health checks after the cluster upgrade
 
-**Answer: A**
+**Answer: D**
 A 503 with running pods but no healthy endpoints in the Service typically means readiness probes are failing. Cluster upgrades can change probe behavior or timing, so verifying probe configuration is the correct first step.
 
 ---
@@ -267,12 +267,12 @@ Per-key token consumption alerting detects anomalous usage patterns in near real
 ### Q21
 An ML engineer needs to view the NAI operator logs to debug why an endpoint deployment is stuck in a pending state. Which command retrieves the relevant logs?
 
-- A) `kubectl logs -n nai-system deployment/nai-operator`
-- B) `nvidia-smi --query-gpu=temperature.gpu --format=csv`
-- C) `ncli cluster get-status`
-- D) `acli vm.list`
+- A) `acli vm.list`
+- B) `kubectl logs -n nai-system deployment/nai-operator`
+- C) `nvidia-smi --query-gpu=temperature.gpu --format=csv`
+- D) `ncli cluster get-status`
 
-**Answer: A**
+**Answer: B**
 The NAI operator runs as a Kubernetes deployment. Using `kubectl logs` against the operator deployment in the `nai-system` namespace retrieves the operator's log output, which includes endpoint lifecycle events and error messages.
 
 ---
@@ -280,12 +280,12 @@ The NAI operator runs as a Kubernetes deployment. Using `kubectl logs` against t
 ### Q22
 Which batch size tuning strategy is MOST appropriate when the goal is to maximize inference throughput on a GPU with 80 GB of VRAM serving a 13B parameter model?
 
-- A) Gradually increase the batch size while monitoring GPU memory usage and TPS until memory utilization approaches capacity without triggering OOM errors
-- B) Set the batch size to 1 and rely on vertical pod autoscaling to increase GPU count
-- C) Set the batch size to the maximum possible value regardless of model size or memory
-- D) Disable batching entirely and process one request at a time for lowest latency
+- A) Set the batch size to the maximum possible value regardless of model size or memory
+- B) Disable batching entirely and process one request at a time for lowest latency
+- C) Gradually increase the batch size while monitoring GPU memory usage and TPS until memory utilization approaches capacity without triggering OOM errors
+- D) Set the batch size to 1 and rely on vertical pod autoscaling to increase GPU count
 
-**Answer: A**
+**Answer: C**
 Optimal batch size is found by incrementally increasing it and monitoring the GPU memory/TPS tradeoff. Too large risks OOM; too small underutilizes the GPU. Systematic tuning balances throughput and stability.
 
 ---
@@ -293,12 +293,12 @@ Optimal batch size is found by incrementally increasing it and monitoring the GP
 ### Q23
 An organization stores NAI model artifacts on Nutanix Objects. Which feature of Nutanix Objects is MOST important for protecting against accidental model deletion?
 
-- A) Object versioning, which retains previous versions of objects even after overwrite or deletion
-- B) NKP pod disruption budgets, which prevent pod evictions
-- C) AHV live migration, which moves VMs between hosts without downtime
-- D) Prism Central Calm blueprints, which automate VM provisioning
+- A) NKP pod disruption budgets, which prevent pod evictions
+- B) AHV live migration, which moves VMs between hosts without downtime
+- C) Prism Central Calm blueprints, which automate VM provisioning
+- D) Object versioning, which retains previous versions of objects even after overwrite or deletion
 
-**Answer: A**
+**Answer: D**
 Object versioning on Nutanix Objects preserves every version of stored artifacts, allowing recovery of previous model versions even if files are accidentally overwritten or deleted.
 
 ---
@@ -319,12 +319,12 @@ HPA with GPU-based custom metrics dynamically scales inference replicas in respo
 ### Q25
 An administrator configures Grafana dashboards for NAI monitoring. Which Prometheus metric provides the BEST signal for detecting that inference requests are waiting too long before processing begins?
 
-- A) Request queue depth or pending request count in the inference engine metrics
-- B) Nutanix cluster storage replication factor
-- C) AHV hypervisor CPU ready time
-- D) Kubernetes etcd commit duration
+- A) Kubernetes etcd commit duration
+- B) Request queue depth or pending request count in the inference engine metrics
+- C) Nutanix cluster storage replication factor
+- D) AHV hypervisor CPU ready time
 
-**Answer: A**
+**Answer: B**
 Request queue depth directly measures how many inference requests are waiting to be processed, which is the primary indicator of queuing delay and processing bottlenecks in the serving pipeline.
 
 ---
@@ -332,12 +332,12 @@ Request queue depth directly measures how many inference requests are waiting to
 ### Q26
 A compliance requirement states that all changes to NAI endpoint configurations must be traceable to an individual administrator. Which approach BEST satisfies this requirement?
 
-- A) Enable Kubernetes RBAC audit logging to record which authenticated user modified deployments, ConfigMaps, and Secrets in the NAI namespace
-- B) Require all administrators to share a single kubeconfig with cluster-admin privileges
-- C) Store all configuration files on an unversioned NFS share
-- D) Disable RBAC and rely on network segmentation to control access
+- A) Store all configuration files on an unversioned NFS share
+- B) Disable RBAC and rely on network segmentation to control access
+- C) Enable Kubernetes RBAC audit logging to record which authenticated user modified deployments, ConfigMaps, and Secrets in the NAI namespace
+- D) Require all administrators to share a single kubeconfig with cluster-admin privileges
 
-**Answer: A**
+**Answer: C**
 Kubernetes RBAC audit logging records the authenticated identity, timestamp, and action for every API request, providing a traceable audit trail that satisfies compliance requirements for configuration change tracking.
 
 ---
@@ -345,12 +345,12 @@ Kubernetes RBAC audit logging records the authenticated identity, timestamp, and
 ### Q27
 An engineer is evaluating whether to add a second GPU node or optimize the existing model serving configuration. The current node has an NVIDIA A100 80 GB GPU running a 7B parameter model in FP16. GPU memory utilization is at 30%, and GPU compute utilization is at 45%. Request queue depth is zero. What should the engineer recommend?
 
-- A) Optimize the existing configuration by increasing batch size and concurrent request limits before adding hardware, since GPU resources are significantly underutilized
-- B) Add a second GPU node immediately because the GPU utilization is below 50%
-- C) Replace the A100 with an NVIDIA T4 to save costs since the workload is light
-- D) Migrate the model from NAI to Prism Central Files for better throughput
+- A) Add a second GPU node immediately because the GPU utilization is below 50%
+- B) Replace the A100 with an NVIDIA T4 to save costs since the workload is light
+- C) Migrate the model from NAI to Prism Central Files for better throughput
+- D) Optimize the existing configuration by increasing batch size and concurrent request limits before adding hardware, since GPU resources are significantly underutilized
 
-**Answer: A**
+**Answer: D**
 With 30% memory and 45% compute utilization and no queue depth, the existing GPU has substantial headroom. Increasing batch size or concurrency will improve utilization and throughput before any hardware investment is warranted.
 
 ---
@@ -375,12 +375,12 @@ The `no CUDA-capable device is detected` error means the container runtime canno
 ### Q29
 An inference endpoint returns `OutOfMemoryError: CUDA out of memory` when processing long prompts. The model loads successfully for short prompts. What is the MOST likely cause?
 
-- A) The KV cache grows with prompt length and exceeds available GPU memory when processing long context inputs
-- B) The Kubernetes API server has run out of etcd storage
-- C) The NKP control plane node does not have a GPU assigned
-- D) The Nutanix Files share holding the model has a file size limit of 1 GB
+- A) The Nutanix Files share holding the model has a file size limit of 1 GB
+- B) The KV cache grows with prompt length and exceeds available GPU memory when processing long context inputs
+- C) The Kubernetes API server has run out of etcd storage
+- D) The NKP control plane node does not have a GPU assigned
 
-**Answer: A**
+**Answer: B**
 The KV cache in transformer inference scales linearly with sequence length. Long prompts require proportionally more GPU memory for the cache, which can exceed available VRAM even when the model weights fit comfortably.
 
 ---
@@ -388,12 +388,12 @@ The KV cache in transformer inference scales linearly with sequence length. Long
 ### Q30
 A newly deployed NAI inference endpoint is not reachable from external clients, but `kubectl port-forward` to the pod works correctly. Where should the administrator investigate?
 
-- A) The Kubernetes ingress controller configuration and the associated Service/Ingress resources to ensure external traffic is being routed to the inference pods
-- B) The GPU driver version installed inside the inference container
-- C) The vLLM PagedAttention configuration parameters
-- D) The Nutanix Objects lifecycle policy for model artifacts
+- A) The vLLM PagedAttention configuration parameters
+- B) The Nutanix Objects lifecycle policy for model artifacts
+- C) The Kubernetes ingress controller configuration and the associated Service/Ingress resources to ensure external traffic is being routed to the inference pods
+- D) The GPU driver version installed inside the inference container
 
-**Answer: A**
+**Answer: C**
 If the pod is reachable via port-forward but not externally, the issue lies in the networking layer — typically a misconfigured Ingress resource, missing ingress controller, or incorrect Service selector that prevents external traffic from reaching the pods.
 
 ---
@@ -401,12 +401,12 @@ If the pod is reachable via port-forward but not externally, the issue lies in t
 ### Q31
 An administrator runs `nvidia-smi` on an NKP worker node and sees `ERR!` in the ECC error column for a GPU. Inference pods on this node are experiencing intermittent incorrect outputs. What should the administrator do?
 
-- A) Drain the node using `kubectl drain`, schedule GPU hardware inspection or replacement, and allow workloads to reschedule to healthy nodes
-- B) Increase the batch size in vLLM to compensate for the error rate
-- C) Restart the Prism Central VM to reset the GPU error counters
-- D) Delete and recreate the Kubernetes namespace to clear the error state
+- A) Increase the batch size in vLLM to compensate for the error rate
+- B) Restart the Prism Central VM to reset the GPU error counters
+- C) Delete and recreate the Kubernetes namespace to clear the error state
+- D) Drain the node using `kubectl drain`, schedule GPU hardware inspection or replacement, and allow workloads to reschedule to healthy nodes
 
-**Answer: A**
+**Answer: D**
 ECC errors indicate potential GPU hardware degradation that can cause computation errors. The correct procedure is to drain the node (safely evacuating workloads), then inspect or replace the GPU to prevent data corruption.
 
 ---
@@ -427,12 +427,12 @@ GGUF is a quantized model format for llama.cpp and compatible runtimes. vLLM use
 ### Q33
 An NAI inference pod is stuck in `Pending` state. Running `kubectl describe pod` shows the event: `0/3 nodes are available: 3 Insufficient nvidia.com/gpu`. What does this indicate?
 
-- A) All GPU resources across the three worker nodes are fully allocated to existing pods, and no GPUs are available to schedule the new pod
-- B) The NVIDIA driver is not installed on the pod container image
-- C) The Nutanix Objects bucket has reached its object count limit
-- D) The Kubernetes API server certificate has expired
+- A) The Kubernetes API server certificate has expired
+- B) All GPU resources across the three worker nodes are fully allocated to existing pods, and no GPUs are available to schedule the new pod
+- C) The NVIDIA driver is not installed on the pod container image
+- D) The Nutanix Objects bucket has reached its object count limit
 
-**Answer: A**
+**Answer: B**
 The `Insufficient nvidia.com/gpu` scheduling error means every node in the cluster has already allocated its GPU resources to other pods. The new pod cannot be scheduled until GPUs are freed or new GPU nodes are added.
 
 ---
@@ -440,12 +440,12 @@ The `Insufficient nvidia.com/gpu` scheduling error means every node in the clust
 ### Q34
 After restarting an NKP worker node, the NVIDIA device plugin pod on that node is in `CrashLoopBackOff`. Inference pods are not being scheduled to this node. What should the administrator check FIRST?
 
-- A) Verify that the NVIDIA GPU drivers are properly loaded on the host and that the GPU device files are accessible in `/dev/nvidia*`
-- B) Check if the Nutanix Files share is mounted on Prism Central
-- C) Verify the Grafana dashboard JSON syntax
-- D) Inspect the Kubernetes HPA minimum replica count
+- A) Verify the Grafana dashboard JSON syntax
+- B) Inspect the Kubernetes HPA minimum replica count
+- C) Verify that the NVIDIA GPU drivers are properly loaded on the host and that the GPU device files are accessible in `/dev/nvidia*`
+- D) Check if the Nutanix Files share is mounted on Prism Central
 
-**Answer: A**
+**Answer: C**
 The NVIDIA device plugin requires the host NVIDIA drivers to be loaded and GPU devices to be accessible. If drivers fail to load after a reboot, the device plugin crashes, preventing GPU resource advertisement to the Kubernetes scheduler.
 
 ---
@@ -453,12 +453,12 @@ The NVIDIA device plugin requires the host NVIDIA drivers to be loaded and GPU d
 ### Q35
 An inference endpoint intermittently returns HTTP 504 Gateway Timeout errors. The pod logs show that inference completes successfully but takes 45 seconds. What is the MOST likely cause?
 
-- A) The ingress controller or load balancer has a request timeout configured lower than the actual inference time, causing it to terminate the connection before the response is ready
-- B) The model has been corrupted and needs to be re-downloaded
-- C) The GPU has overheated and entered thermal throttling
-- D) The Kubernetes namespace has exceeded its ResourceQuota for CPU
+- A) The model has been corrupted and needs to be re-downloaded
+- B) The GPU has overheated and entered thermal throttling
+- C) The Kubernetes namespace has exceeded its ResourceQuota for CPU
+- D) The ingress controller or load balancer has a request timeout configured lower than the actual inference time, causing it to terminate the connection before the response is ready
 
-**Answer: A**
+**Answer: D**
 HTTP 504 errors from the ingress controller with successful but slow pod-level inference indicate a timeout mismatch. The ingress/load balancer timeout must be increased to accommodate the expected inference duration.
 
 ---
@@ -479,12 +479,12 @@ The standard diagnostic workflow starts by listing pods to see their status, des
 ### Q37
 An NAI endpoint pod is running but inference requests return `Connection refused` on port 8000. The pod logs show the model loaded successfully. What should the administrator check?
 
-- A) Verify that the containerPort in the pod spec matches port 8000 and that the Kubernetes Service `targetPort` is correctly mapped to the container's listening port
-- B) Check the Nutanix Objects bucket ACL for the model artifact
-- C) Restart the Prism Central management VM
-- D) Increase the GPU count from 1 to 4 in the pod resource request
+- A) Increase the GPU count from 1 to 4 in the pod resource request
+- B) Verify that the containerPort in the pod spec matches port 8000 and that the Kubernetes Service `targetPort` is correctly mapped to the container's listening port
+- C) Check the Nutanix Objects bucket ACL for the model artifact
+- D) Restart the Prism Central management VM
 
-**Answer: A**
+**Answer: B**
 `Connection refused` on a running pod with a loaded model typically means a port mismatch between the Service targetPort and the container's actual listening port, or the container is binding to localhost instead of 0.0.0.0.
 
 ---
@@ -492,12 +492,12 @@ An NAI endpoint pod is running but inference requests return `Connection refused
 ### Q38
 A model download to Nutanix Objects fails repeatedly with a checksum mismatch error. The network connectivity test to the model source passes. What should the administrator do?
 
-- A) Delete the partially downloaded file, verify the expected checksum from the model source, and retry the download, ensuring no proxy or CDN is caching a corrupted version
-- B) Increase GPU memory on the inference pod
-- C) Change the vLLM batch size to 1
-- D) Rotate the TLS certificate on the NKP API server
+- A) Change the vLLM batch size to 1
+- B) Rotate the TLS certificate on the NKP API server
+- C) Delete the partially downloaded file, verify the expected checksum from the model source, and retry the download, ensuring no proxy or CDN is caching a corrupted version
+- D) Increase GPU memory on the inference pod
 
-**Answer: A**
+**Answer: C**
 Checksum mismatches typically indicate a corrupted or incomplete download, sometimes caused by caching proxies. Clearing the cached file and retrying from the source with checksum verification resolves the issue.
 
 ---
@@ -505,12 +505,12 @@ Checksum mismatches typically indicate a corrupted or incomplete download, somet
 ### Q39
 An administrator receives a `FailedScheduling` event for an NAI pod with the message `node(s) didn't match Pod's node affinity/selector`. The cluster has available GPU nodes. What is the MOST likely cause?
 
-- A) The pod specification includes a nodeSelector or nodeAffinity rule that does not match the labels on the available GPU nodes
-- B) The NVIDIA driver version is too new for the GPU hardware
-- C) The model file is stored in an incompatible format
-- D) The Kubernetes Service type is set to ClusterIP instead of NodePort
+- A) The NVIDIA driver version is too new for the GPU hardware
+- B) The model file is stored in an incompatible format
+- C) The Kubernetes Service type is set to ClusterIP instead of NodePort
+- D) The pod specification includes a nodeSelector or nodeAffinity rule that does not match the labels on the available GPU nodes
 
-**Answer: A**
+**Answer: D**
 Node affinity/selector mismatches occur when the pod's scheduling constraints reference labels that don't exist on any available nodes. The administrator must either update the pod's affinity rules or label the GPU nodes accordingly.
 
 ---
@@ -531,12 +531,12 @@ An inference pod repeatedly terminates with `OOMKilled` status, but GPU memory s
 ### Q41
 An administrator notices that DNS resolution for an NAI inference endpoint fails intermittently from client applications. Pods and the Kubernetes Service are healthy. What should be investigated?
 
-- A) The CoreDNS pods in the kube-system namespace and any external DNS configuration for the ingress hostname
-- B) The GPU thermal throttling thresholds on the worker nodes
-- C) The Nutanix Files share quota settings
-- D) The vLLM KV cache eviction policy
+- A) The vLLM KV cache eviction policy
+- B) The CoreDNS pods in the kube-system namespace and any external DNS configuration for the ingress hostname
+- C) The GPU thermal throttling thresholds on the worker nodes
+- D) The Nutanix Files share quota settings
 
-**Answer: A**
+**Answer: B**
 Intermittent DNS failures with healthy pods typically point to CoreDNS issues (pod health, resource limits, upstream DNS forwarding) or external DNS misconfiguration for the ingress hostname.
 
 ---
@@ -544,12 +544,12 @@ Intermittent DNS failures with healthy pods typically point to CoreDNS issues (p
 ### Q42
 After scaling an NAI inference deployment from 2 to 4 replicas, two of the new pods are stuck in `ContainerCreating` state. What should the administrator investigate?
 
-- A) Check if the PersistentVolumeClaim for the model files supports `ReadWriteMany` access mode, as multiple pods may be unable to mount the same volume simultaneously
-- B) Verify that the Grafana dashboard has been updated to show 4 replicas
-- C) Check if the Prism Central license has expired
-- D) Verify that the Nutanix Objects bucket versioning policy is enabled
+- A) Check if the Prism Central license has expired
+- B) Verify that the Nutanix Objects bucket versioning policy is enabled
+- C) Check if the PersistentVolumeClaim for the model files supports `ReadWriteMany` access mode, as multiple pods may be unable to mount the same volume simultaneously
+- D) Verify that the Grafana dashboard has been updated to show 4 replicas
 
-**Answer: A**
+**Answer: C**
 When scaling replicas, all pods need access to the model files. If the PVC uses `ReadWriteOnce`, only one node can mount it. `ReadWriteMany` (e.g., backed by Nutanix Files) is needed for multi-node pod scheduling.
 
 ---
@@ -557,12 +557,12 @@ When scaling replicas, all pods need access to the model files. If the PVC uses 
 ### Q43
 An NKP cluster health check shows a worker node in `NotReady` state. NAI pods previously running on this node are being rescheduled. Which Prism Central view helps determine the underlying infrastructure issue?
 
-- A) The VM list view filtered to the affected worker node VM, showing CPU, memory, disk, and network health metrics
-- B) The Calm marketplace showing available blueprints
-- C) The Karbon cluster creation wizard
-- D) The Objects browser showing bucket access logs
+- A) The Calm marketplace showing available blueprints
+- B) The Karbon cluster creation wizard
+- C) The Objects browser showing bucket access logs
+- D) The VM list view filtered to the affected worker node VM, showing CPU, memory, disk, and network health metrics
 
-**Answer: A**
+**Answer: D**
 Prism Central's VM-level view provides infrastructure diagnostics — CPU, memory, disk I/O, and network metrics — for the underlying VM hosting the NKP worker node, helping identify hardware or hypervisor-level issues causing the `NotReady` state.
 
 ---
@@ -583,12 +583,12 @@ The `max_model_len` parameter in vLLM controls the maximum context length the se
 ### Q45
 An administrator needs to recover an NAI endpoint after its configuration was accidentally corrupted by an unauthorized `kubectl apply`. What is the recommended recovery procedure?
 
-- A) Delete the corrupted endpoint resources and recreate them from the version-controlled manifests stored in the Git repository
-- B) Restart all AHV hosts in the Nutanix cluster
-- C) Re-register the NKP cluster with Prism Central
-- D) Increase the Kubernetes etcd snapshot retention count
+- A) Increase the Kubernetes etcd snapshot retention count
+- B) Delete the corrupted endpoint resources and recreate them from the version-controlled manifests stored in the Git repository
+- C) Restart all AHV hosts in the Nutanix cluster
+- D) Re-register the NKP cluster with Prism Central
 
-**Answer: A**
+**Answer: B**
 The standard recovery procedure for corrupted Kubernetes configurations is to delete the corrupted resources and reapply the known-good manifests from version control, which is why storing configurations in Git is a best practice.
 
 ---
@@ -596,12 +596,12 @@ The standard recovery procedure for corrupted Kubernetes configurations is to de
 ### Q46
 An NKP cluster node needs maintenance. The administrator must ensure NAI inference pods are gracefully migrated. Which kubectl command should be used BEFORE taking the node offline?
 
-- A) `kubectl drain <node-name> --ignore-daemonsets --delete-emptydir-data`
-- B) `kubectl delete node <node-name> --force`
-- C) `kubectl taint nodes <node-name> gpu=broken:NoSchedule`
-- D) `kubectl cordon <node-name>` only, without draining
+- A) `kubectl taint nodes <node-name> gpu=broken:NoSchedule`
+- B) `kubectl cordon <node-name>` only, without draining
+- C) `kubectl drain <node-name> --ignore-daemonsets --delete-emptydir-data`
+- D) `kubectl delete node <node-name> --force`
 
-**Answer: A**
+**Answer: C**
 `kubectl drain` safely evicts all pods from the node (respecting PodDisruptionBudgets), reschedules them on other nodes, and cordons the node to prevent new scheduling — the correct pre-maintenance procedure.
 
 ---
@@ -609,12 +609,12 @@ An NKP cluster node needs maintenance. The administrator must ensure NAI inferen
 ### Q47
 An NAI inference pod's GPU shows 0% utilization in nvidia-smi even though the pod is in `Running` state and claims to have loaded the model. Inference requests return errors. What should the administrator check?
 
-- A) Verify that the CUDA libraries inside the container match the NVIDIA driver version on the host and that the model was loaded to the GPU, not CPU-only mode
-- B) Check if the Prism Central dashboard theme was changed recently
-- C) Verify that the Nutanix Files share has deduplication enabled
-- D) Ensure that the Kubernetes namespace has a NetworkPolicy allowing egress to Nutanix Objects
+- A) Check if the Prism Central dashboard theme was changed recently
+- B) Verify that the Nutanix Files share has deduplication enabled
+- C) Ensure that the Kubernetes namespace has a NetworkPolicy allowing egress to Nutanix Objects
+- D) Verify that the CUDA libraries inside the container match the NVIDIA driver version on the host and that the model was loaded to the GPU, not CPU-only mode
 
-**Answer: A**
+**Answer: D**
 Zero GPU utilization with a "loaded" model suggests a CUDA version mismatch or the runtime falling back to CPU. Verifying driver/library compatibility and confirming the model is on the GPU device is the correct diagnostic step.
 
 ---
@@ -635,12 +635,12 @@ Which kubectl command is MOST useful for determining why a specific NAI pod was 
 ### Q49
 An NAI endpoint was working but stops responding after a Kubernetes Secret containing the model download credentials was accidentally deleted. What is the correct recovery approach?
 
-- A) Recreate the Kubernetes Secret with the correct credentials and restart the affected pods to trigger a fresh credential mount
-- B) Increase GPU memory to allow the model to run from cache
-- C) Delete and recreate the NKP cluster
-- D) Switch the inference runtime from vLLM to a CPU-only framework
+- A) Switch the inference runtime from vLLM to a CPU-only framework
+- B) Recreate the Kubernetes Secret with the correct credentials and restart the affected pods to trigger a fresh credential mount
+- C) Increase GPU memory to allow the model to run from cache
+- D) Delete and recreate the NKP cluster
 
-**Answer: A**
+**Answer: B**
 Kubernetes Secrets are mounted into pods at runtime. Recreating the deleted Secret and restarting the pods ensures they pick up the new credentials for model access and operations.
 
 ---
@@ -648,12 +648,12 @@ Kubernetes Secrets are mounted into pods at runtime. Recreating the deleted Secr
 ### Q50
 An administrator suspects a storage performance issue is causing slow model loading times on NAI endpoints. Which Prism Central metric is MOST relevant?
 
-- A) Storage controller IOPS and latency metrics for the volume backing the PersistentVolume used by inference pods
-- B) Prism Central login page load time
-- C) NKP cluster certificate expiration date
-- D) Nutanix Files share replication lag to a remote site
+- A) NKP cluster certificate expiration date
+- B) Nutanix Files share replication lag to a remote site
+- C) Storage controller IOPS and latency metrics for the volume backing the PersistentVolume used by inference pods
+- D) Prism Central login page load time
 
-**Answer: A**
+**Answer: C**
 Model loading is a storage-intensive operation that reads large files from persistent storage. Storage controller IOPS and latency metrics in Prism Central directly indicate whether storage performance is the bottleneck.
 
 ---
@@ -661,12 +661,12 @@ Model loading is a storage-intensive operation that reads large files from persi
 ### Q51
 An inference endpoint returns correct responses for simple prompts but produces garbled output for complex multi-turn conversations. GPU health checks pass. What is the MOST likely issue?
 
-- A) The model's maximum context length is being silently truncated, causing the conversation history to be cut off mid-token, resulting in incoherent generation
-- B) The Kubernetes Service is using session affinity instead of round-robin
-- C) The AHV hypervisor CPU scheduling priority is set too low
-- D) The Nutanix Objects WORM policy is preventing model file updates
+- A) The Kubernetes Service is using session affinity instead of round-robin
+- B) The AHV hypervisor CPU scheduling priority is set too low
+- C) The Nutanix Objects WORM policy is preventing model file updates
+- D) The model's maximum context length is being silently truncated, causing the conversation history to be cut off mid-token, resulting in incoherent generation
 
-**Answer: A**
+**Answer: D**
 Silent context truncation is a common issue when multi-turn conversations exceed the model's maximum context window. The model receives incomplete context and generates incoherent output as a result.
 
 ---
@@ -687,12 +687,12 @@ With functioning ingress controller pods but no external access, the Ingress res
 ### Q53
 After a power outage, an NKP cluster comes back online but NAI inference pods fail to start, reporting `VolumeMount` errors. What should the administrator verify?
 
-- A) The PersistentVolumes and PersistentVolumeClaims are in `Bound` state and the underlying Nutanix storage (Volumes or Files) is accessible after the power restoration
-- B) The Grafana dashboards are displaying real-time data
-- C) The GPU temperature is within normal operating range
-- D) The Kubernetes ConfigMap for Prometheus contains valid YAML
+- A) The Kubernetes ConfigMap for Prometheus contains valid YAML
+- B) The PersistentVolumes and PersistentVolumeClaims are in `Bound` state and the underlying Nutanix storage (Volumes or Files) is accessible after the power restoration
+- C) The Grafana dashboards are displaying real-time data
+- D) The GPU temperature is within normal operating range
 
-**Answer: A**
+**Answer: B**
 After a power outage, storage subsystems may not recover immediately. Verifying PV/PVC bind state and underlying Nutanix storage accessibility is critical before inference pods can mount their model data volumes.
 
 ---
@@ -700,12 +700,12 @@ After a power outage, storage subsystems may not recover immediately. Verifying 
 ### Q54
 A user reports that inference requests succeed from one application but fail with `401 Unauthorized` from another application, both using the same NAI endpoint. What should be checked?
 
-- A) Verify that the failing application is correctly including the API key in the `Authorization: Bearer` header and that the key has not been revoked or rotated since configuration
-- B) Check if the GPU has ECC errors affecting only certain clients
-- C) Verify that Nutanix Objects versioning is enabled for the model bucket
-- D) Ensure the Prometheus ServiceMonitor is scraping both applications
+- A) Verify that Nutanix Objects versioning is enabled for the model bucket
+- B) Ensure the Prometheus ServiceMonitor is scraping both applications
+- C) Verify that the failing application is correctly including the API key in the `Authorization: Bearer` header and that the key has not been revoked or rotated since configuration
+- D) Check if the GPU has ECC errors affecting only certain clients
 
-**Answer: A**
+**Answer: C**
 A 401 error from one client but not another points to an authentication issue in the failing client — typically a missing, malformed, or expired API key in the Authorization header rather than an infrastructure problem.
 
 ---
@@ -717,12 +717,12 @@ A 401 error from one client but not another points to an authentication issue in
 ### Q55
 A development team currently uses the OpenAI Python SDK to call GPT-4 in production. They want to switch to a locally hosted model on NAI without rewriting their application. What is the MINIMUM change required?
 
-- A) Change the `base_url` parameter in the OpenAI client initialization to point to the NAI endpoint URL and update the API key
-- B) Rewrite the entire application using a Nutanix-specific SDK
-- C) Convert the model from safetensors to ONNX format
-- D) Install the NVIDIA CUDA toolkit on the application server
+- A) Rewrite the entire application using a Nutanix-specific SDK
+- B) Convert the model from safetensors to ONNX format
+- C) Install the NVIDIA CUDA toolkit on the application server
+- D) Change the `base_url` parameter in the OpenAI client initialization to point to the NAI endpoint URL and update the API key
 
-**Answer: A**
+**Answer: D**
 NAI exposes an OpenAI-compatible API, so the OpenAI SDK works as a drop-in client. Only the `base_url` and API key need to change — no code rewrite or special SDK is needed.
 
 ---
@@ -743,12 +743,12 @@ The `/v1/chat/completions` endpoint accepts a `messages` array where each messag
 ### Q57
 A developer wants to implement streaming responses from an NAI endpoint so users see tokens as they are generated. Which combination of API settings enables this?
 
-- A) Set `stream: true` in the request body and handle Server-Sent Events (SSE) in the client
-- B) Set `batch_size: 1` in the request body and use a WebSocket connection
-- C) Set `async: true` in the HTTP headers and poll a separate `/v1/results` endpoint
-- D) Set `chunked_transfer: enabled` in the Kubernetes Ingress annotation
+- A) Set `chunked_transfer: enabled` in the Kubernetes Ingress annotation
+- B) Set `stream: true` in the request body and handle Server-Sent Events (SSE) in the client
+- C) Set `batch_size: 1` in the request body and use a WebSocket connection
+- D) Set `async: true` in the HTTP headers and poll a separate `/v1/results` endpoint
 
-**Answer: A**
+**Answer: B**
 The OpenAI-compatible API uses `stream: true` to enable streaming, which returns tokens incrementally via Server-Sent Events (SSE). The client must process the event stream to display tokens as they arrive.
 
 ---
@@ -756,12 +756,12 @@ The OpenAI-compatible API uses `stream: true` to enable streaming, which returns
 ### Q58
 A developer is building a RAG (Retrieval Augmented Generation) application using NAI. Which architecture correctly describes the RAG pattern?
 
-- A) The application queries a vector database with the user's question to retrieve relevant documents, then sends those documents along with the question to NAI's `/v1/chat/completions` endpoint as context
-- B) The application sends the user's question directly to Nutanix Objects, which performs inference and returns a response
-- C) The application stores the model weights in a vector database and queries them directly without calling NAI
-- D) The application uses NAI's `/v1/models` endpoint to search through documents and generate embeddings
+- A) The application stores the model weights in a vector database and queries them directly without calling NAI
+- B) The application uses NAI's `/v1/models` endpoint to search through documents and generate embeddings
+- C) The application queries a vector database with the user's question to retrieve relevant documents, then sends those documents along with the question to NAI's `/v1/chat/completions` endpoint as context
+- D) The application sends the user's question directly to Nutanix Objects, which performs inference and returns a response
 
-**Answer: A**
+**Answer: C**
 RAG works by first retrieving relevant context from a vector database, then including that context in the prompt sent to the LLM for grounded generation. NAI serves as the generation component in this architecture.
 
 ---
@@ -769,12 +769,12 @@ RAG works by first retrieving relevant context from a vector database, then incl
 ### Q59
 Which HTTP header is required for authenticating API requests to an NAI inference endpoint?
 
-- A) `Authorization: Bearer <api-key>`
-- B) `X-Nutanix-Auth: <cluster-uuid>`
-- C) `Cookie: session=<prism-central-token>`
-- D) `X-GPU-Key: <nvidia-license-key>`
+- A) `X-Nutanix-Auth: <cluster-uuid>`
+- B) `Cookie: session=<prism-central-token>`
+- C) `X-GPU-Key: <nvidia-license-key>`
+- D) `Authorization: Bearer <api-key>`
 
-**Answer: A**
+**Answer: D**
 NAI uses the standard Bearer token authentication scheme in the Authorization HTTP header, consistent with the OpenAI API specification it is compatible with.
 
 ---
@@ -795,12 +795,12 @@ The `GET /v1/models` endpoint returns a list of all models currently available o
 ### Q61
 A developer is setting the `temperature` parameter for a document classification task using NAI. Which value is MOST appropriate for consistent, deterministic classification?
 
-- A) `temperature: 0` or a very low value like `0.1` to minimize randomness in the output
-- B) `temperature: 2.0` to maximize creativity in classification labels
-- C) `temperature: 1.0` because it is the universal default for all tasks
-- D) `temperature: -1` to enable greedy decoding mode
+- A) `temperature: -1` to enable greedy decoding mode
+- B) `temperature: 0` or a very low value like `0.1` to minimize randomness in the output
+- C) `temperature: 2.0` to maximize creativity in classification labels
+- D) `temperature: 1.0` because it is the universal default for all tasks
 
-**Answer: A**
+**Answer: B**
 For classification tasks requiring consistent and deterministic output, a temperature of 0 (or near-zero) minimizes the randomness in token sampling, producing the most probable output reliably.
 
 ---
@@ -808,12 +808,12 @@ For classification tasks requiring consistent and deterministic output, a temper
 ### Q62
 An application team wants to integrate a health check for the NAI inference endpoint into their load balancer configuration. Which endpoint should they use?
 
-- A) The `/health` endpoint, which returns the readiness status of the inference server
-- B) The `/v1/chat/completions` endpoint with a test prompt on every health check interval
-- C) The `/v1/models` endpoint, parsing the HTML response for an "OK" string
-- D) The `/nvidia-smi` endpoint, which returns raw GPU utilization data
+- A) The `/v1/models` endpoint, parsing the HTML response for an "OK" string
+- B) The `/nvidia-smi` endpoint, which returns raw GPU utilization data
+- C) The `/health` endpoint, which returns the readiness status of the inference server
+- D) The `/v1/chat/completions` endpoint with a test prompt on every health check interval
 
-**Answer: A**
+**Answer: C**
 The `/health` endpoint is designed specifically for health checks, returning a lightweight status response suitable for load balancer and Kubernetes probe integration without the overhead of running actual inference.
 
 ---
@@ -821,12 +821,12 @@ The `/health` endpoint is designed specifically for health checks, returning a l
 ### Q63
 A developer notices that their application receives duplicate responses from NAI when using multiple inference pod replicas behind a Kubernetes Service. What is the MOST likely cause?
 
-- A) The application is not handling the HTTP response correctly and is retrying requests that were already processed, not a duplicate response from NAI itself
-- B) The Kubernetes Service is configured with `sessionAffinity: ClientIP`, causing the same pod to receive all requests
-- C) The vLLM PagedAttention mechanism is duplicating KV cache entries
-- D) The NVIDIA device plugin is advertising twice the actual GPU count
+- A) The Kubernetes Service is configured with `sessionAffinity: ClientIP`, causing the same pod to receive all requests
+- B) The vLLM PagedAttention mechanism is duplicating KV cache entries
+- C) The NVIDIA device plugin is advertising twice the actual GPU count
+- D) The application is not handling the HTTP response correctly and is retrying requests that were already processed, not a duplicate response from NAI itself
 
-**Answer: A**
+**Answer: D**
 Kubernetes Services with multiple replicas use round-robin distribution and do not send duplicate responses. Apparent duplicates are typically caused by client-side retry logic sending the same request multiple times.
 
 ---
@@ -847,12 +847,12 @@ The `max_tokens` parameter specifies the upper limit on the number of tokens the
 ### Q65
 A developer is building a chatbot using NAI and needs to maintain conversation context across multiple API calls. Which approach correctly implements stateful conversation?
 
-- A) Include the full conversation history as a `messages` array in each API request, appending new user and assistant messages after each turn
-- B) Store the conversation ID in a Kubernetes ConfigMap and reference it in the `X-Session-ID` header
-- C) Use the `/v1/sessions/create` endpoint to initialize a server-side session
-- D) Set `stateful: true` in the NAI operator custom resource definition
+- A) Set `stateful: true` in the NAI operator custom resource definition
+- B) Include the full conversation history as a `messages` array in each API request, appending new user and assistant messages after each turn
+- C) Store the conversation ID in a Kubernetes ConfigMap and reference it in the `X-Session-ID` header
+- D) Use the `/v1/sessions/create` endpoint to initialize a server-side session
 
-**Answer: A**
+**Answer: B**
 The OpenAI-compatible API is stateless — each request must contain the complete conversation history in the messages array. The application is responsible for accumulating and sending the full message history on each turn.
 
 ---
@@ -860,12 +860,12 @@ The OpenAI-compatible API is stateless — each request must contain the complet
 ### Q66
 A developer wants to use an NAI-hosted model for code generation. Which configuration MOST improves code output quality?
 
-- A) Deploy a code-optimized model (e.g., Code Llama or StarCoder) and set `temperature` to a low value with a code-specific system prompt
-- B) Use any general-purpose chat model with `temperature: 2.0` and no system prompt
-- C) Deploy the model on CPU-only nodes for better determinism
-- D) Set `top_p: 0` and `max_tokens: 1` for one token at a time generation
+- A) Deploy the model on CPU-only nodes for better determinism
+- B) Set `top_p: 0` and `max_tokens: 1` for one token at a time generation
+- C) Deploy a code-optimized model (e.g., Code Llama or StarCoder) and set `temperature` to a low value with a code-specific system prompt
+- D) Use any general-purpose chat model with `temperature: 2.0` and no system prompt
 
-**Answer: A**
+**Answer: C**
 Code-optimized models are trained specifically on code corpora and produce better code output. Low temperature reduces randomness for more syntactically correct generation, and a code-specific system prompt guides output formatting.
 
 ---
@@ -873,12 +873,12 @@ Code-optimized models are trained specifically on code corpora and produce bette
 ### Q67
 An application sends a request to NAI's `/v1/chat/completions` endpoint but receives a `422 Unprocessable Entity` error. The request body contains `{"prompt": "Hello"}`. What is wrong?
 
-- A) The `/v1/chat/completions` endpoint requires a `messages` array, not a `prompt` string — the `prompt` field is used with the `/v1/completions` endpoint
-- B) The model has been deleted from Nutanix Objects
-- C) The GPU has run out of memory
-- D) The API key has expired
+- A) The model has been deleted from Nutanix Objects
+- B) The GPU has run out of memory
+- C) The API key has expired
+- D) The `/v1/chat/completions` endpoint requires a `messages` array, not a `prompt` string — the `prompt` field is used with the `/v1/completions` endpoint
 
-**Answer: A**
+**Answer: D**
 The `/v1/chat/completions` endpoint expects a `messages` array with role/content objects, while the `/v1/completions` endpoint uses a `prompt` string. Using the wrong field format returns a 422 validation error.
 
 ---
@@ -899,12 +899,12 @@ Map-reduce summarization (chunk → summarize → combine) is the standard techn
 ### Q69
 A developer needs to monitor the performance of their application's NAI API calls. Which endpoint provides Prometheus-compatible metrics about inference performance?
 
-- A) The metrics endpoint (typically `/metrics`) on the inference server, which exposes request counts, latencies, and queue depth in Prometheus format
-- B) The `/v1/models` endpoint, which includes performance statistics in the model list
-- C) The `/health` endpoint, which returns detailed latency percentiles
-- D) The `/v1/chat/completions` endpoint with a `metrics: true` query parameter
+- A) The `/v1/chat/completions` endpoint with a `metrics: true` query parameter
+- B) The metrics endpoint (typically `/metrics`) on the inference server, which exposes request counts, latencies, and queue depth in Prometheus format
+- C) The `/v1/models` endpoint, which includes performance statistics in the model list
+- D) The `/health` endpoint, which returns detailed latency percentiles
 
-**Answer: A**
+**Answer: B**
 The `/metrics` endpoint exposes Prometheus-format metrics including request count, latency histograms, queue depth, and GPU utilization — designed for scraping by Prometheus and visualization in Grafana.
 
 ---
@@ -912,12 +912,12 @@ The `/metrics` endpoint exposes Prometheus-format metrics including request coun
 ### Q70
 A developer's application calls NAI with `top_p: 0.95` and `temperature: 0.7`. What effect do these parameters have on the model's output?
 
-- A) `temperature: 0.7` moderately reduces sampling randomness, and `top_p: 0.95` (nucleus sampling) limits token selection to the most probable tokens whose cumulative probability reaches 95%
-- B) `top_p: 0.95` sets the GPU utilization target to 95%, and `temperature: 0.7` sets the cooling threshold
-- C) Both parameters control the number of inference replicas behind the Kubernetes Service
-- D) `temperature: 0.7` sets the request timeout to 0.7 seconds, and `top_p: 0.95` sets the success rate SLA
+- A) Both parameters control the number of inference replicas behind the Kubernetes Service
+- B) `temperature: 0.7` sets the request timeout to 0.7 seconds, and `top_p: 0.95` sets the success rate SLA
+- C) `temperature: 0.7` moderately reduces sampling randomness, and `top_p: 0.95` (nucleus sampling) limits token selection to the most probable tokens whose cumulative probability reaches 95%
+- D) `top_p: 0.95` sets the GPU utilization target to 95%, and `temperature: 0.7` sets the cooling threshold
 
-**Answer: A**
+**Answer: C**
 Temperature controls the randomness of token selection (lower = more deterministic), while top_p (nucleus sampling) restricts sampling to the smallest set of tokens whose cumulative probability exceeds the threshold (0.95), balancing diversity and quality.
 
 ---
@@ -925,12 +925,12 @@ Temperature controls the randomness of token selection (lower = more determinist
 ### Q71
 An operations team wants to implement canary deployments for a new model version on NAI. How should they configure the Kubernetes resources?
 
-- A) Deploy the new model version as a separate Deployment with a small number of replicas and use a Kubernetes Service with weighted traffic splitting or an Istio VirtualService to route a percentage of traffic to the canary
-- B) Replace the model file on the PersistentVolume while pods are running
-- C) Change the Docker image tag in the existing Deployment and wait for Kubernetes to detect the change
-- D) Create a new Nutanix Objects bucket for the canary model and redirect Prism Central traffic
+- A) Replace the model file on the PersistentVolume while pods are running
+- B) Change the Docker image tag in the existing Deployment and wait for Kubernetes to detect the change
+- C) Create a new Nutanix Objects bucket for the canary model and redirect Prism Central traffic
+- D) Deploy the new model version as a separate Deployment with a small number of replicas and use a Kubernetes Service with weighted traffic splitting or an Istio VirtualService to route a percentage of traffic to the canary
 
-**Answer: A**
+**Answer: D**
 Canary deployments use a separate Deployment with limited replicas and traffic management (via Service mesh or ingress weights) to route a small percentage of traffic to the new version, enabling safe validation before full rollout.
 
 ---
@@ -951,12 +951,12 @@ HTTP 429 is the standard rate-limiting response code indicating temporary overlo
 ### Q73
 A developer configures their NAI API client with the wrong `base_url`, pointing to the Prism Central address instead of the NAI endpoint. What error will they MOST likely receive?
 
-- A) An HTTP error (such as `404 Not Found` or `Connection Refused`) because Prism Central does not serve the OpenAI-compatible API paths
-- B) Successful inference responses from Prism Central's built-in LLM
-- C) A `CUDA out of memory` error returned by Prism Central
-- D) A valid model list from the `/v1/models` endpoint showing Prism Central system models
+- A) A valid model list from the `/v1/models` endpoint showing Prism Central system models
+- B) An HTTP error (such as `404 Not Found` or `Connection Refused`) because Prism Central does not serve the OpenAI-compatible API paths
+- C) Successful inference responses from Prism Central's built-in LLM
+- D) A `CUDA out of memory` error returned by Prism Central
 
-**Answer: A**
+**Answer: B**
 Prism Central is the Nutanix management plane and does not serve OpenAI-compatible API endpoints. Requests to `/v1/chat/completions` on Prism Central will receive HTTP 404 or connection errors.
 
 ---
@@ -964,12 +964,12 @@ Prism Central is the Nutanix management plane and does not serve OpenAI-compatib
 ### Q74
 An application developer needs to use NAI for extracting structured information from invoices. Which API pattern is MOST effective?
 
-- A) Send each invoice's text to `/v1/chat/completions` with a system prompt that specifies the desired output schema (e.g., JSON with fields for vendor, amount, date) and set `temperature: 0`
-- B) Upload the invoice PDF directly to the `/v1/embeddings` endpoint for automatic parsing
-- C) Use the `/v1/models` endpoint to create a custom fine-tuned model for each invoice format
-- D) Send the invoice to Nutanix Objects and use an Objects lifecycle policy to trigger extraction
+- A) Use the `/v1/models` endpoint to create a custom fine-tuned model for each invoice format
+- B) Send the invoice to Nutanix Objects and use an Objects lifecycle policy to trigger extraction
+- C) Send each invoice's text to `/v1/chat/completions` with a system prompt that specifies the desired output schema (e.g., JSON with fields for vendor, amount, date) and set `temperature: 0`
+- D) Upload the invoice PDF directly to the `/v1/embeddings` endpoint for automatic parsing
 
-**Answer: A**
+**Answer: C**
 Structured extraction is best performed by providing clear output schema instructions in the system prompt with low temperature for consistent results. The chat completions endpoint handles the instruction-following required for extraction.
 
 ---
@@ -977,12 +977,12 @@ Structured extraction is best performed by providing clear output schema instruc
 ### Q75
 A developer implements a RAG application with NAI but finds that the model sometimes ignores the retrieved context and generates answers from its training data. What is the MOST effective mitigation?
 
-- A) Strengthen the system prompt to explicitly instruct the model to answer ONLY based on the provided context, and include a clear delimiter separating context from the question
-- B) Increase `temperature` to 2.0 to force the model to use retrieved context
-- C) Switch from `/v1/chat/completions` to `/v1/embeddings` for the generation step
-- D) Reduce the vector database's similarity threshold to 0.0 to retrieve more irrelevant documents
+- A) Increase `temperature` to 2.0 to force the model to use retrieved context
+- B) Switch from `/v1/chat/completions` to `/v1/embeddings` for the generation step
+- C) Reduce the vector database's similarity threshold to 0.0 to retrieve more irrelevant documents
+- D) Strengthen the system prompt to explicitly instruct the model to answer ONLY based on the provided context, and include a clear delimiter separating context from the question
 
-**Answer: A**
+**Answer: D**
 Explicit system prompt instructions to use only the provided context, combined with clear context formatting and delimiters, significantly reduce the model's tendency to rely on parametric knowledge over the retrieved documents.
 
 ---
@@ -1003,12 +1003,12 @@ The `/v1/models` endpoint provides dynamic model discovery. The application can 
 ### Q77
 A developer wants to limit the cost and latency of NAI API calls by preventing the model from generating excessively long responses. Which combination of parameters is MOST effective?
 
-- A) Set `max_tokens` to a reasonable upper bound and use `stop` sequences to halt generation at logical boundaries
-- B) Set `temperature: 0` and `top_p: 0`, which prevents the model from generating any tokens
-- C) Set `batch_size: 1` in the request body to limit output to one batch
-- D) Set the Kubernetes pod memory limit to 1 MB to force truncation
+- A) Set the Kubernetes pod memory limit to 1 MB to force truncation
+- B) Set `max_tokens` to a reasonable upper bound and use `stop` sequences to halt generation at logical boundaries
+- C) Set `temperature: 0` and `top_p: 0`, which prevents the model from generating any tokens
+- D) Set `batch_size: 1` in the request body to limit output to one batch
 
-**Answer: A**
+**Answer: B**
 `max_tokens` hard-caps the generation length, while `stop` sequences allow the model to halt at natural boundaries (like end-of-paragraph or special tokens), providing both a safety limit and graceful termination.
 
 ---
@@ -1016,12 +1016,12 @@ A developer wants to limit the cost and latency of NAI API calls by preventing t
 ### Q78
 A load balancer health check to an NAI endpoint starts failing, and the endpoint is removed from the pool. Pods are healthy and inference works when tested directly via `kubectl port-forward`. What should the administrator check?
 
-- A) Verify that the load balancer is configured to use the correct health check path (`/health`), port, and protocol, and that the endpoint's firewall rules allow health check traffic from the load balancer's IP range
-- B) Replace the GPU in the worker node
-- C) Delete the model artifacts and re-download from the source
-- D) Increase the vLLM batch size to allow health check requests
+- A) Delete the model artifacts and re-download from the source
+- B) Increase the vLLM batch size to allow health check requests
+- C) Verify that the load balancer is configured to use the correct health check path (`/health`), port, and protocol, and that the endpoint's firewall rules allow health check traffic from the load balancer's IP range
+- D) Replace the GPU in the worker node
 
-**Answer: A**
+**Answer: C**
 Health check failures with healthy pods indicate a load balancer configuration issue — wrong path, port, protocol, or firewall rules blocking health check traffic. The `/health` endpoint and network path must be verified.
 
 ---
@@ -1029,12 +1029,12 @@ Health check failures with healthy pods indicate a load balancer configuration i
 ### Q79
 Which statement about NAI's OpenAI-compatible API is NOT true?
 
-- A) NAI requires a proprietary Nutanix SDK and does not support the standard OpenAI client libraries
-- B) NAI supports the `/v1/chat/completions` endpoint with the same request/response format as OpenAI
-- C) Applications can switch from OpenAI to NAI by changing the `base_url` and API key
-- D) NAI supports streaming responses via Server-Sent Events using the `stream: true` parameter
+- A) NAI supports the `/v1/chat/completions` endpoint with the same request/response format as OpenAI
+- B) Applications can switch from OpenAI to NAI by changing the `base_url` and API key
+- C) NAI supports streaming responses via Server-Sent Events using the `stream: true` parameter
+- D) NAI requires a proprietary Nutanix SDK and does not support the standard OpenAI client libraries
 
-**Answer: A**
+**Answer: D**
 This statement is false — NAI specifically provides an OpenAI-compatible API so that standard OpenAI client libraries work without modification. Only the base URL and API key need to change.
 
 ---

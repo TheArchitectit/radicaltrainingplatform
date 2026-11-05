@@ -91,7 +91,7 @@
         {
           "bank": "aws-saa-beginner.md",
           "path": "content/exams/AWS-SAA/questions/aws-saa-beginner.md",
-          "sha256": "ed2120a7ea79894fbf35487339f3402bd137b11763d80059b6f3433147688e93"
+          "sha256": "724febcec9f0477a947a856c1ef7c69a7b54aca7874cb52dc570dd6734dff686"
         }
       ]
     },
@@ -181,7 +181,7 @@
         {
           "bank": "az104-beginner.md",
           "path": "content/exams/AZ-104/questions/az104-beginner.md",
-          "sha256": "111042df3e27c39f4a63e59f05083d0f8fac7d58eb5b75c2ea95957b93ae431b"
+          "sha256": "06d74d7bb44b6914b91ae11f62124369ba8bd512ddaa6bd5a2cd07d047b6629b"
         }
       ]
     },
@@ -221,7 +221,7 @@
         {
           "bank": "core1-demo-cut.md",
           "path": "content/exams/COMPTIA-A-1201/questions/core1-demo-cut.md",
-          "sha256": "9df291e58160afcb06343b74db0d05a4c13661f64ba5e8533c15e3ade39fecaf"
+          "sha256": "3dbbe0089049921cb35d50f7c17579a975f30220fb046f8cef765e5be7c8de36"
         },
         {
           "bank": "core1-domain1-bank.md",
@@ -296,7 +296,7 @@
         {
           "bank": "core2-b1-domain1-bank.md",
           "path": "content/exams/COMPTIA-A-1202/questions/core2-b1-domain1-bank.md",
-          "sha256": "bcd28c200a2cc67b508917747a37175dcd8860d5a1f31f8e3ac134a621a18368"
+          "sha256": "c5b9da811a40f9d9c77b39684052a81787fcf35feebdc6dfcf55c025db65405d"
         },
         {
           "bank": "core2-b2-domain2-bank.md",
@@ -316,7 +316,7 @@
         {
           "bank": "core2-demo-cut.md",
           "path": "content/exams/COMPTIA-A-1202/questions/core2-demo-cut.md",
-          "sha256": "cc808f245fa9f1f8fa90d28cb9e643097bf40a8aa71fefaceaf72434064499e9"
+          "sha256": "0d826306569a463f32dc8bde3cac21d980168892430098411ee9c4b90c118618"
         },
         {
           "bank": "core2-part1.md",
@@ -401,17 +401,17 @@
         {
           "bank": "net009-n2-demo-cut.md",
           "path": "content/exams/COMPTIA-NET-009/questions/net009-n2-demo-cut.md",
-          "sha256": "21ac9d25958aacc213728b791d7fcffd090b9529d903cd79df969543debf4c75"
+          "sha256": "f566819a09cd90db2b97e339f75ad87798f2613cc101e95da801692a0dd064b9"
         },
         {
           "bank": "net009-n3-demo-cut.md",
           "path": "content/exams/COMPTIA-NET-009/questions/net009-n3-demo-cut.md",
-          "sha256": "2b036cd7ef7c0d4fdefab4788462ca2d69fa23be1f5d4fc05f89f52b03ccfa07"
+          "sha256": "0718ccb5a70aa581ddc61187dab8ce2bc8096a25c5a5707539a258c2ffa4dd2e"
         },
         {
           "bank": "net009-n4-demo-cut.md",
           "path": "content/exams/COMPTIA-NET-009/questions/net009-n4-demo-cut.md",
-          "sha256": "2ce32f0d7b47d2696f86a6380048afc7cb6fa23dd840e7f75b4942aee09eefe3"
+          "sha256": "c71cbba98725fdc38c55ed18de6c52e592708eba1d9d24279e5be70dd3ae4712"
         },
         {
           "bank": "net009-n5-demo-cut.md",
@@ -536,7 +536,7 @@
         {
           "bank": "nca75-pilot.md",
           "path": "content/exams/NCA-75/questions/nca75-pilot.md",
-          "sha256": "02899ba6f508af715989b088bb90476caf5645d022158e5426cbe22d7dfdf216"
+          "sha256": "c985be781c3c7920da9b6b9f2c82330438d60618cf19b63e5b48bb53f8687dd8"
         }
       ]
     }
@@ -545,112 +545,112 @@
     {
       "bank": "NCA-75-Part1.md",
       "path": "NCA-75-Part1.md",
-      "sha256": "a9d4a18e12d7744756996b372a815ef704b1e0d8431654d50b25217814618728"
+      "sha256": "47d82de40dda240279fccb73733e01568f462d581b2e768278fb6af990d6ba71"
     },
     {
       "bank": "NCA-75-Part2.md",
       "path": "NCA-75-Part2.md",
-      "sha256": "f624310fa736066f871f179616dffd83f10812f444836348aac1fa1cf351486c"
+      "sha256": "a94dde1323cfb4c3bbabf0968e84ebc53a3f5349299788ddfa6a8444d9386dd9"
     },
     {
       "bank": "NCA-75-Part3-GapFill.md",
       "path": "NCA-75-Part3-GapFill.md",
-      "sha256": "3ab3cd45d0806de0489b378e32317af221c1289ba7cdccf44fc2924aa780ae0b"
+      "sha256": "a9c4f390e2af9928cb1e882355c8bec0a6684c420af123b9d173a6ac1c78f19b"
     },
     {
       "bank": "NCM-MCI-Part1.md",
       "path": "NCM-MCI-Part1.md",
-      "sha256": "761b8b4f8b503e4dd3fdad11a848da729f5f1311f8141ebe4bc27e8c61a1f40b"
+      "sha256": "19184359be0730d90e5b51f255e9babeaf6fa96d2e9407cdd15dc546a044e9fa"
     },
     {
       "bank": "NCM-MCI-Part2.md",
       "path": "NCM-MCI-Part2.md",
-      "sha256": "f0587753ba820776edb0512411ca8fde2e0e0a6b3fde1cc554ea45aa47eac581"
+      "sha256": "289d7f5a07d4f3b485b3d6214454fead4e3eada260be7d35e0cd8a9680f59b1b"
     },
     {
       "bank": "NCM-MCI-Part3.md",
       "path": "NCM-MCI-Part3.md",
-      "sha256": "f6d81cbe8195bca13a8c1396d873f3ed724952a8535ab2fac63dce99789a6c3c"
+      "sha256": "671619221a7464348d580fc481a533857d979486ab27fa1d1dca6358f7e38d16"
     },
     {
       "bank": "NCM-MCI-Part4.md",
       "path": "NCM-MCI-Part4.md",
-      "sha256": "a7bc41f132cfa0d85eeee61dfd4643401668463a7fc28a3934b2597625de9233"
+      "sha256": "c735570c207d813b4a6a6848f78c03db159bb760d7e9ece0e1ab42fb03ac587a"
     },
     {
       "bank": "NCM-MCI-Part5-GapFill.md",
       "path": "NCM-MCI-Part5-GapFill.md",
-      "sha256": "624b88dba503610066870a48635251bdf8fc458491d5cf69a67da5ecdd3d093e"
+      "sha256": "36801e9c53a7eb5eb1f81726430f4f4a0aaf9b80a3ec886cbb489d28ef024929"
     },
     {
       "bank": "NCP-AI-Part1.md",
       "path": "NCP-AI-Part1.md",
-      "sha256": "8957b7e2a9e530f9278c56c1d62061bb14cffb1b400d6aca5271dc2126256324"
+      "sha256": "3d8a431b9ab973e4f398168ef3574b2b0c690b861b551fb7cda8000107bcf512"
     },
     {
       "bank": "NCP-AI-Part2.md",
       "path": "NCP-AI-Part2.md",
-      "sha256": "7a4d89feebd385877c4236b7f472d00315b77a88c3cbaf88c371b1a7b53545c5"
+      "sha256": "82a06eaef592375816f4c04352b4ef2d9fab6740539b94f7bc840b92ce1f531f"
     },
     {
       "bank": "NCP-AI-Part3.md",
       "path": "NCP-AI-Part3.md",
-      "sha256": "3208216742460e6ea08f880f4a990000e603433270d934dce9d1b2a1feaf7beb"
+      "sha256": "67bd84be4a9a53263339a00f4074e99c388b957c8cdb68f7be20537d8eb20ec3"
     },
     {
       "bank": "NCP-AI-Part4.md",
       "path": "NCP-AI-Part4.md",
-      "sha256": "84e63cdb4e8145668cbfc552dab5c7e78cee8458a768f1be35f2e50267c305bd"
+      "sha256": "621b712c9e4d39c806890c6b19c41585747a55251d28436ecbbc032d7bad3fe6"
     },
     {
       "bank": "NCP-AI-Part5-GapFill.md",
       "path": "NCP-AI-Part5-GapFill.md",
-      "sha256": "2565e8a0163d3463a121becb3bd0fd39deb74d67fa2d26c97f3277e8a72724a7"
+      "sha256": "dfd05badf41a5973286343dc633ddb798d1efe152e859722dcf592787359cd80"
     },
     {
       "bank": "NCP-CI-Part1.md",
       "path": "NCP-CI-Part1.md",
-      "sha256": "3bc24f7b8f9fb769ed258689a635a8ffe358ac94ddcf029aea871ce4f609cd0b"
+      "sha256": "e7ec65bb1068821813e081ff71f3af93fc3931351fb4f231f900ae1a28ccd2c8"
     },
     {
       "bank": "NCP-CI-Part2.md",
       "path": "NCP-CI-Part2.md",
-      "sha256": "40bc2d0c23713fc066d6deb274787ce24fc0a7c8827865a9b5a23dd4889de349"
+      "sha256": "bec7d88471ab1df88680cc7d6e913ea882327b9bad1c34603f22cedac0668e92"
     },
     {
       "bank": "NCP-CI-Part3.md",
       "path": "NCP-CI-Part3.md",
-      "sha256": "ae24cc5fe7baf878688f695080f26c5808e4175fb4aeda78dfa789bf685f5aab"
+      "sha256": "8ede4f766fb0078c9990d4a86487d89cbd1b4b489ebe550651bc953fafc46286"
     },
     {
       "bank": "NCP-CI-Part4.md",
       "path": "NCP-CI-Part4.md",
-      "sha256": "565b855e857b0a23dcdeef05328e7f302e666659d663822ee47fd01bcafc5188"
+      "sha256": "4bab20705e75bb4f7294fd266952078b292bd93ed47d3a66cd952f73f99f2c86"
     },
     {
       "bank": "NCP-CI-Part5-GapFill.md",
       "path": "NCP-CI-Part5-GapFill.md",
-      "sha256": "6744c08ae01cc0fa2a6830a8db176ffdc4c87e5b1e141da4854154f61e0587ef"
+      "sha256": "6a1560b451091588efccb7d7c7159bce50f41e92ac2bdab8f6a2fb609fd7ab94"
     },
     {
       "bank": "NCP-US-Part1.md",
       "path": "NCP-US-Part1.md",
-      "sha256": "cb1f4f43b4ffcef9ef966f3349c490673f5fb7711354dda30d48a8dbefc6bab3"
+      "sha256": "c8e22452d6191d562da8564caaeb638f2aa5ebdcd5aeb91699c5026087920fe0"
     },
     {
       "bank": "NCP-US-Part2-D3.md",
       "path": "NCP-US-Part2-D3.md",
-      "sha256": "92dc7f57ac1872b7456129668045f9d4413178457e080dd59b06eefee81d2d5b"
+      "sha256": "46b882d2be897272e6a673c06971e38f6a4a50e1b8f1e37bf7e3922d3fa50f3d"
     },
     {
       "bank": "NCP-US-Part2-D4.md",
       "path": "NCP-US-Part2-D4.md",
-      "sha256": "b44d719438bb10331d9c00cff093f7964975a29aaf95a7bf2ebc8a7380a6def3"
+      "sha256": "e352d23b0015e3e2f6a3a3367ed2890b03cb495b8803f2b411c3bbf21eaec7a4"
     },
     {
       "bank": "NCP-US-Part3-GapFill.md",
       "path": "NCP-US-Part3-GapFill.md",
-      "sha256": "2a6715397a69a34b9a54e18108dbc7c18ab0be16cfd7ce59eca3ce4b573a709b"
+      "sha256": "faad797f527220dac1270abaf7690b898695666b912f50900da417f30236c91f"
     }
   ],
   "tracks": [
@@ -5476,112 +5476,112 @@
   "files": [
     {
       "path": "NCA-75-Part1.md",
-      "sha256": "a9d4a18e12d7744756996b372a815ef704b1e0d8431654d50b25217814618728",
+      "sha256": "47d82de40dda240279fccb73733e01568f462d581b2e768278fb6af990d6ba71",
       "bytes": 20015
     },
     {
       "path": "NCA-75-Part2.md",
-      "sha256": "f624310fa736066f871f179616dffd83f10812f444836348aac1fa1cf351486c",
+      "sha256": "a94dde1323cfb4c3bbabf0968e84ebc53a3f5349299788ddfa6a8444d9386dd9",
       "bytes": 20967
     },
     {
       "path": "NCA-75-Part3-GapFill.md",
-      "sha256": "3ab3cd45d0806de0489b378e32317af221c1289ba7cdccf44fc2924aa780ae0b",
+      "sha256": "a9c4f390e2af9928cb1e882355c8bec0a6684c420af123b9d173a6ac1c78f19b",
       "bytes": 31440
     },
     {
       "path": "NCM-MCI-Part1.md",
-      "sha256": "761b8b4f8b503e4dd3fdad11a848da729f5f1311f8141ebe4bc27e8c61a1f40b",
+      "sha256": "19184359be0730d90e5b51f255e9babeaf6fa96d2e9407cdd15dc546a044e9fa",
       "bytes": 56722
     },
     {
       "path": "NCM-MCI-Part2.md",
-      "sha256": "f0587753ba820776edb0512411ca8fde2e0e0a6b3fde1cc554ea45aa47eac581",
+      "sha256": "289d7f5a07d4f3b485b3d6214454fead4e3eada260be7d35e0cd8a9680f59b1b",
       "bytes": 47599
     },
     {
       "path": "NCM-MCI-Part3.md",
-      "sha256": "f6d81cbe8195bca13a8c1396d873f3ed724952a8535ab2fac63dce99789a6c3c",
+      "sha256": "671619221a7464348d580fc481a533857d979486ab27fa1d1dca6358f7e38d16",
       "bytes": 58279
     },
     {
       "path": "NCM-MCI-Part4.md",
-      "sha256": "a7bc41f132cfa0d85eeee61dfd4643401668463a7fc28a3934b2597625de9233",
+      "sha256": "c735570c207d813b4a6a6848f78c03db159bb760d7e9ece0e1ab42fb03ac587a",
       "bytes": 57669
     },
     {
       "path": "NCM-MCI-Part5-GapFill.md",
-      "sha256": "624b88dba503610066870a48635251bdf8fc458491d5cf69a67da5ecdd3d093e",
+      "sha256": "36801e9c53a7eb5eb1f81726430f4f4a0aaf9b80a3ec886cbb489d28ef024929",
       "bytes": 56332
     },
     {
       "path": "NCP-AI-Part1.md",
-      "sha256": "8957b7e2a9e530f9278c56c1d62061bb14cffb1b400d6aca5271dc2126256324",
+      "sha256": "3d8a431b9ab973e4f398168ef3574b2b0c690b861b551fb7cda8000107bcf512",
       "bytes": 56266
     },
     {
       "path": "NCP-AI-Part2.md",
-      "sha256": "7a4d89feebd385877c4236b7f472d00315b77a88c3cbaf88c371b1a7b53545c5",
+      "sha256": "82a06eaef592375816f4c04352b4ef2d9fab6740539b94f7bc840b92ce1f531f",
       "bytes": 61598
     },
     {
       "path": "NCP-AI-Part3.md",
-      "sha256": "3208216742460e6ea08f880f4a990000e603433270d934dce9d1b2a1feaf7beb",
+      "sha256": "67bd84be4a9a53263339a00f4074e99c388b957c8cdb68f7be20537d8eb20ec3",
       "bytes": 56699
     },
     {
       "path": "NCP-AI-Part4.md",
-      "sha256": "84e63cdb4e8145668cbfc552dab5c7e78cee8458a768f1be35f2e50267c305bd",
+      "sha256": "621b712c9e4d39c806890c6b19c41585747a55251d28436ecbbc032d7bad3fe6",
       "bytes": 49452
     },
     {
       "path": "NCP-AI-Part5-GapFill.md",
-      "sha256": "2565e8a0163d3463a121becb3bd0fd39deb74d67fa2d26c97f3277e8a72724a7",
+      "sha256": "dfd05badf41a5973286343dc633ddb798d1efe152e859722dcf592787359cd80",
       "bytes": 17670
     },
     {
       "path": "NCP-CI-Part1.md",
-      "sha256": "3bc24f7b8f9fb769ed258689a635a8ffe358ac94ddcf029aea871ce4f609cd0b",
+      "sha256": "e7ec65bb1068821813e081ff71f3af93fc3931351fb4f231f900ae1a28ccd2c8",
       "bytes": 52095
     },
     {
       "path": "NCP-CI-Part2.md",
-      "sha256": "40bc2d0c23713fc066d6deb274787ce24fc0a7c8827865a9b5a23dd4889de349",
+      "sha256": "bec7d88471ab1df88680cc7d6e913ea882327b9bad1c34603f22cedac0668e92",
       "bytes": 52568
     },
     {
       "path": "NCP-CI-Part3.md",
-      "sha256": "ae24cc5fe7baf878688f695080f26c5808e4175fb4aeda78dfa789bf685f5aab",
+      "sha256": "8ede4f766fb0078c9990d4a86487d89cbd1b4b489ebe550651bc953fafc46286",
       "bytes": 50359
     },
     {
       "path": "NCP-CI-Part4.md",
-      "sha256": "565b855e857b0a23dcdeef05328e7f302e666659d663822ee47fd01bcafc5188",
+      "sha256": "4bab20705e75bb4f7294fd266952078b292bd93ed47d3a66cd952f73f99f2c86",
       "bytes": 49128
     },
     {
       "path": "NCP-CI-Part5-GapFill.md",
-      "sha256": "6744c08ae01cc0fa2a6830a8db176ffdc4c87e5b1e141da4854154f61e0587ef",
+      "sha256": "6a1560b451091588efccb7d7c7159bce50f41e92ac2bdab8f6a2fb609fd7ab94",
       "bytes": 44176
     },
     {
       "path": "NCP-US-Part1.md",
-      "sha256": "cb1f4f43b4ffcef9ef966f3349c490673f5fb7711354dda30d48a8dbefc6bab3",
+      "sha256": "c8e22452d6191d562da8564caaeb638f2aa5ebdcd5aeb91699c5026087920fe0",
       "bytes": 66881
     },
     {
       "path": "NCP-US-Part2-D3.md",
-      "sha256": "92dc7f57ac1872b7456129668045f9d4413178457e080dd59b06eefee81d2d5b",
+      "sha256": "46b882d2be897272e6a673c06971e38f6a4a50e1b8f1e37bf7e3922d3fa50f3d",
       "bytes": 60185
     },
     {
       "path": "NCP-US-Part2-D4.md",
-      "sha256": "b44d719438bb10331d9c00cff093f7964975a29aaf95a7bf2ebc8a7380a6def3",
+      "sha256": "e352d23b0015e3e2f6a3a3367ed2890b03cb495b8803f2b411c3bbf21eaec7a4",
       "bytes": 59245
     },
     {
       "path": "NCP-US-Part3-GapFill.md",
-      "sha256": "2a6715397a69a34b9a54e18108dbc7c18ab0be16cfd7ce59eca3ce4b573a709b",
+      "sha256": "faad797f527220dac1270abaf7690b898695666b912f50900da417f30236c91f",
       "bytes": 63557
     },
     {
@@ -5661,8 +5661,8 @@
     },
     {
       "path": "content/exams/AWS-SAA/questions/aws-saa-beginner.md",
-      "sha256": "ed2120a7ea79894fbf35487339f3402bd137b11763d80059b6f3433147688e93",
-      "bytes": 49478
+      "sha256": "724febcec9f0477a947a856c1ef7c69a7b54aca7874cb52dc570dd6734dff686",
+      "bytes": 49958
     },
     {
       "path": "content/exams/AZ-104/exam.json",
@@ -5746,8 +5746,8 @@
     },
     {
       "path": "content/exams/AZ-104/questions/az104-beginner.md",
-      "sha256": "111042df3e27c39f4a63e59f05083d0f8fac7d58eb5b75c2ea95957b93ae431b",
-      "bytes": 40902
+      "sha256": "06d74d7bb44b6914b91ae11f62124369ba8bd512ddaa6bd5a2cd07d047b6629b",
+      "bytes": 40979
     },
     {
       "path": "content/exams/COMPTIA-A-1201/exam.json",
@@ -5781,8 +5781,8 @@
     },
     {
       "path": "content/exams/COMPTIA-A-1201/questions/core1-demo-cut.md",
-      "sha256": "9df291e58160afcb06343b74db0d05a4c13661f64ba5e8533c15e3ade39fecaf",
-      "bytes": 11305
+      "sha256": "3dbbe0089049921cb35d50f7c17579a975f30220fb046f8cef765e5be7c8de36",
+      "bytes": 11758
     },
     {
       "path": "content/exams/COMPTIA-A-1201/questions/core1-domain1-bank.md",
@@ -5851,8 +5851,8 @@
     },
     {
       "path": "content/exams/COMPTIA-A-1202/questions/core2-b1-domain1-bank.md",
-      "sha256": "bcd28c200a2cc67b508917747a37175dcd8860d5a1f31f8e3ac134a621a18368",
-      "bytes": 22381
+      "sha256": "c5b9da811a40f9d9c77b39684052a81787fcf35feebdc6dfcf55c025db65405d",
+      "bytes": 22474
     },
     {
       "path": "content/exams/COMPTIA-A-1202/questions/core2-b2-domain2-bank.md",
@@ -5871,8 +5871,8 @@
     },
     {
       "path": "content/exams/COMPTIA-A-1202/questions/core2-demo-cut.md",
-      "sha256": "cc808f245fa9f1f8fa90d28cb9e643097bf40a8aa71fefaceaf72434064499e9",
-      "bytes": 7144
+      "sha256": "0d826306569a463f32dc8bde3cac21d980168892430098411ee9c4b90c118618",
+      "bytes": 7874
     },
     {
       "path": "content/exams/COMPTIA-A-1202/questions/core2-part1.md",
@@ -5951,18 +5951,18 @@
     },
     {
       "path": "content/exams/COMPTIA-NET-009/questions/net009-n2-demo-cut.md",
-      "sha256": "21ac9d25958aacc213728b791d7fcffd090b9529d903cd79df969543debf4c75",
-      "bytes": 4467
+      "sha256": "f566819a09cd90db2b97e339f75ad87798f2613cc101e95da801692a0dd064b9",
+      "bytes": 5015
     },
     {
       "path": "content/exams/COMPTIA-NET-009/questions/net009-n3-demo-cut.md",
-      "sha256": "2b036cd7ef7c0d4fdefab4788462ca2d69fa23be1f5d4fc05f89f52b03ccfa07",
-      "bytes": 4103
+      "sha256": "0718ccb5a70aa581ddc61187dab8ce2bc8096a25c5a5707539a258c2ffa4dd2e",
+      "bytes": 4801
     },
     {
       "path": "content/exams/COMPTIA-NET-009/questions/net009-n4-demo-cut.md",
-      "sha256": "2ce32f0d7b47d2696f86a6380048afc7cb6fa23dd840e7f75b4942aee09eefe3",
-      "bytes": 3879
+      "sha256": "c71cbba98725fdc38c55ed18de6c52e592708eba1d9d24279e5be70dd3ae4712",
+      "bytes": 4414
     },
     {
       "path": "content/exams/COMPTIA-NET-009/questions/net009-n5-demo-cut.md",
@@ -6081,8 +6081,8 @@
     },
     {
       "path": "content/exams/NCA-75/questions/nca75-pilot.md",
-      "sha256": "02899ba6f508af715989b088bb90476caf5645d022158e5426cbe22d7dfdf216",
-      "bytes": 26493
+      "sha256": "c985be781c3c7920da9b6b9f2c82330438d60618cf19b63e5b48bb53f8687dd8",
+      "bytes": 28184
     },
     {
       "path": "content/exams/NCA-75/remap.csv",

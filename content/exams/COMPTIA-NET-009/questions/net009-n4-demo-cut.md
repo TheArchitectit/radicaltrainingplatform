@@ -6,10 +6,10 @@
 
 ### Q21
 A hospital places medical devices, staff workstations, and guest Wi-Fi on separate network segments with controlled paths between them. What security purpose does this segmentation primarily serve?
-- A) It replaces the need for user authentication
-- B) It encrypts all traffic between the segments
+- A) It replaces user authentication because every device inherits the trust level assigned to its network segment
+- B) It automatically encrypts every packet that crosses a segment boundary, regardless of the protocol in use
 - C) It limits lateral movement so a compromise in one segment cannot freely reach the others
-- D) It increases raw bandwidth on every segment
+- D) It guarantees additional raw bandwidth on all segments by eliminating congestion between device classes
 
 **Answer: C**
 Segmentation is damage control: if a guest device or a flat IoT gadget is compromised, a segmented design means the attacker does not automatically land on clinical workstations. Inter-segment traffic can be inspected and limited. Encryption is a separate control (A), segmentation is not a bandwidth tool (C), and identity checks still matter inside every segment (D).
@@ -18,9 +18,9 @@ Segmentation is damage control: if a guest device or a flat IoT gadget is compro
 
 ### Q22
 After a workstation on the user VLAN is infected with malware, the security team finds the malware only reached other user workstations and never touched the server VLAN. Which design choice produced that outcome?
-- A) A larger DHCP scope on the user VLAN
-- B) Disabling ICMP on the server VLAN
-- C) A longer subnet mask on the server VLAN
+- A) A larger DHCP scope on the user VLAN, so infected clients receive addresses outside the servers' address range
+- B) Disabling ICMP on the server VLAN, which prevents the malware from discovering or reaching any server address
+- C) A longer subnet mask on the server VLAN, which isolates its hosts without requiring any filtering rule
 - D) Segmentation with an explicit deny-by-default path from user VLANs to the server VLAN
 
 **Answer: D**
@@ -42,10 +42,10 @@ Multi-factor authentication requires factors from different categories: somethin
 
 ### Q24
 Users report that a familiar-looking login page is asking for their corporate credentials after they clicked a link in an email. Which threat is this?
-- A) DDoS
+- A) A distributed denial-of-service attack against the login service
 - B) Phishing (credential harvesting via a deceptive page)
-- C) VLAN hopping
-- D) A routing loop
+- C) VLAN hopping into a restricted server segment
+- D) A routing loop that redirects users to the deceptive page
 
 **Answer: B**
 An email-borne lure to a fake login page is phishing — a social-engineering attack that steals credentials or drops malware. DDoS floods availability (A), VLAN hopping is a Layer 2 segmentation attack (C), and a routing loop causes repeated forwarding and congestion rather than a credential prompt (D).

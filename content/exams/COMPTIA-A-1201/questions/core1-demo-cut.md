@@ -90,7 +90,7 @@ Local devices are reachable, so the IP address and mask are correct — the host
 
 ### Q8
 What role does the default gateway play on a host's network configuration?
-- A) It is the address the host uses for all local subnet traffic
+- A) It is the address the host uses as the next hop for all local subnet traffic
 - B) It is the server that assigns the host its IP address
 - C) It is the service that resolves hostnames to IP addresses
 - D) It is the router address where the host sends traffic destined for other networks
@@ -151,7 +151,7 @@ DNS name lookups use port 53 (UDP for ordinary queries, TCP for larger responses
 ### Q13
 One user cannot reach the company intranet by name. Colleagues on the same switch can. What is the safest first test on that user's workstation?
 - A) Record the current IP configuration and try a name lookup (nslookup) to see what fails
-- B) Change the DNS server to a public resolver and leave it that way
+- B) Change the DNS server to a public resolver and leave it that way for all future queries
 - C) Reinstall the operating system
 - D) Replace the network switch
 
@@ -162,9 +162,9 @@ When one host is affected and its neighbors are fine, start with a safe, reversi
 
 ### Q14
 After a desk move, a laptop gets no DHCP address and shows a 169.254.x.x APIPA address. Link light is on. What should the technician verify first, before replacing any hardware?
-- A) That the laptop battery is fully charged
-- B) That the printer driver is up to date
-- C) That the monitor cable is seated
+- A) That the laptop uses the same DNS server address as the other workstations on this floor
+- B) That the laptop's default gateway matches the address used at the old desk and building
+- C) That the laptop's subnet mask matches the mask configured on the old port and VLAN
 - D) That the wall port / switch port actually reaches a DHCP-enabled network (correct VLAN or uplink)
 
 **Answer: D**
@@ -174,10 +174,10 @@ APIPA with a link light means the NIC is up but no lease arrived — the usual c
 
 ### Q15
 A user reports that file transfers to one server are slow, while other servers feel normal. What is the safest first measurement?
-- A) Replace the workstation's network cable
+- A) Replace the workstation's network cable with a known-good cable and repeat the transfer
 - B) Compare a ping or path test to the slow server against the same test to a known-good server
-- C) Defragment the workstation's hard drive
-- D) Increase the NIC speed/duplex settings immediately
+- C) Defragment the workstation's hard drive before repeating the same file transfer
+- D) Set the NIC to a fixed speed and duplex before repeating the file transfer
 
 **Answer: B**
 Before changing anything, measure. Comparing the slow path against a known-good one tells you whether the delay is on the network path to that server, on the server itself, or unique to the client — and it gives you a baseline to prove any later fix. Changing speed/duplex (A) and swapping cable (B) are guesses that can make things worse; defragmenting (D) does not test a network path at all.
@@ -186,10 +186,10 @@ Before changing anything, measure. Comparing the slow path against a known-good 
 
 ### Q16
 A technician confirmed the workstation has a valid IP address and can ping its default gateway. Name resolution still fails. What is the next step in isolating the cause?
-- A) Replace the workstation's NIC
-- B) Reinstall the operating system
+- A) Replace the workstation's NIC with a known-good adapter and repeat the lookup
+- B) Reinstall the operating system and restore the workstation's original network settings
 - C) Test DNS specifically — try a lookup (nslookup) and verify the configured DNS server answers
-- D) Change the subnet mask and reboot
+- D) Change the subnet mask to match the gateway and reboot before trying another lookup
 
 **Answer: C**
 Local delivery is already proven (valid IP, gateway ping works). The remaining suspect is the name-resolution path, so the next step is to test that layer directly: does a lookup run, and does the configured DNS server reply? Replacing hardware (A) and reinstalling (B) are invasive actions with no evidence pointing at them; changing the mask (D) would disturb a working local path and does not test DNS.

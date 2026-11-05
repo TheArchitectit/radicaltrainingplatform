@@ -108,6 +108,7 @@ Every row names its requirement IDs, the test type (unit / integration / E2E / g
 | TM-91 | Storage recovery: corrupt entry, quota pressure, blocked storage — honest outcomes recorded | E2E | R-23 |
 | TM-92 | ShellCheck gate + packaging script behavior fixtures (diagnostic-branch exit codes, icon paths) | gate | R-24 |
 | TM-93 | RedEye lane: seeded wrong key + mapping error returned; edited item loses release; injection fixture flagged; lane-down = zero release | gate | REQ-REV-01..06 |
+| TM-94 | Answer-key rebalancer: label references refused, multi-key blocks unchanged, deterministic balance and no-op rerun; longest-option cue fails on release | script self-test | REQ-PB-02/03/04/05 |
 
 ## TM-70 series — gates about gates
 
