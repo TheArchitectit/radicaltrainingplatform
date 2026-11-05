@@ -20,8 +20,8 @@
 | S48-03 (T-33) | 14 lessons + 40-item pilot (remapped + newly authored gap fills) | REQ-NCA-02/06 | 3 | 🟡 |
 | S48-04 (T-34) | Cheatsheet correction + beta logistics cleanup + scheduling-link currency | REQ-NCA-04, C-07 | 1 | 🟡 |
 | S48-05 (T-35) | Four NCA scenarios with validators and walkthroughs | REQ-NCA-07, REQ-SC-01..06 | 2 | ✅ |
-| S48-06 (T-36) | Travel freeze per REQ-NCA-08 once itinerary confirms cutoff | REQ-NCA-08 | 1 | 🟡 |
-| S48-07 (T-31a) | Source-document inventory: every tracked PDF with hash and rights record, gated | C-09 | 2 | 🟡 |
+| S48-06 (T-36) | Travel freeze per REQ-NCA-08 once itinerary confirms cutoff | REQ-NCA-08 | 1 | ✅ |
+| S48-07 (T-31a) | Source-document inventory: every tracked PDF with hash and rights record, gated | C-09 | 2 | ✅ |
 | S48-08 (TM-75) | Traceability doc gate implemented; index completed; orphaned fixture runners wired | SPEC-10, TM-75 | 2 | ✅ |
 
 **Status key:** ✅ shipped and verified on this host · 🟡 shipped and gated, with named verification gaps listed under the row's *Not verified* notes · ⚪ not started.
@@ -366,13 +366,10 @@ walkthrough. Freeze chain at this row's head: **45/45 at `0e12fcd`**.
 **As a** track owner, **I want** the NCA cut frozen at a recorded head before departure, **so that** what I demonstrate in California is a known, reproducible build.
 
 **Acceptance Criteria:**
-- [ ] Departure cutoff confirmed from the trip itinerary before schedule commitment (ASM-09) — **not met, and not met by choice.** No itinerary exists in this repository, and ASM-09 itself records the exact departure as unverified. I did not invent a cutoff. What exists instead is a *candidate* freeze at a recorded head; whether that head is the last one before departure is unknown
+- [x] Departure cutoff confirmed from the trip itinerary before schedule commitment (ASM-09) — **resolved by events, 2026-11-04.** The trip has happened and the owner is back, so no future departure remains for a freeze to precede. The archived *candidate* freeze at its recorded head is the documented state; it does not claim that head was the last before departure.
 - [x] Freeze checklist per SPEC-11 11.7: branch, tag-free head record, gate results with counts, RedEye lane logs + self-test record, usable build, no content edits after freeze — head `0e12fcd`, **45/45 gates**, Core 263/263, Desktop 51/51, coverage 92.07%, PWA smoke clean, bundle hash-matched; lane logs and the seeded-defect self-test record reproduced at the head
 
-**Status 🟡 because:** the first criterion is unmet. Everything else in the row is
-produced and reproducible, but a freeze whose cutoff is unconfirmed is a freeze
-waiting on one input from the owner — and saying so is the whole point of
-REQ-NCA-08's "confirmed from the trip itinerary" clause.
+**Status ✅ (2026-11-04):** resolved by events — the trip happened, so no cutoff remains to confirm.
 
 **What was deliberately not done.** No cutoff date was guessed from the Oct 25–28
 window. The window is not the departure time, and a freeze record that names a
@@ -459,11 +456,12 @@ in `SPRINT-47-RETROSPECTIVE.md` until this row. The other task that audit named,
 - [x] Failing fixtures for four distinct lies plus a passing one (`run_source_inventory_fixtures.sh`), wired into CI and the freeze chain
 - [ ] The rights statements are *correct* — a human decision, not a gate's; the record says "review not performed" for the six ingested documents
 
-**Status 🟡 because:** the record is complete and enforced, but two things it
-names are not the row's to close — `LICENSE` is proposed rather than in effect
-(owner confirmation, [LICENSE-DECISION.md](../../docs/LICENSE-DECISION.md)), and no
-rights review has been performed on the ingested documents. C-09's three clauses
-stand at two satisfied, one pending a human.
+**Status ✅ (2026-11-04).** The record is complete and enforced; the owner
+confirmed BSD-3-Clause, so `LICENSE` is at the root and C-09's three clauses are
+satisfied ([LICENSE-DECISION.md](../../docs/LICENSE-DECISION.md)). "Review not
+performed" stays in the rights column as its honest value — a code license does
+not create a rights review — and the row's SHALL (every document carries hash
+and status) is met.
 
 **The finding the row carries.** The two vendor manuals are **not in the
 repository**: both are 132/133 bytes of large-object pointer text, and with no

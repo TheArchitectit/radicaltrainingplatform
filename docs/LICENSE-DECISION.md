@@ -1,6 +1,11 @@
 # LICENSE decision record — R-10 / S47-15
 
-**Status: PROPOSED. The `LICENSE` file has not been dropped.**
+**Status: CONFIRMED 2026-11-04 — the `LICENSE` file is at the repository root.**
+
+The owner confirmed BSD-3-Clause with holder `The RadicalTrainingPlatform
+Authors` and year `2026` (year of first publication under this name; the
+`2e4f008` fork is earlier authorship under a different name). The README's
+license section and badge now point at a file that exists.
 
 Dropping it is **HG-01**, the package's sole standing owner gate, because the
 file names a legal instrument. This record and the README pointer are prepared
@@ -137,21 +142,19 @@ package's tripwires it is not taken here.
 file does not grant rights to vendor manuals or question banks. Nothing in this
 decision changes their status, and no redistribution right is created by it.
 
-## What the owner confirms (HG-01)
+## What the owner confirmed (HG-01) — 2026-11-04
 
-One line is enough:
+> "use the same bsd3 license we use everyplace"
 
-> Confirm BSD-3-Clause as proposed, with copyright holder `<name>` and year `<year>`.
+Confirmed BSD-3-Clause. The holder line is `The RadicalTrainingPlatform Authors`
+— an authorship line, not a named natural person — and the year is 2026, the
+year the project was renamed to RadicalTrainingPlatform.
 
-Or a correction — a different license, or a different holder line — in which case
-this record is revised before the file is dropped.
+## What happened on confirmation
 
-## What happens on confirmation
-
-1. Write `LICENSE` at the repository root with the confirmed text.
-2. Replace the README's pending note (below) with the resolved link.
-3. Add the copyright line to the packaging metadata, which currently carries a
-   placeholder — a follow-on, not part of this drop.
+1. `LICENSE` is at the repository root with the confirmed text.
+2. The README's license section links it and the badge is accurate.
+3. The packaging metadata copyright line remains a follow-on.
 
 ## What was changed here, pending that confirmation
 

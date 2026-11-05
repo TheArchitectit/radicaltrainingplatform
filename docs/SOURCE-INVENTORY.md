@@ -76,13 +76,13 @@ LFS filter, and the objects are not fetchable from this repository. The finding
 those documents raise (public exposure) is not supported by the tree; the
 finding that *is* supported is absence.
 
-**4. `LICENSE` is proposed, not in effect.** C-09's passing condition has three
-clauses. Two are now satisfied — this inventory, and the tutor-corpus
-transmission-rights gate (`services/ai-gateway/corpus.mjs`,
-`tests/gates/tutor-eval.mjs`). The third, "LICENSE present", is deliberately
-open: [LICENSE-DECISION.md](LICENSE-DECISION.md) holds prepared BSD-3-Clause
-text waiting on one owner confirmation, because a license names a legal
-instrument. That clause is not this record's to close.
+**4. `LICENSE` is present.** C-09's passing condition has three clauses. All
+three are now satisfied — this inventory, the tutor-corpus transmission-rights
+gate (`services/ai-gateway/corpus.mjs`, `tests/gates/tutor-eval.mjs`), and the
+BSD-3-Clause `LICENSE` at the repository root, confirmed by the owner on
+2026-11-04 ([LICENSE-DECISION.md](LICENSE-DECISION.md)). It covers code and
+original content only; the vendor manuals remain a separate rights question,
+unchanged by it.
 
 ---
 
