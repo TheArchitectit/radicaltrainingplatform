@@ -74,6 +74,16 @@ export async function ask(rawRequest, { root, provider, corpusPath, now = () => 
                 logged: { event: 'provider-unavailable', at: now() },
             };
         }
+        if (err.name === 'SpendKillSwitchTripped') {
+            // The kill switch is not a transient error — it is the gateway
+            // refusing to spend further (REQ-AI-07). Logged as its own event
+            // so the audit trail shows the budget, not just "provider error".
+            return {
+                status: 'unavailable',
+                detail: redact(err.message),
+                logged: { event: 'spend-kill-switch', at: now() },
+            };
+        }
         // Timeouts and rate limits land here (REQ-AI-06). The panel shows an
         // unavailable tutor; it never invents output.
         return {

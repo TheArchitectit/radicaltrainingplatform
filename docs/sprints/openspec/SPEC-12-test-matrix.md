@@ -89,6 +89,7 @@ Every row names its requirement IDs, the test type (unit / integration / E2E / g
 | TM-65 | Injection fixtures (6): retrieval text never executes as instruction | eval | REQ-AI-04/06, G-01 |
 | TM-66 | Evaluation run: 12 answerable + 6 unsupported + 6 injection + offline/timeout/rate-limit; report archived | eval | REQ-AI-06 |
 | TM-67 | Fallback: recorded-example label visible; zero network calls | E2E | REQ-AI-07 |
+| TM-68 | Gateway control mutation pairs; live loopback CORS/preflight, 429 + retry-after, spend cut-off and redacted JSONL sink | fixture + integration | REQ-AI-06/07 |
 
 ## TM-80 series — final-audit runtime findings
 

@@ -39,9 +39,19 @@ export const DEFAULT_CONFIG = {
     secretRef: null,
     timeoutMs: 20000,
     maxOutputTokens: 700,
-    rateLimitPerMinute: 10,
-    // Owner decisions, deliberately unset (G-05).
+    // REQ-AI-07: enforced by RateLimiter in server.mjs — a request over this
+    // budget gets 429 with retry-after. 60/min is the shipped default so a
+    // local batch caller (RedEye) is not throttled at the documented rate; an
+    // operator who wants a tighter ceiling sets this in config.json.
+    rateLimitPerMinute: 60,
+    // Owner decisions, deliberately unset (G-05). A positive integer is a
+    // budget of provider-call units for the life of the process; once
+    // exhausted the gateway refuses further provider calls until restart.
     spendKillSwitch: null,
+    // JSONL audit sink, relative to the repo root. `false` disables the sink
+    // and the gateway falls back to console-only logging (the previous
+    // behaviour) — but a configured path is what the shipped config uses.
+    auditLogPath: 'content/review-logs/gateway-audit.jsonl',
 };
 
 const REDACTIONS = [

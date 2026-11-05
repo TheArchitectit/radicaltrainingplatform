@@ -144,6 +144,9 @@ gate "bash tests/gates/run_content_bundle_fixtures.sh"  bash tests/gates/run_con
 # Added in Sprint 48 (S48-08, TM-75): TM-66/REQ-AI-06's evaluation run. Its
 # harness asserts both directions and ran nowhere in CI or the chain.
 gate "bash tests/gates/run_tutor_eval.sh"               bash tests/gates/run_tutor_eval.sh
+# Gateway controls advertised in config must also hold over the live HTTP path:
+# loopback CORS/preflight, 429 + retry-after, spend cut-off and redacted JSONL.
+gate "bash tests/gates/run_gateway_controls_fixtures.sh" bash tests/gates/run_gateway_controls_fixtures.sh
 gate "python3 scripts/check-artifact-secrets.py"        python3 scripts/check-artifact-secrets.py
 gate "bash tests/gates/run_artifact_secrets_fixtures.sh" bash tests/gates/run_artifact_secrets_fixtures.sh
 

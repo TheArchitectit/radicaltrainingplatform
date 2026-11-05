@@ -20,6 +20,9 @@ import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { ask, loadCorpus } from './pipeline.mjs';
 import { ProviderAdapter, DEFAULT_CONFIG, redact } from './provider.mjs';
+import {
+    RateLimiter, SpendTracker, AuditSink, GuardedProvider, corsHeaders, preflightHeaders,
+} from './controls.mjs';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 
@@ -48,15 +51,36 @@ function loadConfig() {
 }
 
 const config = loadConfig();
-const provider = new ProviderAdapter(config);
+// REQ-AI-07: wrap the provider so the spend kill switch is enforced at the
+// spend point. The guard throws SpendKillSwitchTripped; the pipeline logs it.
+const rateLimiter = new RateLimiter({ limitPerMinute: config.rateLimitPerMinute });
+const spendTracker = new SpendTracker({ budget: config.spendKillSwitch });
+const provider = new GuardedProvider(new ProviderAdapter(config), spendTracker);
 const corpus = loadCorpus({ root: ROOT });
 
-function json(res, status, body) {
+// Audit sink: optional (config.auditLogPath may be false/absent). When set,
+// every logged event from the pipeline and every 429 is appended as JSONL.
+let audit = null;
+if (config.auditLogPath) {
+    audit = new AuditSink(config.auditLogPath, { repoRoot: ROOT });
+}
+
+function logAudit(event) {
+    if (audit) {
+        try { audit.write(event); }
+        catch (err) { console.error('[gateway] audit sink write failed:', redact(err.message)); }
+    }
+    if (event) console.log('[gateway]', redact(JSON.stringify(event)));
+}
+
+function json(res, status, body, extraHeaders = {}) {
     const payload = JSON.stringify(body);
     res.writeHead(status, {
         'content-type': 'application/json; charset=utf-8',
         'content-length': Buffer.byteLength(payload),
         'cache-control': 'no-store',
+        ...corsHeaders(res.req?.headers?.origin ?? ''),
+        ...extraHeaders,
     });
     res.end(payload);
 }
@@ -75,6 +99,11 @@ async function readBody(req, limit = 64 * 1024) {
 const server = createServer(async (req, res) => {
     const url = new URL(req.url, 'http://127.0.0.1');
     try {
+        if (req.method === 'OPTIONS') {
+            res.writeHead(204, preflightHeaders(req.headers.origin ?? ''));
+            return res.end();
+        }
+
         if (req.method === 'GET' && url.pathname === '/health') {
             const reason = provider.unavailableReason();
             return json(res, 200, {
@@ -98,9 +127,23 @@ const server = createServer(async (req, res) => {
         }
 
         if (req.method === 'POST' && url.pathname === '/tutor/ask') {
+            const taken = rateLimiter.take();
+            if (!taken.ok) {
+                logAudit({
+                    event: 'rate-limited',
+                    retryAfterSeconds: taken.retryAfterSeconds,
+                    at: Date.now(),
+                });
+                return json(res, 429, {
+                    status: 'rate-limited',
+                    detail: 'request rate limit exceeded',
+                    retryAfterSeconds: taken.retryAfterSeconds,
+                }, { 'retry-after': String(taken.retryAfterSeconds) });
+            }
+
             const body = JSON.parse(await readBody(req));
             const result = await ask(body, { root: ROOT, provider });
-            if (result.logged) console.log('[gateway]', redact(JSON.stringify(result.logged)));
+            if (result.logged) logAudit(result.logged);
             const status = result.status === 'rejected' ? 400
                 : result.status === 'unavailable' ? 503
                     : 200;

@@ -39,30 +39,22 @@ repository does not contain.
 | S48-06 | T-36 travel freeze | The itinerary cutoff date is not supplied | The owner's date |
 | S48-07 | T-31a source inventory | HG-01 needs the copyright-holder line; `rightsStatus` has a gap | The owner's LICENSE line (SPEC-15 tripwire) |
 
-## Deferred decisions — not started
+## Deferred decisions
 
-### 1. Gateway controls
+### 1. Gateway controls — closed 2026-11-04
 
-`services/ai-gateway/` is a loopback-only, zero-dependency service
-(`server.mjs:118` binds `127.0.0.1`). Three controls are advertised or implied
-but not in force:
+The formerly decorative controls are now enforced by `controls.mjs` and wired
+into the real server: a fixed-window limiter returns 429 with `retry-after`,
+a loopback-only CORS policy answers `OPTIONS`, the provider wrapper enforces
+a sticky process-lifetime spend kill switch, and logged events are appended
+to a redacted JSONL sink. The default limit is 60/minute so RedEye is not
+throttled. `tests/gates/run_gateway_controls_fixtures.sh` supplies a failing
+and passing fixture for each control and exercises CORS, rate limiting and
+auditing against the live HTTP server.
 
-* `rateLimitPerMinute: 10` — `provider.mjs:42`, `config.example.json:11`.
-  Nothing reads it; there is no 429 path.
-* `spendKillSwitch: null` — `provider.mjs:44`, `config.example.json:15`.
-  Nothing reads it either.
-* No CORS or `OPTIONS` handling. A PWA served from `:8080` calling the
-  gateway on `:8787` is cross-origin, so live mode would be blocked by the
-  browser. This does not break today's behaviour: the default mode is
-  `recorded`, and live is opt-in.
-* No audit-log sink. `result.logged` is written to the console through
-  `redact()` (`server.mjs:103`).
-
-**Options.** Implement them (429 + loopback-origin CORS + a sink, each with a
-failing and a passing fixture), or retire the dead keys and document the
-gateway as loopback-only with no limiter. **Trade-off:** a 10/minute default
-may throttle RedEye, which the owner stated uses the gateway with the same
-API key.
+Provider activation and `spendKillSwitch` remain unset owner decisions (G-05).
+The shipped default is still `activation: false`; no provider was enabled and
+no paid call was made.
 
 ### 2. `PlaceholderView` reachability
 
@@ -84,6 +76,6 @@ an offline-cache gap, and no action is warranted.
 
 1. Supply whichever blocked inputs are available (the LICENSE line and the
    travel cutoff are owner-only; the guide needs a human read).
-2. Choose a direction for the gateway controls — implement or retire.
+2. Resolve `PlaceholderView` reachability and the remaining advisory reviews.
 3. Re-run `bash tests/gates/run_freeze_chain.sh --expect-sha <full SHA>` after
    any change and record the new total at the new head.

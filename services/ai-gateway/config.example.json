@@ -8,7 +8,8 @@
 
   "timeoutMs": 20000,
   "maxOutputTokens": 700,
-  "rateLimitPerMinute": 10,
+  "rateLimitPerMinute": 60,
+  "auditLogPath": "content/review-logs/gateway-audit.jsonl",
 
   "_activation_note": "activation, provider, model and any spend limit are owner decisions (G-05). The shipped default is false: the demo runs the recorded-example fallback, and the panel says so.",
 
