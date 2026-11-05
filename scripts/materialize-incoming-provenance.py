@@ -90,8 +90,7 @@ def parse_markers(text: str) -> list[dict]:
     return [json.loads(m.group(1)) for m in MARKER.finditer(text)]
 
 
-def record(exam_id: str, bank: str, number: str, marker: dict,
-           verified: str) -> dict:
+def record(exam_id: str, bank: str, number: str, marker: dict) -> dict:
     return {
         "itemId": f"{exam_id}/{bank}/{number}",
         "examId": exam_id,
@@ -102,13 +101,17 @@ def record(exam_id: str, bank: str, number: str, marker: dict,
         "assistance": "ai-drafted",
         "rightsBasis": RIGHTS_BASIS,
         "reviewer": "",
-        "reviewDate": verified,
+        # The marker's `verified` date is the drop's build date, not a review
+        # date. Nobody has read these items; an empty field says so, and
+        # SPEC-20 REQ-RV-05 fails any record that dates a review it cannot
+        # attribute to a person.
+        "reviewDate": "",
         "originalityCheck": ORIGINALITY,
         "status": "draft",
     }
 
 
-def collect() -> tuple[dict[pathlib.Path, dict], list[str]]:
+def collect(rewrite: bool = False) -> tuple[dict[pathlib.Path, dict], list[str]]:
     """Return ({path: record}, problems). Reads only; writes nothing."""
     out: dict[pathlib.Path, dict] = {}
     problems: list[str] = []
@@ -144,11 +147,18 @@ def collect() -> tuple[dict[pathlib.Path, dict], list[str]]:
                                     f"monolith ({m.get('objective')})")
                 target = REPO_ROOT / "content" / "provenance" / exam_id / f"{number}.json"
                 if target.exists():
-                    problems.append(f"{target.relative_to(REPO_ROOT)}: already exists — "
-                                    f"refusing to overwrite an existing record")
-                    continue
-                out[target] = record(exam_id, bank, number, marker,
-                                     str(marker.get("verified", "")))
+                    existing = json.loads(target.read_text(encoding="utf-8"))
+                    if existing.get("rightsBasis") != RIGHTS_BASIS:
+                        problems.append(
+                            f"{target.relative_to(REPO_ROOT)}: already exists and was "
+                            f"not written by this script — refusing to overwrite")
+                        continue
+                    if not rewrite:
+                        problems.append(
+                            f"{target.relative_to(REPO_ROOT)}: already exists — pass "
+                            f"--rewrite to regenerate a record this script owns")
+                        continue
+                out[target] = record(exam_id, bank, number, marker)
     return out, problems
 
 
@@ -156,10 +166,14 @@ def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--write", action="store_true", help="create the records")
+    ap.add_argument("--rewrite", action="store_true",
+                    help="regenerate records this script already wrote (the "
+                         "rightsBasis identifies them); never touches a record it "
+                         "did not write")
     ap.add_argument("--check", action="store_true", help="report only (default)")
     args = ap.parse_args()
 
-    records, problems = collect()
+    records, problems = collect(rewrite=args.rewrite)
     if problems:
         print("INCOMING PROVENANCE: FAIL")
         for p in problems[:40]:

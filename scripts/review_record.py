@@ -52,6 +52,15 @@ def review_record_errors(label: str, prov: dict, date_marker: str = "") -> list[
             errors.append(
                 f"{label}: reviewer {reviewer!r} with an empty reviewDate — a named "
                 f"review needs a date, or an explicit no-date note (SPEC-20 REQ-RV-03)")
+    if review_date and not reviewer:
+        # REQ-RV-05: the mirror of the rule above. A date with no person is a
+        # review nobody can be asked about — it reads as "someone checked this
+        # on that day" when nothing did. Records that carry an automatedReview
+        # date it through that field instead, which says the same thing truly.
+        errors.append(
+            f"{label}: reviewDate {review_date!r} with no reviewer — a date claims a "
+            f"person checked this; a tool's run is dated in automatedReview "
+            f"(SPEC-20 REQ-RV-05)")
     if status == "reviewed" and not reviewer:
         errors.append(
             f"{label}: status 'reviewed' with no reviewer (SPEC-20 REQ-RV-03)")

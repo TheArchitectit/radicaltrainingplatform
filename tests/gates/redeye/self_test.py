@@ -120,6 +120,26 @@ def main():
         tool = outcome(tool_results[f"{EXAM_ID}/bank-clean.md/Q3"], "provenance")
         check("seeded tool name in reviewer caught (REQ-RV-01)",
               tool and tool["outcome"] == "fail", str(tool))
+
+        # Seed: SPEC-20 REQ-RV-05 — a date with no person claims a review
+        # nobody can be asked about. The honest record leaves reviewDate empty
+        # and dates a tool's run in automatedReview instead.
+        rec = json.loads((prov_dir / "bank-clean-Q3.json").read_text(encoding="utf-8"))
+        rec["reviewer"] = ""
+        rec["reviewDate"] = "2026-10-10"
+        (prov_dir / "bank-clean-Q3.json").write_text(json.dumps(rec), encoding="utf-8")
+        dated_results, _ = run("bank-clean.md")
+        dated = outcome(dated_results[f"{EXAM_ID}/bank-clean.md/Q3"], "provenance")
+        check("seeded reviewDate with no reviewer caught (REQ-RV-05)",
+              dated and dated["outcome"] == "fail", str(dated))
+        # The passing side: the same item with the date moved to automatedReview.
+        rec["reviewDate"] = ""
+        rec["automatedReview"] = "redeye-lane:2026-10-10"
+        (prov_dir / "bank-clean-Q3.json").write_text(json.dumps(rec), encoding="utf-8")
+        dated_results, _ = run("bank-clean.md")
+        dated = outcome(dated_results[f"{EXAM_ID}/bank-clean.md/Q3"], "provenance")
+        check("automated date in automatedReview passes (REQ-RV-05)",
+              dated and dated["outcome"] != "fail", str(dated))
         # Running the lane over a clean record must not change reviewer and
         # must stamp automatedReview (REQ-RV-04).
         run("bank-clean.md")
