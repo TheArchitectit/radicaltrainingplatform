@@ -1,12 +1,40 @@
 # NCA 7.5 — Quick Reference Cheat Sheet
 
-> **Status note — dated 2026-10-11.** This sheet was originally written against the
-> NCA 7.5 beta blueprint and has *not* been re-verified claim-by-claim against the
-> current (June 15, 2026) guide. Per REQ-NCA-04, wording is changed only where a claim
-> was individually re-verified; the rest keeps its original wording rather than being
-> silently relabelled. One claim **has** been corrected and is marked inline: the CVM
-> SSH default (errata **NCA-75-Part3-GapFill-Q3**). The beta window this sheet was
-> first written for closed on 2026-06-14 (SPEC-18).
+> **Status note — revised 2026-11-06.** This sheet was originally written against the
+> NCA 7.5 beta blueprint. A claim-by-claim re-verification pass was run on
+> 2026-11-06 against the **Prism Central Infrastructure Guide, pc.7.5** (Nutanix
+> revision dated 2026-11-02). Per REQ-NCA-04, wording changes only where a claim
+> was individually re-verified — and the pass found **nothing to change**.
+> Sixteen PC-side claims held: PC API v4 as current, port 9440 and the
+> HTTP-to-9440 redirect, NGT proxy 2074, the 2,048-VM per-cluster NGT limit,
+> iSCSI 3260, PC as a separate appliance with 3-VM scale-out, RBAC, Projects,
+> Categories and Flow/Calm/NKP as PC-side, authenticated NTP with SHA
+> algorithms, Guest Customization Profiles at NGT 4.5, dark-site LCM in PC,
+> multi-site DR as a PC capability, the Starter/Pro/Ultimate tier names, and
+> S3-compatible PC backup targets.
+>
+> Two claims are **contested but left as written.** The bond-mode rows name
+> `active-backup` as default and `balance-slb` as recommended; the PC guide's
+> bond table labels Active-Backup "Recommended. Default" and gives balance-slb
+> the multicast and LACP caveats. That table documents Prism Central
+> multicluster/VPC uplinks, **not** the AHV host bonds the sheet describes, and
+> the document that does adjudicate those — the AHV 11 admin guide — is the
+> second pointer-only PDF in [SOURCE-INVENTORY.md](../docs/SOURCE-INVENTORY.md)
+> and is not obtainable. Absence in the wrong document is not a contradiction.
+> The three named S3 vendors (Wasabi, Backblaze, OVHcloud) are simply not named
+> in the PC guide, which is an omission rather than a refutation.
+>
+> Everything storage-fabric-side — replication-factor copy counts, extent and
+> extent-group sizes, EC-X savings, the write path, the CVM service table, AES,
+> per-node capacity, the Unified Cache formula, ILM thresholds, node minimums,
+> the vNIC type, the Prism Element API version, ports 80, 2073 and 3261, the
+> Pulse destination, and SAML/MFA — is **outside the pc.7.5 guide entirely** and
+> stays as carried from the beta sheet. They need the AOS / Prism Element / AHV
+> 11 guide. Verified against one guide is not verified against the product.
+>
+> One corrected claim remains marked inline: the CVM SSH default (errata
+> **NCA-75-Part3-GapFill-Q3**). The beta window this sheet was first written for
+> closed on 2026-06-14 (SPEC-18).
 
 ## Must-Know Numbers
 | Metric | Value |

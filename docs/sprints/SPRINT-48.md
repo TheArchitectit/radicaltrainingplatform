@@ -250,13 +250,18 @@ section was dated and its closed window stated.
 - `tests/gates/run_cheatsheet_fixtures.sh` (new) — 2 must-fail fixtures + 1 must-pass + the real tree
 - `.github/workflows/build.yml`, `tests/gates/run_freeze_chain.sh` — gate wired in
 
-**Not verified:** the Nutanix guide was not opened, so **no other claim on this
-sheet was re-checked** — the numbers table, the acronyms, the write path, the
-licensing tiers and the product-name table are all carried forward from the beta
-sheet unexamined. Every remaining “beta” label is therefore retained, which is
-the honest state and not a finished one. The waiver code is dated expired, not
-confirmed expired against Nutanix's own notice; the June 14, 2026 date is taken
-from the sheet's own text.
+**Not verified (revised 2026-11-06):** a claim-by-claim pass ran against the
+**Prism Central Infrastructure Guide pc.7.5** (vendor revision 2026-11-02); 16
+PC-side claims held (API v4, 9440 and its redirect, NGT proxy 2074, the
+2,048-VM NGT limit, iSCSI 3260, PC as separate appliance with 3-VM scale-out,
+RBAC/Projects/Categories, Flow/Calm/NKP, authenticated NTP with SHA, Guest
+Customization Profiles at NGT 4.5, dark-site LCM, multi-site DR, tier names, S3
+backup targets) and **no wording changed.** The bond-mode rows and the three
+named S3 vendors are contested-but-retained: the PC guide's bond table covers
+multicluster/VPC uplinks, not the AHV host bonds the sheet describes, and the
+document that adjudicates them is the second pointer-only PDF. Storage-fabric
+numbers, the write path, the CVM table, PE API v2.0, ports 80/2073/3261, Pulse
+and SAML/MFA are **outside the pc.7.5 guide entirely** and stay unexamined.
 
 **Measured:** freeze chain **43/43 at `ce51fc5`** (was 41/41; +2 gates), exit 0.
 
@@ -369,13 +374,7 @@ walkthrough. Freeze chain at this row's head: **45/45 at `0e12fcd`**.
 - [x] Departure cutoff confirmed from the trip itinerary before schedule commitment (ASM-09) — **resolved by events, 2026-11-04.** The trip has happened and the owner is back, so no future departure remains for a freeze to precede. The archived *candidate* freeze at its recorded head is the documented state; it does not claim that head was the last before departure.
 - [x] Freeze checklist per SPEC-11 11.7: branch, tag-free head record, gate results with counts, RedEye lane logs + self-test record, usable build, no content edits after freeze — head `0e12fcd`, **45/45 gates**, Core 263/263, Desktop 51/51, coverage 92.07%, PWA smoke clean, bundle hash-matched; lane logs and the seeded-defect self-test record reproduced at the head
 
-**Status ✅ (2026-11-04):** resolved by events — the trip happened, so no cutoff remains to confirm.
-
-**What was deliberately not done.** No cutoff date was guessed from the Oct 25–28
-window. The window is not the departure time, and a freeze record that names a
-date it cannot source is worse than one that says it does not know: a reader
-would treat it as confirmed. The record instead states, in its own second
-section, exactly which criterion it fails and why.
+**Status ✅ (2026-11-04):** resolved by events — the trip happened, so no cutoff remains to confirm. **What was deliberately not done:** no cutoff date was guessed from the Oct 25–28 window — the window is not the departure time, and a freeze record naming a date it cannot source is worse than one that says it does not know.
 
 **A second exclusion reason appeared, and it is the gate working.** Running the
 NCA lane at this head shows two distinct reasons: `verdict is 'return'` (the

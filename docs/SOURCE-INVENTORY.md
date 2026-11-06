@@ -76,7 +76,17 @@ LFS filter, and the objects are not fetchable from this repository. The finding
 those documents raise (public exposure) is not supported by the tree; the
 finding that *is* supported is absence.
 
-**4. `LICENSE` is present.** C-09's passing condition has three clauses. All
+**4. The declared pointer objects no longer match what Nutanix publishes.**
+On 2026-11-06 the vendor URL for the Prism Central guide was fetched directly
+(`download.nutanix.com/documentation/vpc75/Prism-Central-Guide-vpc_7_5.pdf`).
+The live object is 19,541,681 bytes, `sha256:6f023aa6d56091ef…`, last modified
+2026-11-02; the pointer in the tree declares 19,424,163 bytes and
+`sha256:ef837281846cd14d…`. Nutanix republishes these manuals under the same
+filename, so even a future materialization would not reproduce the recorded
+oid. Recorded rather than fixed: correcting a pointer means deciding what this
+repository should hold, which is the disposition question in finding 1.
+
+**5. `LICENSE` is present.** C-09's passing condition has three clauses. All
 three are now satisfied — this inventory, the tutor-corpus transmission-rights
 gate (`services/ai-gateway/corpus.mjs`, `tests/gates/tutor-eval.mjs`), and the
 BSD-3-Clause `LICENSE` at the repository root, confirmed by the owner on
