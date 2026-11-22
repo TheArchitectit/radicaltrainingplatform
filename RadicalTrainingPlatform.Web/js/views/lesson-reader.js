@@ -7,7 +7,9 @@ import { linksForLesson } from '../data/content-links.js';
  * Lesson reader (T-11, REQ-UI-02) — renders a released lesson's markdown
  * with the objective IDs the manifest maps it to. Markdown rendering is
  * deliberately minimal and escape-first: paragraphs, ##/### headings, bold,
- * inline code, lists. No raw HTML from lesson files reaches the DOM.
+ * inline code, lists, and internal links. No raw HTML from lesson files
+ * reaches the DOM, and a link's target must start with '#' (an in-app route),
+ * so a lesson file cannot emit an outbound URL.
  *
  * T-23 mounts the study-coach panel at the foot of the lesson: the reader is
  * study mode, so the tutor is available here (and is not, in an unsubmitted
@@ -67,12 +69,15 @@ export class LessonReaderView extends BaseView {
         this.#tutor = null;
     }
 
-    /** Escape-first markdown subset: headings, lists, bold, code, paragraphs. */
+    /** Escape-first markdown subset: headings, lists, bold, code, internal links. */
     #renderMarkdown(md) {
         const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        // Link last, after escaping: the href group must start with '#', and the
+        // quote/angle characters a hostile href would need are already entities.
         const inline = (s) => esc(s)
             .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
-            .replace(/`([^`]+)`/g, '<code>$1</code>');
+            .replace(/`([^`]+)`/g, '<code>$1</code>')
+            .replace(/\[([^\]]+)\]\((#[^)\s]*)\)/g, '<a href="$2">$1</a>');
         const out = [];
         let inList = false;
         let listType = null;

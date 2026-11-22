@@ -80,6 +80,10 @@ gate "python3 scripts/check-item-identity.py"           python3 scripts/check-it
 gate "python3 scripts/check-item-identity.py --self-test" python3 scripts/check-item-identity.py --self-test
 gate "python3 scripts/check-item-types.py"              python3 scripts/check-item-types.py
 gate "python3 scripts/check-item-types.py --self-test"  python3 scripts/check-item-types.py --self-test
+# Added with TM-94/TM-95/TM-102: every illustration and declared simulation
+# gap is labelled as one, in the lesson source and in the shipped artifact.
+gate "python3 scripts/check-labelled-content.py"        python3 scripts/check-labelled-content.py
+gate "python3 scripts/check-labelled-content.py --self-test" python3 scripts/check-labelled-content.py --self-test
 # Added with SPEC-21: no released bank may concentrate its keys by position.
 gate "python3 scripts/check-answer-balance.py"          python3 scripts/check-answer-balance.py
 gate "python3 scripts/check-answer-balance.py --self-test" python3 scripts/check-answer-balance.py --self-test

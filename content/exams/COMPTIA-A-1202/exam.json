@@ -297,7 +297,25 @@
     "authorship": "original",
     "review": "human-required"
   },
-  "gaps": [],
+  "gaps": [
+    "operating-system and printer configuration hands-on tasks"
+  ],
+  "workedExamples": [
+    {
+      "id": "we-os-startup-repair",
+      "gap": "operating-system and printer configuration hands-on tasks",
+      "label": "worked example",
+      "title": "Worked example - a workstation that will not boot after an update (not a scored item)",
+      "body": "A desktop restarts in the middle of an update and comes back to a recovery screen. Worked reasoning, least destructive first: (1) let Startup Repair run, because it repairs a bad boot configuration without touching user data; (2) if that fails, boot to the recovery environment and run sfc /scannow offline, which replaces corrupted system files from the component store; (3) check the disk for errors before blaming Windows; (4) only then consider a restore point or a repair install. Reimaging is the last step, not the first, because it discards the user's profile. Reasoning walk-through, not an interactive lab."
+    },
+    {
+      "id": "we-os-shared-printer",
+      "gap": "operating-system and printer configuration hands-on tasks",
+      "label": "worked example",
+      "title": "Worked example - a shared printer that works for one user only (not a scored item)",
+      "body": "A printer shared from a workstation prints for its owner but not for a second user. Worked reasoning: (1) check the printer's share permission and the Print permission for that user's group - sharing and file-system permissions are two separate gates; (2) confirm the client and the server use the same driver architecture, because a 32-bit driver on a 64-bit client fails at connection time; (3) look at the host's queue: a job that never appears is a client or connection problem, not a printer problem; (4) check that 'use printer offline' is not set for that user. Recognition-level walk-through, not an interactive lab."
+    }
+  ],
   "releasedBanks": [
     "core2-b1-domain1-bank.md",
     "core2-b2-domain2-bank.md",

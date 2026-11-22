@@ -188,7 +188,7 @@
     "COMPTIA-A-1201": {
       "manifest": {
         "path": "content/exams/COMPTIA-A-1201/exam.json",
-        "sha256": "79c3a766c80fd3b8c10fb1d7cdce2c4a388203c2ad3419c7dc6b48d20f82d10f"
+        "sha256": "f6050ef6c70b7efbcb0b41b52c2d75018d97e14755f5ed4348835b7a647863ab"
       },
       "lessons": [
         {
@@ -209,7 +209,7 @@
         {
           "lessonId": "a4",
           "path": "content/exams/COMPTIA-A-1201/lessons/a4.md",
-          "sha256": "b5a1d22f6193e1e4081bc3a1f21545a7a6bceeea9dfde9030f61f82d7ec660a1"
+          "sha256": "c09a7392dbc9fbf17f89f4e36531c9bcce24335144eec41cee18acac0a95d3c4"
         },
         {
           "lessonId": "a5",
@@ -268,7 +268,7 @@
     "COMPTIA-A-1202": {
       "manifest": {
         "path": "content/exams/COMPTIA-A-1202/exam.json",
-        "sha256": "a423e263592fb5acbd1a32c3e3e98cfedbfe2983e8ef26df9b975c8444c87f75"
+        "sha256": "f3ea549dbb9f3dec7bb0304368ddc0df29e9234cfb28332af17497bc51b1b821"
       },
       "lessons": [
         {
@@ -5751,8 +5751,8 @@
     },
     {
       "path": "content/exams/COMPTIA-A-1201/exam.json",
-      "sha256": "79c3a766c80fd3b8c10fb1d7cdce2c4a388203c2ad3419c7dc6b48d20f82d10f",
-      "bytes": 6501
+      "sha256": "f6050ef6c70b7efbcb0b41b52c2d75018d97e14755f5ed4348835b7a647863ab",
+      "bytes": 8369
     },
     {
       "path": "content/exams/COMPTIA-A-1201/lessons/a1.md",
@@ -5771,8 +5771,8 @@
     },
     {
       "path": "content/exams/COMPTIA-A-1201/lessons/a4.md",
-      "sha256": "b5a1d22f6193e1e4081bc3a1f21545a7a6bceeea9dfde9030f61f82d7ec660a1",
-      "bytes": 6674
+      "sha256": "c09a7392dbc9fbf17f89f4e36531c9bcce24335144eec41cee18acac0a95d3c4",
+      "bytes": 7206
     },
     {
       "path": "content/exams/COMPTIA-A-1201/lessons/a5.md",
@@ -5826,8 +5826,8 @@
     },
     {
       "path": "content/exams/COMPTIA-A-1202/exam.json",
-      "sha256": "a423e263592fb5acbd1a32c3e3e98cfedbfe2983e8ef26df9b975c8444c87f75",
-      "bytes": 8251
+      "sha256": "f3ea549dbb9f3dec7bb0304368ddc0df29e9234cfb28332af17497bc51b1b821",
+      "bytes": 10135
     },
     {
       "path": "content/exams/COMPTIA-A-1202/lessons/b1.md",

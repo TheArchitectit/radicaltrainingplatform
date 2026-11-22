@@ -97,6 +97,14 @@ jobs:
           python3 scripts/check-item-types.py
           python3 scripts/check-item-types.py --self-test
 
+      # REQ-AP-04/05, REQ-NP-04: an illustration carries its label on the link,
+      # in source and in the shipped artifact, and every declared simulation
+      # gap renders as a labeled worked example. Fixture pair: --self-test.
+      - name: Check labelled content
+        run: |
+          python3 scripts/check-labelled-content.py
+          python3 scripts/check-labelled-content.py --self-test
+
       # T-11: study-content.js must match content/ (drift gate).
       - name: Check compiled study content
         run: python3 scripts/generate-study-content.py --check

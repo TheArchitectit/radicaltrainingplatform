@@ -116,6 +116,22 @@ freeze record already archived at this head is the documented state, and
 SPRINT-48 S48-06 is struck rather than left waiting on an input that can no
 longer arrive. TM-101 stops being a named gap.
 
+### 7. The three named TM gaps — closed 2026-11-22
+
+`SPEC-12`'s index carried three rows whose evidence was "named gap — no gate":
+TM-94 (A+ illustration label), TM-95 (A+ worked examples), TM-102 (Network+
+declared gaps). `scripts/check-labelled-content.py` now proves all three, with
+nine seeded failures, and `tests/e2e/smoke-web.mjs` asserts in a real browser
+that lesson A4 actually renders the required label on its `#/pe/vms` link.
+
+Two things had to exist for that to be true rather than claimed: the lesson
+reader gained internal `#/…` link rendering (escape-first, no external hrefs),
+and the A+ manifests gained declared gaps plus four labeled worked examples.
+The gate deliberately scopes the gap→example rule to the exams that adopted the
+convention (Network+, A+); AWS-SAA, AZ-104 and NCA-75 use `gaps` for *authoring*
+gaps ("no lesson or item covers it"), which are reported as advisories rather
+than papered over with invented examples.
+
 ## Next session
 
 1. The four remaining blocked rows need the same two inputs, or the owner's

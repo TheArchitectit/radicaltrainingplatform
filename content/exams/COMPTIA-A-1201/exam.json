@@ -242,7 +242,25 @@
     "authorship": "original",
     "review": "human-required"
   },
-  "gaps": [],
+  "gaps": [
+    "hardware and printer hands-on tasks"
+  ],
+  "workedExamples": [
+    {
+      "id": "we-hardware-thermal-printer",
+      "gap": "hardware and printer hands-on tasks",
+      "label": "worked example",
+      "title": "Worked example - a thermal receipt printer that prints blank (not a scored item)",
+      "body": "A point-of-sale terminal prints a blank receipt after a paper roll change. Worked reasoning, physical layer first: (1) thermal paper is coated on one side only; if the roll went in with the coating away from the print head, the head never touches it - scratch the paper with a coin and the coating darkens; (2) print density or heat is set too low in the printer driver, so the head never gets hot enough to darken the paper; (3) a worn or dirty print head leaves streaks, or nothing. The software path matters only after those three, because the job plainly reached the printer. This is a reasoning walk-through, not an interactive lab and not a scored item."
+    },
+    {
+      "id": "we-hardware-port-identification",
+      "gap": "hardware and printer hands-on tasks",
+      "label": "worked example",
+      "title": "Worked example - a monitor that reports no signal after a move (not a scored item)",
+      "body": "A desktop is moved and the monitor now reports no signal. Worked reasoning: (1) identify the port actually used - HDMI, DisplayPort, DVI and VGA are different connectors, and a DisplayPort-to-HDMI adapter is directional; (2) confirm the cable is in the discrete graphics card's port rather than the motherboard's, because many desktops disable onboard video when a card is installed; (3) check that the monitor's selected input source matches the port in use; (4) only then suspect the cable or the card. The exam asks which step to take next, not which cable is 'best'. Reasoning walk-through, not an interactive lab."
+    }
+  ],
   "releasedBanks": [
     "core1-demo-cut.md",
     "core1-domain1-bank.md",

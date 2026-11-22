@@ -108,7 +108,7 @@ Every row names its requirement IDs, the test type (unit / integration / E2E / g
 | TM-91 | Storage recovery: corrupt entry, quota pressure, blocked storage — honest outcomes recorded | E2E | R-23 |
 | TM-92 | ShellCheck gate + packaging script behavior fixtures (diagnostic-branch exit codes, icon paths) | gate | R-24 |
 | TM-93 | RedEye lane: seeded wrong key + mapping error returned; edited item loses release; injection fixture flagged; lane-down = zero release | gate | REQ-REV-01..06 |
-| TM-94 | Answer-key rebalancer: label references refused, multi-key blocks unchanged, deterministic balance and no-op rerun; longest-option cue fails on release | script self-test | REQ-PB-02/03/04/05 |
+| TM-111 | Answer-key rebalancer: label references refused, multi-key blocks unchanged, deterministic balance and no-op rerun; longest-option cue fails on release | script self-test | REQ-PB-02/03/04/05 |
 
 ## TM-70 series — gates about gates
 
@@ -129,15 +129,15 @@ naming no gate is a **named gap**, not a covered requirement.
 
 | ID | Test | Type | Requirements |
 |---|---|---|---|
-| TM-94 | A+ virtualization label on the PE simulator link (REQ-AP-04) | manual | REQ-AP-04 — **named gap**: lesson A4 is not in the October cut and the label string is absent from the shipped artifact |
-| TM-95 | A+ worked examples carry the label; no fake interactive completion (REQ-AP-05) | manual | REQ-AP-05 — **named gap**: no gate; module A3/B1 render as worked examples |
+| TM-94 | A+ virtualization label on the PE simulator link (REQ-AP-04) | gate + E2E | REQ-AP-04 — `scripts/check-labelled-content.py` + `--self-test` (label missing, external href, compiled artifact dropping the label each fail); `tests/e2e/smoke-web.mjs` asserts the reader renders the label on `#/pe/vms` |
+| TM-95 | A+ worked examples carry the label; no fake interactive completion (REQ-AP-05) | gate | REQ-AP-05 — `scripts/check-labelled-content.py` + `--self-test` (an A+ exam with no worked example, a blank label, a scored-looking title, an `interactive: true` claim, and a short body each fail) |
 | TM-96 | Diagnosis share ≥50% of scored A+ items, fail-closed on untyped | gate | REQ-AP-06 — `scripts/check-item-types.py` + `--self-test` |
 | TM-97 | Demo tutor prompt resolves to the reviewed DNS lesson | eval | REQ-AP-07 — `tests/gates/tutor-eval.mjs` via `run_tutor_eval.sh` |
 | TM-98 | Manifest source fields present; stale review date warns loudly | gate | REQ-MAN-06 — `scripts/validate-manifests.py` |
 | TM-99 | Remap inventory: every itemId resolves, no row lacks a review state, ID stability; unmapped objectives reported as the authoring gap | gate | REQ-NCA-06 — `scripts/check-nca-remap.py` + `run_remap_fixtures.sh` |
 | TM-100 | Four NCA scenarios boot, run and report both states | E2E + gate | REQ-NCA-07 — `run_nca_lab_fixtures.sh`, `tests/e2e/nca-lab-web.mjs` |
 | TM-101 | Freeze before travel: recorded head, gates green, no content edits after | doc | REQ-NCA-08 — freeze evidence + `run_freeze_chain.sh`; the trip occurred and the candidate freeze at its recorded head is the archived state, so there is no future cutoff to confirm |
-| TM-102 | Network+ declared gaps render as labeled worked examples | manual | REQ-NP-04 — **named gap**: no gate |
+| TM-102 | Network+ declared gaps render as labeled worked examples | gate | REQ-NP-04 — `scripts/check-labelled-content.py` + `--self-test` (a declared gap with no worked example, and an example pointing at an undeclared gap, each fail) |
 | TM-103 | PE/PC VLAN lab stays out of October scope until mutations documented | doc | REQ-NP-05 — out of scope by the requirement's own text |
 | TM-104 | Demo tutor prompt resolves to the N5 gateway lesson | eval | REQ-NP-06 — `tests/gates/tutor-eval.mjs` via `run_tutor_eval.sh` |
 | TM-105 | Reset restores the exact seed, proven per scenario in the sweep | E2E | REQ-SC-06 — `tests/gates/web/demo-sweep-report.mjs` (fresh station must report incomplete; walkthrough must complete) |

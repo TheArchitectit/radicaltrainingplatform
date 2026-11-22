@@ -258,6 +258,21 @@ async function main() {
             pass('unknown route renders the placeholder without redirecting');
         }
 
+        // REQ-AP-04: the A4 illustration has to reach a learner's screen with
+        // its label attached to the link. A label present in the compiled data
+        // is not the same as a label the reader actually renders.
+        await evaluate(`location.hash = '#/tracks/track-aplus/lessons/COMPTIA-A-1201/A4'`);
+        await waitForExpr(`!!document.querySelector('.lesson-body a[href="#/pe/vms"]')`,
+            'the A4 simulator link to render');
+        const simLabel = await evaluate(
+            `document.querySelector('.lesson-body a[href="#/pe/vms"]')?.textContent || ''`);
+        if (!simLabel.includes('Nutanix example of a general concept.')) {
+            fail(`the A4 simulator link is labelled ${JSON.stringify(simLabel)}, `
+                + `not the REQ-AP-04 label`);
+        } else {
+            pass('lesson A4 renders the labelled simulator link');
+        }
+
         // One meaningful interaction: enter demo mode, reset the station, and
         // confirm the reseed verification report actually renders in a browser.
         await evaluate(`location.hash = '#/demo'`);
