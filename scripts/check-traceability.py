@@ -178,6 +178,29 @@ def check(root):
             f"unmapped requirement: {req} is declared in "
             f"{OPENSPEC}/SPEC-02..SPEC-10 but no TM row in {MATRIX} names it")
 
+    # An index with two rows for one identifier cannot be cited: a release
+    # record that names TM-94 would satisfy two different tests. This happened
+    # for real — a new row was added as TM-94 beside the existing TM-94 — and
+    # nothing else looked.
+    seen = {}
+    for path in sorted(root.joinpath(OPENSPEC).glob(f"{MATRIX}-*.md")):
+        rel = path.relative_to(root).as_posix()
+        for number, line in enumerate(path.read_text(encoding="utf-8").splitlines(), 1):
+            if not line.startswith("| TM-"):
+                continue
+            cells = [c.strip() for c in line.strip().strip("|").split("|")]
+            if len(cells) < 4:
+                continue
+            tm_id = cells[0]
+            where = f"{rel}:{number}"
+            if tm_id in seen:
+                problems.append(
+                    f"duplicate TM identifier: {tm_id} is a row at "
+                    f"{seen[tm_id]} and again at {where} — two rows for one id "
+                    f"cannot be cited unambiguously")
+            else:
+                seen[tm_id] = where
+
     state = chain_state(root)
     if state is None:
         problems.append(f"missing {CHAIN} — the runner register cannot be read")
@@ -304,6 +327,12 @@ def self_test():
         write_tree(base, declaring, rows_ok, chain_ok + chain_stale, [runner])
         got = check(base)
         cases.append(("stale-exclusion", got, ["stale exclusion"]))
+
+    with tempfile.TemporaryDirectory() as tmp:
+        base = pathlib.Path(tmp) / "duplicate"
+        write_tree(base, declaring, rows_ok + rows_ok, chain_ok, [runner])
+        got = check(base)
+        cases.append(("duplicate-tm-id", got, ["duplicate TM identifier: TM-22"]))
 
     failed = 0
     for label, problems, expected in cases:

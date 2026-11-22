@@ -45,6 +45,13 @@ tripwire or three consecutive failures on one item.
 - [x] `SPRINT-39-40.md` framing — already retitled in an earlier session; one
       stale “classroom kit” label corrected
 
+## W5 — gates about gates (found during this run)
+- [x] `check-traceability.py` now fails on a duplicate TM identifier, with a
+      seeded duplicate case — a real collision (`TM-94` twice) shipped in this
+      session and nothing caught it
+- [x] `check-packaging-manifests.py` ties `<project_license>` to `LICENSE`
+- [ ] commit + push
+
 ## End of run
 - [ ] Final `run_freeze_chain.sh --expect-sha <SHA>`; record total + head
 - [ ] `CARRY-FORWARD.md` next-session section reflects the true state
