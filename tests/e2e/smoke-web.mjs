@@ -273,6 +273,13 @@ async function main() {
             pass('lesson A4 renders the labelled simulator link');
         }
 
+        // A label on a dead link would pass the check above and still fail the
+        // reader, so follow it and require the console it promises.
+        await evaluate(`document.querySelector('.lesson-body a[href="#/pe/vms"]')?.click()`);
+        await waitForExpr(`!!document.getElementById('create-vm-btn')`,
+            'the PE VM view after following the A4 link');
+        pass('following the A4 link opens the Prism Element VM console');
+
         // One meaningful interaction: enter demo mode, reset the station, and
         // confirm the reseed verification report actually renders in a browser.
         await evaluate(`location.hash = '#/demo'`);
