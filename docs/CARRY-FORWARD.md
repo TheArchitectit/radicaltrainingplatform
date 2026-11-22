@@ -32,7 +32,7 @@ Four are still blocked, none on code. Two closed on 2026-11-04 (see below).
 | Row | Task | Blocker | What unblocks it |
 |---|---|---|---|
 | S48-01 | T-31 remap inventory | RedEye model stage is `blocked` (no provider); `mapping-check` reads provenance records the lane does not have | Provider activation — a SPEC-15 tripwire — plus provenance records |
-| S48-02 | T-32 current blueprint | All structural criteria pass; the one remaining clause is a human-attested `sourceReviewDate`. The ingested guide PDF is a bare LFS pointer (132 bytes), so nothing in the tree can be opened and reviewed | A readable copy of the June 15, 2026 NCA 7.5 guide, or the owner's attestation that the manifest structure matches it |
+| S48-02 | T-32 current blueprint | **Structure verified 2026-11-22 by tool** against the guide at the manifest's `sourceUrl` (`sha256:d876abc5…`): 4/4 sections, 14/14 objective titles, versions match, no weight table. Only the *human attestation* clause remains — SPEC-02 requires a person to have opened the source | The owner attests the guide matches the manifest (one line), or a human reads it |
 | S48-03 | T-33 40-item pilot | Same model-stage blocker; all 40 ship `draft-preview` with no item verified | Provider activation; the cut is recorded, not hidden |
 | S48-04 | T-34 companion surfaces | The guide was not opened, so no remaining sheet claim was re-checked (same 132-byte pointer problem) | A readable guide, or the owner's sign-off on the sheet's remaining claims |
 | ~~S48-06~~ | T-36 travel freeze | **Closed 2026-11-04** — the trip has happened; the owner is back and no pre-departure freeze is still ahead. The candidate freeze record stands as the documented head; TM-101 is no longer a named gap | — |

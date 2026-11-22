@@ -29,15 +29,15 @@ tripwire or three consecutive failures on one item.
       lesson claiming interactive support for a declared gap
 - [x] QA → full gates → docs → commit + push
 
-## W3 — S48-02: attest the blueprint structure honestly
-- [ ] Re-fetch the June 15 2026 blueprint from the `sourceUrl` already in
+## W3 — S48-02: attest the blueprint structure honestly — done
+- [x] Re-fetch the June 15 2026 blueprint from the `sourceUrl` already in
       `exam.json`; verify 4 sections, 14 objectives, titles, product versions,
       no weight table
-- [ ] Record as **tool-attested**. Do NOT set `sourceReviewDate` — SPEC-02
+- [x] Record as **tool-attested**. Do NOT set `sourceReviewDate` — SPEC-02
       requires a human to have opened the source, and dating a review nobody
       performed is the SPEC-20 defect already fixed once here
-- [ ] Owner attestation request in `CARRY-FORWARD.md`
-- [ ] docs → gates → commit + push
+- [x] Owner attestation request in `CARRY-FORWARD.md`
+- [x] docs → gates → commit + push
 
 ## W4 — housekeeping
 - [ ] Packaging metadata copyright line reads the confirmed holder
