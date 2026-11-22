@@ -50,7 +50,11 @@ tripwire or three consecutive failures on one item.
       seeded duplicate case — a real collision (`TM-94` twice) shipped in this
       session and nothing caught it
 - [x] `check-packaging-manifests.py` ties `<project_license>` to `LICENSE`
-- [ ] commit + push
+- [x] `check-labelled-content.py` refuses a lesson link to a route the router
+      does not register (dead in-app link), seeded
+- [x] `check-traceability.py` refuses a TM row citing a requirement no spec
+      declares (phantom citation), seeded
+- [x] commit + push
 
 ## End of run
 - [ ] Final `run_freeze_chain.sh --expect-sha <SHA>`; record total + head

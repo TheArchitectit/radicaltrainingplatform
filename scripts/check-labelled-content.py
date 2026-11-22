@@ -48,6 +48,8 @@ REPO_ROOT = pathlib.Path(__file__).resolve().parent.parent
 SIM_LABEL = "Nutanix example of a general concept."
 A4 = pathlib.Path("content/exams/COMPTIA-A-1201/lessons/a4.md")
 COMPILED = pathlib.Path("RadicalTrainingPlatform.Web/js/study-content.js")
+APP_JS = pathlib.Path("RadicalTrainingPlatform.Web/js/app.js")
+LESSON_GLOB = "*/lessons/*.md"
 EXAMS_DIR = pathlib.Path("content/exams")
 
 LINK = re.compile(r"\[([^\]]+)\]\((#[^)\s]*)\)")
@@ -59,6 +61,15 @@ MIN_BODY = 80
 def _manifests(root):
     for path in sorted((root / EXAMS_DIR).glob("*/exam.json")):
         yield path, json.loads(path.read_text(encoding="utf-8"))
+
+
+def _routes(root):
+    """Paths the router registers, from the app's own wiring."""
+    app = pathlib.Path(root) / APP_JS
+    if not app.is_file():
+        return None
+    return set(re.findall(r"router\.register\('([^']+)'",
+                          app.read_text(encoding="utf-8")))
 
 
 def check_tree(root):
@@ -88,6 +99,24 @@ def check_tree(root):
             f"{COMPILED.as_posix()}: the compiled artifact does not carry "
             f"{SIM_LABEL!r} — the label is in the lesson source but not in what "
             f"ships; regenerate study-content.js")
+
+    # A lesson link that names a route the router does not register is a dead
+    # promise: the reader taps it and lands on the unknown-route placeholder.
+    # Only in-app targets are checked; the renderer refuses external hrefs.
+    routes = _routes(root)
+    if routes is not None:
+        for lesson in sorted((root / EXAMS_DIR).glob(LESSON_GLOB)):
+            rel = lesson.relative_to(root).as_posix()
+            for number, line in enumerate(lesson.read_text(encoding="utf-8").splitlines(), 1):
+                for match in LINK.finditer(line):
+                    target = match.group(2).lstrip("#")
+                    if ":" in target:      # a parameterised route, e.g. /tracks/:id
+                        continue
+                    if target not in routes:
+                        failures.append(
+                            f"{rel}:{number}: links to {match.group(2)!r}, which "
+                            f"the router does not register — the reader lands on "
+                            f"the unknown-route placeholder")
 
     for path, manifest in _manifests(root):
         rel = path.relative_to(root).as_posix()
@@ -168,7 +197,7 @@ def _copy_tree(dest):
         target = dest / path.relative_to(REPO_ROOT)
         target.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(path, target)
-    for rel in (A4, COMPILED):
+    for rel in (A4, COMPILED, APP_JS):
         target = dest / rel
         target.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(REPO_ROOT / rel, target)
@@ -245,6 +274,8 @@ def self_test():
         (NETPLUS, "json", {"fn": _short_body}, "a worked example has no body"),
         (COMPILED, "text", {"fn": lambda t: t.replace(SIM_LABEL, "")},
          "the compiled artifact drops the label"),
+        (A4, "text", {"fn": lambda t: t.replace("(#/pe/vms)", "(#/pe/does-not-exist)")},
+         "a lesson links to a route the router does not register"),
     ]
     for rel, kind, kwargs, description in mutations:
         with tempfile.TemporaryDirectory() as td:

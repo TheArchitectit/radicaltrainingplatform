@@ -106,6 +106,18 @@ def declared_ids(root):
     return found
 
 
+def declared_anywhere(root):
+    """Every requirement identifier named in any spec file under openspec/."""
+    ids = set()
+    for path in sorted(root.joinpath(OPENSPEC).glob("SPEC-*.md")):
+        # The matrix is not a declaring document: its own rows name the
+        # requirements, so counting it would make every citation self-declared.
+        if path.name.startswith(f"{MATRIX}-"):
+            continue
+        ids |= set(ID_RE.findall(path.read_text(encoding="utf-8")))
+    return ids
+
+
 def covered_ids(root):
     """Requirement identifiers named in SPEC-12's TM table Requirements cells."""
     matches = sorted(root.joinpath(OPENSPEC).glob(f"{MATRIX}-*.md"))
@@ -177,6 +189,16 @@ def check(root):
         problems.append(
             f"unmapped requirement: {req} is declared in "
             f"{OPENSPEC}/SPEC-02..SPEC-10 but no TM row in {MATRIX} names it")
+
+    # The matrix is the evidence the release record cites, so a row naming a
+    # requirement no spec declares is a citation to nothing. The forward check
+    # above asks whether every declared requirement has a row; this asks the
+    # reverse, and neither implies the other.
+    phantom = covered - declared_anywhere(root)
+    for req in sorted(phantom):
+        problems.append(
+            f"phantom requirement: a TM row in {MATRIX} cites {req}, which no "
+            f"spec under {OPENSPEC} declares")
 
     # An index with two rows for one identifier cannot be cited: a release
     # record that names TM-94 would satisfy two different tests. This happened
@@ -327,6 +349,14 @@ def self_test():
         write_tree(base, declaring, rows_ok, chain_ok + chain_stale, [runner])
         got = check(base)
         cases.append(("stale-exclusion", got, ["stale exclusion"]))
+
+    with tempfile.TemporaryDirectory() as tmp:
+        base = pathlib.Path(tmp) / "phantom"
+        rows_phantom = rows_ok + "| TM-23 | phantom | gate | REQ-ZZ-99 |\n"
+        write_tree(base, declaring, rows_phantom, chain_ok, [runner])
+        got = check(base)
+        cases.append(("phantom-requirement", got,
+                      ["phantom requirement: a TM row in SPEC-12 cites REQ-ZZ-99"]))
 
     with tempfile.TemporaryDirectory() as tmp:
         base = pathlib.Path(tmp) / "duplicate"

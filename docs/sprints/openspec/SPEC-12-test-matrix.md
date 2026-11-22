@@ -118,7 +118,7 @@ Every row names its requirement IDs, the test type (unit / integration / E2E / g
 | TM-72 | Coverage threshold: below-threshold fixture fails | gate | CI-02 |
 | TM-73 | Import check: reintroduced bad import fails; Pages predeploy smoke green on release build | gate | CI-03, R-01 |
 | TM-74 | Scenario validator scan: constant-true fixture fails | gate | REQ-SC-01 |
-| TM-75 | Every gate in this package lists its failing+passing fixture in the release evidence | doc gate | SPEC-10 |
+| TM-75 | Every gate in this package lists its failing+passing fixture in the release evidence; a duplicate TM identifier or a citation to a requirement no spec declares fails | doc gate | SPEC-10 — `scripts/check-traceability.py` (8 self-test cases) |
 
 ## TM-94 series — index completion (TM-75 findings)
 
@@ -129,7 +129,7 @@ naming no gate is a **named gap**, not a covered requirement.
 
 | ID | Test | Type | Requirements |
 |---|---|---|---|
-| TM-94 | A+ virtualization label on the PE simulator link (REQ-AP-04) | gate + E2E | REQ-AP-04 — `scripts/check-labelled-content.py` + `--self-test` (label missing, external href, compiled artifact dropping the label each fail); `tests/e2e/smoke-web.mjs` asserts the reader renders the label on `#/pe/vms` |
+| TM-94 | A+ virtualization label on the PE simulator link (REQ-AP-04) | gate + E2E | REQ-AP-04 — `scripts/check-labelled-content.py` + `--self-test` (label missing, external href, compiled artifact dropping the label each fail); `tests/e2e/smoke-web.mjs` asserts the reader renders the label on `#/pe/vms`; a lesson link to an unregistered route also fails |
 | TM-95 | A+ worked examples carry the label; no fake interactive completion (REQ-AP-05) | gate | REQ-AP-05 — `scripts/check-labelled-content.py` + `--self-test` (an A+ exam with no worked example, a blank label, a scored-looking title, an `interactive: true` claim, and a short body each fail) |
 | TM-96 | Diagnosis share ≥50% of scored A+ items, fail-closed on untyped | gate | REQ-AP-06 — `scripts/check-item-types.py` + `--self-test` |
 | TM-97 | Demo tutor prompt resolves to the reviewed DNS lesson | eval | REQ-AP-07 — `tests/gates/tutor-eval.mjs` via `run_tutor_eval.sh` |
