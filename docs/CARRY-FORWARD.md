@@ -1,12 +1,13 @@
 # Carry-forward — state at 2026-11-04
 
-**Measured head:** see the latest freeze-record commit at the foot of this file;
-each per-item closure records its own SHA and chain total.
-**Freeze chain:** **72/72 at `ac5a5b7`**, measured with `--expect-sha` on the full
+**Measured head:** `96f1ae9` on `main` (each closure below records its own SHA
+and chain total; this line names the overnight run's last verified commit).
+**Freeze chain:** **74/74 at `96f1ae9`**, measured with `--expect-sha` on the full
 40-character SHA.
 **OpenSpec package:** `rtp-beginner-tracks-2026-10` — every task T-01..T-46 is
-landed; two of the six Sprint 48 rows closed on 2026-11-04, four remain blocked
-on inputs listed below.
+landed. Sprint 48: S48-05/06/07/08 ✅; S48-02 verified structurally but awaiting
+a human attestation; S48-01/S48-03 blocked on the RedEye provider; S48-04's
+storage-fabric claims need the AHV guide, which is not obtainable.
 **Phase 4 (Sprints 27-44):** complete — 27-28, 35-36, 29-30, 37-38, 39-40,
 41-42 and 43-44 landed (several rescoped by the owner for a local client);
 31-32 and 33-34 cut owner-deferred.
@@ -134,9 +135,15 @@ than papered over with invented examples.
 
 ## Next session
 
-1. The four remaining blocked rows need the same two inputs, or the owner's
-   attestation in their place: a readable June 15, 2026 NCA 7.5 guide (or the
-   owner says the manifest structure matches it), and a provider decision
-   (SPEC-15 tripwire) for the RedEye model stage.
-2. Re-run `bash tests/gates/run_freeze_chain.sh --expect-sha <full SHA>` after
+1. **Owner attestation for S48-02** — one line saying the June 15, 2026 guide
+   matches the manifest. The structural comparison already passed
+   (`sha256:d876abc5…`); SPEC-02 will not accept a machine's word for a human
+   review, so the date is still the ingest date.
+2. **Provider decision for S48-01/S48-03** — SPEC-15 tripwire; the RedEye model
+   stage stays blocked until you enable a provider.
+3. **AHV 11 / AOS guide** would close the rest of S48-04's claims. It is the
+   second pointer-only PDF; the vendor URL is not known to this repository.
+4. The bot branch `forge-bot/NEXT-548` is still local-only and the audit digest
+   keeps flagging it: land it or delete it (owner call).
+5. Re-run `bash tests/gates/run_freeze_chain.sh --expect-sha <full SHA>` after
    any change and record the new total at the new head.

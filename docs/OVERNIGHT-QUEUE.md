@@ -57,8 +57,8 @@ tripwire or three consecutive failures on one item.
 - [x] commit + push
 
 ## End of run
-- [ ] Final `run_freeze_chain.sh --expect-sha <SHA>`; record total + head
-- [ ] `CARRY-FORWARD.md` next-session section reflects the true state
+- [x] Final `run_freeze_chain.sh --expect-sha <SHA>` — **74/74 at `96f1ae9`**
+- [x] `CARRY-FORWARD.md` next-session section reflects the true state
 - [ ] Leave `docs/DIGEST-FOLLOWUPS.md`, `forge-bot/*` and the feature-branch
       `NEXT-548` commit alone — owner territory
 
