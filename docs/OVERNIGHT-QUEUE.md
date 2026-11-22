@@ -40,9 +40,10 @@ tripwire or three consecutive failures on one item.
 - [x] docs → gates → commit + push
 
 ## W4 — housekeeping
-- [ ] Packaging metadata copyright line reads the confirmed holder
-- [ ] `SPRINT-39-40.md` reframed from “Local Classroom Kit” to local self-study
-      (docs only, no behaviour change)
+- [x] Packaging metadata holder + licence corrected (it declared MIT against a
+      BSD-3-Clause repository) and gated in `check-packaging-manifests.py`
+- [x] `SPRINT-39-40.md` framing — already retitled in an earlier session; one
+      stale “classroom kit” label corrected
 
 ## End of run
 - [ ] Final `run_freeze_chain.sh --expect-sha <SHA>`; record total + head

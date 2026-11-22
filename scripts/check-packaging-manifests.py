@@ -49,6 +49,11 @@ METADATA = ("packaging/linux/"
 # a link that 404s for every reader of the metadata.
 PLACEHOLDER_HOSTS = ("your-org", "example.com", "example.org", "localhost")
 
+# The first line of a SPDX licence file, mapped to the identifier AppStream
+# metadata must declare. Only licences this project could plausibly ship.
+LICENSE_IDS = {"BSD 3-Clause License": "BSD-3-Clause",
+               "MIT License": "MIT"}
+
 # An AppStream comment explaining what was removed is not a claim; only the
 # markup outside comments is.
 COMMENT = re.compile(r"<!--.*?-->", re.DOTALL)
@@ -223,6 +228,22 @@ def check_metadata(root, fail):
     if "<releases>" in markup and "<release " not in markup:
         fail(f"{METADATA}: declares <releases> with no <release> inside it")
 
+    # S48-07 follow-on: the metadata declared MIT while the repository ships
+    # BSD-3-Clause. A packaging surface asserting a licence the project does not
+    # hold is the same defect class as the README badge that linked a missing
+    # LICENSE — the claim and the file have to agree.
+    licence = pathlib.Path(root) / "LICENSE"
+    if licence.is_file():
+        first = licence.read_text(encoding="utf-8").strip().splitlines()[0]
+        expected = LICENSE_IDS.get(first)
+        declared = re.search(r"<project_license>([^<]+)</project_license>", markup)
+        if expected and not declared:
+            fail(f"{METADATA}: declares no <project_license>, but LICENSE is "
+                 f"{expected}")
+        elif expected and declared.group(1).strip() != expected:
+            fail(f"{METADATA}: declares project_license "
+                 f"{declared.group(1).strip()!r}, but LICENSE is {expected!r}")
+
 
 def check_no_secrets(root, fail):
     for rel in (APPIMAGE, DMG, FLATPAK, METADATA):
@@ -249,7 +270,7 @@ def run_checks(root):
 
 def _copy_tree(root, dest):
     for rel in (APPIMAGE, DMG, FLATPAK, METADATA, ENTITLEMENTS,
-                INSTALL_CONTENT, GENERATOR):
+                INSTALL_CONTENT, GENERATOR, "LICENSE"):
         out = pathlib.Path(dest) / rel
         out.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(pathlib.Path(root) / rel, out)
@@ -286,6 +307,9 @@ MUTATIONS = [
      "a placeholder host in the metadata URLs"),
     (METADATA, "<keywords>", "<releases>\n  </releases>\n  <keywords>",
      "a <releases> block with nothing released in it"),
+    (METADATA, "<project_license>BSD-3-Clause</project_license>",
+     "<project_license>MIT</project_license>",
+     "the metadata declares a licence the LICENSE file does not grant"),
     (ENTITLEMENTS, "  build-dmg.sh passed", "  build-dmg.sh passed --options runtime",
      "a command line pasted into an XML comment, making the plist unparseable"),
 ]

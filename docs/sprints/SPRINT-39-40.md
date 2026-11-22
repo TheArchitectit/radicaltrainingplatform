@@ -104,7 +104,7 @@ this document is the shape of that work and it starts from a new owner decision.
 
 ### 1. Progress that can move without an account
 
-`ProgressStore.exportProgress()` and `importProgress()` (S39, local classroom kit), with
+`ProgressStore.exportProgress()` and `importProgress()` (S39, local self-study kit), with
 controls on the Study Tracks page.
 
 The export is a versioned envelope over the **learner** keyspaces only —

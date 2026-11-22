@@ -4,10 +4,10 @@
   <name>RadicalTrainingPlatform</name>
   <summary>Nutanix Certification Exam Prep</summary>
   <developer id="app.radicaltrainingplatform">
-    <name>RadicalTrainingPlatform Project</name>
+    <name>The RadicalTrainingPlatform Authors</name>
   </developer>
   <metadata_license>CC0-1.0</metadata_license>
-  <project_license>MIT</project_license>
+  <project_license>BSD-3-Clause</project_license>
 
   <description>
     <p>
