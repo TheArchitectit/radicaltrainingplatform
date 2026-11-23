@@ -1,0 +1,70 @@
+name: App Auth Smoke
+
+# The fleet provisions Mission Control's GitHub App on every TheArchitectit
+# repo (app id in `vars.DEVGATE_SWEEP_APP_ID`, PEM in
+# `secrets.DEVGATE_SWEEP_APP_PRIVATE_KEY`) so CI can read and dispatch with an
+# installation token instead of the shared 5,000/hour user PAT — see
+# infra-info `ci-fleet/github-app-api-access.md` and
+# `ci-fleet/secret-fleet-sweep-setup.md`.
+#
+# Both values were provisioned here on 2026-11-18 and, until this file, nothing
+# consumed them. A secret that is present but stale looks exactly like a working
+# one until something uses it, and the first real user would then discover it in
+# a confusing way. This workflow is the consumer, and proving the pair works is
+# its whole job.
+#
+# It is deliberately NOT part of build.yml: the build jobs make no GitHub API
+# call, so minting a token there would be ceremony rather than need. Run this
+# manually after any key rotation; `token_mode=app` in the log is the readback
+# the fleet runbook asks for.
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '23 5 * * *'
+
+permissions:
+  contents: read
+
+jobs:
+  token:
+    runs-on: [self-hosted, devgate-rtp]
+    timeout-minutes: 10
+    steps:
+      # Fails loudly when the app-id variable is unset, rather than minting a
+      # token for an empty id and reporting something unrelated downstream.
+      - name: Mint an installation token from the fleet App
+        id: app
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ vars.DEVGATE_SWEEP_APP_ID }}
+          private-key: ${{ secrets.DEVGATE_SWEEP_APP_PRIVATE_KEY }}
+          owner: TheArchitectit
+
+      - name: Prove the token reads this repository
+        env:
+          GH_TOKEN: ${{ steps.app.outputs.token }}
+          REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          if [ -z "${GH_TOKEN:-}" ]; then
+            echo "::error::no installation token was minted — is vars.DEVGATE_SWEEP_APP_ID set?" >&2
+            exit 1
+          fi
+          status=$(curl -sS -o /tmp/rtp-repo.json -w '%{http_code}' \
+            -H "Authorization: Bearer $GH_TOKEN" \
+            -H "Accept: application/vnd.github+json" \
+            "https://api.github.com/repos/$REPO")
+          if [ "$status" != "200" ]; then
+            echo "::error::the App cannot read $REPO (HTTP $status)" >&2
+            exit 1
+          fi
+          python3 - <<'PY'
+          import json, sys
+          data = json.load(open('/tmp/rtp-repo.json'))
+          expected = 'thearchitectit/radicaltrainingplatform'
+          if data.get('full_name', '').lower() != expected:
+              sys.exit(f"token resolved {data.get('full_name')!r}, expected {expected!r}")
+          print(f"token_mode=app repo={data['full_name']} "
+                f"private={data['private']} default_branch={data['default_branch']}")
+          PY
