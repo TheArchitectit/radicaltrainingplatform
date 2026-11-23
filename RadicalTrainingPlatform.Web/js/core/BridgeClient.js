@@ -31,8 +31,8 @@ class BridgeClient {
                 this.#onMessage(e.data);
             });
         } else {
+            // standalone: no host bridge, mock responses are served locally
             this.#mode = 'standalone';
-            console.log('[Bridge] Running in standalone mode (no host bridge). Mock responses enabled.');
         }
     }
 
@@ -73,9 +73,8 @@ class BridgeClient {
             window.dotnetBridge.call(JSON.stringify(msg));
         } else if (this.#mode === 'postmessage') {
             this.#postMessageTarget.postMessage(msg, '*');
-        } else {
-            console.log('[Bridge] Standalone post (no-op):', type, payload);
         }
+        // else: standalone mode has no host to post to; the call is a no-op
     }
 
     /** Register a handler for messages from C#. */

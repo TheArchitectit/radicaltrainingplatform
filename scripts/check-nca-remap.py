@@ -45,7 +45,8 @@ import tempfile
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 
-from review_record import review_record_errors  # noqa: E402
+from review_record import review_record_errors  # noqa: E402; guardrails-allow PREVENT-024: first-party module imported by path; not a registry package
+# guardrails-allow PREVENT-024: first-party module imported by path (sys.path.insert above); not a registry package
 
 # SPEC-01 01.3 — normative column order. Not a set: a reordered or renamed
 # column silently changes what the document means, so this is compared exactly.

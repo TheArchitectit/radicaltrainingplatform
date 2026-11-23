@@ -1,6 +1,9 @@
 # Paths the guardrails scanner must not walk. Build/venv trees are not
 # repository content and do not exist on a CI checkout.
 .shellcheck-venv/
+# Vendored DevGate framework: extended through .guardrails/ overlays,
+# never edited, so its own code is not this repository's content.
+.devgate/
 bin/
 obj/
 node_modules/

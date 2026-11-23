@@ -47,7 +47,8 @@ import tempfile
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 
-from security_baseline_checks import (  # noqa: E402
+from security_baseline_checks import (  # noqa: E402; guardrails-allow PREVENT-024: first-party module imported by path; not a registry package
+# guardrails-allow PREVENT-024: first-party module imported by path (sys.path.insert above); not a registry package
     INDEX,
     REPO_ROOT,
     SBOM,
