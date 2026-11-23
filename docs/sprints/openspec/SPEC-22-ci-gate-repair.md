@@ -186,9 +186,9 @@ Measured on this host on 2026-11-23 against `00aed23` on `main`:
 - **Portability gate:** `python3 scripts/check-test-path-portability.py` → PASS,
   and `--self-test` proves a POSIX-literal file fails it.
 
-**Not observed from this host:** the `build-linux` and `build-winforms` job
-conclusions at the landing head. The Linux leg's steps above are the same commands
-CI runs; the Windows leg cannot be run here at all. The Windows repair is verified
-by construction (every expectation now routes through `Path.Combine`, the same call
-production makes) and by the Linux baseline staying 19/19 — not by a Windows run.
-That is the honest limit of this evidence and it is recorded rather than implied.
+**Observed 2026-11-23 — the Windows leg is no longer an inference.** Run
+`45204396809` (manual dispatch at `436c304`, which contains this repair) completed
+**success** on both legs: `build-linux` on the fleet runner `ucs03-rtp`, and
+`build-winforms` on GitHub-hosted Windows, where the 19 plugin tests are part of
+the full suite. The earlier "verified by construction only" note is superseded by
+that observation; the construction argument still explains *why* it passes.
