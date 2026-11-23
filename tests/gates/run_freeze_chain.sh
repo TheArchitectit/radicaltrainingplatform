@@ -129,6 +129,14 @@ gate "bash tests/gates/run_packaging_fixtures.sh"       bash tests/gates/run_pac
 gate "bash tests/gates/run_release_truth_fixtures.sh"   bash tests/gates/run_release_truth_fixtures.sh
 gate "bash tests/gates/run_bridge_surface_fixtures.sh"  bash tests/gates/run_bridge_surface_fixtures.sh
 gate "bash tests/gates/run_shellcheck_fixtures.sh"      bash tests/gates/run_shellcheck_fixtures.sh
+# SPEC-22 CI-01: provisioning must be able to fail. Runs before the R-24 gate so a
+# host without a usable ShellCheck is reported by the step that owns it.
+gate "bash tests/gates/run_shellcheck_provision_fixtures.sh" bash tests/gates/run_shellcheck_provision_fixtures.sh
+# SPEC-22 CI-02: defeats the Windows-only path regression on the leg that runs
+# everywhere (the defect was invisible on Linux).
+gate "python3 scripts/check-test-path-portability.py --self-test" \
+      python3 scripts/check-test-path-portability.py --self-test
+gate "python3 scripts/check-test-path-portability.py"  python3 scripts/check-test-path-portability.py
 
 # ── Web artifact gates ──
 gate "python3 scripts/check-imports.py"                 python3 scripts/check-imports.py

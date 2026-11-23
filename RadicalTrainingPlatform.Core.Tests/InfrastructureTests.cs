@@ -107,7 +107,7 @@ public class MarkdownExamRepositoryTests
         var files = Substitute.For<IFileProvider>();
         files.GetCurrentDirectory().Returns("/cwd");
         files.GetExecutingAssemblyDirectory().Returns("/asm");
-        files.GetApplicationDataDirectory("RadicalTrainingPlatform").Returns("/appdata");
+        files.GetApplicationDataDirectory("RadicalTrainingPlatform").Returns(TestPaths.Root("appdata"));
         files.Exists(Arg.Any<string>()).Returns(true);
 
         var repo = new MarkdownExamRepository(files);
@@ -122,7 +122,7 @@ public class MarkdownExamRepositoryTests
         var files = Substitute.For<IFileProvider>();
         files.GetCurrentDirectory().Returns("/cwd");
         files.GetExecutingAssemblyDirectory().Returns("/asm");
-        files.GetApplicationDataDirectory("RadicalTrainingPlatform").Returns("/appdata");
+        files.GetApplicationDataDirectory("RadicalTrainingPlatform").Returns(TestPaths.Root("appdata"));
         files.Exists(Arg.Any<string>()).Returns(true);
 
         var repo = new MarkdownExamRepository(files);
@@ -204,10 +204,10 @@ public class MarkdownExamRepositoryTests
         var files = Substitute.For<IFileProvider>();
         files.GetCurrentDirectory().Returns("/dir1");
         files.GetExecutingAssemblyDirectory().Returns("/dir2");
-        files.GetApplicationDataDirectory("RadicalTrainingPlatform").Returns("/appdata");
+        files.GetApplicationDataDirectory("RadicalTrainingPlatform").Returns(TestPaths.Root("appdata"));
         files.Exists("/dir1").Returns(true);
         files.Exists("/dir2").Returns(true);
-        files.Exists("/appdata").Returns(false);
+        files.Exists(TestPaths.Root("appdata")).Returns(false);
         // Both dirs have the same file
         files.GetFiles("/dir1", "*.md").Returns(new[] { "/dir1/exam.md" });
         files.GetFiles("/dir2", "*.md").Returns(new[] { "/dir1/exam.md" }); // Same path

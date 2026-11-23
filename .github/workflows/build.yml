@@ -18,6 +18,14 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Test path portability gate (SPEC-22 CI-02)
+        run: |
+          # The plugin/errata tests failed only on Windows because they hardcoded
+          # POSIX roots ("/repo", "/app") that production Path.Combine's into
+          # "\repo\..." / "\app\...". Invisible on the Linux leg, so gate it.
+          python3 scripts/check-test-path-portability.py --self-test
+          python3 scripts/check-test-path-portability.py
+
       - name: Lint exam content
         run: |
           python3 scripts/lint-content.py
@@ -150,9 +158,14 @@ jobs:
       # run_packaging_fixtures.sh above.
       - name: ShellCheck gate (R-24)
         run: |
-          python3 -m venv .shellcheck-venv
-          .shellcheck-venv/bin/pip install --quiet --disable-pip-version-check \
-            "shellcheck-py==0.11.0.1"
+          # SPEC-22 CI-01: do not assume python3-venv exists. The self-hosted
+          # devgate-rtp runner has Python but no ensurepip/pip/xz, so the old
+          # `python3 -m venv` + pip step could never succeed and the gate never
+          # ran. provision-shellcheck.sh resolves an existing binary or fetches
+          # the pinned static release, and fails closed if neither is possible.
+          bash tests/gates/run_shellcheck_provision_fixtures.sh
+          SHELLCHECK="$(bash scripts/provision-shellcheck.sh)" || exit 1
+          export SHELLCHECK
           bash tests/gates/run_shellcheck_fixtures.sh
 
       # R-01/CI-03 companion gate: every relative import in the PWA must
@@ -343,6 +356,11 @@ jobs:
 
       # cp1252 consoles cannot print the lint output's emoji — force UTF-8
       # (this UnicodeEncodeError killed the 2026-09-02 Windows legs).
+      - name: Test path portability gate (SPEC-22 CI-02)
+        run: |
+          python scripts/check-test-path-portability.py --self-test
+          python scripts/check-test-path-portability.py
+
       - name: Lint exam content
         run: python scripts/lint-content.py
         env:

@@ -42,8 +42,8 @@ public class SessionStoreTests
         }
         public void DeleteFile(string path) => Files.Remove(path);
         public void CreateDirectory(string path) => Dirs.Add(path);
-        public string GetCurrentDirectory() => "/app";
-        public string GetExecutingAssemblyDirectory() => "/app/bin";
+        public string GetCurrentDirectory() => TestPaths.Root("app");
+        public string GetExecutingAssemblyDirectory() => TestPaths.Combine(TestPaths.Root("app"), "bin");
         public string GetApplicationDataDirectory(string appName) => Path.Combine("/appdata", appName);
         public string? GetParentDirectory(string path) => Path.GetDirectoryName(path);
     }

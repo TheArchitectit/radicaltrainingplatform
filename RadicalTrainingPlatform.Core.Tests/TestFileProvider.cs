@@ -65,11 +65,12 @@ internal sealed class TestFileProvider : IFileProvider
 
     public void CreateDirectory(string path) => Dir(path);
 
-    public string GetCurrentDirectory() => "/app";
+    public string GetCurrentDirectory() => TestPaths.Root("app");
 
-    public string GetExecutingAssemblyDirectory() => "/app/bin";
+    public string GetExecutingAssemblyDirectory() => TestPaths.Combine(TestPaths.Root("app"), "bin");
 
-    public string GetApplicationDataDirectory(string appName) => "/appdata/" + appName;
+    public string GetApplicationDataDirectory(string appName) =>
+        TestPaths.Combine(TestPaths.Root("appdata"), appName);
 
     public string? GetParentDirectory(string path) => Path.GetDirectoryName(path);
 }

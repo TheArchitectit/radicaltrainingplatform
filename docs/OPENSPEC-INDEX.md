@@ -32,6 +32,18 @@ Product-level gaps and the per-objective content roadmap (2026-10-20):
 | [`Gap-Analysis-Comptia-A-Network-NCA-75-Beginner-Tracks.md`](drive-ingest-2026-10-10/Gap-Analysis-Comptia-A-Network-NCA-75-Beginner-Tracks.md) | Gap analysis (SPEC-00B source) |
 | [`RTP-OpenSpec-RedEye-2026-10-10.md`](drive-ingest-2026-10-10/RTP-OpenSpec-RedEye-2026-10-10.md) (+ .pdf) | **Standing rule:** every OpenSpec carries a RedEye review lane — active, applies to future OpenSpecs too |
 
+### `rtp-ci-gate-repair-2026-11` — CI gate repair (ShellCheck provisioning, Windows path portability)
+
+| Field | Value |
+|---|---|
+| Status | **Active — implemented 2026-11-23**, awaiting a green freeze chain at the landing head |
+| Base head | `f0d82ca` on `main` (2026-11-23) |
+| Scope | Two red CI steps, both gate defects rather than product defects: `ShellCheck gate (R-24)` could never run on the self-hosted runner (no `ensurepip`/`pip`/`xz`), and 19 plugin/errata tests failed on Windows only because they hardcoded POSIX roots that production `Path.Combine`s |
+| Per-spec doc | [`docs/sprints/openspec/SPEC-22-ci-gate-repair.md`](sprints/openspec/SPEC-22-ci-gate-repair.md) |
+| New gates | `tests/gates/run_shellcheck_provision_fixtures.sh` (5 fixtures), `scripts/check-test-path-portability.py` (+ `--self-test` with bad/good fixtures) |
+| RedEye lane | `not-applicable` — no scored item, key or blueprint claim is touched; recorded rather than omitted per the standing rule |
+| Tripwires | None triggered. HG-01 untouched. |
+
 ## Closed / superseded
 
 None yet in this population — `rtp-beginner-tracks-2026-10` is the first RTP OpenSpec package. When its Sprints 45-48 complete and gates report green at a frozen head, archive the execution record under `docs/sprints/` and mark the package row here as closed.

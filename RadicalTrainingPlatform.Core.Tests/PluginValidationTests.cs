@@ -15,7 +15,10 @@ namespace RadicalTrainingPlatform.Core.Tests;
 /// </summary>
 public class PluginValidationTests
 {
-    private const string Root = "/plugins/acme";
+    // SPEC-22 CI-02: built with Path.Combine (the same call production makes)
+    // so the tree and its expectations agree on every platform. A POSIX literal
+    // here passed on Linux and failed all 19 plugin tests on Windows.
+    private static readonly string Root = TestPaths.Root("plugins", "acme");
 
     private static string Sha(string content) =>
         PluginValidator.Sha256Hex(Encoding.UTF8.GetBytes(content));
@@ -24,10 +27,10 @@ public class PluginValidationTests
     {
         var files = new TestFileProvider()
             .Dir(Root)
-            .Dir($"{Root}/content")
-            .Dir($"{Root}/content/exams/ACME-1")
-            .File($"{Root}/content/exams/ACME-1/exam.json", examJson)
-            .File($"{Root}/plugin.json", pluginJson ?? WellFormed(examJson));
+            .Dir(TestPaths.Combine(Root, "content"))
+            .Dir(TestPaths.Combine(Root, "content", "exams", "ACME-1"))
+            .File(TestPaths.Combine(Root, "content", "exams", "ACME-1", "exam.json"), examJson)
+            .File(TestPaths.Combine(Root, "plugin.json"), pluginJson ?? WellFormed(examJson));
         return files;
     }
 
@@ -56,7 +59,7 @@ public class PluginValidationTests
             pluginJson ?? WellFormed(ExamJson),
             new JsonSerializerOptions { PropertyNameCaseInsensitive = true })!;
         plugin.PluginDirectory = Root;
-        plugin.ManifestPath = $"{Root}/plugin.json";
+        plugin.ManifestPath = TestPaths.Combine(Root, "plugin.json");
         // Derived from contentRoot exactly as discovery derives it, so a test
         // that edits contentRoot actually exercises the content-root check.
         plugin.ContentSearchRoot = Path.Combine(Root, plugin.ContentRoot);
@@ -99,9 +102,9 @@ public class PluginValidationTests
     {
         var files = new TestFileProvider()
             .Dir(Root)
-            .Dir($"{Root}/content")
-            .File($"{Root}/content/exams/ACME-1/exam.json", ExamJson)
-            .File($"{Root}/plugin.json", WellFormed(ExamJson).Replace("\"contentRoot\":\"content\"", "\"contentRoot\":\"absent\""));
+            .Dir(TestPaths.Combine(Root, "content"))
+            .File(TestPaths.Combine(Root, "content", "exams", "ACME-1", "exam.json"), ExamJson)
+            .File(TestPaths.Combine(Root, "plugin.json"), WellFormed(ExamJson).Replace("\"contentRoot\":\"content\"", "\"contentRoot\":\"absent\""));
 
         var plugin = Plugin(WellFormed(ExamJson).Replace("\"contentRoot\":\"content\"", "\"contentRoot\":\"absent\""));
         var result = new PluginValidator(files).Validate(plugin);
@@ -155,10 +158,10 @@ public class PluginValidationTests
         var trackJson = """{"trackId":"track-acme","title":"ACME"}""";
         var files = new TestFileProvider()
             .Dir(Root)
-            .Dir($"{Root}/content")
-            .Dir($"{Root}/content/tracks/track-acme")
-            .File($"{Root}/content/tracks/track-acme/track.json", trackJson)
-            .File($"{Root}/plugin.json", WellFormed(ExamJson));
+            .Dir(TestPaths.Combine(Root, "content"))
+            .Dir(TestPaths.Combine(Root, "content", "tracks", "track-acme"))
+            .File(TestPaths.Combine(Root, "content", "tracks", "track-acme", "track.json"), trackJson)
+            .File(TestPaths.Combine(Root, "plugin.json"), WellFormed(ExamJson));
 
         var result = new PluginValidator(files)
             .Validate(Plugin(), claimedTrackIds: new[] { "TRACK-ACME" });

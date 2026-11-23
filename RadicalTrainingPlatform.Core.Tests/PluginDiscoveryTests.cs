@@ -18,8 +18,20 @@ namespace RadicalTrainingPlatform.Core.Tests;
 /// </summary>
 public class PluginDiscoveryTests
 {
-    private const string BuiltInRoot = "/repo";
-    private const string PluginsRoot = "/plugins";
+    /// <summary>
+    /// Root of the in-memory repository tree.
+    ///
+    /// Platform-agnostic on purpose (SPEC-22 CI-02). These constants used to be
+    /// POSIX literals ("/repo", "/plugins") interpolated with a forward slash,
+    /// which produced keys like "/repo/content". Production builds every path
+    /// with <see cref="IFileProvider.CombinePath"/> (= Path.Combine), so on
+    /// Windows it asks for "\\repo\\content" and never matches — 19 tests failed
+    /// on the build-winforms leg while passing on Linux. Rooting at a relative
+    /// segment and building with Combine() keeps the tree and the expectations
+    /// in the same coordinate system as the code under test, on every platform.
+    /// </summary>
+    private static readonly string BuiltInRoot = TestPaths.Root("repo");
+    private static readonly string PluginsRoot = TestPaths.Root("plugins");
 
     private static string Sha(string content) =>
         PluginValidator.Sha256Hex(Encoding.UTF8.GetBytes(content));
@@ -41,32 +53,40 @@ public class PluginDiscoveryTests
     /// <summary>A repository tree with one built-in exam and one built-in track.</summary>
     private static TestFileProvider Repo()
     {
+        var content = TestPaths.Combine(BuiltInRoot, "content");
+        var examDir = TestPaths.Combine(content, "exams", "COMPTIA-A-1201");
+        var trackDir = TestPaths.Combine(content, "tracks", "track-aplus");
         var files = new TestFileProvider()
             .Dir(BuiltInRoot)
-            .Dir($"{BuiltInRoot}/content")
-            .Dir($"{BuiltInRoot}/content/exams/COMPTIA-A-1201")
-            .File($"{BuiltInRoot}/content/exams/COMPTIA-A-1201/exam.json", ExamJson("COMPTIA-A-1201"))
-            .Dir($"{BuiltInRoot}/content/tracks/track-aplus")
-            .File($"{BuiltInRoot}/content/tracks/track-aplus/track.json", """{"trackId":"track-aplus"}""");
+            .Dir(content)
+            .Dir(examDir)
+            .File(TestPaths.Combine(examDir, "exam.json"), ExamJson("COMPTIA-A-1201"))
+            .Dir(trackDir)
+            .File(TestPaths.Combine(trackDir, "track.json"), """{"trackId":"track-aplus"}""");
         return files;
     }
 
     private static TestFileProvider WithPlugin(TestFileProvider files, string dirName, string examId, string pluginId = "acme")
     {
-        var dir = $"{PluginsRoot}/{dirName}";
+        var dir = TestPaths.Combine(PluginsRoot, dirName);
+        var content = TestPaths.Combine(dir, "content");
+        var examDir = TestPaths.Combine(content, "exams", examId);
         var examJson = ExamJson(examId);
         files.Dir(dir)
-             .Dir($"{dir}/content")
-             .Dir($"{dir}/content/exams/{examId}")
-             .File($"{dir}/content/exams/{examId}/exam.json", examJson)
-             .File($"{dir}/plugin.json", PluginJson(pluginId, "content", ($"exams/{examId}/exam.json", examJson)));
+             .Dir(content)
+             .Dir(examDir)
+             .File(TestPaths.Combine(examDir, "exam.json"), examJson)
+             // plugin.json's internal file list stays forward-slashed: it is a
+             // manifest wire format, not a filesystem path. The validator joins
+             // it to the content root itself.
+             .File(TestPaths.Combine(dir, "plugin.json"), PluginJson(pluginId, "content", ($"exams/{examId}/exam.json", examJson)));
         return files;
     }
 
     private static PluginDiscovery Discovery(TestFileProvider files, IExamRepository? exams = null)
     {
         var discovery = new PluginDiscovery(files, new PluginValidator(files), exams);
-        discovery.RegisterBuiltInContentRoot($"{BuiltInRoot}/content");
+        discovery.RegisterBuiltInContentRoot(TestPaths.Combine(BuiltInRoot, "content"));
         discovery.RegisterPluginRoot(PluginsRoot);
         return discovery;
     }
@@ -91,7 +111,7 @@ public class PluginDiscoveryTests
 
         discovery.Plugins.Count.ShouldBe(2);
         discovery.Plugins.ShouldContain(p => !p.IsBuiltIn && p.PluginId == "acme");
-        discovery.PluginContentSearchRoots.ShouldBe(new[] { $"{PluginsRoot}/acme/content" });
+        discovery.PluginContentSearchRoots.ShouldBe(new[] { TestPaths.Combine(PluginsRoot, "acme", "content") });
         discovery.Rejected.ShouldBeEmpty();
     }
 
@@ -132,7 +152,7 @@ public class PluginDiscoveryTests
     public void TamperedPlugin_IsRejectedWithTheHashMismatch()
     {
         var files = WithPlugin(Repo(), "acme", "ACME-1");
-        files.File($"{PluginsRoot}/acme/content/exams/ACME-1/exam.json", ExamJson("ACME-1-EDITED"));
+        files.File(TestPaths.Combine(PluginsRoot, "acme", "content", "exams", "ACME-1", "exam.json"), ExamJson("ACME-1-EDITED"));
 
         var discovery = Discovery(files);
         discovery.Discover();
@@ -145,7 +165,8 @@ public class PluginDiscoveryTests
     [Fact]
     public void DirectoryWithoutPluginJson_IsReportedNotIgnored()
     {
-        var files = Repo().Dir($"{PluginsRoot}/broken").Dir($"{PluginsRoot}/broken/content");
+        var files = Repo().Dir(TestPaths.Combine(PluginsRoot, "broken"))
+                          .Dir(TestPaths.Combine(PluginsRoot, "broken", "content"));
         var discovery = Discovery(files);
         discovery.Discover();
 
@@ -157,8 +178,8 @@ public class PluginDiscoveryTests
     public void MalformedPluginJson_IsReportedNotIgnored()
     {
         var files = Repo()
-            .Dir($"{PluginsRoot}/broken")
-            .File($"{PluginsRoot}/broken/plugin.json", "{ this is not json");
+            .Dir(TestPaths.Combine(PluginsRoot, "broken"))
+            .File(TestPaths.Combine(PluginsRoot, "broken", "plugin.json"), "{ this is not json");
         var discovery = Discovery(files);
         discovery.Discover();
 
@@ -193,6 +214,6 @@ public class PluginDiscoveryTests
 
         var builtIn = discovery.Plugins.ShouldHaveSingleItem();
         builtIn.IsBuiltIn.ShouldBeTrue();
-        builtIn.ContentSearchRoot.ShouldBe($"{BuiltInRoot}/content");
+        builtIn.ContentSearchRoot.ShouldBe(TestPaths.Combine(BuiltInRoot, "content"));
     }
 }
