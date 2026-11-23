@@ -1,0 +1,62 @@
+# Line-ending policy (SPEC-22 CI-02).
+#
+# Why this file exists
+# --------------------
+# The content bundle manifest stores a SHA-256 per file, computed over the file's
+# BYTES on the machine that generated it (scripts/generate-bundle-manifest.py
+# opens "rb"). ContentBundle.Verify() recomputes that hash from the text it reads
+# back, so the check only agrees when the checkout has the same bytes as the
+# generator saw.
+#
+# With no .gitattributes, Windows checks out CRLF while the manifest was generated
+# from LF, so every hashed file mismatches and Verify() returned 1331 problems for
+# a 1332-file bundle. The test CleanDirectory_LoadsKnownExamCountQuestionErrataAnd...
+# passed on Linux and failed only on build-winforms, for a reason that had nothing
+# to do with the content being wrong.
+#
+# The manifest is generated and verified on all three platforms, so the checkout
+# must be byte-identical on all three. That means LF everywhere, for text git can
+# detect.
+#
+# Do not switch content/ to CRLF: the hashes are already committed and a CRLF
+# checkout is a different file to the verifier.
+
+# Default: normalise to LF in the repository, check out LF on every platform.
+* text=auto eol=lf
+
+# Binary types git must never convert.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.ico binary
+*.pdf binary
+*.zip binary
+*.gz binary
+*.xz binary
+*.nupkg binary
+*.dll binary
+*.exe binary
+*.so binary
+*.dylib binary
+*.woff binary
+*.woff2 binary
+*.ttf binary
+*.otf binary
+*.mp3 binary
+*.wav binary
+*.ogg binary
+*.mp4 binary
+*.webm binary
+
+# Content that is hashed: LF is mandatory, not a preference.
+content/** text eol=lf
+errata.json text eol=lf
+*.md text eol=lf
+*.json text eol=lf
+*.cs text eol=lf
+*.sh text eol=lf
+*.py text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf

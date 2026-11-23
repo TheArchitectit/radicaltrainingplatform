@@ -88,7 +88,14 @@ public class ErrataTests
         // store builds keys with Path.Combine, which emits '\' on Windows.
         public readonly Dictionary<string, string> Files = new();
         public readonly HashSet<string> Dirs = new();
-        private static string N(string p) => p.Replace('\\', '/');
+        /// <summary>
+        /// Every key in this fake is normalized to '/' so the tests are
+        /// platform-independent: the store builds paths with Path.Combine, which
+        /// emits '\\' on Windows. A test that writes Files[...] directly must use
+        /// this too, or its key and the store's lookup disagree on Windows only
+        /// (SPEC-22 CI-02).
+        /// </summary>
+        public static string N(string p) => p.Replace('\\', '/');
         public string CombinePath(params string[] paths) => N(Path.Combine(paths));
         public bool Exists(string path) => Files.ContainsKey(N(path)) || Dirs.Contains(N(path));
         public string[] GetFiles(string d, string p) => Array.Empty<string>();
@@ -122,7 +129,7 @@ public class ErrataTests
     public void Store_FindsErrataByFileAndQuestionId()
     {
         var files = new FakeFiles();
-        files.Files[TestPaths.Combine(TestPaths.Root("app"), "errata.json")] = SampleJson;   // walking up from app/bin finds app
+        files.Files[FakeFiles.N(TestPaths.Combine(TestPaths.Root("app"), "errata.json"))] = SampleJson;   // walking up from app/bin finds app
         var store = new JsonErrataStore(files);
 
         store.TryGetCorrection("nca-75-part1.md", 35, out var answers).ShouldBeTrue();
@@ -141,7 +148,7 @@ public class ErrataTests
     public void Store_MalformedJson_FailsSoft()
     {
         var files = new FakeFiles();
-        files.Files[TestPaths.Combine(TestPaths.Root("app"), "errata.json")] = "{ not json";
+        files.Files[FakeFiles.N(TestPaths.Combine(TestPaths.Root("app"), "errata.json"))] = "{ not json";
         var store = new JsonErrataStore(files);
         store.TryGetCorrection("NCA-75-Part1.md", 35, out _).ShouldBeFalse();
     }
@@ -150,7 +157,7 @@ public class ErrataTests
     public void Store_UnsupportedCorrectionType_Skipped()
     {
         var files = new FakeFiles();
-        files.Files[TestPaths.Combine(TestPaths.Root("app"), "errata.json")] = SampleJson
+        files.Files[FakeFiles.N(TestPaths.Combine(TestPaths.Root("app"), "errata.json"))] = SampleJson
             .Replace("\"answerKey\"", "\"stemRewrite\"");
         var store = new JsonErrataStore(files);
         store.TryGetCorrection("NCA-75-Part1.md", 35, out _).ShouldBeFalse();

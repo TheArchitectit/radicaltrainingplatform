@@ -188,7 +188,12 @@ public sealed class ContentBundle : IContentBundle
             string actual;
             try
             {
-                actual = Hash(_files.ReadAllText(absolute));
+                // Hash the raw BYTES, the same way scripts/generate-bundle-manifest.py
+                // does (open(path, "rb")). Hashing re-encoded text was equivalent only
+                // while the checkout was byte-identical to the generator's input; a CRLF
+                // checkout made it silently different on Windows (SPEC-22 CI-02).
+                // Byte hashing removes the assumption instead of documenting it.
+                actual = Hash(_files.ReadAllBytes(absolute));
             }
             catch (Exception ex)
             {
@@ -351,13 +356,18 @@ public sealed class ContentBundle : IContentBundle
     }
 
     /// <summary>
-    /// SHA-256 of a file's text. Content files are UTF-8 without a BOM (checked
-    /// for the shipped tree), so hashing the re-encoded text matches hashing the
-    /// bytes; a file that gains a BOM will fail verification, which is the
-    /// honest outcome — it is not the file the manifest describes.
+    /// SHA-256 of a file's bytes — the same computation the manifest generator
+    /// performs (Python <c>sha256_file</c> opens the file in binary mode).
+    ///
+    /// This used to hash the re-encoded text and relied on "content files are
+    /// UTF-8 without a BOM, so text-hash equals byte-hash". That held only while
+    /// the working tree was byte-identical to the generator's input. With no
+    /// .gitattributes a Windows checkout materialised CRLF and every file in a
+    /// 1332-file bundle failed verification for a reason unrelated to its content.
+    /// Hashing bytes keeps the verifier and the generator on one definition.
     /// </summary>
-    private static string Hash(string text) =>
-        Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(text))).ToLowerInvariant();
+    private static string Hash(byte[] bytes) =>
+        Convert.ToHexString(SHA256.HashData(bytes)).ToLowerInvariant();
 
     // Shapes of the generated manifest. Kept private: callers get the records above.
     private sealed class ManifestDto
