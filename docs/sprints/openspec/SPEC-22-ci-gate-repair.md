@@ -1,7 +1,8 @@
 # OpenSpec SPEC-22 — CI Gate Repair: ShellCheck Provisioning and Windows Path Portability
 
 **Change package:** `rtp-ci-gate-repair-2026-11`
-**Status:** Active — implemented 2026-11-23, awaiting freeze-chain green at the landing head
+**Status:** Closed 2026-11-23 — implemented and measured. Freeze chain **77/77 at `00aed23`**.
+The Windows job conclusion is the one item this host cannot observe; see *Evidence* below.
 **Base head:** `f0d82ca` on `main` (2026-11-23, the commit before this package's work)
 **Requirements touched:** R-12 (README truth, unchanged), R-24 (ShellCheck gate), TM-75 (traceability)
 **RedEye review lane:** required by SPEC-08A standing rule. This package changes **no** scored
@@ -165,11 +166,29 @@ CARRY-FORWARD S48-01/S48-03; that blocker is unrelated to this work and is not r
 
 ---
 
-## Evidence to archive at the landing head
+## Evidence at the landing head
 
-- Branch, base and head SHA.
-- `bash tests/gates/run_shellcheck_fixtures.sh` → 6/6 with the provisioned binary.
-- `bash tests/gates/run_shellcheck_provision_fixtures.sh` → all cases.
-- `dotnet test ... --filter PluginDiscoveryTests|PluginValidationTests` on Linux → 19/19.
-- `python3 scripts/check-test-path-portability.py` → PASS, with its failing fixture verified.
-- The `build-linux` and `build-winforms` job conclusions on the landing head.
+Measured on this host on 2026-11-23 against `00aed23` on `main`:
+
+- **Head:** `00aed23` (base `f0d82ca`). Working tree clean.
+- **Freeze chain:** `bash tests/gates/run_freeze_chain.sh --expect-sha <full SHA>` →
+  `FREEZE CHAIN: 77/77 at 00aed23`, exit 0. The chain now also runs the two new
+  gates and the provisioning fixture suite.
+- **ShellCheck fixtures:** `SHELLCHECK="$(bash scripts/provision-shellcheck.sh)"` then
+  `bash tests/gates/run_shellcheck_fixtures.sh` → **6 PASS**, `shellcheck ... (0.11.0)`.
+  The provisioned path was `/tmp/scvenv/shellcheck`, fetched by the script itself —
+  no venv, no pip, no xz binary.
+- **Provisioning fixtures:** `bash tests/gates/run_shellcheck_provision_fixtures.sh` →
+  **5/5**: `$SHELLCHECK` honoured, PATH binary honoured, real download executed,
+  unreachable URL fails closed, non-executable `$SHELLCHECK` rejected.
+- **Plugin tests on Linux:** `dotnet test ... --filter PluginDiscoveryTests|PluginValidationTests`
+  → `Failed: 0, Passed: 19`.
+- **Portability gate:** `python3 scripts/check-test-path-portability.py` → PASS,
+  and `--self-test` proves a POSIX-literal file fails it.
+
+**Not observed from this host:** the `build-linux` and `build-winforms` job
+conclusions at the landing head. The Linux leg's steps above are the same commands
+CI runs; the Windows leg cannot be run here at all. The Windows repair is verified
+by construction (every expectation now routes through `Path.Combine`, the same call
+production makes) and by the Linux baseline staying 19/19 — not by a Windows run.
+That is the honest limit of this evidence and it is recorded rather than implied.

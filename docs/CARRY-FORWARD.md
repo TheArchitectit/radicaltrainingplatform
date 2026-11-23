@@ -117,7 +117,22 @@ freeze record already archived at this head is the documented state, and
 SPRINT-48 S48-06 is struck rather than left waiting on an input that can no
 longer arrive. TM-101 stops being a named gap.
 
-### 7. The three named TM gaps — closed 2026-11-22
+### 7. SPEC-22 CI gate repair — closed 2026-11-23
+
+`rtp-ci-gate-repair-2026-11` was the only open spec package. Both defects were
+gate defects, not product defects: ShellCheck provisioning assumed
+`python3 -m venv` exists on the self-hosted runner (it does not — no
+`ensurepip`, no `pip`, no `xz`), and 19 plugin tests built Windows paths with
+`/` literals. `scripts/provision-shellcheck.sh` now resolves a static binary
+through stdlib `lzma`/`tarfile`, and the tests route every expectation through
+the same `Path.Combine` production uses. Both carry fixture suites, both are in
+the chain. Measured: chain **77/77 at `00aed23`**, ShellCheck fixtures 6/6,
+provisioning fixtures 5/5, plugin tests 19/19 on Linux.
+
+**Not observed here:** the Windows CI job conclusion. Recorded as a limit, not
+claimed.
+
+### 8. The three named TM gaps — closed 2026-11-22
 
 `SPEC-12`'s index carried three rows whose evidence was "named gap — no gate":
 TM-94 (A+ illustration label), TM-95 (A+ worked examples), TM-102 (Network+
