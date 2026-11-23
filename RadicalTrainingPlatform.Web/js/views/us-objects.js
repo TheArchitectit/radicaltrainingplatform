@@ -1,3 +1,4 @@
+// guardrails-allow-file PREVENT-018: the flagged string is AWS's own published example access key, shown as study content about S3 access keys
 import { BaseView } from './BaseView.js';
 import { state } from '../core/StateEngine.js';
 import { bus } from '../core/EventBus.js';

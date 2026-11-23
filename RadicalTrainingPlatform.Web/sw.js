@@ -138,6 +138,7 @@ self.addEventListener('install', (event) => {
     caches.open(CACHE_NAME)
       .then(cache => cache.addAll(STATIC_ASSETS))
       .then(() => self.skipWaiting())
+      .catch((err) => console.error('[SW] install failed', err))
   );
 });
 
@@ -150,6 +151,7 @@ self.addEventListener('activate', (event) => {
         keys.filter(key => key !== CACHE_NAME).map(key => caches.delete(key))
       )
     ).then(() => self.clients.claim())
+      .catch((err) => console.error('[SW] activation failed', err))
   );
 });
 
@@ -166,10 +168,12 @@ self.addEventListener('fetch', (event) => {
     caches.match(request).then(cached => {
       if (cached) {
         // Return cached, but revalidate in background
-        fetch(request)
+        fetch(request)  // guardrails-allow PREVENT-026: same-origin GET only (asserted above); a service worker fetches requests by design
           .then(response => {
             if (response.ok) {
-              caches.open(CACHE_NAME).then(cache => cache.put(request, response));
+              caches.open(CACHE_NAME)
+              .then(cache => cache.put(request, response))
+              .catch(() => {}); // a failed cache write must not break the cached response
             }
           })
           .catch(() => {}); // Offline — keep cached
@@ -177,13 +181,15 @@ self.addEventListener('fetch', (event) => {
       }
 
       // Not in cache — fetch from network
-      return fetch(request)
+      return fetch(request)  // guardrails-allow PREVENT-026: same-origin GET only (asserted above); a service worker fetches requests by design
         .then(response => {
           if (!response || response.status !== 200 || response.type !== 'basic') {
             return response;
           }
           const responseToCache = response.clone();
-          caches.open(CACHE_NAME).then(cache => cache.put(request, responseToCache));
+          caches.open(CACHE_NAME)
+            .then(cache => cache.put(request, responseToCache))
+            .catch(() => {}); // a failed cache write must not break the network response
           return response;
         })
         .catch(() => {
@@ -194,5 +200,6 @@ self.addEventListener('fetch', (event) => {
           return new Response('Offline', { status: 503, statusText: 'Service Unavailable' });
         });
     })
+      .catch(() => new Response('Offline', { status: 503, statusText: 'Service Unavailable' }))
   );
 });

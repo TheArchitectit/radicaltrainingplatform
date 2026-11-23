@@ -73,13 +73,13 @@ REFERENCE = re.compile(r"^(?:env:)?[A-Z][A-Z0-9_]{2,}$")
 # and its reason keeps the exemption reviewable.
 ALLOWED = [
     ("RadicalTrainingPlatform.Web/js/core/StateEngine.js",
-     "api_key: 'nai-prod-key-001'",
+     "api_key: 'nai-prod-key-001'",  # guardrails-allow PREVENT-003: the gate's own exemption table quotes the synthetic key it dispositions
      "synthetic lab-simulator seed state; the simulator never calls real infrastructure"),
     ("RadicalTrainingPlatform.Web/js/views/ai-tools.js",
-     'api_key="nai-api-key-here"',
+     'api_key="nai-api-key-here"',  # guardrails-allow PREVENT-003: the gate's own exemption table quotes the placeholder it dispositions
      "placeholder inside a documentation snippet in the NAI study material"),
     ("RadicalTrainingPlatform.Web/js/views/us-objects.js",
-     "AKIAIOSFODNN7EXAMPLE",
+     "AKIAIOSFODNN7EXAMPLE",  # guardrails-allow PREVENT-018: the gate's own exemption table quotes AWS's published example key
      "AWS's own published example credentials, shown as study content about S3 access keys"),
 ]
 

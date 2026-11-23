@@ -1,3 +1,4 @@
+// guardrails-allow-file PREVENT-003: the flagged string is a placeholder inside a documentation snippet shown as study material, not a credential
 import { BaseView } from './BaseView.js';
 import { state } from '../core/StateEngine.js';
 import { toast } from '../components/Toast.js';

@@ -158,6 +158,9 @@ export class ScenariosView extends BaseView {
                 activeDiv.appendChild(el);
                 lab.root = el;
                 lab.afterRender({ scenario });
+            }).catch((err) => {
+                console.error('[scenarios] lab failed to render', err);
+                activeDiv.textContent = 'The lab could not start.';
             });
             return;
         }

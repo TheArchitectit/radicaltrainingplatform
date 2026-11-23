@@ -272,8 +272,8 @@ class StateEngine {
                 { uuid: 'gpu-004', name: 'GPU-Node3-Slot0', model: 'T4', host: 'AHV-Node-03', mode: 'passthrough', mig_partitions: 0, assigned_to: null },
             ],
             nai_endpoints: [
-                { uuid: 'nai-001', name: 'llama-prod', model: 'llama-2-7b-chat', engine: 'vllm', format: 'safetensors', gpu_count: 1, replicas: 2, min_replicas: 2, max_replicas: 5, api_key: 'nai-prod-key-001', status: 'running', url: 'https://llama-prod.nai.ntnxlab.local/v1' },
-                { uuid: 'nai-002', name: 'codellama-dev', model: 'codellama-34b', engine: 'vllm', format: 'gptq', gpu_count: 1, replicas: 1, min_replicas: 1, max_replicas: 3, api_key: 'nai-dev-key-002', status: 'running', url: 'https://codellama-dev.nai.ntnxlab.local/v1' },
+                { uuid: 'nai-001', name: 'llama-prod', model: 'llama-2-7b-chat', engine: 'vllm', format: 'safetensors', gpu_count: 1, replicas: 2, min_replicas: 2, max_replicas: 5, api_key: 'nai-prod-key-001', status: 'running', url: 'https://llama-prod.nai.ntnxlab.local/v1' },  // guardrails-allow PREVENT-003: synthetic lab-simulator seed key; the simulator never calls real infrastructure
+                { uuid: 'nai-002', name: 'codellama-dev', model: 'codellama-34b', engine: 'vllm', format: 'gptq', gpu_count: 1, replicas: 1, min_replicas: 1, max_replicas: 3, api_key: 'nai-dev-key-002', status: 'running', url: 'https://codellama-dev.nai.ntnxlab.local/v1' },  // guardrails-allow PREVENT-003: synthetic lab-simulator seed key; the simulator never calls real infrastructure
             ],
             // Sprint 11 — New collections
             registered_clusters: [

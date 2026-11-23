@@ -1,0 +1,6 @@
+# Paths the guardrails scanner must not walk. Build/venv trees are not
+# repository content and do not exist on a CI checkout.
+.shellcheck-venv/
+bin/
+obj/
+node_modules/
