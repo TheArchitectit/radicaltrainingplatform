@@ -40,6 +40,21 @@ log, plus `repo=TheArchitectit/radicaltrainingplatform` from the API response.
 3. Dispatch `app-auth-smoke.yml`; require `token_mode=app`.
 4. Revoke the old key on the App page.
 
+## Verified live
+
+Dispatched 2026-11-23 through the App itself (from AI02, so the dispatch also
+proves `actions: write`):
+
+| | |
+|---|---|
+| Run | `45196437244` (`app-auth-smoke.yml`, `workflow_dispatch`, `main`) |
+| Runner | `ucs03-rtp-spare1` |
+| Result | **success** |
+| Steps | “Mint an installation token from the fleet App” → success; “Prove the token reads this repository” → success |
+
+That is the readback the fleet runbook asks for: the variable, the PEM in repo
+secrets, and the App's repository access are all working together.
+
 ## Failure modes this catches
 
 - **Variable unset** — the mint step errors naming `DEVGATE_SWEEP_APP_ID`.
