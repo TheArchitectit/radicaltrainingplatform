@@ -1,0 +1,13 @@
+[Unit]
+Description=GitHub App token proxy for the GitHub MCP server
+Documentation=file:///mnt/data/git/radicaltrainingplatform/deploy/github-app-ci-auth.md
+After=network-online.target
+
+[Service]
+ExecStart=/usr/bin/python3 %h/.config/rtp-mcp/proxy.py
+Restart=always
+RestartSec=5
+# The proxy prints nothing on success; failures surface as 502s to the client.
+
+[Install]
+WantedBy=default.target

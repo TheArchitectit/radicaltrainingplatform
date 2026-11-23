@@ -55,6 +55,46 @@ proves `actions: write`):
 That is the readback the fleet runbook asks for: the variable, the PEM in repo
 secrets, and the App's repository access are all working together.
 
+## The Claude Code MCP server uses the same App — there is no PAT
+
+The `plugin:github:github` server ships one static header,
+`Authorization: Bearer ${GITHUB_PERSONAL_ACCESS_TOKEN}`. That variable has
+never been set here, and setting it would mean creating exactly the long-lived
+PAT this repo is moving away from. A PAT is also the exhausted 5,000/hour
+account budget; the App has its own.
+
+An App installation token is accepted by the MCP endpoint as a bearer — but it
+expires after an hour, so it cannot live in a static header.
+
+**Solution: a loopback proxy that mints per request.** `deploy/rtp-mcp/proxy.py`
+listens on `127.0.0.1:8791`, and for every request:
+
+1. mints an installation token by piping `deploy/rtp-mcp/mint.py` over SSH to
+   AI02 and running it under `sudo -n` there (the key never leaves the host),
+2. caches it in memory for 50 minutes,
+3. injects `Authorization: Bearer <token>` and streams the response back.
+
+No PAT exists on this workstation at any point, and no key does either.
+
+**Wiring.** `claude mcp add --transport http --scope user github
+http://127.0.0.1:8791/mcp`, and the plugin's server is disabled (its header can
+never resolve without a PAT). The canonical scripts and the unit live in
+`deploy/rtp-mcp/`; `~/.config/rtp-mcp/{mint,proxy}.py` are symlinks to them so
+there is one copy.
+
+**Deliberate omission:** the proxy does not send `X-GitHub-Api-Version`. The
+MCP endpoint rejects the REST API version header with `invalid apiVersion`.
+
+**Verified 2026-11-23:** `initialize` returns 200 through the proxy with an
+installation token, and `claude mcp list` reports
+`github: http://127.0.0.1:8791/mcp (HTTP) - ✔ Connected`.
+
+**Failure modes:** a 502 `token mint failed` means AI02 is unreachable or
+`sudo -n` was denied. A connection that works and then starts failing tools
+after roughly an hour means the proxy stopped refreshing — check
+`systemctl --user status rtp-mcp-proxy` and restart it. The proxy does not log
+request bodies; that is deliberate, they carry tool payloads.
+
 ## Failure modes this catches
 
 - **Variable unset** — the mint step errors naming `DEVGATE_SWEEP_APP_ID`.
