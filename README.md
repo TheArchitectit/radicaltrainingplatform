@@ -1,11 +1,13 @@
-# 🎯 Nutanix Certification Study Tool
+# 🎯 RadicalTrainingPlatform — Certification Study Platform
 
-A cross-platform certification study platform: a **.NET 10 / Avalonia desktop app**, a
-**static HTML+JS PWA**, and a shared `net10.0` Core library with no UI dependencies. It
-covers Nutanix certification exams plus a beginner track spanning CompTIA A+/Network+,
-Microsoft Azure Administrator (AZ-104), and AWS Certified Solutions Architect -
-Associate (SAA-C03), with a synthwave-themed UI, exam blueprint
-coverage tracking, and a lab simulator.
+A local-first, cross-platform certification study platform. One shared `net10.0` Core
+library with no UI dependencies, two shells over it — a **.NET 10 / Avalonia desktop app**
+and a **static HTML+JS PWA** — plus a legacy WinForms client kept for reference.
+
+It started as a Nutanix certification tool and now covers a beginner track across CompTIA
+A+/Network+, Microsoft Azure Administrator (AZ-104) and AWS Solutions Architect – Associate
+(SAA-C03), alongside the Nutanix exams. Synthwave-themed UI, exam blueprint coverage
+tracking, and a lab simulator.
 
 ![.NET 10.0](https://img.shields.io/badge/.NET-10.0-blue)
 ![License](https://img.shields.io/badge/License-BSD%203--Clause-green)
@@ -259,6 +261,97 @@ covers and, just as importantly, what it does not.
 Note that a code license covers the **code**. It does not cover the vendor
 manuals under `docs/` or any third-party material — those are separate rights
 questions, and the decision record says so explicitly.
+
+## 🗺️ Where this is going
+
+This section is the roadmap, not a wish list. Every item below is tracked in-repo —
+[`docs/GAP-ANALYSIS-2026-10-20.md`](docs/GAP-ANALYSIS-2026-10-20.md) holds the content
+plan with per-objective targets, [`docs/CARRY-FORWARD.md`](docs/CARRY-FORWARD.md) holds
+what is blocked and why, and [`docs/OPENSPEC-INDEX.md`](docs/OPENSPEC-INDEX.md) indexes
+the change packages. Where a claim is a proposal rather than built work, it says so.
+
+### The product definition the roadmap is measured against
+
+Stated by the owner 2026-10-20 and enforced in code, not just intended:
+
+- **Local-first.** A client on the student's own device. No server, no accounts, no sync,
+  no telemetry, no hosting. `fetch`, `XMLHttpRequest`, `WebSocket`, `EventSource` and
+  remote dynamic imports are statically banned from the PWA, and a runtime network spy
+  asserts zero outbound calls during a full scenario walkthrough.
+- **Linux and Windows.** macOS if it comes for free (it does, via Avalonia); not a target.
+- **No identity collection.** A gate asserts no identity-collecting form field exists.
+- **Out of scope:** teacher/class/cohort features, LMS/SCORM/LTI integration, cloud
+  accounts, public distribution of content.
+
+### Content: from draft packs to a drilled curriculum
+
+The honest status today is `draft-preview` — 1,199 PWA items compile, but none carries a
+human source review date. The roadmap replaces per-exam totals with **per-objective**
+floors, because per-exam totals are what once let a 16-item pack claim 27 objectives.
+
+| Target | What it means | State |
+|---|---|---|
+| **R1** | Every objective resolves to 1 released lesson (131/131) | **Met** — 63/131 → 131/131 on 2026-10-26; dangling lesson refs 13 → 0 |
+| **R2** | Every objective has ≥3 released items (≥393 total) | **Met** — all 131 objectives cleared the floor; the bundle has since grown to 1,199 items |
+| **R3** | ≥20 scenarios (one per section for CompTIA/NCA, one per vendor exam) | **Partial** — 51 shipped; 13 planned remain (see below) |
+| **R4** | Non-empty `reviewDate` and non-`return` verdict per item | **Ruled out** — the owner decided 2026-11-04 that `draft-preview` items are usable by students, so "reviewed" is no longer a release condition. Labels that implied a completed review were corrected instead. |
+| **R5** | No target met by duplicating an item | **Enforced** — identity and hygiene gates fail on duplicate IDs and constant-true validators |
+
+**The 13 remaining scenarios are blocked on renderers, not on content.** The Ticket Lab
+renderer's only knobs are `ip` / `gateway` / `dns` against a fixed five-test set, so it can
+express network-addressing faults and nothing else — which cannot cover the OS, security
+and procedures objectives that make up most of A+ Core 2. AZ-104 and AWS-SAA have no
+route and no store collection to run on at all. Those gaps are recorded rather than
+papered over with near-clones.
+
+### Verification: what still blocks a "reviewed" label
+
+The scored-item review gate fails closed by design — every released item's review log
+records `verdict: return` because the key-vs-source review stage has no provider
+configured. Three OpenSpec rows in [`docs/CARRY-FORWARD.md`](docs/CARRY-FORWARD.md) stay
+blocked on that, and one on a human read:
+
+- **S48-01 / S48-03** — RedEye model stage `blocked` (no provider configured). Unblocks
+  with provider activation, which is an owner tripwire.
+- **S48-02** — blueprint structure verified by tool 2026-11-22 against the manifest's
+  `sourceUrl` (4/4 sections, 14/14 objective titles, versions match). Only the human
+  attestation clause remains: SPEC-02 requires a person to have opened the source.
+- **S48-04** — the companion guide was never opened, so no remaining sheet claim was
+  re-checked. Needs a readable guide or the owner's sign-off.
+
+### Platform and distribution
+
+- **Avalonia desktop** — Windows, Linux, macOS from one codebase. CefGlue supplies the
+  lab-simulator WebView on desktop; it is also what blocks mobile.
+- **PWA** — the portable surface, and the intended path for mobile via a native WebView
+  behind an `ILabSimulatorHost` abstraction. Today the simulator runs in an isolated CEF
+  container.
+- **Packaging** — Flatpak and AppImage manifests exist for Linux, a DMG script for macOS;
+  clean-install verification is still open. Windows MSIX is not built.
+- **Distribution stays a git checkout.** An npm package was evaluated and deliberately
+  not taken: publishing a package whose every item is `draft` with no review date is a
+  public distribution of unreviewed study material, which is what the labelling exists to
+  prevent. The npm path can be revisited once the content targets and a review standard
+  are settled — publishing is an owner decision, not an engineering one.
+
+### Features proposed but not built
+
+Recorded so they are not mistaken for shipped work: timed exam simulation, question
+difficulty ratings and spaced repetition (SM-2), question flagging and bookmarking,
+progress persistence beyond the session, and a responsive/accessibility pass to WCAG 2.1
+AA down to 800px. The design record for each is in
+[`docs/DESIGN-MATRIX-AND-ROADMAP.md`](docs/DESIGN-MATRIX-AND-ROADMAP.md); several of its
+gaps (DI, logging, tests, .NET 10 CI) have since closed and the doc carries its own date.
+
+### How the roadmap is kept honest
+
+Every target above is backed by a gate with failing and passing fixtures, wired into
+`tests/gates/run_freeze_chain.sh` and CI. `scripts/check-readme-counts.py` is why the
+counts in this README cannot drift from the generated manifest — if the numbers here stop
+matching the artifact, the build fails. That is deliberate: a README that overstates
+what the code does is the failure mode this repository is built to prevent.
+
+---
 
 ## 🤝 Contributing
 
