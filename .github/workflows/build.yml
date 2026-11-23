@@ -1,11 +1,14 @@
 name: Build
 
-# Triggers: run on push or pull request targeting the main branch
+# Triggers: push or pull request to main, plus manual dispatch. Dispatch exists
+# so a green run can be reproduced — or a fleet/gate change exercised — without
+# pushing an empty commit to get one.
 on:
   push:
     branches: [main]
   pull_request:
     branches: [main]
+  workflow_dispatch:
 
 jobs:
   # Core + Desktop + Tests: Linux self-hosted (ucs03-rtp, label devgate-rtp).
