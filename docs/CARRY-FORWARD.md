@@ -5,8 +5,7 @@ and chain total; this line names the overnight run's last verified commit).
 **Freeze chain:** **74/74 at `96f1ae9`**, measured with `--expect-sha` on the full
 40-character SHA.
 **OpenSpec package:** `rtp-beginner-tracks-2026-10` — every task T-01..T-46 is
-landed. Sprint 48: S48-05/06/07/08 ✅; S48-02 verified structurally but awaiting
-a human attestation; S48-01/S48-03 blocked on the RedEye provider; S48-04's
+landed. Sprint 48: S48-02/05/06/07/08 ✅; S48-01/S48-03 blocked on the RedEye provider; S48-04's
 storage-fabric claims need the AHV guide, which is not obtainable.
 **Phase 4 (Sprints 27-44):** complete — 27-28, 35-36, 29-30, 37-38, 39-40,
 41-42 and 43-44 landed (several rescoped by the owner for a local client);
@@ -33,7 +32,7 @@ Four are still blocked, none on code. Two closed on 2026-11-04 (see below).
 | Row | Task | Blocker | What unblocks it |
 |---|---|---|---|
 | S48-01 | T-31 remap inventory | RedEye model stage is `blocked` (no provider); `mapping-check` reads provenance records the lane does not have | Provider activation — a SPEC-15 tripwire — plus provenance records |
-| S48-02 | T-32 current blueprint | **Structure verified 2026-11-22 by tool** against the guide at the manifest's `sourceUrl` (`sha256:d876abc5…`): 4/4 sections, 14/14 objective titles, versions match, no weight table. Only the *human attestation* clause remains — SPEC-02 requires a person to have opened the source | The owner attests the guide matches the manifest (one line), or a human reads it |
+| ~~S48-02~~ | T-32 current blueprint | **Closed 2026-11-23** — the owner attested the guide matches the manifest, after a tool comparison (4/4 sections, 14/14 titles, versions, no weight table, `sha256:d876abc5…`). `sourceReviewDate` is `2026-11-23` | — |
 | S48-03 | T-33 40-item pilot | Same model-stage blocker; all 40 ship `draft-preview` with no item verified | Provider activation; the cut is recorded, not hidden |
 | S48-04 | T-34 companion surfaces | The guide was not opened, so no remaining sheet claim was re-checked (same 132-byte pointer problem) | A readable guide, or the owner's sign-off on the sheet's remaining claims |
 | ~~S48-06~~ | T-36 travel freeze | **Closed 2026-11-04** — the trip has happened; the owner is back and no pre-departure freeze is still ahead. The candidate freeze record stands as the documented head; TM-101 is no longer a named gap | — |
@@ -150,12 +149,11 @@ than papered over with invented examples.
 
 ## Next session
 
-1. **Owner attestation for S48-02** — one line saying the June 15, 2026 guide
-   matches the manifest. The structural comparison already passed
-   (`sha256:d876abc5…`); SPEC-02 will not accept a machine's word for a human
-   review, so the date is still the ingest date.
-2. **Provider decision for S48-01/S48-03** — SPEC-15 tripwire; the RedEye model
-   stage stays blocked until you enable a provider.
+1. **Local model for RedEye (S48-01/S48-03)** — the owner asked for a local
+   model rather than a paid provider; it needs an endpoint and model name, then
+   the lane can verify items with no spend.
+2. **AHV 11 admin guide** — S48-04's storage-fabric claims are still unverified;
+   the owner approved sourcing it.
 3. **AHV 11 / AOS guide** would close the rest of S48-04's claims. It is the
    second pointer-only PDF; the vendor URL is not known to this repository.
 4. The bot branch `forge-bot/NEXT-548` is still local-only and the audit digest

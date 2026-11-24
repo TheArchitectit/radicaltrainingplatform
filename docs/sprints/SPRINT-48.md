@@ -16,7 +16,7 @@
 | ID | Task | Requirements | Points | Status |
 |---|---|---|---|---|
 | S48-01 (T-31) | Complete remap.csv (started T-09) with RedEye lane logs and seeded-defect self-test record | REQ-NCA-01 | 3 | 🟡 |
-| S48-02 (T-32) | NCA-75 exam.json current blueprint; InitNca75 retired; blueprint fixtures | REQ-NCA-05 | 2 | 🟡 |
+| S48-02 (T-32) | NCA-75 exam.json current blueprint; InitNca75 retired; blueprint fixtures | REQ-NCA-05 | 2 | ✅ |
 | S48-03 (T-33) | 14 lessons + 40-item pilot (remapped + newly authored gap fills) | REQ-NCA-02/06 | 3 | 🟡 |
 | S48-04 (T-34) | Cheatsheet correction + beta logistics cleanup + scheduling-link currency | REQ-NCA-04, C-07 | 1 | 🟡 |
 | S48-05 (T-35) | Four NCA scenarios with validators and walkthroughs | REQ-NCA-07, REQ-SC-01..06 | 2 | ✅ |
@@ -86,14 +86,12 @@ measured, not filled. Full list in the evidence record.
 
 **Acceptance Criteria:**
 - [x] `content/exams/NCA-75/exam.json` encodes the current four sections / 14 objectives: 1 Solutions and tools (1.1–1.3), 2 Platform administration (2.1–2.4), 3 Cluster configuration and maintenance (3.1–3.3), 4 Health and monitoring (4.1–4.4) — asserted section-by-section, objective IDs and titles, against the repo's real manifest rather than a temp copy
-- [ ] Manifest carries displayName “Nutanix Certified Associate 7.5”, officialVersion with June 15 2026 guide date, productVersions AOS 7.5 / AHV 11.0 / pc.7.5, sourceUrl + sourceReviewDate from an actual human source review — **all of this is in place except the last clause**: `sourceReviewDate` is `2026-10-10`, the ingest date all four manifests share. **2026-11-22 — structural verification performed (tool-attested, not a human review):** the guide at the manifest's own `sourceUrl` (610,683 bytes, `sha256:d876abc5acd9…`, PDF title `2024 - NCA7.5 EBG 15June2026`) was fetched and compared to the manifest — 4/4 section titles and 14/14 objective titles match after whitespace normalisation, the product versions match verbatim, and the guide contains no `%` character and no "weight" mention, so the no-weight decision holds. This is recorded as what it is: a machine comparison. SPEC-02 requires a human to have opened the source, so `sourceReviewDate` still stands at the ingest date until the owner attests.
+- [x] Manifest carries displayName “Nutanix Certified Associate 7.5”, officialVersion with June 15 2026 guide date, productVersions AOS 7.5 / AHV 11.0 / pc.7.5, sourceUrl + sourceReviewDate from an actual human source review — **attested 2026-11-23; `sourceReviewDate` is now `2026-11-23`.** The structural comparison (guide at the manifest's own `sourceUrl`, `sha256:d876abc5acd9…`: 4/4 sections, 14/14 objective titles, versions verbatim, no `%`/weight table) was performed by tool and recorded as such; the owner attested the guide matches the manifest, which is the human clause SPEC-02 asks for.
 - [x] No weightPercent — equal study allocation, labeled as study choice (ASM-13)
 - [x] `HardcodedBlueprintService.InitNca75` (beta 20/30/25/25 structure) removed or annotated obsolete with a pointer to the manifest
 - [x] `ManifestBlueprintTests.cs` fixtures assert manifest sections/objectives/IDs match the current guide; beta section titles never render
 
-**Status 🟡 because:** the one unmet line is the identity criterion's closing clause —
-`sourceReviewDate` is not attested as an actual human source review. Everything
-else in the row is landed and enforced; this is recorded rather than smoothed.
+**Status ✅ (2026-11-23):** the closing clause is attested and the row is closed.
 
 **Deleted, not annotated — and why that is the stronger reading.** REQ-NCA-05
 allows "removed or annotated obsolete". The beta block is **removed**:

@@ -448,7 +448,7 @@
     "NCA-75": {
       "manifest": {
         "path": "content/exams/NCA-75/exam.json",
-        "sha256": "e50a33274461e590cce4591c8b15ac233d39f2d3a9776eefdf6d50fd3f1c06c9"
+        "sha256": "e739ef34ffd0a76b392c6481a0939c389442012b988d5550dc67bd02ff1fb417"
       },
       "lessons": [
         {
@@ -5996,7 +5996,7 @@
     },
     {
       "path": "content/exams/NCA-75/exam.json",
-      "sha256": "e50a33274461e590cce4591c8b15ac233d39f2d3a9776eefdf6d50fd3f1c06c9",
+      "sha256": "e739ef34ffd0a76b392c6481a0939c389442012b988d5550dc67bd02ff1fb417",
       "bytes": 3955
     },
     {
