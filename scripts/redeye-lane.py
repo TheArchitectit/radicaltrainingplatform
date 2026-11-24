@@ -17,6 +17,9 @@ Checks per item:
   injection-screen   instruction patterns in item text (deterministic)
   key-vs-source      MODEL STAGE — blocked: model provider not configured
 
+A log's verdict is "pass" only when the model stage verified the key AND every
+check above passed; any failed check, flag or blocked stage makes it "return".
+
 Logs are written to content/review-logs/<examId>/<sanitized-itemId>.json with
 hashes binding the item text, exam manifest and reviewer config (REQ-REV-02);
 any bound input change invalidates the log and scripts/redeye-gate.py will
@@ -88,6 +91,24 @@ def load_config(path=None):
     if not path.is_file():
         sys.exit(f"lane config missing: {path}")
     return path.read_text(encoding="utf-8")
+
+
+def verdict_for(stage, checks):
+    """The log's verdict: 'pass' only when the model verified the key AND every
+    deterministic check passed.
+
+    It used to be the model stage's opinion alone, so an item whose mapping and
+    provenance checks had failed still carried `verdict: pass` — and the ship
+    gate, which reads the verdict, released it. That is the false green this
+    lane exists to prevent, found by running the lane over NCA-75's legacy root
+    banks, whose items have no provenance records: key-vs-source agreed while
+    `mapping-check` and `provenance` failed, and the gate would have accepted
+    them. `flag` is not `pass` either: a flagged item needs a recorded
+    disposition (a permuted key, corrected text), not a release.
+    """
+    if stage != "verified":
+        return "return"
+    return "pass" if all(c.get("outcome") == "pass" for c in checks) else "return"
 
 
 def write_log(log_dir, exam_id, item_id, checks, model_stage, verdict,
@@ -237,13 +258,17 @@ def review_bank(bank_path, exam_id, log_dir, provenance_dir=None, allow_model_pe
             else:
                 stage = "verified"
                 if agree:
-                    model_outcome, verdict = "pass", "pass"
+                    model_outcome = "pass"
                 else:
                     model_outcome = "fail"
                 model_detail = reason or ("model agreed" if agree else "model disagreed")
         else:
             model_outcome, model_detail = "blocked", "model provider not configured"
         checks.append({"name": "key-vs-source", "outcome": model_outcome, "detail": model_detail})
+
+        # The verdict is the whole log's opinion, not the model stage's alone:
+        # a failed deterministic check must not release on a verified key.
+        verdict = verdict_for(stage, checks)
 
         write_log(log_dir, exam_id, item_id, checks, stage, verdict,
                   manifest_hash, config_hash, sha256(item["text"]), run_date)
@@ -271,7 +296,7 @@ def main():
     args = parser.parse_args()
 
     if args.self_test:
-        sys.exit(self_test(review_bank))
+        sys.exit(self_test(review_bank, verdict_for))
 
     # Explicit paths win; --exam then only supplies the examId for them (legacy
     # root banks have no manifest above them to infer from).

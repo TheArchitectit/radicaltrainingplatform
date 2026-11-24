@@ -55,6 +55,32 @@ and are not claimed.
 `redeye-gate.py AZ-104 --config scripts/redeye-config.local.json` prints
 `GATE PASS`. Logs are in `content/review-logs/AZ-104/`.
 
+## Verdict hardening — the summary must agree with its evidence (2026-11-23)
+
+Running the lane over NCA-75's legacy root banks exposed a false green of the
+exact family this sprint keeps finding. Those items have no provenance records,
+so `mapping-check` and `provenance` reported **fail** — and the log still said
+`verdict: "pass"` with `modelStage: "verified"`, because the verdict was the
+model stage's opinion alone. The ship-gate reads the verdict, so it would have
+released items whose own checks had failed.
+
+Two changes, one at each layer:
+
+- **The lane** computes the verdict from the whole log: `pass` only when the
+  model stage verified the key *and* every check outcome is `pass`. A `flag`
+  (position bias, near-duplicate, injection-shaped text) is not a pass either —
+  a flagged item needs a recorded disposition, not a release. `stage !=
+  "verified"` still yields `return`, so the fail-closed path is unchanged.
+- **The gate** re-reads the log's `checks` rather than trusting the summary, so
+  a log written by any lane version cannot release on a failed check; a log
+  with no check results at all is excluded rather than accepted.
+
+Evidence: the lane self-test gains a verdict matrix (verified + all-pass →
+pass; failed check, flagged check, blocked stage, pending stage → return), and
+the gate self-test gains two cases (verdict-pass/verified with a failed
+`mapping-check` → excluded and named; empty `checks` → excluded). All three
+RedEye self-tests and `tests/gates/run_redeye_fixtures.sh` pass.
+
 ## Requirements (normative)
 
 | ID | SHALL | Scenario |

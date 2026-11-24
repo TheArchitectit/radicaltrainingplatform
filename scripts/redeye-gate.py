@@ -4,9 +4,12 @@
 REQ-REV-02: an item enters a released pack only with a passing RedEye log
 bound to the CURRENT item text, manifest and reviewer config. Any bound
 input change invalidates the log. This gate refuses every item that has no
-log, a stale hash, a "return" verdict or a modelStage that is not
-"verified" — and it NAMES every exclusion in the report (fail-closed,
-REQ-REV-05: there is no silent fallback to unreviewed release).
+log, a stale hash, a "return" verdict, a modelStage that is not "verified",
+or a log whose own check results are missing or not all "pass" — and it NAMES
+every exclusion in the report (fail-closed, REQ-REV-05: there is no silent
+fallback to unreviewed release). The check-results clause exists because the
+verdict is the lane's summary of the checks, and a summary that disagrees with
+its evidence must not release.
 
 Until the radredeye model-stage integration lands, every lane log carries
 modelStage "pending" or "blocked", so the gate correctly excludes 100% of
@@ -181,6 +184,24 @@ def gate_exam(exam_id):
                               f"{log.get('modelStage')!r} (key-vs-source not verified)")
                 excluded += 1
                 continue
+            # The verdict is the lane's own summary, and a summary can be wrong
+            # (it was: the lane once passed an item whose mapping and provenance
+            # checks had failed). The gate reads the evidence behind it too, so
+            # a log written by any lane version cannot release on a failed check.
+            checks = log.get("checks")
+            if not isinstance(checks, list) or not checks:
+                report.append(f"  EXCLUDED {item_id}: log carries no check results")
+                excluded += 1
+                continue
+            bad = [c for c in checks
+                   if not isinstance(c, dict) or str(c.get("outcome")) != "pass"]
+            if bad:
+                names = ", ".join(
+                    f"{c.get('name')}={c.get('outcome')}"
+                    for c in bad if isinstance(c, dict)) or "malformed entry"
+                report.append(f"  EXCLUDED {item_id}: check(s) not passing: {names}")
+                excluded += 1
+                continue
             report.append(f"  ok       {item_id}")
     return report, excluded, gated
 
@@ -272,12 +293,19 @@ def self_test():
                                .read_text(encoding="utf-8"))
 
         def log_for(item_id, verdict="pass", model_stage="verified",
-                    item_hash=None, manifest_hash=None, config_hash=None):
+                    item_hash=None, manifest_hash=None, config_hash=None,
+                    checks=None):
             # Defaults bind to the CURRENT fixture inputs so each case isolates
-            # exactly one defect.
+            # exactly one defect. A default log carries the check results a
+            # real lane log carries — an empty list is its own defect case.
             return {
                 "itemId": item_id, "examId": "EXAM-TEST",
                 "verdict": verdict, "modelStage": model_stage,
+                "checks": checks if checks is not None else [
+                    {"name": n, "outcome": "pass", "detail": "fixture"}
+                    for n in ("mapping-check", "position-bias", "originality",
+                              "provenance", "injection-screen", "key-vs-source")
+                ],
                 "boundHashes": {
                     "itemText": item_hash or sha256(real_items[item_id]),
                     "manifest": manifest_hash or real_manifest,
@@ -370,12 +398,39 @@ def self_test():
         if rc != 0 or "GATE PASS" not in out:
             failures.append(f"case all-verified: rc={rc} output={out[:300]}")
 
+        # Case 7: verdict says pass and the model verified, but a deterministic
+        # check failed. The gate must read the evidence, not the summary — this
+        # is the exact false green the NCA-75 run exposed (key agreement while
+        # mapping and provenance failed).
+        lr = base / "logs-checkfail" / "EXAM-TEST"
+        lr.mkdir(parents=True)
+        for iid in real_items:
+            (lr / f"{sanitize_item_id(iid)}.json").write_text(json.dumps(log_for(
+                iid, checks=[
+                    {"name": "mapping-check", "outcome": "fail",
+                     "detail": "no objectiveId"},
+                    {"name": "key-vs-source", "outcome": "pass", "detail": "agreed"},
+                ])))
+        rc, out = run_gate(base / "logs-checkfail")
+        if rc != 1 or "check(s) not passing: mapping-check=fail" not in out:
+            failures.append(f"case failing-check: rc={rc} output={out[:300]}")
+
+        # Case 8: a log with no check results at all is not a passing log.
+        lr = base / "logs-nochecks" / "EXAM-TEST"
+        lr.mkdir(parents=True)
+        for iid in real_items:
+            (lr / f"{sanitize_item_id(iid)}.json").write_text(json.dumps(
+                log_for(iid, checks=[])))
+        rc, out = run_gate(base / "logs-nochecks")
+        if rc != 1 or "carries no check results" not in out:
+            failures.append(f"case no-checks: rc={rc} output={out[:300]}")
+
     if failures:
         for f in failures:
             print(f"SELF-TEST FAILURE: {f}", file=sys.stderr)
         return 2
-    print("redeye-gate self-test: fail-closed on missing/pending/stale/corrupt/return; "
-          "verified-current logs pass")
+    print("redeye-gate self-test: fail-closed on missing/pending/stale/corrupt/return/"
+          "failed-check/no-check logs; verified-current all-pass logs pass")
     return 0
 
 

@@ -11,7 +11,7 @@ import sys
 import tempfile
 
 
-def self_test(review_bank):
+def self_test(review_bank, verdict_for=None):
     """Seeded-defect self-test (REQ-REV-03): every seed must be caught.
 
     Seeds: mis-mapped objective, biased key position, near-duplicate text,
@@ -217,6 +217,24 @@ def self_test(review_bank):
             log = json.loads(blocked_logs[0].read_text())
             if log["modelStage"] != "pending" or log["verdict"] != "return":
                 failures.append("fail-closed violated: modelStage/verdict wrong on pending log")
+
+        # The verdict is the whole log's opinion, not the model stage's alone.
+        # Found by the NCA-75 run: the model agreed while mapping and
+        # provenance failed, and the log still said 'pass' — which the ship
+        # gate released.
+        if verdict_for:
+            flat = [{"name": "mapping-check", "outcome": "pass"}]
+            if verdict_for("verified", flat) != "pass":
+                failures.append("VERDICT: verified + all checks pass did not pass")
+            for stage, checks, why in (
+                    ("verified", [{"name": "mapping-check", "outcome": "fail"}],
+                     "a failed check"),
+                    ("verified", [{"name": "position-bias", "outcome": "flag"}],
+                     "a flagged check"),
+                    ("blocked", flat, "a blocked stage"),
+                    ("pending", flat, "a pending stage")):
+                if verdict_for(stage, checks) != "return":
+                    failures.append(f"VERDICT: {why} still produced a pass")
 
     if failures:
         for f in failures:
