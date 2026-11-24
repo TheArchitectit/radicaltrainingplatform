@@ -1,0 +1,21 @@
+{
+  "source": {
+    "enabled": true,
+    "maxPages": 2,
+    "minScore": 4,
+    "dpi": 110,
+    "timeoutSeconds": 900,
+    "documents": [
+      {
+        "label": "AHV Administration Guide 11.2",
+        "path": "~/Downloads/AHV-Admin-Guide-v11_2.pdf",
+        "sha256": "97b725ea83670a84d9453ba5496e637aeded8e14c8f3e6a1da765c881a60a570"
+      },
+      {
+        "label": "vSphere Administration Guide for AOS 7.6",
+        "path": "~/Downloads/vSphere-Admin6-AOS-v7_6.pdf",
+        "sha256": "228921995a93965070fe02a2b2a788000026bbaa62956dde177df4a8dc18cc16"
+      }
+    ]
+  }
+}

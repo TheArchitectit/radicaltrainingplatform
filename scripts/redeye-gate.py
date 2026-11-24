@@ -175,6 +175,22 @@ def gate_exam(exam_id):
                 report.append(f"  EXCLUDED {item_id}: stale log (reviewer config changed since review)")
                 excluded += 1
                 continue
+            # A log that bound source documents must still match them: the
+            # review was against those pages, and a changed pin is a changed
+            # review. Logs without the binding are unaffected — the stage is
+            # opt-in.
+            source_hash = globals().get("_source_hash")
+            if "sourceConfig" in bound:
+                if source_hash is None:
+                    report.append(f"  EXCLUDED {item_id}: stale log (source documents "
+                                  f"were bound at review but none is configured now)")
+                    excluded += 1
+                    continue
+                if bound.get("sourceConfig") != source_hash:
+                    report.append(f"  EXCLUDED {item_id}: stale log (source documents "
+                                  f"changed since review)")
+                    excluded += 1
+                    continue
             if log.get("verdict") != "pass":
                 report.append(f"  EXCLUDED {item_id}: verdict is {log.get('verdict')!r}")
                 excluded += 1
@@ -215,6 +231,8 @@ def main():
     parser.add_argument("--repo-root", help="override repo root (tests)")
     parser.add_argument("--config", help="lane config whose hash the logs must "
                                          "bind (default: scripts/redeye-config.json)")
+    parser.add_argument("--source-config", help="source-document config whose hash "
+                                                "source-verified logs must bind")
     parser.add_argument("--self-test", action="store_true",
                         help="run fail-closed fixture assertions and exit")
     args = parser.parse_args()
@@ -229,6 +247,12 @@ def main():
         globals()["_repo_root"] = pathlib.Path(args.repo_root)
     if args.config:
         globals()["_config_path"] = pathlib.Path(args.config)
+    if args.source_config:
+        src = pathlib.Path(args.source_config)
+        if not src.is_file():
+            print(f"source config missing: {src}", file=sys.stderr)
+            return 2
+        globals()["_source_hash"] = sha256(src.read_text(encoding="utf-8"))
 
     exam_ids = args.exams
     if args.all:
@@ -294,10 +318,18 @@ def self_test():
 
         def log_for(item_id, verdict="pass", model_stage="verified",
                     item_hash=None, manifest_hash=None, config_hash=None,
-                    checks=None):
+                    checks=None, source_hash=None):
             # Defaults bind to the CURRENT fixture inputs so each case isolates
             # exactly one defect. A default log carries the check results a
             # real lane log carries — an empty list is its own defect case.
+            bound = {
+                "itemText": item_hash or sha256(real_items[item_id]),
+                "manifest": manifest_hash or real_manifest,
+                "config": config_hash or sha256(
+                    sys.modules[__name__].CONFIG_PATH.read_text(encoding="utf-8")),
+            }
+            if source_hash:
+                bound["sourceConfig"] = source_hash
             return {
                 "itemId": item_id, "examId": "EXAM-TEST",
                 "verdict": verdict, "modelStage": model_stage,
@@ -306,12 +338,7 @@ def self_test():
                     for n in ("mapping-check", "position-bias", "originality",
                               "provenance", "injection-screen", "key-vs-source")
                 ],
-                "boundHashes": {
-                    "itemText": item_hash or sha256(real_items[item_id]),
-                    "manifest": manifest_hash or real_manifest,
-                    "config": config_hash or sha256(
-                        sys.modules[__name__].CONFIG_PATH.read_text(encoding="utf-8")),
-                },
+                "boundHashes": bound,
             }
 
         def run_gate(log_root):
@@ -424,6 +451,34 @@ def self_test():
         rc, out = run_gate(base / "logs-nochecks")
         if rc != 1 or "carries no check results" not in out:
             failures.append(f"case no-checks: rc={rc} output={out[:300]}")
+
+        # Case 9: a log that bound source documents, gated without them. The
+        # review was against those pages; running the gate without the pin must
+        # not read as "the review still holds".
+        globals()["_source_hash"] = None
+        lr = base / "logs-sourcebound" / "EXAM-TEST"
+        lr.mkdir(parents=True)
+        for iid in real_items:
+            (lr / f"{sanitize_item_id(iid)}.json").write_text(json.dumps(
+                log_for(iid, source_hash="ab" * 32)))
+        rc, out = run_gate(base / "logs-sourcebound")
+        if rc != 1 or "source documents were bound at review" not in out:
+            failures.append(f"case source-bound: rc={rc} output={out[:300]}")
+
+        # Case 10: same logs, same pin supplied — pass.
+        lr = base / "logs-sourceok" / "EXAM-TEST"
+        lr.mkdir(parents=True)
+        src_cfg = base / "source.json"
+        src_cfg.write_text(json.dumps({"source": {"enabled": True}}), encoding="utf-8")
+        pin = sha256(src_cfg.read_text(encoding="utf-8"))
+        for iid in real_items:
+            (lr / f"{sanitize_item_id(iid)}.json").write_text(json.dumps(
+                log_for(iid, source_hash=pin)))
+        globals()["_source_hash"] = pin
+        rc, out = run_gate(base / "logs-sourceok")
+        globals()["_source_hash"] = None
+        if rc != 0 or "GATE PASS" not in out:
+            failures.append(f"case source-ok: rc={rc} output={out[:300]}")
 
     if failures:
         for f in failures:

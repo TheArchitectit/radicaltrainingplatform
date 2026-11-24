@@ -31,4 +31,12 @@ else
     fail=1
 fi
 
+python3 scripts/redeye_source_stage.py --self-test >/dev/null 2>&1
+if [ $? -eq 0 ]; then
+    echo "PASS: source-stage self-test (selection, pin, disabled, unreachable)"
+else
+    echo "FAIL: source-stage self-test"
+    fail=1
+fi
+
 exit $fail

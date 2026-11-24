@@ -38,6 +38,13 @@ content/exams/<examId>/questions and cannot be inferred:
 
   python3 scripts/redeye-lane.py --exam NCA-75 NCA-75-Part1.md NCA-75-Part2.md NCA-75-Part3-GapFill.md
 
+An OPT-IN source stage can check the key against supplied PDFs instead of the
+model's memory alone (REQ-REV-01a). It is fail-closed: absent the flag it does
+not run, and any doubt while it runs blocks the item:
+
+  python3 scripts/redeye-lane.py --exam NCA-75 --config scripts/redeye-config.local.json \
+      --source-config scripts/redeye-source.local.json nca75-bank.md
+
 --allow-model-pending exists ONLY so the seeded-defect self-test can exercise
 the deterministic checks; it does not make an item releasable — the gate
 rejects any log whose modelStage is not "verified".
@@ -65,6 +72,7 @@ sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 
 from redeye_lane_selftest import self_test  # noqa: E402
 from redeye_model_stage import model_stage_config, verify_key_with_model  # noqa: E402
+from redeye_source_stage import source_stage_config, verify_key_with_source  # noqa: E402
 from redeye_analysis import (  # noqa: E402
     CONCENTRATION_THRESHOLD,
     DUPLICATE_THRESHOLD,
@@ -112,7 +120,8 @@ def verdict_for(stage, checks):
 
 
 def write_log(log_dir, exam_id, item_id, checks, model_stage, verdict,
-              manifest_hash, config_hash, item_text_hash, run_date):
+              manifest_hash, config_hash, item_text_hash, run_date,
+              source_hash=None):
     out_dir = pathlib.Path(log_dir) / exam_id
     out_dir.mkdir(parents=True, exist_ok=True)
     log = {
@@ -127,6 +136,7 @@ def write_log(log_dir, exam_id, item_id, checks, model_stage, verdict,
             "itemText": item_text_hash,
             "manifest": manifest_hash,
             "config": config_hash,
+            **({"sourceConfig": source_hash} if source_hash else {}),
         },
     }
     path = out_dir / f"{sanitize_item_id(item_id)}.json"
@@ -135,7 +145,8 @@ def write_log(log_dir, exam_id, item_id, checks, model_stage, verdict,
 
 
 def review_bank(bank_path, exam_id, log_dir, provenance_dir=None, allow_model_pending=False,
-                run_date=None, config_path=None, limit=None):
+                run_date=None, config_path=None, limit=None,
+                source=None, source_hash=None):
     """Run all checks over one bank. Returns (per-item results, fatal errors).
 
     `run_date` (YYYY-MM-DD) is what the lane records on the provenance record
@@ -266,12 +277,31 @@ def review_bank(bank_path, exam_id, log_dir, provenance_dir=None, allow_model_pe
             model_outcome, model_detail = "blocked", "model provider not configured"
         checks.append({"name": "key-vs-source", "outcome": model_outcome, "detail": model_detail})
 
+        # source-support (OPT-IN, REQ-REV-01a): the keyed answer checked against
+        # rendered pages of a supplied document. Absent unless --source-config
+        # names one; any doubt blocks the stage rather than passing it.
+        if source and model:
+            try:
+                s_agree, s_reason = verify_key_with_source(item, model, source)
+            except Exception as exc:  # noqa: BLE001 — any doubt is a blocked stage
+                checks.append({"name": "source-support", "outcome": "blocked",
+                               "detail": f"source stage failed: {exc}"})
+            else:
+                checks.append({"name": "source-support",
+                               "outcome": "pass" if s_agree else "fail",
+                               "detail": s_reason or ("source agreed" if s_agree
+                                                      else "source disagreed")})
+        elif source:
+            checks.append({"name": "source-support", "outcome": "blocked",
+                           "detail": "source documents configured but no model endpoint"})
+
         # The verdict is the whole log's opinion, not the model stage's alone:
         # a failed deterministic check must not release on a verified key.
         verdict = verdict_for(stage, checks)
 
         write_log(log_dir, exam_id, item_id, checks, stage, verdict,
-                  manifest_hash, config_hash, sha256(item["text"]), run_date)
+                  manifest_hash, config_hash, sha256(item["text"]), run_date,
+                  source_hash)
         results.append({"itemId": item_id, "checks": checks})
 
     return results, errors
@@ -290,6 +320,9 @@ def main():
                         help="SELF-TEST AID ONLY: mark the model stage pending instead of "
                              "blocked; the item still is not releasable")
     parser.add_argument("--config", help="lane config path (default: scripts/redeye-config.json)")
+    parser.add_argument("--source-config",
+                        help="opt-in source-stage config (documents + pinned hashes); "
+                             "absent means no source check runs")
     parser.add_argument("--limit", type=int, help="review only the first N items of each bank")
     parser.add_argument("--self-test", action="store_true",
                         help="run seeded-defect fixture assertions and exit")
@@ -309,6 +342,23 @@ def main():
         return
 
     fatal = []
+    source, source_hash = None, None
+    if args.source_config:
+        # Asked for, so it must work: an unusable source config is a lane
+        # failure, never a run that quietly reviews without it.
+        try:
+            source_text = load_config(args.source_config)
+        except SystemExit:
+            print(f"❌ source config missing: {args.source_config}", file=sys.stderr)
+            sys.exit(1)
+        source = source_stage_config(source_text)
+        if not source:
+            print(f"❌ source config names no usable documents: {args.source_config}",
+                  file=sys.stderr)
+            sys.exit(1)
+        source_hash = sha256(source_text)
+        print(f"source stage: {len(source['documents'])} document(s)")
+
     for bank in bank_paths:
         exam_id = args.exam or infer_exam_id(bank)
         if not exam_id:
@@ -317,7 +367,8 @@ def main():
         _, errors = review_bank(bank, exam_id, args.log_dir,
                                 provenance_dir=args.provenance_dir,
                                 allow_model_pending=args.allow_model_pending,
-                                config_path=args.config, limit=args.limit)
+                                config_path=args.config, limit=args.limit,
+                                source=source, source_hash=source_hash)
         fatal.extend(errors)
 
     written = sum(1 for p in pathlib.Path(args.log_dir).rglob("*.json"))

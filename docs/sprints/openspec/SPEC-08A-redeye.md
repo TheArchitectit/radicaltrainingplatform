@@ -81,6 +81,47 @@ the gate self-test gains two cases (verdict-pass/verified with a failed
 `mapping-check` → excluded and named; empty `checks` → excluded). All three
 RedEye self-tests and `tests/gates/run_redeye_fixtures.sh` pass.
 
+## Source stage — key-vs-source against supplied documents (2026-11-24)
+
+The model stage checks whether one model agrees with the key. REQ-REV-01(a)
+asks for verification **against the source material**, and the owner supplied
+the AHV 11.2 and vSphere for AOS 7.6 guides, so the lane gained an opt-in source
+stage that reads them.
+
+**How it works.** `scripts/redeye_source_stage.py` extracts the document's text
+per page (`pdftotext -layout`, one form-feed split), scores every page by the
+distinct item terms it contains, selects up to `maxPages` pages above
+`minScore`, renders them (`pdftoppm`, cached by document hash + page + DPI), and
+asks the model which option(s) *those pages* support. The keyed answer is not in
+the prompt. "The pages do not settle it" is a refusal, not an agreement — a
+source stage that read silence as support would verify every item against any
+document.
+
+**Opt-in and fail-closed.** Absent `--source-config`, no source check is added
+and behaviour is unchanged. With it, any of the following leaves the check
+`blocked` and the verdict `return`: missing or hash-mismatched document,
+`pdftotext`/`pdftoppm` absent, no page above the vocabulary threshold, endpoint
+error, timeout (the stage has its own budget), empty content (a reasoning model
+can spend it all reasoning about the images), malformed reply, or an answer
+letter that is not an option. A `fail` (pages support a different answer) is
+equally `return`.
+
+**Binding.** The log's `boundHashes.sourceConfig` pins the source-config hash.
+`redeye-gate.py --source-config` excludes a log that bound sources when none is
+supplied now, or when the pin differs — the review was against those pages, so
+a changed pin is a changed review. Logs without the binding are unaffected.
+
+**Measured (2026-11-24).** First item through the stage: pilot Q1
+`source-support: pass` — "Page 4 states CVM runs on every node, VMs run on
+nodes, and local disks aggregate into a shared pool—matching option A" —
+~105 s per item including render and OCR. The full pilot run is recorded in
+[2026-11-24-vendor-guide-review.md](../../qa/release-evidence/2026-11-24-vendor-guide-review.md).
+
+**What this is not.** It is not the radredeye render-look-judge adapter: there
+is no capture pipeline, no frame scoring and no MCP surface. It is a page
+selection plus a vision call, and every limit of that is recorded rather than
+papered over.
+
 ## Requirements (normative)
 
 | ID | SHALL | Scenario |
