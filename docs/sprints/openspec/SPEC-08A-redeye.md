@@ -122,6 +122,20 @@ is no capture pipeline, no frame scoring and no MCP surface. It is a page
 selection plus a vision call, and every limit of that is recorded rather than
 papered over.
 
+## Remap-aware mapping check (2026-11-24)
+
+`mapping-check` read only per-item provenance, so the 140 remapped legacy items
+— which have no C-02 records — failed it even though S48-01's inventory holds
+their mapping. The check now reads provenance first and falls back to
+`content/exams/<examId>/remap.csv`, matched by (sourceFile, question number).
+The detail names the source and, when the row's `keyReviewed` is not `true`,
+says the mapping is provisional. A row absent from both places still fails; a
+row whose objective is not in the manifest still fails.
+
+This does not unblock release: `provenance` still fails for those items until
+C-02 records exist, which is the correct state — the remap inventory is a
+mapping, not a provenance record.
+
 ## Requirements (normative)
 
 | ID | SHALL | Scenario |

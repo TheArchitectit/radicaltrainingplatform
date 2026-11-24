@@ -10,7 +10,9 @@ until that integration lands (REQ-REV-05 — no silent fallback, no
 self-exemption).
 
 Checks per item:
-  mapping-check      objectiveId exists in the exam manifest (deterministic)
+  mapping-check      objectiveId exists in the exam manifest — read from the
+                     item's provenance record, else from remap.csv for legacy
+                     banks (and reported as provisional when keyReviewed=false)
   position-bias      per-bank answer-letter concentration (deterministic)
   originality        near-duplicate screen vs sibling items (deterministic)
   provenance         C-02 record present and complete (deterministic)
@@ -84,6 +86,7 @@ from redeye_analysis import (  # noqa: E402
     item_id_for,
     load_manifest_objective_ids,
     load_provenance,
+    load_remap_row,
     ngrams,
     overlap_ratio,
     parse_bank,
@@ -189,18 +192,33 @@ def review_bank(bank_path, exam_id, log_dir, provenance_dir=None, allow_model_pe
         item_id = item_id_for(exam_id, bank_path, item["number"])
         checks = []
 
-        # mapping-check (deterministic, REQ-REV-01b)
+        # mapping-check (deterministic, REQ-REV-01b). Per-item provenance is
+        # the primary source; legacy root banks carry their mapping in
+        # remap.csv (S48-01), so the check reads it rather than failing on a
+        # record those banks never had — and says when that mapping is still
+        # marked provisional.
         record, prov_path = load_provenance(exam_id, item_id, provenance_dir)
         objective_id = (record or {}).get("objectiveId", "")
+        mapping_source = "provenance" if objective_id else ""
+        remap_note = ""
+        if not objective_id:
+            row = load_remap_row(exam_id, item_id)
+            if row and row.get("newObjectiveId"):
+                objective_id = row["newObjectiveId"]
+                mapping_source = "remap.csv"
+                if str(row.get("keyReviewed", "")).strip().lower() != "true":
+                    remap_note = "; provisional mapping (keyReviewed=false)"
         if not objective_id:
             checks.append({"name": "mapping-check", "outcome": "fail",
-                           "detail": "no objectiveId (missing/empty provenance)"})
+                           "detail": "no objectiveId in provenance or remap.csv"})
         elif objective_id not in objective_ids:
             checks.append({"name": "mapping-check", "outcome": "fail",
-                           "detail": f"objectiveId {objective_id!r} not in exam manifest"})
+                           "detail": f"objectiveId {objective_id!r} from {mapping_source} "
+                                     f"not in exam manifest"})
         else:
             checks.append({"name": "mapping-check", "outcome": "pass",
-                           "detail": f"objectiveId {objective_id} in manifest"})
+                           "detail": f"objectiveId {objective_id} in manifest "
+                                     f"({mapping_source}{remap_note})"})
 
         # position-bias (deterministic, REQ-REV-01c; feeds R-09)
         if single_total and len(item["keys"]) == 1 and item["keys"][0] == dominant_letter \

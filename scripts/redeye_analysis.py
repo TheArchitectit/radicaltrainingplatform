@@ -10,6 +10,7 @@ command holds the log format, the per-bank loop and the CLI.
 discovery helpers are relative to the repository; the command imports it.
 """
 import collections
+import csv
 import hashlib
 import json
 import pathlib
@@ -107,6 +108,34 @@ def load_manifest_objective_ids(exam_id):
         for objective in section.get("objectives", []):
             ids.add(objective["id"])
     return manifest_path, ids
+
+
+def load_remap_row(exam_id, item_id, remap_root=None):
+    """The remap inventory row for a legacy bank item, or None.
+
+    Legacy root banks keep their mapping in `content/exams/<examId>/remap.csv`
+    (S48-01: the remap inventory is the mapping of record), not in per-item
+    provenance records. Matching is by (sourceFile, question number) because
+    the CSV's `itemId` spelling predates the lane's `exam/file/Qn` format.
+    The row is returned as-is — including `keyReviewed` — so the caller can
+    say the mapping is provisional rather than implying a review.
+    """
+    root = pathlib.Path(remap_root) if remap_root else (
+        REPO_ROOT / "content" / "exams" / exam_id)
+    path = root / "remap.csv"
+    if not path.is_file():
+        return None
+    match = re.match(r"^[^/]+/([^/]+)/Q(\d+)$", item_id)
+    if not match:
+        return None
+    bank, number = match.group(1), match.group(2)
+    with path.open(encoding="utf-8", newline="") as fh:
+        for row in csv.DictReader(fh):
+            if row.get("sourceFile") != bank:
+                continue
+            if (row.get("itemId") or "").rsplit(":", 1)[-1] == number:
+                return row
+    return None
 
 
 def load_provenance(exam_id, item_id, provenance_dir):

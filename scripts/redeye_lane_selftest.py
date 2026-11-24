@@ -218,6 +218,23 @@ def self_test(review_bank, verdict_for=None):
             if log["modelStage"] != "pending" or log["verdict"] != "return":
                 failures.append("fail-closed violated: modelStage/verdict wrong on pending log")
 
+        # Remap-aware mapping (S48-01): legacy root banks map through
+        # remap.csv, and the row's keyReviewed flag reaches the detail.
+        from redeye_analysis import load_remap_row
+        remap_dir = base / "remap"
+        remap_dir.mkdir()
+        (remap_dir / "remap.csv").write_text(
+            "itemId,sourceFile,oldDomain,oldObjectiveId,newSection,newObjectiveId,"
+            "productVersion,keyReviewed,explanationReviewed,rightsStatus,reviewer,"
+            "automatedReview,notes\n"
+            "bank-legacy.md:1,bank-legacy.md,x,1.1,2,2.3,m,false,false,original,,,p\n",
+            encoding="utf-8")
+        row = load_remap_row(exam_id, f"{exam_id}/bank-legacy.md/Q1", remap_dir)
+        if not row or row.get("newObjectiveId") != "2.3":
+            failures.append(f"REMAP: legacy row not resolved: {row}")
+        if load_remap_row(exam_id, f"{exam_id}/bank-legacy.md/Q9", remap_dir) is not None:
+            failures.append("REMAP: an absent question matched a row")
+
         # The verdict is the whole log's opinion, not the model stage's alone.
         # Found by the NCA-75 run: the model agreed while mapping and
         # provenance failed, and the log still said 'pass' — which the ship
