@@ -38,14 +38,14 @@
 **Acceptance Criteria:**
 - [x] `content/exams/NCA-75/remap.csv` complete: exactly 140 rows, every item ID resolves to a parsed question, every row carries review state (columns per SPEC-01 01.3) — enforced by `scripts/check-nca-remap.py`, whose failure mode is a `--self-test` fixture set (7 seeded defects + 1 clean 140-row inventory) and `tests/gates/run_remap_fixtures.sh`
 - [x] Existing question IDs never change; remap attaches mapping only — the validator asserts the itemId set **equals** the bank's question set, so a dropped, invented or renumbered ID fails
-- [ ] Every remapped row passes the RedEye lane with remap-aware checks (key re-verification against current documentation, explanation re-read, mapping check, rights status) — **the lane runs and every one of the 140 is `return`/excluded**; the key-vs-source stage is blocked (no provider) and `mapping-check` fails on missing provenance records, which the lane reads instead of `remap.csv`
+- [ ] Every remapped row passes the RedEye lane with remap-aware checks (key re-verification against current documentation, explanation re-read, mapping check, rights status) — **run 2026-11-23 against the local model: 140/140 keys independently derived and agreed (`modelStage: verified`), but every row is still `return`/excluded**; `mapping-check` and `provenance` fail on missing C-02 records (the lane reads provenance, not `remap.csv`), and explanation re-read/rights status have no check at all
 - [x] Errata fixtures still pass: NCA-75-Part1 Q35 = D; NCA-75-Part3-GapFill Q3 = A (REQ-NCA-03)
 - [x] Lane logs + seeded-defect self-test record archived in release evidence
 
 **Status 🟡 because:** the inventory is complete and enforced, but the row's own
 "every remapped row passes the lane" line is not met and is not claimed to be.
-That needs either the radredeye model stage (REQ-REV-05) or provenance records
-under `content/provenance/NCA-75/` — neither exists yet. Recorded, not smoothed.
+The model stage now exists and the 140 keys agree with it; what blocks release
+is the missing provenance records and the two checks the lane does not have.
 
 **The finding of the row — a ship gate that could not fail.** Before this work,
 `python3 scripts/redeye-gate.py NCA-75` printed **"✅ GATE PASS"** and exited 0
@@ -73,13 +73,9 @@ mapped items**, which is narrower than SPEC-06's estimate of the gaps (1.x, 2.4,
 - `.github/workflows/build.yml`, `tests/gates/run_freeze_chain.sh` — gate wired in
 - `content/exams/NCA-75/remap.csv` — unchanged (already complete); validated, not rewritten
 
-**Not verified:** no key or explanation re-verified against current documentation
-(all 140 flags deliberately `false`); the lane's `mapping-check` cannot read
-`remap.csv`; `rightsStatus` is an assertion, not a review; the 40-item pilot does
-not exist yet, so nothing here names release candidates; objective 3.2's gap is
-measured, not filled. Full list in the evidence record.
+**Not verified:** no key or explanation re-verified against current documentation — the keys were re-derived blind by the local model (140/140 agree), which is not source verification; the lane's `mapping-check` cannot read `remap.csv`; `rightsStatus` is an assertion, not a review; the 40-item pilot now holds 44 reviewed-by-lane items, so the row's count is stale; objective 3.2's gap is measured, not filled. Full list in the evidence records.
 
-**Evidence:** [../qa/release-evidence/2026-10-25-nca-remap.md](../qa/release-evidence/2026-10-25-nca-remap.md).
+**Evidence:** [2026-10-25-nca-remap.md](../qa/release-evidence/2026-10-25-nca-remap.md) · [2026-11-23-nca-lane-model-stage.md](../qa/release-evidence/2026-11-23-nca-lane-model-stage.md) (lane run, gate counts, the verdict false green fixed in `65f6c85`).
 
 ### S48-02 (T-32): Current Blueprint Manifest
 **As a** learner, **I want** the NCA track to present the current official blueprint, **so that** I never study the beta structure by accident.
@@ -159,18 +155,19 @@ covered beta code were deleted, not because coverage regressed. Freeze chain
 
 **Acceptance Criteria:**
 - [x] 14 lessons (s1_1..s4_4), one per current objective, synopses per SPEC-06 06.4 — each wired into its objective's `lessonIds`, so the track reports 14/14 objectives at 100%
-- [ ] 40-item reviewed pilot: 10 per current section (equal allocation = study choice, not official weight, stated in exam.json) — the 40 items exist, 10 per section, every objective covered by ≥2 items; **"reviewed" is not satisfied** and is not claimed: no item reached `modelStage: verified`
+- [ ] 40-item reviewed pilot: 10 per current section (equal allocation = study choice, not official weight, stated in exam.json) — the pilot **holds 44 items, 10/12/10/12 by section, every objective covered by ≥3** (measured 2026-11-23; "40" was the authored target); **"reviewed" is still not satisfied and is not claimed**: all 44 are `modelStage: verified` and `verdict: pass` with every check green, but the model derives keys blind from its own knowledge — the guide was not consulted — so REQ-REV-01(a)'s "against the source" is unmet
 - [x] Authoring gaps filled with new original items where the bank cannot supply two reviewed items per objective — expected gaps: solutions/tools (1.x), licensing (2.4), support-case workflow (4.3), performance interpretation (4.4); final gap count from the objective-by-objective review, not the spec estimate — **the measured count is 40, not the spec's four gap areas**: S48-01 established that all 140 bank items are excluded, so the bank supplies zero *reviewed* coverage and REQ-NCA-06's "where the bank cannot supply reviewed coverage" applies to the whole cut. Objective 3.2, measured at zero mapped bank items, carries three authored items
 - [x] New authored items live in `content/exams/NCA-75/questions/nca75-pilot.md`; remapped bank items stay in their original files — nothing was moved, renumbered or relabelled
-- [x] Every released item: full provenance + RedEye lane log; remaining bank items stay in review status — 40 C-02-complete provenance records with resolvable `objectiveId`s; 40 lane logs, each recording the lane's true verdict (`return` / `blocked`); the 140 bank items are absent from `RELEASED_BANKS` and remain in review
+- [x] Every released item: full provenance + RedEye lane log; remaining bank items stay in review status — 44 C-02-complete provenance records with resolvable `objectiveId`s; 44 lane logs, each now `verified`/`pass` (2026-11-23 local-model run); the 140 bank items are absent from `RELEASED_BANKS` and remain in review, each `verified` but `return` on provenance/mapping
 - [x] Coverage labeling shows pilot scope — bundle release state `draft-preview`, the bank's own header, and the track's `previewLabel`
 
 **Status 🟡 because:** the row is titled a *reviewed* pilot and no item is
-reviewed. Every one of the 40 has a lane log, and every log says `return` with
-`modelStage: blocked` — the model stage is not integrated (REQ-REV-05), which is
-the same blocker S48-01 recorded. The cut ships at release state `draft-preview`,
-matching how the A+/Network+ demo cuts ship, and the honest label is *pilot
-scope*, not *verified*.
+reviewed in REQ-REV-01(a)'s sense. All 44 now pass every lane check with the
+model stage verified (2026-11-23), but the key-vs-source check is blind model
+derivation, not a read against the Nutanix guide, and the lane has no
+explanation re-read or rights check. `reviewDate` is still empty on every
+record. The cut ships at release state `draft-preview`; the honest label is
+*pilot scope, model-verified*, not *source-verified*.
 
 **The lane earned its keep — it caught a defect in my own items.** The first run
 flagged `position-bias`: **key B was the answer for 28 of 40 single-key items
@@ -205,11 +202,11 @@ unchanged, and the case still fails if a root bank stops being discovered.
 - `tests/gates/redeye/self_test.py` — bank-discovery assertion narrowed to its meaning
 - `content-manifest.json`, `RadicalTrainingPlatform.Web/content-bundle.json`, `RadicalTrainingPlatform.Web/js/study-content.js` — regenerated
 
-**Not verified:** no item is verified — the model stage is blocked, so nothing
-here has been re-read against the Nutanix guide or against current documentation;
-the 14 lessons are authored prose that no human has reviewed; the guide was not
+**Not verified:** no item is source-verified — the model stage derives keys blind
+and nothing was re-read against the Nutanix guide or current documentation; the
+14 lessons are authored prose that no human has reviewed; the guide was not
 opened at execution time, so the objective titles the lessons are written against
-come from the S48-01 ingest. `reviewDate` is empty on all 40 records and `status`
+come from the S48-01 ingest. `reviewDate` is empty on all 44 records and `status`
 is `draft`, which is the truth rather than a placeholder.
 
 **Measured:** NCA track coverage **14/14 objectives, 100%** (was 0). Compiled
