@@ -219,7 +219,7 @@ bundle: 89 scored items (63 diagnosis, 71% — threshold 50%), 28 lesson slots,
 
 **Acceptance Criteria:**
 - [x] `studyguides/CHEATSHEET-NCA-75.md` corrected: SSH is enabled by default on fresh AOS 7.5 installs (disable plan deferred), referencing errata ID NCA-75-Part3-GapFill-Q3; CI grep fixture asserts the stale string “CVM SSH disabled by default” is absent — enforced by `scripts/check-nca-cheatsheet.py` with three fixtures (`bad`, `half-fix`, `good`) and `tests/gates/run_cheatsheet_fixtures.sh`
-- [x] “Beta” labels removed only from claims individually re-verified against the current guide — **none were re-verified**, so none were removed: the guide was not opened. The sheet instead carries a dated status note saying so, and the one claim that *was* corrected is marked inline
+- [x] “Beta” labels removed only from claims individually re-verified against the current guide — **2026-11-24: AHV 11.2 + vSphere for AOS 7.6 supplied and read; twelve claims adjudicated, two corrected inline** (bond "recommended", NearSync low bound); the beta-tips block keeps its date, and every still-unconfirmed claim is named
 - [x] Waiver-code/beta-exam tips clearly dated — the “Beta Exam Tips” section is dated 2026-10-11 and states the beta window closed June 14, 2026; the waiver code is marked expired rather than deleted (no current-guide replacement was verified, so deleting it would have been a silent relabel)
 - [x] Scheduling-link currency checked (C-07 review work, never silent relabeling) — the sheet contains **no links at all** (`insights.nutanix.com:443` is a host:port table entry, not a URL), so there was nothing to relabel; the gate prints the link inventory on every run so the check recurs rather than being a one-time claim
 
@@ -239,26 +239,26 @@ wrong)”*. A dated status note was added under the title, and the beta-tips
 section was dated and its closed window stated.
 
 **Files:**
-- `studyguides/CHEATSHEET-NCA-75.md` — claim corrected; dated status note; beta tips dated and closed
+- `studyguides/CHEATSHEET-NCA-75.md` — claim corrected; dated status note; beta tips dated and closed; 2026-11-24 AHV/vSphere corrections
+- `docs/qa/release-evidence/2026-11-24-vendor-guide-review.md` — the guide review matrix
 - `scripts/check-nca-cheatsheet.py` (new) — the gate
 - `tests/gates/fixtures/cheatsheet-check/{bad,half-fix,good}/studyguides/CHEATSHEET-NCA-75.md` (new, 3)
 - `tests/gates/run_cheatsheet_fixtures.sh` (new) — 2 must-fail fixtures + 1 must-pass + the real tree
 - `.github/workflows/build.yml`, `tests/gates/run_freeze_chain.sh` — gate wired in
 
-**Not verified (revised 2026-11-06):** a claim-by-claim pass ran against the
-**Prism Central Infrastructure Guide pc.7.5** (vendor revision 2026-11-02); 16
-PC-side claims held (API v4, 9440 and its redirect, NGT proxy 2074, the
-2,048-VM NGT limit, iSCSI 3260, PC as separate appliance with 3-VM scale-out,
-RBAC/Projects/Categories, Flow/Calm/NKP, authenticated NTP with SHA, Guest
-Customization Profiles at NGT 4.5, dark-site LCM, multi-site DR, tier names, S3
-backup targets) and **no wording changed.** The bond-mode rows and the three
-named S3 vendors are contested-but-retained: the PC guide's bond table covers
-multicluster/VPC uplinks, not the AHV host bonds the sheet describes, and the
-document that adjudicates them is the second pointer-only PDF. Storage-fabric
-numbers, the write path, the CVM table, PE API v2.0, ports 80/2073/3261, Pulse
-and SAML/MFA are **outside the pc.7.5 guide entirely** and stay unexamined.
+**Not verified (revised 2026-11-24):** see
+[2026-11-24-vendor-guide-review.md](../qa/release-evidence/2026-11-24-vendor-guide-review.md)
+for the matrix. The pc.7.5 pass held 16 PC-side claims with no wording change.
+The AHV 11.2 pass confirmed the bond default, the iSCSI redirector and its port
+set, NGT VSS, vTPM, VM Startup Policies, Metro synchronous RPO and NearSync's
+20 s–15 min interval; it **contradicted** the cheatsheet's recommended bond mode
+and its 15 s NearSync low bound, both corrected. Still outside every reviewed
+guide: RF copy counts, extent sizes, EC-X, AES, capacity, cache/ILM formulas,
+the CVM role table, PE API v2.0, ports 80/2073/3261 as named roles, Pulse and
+SAML/MFA; the three S3 vendors remain unnamed. The three supplied PDFs are not
+in the repository and no rights review was performed.
 
-**Measured:** freeze chain **43/43 at `ce51fc5`** (was 41/41; +2 gates), exit 0.
+**Measured:** freeze chain **43/43 at `ce51fc5`** (was 41/41; +2 gates), exit 0. Re-measured 2026-11-24 after the AHV/vSphere guide pass: **77/77** at the run head.
 
 ### S48-05 (T-35): Four NCA Scenarios
 **As a** learner, **I want** beginner NCA scenarios with honest validators, **so that** practice means something.

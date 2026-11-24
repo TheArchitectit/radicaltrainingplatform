@@ -1,6 +1,6 @@
 # NCA 7.5 — Quick Reference Cheat Sheet
 
-> **Status note — revised 2026-11-06.** This sheet was originally written against the
+> **Status note — revised 2026-11-24 (AHV 11.2 pass); first revised 2026-11-06.** This sheet was originally written against the
 > NCA 7.5 beta blueprint. A claim-by-claim re-verification pass was run on
 > 2026-11-06 against the **Prism Central Infrastructure Guide, pc.7.5** (Nutanix
 > revision dated 2026-11-02). Per REQ-NCA-04, wording changes only where a claim
@@ -13,24 +13,29 @@
 > multi-site DR as a PC capability, the Starter/Pro/Ultimate tier names, and
 > S3-compatible PC backup targets.
 >
-> Two claims are **contested but left as written.** The bond-mode rows name
-> `active-backup` as default and `balance-slb` as recommended; the PC guide's
-> bond table labels Active-Backup "Recommended. Default" and gives balance-slb
-> the multicast and LACP caveats. That table documents Prism Central
-> multicluster/VPC uplinks, **not** the AHV host bonds the sheet describes, and
-> the document that does adjudicate those — the AHV 11 admin guide — is the
-> second pointer-only PDF in [SOURCE-INVENTORY.md](../docs/SOURCE-INVENTORY.md)
-> and is not obtainable. Absence in the wrong document is not a contradiction.
-> The three named S3 vendors (Wasabi, Backblaze, OVHcloud) are simply not named
-> in the PC guide, which is an omission rather than a refutation.
+> The bond-mode rows are **adjudicated, 2026-11-24.** The AHV 11.2
+> Administration Guide was supplied and read. Its Bond Types table labels
+> **Active-Backup "Recommended. Default configuration"** and gives balance-slb
+> (Active-Active with MAC pinning) multicast caveats and a warning not to use it
+> with LACP. The sheet's default row was right; the **recommended row was wrong**
+> and is corrected inline. The three named S3 vendors (Wasabi, Backblaze,
+> OVHcloud) remain unconfirmed — neither the AHV nor the vSphere
+> guide names backup vendors.
 >
-> Everything storage-fabric-side — replication-factor copy counts, extent and
-> extent-group sizes, EC-X savings, the write path, the CVM service table, AES,
-> per-node capacity, the Unified Cache formula, ILM thresholds, node minimums,
-> the vNIC type, the Prism Element API version, ports 80, 2073 and 3261, the
-> Pulse destination, and SAML/MFA — is **outside the pc.7.5 guide entirely** and
-> stays as carried from the beta sheet. They need the AOS / Prism Element / AHV
-> 11 guide. Verified against one guide is not verified against the product.
+> The same AHV 11.2 pass **confirmed** the iSCSI redirector on every AHV host
+> (p.7), that 3260/3261/3205 are the iSCSI service ports (p.63), the ESXi NFS
+> datastore path (vSphere for AOS 7.6, p.4), NGT VSS application-consistent
+> snapshots, vTPM support, VM Startup Policies, and NearSync intervals of 20 s
+> to 15 min (p.157) — which corrected the sheet's 15 s low bound inline.
+>
+> Everything else storage-fabric-side — replication-factor copy counts, extent
+> and extent-group sizes, EC-X savings, the write path, the CVM service table,
+> AES, per-node capacity, the Unified Cache formula, ILM thresholds, node
+> minimums, the vNIC default, the Prism Element API version, ports 80, 2073 and
+> 3261 as *named* roles, the Pulse destination, and SAML/MFA — is **outside the
+> documents reviewed so far** (pc.7.5, AHV 11.2, vSphere for AOS 7.6) and stays
+> as carried from the beta sheet. The full verdict matrix is in
+> [the review record](../docs/qa/release-evidence/2026-11-24-vendor-guide-review.md).
 >
 > One corrected claim remains marked inline: the CVM SSH default (errata
 > **NCA-75-Part3-GapFill-Q3**). The beta window this sheet was first written for
@@ -51,7 +56,7 @@
 | EC-X savings (RF2) | ~33-37% |
 | EC-X savings (RF3) | ~50% |
 | AHV default bond mode | active-backup |
-| AHV recommended bond mode | balance-slb |
+| AHV recommended bond mode | active-backup — AHV 11.2 labels it "Recommended. Default"; balance-slb is caveated |
 | AHV default vNIC | VirtIO |
 | NGT VSS | Application-consistent snapshots |
 | CVM default RAM | ~32 GB (varies by feature load) |
@@ -67,7 +72,7 @@
 | NearSync activation | ≤ 15 min snapshot frequency |
 | Metro Availability RPO | 0 (synchronous) |
 | Async DR RPO | 1-24 hours |
-| NearSync RPO | ~15 sec - 15 min |
+| NearSync RPO | 20 sec - 15 min |
 | LCM upgrade order | AOS → Hypervisor → Firmware |
 | Prism ports | 80 (HTTP redirect), 9440 (HTTPS) |
 | NGT Master port | 2073 |
