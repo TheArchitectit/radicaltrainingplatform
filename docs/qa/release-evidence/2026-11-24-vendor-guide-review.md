@@ -63,6 +63,45 @@ version; it carries no claim from this cheat sheet.
 Both corrections are wording changes on claims that were individually
 re-verified, which is what REQ-NCA-04 permits. No other wording changed.
 
+## Source-stage pilot run (2026-11-24)
+
+The lane's new opt-in source stage was run over the whole 44-item pilot with
+these two guides pinned in `scripts/redeye-source.local.json`:
+
+```
+python3 scripts/redeye-lane.py --exam NCA-75 --config scripts/redeye-config.local.json \
+  --source-config scripts/redeye-source.local.json \
+  content/exams/NCA-75/questions/nca75-pilot.md
+python3 scripts/redeye-gate.py NCA-75 --config scripts/redeye-config.local.json \
+  --source-config scripts/redeye-source.local.json
+```
+
+| Outcome | Items | Meaning |
+|---|---|---|
+| `source-support: pass` | **13** | The rendered pages support exactly the keyed answer; the model cited pages and reasons |
+| `source-support: fail` — pages do not settle it | **31** | The selected pages did not answer the item; every one of the 31 says so |
+| `source-support: fail` — contradictory | **0** | No item had a key the pages contradicted |
+| `blocked` | 0 | No timeout, pin or tooling failure in the full run |
+
+**Zero contradictions is the important number.** In 44 items whose keys the
+model stage had already agreed with, the documents never supported a different
+answer. The source stage's value is the 13 it can cite: Q1 (AHV p.4), Q2 (p.4),
+Q4 (p.7), Q5 (p.4), Q9 (pp.61/134), Q12 (pp.156–157), Q14, Q17, Q18 (p.4),
+Q22 (p.4, p.73), Q23 (p.39), Q27, Q33 (p.28) — each with the page or page
+content named and the claim it supports.
+
+**Why 31 do not settle.** Their subjects are outside these two documents:
+licensing models and core counting, alert correlation/root-cause ordering,
+Pulse telemetry, disk-latency and backup-window analysis, managed-vs-unmanaged
+network definitions, and NCA tooling (Move/Foundation/Collector/X-Ray). Those
+live in the Prism Central, licensing and operational guides, which were not
+supplied. The stage refuses rather than guessing — that is the fail-closed
+behaviour it was built for, and it is reported as a gap, not smoothed.
+
+**Ship-gate with the source pin:** 304 items gated, **13 ok**, **171 return**
+(140 legacy provenance/mapping + 31 pilot items the documents do not settle),
+**120 no log** (unreleased pack banks), exit 1.
+
 ## What this record does not establish
 
 - That the unread claims are correct — they remain carried from the beta sheet.

@@ -155,19 +155,20 @@ covered beta code were deleted, not because coverage regressed. Freeze chain
 
 **Acceptance Criteria:**
 - [x] 14 lessons (s1_1..s4_4), one per current objective, synopses per SPEC-06 06.4 — each wired into its objective's `lessonIds`, so the track reports 14/14 objectives at 100%
-- [ ] 40-item reviewed pilot: 10 per current section (equal allocation = study choice, not official weight, stated in exam.json) — the pilot **holds 44 items, 10/12/10/12 by section, every objective covered by ≥3** (measured 2026-11-23; "40" was the authored target); **"reviewed" is still not satisfied and is not claimed**: all 44 are `modelStage: verified` and `verdict: pass` with every check green, but the model derives keys blind from its own knowledge — the guide was not consulted — so REQ-REV-01(a)'s "against the source" is unmet
+- [ ] 40-item reviewed pilot: 10 per current section (equal allocation = study choice, not official weight, stated in exam.json) — the pilot **holds 44 items, 10/12/10/12 by section, every objective covered by ≥3** (measured 2026-11-23; "40" was the authored target); **2026-11-24: 13 of 44 are source-verified** by the new opt-in source stage against the AHV 11.2 / vSphere 7.6 guides (keys cited to pages, zero contradictions), while **31 are not settled by those documents** and stay `return`; no item has human review, so "reviewed" is still not claimed in full
 - [x] Authoring gaps filled with new original items where the bank cannot supply two reviewed items per objective — expected gaps: solutions/tools (1.x), licensing (2.4), support-case workflow (4.3), performance interpretation (4.4); final gap count from the objective-by-objective review, not the spec estimate — **the measured count is 40, not the spec's four gap areas**: S48-01 established that all 140 bank items are excluded, so the bank supplies zero *reviewed* coverage and REQ-NCA-06's "where the bank cannot supply reviewed coverage" applies to the whole cut. Objective 3.2, measured at zero mapped bank items, carries three authored items
 - [x] New authored items live in `content/exams/NCA-75/questions/nca75-pilot.md`; remapped bank items stay in their original files — nothing was moved, renumbered or relabelled
 - [x] Every released item: full provenance + RedEye lane log; remaining bank items stay in review status — 44 C-02-complete provenance records with resolvable `objectiveId`s; 44 lane logs, each now `verified`/`pass` (2026-11-23 local-model run); the 140 bank items are absent from `RELEASED_BANKS` and remain in review, each `verified` but `return` on provenance/mapping
 - [x] Coverage labeling shows pilot scope — bundle release state `draft-preview`, the bank's own header, and the track's `previewLabel`
 
-**Status 🟡 because:** the row is titled a *reviewed* pilot and no item is
-reviewed in REQ-REV-01(a)'s sense. All 44 now pass every lane check with the
-model stage verified (2026-11-23), but the key-vs-source check is blind model
-derivation, not a read against the Nutanix guide, and the lane has no
-explanation re-read or rights check. `reviewDate` is still empty on every
-record. The cut ships at release state `draft-preview`; the honest label is
-*pilot scope, model-verified*, not *source-verified*.
+**Status 🟡 because:** the row is titled a *reviewed* pilot and 31 of the 44
+items are not reviewed in REQ-REV-01(a)'s sense. The 2026-11-24 source pass
+verifies **13** items against AHV 11.2 / vSphere 7.6 with page citations and
+**no contradictions**; the other 31 concern subjects those guides do not cover
+(licensing, alert correlation, Pulse, performance metrics, tooling) and are
+returned rather than guessed. `reviewDate` is still empty on every record and
+no human has read an item. The cut ships as `draft-preview`; the honest label
+is a *partially source-verified pilot*, not a *source-verified* one.
 
 **The lane earned its keep — it caught a defect in my own items.** The first run
 flagged `position-bias`: **key B was the answer for 28 of 40 single-key items
