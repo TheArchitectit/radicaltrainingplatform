@@ -1,0 +1,20 @@
+{
+  "lane": "redeye-lane",
+  "version": "0.1.0-local-model",
+  "reviewer": "redeye-lane",
+  "concentrationThreshold": 0.40,
+  "duplicateThreshold": 0.6,
+  "ngramSize": 5,
+  "modelStage": "openai-compatible",
+  "model": {
+    "baseUrl": "http://100.85.128.54:8090",
+    "model": "qwen3.8-flash-next-uncensored",
+    "apiKey": "local",
+    "maxTokens": 1200,
+    "timeoutSeconds": 180
+  },
+  "policy": {
+    "failClosed": true,
+    "note": "Local fleet endpoint (infra-info local-llm.md). The string 'local' is that endpoint's literal key, not a credential. Any timeout, HTTP error, empty content or malformed reply leaves the stage blocked; only an explicit agree produces a verified pass."
+  }
+}

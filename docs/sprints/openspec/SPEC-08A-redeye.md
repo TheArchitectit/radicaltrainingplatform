@@ -17,6 +17,44 @@ Existing capability: `radredeye-core` (frames, sink fan-out, bounded replay, nam
 
 **Boundaries from the baseline review:** CaptureSink errors do not abort capture; review regression logging ignores the subprocess result; the frame-gate aggregator counts only recorded lines, treats absent timing as passing and can report all_ok on zero records — so neither frame retrieval, health, a frame score nor that dashboard is a substitute for the item-level fail-closed ship-gate. Build explicit completion/error accounting and expected-item coverage outside model output. `main.rs` binds 0.0.0.0:8765, not loopback; the admin bearer-token gate is not proof of authentication on the capture/MCP surfaces — restrict the RTP deployment to an isolated local boundary or add reviewed authentication before exposing private evidence. The RTP review adapter must not expose control tools, publishing, merge or repository-write capabilities to its model context.
 
+## Model stage integration — key-vs-source (2026-11-23)
+
+The lane's key-vs-source stage is now implemented against the fleet's **local**
+OpenAI-compatible endpoint (infra-info `local-llm.md`:
+`http://100.85.128.54:8090`, model `qwen3.8-flash-next-uncensored`). The key in
+that config is that endpoint's literal `local`, not a credential; no paid
+provider is involved and no spend is possible.
+
+**Blind derivation, not agreement.** The prompt contains the item and its
+options and asks the model to choose the correct ones; the keyed answer is
+deliberately withheld. The lane then compares the model's answer set with the
+key. Showing the key would invite agreement and make the check a tautology —
+the first version of this integration did exactly that and was discarded before
+any log was committed.
+
+**Fail-closed.** A timeout, HTTP error, empty `content` (a reasoning model can
+spend its whole budget reasoning and return null), a malformed reply, an answer
+letter that is not an option, or an item with no parseable options all leave
+`modelStage: "blocked"` and `verdict: "return"`. The lane self-test seeds an
+unreachable endpoint and asserts that outcome, so the fail-closed path is a
+test, not a claim.
+
+**Configuration.** `scripts/redeye-config.local.json` names the endpoint;
+`scripts/redeye-config.json` (shipped default) keeps no model, so a checkout
+without the fleet endpoint stays fail-closed. The lane's `--config` and the
+gate's `--config` must name the same file: the log binds the config hash, and a
+different config reads as stale.
+
+**What this is not.** It is not the radredeye render-look-judge adapter
+described above. There is no visual capture, no separate blind-derivation
+context beyond the prompt boundary, and no MCP surface. Those remain unbuilt
+and are not claimed.
+
+**Evidence (2026-11-23).** `--exam AZ-104` over `az104-beginner.md`:
+51/51 items `modelStage: verified`, 51/51 `verdict: pass`;
+`redeye-gate.py AZ-104 --config scripts/redeye-config.local.json` prints
+`GATE PASS`. Logs are in `content/review-logs/AZ-104/`.
+
 ## Requirements (normative)
 
 | ID | SHALL | Scenario |

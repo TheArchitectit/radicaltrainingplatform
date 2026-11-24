@@ -142,8 +142,9 @@ def gate_exam(exam_id):
     manifest_path = _repo_root / "content" / "exams" / exam_id / "exam.json"
     manifest_hash = sha256(manifest_path.read_text(encoding="utf-8")) \
         if manifest_path.is_file() else None
-    config_hash = sha256(CONFIG_PATH.read_text(encoding="utf-8")) \
-        if CONFIG_PATH.is_file() else None
+    config_path = pathlib.Path(globals().get("_config_path") or CONFIG_PATH)
+    config_hash = sha256(config_path.read_text(encoding="utf-8")) \
+        if config_path.is_file() else None
 
     for bank in banks:
         for item_id, text in parse_items(bank, exam_id):
@@ -191,6 +192,8 @@ def main():
     parser.add_argument("--all", action="store_true", help="gate every exam under content/exams/")
     parser.add_argument("--log-root", help="override review-log root (tests)")
     parser.add_argument("--repo-root", help="override repo root (tests)")
+    parser.add_argument("--config", help="lane config whose hash the logs must "
+                                         "bind (default: scripts/redeye-config.json)")
     parser.add_argument("--self-test", action="store_true",
                         help="run fail-closed fixture assertions and exit")
     args = parser.parse_args()
@@ -203,6 +206,8 @@ def main():
         LOG_ROOT = pathlib.Path(args.log_root)
     if args.repo_root:
         globals()["_repo_root"] = pathlib.Path(args.repo_root)
+    if args.config:
+        globals()["_config_path"] = pathlib.Path(args.config)
 
     exam_ids = args.exams
     if args.all:
