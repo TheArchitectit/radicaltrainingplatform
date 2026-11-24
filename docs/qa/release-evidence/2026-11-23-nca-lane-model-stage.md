@@ -76,6 +76,25 @@ were sent to the model as PNGs:
 This is a capability test, not a review stage: nothing in the lane consumes
 page images yet.
 
+## Update 2026-11-24 — legacy rerun with remap-aware mapping
+
+After `mapping-check` learned to read `content/exams/NCA-75/remap.csv`, the
+three legacy banks were rerun (model stage only, no source pin):
+
+| Bank | Items | mapping-check | provenance | verdict |
+|---|---|---|---|---|
+| Part1 / Part2 / Part3-GapFill | 140 | pass 140 (from remap.csv; `keyReviewed=false` → provisional) | fail 140 (no C-02 record) | return 140 |
+
+The keys remain 140/140 model-agreed. Nothing releases: provenance is the
+remaining blocker, and `rightsStatus` is still an assertion in the remap rows
+rather than a review.
+
+**Gate counts at this state.** With the source pin (`--source-config`):
+304 gated — 13 ok (source-verified pilot items), 140 `no source-verified log`,
+120 `no review log`, 31 `verdict is 'return'`. Without the pin: 0 ok — the 44
+pilot logs bind sources and are excluded as stale, the 140 return, 120 have no
+log. The two configurations measure different questions and neither is a pass.
+
 ## What this record does not establish
 
 - **No source-grounded review.** `key-vs-source` is the model's blind

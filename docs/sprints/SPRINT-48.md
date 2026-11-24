@@ -38,7 +38,7 @@
 **Acceptance Criteria:**
 - [x] `content/exams/NCA-75/remap.csv` complete: exactly 140 rows, every item ID resolves to a parsed question, every row carries review state (columns per SPEC-01 01.3) — enforced by `scripts/check-nca-remap.py`, whose failure mode is a `--self-test` fixture set (7 seeded defects + 1 clean 140-row inventory) and `tests/gates/run_remap_fixtures.sh`
 - [x] Existing question IDs never change; remap attaches mapping only — the validator asserts the itemId set **equals** the bank's question set, so a dropped, invented or renumbered ID fails
-- [ ] Every remapped row passes the RedEye lane with remap-aware checks (key re-verification against current documentation, explanation re-read, mapping check, rights status) — **run 2026-11-23 against the local model: 140/140 keys independently derived and agreed (`modelStage: verified`), but every row is still `return`/excluded**; `mapping-check` and `provenance` fail on missing C-02 records (the lane reads provenance, not `remap.csv`), and explanation re-read/rights status have no check at all
+- [ ] Every remapped row passes the RedEye lane with remap-aware checks (key re-verification against current documentation, explanation re-read, mapping check, rights status) — **2026-11-24, 140/140 keys derived and agreed; 140/140 now pass `mapping-check` from `remap.csv` (provisional, `keyReviewed=false`), but every row is still `return`** because `provenance` fails — these banks have no C-02 records — and explanation re-read/rights status have no check at all
 - [x] Errata fixtures still pass: NCA-75-Part1 Q35 = D; NCA-75-Part3-GapFill Q3 = A (REQ-NCA-03)
 - [x] Lane logs + seeded-defect self-test record archived in release evidence
 
@@ -73,7 +73,7 @@ mapped items**, which is narrower than SPEC-06's estimate of the gaps (1.x, 2.4,
 - `.github/workflows/build.yml`, `tests/gates/run_freeze_chain.sh` — gate wired in
 - `content/exams/NCA-75/remap.csv` — unchanged (already complete); validated, not rewritten
 
-**Not verified:** no key or explanation re-verified against current documentation — the keys were re-derived blind by the local model (140/140 agree), which is not source verification; the lane's `mapping-check` cannot read `remap.csv`; `rightsStatus` is an assertion, not a review; the 40-item pilot now holds 44 reviewed-by-lane items, so the row's count is stale; objective 3.2's gap is measured, not filled. Full list in the evidence records.
+**Not verified:** no key or explanation re-verified against current documentation — the keys were re-derived blind by the local model (140/140 agree), which is not source verification; `mapping-check` now reads `remap.csv`, whose mapping is provisional (`keyReviewed=false` on all 140); `rightsStatus` is an assertion, not a review; the 40-item pilot now holds 44 reviewed-by-lane items, so the row's count is stale; objective 3.2's gap is measured, not filled. Full list in the evidence records.
 
 **Evidence:** [2026-10-25-nca-remap.md](../qa/release-evidence/2026-10-25-nca-remap.md) · [2026-11-23-nca-lane-model-stage.md](../qa/release-evidence/2026-11-23-nca-lane-model-stage.md) (lane run, gate counts, the verdict false green fixed in `65f6c85`).
 

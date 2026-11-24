@@ -137,7 +137,9 @@ row whose objective is not in the manifest still fails.
 
 This does not unblock release: `provenance` still fails for those items until
 C-02 records exist, which is the correct state — the remap inventory is a
-mapping, not a provenance record.
+mapping, not a provenance record. Measured 2026-11-24 over the three legacy
+banks: **140/140 `mapping-check: pass` (provisional), 140/140 `provenance:
+fail`, 140/140 `return`**, keys 140/140 model-agreed.
 
 ## Requirements (normative)
 
