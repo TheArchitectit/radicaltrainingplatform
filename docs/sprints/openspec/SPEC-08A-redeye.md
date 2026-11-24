@@ -109,7 +109,10 @@ equally `return`.
 **Binding.** The log's `boundHashes.sourceConfig` pins the source-config hash.
 `redeye-gate.py --source-config` excludes a log that bound sources when none is
 supplied now, or when the pin differs — the review was against those pages, so
-a changed pin is a changed review. Logs without the binding are unaffected.
+a changed pin is a changed review. A gate given the pin also refuses a log
+that binds no source documents: supplying the pin means requiring it, or
+"gate with sources" would accept the same model-only log "gate without" does.
+Logs are unaffected only when the gate itself names no source config.
 
 **Measured (2026-11-24).** First item through the stage: pilot Q1
 `source-support: pass` — "Page 4 states CVM runs on every node, VMs run on

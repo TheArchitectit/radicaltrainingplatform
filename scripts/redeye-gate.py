@@ -9,7 +9,8 @@ or a log whose own check results are missing or not all "pass" — and it NAMES
 every exclusion in the report (fail-closed, REQ-REV-05: there is no silent
 fallback to unreviewed release). The check-results clause exists because the
 verdict is the lane's summary of the checks, and a summary that disagrees with
-its evidence must not release.
+its evidence must not release. With `--source-config`, a log that binds no
+source documents is also excluded: supplying the pin means requiring it.
 
 Until the radredeye model-stage integration lands, every lane log carries
 modelStage "pending" or "blocked", so the gate correctly excludes 100% of
@@ -25,7 +26,6 @@ Exit codes:
   2 — self-test assertion failed (--self-test)
 """
 import argparse
-import hashlib
 import json
 import pathlib
 import re
@@ -46,34 +46,9 @@ LOG_ROOT = REPO_ROOT / "content" / "review-logs"
 # Overridable in tests so fixture exams/logs can live in a temp dir.
 _repo_root = REPO_ROOT
 
-
-def sha256(text):
-    return hashlib.sha256(text.encode("utf-8")).hexdigest()
-
-
-def sanitize_item_id(item_id):
-    return re.sub(r"[^A-Za-z0-9._-]+", "_", item_id)
-
-
-SUFFIX_STRIP = re.compile(
-    r"^(.+?)-(?:Part\d+(?:-.*)?|D\d+(?:-.*)?|GapFill(?:-.*)?)$", re.IGNORECASE
+from redeye_gate_banks import (  # noqa: E402 — beside this script
+    SUFFIX_STRIP, derive_exam_code, sanitize_item_id, sha256,
 )
-
-
-def derive_exam_code(file_name):
-    """Port of QuestionParser.DeriveExamCode — mirrors check-item-identity.py.
-
-    Legacy root banks (NCA-75-Part1.md) carry their exam in the filename, not
-    in a directory. Without this the gate cannot see them at all.
-    """
-    current = pathlib.Path(file_name).stem
-    while True:
-        match = SUFFIX_STRIP.match(current)
-        if not match:
-            break
-        current = match.group(1)
-    parts = current.split("-")
-    return f"{parts[0]}-{parts[1]}" if len(parts) >= 2 else current
 
 
 def collect_banks(exam_id):
@@ -177,9 +152,16 @@ def gate_exam(exam_id):
                 continue
             # A log that bound source documents must still match them: the
             # review was against those pages, and a changed pin is a changed
-            # review. Logs without the binding are unaffected — the stage is
-            # opt-in.
+            # review. And a gate given a source pin is asking for source
+            # verification, so a log without the binding does not satisfy it —
+            # otherwise "gate with sources" and "gate without" accept the same
+            # model-only log and the pin means nothing.
             source_hash = globals().get("_source_hash")
+            if source_hash is not None and "sourceConfig" not in bound:
+                report.append(f"  EXCLUDED {item_id}: no source-verified log "
+                              f"(source documents configured at gate time)")
+                excluded += 1
+                continue
             if "sourceConfig" in bound:
                 if source_hash is None:
                     report.append(f"  EXCLUDED {item_id}: stale log (source documents "
@@ -479,6 +461,18 @@ def self_test():
         globals()["_source_hash"] = None
         if rc != 0 or "GATE PASS" not in out:
             failures.append(f"case source-ok: rc={rc} output={out[:300]}")
+
+        # Case 11: a gate given a source pin refuses a model-only log — "gate
+        # with sources" must not accept what "gate without" accepts.
+        lr = base / "logs-nosource" / "EXAM-TEST"
+        lr.mkdir(parents=True)
+        for iid in real_items:
+            (lr / f"{sanitize_item_id(iid)}.json").write_text(json.dumps(log_for(iid)))
+        globals()["_source_hash"] = pin
+        rc, out = run_gate(base / "logs-nosource")
+        globals()["_source_hash"] = None
+        if rc != 1 or "no source-verified log" not in out:
+            failures.append(f"case no-source-log: rc={rc} output={out[:300]}")
 
     if failures:
         for f in failures:
