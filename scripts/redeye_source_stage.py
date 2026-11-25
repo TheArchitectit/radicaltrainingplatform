@@ -297,6 +297,32 @@ def best_citation_page(quote, candidates):
     return best
 
 
+def _candidates_for(item, docs_pages, source):
+    """Selected pages across all configured documents.
+
+    A document that does not cover the item is not an error — another document
+    may. Measured case: the vSphere guide often answers while the AHV guide
+    does not. Only "nothing matched anywhere" refuses; a hash mismatch or a
+    missing tool still raises, because those are configuration failures.
+    """
+    candidates = []
+    for doc, text_pages in docs_pages:
+        try:
+            numbers = select_pages(item, text_pages,
+                                   max_pages=int(source.get("maxPages", 3)),
+                                   min_score=int(source.get("minScore", 3)),
+                                   cache_key=doc["sha256"])
+        except RuntimeError as exc:
+            if str(exc).startswith("no source page matched"):
+                continue
+            raise
+        candidates.extend((doc, number, text_pages[number - 1])
+                          for number in numbers)
+    if not candidates:
+        raise RuntimeError("no source page matched the item in any configured document")
+    return candidates
+
+
 def verify_key_with_source(item, model, source):
     """True when the rendered source pages support exactly the keyed answer.
 
@@ -307,16 +333,11 @@ def verify_key_with_source(item, model, source):
     options = _options(item)
     if not options:
         raise RuntimeError("item has no options to check against the source")
-    candidates = []
-    for doc in source["documents"]:
-        text_pages = load_source_index(doc)
-        for number in select_pages(item, text_pages,
-                                   max_pages=int(source.get("maxPages", 3)),
-                                   min_score=int(source.get("minScore", 3)),
-                                   cache_key=doc["sha256"]):
-            candidates.append((doc, number, text_pages[number - 1]))
-    if not candidates:
-        raise RuntimeError("no source pages selected")
+    candidates = _candidates_for(
+        item,
+        [(doc, load_source_index(doc)) for doc in source["documents"]],
+        source,
+    )
     listing = "\n".join(f"{k}) {v}" for k, v in options.items())
     content = [
         {"type": "text", "text":
@@ -452,6 +473,29 @@ def self_test():
             failures.append("an invented quote was accepted as support")
         if citation_supported("too short", page_text):
             failures.append("a too-short quote was accepted")
+
+        # A document that covers nothing must not block an item another
+        # document answers; only "nothing anywhere" refuses.
+        doc_a = {"path": "a", "sha256": "a" * 64, "label": "A"}
+        doc_b = {"path": "b", "sha256": "b" * 64, "label": "B"}
+        unrelated = ["nothing here about the question"]
+        matching = ["bond type active-backup default recommended"]
+        try:
+            got = _candidates_for(
+                {"text": "Which bond type is the default and recommended?"},
+                [(doc_a, unrelated), (doc_b, matching)],
+                {"minScore": 3})
+            if len(got) != 1 or got[0][0]["label"] != "B":
+                failures.append(f"cross-document selection wrong: {got}")
+        except Exception as exc:  # noqa: BLE001
+            failures.append(f"cross-document selection raised: {exc}")
+        try:
+            _candidates_for({"text": "Which bond type is the default and recommended?"},
+                            [(doc_a, unrelated)], {"minScore": 3})
+            failures.append("no-match across all documents did not refuse")
+        except RuntimeError as exc:
+            if "any configured document" not in str(exc):
+                failures.append(f"wrong refusal reason: {exc}")
 
         model = {"baseUrl": "http://127.0.0.1:9", "model": "unreachable",
                  "apiKey": "local", "timeoutSeconds": 2}
