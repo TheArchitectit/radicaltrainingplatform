@@ -95,6 +95,16 @@ rather than a review.
 pilot logs bind sources and are excluded as stale, the 140 return, 120 have no
 log. The two configurations measure different questions and neither is a pass.
 
+## Update — the two unreleased pack banks (2026-11-24)
+
+`nca75-new-part{1,2}.md` (120 items, not in `RELEASED_BANKS`) were reviewed with
+the model stage only: **119 `verdict: pass`** with every check green, and **1
+`return`** — `nca75-new-part2.md/Q137`, `key-vs-source: blocked` ("model stage
+failed: timed out"). That is the fail-closed path working; the item is not
+verified until a rerun succeeds. Neither bank is released, and this run changes
+no release state — it exists so the gate stops reporting them as "no review
+log" and so the content is measured before anyone considers promoting it.
+
 ## What this record does not establish
 
 - **No source-grounded review.** `key-vs-source` is the model's blind

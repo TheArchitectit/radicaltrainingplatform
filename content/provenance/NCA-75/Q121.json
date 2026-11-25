@@ -10,5 +10,6 @@
   "reviewer": "",
   "reviewDate": "",
   "originalityCheck": "no-exam-item-proximity",
-  "status": "draft"
+  "status": "draft",
+  "automatedReview": "redeye-lane:2026-11-25"
 }
