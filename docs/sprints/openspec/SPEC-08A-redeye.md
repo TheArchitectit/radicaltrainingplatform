@@ -114,10 +114,11 @@ that binds no source documents: supplying the pin means requiring it, or
 "gate with sources" would accept the same model-only log "gate without" does.
 Logs are unaffected only when the gate itself names no source config.
 
-**Measured (2026-11-24).** First item through the stage: pilot Q1
-`source-support: pass` — "Page 4 states CVM runs on every node, VMs run on
-nodes, and local disks aggregate into a shared pool—matching option A" —
-~105 s per item including render and OCR. The full pilot run is recorded in
+**Measured (2026-11-24).** The first item through the stage appeared to pass
+and cited AHV page 4 — which is the guide's table of contents. That pass was
+withdrawn and is the reason the stage now excludes TOC pages and requires a
+verbatim, verifiable quote: the model's assertion is not evidence. The
+corrected pilot run is recorded in
 [2026-11-24-vendor-guide-review.md](../../qa/release-evidence/2026-11-24-vendor-guide-review.md).
 
 **What this is not.** It is not the radredeye render-look-judge adapter: there

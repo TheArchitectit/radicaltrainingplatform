@@ -5,7 +5,10 @@ The model stage asks the model to derive an answer blind and compares it with
 the key. That checks whether one model agrees with the author; it does not check
 the key against a document. This stage does: it selects the pages of a supplied
 PDF that share vocabulary with the item, renders them, and asks the model which
-option(s) those pages support. The keyed answer is still withheld.
+option(s) those pages support. The keyed answer is still withheld, and the
+model's word is not evidence — it must quote the page verbatim and the quote
+must be found on a supplied page (60% trigram overlap), because a citation that
+cannot be found is exactly how a table of contents once read as support.
 
 Opt-in and fail-closed, by construction:
 
@@ -111,29 +114,104 @@ def item_terms(item):
     return {w for w in words if w not in STOPWORDS}
 
 
-def select_pages(item, pages, max_pages=3, min_score=3):
-    """The pages that share the most vocabulary with the item.
+_WORD = re.compile(r"[a-z][a-z0-9+.-]{3,}")
+_PAGE_CACHE = {}
+# A table-of-contents page shares vocabulary with every item and supports none
+# of them. Measured: AHV 11.2 page 4 is the TOC, and the stage cited it as
+# "stating" the answer for five pilot items — the model confabulated support
+# from a contents list. Ten dot-leader runs is a TOC; body pages do not have
+# them.
+_TOC_LEADER = re.compile(r"\.{4,}")
 
-    A page must share at least `min_score` distinct terms with the item; if no
-    page does, the stage refuses rather than sending unrelated pages to the
-    model — an item the source does not cover is not a source-verified item.
+
+def _is_toc(page):
+    return len(_TOC_LEADER.findall(page)) >= 10
+
+
+def _norm(word):
+    word = word.strip(".")
+    return word[:-1] if len(word) > 4 and word.endswith("s") else word
+
+
+def _page_features(pages, cache_key=None):
+    """Normalized word lists and bigram sets per page, cached per document.
+
+    Recomputing this for every item was measurable: a 320-page guide is ~160k
+    words and the lane asks per item per document.
     """
-    terms = item_terms(item)
+    if cache_key and cache_key in _PAGE_CACHE:
+        return _PAGE_CACHE[cache_key]
+    word_lists = [[_norm(w) for w in _WORD.findall(page.lower())] for page in pages]
+    bigrams = [
+        {f"{a} {b}" for a, b in zip(words, words[1:])
+         if a not in STOPWORDS and b not in STOPWORDS}
+        for words in word_lists
+    ]
+    features = (word_lists, bigrams)
+    if cache_key:
+        _PAGE_CACHE[cache_key] = features
+    return features
+
+
+def select_pages(item, pages, max_pages=3, min_score=3, cache_key=None):
+    """Pages to render: the union of two selections, each capped at max_pages.
+
+    The single-term count (the original selection) finds overview pages — the
+    one that introduces a concept in plain words, which is how most items are
+    answered. Phrase (bigram) scoring finds the deep page that names the
+    subject. Measured both ways on the pilot: replacing the first with the
+    second lost 8 of 13 previously cited pages, and using only the first missed
+    pages that do settle an item. So both run and the union is rendered; the
+    cap is 2 x max_pages.
+
+    A page must be picked by one of them; if neither finds anything the stage
+    refuses rather than sending unrelated pages to the model — an item the
+    source does not cover is not a source-verified item.
+    """
+    word_lists, page_bigrams = _page_features(pages, cache_key)
+    item_words = [_norm(w) for w in _WORD.findall((item.get("text") or "").lower())]
+    terms = {w for w in item_words if w not in STOPWORDS}
     if not terms:
         raise RuntimeError("item has no usable terms for page selection")
-    scored = []
+    token_sets = [set(words) for words in word_lists]
+
+    # The count pass is deliberately the ORIGINAL selection, substring match
+    # included: a normalized token match is stricter and lost overview pages
+    # that matched a plural or a derived form ("management" for "manage").
+    raw_terms = item_terms(item)
+    counted = []
     for number, page in enumerate(pages, start=1):
-        low = page.lower()
-        score = sum(1 for t in terms if t in low)
-        if score:
-            scored.append((score, number))
-    scored.sort(key=lambda pair: (-pair[0], pair[1]))
-    chosen = [number for score, number in scored[:max_pages] if score >= min_score]
+        if _is_toc(page):
+            continue
+        score = sum(1 for t in raw_terms if t in page.lower())
+        if score >= min_score:
+            counted.append((score, number))
+    counted.sort(key=lambda pair: (-pair[0], pair[1]))
+    by_terms = [number for _, number in counted[:max_pages]]
+
+    item_bigrams = {f"{a} {b}" for a, b in zip(item_words, item_words[1:])
+                    if a not in STOPWORDS and b not in STOPWORDS}
+    n = len(pages)
+    bg_df = {b: sum(1 for s in page_bigrams if b in s) for b in item_bigrams}
+    specific_bg = {b for b, d in bg_df.items() if 0 < d <= max(2, n // 50)}
+    df = {t: sum(1 for ts in token_sets if t in ts) for t in terms}
+    phrased = []
+    for number, (tokens, bigrams) in enumerate(zip(token_sets, page_bigrams), start=1):
+        if _is_toc(pages[number - 1]):
+            continue
+        phrases = len(specific_bg & bigrams)
+        rare = sum(1.0 / df[t] for t in terms if t in tokens and df[t])
+        if phrases or rare >= 1.0:
+            phrased.append((3 * phrases + rare, number))
+    phrased.sort(key=lambda pair: (-pair[0], pair[1]))
+    by_phrases = [number for _, number in phrased[:max_pages]]
+
+    chosen = sorted(set(by_terms) | set(by_phrases))[:2 * max_pages]
     if not chosen:
-        best = scored[0] if scored else (0, 0)
-        raise RuntimeError(f"no source page matched the item (best score {best[0]}, "
+        best = max([s for s, _ in counted] + [0])
+        raise RuntimeError(f"no source page matched the item (best score {best}, "
                            f"threshold {min_score})")
-    return sorted(chosen)
+    return chosen
 
 
 def render_page(doc, number, dpi=110):
@@ -177,6 +255,48 @@ def _endpoint(model):
     return url + "/chat/completions", key
 
 
+def _norm_words(text):
+    return re.findall(r"[a-z0-9]+", (text or "").lower())
+
+
+def _trigrams(words):
+    return {tuple(words[i:i + 3]) for i in range(max(0, len(words) - 2))}
+
+
+def citation_supported(quote, page, threshold=0.6, min_words=8):
+    """True when `quote` really appears on `page`.
+
+    The model's word is not evidence. Measured failure this exists for: the
+    stage cited AHV 11.2 page 4 as stating an answer, and page 4 is the table
+    of contents — a hallucinated citation that read as verification. The reply
+    must now carry a verbatim sentence, and 60% of its trigrams must occur on
+    one supplied page; OCR of a rendered page differs slightly from the text
+    layer, which is why this is overlap and not equality.
+    """
+    words = _norm_words(quote)
+    if len(words) < min_words:
+        return False
+    page_grams = _trigrams(_norm_words(page))
+    quote_grams = _trigrams(words)
+    if not quote_grams:
+        return False
+    return len(quote_grams & page_grams) / len(quote_grams) >= threshold
+
+
+def best_citation_page(quote, candidates):
+    """(doc, number, ratio) of the supplied page that best supports the quote."""
+    words = _norm_words(quote)
+    quote_grams = _trigrams(words)
+    best = (None, None, 0.0)
+    for doc, number, text in candidates:
+        page_grams = _trigrams(_norm_words(text))
+        ratio = (len(quote_grams & page_grams) / len(quote_grams)
+                 if quote_grams else 0.0)
+        if ratio > best[2]:
+            best = (doc, number, ratio)
+    return best
+
+
 def verify_key_with_source(item, model, source):
     """True when the rendered source pages support exactly the keyed answer.
 
@@ -192,8 +312,9 @@ def verify_key_with_source(item, model, source):
         text_pages = load_source_index(doc)
         for number in select_pages(item, text_pages,
                                    max_pages=int(source.get("maxPages", 3)),
-                                   min_score=int(source.get("minScore", 3))):
-            candidates.append((doc, number))
+                                   min_score=int(source.get("minScore", 3)),
+                                   cache_key=doc["sha256"]):
+            candidates.append((doc, number, text_pages[number - 1]))
     if not candidates:
         raise RuntimeError("no source pages selected")
     listing = "\n".join(f"{k}) {v}" for k, v in options.items())
@@ -203,7 +324,7 @@ def verify_key_with_source(item, model, source):
          "Which option(s) do the supplied pages support? Use only these pages. "
          "If they do not settle the answer, say supported=false."},
     ]
-    for doc, number in candidates:
+    for doc, number, _text in candidates:
         png = render_page(doc, number, int(source.get("dpi", 110)))
         content.append({"type": "text", "text":
                         f"Page {number} of {doc.get('label') or Path(doc['path']).name}:"})
@@ -218,7 +339,9 @@ def verify_key_with_source(item, model, source):
             {"role": "system",
              "content": "You verify certification items against supplied source pages. "
                         "Reply with JSON only: {\"supported\": true|false, "
-                        "\"answers\": [\"<letter>\", ...], \"reason\": \"<25 words>\"}"},
+                        "\"answers\": [\"<letter>\", ...], "
+                        "\"quote\": \"<one sentence copied verbatim from a supplied page>\", "
+                        "\"reason\": \"<25 words>\"}"},
             {"role": "user", "content": content},
         ],
     }).encode()
@@ -242,16 +365,24 @@ def verify_key_with_source(item, model, source):
     answers = verdict.get("answers")
     if not isinstance(answers, list) or not answers:
         raise RuntimeError(f"model reply is not the requested shape: {raw[:120]}")
+    quote = verdict.get("quote")
+    if not isinstance(quote, str) or len(_norm_words(quote)) < 8:
+        raise RuntimeError("model claimed support without a quotable sentence")
+    doc, page, ratio = best_citation_page(quote, candidates)
+    if ratio < 0.6:
+        return False, (f"citation not found on any supplied page (best overlap "
+                       f"{ratio:.0%}); the claim is unsupported: {quote[:120]}")
     derived = {str(a).strip().upper() for a in answers}
     unknown = derived - set(options)
     if unknown:
         raise RuntimeError(f"model answered with {sorted(unknown)}, which are not options")
     keyed = {str(k).strip().upper() for k in (item.get("keys") or [])}
     reason = str(verdict.get("reason", ""))
+    cite = f"{doc.get('label') or Path(doc['path']).name} p.{page}: \"{quote[:140]}\""
     if derived == keyed:
-        return True, reason
+        return True, f"{cite} — {reason}".strip()
     return False, (f"source supports {sorted(derived)}; key says {sorted(keyed)}. "
-                   f"{reason}").strip()
+                   f"{cite} — {reason}").strip()
 
 
 def self_test():
@@ -270,6 +401,18 @@ def self_test():
                 failures.append(f"page selection picked {chosen}, expected [2]")
         except Exception as exc:  # noqa: BLE001
             failures.append(f"page selection failed: {exc}")
+
+        # A table of contents matches item vocabulary and supports nothing; it
+        # was cited for five pilot items before this check existed.
+        toc = "bond type is the default and recommended ....1\n" * 12
+        try:
+            chosen = select_pages({"text": "Which bond type is the default and recommended?"},
+                                  [toc, "irrelevant", doc.read_text(encoding="utf-8")],
+                                  min_score=3)
+            if chosen == [1] or 1 in chosen:
+                failures.append(f"a table-of-contents page was selected: {chosen}")
+        except Exception as exc:  # noqa: BLE001
+            failures.append(f"TOC fixture selection failed: {exc}")
 
         try:
             select_pages({"text": "quantum flux capacitor calibration"},
@@ -294,6 +437,21 @@ def self_test():
         if source_stage_config(json.dumps({"source": {"enabled": False,
                                                       "documents": [pinned]}})) is not None:
             failures.append("a disabled source stage was treated as configured")
+
+        # Citation grounding: an invented "quote" must not read as support, and
+        # a real one must be found on the page it claims.
+        page_text = ("The controller VM runs on every node and aggregates the "
+                     "local disks of the cluster into a shared storage pool.")
+        if not citation_supported(
+                "the controller VM runs on every node and aggregates the local disks",
+                page_text):
+            failures.append("a real quote was not recognised as support")
+        if citation_supported(
+                "each node must be rebuilt from an external backup before use",
+                page_text):
+            failures.append("an invented quote was accepted as support")
+        if citation_supported("too short", page_text):
+            failures.append("a too-short quote was accepted")
 
         model = {"baseUrl": "http://127.0.0.1:9", "model": "unreachable",
                  "apiKey": "local", "timeoutSeconds": 2}

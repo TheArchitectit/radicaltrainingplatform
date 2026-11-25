@@ -65,6 +65,16 @@ re-verified, which is what REQ-NCA-04 permits. No other wording changed.
 
 ## Source-stage pilot run (2026-11-24)
 
+> **Correction, same day: the 13-item figure below is withdrawn.** Those passes
+> were produced by a page selection that did not exclude tables of contents.
+> Five of them cited AHV 11.2 page 4 — rendered and read: it is the table of
+> contents — and the model "quoted" support that is not on it. The stage now
+> excludes TOC pages, unions a term-count and a phrase selection, and requires
+> the model to quote the page verbatim with the quote verified against the page
+> text (60% trigram overlap); a citation that cannot be found is a failure. The
+> table below is kept as the record of the flawed pass, not as evidence of
+> verification, and the corrected re-run supersedes it.
+
 The lane's new opt-in source stage was run over the whole 44-item pilot with
 these two guides pinned in `scripts/redeye-source.local.json`:
 
